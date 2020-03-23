@@ -4,3 +4,4 @@
 
 layout: home
 ---
+This is a sample text for testing Jekyll-based site.
