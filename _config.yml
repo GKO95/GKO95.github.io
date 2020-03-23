@@ -25,7 +25,6 @@ github_username:  GKO95
 
 # Build settings
 markdown: kramdown
-remote_theme: GKO95/GKO95.github.theme
 plugins:
   - jekyll-feed
 
