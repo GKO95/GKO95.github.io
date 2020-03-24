@@ -1,7 +1,34 @@
-.site-title {
-    float: left;
+.site-header {
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    text-align: center;
+
+    color:white;
+    font-size:32px;
+    font-weight: bold;
+    font-family: monospace;
 }
 
 .site-nav {
-    float: right;
+    padding:0px;
+    background-color: gray;
+    max-width: calc(1200px - (0px * 2));
+}
+
+.site-main {
+    background-color: white;
+}
+
+.site-content {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    max-width: calc(1200px - (0px * 2));
+}
+
+.home {
+
 }

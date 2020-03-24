@@ -7,18 +7,20 @@
 
         {%- include header.html -%}
 
-        <main>
-            <div class="wrapper">
+        <main class="wrapper">
 
-                {{ content }}
+            <div class="site-main">
+                {%- include navigation.html -%}
+                <div class="site-content wrapper-padding">
 
+                    {{ content }}
+
+                </div>
             </div>
+
         </main>
         
         {%- include footer.html -%}
 
     </body>
-    
 </html>
-
-

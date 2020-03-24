@@ -1,3 +1,6 @@
+---
+layout: page
+---
 # **PYTHON: BASIC**
 
 Python is a high-level programming language with applications in numerous areas, including web programming, scientific computing, and artificial intelligence. The language is executed sequentially in line-after-line order and doesn't need semicolon `;` to end the line of statement.

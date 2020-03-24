@@ -1,20 +1,17 @@
-header {
-    margin-top: 15px;
-
-    border-top: solid rgb(180,180,180) 2px;
-    border-bottom: solid rgb(180,180,180) 2px;
-
-    background-color: rgb(230,230,230);
-
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    overflow: auto;
-}
-
 body {
     margin: 0px;
+    padding: 0px;
+
+    background-color: lightsteelblue;
+}
+
+footer {
+    color: gray;
 }
 
 .wrapper {
     margin-left: auto;
     margin-right: auto;
+
+    max-width: calc(1200px - (0px * 2));
 }
