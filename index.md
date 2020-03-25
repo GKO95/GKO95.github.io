@@ -12,7 +12,7 @@ layout: home
 
 * C++
 * C#
-* Python
+* [Python]({% post_url /md.Programming/PRGMING_Python %})
 
 ### Mathematics
 
