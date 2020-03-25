@@ -10,5 +10,15 @@ layout: home
 
 ### Programming
 
-* [Python](md.Programming/PRGMING_Python.md)
+* C++
+* C#
+* Python
 
+### Mathematics
+
+### Science
+
+## Repository
+
+* Tutorials
+* Challenges
