@@ -1,12 +1,50 @@
 .site-header {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    text-align: center;
+    display: block;
+
+    padding-bottom: 30px;
+}
+
+.site-nav {
+    padding: 10px 10px 0px 10px;
+    margin-bottom: 15px;
+    background-color: transparent;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
     text-align: center;
+}
+
+.site-logo {
     display: block;
 }
 
+.site-tabs {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.site-tabs a {
+    padding: 0px 10px;
+
+    /* Disable selection. */
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    text-decoration: none;
+}
+
 .site-title {
+    margin-top: 100px;
+
     border: white solid 8px;
     font-size: 64px;
 
@@ -21,6 +59,9 @@
     -khtml-user-select: none;
     -webkit-user-select: none;
 
+    /* Disable hyperlink underline. */
+    text-decoration: none;
+
     /* Letter affects right padding. */
     letter-spacing: 10px;
     padding: 0px 0px 0px 10px;
@@ -29,14 +70,6 @@
 .site-main {
     display: block;
     flex: 1 0 auto;
-}
-
-.site-nav {
-    padding:0px;
-    background-color: transparent;
-    border-bottom: solid black 1px;
-
-    text-align: center;
 }
 
 .site-content {
@@ -49,6 +82,7 @@
     height: -moz-available;         /* MOZILLA */
 
     background-color: white;
+    overflow: auto;
 }
 
 .site-post {
