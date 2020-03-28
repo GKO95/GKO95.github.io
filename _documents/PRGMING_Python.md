@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: document
+title: "Programming | Python3"
 ---
 # **PYTHON: BASIC**
 
