@@ -29,6 +29,24 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
+# Collections
+collections:
+  documents:
+    output: true
+    permalink: /:collection/:path/
+
+# Front Matter setting
+defaults:
+  # _documents
+  - scope:
+      path: ""
+      type: "documents"
+    values:
+      layout: "document"
+
+
+
+
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.

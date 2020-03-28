@@ -11,13 +11,9 @@ Welcome to [Jekyll]({% post_url 2020-03-23-welcome-to-jekyll %})!
 
 ### Programming
 
-* C++
-* C#
-* Python
-
-### Mathematics
-
-### Science
+{% for documents in site.documents %}
+* [{{ documents.name }}]( {{ documents.url }} )
+{% endfor %}
 
 ## Repository
 
