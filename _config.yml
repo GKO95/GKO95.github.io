@@ -31,21 +31,18 @@ plugins:
 
 # Collections
 collections:
-  documents:
+  articles:
     output: true
     permalink: /:collection/:path/
 
 # Front Matter setting
 defaults:
-  # _documents
+  # _articles
   - scope:
       path: ""
-      type: "documents"
+      type: "articles"
     values:
       layout: "document"
-
-
-
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

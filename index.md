@@ -10,9 +10,9 @@ Welcome to [Jekyll]({% post_url 2020-03-23-welcome-to-jekyll %})!
 ## Documents
 
 ### Programming
-
-{% for documents in site.documents %}
-* [{{ documents.name }}]( {{ documents.url }} )
+{% assign programmings = site.articles | where: "category", "Programming" %}
+{% for programming in programmings %}
+* [{{ programming.name }}]( {{ programming.url }} )
 {% endfor %}
 
 ## Repository

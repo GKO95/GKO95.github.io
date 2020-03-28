@@ -1,6 +1,7 @@
 ---
 layout: document
 title: "Programming | Python3"
+category: Programming
 name: Python3
 ---
 # **PYTHON: BASIC**
