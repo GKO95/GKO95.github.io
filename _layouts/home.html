@@ -1,12 +1,56 @@
----
-layout: default
----
-<div class="site-content">
+<!DOCTYPE html>
+<html lang="{{ page.lang |default: site.lang | default: 'en' }}">
 
-    <div class="site-post">
+    {%- include head.html -%}
 
-    {{ content }}
+    <body>
 
-    </div>
-    
-</div>
+        <!-- HEADER -->
+        <header class="home-header"> 
+            <nav class="home-nav">
+                <a class="home-logo" href="{{ '/' | relative_url }}"><img src="/assets/images/outline.png" width="32px" height="32px"></a>
+                <div class="home-tabs">
+                    <a href="{{ '/about' }}">ABOUT</a>
+                </div>
+            </nav>
+            <div class="home-title">
+                <a href="{{ '/' | relative_url }}"> {{ site.github_username | escape }} </a>
+            </div>
+        </header>
+
+        <!-- MAIN -->
+        <main class="home-main">
+
+            <!-- MAIN::PROGRAMMING -->
+            <div class="home-programming">
+                <ul class="home-programming-list">
+                    {% assign programmings = site.articles | where: "category", "Programming" %}
+                    {% for programming in programmings %}
+                    <a class="home-programming-cell" href="{{ programming.url }}">
+                        <li>
+                            <h1>
+                                {{ programming.name }}
+                            </h1>
+                            <p>
+                                {{ programming.description }}
+                            </p>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- MAIN::LIBRARY -->
+            <div class="home-library">
+
+
+
+            </div>
+
+        </main>
+        
+        <!-- FOOTER -->
+        <footer class="home-footer"></footer>
+
+    </body>
+</html>

@@ -1,8 +1,9 @@
 ---
+name: Python3
 layout: document
 title: "Programming | Python3"
 category: Programming
-name: Python3
+description: "Python is an interpreted, high-level, general-purpose programming language with great code readability."
 ---
 # **PYTHON: BASIC**
 

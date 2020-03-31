@@ -1,8 +1,9 @@
 ---
+name: C++
 layout: document
 title: "Programming | C++"
 category: Programming
-name: C++
+description: "C++ is a high-level, general-purpose programming language created as an extension of the C programming language."
 ---
 # **C++: BASIC**
 
@@ -850,20 +851,20 @@ An array that has series of array of same size as elements.
 
 ```cpp
 /* Assigning initial series of data to the array upon declaration.*/
-int array_0[2][3]=\{\{ivalue00 ,ivalue01 ,ivalue02 } ,{ivalue10 ,ivalue11 ,ivalue12 \}\};
+int array_0[2][3]=/\{\{/ivalue00 ,ivalue01 ,ivalue02 } ,{ivalue10 ,ivalue11 ,ivalue12 /\}\}/;
 ```
 
 Dynamic array size is also possible in multi-dimensional array but limited only to its first boundary.
 
 ```cpp
 /* Assigning initial series of data to the nth-Dimension array of undefined size upon declaration.*/
-int array_0[][]=\{\{ivalue00, ivalue01, ivalue02}, {ivalue10, ivalue11, ivalue12\}\};
+int array_0[][]=/\{\{/ivalue00, ivalue01, ivalue02}, {ivalue10, ivalue11, ivalue12/\}\}/;
 std::cout << array_0[0][2];
 
-int array_0[2][]=\{\{ivalue00, ivalue01, ivalue02}, {ivalue10, ivalue11, ivalue12\}\};
+int array_0[2][]=/\{\{/ivalue00, ivalue01, ivalue02}, {ivalue10, ivalue11, ivalue12/\}\}/;
 std::cout << array_0[0][2]; 
 
-int array_0[][3]=\{\{ivalue00, ivalue01, ivalue02}, {ivalue10, ivalue11, ivalue12\}\};
+int array_0[][3]=/\{\{/ivalue00, ivalue01, ivalue02}, {ivalue10, ivalue11, ivalue12/\}\}/;
 std::cout << array_0[0][2];
 ```
 
