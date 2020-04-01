@@ -8,7 +8,9 @@
         <!-- HEADER -->
         <header class="home-header"> 
             <nav class="home-nav">
-                <a class="home-logo" href="{{ '/' | relative_url }}"><img src="/assets/images/outline.png" width="32px" height="32px"></a>
+                <div class="home-logo">
+                    <a href="{{ '/' | relative_url }}"><img src="/assets/images/logo-ghpage.png" width="38px" height="38px"></a>
+                </div>
                 <div class="home-tabs">
                     <a href="{{ '/about' }}">ABOUT</a>
                 </div>
@@ -23,6 +25,9 @@
 
             <!-- MAIN::PROGRAMMING -->
             <div class="home-programming">
+                <div class="home-programming-header">
+                    <h1>PROGRAMMING</h1>
+                </div>
                 <ul class="home-programming-list">
                     {% assign programmings = site.articles | where: "category", "Programming" %}
                     {% for programming in programmings %}
@@ -50,7 +55,15 @@
         </main>
         
         <!-- FOOTER -->
-        <footer class="home-footer"></footer>
+        <footer class="home-footer">
+            <div class="home-footer-text">
+                <span>Copyright (C) 2020 Gihwan Ko</span>
+            </div>
+            <div class="home-footer-logo">
+                <a href="https://github.com/GKO95"><img src="/assets/images/logo-github.png" width="38px" height="38px"></a>
+                <a href="https://blog.naver.com/acft"><img src="/assets/images/logo-naver.png" width="38px" height="38px"></a>    
+            </div>
+        </footer>
 
     </body>
 </html>
