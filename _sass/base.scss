@@ -10,17 +10,18 @@ body {
 
 /* Scrollbar */
 ::-webkit-scrollbar {               // width
+    display: none;
     width: 10px;
-  }
+}
   
-  ::-webkit-scrollbar-track {       // track
-    background: #f1f1f1;
-  }
-  
-  ::-webkit-scrollbar-thumb {       // thumb
-    background: #888;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover { // thumb::hover
+::-webkit-scrollbar-track {       // track
     background: #555;
-  }
+}
+  
+::-webkit-scrollbar-thumb {       // thumb
+    background: #888;
+}
+  
+::-webkit-scrollbar-thumb:hover { // thumb::hover
+    background: black;
+}
