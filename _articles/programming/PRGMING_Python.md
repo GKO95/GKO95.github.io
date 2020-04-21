@@ -1086,22 +1086,6 @@ print(lst)
 
 A keyword used to create a generator; keyword returns the value when iterated by `for` loop statement.
 
-## Itertools Library
-
-Standard library providing several useful functions related to an iterable object as the example below:
-
-| FUNCTION         | EXAMPLE                                 | DESCRIPTION                                                  |
-| ---------------- | --------------------------------------- | ------------------------------------------------------------ |
-| `count()`        | `count(number[,step])`                  | Counts up infinitely from `number` by `step` which is an optional input. |
-| `cycle()`        | `cycle(iterable)`                       | Iterates given `iterable` object infinitely.                 |
-| `repeat()`       | `repeat(value[, number])`               | Repeat the `value` infinitely or for certain *number* of times. |
-| `chain()`        | `chain(lst0,lst1)`                      | Combine the lists or strings to one in sequence.             |
-| `takewhile()`    | `takewhile(predicate,lst)`              | Take the value from the `lst` in sequence while each value satisfies Boolean-conditioning function (`predicate`). When `False`, `takewhile()` stops the function and returns the taken value as a list, even there’s a value that satisfies the predicate after, which won’t be returned. |
-| `product()`      | `product([lst0,lst1,...[,repeat=int]])` | Create iterable object of tuples consist of one data (in sequence order) from each `lst` following the inputted list order. |
-| `permutations()` | `permutations(lst[,length])`            | Create iterable object of tuples of length of `length` with every possible permutation (order-sensitive). |
-
-*Reference: https://docs.python.org/3/library/itertools.html*
-
 # **PYTHON: FUNCTIONAL PROGRAMMING**
 
 There are three different types of programming method that can be applied to Python language: procedural, functional, and object-oriented.
