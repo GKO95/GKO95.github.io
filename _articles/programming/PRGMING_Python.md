@@ -735,27 +735,19 @@ An object with a `__next__` method (Python3) which automatically calls next elem
 List iterable object is used to store item in order along its index, irrelevant to data type. Defining the list object is done using a bracket ` []` by assigning values inside, comma separated. Bracket is also used to call an element at index location.
 
 ```python
-lst = [int1, str2, lst3, any4, ...]
-print(lst)
-print(lst[0])
-```
+lst = [int1, str2, lst3, any4, ... ]
 
-```
-[int1, str2, lst3, any4, ...]
-int1
+print( lst )		# >> OUTPUT: [int1, str2, lst3, any4, ... ]
+print( lst[0] )		# >> OUTPUT: int1
 ```
 
 It is possible to change the existing value by reassigning individual element. Calling the element that is outside the range of list is not possible and will results error.
 
 ```python
 lst = [int0, int1, int2]
-lst[1] = int3
-lst[3] = int4
-```
 
-```
-[int0, int3, int2]
-IndexError: list assignment index out of range
+lst[1] = int3		# >> RESULT: lst = [int0, int3, int2]
+lst[3] = int4		# IndexError: list assignment index out of range
 ```
 
 String data can be indexed like a list, where each element is a character consisting the string.
@@ -780,17 +772,15 @@ A list can be added and multiplied, with operations exclusive to iterable object
 ```python
 lst = [1, 2, 3]
 
-print(lst + [3, 4, 5])
-print(lst * 3)
-print(1 in lst)
-print(2 not in lst)
-```
+# + OPERATOR
+print( lst + [3, 4, 5] )	# >> OUTPUT: [1, 2, 3, 3, 4, 5]
 
-```
-[1, 2, 3, 3, 4, 5]
-[1, 2, 3, 1, 2, 3, 1, 2, 3]
-True
-False
+# * OPERATOR
+print( lst * 3 )			# >> OUTPUT: [1, 2, 3, 1, 2, 3, 1, 2, 3]
+
+# in OPERATOR
+print( 1 in lst )			# >> OUTPUT: True
+print( 2 not in lst )		# >> OUTPUT: False
 ```
 
 Following are functions that does certain features to and for a list (or more like iterable) object.
@@ -806,24 +796,21 @@ Following are functions that does certain features to and for a list (or more li
 ```python
 lst = [10, 9, 8, 7, 6]
 
+# ALL() FUNCTION
 if all( [var > 5 for var in lst] ):
-	print("Numbers are all above 5.")
+	print("Numbers are all above 5.")		# >> OUTPUT: Numbers are all above 5.
 
+# ANY() FUNCTION
 if any( [ var % 2 ==  0 for var in lst] ):
-	print("At least one number is even.")
-
+	print("At least one number is even.")	# >> OUTPUT: At least one number is even.
+    
+# ENUMERATE() FUNCTION
 for var in enumerate(lst):
-	print(var)
-```
-
-```
-Numbers are all above 5.
-At least one number is even.
-(0,10)
-(1,9)
-(2,8)
-(3,7)
-(4,6)
+	print(var)								# >> OUTPUT: (0,10)
+    										# >>		 (1,9)
+        									# >>		 (2,8)
+            								# >>		 (3,7)
+                							# >>		 (4,6)
 ```
 
 Since list is an (iterable) object, it also has methods it can access to perform certain features:
@@ -836,17 +823,15 @@ Since list is an (iterable) object, it also has methods it can access to perform
 
 ```python
 lst = [10, 9, 8, 7, 6]
-print(lst.append("7"))
 
-print(lst.insert(1,"7"))
+# APPEND() METHOD
+print( lst.append("7") )		# >> OUTPUT: [10, 9, 8, 7, 6, "7"]
 
-print(lst.index(8))
-```
+# INSERT() METHOD
+print( lst.insert(1,"7") )		# >> OUTPUT: [10, "7", 9, 8, 7, 6]
 
-```
-[10, 9, 8, 7, 6, "7"]
-[10, "7", 9, 8, 7, 6]
-2
+# INDEX() METHOD
+print( lst.index(8) )			# >> OUTPUT: 2
 ```
 
 ### List Comprehension
@@ -881,27 +866,18 @@ Slicing starts from `start_elem` (inclusive) until `end_elem` (exclusive) with i
 
 ```python
 lst =[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-print(lst[2:8])
+print( lst[2:8] )		# >> OUTPUT: [2, 3, 4, 5, 6, 7]
 
 # SLICE FROM/UNTIL THE END OF THE LIST
-print(lst[2:])
-print(lst[:8])
+print( lst[2:] )		# >> OUTPUT: [2, 3, 4, 5, 6, 7, 8, 9]
+print( lst[:8] )		# >> OUTPUT: [0, 1, 2, 3, 4, 5, 6, 7]
 
 # SLICE WITH SKIPPING SOME ELEMENTS WITH INTERVAL
-print(lst[::2])
-print(lst[2:8:3])
+print( lst[::2] )		# >> OUTPUT: [0, 2, 4, 6, 8]
+print( lst[2:8:3] )		# >> OUTPUT: [2, 5]
 
 # REVERSE INTERVAL
-print(lst[7:3:-1])
-```
-
-```
-[2, 3, 4, 5, 6, 7]
-[2, 3, 4, 5, 6, 7, 8, 9]
-[0, 1, 2, 3, 4, 5, 6, 7]
-[0, 2, 4, 6, 8]
-[2, 5]
-[7, 6, 5, 4]
+print( lst[7:3:-1] )	# >> OUTPUT: [7, 6, 5, 4]
 ```
 
 ## Tuple
@@ -910,22 +886,13 @@ Tuple iterable object is used to store item in order just like a list, but canno
 
 ```python
 tpl =(data0, data1, data2)
-print(tpl)
-print(tpl[0])
+print( tpl )		# >> OUTPUT: (data0, data1, data2)
+print( tpl[0] )		# >> OUTPUT: data0
 
 # ALTERNATIVE: tuple without parentheses
 tpl = data0, data1, data2
-print(tpl)
-print(tpl[0])
-```
-
-```
-(data0, data1, data2)
-data0
-
-# ALTERNATIVE: tuple without parentheses
-(data0, data1, data2)
-data0
+print( tpl )		# >> OUTPUT: (data0, data1, data2)
+print( tpl[0] )		# >> OUTPUT: data0
 ```
 
 Because tuple is a constant version of a list, the data inside cannot be changed. The error will occur when such effort is made.
@@ -948,17 +915,11 @@ Unpacking tuple means assigning individual element in tuple to variables or anot
 
 ```python
 var0, var1, *var2, var3 = [data0, data1, data2, data3, data4, data5]
-print(var0)
-print(var1)
-print(var2)
-print(var3) 
-```
 
-```
-data0
-data1
-[data2, data3, data4]
-data5
+print(var0)		# >> OUTPUT: data0
+print(var1)		# >> OUTPUT: data1
+print(var2)		# >> OUTPUT: [data2, data3, data4]
+print(var3) 	# >> OUTPUT: data5
 ```
 
 ## Dictionary
@@ -967,15 +928,10 @@ Dictionary is an iterable object with data structured to maps the key elements t
 
 ```python
 dictionary = {key0:value0, key1:value1, key2:value2}
-print(dictionary[key0])
-print(dictionary[key1])
-print(dictionary[key3])
-```
 
-```
-value0
-value1
-KeyError: key3
+print( dictionary[key0] )	# >> OUTPUT: value0
+print( dictionary[key1] )	# >> OUTPUT: value1
+print( dictionary[key3] )	# KeyError: key3
 ```
 
 Mutable object (e.g. list and dictionary) cannot be used as a key element; only immutable object is allowed. However, mutable object can still be used as a value of the key.
@@ -1009,15 +965,9 @@ Operations for a dictionary is same as other iterable objects but have slight di
 ```python
 dictionary = {key0:value0, key1:value1}
 
-print(key0 in dictionary)
-print(value1 in dictionary)
-print(key3 not in dictionary)
-```
-
-```
-True
-False   # Although there is a value1 for to key1,in operator cannot find through value.
-True
+print( key0 in dictionary )			# >> OUTPUT: True
+print( value1 in dictionary )		# >> OUTPUT: False
+print( key3 not in dictionary )		# >> OUTPUT: True
 ```
 
 Dictionary can have its own functions and methods to execute certain features of dictionary:
@@ -1030,15 +980,9 @@ Dictionary can have its own functions and methods to execute certain features of
 ```python
 dictionary = {key0:value0, key1:value1}
 
-print(dictionary.get(key0))
-print(dictionary.get(key2))
-print(dictionary.get(key3,"not in dictionary"))
-```
-
-```
-value0
-None
-not in dictionary
+print( dictionary.get(key0) )						# >> OUTPUT: value0
+print( dictionary.get(key2) )						# >> OUTPUT: None
+print( dictionary.get(key3, "not in dictionary") )	# >> OUTPUT: not in dictionary
 ```
 
 ## Set
@@ -1068,18 +1012,18 @@ set0 = {1, 2, 3, 4, 5, 6}
 set1 = {4, 5, 6, 7, 8, 9}
 
 print(set0 | set1)
-# {1, 2, 3, 4, 5, 6, 7, 8, 9}
+# >> OUTPUT: {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
 print(set0 & set1)
-# {4, 5, 6}
+# >> OUTPUT: {4, 5, 6}
 
 print(set0 - set1)
 print(set1 - set0) 
-# {1, 2, 3}
-# {7, 8, 9}
+# >> OUTPUT: {1, 2, 3}
+# >> OUTPUT: {7, 8, 9}
 
 print(set0 ^ set1)
-# {1, 2, 3, 7, 8, 9}
+# >> OUTPUT: {1, 2, 3, 7, 8, 9}
 ```
 
 Set can have its own functions and methods to execute certain features of set.
@@ -1098,21 +1042,14 @@ The function above is necessary when creating an empty set, as `{}` creates an e
 
 ```python
 set0 = set( [data0, data1, data2, data1] )
-print(set0)
+print( set0 )			# >> OUTPUT: {data0, data1, data2}
 
 set0.add( data3 )
 set0.remove( data0 )
-print(set0)
+print( set0 )			# >> OUTPUT: {data1, data2, data3}
 
-print(set0.pop())
-print(set0)
-```
-
-```
-{data0, data1, data2}
-{data1, data2, data3}
-data1				# Random data inside a set has been popped out and got returned.
-{data0, data2}		# set_name now has a data only without randomly selected data1.
+print( set0.pop() )		# >> OUTPUT: data1 (randomly popped)
+print( set0 )			# >> OUTPUT: {data0, data2}
 ```
 
 ## Generator
