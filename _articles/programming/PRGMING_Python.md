@@ -2,6 +2,7 @@
 name: Python3
 layout: document
 title: "Programming | Python3"
+author: GKO95
 category: Programming
 description: "Python is an interpreted, high-level, general-purpose programming language with great code readability."
 ---
