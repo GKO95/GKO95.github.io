@@ -1441,12 +1441,13 @@ print( x.append(13) )
 ```
 
 ### Method & Attribute
+Below is a description of method and attribute of an object in Python.
 
-**Method**
-: method is an object-dependent function that is bounded by the object, meaning the object needs to be presented to use a method and cannot be used independently.
+* **Method**
+    : method is an object-dependent function that is bounded by the object, meaning the object needs to be presented to use a method and cannot be used independently.
 
-**Attribute**
-: attribute is a features and properties of the object (including bounded function). Hence, methods are included as one of the attributes of the object. However, for easier understanding, this document will distinguish attribute as attribute without methods.
+* **Attribute**
+    : attribute is a features and properties of the object (including bounded function). Hence, methods are included as one of the attributes of the object. However, for easier understanding, this document will distinguish attribute as attribute without methods.
 
 ## Classes
 
