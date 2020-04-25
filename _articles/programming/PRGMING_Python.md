@@ -1426,7 +1426,7 @@ Previous chapter has explained and dealt with procedural and functional programm
 
 ## Object
 
-Object (aka. instance) is a block of data which acts like a building brick: every object has its own attributes that are properties and capabilities of the object. The attribute can be accessed and utilized by `object.attribute` format.
+Object (aka. instance) is a block of data which acts like a building brick; every object has its own attributes that are properties and capabilities of the object. The attribute can be accessed and utilized by `object.attribute` format.
 
 The programming based around use of a custom objects is called *object-oriented programming*.
 
@@ -1441,12 +1441,13 @@ print( x.append(13) )
 ```
 
 ### Method & Attribute
+Below is a description of method and attribute of an object in Python.
 
-**Method**
-: method is an object-dependent function that is bounded by the object, meaning the object needs to be presented to use a method and cannot be used independently.
+* **Method**
+    : method is an object-dependent function that is bounded by the object, meaning the object needs to be presented to use a method and cannot be used independently.
 
-**Attribute**
-: attribute is a features and properties of the object (including bounded function). Hence, methods are included as one of the attributes of the object. However, for easier understanding, this document will distinguish attribute as attribute without methods.
+* **Attribute**
+    : attribute is a features and properties of the object (including bounded function). Hence, methods are included as one of the attributes of the object. However, for easier understanding, this document will distinguish attribute as attribute without methods.
 
 ## Classes
 
