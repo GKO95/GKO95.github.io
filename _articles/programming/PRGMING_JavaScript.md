@@ -2,6 +2,7 @@
 name: JavaScript
 layout: document
 title: "Programming | JavaScript"
+author: GKO95
 category: Programming
 description: "JavaScript is high-level, multi-paradigm language, and is one of the core technologies of the World Wide Web."
 ---
