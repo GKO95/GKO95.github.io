@@ -18,6 +18,12 @@ Programming language such as C/C++ uses compiler that translates a source code (
 
 Python is interpreter-driven high-level language: this allows scripting the code much easier than compiler, but its execution time can be slower in comparison.
 
+### CPython
+
+Originally, Python interpreter was developed using C programming language. This implementation is called CPython and is the most widely used implementation of all. Other implementations are Jython (Java-implementation), IronPython (.NET-implementation), PyPy (Python-implementation), and more.
+
+While Python is introduced as an interpreter language, it actually is both interpreter and compiler: CPython first processes Python code into intermediate bytecode which is than executed by CPython interpreter. Because of this, Python execution takes longer time on first run from compilation.
+
 ## Comment
 
 There are two different comments in Python: line comment and block comment.
@@ -663,12 +669,12 @@ Exception is an error-exclusive conditional statement: the statement checks whet
 
 The `try`/`except` statement is used to handle exceptions, and to call certain statements when an exception occurred. There are additional statements that can be used together with the pair:
 
-| KEYWORD   | USAGE               | DESCRIPTION                                                  |
-| --------- | ------------------- | ------------------------------------------------------------ |
-| `try`     | Code testing ground | A block of code to be checked for exception.                 |
-| `except`  | Code for exception  | A code to be executed when certain exception occurs.         |
-| `else`    | Code for no error   | [OPTIONAL: A code to be executed when the code has passed with no error (exception) occurred.] |
-| `finally` | Finale statement    | [OPTIONAL: A block of code executed no matter what exception has occurred, and even when there’s no error.] |
+| KEYWORD   | DESCRIPTION                                                  |
+| --------- | ------------------------------------------------------------ |
+| `try`     | A block of code to be checked for exception.                 |
+| `except`  | A code to be executed when certain exception occurs.         |
+| `else`    | [OPTIONAL: A code to be executed when the code has passed with no error (exception) occurred.] |
+| `finally` | [OPTIONAL: A block of code executed no matter what exception has occurred, and even when there’s no error.] |
 
 ```python
 try:
@@ -1422,7 +1428,7 @@ A decorator located closest to pre-decorated function will be applied firsthand.
 
 # **PYTHON: OBJECT-ORIENTED PROGRAMMING**
 
-Previous chapter has explained and dealt with procedural and functional programming. The third scripting method, object-oriented programming is based around usage of classes and objects instead of functions.
+Previous chapter has explained and dealt with procedural and functional programming. The third scripting method, object-oriented programming (abbrev. OOP) is based around usage of classes and objects instead of functions.
 
 ## Object
 
@@ -1441,6 +1447,7 @@ print( x.append(13) )
 ```
 
 ### Method & Attribute
+
 Below is a description of method and attribute of an object in Python.
 
 * **Method**
@@ -1449,9 +1456,9 @@ Below is a description of method and attribute of an object in Python.
 * **Attribute**
     : attribute is a features and properties of the object (including bounded function). Hence, methods are included as one of the attributes of the object. However, for easier understanding, this document will distinguish attribute as attribute without methods.
 
-## Classes
+## Class
 
-Classes create objects (aka. instance), hence can be deemed as an object’s blueprint. Classes are created first by a keyword `class` containing functions as method of the class in indented block.
+Class is used to create objects (aka. instance), hence can be deemed as an object’s blueprint. Classes are created first by a keyword `class` containing functions as method of the class in indented block.
 
 ```python
 # CREATING CLASS
@@ -1780,16 +1787,16 @@ Object has three stages of lifecycle:
 
 ## Encapsulation
 
-Encapsulation restricts access to attributes/methods and variables to prevent accidental modification. Refer to *Data Hiding* and *Properties* for more information on encapsulation.
+Encapsulation is one of the fundamental concept which (1) combines attributes and methods into a single class data, and/or (2) restricts direct access to these attributes and methods (aka. data hiding). This feature prevents accidental modification on class from code outside.
 
 ### Data Hiding
 
-Restricting external code from accessing attributes/methods and variables of instances by making them private. Python uses the following two symbols, underscore `_` and dunder `__` for make attributes and methods private.
+Despite encapsulation is also implemented on Python classes, external code can still access to these attributes and methods as they are not restricted. If there are attributes and methods in class that needs to be hidden as possible, method such as name mangling is conventionally used in Python.
 
 | SYMBOL | EXAMPLE       | DESCRIPTION                                                  |
 | :----: | ------------- | ------------------------------------------------------------ |
-|  `_`   | `_attribute`  | Underscore at beginning of an attribute's name. This prevents accessing attribute from `import` statement, but class-external code can still access this "private" attributes. |
-|  `__`  | `__attribute` | Dunder at beginning of an attribute's name. This prevents accessing from import statement and class-external code. Bugs caused by sharing same object name can be avoided by this approach. |
+|  `_`   | `_attribute`  | Though not a name mangling, it can prevent accessing attributes and methods from being passed via module import but not from codes outside the class. |
+|  `__`  | `__attribute` | Name mangling: this prevents accessing attributes and methods from being passed via module import and codes outside the class, thus becomes "private". |
 
 ### Properties
 
@@ -1802,7 +1809,6 @@ Properties is a decorator that allows method to be updated without modifying the
 Property is declared using decorator symbol, meaning it is used specifically for method. One of the special feature of property is it does not take any argument except `self` variable to call itself from instance. Although property is based on method, syntax to call property is same as attribute: `instance.attribute`.
 
 ```python
-# CREATE CLASS
 class CLASS:
     def __init__(self, arg1, arg2):
         self.A = arg1
@@ -2133,6 +2139,8 @@ When using Python on Windows, it is recommended to use `python -m pip` instead o
 ```
 python -m pip
 ```
+
+In case `python` command does not work but opens Microsoft Store, type `py` instead.
 
 The command means accessing the pip under the python interpreter specified as `python` in environment variable. This allows package management by each interpreter more controllable, even when using virtual environment. When there is another version of Python installed, say 32 bits of Python 3.5
 
