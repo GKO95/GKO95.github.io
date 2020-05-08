@@ -1231,23 +1231,23 @@ function(1, key0 = value0, key1 = value1)
 ```
 
 ```
-{key_0∶value_0, key_1∶value_1}
+{key0∶ value0, key1∶ value1}
 ```
 
 ----
 
 ```python
 # DEFAULT-INITIALIZED PARAMETER arg2
-def function(arg1, arg2="string"):
-    print(arg_2)
+def function(arg1, arg2 = "Hello"):
+    print(arg2)
     
 function(1)
-function(2, "needle")
+function(2, "World!")
 ```
 
 ```
-string
-needle
+Hello
+World!
 ```
 
 ## Anonymous Function
