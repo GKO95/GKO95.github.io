@@ -1259,7 +1259,7 @@ Also known as **Lambda function (express)**, is an unnamed function without decl
 | `lambda param0, param1 ∶ expression`                         |
 | A main body of anonymous function consisting parameters and its return expression. |
 
-Although anonymous function is a function without a name for a single-use, it can be assigned to variables and called when the function is needed. The anonymous function of the named function at *Pure Function* example section is expressed as below:
+Although anonymous function is a function without a name for a single-use, it can be assigned to variables and called when the function is needed. The anonymous function of the *Pure Function* example section can be expressed as follows:
 
 ```python
 # NAMED FUNCTION
@@ -1280,7 +1280,7 @@ variable(2,3)
 
 ## Map Function
 
-Built-in function which takes iterable objects and function with parameters as arguments. Map function returns a list containing return value of the function with iterable objects as arguments.
+Built-in function which takes iterable objects and function with parameters as arguments. Map function returns a list consisting return value of the function with iterable objects as its arguments.
 
 | SYNTAX                                                       |
 | ------------------------------------------------------------ |
@@ -1384,7 +1384,7 @@ function = decorator(function)
 function()
 ```
 
-Decorator above have decorated (modified) `function()` and assigned the decorated function to a variable `variable()` and `function()`, where latter maintains the function name.
+Decorator above have decorated (modified) `function()` and assigned the decorated function to a variable `variable` and `function`, where latter maintains the function name.
 
 When passing function as a parameter of a decorator, no parenthesis are needed like `function()`. This is because former passes function itself and latter passes return value of the function.
 
