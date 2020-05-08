@@ -643,6 +643,28 @@ int factorial(int num) {
 
 Recursion can occur indirectly by multiple number of functions calling one to another, then back to the beginning.
 
+## Callback Function
+
+Also known as a **"call-after" function** is a function that is passed as an argument to other function (calling function) which expects the argument (callback function) to execute on some time.
+
+Do not try to understand the script below for now as this requires understanding of a pointer which will be dealt on *C++: POINTER § Function Pointer*.
+
+```cpp
+// CALLING FUNCTION
+float FUNC(float (*callback)(int, float), int arg1, float arg2) {
+	float var = callback(arg1, arg2);		// FUNCTION CALLBACK
+    return var;
+}
+
+// CALLBACK FUNCTION
+float function(int arg1, float arg2) {
+	return arg1 + arg2;
+}
+
+// THEREFORE...
+FUNC(&function, 1, 3.0);	// >> OUTPUT: 4.0
+```
+
 # **C++: CONDITIONAL AND LOOP**
 
 Line-by-line sequential code execution programming is also known as *procedural programming*. It is the basic programming style using mostly with conditional and loops statements and additional functions for assistance.
