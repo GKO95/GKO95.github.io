@@ -14,15 +14,15 @@ This chapter describes on basic concepts and coding syntax used in Python.
 
 ## Interpreter
 
-Programming language such as C/C++ uses compiler that translates a source code (written in English) to a computer language (such as binary language) computer can understand for execution. However, interpreter allows computer to execute the program directly from a source code without translation.
+Programming language such as C/C++ uses compiler that translates a source code (written in English) to a computer language (such as binary code) computer can understand and execute. However, interpreter allows computer to execute the program directly from a source code without translation.
 
 Python is interpreter-driven high-level language: this allows scripting the code much easier than compiler, but its execution time can be slower in comparison.
 
 ### CPython
 
-Originally, Python interpreter was developed using C programming language. This implementation is called CPython and is the most widely used implementation of all. Other implementations are Jython (Java-implementation), IronPython (.NET-implementation), PyPy (Python-implementation), and more.
+Originally, Python interpreter was developed using C programming language. This implementation is called CPython and is the most widely used implementation of all. Other notable implementations are Jython (Java-implementation), IronPython (.NET-implementation), and PyPy (Python-implementation).
 
-While Python is introduced as an interpreter language, it actually is both interpreter and compiler: CPython first processes Python code into intermediate bytecode which is than executed by CPython interpreter. Because of this, Python execution takes longer time on first run from compilation.
+While Python is introduced as an interpreter language, it actually uses both interpreter and compiler: CPython first processes Python code into intermediate bytecode which is than executed by CPython interpreter. Because of this, Python execution takes longer time on first run from compilation.
 
 ## Comment
 
@@ -95,7 +95,7 @@ To print mixture of more than a single data type in a single `print()` function,
 
 ## Variable
 
-Variable is a container for the data which can be assigned using assignment operator `=`. There are three different common stages in variable: declaration, definition, and initialization.
+Variable is a container for a data which can be assigned using assignment operator `=`. There are three different common stages in variable: declaration, definition, and initialization.
 
 * **Declaration**
   : declaration is declaring existence of the construct of such as variables, functions, objects, and more. While declaration also includes specifying which data type the construct is in other languages, this is exception to Python since constructs in this language do not need to be declared with data type.
@@ -104,12 +104,12 @@ Variable is a container for the data which can be assigned using assignment oper
   : definition refers to block of codes on values and performance the construct has and is capable of.
 
   ```python
-  # DEFINITION (+DECLARATION) OF VARIABLE
+  # DEFINITION (+ DECLARATION) OF VARIABLE
   variable = 1
   
-  # DEFINITION (+DECLARATION) OF FUNCTION
+  # DEFINITION (+ DECLARATION) OF FUNCTION
   def function():
-    statements
+      statements
       return 0
   ```
   
@@ -124,23 +124,23 @@ Programmer should observe the rules on naming variable in Python:
 
 * Spaces are not allowed.
 
-Variables are not data-type fixed, allowing programmer to change the value whatever and whenever they want even from a single variable.
+Variable is not data-type fixed, allowing developers to change the value whatever and whenever using a single variable.
 
 ### Local & Global Variable
 
-**Local variable** is a variable declared inside a code block, such as function or class. Data stored in local variable is removed when exiting the code block, thus cannot be used outside. Local variable is allowed to have same variable name declared outside (technically, is borrowing the name as a different identity).
+**Local variable** is a variable declared inside a code block, such as function or class. Data stored in local variable is destroyed when exiting the code block, thus cannot be used outside. This allows variable with the same name to be declared outside the code block.
 
-**Global variable** is a variable declared on a global scope of the script which is outside a code block. It is possible to use the global variable inside a code block using `global` keyword. However, global variable should be avoided if possible to prevent unexpected result and error caused by conflicting variables.
+**Global variable** is a variable declared outside of any code block on the script. Accessing the global variable in a code block is done using `global` keyword. However, global variable should be avoided if possible to prevent unexpected result and error caused by conflicting variables.
 
 ### Constant Variable
 
-Constant variable is a special type of variable that cannot be changed after its initialization. Unfortunately, Python does not have a constant variable since Python does not have a concept of *declaration*. While C-based language do have this feature, Python developer should just be careful not to mess up the what-is-used-as-constant variable.
+Constant variable is a special type of variable that cannot be changed after its initialization. Unfortunately, Python does not have a constant variable since it does not have a concept of *declaration*. While C-based language do have this feature, Python developer should just be careful not to mess up the what-is-used-as-constant variable.
 
 Common method used in Python to indicate the constant variable is declaring the variable UPPERCASE.
 
 ### `del` Keyword
 
-A keyword used to delete variable. Deleted variable can be reassigned later.
+The `de;` keyword is used to delete variable. Deleted variable can be reassigned later.
 
 ```python
 # DECLARATION OF THE VARIABLE "x"
@@ -164,7 +164,7 @@ Data type a variable can store in Python can be categorized into three different
 Although a function and a method will be introduced in later chapter, knowing the key difference between these three will prevent getting confused on understanding concepts of programming language overall.
 
 * **Operator**
-  : a constructs which can manipulate the value of operands, such as an arithmetic sign. It does not need argument to operates but by placing before, after, or between the operands.
+  : a constructs which can manipulate the value of operands, such as arithmetic operators. It operates simply by placing before, after, or between the operands.
 * **Function**
   : a reusable piece of code which is called by name to operates. Function can be distinguished from an operator by parenthesis `()` at suffix of the function's name; `function()`.
 * **Method**
@@ -206,22 +206,22 @@ Arithmetic operation of a numeric data type is as follows:
 | NAME                           | OPERATOR | DESCRIPTION                                                  |
 | ------------------------------ | :------: | ------------------------------------------------------------ |
 | Addition                       |   `+`    | -                                                            |
-| Subtraction                    |   `-`    | Python doesn’t have a subtraction. Instead, negative sign substitutes subtraction, as adding negative value is equal to subtracting. |
+| Subtraction                    |   `-`    | Python doesn’t have a subtraction. Negative sign substitutes subtraction, as adding negative value is equal to subtracting value. |
 | Multiplication                 |   `*`    | -                                                            |
 | Exponential                    |   `**`   | -                                                            |
-| Division                       |   `/`    | When divided, the value automatically changes to data type of `float`, a data type of number with decimal point. |
-| Quotient (aka. floor division) |   `//`   | When divided, gives an output a quotient of division only, without a remainder. |
-| Remainder                      |   `%`    | When divided, gives an output a remainder of the division.   |
+| Division                       |   `/`    | When divided, the value implicitly (or automatically) converts to `float`. |
+| Quotient (aka. floor division) |   `//`   | Outputs a quotient of division only, without a remainder.    |
+| Remainder                      |   `%`    | Outputs a remainder of the division.                         |
 
-For easier readability of the arithmetic operation, you can place blank spaces between number and operator as it does not affect anything on its output.
+For easier readability of the arithmetic operation, you can place blank spaces between number and operator as it does not affect on its output.
 
-Additional operations using with built-in functions and methods exclusive to numeric data type. Most of the operation below requires an iteratable object called *list* which will be introduced later.
+Additional operations are available using built-in functions and methods exclusive to numeric data type. Most of the operation below requires an iterable object called *list* which will be introduced later.
 
 | FUNCTION  | EXAMPLE             | DESCRIPTION                                                  |
 | --------- | ------------------- | ------------------------------------------------------------ |
-| `max()`   | `max([0,1,2,3,4])`  | Find the maximum number inside.                              |
-| `min()`   | `min([0,1,2,3,4])`  | Find the minimum number inside.                              |
 | `abs()`   | `abs(-21)`          | Find out absolute value of the number.                       |
+| `round()` | `round(164.2597,2)` | Rounds up the number to one’s digit on default, or to a fraction digit behind. |
+| `max()`   | `max([0,1,2,3,4])`  | Find the maximum number inside.                              |
 | `round()` | `round(164.2597,2)` | Rounds up the number to one’s digit on default, or to a fraction digit behind. |
 | `sum()`   | `sum([0,1,2,3,4])`  | Sum all the numbers in the list.                             |
 
@@ -236,22 +236,22 @@ print(round(164.259763145,2))
 164.26
 ```
 
-Assignment operator is a combination of an arithmetic and an assignment sign `=`, making numerical calculation code to be written more concisely.
+Assignment operator is a combination of an arithmetic and an assignment symbol `=`, making numerical calculation code to be written more concisely.
 
-| OPERATOR | EXAMPLE  | EQUIVALENT                                                   |
-| :------: | -------- | ------------------------------------------------------------ |
-|   `=`    | `x = y`  | `x = y`; assign the value of variable `y` to the variable `x`. |
-|   `+=`   | `x += y` | `x = x + y`                                                  |
-|   `-=`   | `x -= y` | `x = x - y`                                                  |
-|   `*=`   | `x *= y` | `x = x * y`                                                  |
-|   `/=`   | `x /= y` | `x = x / y`                                                  |
-|   `%=`   | `x %= y` | `x = x % y`                                                  |
+| OPERATOR | EXAMPLE  | EQUIVALENT                                                |
+| :------: | -------- | --------------------------------------------------------- |
+|   `=`    | `x = y`  | `x = y`; assigns a value of variable `y` to variable `x`. |
+|   `+=`   | `x += y` | `x = x + y`                                               |
+|   `-=`   | `x -= y` | `x = x - y`                                               |
+|   `*=`   | `x *= y` | `x = x * y`                                               |
+|   `/=`   | `x /= y` | `x = x / y`                                               |
+|   `%=`   | `x %= y` | `x = x % y`                                               |
 
 Increment and decrement does not exist in Python programming language.
 
 ### Boolean Data Type
 
-Boolean data type is useful for a code that requires logical conditioning whether it is true or false:
+Boolean data type is useful for a code that requires logical conditioning whether the statement is true or false:
 
 | VALUE          | NAME            | DESCRIPTION                   |
 | -------------- | --------------- | ----------------------------- |
@@ -260,7 +260,7 @@ Boolean data type is useful for a code that requires logical conditioning whethe
 
 Any non-zero positive number can represents Boolean value of `True`. In other word, Boolean value of `2` or `3` are also equivalent to `True` while `False` is only represented by the number `0`.
 
-Comparison operation is used to compare relation of two or more values, returning corresponding Boolean data type depending on whether the condition is held true or false. 
+Comparison operator is used to compare relation of two or more values, returning corresponding Boolean data type depending on whether the condition is held true or false. 
 
 | OPERATOR | DESCRIPTION              |
 | -------- | ------------------------ |
@@ -282,7 +282,7 @@ Meanwhile, the Boolean data type can be added, multiplied, and complemented as f
 
 ### String Data Type
 
-String data type is a text-based data which can be distinguished with other data type by a pair of single quotation mark `''` or double quotation mark `""`. Variable or data that is a string data type is commonly called *string object*.
+String data type is a text-based data which can be distinguished by a pair of single quotation mark `''` or double quotation mark `""`. Variable or data that is a string data type is commonly called *string object*.
 
 Although placing the quotation mark inside a string object can cause broken string data, placing a backslash `\` before the quotation mark can escape from premature end of string.
 
@@ -337,7 +337,7 @@ String is an object (or simply, an independent individual of data), thus string 
 | -------------- | ------------------------ | ------------------------------------------------------------ |
 | `format()`     | `str.format(data)`       | Inserts string or non-string `data` type to a designated space via location or name designated by `{}`. |
 | `join()`       | `str.join(str_lst)`      | Joins a list of string objects `str_lst` by placing string object `str` in-between. |
-| `split()`      | `str.split([str1])`      | Convert a string `str` to a list by separating based on blank spaces if there's no argument in method.<br /><br />[OPTIONAL: In case there’s an argument `str1`, the string object `str` is separated based on `str1`.] |
+| `split()`      | `str.split([str1])`      | Convert a string `str` to a list by separating based on blank spaces if there's no argument in method.<br /><br />*[OPTIONAL: In case there’s an argument `str1`, the string object `str` is separated based on `str1`.]* |
 | `replace()`    | `str.replace(str1,str2)` | Replace `str1` to `str2` within the string object `str`.     |
 | `startswith()` | `str.startswith()`       | Check the start of the `str` for equivalence.                |
 | `endswith()`   | `str.endswith()`         | Check the end of the `str` for equivalence.                  |
@@ -379,7 +379,7 @@ this is a sentence.
 ```
 ### Type Conversion
 
-It is possible to convert one's data type to another different data type. The following three are the conversion widely used when developing Python program:
+It is possible to convert a data type to another different data type. The following three are the conversion widely used when developing Python program:
 
 | FUNCTION  | NAME               | DESCRIPTION                                                  |
 | --------- | ------------------ | ------------------------------------------------------------ |
@@ -400,16 +400,16 @@ Escape character `\` is used to escape from execution of operation intended for 
 | `\'`   | Single quote   |
 | `\"`   | Double quote   |
 
-Not just to escape from unwanted operation, escape character is also used to code a single long command into short consecutive multi-line commands.
+Not just to escape from unwanted operation, escape character is also used to code a single long line of code into short consecutive multi-line code.
 
 ## None
 
 An data with no value regardless of data type. Although `None` can be used as `False` in Boolean logic conditioning, `None` and `False` is completely different even in Boolean concept.
 
 ```python
-# CONDITIONAL CHECK: is None can be deemed as False in Boolean?
+# CONDITIONAL CHECK: can None be deemed as False in Boolean?
 if not(None and True):
-	print(None)
+    print(None)
 ```
 
 ```
@@ -418,9 +418,7 @@ None                    # This proves that None can be used as False in Boolean.
 
 # **PYTHON: CONDITIONAL AND LOOP**
 
-Line-by-line sequential code execution programming is also known as *procedural programming*. It is the basic programming style using mostly with conditional and loops statements and additional functions for assistance.
-
-This chapter introduce list of conditional and loop statements essential in Python programming.
+Conditional and loop statement is commonly used and one of the essential pieces of code in programming. This chapter introduces list of conditional and loop statements in Python programming.
 
 ## Indentation
 Indentation is used to delimit (mark the limits or boundaries) blocks of code. Simply put, it is used to distinguish where the block of code belongs to. Indentation is inserted on the section of code after colon `:`.
@@ -430,13 +428,13 @@ Beware as placement of indentation can change the script entirely.
 ```python
 # IDENTATION ON THE SECOND PRINT. 
 if 1 < 0:
-	print("Condition is False.") 
-	print("End of IF statement.")
+    print("Condition is False.") 
+    print("End of IF statement.")
 print("The End.") 
 
 # NO INDENTATION ON THE SECOND PRINT.
 if 1 < 0:
-	print("Condition is False.") 
+    print("Condition is False.") 
 print("End of IF statement.")
 print("The End.") 
 ```
@@ -454,7 +452,7 @@ Conditional `if` statement runs code if the condition is true. When the conditio
 
 ```python
 if condition:
-	statements
+    statements
 ```
 
 ### `else` Statement
@@ -463,20 +461,20 @@ Conditional `else` statement must be followed after `if` statement as it cannot 
 
 ```python
 if condition:
-	statements
+    statements
 else:
-	statements
+    statements
 ```
 Chaining `if` and `else` statement is possible in series of conditioning as follows:
 
 ```python
 if condition: 
-	statements
+    statements
 else:
-	if condition:
-		statements
-	else condition:
-		statements
+    if condition:
+        statements
+    else condition:
+        statements
 ```
 
 ### `elif` Statement
@@ -485,11 +483,11 @@ Conditional `elif` statement is a combination of `if` and `else` statement; when
 
 ```python
 if condition: 
-	statements
+    statements
 elif condition:
-	statments:
+    statments:
 else:
-	statements
+    statements
 ```
 
 However, this is not the same as chain of `else`-`if` conditional statement as that is a combination of two different conditional set, while `elif` statement guarantees a single conditional set.
@@ -510,26 +508,26 @@ The `while` loop statement repeatedly execute statements inside (aka. iterate) a
 
 ```python
 while condition:
-	statements
+    statements
 ```
 The `else` statement may follow after a `while` loop statement, which will be executed when the loop statement has successfully finished its iteration (by conditional mean).
 
 ```python
 # FINISHED LOOP: completed iteration
 while index < 10:
-	index += 1
-	if index == 999:
-		break
-	else:
-		print("First...successful!")
+    index += 1
+    if index == 100:
+        break
+    else:
+        print("First...successful!")
 
 # FINISHED LOOP: forece-escaped via break statement
 while index < 10:
-	index += 1
-	if index == 5:
-		break
-	else:
-		print("Second...successful!")
+    index += 1
+    if index == 5:
+        break
+    else:
+        print("Second...successful!")
 ```
 
 ```
@@ -542,10 +540,10 @@ The `break` statement can be used to end a loop prematurely, before complete ite
 
 ```python 
 while single_loop_condition:
-	statement1
-	statement2
-	break
-	statements3
+    statement1
+    statement2
+    break
+    statements3
 ```
 
 ```
@@ -578,24 +576,28 @@ statement2
 
 ## `for` Loop
 
-The `for` loop statements repeatedly execute statements inside (aka. iterate) as long as it is in the valid range. The loop ends once the range object is out of range integer.
+The `for` loop statements repeatedly execute statements inside (aka. iterate) as long as it is in the valid range. The loop ends once all the values in range are iterated.
 
 ```python
 for index in iterable:
-	statements
+    statements
 ```
 
-Here, a local variable `index` obtains integer from `iterable` iterable object and execute statements one-by-one until running all the values inside the object. The `iterable` doesn’t have to be an iterable object: string object can also work, which returns character comprising the string object instead.
+Here, a local variable `index` obtains value from `iterable` and execute statements one-by-one until running all the values inside. The `iterable`s commonly used in the loop are
+
+1. range object: contains pattern of number in sequence (refer to *PYTHON: ITERABLE OBJECT § Range*)
+2. list object: contains list of data regardless of data type and pattern (refer to *PYTHON: ITERABLE OBJECT § List*).
+3. string object: returns character comprising the string.
 
 ```python
-for var in range(3, 9, 2):
-	print("Hello World" , var)
+for var in range(3):
+    print("Hello World" , var)
 ```
 
 ```
-Hello World 3
-Hello World 5
-Hello World 7
+Hello World 0
+Hello World 1
+Hello World 2
 ```
 
 Just like the `while` loop statement, `break` and `continue` can be used in `for` loop as well since it is the same loop-iterating statement.
@@ -605,69 +607,30 @@ The `else` statement may follow after a `for` loop statement, which will be exec
 ```python
 # FINISHED LOOP: completed iteration
 for index in range(10):
-	if index == 999:
-		break
-	else:
-		print("First...successful!")
+    if index == 100:
+        break
+    else:
+        print("First...successful!")
 
 # FINISHED LOOP: forece-escaped via break statement
 while index in range(10):
-	if index == 5:
-		break
-	else:
-		print("Second...successful!")
+    if index == 5:
+        break
+    else:
+        print("Second...successful!")
 ```
 
 ```
 First...successful!
 ```
 
-### **`range()` Function**
-
-A function that creates a sequential list of integers, called "range" object.
-
-| FUNCTION  | EXAMPLE                             | DESCRIPTION                                                  |
-| --------- | ----------------------------------- | ------------------------------------------------------------ |
-| `range()` | `range(start_num, length,interval)` | Creates a range object that has `legnth` number of sequence of integer starting from 0.<br /><br />OPTIONAL: Sequence starts from `start_num` number (not an index) with `interval`. For easier understanding, refer to the sample code below. |
-| `list()`  | `list(rng)`                         | Convert range object `rng` to list.                          |
-
-```python
-print(range(10)) 
-
-print(list(range(10)))
-
-print(list(range(4,10)))
-
-print(list(range(4,10,2)))
-```
-
-```
-range(0,10)            # Range object (one of a types of iterable object)
-[0,1,2,3,4,5,6,7,8,9]
-[4,5,6,7,8,9]
-[4,6,8]
-```
-
-A yet explained `for` loop statement executes code while in valid range, and `range()` function creates a range object that can provide a valid range of iteration.
-
-```python
-for var in range(3, 9, 2):
-	print("Hello World" , var)
-```
-
-```
-Hello World 3
-Hello World 5
-Hello World 7
-```
-
 ## Exception
 
-Exception is an error-exclusive conditional statement: the statement checks whether something goes wrong due to incorrect coding or input, stopping the program immediately. There are some statements that can be used to handle the script errors as follows.
+Exception is an error-exclusive conditional statement: the statement checks whether the code is inexecutable due to incorrect coding or input, and stops the program immediately. There are some statements that can be used to handle the script errors.
 
 ### `try`/`except` Statement
 
-The `try`/`except` statement is used to handle exceptions, and to call certain statements when an exception occurred. There are additional statements that can be used together with the pair:
+The `try`/`except` statement pair is used to handle exceptions and call certain statements corresponding to an exception occurred. There are additional statements that can be used together with the pair:
 
 | KEYWORD   | DESCRIPTION                                                  |
 | --------- | ------------------------------------------------------------ |
@@ -678,22 +641,22 @@ The `try`/`except` statement is used to handle exceptions, and to call certain s
 
 ```python
 try:
-	statements
-except exception_type_1:
-	statements
-except exception_type_2:
-	statements
+    statements
+except exception_type1:
+    statements
+except exception_type2:
+    statements
 except:			# UNCONDITIONAL EXCEPTION LOCATES LAST.
-	statements
+    statements
 finally:
-	statements
+    statements
 ```
 
 Even after `try`/`except` statement is executed, the program does not stop and continues onward.
 
 ### `raise` Statement
 
-The `raise` statement is used to raise exception intentionally, but manually. As the statement raises error, it also stops the runtime immediately, preventing anymore further execution thereafter.
+The `raise` statement is used to manually raise exception intentionally. As the statement raises error, it also stops the runtime immediately, preventing anymore further execution thereafter.
 
 ```python
 # EXPLICITLY RAISE EXCEPTION: can be used alone, even inside an 'except' code above.
@@ -705,14 +668,14 @@ raise exception_description
 
 ### `assert` Statement
 
-The `assert` statement checks expressions of code for validity (aka. assertion). When tested expression is valid with no problem, assertion returns `True`. When assertion returns `False`, an exception is raised.
+The `assert` statement checks expressions for validity (aka. assertion). When tested expression is valid with no problem, assertion returns `True`. When an exception is raised, assertion returns `False`.
 
 ```python
-Print(0)
+print(0)
 assert TRUE_expression
-Print(1)
+print(1)
 assert FALSE_expression,"exception_type"
-Print(2)
+print(2)
 ```
 
 ```
@@ -731,42 +694,101 @@ Not just its simplicity that makes Python language useful, its iterable object i
 
 ## Iterable Object
 
-An object with an `__iter__` method (Python3) which returns iterator object, eventually going through every data within the iterable object in sequence; called iteration.
+Iterable object is used to store collection of data, and is defined by an object that has `__iter__` method (Python3) which returns iterator object. Iterator is an object which automatically calls next element of data, thus iterates every data within the iterable object in sequence.
 
-### Iterator Object
-
-An object with a `__next__` method (Python3) which automatically calls next element of data.
-
-## List
-
-List iterable object is used to store item in order along its index, irrelevant to data type. Defining the list object is done using a bracket ` []` by assigning values inside, comma separated. Bracket is also used to call an element at index location.
+One of the special feature of iterable object is it can access and/or modify stored data using a bracket `[]`. String object introduced in *PYTHON: BASIC § String Data Type* is also an iterable object.
 
 ```python
-lst = [int1, str2, lst3, any4, ... ]
-
-print( lst )		# >> OUTPUT: [int1, str2, lst3, any4, ... ]
-print( lst[0] )		# >> OUTPUT: int1
-```
-
-It is possible to change the existing value by reassigning individual element. Calling the element that is outside the range of list is not possible and will results error.
-
-```python
-lst = [int0, int1, int2]
-
-lst[1] = int3		# >> RESULT: lst = [int0, int3, int2]
-lst[3] = int4		# IndexError: list assignment index out of range
-```
-
-String data can be indexed like a list, where each element is a character consisting the string.
-
-```python
-variable ="Hello." 
+variable = "Hello World!" 
 print(variable[1])
 ```
 
 ```
 e
 ```
+
+### Iterable Slicing
+
+Slicing is one of the powerful feature Python has advantage over other programming languages on handling a group of data such as iterable object. Slicing iterable can only extract desired portion of the original.
+
+|  SYNTAX   | EXAMPLE                            |
+| :-------: | ---------------------------------- |
+| `[ : : ]` | `iterable[start : end : interval]` |
+
+Slicing starts from `start` (inclusive) until `end` (exclusive) with interval of `interval`. All thee arguments do not have to be filled to slice an iterable.
+
+```python
+variable = "Hello World!"
+print(variable[2:8])	# >> OUTPUT: "llo Wo"
+
+# SLICE FROM/UNTIL THE END OF THE LIST
+print(variable[2: ])	# >> OUTPUT: "llo World!"
+print(variable[ :8])	# >> OUTPUT: "Hello Wo"
+
+# SLICE WITH SKIPPING SOME ELEMENTS WITH INTERVAL
+print(variable[ : :2])	# >> OUTPUT: "HloWrd"
+print(vairalbe[2:8:2])	# >> OUTPUT: "oW"
+
+# REVERSE INTERVAL
+print(variable[8:2:-1])	# >> OUTPUT: "roW ol"
+```
+
+## Range
+
+Range iterable object stores a number in sequenced pattern by specifying starting number (inclusive), ending number (exclusive), and sequencing interval. Range object is created using the `range()` function:
+
+| FUNCTION  | EXAMPLE                      | DESCRIPTION                                                  |
+| --------- | ---------------------------- | ------------------------------------------------------------ |
+| `range()` | `range(start, end,interval)` | Creates a range object that has `legnth` number of sequence of integer starting from default `start = 0`.<br /><br />*[OPTIONAL: Sequence starts from `start_num` number (not an index) with `interval`. For easier understanding, refer to the sample code below.]* |
+
+```python
+variable = range(3, 10, 2)
+
+variable[0]		# >> OUTPUT: 3
+variable[1]		# >> OUTPUT: 5
+variable[2]		# >> OUTPUT: 7
+variable[3]		# >> OUTPUT: 9
+```
+
+## List
+
+List iterable object stores item in sequence along its index, irrelevant to data type. Assigning value to a list is done using a bracket ` []` by with values in order, comma separated. Bracket is also used to call an element at index location.
+
+```python
+lst = [value1, value2, value3, value4, ... ]
+
+print(lst)			# >> OUTPUT: [value1, value2, value3, value4, ... ]
+print(lst[0])		# >> OUTPUT: value1
+```
+
+It is possible to change the existing value by reassigning individual element. Calling the element that is outside the range of list is not possible and will results error.
+
+```python
+lst = [value1, value2, value3]
+
+lst[1] = value4		# >> RESULT: lst = [value1, value4, value3]
+lst[3] = value5		# IndexError: list assignment index out of range
+```
+
+List can be created programmatically if the elements observe specific sequencing pattern, called **List Comprehension**. This requires `for` loop with optional `if` conditional statement.
+
+| SYNTAX          | EXAMPLE                                          |
+| --------------- | ------------------------------------------------ |
+| `[ for in if ]` | `lst[element for index in iterable if condtion]` |
+
+This creates a list containing `elem` data based on variable `index` from `iterable` object while the `condition` is true; `if` statement in comprehension is optional.
+
+```python
+lst = [i**2 for i in range(5)]
+lst = [i**2 for i in range(5) if (i**2) % 2 == 0]
+```
+
+```
+[0, 1, 4, 9, 16]
+[0, 4, 16]
+```
+
+### List Operation
 
 A list can be added and multiplied, with operations exclusive to iterable objects. Operations below are not restricted to a list alone but can be applied to other iterable objects introduced later.
 
@@ -777,17 +799,17 @@ A list can be added and multiplied, with operations exclusive to iterable object
 | `in`     | Included       | Check if an item is in a list.                               |
 
 ```python
-lst = [1, 2, 3]
+lst = [value1, value2, value3]
 
 # + OPERATOR
-print( lst + [3, 4, 5] )	# >> OUTPUT: [1, 2, 3, 3, 4, 5]
+print(lst + [value3, value4])	 # >> OUTPUT: [value1, value2, value3, value3, value4]
 
 # * OPERATOR
-print( lst * 3 )			# >> OUTPUT: [1, 2, 3, 1, 2, 3, 1, 2, 3]
+print(lst * 2)				   	# >> OUTPUT: [value1, value2, value3, value1, value2, value3]
 
 # in OPERATOR
-print( 1 in lst )			# >> OUTPUT: True
-print( 2 not in lst )		# >> OUTPUT: False
+print(value1 in lst)		   	# >> OUTPUT: True
+print(value2 not in lst)		# >> OUTPUT: False
 ```
 
 Following are functions that does certain features to and for a list (or more like iterable) object.
@@ -798,214 +820,157 @@ Following are functions that does certain features to and for a list (or more li
 | `all()`       | `all([condition for index in lst])` | Return `True` when all elements inside the `lst` list meets `condition`. |
 | `any()`       | `any([condition for index in lst])` | Return `True` when any element inside the `lst` list meets `condition`. |
 | `enumerate()` | `enumerate(lst)`                    | Iterates elements inside the `lst` list with sequencing.     |
-| `list()`      | `list(iterable)`                    | Convert an iterable object to a list; creates empty list if `iterable` is not presented. |
+| `list()`      | `list(iterable)`                    | Convert an iterable object (such as string and range) to a list; creates empty list if `iterable` is not presented. |
 
 ```python
 lst = [10, 9, 8, 7, 6]
 
 # ALL() FUNCTION
 if all( [var > 5 for var in lst] ):
-	print("Numbers are all above 5.")		# >> OUTPUT: Numbers are all above 5.
+    print("Numbers are all above 5.")		   # >> OUTPUT: Numbers are all above 5.
 
 # ANY() FUNCTION
 if any( [ var % 2 ==  0 for var in lst] ):
-	print("At least one number is even.")	# >> OUTPUT: At least one number is even.
+    print("At least one number is even.")	   # >> OUTPUT: At least one number is even.
     
 # ENUMERATE() FUNCTION
 for var in enumerate(lst):
-	print(var)								# >> OUTPUT: (0,10)
-    										# >>		 (1,9)
-        									# >>		 (2,8)
-            								# >>		 (3,7)
-                							# >>		 (4,6)
+    print(var)								 # >> OUTPUT: (0,10)
+                                                # >>		 (1,9)
+                                                # >>		 (2,8)
+                                                # >>		 (3,7)
+                                                # >>		 (4,6)
 ```
 
-Since list is an (iterable) object, it also has methods it can access to perform certain features:
+Since list is an (iterable) object, it also has methods it can use to perform certain features:
 
-| METHOD     | EXAMPLE                 | DESCRIPTION                                             |
-| ---------- | ----------------------- | ------------------------------------------------------- |
-| `append()` | `lst.append(data)`      | Add `data` at the end of the `lst` list.                |
-| `insert()` | `lst.insert(int, data)` | Add `data` at `int` element location of the `lst` list. |
-| `index()`  | `lst.index(data)`       | Find the smallest number of location of *data*.         |
-
-```python
-lst = [10, 9, 8, 7, 6]
-
-# APPEND() METHOD
-print( lst.append("7") )		# >> OUTPUT: [10, 9, 8, 7, 6, "7"]
-
-# INSERT() METHOD
-print( lst.insert(1,"7") )		# >> OUTPUT: [10, "7", 9, 8, 7, 6]
-
-# INDEX() METHOD
-print( lst.index(8) )			# >> OUTPUT: 2
-```
-
-### List Comprehension
-
-List can be generated using a `for` loop and `if` condition syntax when elements have certain rule/pattern.
-
-| SYNTAX          | EXAMPLE                                  |
-| --------------- | ---------------------------------------- |
-| `[ for in if ]` | `lst[elem for index in rng if condtion]` |
-
-This creates a list according to the `elem` utilizing variable `var` in a range given by the range object `rng` when the `condition` is true; `if` statement in comprehension is optional.
-
-```python
-lst =[i**2 for i in range(5)]
-lst =[i**2 for i in range(5) if (i**2)%2==0]
-```
-
-```
-[0, 1, 4, 9, 16]
-[0, 4, 16]
-```
-
-### List Slice
-
-List slicing is one of the powerful tool Python has advantage over other programming languages. Slicing the list extracts portion of the original list, thus creates smaller list.
-
-|  SYNTAX   | EXAMPLE                                 |
-| :-------: | --------------------------------------- |
-| `[ : : ]` | `lst[start_elem : end_elem : interval]` |
-
-Slicing starts from `start_elem` (inclusive) until `end_elem` (exclusive) with interval of `interval`. All thee arguments do not have to be filled to slice the list.
-
-```python
-lst =[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-print( lst[2:8] )		# >> OUTPUT: [2, 3, 4, 5, 6, 7]
-
-# SLICE FROM/UNTIL THE END OF THE LIST
-print( lst[2:] )		# >> OUTPUT: [2, 3, 4, 5, 6, 7, 8, 9]
-print( lst[:8] )		# >> OUTPUT: [0, 1, 2, 3, 4, 5, 6, 7]
-
-# SLICE WITH SKIPPING SOME ELEMENTS WITH INTERVAL
-print( lst[::2] )		# >> OUTPUT: [0, 2, 4, 6, 8]
-print( lst[2:8:3] )		# >> OUTPUT: [2, 5]
-
-# REVERSE INTERVAL
-print( lst[7:3:-1] )	# >> OUTPUT: [7, 6, 5, 4]
-```
+| METHOD     | EXAMPLE                    | DESCRIPTION                                                |
+| ---------- | -------------------------- | ---------------------------------------------------------- |
+| `append()` | `lst.append(value)`        | Add `value` at the end of the `lst` list.                  |
+| `insert()` | `lst.insert(index, value)` | Add `value` at `index` element location of the `lst` list. |
+| `index()`  | `lst.index(value)`         | Find the smallest number of location of `value`.           |
 
 ## Tuple
 
-Tuple iterable object is used to store item in order just like a list, but cannot change value of elements after its initialization. This property of iterable object is called immutable (opp. mutable). Tuple use parentheses `()` or even without any to distinguish itself from the List.
+Tuple iterable object is used to store item in order just like a list, but cannot change value after initialization. This property of iterable object is called immutable (opp. mutable). Tuple use parentheses `()` or even without any to distinguish itself from other iterable.
 
 ```python
-tpl =(data0, data1, data2)
-print( tpl )		# >> OUTPUT: (data0, data1, data2)
-print( tpl[0] )		# >> OUTPUT: data0
+tpl = (value1, value2, value3)
+print(tpl)			# >> OUTPUT: (value1, value2, value3)
+print(tpl[0])		# >> OUTPUT: value1
 
 # ALTERNATIVE: tuple without parentheses
-tpl = data0, data1, data2
-print( tpl )		# >> OUTPUT: (data0, data1, data2)
-print( tpl[0] )		# >> OUTPUT: data0
+tpl = value1, value2, value3
+print(tpl)			# >> OUTPUT: (value1, value2, value3)
+print(tpl[0])		# >> OUTPUT: value1
 ```
 
 Because tuple is a constant version of a list, the data inside cannot be changed. The error will occur when such effort is made.
 
 ```python
-tpl = [data0, data1, data2]
-tpl[1] = data3
+tpl = (value1, value2, value3)
+tpl[1] = value4
 ```
 
 ```
 TypeError: 'tuple' object does not support item assignment
 ```
 
-Tuple operation can be referred from operation, function, and method table in *List* section.
+Tuple operation can be referred from operation, function, and method table in *PYTHON: ITERABLE OBJECT § List Operation* subsection.
 
 
 ### Unpacking Tuple
 
-Unpacking tuple means assigning individual element in tuple to variables or another tuples. Placing asterisk `*` on prefix of a variable would return multiple number of elements as a list. This will be explained in *Parameters & Arguments* article section.
+Unpacking tuple means assigning individual element in tuple to variables or another tuples. Placing asterisk `*` on prefix of a variable would return multiple leftover elements as a list object. This will be explained in *PYTHON: FUNCTIONAL PROGRAMMING § Parameters & Arguments* subsection.
 
 ```python
-var0, var1, *var2, var3 = [data0, data1, data2, data3, data4, data5]
+variable1, variable2, *variable3, variable3 = [value1, value2, value3, value4, value5]
 
-print(var0)		# >> OUTPUT: data0
-print(var1)		# >> OUTPUT: data1
-print(var2)		# >> OUTPUT: [data2, data3, data4]
-print(var3) 	# >> OUTPUT: data5
+print(variable1)		# >> OUTPUT: value1
+print(variable2)		# >> OUTPUT: value2
+print(variable3)		# >> OUTPUT: [value3, value4]
+print(variable3)		# >> OUTPUT: value5
 ```
 
 ## Dictionary
 
-Dictionary is an iterable object with data structured to maps the key elements to its value. Because of this property, dictionary does not call value by numerical index but through keys. Dictionary uses curly bracket `{}` to distinguish itself from other iterable objects.
+Dictionary is an iterable object that has indexing `key` data and `value` data paired as a single element. Dictionary does not call value by integer index but through `key`. Dictionary uses curly bracket `{}` to distinguish itself from other iterable.
 
 ```python
-dictionary = {key0:value0, key1:value1, key2:value2}
+dictionary = {key1: value1, key2: value2, key3: value3}
 
-print( dictionary[key0] )	# >> OUTPUT: value0
-print( dictionary[key1] )	# >> OUTPUT: value1
-print( dictionary[key3] )	# KeyError: key3
+print(dictionary[key1])		# >> OUTPUT: value1
+print(dictionary[key2])		# >> OUTPUT: value2
+print(dictionary[key4])		# KeyError: key4
 ```
 
-Mutable object (e.g. list and dictionary) cannot be used as a key element; only immutable object is allowed. However, mutable object can still be used as a value of the key.
+Mutable object (e.g. list and dictionary) cannot be used as `key` of the element; only immutable object is allowed. However, mutable object can still be used as a `value` of the element.
 
 ```python
-dictionary = {list0:value0, key1:value1}
+dictionary = {lst1: value1, key2: value2}
 ```
 
 ```
 TypeError: unhashable type: 'list'
 ```
 
-It is possible to change the existing value of a key within a dictionary. Unlike list object, creating new key and assigning its value is also possible without needing any help from a method.
+It is possible to change the existing `value` of the `key` within a dictionary. Unlike list object, creating new `key` data and assigning its `value` is also possible without needing any help from a method.
 
 ```python
-dictionary = {key0:value0, key1:value1, key2:value2}
-dictionary[key1] = value3
-dictionary[key4] = value4
+dictionary = {key1: value1, key2: value2, key3: value3}
+dictionary[key1] = value4
+dictionary[key5] = value5
 ```
 
 ```
-{key0:value0, key1:value3, key2:value2, key4:value4}
+{key1: value1, key2: value2, key3: value3, key5: value5}
 ```
 
 Operations for a dictionary is same as other iterable objects but have slight difference:
 
 | OPERATOR | NAME                     | DESCRIPTION                                                  |
 | -------- | ------------------------ | ------------------------------------------------------------ |
+| `+`      | Addition                 | Merge two or more different lists to a single list.          |
+| `*`      | Multiplication           | Multiply the string by the number of integer (float does not work). |
 | `in`     | Included (key exclusive) | Check if the key is in a dictionary. However, it does not check the value. |
 
 ```python
-dictionary = {key0:value0, key1:value1}
+dictionary = {key1: value1, key2: value2}
 
-print( key0 in dictionary )			# >> OUTPUT: True
-print( value1 in dictionary )		# >> OUTPUT: False
-print( key3 not in dictionary )		# >> OUTPUT: True
+print(key1 in dictionary )			# >> OUTPUT: True
+print(value2 in dictionary )		# >> OUTPUT: False
+print(key3 not in dictionary )		# >> OUTPUT: True
 ```
 
-Dictionary can have its own functions and methods to execute certain features of dictionary:
+Dictionary have its own function and method to execute certain features exclusive for dictionary:
 
 | OPERATION | EXAMPLE                             | DESCRIPTION                                                  |
 | --------- | ----------------------------------- | ------------------------------------------------------------ |
 | `get()`   | `dictionary.get(key,[description])` | Find the key and get its value; additional description can be added when the key is not found (`None` by default). |
-| `dict()`  | `name=dict()`                       | Can create empty dictionary.                                 |
+| `dict()`  | `dictionary=dict()`                 | Can create empty dictionary.                                 |
 
 ```python
-dictionary = {key0:value0, key1:value1}
+dictionary = {key1: value1, key2: value2}
 
-print( dictionary.get(key0) )						# >> OUTPUT: value0
-print( dictionary.get(key2) )						# >> OUTPUT: None
-print( dictionary.get(key3, "not in dictionary") )	# >> OUTPUT: not in dictionary
+print(dictionary.get(key0))							# >> OUTPUT: value1
+print(dictionary.get(key2))							# >> OUTPUT: None
+print(dictionary.get(key3, "not in dictionary"))	  # >> OUTPUT: not in dictionary
 ```
 
 ## Set
 
-Set is an iterable object that guarantees uniqueness, meaning it does not allow duplicate data to exist within the object. Just like dictionary, set uses curly bracket `{}` to assign values but without key-value pair. Due to the reasons above, set is much faster to check the data than a list.
+Set is an iterable object that guarantees uniqueness, meaning it does not allow duplicate element within the object. Just like dictionary, set uses curly bracket `{}` to assign values but without `key`-`value` pair. Due to the reasons above, set is much faster to check the elements than list.
 
 ```python
-set0 = {data0, data1, data2, data1}
-print(set0)
+st = {value1, value2, value3}
+print(st)
 ```
 
 ```
-{data0, data1, data2}
+{value1, value2, value3}
 ```
 
-Set have mathematical operations which works exactly like mathematical set.
+Set have mathematical operations available which works exactly like mathematical set.
 
 | OPERATION | NAME                 | DESCRIPTION                                                  |
 | --------- | -------------------- | ------------------------------------------------------------ |
@@ -1015,48 +980,43 @@ Set have mathematical operations which works exactly like mathematical set.
 | `^`       | Symmetric difference | Return data exclusive to each set, but not both.             |
 
 ```python
-set0 = {1, 2, 3, 4, 5, 6}
-set1 = {4, 5, 6, 7, 8, 9}
+set1 = {1, 2, 3, 4, 5, 6}
+set2 = {4, 5, 6, 7, 8, 9}
 
-print(set0 | set1)
-# >> OUTPUT: {1, 2, 3, 4, 5, 6, 7, 8, 9}
+print(set1 | set2)		# >> OUTPUT: {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-print(set0 & set1)
-# >> OUTPUT: {4, 5, 6}
+print(set1 & set2)		# >> OUTPUT: {4, 5, 6}
 
-print(set0 - set1)
-print(set1 - set0) 
-# >> OUTPUT: {1, 2, 3}
-# >> OUTPUT: {7, 8, 9}
+print(set1 - set2)		# >> OUTPUT: {1, 2, 3}
+print(set2 - set1)		# >> OUTPUT: {7, 8, 9}
 
-print(set0 ^ set1)
-# >> OUTPUT: {1, 2, 3, 7, 8, 9}
+print(set1 ^ set2)		# >> OUTPUT: {1, 2, 3, 7, 8, 9}
 ```
 
-Set can have its own functions and methods to execute certain features of set.
+Set have its own function to execute certain features exclusive for set:
 
 | FUNCTION | EXAMPLE         | DESCRIPTION                                                  |
 | -------- | --------------- | ------------------------------------------------------------ |
-| `set()`  | `set(iterable)` | Function which creates set: list and tuple should be with bracket `[]` and parentheses `()`. Dictionary is not included in this case. |
+| `set()`  | `set(iterable)` | Function which creates a set: list and tuple assigned with parentheses `()` are allowed, but dictionary is not possible. |
 
 The function above is necessary when creating an empty set, as `{}` creates an empty dictionary instead. Meanwhile, the methods used by set object are as follows:
 
-| METHOD     | EXAMPLE            | DESCRIPTION                                                  |
-| ---------- | ------------------ | ------------------------------------------------------------ |
-| `add()`    | `set.add(data)`    | Add `data` at the end of the set.                            |
-| `remove()` | `set.remove(data)` | Remove `data` in the set.                                    |
-| `pop()`    | `set.pop([key1])`  | Randomly selected element [or `key1` ] is popped or removed from the set. |
+| METHOD     | EXAMPLE             | DESCRIPTION                                                 |
+| ---------- | ------------------- | ----------------------------------------------------------- |
+| `add()`    | `set.add(value)`    | Add `value` at the end of the set.                          |
+| `remove()` | `set.remove(value)` | Remove `value` in the set.                                  |
+| `pop()`    | `set.pop()`         | Randomly selected element is popped (removed) from the set. |
 
 ```python
-set0 = set( [data0, data1, data2, data1] )
-print( set0 )			# >> OUTPUT: {data0, data1, data2}
+st = set([value1, value2, value3, value1])
+print(st)				# >> OUTPUT: {value1, value2, value3}
 
-set0.add( data3 )
-set0.remove( data0 )
-print( set0 )			# >> OUTPUT: {data1, data2, data3}
+set0.add(value4)
+set0.remove(value1)
+print(st)				# >> OUTPUT: {value2, value3, value4}
 
-print( set0.pop() )		# >> OUTPUT: data1 (randomly popped)
-print( set0 )			# >> OUTPUT: {data0, data2}
+print(st.pop())			# >> OUTPUT: value2 (randomly popped)
+print(st)				# >> OUTPUT: {value3, value4}
 ```
 
 ## Generator
@@ -1066,14 +1026,14 @@ Generator is an iterable object that can be created by developer using `yield` a
 ```python
 # CREATING THE GENERATOR.
 def generator_function():
-	var = 0
-	while var < 5
-		yield var
-		var += 1
+    var = 0
+    while var < 5
+        yield var
+        var += 1
 
 # ITERATING GENERATOR ELEMENT-BY-ELEMENT.
 for var in generator_function():
-	print(var)
+    print(var)
 
 # CONVERSION TO "LIST" DATA TYPE.
 lst = list(generator_function())
@@ -1095,8 +1055,6 @@ A keyword used to create a generator; keyword returns the value when iterated by
 
 # **PYTHON: FUNCTIONAL PROGRAMMING**
 
-There are three different types of programming method that can be applied to Python language: procedural, functional, and object-oriented.
-
 Functional programming is a style of program scripting that is based mostly around usage of the functions. This chapter will be introducing the guide on how to create and use function in Python for functional programming.
 
 ## Function
@@ -1108,14 +1066,14 @@ The programming based around use of custom functions is called *functional progr
 ```python
 x = [0, 3, 5, 9]
 print(len(x))
-# Code "print()" function, and "len( )" function that returns the length of list object.
+# Using "print()" function, and "len( )" function that returns the length of list object.
 ```
 
 ```
 4
 ```
 
-Although function acts quite different from variable, they can be treated just the same. For easier understanding please refer to the example below:
+Although function acts quite different from variable, they can be treated just the same when assigned to variable.
 
 ```python
 # ORIGINAL FUNCTION
@@ -1126,7 +1084,7 @@ variable = function
 print(variable(arg1, arg2))
 ```
 
-Not only can it be assigned to variable, but function can also be passed as parameter of the other function. Therefore, you can define a function by using another function that’s been already defined.
+Not only can it be assigned to variable, but function can also be passed as parameter of the other function. Therefore, developer can define new function using already-defined function.
 
 ### Pure Function
 
@@ -1148,7 +1106,7 @@ A function that takes other function(s) as parameters or return the function(s) 
 
 ## `def` Keyword
 
-The `def` keyword is used to create your own function. When calling your newly created function before defining one, an error occurs as Python executes sequentially, thus is deemed calling non-existing function.
+The `def` keyword is used to create custom function. When calling newly created function before defining one, an error occurs as Python executes sequentially, thus is deemed calling non-existing function.
 
 ```python
 def function(arg1, ar2):
@@ -1176,7 +1134,7 @@ Function does not need to have a `return` statement which will return `None` whe
 ```python
 def function_name():
     print("Hello!")
-    
+
 print(function_name())
 ```
 
@@ -1188,7 +1146,7 @@ None
 
 ### Parameter & Argument
 
-Following are the difference between parameters and arguments that is referred significantly when discussed on function.
+Following is a difference between parameter and argument that is referred significantly when discussing function:
 
 **Parameter**
 Parameter is a function-internal local variable: because parameters is a function-exclusive local variable, it cannot be called from outside.
@@ -1200,7 +1158,7 @@ Parameter is a function-internal local variable: because parameters is a functio
 |   `=`    | `arg1=value` | Returns default value otherwise inputted to its parameter. Must locate after normal parameter. |
 
 **Argument**
-Argument is a value/object being passed to the function parameter and those passed values and objects will be processed by the function code.
+Argument is a value or object being passed to the function parameter and those passed values and objects will be processed by the function code.
 
 Examples below show how function parameter and argument works:
 
@@ -1259,7 +1217,7 @@ Also known as **Lambda function (express)**, is an unnamed function without decl
 | `lambda param0, param1 ∶ expression`                         |
 | A main body of anonymous function consisting parameters and its return expression. |
 
-Although anonymous function is a function without a name for a single-use, it can be assigned to variables and called when the function is needed. The anonymous function of the *Pure Function* example section can be expressed as follows:
+Although anonymous function is a function without a name for a single-use, it can be assigned to variables and called when the function is needed. The anonymous function of the *PYTHON: FUNCTIONAL PROGRAMMING § Pure Function* example section can be expressed as follows:
 
 ```python
 # NAMED FUNCTION
@@ -1284,20 +1242,20 @@ Built-in function which takes iterable objects and function with parameters as a
 
 | SYNTAX                                                       |
 | ------------------------------------------------------------ |
-| `map(function, iter0, iter1, ...)`                           |
-| In higher-order `map` function, iterable object `iter0` and `iter1` are passed as argument for `function`. |
+| `map(function, iterable1, iterable2, ...)`                   |
+| In higher-order `map` function, iterable object `iterable1` and `iterable2` are passed as argument for `function`. |
 
 Conversion to an iterable object, such as `list()` function is necessary to avoid error such as "SyntaxError".
 
 ```python 
-lst0 = [1, 2, 3, 4, 5]
-lst1 = [0, 9, 8, 7, 6, 5]
+lst1 = [1, 2, 3, 4, 5]
+lst2 = [0, 9, 8, 7, 6, 5]
 
-var0 = map(lambda x, y: x ** 2 + y, lst0, lst1)
-var1 = map(lambda y, x: x ** 2 + y, lst1, lst0)
+variable1 = map(lambda x, y: x ** 2 + y, lst1, lst2)
+variable2 = map(lambda y, x: x ** 2 + y, lst2, lst1)
 
-print( list(var0) )
-print( list(var1) )
+print(list(variable1))
+print(list(variable2))
 ```
 
 ```
@@ -1319,9 +1277,9 @@ Conversion to an iterable object, such as `list()` function is necessary to avoi
 ```python
 lst = [1, 2, 3, 4, 5]
 
-var = filter(lambda x: x % 2 is 0, lst)
+variable = filter(lambda x: x % 2 is 0, lst)
 
-print( list(var) )
+print(list(variable))
 ```
 
 ```
@@ -1360,20 +1318,20 @@ RuntimeError: maximum recursion depth exceeded
 
 ## Decorator
 
-A function which modifies original function’s functionality and returns the modified "function" itself (rather than returning value). Hence, assignment to a variable is needed for a function to properly work after processing through the decorator. Its function will then have a same name as the variable.
+Decorator is a function which modifies original function’s functionality and returns the modified "function" itself (rather than returning value). Hence, assignment to a variable is needed for a function to properly work after processing through the decorator. Its function will then have a same name as the variable.
 
 ```python
 # ORIGINAL FUNCTION
 def function():
-	statements
+    statements
 
 # CREATING DECORATOR
 def decorator(func):
-	def modified_function():
+    def modified_function():
         """
         statements including func()
         """
-	return modified_function
+    return modified_function
 
 # DECORATING (MODIFYING) FUNCTION
 variable = decorator(function) 
@@ -1399,16 +1357,16 @@ A decorator symbol `@` used for pre-pending the function definition, placed befo
 ```python
 # CREATING DECORATOR.
 def decorator(func):
-    def modified_function():
-        """
-        statements including func()
-        """
-    return function_modified
+	def modified_function():
+		"""
+		statements including func()
+		"""
+	return modified_function
 
 # DECORATING FUNCTION: @ SYMBOL
 @decorator
 def function():	# ORIGINAL FUNCTION OF "function()"
-    statements
+	statements
 
 # FUNCTION NAME REMAINS THE SAME.
 function()
@@ -1417,13 +1375,13 @@ function()
 Additionally, more than one decorator can be applied to a single pre-decorated function.
 
 ```python
-@decorator0
 @decorator1
+@decorator2
 def function():
-    statements
+	statements
 ```
 
-A decorator located closest to pre-decorated function will be applied firsthand. Thus, the function object `function()` will first be decorated by `@decorator1`  then `@decorator0` sequentially.
+A decorator located closest to pre-decorated function will be applied firsthand. Thus, the function object `function()` will first be decorated by `@decorator2`  then `@decorator1` sequentially.
 
 
 # **PYTHON: OBJECT-ORIENTED PROGRAMMING**
@@ -1432,122 +1390,122 @@ Previous chapter has explained and dealt with procedural and functional programm
 
 ## Object
 
-Object (aka. instance) is a block of data which acts like a building brick; every object has its own attributes that are properties and capabilities of the object. The attribute can be accessed and utilized by `object.attribute` format.
+Previous chapters have introduced variable (which can store data) and function (which can process data). Object, aka. instance, is a block of data which encapsulate these variables and functions into a single identity.
 
 The programming based around use of a custom objects is called *object-oriented programming*.
 
 ```python
-# OBJECT "x" CALLING METHOD "append()" AVAILABLE IN STRING
-x = [0 ,3 ,5 ,9]
-print( x.append(13) )
+x = [0, 3, 5, 9]
+print(x.index(5))
+# Using "index()" method that returns index of the value 5.
 ```
 
 ```
-[0, 3, 5, 9, 13]
+2
 ```
 
-### Method & Attribute
+### Encapsulation
 
-Below is a description of method and attribute of an object in Python.
+Encapsulation is the core concept in object which...
 
-* **Method**
-    : method is an object-dependent function that is bounded by the object, meaning the object needs to be presented to use a method and cannot be used independently.
+1. combines variables and functions into a single object
+2. restrict direct access to these variables and functions to prevent accidental modification from external code. 
 
-* **Attribute**
-    : attribute is a features and properties of the object (including bounded function). Hence, methods are included as one of the attributes of the object. However, for easier understanding, this document will distinguish attribute as attribute without methods.
+### Attribute & Method
+
+The variables and function encapsulated to the object is called differently:
+
+* **Attribute** is an object-dependent variable, accessed by `object.attribute` format.
+* **Method** is an object-dependent function, accessed by `object.method()` format.
 
 ## Class
 
-Class is used to create objects (aka. instance), hence can be deemed as an object’s blueprint. Classes are created first by a keyword `class` containing functions as method of the class in indented block.
+Class is used to create objects (aka. instance), hence can be deemed as a blueprint of the object. Classes are created using keyword `class` and inside defines variables and functions which becomes attributes and methods for the object.
 
 ```python
 # CREATING CLASS
 class CLASS∶
-	global var			# GLOBAL VARIABLE: LINKED TO VARAIBLE OUTSIDE WITH SAME NAME
-    attr0 = value		# CLASS ATTRIBUTE
-    
     # INSTANCE INITIALIZATION (= CONSTRUCTOR)
     def __init__(self, arg1, arg2):
-        # INSTANCE ATTRIBUTES
+        # ATTRIBUTES (similar to VARIABEL)
         self.attr1 = arg1
         self.attr2 = arg2
         
-    # INSTANCE METHOD
+	# METHOD (similar to FUNCTION)
     def method(self, arg3):
-        """
-        statements including var3
-        """
-        return arg3
+        self.attr3 = arg3
+        return self.attr1 + self.attr2 - self.attr3
 
-var = "Hello World!"			# DECLARE VARIABLE (LINKED TO GLOBAL VARIABLE)
-instance = CLASS(var1, var2)	# CREATE INSTANCE FROM THE CLASS
+# INSTANTIATION
+instance = CLASS(value1, value2)	# CREATE INSTANCE FROM THE CLASS
 
-instance.method(var3)			# CALLING METHOD
-instance.var					# CALLING ATTRIBUTE
+# THEREFORE...
+print(instance.attr3)
+print(instance.method(value3))
 ```
 
 ```
-var3
-"Hello World!"
+value3
+value1 + value2 - value3
+```
+
+### `self` Variable
+
+The `self` variable is a conventional name to indicate an instance itself. Placing `self` on variables or functions bounds them to an object, thus declares as attributes and methods. These attributes and methods can be accessed only from the instance.
+
+Variables and functions without `self` are local variables and functions inside the instance, and is not accessible. Attempting to do so results "AttributeError".
+
+```python
+# CREATING CLASS
+class CLASS:
+    def __init__(self, arg1, arg2):
+        self.attr1 = arg1
+        self.attr2 = None        # ATTRIBUTE MUST BE INITIALIZED, ELSE RESULTS "AttributeError"
+        attr3 = arg2             # LOCAL VARIABLE
+
+
+# INSTANTIATION
+instance = CLASS(1, 2)
+''' EQUIVALENT: 
+Class.__init__(self = instance, arg1 = 1, arg2 = 2, arg3 = 3)
+'''
+
+# THEREFORE...
+instance.attr1		# >> OUTPUT: 1
+instance.attr2		# >> OUTPUT: None
+instance.attr3		# AttributeError: 'CLASS' object has no attribute 'C'
 ```
 
 ### `__init__` Method
 
-The `__init__` method is the most important method in class which is used to create class constructor (like the *constructor* in C/C++ language). This method defines how many parameters the instance can have and also responsible for initializing attribute values for instance.
+The `__init__` method is the most important method needed to create instance. As the name implies (abbreviation of *initialization*), this method is automatically called when creating an object from class and is responsible for defining the number of arguments needed on instance initialization.
 
-The `__init__` method automatically called only when instance is created from the class. Therefore, initialized attribute can only be access through instance, but not from the class directly. As oppose to this, attribute declared outside the `__init__` method is accessible from both instance and class.
+## Instance Attribute/Method
 
-### Global Variable
+All methods (and attributes) that are declared normally within the class with `self` for self-indication are instance methods (and attributes). There is no special syntax that need to declare for instance method.
 
-Variable assigned with `global` keyword represents global variable. This variable is linked to the variable outside the class but shares the same name.
-
-Without `global` keyword, the variable inside the class becomes local variable. Local variable and variable declared outside the class will be irrelevant to each other.
-
-## Instance Method
-
-All methods (or attributes) that are declared normally within the class are instance methods (or attributes). There is no special syntax that need to declare for instance method.
-
-Some may misunderstand instance method can be distinguished by checking whether the argument `self` is there or not. This is not true as `self` is purely an argument and has no power on defining the type of method or attribute. The detail information is explained under the subsection below.
-
-### `self` Variable
-
-The `self` variable is a conventional name to indicate a current instance, meaning it is not a keyword and the name can be set however developer wants. Variables with `self` prefix become instance attributes.
-
-These instance attribute can be accessed only upon declaring an instance (like `this` pointer in C++ language). Variables without `self` prefix cannot be called from the instance as they are not an attribute but a plain local variables. Local variables cannot be called outside its scope of method, and attempting to do so results "AttributeError".
+However, instance attribute cannot be defined outside instance method where `self` variable in valid. Variables declared outside the method becomes class attribute instead.
 
 ```python
 # CREATING CLASS
-class CLASS():
-    def __init__(self, arg1, arg2, arg3):
-        self.A = arg1
-        self.B = arg2
-        self.C
-        D = arg3			# LOCAL VARIABLE
-        
-    def method(other, x)	# REPLACING "self" VARIABLE TO DIFFERENT NAME STILL WORKS.
-    	other.C = x			# ATTRIBUTE "self.C" IS AVAILABLE IN DIFFERENT METHODS.
+class CLASS:
+    def __init__(self, arg1, arg2):
+        # INSTANCE ATTRIBUTES
+        self.attr1 = arg1
+        self.attr2 = arg2
+        self.attr3 = None
 
-
-# INSTANTIATION
-instance = CLASS(1, 2, 3)
-instance.method(4)
-'''EQUIVALENT: 
-Class.__init__(self = instance, arg1 = 1, arg2 = 2, arg3 = 3)
-Class.method_name(other = instance, x = 4)
-'''
-
-# THEREFORE...
-CLASS.A			# AttributeError: type object 'Class' has no attribute 'A'
-
-instance.A		# >> OUTPUT: 1
-instance.B		# >> OUTPUT: 2
-instance.C		# >> OUTPUT: 4
-instance.D		# AttributeError: 'Class' object has no attribute 'D'
+	# INSTANCE METHOD
+    def method1(self, arg3):
+        self.attr3 = arg3
 ```
 
-## Class Method
 
-A method which can be accessed through class alone without needs of creating an instance.
+## Class Attribute/Method
+
+Class attributes and methods can be accessed both from instance and class without any instantiation. Class attribute is declared without under class definition, indented along with methods. `self` variable is not used.
+
+Class method is a method which can be accessed through class alone without needing to create an instance.
 
 |     SYNTAX     | DESCRIPTION                              |
 | :------------: | ---------------------------------------- |
@@ -1558,20 +1516,23 @@ Though class method is defined by the decorator syntax mentioned above, the meth
 ```python
 # CREATING CLASS
 class CLASS:
-    def __init__(self, arg1, arg2):
-        self.A = arg1
-        self.B = arg2
-        self.C
-        
-	def method1(self, arg3):
-        self.C = arg3
+    # CLASS ATTRIBUTE
+    attribute = value
     
-    # DEFINING CLASS METHOD
+    def __init__(self, arg1, arg2):
+        self.attr1 = arg1
+        self.attr2 = arg2
+        self.attr3 = None
+
+    def method1(self, arg3):
+        self.attr3 = arg3
+    
+	# CLASS METHOD
     @classmethod
     def method2(cls, arg4):
         return arg4
     
-    # DEFINING CLASS METHOD FOR INSTANTIATION
+    # CLASS METHOD FOR INSTANTIATION
     @classmethod
     def method3(cls, x, y):
         return cls(x**2, y**2)
@@ -1585,20 +1546,23 @@ instance2 = CLASS.method3(1, 2)	# INSTANTIATE: arg1 = 1**1, arg2 = 2**2
 instance2.method1(4)
 
 # THEREFORE...
-instance1.A			# >> OUTPUT: 1
-instance1.B			# >> OUTPUT: 2
-instance1.C			# >> OUTPUT: 4
+CLASS.attribute			# >> OUTPUT: value
+CLASS.method2(3)		# >> OUTPUT: 3
 
-instance2.A			# >> OUTPUT: 1 (= 1**2)
-instance2.B			# >> OUTPUT: 4 (= 2**2)
-instance3.C			# >> OUTPUT: 4
+instance1.attribute	 	# >> OUTPUT: value
+instance1.attr1			# >> OUTPUT: 1
+instance1.attr2			# >> OUTPUT: 2
+instance1.attr3			# >> OUTPUT: 4
 
-CLASS.method2(3)	# >> OUTPUT: 3
+instance2.attribute	 	# >> OUTPUT: value
+instance2.attr1			# >> OUTPUT: 1 (= 1**2)
+instance2.attr2			# >> OUTPUT: 4 (= 2**2)
+instance2.attr3			# >> OUTPUT: 4
 ```
 
 ## Static Method
 
-A method that can be called without instantiation, but without parameter to call itself like `self` and `cls`.
+Static method is a method that can be called without instantiation, but without parameter to call itself like `self` and `cls`.
 
 | SYNTAX          | DESCRIPTION                               |
 | --------------- | ----------------------------------------- |
@@ -1610,15 +1574,16 @@ Since static method does not have a parameter to call itself, static method cann
 # CREATING CLASS
 class CLASS:
     def __init__(self, arg1, arg2):
-        self.A = arg1
-        self.B = arg2
-        self.C
+        self.attr1 = arg1
+        self.attr2 = arg2
+        self.attr3 = None
         
-	def method1(self, arg3)
-    	self.C = arg3
+    def method1(self, arg3)
+        self.attr3 = arg3
         
+    # STATIC METHOD
     @staticmethod
-	def method2(arg4):
+    def method2(arg4):
         return True if arg4 is 4 else False
 
 
@@ -1627,16 +1592,16 @@ instance = CLASS(1, 2)
 instance.method1(4)
 
 # THEREFORE...
-instance.A			# >> OUTPUT: 1
-instance.B			# >> OUTPUT: 2
-instance.C			# >> OUTPUT: 4
+instance.attr1			# >> OUTPUT: 1
+instance.attr2			# >> OUTPUT: 2
+instance.attr3			# >> OUTPUT: 4
 
-CLASS.method2(4)	# >> OUTPUT: True
+CLASS.method2(4)		# >> OUTPUT: True
 ```
 
 ## Magic Method
 
-Magic method is a special method which has Double UNDERscores(dunder) on both side of its name. These method generally represents operator, and are referenced to overload operator to modify the operator's functionality. 
+Magic method is a special method which has Double UNDERscores(dunder) on both side of its name. These method generally represents operator, and are used when overloading operator to modify the operator's functionality. 
 
 Previously encountered `__init__` method used for instance initialization is one of the widely used magic method. More can be seen on the table below:
 
@@ -1655,143 +1620,111 @@ Previously encountered `__init__` method used for instance initialization is one
 Overloading operator means customizing operator to function differently on certain classes or portion of the script. Magic method is used to overload operator but overloaded functionality is only exclusive to that specific class. As an example, `x + y`  is expressed as `x.__add__(y)` .
 
 ```python
+# CREATING CLASS
 class CLASS:
     def __init__(self, arg1):
         self.A = arg1
         
     def __add__(self, arg2):
-        return "&".join([self.A, arg2])		# INSERT "&" BETWEEN TWO STRING OBJECTS.
+        return "\0".join([self.A, arg2.A])		# INSERT "\0" BETWEEN TWO STRING OBJECTS.
 
-    
-var1 = CLASS("Hello")
-var2 = CLASS("World!")
-print(var1 + var2)
-```
+# INSTANTIATION
+instance1 = CLASS("Hello")
+instance2 = CLASS("World!")
 
-```
-Hello&World!
+instance1 + instance2		# >> OUTPUT: "Hello World!"
 ```
 
 ## Inheritance
 
-Inheritance is act of superclass providing (inheriting) attributes and methods to derived subclass.
-
-Any class that inherits attributes and methods and class that derives from are called superclass (base class) and subclass (child class) respectively. When the same name of attributes and methods exists on both superclass and subclass, superclass's attributes are overwritten by attributes of subclass.
-
-Inheritance can be done through multiple instances but cannot have circular inheritance.
+Inheritance is an act of superclass (base class) providing attributes and methods to derived subclass (child class). When the same name of attributes and methods exists on both superclass and subclass, attributes and methods from superclass are overridden by subclass's.
 
 ```python
+# CREATING SUPERCLASS
 class SUPERCLASS:
-    def __init__(self, arg1, arg2):
-        self.A = arg1
-        self.B = arg2
+    attr1 = value1
+    attr2 = value2
 
-        
-# DERIVE SUBLCASS (BUT NO INHERITANCE YET)
-class SUBCLASS (SUPERCLASS):
-    def __init__(self, x, y):
-        super().__init__(y, x)	# INHERITING SUPERCLASS'S ATTRIBUTES AND METHODS
-        """EQUIVALENT:
-        super(SUBCLASS, self).__init__(arg1 = y, arg2 = x)
-        """
-        self.A = x
-        self.C = y
-
+# CREATING SUBCLASS
+class SUBCLASS(SUPERCLASS):
+    attr2 = "Hello World!"
+    attr3 = value3
 
 # INSTANTIATION  
-instance = SUBCLASS(1, 3)
+instance = SUBCLASS()
 
-instance.A		# >> OUTPUT: 1 (ALTHOUGH INHERITED "self.A = 3", OVERWRITTEN BY SUBCLASS)
-instance.B		# >> OUTPUT: 1 (ATTRIBUTE "B" INHERITED FROM SUPERCLASS)
-instance.C		# >> OUTPUT: 3
+# THEREFORE...
+instance.attr1		# >> OUTPUT: value1
+instance.attr2		# >> OUTPUT: "Hello World!"
+instance.attr3		# >> OUTPUT: value3
 ```
 
 ### Super Function
 
-The `super()` function calls the attributes or methods from its superclass directly. Without this function, the `instance.B` will cause "AttributeError" saying no attribute `B` exist within `SUBCLASS` instance. 
-
-The following syntax is used for single base class inheritance:
+The `super()` function is used to access the superclass properties, such as class attributes instance/class/static methods directly. This function is mainly used to avoid overriding superclass attributes and methods.
 
 ```python
-class SUBCLASS(SUPERCLASS):
-    super().__init__()
-    super().attribute
-```
-
-### Diamond Problem
-
-Diamond problem refers to the inheritance logic problem where a single subclass (`SUBCLASS`) is inherited from two classes (`INTERCLASS1` and `INTERCLASS2`) derived from a single superclass (`SUPERCLASS`). In such case, it is likely that inheritance from superclass occurs twice to the subclass.
-
-This occurrence can be prevented using `super()` function:
-
-```python
-# SUPERCLASS
+# CREATING SUPERCLASS
 class SUPERCLASS:
-    def __init__():
-        print("START SUPERCLASS __INIT__")
-        print("----")
-        print("END SUPERCLASS __INIT__")
-        
-        
-# TWO INTERMEDIATE CLASSES DERIVED FROM SUPERCLASS
-class INTERCLASS1(SUPERCLASS):
-    def __init__():
-        print("START INTERCLASS1 __INIT__")
-        super().__init__()
-        print("")
-        
-        
-class INTERCLASS2(SUPERCLASS):
-    def __init__():
-        print("START INTERCLASS2 __INIT__")
-        super().__init__()
-        print("END INTERCLASS2 __INIT__")
-        
-        
-# SUBCLASS DERIVED FROM TWO INTERMEDIATE CLASSES
-class SUBCLASS(INTERCLASS1, INTERCLASS2):
-    def __init__():
-        print("START SUBCLASS __INIT__")
-        super().__init__()
-        print("END SUBCLASS __INIT__")
-        
-        
+    def __init__(self, arg1):
+        print("Hello World!")
+        self.attr = arg1
+
+# CREATING SUBCLASS
+class SUBCLASS(SUPERCLASS):
+    def __init__(self, arg2):
+        print("Goodbye World?")
+
+
 # INSTANTIATION
-instance = SUBCLASS()
+instance = SUBCLASS(3)
+
+# THEREFORE...
+print(instance.attr)
 ```
 
 ```
-START SUBCLASS __INIT__
-START INTERCLASS1 __INIT__
-START INTERCLASS2 __INIT__
-START SUPERCLASS __INIT__
-----
-END SUPERCLASS __INIT__
-END INTERCLASS2 __INIT__
-END INTERCLASS1 __INIT__
-END SUBCLASS __INIT__
+"Goodbye World?"
+AttributeError: 'SUBCLASS' object has no attribute 'attribute'
 ```
 
-The result above shows the superclass is only inherited once, this is due to `super()` function recognizing the inheritance pattern and skips extra inheritance from superclass.
+Originally, the `__init__()` method in `SUPERCLASS` would have been overridden by `SUBCLASS` since both methods share the same name. This is the reason `print(Hello World")` did not appeared and `self.attribute` cause an error despite inheritance.
 
-## Lifecycle of Object
+On the other hand, when using super function to called the `__init__()` method directly from the `SUPERCLASS`
 
-Object has three stages of lifecycle:
+```python
+# CREATING SUPERCLASS
+class SUPERCLASS:
+    def __init__(self, arg1):
+        print("Hello World!")
+        self.attribute = arg1
 
-1. **Definition**
-    : a stage of creating class using keyword `class`.
-2. **Instantiation**
-    : creating an instance through `__init__` magic method.
-3. **Destruction**
-    : Python automatically deletes instance once the number of variables referring to the instance counts down to zero, called reference count. Manual instance deletion can be done by `del` statement (aka. `__del__`  method). This process of instance deletion is called *garbage collection*.
+# CREATING SUBCLASS
+class SUBCLASS(SUPERCLASS):
+    def __init__(self, arg2):
+        # DIRECTLY INHERITING "__init__()" METHOD FROM SUPERCLASS
+        super().__init__(arg2)
+        print("Goodbye World?")
 
-## Encapsulation
 
-Encapsulation is one of the fundamental concept which (1) combines attributes and methods into a single class data, and/or (2) restricts direct access to these attributes and methods (aka. data hiding). This feature prevents accidental modification on class from code outside.
+# INSTANTIATION
+instance = SUBCLASS(3)
 
-### Data Hiding
+# THEREFORE...
+print(instance.attribute)
+```
 
-Despite encapsulation is also implemented on Python classes, external code can still access to these attributes and methods as they are not restricted. If there are attributes and methods in class that needs to be hidden as possible, method such as name mangling is conventionally used in Python.
+```
+"Hello World!"
+"Goodbye World?"
+3
+```
+
+## Data Hiding
+
+Previously on *Encapsulation* subsection mentioned creating an object provides restriction on accessing attributes and methods, called *Data Hiding*. In Python, however, data hiding is not guaranteed and can be accessed easily from the code outside the class.
+
+Still, manual approach such as name mangling is possible to prevent access to attributes and methods of the class:
 
 | SYMBOL | EXAMPLE       | DESCRIPTION                                                  |
 | :----: | ------------- | ------------------------------------------------------------ |
@@ -1800,32 +1733,7 @@ Despite encapsulation is also implemented on Python classes, external code can s
 
 ### Properties
 
-Properties is a decorator that allows method to be updated without modifying the method directly. Because of this, property does not permitted direct change of data which makes the method seems read-only.
-
-| SYNTAX      | DESCRIPTION                           |
-| ----------- | ------------------------------------- |
-| `@property` | Decorator used to declare properties. |
-
-Property is declared using decorator symbol, meaning it is used specifically for method. One of the special feature of property is it does not take any argument except `self` variable to call itself from instance. Although property is based on method, syntax to call property is same as attribute: `instance.attribute`.
-
-```python
-class CLASS:
-    def __init__(self, arg1, arg2):
-        self.A = arg1
-        self.B = arg2
-        
-    @property
-    def method(self):
-        return True
-    
-    
- # INSTANTIATION 
-instance = CLASS(1, 3)
-instance.method				# >> OUTPUT: True
-instance.method = False		# AttributeError: can't set attribute
-```
-
-Properties are consist of three different method used for encapsulation: `getter`, `setter`, and `deleter`.
+Property is a decorator that supports data hiding by dividing a single method into three separate methods: `getter`, `setter`, and `deleter`. Because property is declared using decorator symbol, it can only be used on method.
 
 | METHOD  | SYNTAX            | DESCRIPTION                                           |
 | ------- | ----------------- | ----------------------------------------------------- |
@@ -1836,26 +1744,46 @@ Properties are consist of three different method used for encapsulation: `getter
 ```python
 # CREATING CLASS
 class CLASS:
-    def __init__(self, arg1, arg2):
-        self.A = arg1
-        self.B = arg2
-        
-    @property			# GETTER METHOD
+    def __init__(self, arg1):
+        self.attr1 = arg1
+    
+    # DEFINITION: GETTER METHOD
+    @property
     def method(self):
-        return self.A
-        
-    @method.setter		# SETTER METHOD
+        return self.attr1
+    
+    # DEFINITION: SETTER METHOD
+    @method.setter
     def method(self, arg3):
-        statements
-        
-    @method.deleter		# DELETER METHOD
+        self.attr1 = arg3
+    
+    # DEFINITION: DELETER METHOD
+    @method.deleter
     def method(self):
-        del self.A
+        del self.attr1
+        
+# INSTANTIATION
+instance = CLASS(3)
+
+# THEREFORE
+print(instance.method)        # EXAMPLE: GETTER METHOD
+
+instance.method = 1           # EXAMPLE: SETTER METHOD
+print(instance.method)
+
+del instance.method           # EXAMPLE: DELETER METHOD
+print(instance.method)
 ```
 
-The `setter` method is used to modify the property attribute which may seems like defining property is unnecessary. However, this is not true as a single function is separated into more than one method: method exclusive for setting value and returning value.
+```
+3
+1
+AttributeError: 'CLASS' object has no attribute 'attr1'
+```
 
-Using the property with these methods encapsulate sensitive codes that shouldn't be modified by the user (such as `setter` method), while maintaining constant API user can access despite having updated function.
+Separating method using property encapsulate sensitive code that shouldn't be modified by the user (such as `setter` and `deleter` method), while providing constant access to the method via `getter` method despite any changes were made on `setter` and `deleter`.
+
+Although `getter` method is essential in property, the `setter` and `deleter` are optional; using `getter` method alone would make unmodifiable read-only method.
 
 # **PYTHON: PYTHONICNESS**
 
@@ -1967,8 +1895,8 @@ open("filename.txt")
 The `close()` method is used to close currently opened files. Closing file in very important on avoiding wasting resource. Ensure the files are always closed even on exceptions by using try/except or with statement.
 
 ```python
-variable = open("file.txt", "r")
-variable.close()
+file = open("file.txt", "r")
+file.close()
 ```
 
 ### `with` Statement
@@ -1976,7 +1904,7 @@ variable.close()
 The `with` statement creates temporary variable only available inside an indented code block of the `with` statement. When the file is opened using this statement, the file automatically closes at the end of the code block even if exceptions occur within it.
 
 ```python
-with open("file.txt") as variable:
+with open("file.txt") as file:
     statements
 ```
 
@@ -1995,11 +1923,11 @@ After opening the text-based file, Python can read lines of file's content using
 Read method can be used on the same file over again, but it will continue from where Python last read. When there’s no argument, the read method reads the rest of the text from where it last left off.
 
 ```python
-with open("path\\file.txt") as variable:
-    print(variable.read(16))	# READ 16 BYTES FROM THE START OF THE CONTENT.
-	print(variable.read(4))		# READ 4 BYTES FROM THE POINT AFTER PREVIOUS 16 BYTES.
-	print(variable.read())		# READ THE REST OF THE TEXT AFTER PREVIOUS 4 BYTES.
-	print(variable.read())		# READ NO TEXT AS NO MORE CONTENT TO READ.
+with open("path\\file.txt") as file:
+    print(file.read(16))	# READ 16 BYTES FROM THE START OF THE CONTENT.
+    print(file.read(4))		# READ 4 BYTES FROM THE POINT AFTER PREVIOUS 16 BYTES.
+    print(file.read())		# READ THE REST OF THE TEXT AFTER PREVIOUS 4 BYTES.
+    print(file.read())		# READ NO TEXT AS NO MORE CONTENT TO READ.
 ```
 
 The `Readlines()` method is used to return a list of text of each line. The method do accepts argument, but it works exactly same as a read method: it designates how many bytes to read.
@@ -2014,9 +1942,9 @@ Last line somewhere.
 ```
 
 ```python
-with open("path\\file.txt") as variable:
-    print(variable.readlines())
-    print(variable.readline())
+with open("path\\file.txt") as file:
+    print(file.readlines())
+    print(file.readline())
 ```
 
 ```
@@ -2029,7 +1957,7 @@ First line here.
 Each line of text-base content can be retrieved using `for` loop statement:
 
 ```python
-for variable in file:
+for file in variable:
     print(variable)
 ```
 
@@ -2049,8 +1977,8 @@ Last line somewhere.
 Overwrite mode `w` deletes all of previously existing content and write down fresh from the beginning.
 
 ```python
-with open("path\\file.txt", "w") as variable:
-    variable.write("TEXT OVERWRITTEN!")
+with open("path\\file.txt", "w") as file:
+    file.write("TEXT OVERWRITTEN!")
 ```
 
 ```
@@ -2061,9 +1989,9 @@ TEXT OVERWRITTEN!
 On the other hand, append mode `a` does not delete existing content but continue writing from the end.
 
 ```python
-with open("path\\file.txt", "a") as variable:
-    variable = variable.write("TEXT APPENDED.")
-	print(variable)
+with open("path\\file.txt", "a") as file:
+    file = file.write("TEXT APPENDED.")
+    print(file)
 ```
 
 ```
@@ -2080,12 +2008,12 @@ Upon successfully written, `write()` method returns the number of bytes written.
 New file can be created using the `write()` method which does not bound by just writing on existing file. Creating file is simply done by designating file name is doesn't exist on the specified path.
 
 ```python
-with open("path\\new-file.txt", "w") as variable:
-    variable.write("NEW FILE CREATED!")
+with open("path\\new_file.txt", "w") as file:
+    file.write("NEW FILE CREATED!")
 ```
 
 ```
-<new-file.txt>
+<new_file.txt>
 NEW FILE CREATED!
 ```
 
