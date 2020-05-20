@@ -1143,7 +1143,6 @@ Hello!
 None
 ```
 
-
 ### Parameter & Argument
 
 Following is a difference between parameter and argument that is referred significantly when discussing function:
@@ -1151,14 +1150,14 @@ Following is a difference between parameter and argument that is referred signif
 **Parameter**
 Parameter is a function-internal local variable: because parameters is a function-exclusive local variable, it cannot be called from outside.
 
-| OPERATOR |    SYNTAX    | DESCRIPTION                                                  |
-| :------: | :----------: | ------------------------------------------------------------ |
-|   `*`    |   `*args`    | Allows multiple number of arguments.<br />Call by `args`(arguments) without asterisk, and returns tuple of arguments. Must locate after normal parameter. |
-|   `**`   |  `**kwargs`  | Allows use of undefined parameter in advance.<br />Call by `kwargs`(keyword arguments) without asterisks, and returns dictionary of arguments’ name and corresponding values. |
-|   `=`    | `arg1=value` | Returns default value otherwise inputted to its parameter. Must locate after normal parameter. |
-
 **Argument**
 Argument is a value or object being passed to the function parameter and those passed values and objects will be processed by the function code.
+
+| OPERATOR |   SYNTAX    | DESCRIPTION                                                  |
+| :------: | :---------: | ------------------------------------------------------------ |
+|   `*`    |   `*args`   | Allows multiple number of arguments.<br />Call by `args`(arguments) without asterisk, and returns tuple of arguments. Must locate after normal parameter. |
+|   `**`   | `**kwargs`  | Allows use of undefined parameter in advance.<br />Call by `kwargs`(keyword arguments) without asterisks, and returns dictionary of arguments’ name and corresponding values. |
+|   `=`    | `arg=value` | Passes default value to parameter unless argument value is specified. Must locate after normal parameter. |
 
 Examples below show how function parameter and argument works:
 
