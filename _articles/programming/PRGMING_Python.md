@@ -6,11 +6,9 @@ author: GKO95
 category: Programming
 description: "Python is an interpreted, high-level, general-purpose programming language with great code readability."
 ---
-# **PYTHON: BASIC**
+# **PYTHON: INTRO**
 
 Python is a high-level programming language with applications in numerous areas, including web programming, scientific computing, and artificial intelligence. The language is executed sequentially line-after-line and doesn't need semicolon `;` to end the line of statement.
-
-This chapter describes on basic concepts and coding syntax used in Python.
 
 ## Interpreter
 
@@ -23,6 +21,10 @@ Python is interpreter-driven high-level language: this allows scripting the code
 Originally, Python interpreter was developed using C programming language. This implementation is called CPython and is the most widely used implementation of all. Other notable implementations are Jython (Java-implementation), IronPython (.NET-implementation), and PyPy (Python-implementation).
 
 While Python is introduced as an interpreter language, it actually uses both interpreter and compiler: CPython first processes Python code into intermediate bytecode which is than executed by CPython interpreter. Because of this, Python execution takes longer time on first run from compilation.
+
+# **PYTHON: BASIC**
+
+General programming language has essential, fundamental, or even helpful data and syntax that needs to be observed and acknowledged when coding. As the beginning of the practical coding, this chapter will introduce basic information on Python language coding.
 
 ## Comment
 
@@ -101,7 +103,7 @@ Variable is a container for a data which can be assigned using assignment operat
   : declaration is declaring existence of the construct of such as variables, functions, objects, and more. While declaration also includes specifying which data type the construct is in other languages, this is exception to Python since constructs in this language do not need to be declared with data type.
 
 * **Definition**
-  : definition refers to block of codes on values and performance the construct has and is capable of.
+  : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
 
   ```python
   # DEFINITION (+ DECLARATION) OF VARIABLE
@@ -1426,7 +1428,7 @@ Class is used to create objects (aka. instance), hence can be deemed as a bluepr
 class CLASS∶
     # INSTANCE INITIALIZATION (= CONSTRUCTOR)
     def __init__(self, arg1, arg2):
-        # ATTRIBUTES (similar to VARIABEL)
+        # ATTRIBUTES (similar to VARIABLE)
         self.attr1 = arg1
         self.attr2 = arg2
         
