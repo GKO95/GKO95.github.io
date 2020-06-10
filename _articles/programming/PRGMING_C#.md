@@ -18,10 +18,10 @@ It is highly recommended to read [*PRGMING_Cpp.md*](./PRGMING_Cpp.md) document b
 
 The framework is constituted by CoreFX *(FCL)* and CoreCLR *(CRL)*. Following is a brief description on FCL and CLR:
 
-| COMPONENTS                    | DESCRIPTION                                                  |
-| ----------------------------- | ------------------------------------------------------------ |
+| COMPONENTS                    | DESCRIPTION                                                     |
+|-------------------------------|-----------------------------------------------------------------|
 | Framework Class Library (FCL) | Provides Standard Libraries for .NET programming and execution. |
-| Common Language Runtime (CLR) | Compiles and executes .NET application using JIT compiler.   |
+| Common Language Runtime (CLR) | Compiles and executes .NET application using JIT compiler.      |
 
 <div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\Csharp\NETFramework.png" width=100%></div>
 <center style="font-weight:bold">Figure 1. .NET Common Language Infrastructure (CLI).</center>
@@ -52,10 +52,10 @@ C# is an object-oriented programming which mainly uses "object (aka. instance)" 
 
 Objects (aka. instances) are independent unit of data composed of members called *fields* and *methods*. Object members can be accessed using dot (`.`):
 
-| MEMBER   | SYNTAX              | DESCRIPTION                                                  |
-| -------- | ------------------- | ------------------------------------------------------------ |
-| Field    | `object.field`      | A member of object to store value.                           |
-| Method   | `object.method()`   | A member of object to process and/or output data.            |
+| MEMBER   | SYNTAX              | DESCRIPTION                                                                                 |
+|----------|---------------------|---------------------------------------------------------------------------------------------|
+| Field    | `object.field`      | A member of object to store value.                                                          |
+| Method   | `object.method()`   | A member of object to process and/or output data.                                           |
 | Property | `object.property()` | A method specifically designed to output field value, to protect direct field modification. |
 
 ### Class
@@ -183,7 +183,7 @@ scope2.WriteLine("Second Line");
 C# displays the results by writing on the console windows and has two different version of output:
 
 | OUTPUT                | SYNTAX                      | DESCRIPTION                             |
-| --------------------- | --------------------------- | --------------------------------------- |
+|-----------------------|-----------------------------|-----------------------------------------|
 | `Console.Write()`     | `Console.Write("Text")`     | Write function without line terminator. |
 | `Console.WriteLine()` | `Console.WriteLine("Text")` | Write function with new line feature.   |
 
@@ -206,7 +206,7 @@ Egg
 Meanwhile, there are three different of input which it reads the input data from the console:
 
 | INPUT                | RETURN         | DESCRIPTION                                         |
-| -------------------- | -------------- | --------------------------------------------------- |
+|----------------------|----------------|-----------------------------------------------------|
 | `Console.Read()`     | Integer        | Read function for a single character in ASCII.      |
 | `Console.ReadLine()` | String         | Read function for a single line of text in string.  |
 | `Console.ReadKey()`  | ConsoleKeyInfo | Read function for a single keyboard button pressed. |
@@ -270,7 +270,7 @@ Second Line
 ```
 
 | SYNTAX | DESCRIPTION    |
-| ------ | -------------- |
+|--------|----------------|
 | `\n`   | New line       |
 | `\t`   | Horizontal tab |
 | `\\`   | Backslash      |
@@ -284,17 +284,17 @@ Data type is one of the important factor which determines type and byte size of 
 
 C# programming language have several number of pre-defined type identifier as follows:
 
-| IDENTIFIER | DATA TYPE               | DESCRIPTION                                                  |
-| ---------- | ----------------------- | ------------------------------------------------------------ |
-| `int`      | Integer                 | 32-bits precision integer number.<br />Size: 4 bytes         |
-| `float`    | Floating point number   | Real number with decimal points<br />Size: 4 bytes (requires suffix `f` or `F`) |
-| `double`   | Double-precision float  | Float with doubled precision and memory.<br />Size: 8 bytes (with or without suffix `d` or `D`) |
-| `decimal`  | Highest-precision float | Float with greater precision and memory<br/>Size: 16 bytes (requires suffix `m` or `M`) |
-| `char`     | Character: `''`         | A single character, e.g., `'A'` and `'?'`.<br />Size: 1 byte |
+| IDENTIFIER | DATA TYPE               | DESCRIPTION                                                                                          |
+|------------|-------------------------|------------------------------------------------------------------------------------------------------|
+| `int`      | Integer                 | 32-bits precision integer number.<br />Size: 4 bytes                                                 |
+| `float`    | Floating point number   | Real number with decimal points<br />Size: 4 bytes (requires suffix `f` or `F`)                      |
+| `double`   | Double-precision float  | Float with doubled precision and memory.<br />Size: 8 bytes (with or without suffix `d` or `D`)      |
+| `decimal`  | Highest-precision float | Float with greater precision and memory<br/>Size: 16 bytes (requires suffix `m` or `M`)              |
+| `char`     | Character: `''`         | A single character, e.g., `'A'` and `'?'`.<br />Size: 1 byte                                         |
 | `string`   | String: `""`            | Series of characters under the namespace `std`.<br />Size: N/A (depends on overall character length) |
-| `bool`     | Boolean                 | Non-zero represents `True` while zero is `False`.<br />Size: 1 byte |
-| `var`      | Automatic               | Data type is declared automatically.<br />Useful for declaring new variable with complex data type. |
-| `void`     | Void                    | Non-specific data type.<br />Size: 1 byte                    |
+| `bool`     | Boolean                 | Non-zero represents `True` while zero is `False`.<br />Size: 1 byte                                  |
+| `var`      | Automatic               | Data type is declared automatically.<br />Useful for declaring new variable with complex data type.  |
+| `void`     | Void                    | Non-specific data type.<br />Size: 1 byte                                                            |
 
 ### `sizeof()` Operator
 
@@ -394,13 +394,13 @@ Operator is the simplest form of data processing unit which can manipulate the v
 
 Arithmetic operator is mainly focused on processing numeric data type. Following is a list of arithmetic operator used by numeric data type:
 
-|             NAME             | OPERATOR | DESCRIPTION                                                  |
-| :--------------------------: | -------- | ------------------------------------------------------------ |
-|           Addition           | `+`      | -                                                            |
-|         Subtraction          | `-`      | -                                                            |
-|        Multiplication        | `*`      | -                                                            |
-|           Division           | `/`      | When both operands are integer: dividend is an integer without remainder.<br/>When at least one operand is real (float or double): dividend is a real (float or double). |
-| Remainder (Modulus Division) | `%`      | Remainder only returns integer.                              |
+| NAME                         | OPERATOR | DESCRIPTION                                                                                                                                                              |
+|:----------------------------:|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Addition                     | `+`      | -                                                                                                                                                                        |
+| Subtraction                  | `-`      | -                                                                                                                                                                        |
+| Multiplication               | `*`      | -                                                                                                                                                                        |
+| Division                     | `/`      | When both operands are integer: dividend is an integer without remainder.<br/>When at least one operand is real (float or double): dividend is a real (float or double). |
+| Remainder (Modulus Division) | `%`      | Remainder only returns integer.                                                                                                                                          |
 
 For easier readability of the arithmetic operator, you can place blank space between number and operator, and it doesn’t affect anything on output.
 
@@ -409,7 +409,7 @@ For easier readability of the arithmetic operator, you can place blank space bet
 Assignment operator is another operation used within numeric data type. Following is a list of assignment operator used by numeric data type:
 
 | OPERATOR | EXAMPLE | EQUIVALENT |
-| -------- | ------- | ---------- |
+|----------|---------|------------|
 | `+=`     | `x+=1`  | `x=x+1`    |
 | `-=`     | `x-=1`  | `x=x-1`    |
 | `*=`     | `x*=1`  | `x=x*1`    |
@@ -419,7 +419,7 @@ Assignment operator is another operation used within numeric data type. Followin
 Although not an assignment operator, a similar **increment and decrement** of the numerical value can be expressed as follow on C-based programming language:
 
 | OPERATOR    | EXAMPLE | DESCRIPTION   |
-| ----------- | ------- | ------------- |
+|-------------|---------|---------------|
 | `++` prefix | `x=y++` | `x=y; y=y+1;` |
 | `++` suffix | `x=++y` | `y=y+1; x=y;` |
 | `--` prefix | `x=y--` | `x=y; y=y-1;` |
@@ -430,7 +430,7 @@ Although not an assignment operator, a similar **increment and decrement** of th
 Relational operator is for checking whether the relational condition between two numeric values and returns Boolean value whether condition is true or false. Following is a list of relational operator:
 
 | OPERATOR | DESCRIPTION              |
-| -------- | ------------------------ |
+|----------|--------------------------|
 | `<`      | Lesser than              |
 | `<=`     | Lesser than or equal to  |
 | `>`      | Greater than             |
@@ -442,11 +442,11 @@ Relational operator is for checking whether the relational condition between two
 
 Logical operator consist of AND, OR, and NOT logic. When doing so, think of `true` and `false` as binary 1 and 0, respectively. In wider sense, any non-zero number is deemed `true`.
 
-| OPERATOR | LOGIC | DESCRIPTION                                                |
-| -------- | ----- | ---------------------------------------------------------- |
-| `&&`     | AND   | `true` when all the arguments are `true`, else `false`.    |
-| `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
-| `!`      | NOT   | Change `true` to `false` and vice versa.                   |
+| OPERATOR | LOGIC | DESCRIPTION                                             |
+|----------|-------|---------------------------------------------------------|
+| `&&`     | AND   | `true` when all the arguments are `true`, else `false`. |
+| `        |       | `                                                       | OR | `true` when at least one argument is `true`, else `false`. |
+| `!`      | NOT   | Change `true` to `false` and vice versa.                |
 
 # **C#: CONDITIONAL AND LOOP**
 
@@ -697,13 +697,13 @@ Multi-dimensional array can be declared and initialized that holds values under 
 
 ```c#
 // MULTI-DIMENSIONAL 1
-int[ , ] arr = new int[3,2] {{value1, value2}, {value3, value4}, {value5, value6}};
+int[ , ] arr = new int[3,2] { {value1, value2}, {value3, value4}, {value5, value6} };
 
 // MULTI-DIMENSIONAL 2
-int[ , ] arr = new int[ , ] {{value1, value2}, {value3, value4}, {value5, value6}};
+int[ , ] arr = new int[ , ] { {value1, value2}, {value3, value4}, {value5, value6} };
 
 // MULTI-DIMENSIONAL 3
-int[ , ] arr = {{value1, value2}, {value3, value4}, {value5, value6}};
+int[ , ] arr = { {value1, value2}, {value3, value4}, {value5, value6} };
 ```
 
 Since multi-dimensional array is created from a single declaration, array data is stored in a single block of memory.
@@ -782,7 +782,7 @@ SortedList<string, int> SLIST = new SortedList<string, int>();
 using System.Collections.Generic;
 
 // INITIALIZATION OF SORTED LIST COLLECTION
-SortedList<string, int> SLIST = new SortedList<string, int>() {{"B", 3}, {"A", 1}};
+SortedList<string, int> SLIST = new SortedList<string, int>() { {"B", 3}, {"A", 1} };
 
 System.Console.WriteLine(SLIST["B"]);
 ```
@@ -810,7 +810,7 @@ Dictionary<string, int> DICT = new Dictionary<string, int>();
 using System.Collections.Generic;
 
 // INITIALIZATION OF DICTIONARY COLLECTION
-Dictionary<string, int> DICT = new Dictionary<string, int>() {{"B", 3}, {"A", 1}};
+Dictionary<string, int> DICT = new Dictionary<string, int>() { {"B", 3}, {"A", 1} };
 
 System.Console.WriteLine(DICT["B"]);
 ```

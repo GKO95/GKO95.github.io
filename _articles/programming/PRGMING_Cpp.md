@@ -23,7 +23,7 @@ Compilation of C/C++ language is divided into two stage that is done by preproce
 Preprocessing is a first stage of compilation done by a preprocessor. Preprocessor directive (aka. compiler directive) which is denoted by octothorpe symbol `#` in the script commands for preprocessor to perform certain actions before compiler does.
 
 | Preprocessor Directive | Example               | Summery                                          |
-| :--------------------- | --------------------- | ------------------------------------------------ |
+|:-----------------------|-----------------------|--------------------------------------------------|
 | `#include`             | `#include <iostream>` | Include header file to the script.               |
 | `#define`              | `#define SQUARE`      | Define new macro that can be used in the script. |
 | `#pragma`              | `#pragma once`        | Provide additional options to the compiler.      |
@@ -54,11 +54,11 @@ The difference is which location preprocessor searches for the including header 
 
 Following is the list of header files that is often used when programming with C++ language.
 
-| Header Files | Syntax                | Summery                                                      |
-| ------------ | --------------------- | ------------------------------------------------------------ |
-| `iostream`   | `#include <iostream>` | Defines standard input/output function:<br />`operator >>`, `operator <<` |
-| `string`     | `#include <string>`   | Defines string-handling functions:<br />`append()`, `length()` |
-| `cmath`      | `#include <cmath>`    | Define common mathematical functions:<br />`exp()`, `cos()`  |
+| Header Files | Syntax                | Summery                                                                       |
+|--------------|-----------------------|-------------------------------------------------------------------------------|
+| `iostream`   | `#include <iostream>` | Defines standard input/output function:<br />`operator >>`, `operator <<`     |
+| `string`     | `#include <string>`   | Defines string-handling functions:<br />`append()`, `length()`                |
+| `cmath`      | `#include <cmath>`    | Define common mathematical functions:<br />`exp()`, `cos()`                   |
 | `chrono`     | `#include <chrono>`   | Defines date and time-handling functions:<br />`system_clock()`, `duration()` |
 
 ### Precompiled Header
@@ -68,7 +68,7 @@ Precompiled header is a header that is compiled into an intermediate form that i
 However, precompiled header is not always beneficial as using precompiled header does take more time to prepare for compilation. For a header file that is small or often subject to change, precompiled header is unnecessary.
 
 | Precompiled Header | Compiler                              |
-| ------------------ | ------------------------------------- |
+|--------------------|---------------------------------------|
 | `stdafx.h`         | Visual Studio 2015 (msvc14) and below |
 | `pch.h`            | Visual Studio 2017 (msvc15) and above |
 
@@ -650,10 +650,10 @@ Array can contain another array as an element, under the condition these arrays 
 
 ```cpp
 // INITIALIZATION 1
-int arr[size1][size2] = {{value11, value12, ... }, {value21, value22, ...}, ... };
+int arr[size1][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 
 // INITIALIZATION 2
-int arr[     ][size2] = {{value11, value12, ... }, {value21, value22, ...}, ... };
+int arr[     ][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 ```
 
 ## Array Class
@@ -738,9 +738,9 @@ Following are the difference between parameters and arguments that is referred s
 **Parameter**
 Parameter is a function-internal local variable: because parameters is a function-exclusive local variable, it cannot be called from outside.
 
-| OPERATOR |   SYNTAX    | DESCRIPTION                                                  |
-| :------: | :---------: | ------------------------------------------------------------ |
-|   `=`    | `arg=value` | Parameter `arg` is assigned `value` by default when no other value is passed. Must locate after normal parameter. |
+| OPERATOR | SYNTAX      | DESCRIPTION                                                                                                       |
+|:--------:|:-----------:|-------------------------------------------------------------------------------------------------------------------|
+| `=`      | `arg=value` | Parameter `arg` is assigned `value` by default when no other value is passed. Must locate after normal parameter. |
 
 **Argument**
 Argument is a value or object being passed to the function parameter and those passed values and objects will be processed by the function code. However, argument is independent from parameter: change on parameter does not affect value or object passed as argument.
