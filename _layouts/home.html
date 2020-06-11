@@ -6,6 +6,7 @@
     <body>
 
         <!-- HEADER -->
+    <!--
         <header class="home-header"> 
             <nav class="home-nav">
                 <div class="home-logo">
@@ -19,11 +20,41 @@
                 <a href="{{ '/' | relative_url }}"> {{ site.github_username | escape }} </a>
             </div>
         </header>
+    -->
+
+        <header id="home-header">
+
+        </header>
 
         <!-- MAIN -->
-        <main class="home-main">
+        <main id="home-main">
+
+            <div>
+
+                <div class="home-aisle">
+                    <p>Programming</p>
+                </div>
+
+                <ul id="home-shelf">
+                    {% assign programmings = site.articles | where: "category", "Programming" %}
+                    {% for programming in programmings %}
+                    <a class="home-book" href="{{ programming.url }}">
+                        <li>
+                            <h1>
+                                {{ programming.name }}
+                            </h1>
+                            <p>
+                                {{ programming.description }}
+                            </p>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+
+            </div>
 
             <!-- MAIN::PROGRAMMING -->
+        <!--
             <div class="home-programming">
                 <div class="home-programming-header">
                     <h1>PROGRAMMING</h1>
@@ -44,17 +75,20 @@
                     {% endfor %}
                 </ul>
             </div>
+        -->
 
-            <!-- MAIN::LIBRARY -->
-            <div class="home-library">
-
-
-
-            </div>
 
         </main>
         
         <!-- FOOTER -->
+
+        <footer id="home-footer">
+
+            
+
+        </footer>
+
+    <!--
         <footer class="home-footer">
             <div class="home-footer-text">
                 <span>Copyright (C) 2020 Gihwan Ko</span>
@@ -64,6 +98,50 @@
                 <a href="https://blog.naver.com/acft"><img src="/assets/images/logo-naver.png" width="38px" height="38px"></a>    
             </div>
         </footer>
-
+    -->
     </body>
+
+    <script type="text/javascript">
+
+        var main    = document.getElementById("home-main");
+        var aisle   = document.getElementById("home-aisle");
+        var shelf   = document.getElementById("home-shelf");
+        var books   = document.getElementsByClassName("home-book");
+
+        const numChildren = () => {
+            return books.length;
+        }
+
+        var length  = numChildren();
+        var degree  = 0;
+
+        var width   = 30;
+        var height  = 30;
+
+        var coordX  = 50;
+        var coordY  = 0;
+    
+        for (let element of shelf.children)
+        {
+            element.style.width  = width  + "vw";
+            element.style.height = height + "vh";
+
+            element.style.left = (coordX - width / 2) + "vw";
+        }
+
+        main.addEventListener("wheel", event => 
+            {
+                degree += (5* event.deltaY/100);
+                if (degree >= 360) degree -= 360;
+                else if (degree < 0) degree += 360;
+            
+                for (let index = 0; index < length; index++)
+                {
+                    books[index].style.transform = "rotateY("+degree+"deg)";
+                }
+            }
+        )
+
+
+    </script>
 </html>
