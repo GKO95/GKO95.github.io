@@ -375,7 +375,7 @@ It is possible to convert a data type to another different data type. The follow
 | `str()`   | Convert to string  | `int`: No restriction.<br />`float`: No restriction.                                                               |
 
 ## Escape Character
-Escape character `\` is used to escape from execution of operation intended for an operator. On introduction on string data type, `\'` is used to prevent string from premature ending.
+Escape character `\` is used to escape from sequence of character and execute certain operation within text-base data. On introduction on string data type, `\'` is used to prevent string from premature ending.
 
 | SYNTAX | DESCRIPTION    |
 |--------|----------------|
@@ -386,7 +386,7 @@ Escape character `\` is used to escape from execution of operation intended for 
 | `\'`   | Single quote   |
 | `\"`   | Double quote   |
 
-Not just to escape from unwanted operation, escape character is also used to code a single long line of code into short consecutive multi-line code.
+Not just to escape from string and to perform operation, escape character is also used to code a single long line of code into short consecutive multi-line code.
 
 ## None
 An data with no value regardless of data type. Although `None` can be used as `False` in Boolean logic conditioning, `None` and `False` is completely different even in Boolean concept.
