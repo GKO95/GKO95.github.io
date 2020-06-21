@@ -116,29 +116,23 @@
 }
 
 
+/*==============================================================================================================
+>> HOME
+==============================================================================================================*/
+#home-header {
+    background-color: white;
+    height: 25vh;
 
-/* HOME STYLESHEET */
-.home-header {
     display: flex;
     flex-direction: column;
     align-items: stretch;
 
-    height: 50vh;
-
     overflow: hidden;
-    
-    background-image: url('../images/header.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-y: 40%;
-    background-position-x: 50%;
-
-    border-bottom: solid black 10px;
 }
 
-.home-nav {
-    padding: 15px 15px 0px 15px;
-    background-color: transparent;
+#home-header #home-nav {
+    padding: 10px 15px 5px 15px;
+    background-color: black;
 
     display: flex;
     flex-direction: row;
@@ -148,11 +142,7 @@
     text-align: center;
 }
 
-.home-logo {
-    display: block;
-}
-
-.home-tabs {
+#home-header #home-nav #home-url {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -162,21 +152,21 @@
     font-size: 24px;
 }
 
-.home-tabs a {
+#home-header #home-nav #home-url a {
     padding: 0px 0px 0px 20px;
 
-    /* Disable selection. */
+    // Disable selection.
     user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
 
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
-.home-title {
+#home-header #home-title {
     display: block;
     font-size: 64px;
 
@@ -189,153 +179,97 @@
     font-family: monospace;
 }
 
-.home-title a {
-    border: white solid 8px;
+#home-header #home-title a {
+    border: black solid 8px;
     font-size: 82px;
 
-    color:white;
+    color:black;
     font-weight: bold;
     font-family: monospace;
 
-    /* Disable selection. */
+    // Disable selection.
     user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
 
-    /* Disable hyperlink underline. */
+    // Disable hyperlink underline.
     text-decoration: none;
 
-    /* Letter affects right padding. */
+    // Letter affects right padding.
     letter-spacing: 10px;
     padding: 0px 0px 0px 10px;
 }
 
-.home-main {
-    padding: 0px;
-    margin: 0px;
-    overflow: auto;
+#home-main {
+    background-color: skyblue;
+    height:70vh;
 }
 
-.home-programming {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    overflow:inherit;
-    background-image:linear-gradient(rgba(0,0,0,1), rgba(200, 200, 200, 1), rgba(255,255,255,1));
-    background-size: 100%;
-    height: 50vh;
-}
-
-.home-programming-header {
-    padding: 30px 60px 0px 60px;
-}
-
-.home-programming-header h1 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
-    margin: 0px;
-}
-
-.home-programming-list {
+#home-shelf {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
 
     margin: 0px;
     padding: 0px;
 
-    list-style-type: none;
+    width: 100vw;
     height: 100%;
+
+    list-style-type: none;
+
+    background-color: white;
+    perspective: 500px;
+
+    position: relative;
+    overflow: hidden;
 }
 
-.home-programming-cell {
+.home-book {
     display: block;
-    min-width: 200px;
-    width: 20%;
-    height:60%;
 
-    background-color: rgba(225, 225, 225, 1);
+    margin-top:auto;
+    margin-bottom: auto;
 
-    /* Disable selection. */
+    border: solid black 5px;
+    border-radius: 0.5em;
+
+    // Disable selection.
     user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
 
-    /* Disable hyperlink underline. */
+    // Disable hyperlink underline.
     text-decoration: none;
+    
+    background-color: white;
 
-    margin-top: auto;
-    margin-bottom: auto;
-    padding: 0px 0px;
-
+    position: absolute;
 }
 
-.home-programming-cell h1 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    font-size: 48px;
-    color: steelblue;
+#home-footer {
+    background-color: black;
+    height: 5vh;
 
-    text-align: center;
-    margin: 0px;
-    padding: 10px 0px;
+    overflow: hidden;
 }
 
-.home-programming-cell p {
-    padding: 10px 30px;
-    color: black;
-}
-
-.home-library {
-    height: 50vh;
-}
-
-.home-footer {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: space-between;
-
-    border-top: solid black 10px;
-
-    background-image: url('../images/header.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position-x: 50%;
-    background-position-y: 80%;
-
-    height: 50px;
-    padding: 0px 20px;
-}
-
-.home-footer-text {
+#home-footer #home-copyright {
     color: white;
     font-weight: bold;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 12px;
 
-    /* Disable selection. */
+    //@debug Disable selection.
     user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
 
-    padding-top: 1vh;
-}
-
-.home-footer-logo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.home-footer a {
-    padding: 0px 0px 0px 20px;
+    padding-top: 5px;
+    padding-left: 15px;
 }
