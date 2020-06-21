@@ -137,7 +137,6 @@
 #home-footer {
     background-color: blue;
     height: 20vh;
-
 }
 
 #home-shelf {
@@ -150,21 +149,24 @@
     padding: 0px;
 
     width: 100vw;
-    height: 50vh;
+    height: 100%;
 
     list-style-type: none;
 
-    background-color: red;
+    background-color: white;
     perspective: 500px;
 
-    position: absolute;
+    position: relative;
     overflow: hidden;
 }
 
 .home-book {
     display: block;
 
-    border: solid black 1px;
+    margin-top:auto;
+    margin-bottom: auto;
+
+    border: solid black 5px;
     border-radius: 0.5em;
     //min-width: 200px;
     //width: 20%;
@@ -186,9 +188,9 @@
     //margin-bottom: auto;
     //padding: 0px 0px;
     
-    background-color: gray;
+    background-color: white;
 
-    position: relative;
+    position: absolute;
 }
 
 
