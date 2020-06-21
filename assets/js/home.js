@@ -119,15 +119,19 @@ const InitShelf = () => {
         volumes.push(temp);
     }
 
-    let count = 0;
-    for (let volume of volumes)
+    try // EXCEPTION HANDLER: JUST TO PREVENT ERROR NOTIFICATION.
     {
-        books[count].style.left = Math.round((1 - bookW) * volume[0] * shelfW) + "px";
-        books[count].style.transform = "rotateY("+volume[1]+"deg) scale("+volume[2]+","+volume[3]+")";
-        books[count].style.zIndex = volume[4];
-
-        count++;
+        let count = 0;
+        for (let volume of volumes)
+        {
+            books[count].style.left = Math.round((1 - bookW) * volume[0] * shelfW) + "px";
+            books[count].style.transform = "rotateY("+volume[1]+"deg) scale("+volume[2]+","+volume[3]+")";
+            books[count].style.zIndex = volume[4];
+    
+            count++;
+        }
     }
+    catch(err) { }
 }
 
 InitShelf();    
@@ -242,15 +246,19 @@ const OnScroll = (x) => {
     // OUT OF RANGE
     else {return;}
 
-    let count = 0;
-    for (let volume of volumes)
+    try // EXCEPTION HANDLER: JUST TO PREVENT ERROR NOTIFICATION.
     {
-        books[count].style.left = Math.round((1 - bookW) * volume[0] * shelfW) + "px";
-        books[count].style.transform = "rotateY("+volume[1]+"deg) scale("+volume[2]+","+volume[3]+")";
-        books[count].style.zIndex = volume[4];
-
-        count++;
+        let count = 0;
+        for (let volume of volumes)
+        {
+            books[count].style.left = Math.round((1 - bookW) * volume[0] * shelfW) + "px";
+            books[count].style.transform = "rotateY("+volume[1]+"deg) scale("+volume[2]+","+volume[3]+")";
+            books[count].style.zIndex = volume[4];
+    
+            count++;
+        }
     }
+    catch(err) { }
 }
 
 main.addEventListener("wheel", event => 
