@@ -181,7 +181,7 @@
 
 #home-header #home-title a {
     border: black solid 8px;
-    font-size: 82px;
+    font-size: 85.5px;
 
     color:black;
     font-weight: bold;
@@ -204,10 +204,40 @@
 
 #home-main {
     background-color: skyblue;
-    height:70vh;
+    position: relative;
+    height: 70vh;
 }
 
-#home-shelf {
+#home-main #home-aisle {
+    position: absolute;
+    z-index: 10;
+    
+    height: 5vh;
+    width:100vw;
+    top: 0px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    // Disable selection.
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    font-size: 32px;
+}
+
+#home-main #home-aisle span {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#home-main #home-shelf {
     display: flex;
     flex-direction: row;
 
@@ -226,14 +256,14 @@
     overflow: hidden;
 }
 
-.home-book {
+#home-main #home-shelf .home-book {
     display: block;
 
     margin-top:auto;
     margin-bottom: auto;
 
     border: solid black 5px;
-    border-radius: 0.5em;
+    border-radius: 1em;
 
     // Disable selection.
     user-select: none;
@@ -248,13 +278,32 @@
     background-color: white;
 
     position: absolute;
+
+}
+
+#home-main #home-shelf li {
+    overflow: hidden;
+    height:100%;
+    width: 80%;
+    margin:auto;
+
+    color: black;
+}
+
+#home-main #home-shelf li p {
+    font-family: sans-serif;
+    font-size: 1.5em;
+}
+
+#home-main #home-shelf li h1 {
+    font-family: sans-serif;
+    font-size: 3em;
 }
 
 #home-footer {
-    background-color: black;
+    background-color: white;
+    position: relative;
     height: 5vh;
-
-    overflow: hidden;
 }
 
 #home-footer #home-copyright {
@@ -263,13 +312,22 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 12px;
 
+    bottom: 0px;
+    position: absolute;
+
+    background-color: black;
+    width:100vw;
+    
+    padding: 5px 0px 5px 0px;
+
     //@debug Disable selection.
     user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
+}
 
-    padding-top: 5px;
-    padding-left: 15px;
+#home-footer #home-copyright span{
+    padding: 0px 15px 0px 15px;
 }

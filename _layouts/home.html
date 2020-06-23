@@ -1,49 +1,28 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang |default: site.lang | default: 'en' }}">
-
     {%- include home-head.html -%}
-
     <body>
-
         <!-- HEADER -->
-
         {%- include home-header.html -%}
-
         <!-- MAIN -->
         <main id="home-main">
-
-
-            <!--
-            <div class="home-aisle" style="float: left">
-                <p>Programming</p>
+            <div id="home-aisle">
+                <span>Programming</span>
             </div>
-            -->
-
             <ul id="home-shelf">
                 {% assign programmings = site.articles | where: "category", "Programming" %}
                 {% for programming in programmings %}
                 <a class="home-book" href="{{ programming.url }}">
                     <li>
-                        <h1>
-                            {{ programming.name }}
-                        </h1>
-                        <p>
-                            {{ programming.description }}
-                        </p>
+                        <h1>{{ programming.name }}</h1>
+                        <p>{{ programming.description }}</p>
                     </li>
                 </a>
                 {% endfor %}
             </ul>
-
-
         </main>
-        
         <!-- FOOTER -->
-
         {%- include home-footer.html -%}
-
-
     </body>
     <script type="text/javascript" src="{{ '/assets/js/home.js' | relative_url }}"></script>
-
 </html>
