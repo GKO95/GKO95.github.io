@@ -39,9 +39,6 @@ var elementPOS = elementX.map(function(x)
     {return x * shelfW;}
 );
 
-/*==============================================================================================================
->> DECLARE DOM & GET SIZE
-==============================================================================================================*/
 const volumeInfo = [
     0.5,    // MID  [% norm]
     0.0,    // DEG  [degree]
@@ -88,35 +85,38 @@ var volumes = [];
 const InitShelf = () => {
     
     InitBooks();
-
-    for (let i = 0; i < length; i++)
+    
+    if (volumes.length < length)
     {
-        let temp = volumeInfo;
-        if (i == index)
+        for (let i = 0; i < length; i++)
         {
+            let temp = volumeInfo;
+            if (i == index)
+            {
+                volumes.push(temp);
+                continue;
+            }
+    
+            // ELEMENTWISE ADDITION
+            temp = temp.map(function(ref, idx){
+                if (idx < 2) _TEMP = ref + volumeNear[idx];
+                else _TEMP = ref - volumeNear[idx];
+                return _TEMP;
+            })
+            if (Math.abs(i - index) == 1)
+            {
+                volumes.push(temp);
+                continue;
+            }
+    
+            // ELEMENTWISE ADDITION
+            temp = temp.map(function(ref, idx){
+                if (idx < 2) _TEMP = ref + volumeAway[idx];
+                else _TEMP = ref - volumeAway[idx];
+                return _TEMP;
+            })
             volumes.push(temp);
-            continue;
         }
-
-        // ELEMENTWISE ADDITION
-        temp = temp.map(function(ref, idx){
-            if (idx < 2) _TEMP = ref + volumeNear[idx];
-            else _TEMP = ref - volumeNear[idx];
-            return _TEMP;
-        })
-        if (Math.abs(i - index) == 1)
-        {
-            volumes.push(temp);
-            continue;
-        }
-
-        // ELEMENTWISE ADDITION
-        temp = temp.map(function(ref, idx){
-            if (idx < 2) _TEMP = ref + volumeAway[idx];
-            else _TEMP = ref - volumeAway[idx];
-            return _TEMP;
-        })
-        volumes.push(temp);
     }
 
     try // EXCEPTION HANDLER: JUST TO PREVENT ERROR NOTIFICATION.
@@ -198,16 +198,16 @@ const OnScroll = (x) => {
             switch(count)
             {
             case index - 1:
-                volumes[count] = indexPrefix(volume, volumeAway, 1);
+                volumes[count] = indexPrefix(volume, volumeAway, x);
                 break;
             case index:
-                volumes[count] = indexPrefix(volume, volumeNear, 1);
+                volumes[count] = indexPrefix(volume, volumeNear, x);
                 break;
             case index + 1:
-                volumes[count] = indexSuffix(volume, volumeNear, 1);
+                volumes[count] = indexSuffix(volume, volumeNear, x);
                 break;
             case index + 2:
-                volumes[count] = indexSuffix(volume, volumeAway, 1);
+                volumes[count] = indexSuffix(volume, volumeAway, x);
                 break;
             default:
                 ;
@@ -225,16 +225,16 @@ const OnScroll = (x) => {
             switch(count)
             {
             case index - 2:
-                volumes[count] = indexPrefix(volume, volumeAway, -1);
+                volumes[count] = indexPrefix(volume, volumeAway, x);
                 break;
             case index - 1:
-                volumes[count] = indexPrefix(volume, volumeNear, -1);
+                volumes[count] = indexPrefix(volume, volumeNear, x);
                 break;
             case index:
-                volumes[count] = indexSuffix(volume, volumeNear, -1);
+                volumes[count] = indexSuffix(volume, volumeNear, x);
                 break;
             case index + 1:
-                volumes[count] = indexSuffix(volume, volumeAway, -1);
+                volumes[count] = indexSuffix(volume, volumeAway, x);
                 break;
             default:
                 ;
@@ -271,67 +271,6 @@ main.addEventListener("wheel", event =>
 )
 
 /*==============================================================================================================
->> FUNCTION: DYNAMIC TITLE SIZING
-==============================================================================================================*/
-const header = document.getElementById("home-header");
-const nav    = document.getElementById("home-nav");
-const title  = document.getElementById("home-title").children[0];
-
-const InitTitle = () => {
-
-    let _border  = parseInt(title.style.borderWidth);
-    let _spacing = parseInt(title.style.letterSpacing);
-
-    if (header.offsetHeight - nav.offsetHeight < 100 + (8 * 2)) {
-        if (isNaN(_spacing))
-        {
-            title.style.borderWidth = 0 + "px";
-            title.style.letterSpacing = 5 + "px";
-        }
-        else if (_spacing!=5)
-        {   
-            let animate = setInterval(function() {
-
-                if (_border == 0 && _spacing == 5) 
-                {clearInterval(animate);}
-                
-                if (_border > 0) _border--;
-                if (_spacing > 5) _spacing--;
-    
-                title.style.borderWidth = _border + "px";
-                title.style.letterSpacing = _spacing + "px";
-
-            }, 25);
-        } 
-
-    }
-    else if (header.offsetHeight - nav.offsetHeight >= 100 + (8 * 2))
-    {
-        if (isNaN(_spacing))
-        {
-            title.style.borderWidth = 8 + "px";
-            title.style.letterSpacing = 10 + "px";
-        }
-        else if (_spacing!=10)
-        {
-            let animate = setInterval(function() {
-
-                if (_border == 8 && _spacing == 10) 
-                {clearInterval(animate);}
-
-                if (_border < 8) _border++;
-                if (_spacing < 10) _spacing++;
-
-                title.style.borderWidth = _border + "px";
-                title.style.letterSpacing = _spacing + "px";
-            }, 25);
-        }
-    }
-}
-
-InitTitle();
-
-/*==============================================================================================================
 >> FUNCTION: RESIZE WINDOW
 ==============================================================================================================*/
 window.addEventListener('resize', event =>
@@ -348,7 +287,6 @@ window.addEventListener('resize', event =>
             {return x * shelfW;}
         );
 
-        InitTitle();
         InitShelf();
     }
 )
