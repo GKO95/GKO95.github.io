@@ -2,7 +2,7 @@
 >> FUNCTION: DYNAMIC TITLE SIZING
 ==============================================================================================================*/
 const header = document.getElementById("home-header");
-const nav    = document.getElementById("home-nav");
+const nav    = document.getElementById("navigation");
 const title  = document.getElementById("home-title").children[0];
 
 const InitTitle = () => {

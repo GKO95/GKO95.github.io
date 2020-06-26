@@ -1,6 +1,6 @@
 ---
 name: C#
-layout: document
+layout: docs
 title: "Programming | C#"
 author: GKO95
 category: Programming

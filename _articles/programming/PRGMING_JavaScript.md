@@ -1,6 +1,6 @@
 ---
 name: JavaScript
-layout: document
+layout: docs
 title: "Programming | JavaScript"
 author: GKO95
 category: Programming

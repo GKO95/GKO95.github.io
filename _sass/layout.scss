@@ -1,85 +1,4 @@
-/* SITE STYLESHEET */
-.site-header {
-    text-align: center;
-    display: block;
-
-    padding-bottom: 30px;
-    background-color: steelblue;
-}
-
-.site-nav {
-    padding: 10px 10px 0px 10px;
-    margin-bottom: 15px;
-    background-color: transparent;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    text-align: center;
-}
-
-.site-logo {
-    display: block;
-}
-
-.site-tabs {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    font-size: 24px;
-}
-
-.site-tabs a {
-    padding: 0px 10px;
-
-    /* Disable selection. */
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-
-    text-decoration: none;
-    color: white;
-}
-
-.site-title {
-    margin-top: 100px;
-
-    border: white solid 8px;
-    font-size: 64px;
-
-    color:white;
-    font-weight: bold;
-    font-family: monospace;
-
-    /* Disable selection. */
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-
-    /* Disable hyperlink underline. */
-    text-decoration: none;
-
-    /* Letter affects right padding. */
-    letter-spacing: 10px;
-    padding: 0px 0px 0px 10px;
-}
-
-.site-main {
-    display: block;
-    flex: 1 0 auto;
-}
-
-.site-content {
+#default-content {
     display: block;
 
     max-width: calc(1200px - (30px * 2));
@@ -93,28 +12,155 @@
     overflow: auto;
 }
 
-.site-post {
 
+/*==============================================================================================================
+>> DEFAULT
+==============================================================================================================*/
+#default-header {
+    background-color: white;
+    height: 25vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    overflow: hidden;
+    width:100%;
 }
 
-.site-footer {
+#default-header #default-title {
     display: block;
-    background-color: steelblue;
-    
-    max-width: calc(1200px - (30px * 2));
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 30px;
-    padding-right: 30px;
+    font-size: 64px;
 
+    margin-top:auto;
+    margin-bottom:auto;
+
+    text-align: center;
+
+    font-weight: bold;
+    font-family: monospace;
+}
+
+#default-header #default-title a {
+    border: black solid 8px;
+    font-size: 85.5px;
+
+    color:black;
+    font-weight: bold;
+    font-family: monospace;
+
+    // Disable selection.
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    // Disable hyperlink underline.
+    text-decoration: none;
+
+    // Letter affects right padding.
+    letter-spacing: 10px;
+    padding: 0px 0px 0px 10px;
+}
+
+#default-toc {
+    position: fixed;
+}
+
+#default-toc span {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+#default-main {
+    display: block;
+    flex: 1 0 auto;
+}
+
+#default-footer {
+    background-color: white;
+    position: relative;
+    height: 5vh;
+}
+
+#default-footer #copyright {
     color: white;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12px;
+
+    bottom: 0px;
+    position: absolute;
+
+    background-color: black;
+    
+    padding: 5px 0px 5px 0px;
+
+    width:100%;
+
+    //@debug Disable selection.
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
 }
 
-.site-footer p {
-    margin-top: 2px;
-    margin-bottom: 2px;
+#default-footer #copyright span{
+    padding: 0px 15px 0px 15px;
 }
 
+/*==============================================================================================================
+>> NAVIGATION
+==============================================================================================================*/
+#navigation {
+    padding: 10px 0px 5px 0px;
+    background-color: black;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    text-align: center;
+
+    position:fixed;
+    width: 100%;
+    top:0px;
+}
+
+#navigation #navigation-logo {
+    display: block;
+    padding-left: 15px;
+}
+
+#navigation #navigation-url {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    padding-right: 15px;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+#navigation #navigation-url a {
+    padding: 0px 0px 0px 20px;
+
+    // Disable selection.
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    color: black;
+    text-decoration: none;
+}
 
 /*==============================================================================================================
 >> HOME
@@ -130,40 +176,9 @@
     overflow: hidden;
 }
 
-#home-header #home-nav {
-    padding: 10px 15px 5px 15px;
-    background-color: black;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    text-align: center;
-}
-
-#home-header #home-nav #home-url {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    font-size: 24px;
-}
-
-#home-header #home-nav #home-url a {
-    padding: 0px 0px 0px 20px;
-
-    // Disable selection.
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-
-    color: black;
-    text-decoration: none;
+#home-header #navigation{
+    position: static;
+    width: auto;
 }
 
 #home-header #home-title {
@@ -298,36 +313,4 @@
 #home-main #home-shelf li h1 {
     font-family: sans-serif;
     font-size: 3em;
-}
-
-#home-footer {
-    background-color: white;
-    position: relative;
-    height: 5vh;
-}
-
-#home-footer #home-copyright {
-    color: white;
-    font-weight: bold;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 12px;
-
-    bottom: 0px;
-    position: absolute;
-
-    background-color: black;
-    width:100vw;
-    
-    padding: 5px 0px 5px 0px;
-
-    //@debug Disable selection.
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-}
-
-#home-footer #home-copyright span{
-    padding: 0px 15px 0px 15px;
 }

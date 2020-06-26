@@ -1,6 +1,6 @@
 ---
 name: Python3
-layout: document
+layout: docs
 title: "Programming | Python3"
 author: GKO95
 category: Programming
@@ -30,13 +30,13 @@ There are two different comments in Python: line comment and block comment.
 * **Block comment** (aka. **docstrings**)
   : a comment with multiple lines of code by using three pairs of double quote `""" """` or single quote `''' '''`. Docstrings can even be used to write multiple lines of sentence and view it on runtime.
 
-```python
+{% highlight python %}
 """
 BLOCK COMMENT:
 multiple line of comment can be placed here and can even be viewed on runtime.
 """
 # LINE COMMENT: for a single line of code.
-```
+{% endhighlight %}
 
 ## Input & Output
 Python has a single input and output function for a terminal text-based:
@@ -46,11 +46,11 @@ Python has a single input and output function for a terminal text-based:
 | `input()`    | `input("Write:")`         | Text data inside a function `input()` is shown on a terminal when input is needed, and always return input data as text. |
 | `print()`    | `print("Read:",variable)` | Print data types (e.g. text, number) on a console, where `variable` is a text data for concatenation.                    |
 
-```python
+{% highlight python %}
 variable = input("Write: ")
 print("Read:", variable)
 # EQUIVALENT: print("Read:", input("Write: "))
-```
+{% endhighlight %}
 
 ```
 Write: Hello World!

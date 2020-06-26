@@ -24,20 +24,10 @@ var index = 0;
 var length = 0;
 
 // POSITION: PERCENTAGE (NORMALIZED)
-const elementY = (1 - bookH)/2;
-const elementX = [
-    (1 - bookW) * (0.5 - 0.6), 
-    (1 - bookW) * (0.5 - 0.55), 
-    (1 - bookW) * (0.5),
-    (1 - bookW) * (0.5 + 0.55),
-    (1 - bookW) * (0.5 + 0.6)
-];
+const elementY = (1 - bookH)* 65/100;
 
 // POSITION: PIXEL
 var elementTOP = elementY * shelfH;
-var elementPOS = elementX.map(function(x)
-    {return x * shelfW;}
-);
 
 const volumeInfo = [
     0.5,    // MID  [% norm]
@@ -192,7 +182,7 @@ const OnScroll = (x) => {
     // SCROLL DOWN -> NEXT
     if (x > 0 && index < length - 1)
     {
-        let count = 0;
+        let count = 0;  // index of "volume" within "volumes"
         for (let volume of volumes)
         {
             switch(count)
@@ -219,7 +209,7 @@ const OnScroll = (x) => {
     // SCROLL UP -> PREV
     else if (x < 0 && index > 0)
     {
-        let count = 0;
+        let count = 0;  // index of "volume" within "volumes"
         for (let volume of volumes)
         {
             switch(count)
@@ -283,9 +273,6 @@ window.addEventListener('resize', event =>
         shelfH = shelf.offsetHeight;
 
         elementTOP  = elementY * shelfH;
-        elementPOS = elementX.map(function(x)
-            {return x * shelfW;}
-        );
 
         InitShelf();
     }
