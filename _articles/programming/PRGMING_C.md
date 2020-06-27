@@ -1,10 +1,12 @@
 ---
 name: C
 layout: docs
-title: "Programming | C"
 author: GKO95
 category: Programming
-description: "C is the most widely used general-purpose programming language that has influenced on numerous programming languages."
+title: "Programming | C"
+logo: "/assets/images/logo-c.png"
+summary: "."
+order: 0x01
 ---
 # **C: INTRO**
 

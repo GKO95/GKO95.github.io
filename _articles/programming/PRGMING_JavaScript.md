@@ -1,10 +1,12 @@
 ---
 name: JavaScript
 layout: docs
-title: "Programming | JavaScript"
 author: GKO95
 category: Programming
-description: "JavaScript is high-level, multi-paradigm language, and is one of the core technologies of the World Wide Web."
+title: "Programming | JavaScript"
+logo: "/assets/images/logo-js.png"
+summary: "."
+order: 0x04
 ---
 # **JAVASCRIPT: BASIC**
 

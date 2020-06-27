@@ -1,10 +1,12 @@
 ---
 name: C#
 layout: docs
-title: "Programming | C#"
 author: GKO95
 category: Programming
-description: "C# is a general-purpose, multi-paradigm programming language developed by Microsoft as part of .NET Framework."
+title: "Programming | C#"
+logo: "/assets/images/logo-csharp.png"
+summary: "."
+order: 0x03
 ---
 # **C#: INTRO**
 

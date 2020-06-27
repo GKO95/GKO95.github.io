@@ -1,10 +1,12 @@
 ---
 name: Python3
 layout: docs
-title: "Programming | Python3"
 author: GKO95
 category: Programming
-description: "Python is an interpreted, high-level, general-purpose programming language with great code readability."
+title: "Programming | Python3"
+logo: "/assets/images/logo-python.png"
+summary: "."
+order: 0x00
 ---
 # **PYTHON: INTRO**
 Python is a high-level programming language with applications in numerous areas, including web programming, scientific computing, and artificial intelligence. The language is executed sequentially line-after-line and doesn't need semicolon `;` to end the line of statement.
@@ -30,13 +32,13 @@ There are two different comments in Python: line comment and block comment.
 * **Block comment** (aka. **docstrings**)
   : a comment with multiple lines of code by using three pairs of double quote `""" """` or single quote `''' '''`. Docstrings can even be used to write multiple lines of sentence and view it on runtime.
 
-{% highlight python %}
+```python
 """
 BLOCK COMMENT:
 multiple line of comment can be placed here and can even be viewed on runtime.
 """
 # LINE COMMENT: for a single line of code.
-{% endhighlight %}
+```
 
 ## Input & Output
 Python has a single input and output function for a terminal text-based:
@@ -46,11 +48,11 @@ Python has a single input and output function for a terminal text-based:
 | `input()`    | `input("Write:")`         | Text data inside a function `input()` is shown on a terminal when input is needed, and always return input data as text. |
 | `print()`    | `print("Read:",variable)` | Print data types (e.g. text, number) on a console, where `variable` is a text data for concatenation.                    |
 
-{% highlight python %}
+```python
 variable = input("Write: ")
 print("Read:", variable)
 # EQUIVALENT: print("Read:", input("Write: "))
-{% endhighlight %}
+```
 
 ```
 Write: Hello World!
@@ -2183,16 +2185,16 @@ Since Matplotlib is a huge scientific library and is still growing, this chapter
 ## Terminology
 Matplotlib has various term user and developer may not be familiar of. This section is hereby provide terminology used in the library that could help understand. Below is a figure from official Matplotlib website:
 
-<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\Python\matplotlib_terminology.png" width=100%></div><center style="font-weight:bold">Figure #. Matplotlib terminology.</center>
+<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src="./../.images/Python/matplotlib_terminology.png" width="100%"></div><center style="font-weight:bold">Figure #. Matplotlib terminology.</center>
 ### Figure
 
 Figure is considered an empty window of easel (a standing frame for a canvas):
 
-<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\Python\matplotlib_figure_no_axes.png" width=70%></div><center style="font-weight:bold">Figure #. Matplotlib figure without any axes.</center>
+<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src="./../.images/Python/matplotlib_figure_no_axes.png" width="70%"></div><center style="font-weight:bold">Figure #. Matplotlib figure without any axes.</center>
 Calling a figure using API such as `matplotlib.pyplot.figure()` returns pure white window background without anything.
 
 ### Axes
 Axes (aka. subplot) is the region of the image with the data space, considered as canvas that goes up on easel. Do not be confused with axes and axis which is completely different. A following is a figure with four empty axes:
 
-<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\Python\matplotlib_figure_with_axes.png" width=70%></div><center style="font-weight:bold">Figure #. Matplotlib figure with four axes.</center>
+<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src="./../.images/Python/matplotlib_figure_with_axes.png" width="70%"></div><center style="font-weight:bold">Figure #. Matplotlib figure with four axes.</center>
 API such as `matplotlib.pyplot.subplot()` or `matplotlib.pyplot.subplots()` returns both figure and a single or multiple empty axes simultaneously.

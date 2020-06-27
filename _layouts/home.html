@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang |default: site.lang | default: 'en' }}">
     {%- include home-head.html -%}
-    <body>
+    <body id="home">
         <!-- HEADER -->
         {%- include home-header.html -%}
         <!-- MAIN -->
         <main id="home-main">
-            <div id="home-aisle">
-                <span>Programming</span>
+            <div id="home-register">
+                <div id="shift-left"><span>&#x25c0;</span></div>
+                <div id="shift-right"><span>&#x25b6;</span></div>
+                <ul id="home-byte">
+                    {% assign programmings = site.articles | where: "category", "Programming" | sort:"order" %}
+                    {% for programming in programmings %}
+                    <a class="home-bit" href="{{ programming.url }}">
+                        <li>
+                            <!--<h1>{{ programming.name }}</h1>-->
+                            <span class="bit-logo" style="background-image:url('{{ programming.logo }}')"></span>
+                            <span>{{ programming.summary }}</span>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+
             </div>
-            <ul id="home-shelf">
-                {% assign programmings = site.articles | where: "category", "Programming" %}
-                {% for programming in programmings %}
-                <a class="home-book" href="{{ programming.url }}">
-                    <li>
-                        <h1>{{ programming.name }}</h1>
-                        <p>{{ programming.description }}</p>
-                    </li>
-                </a>
-                {% endfor %}
-            </ul>
         </main>
         <!-- FOOTER -->
         {%- include home-footer.html -%}
     </body>
     <script type="text/javascript" src="{{ '/assets/js/home-title.js' | relative_url }}"></script>
-    <script type="text/javascript" src="{{ '/assets/js/home-scroll.js' | relative_url }}"></script>
+    <script type="text/javascript" src="{{ '/assets/js/home-register.js' | relative_url }}"></script>
+    <!--<script type="text/javascript" src="{{ '/assets/js/home-shelf.js' | relative_url }}"></script>-->
 </html>

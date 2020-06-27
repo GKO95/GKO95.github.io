@@ -1,10 +1,12 @@
 ---
 name: C++
 layout: docs
-title: "Programming | C++"
 author: GKO95
 category: Programming
-description: "C++ is a high-level, general-purpose programming language created as an extension of the C programming language."
+title: "Programming | C++"
+logo: "/assets/images/logo-cpp.png"
+summary: "."
+order: 0x02
 ---
 # **C++: INTRO**
 
