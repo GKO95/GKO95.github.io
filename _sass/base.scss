@@ -20,21 +20,21 @@ h1, h2, h3 {
 }
 
 /* Scrollbar */
-/*
+
 ::-webkit-scrollbar {               // width
-    display: none;
-    width: 10px;
+    //display: none;
+    width: 17px;
 }
   
 ::-webkit-scrollbar-track {       // track
-    background: #555;
+    background: rgb(64, 64, 64);
 }
   
 ::-webkit-scrollbar-thumb {       // thumb
-    background: #888;
+    background: rgb(128, 128, 128);
+    border-radius: 1em;
 }
   
 ::-webkit-scrollbar-thumb:hover { // thumb::hover
-    background: black;
+    //background: black;
 }
-*/
