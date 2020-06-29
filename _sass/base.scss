@@ -1,0 +1,45 @@
+body {
+    background-color: rgb(32, 32, 32);
+    color: white;
+
+    margin: 0px;
+    padding: 0px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 600px;
+    min-width: 800px;
+
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: large;
+    letter-spacing: 0px;
+}
+
+h1, h2, h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Highlighter-rouge */
+.highlighter-rouge {
+    
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {               // width
+    //display: none;
+    width: 17px;
+}
+  
+::-webkit-scrollbar-track {       // track
+    background: rgb(64, 64, 64);
+}
+  
+::-webkit-scrollbar-thumb {       // thumb
+    background: rgb(128, 128, 128);
+    border-radius: 1em;
+}
+  
+::-webkit-scrollbar-thumb:hover { // thumb::hover
+    //background: black;
+}

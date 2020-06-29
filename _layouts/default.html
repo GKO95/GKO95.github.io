@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang |default: site.lang | default: 'en' }}">
+    {%- include default-head.html -%}
+    <body id="default">
+        {%- include default-menu.html -%}
+        {%- include default-header.html -%}
+        <main id="default-main">
+            <div id="default-content">
+                {{ content }}
+            </div>
+        </main>
+        {%- include .footer.html -%}
+    </body>
+    <script type="text/javascript" src="{{ '/assets/js/default-config.js' | relative_url }}"></script>
+</html>
