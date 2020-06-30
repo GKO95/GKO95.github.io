@@ -1,32 +1,13 @@
-const __HEADER__  = document.getElementById("default-header");
-const __MAIN__    = document.getElementsByTagName("main")[0];
-const __FOOTER__  = document.getElementById("footer");
-
-var winHeight = window.innerHeight;
-var winWidth  = window.innerWidth;
-
-/*========================================
->> AUTO-FIT MAIN
-========================================*/
-const MainSize = () => {
-    if (__MAIN__.getBoundingClientRect.bottom + __FOOTER__.offsetHeight < winHeight)
-    {
-        __MAIN__.style.height = (winHeight - 
-                (__HEADER__.getBoundingClientRect().bottom
-                + __FOOTER__.offsetHeight)
-                ) + "px";
-    }
-}; MainSize();
+const __HEADER__  = document.getElementsByTagName("HEADER")[0];
+const __MAIN__    = document.getElementsByTagName("MAIN")[0];
+const __FOOTER__  = document.getElementsByTagName("FOOTER")[0];
 
 /*========================================
 >> MENU
 ========================================*/
 const __NAV__ = document.getElementById("navigation");
 const __MENU__ = document.getElementById("menu");
-const __CONTENT__ = document.getElementById("default-content");
-
-var mainHeight = document.getElementById("default-main").offsetHeight;
-var mainWidth = document.getElementById("default-main").offsetWidth;
+const __CONTENT__ = document.getElementById("docs-content");
 
 // 17px FOR CONSIDERING PROPERTY "overflow-y"
 const _CSS_widthMenu = parseInt(getComputedStyle(__MENU__).width) + 17;
@@ -37,7 +18,7 @@ __MENU__.style.left = -(_CSS_widthMenu) + "px";
 
 const MenuSize = () => {
     __MENU__.style.height 
-        = winHeight - (__NAV__.offsetHeight) + "px";
+        = window.innerHeight - (__NAV__.offsetHeight) + "px";
 }; MenuSize();
 
 document.getElementById("menu-button").addEventListener("click", function() {
@@ -76,7 +57,7 @@ document.getElementById("menu-button").addEventListener("click", function() {
 });
 
 const MenuParser = () => {
-    let elements = document.getElementById("default-content").children;
+    let elements = document.getElementById("docs-content").children;
     let textNode;
     for (let element of elements) {
         if (element.tagName == "H1")
@@ -105,6 +86,27 @@ const MenuParser = () => {
     }
 }; MenuParser();
 
+__MAIN__.addEventListener("click", function() {
+    if (parseInt(__MENU__.style.left) == 0)
+    {
+        let animate;
+        let leftPosition;
+    
+        let interval = 8;
+
+        leftPosition = 0;
+        animate = setInterval(function() {
+            if (leftPosition == -(_CSS_widthMenu))
+            {clearInterval(animate);}
+            else
+            {
+                leftPosition -= interval;
+                __MENU__.style.left = leftPosition + "px";
+            }
+        }, 1);
+    }
+});
+
 /*========================================
 >> FUNCTION: SCROLL WINDOW
 ========================================*/
@@ -113,12 +115,12 @@ window.onscroll = function() {
             >= document.body.offsetHeight - __FOOTER__.offsetHeight) {
 
         __MENU__.style.height 
-            = winHeight - (__NAV__.offsetHeight)
+            = window.innerHeight - (__NAV__.offsetHeight)
                 - (__FOOTER__.offsetHeight - (document.body.offsetHeight - (window.innerHeight + window.scrollY))) + "px";
     }
     else {
         __MENU__.style.height 
-            = winHeight - (__NAV__.offsetHeight) + "px";
+            = window.innerHeight - (__NAV__.offsetHeight) + "px";
     }
 };
 
@@ -126,11 +128,5 @@ window.onscroll = function() {
 >> FUNCTION: RESIZE WINDOW
 ========================================*/
 window.addEventListener('resize', event => {
-    
-    winHeight = window.innerHeight;
-    winWidth = window.innerWidth;
-    mainHeight = document.getElementById("default-main").offsetHeight;
-
-    MainSize();
     MenuSize();
 });

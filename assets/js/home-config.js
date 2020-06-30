@@ -1,21 +1,8 @@
-const __HEADER__  = document.getElementById("home-header");
-const __NAV__     = document.getElementById("navigation");
-const __TITLE__   = document.getElementById("home-title").children[0];
-const __MAIN__    = document.getElementsByTagName("main")[0];
-const __FOOTER__  = document.getElementById("footer");
-
-var winHeight = window.innerHeight;
-var winWidth  = window.innerWidth;
-
-/*========================================
->> AUTO-FIT MAIN
-========================================*/
-const MainSize = () => {
-    __MAIN__.style.height = (winHeight - 
-            (__HEADER__.getBoundingClientRect().bottom
-            + __FOOTER__.offsetHeight)
-            ) + "px";
-}; MainSize();
+const __HEADER__  = document.getElementsByTagName("HEADER")[0];
+const __NAV__     = document.getElementsByTagName("NAV")[0];
+const __TITLE__   = document.getElementById("title").children[0];
+const __MAIN__    = document.getElementsByTagName("MAIN")[0];
+const __FOOTER__  = document.getElementsByTagName("FOOTER")[0];
 
 /*========================================
 >> FUNCTION: DYNAMIC SIZING
@@ -85,10 +72,5 @@ const TitleSize = () => {
 >> FUNCTION: RESIZE WINDOW
 ========================================*/
 window.addEventListener('resize', event => {
-
-    winHeight = window.innerHeight;
-    winWidth = window.innerWidth;
-
-    MainSize();
     TitleSize(); 
 });
