@@ -1,13 +1,52 @@
 const __HEADER__  = document.getElementsByTagName("HEADER")[0];
 const __MAIN__    = document.getElementsByTagName("MAIN")[0];
 const __FOOTER__  = document.getElementsByTagName("FOOTER")[0];
+const __NAV__     = document.getElementsByTagName("NAV")[0];
+
+const __MENU__    = document.getElementById("menu");
+const __CONTENT__ = document.getElementById("docs-content");
 
 /*========================================
->> MENU
+>> MAIN: SIMPLIFIED
 ========================================*/
-const __NAV__ = document.getElementById("navigation");
-const __MENU__ = document.getElementById("menu");
-const __CONTENT__ = document.getElementById("docs-content");
+const __TITLE__   = document.getElementById("title");
+__TITLE__.style.paddingTop = __NAV__.offsetHeight + "px";
+
+if (__CONTENT__.children[0].tagName == "H1")
+{ __CONTENT__.children[0].style.marginTop = 0 + "px"; }
+
+const Raw2Chapter = () => {
+
+    let elem;
+    let __CHAPTER__;
+    let elements = __CONTENT__.children.length;
+    for (let index = 0; index < elements; index++)
+    {
+        if (__CONTENT__.children[0].tagName == "H1")
+        {
+            __CHAPTER__ = document.createElement("DIV");
+            __CHAPTER__.setAttribute("class", "docs-chapter");
+            __CONTENT__.appendChild(__CHAPTER__);
+        }
+        else if (__CONTENT__.children[0].className == "docs-chapter") 
+        { break; }
+
+        elem = document.createElement(__CONTENT__.children[0].tagName);
+        if (__CONTENT__.children[0].className.split(" ")[1] == "highlighter-rouge")
+        {
+            elem.setAttribute("class", __CONTENT__.children[0].className);
+        }
+        __CONTENT__.lastChild.appendChild(elem);
+        __CONTENT__.lastChild.lastChild.innerHTML = __CONTENT__.children[0].innerHTML;
+
+        __CONTENT__.removeChild(__CONTENT__.children[0]);
+    }
+
+}; Raw2Chapter();
+
+/*========================================
+>> MENU: SIMPLIFIED
+========================================*/
 
 // 17px FOR CONSIDERING PROPERTY "overflow-y"
 const _CSS_widthMenu = parseInt(getComputedStyle(__MENU__).width) + 17;
@@ -21,6 +60,7 @@ const MenuSize = () => {
         = window.innerHeight - (__NAV__.offsetHeight) + "px";
 }; MenuSize();
 
+// >> EXPAND/COLLAPSE MENU ON CLIKCING BUTTON
 document.getElementById("menu-button").addEventListener("click", function() {
     
     let animate;
@@ -56,36 +96,7 @@ document.getElementById("menu-button").addEventListener("click", function() {
     }
 });
 
-const MenuParser = () => {
-    let elements = document.getElementById("docs-content").children;
-    let textNode;
-    for (let element of elements) {
-        if (element.tagName == "H1")
-        {
-            let elemH1 = document.createElement("H1");
-            __MENU__.appendChild(elemH1);
-
-            //textNode = document.createTextNode(element.innerHTML);
-            //elemH1.appendChild(textNode);
-            __MENU__.lastChild.innerHTML = element.innerHTML;
-        }
-        else if (element.tagName == "H2")
-        {
-            let elemH2 = document.createElement("H2");
-            __MENU__.appendChild(elemH2);
-
-            __MENU__.lastChild.innerHTML = element.innerHTML;
-        }
-        else if (element.tagName == "H3")
-        {
-            let elemH3 = document.createElement("H3");
-            __MENU__.appendChild(elemH3);
-
-            __MENU__.lastChild.innerHTML = element.innerHTML;
-        }
-    }
-}; MenuParser();
-
+// >> COLLAPSE MENU ON CLIKCING <MAIN>
 __MAIN__.addEventListener("click", function() {
     if (parseInt(__MENU__.style.left) == 0)
     {
@@ -106,6 +117,40 @@ __MAIN__.addEventListener("click", function() {
         }, 1);
     }
 });
+
+const MenuParser = () => {
+
+    let elem;
+    for (let chapter of __CONTENT__.children)
+    {
+
+        elem = document.createElement("H1");
+        elem.innerHTML = chapter.firstChild.innerHTML;
+        __MENU__.appendChild(elem);
+
+        elem = document.createElement("DIV");
+        for (let section of chapter.children)
+        {
+            if (section.tagName == "H2")
+            {
+                elem.appendChild(document.createElement("H2"));
+                elem.lastChild.innerHTML = section.innerHTML;
+            }
+            else if (section.tagName == "H3")
+            {
+                elem.appendChild(document.createElement("H3"));
+                elem.lastChild.innerHTML = section.innerHTML;
+            }
+        }
+        __MENU__.appendChild(elem);
+    }
+
+}; MenuParser();
+
+/*========================================
+>> SYNC: MAIN + MENU
+========================================*/
+
 
 /*========================================
 >> FUNCTION: SCROLL WINDOW
