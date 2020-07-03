@@ -18,10 +18,13 @@ if (__CONTENT__.children[0].tagName == "H1")
 const Raw2Chapter = () => {
 
     let elem;
+    let countH2;
+    let countH3;
     let __CHAPTER__;
     let elements = __CONTENT__.children.length;
     for (let index = 0; index < elements; index++)
     {
+        // DISTINGUISH CHAPTERS BY "H1" TAG WITH "DIV"
         if (__CONTENT__.children[0].tagName == "H1")
         {
             __CHAPTER__ = document.createElement("DIV");
@@ -32,9 +35,14 @@ const Raw2Chapter = () => {
         { break; }
 
         elem = document.createElement(__CONTENT__.children[0].tagName);
+        // RETAIN HIGHLIGHTER-ROUGE STYLE
         if (__CONTENT__.children[0].className.split(" ")[1] == "highlighter-rouge")
         {
             elem.setAttribute("class", __CONTENT__.children[0].className);
+        }
+        // RETAIN ID FOR TABLE OF CONTENT
+        else if (__CONTENT__.children[0].id != "") {
+            elem.setAttribute("id", __CONTENT__.children[0].id);
         }
         __CONTENT__.lastChild.appendChild(elem);
         __CONTENT__.lastChild.lastChild.innerHTML = __CONTENT__.children[0].innerHTML;
@@ -119,30 +127,37 @@ __MAIN__.addEventListener("click", function() {
 });
 
 const MenuParser = () => {
-
-    let elem;
+    let elem; let anchor; let division;
     for (let chapter of __CONTENT__.children)
     {
+        elem = document.createElement("H1"); elem.innerHTML = chapter.firstChild.innerHTML;
+        anchor = document.createElement("A"); anchor.appendChild(elem);
+        //anchor.setAttribute("href", "#"+chapter.firstChild.id);
+        __MENU__.appendChild(anchor);
 
-        elem = document.createElement("H1");
-        elem.innerHTML = chapter.firstChild.innerHTML;
-        __MENU__.appendChild(elem);
+        division = document.createElement("DIV");
+        
+        for (let section of chapter.children) {
 
-        elem = document.createElement("DIV");
-        for (let section of chapter.children)
-        {
+            anchor = document.createElement("A");
+            anchor.setAttribute("href", "#"+section.id);
             if (section.tagName == "H2")
             {
-                elem.appendChild(document.createElement("H2"));
-                elem.lastChild.innerHTML = section.innerHTML;
+                anchor.innerHTML = section.innerHTML;
+                elem = document.createElement("H2");
+                
+                elem.appendChild(anchor);  division.appendChild(elem);
             }
             else if (section.tagName == "H3")
             {
-                elem.appendChild(document.createElement("H3"));
-                elem.lastChild.innerHTML = section.innerHTML;
+                anchor.innerHTML = section.innerHTML;
+                elem = document.createElement("H3");
+                
+                elem.appendChild(anchor);  division.appendChild(elem);
             }
+
         }
-        __MENU__.appendChild(elem);
+        __MENU__.appendChild(division);
     }
 
 }; MenuParser();
