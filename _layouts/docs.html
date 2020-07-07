@@ -2,7 +2,6 @@
 layout: template
 ---
 <body id="docs">
-    {%- include .menu.html -%}
     {%- include .header.html -%}
     <main id="docs-main">
         <div id="docs-content">
@@ -10,5 +9,6 @@ layout: template
         </div>
     </main>
     {%- include .footer.html -%}
+    {%- include .menu.html -%}
 </body>
 <script type="text/javascript" src="{{ '/assets/js/docs-config.js' | relative_url }}"></script>

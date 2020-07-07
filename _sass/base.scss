@@ -50,6 +50,26 @@ code {
     font-family: 'Courier New', Courier, monospace;
 }
 
+table {
+    width: 100%;
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+
+    border-collapse: collapse;
+}
+
+th {
+    border: solid white 1px;
+    border-bottom: double white 4px;
+    padding: 0.2em;
+}
+
+td {
+    border: solid white 1px;
+    padding: 0.2em;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {               // width
     //display: none;

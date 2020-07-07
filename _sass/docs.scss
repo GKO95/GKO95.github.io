@@ -1,0 +1,161 @@
+//================================
+// DOCS
+//================================
+#docs header {
+    background-color: inherit;
+    height: 25vh;
+    min-height: 128px;
+    max-height: 128px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    overflow: hidden;
+    width:100%;
+}
+
+#docs header #title {
+    display: none;
+    font-size: 64px;
+
+    margin-top:auto;
+    margin-bottom:auto;
+
+    text-align: center;
+
+    font-weight: bold;
+    font-family: monospace;
+}
+
+#docs header #title a {
+    border-style: solid;
+    border-color: white;
+    border-width: 8px;
+    font-size: 85.5px;
+
+    color: inherit;
+    font-weight: bold;
+    font-family: monospace;
+
+    // Disable selection.
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    // Disable hyperlink underline.
+    text-decoration: none;
+
+    // Letter affects right padding.
+    letter-spacing: 10px;
+    padding: 0px 0px 0px 10px;
+}
+
+#docs-main {
+    display: block;
+    flex: 1 0 auto;
+    background-color: inherit;
+    color: inherit;
+}
+
+#docs-content {
+    display: block;
+
+    max-width: calc(1200px - (30px * 2));
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-left: 30px;
+    padding-right: 30px;
+
+    background-color: inherit;
+    overflow: auto;
+}
+
+#docs-content h1 {
+    //font-family: 'OpenSans';
+    border-bottom-style: solid;
+    margin-bottom: 24px;
+    margin-top: 0px;
+}
+
+#docs-content h2 {
+    padding-left: 0.4em;
+    margin-bottom: 0.5em;
+    //font-family: 'OpenSans';
+}
+
+#docs-content h3 {
+    padding-left: 1.6em;
+    margin-bottom: 0.5em;
+    //font-family: 'OpenSans';
+    font-style: italic;
+}
+/* SOURCE OF PROBLEM: UNEQUAL MAIN HEIGHT!
+#docs-content h1::before, #docs-content h2::before, #docs-content h3::before {
+    display: block;
+    content: " ";
+    height: 72px;  // Give height of your fixed element 
+    margin-top: -72px; // Give negative margin of your fixed element
+    visibility: hidden;
+}
+*/
+#docs-content .docs-chapter {
+    margin-bottom: 48px;
+    display: none;
+}
+
+#docs #menu-content {
+    overflow-y: scroll;
+}
+
+#docs #menu-content a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+#docs #menu-content h1 {
+    padding: 0px;
+    margin: 0px;
+
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+
+    font-family: 'OpenSans';
+    font-weight: bold;
+    font-size: 20px;
+
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+#docs #menu-content h2 {
+    padding: 0px;
+
+    margin-left: 32px;
+    margin-right: 8px;
+    margin-top: 0px;
+    margin-bottom: 4px;
+
+    font-family: 'OpenSans';
+    font-size: 16px;
+}
+
+#docs #menu-content h3 {
+    padding: 0px;
+
+    margin-left: 64px;
+    margin-right: 8px;
+    margin-top: 0px;
+    margin-bottom: 4px;
+
+    font-family: 'OpenSans';
+    font-weight: normal;
+    font-size: 14px;
+    font-style: italic;    
+}

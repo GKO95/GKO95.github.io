@@ -4,13 +4,12 @@ const __TITLE__   = document.getElementById("title").children[0];
 const __MAIN__    = document.getElementsByTagName("MAIN")[0];
 const __FOOTER__  = document.getElementsByTagName("FOOTER")[0];
 
-/*========================================
->> FUNCTION: DYNAMIC SIZING
-========================================*/
+//========================================
+// FUNCTION: DYNAMIC TITLE SIZING
+//========================================
 const _CSS_borderWidthTitle = parseInt(getComputedStyle(__TITLE__).borderWidth);
-const _CSS_fontSizeTitle
-    = parseFloat(getComputedStyle(__TITLE__).fontSize) + 14.5 + _CSS_borderWidthTitle * 2;
-const _CSS_spacingTitle = parseInt(getComputedStyle(__TITLE__).letterSpacing);
+const _CSS_fontSizeTitle    = parseFloat(getComputedStyle(__TITLE__).fontSize) + 14.5 + _CSS_borderWidthTitle * 2;
+const _CSS_spacingTitle     = parseInt(getComputedStyle(__TITLE__).letterSpacing);
 
 const TitleSize = () => {
     let widthBorder  = parseInt(__TITLE__.style.borderWidth);
@@ -68,9 +67,10 @@ const TitleSize = () => {
     }
 }; TitleSize();
 
-/*========================================
->> FUNCTION: RESIZE WINDOW
-========================================*/
+//========================================
+// FUNCTION: RESIZE WINDOW
+//========================================
 window.addEventListener('resize', event => {
-    TitleSize(); 
+    TitleSize();
+    MenuSize();
 });

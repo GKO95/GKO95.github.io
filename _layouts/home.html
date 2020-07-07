@@ -6,26 +6,33 @@ layout: template
     {%- include .header.html -%}
     <!-- MAIN -->
     <main id="home-main">
-        <div id="home-register">
-            <div id="shift-left"><span>&#x25c0;</span></div>
-            <div id="shift-right"><span>&#x25b6;</span></div>
-            <ul id="home-byte">
-                {% assign programmings = site.docs | where: "category", "Programming" | sort:"order" %}
-                {% for programming in programmings %}
-                <a class="home-bit" href="{{ programming.url }}">
-                    <li>
-                        <!--<h1>{{ programming.name }}</h1>-->
-                        <span class="bit-logo" style="background-image:url('{{ programming.logo }}')"></span>
-                        <span>{{ programming.summary }}</span>
-                    </li>
-                </a>
-                {% endfor %}
-            </ul>
+        <div id="home-upper">
+            <div id="home-register">
+                <div class="home-shift" id="shift-left"><span>&#x25c0;</span></div>
+                <div class="home-shift" id="shift-right"><span>&#x25b6;</span></div>
+                <ul class="home-byte">
+                    {% assign programmings = site.docs | where: "category", "Programming" | sort:"order" %}
+                    {% for programming in programmings %}
+                    <a class="home-bit" href="{{ programming.url }}">
+                        <li>
+                            <!--<h1>{{ programming.name }}</h1>-->
+                            <span style="background-image:url('{{ programming.logo }}')"></span>
+                            <!--<span>{{ programming.summary }}</span>-->
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
 
+            </div>
+        </div>
+        <div id="home-lower">
+            <!-- CONTENT HERE -->
         </div>
     </main>
     <!-- FOOTER -->
     {%- include .footer.html -%}
+    <!-- MENU -->
+    {%- include .menu.html -%}
 </body>
 <script type="text/javascript" src="{{ '/assets/js/home-config.js' | relative_url }}"></script>
 <script type="text/javascript" src="{{ '/assets/js/home-register.js' | relative_url }}"></script>
