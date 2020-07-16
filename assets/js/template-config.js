@@ -1,20 +1,27 @@
 //========================================
 // >> AUTO-FIT MAIN
 //========================================
-const __initsize__ = document.body.getBoundingClientRect().height;
+var __initsize__;
 const __autosize__ = () => {
     document.getElementsByTagName("MAIN")[0].style.height = window.innerHeight
         - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height
         - document.getElementsByTagName("FOOTER")[0].offsetHeight + "px"
-}; 
+};
 
-if (document.body.getBoundingClientRect().height < window.innerHeight) { __autosize__(); }
-//alert(__initsize__ + " : " +document.body.getBoundingClientRect().height);
+document.addEventListener("readystatechange", function() {
+if (document.readyState == "complete") {
+
+    __initsize__ = document.body.getBoundingClientRect().height;
+    if (__initsize__ < window.innerHeight) { __autosize__(); }
+    document.getElementsByTagName("MAIN")[0].style.visibility = "visible";
+    document.getElementsByTagName("FOOTER")[0].style.visibility = "visible";
+    //alert(__initsize__ + " : " +document.body.getBoundingClientRect().height);
+
+}});
 
 //========================================
 // >> COMMON MENU
 //========================================
-
 // >> MENU SIZING
 document.getElementById("menu");
 const __menusize__ = () => {
@@ -28,6 +35,11 @@ const __menusize__ = () => {
         document.getElementById("menu").style.height = window.innerHeight 
             - document.getElementsByTagName("NAV")[0].offsetHeight- document.getElementsByTagName("FOOTER")[0].offsetHeight + "px";
     }
+
+    document.getElementById("menu-content").style.height = document.getElementById("menu-main").offsetHeight - document.getElementById("menu-option").offsetHeight
+        - parseInt(getComputedStyle(document.getElementById("menu-option")).marginTop) - parseInt(getComputedStyle(document.getElementById("menu-content")).marginBottom)
+        - ( parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) > parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop)
+            ? parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) : parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop) ) + "px";
 }; __menusize__();
 
 // >> MENU SIZING BY SCROLL
@@ -47,54 +59,66 @@ window.onscroll = function() {
 
 // >> MENU BUTTON CLICK (INCLUDING CONVENIENT CLICK)
 const __menuclick__ = (event) => {
-    // PREVENT EXITING MENU WHEN CONTENT OF MENU IS CLICKED DUE TO BUBBLING.
-    if (event.target.id != "menu-bkgd" && event.target.id != "menu-button") {return;}
 
-    let animate; let opacityBkgd; let widthContent; let opacityContent;
+    let animate; let opacityMenuBkgd; let sizeMenuMain; let opacityMenuMain;
     if (document.getElementById("menu").style.visibility == "hidden")
     {
-        opacityBkgd = 0.0; widthContent = 0; opacityContent = 0.0;
+        opacityMenuBkgd = 0.0; sizeMenuMain = 0; opacityMenuMain = 0.0;
         animate = setInterval(function() {
             document.getElementById("menu").style.visibility = "visible";
-            if (opacityBkgd == 7 && widthContent == 64 && opacityContent == 10) 
+            if (opacityMenuBkgd == 7 && sizeMenuMain == 80 && opacityMenuMain == 10) 
             {
                 clearInterval(animate);
             }
             else
             {
-                if (opacityBkgd < 7) {opacityBkgd++;}
-                if (widthContent < 64) {widthContent += 16;}
-                if (opacityContent < 10) {opacityContent++;}
-                document.getElementById("menu-bkgd").style.backgroundColor = "rgba(128,128,128,"+(opacityBkgd/10)+")";
-                document.getElementById("menu-content").style.width = widthContent + "%";
-                document.getElementById("menu-content").style.opacity = opacityContent/10;
+                if (opacityMenuBkgd < 7) {opacityMenuBkgd++;}
+                if (sizeMenuMain < 80) {sizeMenuMain += 20;}
+                if (opacityMenuMain < 10) {opacityMenuMain++;}
+                document.getElementById("menu-bkgd").style.backgroundColor = "rgba(128,128,128,"+(opacityMenuBkgd/10)+")";
+                document.getElementById("menu-main").style.height = sizeMenuMain + "%";
+                document.getElementById("menu-main").style.opacity = opacityMenuMain/10;
             }
         }, 20);
     }
     else
     {
-        opacityBkgd = 7; widthContent = 64; opacityContent = 10;
+        opacityMenuBkgd = 7; sizeMenuMain = 80; opacityMenuMain = 10;
         animate = setInterval(function() {
-            if (opacityBkgd <= 0.0 && widthContent <= 0 && opacityContent <= 0.0)
+            if (opacityMenuBkgd <= 0.0 && sizeMenuMain <= 0 && opacityMenuMain <= 0.0)
             {
                 clearInterval(animate);
                 document.getElementById("menu").style.visibility = "hidden";
             }
             else
             {
-                if(opacityBkgd > 0) {opacityBkgd--;}
-                if(widthContent > 0) {widthContent -= 8;}
-                if (opacityContent > 0) {opacityContent--;}
-                document.getElementById("menu-bkgd").style.backgroundColor = "rgba(128,128,128,"+(opacityBkgd/10)+")";
-                document.getElementById("menu-content").style.width = widthContent + "%";
-                document.getElementById("menu-content").style.opacity = opacityContent/10;
+                if(opacityMenuBkgd > 0) {opacityMenuBkgd--;}
+                if(sizeMenuMain > 0) {sizeMenuMain -= 10;}
+                if (opacityMenuMain > 0) {opacityMenuMain--;}
+                document.getElementById("menu-bkgd").style.backgroundColor = "rgba(128,128,128,"+(opacityMenuBkgd/10)+")";
+                document.getElementById("menu-main").style.height = sizeMenuMain + "%";
+                document.getElementById("menu-main").style.opacity = opacityMenuMain/10;
             }
         }, 20);
     }
-    event.stopPropagation();
 };
-document.getElementById("menu-button").addEventListener("click", __menuclick__);
-document.getElementById("menu-bkgd").addEventListener("click", __menuclick__, true);
+
+document.getElementById("menu-button").addEventListener("click", function() {
+    // PREVENT EXITING MENU WHEN "menu-main" AND ITS CHILDREN ARE CLICKED DUE TO BUBBLING.
+    if ((event.target.id != "menu-bkgd" && event.target.id != "menu-button") || false) {return;}
+    __menuclick__();
+});
+document.getElementById("menu-bkgd").addEventListener("click", function() {
+    // PREVENT EXITING MENU WHEN "menu-main" AND ITS CHILDREN ARE CLICKED DUE TO BUBBLING.
+    if ((event.target.id != "menu-bkgd" && event.target.id != "menu-button") || false) {return;}
+    __menuclick__();
+});
+document.onkeydown = function(e) {
+    // CONVENIENT MENU ESCAPE WITH "ESCAPE" BUTTON.
+    e = e || window.event;
+    if (e.keyCode == 27 && document.getElementById("menu").style.visibility == "visible")
+    {__menuclick__();}
+};
 
 //========================================
 // >> FUNCTION: RESIZE WINDOW

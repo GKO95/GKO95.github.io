@@ -72,5 +72,4 @@ const TitleSize = () => {
 //========================================
 window.addEventListener('resize', event => {
     TitleSize();
-    MenuSize();
 });

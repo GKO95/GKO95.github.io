@@ -10,19 +10,28 @@ layout: template
             <div id="home-register">
                 <div class="home-shift" id="shift-left"><span>&#x25c0;</span></div>
                 <div class="home-shift" id="shift-right"><span>&#x25b6;</span></div>
+                <!-- PROGRAMMING -->
                 <ul class="home-byte">
                     {% assign programmings = site.docs | where: "category", "Programming" | sort:"order" %}
                     {% for programming in programmings %}
-                    <a class="home-bit" href="{{ programming.url }}">
+                    <a class="home-bit" href="{{ programming.url }}" title="{{ programming.title }}">
                         <li>
-                            <!--<h1>{{ programming.name }}</h1>-->
                             <span style="background-image:url('{{ programming.logo }}')"></span>
-                            <!--<span>{{ programming.summary }}</span>-->
                         </li>
                     </a>
                     {% endfor %}
                 </ul>
-
+                <!-- LIBRARY -->
+                <ul class="home-byte">
+                    {% assign libraries = site.docs | where: "category", "Library" | sort:"order" %}
+                    {% for library in libraries %}
+                    <a class="home-bit" href="{{ library.url }}" title="{{ library.title }}">
+                        <li>
+                            <span style="background-image:url('{{ library.logo }}')"></span>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
         <div id="home-lower">

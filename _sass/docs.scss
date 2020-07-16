@@ -62,6 +62,7 @@
 
 #docs-content {
     display: block;
+    //visibility: hidden;
 
     max-width: calc(1200px - (30px * 2));
     margin-left: auto;
@@ -71,29 +72,36 @@
     padding-right: 30px;
 
     background-color: inherit;
-    overflow: auto;
+    //overflow: hidden;
 }
 
 #docs-content h1 {
-    //font-family: 'OpenSans';
     border-bottom-style: solid;
-    margin-bottom: 24px;
-    margin-top: 0px;
+
+    //font-family: 'OpenSans';
+    font-size: 2.4em;
+    
+    margin-bottom: 0.6em;
+    //margin-top: 1.2em;
 }
 
 #docs-content h2 {
+    font-size: 1.6em;
+
     padding-left: 0.4em;
     margin-bottom: 0.5em;
     //font-family: 'OpenSans';
-}
+}   
 
 #docs-content h3 {
+    font-size: 1.2em;
+
     padding-left: 1.6em;
     margin-bottom: 0.5em;
     //font-family: 'OpenSans';
     font-style: italic;
 }
-/* SOURCE OF PROBLEM: UNEQUAL MAIN HEIGHT!
+
 #docs-content h1::before, #docs-content h2::before, #docs-content h3::before {
     display: block;
     content: " ";
@@ -101,61 +109,20 @@
     margin-top: -72px; // Give negative margin of your fixed element
     visibility: hidden;
 }
-*/
-#docs-content .docs-chapter {
-    margin-bottom: 48px;
-    display: none;
-}
 
-#docs #menu-content {
-    overflow-y: scroll;
+.docs-chapter {
+    margin-bottom: 48px;
+    //overflow: hidden;
 }
 
 #docs #menu-content a {
     display: block;
+    float:left;
+    clear: left;
+
+    font-family: 'OpenSans';
     color: inherit;
+
+    margin: 8px 8px;
     text-decoration: none;
-}
-
-#docs #menu-content h1 {
-    padding: 0px;
-    margin: 0px;
-
-    margin-left: 8px;
-    margin-right: 8px;
-    margin-top: 16px;
-    margin-bottom: 8px;
-
-    font-family: 'OpenSans';
-    font-weight: bold;
-    font-size: 20px;
-
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-}
-
-#docs #menu-content h2 {
-    padding: 0px;
-
-    margin-left: 32px;
-    margin-right: 8px;
-    margin-top: 0px;
-    margin-bottom: 4px;
-
-    font-family: 'OpenSans';
-    font-size: 16px;
-}
-
-#docs #menu-content h3 {
-    padding: 0px;
-
-    margin-left: 64px;
-    margin-right: 8px;
-    margin-top: 0px;
-    margin-bottom: 4px;
-
-    font-family: 'OpenSans';
-    font-weight: normal;
-    font-size: 14px;
-    font-style: italic;    
 }
