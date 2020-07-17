@@ -105,8 +105,8 @@
 #docs-content h1::before, #docs-content h2::before, #docs-content h3::before {
     display: block;
     content: " ";
-    height: 72px;  // Give height of your fixed element 
-    margin-top: -72px; // Give negative margin of your fixed element
+    height: 64px;  // Give height of your fixed element 
+    margin-top: -64px; // Give negative margin of your fixed element
     visibility: hidden;
 }
 

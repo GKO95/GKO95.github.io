@@ -9,12 +9,7 @@ const __mCONTENT__ = document.getElementById("menu-content");
 const __mOPTION__  = document.getElementById("menu-option");
 
 //========================================
-// >> HREF POSITION SHIFT
-//========================================
-
-
-//========================================
-// >> MAIN: SIMPLIFIED
+// >> MAIN: CATEGORIZATION
 //========================================
 const Raw2Chapter = () => { // >> "docs-content" INITIALLY HIDDEN!
 
@@ -55,10 +50,10 @@ const Raw2Chapter = () => { // >> "docs-content" INITIALLY HIDDEN!
     __MAIN__.children[0].style.visibility = "visible";
     
 }; Raw2Chapter();
-//========================================
-// >> MENU: SIMPLIFIED
-//========================================
 
+//========================================
+// >> MENU: ORGANIZATION
+//========================================
 const MenuDesign = () => {
 
     // >> TOP-SIDE
@@ -113,86 +108,81 @@ const MenuDesign = () => {
     document.getElementById("menu-content").getElementsByTagName("SECTION")[0].style.float = "left";
     document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.float = "right";
 
-    document.getElementById("menu-content").getElementsByTagName("SECTION")[0].style.width = "60%";
-    document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.width = "40%";
+    document.getElementById("menu-content").getElementsByTagName("SECTION")[0].style.width = "50%";
+    document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.width = "50%";
 
     document.getElementById("menu-content").getElementsByTagName("SECTION")[0].style.backgroundColor = "inherit";
-    document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.backgroundColor = "rgb(32,32,32)";
+    document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.backgroundColor = "rgb(32,32,32)";    
 
-    let anchor;
+    let anchor; let subanchor;
     for (let chapter of __CONTENT__.children)
     {
         anchor = document.createElement("A");
         anchor.style.cursor = "pointer";
-        anchor.innerHTML = chapter.firstChild.innerHTML;
-        anchor.setAttribute("href", "#"+chapter.firstChild.id);
+        anchor.style.fontWeight = "bold";
+        anchor.innerText = chapter.firstChild.innerText;
         anchor.addEventListener("click", function() {
-            opacityMenuBkgd = 7; sizeMenuMain = 80; opacityMenuMain = 10;
-            animate = setInterval(function() {
-                if (opacityMenuBkgd <= 0.0 && sizeMenuMain <= 0 && opacityMenuMain <= 0.0)
-                {
-                    clearInterval(animate);
-                    document.getElementById("menu").style.visibility = "hidden";
+
+            if (document.getElementById("menu-content").getElementsByTagName("SECTION")[1].innerHTML == ""
+                || document.getElementById("menu-content").getElementsByTagName("SECTION")[1].children[0].hash != "#"+chapter.firstChild.id)
+            {   
+                // >> CLEAR PREVIOUS CHAPTER SELECTION
+                document.getElementById("menu-content").getElementsByTagName("SECTION")[1].innerHTML = ""
+                for (let element of chapter.children){ 
+                    if (element.tagName == "H1")
+                    {
+                        subanchor = document.createElement("A"); subanchor.innerHTML = element.innerHTML;
+                        subanchor.style.margin = "16px 16px 8px 16px"; subanchor.style.fontStyle = "bold"; subanchor.style.fontSize = "1.6em";
+                        subanchor.style.borderBottom = "solid white 2px"; subanchor.style.float = "none";
+                    }
+                    else if (element.tagName == "H2")
+                    {
+                        subanchor = document.createElement("A"); subanchor.innerHTML = element.innerHTML;
+                        subanchor.style.margin = "4px 0px 4px 24px"; subanchor.style.fontStyle = "normal"; subanchor.style.fontSize = "1.0em";
+                    }
+                    else if (element.tagName == "H3")
+                    {
+                        subanchor = document.createElement("A"); subanchor.innerHTML = element.innerHTML;
+                        subanchor.style.margin = "2px 0px 2px 64px"; subanchor.style.fontStyle = "italic"; subanchor.style.fontSize = "0.8em";
+                    }
+                    else {continue;}
+                    document.getElementById("menu-content").getElementsByTagName("SECTION")[1].appendChild(subanchor);
+                    subanchor.setAttribute("href","#"+element.id);
+                    subanchor.addEventListener("click", function() {
+                        window.onscroll = function() {}; 
+                        opacityMenuBkgd = 7; sizeMenuMain = 80; opacityMenuMain = 10;
+                        animate = setInterval(function() {
+                            if (opacityMenuBkgd <= 0.0 && sizeMenuMain <= 0 && opacityMenuMain <= 0.0)
+                            {
+                                clearInterval(animate);
+                                document.getElementById("menu").style.visibility = "hidden";
+                            }
+                            else
+                            {
+                                if(opacityMenuBkgd > 0) {opacityMenuBkgd--;}
+                                if(sizeMenuMain > 0) {sizeMenuMain -= 10;}
+                                if (opacityMenuMain > 0) {opacityMenuMain--;}
+                                document.getElementById("menu-bkgd").style.backgroundColor = "rgba(128,128,128,"+(opacityMenuBkgd/10)+")";
+                                document.getElementById("menu-main").style.height = sizeMenuMain + "%";
+                                document.getElementById("menu-main").style.opacity = opacityMenuMain/10;
+                            }
+                        }, 20);
+                    });
                 }
-                else
-                {
-                    if(opacityMenuBkgd > 0) {opacityMenuBkgd--;}
-                    if(sizeMenuMain > 0) {sizeMenuMain -= 10;}
-                    if (opacityMenuMain > 0) {opacityMenuMain--;}
-                    document.getElementById("menu-bkgd").style.backgroundColor = "rgba(128,128,128,"+(opacityMenuBkgd/10)+")";
-                    document.getElementById("menu-main").style.height = sizeMenuMain + "%";
-                    document.getElementById("menu-main").style.opacity = opacityMenuMain/10;
-                }
-            }, 20);
+                // >> SCROLLABLE
+                document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.overflowY = "scroll";
+            }
+            else
+            {
+                // >> CLEAR PREVIOUS CHAPTER SELECTION
+                document.getElementById("menu-content").getElementsByTagName("SECTION")[1].innerHTML = "";
+                document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.overflowY = "initial";
+            }
+
         });
+
         document.getElementById("menu-content").getElementsByTagName("SECTION")[0].appendChild(anchor);
     }
- 
-    /*
-    for (let index = 0; index < __CONTENT__.children.length; index++)
-    {
-        document.getElementById("menu-content").getElementsByTagName("SECTION")[0].children[index].addEventListener("click", function() {
-            window.scrollTo(0, __CONTENT__.children[index].getBoundingClientRect().top + (48 * index));
-        });
-        
-    }
-    */
-    /*
-    for (let chapter of __CONTENT__.children)
-    {
-        elem = document.createElement("H1"); elem.innerHTML = chapter.firstChild.innerHTML;
-        anchor = document.createElement("A"); anchor.appendChild(elem);
-        anchor.setAttribute("href", "#"+chapter.firstChild.id);
-
-        __MENU__.appendChild(anchor);   
-
-        division = document.createElement("SECTION");
-        division.style.display = "none";
-        
-        // ADD "H2" AND "H3" SUBCHAPTER IN CHAPTER.
-        for (let subchapter of chapter.children) {
-
-            anchor = document.createElement("A");
-            anchor.setAttribute("href", "#"+subchapter.id);
-            if (subchapter.tagName == "H2")
-            {
-                anchor.innerHTML = subchapter.innerHTML;
-                elem = document.createElement("H2");
-                
-                elem.appendChild(anchor);  division.appendChild(elem);
-            }
-            else if (subchapter.tagName == "H3")
-            {
-                anchor.innerHTML = subchapter.innerHTML;
-                elem = document.createElement("H3");
-                
-                elem.appendChild(anchor);  division.appendChild(elem);
-            }
-
-        }
-        __MENU__.appendChild(division);
-    }
-    */
 
 }; MenuDesign();
 
@@ -237,46 +227,6 @@ const MenuParser = () => {
 
 }; MenuParser();
 */
-
-//========================================
-// >> SYNC: MAIN + MENU
-//========================================
-const syncMainMenu = () => {
-    let found = false;
-    // DISPLAY FIRST CHAPTER ONLY IF NO HASH TAG IS PRESENTED
-
-    if (true /*window.location.hash == ""*/) {
-
-        for (let chapter of __CONTENT__.children)
-        {
-            //chapter.style.display = "block";
-            //chapter.getBoundingClientRect().top);
-        }
-        return;
-    }
-    
-    /*
-    for (let chapter = 0; chapter < __CONTENT__.children.length; chapter++)
-    {
-        __CONTENT__.children[chapter].style.display = "none";
-        __MENU__.getElementsByTagName("A")[0].setAttribute("href", "");
-        __MENU__.getElementsByTagName("SECTION")[chapter].style.display = "none";
-
-        if (found) {continue;}
-        for (let section of __CONTENT__.children[chapter].children)
-        {
-            if (window.location.hash == "#" + section.id)
-            {
-                __CONTENT__.children[chapter].style.display = "block";
-                __MENU__.getElementsByTagName("A")[0].setAttribute("href", "#" + __CONTENT__.children[chapter].firstChild.id);
-                __MENU__.getElementsByTagName("SECTION")[chapter].style.display = "block";
-                break;
-            }
-        }
-    }
-    */
-
-}; //syncMainMenu();
 
 //========================================
 // >> FUNCTION: RESIZE WINDOW

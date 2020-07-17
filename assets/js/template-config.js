@@ -26,36 +26,28 @@ if (document.readyState == "complete") {
 document.getElementById("menu");
 const __menusize__ = () => {
     document.getElementById("menu").style.top = document.getElementsByTagName("NAV")[0].getBoundingClientRect().bottom + "px";
-    if (document.body.getBoundingClientRect().height > window.innerHeight)
-    {
-        document.getElementById("menu").style.height = window.innerHeight - document.getElementsByTagName("NAV")[0].offsetHeight + "px";
-    }
-    else
-    {
-        document.getElementById("menu").style.height = window.innerHeight 
-            - document.getElementsByTagName("NAV")[0].offsetHeight- document.getElementsByTagName("FOOTER")[0].offsetHeight + "px";
-    }
+    document.getElementById("menu").style.height = window.innerHeight - document.getElementsByTagName("NAV")[0].offsetHeight + "px";
 
     document.getElementById("menu-content").style.height = document.getElementById("menu-main").offsetHeight - document.getElementById("menu-option").offsetHeight
         - parseInt(getComputedStyle(document.getElementById("menu-option")).marginTop) - parseInt(getComputedStyle(document.getElementById("menu-content")).marginBottom)
         - ( parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) > parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop)
             ? parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) : parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop) ) + "px";
-}; __menusize__();
+}; 
 
-// >> MENU SIZING BY SCROLL
-window.onscroll = function() {
-    if ((window.innerHeight + window.scrollY) 
-            >= document.body.offsetHeight - document.getElementsByTagName("FOOTER")[0].offsetHeight) {
-
-        document.getElementById("menu").style.height 
-            = window.innerHeight - (document.getElementsByTagName("NAV")[0].offsetHeight)
-                - (document.getElementsByTagName("FOOTER")[0].offsetHeight - (document.body.offsetHeight - (window.innerHeight + window.scrollY))) + "px";
-    }
-    else {
-        document.getElementById("menu").style.height 
-            = window.innerHeight - (document.getElementsByTagName("NAV")[0].offsetHeight) + "px";
-    }
-};
+// >> PREVENT DOCUMENT SCROLLING ON MENU
+// SOURCE: https://www.geeksforgeeks.org/how-to-disable-scrolling-temporarily-using-javascript/
+const __scrolldisable__ = () => { 
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop; 
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft, 
+  
+        window.onscroll = function() { 
+            window.scrollTo(scrollLeft, scrollTop); 
+        }; 
+} 
+  
+const __scrollenable__ = () => { 
+    window.onscroll = function() {}; 
+} 
 
 // >> MENU BUTTON CLICK (INCLUDING CONVENIENT CLICK)
 const __menuclick__ = (event) => {
@@ -63,6 +55,7 @@ const __menuclick__ = (event) => {
     let animate; let opacityMenuBkgd; let sizeMenuMain; let opacityMenuMain;
     if (document.getElementById("menu").style.visibility == "hidden")
     {
+        __scrolldisable__();
         opacityMenuBkgd = 0.0; sizeMenuMain = 0; opacityMenuMain = 0.0;
         animate = setInterval(function() {
             document.getElementById("menu").style.visibility = "visible";
@@ -83,6 +76,7 @@ const __menuclick__ = (event) => {
     }
     else
     {
+        __scrollenable__();
         opacityMenuBkgd = 7; sizeMenuMain = 80; opacityMenuMain = 10;
         animate = setInterval(function() {
             if (opacityMenuBkgd <= 0.0 && sizeMenuMain <= 0 && opacityMenuMain <= 0.0)
@@ -106,18 +100,18 @@ const __menuclick__ = (event) => {
 document.getElementById("menu-button").addEventListener("click", function() {
     // PREVENT EXITING MENU WHEN "menu-main" AND ITS CHILDREN ARE CLICKED DUE TO BUBBLING.
     if ((event.target.id != "menu-bkgd" && event.target.id != "menu-button") || false) {return;}
-    __menuclick__();
+    __menusize__(); __menuclick__();
 });
 document.getElementById("menu-bkgd").addEventListener("click", function() {
     // PREVENT EXITING MENU WHEN "menu-main" AND ITS CHILDREN ARE CLICKED DUE TO BUBBLING.
     if ((event.target.id != "menu-bkgd" && event.target.id != "menu-button") || false) {return;}
-    __menuclick__();
+    __menusize__(); __menuclick__();
 });
 document.onkeydown = function(e) {
     // CONVENIENT MENU ESCAPE WITH "ESCAPE" BUTTON.
     e = e || window.event;
     if (e.keyCode == 27 && document.getElementById("menu").style.visibility == "visible")
-    {__menuclick__();}
+    { __menusize__(); __menuclick__(); }
 };
 
 //========================================
