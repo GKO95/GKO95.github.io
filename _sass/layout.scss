@@ -1,85 +1,8 @@
-#default-content {
-    display: block;
-
-    max-width: calc(1200px - (30px * 2));
-    margin-left: auto;
-    margin-right: auto;
-
-    padding-left: 30px;
-    padding-right: 30px;
-
-    background-color: inherit;
-    overflow: auto;
-}
-
-#default-content h1 {
-    border-bottom-style: solid;
-    margin-bottom: 24px;
-    margin-top: 48px;
-}
-
-/*==============================================================================================================
->> DEFAULT
-==============================================================================================================*/
-#default-header {
-    background-color: inherit;
-    height: 25vh;
-
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-
-    overflow: hidden;
-    width:100%;
-}
-
-#default-header #default-title {
-    display: block;
-    font-size: 64px;
-
-    margin-top:auto;
-    margin-bottom:auto;
-
-    text-align: center;
-
-    font-weight: bold;
-    font-family: monospace;
-}
-
-#default-header #default-title a {
-    font-size: 85.5px;
-
-    color: inherit;
-    font-weight: bold;
-    font-family: monospace;
-
-    // Disable selection.
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-
-    // Disable hyperlink underline.
-    text-decoration: none;
-
-    // Letter affects right padding.
-    letter-spacing: 10px;
-    padding: 0px 0px 0px 10px;
-}
-
-#default-main {
-    display: block;
-    flex: 1 0 auto;
-    background-color: inherit;
-    color: inherit;
-}
-
 /*==============================================================================================================
 >> NAVIGATION
 ==============================================================================================================*/
 #navigation {
-    padding: 10px 0px 5px 0px;
+    padding: 10px 0px 3px 0px;
     background-color: black;
 
     display: flex;
@@ -94,9 +17,17 @@
     top:0px;
 }
 
+#navigation a {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 32px;
+}
+
 #navigation #navigation-logo a {
-    display: inline;
-    padding-left: 15px;
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+    margin-left: 16px;
 
     // Disable selection.
     user-select: none;
@@ -104,51 +35,52 @@
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
-}
-
-#navigation #navigation-url {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    padding-right: 15px;
-
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    font-size: 24px;
 }
 
 #navigation #navigation-url a {
-    padding: 0px 0px 0px 20px;
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+    margin-right: 16px;
 
     // Disable selection.
     user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
-    -khtml-user-select: none;
+    -khtml-user-select: none;   
     -webkit-user-select: none;
-
-    color: black;
-    text-decoration: none;
 }
 
 /*==============================================================================================================
 >> MENU
 ==============================================================================================================*/
+#menu {
+    visibility: hidden;
+    position: fixed;
+    width: 100%;
+}
+
 #menu-button {
     cursor: pointer;
+    background-image: url("/assets/images/logo/logo-menu.png");
 }
 
-#home #menu {
+#menu-bkgd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    background-color: rgb(128,128,128);
+    width: 100%;
+    height: 100%;
 }
 
-#default #menu {
-    position: fixed;
-    background-color: rgb(40, 40, 40);
-    width: 512px;
-
-    overflow-y: scroll;
+#menu-main {
+    width: 64%;
+    height: 80%;
+    
+    margin: auto;
+    background-color: rgb(40,40,40);
 
     // Disable selection.
     user-select: none;
@@ -157,47 +89,56 @@
     -khtml-user-select: none;
     -webkit-user-select: none;
 
-    font-family: monospace;
+    overflow: hidden;
 }
 
-#default #menu h1 {
-    padding: 0px;
-    margin: 0px;
+#menu-option {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 
-    margin-left: 8px;
-    margin-right: 8px;
-    margin-top: 16px;
-    margin-bottom: 8px;
+    background-color: rgb(24,24,24);
+    height: 64px;
+    width: 90%;
 
-    font-size: 20px;
+    margin: 24px auto;
+}
+
+#menu-title {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
+    font-size: 32px;
+
+    margin-left: 16px;
 }
 
-#default #menu h2 {
-    padding: 0px;
-
-    margin-left: 32px;
-    margin-right: 8px;
-    margin-top: 0px;
-    margin-bottom: 4px;
-
-    font-size: 16px;
-    font-weight: bold;
+#menu-select {
+    height: 52px;
 }
 
-#default #menu h3 {
-    padding: 0px;
+#menu-select a {
+    display: inline-block;
+    border-radius: 0.5em;
+    width: 52px;
+    height: 52px;
 
-    margin-left: 64px;
-    margin-right: 8px;
-    margin-top: 0px;
-    margin-bottom: 4px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40px;
 
-    font-size: 14px;
-    font-weight: normal;
-    font-style: italic;
+    margin-top:auto;
+    margin-bottom: auto;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+#menu-content {
+    position: flex;
+
+    width: 90%;
+    height: 100%;
+    margin: 24px auto;
 }
 
 /*==============================================================================================================
@@ -231,171 +172,14 @@
 }
 
 /*==============================================================================================================
->> HOME
+>> HIGHLIGTER-ROUGE
 ==============================================================================================================*/
-#home-header {
+.highlighter-rouge pre {
+    padding: 0.5em 1em;
+}
+
+.highlighter-rouge code {
     background-color: inherit;
-    height: 25vh;
-    min-height: 157px;
-    max-height: 256px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-
-    overflow: hidden;
-}
-
-#home-header #navigation{
-    position: static;
-    width: auto;
-}
-
-#home-header #home-title {
-    display: block;
-    font-size: 64px;
-
-    margin-top:auto;
-    margin-bottom:auto;
-
-    text-align: center;
-
-    font-weight: bold;
-    font-family: monospace;
-}
-
-#home-header #home-title a {
-    border-style: solid;
-    border-color: white;
-    border-width: 8px;
-    font-size: 85.5px;
-
-    color: inherit;
-    font-weight: bold;
-    font-family: monospace;
-
-    // Disable selection.
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-
-    // Disable hyperlink underline.
-    text-decoration: none;
-
-    // Letter affects right padding.
-    letter-spacing: 10px;
-    padding: 0px 0px 0px 10px;
-}
-
-#home-main {
-    position: relative;
-    background-color: inherit;
-    min-height: 419px;
-}
-
-#home-register {
-    position: relative;
-    background-color: rgb(64, 64, 64);
-    
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 24px;
-    margin-bottom: 24px;
-
-    width: 96%;
-    height: 32vh;
-}
-
-#shift-left, #shift-right {
-    position: absolute;
-    width: 48px;
-    height: 100%;
-
-    text-align: center;
-    font-size: 40px;
-
-    // Disable selection.
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-
-    line-height: 32vh;
-}
-
-#shift-left {
-    left: 0px;
-    text-align: right;
-}
-
-#shift-right {
-    right: 0px;
-    text-align: left;
-}
-
-#shift-left span, #shift-right span {
-    display: inline-block;
-    line-height: inherit;
-}
-
-#shift-left:hover, #shift-right:hover {
-    cursor: pointer;
-}
-
-#home-byte {
-    height: 100%;
-    
-    margin: 0px 48px;
+    font-size: medium;
     padding: 0px;
-
-    display: flex;
-    //flex-wrap: wrap;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-
-    list-style-type: none;
-    vertical-align: middle;
-}
-
-#home-byte li {
-    overflow: hidden;
-    height:100%;
-    width: 100%;
-    margin:auto;
-}
-
-.home-bit {
-    background-color: rgb(48, 48, 48);
-    position: relative;
-
-    display: block;
-    width: 224px;
-    height: 224px;
-
-    // Disable selection.
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-
-    // Disable hyperlink underline.
-    text-decoration: none;
-
-    color:inherit;
-    transition: 0.1s
-}
-
-.home-bit .bit-logo{
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-
-    background-size: 200px;
-    background-repeat: no-repeat;
-    background-position: center;
 }

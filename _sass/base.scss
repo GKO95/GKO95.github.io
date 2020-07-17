@@ -1,3 +1,24 @@
+@font-face {
+    font-family: 'OpenSans';
+    src: url(/assets/font/OpenSans-SemiBold.ttf);
+}
+@font-face {
+    font-family: 'OpenSans';
+    font-weight: bold;
+    src: url(/assets/font/OpenSans-ExtraBold.ttf);
+}
+@font-face {
+    font-family: 'OpenSans';
+    font-style: italic;
+    src: url(/assets/font/OpenSans-SemiBoldItalic.ttf);
+}
+@font-face {
+    font-family: 'OpenSans';
+    font-style: italic;
+    font-weight: bold;
+    src: url(/assets/font/OpenSans-ExtraBoldItalic.ttf);
+}
+
 body {
     background-color: rgb(32, 32, 32);
     color: white;
@@ -11,24 +32,52 @@ body {
     min-height: 600px;
     min-width: 800px;
 
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'OpenSans';
     font-size: large;
     letter-spacing: 0px;
+}
+
+main, footer {
+    visibility: hidden;
 }
 
 h1, h2, h3 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-/* Highlighter-rouge */
-.highlighter-rouge {
-    
+code {
+    background-color: rgb(48, 48, 48);
+    border-radius: 0.2em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+
+    font-family: 'Courier New', Courier, monospace;
+}
+
+table {
+    width: 100%;
+    border-style: solid;
+    border-color: white;
+    border-width: 1px;
+
+    border-collapse: collapse;
+}
+
+th {
+    border: solid white 1px;
+    border-bottom: double white 4px;
+    padding: 0.2em;
+}
+
+td {
+    border: solid white 1px;
+    padding: 0.2em;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {               // width
     //display: none;
-    width: 17px;
+    width: 16px;
 }
   
 ::-webkit-scrollbar-track {       // track

@@ -1,0 +1,128 @@
+//================================
+// DOCS
+//================================
+#docs header {
+    background-color: inherit;
+    height: 25vh;
+    min-height: 128px;
+    max-height: 128px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    overflow: hidden;
+    width:100%;
+}
+
+#docs header #title {
+    display: none;
+    font-size: 64px;
+
+    margin-top:auto;
+    margin-bottom:auto;
+
+    text-align: center;
+
+    font-weight: bold;
+    font-family: monospace;
+}
+
+#docs header #title a {
+    border-style: solid;
+    border-color: white;
+    border-width: 8px;
+    font-size: 85.5px;
+
+    color: inherit;
+    font-weight: bold;
+    font-family: monospace;
+
+    // Disable selection.
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    // Disable hyperlink underline.
+    text-decoration: none;
+
+    // Letter affects right padding.
+    letter-spacing: 10px;
+    padding: 0px 0px 0px 10px;
+}
+
+#docs-main {
+    display: block;
+    flex: 1 0 auto;
+    background-color: inherit;
+    color: inherit;
+}
+
+#docs-content {
+    display: block;
+    //visibility: hidden;
+
+    max-width: calc(1200px - (30px * 2));
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-left: 30px;
+    padding-right: 30px;
+
+    background-color: inherit;
+    //overflow: hidden;
+}
+
+#docs-content h1 {
+    border-bottom-style: solid;
+
+    //font-family: 'OpenSans';
+    font-size: 2.4em;
+    
+    margin-bottom: 0.6em;
+    //margin-top: 1.2em;
+}
+
+#docs-content h2 {
+    font-size: 1.6em;
+
+    padding-left: 0.4em;
+    margin-bottom: 0.5em;
+    //font-family: 'OpenSans';
+}   
+
+#docs-content h3 {
+    font-size: 1.2em;
+
+    padding-left: 1.6em;
+    margin-bottom: 0.5em;
+    //font-family: 'OpenSans';
+    font-style: italic;
+}
+
+#docs-content h1::before, #docs-content h2::before, #docs-content h3::before {
+    display: block;
+    content: " ";
+    height: 64px;  // Give height of your fixed element 
+    margin-top: -64px; // Give negative margin of your fixed element
+    visibility: hidden;
+}
+
+.docs-chapter {
+    margin-bottom: 48px;
+    //overflow: hidden;
+}
+
+#docs #menu-content a {
+    display: block;
+    float:left;
+    clear: left;
+
+    font-family: 'OpenSans';
+    color: inherit;
+
+    margin: 8px 8px;
+    text-decoration: none;
+}

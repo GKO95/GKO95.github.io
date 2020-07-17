@@ -37,7 +37,7 @@ plugins:
 
 # Collections
 collections:
-  articles:
+  docs:
     output: true
     permalink: /:collection/:path/
 
@@ -46,9 +46,9 @@ defaults:
   # _articles
   - scope:
       path: ""
-      type: "articles"
+      type: "docs"
     values:
-      layout: "document"
+      layout: "docs"
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
