@@ -6,27 +6,26 @@ author: GKO95
 category: Programming
 title: "Programming | Python3"
 logo: "/assets/images/logo/logo-python.png"
-summary: "."
 order: 0x00
 ---
 # **PYTHON: INTRO**
 Python is a high-level programming language with applications in numerous areas, including web programming, scientific computing, and artificial intelligence. The language is executed sequentially line-after-line and doesn't need semicolon `;` to end the line of statement.
 
 ## Interpreter
-Programming language such as C/C++ uses compiler that translates a source code (written in English) to a computer language (such as binary code) computer can understand and execute. However, interpreter allows computer to execute the program directly from a source code without translation.
+Programming language such as C/C++ uses compiler that translates (English-written) source codes to (binary code) machine language computer can understand and execute. However, interpreter allows computer to execute the program directly from a source code without translation.
 
 Python is interpreter-driven high-level language: this allows scripting the code much easier than compiler, but its execution time can be slower in comparison.
 
 ### CPython
 Originally, Python interpreter was developed using C programming language. This implementation is called CPython and is the most widely used implementation of all. Other notable implementations are Jython (Java-implementation), IronPython (.NET-implementation), and PyPy (Python-implementation).
 
-While Python is introduced as an interpreter language, it actually uses both interpreter and compiler: CPython first processes Python code into intermediate bytecode which is than executed by CPython interpreter. Because of this, Python execution takes longer time on first run from compilation.
+While Python is introduced as an interpreter language, it actually uses both interpreter and compiler: CPython first processes Python code into intermediate bytecode which is then executed by CPython interpreter. Because of this, Python execution takes longer time on first run from compilation.
 
 # **PYTHON: BASIC**
 General programming language has essential, fundamental, or even helpful data and syntax that needs to be observed and acknowledged when coding. As the beginning of the practical coding, this chapter will introduce basic information on Python language coding.
 
 ## Comment
-There are two different comments in Python: line comment and block comment.
+Comment in programming language is not executed, and is commonly used to write down information related to the code. There are two different comments in Python: line comment and block comment.
 
 * **Line comment**
   : a comment worth a single line of code, and is declared by `#` (octothorpe).
@@ -47,7 +46,7 @@ Python has a single input and output function for a terminal text-based:
 | INPUT/OUTPUT | SYNTAX                    | DESCRIPTION                                                                                                              |
 |--------------|---------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | `input()`    | `input("Write:")`         | Text data inside a function `input()` is shown on a terminal when input is needed, and always return input data as text. |
-| `print()`    | `print("Read:",variable)` | Print data types (e.g. text, number) on a console, where `variable` is a text data for concatenation.                    |
+| `print()`    | `print("Read:",variable)` | Data inside a function `print()` is shown on a terminal when executed irrelevant to data type, where `variable` is a text data for concatenation.                    |
 
 ```python
 variable = input("Write: ")
@@ -92,14 +91,21 @@ To print mixture of more than a single data type in a single `print()` function,
    and B is Python3.
    ```
 
+## Identifier
+Identifier is a name used to identify a data (aka. construct) in programming. In other word, it is just a (user-defined) name. In Python, following rules must be observed when naming identifier:
+
+* First character is only allowed to have an alphabet letters and underscore `_`.
+* Beside the first character may use alphabet letters, digits, or underscores.
+* Black spaces are prohibited.
+
 ## Variable
 Variable is a container for a data which can be assigned using assignment operator `=`. There are three different common stages in variable: declaration, definition, and initialization.
 
 * **Declaration**
-  : declaration is declaring existence of the construct of such as variables, functions, objects, and more. While declaration also includes specifying which data type the construct is in other languages, this is exception to Python since constructs in this language do not need to be declared with data type.
+  : declaration is declaring existence of the construct (e.g. variables, functions, objects, etc) by specifying name (aka. identifier). Declaration typically specifies data type of constructs in other languages, but this is an exception in Python as it does not specify data type on constructs.
 
 * **Definition**
-  : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
+  : definition refers to block of codes that contains value and/or performance the construct has and/or is capable of. In some cases, definition of variable and function is also called *assignment* and *implementation* respectively.
 
   ```python
   # DEFINITION (+ DECLARATION) OF VARIABLE
@@ -114,32 +120,24 @@ Variable is a container for a data which can be assigned using assignment operat
 * **Initialization**
   : initialization is assigning the initial value to the construct, simply the *first* definition. The first definition is generally done on the same time when declaring the construct. Hence, initialization is commonly thought by people as *declaration + definition*, but is not always true.
 
-Programmer should observe the rules on naming variable in Python:
-
-* Only letters, numbers, and underscores are allowed.
-
-* Name cannot start with numbers.
-
-* Spaces are not allowed.
-
 Variable is not data-type fixed, allowing developers to change the value whatever and whenever using a single variable.
 
 ### Local & Global Variable
-**Local variable** is a variable declared inside a code block, such as function or class. Data stored in local variable is destroyed when exiting the code block, thus cannot be used outside. This allows variable with the same name to be declared outside the code block.
+**Local variable** is a variable declared inside a code block, such as function or class. However, this does not apply to conditional, loop, `with` statement and some cases. Data stored in local variable is destroyed when exiting the code block, thus cannot be used outside. This allows variable with the same name to be declared outside the code block.
 
 **Global variable** is a variable declared outside of any code block on the script. Accessing the global variable in a code block is done using `global` keyword. However, global variable should be avoided if possible to prevent unexpected result and error caused by conflicting variables.
 
 ### Constant Variable
 Constant variable is a special type of variable that cannot be changed after its initialization. Unfortunately, Python does not have a constant variable since it does not have a concept of *declaration*. While C-based language do have this feature, Python developer should just be careful not to mess up the what-is-used-as-constant variable.
 
-Common method used in Python to indicate the constant variable is declaring the variable UPPERCASE.
+Conventionally, Python identifies constant variable by naming all UPPERCASE.
 
 ### `del` Keyword
-The `de;` keyword is used to delete variable. Deleted variable can be reassigned later.
+The `del` keyword is used to delete variable. Deleted variable can be reassigned later.
 
 ```python
 # DECLARATION OF THE VARIABLE "x"
-x = "Python"
+x = "Python3"
 print(x)
 
 # DELETION OF THE VARIABLE "x"
@@ -148,7 +146,7 @@ print(x)
 ```
 
 ```
-Python
+Python3
 NameError: name 'x' is not defined
 ```
 
@@ -215,7 +213,6 @@ Additional operations are available using built-in functions and methods exclusi
 | `abs()`   | `abs(-21)`          | Find out absolute value of the number.                                         |
 | `round()` | `round(164.2597,2)` | Rounds up the number to one’s digit on default, or to a fraction digit behind. |
 | `max()`   | `max([0,1,2,3,4])`  | Find the maximum number inside.                                                |
-| `round()` | `round(164.2597,2)` | Rounds up the number to one’s digit on default, or to a fraction digit behind. |
 | `sum()`   | `sum([0,1,2,3,4])`  | Sum all the numbers in the list.                                               |
 
 ```python

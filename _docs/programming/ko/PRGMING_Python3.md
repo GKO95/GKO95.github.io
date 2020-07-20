@@ -1,186 +1,185 @@
 ---
-name: Python3
+name: 파이썬3
 lang: ko
 layout: docs
 author: GKO95
 category: Programming
-title: "Programming | Python3"
+title: "프로그래밍 | 파이썬3"
 logo: "/assets/images/logo/logo-python.png"
-summary: "."
 order: 0x00
 ---
-# **PYTHON: INTRO**
-Python is a high-level programming language with applications in numerous areas, including web programming, scientific computing, and artificial intelligence. The language is executed sequentially line-after-line and doesn't need semicolon `;` to end the line of statement.
+# **파이썬: 소개**
+파이썬은 웹 프로그래밍, 컴퓨터 과학, 인공지능을 포함한 수많은 영역에서 응용 가능한 고급 프로그래밍 언어이다. 파이썬은 위에서부터 아래로 순차적으로 실행되며 코드 문(文) 끝에는 세미콜론(`;`)이 필요하지 않다.
 
-## Interpreter
-Programming language such as C/C++ uses compiler that translates a source code (written in English) to a computer language (such as binary code) computer can understand and execute. However, interpreter allows computer to execute the program directly from a source code without translation.
+## 인터프리터
+C/C++와 같은 프로그래밍 언어는 (영문) 소스 코드를 컴퓨터가 이해하고 실행할 수 있는 (이진코드) 컴퓨터 언어로 번역하는 컴파일러가 사용된다. 그러나 인터프리터는 컴퓨터 언어로의 번역 없이 소스 코드에서 직접 프로그램을 실행한다.
 
-Python is interpreter-driven high-level language: this allows scripting the code much easier than compiler, but its execution time can be slower in comparison.
+파이썬은 인터프리터로 동작하는 고급 언어이다. 비록 코드 작성은 컴파일러보다 쉽지만, 프로그램 실행 시간은 비교적 느리다.
 
-### CPython
-Originally, Python interpreter was developed using C programming language. This implementation is called CPython and is the most widely used implementation of all. Other notable implementations are Jython (Java-implementation), IronPython (.NET-implementation), and PyPy (Python-implementation).
+### C파이썬
+본래 파이썬 인터프리터는 C 언어를 기반하여 개발되었다. C 기반의 인터프리터를 C파이썬(CPython)이라 부르며 가장 널리 사용되는 인터프리터이다. 다른 언어로 구현된 것으로는 Jython(자바로 구현된 인터프리터), IronPython(.NET으로 구현된 인터프리터), 그리고 PyPy(순수 파이썬으로 구현된 인터프리터) 등이 있다.
 
-While Python is introduced as an interpreter language, it actually uses both interpreter and compiler: CPython first processes Python code into intermediate bytecode which is than executed by CPython interpreter. Because of this, Python execution takes longer time on first run from compilation.
+파이썬은 인터프리터 언어로 소개되었으나, 실제로는 인터프리터와 컴파일러 둘 다 사용한다. C파이썬은 우선 파이썬 코드를 바이트코드(bytecode)로 컴파일한 다음 C파이썬 인터프리터에 의해 실행된다. 이로 인해, 파이썬을 처음으로 실행하면 컴파일 작업이 필요해 시간이 더 소요된다.
 
-# **PYTHON: BASIC**
-General programming language has essential, fundamental, or even helpful data and syntax that needs to be observed and acknowledged when coding. As the beginning of the practical coding, this chapter will introduce basic information on Python language coding.
+# **파이썬: 기초**
+일반적으로 프로그래밍 언어에는 코딩에 있어 준수하고 인식되어야 하는 프로그래밍의 기반이 되는 중요한 데이터나 구문이 존재한다. 실질적이 프로그래밍에 있어, 본 장에서는 파이썬 프로그램 코딩에 기초적인 정보를 제공한다.
 
-## Comment
-There are two different comments in Python: line comment and block comment.
+## 주석
+프로그래밍에 있어 주석은 실행되지 않으며, 흔히 코드와 관련된 정보를 입력하는데 사용되기도 한다. 파이썬에는 두 가지의 주석이 존재한다: *한줄 주석*과 *블록 주석*이 있다.
 
-* **Line comment**
-  : a comment worth a single line of code, and is declared by `#` (octothorpe).
-* **Block comment** (aka. **docstrings**)
-  : a comment with multiple lines of code by using three pairs of double quote `""" """` or single quote `''' '''`. Docstrings can even be used to write multiple lines of sentence and view it on runtime.
+* **한줄 주석**
+  : 코드 한 줄을 차지하는 주석이며, 해시 기호(`#`)로 표시된다.
+* **블록 주석** (일명. **독스트링**)
+  : 코드 여러 줄을 차지하는 주석이며, 세 쌍의 작은 따옴표(`''' '''`) 혹은 큰 따옴표 (`""" """`)로 표시된다. 독스크링(docstrings)은 또한 여러 줄의 문장을 쓰는데 사용되기도 하며, 프로그램 실행 도중에도 볼 수 있다.
 
 ```python
 """
-BLOCK COMMENT:
-multiple line of comment can be placed here and can even be viewed on runtime.
+블록 주석:
+코드 여러 줄을 차지하는 주석이며, 프로그램 실행 중에서도 볼 수 있다.
 """
-# LINE COMMENT: for a single line of code.
+# 한줄 주석: 코드 한 줄을 차지하는 주석
 ```
 
-## Input & Output
-Python has a single input and output function for a terminal text-based:
+## 입력 & 출력
+파이썬은 텍스트 기반의 터미널을 위한 입력 및 출력 함수를 가진다.
 
-| INPUT/OUTPUT | SYNTAX                    | DESCRIPTION                                                                                                              |
-|--------------|---------------------------|--------------------------------------------------------------------------------------------------------------------------|
-| `input()`    | `input("Write:")`         | Text data inside a function `input()` is shown on a terminal when input is needed, and always return input data as text. |
-| `print()`    | `print("Read:",variable)` | Print data types (e.g. text, number) on a console, where `variable` is a text data for concatenation.                    |
+| 입력/출력    | 구문                      | 설명                                                         |
+| --------- | ------------------------- | ------------------------------------------------------------ |
+| `input()` | `input("입력:")`          | 터미널에서 입력을 요구할 시, 입력 함수 `input()` 내의 텍스트 데이터가 나타나며 입력 데이터는 항상 문자열 자료형이다. |
+| `print()` | `print("출력:", 변수)` | 출력 함수 `input()`가 실행될 시, 자료형과 관계없이 함수 내의 데이터가 터미널에 나타난다. 여기서 `변수`는 함께 표시할 문자열 데이터이다. |
 
 ```python
-variable = input("Write: ")
-print("Read:", variable)
-# EQUIVALENT: print("Read:", input("Write: "))
+변수 = input("입력: ")
+print("출력:", 변수)
+# 동일: print("출력:", input("입력: "))
 ```
 
 ```
-Write: Hello World!
-Read: Hello World!
+입력: Hello World!
+출력: Hello World!
 ```
 
-To print mixture of more than a single data type in a single `print()` function, there are two possible methods with slightly different results.
+하나의 `print()` 함수에서 두 가지 이상의 자료형을 한 번에 출력하는 데 두 가지의 방법이 존재하며, 이들의 출력 방식은 약간 다르다.
 
-1. Using a comma `,` can list the data in sequence but always places blank space on each comma.
+1. 쉼표(`,`)를 사용하여 연속적으로 데이터를 나열할 수 있으나, 쉼표에는 항상 공백이 놓여진다.
 
    ```python
    A = 10.0
-   B = "Python3"
+   B = "파이썬3"
    
-   # MIXTURE OF STRING AND INT IS LISTED USING COMMA ",".
-   print("A is", A , ", \nand B is", B, ".")
+   # 문자열과 정수의 혼합된 데이터를 쉼표(",")를 사용해 나열한다.
+   print("A는", A , ", \n그리고 B는", B, "이다.")
    ```
 
    ```
-   A is 10.0 ,
-   and B is Python3 .
+   A는 10.0 ,
+   그리고 B는 파이썬3 이다.
    ```
 
-2. Concatenation of string using `+` and does not create blank space between. However, data type that is not a string needs to be converted to string to use a concatenation.
+2. 더하기 기호(`+`)를 문자열 연결에 사용하면 사이에 공백이 생기지 않는다. 그러나 문자열 자료형이 아닌 데이터는 우선 문자열로 변환해야 한다.
 
    ```python
    A = 10.0
-   B = "Python3"
+   B = "파이썬3"
    
-   # MIXTURE OF STRING AND INT IS CONCATENATED USING "+" AFTER STRING CONVERSION.
-   print("A is", str(A) + ", \nand B is", B + ".")
+   # 문자열과 정수의 혼합된 데이터를 문자열 변환 이후 더하기 기호("+")를 사용해 나열한다.
+   print("A는", str(A) + ", \n그리고 B 는", B + "이다.")
    ```
 
    ```
-   A is 10.0,
-   and B is Python3.
+   A는 10.0,
+   그리고 B는 파이썬3이다.
    ```
 
-## Variable
-Variable is a container for a data which can be assigned using assignment operator `=`. There are three different common stages in variable: declaration, definition, and initialization.
+## 식별자
+식별자는 프로그래밍에서 데이터(일명 구성체; construct)를 구별하기 위해 사용되는 명칭이다. 다시 말해, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다:
 
-* **Declaration**
-  : declaration is declaring existence of the construct of such as variables, functions, objects, and more. While declaration also includes specifying which data type the construct is in other languages, this is exception to Python since constructs in this language do not need to be declared with data type.
+* 오직 영문, 숫자, 밑줄(`_`)만 허용된다.
+* 첫 문자는 숫자로 시작할 수 없다.
+* 공백은 허용되지 않는다.
 
-* **Definition**
-  : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
+## 변수
+변수는 할당 연산자(`=`)를 사용하여 데이터를 할당할 수 있는 저장공간이다. 변수에는 선언, 정의, 초기화란 세 가지 공통 단계가 있다.
+
+* **선언**
+  : 선언이란 변수, 함수, 객체와 같은 구성체(construct)에 이름(일명 식별자)을 붙여 존재를 알리는 단계이다. 다른 프로그래밍 언어에서 선언은 일반적으로 구성체에 자료형을 지정하지만, 파이썬은 예외적으로 구성체에 자료형 지정이 없다.
+
+* **정의**
+  : 정의란 구성체가 가지는 데이터 값(혹은 실행 가능한 기능)을 담는 코드 블록을 의미한다. 일부 경우, 변수와 함수의 정의는 각각 *할당(assignment)*과 *구현(implementation)*이라고도 부른다.
 
   ```python
-  # DEFINITION (+ DECLARATION) OF VARIABLE
-  variable = 1
+  # 변수의 정의 (+ 선언)
+  변수 = 1
   
-  # DEFINITION (+ DECLARATION) OF FUNCTION
-  def function():
-      statements
+  # 함수의 정의 (+ 선언)
+  def 함수():
+      실행문
       return 0
   ```
   
-* **Initialization**
-  : initialization is assigning the initial value to the construct, simply the *first* definition. The first definition is generally done on the same time when declaring the construct. Hence, initialization is commonly thought by people as *declaration + definition*, but is not always true.
+* **초기화**
+  : 초기화는 구성체에 초기값을 할당하는 것이며, 간단히 *최초* 정의라고 간주할 수 있다. 구성체의 가장 첫 정의는 일반적으로 선언 단계와 함께 이루어진다. 이러한 이유로 초기화는 *선어 + 정의*라고 흔히 여겨지지만 이는 사실이 아니다.
 
-Programmer should observe the rules on naming variable in Python:
+변수의 자료형은 고정되어 있지 않다. 그러므로 프로그래머는 하나의 변수로 원하는 어떠한 값으로 언제든지 변경할 수 있다.
 
-* Only letters, numbers, and underscores are allowed.
+### 지역 변수 & 전역 변수
+**지역 변수**는 함수나 클래스의 코드 블록 내부에서 선언된 변수이다. 단, 이는 조건문이나 반복문, `with` 문 등 일부 경우에는 적용되지 않는다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다. 지역 변수는 외부에서 선언된 변수의 이름을 가질 수 있다.
 
-* Name cannot start with numbers.
+**전역 변수**는 스크립트 내에서 어떠한 코드 블록에도 속하지 않은 외부에 선언된 변수이다. `global` 키워드를 이용해 코드 블록 내부에서 전역 변수를 사용할 수 있다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수는 피해야 한다.
 
-* Spaces are not allowed.
+### 상수 변수
+상수 변수는 초기화 후 변경할 수 없는 특별한 유형의 변수이다. 그러나 파이썬은 선언의 개념이 없기 때문에 실질적으로 상수 변수란 존재하지 않는다. C/C++와 같은 언어는 이러한 기능을 가지고 있지만, 파이썬 개발자는 상수 변수로 사용될 변수의 할당값을 수정하지 않도록 주의할 수 밖에 없다.
 
-Variable is not data-type fixed, allowing developers to change the value whatever and whenever using a single variable.
+파이썬에서 상수 변수임을 알리는데 통상적으로 변수의 이름을 전부 대문자로 표기한다.
 
-### Local & Global Variable
-**Local variable** is a variable declared inside a code block, such as function or class. Data stored in local variable is destroyed when exiting the code block, thus cannot be used outside. This allows variable with the same name to be declared outside the code block.
-
-**Global variable** is a variable declared outside of any code block on the script. Accessing the global variable in a code block is done using `global` keyword. However, global variable should be avoided if possible to prevent unexpected result and error caused by conflicting variables.
-
-### Constant Variable
-Constant variable is a special type of variable that cannot be changed after its initialization. Unfortunately, Python does not have a constant variable since it does not have a concept of *declaration*. While C-based language do have this feature, Python developer should just be careful not to mess up the what-is-used-as-constant variable.
-
-Common method used in Python to indicate the constant variable is declaring the variable UPPERCASE.
-
-### `del` Keyword
-The `de;` keyword is used to delete variable. Deleted variable can be reassigned later.
+### `del` 키워드
+`del` 키워드는 변수를 삭제 할 때 사용한다. 삭제된 변수 이름으로 나중에 재선언 할 수 있다.
 
 ```python
-# DECLARATION OF THE VARIABLE "x"
-x = "Python"
+# 변수 "x"의 선언
+x = "파이썬3"
 print(x)
 
-# DELETION OF THE VARIABLE "x"
+# 변수 "x"의 삭제
 del x
 print(x)
 ```
 
 ```
-Python
+파이썬3
 NameError: name 'x' is not defined
 ```
 
-## Data Type
-Data type a variable can store in Python can be categorized into three different type: numeric, string, and Boolean data type. Depending on the data type, Python can perform type-specific features that process the data, called *operation*. Those that can operates data are (1) operator, (2) function, and (3) method.
+## 자료형
+변수가 파이썬에 저장할 수 있는 자료형은 숫자형, 문자열, 논리형 등 세 가지 유형으로 분류할 수 있다. 파이썬은 데이터의 자료형에 따라 수행할 수 있는 기능이 있으며, 이는 연산이라고 부른다. 연산이 가능한 것으로는 (1) 연산자, (2) 함수, 그리고 (3) 메소드가 있다.
 
-Although a function and a method will be introduced in later chapter, knowing the key difference between these three will prevent getting confused on understanding concepts of programming language overall.
+비록 함수와 메소드는 후반부에 소개될 것이지만, 이 세 가지 사이의 주요 차이점을 아는 것은 프로그래밍 언어의 개념을 전반적으로 이해하는 데 있어서 혼동을 예방할 수 있다.
 
-* **Operator**
-  : a constructs which can manipulate the value of operands, such as arithmetic operators. It operates simply by placing before, after, or between the operands.
-* **Function**
-  : a reusable piece of code which is called by name to operates. Function can be distinguished from an operator by parenthesis `()` at suffix of the function's name; `function()`.
-* **Method**
-  : an object-exclusive function. Method also has parenthesis `()` at suffix of its name but is always bounded to an object; `object.method()`.
+* **연산자**
+  : 사칙 연산자와 같이 피연산자의 값을 조작하는 데 사용되는 코드이다. 간단히 피연산자의 앞, 뒤 혹은 두 피연산자 사이에 배치하여 사용한다.
+* **함수**
+  : 실행하고자 하는 기능을 이름으로 호출하여 재사용 가능한 코드 조각이다. 함수는 `function()`과 같이 이름 접무사에 괄호(`()`)를 가지므로써 연산자와 구별할 수 있다.
+* **메소드**
+  : 객체에서만 사용할 수 있는 함수이다. 메소드는 `object.method()`와 같이 이름 접미사에 괄호(`()`)가 있지만 항상 객체에 종속되어 있다.
 
-### Numeric Data Type
-Numeric data type is widely used in Python for scientific purpose such as plotting, processing, and on the field of modeling neural network in artificial intelligence. Following are the list of numeric data types:
+### 숫자 자료형
+숫자 자료형은 그래프, 연산처리, 인공지능의 신경망 모델링 등 과학적인 목적으로 파이썬에서 널리 사용된다. 다음은 숫자 자료형의 목록이다:
 
-| KEYWORD   | DATA TYPE             | DESCRIPTION                                                                        |
-|-----------|-----------------------|------------------------------------------------------------------------------------|
-| `int`     | Integer               | 32-bits precision integer number.<br />Size: unlimited (max. 400 bytes)            |
-| `float`   | Floating point number | Real number with decimal points.<br />Size: unlimited (max. 400 bytes)             |
-| `complex` | Complex number        | Contains floating real and imaginary number.<br />Size: unlimited (max. 400 bytes) |
+| 키워드    | 자료형                | 설명                                                         |
+| --------- | --------------------- | ------------------------------------------------------------ |
+| `int`     | 정수               | 32 비트 정밀 정수.<br />크기: 무제한 (최대 400 바이트) |
+| `float`   | 부동소수점수 | 소수점을 포함한 실수.<br />크기: 무제한 (최대 400 바이트) |
+| `complex` | 복소수        | 부동 소수와 허수의 합.<br />크기: 무제한 (최대 400 바이트) |
 
-The byte size of numeric data type is greater than any other languages. This is just a maximum byte size numeric data type can have and it can be much smaller depending on the what the number is. This flexibility of the byte size makes Python doesn't require data type declaration.
+숫자 자료형의 바이트 크기는 다른 언어에서 보다 크다. 이는 숫자 자료형이 가질 수 있는 최대 바이트 크기를 말하며, 값에 따라 훨씬 더 작을 수 있다. 이러한 바이트 크기의 유연성은 파이썬에 자료형 선언이 불필요하게 만든다.
 
-Data type `float` is one of the commonly used numeric data type as it’s the smallest data type that can express the fraction besides `complex`. The `float` data type has following properties:
+`float` 자료형은 가장 흔히 사용되는 숫자 자료형이며 `complex` 외에 분수를 표현할 수 있는 가장 작은 자료형이다. `float` 자료형은 다음과 같은 특징을 가진다:
 
-* Extra zeros (beside right behind the decimal point) at end of the number are ignored.
-* Calculation returns `float` data type automatically when…
-  * Arithmetic operation involving even one single `float`.
-  * Division of `int`.
+
+* 소수점 끝에 있는 추가 숫자 0은 무시된다.
+* 다음 계산은 자동적으로 `float` 자료형을 반환한다.
+  * `float`를 하나라도 포함한 연산
+  * `int`의 나눗셈 연산
 
 ```python
 print(9.8765000)
@@ -194,32 +193,31 @@ print(4 + 1.0)
 5.0
 ```
 
-Arithmetic operation of a numeric data type is as follows:
+숫자 자료형의 산술 연산은 다음과 같다:
 
-| NAME                           | OPERATOR | DESCRIPTION                                                                                                                       |
-|--------------------------------|:--------:|-----------------------------------------------------------------------------------------------------------------------------------|
-| Addition                       | `+`      | -                                                                                                                                 |
-| Subtraction                    | `-`      | Python doesn’t have a subtraction. Negative sign substitutes subtraction, as adding negative value is equal to subtracting value. |
-| Multiplication                 | `*`      | -                                                                                                                                 |
-| Exponential                    | `**`     | -                                                                                                                                 |
-| Division                       | `/`      | When divided, the value implicitly (or automatically) converts to `float`.                                                        |
-| Quotient (aka. floor division) | `//`     | Outputs a quotient of division only, without a remainder.                                                                         |
-| Remainder                      | `%`      | Outputs a remainder of the division.                                                                                              |
+| 이름                           | 연산자 | 설명                                                         |
+| ------------------------------ | :----: | ------------------------------------------------------------ |
+| 덧셈                       |  `+`   | -                                                            |
+| 뺄셈                    |  `-`   | 파이썬은 뺄셈이 없다. 그 대신 기호는 음수를 의미하며, 수학적으로도 음수를 더하는 것은 뺄셈과 동일하다. |
+| 곱셈                 |  `*`   | -                                                            |
+| 제곱                    |  `**`  | -                                                            |
+| 나눗셈                       |  `/`   | 나눗셈을 할 시, 값은 자동적으로 `float` 자료형으로 변환된다. |
+| 몫 |  `//`  | 나눗셈에서 나머지를 제외한 몫만 도출한다.    |
+| 나머지                      |  `%`   | 나눗셈에서 몫을 제외한 나머지만 도출한다.                         |
 
-For easier readability of the arithmetic operation, you can place blank spaces between number and operator as it does not affect on its output.
+산술 연산을 쉽게 읽을 수 있도록 숫자 사이에 공백을 넣어도 된다. 이 공백은 숫자나 수학 연산에 아무런 영향을 주지 않는다.
 
-Additional operations are available using built-in functions and methods exclusive to numeric data type. Most of the operation below requires an iterable object called *list* which will be introduced later.
+숫자 자료형에 국한된 파이썬 내장 함수 및 메소드를 사용하여 추가적인 연산을 수행할 수 있다. 아래의 대부분 연산은 *리스트(list)*라는 이터러블(iterable) 객체가 필요하며, 해당 객체는 이후에 소개될 예정이다.
 
-| FUNCTION  | EXAMPLE             | DESCRIPTION                                                                    |
-|-----------|---------------------|--------------------------------------------------------------------------------|
-| `abs()`   | `abs(-21)`          | Find out absolute value of the number.                                         |
-| `round()` | `round(164.2597,2)` | Rounds up the number to one’s digit on default, or to a fraction digit behind. |
-| `max()`   | `max([0,1,2,3,4])`  | Find the maximum number inside.                                                |
-| `round()` | `round(164.2597,2)` | Rounds up the number to one’s digit on default, or to a fraction digit behind. |
-| `sum()`   | `sum([0,1,2,3,4])`  | Sum all the numbers in the list.                                               |
+| 함수      | 예시                | 설명                                                         |
+| --------- | ------------------- | ------------------------------------------------------------ |
+| `abs()`   | `abs(-21)`          | 숫자의 절댓값을 구한다.                       |
+| `round()` | `round(164.2597,2)` | 기본적으로 한 자릿수로 숫자를 반올림하거나 뒤의 소수 자릿수로 반올림한다. |
+| `max()`   | `max([0,1,2,3,4])`  | 리스트 객체 내에서 가장 큰 숫자를 반환한다.                              |
+| `sum()`   | `sum([0,1,2,3,4])`  | 리스트 객체 내에에서 숫자를 모두 더한다.                             |
 
 ```python
-# EXAMPLE OF ROUND() FUNCTION
+# round() 함수의 예시
 print(round(164.259763145))
 print(round(164.259763145,2))
 ```
@@ -229,24 +227,24 @@ print(round(164.259763145,2))
 164.26
 ```
 
-Assignment operator is a combination of an arithmetic and an assignment symbol `=`, making numerical calculation code to be written more concisely.
+할당 연산자는 산술 기호와 할당 기호(`=`)의 조합으로, 숫자 계산 코드를 보다 간결하게 작성하도록 한다.
 
-| OPERATOR | EXAMPLE  | EQUIVALENT                                                |
-|:--------:|----------|-----------------------------------------------------------|
-| `=`      | `x = y`  | `x = y`; assigns a value of variable `y` to variable `x`. |
-| `+=`     | `x += y` | `x = x + y`                                               |
-| `-=`     | `x -= y` | `x = x - y`                                               |
-| `*=`     | `x *= y` | `x = x * y`                                               |
-| `/=`     | `x /= y` | `x = x / y`                                               |
-| `%=`     | `x %= y` | `x = x % y`                                               |
+| 연산자 | 예시     | 동일                                                |
+| :----: | -------- | --------------------------------------------------------- |
+|  `=`   | `x = y`  | `x = y`; `x` 변수에 `y`변수의 값을 할당한다. |
+|  `+=`  | `x += y` | `x = x + y`                                               |
+|  `-=`  | `x -= y` | `x = x - y`                                               |
+|  `*=`  | `x *= y` | `x = x * y`                                               |
+|  `/=`  | `x /= y` | `x = x / y`                                               |
+|  `%=`  | `x %= y` | `x = x % y`                                               |
 
-Increment and decrement does not exist in Python programming language.
+파이썬 프로그래밍 언어에는 증감 연산자가 존재하지 않는다.
 
-### Boolean Data Type
+### 논리 자료형
 Boolean data type is useful for a code that requires logical conditioning whether the statement is true or false:
 
-| VALUE          | NAME            | DESCRIPTION                   |
-|----------------|-----------------|-------------------------------|
+| 값             | 이름            | 설명                          |
+| -------------- | --------------- | ----------------------------- |
 | `True` or `1`  | Logically true  | Returned when logic is true.  |
 | `False` or `0` | Logically false | Returned when logic is false. |
 
@@ -254,25 +252,25 @@ Any non-zero positive number can represents Boolean value of `True`. In other wo
 
 Comparison operator is used to compare relation of two or more values, returning corresponding Boolean data type depending on whether the condition is held true or false. 
 
-| OPERATOR | DESCRIPTION              |
-|----------|--------------------------|
-| `<`      | Lesser than              |
-| `<=`     | Lesser than or equal to  |
-| `>`      | Greater than             |
-| `>=`     | Greater than or equal to |
-| `==`     | Equal to                 |
-| `!=`     | Not equal to             |
+| 연산자 | 설명                     |
+| ------ | ------------------------ |
+| `<`    | Lesser than              |
+| `<=`   | Lesser than or equal to  |
+| `>`    | Greater than             |
+| `>=`   | Greater than or equal to |
+| `==`   | Equal to                 |
+| `!=`   | Not equal to             |
 
 Meanwhile, the Boolean data type can be added, multiplied, and complemented as follows:
 
-| OPERATOR | NAME           | DESCRIPTION                                             |
-|:--------:|----------------|---------------------------------------------------------|
-| `is`     | Equivalence    | Boolean evaluator between two data: equivalent to `==`. |
-| `and`    | Multiplication | True when all the arguments are True, else False.       |
-| `or`     | Addition       | True when at least one argument is True, else False.    |
-| `not`    | Complement     | Change True to False and vice versa.                    |
+| 연산자 | 이름           | 설명                                                    |
+| :----: | -------------- | ------------------------------------------------------- |
+|  `is`  | Equivalence    | Boolean evaluator between two data: equivalent to `==`. |
+| `and`  | Multiplication | True when all the arguments are True, else False.       |
+|  `or`  | Addition       | True when at least one argument is True, else False.    |
+| `not`  | Complement     | Change True to False and vice versa.                    |
 
-### String Data Type
+### 문자열 자료형
 String data type is a text-based data which can be distinguished by a pair of single quotation mark `''` or double quotation mark `""`. Variable or data that is a string data type is commonly called *string object*.
 
 Although placing the quotation mark inside a string object can cause broken string data, placing a backslash `\` before the quotation mark can escape from premature end of string.
@@ -368,30 +366,30 @@ True        # True as it also includes a period at the end.
 THIS IS A SENTENCE.
 this is a sentence.
 ```
-### Type Conversion
+### 자료형 변환
 It is possible to convert a data type to another different data type. The following three are the conversion widely used when developing Python program:
 
-| FUNCTION  | NAME               | DESCRIPTION                                                                                                        |
-|-----------|--------------------|--------------------------------------------------------------------------------------------------------------------|
-| `int()`   | Convert to integer | `float`: Fraction is eliminated, returning integer only.<br />`string`: Only numerical characters are convertible. |
-| `float()` | Convert to float   | `int`: No restriction.<br />`string`: Only numerical characters are convertible.                                   |
-| `str()`   | Convert to string  | `int`: No restriction.<br />`float`: No restriction.                                                               |
+| 함수      | 이름              | 설명                                                         |
+| --------- | ----------------- | ------------------------------------------------------------ |
+| `int()`   | 정수 변환         | `float`: Fraction is eliminated, returning integer only.<br />`string`: Only numerical characters are convertible. |
+| `float()` | 부동소수점수 변환 | `int`: 제약없음.<br />`string`: Only numerical characters are convertible. |
+| `str()`   | 문자열 변환       | `int`: 제약없음.<br />`float`: 제약없음.                     |
 
-## Escape Character
+## 탈출 문자
 Escape character `\` is used to escape from sequence of character and execute certain operation within text-base data. On introduction on string data type, `\'` is used to prevent string from premature ending.
 
-| SYNTAX | DESCRIPTION    |
-|--------|----------------|
-| `\n`   | New line       |
-| `\t`   | Horizontal tab |
-| `\\`   | Backslash      |
-| `\b`   | Backspace      |
-| `\'`   | Single quote   |
-| `\"`   | Double quote   |
+| 구문 | 설명           |
+| ---- | -------------- |
+| `\n` | 줄바꾸기       |
+| `\t` | Horizontal tab |
+| `\\` | Backslash      |
+| `\b` | Backspace      |
+| `\'` | 작은 따옴표    |
+| `\"` | 큰 따옴표      |
 
 Not just to escape from string and to perform operation, escape character is also used to code a single long line of code into short consecutive multi-line code.
 
-## None
+## `None` 키워드
 An data with no value regardless of data type. Although `None` can be used as `False` in Boolean logic conditioning, `None` and `False` is completely different even in Boolean concept.
 
 ```python
@@ -404,10 +402,10 @@ if not(None and True):
 None                    # This proves that None can be used as False in Boolean.
 ```
 
-# **PYTHON: CONDITIONAL AND LOOP**
+# **파이썬: 조건 및 루프**
 Conditional and loop statement is commonly used and one of the essential pieces of code in programming. This chapter introduces list of conditional and loop statements in Python programming.
 
-## Indentation
+## 들여쓰기
 Indentation is used to delimit (mark the limits or boundaries) blocks of code. Simply put, it is used to distinguish where the block of code belongs to. Indentation is inserted on the section of code after colon `:`.
 
 Beware as placement of indentation can change the script entirely.
@@ -433,7 +431,7 @@ End of IF statement.
 The End.
 ```
 
-## `if` Statement
+## `if` 조건문
 Conditional `if` statement runs code if the condition is true. When the condition evaluates `True`, the statements are carried out but otherwise ignored.
 
 ```python
@@ -441,7 +439,7 @@ if condition:
     statements
 ```
 
-### `else` Statement
+### `else` 조건문
 Conditional `else` statement must be followed after `if` statement as it cannot be used alone. The statement contains code that is called when the condition evaluates `False`. The `else` statement is not indented along with `if` statement.
 
 ```python
@@ -453,22 +451,22 @@ else:
 Chaining `if` and `else` statement is possible in series of conditioning as follows:
 
 ```python
-if condition: 
-    statements
+if 조건1: 
+    실행문
 else:
-    if condition:
-        statements
-    else condition:
-        statements
+    if 조건2:
+        실행문
+    else:
+        실행문
 ```
 
-### `elif` Statement
+### `elif` 조건문
 Conditional `elif` statement is a combination of `if` and `else` statement; when the first condition evaluates `false`, the `elif` statement provides second (or more) chance to evaluate condition different from the first one. 
 
 ```python
-if condition: 
+if 조건1: 
     statements
-elif condition:
+elif 조건2:
     statments:
 else:
     statements
@@ -476,37 +474,37 @@ else:
 
 However, this is not the same as chain of `else`-`if` conditional statement as that is a combination of two different conditional set, while `elif` statement guarantees a single conditional set.
 
-### Ternary Operator
+### 조건 연산자
 Conditional statement can be expressed simply using ternary operator as shown below:
 
 ```python
-var = True_return if condition else False_return
+var = 반환값_참 if 조건 else 반환값_거짓
 ```
 
 The vocabulary *ternary* represents the statement takes three arguments. Ternary operator should not be overused as it reduces readability, but useful on variable assignment.
 
-## `while` Loop
+## `while` 반복문
 The `while` loop statement repeatedly execute statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `False`.
 
 ```python
-while condition:
-    statements
+while 조건:
+    실행문
 ```
 The `else` statement may follow after a `while` loop statement, which will be executed when the loop statement has successfully finished its iteration (by conditional mean).
 
 ```python
 # FINISHED LOOP: completed iteration
-while index < 10:
-    index += 1
-    if index == 100:
+while 변수 < 10:
+    변수 += 1
+    if 변수 == 100:
         break
     else:
         print("First...successful!")
 
 # FINISHED LOOP: forece-escaped via break statement
-while index < 10:
-    index += 1
-    if index == 5:
+while 변수 < 10:
+    변수 += 1
+    if 변수 == 5:
         break
     else:
         print("Second...successful!")
@@ -516,45 +514,45 @@ while index < 10:
 First...successful!
 ```
 
-### `break` Statement
+### `break` 문
 The `break` statement can be used to end a loop prematurely, before complete iteration is made. When encountered inside a loop, immediately escapes from the loop but does not break from its outer loop.
 
 ```python 
-while single_loop_condition:
-    statement1
-    statement2
+while 단일반복_조건:
+    실행문1
+    실행문2
     break
-    statements3
+    실행문3
 ```
 
 ```
-statement1
-statement2
+실행문1
+실행문2
 ```
 
-### `continue` Statement
+### `continue` 문
 The `continue` statement skips the rest of the statement below in the loop and jumps back to the conditioning part. This maintains the loop iteration rather than escaping the loop like `break` statement.
 
 ```python 
 while i < 5:
-    statement1
-    statement2
+    실행문1
+    실행문2
     continue
-    statement3
+    실행문3
 ```
 
 ```
-statement1
-statement2
-statement1
-statement2
-statement1
-statement2
+실행문1
+실행문2
+실행문1
+실행문2
+실행문1
+실행문2
 ...
 ```
 
 
-## `for` Loop
+## `for` 반복문
 The `for` loop statements repeatedly execute statements inside (aka. iterate) as long as it is in the valid range. The loop ends once all the values in range are iterated.
 
 ```python
@@ -569,8 +567,8 @@ Here, a local variable `index` obtains value from `iterable` and execute stateme
 3. string object: returns character comprising the string.
 
 ```python
-for var in range(3):
-    print("Hello World" , var)
+for 변수 in range(3):
+    print("Hello World" , 변수)
 ```
 
 ```
@@ -585,15 +583,15 @@ The `else` statement may follow after a `for` loop statement, which will be exec
 
 ```python
 # FINISHED LOOP: completed iteration
-for index in range(10):
-    if index == 100:
+for 변수 in range(10):
+    if 변수 == 100:
         break
     else:
         print("First...successful!")
 
 # FINISHED LOOP: forece-escaped via break statement
-while index in range(10):
-    if index == 5:
+while 변수 in range(10):
+    if 변수 == 5:
         break
     else:
         print("Second...successful!")
@@ -603,35 +601,35 @@ while index in range(10):
 First...successful!
 ```
 
-## Exception
+## 예외
 Exception is an error-exclusive conditional statement: the statement checks whether the code is inexecutable due to incorrect coding or input, and stops the program immediately. There are some statements that can be used to handle the script errors.
 
-### `try`/`except` Statement
+### `try`/`except` 문
 The `try`/`except` statement pair is used to handle exceptions and call certain statements corresponding to an exception occurred. There are additional statements that can be used together with the pair:
 
-| KEYWORD   | DESCRIPTION                                                                                                 |
-|-----------|-------------------------------------------------------------------------------------------------------------|
-| `try`     | A block of code to be checked for exception.                                                                |
-| `except`  | A code to be executed when certain exception occurs.                                                        |
-| `else`    | [OPTIONAL: A code to be executed when the code has passed with no error (exception) occurred.]              |
+| 키워드    | 설명                                                         |
+| --------- | ------------------------------------------------------------ |
+| `try`     | A block of code to be checked for exception.                 |
+| `except`  | A code to be executed when certain exception occurs.         |
+| `else`    | [OPTIONAL: A code to be executed when the code has passed with no error (exception) occurred.] |
 | `finally` | [OPTIONAL: A block of code executed no matter what exception has occurred, and even when there’s no error.] |
 
 ```python
 try:
-    statements
+    실행문
 except exception_type1:
-    statements
+    실행문
 except exception_type2:
-    statements
+    실행문
 except:			# UNCONDITIONAL EXCEPTION LOCATES LAST.
-    statements
+    실행문
 finally:
-    statements
+    실행문
 ```
 
 Even after `try`/`except` statement is executed, the program does not stop and continues onward.
 
-### `raise` Statement
+### `raise` 문
 The `raise` statement is used to manually raise exception intentionally. As the statement raises error, it also stops the runtime immediately, preventing anymore further execution thereafter.
 
 ```python
@@ -642,14 +640,14 @@ raise
 raise exception_description
 ```
 
-### `assert` Statement
+### `assert` 문
 The `assert` statement checks expressions for validity (aka. assertion). When tested expression is valid with no problem, assertion returns `True`. When an exception is raised, assertion returns `False`.
 
 ```python
 print(0)
-assert TRUE_expression
+assert 표현식_참
 print(1)
-assert FALSE_expression,"exception_type"
+assert 표현식_거짓, "exception_type"
 print(2)
 ```
 
@@ -659,13 +657,13 @@ print(2)
 AssertionError: exception_type
 ```
 
-## `pass` Statement
+## `pass` 문
 The `pass` statement is a null operation that does nothing when executed. This comes useful by inserting it where the code will be placed but hasn’t been written yet.
 
-# **PYTHON: ITERABLE OBJECT**
+# **파이썬: 이터러블 객체**
 Not just its simplicity that makes Python language useful, its iterable object is powerful and flexible than any other programming language can provide. While C++ has a iterable object called *array* and *vector*, Python has four iterable object that has same features but with slightly different properties.
 
-## Iterable Object
+## 이터러블 객첵
 Iterable object is used to store collection of data, and is defined by an object that has `__iter__` method (Python3) which returns iterator object. Iterator is an object which automatically calls next element of data, thus iterates every data within the iterable object in sequence.
 
 One of the special feature of iterable object is it can access and/or modify stored data using a bracket `[]`. String object introduced in *PYTHON: BASIC § String Data Type* is also an iterable object.
@@ -679,7 +677,7 @@ print(variable[1])
 e
 ```
 
-### Iterable Slicing
+### 이터러블 Slicing
 Slicing is one of the powerful feature Python has advantage over other programming languages on handling a group of data such as iterable object. Slicing iterable can only extract desired portion of the original.
 
 | SYNTAX    | EXAMPLE                            |
@@ -704,7 +702,7 @@ print(vairalbe[2:8:2])	# >> OUTPUT: "oW"
 print(variable[8:2:-1])	# >> OUTPUT: "roW ol"
 ```
 
-## Range
+## 범위 객체
 Range iterable object stores a number in sequenced pattern by specifying starting number (inclusive), ending number (exclusive), and sequencing interval. Range object is created using the `range()` function:
 
 | FUNCTION  | EXAMPLE                      | DESCRIPTION                                                                                                                                                                                                                                                          |
@@ -720,7 +718,7 @@ variable[2]		# >> OUTPUT: 7
 variable[3]		# >> OUTPUT: 9
 ```
 
-## List
+## 리스트 객체
 List iterable object stores item in sequence along its index, irrelevant to data type. Assigning value to a list is done using a bracket ` []` by with values in order, comma separated. Bracket is also used to call an element at index location.
 
 ```python
@@ -760,11 +758,11 @@ lst = [i**2 for i in range(5) if (i**2) % 2 == 0]
 ### List Operation
 A list can be added and multiplied, with operations exclusive to iterable objects. Operations below are not restricted to a list alone but can be applied to other iterable objects introduced later.
 
-| OPERATOR | NAME           | DESCRIPTION                                                         |
-|----------|----------------|---------------------------------------------------------------------|
-| `+`      | Addition       | Merge two or more different lists to a single list.                 |
-| `*`      | Multiplication | Multiply the string by the number of integer (float does not work). |
-| `in`     | Included       | Check if an item is in a list.                                      |
+| 연산자 | 이름           | 설명                                                         |
+| ------ | -------------- | ------------------------------------------------------------ |
+| `+`    | Addition       | Merge two or more different lists to a single list.          |
+| `*`    | Multiplication | Multiply the string by the number of integer (float does not work). |
+| `in`   | Included       | Check if an item is in a list.                               |
 
 ```python
 lst = [value1, value2, value3]
@@ -782,12 +780,12 @@ print(value2 not in lst)		# >> OUTPUT: False
 
 Following are functions that does certain features to and for a list (or more like iterable) object.
 
-| FUNCTION      | EXAMPLE                             | DESCRIPTION                                                                                                         |
-|---------------|-------------------------------------|---------------------------------------------------------------------------------------------------------------------|
-| `len()`       | `len(lst)`                          | Find the length of the `lst` list by counting elements.                                                             |
-| `all()`       | `all([condition for index in lst])` | Return `True` when all elements inside the `lst` list meets `condition`.                                            |
-| `any()`       | `any([condition for index in lst])` | Return `True` when any element inside the `lst` list meets `condition`.                                             |
-| `enumerate()` | `enumerate(lst)`                    | Iterates elements inside the `lst` list with sequencing.                                                            |
+| 함수          | 예시                                | 설명                                                         |
+| ------------- | ----------------------------------- | ------------------------------------------------------------ |
+| `len()`       | `len(lst)`                          | Find the length of the `lst` list by counting elements.      |
+| `all()`       | `all([condition for index in lst])` | Return `True` when all elements inside the `lst` list meets `condition`. |
+| `any()`       | `any([condition for index in lst])` | Return `True` when any element inside the `lst` list meets `condition`. |
+| `enumerate()` | `enumerate(lst)`                    | Iterates elements inside the `lst` list with sequencing.     |
 | `list()`      | `list(iterable)`                    | Convert an iterable object (such as string and range) to a list; creates empty list if `iterable` is not presented. |
 
 ```python
@@ -812,13 +810,13 @@ for var in enumerate(lst):
 
 Since list is an (iterable) object, it also has methods it can use to perform certain features:
 
-| METHOD     | EXAMPLE                    | DESCRIPTION                                                |
-|------------|----------------------------|------------------------------------------------------------|
+| 메소드     | 예시                       | 설명                                                       |
+| ---------- | -------------------------- | ---------------------------------------------------------- |
 | `append()` | `lst.append(value)`        | Add `value` at the end of the `lst` list.                  |
 | `insert()` | `lst.insert(index, value)` | Add `value` at `index` element location of the `lst` list. |
 | `index()`  | `lst.index(value)`         | Find the smallest number of location of `value`.           |
 
-## Tuple
+## 튜플 객체
 Tuple iterable object is used to store item in order just like a list, but cannot change value after initialization. This property of iterable object is called immutable (opp. mutable). Tuple use parentheses `()` or even without any to distinguish itself from other iterable.
 
 ```python
@@ -835,8 +833,8 @@ print(tpl[0])		# >> OUTPUT: value1
 Because tuple is a constant version of a list, the data inside cannot be changed. The error will occur when such effort is made.
 
 ```python
-tpl = (value1, value2, value3)
-tpl[1] = value4
+tpl = (데이터1, 데이터2, 데이터3)
+tpl[1] = 데이터4
 ```
 
 ```
@@ -858,7 +856,7 @@ print(variable3)		# >> OUTPUT: [value3, value4]
 print(variable3)		# >> OUTPUT: value5
 ```
 
-## Dictionary
+## 딕셔너리 객체
 Dictionary is an iterable object that has indexing `key` data and `value` data paired as a single element. Dictionary does not call value by integer index but through `key`. Dictionary uses curly bracket `{}` to distinguish itself from other iterable.
 
 ```python
@@ -893,11 +891,11 @@ dictionary[key5] = value5
 
 Operations for a dictionary is same as other iterable objects but have slight difference:
 
-| OPERATOR | NAME                     | DESCRIPTION                                                                |
-|----------|--------------------------|----------------------------------------------------------------------------|
-| `+`      | Addition                 | Merge two or more different lists to a single list.                        |
-| `*`      | Multiplication           | Multiply the string by the number of integer (float does not work).        |
-| `in`     | Included (key exclusive) | Check if the key is in a dictionary. However, it does not check the value. |
+| 연산자 | 이름                     | 설명                                                         |
+| ------ | ------------------------ | ------------------------------------------------------------ |
+| `+`    | Addition                 | Merge two or more different lists to a single list.          |
+| `*`    | Multiplication           | Multiply the string by the number of integer (float does not work). |
+| `in`   | Included (key exclusive) | Check if the key is in a dictionary. However, it does not check the value. |
 
 ```python
 dictionary = {key1: value1, key2: value2}
@@ -909,10 +907,10 @@ print(key3 not in dictionary )		# >> OUTPUT: True
 
 Dictionary have its own function and method to execute certain features exclusive for dictionary:
 
-| OPERATION | EXAMPLE                             | DESCRIPTION                                                                                                        |
-|-----------|-------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| `get()`   | `dictionary.get(key,[description])` | Find the key and get its value; additional description can be added when the key is not found (`None` by default). |
-| `dict()`  | `dictionary=dict()`                 | Can create empty dictionary.                                                                                       |
+| 연산     | 예시                                | 설명                                                         |
+| -------- | ----------------------------------- | ------------------------------------------------------------ |
+| `get()`  | `dictionary.get(key,[description])` | Find the key and get its value; additional description can be added when the key is not found (`None` by default). |
+| `dict()` | `dictionary=dict()`                 | Can create empty dictionary.                                 |
 
 ```python
 dictionary = {key1: value1, key2: value2}
@@ -922,7 +920,7 @@ print(dictionary.get(key2))							# >> OUTPUT: None
 print(dictionary.get(key3, "not in dictionary"))	  # >> OUTPUT: not in dictionary
 ```
 
-## Set
+## 집합 객체
 Set is an iterable object that guarantees uniqueness, meaning it does not allow duplicate element within the object. Just like dictionary, set uses curly bracket `{}` to assign values but without `key`-`value` pair. Due to the reasons above, set is much faster to check the elements than list.
 
 ```python
@@ -1012,13 +1010,13 @@ print(lst)
 [0, 1, 2, 3, 4]
 ```
 
-### `yield` Keyword
+### `yield` 키워드
 A keyword used to create a generator; keyword returns the value when iterated by `for` loop statement.
 
-# **PYTHON: FUNCTIONAL PROGRAMMING**
+# **파이썬: 함수형 프로그래밍**
 Functional programming is a style of program scripting that is based mostly around usage of the functions. This chapter will be introducing the guide on how to create and use function in Python for functional programming.
 
-## Function
+## 함수
 Function is an independent block of code which can process the data and present newly processed data once it’s called, allowing dynamic program scripting. Function can be distinguished from its code format which has parenthesis after its name; `function()`.
 
 The programming based around use of custom functions is called *functional programming*.
@@ -1046,7 +1044,7 @@ print(variable(arg1, arg2))
 
 Not only can it be assigned to variable, but function can also be passed as parameter of the other function. Therefore, developer can define new function using already-defined function.
 
-### Pure Function
+### 순수 함수
 Function that returns a value that depends only on their arguments without any side effects.
 
 As for an example, cosine function `cos(x)` that only has single parameter `x` returns the value which depends only on the argument `x`; hence, the the cosine function is a pure function.
@@ -1062,7 +1060,7 @@ def function(x,y):
 ### Higher-Order Function
 A function that takes other function(s) as parameters or return the function(s) as a result.
 
-## `def` Keyword
+## `def` 키워드
 The `def` keyword is used to create custom function. When calling newly created function before defining one, an error occurs as Python executes sequentially, thus is deemed calling non-existing function.
 
 ```python
@@ -1082,7 +1080,7 @@ WorldWorld
 
 Parentheses `()` is necessary when defining a function even the function does not have any parameter.
 
-### `return` Statement
+### `return` 반환문
 The `return` statement is a function-exclusive statement that returns value of certain data that can be directly used from the function. Once a return statement is executed, the function ends immediately despite there are codes still left inside.
 
 Function does not need to have a `return` statement which will return `None` when passed to variable or be printed on console terminal (for example, by using `print()` function).
@@ -1099,20 +1097,20 @@ Hello!
 None
 ```
 
-### Parameter & Argument
+### 매개변수 & 전달인자
 Following is a difference between parameter and argument that is referred significantly when discussing function:
 
-**Parameter**
+**매개변수**
 Parameter is a function-internal local variable: because parameters is a function-exclusive local variable, it cannot be called from outside.
 
-**Argument**
+**전달인자**
 Argument is a value or object being passed to the function parameter and those passed values and objects will be processed by the function code.
 
-| OPERATOR | SYNTAX      | DESCRIPTION                                                                                                                                                                   |
-|:--------:|:-----------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `*`      | `*args`     | Allows multiple number of arguments.<br />Call by `args`(arguments) without asterisk, and returns tuple of arguments. Must locate after normal parameter.                     |
-| `**`     | `**kwargs`  | Allows use of undefined parameter in advance.<br />Call by `kwargs`(keyword arguments) without asterisks, and returns dictionary of arguments’ name and corresponding values. |
-| `=`      | `arg=value` | Passes default value to parameter unless argument value is specified. Must locate after normal parameter.                                                                     |
+| 연산자 |    구문     | 설명                                                         |
+| :----: | :---------: | ------------------------------------------------------------ |
+|  `*`   |   `*args`   | Allows multiple number of arguments.<br />Call by `args`(arguments) without asterisk, and returns tuple of arguments. Must locate after normal parameter. |
+|  `**`  | `**kwargs`  | Allows use of undefined parameter in advance.<br />Call by `kwargs`(keyword arguments) without asterisks, and returns dictionary of arguments’ name and corresponding values. |
+|  `=`   | `arg=value` | Passes default value to parameter unless argument value is specified. Must locate after normal parameter. |
 
 Examples below show how function parameter and argument works:
 
@@ -1162,10 +1160,10 @@ Hello
 World!
 ```
 
-## Anonymous Function
-Also known as **Lambda function (express)**, is an unnamed function without declaration (thus, anonymous) and does not store data, returning value only from a single expression. Anonymous function is generally used for a single-use function, or as an argument of higher-order function's parameter.
+## 익명 함수
+Also known as **람다 함수** (혹은 **람다 표현식**), is an unnamed function without declaration (thus, anonymous) and does not store data, returning value only from a single expression. Anonymous function is generally used for a single-use function, or as an argument of higher-order function's parameter.
 
-| SYNTAX                                                       |
+| 구문                                                         |
 | ------------------------------------------------------------ |
 | `lambda param0, param1 ∶ expression`                         |
 | A main body of anonymous function consisting parameters and its return expression. |
@@ -1189,7 +1187,7 @@ variable(2,3)
 7
 ```
 
-## Map Function
+## Map 함수
 Built-in function which takes iterable objects and function with parameters as arguments. Map function returns a list consisting return value of the function with iterable objects as its arguments.
 
 | SYNTAX                                                       |
@@ -1215,12 +1213,12 @@ print(list(variable2))
 [1, 83, 67, 53, 41]
 ```
 
-## Filter Function
+## Filter 함수
 Built-in function which takes iterable object and Boolean conditioning function (aka. predicate) as arguments and returns iterable object containing only with the data that passed the predicate.
 
-| SYNTAX                                                                                               |
-|------------------------------------------------------------------------------------------------------|
-| `filter(predicate, iterable)`                                                                        |
+| 구문                                                         |
+| ------------------------------------------------------------ |
+| `filter(predicate, iterable)`                                |
 | In higher-order `filter` function, iterable object `iterable`are passed as argument for `predicate`. |
 
 Conversion to an iterable object, such as `list()` function is necessary to avoid error such as "SyntaxError".
@@ -1237,7 +1235,7 @@ print(list(variable))
 [2, 4]
 ```
 
-## Recursive Function
+## 회귀 함수
 Recursive function is a function that calls itself (recursion). Factorial $!$ in mathematic is the best example of recursive function implementation.
 
 ```python
@@ -1265,7 +1263,7 @@ A case of recursion which doesn’t involve referring to itself anymore. It can 
 RuntimeError: maximum recursion depth exceeded
 ```
 
-## Decorator
+## 데코레이터
 Decorator is a function which modifies original function’s functionality and returns the modified "function" itself (rather than returning value). Hence, assignment to a variable is needed for a function to properly work after processing through the decorator. Its function will then have a same name as the variable.
 
 ```python
@@ -1294,12 +1292,12 @@ Decorator above have decorated (modified) `function()` and assigned the decorate
 
 When passing function as a parameter of a decorator, no parenthesis are needed like `function()`. This is because former passes function itself and latter passes return value of the function.
 
-### `@` Symbol
+### `@` 기호
 A decorator symbol `@` used for pre-pending the function definition, placed before pre-decorated function.
 
-| OPERATOR | EXAMPLE      | DESCRIPTION                                               |
-|:--------:|--------------|-----------------------------------------------------------|
-| `@`      | `@decorator` | `@decorator` is a replacement of `func = decorator(func)` |
+| 연산자 | 예시         | 설명                                                      |
+| :----: | ------------ | --------------------------------------------------------- |
+|  `@`   | `@decorator` | `@decorator` is a replacement of `func = decorator(func)` |
 
 ```python
 # CREATING DECORATOR.
@@ -1331,10 +1329,10 @@ def function():
 A decorator located closest to pre-decorated function will be applied firsthand. Thus, the function object `function()` will first be decorated by `@decorator2`  then `@decorator1` sequentially.
 
 
-# **PYTHON: OBJECT-ORIENTED PROGRAMMING**
+# **파이썬: 객체지향 프로그래밍**
 Previous chapter has explained and dealt with procedural and functional programming. The third scripting method, object-oriented programming (abbrev. OOP) is based around usage of classes and objects instead of functions.
 
-## Object
+## 객체
 Previous chapters have introduced variable (which can store data) and function (which can process data). Object, aka. instance, is a block of data which encapsulate these variables and functions into a single identity.
 
 The programming based around use of a custom objects is called *object-oriented programming*.
@@ -1349,19 +1347,19 @@ print(x.index(5))
 2
 ```
 
-### Encapsulation
+### 캡슐화
 Encapsulation is the core concept in object which...
 
 1. combines variables and functions into a single object
 2. restrict direct access to these variables and functions to prevent accidental modification from external code. 
 
-### Attribute & Method
+### 속성 & 메소드
 The variables and function encapsulated to the object is called differently:
 
 * **Attribute** is an object-dependent variable, accessed by `object.attribute` format.
 * **Method** is an object-dependent function, accessed by `object.method()` format.
 
-## Class
+## 클래스
 Class is used to create objects (aka. instance), hence can be deemed as a blueprint of the object. Classes are created using keyword `class` and inside defines variables and functions which becomes attributes and methods for the object.
 
 ```python
@@ -1391,7 +1389,7 @@ value3
 value1 + value2 - value3
 ```
 
-### `self` Variable
+### `self` 변수
 The `self` variable is a conventional name to indicate an instance itself. Placing `self` on variables or functions bounds them to an object, thus declares as attributes and methods. These attributes and methods can be accessed only from the instance.
 
 Variables and functions without `self` are local variables and functions inside the instance, and is not accessible. Attempting to do so results "AttributeError".
@@ -1417,10 +1415,10 @@ instance.attr2		# >> OUTPUT: None
 instance.attr3		# AttributeError: 'CLASS' object has no attribute 'C'
 ```
 
-### `__init__` Method
+### `__init__` 메소드
 The `__init__` method is the most important method needed to create instance. As the name implies (abbreviation of *initialization*), this method is automatically called when creating an object from class and is responsible for defining the number of arguments needed on instance initialization.
 
-## Instance Attribute/Method
+## 객체 속성/메소드
 All methods (and attributes) that are declared normally within the class with `self` for self-indication are instance methods (and attributes). There is no special syntax that need to declare for instance method.
 
 However, instance attribute cannot be defined outside instance method where `self` variable in valid. Variables declared outside the method becomes class attribute instead.
@@ -1440,12 +1438,12 @@ class CLASS:
 ```
 
 
-## Class Attribute/Method
+## 클래스 속성/메소드
 Class attributes and methods can be accessed both from instance and class without any instantiation. Class attribute is declared without under class definition, indented along with methods. `self` variable is not used.
 
 Class method is a method which can be accessed through class alone without needing to create an instance.
 
-|     SYNTAX     | DESCRIPTION                              |
+|      구문      | 설명                                     |
 | :------------: | ---------------------------------------- |
 | `@classmethod` | Decorator used to declare class methods. |
 
@@ -1498,10 +1496,10 @@ instance2.attr2			# >> OUTPUT: 4 (= 2**2)
 instance2.attr3			# >> OUTPUT: 4
 ```
 
-## Static Method
+## 정적 메소드
 Static method is a method that can be called without instantiation, but without parameter to call itself like `self` and `cls`.
 
-| SYNTAX          | DESCRIPTION                               |
+| 구문            | 설명                                      |
 | --------------- | ----------------------------------------- |
 | `@staticmethod` | Decorator used to declare static methods. |
 
@@ -1536,7 +1534,7 @@ instance.attr3			# >> OUTPUT: 4
 CLASS.method2(4)		# >> OUTPUT: True
 ```
 
-## Magic Method
+## 매직 메소드
 Magic method is a special method which has Double UNDERscores(dunder) on both side of its name. These method generally represents operator, and are used when overloading operator to modify the operator's functionality. 
 
 Previously encountered `__init__` method used for instance initialization is one of the widely used magic method. More can be seen on the table below:
@@ -1570,7 +1568,7 @@ instance2 = CLASS("World!")
 instance1 + instance2		# >> OUTPUT: "Hello World!"
 ```
 
-## Inheritance
+## 상속
 Inheritance is an act of superclass (base class) providing attributes and methods to derived subclass (child class). When the same name of attributes and methods exists on both superclass and subclass, attributes and methods from superclass are overridden by subclass's.
 
 ```python
@@ -1593,7 +1591,7 @@ instance.attr2		# >> OUTPUT: "Hello World!"
 instance.attr3		# >> OUTPUT: value3
 ```
 
-### Super Function
+### 슈퍼 함수
 The `super()` function is used to access the superclass properties, such as class attributes instance/class/static methods directly. This function is mainly used to avoid overriding superclass attributes and methods.
 
 ```python
@@ -1653,7 +1651,7 @@ print(instance.attribute)
 3
 ```
 
-## Data Hiding
+## 데이터 숨기기
 Previously on *Encapsulation* subsection mentioned creating an object provides restriction on accessing attributes and methods, called *Data Hiding*. In Python, however, data hiding is not guaranteed and can be accessed easily from the code outside the class.
 
 Still, manual approach such as name mangling is possible to prevent access to attributes and methods of the class:
@@ -1663,7 +1661,7 @@ Still, manual approach such as name mangling is possible to prevent access to at
 | `_`    | `_attribute`  | Though not a name mangling, it can prevent accessing attributes and methods from being passed via module import but not from codes outside the class.  |
 | `__`   | `__attribute` | Name mangling: this prevents accessing attributes and methods from being passed via module import and codes outside the class, thus becomes "private". |
 
-### Properties
+### 프로퍼티
 Property is a decorator that supports data hiding by dividing a single method into three separate methods: `getter`, `setter`, and `deleter`. Because property is declared using decorator symbol, it can only be used on method.
 
 | METHOD  | SYNTAX            | DESCRIPTION                                           |
@@ -1716,7 +1714,7 @@ Separating method using property encapsulate sensitive code that shouldn't be mo
 
 Although `getter` method is essential in property, the `setter` and `deleter` are optional; using `getter` method alone would make unmodifiable read-only method.
 
-# **PYTHON: PYTHONICNESS**
+# **파이썬: PYTHONICNESS**
 As learning to understand how the Python can and be use on programming, there is a Python's unique style of programming recommended for Python developer to implement as possible.
 
 ## Zen of Python
@@ -1737,7 +1735,7 @@ Eight scripting style guides for Python suggested by experienced Python develope
 7.	`from module import *` should be avoided.
 8.	There should be only one statement per line.
 
-## Entry Point
+## 시작점
 While other program language such as C/C++ has a traditional entry point called `main()` which is the function where the program execution starts, Python does not have one.
 
 Instead, Python uses special variable `__name__` which indicates the current Python script being executed. When this script is the main executing file, the `__name__` variable is assigned as `"__main__"` value. 
@@ -1750,7 +1748,7 @@ if __name__ == "__main__":
 
 Codes and statements indented under this condition will not be executed when it is imported as a module to the other script. Beware, the equivalent `==` operator cannot be replaced to logical `is` operator.
 
-# **PYTHON: REGULAR EXPRESSION**
+# **파이썬: REGULAR EXPRESSION**
 Regular expression is a domain specific language (DSL) for string manipulation. Regular expression is not Python-exclusive feature, and is utilized by other programming languages as well (aka. regex).
 
 ## `re` Module
@@ -1793,23 +1791,23 @@ Group that cannot be accessible by `group(...)` and `groups()` methods, which re
 |--------|------------------|---------------------------------------------------------|
 | `?:`   | `r"(?:string)" ` | Inaccessible via `group(...)`  and `groups()`  methods. |
 
-# **PYTHON: FILE MANAGEMENT**
+# **파이썬: 파일 관리**
 When using the Python in advanced scripting, such as use for scientific research and artificial intelligence, the input data that needs to be computed cannot be stored through console command of the Python and may need to read through files if necessary.
 
-## Opening Files
+## 파일 열기
 Before reading or manipulating files via Python, the file must be opened firsthand. The `open()` function is used to open a file user want to open.
 
 ```python
 open("filename.txt")
 ```
 
-| OPTION | DESCRIPTION                        |
-|--------|------------------------------------|
-| `r`    | Read mode (default)                |
-| `w`    | Write mode (rewrites content)      |
-| `a`    | Append mode (adding new content)   |
-| `rb`   | Binary read mode (non-text files)  |
-| `wb`   | Binary write mode (non-text files) |
+| 전달인자 | 설명                               |
+| -------- | ---------------------------------- |
+| `r`      | Read mode (default)                |
+| `w`      | Write mode (rewrites content)      |
+| `a`      | Append mode (adding new content)   |
+| `rb`     | Binary read mode (non-text files)  |
+| `wb`     | Binary write mode (non-text files) |
 
 The `close()` method is used to close currently opened files. Closing file in very important on avoiding wasting resource. Ensure the files are always closed even on exceptions by using try/except or with statement.
 
@@ -1818,7 +1816,7 @@ file = open("file.txt", "r")
 file.close()
 ```
 
-### `with` Statement
+### `with` 문
 The `with` statement creates temporary variable only available inside an indented code block of the `with` statement. When the file is opened using this statement, the file automatically closes at the end of the code block even if exceptions occur within it.
 
 ```python
@@ -1876,14 +1874,14 @@ with instance.method():
 
 One of the actual implementation of this syntax can be found on chapter *TENSORFLOW: BASIC § TensorBoard* in [*PRGMING_TensorFlow*](./PRGMING_TensorFlow.md) document.
 
-### Absolute & Relative Paths
+### 절대주소 및 상대주소
 Just as other programming languages are, Python have two different types of path: absolute and relative path. When designating a path, use double backslash `\\` as a single backslash is an escape character that can cause unwanted operation.
 
 ```python
 variable = open("path\\file.txt")
 ```
 
-## Reading Files
+## 파일 읽기
 After opening the text-based file, Python can read lines of file's content using `read()` method. Argument inside the method represent the number of bytes the method will read.
 
 Read method can be used on the same file over again, but it will continue from where Python last read. When there’s no argument, the read method reads the rest of the text from where it last left off.
@@ -1926,7 +1924,7 @@ for file in variable:
     print(variable)
 ```
 
-## Writing Files
+## 파일 쓰기
 In Python, file can be created or (over)written by the `write()` method of the text-based file object. There are two options user can choose when writing: overwrite and append.
 
 Suppose there is a file with text content written as follows:
@@ -1967,7 +1965,7 @@ Last line somewhere.TEXT APPENDED.
 
 Upon successfully written, `write()` method returns the number of bytes written.
 
-### Creating Files
+### 파일 생성하기
 New file can be created using the `write()` method which does not bound by just writing on existing file. Creating file is simply done by designating file name is doesn't exist on the specified path.
 
 ```python
@@ -1980,10 +1978,10 @@ with open("path\\new_file.txt", "w") as file:
 NEW FILE CREATED!
 ```
 
-# **PYTHON: PACKAGE**
+# **파이썬: 패키지**
 Python has variety of packages that can be easily downloaded and used on-demand. This chapter describes what the package is and how to implement it to the script.
 
-## Modules
+## 모듈
 A Python module is simply a Python source code file with `.py` extension. Developer may developed their own code containing class or function, and calling those codes from distribute Python file can be done using `import` keyword.
 
 ```python
@@ -2000,7 +1998,7 @@ from module import function as name
 
 However, because module is not referred to use the function, there is potential conflict caused by function naming. Unless the function is named with guaranteed uniqueness, it is safe to use the previous approach to import modules.
 
-## Package
+## 패키지
 Package is a directory of folder that holds a collection of Python modules or sub-packages. Every package folder must have a special Python file called `__init__.py` which can be blank or contains directory path of current package to prevent directories error caused by a common name.
 
 ```python
@@ -2034,24 +2032,24 @@ The command means accessing the pip under the python interpreter specified as `p
 py -3.5-32 -m pip
 ```
 
-# **PYTHON: VIRTUAL ENVIRONMENT**
+# **파이썬: 가상환경**
 C-based project needs to include header files and libraries individually when compiling the script. Python, on the other hand, requires installation of modules under the interpreter directory.
 
 However, when working with multiple Python projects, having all the packages installed in a single interpreter is inconvenient and inefficient. This is why separating Python environment is essential which can be done using virtual environment.
 
-## `venv` Package
+## `venv` 패키지
 The Python3 has virtual environment package `venv` included by default. The package support creating lightweight virtual environments with their own site directory, optionally isolated from system site directory.
 
 Each virtual environment has its own Python binary (which matches the version of the binary that was used to create this environment) and can have its own independent set of installed Python packages in its site directory.
 
-### Creating Environment
+### 가상환경 생성
 Creating a virtual environment under the name `.venv` on desired project directory is done as follows:
 
 ```
 python -m venv D:\Workspace\Python\project\.venv
 ```
 
-### Activate Environment
+### 가상환경 실행
 Here, the term "activating" means activating virtual environment on the command prompt or terminal. While this is unnecessary when running the script under virtual environment, activation is required when installing packages using pip on console.
 
 * Windows:
@@ -2066,7 +2064,7 @@ Here, the term "activating" means activating virtual environment on the command 
     source ~/Workspace/Python/project/.venv/bin/activate
     ```
 
-### Deactivate Environment
+### 가상환경 종료
 To exit from virtual environment activated console, user need to "deactivate" virtual environment.
 
 ```
@@ -2075,7 +2073,7 @@ deactivate
 
 This is same as enter the command `PATH=D:\Workspace\Python\.venv\Scripts\deactivate.bat`. Because of this, relocating the virtual environment directory will cause `deactivate` command unable to recognize the path.
 
-# **PYTHON: NUMPY**
+# **파이썬: NUMPY**
 NumPy is an extremely powerful and useful library used in Python which supports multi-dimensional matrix (aka. NumPy array). As one of the best known scientific libraries, it is implemented on other well-recognized libraries such as [Matplotlib](https://matplotlib.org/), [TensorFlow](https://www.tensorflow.org/), et cetera.
 
 To install NumPy library, open command prompt window and enter the command below: 
@@ -2172,7 +2170,7 @@ print(variable[:, 1:-1])
  [4 5]]
 ```
 
-# **PYTHON: MATPLOTLIB**
+# **파이썬: MATPLOTLIB**
 Matplotlib is a Python 2D plotting library which produces publication quality figures in a variety of hardcopy formats and interactive environments across platforms. Developer can generate plots, histograms, power spectra, bar charts, error charts, scatterplots, and more with just a few lines of code.
 
 To install Matplotlib library, open command prompt window and enter the command below: 
