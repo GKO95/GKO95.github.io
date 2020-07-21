@@ -216,7 +216,7 @@ Additional operations are available using built-in functions and methods exclusi
 | `sum()`   | `sum([0,1,2,3,4])`  | Sum all the numbers in the list.                                               |
 
 ```python
-# EXAMPLE OF ROUND() FUNCTION
+# EXAMPLE OF "round()" FUNCTION
 print(round(164.259763145))
 print(round(164.259763145,2))
 ```
@@ -285,10 +285,10 @@ Where
 Where's my "Cat in the Hat" book?
 ```
 
-Create a string with three sets of quotes (either single or double) becomes docstring; docstring can create a newlines just by pressing Enter/Return button. Otherwise, developer need to insert `\n` code manually.
+Create a string with three sets of quotes (either single or double) can create multi-line string object; this allows changing line just by pressing Enter/Return on keyboard. Otherwise, developer need to insert `\n` code manually.
 
 ```python
-# PRINTING AND WRITING STRING IN MULTIPLE LINES.
+# PRINTING AND WRITING MULTIPLE LINES WITH MULTI-LINE STRING OBJECT.
 print("Thank you!\nYou're welcome.")
 print("""Thank you!
 You're welcome.""")
@@ -309,23 +309,23 @@ String objects in Python can be added and multiplied like a number data type:
 | `*`      | Multiplication | Multiply the string by the number of integer (float does not work). |
 
 ```python
-print("Pyt" + 'hon')
+print("Pyt" + 'hon3')
 print(4 * "2")
 ```
 
 ```
-Python
+Python3
 2222
 ```
 
-String is an object (or simply, an independent individual of data), thus string has its own unique operations that has not been introduced in previous two data types:
+String is an object (an independent individual of variable and function merged as single data), thus string has its own unique operations that has not been introduced in previous two data types:
 
 
 | METHOD         | EXAMPLE                  | DESCRIPTION                                                                                                                                                                                                               |
 |----------------|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `format()`     | `str.format(data)`       | Inserts string or non-string `data` type to a designated space via location or name designated by `{}`.                                                                                                                   |
 | `join()`       | `str.join(str_lst)`      | Joins a list of string objects `str_lst` by placing string object `str` in-between.                                                                                                                                       |
-| `split()`      | `str.split([str1])`      | Convert a string `str` to a list by separating based on blank spaces if there's no argument in method.<br /><br />*[OPTIONAL: In case there’s an argument `str1`, the string object `str` is separated based on `str1`.]* |
+| `split()`      | `str.split()`      | Convert a string `str` to a list by separating based on blank spaces if there's no argument in method.<br /><br />*[OPTIONAL: In case there’s an argument `str1`, the string object `str` is separated based on `str1`.]* |
 | `replace()`    | `str.replace(str1,str2)` | Replace `str1` to `str2` within the string object `str`.                                                                                                                                                                  |
 | `startswith()` | `str.startswith()`       | Check the start of the `str` for equivalence.                                                                                                                                                                             |
 | `endswith()`   | `str.endswith()`         | Check the end of the `str` for equivalence.                                                                                                                                                                               |
@@ -335,11 +335,10 @@ String is an object (or simply, an independent individual of data), thus string 
 
 ```python
 # STRING FORMAT: [1] BY-LOCATION & [2] BY-NAME ASSIGNMENT
-lst = [str0, int1, int2]
-print("{2} {0} {1}".format(lst[0], lst[2], lst[1]))
-print("{x} {y} {z}".format(x = lst[0], y = lst[2], z = lst[1]))
+print("{2} {0} {1}".format(value1, value3, value2))
+print("{x} {y} {z}".format(x = value1, y = value3, z = value2))
 
-# STRING CONCATENATION
+# STRING CONCATENATION AND SPLIT
 print(" ! ".join([str0, str1, str2]))
 print("str0 ! str1 ! str2".split(" ! "))
 
@@ -353,8 +352,8 @@ print("This is a SENTENCE.".lower())
 ```
 
 ```
-int1 str0 int2
-str0 int2 int1
+value2 value1 value3
+value1 value3 value2
 
 str0 ! str1 ! str2
 [str0, str1, str2]
@@ -365,8 +364,9 @@ True        # True as it also includes a period at the end.
 THIS IS A SENTENCE.
 this is a sentence.
 ```
+
 ### Type Conversion
-It is possible to convert a data type to another different data type. The following three are the conversion widely used when developing Python program:
+It is possible to convert a data type to another different data type. The following three are the conversion commonly used when developing Python program:
 
 | FUNCTION  | NAME               | DESCRIPTION                                                                                                        |
 |-----------|--------------------|--------------------------------------------------------------------------------------------------------------------|
@@ -388,7 +388,7 @@ Escape character `\` is used to escape from sequence of character and execute ce
 
 Not just to escape from string and to perform operation, escape character is also used to code a single long line of code into short consecutive multi-line code.
 
-## None
+## `None` Keyword
 An data with no value regardless of data type. Although `None` can be used as `False` in Boolean logic conditioning, `None` and `False` is completely different even in Boolean concept.
 
 ```python

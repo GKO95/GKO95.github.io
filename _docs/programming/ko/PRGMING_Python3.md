@@ -241,42 +241,42 @@ print(round(164.259763145,2))
 파이썬 프로그래밍 언어에는 증감 연산자가 존재하지 않는다.
 
 ### 논리 자료형
-Boolean data type is useful for a code that requires logical conditioning whether the statement is true or false:
+논리 자료형은 문장이 참인지 거짓인지 판별하는 논리적 조건이 요구되는 코드에 유용하게 사용된다:
 
 | 값             | 이름            | 설명                          |
 | -------------- | --------------- | ----------------------------- |
-| `True` or `1`  | Logically true  | Returned when logic is true.  |
-| `False` or `0` | Logically false | Returned when logic is false. |
+| `True` 혹은 `1`  | 논리적 참  | 논리가 참일 때 반환된다.  |
+| `False` 혹은 `0` | 논리적 거짓 | 논리가 거짓일 때 반환된다. |
 
-Any non-zero positive number can represents Boolean value of `True`. In other word, Boolean value of `2` or `3` are also equivalent to `True` while `False` is only represented by the number `0`.
+숫자 0이 아닌 아무런 정수는 `True` 논리값을 나타낸다. 즉, 정수 `2`와 `3`도 `True` 논리값이며, `False`은 오로지 정수 `0`으로만 표현된다.
 
-Comparison operator is used to compare relation of two or more values, returning corresponding Boolean data type depending on whether the condition is held true or false. 
+비교 연산자는 둘 이상의 값의 관계를 비교하는데 사용되며, 조건이 참인지 거짓인지 여부에 따라 해당하는 논리 자료형을 반환한다.
 
-| 연산자 | 설명                     |
-| ------ | ------------------------ |
-| `<`    | Lesser than              |
-| `<=`   | Lesser than or equal to  |
-| `>`    | Greater than             |
-| `>=`   | Greater than or equal to |
-| `==`   | Equal to                 |
-| `!=`   | Not equal to             |
+| 연산자 | 설명 |
+|------|----|
+| `<`  | 미만 |
+| `<=` | 이하 |
+| `>`  | 초과 |
+| `>=` | 이상 |
+| `==` | 동일 |
+| `!=` | 상이 |
 
-Meanwhile, the Boolean data type can be added, multiplied, and complemented as follows:
+한편, 논리 자료형은 논리합, 논리곱, 및 보수 연산아 가능하다
 
 | 연산자 | 이름           | 설명                                                    |
 | :----: | -------------- | ------------------------------------------------------- |
-|  `is`  | Equivalence    | Boolean evaluator between two data: equivalent to `==`. |
-| `and`  | Multiplication | True when all the arguments are True, else False.       |
-|  `or`  | Addition       | True when at least one argument is True, else False.    |
-| `not`  | Complement     | Change True to False and vice versa.                    |
+|  `is`  | 동등    | 두 데이터 사이의 논리 판단자이며, `==`와 유사하다.  |
+| `and`  | 논리곱 | 모든 인수가 `True`이면 `True`이고 그렇지 않으면 `False`이다.       |
+|  `or`  | 논리합  | 하나 이상의 인수가 `True`이면 `True`이고 그렇지 않으면 `False`이다.    |
+| `not`  | 보수     | `True`를 `False`로 변경 혹은 `False`를 `True`로 변경한다.     |
 
 ### 문자열 자료형
-String data type is a text-based data which can be distinguished by a pair of single quotation mark `''` or double quotation mark `""`. Variable or data that is a string data type is commonly called *string object*.
+문자열 자료형은 한 쌍의 작은 따옴표 `''` 또는 큰 따옴표 `""`로 구별되는 텍스트 기반 데이터이다. 문자열 자료형의 변수 또는 데이터 값을 일반적으로 *문자열 객체*라고 부른다.
 
-Although placing the quotation mark inside a string object can cause broken string data, placing a backslash `\` before the quotation mark can escape from premature end of string.
+문자열 객체 내부에 따옴표를 배치하면 문자열 데이터이 도중에 끊길 수 있으며, 따옴표 앞에 `\`를 배치하여 문자열을 유지할 수 있다.
 
 ```python
-# COMPARISON BETWEEN IMPROPER AND PROPER WAY OF TYPING STRINGS.
+# 문자열 작성의 부적절한 예시와 적절한 예시의 비교.
 print('Where's my "Cat in the Hat" book?')
 print('Where\'s my "Cat in the Hat" book?')
 ```
@@ -286,65 +286,64 @@ Where
 Where's my "Cat in the Hat" book?
 ```
 
-Create a string with three sets of quotes (either single or double) becomes docstring; docstring can create a newlines just by pressing Enter/Return button. Otherwise, developer need to insert `\n` code manually.
+세 쌍의 (작은 혹은 큰) 따옴표는 다중 문자열 객체를 생성한다. 이는 단순히 키보드의 Enter/Return 버튼을 눌러 줄바꿈이 가능하도록 한다. 이를 사용하지 않을 시, 줄바꿈은 `\n`을 직접 삽입해야 한다.
 
 ```python
-# PRINTING AND WRITING STRING IN MULTIPLE LINES.
-print("Thank you!\nYou're welcome.")
-print("""Thank you!
-You're welcome.""")
+# 다중 문자열 객체로 여러 줄의 텍스트 작성 및 출력.
+print("안녕하세요.\n처음 뵙겠습니다!")
+print("""안녕하세요.
+처음 뵙겠습니다!""")
 ```
 
 ```
-Thank you!
-You're welcome.
-Thank you!
-You're welcome.
+안녕하세요.
+처음 뵙겠습니다!    
+안녕하세요.
+처음 뵙겠습니다!
 ```
 
-String objects in Python can be added and multiplied like a number data type:
+파이썬의 문자열 객체는 숫자 자료형과 마찬가지로 덧셈과 곱셈이 가능하다.
 
-| OPERATOR | NAME           | DESCRIPTION                                                         |
+| 연산자 | 이름           | 설명                                                         |
 |:--------:|----------------|---------------------------------------------------------------------|
-| `+`      | Concatenation  | Merge two different strings to one (type of quote doesn’t matter).  |
-| `*`      | Multiplication | Multiply the string by the number of integer (float does not work). |
+| `+`      | 연결  | 서로 다른 두 문자열을 하나의 문자열에 병합한다 (따옴표 유형은 중요하지 않다).  |
+| `*`      | 곱셈 | 문자열을 정수 값만큼 곱한다 (`float`는 사용 불가). |
 
 ```python
-print("Pyt" + 'hon')
+print("파이" + '썬3')
 print(4 * "2")
 ```
 
 ```
-Python
+파이썬3
 2222
 ```
 
-String is an object (or simply, an independent individual of data), thus string has its own unique operations that has not been introduced in previous two data types:
+문자열은 객체(간략히 말해, 변수와 함수가 하나의 데이토로 통합된 독립적 존재)이므로 이전 두 자료형에는 적용되지 않은 고유한 연산을 가진다:
 
 
-| METHOD         | EXAMPLE                  | DESCRIPTION                                                                                                                                                                                                               |
+| 메소드         | 예시                  | 설명                                                                                                                                                                                                               |
 |----------------|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `format()`     | `str.format(data)`       | Inserts string or non-string `data` type to a designated space via location or name designated by `{}`.                                                                                                                   |
-| `join()`       | `str.join(str_lst)`      | Joins a list of string objects `str_lst` by placing string object `str` in-between.                                                                                                                                       |
-| `split()`      | `str.split([str1])`      | Convert a string `str` to a list by separating based on blank spaces if there's no argument in method.<br /><br />*[OPTIONAL: In case there’s an argument `str1`, the string object `str` is separated based on `str1`.]* |
-| `replace()`    | `str.replace(str1,str2)` | Replace `str1` to `str2` within the string object `str`.                                                                                                                                                                  |
-| `startswith()` | `str.startswith()`       | Check the start of the `str` for equivalence.                                                                                                                                                                             |
-| `endswith()`   | `str.endswith()`         | Check the end of the `str` for equivalence.                                                                                                                                                                               |
-| `upper()`      | `str.upper()`            | Change every text in `str` to uppercase letter.                                                                                                                                                                           |
-| `lower()`      | `str.lower()`            | Change every text in `str` to lowercase letter.                                                                                                                                                                           |
+| `format()`     | `텍스트.format(데이터)`       | 문자열 또는 비문자열 `데이터`를 지정된 `{}` 공간에 위치별 혹은 이름별로 할당한다.     |    
+| `join()`       | `텍스트.join(문자열_리스트)`      | 문자열로 이루어진 리스트 객체인 `문자열_리스트` 내의 문자열들 사이에 `텍스트` 문자열을 삽입하여 하나의 문자열로 결합한다.      |
+| `split()`      | `텍스트.split()`      | 괄호 안에 문자열이 없는 경우, 공백에 따라 `텍스트` 문자열을 구분하여 리스트 객체로 변환한다.<br/><br/>*[선택사항: 괄호 안에 `문자열1`이 존재하면 `텍스트`는 `문자열1`을 기준으로 나뉘어진다.]* |
+| `replace()`    | `텍스트.replace(문자열1,문자열2)` | `텍스트` 문자열 내에서 `문자열1`을 `문자열2`로 바꾼다.       |
+| `startswith()` | `텍스트.startswith()`       | `텍스트` 문자열 시작 부분의 동등성을 확인한다. |
+| `endswith()`   | `텍스트.endswith()`         | `텍스트` 문자열 끝 부분의 동등성을 확인한다. |
+| `upper()`      | `텍스트.upper()`            | `텍스트` 문자열의 모든 영문을 대문자로 변환한다. |
+| `lower()`      | `텍스트.lower()`            | `텍스트` 문자열의 모든 영문을 소문자로 변환한다. |
 
 
 ```python
-# STRING FORMAT: [1] BY-LOCATION & [2] BY-NAME ASSIGNMENT
-lst = [str0, int1, int2]
-print("{2} {0} {1}".format(lst[0], lst[2], lst[1]))
-print("{x} {y} {z}".format(x = lst[0], y = lst[2], z = lst[1]))
+# 문자열 형식: [1] 위치별 및 [2] 이름별 할당.
+print("{2} {0} {1}".format(데이터1, 데이터3, 데이터2))
+print("{x} {y} {z}".format(x = 데이터1, y = 데이터3, z = 데이터2))
 
-# STRING CONCATENATION
-print(" ! ".join([str0, str1, str2]))
-print("str0 ! str1 ! str2".split(" ! "))
+# 문자열 연결 및 분리
+print(" ! ".join([문자열1, 문자열2, 문자열3]))
+print("문자열1 ! 문자열2 ! 문자열3".split(" ! "))
 
-# CHECK-UP FOR THE STRING
+# 문자열 확인
 print("This is a sentence.".startswith("this"))
 print("This is a sentence.".endswith("sentence."))
 
@@ -354,52 +353,53 @@ print("This is a SENTENCE.".lower())
 ```
 
 ```
-int1 str0 int2
-str0 int2 int1
+데이터2 데이터1 데이터3
+데이터1 데이터3 데이터2
 
-str0 ! str1 ! str2
-[str0, str1, str2]
+문자열1 ! 문자열2 ! 문자열3
+[문자열1, 문자열2, 문자열3]
 
-False       # False as the first letter "t" is not capitalized.
-True        # True as it also includes a period at the end.
+False       # 대문자 "T"와 소문자 "t"는 다른 존재이므로 거짓이다.
+True        # 맨 마지막에 온점을 포함하여 참이다.
 
 THIS IS A SENTENCE.
 this is a sentence.
 ```
+
 ### 자료형 변환
-It is possible to convert a data type to another different data type. The following three are the conversion widely used when developing Python program:
+자료형은 다른 자료형으로 변환될 수 있다. 다음 세 가지의 변환은 파이썬 프로그램 개발에서 가장 흔히 사용되는 변환이다:
 
 | 함수      | 이름              | 설명                                                         |
 | --------- | ----------------- | ------------------------------------------------------------ |
-| `int()`   | 정수 변환         | `float`: Fraction is eliminated, returning integer only.<br />`string`: Only numerical characters are convertible. |
-| `float()` | 부동소수점수 변환 | `int`: 제약없음.<br />`string`: Only numerical characters are convertible. |
+| `int()`   | 정수 변환         | `float`: 분수는 제거되고 정수만 반환.<br />`string`: 숫자만 변환 및 반환 가능. |
+| `float()` | 부동소수점수 변환 | `int`: 제약없음.<br />`string`: 숫자만 변환 및 반환 가능. |
 | `str()`   | 문자열 변환       | `int`: 제약없음.<br />`float`: 제약없음.                     |
 
 ## 탈출 문자
-Escape character `\` is used to escape from sequence of character and execute certain operation within text-base data. On introduction on string data type, `\'` is used to prevent string from premature ending.
+탈출 문자 `\`는 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 문자열 자료형을 소개할 때 문자열의 조기 종료를 방지하기 위해 `\`를 사용하였다.
 
 | 구문 | 설명           |
 | ---- | -------------- |
-| `\n` | 줄바꾸기       |
-| `\t` | Horizontal tab |
-| `\\` | Backslash      |
-| `\b` | Backspace      |
+| `\n` | 줄바꿈       |
+| `\t` | 탭 |
+| `\\` | 백슬래시      |
+| `\b` | 백스페이스      |
 | `\'` | 작은 따옴표    |
 | `\"` | 큰 따옴표      |
 
-Not just to escape from string and to perform operation, escape character is also used to code a single long line of code into short consecutive multi-line code.
+문자열로부터 탈출하여 연산을 수행하는 것 이외에, 탈출 문자는 하나의 긴 문장을 연속의 다수 짧은 문장으로 작성하는 데에도 사용된다.
 
 ## `None` 키워드
-An data with no value regardless of data type. Although `None` can be used as `False` in Boolean logic conditioning, `None` and `False` is completely different even in Boolean concept.
+자료형에 관계없이 아무런 값이 없는 데이터이다. 비록 논리 조건에서는 `None`을 `False`으로 사용할 수 있지만, 개념적으로는 `None`과 `False`는 완전히 다른 존재이다.
 
 ```python
-# CONDITIONAL CHECK: can None be deemed as False in Boolean?
+# 조건부 확인: 논리 조건에서 None을 False로 간주할 수 있는가?
 if not(None and True):
     print(None)
 ```
 
 ```
-None                    # This proves that None can be used as False in Boolean.
+None                    # 이는 논리 조건에서 None을 False로 사용할 수 있음을 보여준다.
 ```
 
 # **파이썬: 조건 및 루프**
