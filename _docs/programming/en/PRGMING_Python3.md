@@ -403,21 +403,21 @@ None                    # This proves that None can be used as False in Boolean.
 
 # **PYTHON: CONDITIONAL AND LOOP**
 Conditional and loop statement is commonly used and one of the essential pieces of code in programming. This chapter introduces list of conditional and loop statements in Python programming.
-
+    
 ## Indentation
 Indentation is used to delimit (mark the limits or boundaries) blocks of code. Simply put, it is used to distinguish where the block of code belongs to. Indentation is inserted on the section of code after colon `:`.
 
 Beware as placement of indentation can change the script entirely.
 
 ```python
-# IDENTATION ON THE SECOND PRINT. 
-if 1 < 0:
+# IDENTATION ON THE SECOND "print()". 
+if False:
     print("Condition is False.") 
     print("End of IF statement.")
 print("The End.") 
 
-# NO INDENTATION ON THE SECOND PRINT.
-if 1 < 0:
+# NO INDENTATION ON THE SECOND "print()".
+if False:
     print("Condition is False.") 
 print("End of IF statement.")
 print("The End.") 
@@ -435,7 +435,7 @@ Conditional `if` statement runs code if the condition is true. When the conditio
 
 ```python
 if condition:
-    statements
+    statements_true
 ```
 
 ### `else` Statement
@@ -443,32 +443,33 @@ Conditional `else` statement must be followed after `if` statement as it cannot 
 
 ```python
 if condition:
-    statements
+    True_statement
 else:
-    statements
+    False_statement
 ```
+
 Chaining `if` and `else` statement is possible in series of conditioning as follows:
 
 ```python
-if condition: 
-    statements
+if condition1: 
+    statements1
 else:
-    if condition:
-        statements
-    else condition:
-        statements
+    if condition2:
+        statements2
+    else:
+        statements3
 ```
 
 ### `elif` Statement
-Conditional `elif` statement is a combination of `if` and `else` statement; when the first condition evaluates `false`, the `elif` statement provides second (or more) chance to evaluate condition different from the first one. 
+Conditional `elif` statement is a combination of `if` and `else` statement; when the first condition evaluates `false`, the `elif` statement provides second (or more) chance to evaluate new condition different from the first one. 
 
 ```python
-if condition: 
-    statements
-elif condition:
-    statments:
+if condition1: 
+    statements1
+elif condition2:
+    statments2
 else:
-    statements
+    statements3
 ```
 
 However, this is not the same as chain of `else`-`if` conditional statement as that is a combination of two different conditional set, while `elif` statement guarantees a single conditional set.
@@ -477,7 +478,7 @@ However, this is not the same as chain of `else`-`if` conditional statement as t
 Conditional statement can be expressed simply using ternary operator as shown below:
 
 ```python
-var = True_return if condition else False_return
+True_return if condition else False_return
 ```
 
 The vocabulary *ternary* represents the statement takes three arguments. Ternary operator should not be overused as it reduces readability, but useful on variable assignment.
@@ -489,6 +490,7 @@ The `while` loop statement repeatedly execute statements inside (aka. iterate) a
 while condition:
     statements
 ```
+
 The `else` statement may follow after a `while` loop statement, which will be executed when the loop statement has successfully finished its iteration (by conditional mean).
 
 ```python
@@ -514,7 +516,7 @@ First...successful!
 ```
 
 ### `break` Statement
-The `break` statement can be used to end a loop prematurely, before complete iteration is made. When encountered inside a loop, immediately escapes from the loop but does not break from its outer loop.
+The `break` statement is used to end a loop prematurely, before complete iteration is made. When encountered inside a loop, immediately escapes from the current loop but does not break from its outer loop.
 
 ```python 
 while single_loop_condition:
@@ -601,7 +603,7 @@ First...successful!
 ```
 
 ## Exception
-Exception is an error-exclusive conditional statement: the statement checks whether the code is inexecutable due to incorrect coding or input, and stops the program immediately. There are some statements that can be used to handle the script errors.
+Exception is an inexecutable code error due to incorrect coding or input, halting the program immediately. There are some statements that can be used to handle the script errors.
 
 ### `try`/`except` Statement
 The `try`/`except` statement pair is used to handle exceptions and call certain statements corresponding to an exception occurred. There are additional statements that can be used together with the pair:

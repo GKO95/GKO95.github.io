@@ -403,119 +403,121 @@ None                    # 이는 논리 조건에서 None을 False로 사용할 
 ```
 
 # **파이썬: 조건 및 루프**
-Conditional and loop statement is commonly used and one of the essential pieces of code in programming. This chapter introduces list of conditional and loop statements in Python programming.
+조건문 및 반복문(혹은 루프문)은 일반적으로 사용되며 프로그래밍에 필수적인 코드 중 하나이다. 본 장에서는 파이썬 프로그래밍의 조건문과 반복문을 소개한다.
 
 ## 들여쓰기
-Indentation is used to delimit (mark the limits or boundaries) blocks of code. Simply put, it is used to distinguish where the block of code belongs to. Indentation is inserted on the section of code after colon `:`.
+들여쓰기는 코드 블록 경계를 표시하는 데 사용한다. 간단히 말해, 코드 블록이 어디에 속하는지 구별하는데 사용한다. 들여쓰기는 콜론(`:`)이 시작되는 이후부터 삽입된다.
 
-Beware as placement of indentation can change the script entirely.
+들여쓰기의 여부에 따라 코드가 완전히 변경될 수 있으므로 주의해야 한다.
 
 ```python
-# IDENTATION ON THE SECOND PRINT. 
-if 1 < 0:
-    print("Condition is False.") 
-    print("End of IF statement.")
-print("The End.") 
+# 두 번째 print() 함수에 들여쓰기 된 경우.
+if False:
+    print("본 문장은 거짓이다.") 
+    print("조건문 종료.")
+print("끝!") 
 
-# NO INDENTATION ON THE SECOND PRINT.
-if 1 < 0:
-    print("Condition is False.") 
-print("End of IF statement.")
-print("The End.") 
+# 두 번째 print() 함수에 들여쓰기가 되지 않은 경우.
+if False:
+    print("본 문장은 거짓이다.") 
+print("조건문 종료.")
+print("끝!") 
 ```
 
 ```
-The End.
+끝!
 
-End of IF statement.
-The End.
+조건문 종료.
+끝!
 ```
 
 ## `if` 조건문
-Conditional `if` statement runs code if the condition is true. When the condition evaluates `True`, the statements are carried out but otherwise ignored.
+조건부 `if` 문은 조건이 참일 경우 코드를 실행한다. 조건이 `True`일 때 문장이 수행되지만 그렇지 않으면 무시된다.
 
 ```python
-if condition:
-    statements
+if 조건:
+    실행문
 ```
 
 ### `else` 조건문
-Conditional `else` statement must be followed after `if` statement as it cannot be used alone. The statement contains code that is called when the condition evaluates `False`. The `else` statement is not indented along with `if` statement.
+조건부 `else` 문은 반드시 `if` 문 이후에 사용되기에 단독으로 사용할 수 없다. 실행문에는 조건부가 `False`로 평가되었을 경우 호출되는 코드가 포함되어 있다. `else` 문은 `if` 문과 같이 들여쓰기를 하지 않는다.
 
 ```python
-if condition:
-    statements
+if 조건:
+    실행문_참
 else:
-    statements
+    실행문_거짓
 ```
-Chaining `if` and `else` statement is possible in series of conditioning as follows:
+
+`if` 문과 `else` 문을 다음과 같이 조건의 연속을 연쇄적으로 사용할 수 있다:
 
 ```python
 if 조건1: 
-    실행문
+    실행문1
 else:
     if 조건2:
-        실행문
+        실행문2
     else:
-        실행문
+        실행문3
 ```
 
 ### `elif` 조건문
-Conditional `elif` statement is a combination of `if` and `else` statement; when the first condition evaluates `false`, the `elif` statement provides second (or more) chance to evaluate condition different from the first one. 
+조건부 `elif` 문은 `if`와 `else` 문의 조합으로 첫 번째 조건이 거짓일 경우, 첫 번째 조건과 다른 새로운 조건을 평가할 수 있는 두 번째 (혹은 그 이상) 기회를 제공한다.
 
 ```python
 if 조건1: 
-    statements
+    실행문1
 elif 조건2:
-    statments:
+    실행문2
 else:
-    statements
+    실행문3
 ```
 
-However, this is not the same as chain of `else`-`if` conditional statement as that is a combination of two different conditional set, while `elif` statement guarantees a single conditional set.
+하지만 우선 소개된 `else`-`if` 연쇄 조건문은 두 조건부가 함께 사용되는 점과 비교해, `elif` 조건문은 여전히 하나의 조건부에서 처리되므로, 이 둘은 구체적으로 서로 다른 조건문임을 명시해야 한다.
 
 ### 조건 연산자
-Conditional statement can be expressed simply using ternary operator as shown below:
+조건문은 아래와 같이 조건 연산자를 사용하여 간략히 표현될 수 있다:
 
 ```python
-var = 반환값_참 if 조건 else 반환값_거짓
+반환값_참 if 조건 else 반환값_거짓
 ```
 
-The vocabulary *ternary* represents the statement takes three arguments. Ternary operator should not be overused as it reduces readability, but useful on variable assignment.
+조건 연산자는 영어로 *ternary operator*로, 이는 세 가지 인수를 사용하는 것을 의미한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에는 유용하다.
 
 ## `while` 반복문
-The `while` loop statement repeatedly execute statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `False`.
+`while` 반복문은 조건이 유지되는 한 내부 코드를 반복적으로 실행한다. 조건이 `False`임이 판정되면 반복문을 종료한다.
 
 ```python
 while 조건:
     실행문
 ```
-The `else` statement may follow after a `while` loop statement, which will be executed when the loop statement has successfully finished its iteration (by conditional mean).
+
+`else` 조건문은 `while` 반복문 뒤에 따라올 수 있으며, 이는 반복문이 조건부에 의해 정상적으로 종료되었을 때만 실행된다.
 
 ```python
-# FINISHED LOOP: completed iteration
+# 루프 종료: 반복 완료
 while 변수 < 10:
     변수 += 1
     if 변수 == 100:
         break
     else:
-        print("First...successful!")
+        print("첫 번째 반복문...완료!")
 
-# FINISHED LOOP: forece-escaped via break statement
+# 루프 종료: 탈출문으로 강제 처리
 while 변수 < 10:
     변수 += 1
     if 변수 == 5:
         break
     else:
-        print("Second...successful!")
+        print("두 번째 반복문...완료!")
 ```
 
 ```
-First...successful!
+첫 번째 반복문...완료!
 ```
 
 ### `break` 문
-The `break` statement can be used to end a loop prematurely, before complete iteration is made. When encountered inside a loop, immediately escapes from the loop but does not break from its outer loop.
+`break` 문 (일명 탈출문)은 반복이 완료되기 전에 루프를 조기 종료하는데 사용된다. 루프 내부에서 탈출문을 마주치는 즉시 현재 루프에서 탈출하지만 그 바깥 루프까지는 탈출하지 않는다.
 
 ```python 
 while 단일반복_조건:
@@ -531,10 +533,10 @@ while 단일반복_조건:
 ```
 
 ### `continue` 문
-The `continue` statement skips the rest of the statement below in the loop and jumps back to the conditioning part. This maintains the loop iteration rather than escaping the loop like `break` statement.
+`continue` 문은 반복문 내에서 나머지 실행문을 전부 건너뛰고 다시 조건부 판정부분으로 돌아가게 한다. 이는 반복문을 종료하는 `break` 문과 달리 반복문의 루프를 유지한다.
 
 ```python 
-while i < 5:
+while 변수 < 5:
     실행문1
     실행문2
     continue
@@ -553,18 +555,18 @@ while i < 5:
 
 
 ## `for` 반복문
-The `for` loop statements repeatedly execute statements inside (aka. iterate) as long as it is in the valid range. The loop ends once all the values in range are iterated.
+`for` 반복문은 유효한 범위에 있는 한 내부 코드를 반복적으로 실행한다. 범위 내의 모든 값이 반복되면 반복문을 종료한다.
 
 ```python
-for index in iterable:
-    statements
+for 변수 in 이터러블:
+    실행문
 ```
 
-Here, a local variable `index` obtains value from `iterable` and execute statements one-by-one until running all the values inside. The `iterable`s commonly used in the loop are
+여기서 지역 변수 `변수`는 `이터러블`에서 값을 얻고, 내부의 실행문을 더이상 불러올 값이 없을 때까지 하나씩 실행한다. 흔히 반복문에 사용되는 `이터러블` 데이터는 다음과 같다.
 
-1. range object: contains pattern of number in sequence (refer to *PYTHON: ITERABLE OBJECT § Range*)
-2. list object: contains list of data regardless of data type and pattern (refer to *PYTHON: ITERABLE OBJECT § List*).
-3. string object: returns character comprising the string.
+1. 범위 객체: 숫자를 순서대로 담고있는 객체이다 (*파이썬: 이터러블 객체 § 범위 객체* 참고)
+2. 리스트 객체: 자료형과 순서에 상관없이 데이터를 담고있는 객체이다 (*파이썬: 이터러블 객체 § 리스트 객체* 참고).
+3. 문자열 객체: 문자열을 구성하는 문자를 반환한다.
 
 ```python
 for 변수 in range(3):
@@ -577,88 +579,90 @@ Hello World 1
 Hello World 2
 ```
 
-Just like the `while` loop statement, `break` and `continue` can be used in `for` loop as well since it is the same loop-iterating statement.
+`while` 반복문과 마찬가지로, 코드를 반복적으로 실행하는 `for` 문에서도 `break`와 `continue` 문을 사용할 수 있다.
 
-The `else` statement may follow after a `for` loop statement, which will be executed when the loop statement has successfully finished its iteration (by running out of range).
+`else` 문장은 `for` 루프 문 다음에 나타날 수 있다. 루프 문장은 루프 문장이 성공적으로 반복을 마쳤을 때(범위가 부족하여) 실행된다.
+
+`else` 조건문은 `for` 반복문 뒤에 따라올 수 있으며, 이는 반복문이 범위 내에서 더 이상 호출할 값이 없음에 의해 정상적으로 종료되었을 때만 실행된다.
 
 ```python
-# FINISHED LOOP: completed iteration
+# 루프 종료: 반복 완료
 for 변수 in range(10):
     if 변수 == 100:
         break
     else:
-        print("First...successful!")
+        print("첫 번째 반복문...완료!")
 
-# FINISHED LOOP: forece-escaped via break statement
+# 루프 종료: 탈출문으로 강제 처리
 while 변수 in range(10):
     if 변수 == 5:
         break
     else:
-        print("Second...successful!")
+        print("두 번째 반복문...완료!")
 ```
 
 ```
-First...successful!
+첫 번째 반복문...완료!
 ```
 
 ## 예외
-Exception is an error-exclusive conditional statement: the statement checks whether the code is inexecutable due to incorrect coding or input, and stops the program immediately. There are some statements that can be used to handle the script errors.
+예외는 잘못된 코딩이나 입력으로 인해 실행 불가능 코드 오류이며, 이를 마주할 시 프로그램을 즉시 중지한다. 스크립트 예외처리에 사용할 수 있는 일부 문들이 존재한다.
 
 ### `try`/`except` 문
-The `try`/`except` statement pair is used to handle exceptions and call certain statements corresponding to an exception occurred. There are additional statements that can be used together with the pair:
+`try`/`except` 쌍의 문은 예외를 처리하고 발생한 예외에 따라 특정 실행문을 호출하는 데 사용된다. 이 두 가지 이외에도 예외처리에 사용되는 추가 문들도 있다.
 
 | 키워드    | 설명                                                         |
 | --------- | ------------------------------------------------------------ |
-| `try`     | A block of code to be checked for exception.                 |
-| `except`  | A code to be executed when certain exception occurs.         |
-| `else`    | [OPTIONAL: A code to be executed when the code has passed with no error (exception) occurred.] |
-| `finally` | [OPTIONAL: A block of code executed no matter what exception has occurred, and even when there’s no error.] |
+| `try`     | 예외가 있는지 확인하는 코드 블록을 제공한다.               |
+| `except`  | 특정 예외가 발생하였을 때 실행된다.         |
+| `else`    | [선택사항: 오류(예외)가 감지되지 않았을 시 실행된다.] |
+| `finally` | [선택사항: 오류 발생 여부를 떠나 반드시 실행되는 코드이다.] |
 
 ```python
 try:
     실행문
-except exception_type1:
+except 예외유형1:
     실행문
-except exception_type2:
+except 예외유형2:
     실행문
-except:			# UNCONDITIONAL EXCEPTION LOCATES LAST.
+except:			# 전조건 예외처리는 마지막에 위치한다.
     실행문
 finally:
     실행문
 ```
 
-Even after `try`/`except` statement is executed, the program does not stop and continues onward.
+`try`/`except` 문이 실행된 후에도 프로그램은 멈추지 않고 계속된다.
 
 ### `raise` 문
-The `raise` statement is used to manually raise exception intentionally. As the statement raises error, it also stops the runtime immediately, preventing anymore further execution thereafter.
+`raise` 문은 의도적으로 직접 예외를 발생시키는 데 사용된다. 해당 문으로 오류를 발생시키면 프로그램이 즉시 중단되어 더 이상의 실행이 이루어지지 않는다.
 
 ```python
-# EXPLICITLY RAISE EXCEPTION: can be used alone, even inside an 'except' code above.
+# 명시적 예외 발생: 위의 'except' 문 내에서도 단독으로 사용할 수 있음.
 raise
 
-# PROVIDE DETAIL DESCRIPTION ON EXPLICITLY RAISED EXCEPTION
-raise exception_description
+# 명시적으로 발생된 예외에 대한 자세한 설명을 제공한다.
+raise 예외설명
 ```
 
 ### `assert` 문
-The `assert` statement checks expressions for validity (aka. assertion). When tested expression is valid with no problem, assertion returns `True`. When an exception is raised, assertion returns `False`.
+`assert` 문은 표현식의 타당성(일명 진술)을 확인한다. 확인한 표현식이 유효하고 문제가 없으면 해당 진술은 `True`를 반환한다. 예외가 발생하였으면 해당 진술은 `False`를 반환한다.
 
 ```python
 print(0)
 assert 표현식_참
 print(1)
-assert 표현식_거짓, "exception_type"
+assert 표현식_거짓, "예외유형"
 print(2)
 ```
 
 ```
 0
 1
-AssertionError: exception_type
+AssertionError: 예외유형
 ```
 
 ## `pass` 문
-The `pass` statement is a null operation that does nothing when executed. This comes useful by inserting it where the code will be placed but hasn’t been written yet.
+`pass` 문은 실행될 때 아무 작업도 수행하지 않는다. 실행문 코드가 아직 작성하지 않은 상태에서 임시 코드로 유용하게 사용된다.
 
 # **파이썬: 이터러블 객체**
 Not just its simplicity that makes Python language useful, its iterable object is powerful and flexible than any other programming language can provide. While C++ has a iterable object called *array* and *vector*, Python has four iterable object that has same features but with slightly different properties.
