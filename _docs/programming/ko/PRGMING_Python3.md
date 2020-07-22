@@ -17,7 +17,7 @@ C/C++와 같은 프로그래밍 언어는 (영문) 소스 코드를 컴퓨터가
 파이썬은 인터프리터로 동작하는 고급 언어이다. 비록 코드 작성은 컴파일러보다 쉽지만, 프로그램 실행 시간은 비교적 느리다.
 
 ### C파이썬
-본래 파이썬 인터프리터는 C 언어를 기반하여 개발되었다. C 기반의 인터프리터를 C파이썬(CPython)이라 부르며 가장 널리 사용되는 인터프리터이다. 다른 언어로 구현된 것으로는 Jython(자바로 구현된 인터프리터), IronPython(.NET으로 구현된 인터프리터), 그리고 PyPy(순수 파이썬으로 구현된 인터프리터) 등이 있다.
+가장 첫 파이썬 인터프리터는 C 프로그래밍 언어를 기반하여 개발되었다. C 기반의 인터프리터를 C파이썬(CPython)이라 부르며 가장 널리 사용되는 인터프리터이다. 다른 언어로 구현된 것으로는 Jython(자바로 구현된 인터프리터), IronPython(.NET으로 구현된 인터프리터), 그리고 PyPy(순수 파이썬으로 구현된 인터프리터) 등이 있다.
 
 파이썬은 인터프리터 언어로 소개되었으나, 실제로는 인터프리터와 컴파일러 둘 다 사용한다. C파이썬은 우선 파이썬 코드를 바이트코드(bytecode)로 컴파일한 다음 C파이썬 인터프리터에 의해 실행된다. 이로 인해, 파이썬을 처음으로 실행하면 컴파일 작업이 필요해 시간이 더 소요된다.
 
@@ -453,12 +453,12 @@ else:
 
 ```python
 if 조건1: 
-    실행문1
+    실행문
 else:
     if 조건2:
-        실행문2
+        실행문
     else:
-        실행문3
+        실행문
 ```
 
 ### `elif` 조건문
@@ -466,11 +466,11 @@ else:
 
 ```python
 if 조건1: 
-    실행문1
+    실행문
 elif 조건2:
-    실행문2
+    실행문
 else:
-    실행문3
+    실행문
 ```
 
 하지만 우선 소개된 `else`-`if` 연쇄 조건문은 두 조건부가 함께 사용되는 점과 비교해, `elif` 조건문은 여전히 하나의 조건부에서 처리되므로, 이 둘은 구체적으로 서로 다른 조건문임을 명시해야 한다.
@@ -625,7 +625,7 @@ except 예외유형1:
     실행문
 except 예외유형2:
     실행문
-except:			# 전조건 예외처리는 마지막에 위치한다.
+except:            # 전조건 예외처리는 마지막에 위치한다.
     실행문
 finally:
     실행문
@@ -665,6 +665,9 @@ AssertionError: 예외유형
 `pass` 문은 실행될 때 아무 작업도 수행하지 않는다. 실행문 코드가 아직 작성하지 않은 상태에서 임시 코드로 유용하게 사용된다.
 
 # **파이썬: 이터러블 객체**
+파이썬 언어의 유용성은 단순함 이외에도 다른 언어와 달리 제공되는 강력하고 유연한 이터러블 객체에서도 부각된다. C++은 array와 vector라고 하는 반복 가능한 객체를 가지고 있는 반면, 파이썬은 기능은 같지만 속성은 약간 다른 4개의 반복 가능한 객체를 가지고 있다.
+
+
 Not just its simplicity that makes Python language useful, its iterable object is powerful and flexible than any other programming language can provide. While C++ has a iterable object called *array* and *vector*, Python has four iterable object that has same features but with slightly different properties.
 
 ## 이터러블 객첵
@@ -692,18 +695,18 @@ Slicing starts from `start` (inclusive) until `end` (exclusive) with interval of
 
 ```python
 variable = "Hello World!"
-print(variable[2:8])	# >> OUTPUT: "llo Wo"
+print(variable[2:8])    # >> OUTPUT: "llo Wo"
 
 # SLICE FROM/UNTIL THE END OF THE LIST
-print(variable[2: ])	# >> OUTPUT: "llo World!"
-print(variable[ :8])	# >> OUTPUT: "Hello Wo"
+print(variable[2: ])    # >> OUTPUT: "llo World!"
+print(variable[ :8])    # >> OUTPUT: "Hello Wo"
 
 # SLICE WITH SKIPPING SOME ELEMENTS WITH INTERVAL
-print(variable[ : :2])	# >> OUTPUT: "HloWrd"
-print(vairalbe[2:8:2])	# >> OUTPUT: "oW"
+print(variable[ : :2])    # >> OUTPUT: "HloWrd"
+print(vairalbe[2:8:2])    # >> OUTPUT: "oW"
 
 # REVERSE INTERVAL
-print(variable[8:2:-1])	# >> OUTPUT: "roW ol"
+print(variable[8:2:-1])    # >> OUTPUT: "roW ol"
 ```
 
 ## 범위 객체
@@ -716,10 +719,10 @@ Range iterable object stores a number in sequenced pattern by specifying startin
 ```python
 variable = range(3, 10, 2)
 
-variable[0]		# >> OUTPUT: 3
-variable[1]		# >> OUTPUT: 5
-variable[2]		# >> OUTPUT: 7
-variable[3]		# >> OUTPUT: 9
+variable[0]        # >> OUTPUT: 3
+variable[1]        # >> OUTPUT: 5
+variable[2]        # >> OUTPUT: 7
+variable[3]        # >> OUTPUT: 9
 ```
 
 ## 리스트 객체
@@ -728,8 +731,8 @@ List iterable object stores item in sequence along its index, irrelevant to data
 ```python
 lst = [value1, value2, value3, value4, ... ]
 
-print(lst)			# >> OUTPUT: [value1, value2, value3, value4, ... ]
-print(lst[0])		# >> OUTPUT: value1
+print(lst)            # >> OUTPUT: [value1, value2, value3, value4, ... ]
+print(lst[0])        # >> OUTPUT: value1
 ```
 
 It is possible to change the existing value by reassigning individual element. Calling the element that is outside the range of list is not possible and will results error.
@@ -737,8 +740,8 @@ It is possible to change the existing value by reassigning individual element. C
 ```python
 lst = [value1, value2, value3]
 
-lst[1] = value4		# >> RESULT: lst = [value1, value4, value3]
-lst[3] = value5		# IndexError: list assignment index out of range
+lst[1] = value4        # >> RESULT: lst = [value1, value4, value3]
+lst[3] = value5        # IndexError: list assignment index out of range
 ```
 
 List can be created programmatically if the elements observe specific sequencing pattern, called **List Comprehension**. This requires `for` loop with optional `if` conditional statement.
@@ -772,14 +775,14 @@ A list can be added and multiplied, with operations exclusive to iterable object
 lst = [value1, value2, value3]
 
 # + OPERATOR
-print(lst + [value3, value4])	 # >> OUTPUT: [value1, value2, value3, value3, value4]
+print(lst + [value3, value4])     # >> OUTPUT: [value1, value2, value3, value3, value4]
 
 # * OPERATOR
-print(lst * 2)				   	# >> OUTPUT: [value1, value2, value3, value1, value2, value3]
+print(lst * 2)                       # >> OUTPUT: [value1, value2, value3, value1, value2, value3]
 
 # in OPERATOR
-print(value1 in lst)		   	# >> OUTPUT: True
-print(value2 not in lst)		# >> OUTPUT: False
+print(value1 in lst)               # >> OUTPUT: True
+print(value2 not in lst)        # >> OUTPUT: False
 ```
 
 Following are functions that does certain features to and for a list (or more like iterable) object.
@@ -797,19 +800,19 @@ lst = [10, 9, 8, 7, 6]
 
 # ALL() FUNCTION
 if all( [var > 5 for var in lst] ):
-    print("Numbers are all above 5.")		   # >> OUTPUT: Numbers are all above 5.
+    print("Numbers are all above 5.")           # >> OUTPUT: Numbers are all above 5.
 
 # ANY() FUNCTION
 if any( [ var % 2 ==  0 for var in lst] ):
-    print("At least one number is even.")	   # >> OUTPUT: At least one number is even.
+    print("At least one number is even.")       # >> OUTPUT: At least one number is even.
     
 # ENUMERATE() FUNCTION
 for var in enumerate(lst):
-    print(var)								 # >> OUTPUT: (0,10)
-                                                # >>		 (1,9)
-                                                # >>		 (2,8)
-                                                # >>		 (3,7)
-                                                # >>		 (4,6)
+    print(var)                                 # >> OUTPUT: (0,10)
+                                                # >>         (1,9)
+                                                # >>         (2,8)
+                                                # >>         (3,7)
+                                                # >>         (4,6)
 ```
 
 Since list is an (iterable) object, it also has methods it can use to perform certain features:
@@ -825,13 +828,13 @@ Tuple iterable object is used to store item in order just like a list, but canno
 
 ```python
 tpl = (value1, value2, value3)
-print(tpl)			# >> OUTPUT: (value1, value2, value3)
-print(tpl[0])		# >> OUTPUT: value1
+print(tpl)            # >> OUTPUT: (value1, value2, value3)
+print(tpl[0])        # >> OUTPUT: value1
 
 # ALTERNATIVE: tuple without parentheses
 tpl = value1, value2, value3
-print(tpl)			# >> OUTPUT: (value1, value2, value3)
-print(tpl[0])		# >> OUTPUT: value1
+print(tpl)            # >> OUTPUT: (value1, value2, value3)
+print(tpl[0])        # >> OUTPUT: value1
 ```
 
 Because tuple is a constant version of a list, the data inside cannot be changed. The error will occur when such effort is made.
@@ -854,10 +857,10 @@ Unpacking tuple means assigning individual element in tuple to variables or anot
 ```python
 variable1, variable2, *variable3, variable3 = [value1, value2, value3, value4, value5]
 
-print(variable1)		# >> OUTPUT: value1
-print(variable2)		# >> OUTPUT: value2
-print(variable3)		# >> OUTPUT: [value3, value4]
-print(variable3)		# >> OUTPUT: value5
+print(variable1)        # >> OUTPUT: value1
+print(variable2)        # >> OUTPUT: value2
+print(variable3)        # >> OUTPUT: [value3, value4]
+print(variable3)        # >> OUTPUT: value5
 ```
 
 ## 딕셔너리 객체
@@ -866,9 +869,9 @@ Dictionary is an iterable object that has indexing `key` data and `value` data p
 ```python
 dictionary = {key1: value1, key2: value2, key3: value3}
 
-print(dictionary[key1])		# >> OUTPUT: value1
-print(dictionary[key2])		# >> OUTPUT: value2
-print(dictionary[key4])		# KeyError: key4
+print(dictionary[key1])        # >> OUTPUT: value1
+print(dictionary[key2])        # >> OUTPUT: value2
+print(dictionary[key4])        # KeyError: key4
 ```
 
 Mutable object (e.g. list and dictionary) cannot be used as `key` of the element; only immutable object is allowed. However, mutable object can still be used as a `value` of the element.
@@ -904,9 +907,9 @@ Operations for a dictionary is same as other iterable objects but have slight di
 ```python
 dictionary = {key1: value1, key2: value2}
 
-print(key1 in dictionary )			# >> OUTPUT: True
-print(value2 in dictionary )		# >> OUTPUT: False
-print(key3 not in dictionary )		# >> OUTPUT: True
+print(key1 in dictionary )            # >> OUTPUT: True
+print(value2 in dictionary )        # >> OUTPUT: False
+print(key3 not in dictionary )        # >> OUTPUT: True
 ```
 
 Dictionary have its own function and method to execute certain features exclusive for dictionary:
@@ -919,9 +922,9 @@ Dictionary have its own function and method to execute certain features exclusiv
 ```python
 dictionary = {key1: value1, key2: value2}
 
-print(dictionary.get(key0))							# >> OUTPUT: value1
-print(dictionary.get(key2))							# >> OUTPUT: None
-print(dictionary.get(key3, "not in dictionary"))	  # >> OUTPUT: not in dictionary
+print(dictionary.get(key0))                            # >> OUTPUT: value1
+print(dictionary.get(key2))                            # >> OUTPUT: None
+print(dictionary.get(key3, "not in dictionary"))      # >> OUTPUT: not in dictionary
 ```
 
 ## 집합 객체
@@ -949,14 +952,14 @@ Set have mathematical operations available which works exactly like mathematical
 set1 = {1, 2, 3, 4, 5, 6}
 set2 = {4, 5, 6, 7, 8, 9}
 
-print(set1 | set2)		# >> OUTPUT: {1, 2, 3, 4, 5, 6, 7, 8, 9}
+print(set1 | set2)        # >> OUTPUT: {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-print(set1 & set2)		# >> OUTPUT: {4, 5, 6}
+print(set1 & set2)        # >> OUTPUT: {4, 5, 6}
 
-print(set1 - set2)		# >> OUTPUT: {1, 2, 3}
-print(set2 - set1)		# >> OUTPUT: {7, 8, 9}
+print(set1 - set2)        # >> OUTPUT: {1, 2, 3}
+print(set2 - set1)        # >> OUTPUT: {7, 8, 9}
 
-print(set1 ^ set2)		# >> OUTPUT: {1, 2, 3, 7, 8, 9}
+print(set1 ^ set2)        # >> OUTPUT: {1, 2, 3, 7, 8, 9}
 ```
 
 Set have its own function to execute certain features exclusive for set:
@@ -975,14 +978,14 @@ The function above is necessary when creating an empty set, as `{}` creates an e
 
 ```python
 st = set([value1, value2, value3, value1])
-print(st)				# >> OUTPUT: {value1, value2, value3}
+print(st)                # >> OUTPUT: {value1, value2, value3}
 
 set0.add(value4)
 set0.remove(value1)
-print(st)				# >> OUTPUT: {value2, value3, value4}
+print(st)                # >> OUTPUT: {value2, value3, value4}
 
-print(st.pop())			# >> OUTPUT: value2 (randomly popped)
-print(st)				# >> OUTPUT: {value3, value4}
+print(st.pop())            # >> OUTPUT: value2 (randomly popped)
+print(st)                # >> OUTPUT: {value3, value4}
 ```
 
 ## Generator
@@ -1021,7 +1024,7 @@ A keyword used to create a generator; keyword returns the value when iterated by
 Functional programming is a style of program scripting that is based mostly around usage of the functions. This chapter will be introducing the guide on how to create and use function in Python for functional programming.
 
 ## 함수
-Function is an independent block of code which can process the data and present newly processed data once it’s called, allowing dynamic program scripting. Function can be distinguished from its code format which has parenthesis after its name; `function()`.
+Function is an independent block of code which can process the data and present newly processed data once it's called, allowing dynamic program scripting. Function can be distinguished from its code format which has parenthesis after its name; `function()`.
 
 The programming based around use of custom functions is called *functional programming*.
 
@@ -1058,7 +1061,7 @@ As for an example, cosine function `cos(x)` that only has single parameter `x` r
 def function(x,y):
     variable = 2 * x
     vairable += y
-    return variable			# RETURN DEPENDS ONLY ON x AND y PARAMETER.
+    return variable            # RETURN DEPENDS ONLY ON x AND y PARAMETER.
 ```
 
 ### Higher-Order Function
@@ -1113,7 +1116,7 @@ Argument is a value or object being passed to the function parameter and those p
 | 연산자 |    구문     | 설명                                                         |
 | :----: | :---------: | ------------------------------------------------------------ |
 |  `*`   |   `*args`   | Allows multiple number of arguments.<br />Call by `args`(arguments) without asterisk, and returns tuple of arguments. Must locate after normal parameter. |
-|  `**`  | `**kwargs`  | Allows use of undefined parameter in advance.<br />Call by `kwargs`(keyword arguments) without asterisks, and returns dictionary of arguments’ name and corresponding values. |
+|  `**`  | `**kwargs`  | Allows use of undefined parameter in advance.<br />Call by `kwargs`(keyword arguments) without asterisks, and returns dictionary of arguments' name and corresponding values. |
 |  `=`   | `arg=value` | Passes default value to parameter unless argument value is specified. Must locate after normal parameter. |
 
 Examples below show how function parameter and argument works:
@@ -1261,14 +1264,14 @@ print( factorial(5) )
 Recursion can occur indirectly by multiple number of functions calling one to another, then back to the beginning.
 
 ### Base Case
-A case of recursion which doesn’t involve referring to itself anymore. It can be deemed as an exit condition. Without a base case, recursion results infinitely and thus crashes due to memory shortage:
+A case of recursion which doesn't involve referring to itself anymore. It can be deemed as an exit condition. Without a base case, recursion results infinitely and thus crashes due to memory shortage:
 
 ```
 RuntimeError: maximum recursion depth exceeded
 ```
 
 ## 데코레이터
-Decorator is a function which modifies original function’s functionality and returns the modified "function" itself (rather than returning value). Hence, assignment to a variable is needed for a function to properly work after processing through the decorator. Its function will then have a same name as the variable.
+Decorator is a function which modifies original function's functionality and returns the modified "function" itself (rather than returning value). Hence, assignment to a variable is needed for a function to properly work after processing through the decorator. Its function will then have a same name as the variable.
 
 ```python
 # ORIGINAL FUNCTION
@@ -1285,7 +1288,7 @@ def decorator(func):
 
 # DECORATING (MODIFYING) FUNCTION
 variable = decorator(function) 
-variable()		# WHICH IS ACTUALLY A FUNCTION ASSIGNED TO "variable".
+variable()        # WHICH IS ACTUALLY A FUNCTION ASSIGNED TO "variable".
 
 # DECORATING (MODIFYING) FUNCTION: MAINTAIN FUNCTION NAME
 function = decorator(function)
@@ -1306,16 +1309,16 @@ A decorator symbol `@` used for pre-pending the function definition, placed befo
 ```python
 # CREATING DECORATOR.
 def decorator(func):
-	def modified_function():
-		"""
-		statements including func()
-		"""
-	return modified_function
+    def modified_function():
+        """
+        statements including func()
+        """
+    return modified_function
 
 # DECORATING FUNCTION: @ SYMBOL
 @decorator
-def function():	# ORIGINAL FUNCTION OF "function()"
-	statements
+def function():    # ORIGINAL FUNCTION OF "function()"
+    statements
 
 # FUNCTION NAME REMAINS THE SAME.
 function()
@@ -1327,7 +1330,7 @@ Additionally, more than one decorator can be applied to a single pre-decorated f
 @decorator1
 @decorator2
 def function():
-	statements
+    statements
 ```
 
 A decorator located closest to pre-decorated function will be applied firsthand. Thus, the function object `function()` will first be decorated by `@decorator2`  then `@decorator1` sequentially.
@@ -1375,13 +1378,13 @@ class CLASS∶
         self.attr1 = arg1
         self.attr2 = arg2
         
-	# METHOD (similar to FUNCTION)
+    # METHOD (similar to FUNCTION)
     def method(self, arg3):
         self.attr3 = arg3
         return self.attr1 + self.attr2 - self.attr3
 
 # INSTANTIATION
-instance = CLASS(value1, value2)	# CREATE INSTANCE FROM THE CLASS
+instance = CLASS(value1, value2)    # CREATE INSTANCE FROM THE CLASS
 
 # THEREFORE...
 print(instance.attr3)
@@ -1414,9 +1417,9 @@ Class.__init__(self = instance, arg1 = 1, arg2 = 2, arg3 = 3)
 '''
 
 # THEREFORE...
-instance.attr1		# >> OUTPUT: 1
-instance.attr2		# >> OUTPUT: None
-instance.attr3		# AttributeError: 'CLASS' object has no attribute 'C'
+instance.attr1        # >> OUTPUT: 1
+instance.attr2        # >> OUTPUT: None
+instance.attr3        # AttributeError: 'CLASS' object has no attribute 'C'
 ```
 
 ### `__init__` 메소드
@@ -1436,7 +1439,7 @@ class CLASS:
         self.attr2 = arg2
         self.attr3 = None
 
-	# INSTANCE METHOD
+    # INSTANCE METHOD
     def method1(self, arg3):
         self.attr3 = arg3
 ```
@@ -1467,7 +1470,7 @@ class CLASS:
     def method1(self, arg3):
         self.attr3 = arg3
     
-	# CLASS METHOD
+    # CLASS METHOD
     @classmethod
     def method2(cls, arg4):
         return arg4
@@ -1482,22 +1485,22 @@ class CLASS:
 instance1 = CLASS(1, 2)
 instance1.method1(4)
 
-instance2 = CLASS.method3(1, 2)	# INSTANTIATE: arg1 = 1**1, arg2 = 2**2
+instance2 = CLASS.method3(1, 2)    # INSTANTIATE: arg1 = 1**1, arg2 = 2**2
 instance2.method1(4)
 
 # THEREFORE...
-CLASS.attribute			# >> OUTPUT: value
-CLASS.method2(3)		# >> OUTPUT: 3
+CLASS.attribute            # >> OUTPUT: value
+CLASS.method2(3)        # >> OUTPUT: 3
 
-instance1.attribute	 	# >> OUTPUT: value
-instance1.attr1			# >> OUTPUT: 1
-instance1.attr2			# >> OUTPUT: 2
-instance1.attr3			# >> OUTPUT: 4
+instance1.attribute         # >> OUTPUT: value
+instance1.attr1            # >> OUTPUT: 1
+instance1.attr2            # >> OUTPUT: 2
+instance1.attr3            # >> OUTPUT: 4
 
-instance2.attribute	 	# >> OUTPUT: value
-instance2.attr1			# >> OUTPUT: 1 (= 1**2)
-instance2.attr2			# >> OUTPUT: 4 (= 2**2)
-instance2.attr3			# >> OUTPUT: 4
+instance2.attribute         # >> OUTPUT: value
+instance2.attr1            # >> OUTPUT: 1 (= 1**2)
+instance2.attr2            # >> OUTPUT: 4 (= 2**2)
+instance2.attr3            # >> OUTPUT: 4
 ```
 
 ## 정적 메소드
@@ -1531,11 +1534,11 @@ instance = CLASS(1, 2)
 instance.method1(4)
 
 # THEREFORE...
-instance.attr1			# >> OUTPUT: 1
-instance.attr2			# >> OUTPUT: 2
-instance.attr3			# >> OUTPUT: 4
+instance.attr1            # >> OUTPUT: 1
+instance.attr2            # >> OUTPUT: 2
+instance.attr3            # >> OUTPUT: 4
 
-CLASS.method2(4)		# >> OUTPUT: True
+CLASS.method2(4)        # >> OUTPUT: True
 ```
 
 ## 매직 메소드
@@ -1563,13 +1566,13 @@ class CLASS:
         self.A = arg1
         
     def __add__(self, arg2):
-        return "\0".join([self.A, arg2.A])		# INSERT "\0" BETWEEN TWO STRING OBJECTS.
+        return "\0".join([self.A, arg2.A])        # INSERT "\0" BETWEEN TWO STRING OBJECTS.
 
 # INSTANTIATION
 instance1 = CLASS("Hello")
 instance2 = CLASS("World!")
 
-instance1 + instance2		# >> OUTPUT: "Hello World!"
+instance1 + instance2        # >> OUTPUT: "Hello World!"
 ```
 
 ## 상속
@@ -1590,9 +1593,9 @@ class SUBCLASS(SUPERCLASS):
 instance = SUBCLASS()
 
 # THEREFORE...
-instance.attr1		# >> OUTPUT: value1
-instance.attr2		# >> OUTPUT: "Hello World!"
-instance.attr3		# >> OUTPUT: value3
+instance.attr1        # >> OUTPUT: value1
+instance.attr2        # >> OUTPUT: "Hello World!"
+instance.attr3        # >> OUTPUT: value3
 ```
 
 ### 슈퍼 함수
@@ -1730,14 +1733,14 @@ import this
 
 ## Python Enhancement Proposals
 Eight scripting style guides for Python suggested by experienced Python developers, aka. **PEP8**.
-1.	Module should have short, all-lowercase name.
-2.	Class name should be in the CapWords style.
-3.	Most variables and function names should be lowercase_with_underscores.
-4.	Constants (variables that never change value) should be CAPS_WITH_UNDERSCORES.
-5.	Names that would clash with Python keywords (such as 'class' or 'if') should have a trailing underscore.
-6.	Line shouldn’t be longer than 80 characters.
-7.	`from module import *` should be avoided.
-8.	There should be only one statement per line.
+1.    Module should have short, all-lowercase name.
+2.    Class name should be in the CapWords style.
+3.    Most variables and function names should be lowercase_with_underscores.
+4.    Constants (variables that never change value) should be CAPS_WITH_UNDERSCORES.
+5.    Names that would clash with Python keywords (such as 'class' or 'if') should have a trailing underscore.
+6.    Line shouldn't be longer than 80 characters.
+7.    `from module import *` should be avoided.
+8.    There should be only one statement per line.
 
 ## 시작점
 While other program language such as C/C++ has a traditional entry point called `main()` which is the function where the program execution starts, Python does not have one.
@@ -1888,19 +1891,19 @@ variable = open("path\\file.txt")
 ## 파일 읽기
 After opening the text-based file, Python can read lines of file's content using `read()` method. Argument inside the method represent the number of bytes the method will read.
 
-Read method can be used on the same file over again, but it will continue from where Python last read. When there’s no argument, the read method reads the rest of the text from where it last left off.
+Read method can be used on the same file over again, but it will continue from where Python last read. When there's no argument, the read method reads the rest of the text from where it last left off.
 
 ```python
 with open("path\\file.txt") as file:
-    print(file.read(16))	# READ 16 BYTES FROM THE START OF THE CONTENT.
-    print(file.read(4))		# READ 4 BYTES FROM THE POINT AFTER PREVIOUS 16 BYTES.
-    print(file.read())		# READ THE REST OF THE TEXT AFTER PREVIOUS 4 BYTES.
-    print(file.read())		# READ NO TEXT AS NO MORE CONTENT TO READ.
+    print(file.read(16))    # READ 16 BYTES FROM THE START OF THE CONTENT.
+    print(file.read(4))        # READ 4 BYTES FROM THE POINT AFTER PREVIOUS 16 BYTES.
+    print(file.read())        # READ THE REST OF THE TEXT AFTER PREVIOUS 4 BYTES.
+    print(file.read())        # READ NO TEXT AS NO MORE CONTENT TO READ.
 ```
 
 The `Readlines()` method is used to return a list of text of each line. The method do accepts argument, but it works exactly same as a read method: it designates how many bytes to read.
 
-Don’t get confused with `Readline()`s method which only reads the first line in string.
+Don't get confused with `Readline()`s method which only reads the first line in string.
 
 ```
 <file.txt>
@@ -2141,8 +2144,8 @@ While accessing elements of NumPy array is similar to Python's iterable object, 
 import numpy as np
 variable = np.array([[1, 2, 3], [4, 5, 6]])
 
-print(variable[0])		# >> OUTPUT: [1, 2, 3]
-print(variable[0, 1])	# >> OUTPUT: 2
+print(variable[0])        # >> OUTPUT: [1, 2, 3]
+print(variable[0, 1])    # >> OUTPUT: 2
 ```
 
 ### NumPy Shape
@@ -2152,8 +2155,8 @@ Shape of the NumPy cannot be extracted using method of Python's iterable object 
 import numpy as np
 variable = np.array([[1, 2, 3], [4, 5, 6]])
 
-variable.shape		# >> OUTPUT: (2, 3)
-variable.shape[0]	# >> OUTPUT: 2
+variable.shape        # >> OUTPUT: (2, 3)
+variable.shape[0]    # >> OUTPUT: 2
 ```
 
 ## NumPy Indexing
