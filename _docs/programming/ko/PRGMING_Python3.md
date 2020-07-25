@@ -22,15 +22,15 @@ C/C++와 같은 프로그래밍 언어는 (영문) 소스 코드를 컴퓨터가
 파이썬은 인터프리터 언어로 소개되었으나, 실제로는 인터프리터와 컴파일러 둘 다 사용한다. C파이썬은 우선 파이썬 코드를 바이트코드(bytecode)로 컴파일한 다음 C파이썬 인터프리터에 의해 실행된다. 이로 인해, 파이썬을 처음으로 실행하면 컴파일 작업이 필요해 시간이 더 소요된다.
 
 # **파이썬: 기초**
-일반적으로 프로그래밍 언어에는 코딩에 있어 준수하고 인식되어야 하는 프로그래밍의 기반이 되는 중요한 데이터나 구문이 존재한다. 실질적이 프로그래밍에 있어, 본 장에서는 파이썬 프로그램 코딩에 기초적인 정보를 제공한다.
+일반적으로 프로그래밍 언어에는 코딩에 있어 준수하고 인식되어야 하는 프로그래밍의 기반이 되는 중요한 데이터나 구문이 존재한다. 실질적인 프로그래밍에 있어, 본 장에서는 파이썬 프로그램 코딩에 기초적인 정보를 제공한다.
 
 ## 주석
-프로그래밍에 있어 주석은 실행되지 않으며, 흔히 코드와 관련된 정보를 입력하는데 사용되기도 한다. 파이썬에는 두 가지의 주석이 존재한다: *한줄 주석*과 *블록 주석*이 있다.
+프로그래밍에 있어 주석은 실행되지 않으며, 흔히 어떠한 정보를 코드 내에 입력하는데 사용되기도 한다. 파이썬에는 두 가지의 주석이 존재한다: *한줄 주석*과 *블록 주석*이 있다.
 
 * **한줄 주석**
   : 코드 한 줄을 차지하는 주석이며, 해시 기호(`#`)로 표시된다.
 * **블록 주석** (일명. **독스트링**)
-  : 코드 여러 줄을 차지하는 주석이며, 세 쌍의 작은 따옴표(`''' '''`) 혹은 큰 따옴표 (`""" """`)로 표시된다. 독스크링(docstrings)은 또한 여러 줄의 문장을 쓰는데 사용되기도 하며, 프로그램 실행 도중에도 볼 수 있다.
+  : 코드 여러 줄을 차지하는 주석이며, 세 쌍의 작은 따옴표(`''' '''`) 혹은 큰 따옴표 (`""" """`)로 표시된다. 그 중에서 큰 따옴표로 구성된 독스크링(docstrings)은 프로그램 실행 도중에도 볼 수 있다.
 
 ```python
 """
@@ -92,17 +92,17 @@ print("출력:", 변수)
    ```
 
 ## 식별자
-식별자는 프로그래밍에서 데이터(일명 구성체; construct)를 구별하기 위해 사용되는 명칭이다. 다시 말해, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다:
+식별자는 프로그래밍에서 데이터(일명 구성체; construct)를 구별하기 위해 사용되는 명칭이다. 다시 말해, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
 
 * 오직 영문, 숫자, 밑줄(`_`)만 허용된다.
 * 첫 문자는 숫자로 시작할 수 없다.
 * 공백은 허용되지 않는다.
 
 ## 변수
-변수는 할당 연산자(`=`)를 사용하여 데이터를 할당할 수 있는 저장공간이다. 변수에는 선언, 정의, 초기화란 세 가지 공통 단계가 있다.
+변수는 할당 연산자(`=`)를 사용하여 데이터를 할당할 수 있는 저장공간이다. 변수에는 선언, 정의, 초기화란 세 가지 단계가 있다.
 
 * **선언**
-  : 선언이란 변수, 함수, 객체와 같은 구성체(construct)에 이름(일명 식별자)을 붙여 존재를 알리는 단계이다. 다른 프로그래밍 언어에서 선언은 일반적으로 구성체에 자료형을 지정하지만, 파이썬은 예외적으로 구성체에 자료형 지정이 없다.
+  : 선언이란 변수, 함수, 객체와 같은 구성체에 이름(일명 식별자)을 붙여 존재를 알리는 단계이다. 다른 프로그래밍 언어에서 선언은 일반적으로 구성체에 자료형을 지정하지만, 파이썬은 예외적으로 구성체에 자료형 지정이 없다.
 
 * **정의**
   : 정의란 구성체가 가지는 데이터 값(혹은 실행 가능한 기능)을 담는 코드 블록을 의미한다. 일부 경우, 변수와 함수의 정의는 각각 *할당(assignment)*과 *구현(implementation)*이라고도 부른다.
@@ -123,9 +123,9 @@ print("출력:", 변수)
 변수의 자료형은 고정되어 있지 않다. 그러므로 프로그래머는 하나의 변수로 원하는 어떠한 값으로 언제든지 변경할 수 있다.
 
 ### 지역 변수 & 전역 변수
-**지역 변수**는 함수나 클래스의 코드 블록 내부에서 선언된 변수이다. 단, 이는 조건문이나 반복문, `with` 문 등 일부 경우에는 적용되지 않는다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다. 지역 변수는 외부에서 선언된 변수의 이름을 가질 수 있다.
+**지역 변수**는 함수(function)나 클래스(class)의 코드 블록 내부에서 선언된 변수이다. 단, 이는 조건문이나 반복문, `with` 문 등 일부 경우에는 적용되지 않는다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다. 지역 변수는 외부에서 선언된 변수의 이름을 가질 수 있다.
 
-**전역 변수**는 스크립트 내에서 어떠한 코드 블록에도 속하지 않은 외부에 선언된 변수이다. `global` 키워드를 이용해 코드 블록 내부에서 전역 변수를 사용할 수 있다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수는 피해야 한다.
+**전역 변수**는 스크립트 내에서 어떠한 코드 블록에도 속하지 않은 외부에 선언된 변수이다. `global` 키워드를 이용해 코드 블록 내부에서 전역 변수를 사용할 수 있다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수의 사용은 피해야 한다.
 
 ### 상수 변수
 상수 변수는 초기화 후 변경할 수 없는 특별한 유형의 변수이다. 그러나 파이썬은 선언의 개념이 없기 때문에 실질적으로 상수 변수란 존재하지 않는다. C/C++와 같은 언어는 이러한 기능을 가지고 있지만, 파이썬 개발자는 상수 변수로 사용될 변수의 할당값을 수정하지 않도록 주의할 수 밖에 없다.
@@ -136,31 +136,31 @@ print("출력:", 변수)
 `del` 키워드는 변수를 삭제 할 때 사용한다. 삭제된 변수 이름으로 나중에 재선언 할 수 있다.
 
 ```python
-# 변수 "x"의 선언
-x = "파이썬3"
-print(x)
+# 변수의 선언
+변수 = "파이썬3"
+print(변수)
 
 # 변수 "x"의 삭제
-del x
-print(x)
+del 변수
+print(변수)
 ```
 
 ```
 파이썬3
-NameError: name 'x' is not defined
+NameError: name '변수' is not defined
 ```
 
 ## 자료형
-변수가 파이썬에 저장할 수 있는 자료형은 숫자형, 문자열, 논리형 등 세 가지 유형으로 분류할 수 있다. 파이썬은 데이터의 자료형에 따라 수행할 수 있는 기능이 있으며, 이는 연산이라고 부른다. 연산이 가능한 것으로는 (1) 연산자, (2) 함수, 그리고 (3) 메소드가 있다.
+변수가 파이썬에 저장할 수 있는 자료형은 세 가지 유형, 숫자형, 논리형, 그리고 문자열로 분류할 수 있다. 파이썬은 데이터의 자료형에 따라 수행할 수 있는 기능이 있으며, 이를 연산이라고 부른다. 연산이 가능한 구성체로는 (1) 연산자, (2) 함수, 그리고 (3) 메소드가 있다.
 
 비록 함수와 메소드는 후반부에 소개될 예정이지만, 이 세 가지 사이의 주요 차이점을 아는 것은 프로그래밍 언어의 개념을 전반적으로 이해하는 데 있어서 혼동을 예방할 수 있다.
 
 * **연산자**
-  : 사칙 연산자와 같이 피연산자의 값을 조작하는 데 사용되는 코드이다. 간단히 피연산자의 앞, 뒤 혹은 두 피연산자 사이에 배치하여 사용한다.
+  : 사칙 연산자와 같이 피연산자의 값을 조작하는 데 사용되는 코드이다. 간단히 피연산자의 접두부, 접미부 혹은 두 피연산자 사이에 배치하여 사용한다.
 * **함수**
-  : 실행하고자 하는 기능을 이름으로 호출하여 재사용 가능한 코드 조각이다. 함수는 `function()`과 같이 이름 접무사에 괄호(`()`)를 가지므로써 연산자와 구별할 수 있다.
+  : 실행하고자 하는 기능을 이름으로 호출하여 재사용이 가능한 코드 조각이다. 함수는 `function()`과 같이 이름 접미사에 소괄호(`()`)를 가지므로써 연산자와 구별할 수 있다.
 * **메소드**
-  : 객체에서만 사용할 수 있는 함수이다. 메소드는 `object.method()`와 같이 이름 접미사에 괄호(`()`)가 있지만 항상 객체에 종속되어 있다.
+  : 객체에서만 사용할 수 있는 함수이다. 메소드 또한 `object.method()`와 같이 이름 접미사에 소괄호(`()`)가 있지만 항상 객체에 종속되어 있다.
 
 ### 숫자 자료형
 숫자 자료형은 그래프, 연산처리, 인공지능의 신경망 모델링 등 과학적인 목적으로 파이썬에서 널리 사용된다. 다음은 숫자 자료형의 목록이다:
@@ -173,11 +173,10 @@ NameError: name 'x' is not defined
 
 숫자 자료형의 바이트 크기는 다른 언어에서 보다 크다. 이는 숫자 자료형이 가질 수 있는 최대 바이트 크기를 말하며, 값에 따라 훨씬 더 작을 수 있다. 이러한 바이트 크기의 유연성은 파이썬에 자료형 선언이 불필요하게 만든다.
 
-`float` 자료형은 가장 흔히 사용되는 숫자 자료형이며 `complex` 외에 분수를 표현할 수 있는 가장 작은 자료형이다. `float` 자료형은 다음과 같은 특징을 가진다:
-
+`float` 자료형은 가장 흔히 사용되는 숫자 자료형이며 `complex` 외에 분수를 표현할 수 있는 가장 작은 자료형이다. `float` 자료형은 다음과 같은 특징을 가진다.
 
 * 소수점 끝에 있는 추가 숫자 0은 무시된다.
-* 다음 계산은 자동적으로 `float` 자료형을 반환한다.
+* 다음 계산은 자동적으로 `float` 자료형을 반환한다:
   * `float`를 하나라도 포함한 연산
   * `int`의 나눗셈 연산
 
@@ -193,12 +192,12 @@ print(4 + 1.0)
 5.0
 ```
 
-숫자 자료형의 산술 연산은 다음과 같다:
+파이썬에는 다음과 같은 숫자 자료형의 산술 연산이 존재한다. 
 
 | 이름                           | 연산자 | 설명                                                         |
 | ------------------------------ | :----: | ------------------------------------------------------------ |
 | 덧셈                       |  `+`   | -                                                            |
-| 뺄셈                    |  `-`   | 파이썬은 뺄셈이 없다. 그 대신 기호는 음수를 의미하며, 수학적으로도 음수를 더하는 것은 뺄셈과 동일하다. |
+| 뺄셈                    |  `-`   | 파이썬은 뺄셈이 없다. 그 대신, 해당 기호는 음수를 의미하며, 수학적으로도 음수를 더하는 것은 뺄셈과 동일하다. |
 | 곱셈                 |  `*`   | -                                                            |
 | 제곱                    |  `**`  | -                                                            |
 | 나눗셈                       |  `/`   | 나눗셈을 할 시, 값은 자동적으로 `float` 자료형으로 변환된다. |
@@ -207,7 +206,7 @@ print(4 + 1.0)
 
 산술 연산을 쉽게 읽을 수 있도록 숫자 사이에 공백을 넣어도 된다. 이 공백은 숫자나 수학 연산에 아무런 영향을 주지 않는다.
 
-숫자 자료형에 국한된 파이썬 내장 함수 및 메소드를 사용하여 추가적인 연산을 수행할 수 있다. 아래의 대부분 연산은 *리스트(list)*라는 이터러블(iterable) 객체가 필요하며, 해당 객체는 이후에 소개될 예정이다.
+숫자 자료형에 국한된 함수 및 메소드를 사용하여 추가적인 연산을 수행할 수 있다. 아래의 대부분 연산은 *리스트(list)*라는 이터러블(iterable) 객체가 필요하며, 해당 객체는 이후에 소개될 예정이다.
 
 | 함수      | 예시                | 설명                                                         |
 | --------- | ------------------- | ------------------------------------------------------------ |
@@ -217,7 +216,7 @@ print(4 + 1.0)
 | `sum()`   | `sum([0,1,2,3,4])`  | 리스트 객체 내에에서 숫자를 모두 더한다.                             |
 
 ```python
-# round() 함수의 예시
+# "round()" 함수의 예시
 print(round(164.259763145))
 print(round(164.259763145,2))
 ```
@@ -238,21 +237,21 @@ print(round(164.259763145,2))
 |  `/=`  | `x /= y` | `x = x / y`                                               |
 |  `%=`  | `x %= y` | `x = x % y`                                               |
 
-파이썬 프로그래밍 언어에는 증감 연산자가 존재하지 않는다.
+그러나 파이썬 프로그래밍 언어에는 증감 연산자(`++` 및 `--`)가 존재하지 않는다.
 
 ### 논리 자료형
-논리 자료형은 문장이 참인지 거짓인지 판별하는 논리적 조건이 요구되는 코드에 유용하게 사용된다:
+논리 자료형은 문장이 참인지 거짓인지 판별하는 논리적 조건이 요구되는 코드에서 주로 사용된다.
 
 | 값             | 이름            | 설명                          |
 | -------------- | --------------- | ----------------------------- |
 | `True` 혹은 `1`  | 논리적 참  | 논리가 참일 때 반환된다.  |
 | `False` 혹은 `0` | 논리적 거짓 | 논리가 거짓일 때 반환된다. |
 
-숫자 0이 아닌 아무런 정수는 `True` 논리값을 나타낸다. 즉, 정수 `2`와 `3`도 `True` 논리값이며, `False`은 오로지 정수 `0`으로만 표현된다.
+숫자 0이 아닌 아무런 정수는 `True` 논리값을 나타낸다. 즉, 정수 2와 3도 `True` 논리값이며, `False`은 오로지 정수 0으로만 표현된다.
 
-비교 연산자는 둘 이상의 값의 관계를 비교하는데 사용되며, 조건이 참인지 거짓인지 여부에 따라 해당하는 논리 자료형을 반환한다.
+비교 연산자는 둘 이상의 값의 관계를 비교하는데 사용되며, 조건이 참인지 거짓인지 여부에 따라 해당하는 논리값을 반환한다.
 
-| 연산자 | 설명 |
+| 연산자 | 이름 |
 |------|----|
 | `<`  | 미만 |
 | `<=` | 이하 |
@@ -261,19 +260,19 @@ print(round(164.259763145,2))
 | `==` | 동일 |
 | `!=` | 상이 |
 
-한편, 논리 자료형은 논리합, 논리곱, 및 보수 연산아 가능하다
+한편, 논리 자료형은 논리합, 논리곱, 및 보수 연산이 가능하다.
 
 | 연산자 | 이름           | 설명                                                    |
 | :----: | -------------- | ------------------------------------------------------- |
 |  `is`  | 동등    | 두 데이터 사이의 논리 판단자이며, `==`와 유사하다.  |
-| `and`  | 논리곱 | 모든 인수가 `True`이면 `True`이고 그렇지 않으면 `False`이다.       |
-|  `or`  | 논리합  | 하나 이상의 인수가 `True`이면 `True`이고 그렇지 않으면 `False`이다.    |
+| `and`  | 논리곱 | 모든 인수가 `True`이면 `True`이고, 그렇지 않으면 `False`이다.      |
+|  `or`  | 논리합  | 하나 이상의 인수가 `True`이면 `True`이고, 그렇지 않으면 `False`이다.   |
 | `not`  | 보수     | `True`를 `False`로 변경 혹은 `False`를 `True`로 변경한다.     |
 
 ### 문자열 자료형
-문자열 자료형은 한 쌍의 작은 따옴표 `''` 또는 큰 따옴표 `""`로 구별되는 텍스트 기반 데이터이다. 문자열 자료형의 변수 또는 데이터 값을 일반적으로 *문자열 객체*라고 부른다.
+문자열 자료형은 한 쌍의 작은 따옴표(`''`) 또는 큰 따옴표(`""`)로 구별되는 텍스트 기반의 데이터이다. 문자열 자료형의 변수 또는 데이터 값을 일반적으로 *문자열 객체*라고 부른다.
 
-문자열 객체 내부에 따옴표를 배치하면 문자열 데이터이 도중에 끊길 수 있으며, 따옴표 앞에 `\`를 배치하여 문자열을 유지할 수 있다.
+문자열 객체 내부에 따옴표를 배치하면 문자열 데이터이 도중에 끊길 수 있으며, 따옴표 앞에 백슬래시(`\`)를 배치하여 문자열을 유지할 수 있다.
 
 ```python
 # 문자열 작성의 부적절한 예시와 적절한 예시의 비교.
@@ -286,7 +285,7 @@ Where
 Where's my "Cat in the Hat" book?
 ```
 
-세 쌍의 (작은 혹은 큰) 따옴표는 다중 문자열 객체를 생성한다. 이는 단순히 키보드의 Enter/Return 버튼을 눌러 줄바꿈이 가능하도록 한다. 이를 사용하지 않을 시, 줄바꿈은 `\n`을 직접 삽입해야 한다.
+세 쌍의 작은 따옴표 혹은 큰 따옴표는 다중 문자열 객체를 생성한다. 이는 단순히 키보드의 Enter/Return 버튼을 눌러 줄바꿈이 가능한 문자열이다. 이를 사용하지 않을 시, 줄바꿈은 `\n`을 직접 삽입해야 한다.
 
 ```python
 # 다중 문자열 객체로 여러 줄의 텍스트 작성 및 출력.
@@ -302,7 +301,7 @@ print("""안녕하세요.
 처음 뵙겠습니다!
 ```
 
-파이썬의 문자열 객체는 숫자 자료형과 마찬가지로 덧셈과 곱셈이 가능하다.
+파이썬의 문자열 객체는 숫자 자료형처럼 덧셈과 곱셈이 가능하다.
 
 | 연산자 | 이름           | 설명                                                         |
 |:--------:|----------------|---------------------------------------------------------------------|
@@ -319,13 +318,13 @@ print(4 * "2")
 2222
 ```
 
-문자열은 변수와 함수가 하나의 데이터로 통합된 독립적 존재인 "객체"이다. 그러므로 이전 두 자료형에는 소개되지 않은 고유의 연산을 가진다:
+문자열은 변수와 함수가 하나의 데이터로 통합된 독립적 존재인 "객체(object)"이다. 그러므로 이전 두 자료형에는 소개되지 않은 고유의 메소드 연산을 가진다.
 
 | 메소드         | 예시                  | 설명                                                                                                                                                                                                               |
 |----------------|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `format()`     | `텍스트.format(데이터)`       | 문자열 또는 비문자열 `데이터`를 지정된 `{}` 공간에 위치별 혹은 이름별로 할당한다.     |    
+| `format()`     | `텍스트.format(데이터)`       | 문자열 또는 비문자열 `데이터`를 지정된 `{}` 공간에 위치별 혹은 이름별로 할당한다.     |
 | `join()`       | `텍스트.join(문자열_리스트)`      | 문자열로 이루어진 리스트 객체인 `문자열_리스트` 내의 문자열들 사이에 `텍스트` 문자열을 삽입하여 하나의 문자열로 결합한다.      |
-| `split()`      | `텍스트.split()`      | 괄호 안에 문자열이 없는 경우, 공백에 따라 `텍스트` 문자열을 구분하여 리스트 객체로 변환한다.<br/><br/>*[선택사항: 괄호 안에 `문자열1`이 존재하면 `텍스트`는 `문자열1`을 기준으로 나뉘어진다.]* |
+| `split()`      | `텍스트.split()`      | 괄호 안에 문자열이 없는 경우, 공백에 따라 `텍스트` 문자열을 구분하여 리스트 객체로 변환한다.<br/>*[선택사항: 괄호 안에 `문자열1`이 존재하면 `텍스트`는 `문자열1`을 기준으로 나뉘어진다.]* |
 | `replace()`    | `텍스트.replace(문자열1,문자열2)` | `텍스트` 문자열 내에서 `문자열1`을 `문자열2`로 바꾼다.       |
 | `startswith()` | `텍스트.startswith()`       | `텍스트` 문자열 시작 부분의 동등성을 확인한다. |
 | `endswith()`   | `텍스트.endswith()`         | `텍스트` 문자열 끝 부분의 동등성을 확인한다. |
@@ -366,7 +365,7 @@ this is a sentence.
 ```
 
 ### 자료형 변환
-자료형은 다른 자료형으로 변환될 수 있다. 다음 세 가지의 변환은 파이썬 프로그램 개발에서 가장 흔히 사용되는 변환이다:
+자료형은 다른 자료형으로 변환될 수 있으며, 아래의 세 가지 변환은 파이썬 프로그램 개발에서 가장 흔히 사용되는 자료형 변환이다.
 
 | 함수      | 이름              | 설명                                                         |
 | --------- | ----------------- | ------------------------------------------------------------ |
@@ -375,7 +374,7 @@ this is a sentence.
 | `str()`   | 문자열 변환       | `int`: 제약없음.<br />`float`: 제약없음.                     |
 
 ## 탈출 문자
-탈출 문자 `\`는 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 문자열 자료형을 소개할 때 문자열의 조기 종료를 방지하기 위해 `\`를 사용하였다.
+탈출 문자(`\`)는 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 문자열 자료형을 소개할 때 문자열의 조기 종료를 방지하기 위해 `\n` 탈출 문자를 사용하였다.
 
 | 구문 | 설명           |
 | ---- | -------------- |
@@ -386,7 +385,7 @@ this is a sentence.
 | `\'` | 작은 따옴표    |
 | `\"` | 큰 따옴표      |
 
-문자열로부터 탈출하여 연산을 수행하는 것 이외에, 탈출 문자는 하나의 긴 문장을 연속의 다수 짧은 문장으로 작성하는 데에도 사용된다.
+문자열로부터 탈출하여 연산을 수행하는 것 이외에도, 탈출 문자는 하나의 긴 문장을 연속의 다수 짧은 문장으로 작성하는 데에 사용된다.
 
 ## `None` 키워드
 자료형에 관계없이 아무런 값이 없는 데이터이다. 비록 논리 조건에서는 `None`을 `False`으로 사용할 수 있지만, 개념적으로는 `None`과 `False`는 완전히 다른 존재이다.
@@ -402,12 +401,12 @@ None                    # 이는 논리 조건에서 None을 False로 사용할 
 ```
 
 # **파이썬: 조건 및 루프**
-조건문 및 반복문(혹은 루프문)은 일반적으로 사용되며 프로그래밍에 필수적인 코드 중 하나이다. 본 장에서는 파이썬 프로그래밍의 조건문과 반복문을 소개한다.
+조건문 및 반복문(혹은 루프문)은 프로그래밍에 가장 흔히 사용되는 코드 중 하나이다. 본 장에서는 파이썬 프로그래밍의 조건문과 반복문을 소개한다.
 
 ## 들여쓰기
-들여쓰기는 특정 조건문이나 반복문 등에 해당되는 코드 블록의 경계를 표시하는 데 사용된다. 들여쓰기는 콜론(`:`)이 시작되는 이후부터 삽입된다.
+들여쓰기는 문이나 함수, 클래스 등에 사용되며, 해당되는 코드 블록의 경계를 표시하는 데 사용된다. 즉, 본 장에서 들여쓰기는 코드가 어느 조건문 혹은 반복문에 속하는지 구분한다. 들여쓰기는 콜론(`:`)이 시작되는 이후부터 삽입된다.
 
-들여쓰기의 여부에 따라 코드가 완전히 변경될 수 있으므로 주의해야 한다.
+들여쓰기의 여부에 따라 코드의 내용이 완전히 변경될 수 있으므로 주의해야 한다.
 
 ```python
 # 두 번째 print() 함수에 들여쓰기 된 경우.
@@ -431,7 +430,7 @@ print("끝!")
 ```
 
 ## `if` 조건문
-조건부 `if` 문은 조건이 참일 경우 코드를 실행한다. 조건이 `True`일 때 문장이 수행되지만 그렇지 않으면 무시된다.
+`if` 조건문은 조건이 참일 경우 코드를 실행한다. 조건이 `True`일 때 문장이 수행되지만 그렇지 않으면 무시된다.
 
 ```python
 if 조건:
@@ -439,7 +438,7 @@ if 조건:
 ```
 
 ### `else` 조건문
-조건부 `else` 문은 단독으로 사용될 수 없으며 반드시 `if` 문 이후에 사용되어야 한다. 실행문에는 조건부가 `False`로 평가되었을 경우 호출되는 코드가 포함되어 있다.
+`else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 실행문에는 조건부가 `False`로 평가되었을 경우 호출되는 코드가 포함되어 있다.
 
 ```python
 if 조건:
@@ -448,7 +447,7 @@ else:
     실행문_거짓
 ```
 
-`if` 문과 `else` 문을 다음과 같이 조건의 연속을 연쇄적으로 사용할 수 있다:
+`if` 조건문과 `else` 조건문을 다음과 같이 조건의 연속을 연쇄적으로 사용할 수 있다:
 
 ```python
 if 조건1: 
@@ -461,7 +460,7 @@ else:
 ```
 
 ### `elif` 조건문
-조건부 `elif` 문은 `else`와 `if` 문의 조합으로 첫 번째 조건이 거짓일 경우, 첫 번째 조건과 다른 새로운 조건을 제시한다.
+`elif` 조건문은 `else`와 `if` 조건문의 조합으로 첫 번째 조건이 거짓일 경우, 첫 번째 조건과 다른 새로운 조건을 제시한다.
 
 ```python
 if 조건1: 
@@ -472,10 +471,10 @@ else:
     실행문
 ```
 
-하지만 우선 소개된 `else`-`if` 연쇄 조건문은 두 조건부가 함께 사용되는 점과 비교해, `elif` 조건문은 여전히 하나의 조건부에서 처리되므로, 이 둘은 구체적으로 서로 다른 조건문임을 명시해야 한다.
+하지만 우선 소개된 `else`-`if` 연쇄 조건문은 두 조건부가 함께 사용되는 점과 비교해 `elif` 조건문은 여전히 하나의 조건부에서 처리되므로, 이 둘은 구체적으로 서로 다른 조건문임을 명시해야 한다.
 
 ### 조건 연산자
-조건문은 아래와 같이 조건 연산자를 사용하여 간략히 표현될 수 있다:
+조건문은 아래와 같이 조건 연산자를 사용하여 간략히 표현될 수 있다.
 
 ```python
 반환값_참 if 조건 else 반환값_거짓
@@ -497,7 +496,7 @@ while 조건:
 # 루프 종료: 반복 완료
 while 변수 < 10:
     변수 += 1
-    if 변수 == 100:
+    if 변수 is 100:
         break
     else:
         print("첫 번째 반복문...완료!")
@@ -505,7 +504,7 @@ while 변수 < 10:
 # 루프 종료: 탈출문으로 강제 처리
 while 변수 < 10:
     변수 += 1
-    if 변수 == 5:
+    if 변수 is 5:
         break
     else:
         print("두 번째 반복문...완료!")
@@ -516,7 +515,7 @@ while 변수 < 10:
 ```
 
 ### `break` 문
-`break` 문 (일명 탈출문)은 반복이 완료되기 전에 루프를 조기 종료하는데 사용된다. 루프 내부에서 탈출문을 마주치는 즉시 현재 루프에서 탈출하지만 그 바깥 루프로부터는 탈출하지 않는다.
+`break` 문(일명 탈출문)은 반복이 완료되기 전에 루프를 조기 종료하는데 사용된다. 루프 내부에서 탈출문을 마주치는 즉시 현재 루프에서 탈출하지만 그 바깥 루프로부터는 탈출하지 않는다.
 
 ```python 
 while 단일반복_조건:
@@ -532,7 +531,7 @@ while 단일반복_조건:
 ```
 
 ### `continue` 문
-`continue` 문은 반복문 내에서 나머지 실행문을 전부 건너뛰고 다시 조건부 판정부분으로 돌아가게 한다. 이는 반복문을 종료하는 `break` 문과 달리 반복문의 루프를 유지한다.
+`continue` 문은 반복문 내에서 나머지 실행문을 전부 건너뛰고 다시 조건 판정부분으로 돌아가게 한다. 이는 반복문을 종료하는 `break` 문과 달리 반복문의 루프를 유지한다.
 
 ```python 
 while 변수 < 5:
@@ -561,7 +560,7 @@ for 변수 in 이터러블:
     실행문
 ```
 
-여기서 지역 변수 `변수`는 `이터러블`에서 값을 얻고, 내부의 실행문을 더이상 불러올 값이 없을 때까지 하나씩 실행한다. 흔히 반복문에 사용되는 `이터러블` 데이터는 다음과 같다.
+여기서 지역 변수 `변수`는 `이터러블`에서 값을 얻고, 내부의 실행문을 더이상 불러올 값이 없을 때까지 하나씩 반복한다. 흔히 반복문에 사용되는 `이터러블` 데이터는 다음과 같다.
 
 1. 범위 객체: 숫자를 순서대로 담고있는 객체이다 (*파이썬: 이터러블 객체 § 범위 객체* 참고)
 2. 리스트 객체: 자료형과 순서에 상관없이 데이터를 담고있는 객체이다 (*파이썬: 이터러블 객체 § 리스트 객체* 참고).
@@ -585,14 +584,14 @@ Hello World 2
 ```python
 # 루프 종료: 반복 완료
 for 변수 in range(10):
-    if 변수 == 100:
+    if 변수 is 100:
         break
     else:
         print("첫 번째 반복문...완료!")
 
 # 루프 종료: 탈출문으로 강제 처리
 while 변수 in range(10):
-    if 변수 == 5:
+    if 변수 is 5:
         break
     else:
         print("두 번째 반복문...완료!")
@@ -603,10 +602,10 @@ while 변수 in range(10):
 ```
 
 ## 예외
-예외는 잘못된 코딩이나 입력으로 인해 실행 불가능 코드 오류이며, 이를 마주할 시 프로그램을 즉시 중지한다. 스크립트 예외처리에 사용할 수 있는 일부 문들이 존재한다.
+예외는 잘못된 코딩이나 입력으로 인해 실행 불가능 코드 오류이며, 이를 마주할 시 프로그램을 즉시 중지한다. 프로그램에서 발생한 예외를 처리할 수 있는 일부 문들이 존재한다.
 
 ### `try`/`except` 문
-`try`/`except` 쌍의 문은 예외를 처리하고 발생한 예외에 따라 특정 실행문을 호출하는 데 사용된다. 이 두 가지 이외에도 예외처리에 사용되는 추가 문들도 있다.
+`try`/`except` 쌍의 문은 예외를 감지하고 발생한 예외에 따라 특정 실행문을 호출하는 데 사용된다. 이 두 가지 이외에도 예외처리에 사용되는 추가 문들도 있다.
 
 | 키워드    | 설명                                                         |
 | --------- | ------------------------------------------------------------ |
@@ -628,10 +627,10 @@ finally:
     실행문
 ```
 
-`try`/`except` 문이 실행된 후에도 프로그램은 멈추지 않고 계속된다.
+`try`/`except` 문이 실행된 후에도 프로그램은 멈추지 않고 계속 진행된다.
 
 ### `raise` 문
-`raise` 문은 의도적으로 직접 예외를 발생시키는 데 사용된다. 해당 문으로 오류를 발생시키면 프로그램이 즉시 중단되어 더 이상의 실행이 이루어지지 않는다.
+`raise` 문은 의도적으로 예외를 직접 발생시키는 데 사용된다. 해당 문으로 오류를 발생시키면 프로그램이 즉시 중단되어 더 이상의 실행이 이루어지지 않는다.
 
 ```python
 # 명시적 예외 발생: 위의 'except' 문 내에서도 단독으로 사용할 수 있음.
@@ -648,21 +647,21 @@ raise 예외설명
 print(0)
 assert 표현식_참
 print(1)
-assert 표현식_거짓, "예외유형"
+assert 표현식_거짓, "예외유형 설명"
 print(2)
 ```
 
 ```
 0
 1
-AssertionError: 예외유형
+AssertionError: 예외유형 설명
 ```
 
 ## `pass` 문
-`pass` 문은 실행될 때 아무 작업도 수행하지 않는다. 실행문 코드가 아직 작성하지 않은 상태에서 임시 코드로 유용하게 사용된다.
+`pass` 문은 실행될 때 아무 작업도 수행하지 않는다. 코드 블록이 아직 작성하지 않은 상태에서 임시 코드로 사용된다.
 
 # **파이썬: 이터러블 객체**
-파이썬의 유용함은 단순함 이외에도 다른 프로그래밍 언어에서 볼 수 없는 강력하고 유연한 이터러블 객첵에서 비롯된다. 파이썬은 네 개의 약간 다른 특성의 이터러블 객체를 가진다.
+파이썬의 유용함은 단순함 이외에도 다른 프로그래밍 언어에서 볼 수 없는 강력하고 유연한 이터러블 객첵에서 비롯된다. 파이썬은 네 개의 다른 특성의 이터러블 객체를 가진다.
 
 ## 이터러블 객첵
 이터러블(iterable; 반복 가능한) 객체는 수집한 데이터를 저장하는데 사용되며, 반복자(iterator) 객체를 반환하는 `__iter__` 메소드를 보유하는 객체로 정의된다. 반복자 데이터의 다음 요소를 자동으로 호출하는 객체로, 이터러블 객체 내의 모든 데이터를 순차적으로 불러올 수 있도록 한다.
@@ -689,22 +688,22 @@ e
 
 ```python
 변수 = "Hello World!"
-print(변수[2:8])    # >> 출력: "llo Wo"
+print(변수[2:8])     # >> 출력: "llo Wo"
 
 # 시작 혹은 끝만 지정한 리시트 슬라이싱
-print(변수[2: ])    # >> 출력: "llo World!"
-print(변수[ :8])    # >> 출력: "Hello Wo"
+print(변수[2: ])     # >> 출력: "llo World!"
+print(변수[ :8])     # >> 출력: "Hello Wo"
 
 # 간격을 통해 일부 데이터를 뛰어넘어 슬라이싱
-print(변수[ : :2])    # >> 출력: "HloWrd"
-print(변수[2:8:2])    # >> 출력: "oW"
+print(변수[ : :2])   # >> 출력: "HloWrd"
+print(변수[2:8:2])   # >> 출력: "oW"
 
 # 역방향 슬라이싱
-print(변수[8:2:-1])    # >> 출력: "roW ol"
+print(변수[8:2:-1])  # >> 출력: "roW ol"
 ```
 
 ## 범위 객체
-범위(range) 이터러블 객체는 시작할 숫자(포함), 끝을 맺을 숫자(제외) 그리고 순서 간격을 지정하여 일련의 숫자들을 순서에 맞게 저장한다. 범위 객체는 `range()` 함수를 사용하여 생성된다.
+범위(range) 이터러블 객체는 시작할 숫자(포함), 끝을 맺을 숫자(제외) 그리고 순서 간격을 지정하여 일련의 숫자들을 순서에 맞게 저장하는 구성체이다. 범위 객체는 `range()` 함수를 사용하여 생성된다.
 
 | 함수        | 예시                          | 설명                                                          |
 |-----------|-----------------------------|-------------------------------------------------------------|
@@ -720,12 +719,12 @@ print(변수[8:2:-1])    # >> 출력: "roW ol"
 ```
 
 ## 리스트 객체
-리스트(list) 이터러블 객체는 데이터 유형과 관계없이 인덱스(index) 순서에 따라 데이터를 저장한다. 리스트의 데이터 할당은 대괄호(`[]`) 내에 항목을 순서대로 쉼표로 나누어 나열한다. 또한 대괄호는 인덱스 위치의 요소(element)를 호출하는 데에도 사용된다.
+리스트(list) 이터러블 객체는 데이터 유형과 관계없이 인덱스(index) 위치에 따라 데이터를 저장한다. 리스트의 데이터 할당은 대괄호(`[]`) 내에 항목을 순서대로 쉼표로 나누어 나열한다. 또한 대괄호는 인덱스 위치의 요소(element)를 호출하는 데에도 사용된다.
 
 ```python
-리스트 = [데이터1, 데이터2, 데이터3, 데이터4, ... ]
+리스트 = [데이터1, 데이터2, 데이터3, 데이터4, ...]
 
-print(리스트)            # >> 출력: [데이터1, 데이터2, 데이터3, 데이터4, ... ]
+print(리스트)           # >> 출력: [데이터1, 데이터2, 데이터3, 데이터4, ...]
 print(리스트[0])        # >> 출력: 데이터
 ```
 
@@ -783,7 +782,7 @@ print(데이터2 not in 리스트)        # >> 출력: False
 
 | 함수          | 예시                                | 설명                                                         |
 | ------------- | ----------------------------------- | ------------------------------------------------------------ |
-| `len()`       | `len(리스트)`                          | Find the length of the `리스트`내의 요소 개수 (혹은 리스트 길이)를 확인한다.      |
+| `len()`       | `len(리스트)`                          | `리스트`내의 요소 개수(혹은 리스트 길이)를 확인한다.      |
 | `all()`       | `all([조건 for 변수 in 리스트])` | `리스트`의 모든 요소가 `조건`에 부합하면 `True`를 반환한다. |
 | `any()`       | `any([조건 for 변수 in 리스트])` | `리스트`의 최소 한 요소가 `조건`에 부합하면 `True`를 반환한다. |
 | `enumerate()` | `enumerate(리스트)`   | `리스트` 내의 데이터를 해당 인덱스 번호와 함께 나열한다. |
@@ -802,13 +801,13 @@ if any( [ 변수 % 2 ==  0 for 변수 in 변수] ):
     
 # "enumerate()" 함수
 for 변수 in enumerate(리스트):
-    print(변수)                                 # >> 출력: (0,10)
-                                                # >>         (1,9)
-                                                # >>         (2,8)
-                                                # >>         (3,7)
-                                                # >>         (4,6)
+    print(변수)                               # >> 출력: (0,10)
+                                              # >>       (1,9)
+                                              # >>       (2,8)
+                                              # >>       (3,7)
+                                              # >>       (4,6)
 ```
-리스트는 (이터러블) 객체이므로 특정 기능을 수행하는 메소드 또한 가지고 있다:
+리스트는 (이터러블) 객체이므로 특정 기능을 수행하는 메소드 또한 가지고 있다.
 
 | 메소드     | 예시                       | 설명                                                       |
 | ---------- | -------------------------- | ---------------------------------------------------------- |
@@ -817,17 +816,17 @@ for 변수 in enumerate(리스트):
 | `index()`  | `리스트.index(데이터)`         | `데이터`가 위치하는 가장 작은 인덱스 값을 반환한다.   |
 
 ## 튜플 객체
-튜플(tuple) 이터러블 객체는 리스트와 마찬가지로 항목을 순서대로 저장하나, 초기화 후에는 값을 변경할 수 없다. 이러한 이터러블 객체의 속성을 불변(immutable)이라고 한다. 튜플을 초기화 할 때 소괄호(`()`)를 사용하거나 괄호 없이 사용할 수도 있다.
+튜플(tuple) 이터러블 객체는 리스트와 마찬가지로 항목을 순서대로 저장하는 구성체이나, 초기화 후에는 값을 변경할 수 없다. 이러한 이터러블 객체의 속성을 불변(immutable)이라고 한다. 튜플을 초기화 할 때 소괄호(`()`)를 사용하거나 괄호 없이 사용할 수도 있다.
 
 ```python
 튜플 = (데이터1, 데이터2, 데이터3)
-print(튜플)            # >> 출력: (데이터1, 데이터2, 데이터3)
+print(튜플)           # >> 출력: (데이터1, 데이터2, 데이터3)
 print(튜플[0])        # >> 출력: 데이터1
 
-# ALTERNATIVE: tuple without parentheses
+# 대안: 소괄호 없이 초기화된 튜플
 튜플 = 데이터1, 데이터2, 데이터3
-print(튜플)            # >> 출력: (데이터1, 데이터2, 데이터3)
-print(튜플[0])        # >> OUTPUT: 데이터1
+print(튜플)           # >> 출력: (데이터1, 데이터2, 데이터3)
+print(튜플[0])        # >> 출력: 데이터1
 ```
 
 튜플은 리스트 객체의 상수 버전이므로 내부 항목은 변경이 불가능하다. 이를 시도할 경우 오류가 발생한다.
@@ -856,148 +855,148 @@ print(변수4)        # >> 출력: 데이터5
 ```
 
 ## 딕셔너리 객체
-Dictionary is an iterable object that has indexing `key` data and `value` data paired as a single element. Dictionary does not call value by integer index but through `key`. Dictionary uses curly bracket `{}` to distinguish itself from other iterable.
+
+딕셔너리는 인덱싱 키(key) 데이터와 값(value) 데이터를 단일 요소로 쌍을 이루는 이터러블 객체이다. 딕셔너리의 값은 해당하는 키를 통해 호출한다. 딕셔너리는 중괄호(`{}`)를 사용하여 초기화된다.
 
 ```python
-딕셔너리 = {key1: value1, key2: value2, key3: value3}
+딕셔너리 = {키1: 데이터1, 키2: 데이터2, 키3: 데이터3}
 
-print(딕셔너리[key1])        # >> OUTPUT: value1
-print(딕셔너리[key2])        # >> OUTPUT: value2
-print(딕셔너리[key4])        # KeyError: key4
+print(딕셔너리[키1])        # >> 출력: 데이터1
+print(딕셔너리[키2])        # >> 출력: 데이터2
+print(딕셔너리[키4])        # KeyError: 키4
 ```
 
-Mutable object (e.g. list and dictionary) cannot be used as `key` of the element; only immutable object is allowed. However, mutable object can still be used as a `value` of the element.
+리스트와 딕셔너리와 같이 재할당이 가능한 이터러블 객체는 딕셔너리의 키로 사용될 수 없다. 하지만 해당 객체들은 여전히 딕셔너리의 값으로 사용될 수 있다.
 
 ```python
-딕셔너리 = {lst1: value1, key2: value2}
+딕셔너리 = {리스트1: 데이터1, 키2: 데이터2}
 ```
 
 ```
 TypeError: unhashable type: 'list'
 ```
 
-It is possible to change the existing `value` of the `key` within a dictionary. Unlike list object, creating new `key` data and assigning its `value` is also possible without needing any help from a method.
+딕셔너리 내의 키에 할당된 값를 변경할 수 있다. 리스트 객체와 달리 새로운 키를 생성하고 값를 할당하는 것도 함수나 메소드 도움 없이 가능하다.
 
 ```python
-딕셔너리 = {key1: value1, key2: value2, key3: value3}
-딕셔너리[key1] = value4
-딕셔너리[key5] = value5
+딕셔너리 = {키1: 데이터1, 키2: 데이터2, 키3: 데이터3}
+딕셔너리[키1] = 데이터4
+딕셔너리[키5] = 데이터5
 ```
 
 ```
-{key1: value1, key2: value2, key3: value3, key5: value5}
+{키1: 데이터4, 키2: 데이터2, 키3: 데이터3, 키5: 데이터5}
 ```
 
-Operations for a dictionary is same as other iterable objects but have slight difference:
+딕셔너리의 연산은 다른 이터러블 객체의 연산과 유사하나 약간의 차이점이 있다.
 
-| 연산자 | 이름                     | 설명                                                         |
-| ------ | ------------------------ | ------------------------------------------------------------ |
-| `+`    | Addition                 | Merge two or more different lists to a single list.          |
-| `*`    | Multiplication           | Multiply the string by the number of integer (float does not work). |
-| `in`   | Included (key exclusive) | Check if the key is in a dictionary. However, it does not check the value. |
+| 연산자 | 이름           | 설명                                                         |
+| ------ | -------------- | ------------------------------------------------------------ |
+| `+`    | 덧셈           | 서로 다른 두 딕셔너리 객체를 하나의 딕셔너리로 통합한다.     |
+| `in`   | 포함 (키 제외) | 해당 키가 딕셔너리에 있는지 확인한다. 하지만 딕셔너리의 값은 확인하지 않는다. |
 
 ```python
-dictionary = {key1: value1, key2: value2}
+딕셔너리 = {키1: 데이터1, 키2: 데이터2}
 
-print(key1 in 딕셔너리 )            # >> OUTPUT: True
-print(value2 in 딕셔너리 )        # >> OUTPUT: False
-print(key3 not in 딕셔너리 )        # >> OUTPUT: True
+print(키1 in 딕셔너리)            # >> 출력: True
+print(데이터2 in 딕셔너리)        # >> 출력: False
+print(키3 not in 딕셔너리)        # >> 출력: True
 ```
 
-Dictionary have its own function and method to execute certain features exclusive for dictionary:
+딕셔너리는 특정 함수와 메소드를 통해 딕셔너리 전용 연산을 수행할 수 있다.
 
-| 연산     | 예시                                | 설명                                                         |
-| -------- | ----------------------------------- | ------------------------------------------------------------ |
-| `get()`  | `dictionary.get(key,[description])` | Find the key and get its value; additional description can be added when the key is not found (`None` by default). |
-| `dict()` | `dictionary=dict()`                 | Can create empty dictionary.                                 |
+| 연산     | 예시                      | 설명                                                         |
+| -------- | ------------------------- | ------------------------------------------------------------ |
+| `get()`  | `딕셔너리.get(키,[설명])` | 키를 찾아 해당 값을 호출한다. 키를 찾지 못할 시, 덧붙인 `설명`이 반환된다 (기본값: `None`). |
+| `dict()` | `딕셔너리=dict()`         | 빈 딕셔너리 객체를 생성한다.                                 |
 
 ```python
-dictionary = {key1: value1, key2: value2}
+딕셔너리 = {키1: 데이터1, 키2: 데이터2}
 
-print(딕셔너리.get(key0))                            # >> OUTPUT: value1
-print(딕셔너리.get(key2))                            # >> OUTPUT: None
-print(딕셔너리.get(key3, "not in dictionary"))      # >> OUTPUT: not in dictionary
+print(딕셔너리.get(키1))                            # >> 출력: 데이터1
+print(딕셔너리.get(키3))                            # >> 출력: None
+print(딕셔너리.get(키3, "딕셔너리 내에 없음"))       # >> 출력: 딕셔너리 내에 없음
 ```
 
 ## 집합 객체
-Set is an iterable object that guarantees uniqueness, meaning it does not allow duplicate element within the object. Just like dictionary, set uses curly bracket `{}` to assign values but without `key`-`value` pair. Due to the reasons above, set is much faster to check the elements than list.
+집합(set) 객체는 요소의 고유성을 보장하는 이터러블 객체로, 객체 내의 중복 요소를 허용하지 않는다. 딕셔너리와 마찬가지로 집합 초기화에는 중괄호(`{}`)를 사용하지만 `키:값` 형태가 아니다. 이러한 이유로 집합은 리스트보다 요소를 더 빠른 시간 내에 확인할 수 있다.
 
 ```python
-st = {value1, value2, value3}
-print(st)
+집합 = {데이터1, 데이터2, 데이터3}
+print(집합)
 ```
 
 ```
-{value1, value2, value3}
+{데이터1, 데이터2, 데이터3}
 ```
 
-Set have mathematical operations available which works exactly like mathematical set.
+집합의 연산자는 수학에서의 집합에서 사용되는 연산과 동일한 역할을 한다. 
 
-| OPERATION | NAME                 | DESCRIPTION                                                     |
-|-----------|----------------------|-----------------------------------------------------------------|
-| `|`       | Union                | Returns the combined of two sets.                               |
-| `&`       | Intersection         | Returns data which only exist in both sets.                     |
-| `-`       | Difference           | Returns data which only exist in subtrahend and not in minuend. |
-| `^`       | Symmetric difference | Return data exclusive to each set, but not both.                |
+| 연산자 | 이름   | 설명                                                       |
+| ------ | ------ | ---------------------------------------------------------- |
+| `|`    | 합집합 | 두 집합의 합을 반환한다.                                   |
+| `&`    | 교집합 | 두 집합에 존재하는 요소만 반환한다.                        |
+| `-`    | 여집합 | 피감수 집합에만 존재하며 감수 집합에 없는 요소를 반환한다. |
+| `^`    | 대칭차 | 한 집합에는 존재하나 둘 다 속하지 않는 요소를 반환한다.    |
 
 ```python
-set1 = {1, 2, 3, 4, 5, 6}
-set2 = {4, 5, 6, 7, 8, 9}
+집합1 = {1, 2, 3, 4, 5, 6}
+집합2 = {4, 5, 6, 7, 8, 9}
 
-print(set1 | set2)        # >> OUTPUT: {1, 2, 3, 4, 5, 6, 7, 8, 9}
+print(집합1 | 집합2)        # >> 출력: {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-print(set1 & set2)        # >> OUTPUT: {4, 5, 6}
+print(집합1 & 집합2)        # >> 출력: {4, 5, 6}
 
-print(set1 - set2)        # >> OUTPUT: {1, 2, 3}
-print(set2 - set1)        # >> OUTPUT: {7, 8, 9}
+print(집합1 - 집합2)        # >> 출력: {1, 2, 3}
+print(집합1 - 집합2)        # >> 출력: {7, 8, 9}
 
-print(set1 ^ set2)        # >> OUTPUT: {1, 2, 3, 7, 8, 9}
+print(집합1 ^ 집합2)        # >> 출력: {1, 2, 3, 7, 8, 9}
 ```
 
-Set have its own function to execute certain features exclusive for set:
+집합은 특정 함수와 메소드를 통해 집합 전용 연산을 수행할 수 있다.
 
-| FUNCTION | EXAMPLE         | DESCRIPTION                                                                                                              |
-|----------|-----------------|--------------------------------------------------------------------------------------------------------------------------|
-| `set()`  | `set(iterable)` | Function which creates a set: list and tuple assigned with parentheses `()` are allowed, but dictionary is not possible. |
+| 함수    | 예시            | 설명                                                         |
+| ------- | --------------- | ------------------------------------------------------------ |
+| `set()` | `set(이터러블)` | 집합을 생성하는 함수이다. 리스트와 튜플은 변환할 수 있으나, 딕셔너리는 불가하다. |
 
-The function above is necessary when creating an empty set, as `{}` creates an empty dictionary instead. Meanwhile, the methods used by set object are as follows:
+빈 집합 객체는 위의 함수로 통해서 생성되어야 하며, 이는 중괄호(`{}`)가 딕셔너리를 생성하기 때문이다. 한편, 집합 객체가 사용할 수 있는 메소드는 다음과 같다.
 
-| METHOD     | EXAMPLE             | DESCRIPTION                                                 |
-|------------|---------------------|-------------------------------------------------------------|
-| `add()`    | `set.add(value)`    | Add `value` at the end of the set.                          |
-| `remove()` | `set.remove(value)` | Remove `value` in the set.                                  |
-| `pop()`    | `set.pop()`         | Randomly selected element is popped (removed) from the set. |
+| 메소드     | 예시                  | 설명                                         |
+| ---------- | --------------------- | -------------------------------------------- |
+| `add()`    | `집합.add(데이터)`    | 집합에서 `데이터` 요소를 끝에 추가한다.      |
+| `remove()` | `집합.remove(데이터)` | 집합에서 `데이터` 요소를 제거한다.           |
+| `pop()`    | `집합.pop()`          | 무작위로 선택된 요소를 집합 내에서 제거한다. |
 
 ```python
-st = set([value1, value2, value3, value1])
-print(st)                # >> OUTPUT: {value1, value2, value3}
+집합 = set([데이터1, 데이터2, 데이터3, 데이터1])
+print(집합)                # >> 출력: {데이터1, 데이터2, 데이터3}
 
-set0.add(value4)
-set0.remove(value1)
-print(st)                # >> OUTPUT: {value2, value3, value4}
+집합.add(데이터4)
+집합.remove(데이터1)
+print(집합)                # >> 출력: {데이터2, 데이터3, 데이터4}
 
-print(st.pop())            # >> OUTPUT: value2 (randomly popped)
-print(st)                # >> OUTPUT: {value3, value4}
+print(집합.pop())          # >> 출력: 데이터2 (무작위로 제거)
+print(집합)                # >> 출력: {데이터3, 데이터4}
 ```
 
-## Generator
+## 제너레이터 객체
 Generator is an iterable object that can be created by developer using `yield` and `for` loop statement. Generator is especially useful due to its absence of memory restrictions, allowing generator to yield infinite number of data.
 
 ```python
-# CREATING THE GENERATOR.
-def generator_function():
-    var = 0
-    while var < 5
-        yield var
-        var += 1
+# 제네레이터 생성
+def 제너레이터():
+    변수 = 0
+    while 변수 < 5
+        yield 변수
+        변수 += 1
 
-# ITERATING GENERATOR ELEMENT-BY-ELEMENT.
-for var in generator_function():
-    print(var)
+# 제너레이터 반복으로 각 요소 반환
+for 변수 in 제너레이터():
+    print(변수)
 
-# CONVERSION TO "LIST" DATA TYPE.
-lst = list(generator_function())
-print(lst)
+# 리스트 객체로 변환
+리스트 = list(제너레이터())
+print(리스트)
 ```
 
 ```
@@ -1010,65 +1009,64 @@ print(lst)
 ```
 
 ### `yield` 키워드
-A keyword used to create a generator; keyword returns the value when iterated by `for` loop statement.
+제너레이터를 생성하는 데 필요한 키워드이며, `for` 반복문을 실행하면 키워드에 할당된 데이터를 반환한다.
 
 # **파이썬: 함수형 프로그래밍**
-Functional programming is a style of program scripting that is based mostly around usage of the functions. This chapter will be introducing the guide on how to create and use function in Python for functional programming.
+함수형 프로그래밍은 프로그램 코딩 방법 중 한 유형으로 함수 사용을 중심으로 한다. 본 장은 파이썬에서 함수형 프로그래밍을 구현하기 위한 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
 
 ## 함수
-Function is an independent block of code which can process the data and present newly processed data once it's called, allowing dynamic program scripting. Function can be distinguished from its code format which has parenthesis after its name; `function()`.
+함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
-The programming based around use of custom functions is called *functional programming*.
+사용자 지정 함수 사용을 중심으로 한 프로그래밍을 *함수형 프로그래밍*이라고 한다.
 
 ```python
-x = [0, 3, 5, 9]
-print(len(x))
-# Using "print()" function, and "len( )" function that returns the length of list object.
+변수 = [0, 3, 5, 9]
+print(len(변수))
+# "print()" 함수, 그리고 리스트 객체의 길이를 반환하는 "len( )" 함수
 ```
 
 ```
 4
 ```
 
-Although function acts quite different from variable, they can be treated just the same when assigned to variable.
+비록 함수는 변수와 다르지만 동일하게 취급할 수 있다. 이에 대한 내용은 아래의 예제를 참고하여 확인할 수 있다.
 
 ```python
-# ORIGINAL FUNCTION
-function(arg1, arg2)
+# 본래 함수
+함수(인자1, 인자2)
 
-# ASSIGNING AND EXECUTING FUNCTION VIA VARIABLE
-variable = function
-print(variable(arg1, arg2))
+# 변수로 함수를 할당 및 실행
+변수 = 함수
+print(변수(인자1, 인자2))
 ```
 
-Not only can it be assigned to variable, but function can also be passed as parameter of the other function. Therefore, developer can define new function using already-defined function.
+함수는 변수로 할당될 수 있을 뿐만 아니라, 다른 함수의 인자로 전달될 수 있다. 그러므로 이미 정의된 다른 함수를 사용하여 또 다른 함수를 정의할 수 있다.
 
-### 순수 함수
-Function that returns a value that depends only on their arguments without any side effects.
+### 순수 함수 
 
-As for an example, cosine function `cos(x)` that only has single parameter `x` returns the value which depends only on the argument `x`; hence, the the cosine function is a pure function.
+순수 함수는 외부적 요인의 영향 없이 반환값이 순수히 함수의 매개변수에 의존하는 함수이다. 예를 들어, 코사인 함수 `cos(x)`는 매개변수 `x` 하나만을 가지며 반환값도 `x`에만 의존한다. 그러므로 코사인 함수는 순수 함수이다.
 
 ```python
-# FUNCTION WITH x AND y PARAMETER.
-def function(x,y):
-    variable = 2 * x
-    vairable += y
-    return variable            # RETURN DEPENDS ONLY ON x AND y PARAMETER.
+# 매개변수1과 매개변수2로 이루어진 함수
+def 함수(매개변수1, 매개변수2):
+    변수 = 2 * 매개변수1
+    변수 += 매개변수2
+    return 변수			# 반환값이 매개변수1과 매개변수2에만 의존
 ```
 
-### Higher-Order Function
-A function that takes other function(s) as parameters or return the function(s) as a result.
+### 고차 함수
+고차 함수는 다른 함수를 매개변수로 사용하거나 함수를 반환하는 함수이다.
 
 ## `def` 키워드
-The `def` keyword is used to create custom function. When calling newly created function before defining one, an error occurs as Python executes sequentially, thus is deemed calling non-existing function.
+`def` 키워드는 사용자 지정 함수를 만들기 위해 사용된다. 새로 생성한 함수를 정의하기도 전에 호출할 시, 순차적으로 실행되는 파이썬에서는 존재하지 않는 함수를 호출하는 것으로 간주하여 오류가 발생한다.
 
 ```python
-def function(arg1, ar2):
-    print(arg1 * arg2)
-    return arg2
+def 함수(매개변수1, 매개변수2):
+    print(매개변수1 * 매개변수2)
+    return 매개변수2
 
-function("Hello",3)
-print(function("World",2))
+함수("Hello",3)
+print(함수("World",2))
 ```
 
 ```
@@ -1077,50 +1075,50 @@ WorldWorld
 2
 ```
 
-Parentheses `()` is necessary when defining a function even the function does not have any parameter.
+함수를 정의할 때, 어떠한 매개변수가 없을지언정 소괄호(`()`)가 반드시 필요하다.
 
-### `return` 반환문
-The `return` statement is a function-exclusive statement that returns value of certain data that can be directly used from the function. Once a return statement is executed, the function ends immediately despite there are codes still left inside.
-
-Function does not need to have a `return` statement which will return `None` when passed to variable or be printed on console terminal (for example, by using `print()` function).
+### 반환문
+`return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수는 반환문을 반드시 필요로 하지 않으며, 이러한 경우에는 `None` 값이 반환되어 변수에 전달되거나 콘솔창에 출력되어 나타난다. 
 
 ```python
-def function_name():
-    print("Hello!")
-
-print(function_name())
+def 함수():
+    print("Hello World!")
+    
+print(함수())
 ```
 
 ```
-Hello!
+Hello World!
 None
 ```
 
-### 매개변수 & 전달인자
-Following is a difference between parameter and argument that is referred significantly when discussing function:
+
+### 매개변수 및 전달인자
+
+다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
 
 **매개변수**
-Parameter is a function-internal local variable: because parameters is a function-exclusive local variable, it cannot be called from outside.
+매개변수(parameter)는 함수 내의 지역변수이다. 즉, 매개변수는 함수 전용 지역변수이기 때문에 외부에서 호출 할 수가 없다.
 
 **전달인자**
-Argument is a value or object being passed to the function parameter and those passed values and objects will be processed by the function code.
+전달인자(argument), 혹은 간략하게 "인자"는 함수 매개변수로 전달되는 값 혹은 구성체이며, 해당 데이터는 매개변수로 전달되어 처리된다. 이로 인해 흔히 매개변수와 전달인자를 구분없이 사용하는 경우가 많다.
 
-| 연산자 |    구문     | 설명                                                         |
-| :----: | :---------: | ------------------------------------------------------------ |
-|  `*`   |   `*args`   | Allows multiple number of arguments.<br />Call by `args`(arguments) without asterisk, and returns tuple of arguments. Must locate after normal parameter. |
-|  `**`  | `**kwargs`  | Allows use of undefined parameter in advance.<br />Call by `kwargs`(keyword arguments) without asterisks, and returns dictionary of arguments' name and corresponding values. |
-|  `=`   | `arg=value` | Passes default value to parameter unless argument value is specified. Must locate after normal parameter. |
+| 연산자 |    구문    | 설명                                                 |
+| :------: | :----------: | ------------------------------------------------------------ |
+|   `*`    |   `*args`    | 여러 개의 전달인자들을 한 번에 허용한다.<br />함수 내에서는 별표 없이 `args`로 호출하며 튜플을 반환한다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
+|   `**`   |  `**kwargs`  | 정의되지 않은 매개변수를 미리 사용할 수 있도록 한다.<br />함수 내에서는 별표 없이 `kwargs`로 호출하며 전달인자 이름과 해당 값으로 구성된 딕셔너리를 반환한다. |
+|   `=`    | `arg=데이터` | 매개변수에 전달인자가 없으면 기본값이 대신 반환된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
 
-Examples below show how function parameter and argument works:
+아래의 예제는 함수의 매개변수와 전달인자가 동작하는지 보여준다.
 
 ```python
-# PARAMETER *args ALLOWS MORE ARGUMENT TO BE PASSED.
-def function(arg1, *args):
+# 매개변수 *args는 하나 이상의 인자를 전달할 수 있다.
+def 함수(arg1, *args):
     print(arg1)
     print(args)
     print(args[0])
     
-function(1, 2, 3, 4)
+함수(1, 2, 3, 4)
 ```
 
 ```
@@ -1132,26 +1130,26 @@ function(1, 2, 3, 4)
 ----
 
 ```python
-# PARAMETER **kwargs ACCEPTS FUNCTION-UNDEFINED PARAMETER.
-def function(arg1, **kwargs):
+# 매개변수 **kwargs는 함수 내에서 정의되지 않은 매개변수를 수용할 수 있다.
+def 함수(arg1, **kwargs):
     print(kwargs)
     
-function(1, key0 = value0, key1 = value1)
+함수(1, 키1 = 데이터1, 키2 = 데이터2)
 ```
 
 ```
-{key0∶ value0, key1∶ value1}
+{키1∶ 데이터1, 키2∶ 데이터2}
 ```
 
 ----
 
 ```python
-# DEFAULT-INITIALIZED PARAMETER arg2
-def function(arg1, arg2 = "Hello"):
+# 매개변수 arg2의 기본값 초기화
+def 함수(arg1, arg2 = "Hello"):
     print(arg2)
     
-function(1)
-function(2, "World!")
+함수(1)
+함수(2, "World!")
 ```
 
 ```
@@ -1160,51 +1158,51 @@ World!
 ```
 
 ## 익명 함수
-Also known as **람다 함수** (혹은 **람다 표현식**), is an unnamed function without declaration (thus, anonymous) and does not store data, returning value only from a single expression. Anonymous function is generally used for a single-use function, or as an argument of higher-order function's parameter.
+일명 **람다 함수**(lambda function) 혹은 **람다식**(lambda expression)은 선언과 이름이 없는 (즉, 익명) 함수로, 데이터를 저장하지 않고 단일 표현식으로만 값을 반환한다. 익명 함수는 일반적으로 일회용 함수로 사용되거나 고차 함수의 전달인자로 사용된다.
 
-| 구문                                                         |
-| ------------------------------------------------------------ |
-| `lambda param0, param1 ∶ expression`                         |
-| A main body of anonymous function consisting parameters and its return expression. |
+| 구문                                                      |
+| --------------------------------------------------------- |
+| `lambda 매개변수1, 매개변수2 ∶ 표현식`                    |
+| 익명 함수은 매개변수와 이를 반환하는 표현식으로 구성된다. |
 
-Although anonymous function is a function without a name for a single-use, it can be assigned to variables and called when the function is needed. The anonymous function of the *PYTHON: FUNCTIONAL PROGRAMMING § Pure Function* example section can be expressed as follows:
+비록 익명 함수가 한 번만 사용되는 이름없는 함수이지만, 익명 함수는 변수에 할당하여 호출할 수 있다. 다음은 *순수 함수* 예제를 익명 함수로 표현한 것이다.
 
 ```python
-# NAMED FUNCTION
-def function(x, y):
-    return 2 * x + y
+# 이름이 있는 함수
+def 함수(인자1, 인자2):
+    return 2 * 인자1 + 인자2
 
-# ANONYMOUS FUNCTION
-(lambda x, y: 2 * x + y)(2, 3)
+# 익명 함수
+(lambda 인자1, 인자2: 2 * 인자1 + 인자2)(2, 3)
 
-# ANONYMOUS FUNCTION ASSIGNED TO VARIABLE
-variable = lambda x, y: 2 * x + y
-variable(2,3)
+# 변수에 할당된 익명 함수
+변수 = lambda 인자1, 인자2: 2 * 인자1 + 인자2
+변수(2,3)
 ```
 
 ```
 7
 ```
 
-## Map 함수
-Built-in function which takes iterable objects and function with parameters as arguments. Map function returns a list consisting return value of the function with iterable objects as its arguments.
+## `map()` 함수
+`map()` 함수는 이터러블 객체와 매개변수를 갖는 함수를 인자로 가지는 내장 함수이다. `map()` 함수는 이터러블 객체를 인자로 갖는 매개변수 함수의 반환값으로 구성된, 즉 함수로 맵핑(mapping)된 리스트를 반환한다.
 
-| SYNTAX                                                       |
+| 구문                                                         |
 | ------------------------------------------------------------ |
-| `map(function, iterable1, iterable2, ...)`                   |
-| In higher-order `map` function, iterable object `iterable1` and `iterable2` are passed as argument for `function`. |
+| `map(함수, 이터러블1, 이터러블2, ...)`                       |
+| 고차 `map()` 함수에서 이터러블 객체 `이터러블1`와 `이터러블2`가 `함수`의 인자로 전달된다. |
 
-Conversion to an iterable object, such as `list()` function is necessary to avoid error such as "SyntaxError".
+"SyntaxError"와 같은 오류를 방지하려면 리스트나 튜플과 같은 이터러블 객체로 변환해야 한다.
 
 ```python 
-lst1 = [1, 2, 3, 4, 5]
-lst2 = [0, 9, 8, 7, 6, 5]
+리스트1 = [1, 2, 3, 4, 5]
+리스트2 = [0, 9, 8, 7, 6, 5]
 
-variable1 = map(lambda x, y: x ** 2 + y, lst1, lst2)
-variable2 = map(lambda y, x: x ** 2 + y, lst2, lst1)
+변수1 = map(lambda 인자1, 인자2: 인자1 ** 2 + 인자2, 리스트1, 리스트2)
+변수2 = map(lambda 인자2, 인자1: 인자1 ** 2 + 인자2, 리스트2, 리스트1)
 
-print(list(variable1))
-print(list(variable2))
+print(list(변수1))
+print(list(변수2))
 ```
 
 ```
@@ -1212,436 +1210,444 @@ print(list(variable2))
 [1, 83, 67, 53, 41]
 ```
 
-## Filter 함수
-Built-in function which takes iterable object and Boolean conditioning function (aka. predicate) as arguments and returns iterable object containing only with the data that passed the predicate.
+## `filter()` 함수
+`filter()` 함수는 이터러블 객체와 조건 함수(일명 술어)를 인자로 갖는 내장 함수이며, 술어의 조건에 만족하는 데이터만 필터링되어 구성된 이터러블 객체를 반환한다.
 
 | 구문                                                         |
 | ------------------------------------------------------------ |
-| `filter(predicate, iterable)`                                |
-| In higher-order `filter` function, iterable object `iterable`are passed as argument for `predicate`. |
+| `filter(술어, 이터러블)`                                     |
+| 고차 `filter()` 함수에서 이터러블 객체 `이터러블`는 `술어`의 인자로 전달된다. |
 
-Conversion to an iterable object, such as `list()` function is necessary to avoid error such as "SyntaxError".
+"SyntaxError"와 같은 오류를 방지하려면 리스트나 튜플과 같은 이터러블 객체로 변환해야 한다.
 
 ```python
-lst = [1, 2, 3, 4, 5]
+리스트 = [1, 2, 3, 4, 5]
 
-variable = filter(lambda x: x % 2 is 0, lst)
+변수 = filter(lambda 인자: 인자 % 2 is 0, 리스트)
 
-print(list(variable))
+print(list(변수))
 ```
 
 ```
 [2, 4]
 ```
 
-## 회귀 함수
-Recursive function is a function that calls itself (recursion). Factorial $!$ in mathematic is the best example of recursive function implementation.
+## 재귀 함수 
+재귀 함수는 스스로를 호출하는 함수이다. 수학에서의 펙토리얼이 재귀 함수 구현의 대표적인 예제이다.
 
 ```python
-# EXAMPLE: FACTORIAL "!"
-def factorial( x ):
-    # BASE CASE: a case when to escape from the recursion.
-    if x == 1: 
+# 예제: 펙토리얼 "!"
+def 팩터리얼_함수(인자):
+    # 기저 조건: 재귀로부터 탈출하는 조건
+    if 인자 == 1: 
         return 1
     else:
-        return x * factorial(x-1)
+        return 인자 * 팩터리얼_함수(x-1)
 
-print( factorial(5) )
+print(팩터리얼_함수(5))
 ```
 
 ```
 120
 ```
 
-Recursion can occur indirectly by multiple number of functions calling one to another, then back to the beginning.
+여러 함수가 서로를 호출하는 간접적 재귀도 가능하다.
 
-### Base Case
-A case of recursion which doesn't involve referring to itself anymore. It can be deemed as an exit condition. Without a base case, recursion results infinitely and thus crashes due to memory shortage:
+### 기저 조건
+더 이상 스스로를 호출하지 않는 재귀 조건을 말하며, 출구 조건으로 간주할 수 있다. 기저 조건이 없을 시, 재귀는 무한히 발생하여 메모리 부족으로 충돌한다.
 
 ```
 RuntimeError: maximum recursion depth exceeded
 ```
 
 ## 데코레이터
-Decorator is a function which modifies original function's functionality and returns the modified "function" itself (rather than returning value). Hence, assignment to a variable is needed for a function to properly work after processing through the decorator. Its function will then have a same name as the variable.
+데코레이터는 함수의 기능을 수정하는 역할을 하며, 값을 반환하기 보다는 수정된 함수 자체를 반환하는 함수이다. 그러므로 데코레이터를 통해 처리된 후에 제대로 동작하기 위해서는 변수로의 할당이 필요하며, 함수 호출 또한 변수를 통해 이루어진다.
 
 ```python
-# ORIGINAL FUNCTION
-def function():
-    statements
+# 본래 함수
+def 함수():
+	실행문
 
-# CREATING DECORATOR
-def decorator(func):
-    def modified_function():
+# 데코레이터 생성
+def 데코레이터(함수인자):
+	def 수정된_함수():
         """
-        statements including func()
+        함수인자() 함수를 포함한 문
         """
-    return modified_function
+	return 수정된_함수
 
-# DECORATING (MODIFYING) FUNCTION
-variable = decorator(function) 
-variable()        # WHICH IS ACTUALLY A FUNCTION ASSIGNED TO "variable".
-
-# DECORATING (MODIFYING) FUNCTION: MAINTAIN FUNCTION NAME
-function = decorator(function)
-function()
+# 함수 수정하기(데코레이팅)
+변수 = 데코레이터(함수) 
+변수()		          # 실제로는 "변수"라는 이름의 변수에 할당된 함수이다.
+                
+# 함수 수정하기(데코레이팅): 함수 이름 유지
+함수 = 데코레이터(함수)
+함수()
 ```
 
-Decorator above have decorated (modified) `function()` and assigned the decorated function to a variable `variable` and `function`, where latter maintains the function name.
+위의 데코레이터는 `함수()`를 수정하고 변수 `변수()` 및  `함수()`에 할당하였으며, 후자의 경우는 함수명을 유지하였다.
 
-When passing function as a parameter of a decorator, no parenthesis are needed like `function()`. This is because former passes function itself and latter passes return value of the function.
+데코레이터의 인자로 함수를 전달할 때  `함수()`처럼 소괄호를 사용하지 않는다. 소괄호가 있으면 함수의 반환값을 전달하기 때문이며, 함수 자체를 전달하기 위해서는 괄호를 사용하지 않는다.
 
 ### `@` 기호
-A decorator symbol `@` used for pre-pending the function definition, placed before pre-decorated function.
+데코레이터의 `@` 기호는 적용될 데코레이터 이름과 함께 수정될 함수 앞에 놓여 사용된다.
 
-| 연산자 | 예시         | 설명                                                      |
-| :----: | ------------ | --------------------------------------------------------- |
-|  `@`   | `@decorator` | `@decorator` is a replacement of `func = decorator(func)` |
-
-```python
-# CREATING DECORATOR.
-def decorator(func):
-    def modified_function():
-        """
-        statements including func()
-        """
-    return modified_function
-
-# DECORATING FUNCTION: @ SYMBOL
-@decorator
-def function():    # ORIGINAL FUNCTION OF "function()"
-    statements
-
-# FUNCTION NAME REMAINS THE SAME.
-function()
-```
-
-Additionally, more than one decorator can be applied to a single pre-decorated function.
+| 연산자 |  예시   | 설명                                              |
+| :------: | ------------ | --------------------------------------------------------- |
+|   `@`    | `@데코레이터` | `@데코레이터` 는 `함수 = 데코레이터(함수)`를 대체한다. |
 
 ```python
-@decorator1
-@decorator2
-def function():
-    statements
+# 데코레이터 생성
+def 데코레이터(함수인자):
+    def 수정된_함수():
+        """
+        함수인자() 함수를 포함한 문
+        """
+    return 수정된_함수
+
+# 함수 수정하기: @ 기호 사용
+@데코레이터
+def 함수():	# "함수()"의 본래 함수
+    실행문
+
+# 함수 이름은 그대로 유지된다.
+함수()
 ```
 
-A decorator located closest to pre-decorated function will be applied firsthand. Thus, the function object `function()` will first be decorated by `@decorator2`  then `@decorator1` sequentially.
+추가적으로, 수정될 함수에는 하나 이상의 데코레이터를 적용 할 수 있다.
 
+```python
+@데코레이터1
+@데코레이터2
+def 함수():
+    실행문
+```
+
+수정될 함수에 가장 가까운 데코레이터가 우선적으로 적용된다. 그러므로, `함수()` 는 먼저 `@데코레이터2` 다음 `@데코레이터1` 순서대로 적용된다.
 
 # **파이썬: 객체지향 프로그래밍**
-Previous chapter has explained and dealt with procedural and functional programming. The third scripting method, object-oriented programming (abbrev. OOP) is based around usage of classes and objects instead of functions.
+
+본 문서에서 현재까지 절차적 및 함수형 프로그래밍애 대하여 소개하였다. 세 번째 프로그래밍 방법인 객체지향 프로그래밍(object-oriennted programming, 일명 OOP)은 함수 대신 클래스와 객체 사용을 기반으로 한다.
+
 
 ## 객체
-Previous chapters have introduced variable (which can store data) and function (which can process data). Object, aka. instance, is a block of data which encapsulate these variables and functions into a single identity.
 
-The programming based around use of a custom objects is called *object-oriented programming*.
+이전 챕터에서는 (데이터를 저장할 수 있는) 변수와 (데이터를 처리 할 수 있는) 함수를 소개하였다. 객체(object 혹은 instance)는 이러한 변수와 함수를 하나의 데이터로 캡슐화한 구성체이다.
+
+사용자 정의 객체 중심으로 한 프로그래밍을 *객체지향 프로그래밍*이라고 한다.
 
 ```python
-x = [0, 3, 5, 9]
-print(x.index(5))
-# Using "index()" method that returns index of the value 5.
+변수 = [0, 3, 5, 9]
+print(변수.index(5))
+# "index()" 메소드를 사용하여 값 5에 대한 위치를 반환한다
 ```
 
 ```
 2
 ```
 
-### 캡슐화
-Encapsulation is the core concept in object which...
+## 캡슐화
 
-1. combines variables and functions into a single object
-2. restrict direct access to these variables and functions to prevent accidental modification from external code. 
+캡슐화는 객체의 핵심으로 아래의 특성을 가진다.
+
+1. 변수와 함수를 하나의 객체로 결합한다.
+2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
+
 
 ### 속성 & 메소드
-The variables and function encapsulated to the object is called differently:
 
-* **Attribute** is an object-dependent variable, accessed by `object.attribute` format.
-* **Method** is an object-dependent function, accessed by `object.method()` format.
+속성(attribute)과 메소드(method)는 객체에 캡슐화된 변수와 함수를 의미하며 아래와 같은 방법으로 접근한다.
+
+| 객체   | 구문            |
+| ------ | --------------- |
+| 속성   | `객체.속성`     |
+| 메소드 | `객체.메소드()` |
 
 ## 클래스
-Class is used to create objects (aka. instance), hence can be deemed as a blueprint of the object. Classes are created using keyword `class` and inside defines variables and functions which becomes attributes and methods for the object.
+
+클래스(class)는 객체를 생성하는 데 사용된다. 클래스는 `class` 키워드를 사용하여 선언되며, 내부는 객체 속성과 메소드가 되는 변수와 함수를 정의한다.
 
 ```python
-# CREATING CLASS
-class CLASS∶
-    # INSTANCE INITIALIZATION (= CONSTRUCTOR)
-    def __init__(self, arg1, arg2):
-        # ATTRIBUTES (similar to VARIABLE)
-        self.attr1 = arg1
-        self.attr2 = arg2
+# 클래스 생성하기
+class 클래스∶
+    # 인스턴스 초기화(= 생성자)
+    def __init__(self, 인자1, 인자2):
+        # 속성(변수와 비슷함)
+        self.속성1 = 인자1
+        self.속성2 = 인자2
         
-    # METHOD (similar to FUNCTION)
-    def method(self, arg3):
-        self.attr3 = arg3
-        return self.attr1 + self.attr2 - self.attr3
+	# 메소드(함수와 비슷함)
+    def 메소드(self, 인자3):
+        self.속성3 = 인자3
+        return self.속성1 + self.속성2 - self.속성3
 
-# INSTANTIATION
-instance = CLASS(value1, value2)    # CREATE INSTANCE FROM THE CLASS
+# 객체화
+객체 = 클래스(데이터1, 데이터2)	# 클래스로부터 객체 생성
 
-# THEREFORE...
-print(instance.attr3)
-print(instance.method(value3))
+# 그러므로...
+print(객체.속성3)
+print(객체.메소드(데이터3))
 ```
 
 ```
-value3
-value1 + value2 - value3
+데이터3
+데이터1 + 데이터2 - 데이터3
 ```
 
 ### `self` 변수
-The `self` variable is a conventional name to indicate an instance itself. Placing `self` on variables or functions bounds them to an object, thus declares as attributes and methods. These attributes and methods can be accessed only from the instance.
 
-Variables and functions without `self` are local variables and functions inside the instance, and is not accessible. Attempting to do so results "AttributeError".
+`self` 변수는 객체 자체를 나타내는 일반적인 변수 이름이다. 변수 또는 함수에 `self`를 두면 객체에 종속되어 속성 및 메소드로 선언된다. 이러한 속성과 메소드는 객체로만 접근이 가능하다. `self`가 없는 변수 및 함수는 객체 내부의 지역 변수 및 함수이며 외부에서 접근 할 수 없으며, 접근 시 "AttributeError"가 발생한다.
 
 ```python
-# CREATING CLASS
-class CLASS:
-    def __init__(self, arg1, arg2):
-        self.attr1 = arg1
-        self.attr2 = None        # ATTRIBUTE MUST BE INITIALIZED, ELSE RESULTS "AttributeError"
-        attr3 = arg2             # LOCAL VARIABLE
+# 클래스 생성
+class 클래스:
+    def __init__(self, 인자1, 인자2):
+        self.속성1 = 인자1
+        self.속성2 = None        # 속성값을 초기화해주지 않으면 에러가 발생한다.
+        속성3 = 인자2             # 지역 변수
 
 
-# INSTANTIATION
-instance = CLASS(1, 2)
-''' EQUIVALENT: 
-Class.__init__(self = instance, arg1 = 1, arg2 = 2, arg3 = 3)
+# 객체화
+객체 = 클래스(1, 2)
+''' 동일: 
+클래스.__init__(self = 객체, 인자1 = 1, 인자2 = 2, 인자3 = 3)
 '''
 
-# THEREFORE...
-instance.attr1        # >> OUTPUT: 1
-instance.attr2        # >> OUTPUT: None
-instance.attr3        # AttributeError: 'CLASS' object has no attribute 'C'
+# 그러므로
+객체.속성1		# >> 출력: 1
+객체.속성2		# >> 출력: None
+객체.속성3		# AttributeError: '클래스' object has no attribute '속성3'
 ```
 
 ### `__init__` 메소드
-The `__init__` method is the most important method needed to create instance. As the name implies (abbreviation of *initialization*), this method is automatically called when creating an object from class and is responsible for defining the number of arguments needed on instance initialization.
 
-## 객체 속성/메소드
-All methods (and attributes) that are declared normally within the class with `self` for self-indication are instance methods (and attributes). There is no special syntax that need to declare for instance method.
+`__init__` 메소드는 객체를 생성하는 데 필요한 가장 중요한 메소드이다. 이름에서 알 수 있듯이 (*initialization*의 약어), 해당 메소드는 클래스에서 객체를 만들 때 자동으로 호출되며 객체 초기화에 필요한 인수의 수를 결정한다.
 
-However, instance attribute cannot be defined outside instance method where `self` variable in valid. Variables declared outside the method becomes class attribute instead.
+## 객체 속성 & 메소드
+
+객체 속성(instance attribute) 및 객체 메소드(instance method)는 클래스 내에서 `self`와 함께 선언된 모든 속성과 메소드를 의미하며, 객체 통해 접근할 수 있는 속성과 메소드이다. 단, 객체 속성은 객체 메소드 내에서만 선언될 수 있다.
 
 ```python
-# CREATING CLASS
-class CLASS:
-    def __init__(self, arg1, arg2):
-        # INSTANCE ATTRIBUTES
-        self.attr1 = arg1
-        self.attr2 = arg2
-        self.attr3 = None
+# 클래스 생성
+class 클래스:
+    def __init__(self, 인자1, 인자2):
+        # 객체 속성
+        self.속성1 = 인자1
+        self.속성2 = 인자2
+        self.속성3 = None
 
-    # INSTANCE METHOD
-    def method1(self, arg3):
-        self.attr3 = arg3
+	# 객체 메소드
+    def 메소드(self, 인자3):
+        self.속성3 = 인자3
 ```
 
 
-## 클래스 속성/메소드
-Class attributes and methods can be accessed both from instance and class without any instantiation. Class attribute is declared without under class definition, indented along with methods. `self` variable is not used.
+## 클래스 속성 & 메소드
 
-Class method is a method which can be accessed through class alone without needing to create an instance.
+클래스 속성(class attribute) 및 클래스 메소드(class method)는 클래스를 통해 접근할 수 있는 속성과 메소드이다. 클래스 속성은 객체 메소드가 아닌 클래스 내에 선언된 속성이다. 그리고 클래스 메소드를 선언하기 위해서는 아래의 데코레이터를 필요로 하다. 
 
-|      구문      | 설명                                     |
+|     구문     |설명                              |
 | :------------: | ---------------------------------------- |
-| `@classmethod` | Decorator used to declare class methods. |
+| `@classmethod` | 클래스 메소드를 선언하는 데 사용되는 데코레이터이다. |
 
-Though class method is defined by the decorator syntax mentioned above, the method also requires parameter to indicate the class itself (just like instance method have `self` parameter to mention instance itself), conventionally written as `cls`.
+클래스 메소드 또한 객체 클래스의 `self` 변수와 같이 클래스 스스로를 가리키는 변수가 필요하며, 일반적으로 `cls`라는 식별자를 사용한다.
 
 ```python
-# CREATING CLASS
-class CLASS:
-    # CLASS ATTRIBUTE
-    attribute = value
+# 클래스 생성
+class 클래스:
+    # 클래스 속성
+    클래스_속성 = 데이터
     
-    def __init__(self, arg1, arg2):
-        self.attr1 = arg1
-        self.attr2 = arg2
-        self.attr3 = None
+    def __init__(self, 인자1, 인자2):
+        self.속성1 = 인자1
+        self.속성2 = 인자2
+        self.속성3 = None
 
-    def method1(self, arg3):
-        self.attr3 = arg3
+    def 메소드1(self, 인자3):
+        self.속성3 = 인자3
     
-    # CLASS METHOD
+	# 클래스 메소드
     @classmethod
-    def method2(cls, arg4):
-        return arg4
+    def 메소드2(cls, 인자4):
+        return 인자4
     
-    # CLASS METHOD FOR INSTANTIATION
+    # 객체화를 위한 클래스 메소드
     @classmethod
-    def method3(cls, x, y):
-        return cls(x**2, y**2)
+    def 메소드3(cls, 인자5, 인자6):
+        return cls(인자5**2, 인자6**2)
     
     
-# INSTANTIATION
-instance1 = CLASS(1, 2)
-instance1.method1(4)
+# 객체화
+객체1 = 클래스(1, 2)
+객체1.메소드1(4)
 
-instance2 = CLASS.method3(1, 2)    # INSTANTIATE: arg1 = 1**1, arg2 = 2**2
-instance2.method1(4)
+# 객체화: 인자1 = 1**1, 인자2 = 2**2
+객체2 = 클래스.메소드3(1, 2)
+객체2.메소드1(4)
 
-# THEREFORE...
-CLASS.attribute            # >> OUTPUT: value
-CLASS.method2(3)        # >> OUTPUT: 3
+# 그러므로...
+클래스.클래스_속성   # >> 출력: 데이터
+클래스.메소드2(3)	   # >> 출력: 3
 
-instance1.attribute         # >> OUTPUT: value
-instance1.attr1            # >> OUTPUT: 1
-instance1.attr2            # >> OUTPUT: 2
-instance1.attr3            # >> OUTPUT: 4
+객체1.클래스_속성	  # >> 출력: 데이터
+객체1.속성1			# >> 출력: 1
+객체1.속성2			# >> 출력: 2
+객체1.속성3			# >> 출력: 4
 
-instance2.attribute         # >> OUTPUT: value
-instance2.attr1            # >> OUTPUT: 1 (= 1**2)
-instance2.attr2            # >> OUTPUT: 4 (= 2**2)
-instance2.attr3            # >> OUTPUT: 4
+객체2.클래스_속성	  # >> 출력: 데이터
+객체2.속성1			# >> 출력: 1 (= 1**2)
+객체2.속성2			# >> 출력: 4 (= 2**2)
+객체2.속성3			# >> 출력: 4
 ```
 
 ## 정적 메소드
-Static method is a method that can be called without instantiation, but without parameter to call itself like `self` and `cls`.
 
-| 구문            | 설명                                      |
+정적 메소드(static method)는 객체화없이 호출할 수 있으며, `self`나 `cls` 같은 변수를 필요로 하지 않는다. 이러한 변수가 없으므로 정적 메소드는 클래스 및 객체 속성과 메소드를 접근할 수 없다. 다시 말해, 정적 메소드는 단순히 클래스에 속해있는 일반 함수와 동일하게 취급하면 된다. 정적 메소드를 선언하기 위해서는 아래의 데코레이터를 필요로 하다. 
+
+| 구문         |설명                               |
 | --------------- | ----------------------------------------- |
-| `@staticmethod` | Decorator used to declare static methods. |
-
-Since static method does not have a parameter to call itself, static method cannot access or modify any attribute from class and instance. This makes static method identical to normal function belonged to class.
+| `@staticmethod` | 정적 메소드를 선언하는데 사용되는 데코레이터|
 
 ```python
-# CREATING CLASS
-class CLASS:
-    def __init__(self, arg1, arg2):
-        self.attr1 = arg1
-        self.attr2 = arg2
-        self.attr3 = None
+# 클래스 생성
+class 클래스:
+    def __init__(self, 인자1, 인자2):
+        self.속성1 = 인자1
+        self.속성2 = 인자2
+        self.속성3 = None
         
-    def method1(self, arg3)
-        self.attr3 = arg3
+    def 메소드1(self, 인자3)
+        self.속성3 = 인자3
         
-    # STATIC METHOD
+    # 정적 메소드
     @staticmethod
-    def method2(arg4):
-        return True if arg4 is 4 else False
+    def 메소드2(인자4):
+        return True if 인자4 is 4 else False
 
 
-# INSTANTIATION
-instance = CLASS(1, 2)
-instance.method1(4)
+# 객체화
+객체 = 클래스(1, 2)
+객체.메소드1(4)
 
-# THEREFORE...
-instance.attr1            # >> OUTPUT: 1
-instance.attr2            # >> OUTPUT: 2
-instance.attr3            # >> OUTPUT: 4
+# 그러므로...
+객체.속성1			# >> 출력: 1
+객체.속성2			# >> 출력: 2
+객체.속성3			# >> 출력: 4
 
-CLASS.method2(4)        # >> OUTPUT: True
+클래스.메소드2(4)		# >> 출력: True
 ```
 
 ## 매직 메소드
-Magic method is a special method which has Double UNDERscores(dunder) on both side of its name. These method generally represents operator, and are used when overloading operator to modify the operator's functionality. 
 
-Previously encountered `__init__` method used for instance initialization is one of the widely used magic method. More can be seen on the table below:
+매직 메소드는 식별자 양쪽에 던더(dunder; double underscore)가 있는 특수한 메소드이다. 매직 메소드는 대부분 연산자를 나타내며 연산자 오버로딩으로 기능을 수정하는데 사용된다. 예를 들어 초기화에 사용 된 `__init__` 메소드는 널리 사용되는 매직 메소드 중 하나이다. 아래 표에서 더 많은 것을 볼 수 있다:
 
-| OPERATOR | NAME           | MAGIC METHOD               |
-|----------|----------------|----------------------------|
-| `+`      | Addition       | `__add__(self, other)`     |
-| `-`      | Subtraction    | `__sub__(self, other)`     |
-| `*`      | Multiplication | `__mul__(self, other)`     |
-| `/`      | Division       | `__truediv__(self, other)` |
-| `&`      | AND            | `__and__(self, other)`     |
-| `^`      | XOR            | `__xor__(self, other)`     |
-| `|`      | OR             | `__or__(self, other)`      |
+| 연산자 | 이름                       | 매직 메소드             |
+| -------- | -------------------------- | ------------------------ |
+| `+`      | 산술: 덧셈       | `__add__(self, arg)`     |
+| `-`      | 산술: 뺄셈    | `__sub__(self, arg)`     |
+| `*`      | 산술 : 곱셈 | `__mul__(self, arg)`     |
+| `/`      | 산술 : 나눗셈       | `__truediv__(self, arg)` |
+| `&`      | 논리: AND                 | `__and__(self, arg)`     |
+| `^`      | 논리: XOR                 | `__xor__(self, arg)`     |
+| `|`      | 논리: OR                  | `__or__(self, arg)`      |
+| `()`     | 인자호출        | `__call__(self, arg)`    |
 
-### Operator Overloading
-Overloading operator means customizing operator to function differently on certain classes or portion of the script. Magic method is used to overload operator but overloaded functionality is only exclusive to that specific class. As an example, `x + y`  is expressed as `x.__add__(y)` .
+### 연산자 오버로딩
+
+연산자 오버로딩은 특정 클래스나 자료형이 가지는 연산자의 기능을 변경하는 것을 의미한다. 연산자를 오버로드에는 매직 메소드가 사용되지만 오버로드 된 기능은 해당 특정 클래스에만 적용된다. 예를 들어,`x + y`는`x .__ add __ (y)`로 표현이 된다.
 
 ```python
-# CREATING CLASS
-class CLASS:
-    def __init__(self, arg1):
-        self.A = arg1
+# 클래스 생성
+class 클래스:
+    def __init__(self, 인자1):
+        self.속성 = 인자1
         
-    def __add__(self, arg2):
-        return "\0".join([self.A, arg2.A])        # INSERT "\0" BETWEEN TWO STRING OBJECTS.
+    def __add__(self, 인자2):
+        return "\0".join([self.속성, 인자2.속성]) # 두 문자열 객체 사이에 "\0" 추가
 
-# INSTANTIATION
-instance1 = CLASS("Hello")
-instance2 = CLASS("World!")
+# 객체화
+객체1 = 클래스("Hello")
+객체2 = 클래스("World!")
 
-instance1 + instance2        # >> OUTPUT: "Hello World!"
+객체1 + 객체2		# >> 출력: "Hello World!"
 ```
 
 ## 상속
-Inheritance is an act of superclass (base class) providing attributes and methods to derived subclass (child class). When the same name of attributes and methods exists on both superclass and subclass, attributes and methods from superclass are overridden by subclass's.
+
+상속은 파생된 서브클래스(자식 클래스)에 속성과 메소드를 제공하는 슈퍼클래스(기반 클래스)의 동작이다. 슈퍼클래스와 서브클래스 둘 다에 동일한 이름의 속성과 메소드가 존재하는 경우, 슈퍼클래스의 속성과 메소드가 서브클래스에 의해 대체된다.
 
 ```python
-# CREATING SUPERCLASS
-class SUPERCLASS:
-    attr1 = value1
-    attr2 = value2
+# 슈퍼클래스 생성
+class 슈퍼클래스:
+    속성1 = 데이터1
+    속성2 = 데이터2
 
-# CREATING SUBCLASS
-class SUBCLASS(SUPERCLASS):
-    attr2 = "Hello World!"
-    attr3 = value3
+# 서브클래스 생성
+class 서브클래스(슈퍼클래스):
+    속성2 = "Hello World!"
+    속성3 = 데이터3
 
-# INSTANTIATION  
-instance = SUBCLASS()
+# 객체화  
+객체 = 서브클래스()
 
-# THEREFORE...
-instance.attr1        # >> OUTPUT: value1
-instance.attr2        # >> OUTPUT: "Hello World!"
-instance.attr3        # >> OUTPUT: value3
+# 그러므로...
+객체.속성1		# >> 출력: 데이터1
+객체.속성2		# >> 출력: "Hello World!"
+객체.속성3		# >> 출력: 데이터3
 ```
 
 ### 슈퍼 함수
-The `super()` function is used to access the superclass properties, such as class attributes instance/class/static methods directly. This function is mainly used to avoid overriding superclass attributes and methods.
+
+`super ()` 함수는 슈퍼클래스의 속성과 메소드에 직접 접근할 수 있다. 이 함수는 주로 슈퍼클래스 속성과 메소드를 재정의하는 것을 피하기 위해 사용된다.
 
 ```python
-# CREATING SUPERCLASS
-class SUPERCLASS:
-    def __init__(self, arg1):
+# 슈퍼클래스 생성
+class 슈퍼클래스:
+    def __init__(self, 인자1):
         print("Hello World!")
-        self.attr = arg1
+        self.속성 = 인자1
 
-# CREATING SUBCLASS
-class SUBCLASS(SUPERCLASS):
-    def __init__(self, arg2):
+# 서브클래스 생성
+class 서브클래스(슈퍼클래스):
+    def __init__(self, 인자2):
         print("Goodbye World?")
 
 
-# INSTANTIATION
-instance = SUBCLASS(3)
+# 객체화
+객체 = 서브클래스(3)
 
-# THEREFORE...
-print(instance.attr)
+# 그러므로...
+print(객체.속성)
 ```
 
 ```
 "Goodbye World?"
-AttributeError: 'SUBCLASS' object has no attribute 'attribute'
+AttributeError: '서브클래스' object has no attribute '속성'
 ```
+`슈퍼클래스`의 `__init __()`메소드가 `서브클래스`로 상속되었으나 `서브클래스`는 이미 `__init __()` 메소드를 가지고 있어 오버로드로 인해 상속이 되지 않은 것처럼 보인다. 결국 `print(Hello World")`가 나타나지 않고 `self.속성`이 상속에도 불구하고 오류를 일으키는 이유이다.
 
-Originally, the `__init__()` method in `SUPERCLASS` would have been overridden by `SUBCLASS` since both methods share the same name. This is the reason `print(Hello World")` did not appeared and `self.attribute` cause an error despite inheritance.
-
-On the other hand, when using super function to called the `__init__()` method directly from the `SUPERCLASS`
+한편, 슈퍼 함수를 사용하여 `슈퍼클래스`의 `__init__()` 메소드를 다음과 같이 집적 불러올 수 있다.
 
 ```python
-# CREATING SUPERCLASS
-class SUPERCLASS:
-    def __init__(self, arg1):
+# 슈퍼클래스 생성
+class 슈퍼클래스:
+    def __init__(self, 인자1):
         print("Hello World!")
-        self.attribute = arg1
+        self.속성 = 인자1
 
-# CREATING SUBCLASS
-class SUBCLASS(SUPERCLASS):
-    def __init__(self, arg2):
-        # DIRECTLY INHERITING "__init__()" METHOD FROM SUPERCLASS
-        super().__init__(arg2)
+# 서브클래스 생성
+class 서브클래스(슈퍼클래스):
+    def __init__(self, 인자2):
+        # 슈퍼클래스로부터 "__init__()" 메소드 직접 상속
+        super().__init__(인자2)
         print("Goodbye World?")
 
 
-# INSTANTIATION
-instance = SUBCLASS(3)
+# 객체화
+객체 = 슈퍼클래스(3)
 
-# THEREFORE...
-print(instance.attribute)
+# 그러므로...
+print(객체.속성)
 ```
 
 ```
@@ -1651,69 +1657,70 @@ print(instance.attribute)
 ```
 
 ## 데이터 숨기기
-Previously on *Encapsulation* subsection mentioned creating an object provides restriction on accessing attributes and methods, called *Data Hiding*. In Python, however, data hiding is not guaranteed and can be accessed easily from the code outside the class.
 
-Still, manual approach such as name mangling is possible to prevent access to attributes and methods of the class:
+파이썬의 캡슐화는 데이터 숨기기가 완전히 보장되지 않는다. 여전히 외부 코드에서 클래스의 속성과 메소드 접근이 가능하다. 클래스에 가능한 한 숨겨져야 하는 속성과 메소드가 있는 경우 일반적으로 이름뒤섞기(name mangling)와 방법으로 데이터를 숨길 수 있다.
 
-| SYMBOL | EXAMPLE       | DESCRIPTION                                                                                                                                            |
-|:------:|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `_`    | `_attribute`  | Though not a name mangling, it can prevent accessing attributes and methods from being passed via module import but not from codes outside the class.  |
-| `__`   | `__attribute` | Name mangling: this prevents accessing attributes and methods from being passed via module import and codes outside the class, thus becomes "private". |
+| 기호 | 예시       | 설명                                                 |
+| :----: | ------------- | ------------------------------------------------------------ |
+|  `_`   | `_attribute`  |이름 뒤섞기란 기법이 아니지만, 클래스가 모듈로써 불러올 경우에 대하여 접근을 제한된다 |
+|  `__`  | `__attribute` | 이름 뒤섞기: 모듈로써 접근과 클래스 외부에서의 접근을 제한한다. |
 
 ### 프로퍼티
-Property is a decorator that supports data hiding by dividing a single method into three separate methods: `getter`, `setter`, and `deleter`. Because property is declared using decorator symbol, it can only be used on method.
 
-| METHOD  | SYNTAX            | DESCRIPTION                                           |
-|---------|-------------------|-------------------------------------------------------|
-| Getter  | `@property`       | Method for getting the value from property attribute. |
-| Setter  | `@method.setter`  | Method for setting the value of property attribute.   |
-| Deleter | `@method.deleter` | Method for deleting property attribute.               |
+프로퍼티(property)는 단일 메소드를 세 개의 개별 메소드 `getter`,`setter` 및`deleter`로 나누어 데이터 숨기기를 지원하는 데코레이터이다. 프로퍼티는 데코레이터 기호를 사용하여 선언되기 때문에 메소드에서만 사용할 수 있다.
+
+| 메소드  | 구문            | 설명                                           |
+| ------- | ----------------- | ----------------------------------------------------- |
+| Getter  | `@property`       | 프로퍼티 속성에서 값을 가져 오는 메소드. |
+| Setter  | `@method.setter`  | 프로퍼티 속성 값을 설정하는 메소드.  |
+| Deleter | `@method.deleter` | 프로퍼티 속성을 삭제하는 메소드.             |
 
 ```python
-# CREATING CLASS
-class CLASS:
-    def __init__(self, arg1):
-        self.attr1 = arg1
+# 클래스 생성
+class 클래스:
+    def __init__(self, 인자1):
+        self.속성1 = 인자1
     
-    # DEFINITION: GETTER METHOD
+    # 정의: GETTER 메소드
     @property
-    def method(self):
-        return self.attr1
+    def 메소드(self):
+        return self.속성1
     
-    # DEFINITION: SETTER METHOD
-    @method.setter
-    def method(self, arg3):
-        self.attr1 = arg3
+    # 정의: SETTER 메소드
+    @메소드.setter
+    def 메소드(self, 인자2):
+        self.속성1 = 인자2
     
-    # DEFINITION: DELETER METHOD
-    @method.deleter
-    def method(self):
-        del self.attr1
+    # 정의: DELETER 메소드
+    @메소드.deleter
+    def 메소드(self):
+        del self.속성1
         
-# INSTANTIATION
-instance = CLASS(3)
+# 객체화
+객체 = 클라스(3)
 
-# THEREFORE
-print(instance.method)        # EXAMPLE: GETTER METHOD
+# 그러므로
+print(객체.메소드)        # 예시: GETTER 메소드
 
-instance.method = 1           # EXAMPLE: SETTER METHOD
-print(instance.method)
+객체.메소드 = 1           # 예시: SETTER 메소드
+print(객체.메소드)
 
-del instance.method           # EXAMPLE: DELETER METHOD
-print(instance.method)
+del 객체.메소드           # 예시: DELETER 메소드
+print(객체.메소드)
 ```
 
 ```
 3
 1
-AttributeError: 'CLASS' object has no attribute 'attr1'
+AttributeError: '클래스' object has no attribute '속성1'
 ```
 
-Separating method using property encapsulate sensitive code that shouldn't be modified by the user (such as `setter` and `deleter` method), while providing constant access to the method via `getter` method despite any changes were made on `setter` and `deleter`.
+프로퍼티를 통해 메소드를 나누므로써 수정되지 말아야 하는 `setter` 및 `deleter`와 같은 민감한 코드를 숨기면서 `getter` 메소드만을 통해서 기능을 사용할 수 있다. 이를 통해 메소드를 `setter`로 통해 지속적으로 사용 가능하게 하면서 메소드 코딩 작업을 `setter`에서 진행하도록 한다.
 
-Although `getter` method is essential in property, the `setter` and `deleter` are optional; using `getter` method alone would make unmodifiable read-only method.
+비록 `getter` 메소드는 프로퍼티에서 필수적이지만, `setter`와 `deleter`는 선택사항이다. `getter` 메소드만 사용하면 읽기 전용 메소드가 된다.
 
 # **파이썬: PYTHONICNESS**
+
 As learning to understand how the Python can and be use on programming, there is a Python's unique style of programming recommended for Python developer to implement as possible.
 
 ## Zen of Python
@@ -1746,49 +1753,6 @@ if __name__ == "__main__":
 ```
 
 Codes and statements indented under this condition will not be executed when it is imported as a module to the other script. Beware, the equivalent `==` operator cannot be replaced to logical `is` operator.
-
-# **파이썬: REGULAR EXPRESSION**
-Regular expression is a domain specific language (DSL) for string manipulation. Regular expression is not Python-exclusive feature, and is utilized by other programming languages as well (aka. regex).
-
-## `re` Module
-The module which allows Python to access regular expressions. To use the regular expression, place the letter `r` before the string object which indicates raw string.
-
-| SYNTAX | EXAMPLE     | DESCRIPTION        |
-|--------|-------------|--------------------|
-| `r`    | `r"string"` | Raw string object. |
-
-### Special Sequences
-In regular expression not only the backslash works as an escape character `\` but also as a metacharacter that supports various features.
-
-| SYNTAX | EXAMPLE | DESCRIPTION                                      |
-|--------|---------|--------------------------------------------------|
-| `\`    | `r"\"`  | Metacharacter for special sequence (+ *escaper*) |
-
-
-## Grouping
-Grouping makes series of characters or strings to be as one and allows grouped to become an argument for other metacharacters as seen in example of the previous section.
-
-| OPERATION  | EXAMPLE                | DESCRIPTION                                      |
-|------------|------------------------|--------------------------------------------------|
-| `()`       | `r"^str0(str1)" `      | Grouping `str1`  separately from `str0` .        |
-| `group()`  | `re.search.group(...)` | Method used for calling a grouped.               |
-| `groups()` | `re.search.groups( )`  | Method used for calling all the groups in tuple. |
-
-Calling `group(0)` is same as `group()` which returns matched characters or strings between compared two. The rest of integer starting from 1 calls individual group starting from left to right and outer to inner group.
-
-### Named Groups
-Group can be specified to have its own name to be called. No double quotations are needed when inserting name but are needed when calling the named groups.
-
-| SYNTAX | EXAMPLE                | DESCRIPTION                            |
-|--------|------------------------|----------------------------------------|
-| `?P<>` | `r"(?P<name>string)" ` | Designate group with name for calling. |
-
-### Non-capturing Groups
-Group that cannot be accessible by `group(...)` and `groups()` methods, which results skipping index on such groups. However, `group(0)` is an exception where it calls matched comparison between two rather than groups.
-
-| SYNTAX | EXAMPLE          | DESCRIPTION                                             |
-|--------|------------------|---------------------------------------------------------|
-| `?:`   | `r"(?:string)" ` | Inaccessible via `group(...)`  and `groups()`  methods. |
 
 # **파이썬: 파일 관리**
 When using the Python in advanced scripting, such as use for scientific research and artificial intelligence, the input data that needs to be computed cannot be stored through console command of the Python and may need to read through files if necessary.
