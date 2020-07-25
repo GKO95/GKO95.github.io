@@ -1719,91 +1719,92 @@ AttributeError: '클래스' object has no attribute '속성1'
 
 비록 `getter` 메소드는 프로퍼티에서 필수적이지만, `setter`와 `deleter`는 선택사항이다. `getter` 메소드만 사용하면 읽기 전용 메소드가 된다.
 
-# **파이썬: PYTHONICNESS**
+# **파이썬: 파이썬식 코딩**
 
-As learning to understand how the Python can and be use on programming, there is a Python's unique style of programming recommended for Python developer to implement as possible.
+본 장에서는 파이썬 개발자들이 프로그래밍을 할 때 추천하는 파이썬 코딩 스타일에 대하여 소개를 하며, 이를 영어로 pythonicness("파이썬"스러운)라고 부른다.
 
-## Zen of Python
-A set of principle guide when coding Python, provided within Python itself. Accessible via example below.
+## 파이썬의 젠
+파이썬의 젠(Zen of Python)은 파이썬에 내장되어 있는 파이썬 코딩 지침을 담고 있으며, 아래의 코드로 확인할 수 있다.
 
 ```python
 import this
 ```
 
-## Python Enhancement Proposals
-Eight scripting style guides for Python suggested by experienced Python developers, aka. **PEP8**.
-1.    Module should have short, all-lowercase name.
-2.    Class name should be in the CapWords style.
-3.    Most variables and function names should be lowercase_with_underscores.
-4.    Constants (variables that never change value) should be CAPS_WITH_UNDERSCORES.
-5.    Names that would clash with Python keywords (such as 'class' or 'if') should have a trailing underscore.
-6.    Line shouldn't be longer than 80 characters.
-7.    `from module import *` should be avoided.
-8.    There should be only one statement per line.
+## PEP8
+PEP8란, 여덟 가지의 파이썬 개선 제안서(Python Enhancement Proposals)로 경력있는 파이썬 개발자들이 조언하는 파이썬 프로그래밍 스타일이다.
+
+1.    모듈 이름은 간결하고 소문자로만 구성되어야 한다.
+2.    클래스 이름은 대문자로 시작하는 단어들로 구성되어야 한다 (일명 CapWords 스타일).
+3.    대부분의 변수와 함수 이름은 소문자와 밑줄(띄어쓰기 대행)로만 구성되어야 한다.
+4.    상수 변수는 대문자와 밑줄(띄어쓰기 대행)로만 구성되어야 한다.
+5.    파이썬 키워드와 충돌이 일어날 수 있는 이름 접미부에 밑줄을 넣도록 한다.
+6.    한 줄은 80자를 초과하지 않도록 한다.
+7.    `from module import *`는 되도록 사용하지 않는다.
+8.    한 줄에는 하나의 문만 있어야 한다.
 
 ## 시작점
-While other program language such as C/C++ has a traditional entry point called `main()` which is the function where the program execution starts, Python does not have one.
-
-Instead, Python uses special variable `__name__` which indicates the current Python script being executed. When this script is the main executing file, the `__name__` variable is assigned as `"__main__"` value. 
+시작점(entry point)는 프로그램이 시작되는 부분을 의미하며, C/C++ 프로그래밍 언어의 경우 `main()` 함수에서부터 코드가 실행된다. 그러나 파이썬은 시작점이란 존재하지 않는다. 하지만 현재 어느 스크립트를 중심으로 실행되는지 판별하는 코드가 있으며 `__name__` 매직 메소드가 `"__main__"`과 일치 여부를 확인한다.
 
 ```python
-# ENTRY POINT
+# 시작점
 if __name__ == "__main__":
-    statements
+    실행문
 ```
 
-Codes and statements indented under this condition will not be executed when it is imported as a module to the other script. Beware, the equivalent `==` operator cannot be replaced to logical `is` operator.
+파이썬에서는 이를 시작점이라고 부르며, 모듈로 가져온 스크립트에서는 시작점이 실행되지 않는다. 주의해야 할 점은 비교 연산자 `==`는 논리 연산자인 `is`로 대체하여서는 절대 안된다.
 
 # **파이썬: 파일 관리**
-When using the Python in advanced scripting, such as use for scientific research and artificial intelligence, the input data that needs to be computed cannot be stored through console command of the Python and may need to read through files if necessary.
+과학적 연구 혹은 인공지능 목적으로 작성된 심화된 파이썬 프로그램에서 입력 데이터를 터미널로 입력하기에 터무니 없이 비효율적일 수 있다. 이러한 문제를 해결하기 위해 데이터가 입력된 파일을 불러와 프로그램 상에서 처리할 수 있어야 한다.
 
 ## 파일 열기
-Before reading or manipulating files via Python, the file must be opened firsthand. The `open()` function is used to open a file user want to open.
+파이썬에서는 파일을 처리하기 전에, 우선 파일을 열어야 한다. `open()` 함수를 통해 원하는 파일을 열 수 있다.
 
 ```python
-open("filename.txt")
+open("파일이름.txt")
 ```
 
 | 전달인자 | 설명                               |
 | -------- | ---------------------------------- |
-| `r`      | Read mode (default)                |
-| `w`      | Write mode (rewrites content)      |
-| `a`      | Append mode (adding new content)   |
-| `rb`     | Binary read mode (non-text files)  |
-| `wb`     | Binary write mode (non-text files) |
+| `r`      | 읽기 모드 (기본값)                 |
+| `w`      | 쓰기 모드 (새로 쓰기)              |
+| `a`      | 덧붙이기 모드 (내용 추가)          |
+| `rb`     | 바이너리 읽기 모드 (비텍스트 파일) |
+| `wb`     | 바이너리 쓰기 모드 (비텍스트 파일) |
 
-The `close()` method is used to close currently opened files. Closing file in very important on avoiding wasting resource. Ensure the files are always closed even on exceptions by using try/except or with statement.
+`close()` 메소드는 현재 열려있는 파일을 닫기 위해 사용한다. 파일을 닫는 것은 리소스 낭비를 줄이는 데 매우 중요한 역할을 한다. `try`/`except` 문 혹은 `with` 문을 통해 예외처리가 발생하여도 정상적으로 파일이 닫히도록 한다.
 
 ```python
-file = open("file.txt", "r")
-file.close()
+파일 = open("파일이름.txt", "r")
+파일.close()
 ```
 
 ### `with` 문
-The `with` statement creates temporary variable only available inside an indented code block of the `with` statement. When the file is opened using this statement, the file automatically closes at the end of the code block even if exceptions occur within it.
+
+`with` 문은 해당 코드 블록 안에서만 사용할 수 있는 임시 변수를 생성한다. `with` 문으로 파일을 열었을 경우, 예외처리가 발생하여도 코드 블록이 종료되면 파일은 자동적으로 닫힌다.
 
 ```python
-with open("file.txt") as file:
-    statements
+with open("파일이름.txt") as 파일:
+    실행문
 ```
 
-### Context Manager
-Context manager is an interface that allows support of `with` statement. There are two methods available for setting object method and function as context manager: (1) using `__enter__()` & `__exit__()` method pair and (2) using `contextlib` module.
+### 컨텍스트 관리자
+
+컨텍스트 관리자는 `with` 문을 지원하는 인터페이스이다. 함수나 메소드를 컨텍스트 관리자로 설정하는 방법은 두 가지가 있다: (1) `__enter__()` 및 `__exit__()` 메소드 혹은 (2) `contextlib` 모듈을 사용하는 것이다.
 
 ```python
-# CONTEXT MANAGER 1
-class CLASS:
+# 컨텍스트 관리자 1
+class 클래스:
     def __init__(self):
         pass
     
-    # EXECUTE UPON ENTERING "WITH"
+    # "with" 문 시작 시 실행
     def __enter__(self):
-        self.variable = expression
-        return self.variable
+        self.변수 = 표현식
+        return self.변수
     
-    # EXECUTE UPON EXITING "WITH"
+    # "with" 문 종료 시 실행
     def __exit__(self):
-        statements
+        실행문
 ```
 
 ----
@@ -1811,134 +1812,132 @@ class CLASS:
 ```python
 from contextlib import contextmanager
 
-# CONTEXT MANAGER 2 
-class CLASS:
+# 컨텍스트 관리자 2 
+class 클래스:
     def __init__(self):
         pass
     
-    # "WITH" SUPPORTED FUNCTION/METHOD
+    # "with" 문 지원 함수 혹은 메소드
     @contextmanager
-    def method(self):
-        self.variable = expression`
-        yield self.variable
-        statements
+    def 메소드(self):
+        self.변수 = 표현식
+        yield self.변수
+        실행문
 ```
 
-Context manager returns (or yields) attribute (or variable) when using `with` statement, which becomes a resource to be handled while within the statement. Having implicitly determined resource makes `as` keyword unnecessary, unless there is a need to alias the name.
+컨텍스트 관리자는 `with` 문을 사용할 시, 반환(`return`) 혹은 양도(`yield`)된 데이터는 `with` 문에서 처리할 수 있는 리소스가 된다. 이렇게 암시적으로 지정된 리소스는 다른 명칭을 사용하지 않는 이상 `as` 키워드의 사용이 불필요하다.
 
 ```python
-# INSTANTIATION
-instance = CLASS()
+# 객체화
+객체 = 클래스()
 
-with instance.method():
-    # HANDLES "self.variable"
-    statements
+with 객체.메소드():
+    # "self.변수"를 위주로 처리
+    실행문
 ```
 
-One of the actual implementation of this syntax can be found on chapter *TENSORFLOW: BASIC § TensorBoard* in [*PRGMING_TensorFlow*](./PRGMING_TensorFlow.md) document.
+대표적인 컨텍스트 관리자의 실제 적용 예시로는 *PRGMING_TensorFlow* 문서의 *텐서플로우: 기초 § 텐서보드*에서 확인할 수 있다.
 
-### 절대주소 및 상대주소
-Just as other programming languages are, Python have two different types of path: absolute and relative path. When designating a path, use double backslash `\\` as a single backslash is an escape character that can cause unwanted operation.
+### 절대주소 & 상대주소
+
+다른 프로그래밍 언어와 마찬가지로, 파이썬에는 절대주소와 상대주소가 존재한다. 경로를 지정할 때에는 백슬래시 두 개(`\\`)로 폴더 및 파일을 구분해야 하며, 하나만 사용하면 탈출 문자가 되어 원치 않은 연산이 수행될 수 있다.
 
 ```python
-variable = open("path\\file.txt")
+파일 = open("경로\\파일이름.txt")
 ```
 
 ## 파일 읽기
-After opening the text-based file, Python can read lines of file's content using `read()` method. Argument inside the method represent the number of bytes the method will read.
 
-Read method can be used on the same file over again, but it will continue from where Python last read. When there's no argument, the read method reads the rest of the text from where it last left off.
+텍스트 기반 파일을 연 이후, 파이썬은 `read()` 메소드를 통해 파일 내용을 읽을 수 있다. 메소드의 인자로는 정수가 건네지며, 이는 읽을 바이트 수를 의미한다. 하나의 파일에서 `read()` 메소드는 여러 번 사용될 수 있으며, 마지막으로 읽은 부분에서부터 이어서 읽는다. 인자가 없을 시, 메소드는 나머지 내용 전체를 읽는다.
 
 ```python
-with open("path\\file.txt") as file:
-    print(file.read(16))    # READ 16 BYTES FROM THE START OF THE CONTENT.
-    print(file.read(4))        # READ 4 BYTES FROM THE POINT AFTER PREVIOUS 16 BYTES.
-    print(file.read())        # READ THE REST OF THE TEXT AFTER PREVIOUS 4 BYTES.
-    print(file.read())        # READ NO TEXT AS NO MORE CONTENT TO READ.
+with open("경로\\파일이름.txt") as 파일:
+    print(파일.read(16))    # 내용 시작 부분에서부터 16 바이트를 읽는다.
+    print(파일.read(4))     # 16 바이트 이후로부터 4 바이트를 읽는다.
+    print(파일.read())      # 4 바이트 이후로부터 나머지 바이트를 읽는다.
+    print(파일.read())      # 더이상 읽을 내용이 없어 아무런 텍스트를 반환하지 않는다.
 ```
 
-The `Readlines()` method is used to return a list of text of each line. The method do accepts argument, but it works exactly same as a read method: it designates how many bytes to read.
-
-Don't get confused with `Readline()`s method which only reads the first line in string.
+`Readlines()` 메소드는 각 줄의 내용을 담는 리스트 객체를 반환한다. 해당 메소드 또한 인자로는 정수가 건네지며, 이는 읽을 바이트 수를 의미한다. 하지만 첫 줄만 읽는 `Readline()` 메소드와 혼돈하지 않도록 주의해야 한다.
 
 ```
-<file.txt>
-First line here.
-Second line there.
-Last line somewhere.
+<파일이름.txt>
+첫 번째 줄은 여기에.
+두 번째 줄은 저기에.
+마지막 줄은 어딘가에.
 ```
 
 ```python
-with open("path\\file.txt") as file:
-    print(file.readlines())
-    print(file.readline())
+with open("경로\\파일이름.txt") as 파일:
+    print(파일.readlines())
+    print(파일.readline())
 ```
 
 ```
-['First line here.\n','Second line there.\n','Last line somewhere.']
-First line here.
+['첫 번째 줄은 여기에.\n','두 번째 줄은 저기에.\n','마지막 줄은 어딘가에.']
+첫 번째 줄은 여기에.
 ```
 
-### Printing Line using Loop
-Each line of text-base content can be retrieved using `for` loop statement:
+### 반복문을 이용한 내용 출력
+
+각 줄의 텍스티 기반 파일 내용은 `for` 반복문을 다음과 같은 방법으로 사용해 출력할 수 있다.
 
 ```python
-for file in variable:
-    print(variable)
+for 변수 in 파일:
+    print(변수)
 ```
 
 ## 파일 쓰기
-In Python, file can be created or (over)written by the `write()` method of the text-based file object. There are two options user can choose when writing: overwrite and append.
 
-Suppose there is a file with text content written as follows:
+파이썬에서 텍스트 파일은 `write()` 메소드를 통해 생성되거나 작성된다. 파일을 쓰는 모드에는 두 가지가 존재한다: (1) 새로 쓰기와 (2) 덧붙여 쓰기가 있다. 아래의 텍스트 파일이 있다고 가정한다.
 
 ```
-<file.txt>
-First line here.
-Second line there.
-Last line somewhere.
+<파일이름.txt>
+첫 번째 줄은 여기에.
+두 번째 줄은 저기에.
+마지막 줄은 어딘가에.
 ```
 
-Overwrite mode `w` deletes all of previously existing content and write down fresh from the beginning.
+새로 쓰기(overwrite) 모드 `w`는 기존의 모든 내용들을 삭제하여 처음부터 새로 작성한다.
 
 ```python
-with open("path\\file.txt", "w") as file:
-    file.write("TEXT OVERWRITTEN!")
+with open("경로\\파일이름.txt", "w") as 파일:
+    파일.write("텍스트 새로 쓰기!")
 ```
 
 ```
-<file.txt>
+<파일이름.txt>
 TEXT OVERWRITTEN!
 ```
 
-On the other hand, append mode `a` does not delete existing content but continue writing from the end.
+덧붙여 쓰기(append) 모드 `a`는 기존의 모든 내용들을 유지하고 맨 끝 단락에서부터 작성한다.
 
 ```python
-with open("path\\file.txt", "a") as file:
-    file = file.write("TEXT APPENDED.")
-    print(file)
+with open("경로\\파일이름.txt", "a") as 파일:
+    file.write("텍스트 덧붙여 쓰기!")
 ```
 
 ```
-<file.txt>
-First line here.
-Second line there.
-Last line somewhere.TEXT APPENDED.
+<파일이름.txt>
+첫 번째 줄은 여기에.
+두 번째 줄은 저기에.
+마지막 줄은 어딘가에.텍스트 덧붙여 쓰기!
 ```
 
-Upon successfully written, `write()` method returns the number of bytes written.
+ 성공적으로 쓰기를 완료하였을 시, `write()` 메소드는 작성된 내용의 바이트 수를 반환한다.
 
 ### 파일 생성하기
-New file can be created using the `write()` method which does not bound by just writing on existing file. Creating file is simply done by designating file name is doesn't exist on the specified path.
+
+`write()` 메소드는 기존의 파일을 작성하는 것 이외에도 새로운 파일을 생성하는 데에도 쓰인다. 지정된 경로에 존재하지 않는 파일 이름으로 내용을 작성하면 해당 이름을 가진 새로운 파일이 생성된다. 
 
 ```python
-with open("path\\new_file.txt", "w") as file:
-    file.write("NEW FILE CREATED!")
+with open("경로\\새파일이름.txt", "w") as 파일:
+    파일.write("새 파일 생성!")
 ```
 
 ```
-<new_file.txt>
-NEW FILE CREATED!
+<새파일이름.txt>
+새 파일 생성!
 ```
 
 # **파이썬: 패키지**
