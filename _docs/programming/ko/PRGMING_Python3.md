@@ -1719,9 +1719,9 @@ AttributeError: '클래스' object has no attribute '속성1'
 
 비록 `getter` 메소드는 프로퍼티에서 필수적이지만, `setter`와 `deleter`는 선택사항이다. `getter` 메소드만 사용하면 읽기 전용 메소드가 된다.
 
-# **파이썬: 파이썬식 코딩**
+# **파이썬: 파이썬다운**
 
-본 장에서는 파이썬 개발자들이 프로그래밍을 할 때 추천하는 파이썬 코딩 스타일에 대하여 소개를 하며, 이를 영어로 pythonicness("파이썬"스러운)라고 부른다.
+본 장에서는 파이썬 개발자들이 프로그래밍을 할 때 추천하는 파이썬 코딩 스타일에 대하여 소개를 하며, 이를 영어로 pythonic("파이썬"스러운)이라고 부른다.
 
 ## 파이썬의 젠
 파이썬의 젠(Zen of Python)은 파이썬에 내장되어 있는 파이썬 코딩 지침을 담고 있으며, 아래의 코드로 확인할 수 있다.
@@ -1731,7 +1731,7 @@ import this
 ```
 
 ## PEP8
-PEP8란, 여덟 가지의 파이썬 개선 제안서(Python Enhancement Proposals)로 경력있는 파이썬 개발자들이 조언하는 파이썬 프로그래밍 스타일이다.
+PEP8란, 여덟 가지의 파이썬 개선 제안(Python Enhancement Proposals)으로 경력있는 파이썬 개발자들이 조언하는 파이썬 프로그래밍 스타일이다.
 
 1.    모듈 이름은 간결하고 소문자로만 구성되어야 한다.
 2.    클래스 이름은 대문자로 시작하는 단어들로 구성되어야 한다 (일명 CapWords 스타일).
@@ -1771,7 +1771,7 @@ open("파일이름.txt")
 | `rb`     | 바이너리 읽기 모드 (비텍스트 파일) |
 | `wb`     | 바이너리 쓰기 모드 (비텍스트 파일) |
 
-`close()` 메소드는 현재 열려있는 파일을 닫기 위해 사용한다. 파일을 닫는 것은 리소스 낭비를 줄이는 데 매우 중요한 역할을 한다. `try`/`except` 문 혹은 `with` 문을 통해 예외처리가 발생하여도 정상적으로 파일이 닫히도록 한다.
+`close()` 메소드는 현재 열려있는 파일을 닫는다. 파일을 닫는 것은 리소스 낭비를 줄이는 데 매우 중요한 역할을 한다. 예외처리가 발생하여도 정상적으로 파일을 닫을 수 있도록 `try`/`except` 문 혹은 `with` 문을 함께 사용할 것을 권장한다.
 
 ```python
 파일 = open("파일이름.txt", "r")
@@ -1780,7 +1780,7 @@ open("파일이름.txt")
 
 ### `with` 문
 
-`with` 문은 해당 코드 블록 안에서만 사용할 수 있는 임시 변수를 생성한다. `with` 문으로 파일을 열었을 경우, 예외처리가 발생하여도 코드 블록이 종료되면 파일은 자동적으로 닫힌다.
+`with` 문은 해당 코드 블록 안에서만 사용할 수 있는 임시 변수를 생성한다. `with` 문으로 파일을 열었을 경우, 코드 블록이 종료되면 파일은 자동적으로 닫힌다.
 
 ```python
 with open("파일이름.txt") as 파일:
@@ -1789,7 +1789,7 @@ with open("파일이름.txt") as 파일:
 
 ### 컨텍스트 관리자
 
-컨텍스트 관리자는 `with` 문을 지원하는 인터페이스이다. 함수나 메소드를 컨텍스트 관리자로 설정하는 방법은 두 가지가 있다: (1) `__enter__()` 및 `__exit__()` 메소드 혹은 (2) `contextlib` 모듈을 사용하는 것이다.
+컨텍스트 관리자는 `with` 문을 지원하는 인터페이스이다. 함수나 메소드를 컨텍스트 관리자로 설정하는 방법은 두 가지가 있다: (1) `__enter__()`와 `__exit__()` 메소드 그리고 (2) `contextlib` 모듈을 사용하는 것이다.
 
 ```python
 # 컨텍스트 관리자 1
@@ -1840,7 +1840,7 @@ with 객체.메소드():
 
 ### 절대주소 & 상대주소
 
-다른 프로그래밍 언어와 마찬가지로, 파이썬에는 절대주소와 상대주소가 존재한다. 경로를 지정할 때에는 백슬래시 두 개(`\\`)로 폴더 및 파일을 구분해야 하며, 하나만 사용하면 탈출 문자가 되어 원치 않은 연산이 수행될 수 있다.
+파이썬에는 절대주소와 상대주소가 존재한다. 경로를 지정할 때에는 백슬래시 두 개(`\\`)로 폴더 및 파일을 구분해야 하며, 하나만 사용하면 탈출 문자가 되어 원치 않은 텍스트 연산이 수행될 수 있다.
 
 ```python
 파일 = open("경로\\파일이름.txt")
@@ -1858,7 +1858,7 @@ with open("경로\\파일이름.txt") as 파일:
     print(파일.read())      # 더이상 읽을 내용이 없어 아무런 텍스트를 반환하지 않는다.
 ```
 
-`Readlines()` 메소드는 각 줄의 내용을 담는 리스트 객체를 반환한다. 해당 메소드 또한 인자로는 정수가 건네지며, 이는 읽을 바이트 수를 의미한다. 하지만 첫 줄만 읽는 `Readline()` 메소드와 혼돈하지 않도록 주의해야 한다.
+`Readlines()` 메소드는 각 줄의 내용을 담는 리스트 객체를 반환한다. 메소드의 인자로는 정수가 건네지며, 이는 읽을 바이트 수를 의미한다. 다만, 첫 줄만 읽는 `Readline()` 메소드와 혼돈하지 않도록 주의해야 한다.
 
 ```
 <파일이름.txt>
@@ -1941,122 +1941,131 @@ with open("경로\\새파일이름.txt", "w") as 파일:
 ```
 
 # **파이썬: 패키지**
-Python has variety of packages that can be easily downloaded and used on-demand. This chapter describes what the package is and how to implement it to the script.
+
+파이썬에는 특정 목적을 수행하기 위한 여러 가지의 패키지들이 존재한다. 본 장에서는 패키지를 다운로드하여 사용하는 방법을 설명한다.
 
 ## 모듈
-A Python module is simply a Python source code file with `.py` extension. Developer may developed their own code containing class or function, and calling those codes from distribute Python file can be done using `import` keyword.
+파이썬 모듈(module)은 추가 기능을 위해 불러온 `.py` 확장자의 일반 파이썬 소스 코드를 가리킨다. 개발자는 함수나 클래스를 담고 있는 파이썬 스크립트를 작성하고, 이를 `import` 키워드를 통해 다른 스크립트로 구성체, 자료형, 연산을 불러올 수 있다. 아래는 `모듈.py`이란 파이썬 스크립트를 불러오는 예시이다.
 
 ```python
-import module
-module.function()
+import 모듈
+모듈.함수()
 ```
 
-Above approach still requires name of the module to be mentioned every time when using its function. To ignore referring to the module while still using module's function, use the `from` keyword beforehand.
+위의 방법은 `함수()`를 사용하기 위해 매번 모듈을 언급해야 한다. 이런 불편함을 해소하기 위해 `from` 키워드를 통해 암묵적으로 모듈을 언급하는 방법을 택한다.
 
 ```python
-from module import function1, function2
-from module import function as name
+from 모듈 import 함수1, 함수2
+from 모듈 import 함수 as 이름
 ```
 
-However, because module is not referred to use the function, there is potential conflict caused by function naming. Unless the function is named with guaranteed uniqueness, it is safe to use the previous approach to import modules.
+그러나 모듈이 암묵적으로 언급되었으므로, 동일한 함수 이름으로 생길 수 있는 충돌 문제가 잠재적으로 내포되어 있다. 함수 이름의 고유성이 확실히 보장되지 않는 이상, 모듈을 안전하게 불러오기 위해 전자의 방법을 권장한다.
 
 ## 패키지
-Package is a directory of folder that holds a collection of Python modules or sub-packages. Every package folder must have a special Python file called `__init__.py` which can be blank or contains directory path of current package to prevent directories error caused by a common name.
+
+패키지(package)는 관련 파이썬 모듈들을 담고 있는 하나의 폴더이다. 모든 파이썬 패키지 폴더 내에는 `__init__.py`라는 특수한 파이썬 파일이 존재하며, 안에는 아무런 내용이 없거나 해당 패키지의 파일경로가 담겨있기도 한다.
 
 ```python
-import package.module
-from package.module import function
+import 패키지.모듈
+from 패키지.모듈 import 함수
 ```
 
-## Python Package Index
-Python Package Index (aka. PyPI) is an external module storage website (*https://pypi.python.org/pypi*). To download and install the modules and packages, a software called pip is necessary.
+## PyPI
+PyPI(Python Package Index; 파이썬 패키지 목록)은 온라인 모듈 저장소이다(*https://pypi.python.org/pypi*). 모듈 및 패키지를 설치하기 위해서는 pip라는 소프트웨어가 반드시 필요하다.
 
 ### PIP
-The pip software is a package management system required to install and manage the Python package. Nowadays, pip comes installed by default with modern distribution of Python. User can install pip separately online. Installation and management of packages are done using Command Prompt.
 
-| NAME         | DESCRIPTION               | COMMAND                 |
-|--------------|---------------------------|-------------------------|
-| Installation | Install the package       | `pip install package`   |
-| Remove       | Uninstall the package     | `pip uninstall package` |
-| List         | Show the list of packages | `pip list`              |
+pip 소프트웨어는 파이썬 패키지 관리 시스템이다. 패키지 관리 소프트웨어는 기본적으로 파이썬3 인터프리터와 함께 설치되지만, 온라인에서 개별적으로 설치할 수도 있다. 패키지의 설치 및 관리는 명령 프롬프트나 Powershell과 같은 터미널 유형 콘솔창에서 이루어진다. 
 
-When using Python on Windows, it is recommended to use `python -m pip` instead of `pip` alone. 
+| 이름        | 설명               | 명령어                 |
+| ----------- | ------------------ | ---------------------- |
+| `install`   | 패키지 설치        | `pip install 패키지`   |
+| `uninstall` | 패키지 제거        | `pip uninstall 패키지` |
+| `list`      | 설치된 패키지 목록 | `pip list`             |
+
+윈도우 OS에서 파이썬 pip를 사용할 경우, 단독적인 `pip`가 아닌 `python -m pip` 명령어를 사용하는 것을 권장한다(macOS 및 리눅스 제외).
 
 ```
 python -m pip
 ```
 
-In case `python` command does not work but opens Microsoft Store, type `py` instead.
+특히 원도우 10 OS를 사용하는 경우 `python`을 입력하는 것만으로 마이크로소프트 스토어로 이동하게 되는데, 해결 방법은 두 가지가 있다.
 
-The command means accessing the pip under the python interpreter specified as `python` in environment variable. This allows package management by each interpreter more controllable, even when using virtual environment. When there is another version of Python installed, say 32 bits of Python 3.5
+1. `python`을 `py`로 대체 (Python Launcher 프로그램 사용).
+2. 컴퓨터에서 `설정 > 앱 > 앱 및 기능 > 앱 실행 별칭 관리`에서 `python.exe` 및 `python3.exe`을 해제 (본질적 문제 해결).
+
+위의 명령어는 컴퓨터 환경설정에서 지정된 파이썬 인터프리터의 pip를 접속한다는 것을 의미한다. 이를 통해 인터프리터 간의 패키지 관리에 혼돈을 줄일 수 있다. 만일 32비트 파이썬3.5 인터프리터가 설치되었을 경우, 다음 명령어로 접근할 수 있다.  
 
 ```
 py -3.5-32 -m pip
 ```
 
 # **파이썬: 가상환경**
-C-based project needs to include header files and libraries individually when compiling the script. Python, on the other hand, requires installation of modules under the interpreter directory.
 
-However, when working with multiple Python projects, having all the packages installed in a single interpreter is inconvenient and inefficient. This is why separating Python environment is essential which can be done using virtual environment.
+파이썬에서 pip로 설치한 패키지들은 전부 인터프리터 경로에 설치된다. 이는 여러 파이썬 프로젝트를 진행할 시 치명적인 문제점이 될 수 있는데, 바로 인터프리터에는 하나의 패키지가 여러 개 존재할 수 없다는 것이다. 결국 두 프로젝트가 서로 다른 버전의 패키지를 요구되면 프로젝트를 작업할 때마다 모듈을 새로 설치하는 번거로움이 발생한다.
+
+이러한 문제를 해결하기 위한 게 바로 가상환경(virtual environment)이다. 해당 프로젝트만을 위한 인터프리터를 복제하여 할당하면, 두 프로젝트 간의 패키지 충돌이 일어나지 않으며 패키지 관리도 훨씬 용이해진다.
 
 ## `venv` 패키지
-The Python3 has virtual environment package `venv` included by default. The package support creating lightweight virtual environments with their own site directory, optionally isolated from system site directory.
 
-Each virtual environment has its own Python binary (which matches the version of the binary that was used to create this environment) and can have its own independent set of installed Python packages in its site directory.
+파이썬3에는 기본적으로 `venv`라는 가상환경 패키지가 포함되어 있다. 본 패키지는 간단한 가상환경을 지원해주며, 시스템 인터프리터와 분리되었으나 동일한 버전의 개별 인터프리터가 할당된다. 해당 인터프리터의 pip로 설치된 패키지는 가상환경에 설치된다.
 
 ### 가상환경 생성
-Creating a virtual environment under the name `.venv` on desired project directory is done as follows:
+
+원하는 파이썬 프로젝트에 `.venv` 이름의 가상환경을 생성하기 위해 아래의 명령어를 입력한다.
 
 ```
 python -m venv D:\Workspace\Python\project\.venv
 ```
 
 ### 가상환경 실행
-Here, the term "activating" means activating virtual environment on the command prompt or terminal. While this is unnecessary when running the script under virtual environment, activation is required when installing packages using pip on console.
 
-* Windows:
+여기서 가상환경 "실행"이란 가상환경을 터미널을 통해 접속한다는 것을 의미한다. 파이썬 프로그램 실행에는 가상환경 실행을 요하지 않으나, 패키지를 설치하기 위해서는 가상환경 실행이 필요하다.
+
+* 윈도우 OS:
 
     ```
     D:\Workspace\Python\project\.venv\Scripts\activate.bat
     ```
 
-* Unix (e.g. Linux and macOS):
+* 유닉스 (예. macOS 및 리눅스):
 
     ```
     source ~/Workspace/Python/project/.venv/bin/activate
     ```
 
 ### 가상환경 종료
-To exit from virtual environment activated console, user need to "deactivate" virtual environment.
+
+터미널로부터 가상환경을 종료하기 위해 아래의 명령어를 입력한다.
 
 ```
 deactivate
 ```
 
-This is same as enter the command `PATH=D:\Workspace\Python\.venv\Scripts\deactivate.bat`. Because of this, relocating the virtual environment directory will cause `deactivate` command unable to recognize the path.
+이는 `PATH=D:\Workspace\Python\.venv\Scripts\deactivate.bat` 명령어를 입력하는 것과 동일하다. 이러한 이유로, 가상환경 경로를 옮길 시 `deactivate` 명령어를 인식하지 못하여 직접 경로를 찾아서 `deactivate.bat` 파일을 실행해야 한다.
 
-# **파이썬: NUMPY**
-NumPy is an extremely powerful and useful library used in Python which supports multi-dimensional matrix (aka. NumPy array). As one of the best known scientific libraries, it is implemented on other well-recognized libraries such as [Matplotlib](https://matplotlib.org/), [TensorFlow](https://www.tensorflow.org/), et cetera.
+# **파이썬: 넘파이**
 
-To install NumPy library, open command prompt window and enter the command below: 
+넘파이는 다차원 행렬을 지원하는 매우 강력하고 유용한 파이썬 전용 라이브러리이다. 넘파이는 다른 라이브러리에 있어서도 독보적인 입지를 다지는데, Matplotlib 혹은 TensorFlow와 같은 라이브러리에서도 흔히 사용된다.
+
+넘파이 라이브러리를 설치하기 위해, 아래의 명령어를 입력한다.
 
 ```
 python -m pip install numpy
 ```
 
-Since NumPy is a huge scientific library and is still growing, this chapter will briefly introduce basic usage of the array. For more information on its API, refer to the following URL: https://numpy.org/
+넘파이는 현재까지도 계속 업데이트되고 있는 라이브러리로, 본 장에서는 넘파이에 대한 대략적인 설명과 사용법 소개를 집중한다. 더 자세한 API 정보는 다음 URL을 참고한다: https://numpy.org/
 
-## NumPy Array
-NumPy array is a very flexible matrix. Compared to Python's List iterable object, the array has better performance both advantageous in faster speed and efficient memory management.
+## 넘파이 행렬
 
-Declaration of the NumPy array is be done as follows:
+넘파이 행렬은 매우 유연한 행렬이다. 파이썬의 리스트 객체에 비하면, 넘파이 행렬은 처리 속도와 효율적 메모리 관리 면에서 매우 우월하다. 넘파이 행렬의 선언은 다음과 같다.
 
 ```python
 import numpy as np
 
-# NUMPY DECLARATION
-variable = np.ndarray(shape = (2, 3))
-print(variable)
+# 넘파이 선언
+변수 = np.ndarray(shape = (2, 3))
+print(변수)
 ```
 
 ```
@@ -2064,16 +2073,16 @@ print(variable)
  [    32765 870097920     32765]]
 ```
 
-This creates NumPy array object based on the given size, but its value is randomly generated.
+이는 넘파이 행렬을 크기를 기반하여 생성하지만, 요소 값은 무작위로 선정된다.
 
-Initialization of the NumPy array is done as follows:
+넘파이 행렬의 초기화는 다음과 같다.
 
 ```python
 import numpy as np
 
-# NUMPY INITIALIZATION 
-variable = np.array([[1, 2, 3], [4, 5, 6]])
-print(variable)
+# 넘파이 초기화 
+변수 = np.array([[1, 2, 3], [4, 5, 6]])
+print(변수)
 ```
 
 ```
@@ -2081,81 +2090,55 @@ print(variable)
  [4 5 6]]
 ```
 
-This creates NumPy array object based on the given value, but has disadvantage on creating the array with huge size or deeper dimension. 
+넘파이 선언과 달리 주어진 값에 따라 넘파이 행렬이 생성되지만, 만일 차원의 크기가 방대해지면 이러한 방법은 오히려 비효율적이다.
 
-More NumPy methods exist that is used to create the array with better convenience:
+아래의 목록은 넘파이 행렬을 더 편리하게 생성하는 그 외의 메소드를 소개한다.
 
-| NUMPY ARRAY             | DESCRIPTION                                                   |
-|-------------------------|---------------------------------------------------------------|
-| `np.zeros(shape)`       | Create a NumPy filled with number 0 with the size of `shape`. |
-| `np.ones(shape)`        | Create a NumPy filled with number 1 with the size of `shape`. |
-| `np.eye(N)`             | Create a NumPy identity matrix of `N` x `N` size.             |
-| `np.full(shape, value)` | Create a NumPy filled with `value` with the size of `shape`.  |
+| 넘파이 행렬         | 설명                                                     |
+| ------------------- | -------------------------------------------------------- |
+| `np.full(크기, 값)` | 값이 전부 `값`로 채워진 `크기`의 넘파이 행렬을 생성한다. |
+| `np.zeros(크기)`    | 값이 전부 0으로 채워진 `크기`의 넘파이 행렬을 생성한다.  |
+| `np.ones(크기)`     | 값이 전부 1로 채워진 `크기`의 넘파이 행렬을 생성한다.    |
+| `np.eye(크기)`      | `크기`의 넘파이 단위 정방행렬을 생성한다.                |
 
-### NumPy Element
-While accessing elements of NumPy array is similar to Python's iterable object, but its syntax is different:
+### 넘파이 요소
+
+넘파이 행렬의 요소를 접근하는 방식은 파이썬의 이터러블 객체와 비슷하나 약간의 차이점이 있다.
 
 ```python
 import numpy as np
-variable = np.array([[1, 2, 3], [4, 5, 6]])
+변수 = np.array([[1, 2, 3], [4, 5, 6]])
 
-print(variable[0])        # >> OUTPUT: [1, 2, 3]
-print(variable[0, 1])    # >> OUTPUT: 2
+print(변수[0])       # >> 출력: [1, 2, 3]
+print(변수[0, 1])    # >> 출력: 2
 ```
 
-### NumPy Shape
-Shape of the NumPy cannot be extracted using method of Python's iterable object such as `len()`. Instead, NumPy has its own attribute containing length of each dimension.
+### 넘파이 크기
+넘파이 크기는 파이썬의 일반 이터러블 객체 메소드인 `len()`에서 알아낼 수 없다. 그 대신, 넘파이 자체적으로 가지는 속성에서 각 차원의 크기를 확인할 수 있다.
 
 ```python
 import numpy as np
-variable = np.array([[1, 2, 3], [4, 5, 6]])
+변수 = np.array([[1, 2, 3], [4, 5, 6]])
 
-variable.shape        # >> OUTPUT: (2, 3)
-variable.shape[0]    # >> OUTPUT: 2
+변수.shape        # >> 출력: (2, 3)
+변수.shape[0]     # >> 출력: 2
 ```
 
-## NumPy Indexing
-The term "indexing" means slicing the array to specific range only. Each dimension is indexed using colon `:` and are distinguished via comma `,`. Indexing shares the same rules as slicing of iterable object.
+## 넘파이 인덱싱
 
-* `n:m` : start indexing from n^th^ element (included) to m^th^ element (excluded)
-* `:` : start indexing from beginning to the end, thus skip indexing.
+인덱싱(indexing)이란 행렬의 특정 범위 내의 요소들을 추출하는 것이다. 각 차원의 추출 범위는 콜론(`:`)으로 지정하며, 쉼표(`,`)로 차원을 구별한다. 인덱싱 구문 규칙은 이터러블 객체의 슬라싱과 동일하다. 
+
+* `n:m` : 차원의 `n`번째 인덱스 요소에서부터 `m`번째 이전의 요소까지 추출한다.
+* `:` : 차원의 처음부터 끝까지를 추출한다.
 
 ```python
 import numpy as np
-variable = np.array([[1, 2, 3], [4, 5, 6]])
+변수 = np.array([[1, 2, 3], [4, 5, 6]])
 
-print(variable[:, 1:-1])
+print(변수[:, 1:-1])
 ```
 
 ```
 [[1 2]
  [4 5]]
 ```
-
-# **파이썬: MATPLOTLIB**
-Matplotlib is a Python 2D plotting library which produces publication quality figures in a variety of hardcopy formats and interactive environments across platforms. Developer can generate plots, histograms, power spectra, bar charts, error charts, scatterplots, and more with just a few lines of code.
-
-To install Matplotlib library, open command prompt window and enter the command below: 
-
-```
-python -m pip install matplotlib
-```
-
-Since Matplotlib is a huge scientific library and is still growing, this chapter will briefly introduce basic terminology and its mechanism. For more information, refer to the following URL: https://matplotlib.org/
-
-## Terminology
-Matplotlib has various term user and developer may not be familiar of. This section is hereby provide terminology used in the library that could help understand. Below is a figure from official Matplotlib website:
-
-<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src="{{ '/assets/images/docs/Python/matplotlib_terminology.png' | relative_url }}" width="100%"></div><center style="font-weight:bold">Figure #. Matplotlib terminology.</center>
-### Figure
-
-Figure is considered an empty window of easel (a standing frame for a canvas):
-
-<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src="{{ '/assets/images/docs/Python/matplotlib_figure_no_axes.png' | relative_url }}" width="70%"></div><center style="font-weight:bold">Figure #. Matplotlib figure without any axes.</center>
-Calling a figure using API such as `matplotlib.pyplot.figure()` returns pure white window background without anything.
-
-### Axes
-Axes (aka. subplot) is the region of the image with the data space, considered as canvas that goes up on easel. Do not be confused with axes and axis which is completely different. A following is a figure with four empty axes:
-
-<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src="{{ '/assets/images/docs/Python/matplotlib_figure_with_axes.png' | relative_url }}" width="70%"></div><center style="font-weight:bold">Figure #. Matplotlib figure with four axes.</center>
-API such as `matplotlib.pyplot.subplot()` or `matplotlib.pyplot.subplots()` returns both figure and a single or multiple empty axes simultaneously.
