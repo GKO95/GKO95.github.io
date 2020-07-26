@@ -70,13 +70,17 @@ const MenuDesign = () => {
 
     document.getElementById("menu-title").innerText = category + ": " + __PAGENAME__;
 
-    let button = document.createElement("A");
+    let button; let path;
+
+    // >> VIEW RAW DOCUMENT
+    button = document.createElement("A");
     button.style.backgroundImage = "url(/assets/images/logo/logo-code.png)";
-    let path = "https://github.com/GKO95/GKO95.github.io/blob/master/_articles/"+__CATEGORY__.toLowerCase()+"/"+category+"_"+__PAGENAME__+".md";
+    path = "https://github.com/GKO95/GKO95.github.io/blob/master/_articles/"+__CATEGORY__.toLowerCase()+"/"+category+"_"+__PAGENAME__+".md";
     button.setAttribute("href", path); button.setAttribute("title", "View raw in GitHub");
     document.getElementById("menu-select").appendChild(button);
 
-    button = document.createElement("A");
+    // >> TOGGLE SIMPLIFIED VERSION
+    button = document.createElement("A");   
     button.style.backgroundImage = "url(/assets/images/logo/logo-section.png)";
     if (window.location.hash != "#full") button.style.backgroundColor = "inherit";
     else button.style.backgroundColor = "rgb(64,64,64)";
@@ -95,6 +99,12 @@ const MenuDesign = () => {
         }
 
     });
+    document.getElementById("menu-select").appendChild(button);
+
+    // >> TOGGLE LANGUAGE
+    button = document.createElement("A");
+    button.style.backgroundImage = "url(/assets/images/logo/logo-language.png)";
+    button.setAttribute("href", path); button.setAttribute("title", "View raw in GitHub");
     document.getElementById("menu-select").appendChild(button);
 
 

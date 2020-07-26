@@ -1,5 +1,6 @@
 ---
 name: C++
+lang: ko
 layout: docs
 author: GKO95
 category: Programming
