@@ -881,9 +881,9 @@ TypeError: unhashable type: 'list'
 It is possible to change the existing `value` of the `key` within a dictionary. Unlike list objects, creating new `key` data and assigning its `value` is also possible without needing any help from a method.
 
 ```python
-dictionary = {key1: value1, key2: value2, key3: value3}
-dictionary[key1] = value4
-dictionary[key5] = value5
+    dictionary = {key1: value1, key2: value2, key3: value3}
+    dictionary[key1] = value4
+    dictionary[key5] = value5
 ```
 
 ```
@@ -1407,7 +1407,7 @@ class CLASS:
 # INSTANTIATION
 instance = CLASS(1, 2)
 ''' EQUIVALENT: 
-Class.__init__(self = instance, arg1 = 1, arg2 = 2, arg3 = 3)
+Class.__init__(self = instance, arg1 = 1, arg2 = 2)
 '''
 
 # THEREFORE...
@@ -1830,7 +1830,7 @@ with instance.method():
     statements
 ```
 
-One of the actual implementation of this syntax can be found on chapter *TENSORFLOW: BASIC § TensorBoard* in [*PRGMING_TensorFlow*](./PRGMING_TensorFlow.md) document.
+One of the actual implementation of this syntax can be found on chapter *TENSORFLOW: BASIC § TensorBoard* in [*LIBRARY_TensorFlow*](./../../../library/en/LIBRARY_TensorFlow/) document.
 
 ### Absolute & Relative Paths
 Python has two different types of paths: absolute and relative path. When designating a file path, use double backslash `\\` since using a single backslash will escape string object and can cause unwanted operation.

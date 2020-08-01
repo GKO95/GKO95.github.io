@@ -3,16 +3,53 @@
 //========================================
 var __initsize__;
 const __autosize__ = () => {
-    document.getElementsByTagName("MAIN")[0].style.height = window.innerHeight
-        - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height
-        - document.getElementsByTagName("FOOTER")[0].offsetHeight + "px"
+    document.getElementsByTagName("MAIN")[0].style.height 
+        = (window.innerHeight < parseInt(getComputedStyle(document.body).minHeight) ? parseInt(getComputedStyle(document.body).minHeight) : window.innerHeight)
+            - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height
+            - document.getElementsByTagName("FOOTER")[0].offsetHeight + "px"
 };
 
 document.addEventListener("readystatechange", function() {
 if (document.readyState == "complete") {
 
     __initsize__ = document.body.getBoundingClientRect().height;
-    if (__initsize__ < window.innerHeight) { __autosize__(); }
+    if (window.innerHeight < parseInt(getComputedStyle(document.body).minHeight))
+    {
+        if (__initsize__ <= parseInt(getComputedStyle(document.body).minHeight))
+        {
+            document.getElementsByTagName("MAIN")[0].style.height
+                = parseInt(getComputedStyle(document.body).minHeight) - document.getElementsByTagName("FOOTER")[0].offsetHeight
+                    - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height + "px";
+        }
+    }
+    else
+    {
+        if (__initsize__ <= parseInt(getComputedStyle(document.body).minHeight)) 
+        {
+            document.getElementsByTagName("MAIN")[0].style.height
+                = window.innerHeight - document.getElementsByTagName("FOOTER")[0].offsetHeight
+                    - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height + "px";
+        }
+    }
+    /*
+    if (__initsize__ <= window.innerHeight)
+    { 
+        if (window.innerHeight < parseInt(getComputedStyle(document.body).minHeight))
+        {
+            document.getElementsByTagName("MAIN")[0].style.height
+                = parseInt(getComputedStyle(document.body).minHeight)
+                    - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height
+                    - document.getElementsByTagName("FOOTER")[0].offsetHeight + "px";
+        }
+        else
+        {
+            document.getElementsByTagName("MAIN")[0].style.height
+                = window.innerHeight
+                    - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height
+                    - document.getElementsByTagName("FOOTER")[0].offsetHeight + "px";
+        }
+    }
+    */
     document.getElementsByTagName("MAIN")[0].style.visibility = "visible";
     document.getElementsByTagName("FOOTER")[0].style.visibility = "visible";
     //alert(__initsize__ + " : " +document.body.getBoundingClientRect().height);
@@ -119,6 +156,23 @@ document.onkeydown = function(e) {
 //========================================
 window.addEventListener('resize', event => {
     //alert(document.body.getBoundingClientRect().height + " : " + window.innerHeight);
-    if (__initsize__ < window.innerHeight) { __autosize__(); }
+    if (window.innerHeight < parseInt(getComputedStyle(document.body).minHeight))
+    {
+        if (__initsize__ <= parseInt(getComputedStyle(document.body).minHeight))
+        {
+            document.getElementsByTagName("MAIN")[0].style.height
+                = parseInt(getComputedStyle(document.body).minHeight) - document.getElementsByTagName("FOOTER")[0].offsetHeight
+                    - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height + "px";
+        }
+    }
+    else
+    {
+        if (__initsize__ <= parseInt(getComputedStyle(document.body).minHeight)) 
+        {
+            document.getElementsByTagName("MAIN")[0].style.height
+                = window.innerHeight - document.getElementsByTagName("FOOTER")[0].offsetHeight
+                    - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height + "px";
+        }
+    }
     __menusize__();
 });

@@ -126,3 +126,8 @@
     margin: 8px 8px;
     text-decoration: none;
 }
+
+#docs #menu-content section {
+    overflow-y: auto;
+    overflow-x: wrap;
+}

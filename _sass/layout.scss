@@ -2,7 +2,7 @@
 >> NAVIGATION
 ==============================================================================================================*/
 #navigation {
-    padding: 10px 0px 3px 0px;
+    padding: 10px 0px 6px 0px;
     background-color: black;
 
     display: flex;
@@ -23,11 +23,17 @@
     background-size: 32px;
 }
 
-#navigation #navigation-logo a {
+#navigation-logo, #navigation-url{
+    height: 32px;
+}
+
+#navigation-logo a {
     display: inline-block;
     height: 32px;
     width: 32px;
     margin-left: 16px;
+
+    align-content: center;
 
     // Disable selection.
     user-select: none;
@@ -37,7 +43,7 @@
     -webkit-user-select: none;
 }
 
-#navigation #navigation-url a {
+#navigation-url a {
     display: inline-block;
     height: 32px;
     width: 32px;
@@ -176,6 +182,7 @@
 ==============================================================================================================*/
 .highlighter-rouge pre {
     padding: 0.5em 1em;
+    overflow-x: auto;
 }
 
 .highlighter-rouge code {

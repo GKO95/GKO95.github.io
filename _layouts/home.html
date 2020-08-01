@@ -35,7 +35,14 @@ layout: template
             </div>
         </div>
         <div id="home-lower">
-            <!-- CONTENT HERE -->
+            <!-- ANNOUNCEMENT -->
+            <div id="home-announcement">
+                {{ content }}
+            </div>
+            <!-- POSTS -->
+            <div id="home-bulletin">
+
+            </div>
         </div>
     </main>
     <!-- FOOTER -->
@@ -44,4 +51,3 @@ layout: template
     {%- include .menu.html -%}
 </body>
 <script type="text/javascript" src="{{ '/assets/js/home-config.js' | relative_url }}"></script>
-<script type="text/javascript" src="{{ '/assets/js/home-register.js' | relative_url }}"></script>

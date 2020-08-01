@@ -4,7 +4,7 @@
 #home header {
     background-color: inherit;
     height: 25vh;
-    min-height: 157px;
+    min-height: 160px;
     max-height: 256px;
 
     display: flex;
@@ -14,7 +14,7 @@
     overflow: hidden;
 }
 
-#home header #navigation{
+#home header #navigation{   
     position: static;
     width: auto;
 }
@@ -193,6 +193,37 @@
     background-repeat: no-repeat;
     background-position: center;
 }
+
+//================================
+// HOME-ANNOUNCEMENT
+//================================
+#home-announcement {
+    box-sizing: border-box;
+    border: solid rgb(64, 64, 64) 4px;
+    
+    height: 64px;
+}
+
+#home-announcement ul {
+    margin: 0px;
+    padding: 4px 8px;
+    list-style-type: none;
+    height: calc(100% - 4px * 2);
+}
+
+//================================
+// HOME-BULLETIN
+//================================
+#home-bulletin {
+
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    background-color: rgb(24, 24, 24);
+    height: calc(100% - 64px - 8px * 2);
+}
+
+
 
 //================================
 // HOME-MENU

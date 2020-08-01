@@ -75,7 +75,7 @@ const MenuDesign = () => {
     // >> VIEW RAW DOCUMENT
     button = document.createElement("A");
     button.style.backgroundImage = "url(/assets/images/logo/logo-code.png)";
-    path = "https://github.com/GKO95/GKO95.github.io/blob/master/_articles/"+__CATEGORY__.toLowerCase()+"/"+category+"_"+__PAGENAME__+".md";
+    path = "https://github.com/GKO95/GKO95.github.io/blob/master/_docs/"+__CATEGORY__.toLowerCase()+"/"+__LANGUAGE__.toLowerCase()+"/"+category+"_"+__PAGENAME__+".md";
     button.setAttribute("href", path); button.setAttribute("title", "View raw in GitHub");
     document.getElementById("menu-select").appendChild(button);
 
@@ -104,7 +104,9 @@ const MenuDesign = () => {
     // >> TOGGLE LANGUAGE
     button = document.createElement("A");
     button.style.backgroundImage = "url(/assets/images/logo/logo-language.png)";
-    button.setAttribute("href", path); button.setAttribute("title", "View raw in GitHub");
+    if (__LANGUAGE__ == "en") path = "./../../ko/"+category+"_"+__PAGENAME__+"/";
+    else if (__LANGUAGE__ == "ko") path = "./../../en/"+category+"_"+__PAGENAME__+"/";
+    button.setAttribute("href", path); button.setAttribute("title", "Toggle language");
     document.getElementById("menu-select").appendChild(button);
 
 
@@ -122,7 +124,7 @@ const MenuDesign = () => {
     document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.width = "50%";
 
     document.getElementById("menu-content").getElementsByTagName("SECTION")[0].style.backgroundColor = "inherit";
-    document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.backgroundColor = "rgb(32,32,32)";    
+    document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.backgroundColor = "rgb(32,32,32)";
 
     let anchor; let subanchor;
     for (let chapter of __CONTENT__.children)
@@ -179,14 +181,11 @@ const MenuDesign = () => {
                         }, 20);
                     });
                 }
-                // >> SCROLLABLE
-                document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.overflowY = "scroll";
             }
             else
             {
                 // >> CLEAR PREVIOUS CHAPTER SELECTION
                 document.getElementById("menu-content").getElementsByTagName("SECTION")[1].innerHTML = "";
-                document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.overflowY = "initial";
             }
 
         });
