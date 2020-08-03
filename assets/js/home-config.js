@@ -12,6 +12,7 @@ const __SHIFTS__    = document.getElementsByClassName("home-shift");
 
 const __LOWER__     = document.getElementById("home-lower");
 const __ANNOUNCE__  = document.getElementById("home-announcement").getElementsByTagName("UL")[0];
+const __BULLETIN__  = document.getElementById("home-bulletin").getElementsByTagName("UL")[0];
 
 //========================================
 // TITLE: IMPLEMENTATION
@@ -216,6 +217,17 @@ for (let shift of __SHIFTS__)
 ========================================*/
 for (let msg = 1; msg < __ANNOUNCE__.children.length; msg++)
 { __ANNOUNCE__.removeChild(__ANNOUNCE__.children[msg]); }
+
+if (__BULLETIN__.children.length > 4)
+{
+    __BULLETIN__.style.alignContent = "space-between";
+}
+else if (__BULLETIN__.children.length > 2)
+{
+    __BULLETIN__.style.alignContent = "baseline";
+    for (let post of __BULLETIN__.children)
+    { post.style.marginBottom = "1%"; }
+}
 
 const InitBulletin = () => {
 
