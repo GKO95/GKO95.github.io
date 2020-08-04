@@ -37,8 +37,14 @@ const Raw2Chapter = () => { // >> "docs-content" INITIALLY HIDDEN!
             elem.setAttribute("class", __CONTENT__.children[0].className);
         }
         // RETAIN ID FOR TABLE OF CONTENT
-        else if (__CONTENT__.children[0].id != "") {
+        else if (__CONTENT__.children[0].id != "")
+        {
             elem.setAttribute("id", __CONTENT__.children[0].id);
+        }
+        else if (__CONTENT__.children[0].tagName == "DIV" && __CONTENT__.children[0].children[0].tagName == "IMG")
+        {
+            elem.setAttribute("class", "docs-figure");
+            __CONTENT__.children[0].children[0].setAttribute("src", "./."+__CONTENT__.children[0].children[0].getAttribute("src"))
         }
         __CONTENT__.lastChild.appendChild(elem);
         __CONTENT__.lastChild.lastChild.innerHTML = __CONTENT__.children[0].innerHTML;

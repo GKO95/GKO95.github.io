@@ -59,6 +59,13 @@ code {
     font-family: 'Courier New', Courier, monospace;
 }
 
+blockquote {
+    border-left: solid 4px rgb(224,224,224);
+    background-color: rgb(24,24,24);
+    color: rgb(200, 200, 200);
+    padding: 2px 16px;
+}
+
 table {
     width: 100%;
     border-style: solid;
