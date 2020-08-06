@@ -1,10 +1,10 @@
 ---
-name: Python3
+name: Python
 lang: en
 layout: docs
 author: GKO95
 category: Programming
-title: "Programming | Python3"
+title: "Programming | Python"
 logo: "/assets/images/logo/logo-python.png"
 order: 0x00
 ---

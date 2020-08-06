@@ -110,9 +110,20 @@
     visibility: hidden;
 }
 
+#docs-content center{
+    font-weight: bold;
+}
+
 .docs-chapter {
     margin-bottom: 48px;
     //overflow: hidden;
+}
+
+.docs-figure {
+    background-color: white;
+    border: solid 4px rgb(64,64,64);
+    border-radius:0.5em;
+    padding: 0.5em 0 0.5em 0;
 }
 
 #docs #menu-content a {
