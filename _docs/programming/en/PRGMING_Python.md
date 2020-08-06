@@ -1770,7 +1770,7 @@ open("filename.txt")
 A `close()` method is used to close the currently opened file. Closing files are important to avoid wasting resources. Ensure files are always closed even on exception by using `try`/`except` or `with` statement.
 
 ```python
-file = open("file.txt", "r")
+file = open("filename.txt", "r")
 file.close()
 ```
 
@@ -1778,7 +1778,7 @@ file.close()
 A `with` statement creates a temporary variable only available inside an indented code block of the statement. When the file is opened using `with` statement, the file automatically closes at the end of the code block even if an exception occurs.
 
 ```python
-with open("file.txt") as file:
+with open("filename.txt") as file:
     statements
 ```
 
@@ -1836,7 +1836,7 @@ One of the actual implementation of this syntax can be found on chapter *TENSORF
 Python has two different types of paths: absolute and relative path. When designating a file path, use double backslash `\\` since using a single backslash will escape string object and can cause unwanted operation.
 
 ```python
-variable = open("path\\file.txt")
+variable = open("path\\filename.txt")
 ```
 
 ## Reading Files
@@ -1845,7 +1845,7 @@ After opening the text-based file, Python can read its content using `read()` me
 Read method can be used on the same file over again, but it will continue from where Python last read. When there is no argument, the read method reads the rest of the text from where it last left off.
 
 ```python
-with open("path\\file.txt") as file:
+with open("path\\filename.txt") as file:
     print(file.read(16))    # READ 16 BYTES FROM THE START OF THE CONTENT.
     print(file.read(4))        # READ 4 BYTES FROM THE POINT AFTER PREVIOUS 16 BYTES.
     print(file.read())        # READ THE REST OF THE TEXT AFTER PREVIOUS 4 BYTES.
@@ -1857,14 +1857,14 @@ The `read-lines()` method is used to return a list of text of each line. The met
 Don't get confused with `Readline()` method which only reads the first line in a string.
 
 ```
-<file.txt>
+[filename.txt]
 First line here.
 Second line there.
 Last line somewhere.
 ```
 
 ```python
-with open("path\\file.txt") as file:
+with open("path\\filename.txt") as file:
     print(file.readlines())
     print(file.readline())
 ```
@@ -1888,7 +1888,7 @@ In Python, a file can be created or (over)written using a `write()` method. Ther
 Suppose there is a file with text content written as follows:
 
 ```
-<file.txt>
+[filename.txt]
 First line here.
 Second line there.
 Last line somewhere.
@@ -1897,25 +1897,25 @@ Last line somewhere.
 Overwrite mode `w` deletes all of previously existing content and write down fresh from the beginning.
 
 ```python
-with open("path\\file.txt", "w") as file:
+with open("path\\filename.txt", "w") as file:
     file.write("TEXT OVERWRITTEN!")
 ```
 
 ```
-<file.txt>
+[filename.txt]
 TEXT OVERWRITTEN!
 ```
 
 On the other hand, append mode `a` does not delete existing content but continue writing from the end.
 
 ```python
-with open("path\\file.txt", "a") as file:
+with open("path\\filename.txt", "a") as file:
     file = file.write("TEXT APPENDED.")
     print(file)
 ```
 
 ```
-<file.txt>
+[filename.txt]
 First line here.
 Second line there.
 Last line somewhere.TEXT APPENDED.
@@ -1927,12 +1927,12 @@ Upon successfully written, `write()` method returns the number of bytes written.
 A new file can be created using the same `write()` method. Creating a file is simply done by designating a file name that does not exist in the specified path.
 
 ```python
-with open("path\\new_file.txt", "w") as file:
+with open("path\\NEW-filename.txt", "w") as file:
     file.write("NEW FILE CREATED!")
 ```
 
 ```
-<new_file.txt>
+[NEW-filename.txt]
 NEW FILE CREATED!
 ```
 

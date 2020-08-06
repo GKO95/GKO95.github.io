@@ -1937,14 +1937,14 @@ with open("경로\\파일이름.txt") as file:
 `Readlines()` 메소드는 각 줄의 내용을 담는 리스트 객체를 반환한다. 메소드의 인자로는 정수가 건네지며, 이는 읽을 바이트 수를 의미한다. 다만, 첫 줄만 읽는 `Readline()` 메소드와 혼돈하지 않도록 주의해야 한다.
 
 ```
-<Sample.txt>
+[파일이름.txt]
 첫 번째 줄은 여기에.
 두 번째 줄은 저기에.
 마지막 줄은 어딘가에.
 ```
 
 ```python
-with open("경로\\Sample.txt") as file:
+with open("경로\\파일이름.txt") as file:
     print(file.readlines())
     print(file.readline())
 ```
@@ -1968,7 +1968,7 @@ for var in file:
 파이썬에서 텍스트 파일은 `write()` 메소드를 통해 생성되거나 작성된다. 파일을 쓰는 모드에는 두 가지가 존재한다: (1) 새로 쓰기와 (2) 덧붙여 쓰기가 있다. 아래의 텍스트 파일이 있다고 가정한다.
 
 ```
-<Sample.txt>
+[Sample.txt]
 첫 번째 줄은 여기에.
 두 번째 줄은 저기에.
 마지막 줄은 어딘가에.
@@ -1977,24 +1977,24 @@ for var in file:
 새로 쓰기(overwrite) 모드 `w`는 기존의 모든 내용들을 삭제하여 처음부터 새로 작성한다.
 
 ```python
-with open("경로\\Sample.txt", "w") as file:
+with open("경로\\파일이름.txt", "w") as file:
     file.write("텍스트 새로 쓰기!")
 ```
 
 ```
-<Sample.txt>
+[파일이름.txt]
 TEXT OVERWRITTEN!
 ```
 
 덧붙여 쓰기(append) 모드 `a`는 기존의 모든 내용들을 유지하고 맨 끝 단락에서부터 작성한다.
 
 ```python
-with open("경로\\Sample.txt", "a") as file:
+with open("경로\\파일이름.txt", "a") as file:
     file.write("텍스트 덧붙여 쓰기!")
 ```
 
 ```
-<Sample.txt>
+[파일이름.txt]
 첫 번째 줄은 여기에.
 두 번째 줄은 저기에.
 마지막 줄은 어딘가에.텍스트 덧붙여 쓰기!
@@ -2007,12 +2007,12 @@ with open("경로\\Sample.txt", "a") as file:
 `write()` 메소드는 기존의 파일을 작성하는 것 이외에도 새로운 파일을 생성하는 데에도 쓰인다. 지정된 경로에 존재하지 않는 파일 이름으로 내용을 작성하면 해당 이름을 가진 새로운 파일이 생성된다. 
 
 ```python
-with open("경로\\NEW-Sample.txt", "w") as file:
+with open("경로\\NEW-파일이름.txt", "w") as file:
     file.write("새 파일 생성!")
 ```
 
 ```
-<NEW-Sample.txt>
+[NEW-파일이름.txt]
 새 파일 생성!
 ```
 
