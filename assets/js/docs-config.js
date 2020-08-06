@@ -86,6 +86,7 @@ const MenuDesign = () => {
     document.getElementById("menu-select").appendChild(button);
 
     // >> TOGGLE SIMPLIFIED VERSION
+    /* FIXME Incomplete functionality!
     button = document.createElement("A");   
     button.style.backgroundImage = "url(/assets/images/logo/logo-section.png)";
     if (window.location.hash != "#full") button.style.backgroundColor = "inherit";
@@ -106,6 +107,7 @@ const MenuDesign = () => {
 
     });
     document.getElementById("menu-select").appendChild(button);
+    */
 
     // >> TOGGLE LANGUAGE
     button = document.createElement("A");
