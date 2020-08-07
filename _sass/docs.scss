@@ -77,29 +77,22 @@
 
 #docs-content h1 {
     border-bottom-style: solid;
-
-    //font-family: 'OpenSans';
     font-size: 2.4em;
-    
     margin-bottom: 0.6em;
-    //margin-top: 1.2em;
+    //font-family: 'OpenSans';
 }
 
 #docs-content h2 {
     font-size: 1.6em;
-
-    padding-left: 0.4em;
     margin-bottom: 0.5em;
     //font-family: 'OpenSans';
 }   
 
 #docs-content h3 {
     font-size: 1.2em;
-
-    padding-left: 1.6em;
+    padding-left: 0.4em;
     margin-bottom: 0.5em;
     //font-family: 'OpenSans';
-    font-style: italic;
 }
 
 #docs-content h1::before, #docs-content h2::before, #docs-content h3::before {
