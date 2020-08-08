@@ -292,12 +292,20 @@ Variable is a container for the data assigned using assignment (`=`) operator. T
     int variable;
     ```
 
+**선언**
+: 선언(declaration)이란 변수, 함수, 객체와 같은 구성체에 이름(일명 식별자)을 붙여 존재를 알리는 단계이다. 다른 프로그래밍 언어에서 선언은 일반적으로 구성체에 자료형을 지정하지만, 파이썬은 예외적으로 구성체에 자료형 지정이 없다.
+
 * **Definition**
     : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
 
+    
+    
     ```c
-    variable = 3;
+variable = 3;
     ```
+
+**정의**
+: 정의(definition)란 구성체가 가지는 데이터 값(혹은 실행 가능한 기능)을 담는 코드 블록을 의미한다. 일부 경우, 변수와 함수의 정의는 각각 *할당(assignment)*과 *구현(implementation)*이라고도 부른다.
 
 * **Initialization**
     : initialization is assigning the initial value to the construct, simply the *first* definition. Since the first definition is generally done on the same time when declaring the construct. Hence, initialization is commonly thought by people as *declaration + definition* which is not always true.
@@ -305,6 +313,11 @@ Variable is a container for the data assigned using assignment (`=`) operator. T
     ```c
     int variable = 3;
     ```
+
+**초기화**
+: 초기화(initialization)는 구성체에 초기값을 할당하는 것이며, 간단히 *최초* 정의라고 간주할 수 있다. 구성체의 가장 첫 정의는 일반적으로 선언 단계와 함께 이루어진다. 이러한 이유로 초기화는 *선언 + 정의*라고 흔히 여겨지지만 이는 사실이 아니다.
+
+
 
 Once the declaration sets data type to a variable, that variable can only take the value of that designated data type.
 
