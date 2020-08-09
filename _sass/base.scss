@@ -1,22 +1,32 @@
 @font-face {
     font-family: 'OpenSans';
-    src: url(/assets/font/OpenSans-SemiBold.ttf);
+    src: url(/assets/font/OpenSans/OpenSans-SemiBold.ttf);
 }
 @font-face {
     font-family: 'OpenSans';
     font-weight: bold;
-    src: url(/assets/font/OpenSans-ExtraBold.ttf);
+    src: url(/assets/font/OpenSans/OpenSans-ExtraBold.ttf);
 }
 @font-face {
     font-family: 'OpenSans';
     font-style: italic;
-    src: url(/assets/font/OpenSans-SemiBoldItalic.ttf);
+    src: url(/assets/font/OpenSans/OpenSans-SemiBoldItalic.ttf);
 }
 @font-face {
     font-family: 'OpenSans';
     font-style: italic;
     font-weight: bold;
-    src: url(/assets/font/OpenSans-ExtraBoldItalic.ttf);
+    src: url(/assets/font/OpenSans/OpenSans-ExtraBoldItalic.ttf);
+}
+
+@font-face {
+    font-family: 'NotoSansKR';
+    src: url(/assets/font/NotoSansKR/NotoSansKR-Regular.otf);
+}
+@font-face {
+    font-family: 'NotoSansKR';
+    font-weight: bold;
+    src: url(/assets/font/NotoSansKR/NotoSansKR-Bold.otf);
 }
 
 body {
@@ -32,7 +42,7 @@ body {
     min-height: 600px;
     min-width: 800px;
 
-    font-family: 'OpenSans';
+    font-family: 'NotoSansKR';
     font-size: large;
     letter-spacing: 0px;
 }
