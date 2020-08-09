@@ -9,144 +9,215 @@ logo: "/assets/images/logo/logo-c.png"
 summary: "."
 order: 0x01
 ---
-# **C: INTRO**
+# **C: 소개**
 
-General-purpose programming language successor to *B* language developed at Bell Labs, designed to construct utilities for Unix. Currently, C is the most widely used programming language and has influenced on numerous programming languages such as C++, C#, Python, Java, and more. 
+C 언어는 유닉스(UNIX) 컴퓨터를 위한 소프트웨어 제작을 위해 개발된 *B* 언어의 후속작이다. 현재 C 언어는 가장 널리 사용되고 있는 프로그래밍 언어로 C++, C#, 파이썬, 자바 등 여러 프로그래밍 언어에 영향을 주었다. C 언어의 다른 프로그래밍 언어에 비해 매우 빠른 처리 속도와 훌륭한 호환성을 가지고 있어 소프트웨어 및 펌웨어 개발에 여전히 사용되고 있다.
 
-Though C++ is a superset of C programming language as it provides more functionality, C still has far better advantage on execution speed with greater compatibility and portability. This makes C a common language on many firmware & software development; Python is originally developed using C language!
+## 컴파일 언어
 
-## Paradigm
+프로그래밍 언어를 실행하는 방법에는 크게 두 가지로 나뉘어진다: 컴파일 언어와 인터프리트 언어이다.
 
-Paradigm is a classification of programming language based on their features. Paradigms are mainly categorized into two different groups: imperative, and declarative programming.
+인터프리터(interpreter)는 영문으로 작성된 소스 코드를 컴퓨터가 곧바로 해독하여 실행하며, 인터프리터가 있는 한 하나의 소스 코드를 서로 다른 시스템에서 동일하게 실행할 수 있는 장점을 가진다(일명 크로스 플랫폼; cross platform). 대표적인 인터프리트 언어로는 파이썬(Python)이 있다. 반면, 컴파일러(compiler)는 소스 코드를 컴퓨터 운영체제와 아키텍처에 따라 이진코드로 번역한 부산물을 생성하여 실행한다. 
 
-### Imperative Programming
+C 언어는 컴파일 언어이며, 크로스 플랫폼이 지원되지 않는 단점이 있지만 컴파일러의 최적화로 인해 인터프리터보다 실행 속도가 매우 빠르다.
 
-Imperative programming is a paradigm that executes program using statements (a line of code that performs certain action) in sequence; it is a programming that focuses on defining how to execute. Below is an example of imperative programming in C language:
+### 컴파일러
+
+C 언어의 컴파일러는 국제표준기구(ISO)에서 표준을 발표한 년도에 따라 버전이 나뉘어진다. 가장 널리 사용되고 있는 버전으로는 ANSI C(일명 C89)와 C99가 있다. 본 문서는 최소한 ANSI C를 기준으로 삼아 C 프로그래밍 언어에 대하여 설명한다.
+
+### 전처리기
+
+전처리기(preprocessor)는 컴파일러가 소스 코드를 이진코드 컴퓨터 언어로 변역하기 전의 컴파일 작업 준비하는 역할을 이행한다. 전처리기가 수행하는 명령어는 해쉬 기호(`#`)로 표시되며, 이를 전처리기 지시문(preprocessor directive)라고 부른다.
+
+| 전처리기 지시문 | 예시                  | 설명                                              |
+| :-------------: | --------------------- | ------------------------------------------------- |
+|   `#include`    | `#include <iostream>` | 스크립트에 헤더 파일을 추가한다.                  |
+|    `#define`    | `#define SQUARE`      | 스크립트 내에서 사용할 수 있는 매크로를 정의한다. |
+|    `#pragma`    | `#pragma once`        | 컴파일러에 추가적 설정을 제공한다.                |
+
+전처리기는 C 언어를 읽지 않을 뿐더러 C 언어 문법을 따르지 않는다. 오로지 전처리기 지시문을 처리하고 주석을 없애는 등의 작업을 하여 컴파일러에 제공한다. 전처리기 지시문은 필수요소가 아니지만 프로그래밍을 더 편리하도록 한다. 전처리기는 컴파일러의 일부 중 하나이다.
+
+# **C: 설치**
+
+C 프로그래밍 언어로 개발하기 위해서는 C 컴파일러가 반드시 필요하며, 컴파일러 제작 회사 및 목적에 따라 종류가 다양하다. 어떤 컴파일러를 사용하는지에 따라 소스 코드를 실행 프로그램으로 컴파일하는 방식이 다를 수가 있으나, 모든 컴파일러는 동일한 ISO 표준에 따라 동작하므로 일반적인 경우에는 어떠한 컴파일러를 사용하던 상관이 없다.
+
+통합 개발 환경(integrated development environment; IDE)은 코드 편집기 기능을 제공하며 컴파일러를 통해 실행 가능한 프로그램을 생성한다. 그러므로 본 장에서는 IDE 설치 및 초기설정 위주에 대하여 설명한다.
+
+## 비주얼 스튜디오
+
+[비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 윈도우 OS의 대표적인 IDE이며 MSVC 컴파일러를 제공한다. 비주얼 스튜디오는 총 세 가지의 에디션이 존재하며, 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. 그 중에서 C 프로그래밍 언어를 위해 "Desktop development with C++"를 선택한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_component.png" width="100%"></div><center style="font-weight: bold;">그림 1. 비주얼 스튜디오 C 프로그래밍을 위한 구성요소.</center>
+
+C++ 구성요소를 선택한 이유는 C++ 컴파일러가 C 프로그래밍 언어 또한 컴파일하기 때문이다. 이러한 이유로 공식적으로 순수 C 프로그래밍 언어 구성요소가 따로 존재하지 않는다. 만일 한국어 지원을 원한다면 Language packs 탭에서 한국어를 함께 선택하면 된다.
+
+비주얼 스튜디오를 실행하면 아래와 같은 시작화면이 나타난다. 새로운 프로젝트를 생성하려면 오른쪽 하단의 Create a new project 버튼을 클릭한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project1.png" width="100%"></div><center style="font-weight: bold;">그림 2. 비주얼 스튜디오 시작화면.</center>
+
+위에서 언급하였듯이 비주얼 스튜디오는 공식적으로 C 프로그래밍 언어에 대한 선택 옵션이 존재하지 않으므로, 프로젝트 생성 메뉴에서 C 프로그래밍 언어 선택은 찾을 수 없다. 그러므로 C 언어 프로젝트 생성을 위해서는 아래의 절차를 따라야 한다:
+
+1. 프로그래밍 언어를 C++로 선택하여 Empty Project(빈 프로젝트)를 클릭한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project2.png" width="100%"></div><center style="font-weight: bold;">그림 3. 비주얼 스튜디오 C 프로젝트 생성 (1단계).</center>
+
+2. 프로젝트 및 솔루션 이름을 선정한다. 여기서 프로젝트란, 소스 코드와 컴파일러 설정 등의 실질적인 코딩 내용을 관리하는 `.vcxproj` 확장자 파일이며, 솔루션은 여러 프로젝트 파일을 하나의 폴더처럼 담는 `.sln` 파일이다. 비주얼 스튜디오에서 프로젝트는 `.sln` 파일로 열기를 권장한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project3.png" width="100%"></div><center style="font-weight: bold;">그림 4. 비주얼 스튜디오 C 프로젝트 생성 (2단계).</center>
+
+3. 오른쪽의 솔루션 탐색기(Solution Explorer)에서 소스 파일(Source Files)에 오른쪽 클릭하여 `추가 > 새 항목`을 클릭한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project4.png" width="100%"></div><center style="font-weight: bold;">그림 4. 비주얼 스튜디오 C 프로젝트 생성 (3단계).</center>
+
+4. 새 항목 추가 창에서 C++ 파일을 선택하나, 파일 이름에서 확장자를 C++ 소스 파일 확장자의 `.cpp`에서 C 소스 파일 확장자인 `.c`로 변경한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project5.png" width="100%"></div><center style="font-weight: bold;">그림 5. 비주얼 스튜디오 C 프로젝트 생성 (4단계).</center>
+
+단, 빈 프로젝트를 통해 추가된 소스 파일인 만큼 내부에는 어떠한 기본적인 코드가 작성되어 있지 않는다. 아래의 코드를 소스 파일에 붙여넣으며, 코드에 대한 설명은 차후 진행될 예정이다.
 
 ```c
-// HOW TO EXECUTE: CONDITIONAL (CHECKS MODULUS AND ASSIGN "even" OR "false")
-auto variable = value % 2 == 0 ? "even" : "odd";
+#include <stdio.h>
+
+int main() {
+    // 여기서부터 코드 입력...
+    printf("Hello, World!\n");
+    return 0;
+}
 ```
 
-The list of imperative programming languages are: C/C++, C#, Python, JavaScript, Java, and more.
-
-*Procedural Programming* is one of the subcategory of imperative programming paradigm. Just like imperative, procedural programming executes code in sequence but supports structuring procedures (aka. functions).
-
-*Object-Oriented Programming* (abbrev. OOP) is another subcategory of imperative programming paradigm, mainly using object that can store data (fields) and procedures (methods). OOP is considered imperative programming since the procedures within objects can access and modify the data fields.
-
-### Declarative Programing
-
-Declarative programming is a paradigm that executes program purely by declaration but without describing the flow, often defined as any style of programming that is not imperative; it is a programming that focuses on defining what to execute. Below is an example of declarative programming in HTML language:
-
-```html
-<!-- WHAT TO EXECUTE: "IMG" TAG (PRESENT IMAGE "./image.png" IN 400x300) -->
-<img src="./image.png" width="400" height="300" />
-```
-
-The list of imperative programming languages are: HTML, Prolog, SQL, QML, Regex, and more
-
-*Functional programming* is one of the declarative paradigm that focuses on using pure functions. While this paradigm is similar to procedural programming from imperative, there is a main difference: functional programming do not have side-effects which can occur on procedural programming, depending purely on arguments and return value (aka. *pure function*).
-
-## Compilation
-
-C/C++ language uses compiler to create executable file from the source code. Compiler translates C source code (written in high-level language: English) to a language computer can understand like binary code (low-level language). Compiled application can be executed without compiler afterward.
-
-Compiler has a several standard revision for ISO (International Organization of Standardization) based on the time it was released. The most renowned revision is a ANSI C (aka. C89) and C99. This document will instruct the programming language based on ANSI C at minimum.
-
-Compilation of C/C++ language is divided into two stage that is done by preprocessor and compiler (technically, preprocessor is included inside a compiler).
-
-### Preprocessor
-
-Preprocessing is a first stage of compilation done by a preprocessor. Preprocessor directive (aka. compiler directive) which is denoted by octothorpe symbol `#` in the script commands for preprocessor to perform certain actions before compiler does.
-
-| Preprocessor Directive | Example               | Summery                                          |
-| :--------------------- | --------------------- | ------------------------------------------------ |
-| `#include`             | `#include <iostream>` | Include header file to the script.               |
-| `#define`              | `#define SQUARE`      | Define new macro that can be used in the script. |
-| `#pragma`              | `#pragma once`        | Provide additional options to the compiler.      |
-
-Preprocessor does not read the C/C++ language but accepts preprocessor directive, comments, declaration, and et cetera within a source code and returns modified source code with preprocessor directive activated, comments removed, header files included, et cetera for compiler to process.
-
-Preprocessor directive is not necessary when programming and does not observe C/C++ language grammar, but it does make programming much easier. Preprocessor is one of the components included in a compiler. 
-
-### Compiler
-
-After preprocessing is finished, the official stage of compilation is processed by the compiler. Compiler starts translating C/C++ source code to a language computer can understand, supported by those activated by preprocessor directives.
+비주얼 스튜디오에서 C 언어 프로그램을 실행하는 방법에는 두 가지가 존재한다: 디버그(debug) 모드(`F5`)와 일반 실행 모드(`Ctrl+F5`)이다. 프로그램에 문제가 발생하여 하나씩 짚어보아야 할 경우 디버깅 모드를 사용하지만, 그렇지 않은 경우에는 일반 실행 모드를 사용할 것을 권장한다.
 
 ### CRT Security Warning
 
-C Run-time Library (CRT) is the part of the C++ Standard Library that incorporates ISO C99 standard library. However, there are several functions not recommended as more secure version of functions are available, suffixed by `_s`. Attempting to utilize these less secured function can alert `C4996` compilation error related to function security warning.
+C Run-time Library (CRT)는 ISO C99 표준 라이브러리를 내포하고 있는 C++ 표준 라이브러리이다. 그 중에서 비주얼 스튜디오의 MSVC 컴파일러는 안정성 문제를 고려하여 일부 기능의 사용을 제한하였으며, 대신 접미사 `_s`가 붙은 더욱 안정된 기능을 제공한다. 사용이 제한된 기능을 사용하려 할 시, 안정성 경고와 관련된 `C4996` 컴파일 작업 오류이 나타난다.
 
-CRT security warning is often found when programming with C language. To override this warning, enter the macro definition shown below:
+CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 그러나 이는 사실상 "경고"이므로 무시하고 컴파일 할 수 있으며, 아래의 코드를 입력하면 된다.
 
 ```c
 #define _CRT_SECURE_NO_WARNINGS
 ```
 
-## Header File
+## 엑스코드
 
-A file that contains function declaration and macro definition which can be used on source code. There exist two different ways of including the header file to the source code: angled brackets `<>` and double quotations `""`.
+[엑스코드](https://developer.apple.com/download/release/)(Xcode)는 애플에서 개발한 macOS의 대표적인 IDE이며 Clang을 기본 컴파일러로 사용한다. 엑스코드 또한 다른 프로그래밍 언어를 지원하는데, 비주얼 스튜디오와 달리 엑스코드는 C 프로그램 언어 선택 옵션이 존재한다.
 
-```cpp
+엑스코드를 실행한 다음, 새로운 프로젝트를 `File > New > Project...`로 통해 생성한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project1.png" width="100%"></div><center style="font-weight: bold;">그림 6. 엑스코드 시작화면.</center>
+
+본격적인 엑스코드 창이 나타나게 되는데, 애플 제품의 어플리케이션 제작에 특화되어 있으며 프로젝트 종류도 여러 가지가 있다. C 언어 프로젝트 생성을 위해서는 아래의 절차를 따라야 한다:
+
+1. 사용하고 있는 컴퓨터가 macOS 운영체제이므로, macOS 탭에서 가장 간단한 터미널 형식의 프로그램을 위해 Command Line Tool을 선택한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project2.png" width="100%"></div><center style="font-weight: bold;">그림 7. 엑스코드 C 프로젝트 생성 (1단계).</center>
+
+2. Product Name에는 프로젝트 이름을 선정하고, Language에는 C로 선택한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project3.png" width="100%"></div><center style="font-weight: bold;">그림 7. 엑스코드 C 프로젝트 생성 (2단계).</center>
+
+3. 프로젝트를 저장할 경로를 고른다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project4.png" width="100%"></div><center style="font-weight: bold;">그림 8. 엑스코드 C 프로젝트 생성 (3단계).</center>
+
+4. 왼쪽 패널에는 Experiment 폴더 아래에 `main.c`라는 C 소스 파일이 생성되어 있으며, 최소한의 기본 코드가 작성되어 있다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project5.png" width="100%"></div><center style="font-weight: bold;">그림 9. 엑스코드 C 프로젝트 생성 (4단계).</center>
+
+엑스코드에서 C 언어 프로그램 실행 모드는 한 가지만 존재하며, 단축키는 `⌘+R`이다. 프로그램에 문제가 발생하여 검토가 필요한 경우, 관측하고자 하는 코드에 중단점(breakpoint)을 설정하여 디버깅을 한다. 활성화된 중단점을 모두 비활성화하여 프로그램을 일반적으로 실행하기 위해서는 단축키 `⌘+Y`로 중단점 활성화 토글을 한다.
+
+## 터미널
+
+리눅스 OS는 기본적으로 GCC 컴파일러가 설치되어 있으나, 위의 비주얼 스튜디오와 엑스코드를 사용할 수 없다. IDE는 컴파일에 반드시 필요한 요소가 아니며, 터미널에서도 컴파일 작업이 가능하다. 최근에는 라즈베리파이와 같은 단일 보드 컴퓨터(single-board computer; SBC)를 사용한 팀 프로젝트가 많아져, 본 내용과 같은 리눅스 사용법은 큰 도움이 될 수 있다.
+
+간단한 예시를 보여주기 위해, *그림 9. 엑스코드 C 프로젝트 생성 (4단계)*에 나온 코드를 그대로 가져와 `main.c`라는 소스 파일에 저장하였다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project1.png" width="100%"></div><center style="font-weight: bold;">그림 10. GCC 컴파일 작업 예시 코드.</center>
+
+위의 `main.c` 소스 파일은 `~/Workspace/C/Experiment` 경로에 저장되었다고 하자.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project2.png" width="100%"></div><center style="font-weight: bold;">그림 11. GCC 컴파일러의 C 언어 프로그램 생성 (1단계).</center>
+
+터미널을 실행하여 소스 파일이 위치한 경로로 이동한다. 터미널에서 경로 이동은 `cd` 명령어를 사용한다. 소스 파일을 컴파일하기 위해서는 아래의 명령어를 입력한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project3.png" width="100%"></div><center style="font-weight: bold;">그림 12. GCC 컴파일러의 C 언어 프로그램 생성 (2단계).</center>
+
+본 명령어을 해석하면 `main.c` 소스 파일을 컴파일하여 이진 파일을 생성(`-o`)하는데, 생성된 이진 파일 이름은 `main`이라고 지정한다는 의미이다. 해당 예시는 GCC 컴파일러의 매우 간단한 예시 중 하나이며, 프로젝트 성질에 따라 외부 라이브러리 링크와 관련된 옵션도 추가할 수 있다.
+
+소스 파일이 위치한 폴더를 다시 한 번 확인하면 컴파일로 생성된 `main` 이진 파일을 확인할 수 있다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project4.png" width="100%"></div><center style="font-weight: bold;">그림 13. GCC 컴파일러의 C 언어 프로그램 생성 (3단계).</center>
+
+이진 파일 `main`을 실행하기 위해서는 터미널에서 `./`와 함께 실행 파일 이름을 입력한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project5.png" width="100%"></div><center style="font-weight: bold;">그림 14. GCC 컴파일러의 C 언어 프로그램 생성 (4단계).</center>
+
+여기서 `./`은 현재 경로를 의미한다. 현재 경로를 표시하는 구문이 없으면 리눅스 터미널은 `main`이란 파일과 전혀 연관이 없는 환경 변수에서 찾으려고 하며, 결국 파일을 찾지 못해 실행하지 못한다.
+
+# **C: 기초**
+
+각 프로그래밍 언어마다 준수되어야 할 규칙과 기반이 되는 데이터들이 존재한다. 이를 어길 시에는 프로그램에 오류가 발생하거나 정상적인 동작을 보장할 수 없다.  실질적인 프로그래밍에 있어, 본 장에서는 C 프로그램 코딩에 기초적인 정보 제공을 목표로 한다.
+
+## 헤더 파일
+
+헤더 파일(header file)은 데이터 혹은 기능의 존재를 알리는 역할을 하며 `.h` 확장자를 가진다. 통상적으로 헤더 파일은 동일한 이름의 소스 파일과 짝을 이루며, 소스 파일에서 작성된 데이터와 코드를 헤더 파일로 통해 다른 소스 파일에서도 사용할 수 있도록 한다.
+
+프로그래밍 언어에서 흔히 사용되는 데이터와 기능들은 바로 사용할 수 있도록 미리 컴파일되어 있다. 이를 표준 라이브러리(standard library)라고 하며, 아래의 헤더 파일는 일부 표준 라이브러리를 소스 파일에 사용하게 한다.
+
+| 헤더 파일 | 구문                | 설명                                                      |
+|:------------:| --------------------- | ------------------------------------------------------------ |
+| `stdio`      | `#include <stdio.h>`  | 표준 입출력 함수를 정의한다:<br />`printf()`, `scanf()` |
+| `stdlib`     | `#include <stdlib.h>` | 메모리 할당, 예외처리와 같은 여러 기능을 정의한다:<br />`rand()`, `malloc()` |
+| `math`       | `#include <math.h>`   | 수학적 계산 관련 함수를 정의한다:<br />`exp()`, `cos()` |
+| `time`       | `#include <time.h>`   | 날짜 및 시간 처리 함수를 정의한다:<br />`time()`, `clock()` |
+
+소스 파일에 헤더 파일을 불러오는 방식에는 두 가지가 존재하며, 홑화살괄호(`<>`)와 큰 따옴표(`""`)가 있다.
+
+```c
 #include <stdio.h>
 #include "header.h"
 ```
 
-The difference is which location preprocessor searches for the including header files.
+이 둘은 전처리기가 헤더 파일을 어느 위치에서 찾을 것인지 차이점을 가진다.
 
 * `#include <header.h>`
-    : searches directories pre-designated by the compiler or IDE, generally used for system header.
-* `#include "header.h"`
-    : searches current local directories where source file is located firsthand. If failed to find the match automatically searches in the pre-designated directories, just like `#include <header.h>`. This method is generally used for user-defined header.
+    : 컴파일러 혹은 IDE에서 지정한 경로를 위주로 헤더 파일을 찾으며, 일반적으로 시스템 헤더 파일에 사용된다.
+* `#include "header.h"`:
+    : 현재 소스 파일이 위치한 경로를 위주로 헤더 파일을 찾는다. 만일 찾지 못하였을 시, ` #include <header.h>`와 같이 지정된 경로에서 헤더 파일을 재탐색한다. 일반적으로 사용자 정의 헤더 파일에 사용된다.
 
-Following is the list of header files that is often used when programming with C language.
+### 컴파일된 헤더
 
-| Header Files | Syntax                | Summery                                                      |
-| ------------ | --------------------- | ------------------------------------------------------------ |
-| `stdio`      | `#include <stdio.h>`  | Defines standard input/output function:<br />`printf()`, `scanf()` |
-| `stdlib`     | `#include <stdlib.h>` | Defines various features, such as memory allocation, exception management (`cstdlib` in C++):<br />`rand()`, `malloc()` |
-| `math`       | `#include <math.h>`   | Define common mathematical functions (`cmath` in C++):<br />`exp()`, `cos()` |
-| `time`       | `#include <time.h>`   | Defines date and time-handling functions (`ctime` in C++):<br />`time()`, `clock()` |
+컴파일된 헤더(precompiled header)는 컴파일러에서 더 빠른 속도로 처리할 수 있도록 중간체 형태로 컴파일된 헤더 파일이다. 컴파일 시간을 줄일 수 있는 장점을 가져 수많은 헤더 파일을 가진 프로젝트 혹은 큰 용량을 가진 헤더 파일에 효율적이다.
 
-### Precompiled Header
+하지만 컴파일된 헤더를 사용하면 컴파일 작업 자체에는 시간이 다소 걸리는 단점이 있다. 그러므로 용량이 작은 프로젝트나 자주 수정을 해야 하는 헤더 파일이 있다면 컴파일된 헤더 파일은 오히려 비효율적이다. 
 
-Precompiled header is a header that is compiled into an intermediate form that is faster to process for the compiler. Having benefit of reducing compilation time, precompiled header is used on the project that includes large amount of header files, or a header file with huge data.
+| 컴파일된 헤더 | 컴파일러                              |
+|:------------------:| ------------------------------------- |
+| `stdafx.h`         | 비주얼 스튜디오 2015 (msvc14) 혹은 이전 버전 |
+| `pch.h`            | 비주얼 스튜디오 2017 (msvc15) 혹은 이후 버전 |
 
-However, precompiled header is not always beneficial as using precompiled header does take more time to prepare for compilation. For a header file that is small or often subject to change, precompiled header is unnecessary.
+## 주석
 
-| Precompiled Header | Compiler                              |
-| ------------------ | ------------------------------------- |
-| `stdafx.h`         | Visual Studio 2015 (msvc14) and below |
-| `pch.h`            | Visual Studio 2017 (msvc15) and above |
+주석(comment)은 프로그래밍에 있어 실행되지 않는 부분이며, 흔히 어떠한 정보를 간략히 스크립트 내에 입력하는데 사용된다. C 언어에는 두 가지의 주석이 존재하며, 이들은 각각 "한줄 주석"과 "블록 주석"이라 부른다.
 
-# **C: BASIC**
-
-General programming language has essential, fundamental, or even helpful data and syntax that needs to be observed and acknowledged when coding. As the beginning of the practical coding, this chapter will introduce basic information on C++ language coding.
-
-## Comment
-
-There are two different comments in C/C++: line comment and block comment.
-
-* **Line comment**
-    : a comment worth a single line of code, and is declared by `//` (double slash).
-* **Block comment**
-    : a comment with multiple lines of code by using pairs of slash asterisk `/* */`.
+* **한줄 주석**
+    : 코드 한 줄을 차지하는 주석이며, 두 개의 슬래시(`//`)로 표시된다.
+* **블록 주석**
+    : 코드 여러 줄을 차지하는 주석이며, 한 쌍의 슬래시와 별표(`/* */`)로 표시된다.
 
 ```c
 /*
-BLOCK COMMENT:
-multiple line of comment can be placed here.
+블록 주석:
+코드 여러 줄을 차지하는 주석이다.
 */  
-// LINE COMMENT: for a single line of code.
+// 한줄 주석: 코드 한 줄을 차지하는 주석이다.
 ```
 
-## Identifier
+## 식별자
+식별자(identifier)는 프로그래밍을 구성하는 데이터(일명 구성체; construct)를 구별하기 위해 사용되는 명칭이다. 다시 말해, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
 
-Identifier is a name used to identify a data such as namespace, variable, function, object, class, and more. In other word, it is just a (user-defined) name. There are rules identifier has to observe:
-
-* First character is only allowed to have an alphabet letters and underscore `_`.
-* Beside the first character may use alphabet letters, digits, or underscores.
-* Black spaces are prohibited.
+* 오직 영문, 숫자, 밑줄(`_`)만 허용된다.
+* 첫 문자는 숫자로 시작할 수 없다.
+* 공백은 허용되지 않는다.
 
 ## Input & Output
 
@@ -292,12 +363,20 @@ Variable is a container for the data assigned using assignment (`=`) operator. T
     int variable;
     ```
 
+**선언**
+: 선언(declaration)이란 변수, 함수, 객체와 같은 구성체에 이름(일명 식별자)을 붙여 존재를 알리는 단계이다. 다른 프로그래밍 언어에서 선언은 일반적으로 구성체에 자료형을 지정하지만, 파이썬은 예외적으로 구성체에 자료형 지정이 없다.
+
 * **Definition**
     : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
 
+    
+    
     ```c
-    variable = 3;
+variable = 3;
     ```
+
+**정의**
+: 정의(definition)란 구성체가 가지는 데이터 값(혹은 실행 가능한 기능)을 담는 코드 블록을 의미한다. 일부 경우, 변수와 함수의 정의는 각각 *할당(assignment)*과 *구현(implementation)*이라고도 부른다.
 
 * **Initialization**
     : initialization is assigning the initial value to the construct, simply the *first* definition. Since the first definition is generally done on the same time when declaring the construct. Hence, initialization is commonly thought by people as *declaration + definition* which is not always true.
@@ -305,6 +384,11 @@ Variable is a container for the data assigned using assignment (`=`) operator. T
     ```c
     int variable = 3;
     ```
+
+**초기화**
+: 초기화(initialization)는 구성체에 초기값을 할당하는 것이며, 간단히 *최초* 정의라고 간주할 수 있다. 구성체의 가장 첫 정의는 일반적으로 선언 단계와 함께 이루어진다. 이러한 이유로 초기화는 *선언 + 정의*라고 흔히 여겨지지만 이는 사실이 아니다.
+
+
 
 Once the declaration sets data type to a variable, that variable can only take the value of that designated data type.
 
