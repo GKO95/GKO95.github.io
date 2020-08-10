@@ -387,16 +387,16 @@ print(4 * "2")
 
 문자열은 변수와 함수가 하나의 데이터로 통합된 독립적 존재, 즉 "객체(object)"이다. 그러므로 이전 두 자료형에는 소개되지 않은 고유의 메소드 연산을 가진다.
 
-| 메소드         | 예시                  | 설명                                                                                                                                                                                                               |
-|:----------------:|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `format()`     | ` text.format(value)` | 문자열 또는 비문자열 `value`를 지정된 `{}` 공간에 위치별 혹은 이름별로 할당한다. |
-| `join()`       | `text.join(str_list)` | 문자열로 이루어진 리스트 객체인 `str_list` 내의 문자열들 사이에 `text` 문자열을 삽입하여 하나의 문자열로 결합한다. |
-| `split()`      | `text.split()`  | 괄호 안에 문자열이 없는 경우, 공백에 따라 `text` 문자열을 구분하여 리스트 객체로 변환한다.<br/>*[선택사항: 괄호 안에 `str1`이 존재하면 `text`는 `str1`을 기준으로 나뉘어진다.]* |
-| `replace()`    | `text.replace(str1,str2)` | `text` 문자열 내에서 `str1`을 `str2`로 바꾼다. |
-| `startswith()` | `text.startswith()`   | `text` 문자열 시작 부분의 동등성을 확인한다. |
-| `endswith()`   | `text.endswith()`     | `text` 문자열 끝 부분의 동등성을 확인한다. |
-| `upper()`      | `text.upper()`        | `text` 문자열의 모든 영문을 대문자로 변환한다. |
-| `lower()`      | `text.lower()`        | `text` 문자열의 모든 영문을 소문자로 변환한다. |
+| 메소드            | 예시                        | 설명                                                                                                                   |
+|:--------------:|---------------------------|----------------------------------------------------------------------------------------------------------------------|
+| `format()`     | ` text.format(value)`     | 문자열 또는 비문자열 `value`를 지정된 `{}` 공간에 위치별 혹은 이름별로 할당한다.                                                                  |
+| `join()`       | `text.join(str_list)`     | 문자열로 이루어진 리스트 객체인 `str_list` 내의 문자열들 사이에 `text` 문자열을 삽입하여 하나의 문자열로 결합한다.                                             |
+| `split()`      | `text.split()`            | 괄호 안에 문자열이 없는 경우, 공백에 따라 `text` 문자열을 구분하여 리스트 객체로 변환한다.<br/>*[선택사항: 괄호 안에 `str1`이 존재하면 `text`는 `str1`을 기준으로 나뉘어진다.]* |
+| `replace()`    | `text.replace(str1,str2)` | `text` 문자열 내에서 `str1`을 `str2`로 바꾼다.                                                                                  |
+| `startswith()` | `text.startswith()`       | `text` 문자열 시작 부분의 동등성을 확인한다.                                                                                         |
+| `endswith()`   | `text.endswith()`         | `text` 문자열 끝 부분의 동등성을 확인한다.                                                                                          |
+| `upper()`      | `text.upper()`            | `text` 문자열의 모든 영문을 대문자로 변환한다.                                                                                        |
+| `lower()`      | `text.lower()`            | `text` 문자열의 모든 영문을 소문자로 변환한다.                                                                                        |
 
 
 ```python
@@ -1119,7 +1119,7 @@ print(variable(arg1, arg2))
 def function(arg1, arg2):
     variable = 2 * arg1
     variable += arg2
-    return variable			# 반환값이 전달인자 arg1과 arg2에만 의존
+    return variable            # 반환값이 전달인자 arg1과 arg2에만 의존
 ```
 
 ### 고차 함수
@@ -1347,7 +1347,7 @@ def decorator(func):
 
 # 함수 수정하기(데코레이팅)
 variable = decorator(function) 
-variable()		          # 실제로는 "variable"라는 이름의 변수에 할당된 함수이다.
+variable()                  # 실제로는 "variable"라는 이름의 변수에 할당된 함수이다.
                 
 # 함수 수정하기(데코레이팅): 함수 이름 유지
 function = decorator(function)
@@ -1376,7 +1376,7 @@ def decorator(func):
 
 # 함수 수정하기: @ 기호 사용
 @decorator
-def function():	    # "function()"의 본래 함수
+def function():        # "function()"의 본래 함수
     statements
 
 # 함수 이름은 그대로 유지된다.
@@ -1445,13 +1445,13 @@ class CLASS:
         self.attr1 = arg1
         self.attr2 = arg2
         
-	# 메소드(함수와 비슷함)
+    # 메소드(함수와 비슷함)
     def method(self, arg3):
         self.attr3 = arg3
         return self.attr1 + self.attr2 - self.attr3
 
 # 객체화
-instance = CLASS(value1, value2)	# 클래스로부터 객체 생성
+instance = CLASS(value1, value2)    # 클래스로부터 객체 생성
 
 # 그러므로...
 print(instance.attr3)
@@ -1483,9 +1483,9 @@ CLASS.__init__(self = instance, arg1 = 1, arg2 = 2)
 '''
 
 # 그러므로
-instance.attr1	    # >> 출력: 1
-instance.attr2	    # >> 출력: None
-instance.attr3	    # AttributeError: 'CLASS' object has no attribute 'attr3'
+instance.attr1        # >> 출력: 1
+instance.attr2        # >> 출력: None
+instance.attr3        # AttributeError: 'CLASS' object has no attribute 'attr3'
 ```
 
 ### `__init__` 메소드
@@ -1505,7 +1505,7 @@ class CLASS:
         self.attr2 = arg2
         self.attr3 = None
 
-	# 객체 메소드
+    # 객체 메소드
     def method(self, arg3):
         self.attr3 = arg3
 ```
@@ -1535,7 +1535,7 @@ class CLASS:
     def method1(self, arg3):
         self.attr3 = arg3
     
-	# 클래스 메소드
+    # 클래스 메소드
     @classmethod
     def method2(cls, arg4):
         return arg4
@@ -1599,11 +1599,11 @@ instance = CLASS(1, 2)
 instance.method1(4)
 
 # 그러므로...
-instance.attr1			# >> 출력: 1
-instance.attr2			# >> 출력: 2
-instance.attr3			# >> 출력: 4
+instance.attr1            # >> 출력: 1
+instance.attr2            # >> 출력: 2
+instance.attr3            # >> 출력: 4
 
-CLASS.method2(4)		# >> 출력: True
+CLASS.method2(4)        # >> 출력: True
 ```
 
 ## 매직 메소드
@@ -1638,7 +1638,7 @@ class CLASS:
 instance1 = CLASS("Hello")
 instance2 = CLASS("World!")
 
-instance1 + instance2		# >> 출력: "Hello World!"
+instance1 + instance2        # >> 출력: "Hello World!"
 ```
 
 ## 상속
@@ -1660,9 +1660,9 @@ class SUBCLASS(SUPERCLASS):
 instance = SUBCLASS()
 
 # 그러므로...
-instance.attr1		# >> 출력: value1
-instance.attr2		# >> 출력: "Hello World!"
-instance.attr3		# >> 출력: value3
+instance.attr1        # >> 출력: value1
+instance.attr2        # >> 출력: "Hello World!"
+instance.attr3        # >> 출력: value3
 ```
 
 ### 슈퍼 함수
