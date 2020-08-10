@@ -1,34 +1,3 @@
-@font-face {
-    font-family: 'OpenSans';
-    src: url(/assets/font/OpenSans/OpenSans-SemiBold.ttf);
-}
-@font-face {
-    font-family: 'OpenSans';
-    font-weight: bold;
-    src: url(/assets/font/OpenSans/OpenSans-ExtraBold.ttf);
-}
-@font-face {
-    font-family: 'OpenSans';
-    font-style: italic;
-    src: url(/assets/font/OpenSans/OpenSans-SemiBoldItalic.ttf);
-}
-@font-face {
-    font-family: 'OpenSans';
-    font-style: italic;
-    font-weight: bold;
-    src: url(/assets/font/OpenSans/OpenSans-ExtraBoldItalic.ttf);
-}
-
-@font-face {
-    font-family: 'NotoSansKR';
-    src: url(/assets/font/NotoSansKR/NotoSansKR-Regular.otf);
-}
-@font-face {
-    font-family: 'NotoSansKR';
-    font-weight: bold;
-    src: url(/assets/font/NotoSansKR/NotoSansKR-Bold.otf);
-}
-
 body {
     background-color: rgb(32, 32, 32);
     color: white;
@@ -42,7 +11,7 @@ body {
     min-height: 600px;
     min-width: 800px;
 
-    font-family: 'NotoSansKR';
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: large;
     letter-spacing: 0px;
 }
@@ -60,7 +29,13 @@ a {
     color: rgb(160, 160, 160);
 }
 
+pre {
+    font-family: 'Consolas', 'Nanum Gothic Coding', monospace;
+    text-rendering: geometricPrecision;
+}   
+
 code {
+    font-family: 'Consolas', 'Nanum Gothic Coding', monospace;
     background-color: rgb(48, 48, 48);
     border-radius: 0.2em;
     padding-left: 0.2em;
@@ -77,21 +52,21 @@ blockquote {
 table {
     width: 100%;
     border-style: solid;
-    border-color: white;
+    border-color: rgb(192,192,192);
     border-width: 1px;
 
     border-collapse: collapse;
 }
 
 th {
-    border: solid white 1px;
-    border-bottom: double white 4px;
+    border: solid rgb(192,192,192) 1px;
+    border-bottom: double rgb(192,192,192) 4px;
     padding: 0.2em;
 }
 
 td {
-    border: solid white 1px;
-    padding: 0.2em;
+    border: solid rgb(192,192,192) 1px;
+    padding: 0.4em;
 }
 
 /* Scrollbar */

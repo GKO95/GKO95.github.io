@@ -185,7 +185,6 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
     : 현재 소스 파일이 위치한 경로를 위주로 헤더 파일을 찾는다. 만일 찾지 못하였을 시, ` #include <header.h>`와 같이 지정된 경로에서 헤더 파일을 재탐색한다. 일반적으로 사용자 정의 헤더 파일에 사용된다.
 
 ### 컴파일된 헤더
-
 컴파일된 헤더(precompiled header)는 컴파일러에서 더 빠른 속도로 처리할 수 있도록 중간체 형태로 컴파일된 헤더 파일이다. 컴파일 시간을 줄일 수 있는 장점을 가져 수많은 헤더 파일을 가진 프로젝트 혹은 큰 용량을 가진 헤더 파일에 효율적이다.
 
 하지만 컴파일된 헤더를 사용하면 컴파일 작업 자체에는 시간이 다소 걸리는 단점이 있다. 그러므로 용량이 작은 프로젝트나 자주 수정을 해야 하는 헤더 파일이 있다면 컴파일된 헤더 파일은 오히려 비효율적이다. 
@@ -194,6 +193,11 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 |:------------------:| ------------------------------------- |
 | `stdafx.h`         | 비주얼 스튜디오 2015 (msvc14) 혹은 이전 버전 |
 | `pch.h`            | 비주얼 스튜디오 2017 (msvc15) 혹은 이후 버전 |
+
+## 문장 종단자
+프로그래밍에서 문장(statement)이란, 실질적으로 무언가를 실행하는 코드를 의미한다. C 언어에서는 모든 문장의 끝에는 항상 문장 종단자(statement terminator)가 위치해야 하며 세미콜론(`;`) 기호를 사용한다.
+
+많은 프로그래밍 입문자가 가장 많이 저지르는 실수 중 하나로 문장 종단자를 잊어버리고 컴파일을 진행하는 것이다. 그러므로 C 기반 언어(C++과 C# 포함)에는 세미콜론을 넣는 것을 습관화해야 한다.
 
 ## 주석
 
@@ -212,32 +216,25 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 // 한줄 주석: 코드 한 줄을 차지하는 주석이다.
 ```
 
-## 식별자
-식별자(identifier)는 프로그래밍을 구성하는 데이터(일명 구성체; construct)를 구별하기 위해 사용되는 명칭이다. 다시 말해, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
+## 입력 & 출력
 
-* 오직 영문, 숫자, 밑줄(`_`)만 허용된다.
-* 첫 문자는 숫자로 시작할 수 없다.
-* 공백은 허용되지 않는다.
+C 언어는 다음과 같은 텍스트 기반의 입력 및 출력 함수를 가진다. 아래는 출력 함수를 우선적으로 나열였다.
 
-## Input & Output
-
-C languages displays the results by writing on the console windows and has several different version of output:
-
-| OUTPUT      | SYNTAX                            | DESCRIPTION                                                  |
-| ----------- | --------------------------------- | ------------------------------------------------------------ |
-| `putchar()` | `putchar('A');`                   | Prints a single character on a console.                      |
-| `puts()`    | `puts("Text");`                   | Prints sequence of characters (aka. string) on a console; auto new-line. |
-| `printf()`  | `printf("format", var);`          | Prints sequence of characters (aka. string) on a console, with format support. |
-| `fprintf()` | `fprintf(stream, "format", var);` | Extension of `printf()` function, available with `stream` selection.<br />`printf(...)` is equivalent to `fprintf(stdout, ...)`, where `stdout` is *standard output stream*. |
+| 출력      | 구문                            | 설명                                                  |
+|:-----------:| --------------------------------- | ------------------------------------------------------------ |
+| `putchar()` | `putchar('A');`                   | 문자 하나를 터미널에 출력한다.                      |
+| `puts()`    | `puts("Text");`                   | 일련의 문자들(일명 문자열)을 터미널에 출력하며, 자동 줄바꿈이 된다. |
+| `printf()`  | `printf("format", var);`          | 일련의 문자들(일명 문자열)을 터미널에 출력하며, 형식 지원이 된다. |
+| `fprintf()` | `fprintf(stream, "format", var);` | 출력 함수 `printf()`의 확장된 개념으로, `stream`에서 스트림 선택이 가능하다. 여기서 `printf(...)`는 `fprintf(stdout, ...)`와 동일하며, `stdout`는 *표준 출력 스트림*을 의미한다. |
 
 ```c
-// PUTCHAR()
+// "putchar()" 출력 함수
 putchar('A');
 
-// PUTS()
+// "puts()" 출력 함수
 puts("Hello World!");
 
-// PRINTF()
+// "printf()" 출력 함수
 float variable = 3.14159;
 printf("variable: %.2f", variable);
 ```
@@ -247,194 +244,173 @@ AHello World!
 variable: 3.14
 ```
 
-Meanwhile, there are several different version of input which it reads the input data from the console:
+출력 함수와 마찬가지로, 터미널을 통해 데이터를 받는 입력 함수에도 여러 종류가 존재한다.
 
-| INPUT       | RETURN                        | DESCRIPTION                                                  |
-| ----------- | ----------------------------- | ------------------------------------------------------------ |
-| `getchar()` | Character                     | Accepts foremost character as an input.                      |
-| `gets()`    | String (aka. character array) | Accepts sequence of characters (aka. string) as an input.    |
-| `scanf()`   | Format-specific               | Accepts inputs matching format specifier; requires address (`&`) operator, except for string. |
+| 입력       | 반환                        | 설명                                                  |
+|:-----------:| ----------------------------- | ------------------------------------------------------------ |
+| `getchar()` | 문자                     | 맨 앞에 있는 문자를 입력으로 받는다.                      |
+| `gets()`    | 문자열 (일명 문자 배열) | 일련의 문자(일명 문자열)을 입력으로 받는다.    |
+| `scanf()`   | 지정 형식               | 지정된 형식에 맞게 입력을 받는다. 문자열을 제외한 입력을 받을 모든 데이터는 주소 연산자(`&`)가 필요하다. |
 
 ```c
-// GETCHAR()
-char var1;
-var1 = getchar();
+// "getchar()" 입력 함수
+char variable1;
+variable1 = getchar();
 
-// GETS()
-char var2[20];
-gets(var2);
+// "gets()" 츨력 함수
+char variable2[20];
+gets(variable2);
 
-// SCANF()
-float var3; char var4[10];
-scanf("%f %3s", &var3, var4);
+// "scanf()" 출력 함수
+float variable3; char variable4[10];
+scanf("%f %3s", &variable3, variable4);
 ```
 
 ```
 A
->>> var1 = 'A'
+>>> variable1 = 'A'
 
 Hello World!
->>> var2 = "Hello World!"
+>>> variable2 = "Hello World!"
 
 3.0 Program
->>> var3 = 3.000000
->>> var4 = "Pro"
+>>> variable3 = 3.000000
+>>> variable4 = "Pro"
 ```
 
-### Formatted Specifier
+### 형식 지정자
 
-Format specifier is to specify the format of data to be accepted as input. While format specifier is available on both `scanf()` input function and `printf()` output function, splicing data (`Program -> Pro`) should be formatted on input-side and how it is presented without modifying data (`3.14159 -> 3.14`) should be formatted on output-side function.
+형식 지정자(format specifier)는 입출력 함수에서 데이터를 어떻게 받아들일 것인지 지정한다. 그러나 형식 지정자가 `scanf()` 입력 함수에서 사용되는지, 혹은 `printf()` 출력 함수에서 사용하는지에 따라 데이터는 달리 처리된다.
+
+* 입력 측에서 형식 지정자를 사용하면 본래 데이터의 성질이나 값이 변한다. 대표적인 예로 일련의 문자에서 원하는 부분만 추출한 작업이 있다(`Program`에서 `Pro`만 추출).
+
+* 출력 측에서 형식 지정자를 사용하면 본래 데이터의 성질과 값은 그대로 유지되나, 어떻게 표시되는지만 달라진다. 대표적인 예로 소수점 버림 작업이 있다(`3.14159`에서 `3.14`로 소수 두 자리만 표시).
 
 ```c
 int variable;
-printf("Enter: ");
+printf("입력: ");
 scanf("%5d", &variable);
 
 printf("%3d", variable);
 ```
 
 ```
-Enter: 1234567
-12345			// NOT "123" AS SPECIFIED USING "%3d"
+입력: 1234567
+12345			// 지정된 "%3d" 형식에 따라 "123"이라고 표시되지 않는다.
 ```
 
-| FORMAT | DESCRIPTION           |
-| :----: | --------------------- |
-|  `%d`  | Decimal               |
-|  `%f`  | Floating point number |
-|  `%c`  | Character             |
-|  `%s`  | String                |
-|  `%x`  | Hexadecimal           |
+| 형식   | 설명       |
+|:----:|----------|
+| `%d` | 정수 (십진수) |
+| `%f` | 부동소수점수   |
+| `%c` | 문자       |
+| `%s` | 문자열      |
+| `%x` | 십육진수     |
 
-### Escape Character
+> 위의 예시에서의 `%3d` 형식은 앞 혹은 뒤의 세 자리만 추출하는 게 아니며, 숫자 3은 오히려 최소 표시 자릿수를 의미한다. 즉, 형식 지정자가 `%7d`이었으면 `0012345`로 최소 일곱 자리로 정수를 표시한다.
 
-Escape character `\` is used to escape from sequence of character and execute certain operation within text-base data.
+## 식별자
+식별자(identifier)는 프로그래밍을 구성하는 데이터(일명 구성체; construct)를 구별하기 위해 사용되는 명칭이다. 다시 말해, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
+
+* 오직 영문, 숫자, 밑줄(`_`)만 허용된다.
+* 첫 문자는 숫자로 시작할 수 없다.
+* 공백은 허용되지 않는다.
+
+## 자료형
+자료형은 프로그래밍에서 자료 형식과 바이트 크기를 결정하는 매우 중요한 구성요소 중 하나이다. 자료형에 따라 프로그램의 메모리 및 처리속도에 효율을 보여줄 수 있다. 아래는 C 프로그래밍 언어가 가지는 자료형이다.
+
+| 식별자 | 자료형              | 설명                                                  |
+|:----------:| ---------------------- | ------------------------------------------------------------ |
+| `int`      | 정수                | 32비트 단정도 정수.<br />크기: 4 바이트         |
+| `float`    | 부동소수점수  | 소수점을 포함한 실수.<br />크기: 4 바이트          |
+| `double`   | 배정도 부동소수점수 | 배의 메모리를 가진 배정도 실수.<br />크기: 8 바이트  |
+| `char`     | 문자: `''`        | 단일 문자: `'A'` 및 `'?'`.<br />크기: 1 바이트  |
+| `bool`     | 논리형                | 논리의 참과 거짓을 `true`(0이 아닌 정수)와 `false`(정수 0)로 표시.<br />크기: 1 바이트 |
+| `void`     | 보이드                   | 불특정 자료형.<br />크기: 1 바이트                    |
+
+### `sizeof()` 연산자
+
+`sizeof()` 연산자는 자료형이나 데이터가 차지하고 있는 메모리 용량을 확인하기 위해 사용하며, 단위는 바이트(byte)이다.
 
 ```c
-printf("First Line\nSecond Line");
+sizeof(int);		// 크기: 4 바이트
+sizeof(char);		// 크기: 1 바이트
 ```
 
-```
-First Line
-Second Line
-```
+## 변수
+변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당할 수 있는 저장공간이다. C 언어의 변수는 자료형이 정해져 있으며, 해당하는 자료형 데이터만 할당받을 수 있다. 
 
-| SYNTAX | DESCRIPTION    |
-| ------ | -------------- |
-| `\n`   | New line       |
-| `\t`   | Horizontal tab |
-| `\\`   | Backslash      |
-| `\b`   | Backspace      |
-| `\'`   | Single quote   |
-| `\"`   | Double quote   |
-
-## Data Type
-
-Data type is one of the important factor which determines type and byte size of the data. A well-implemented data type can results memory and time efficiency when processing the script.
-
-C programming language have several number of pre-defined type identifier as follows:
-
-| IDENTIFIER | DATA TYPE              | DESCRIPTION                                                  |
-| ---------- | ---------------------- | ------------------------------------------------------------ |
-| `int`      | Integer                | 32-bits precision integer number.<br />Size: 4 bytes         |
-| `float`    | Floating point number  | Real number with decimal points.<br />Size: 4 bytes          |
-| `double`   | Double-precision float | Float with doubled precision and memory.<br />Size: 8 bytes  |
-| `char`     | Character: `''`        | A single character, e.g. `'A'` and `'?'`.<br />Size: 1 byte  |
-| `bool`     | Boolean                | Non-zero represents `true` while zero is `false`.<br />Size: 1 byte |
-| `void`     | Void                   | Non-specific data type.<br />Size: 1 byte                    |
-
-### `sizeof()` Operator
-
-An operator that returns the allocating memory size of data type or variable in bytes.
+아래의 예시는 `variable`이란 식별자를 가진 변수가 정수 자료형만 할당받을 수 있는 존재임을 알리는데, 이를 프로그래밍에서는 *선언(declaration)*이라고 부른다.
 
 ```c
-sizeof(int);		// SIZE: 4 BYTE
-sizeof(char);		// SIZE: 1 BYTE
+// 변수 "variable"의 선언
+int variable;
 ```
+한 번 선언된 변수는 컴파일러가 어떠한 데이터 종류를 할당받을 수 있는지 알고 있으므로 더이상 자료형을 표시할 필요가 없다.
 
-## Variable
-
-Variable is a container for the data assigned using assignment (`=`) operator. There are three different common stages in variable: declaration, definition, and initialization.
-
-* **Declaration**
-    : declaration is declaring existence of the construct of such as variables, objects, and more. The declaring also includes specifying which data type the construct is.
-
-    ```c
-    int variable;
-    ```
-
-**선언**
-: 선언(declaration)이란 변수, 함수, 객체와 같은 구성체에 이름(일명 식별자)을 붙여 존재를 알리는 단계이다. 다른 프로그래밍 언어에서 선언은 일반적으로 구성체에 자료형을 지정하지만, 파이썬은 예외적으로 구성체에 자료형 지정이 없다.
-
-* **Definition**
-    : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
-
-    
-    
-    ```c
-variable = 3;
-    ```
-
-**정의**
-: 정의(definition)란 구성체가 가지는 데이터 값(혹은 실행 가능한 기능)을 담는 코드 블록을 의미한다. 일부 경우, 변수와 함수의 정의는 각각 *할당(assignment)*과 *구현(implementation)*이라고도 부른다.
-
-* **Initialization**
-    : initialization is assigning the initial value to the construct, simply the *first* definition. Since the first definition is generally done on the same time when declaring the construct. Hence, initialization is commonly thought by people as *declaration + definition* which is not always true.
-
-    ```c
-    int variable = 3;
-    ```
-
-**초기화**
-: 초기화(initialization)는 구성체에 초기값을 할당하는 것이며, 간단히 *최초* 정의라고 간주할 수 있다. 구성체의 가장 첫 정의는 일반적으로 선언 단계와 함께 이루어진다. 이러한 이유로 초기화는 *선언 + 정의*라고 흔히 여겨지지만 이는 사실이 아니다.
-
-
-
-Once the declaration sets data type to a variable, that variable can only take the value of that designated data type.
-
-### Local & Global Variable
-
-**Local variable** is a variable declared inside a code block, such as namespace, function, and class. Data stored in local variable is destroyed when exiting the code block, thus cannot be used outside. Local variable is allowed to have same variable name declared outside (technically, is borrowing the name as a different identity).
-
-**Global variable** is a variable declared on a global scope of the script which is outside a code block using `extern` keyword. Global variable can be used inside a code block without any special keyword. However, global variable should be avoided if possible to prevent unexpected result and error caused by conflicting variables.
-
-### Constant Variable
-
-Constant variable is a special type of variable that cannot be changed after its initialization. The keyword `const` is used to declare it as a constant variable.
+선언된 변수에 값을 부여하는 것을 *할당(assignment)*라고 하는데, 포괄적인 용어로는 *정의(definition)*이라고 칭한다. 아래는 `variable` 정수형 변수에 숫자 1을 할당한다.
 
 ```c
-const int variable = 3;
+// 변수 "variable"의 정의
+variable = 1;
 ```
 
-### Static Variable
+거의 모든 프로그래밍 언어는 할당 연산자를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)를 놓는다. 반대로 위치시키면 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
-Static variable is a special local variable which maintain its value even when escaped and re-entered a function code block. The keyword `static` is used to declare it as a static variable.
+이 두 절차를 하나로 통합할 수 있으며, 이를 *초기화(initialization)*라고 부른다.
 
 ```c
-static int variable = 3;
+// 변수 "variable"의 초기화
+int variable = 1;
 ```
 
-## Data Type Casting
+### 지역 변수 & 전역 변수
 
-Data type casting force-changes data type stored in a variable into other desired type. Casting the smaller size data to its compatible type of a larger size data is called *implicit* data type casting. This is a natural data type conversion automatically done by compiler as no data loss occurs.
+C 언어에는 크게 세 종류의 변수로 나뉘어진다.
+
+* **지역 변수(local variable)**는 함수(function)나 클래스(class)와 같은 코드 블록 내부에서 선언된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다. 그러므로 지역 변수는 외부에서 선언된 변수의 이름을 가질 수 있다.
+
+* **전역 변수(global variable)**는 스크립트 내에서 어떠한 코드 블록에도 속하지 않은 외부에 선언된 변수이다. 코드 블록 내부에 있는 지역 변수와 함께 사용하기 위해서는 `extern` 키워드로 변수를 선언한다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수의 사용은 피하도록 한다.
+
+  ```c
+  // 전역 변수 선언
+  extern int variable;
+  ```
+
+* **정적 변수(static variable)**는 특수한 지역 변수로 함수나 클래스와 같은 코드 블록을 탈출하여도 데이터가 소멸되지 않고 보존된다. 그러므로 해당 코드 블록을 재실행하면 탈출 직전의 데이터를 이어서 사용할 수 있다. 정적 변수는 `static` 키워드로 선언한다.
+
+  ```c
+  // 정적 변수 선언
+  static int variable;
+  ```
+
+### 상수 변수
+상수 변수(constant variable)는 초기화 이후 변경할 수 없는 특별한 변수이다. 상수 변수는 `const` 키워드를 통해 선언한다.
 
 ```c
-short A = 1;	// 2 BYTES INTEGER
-int B = A;		// 4 BYTES INTEGER
+const int variable = 1;
 ```
 
-On the other hand, its opposite conversion is called *explicit* data type casting which do have a risk of data loss/corruption upon casting data. C-style casting syntax is as follows:
+## 자료형 변환
+자료형 변환은 변수 혹은 데이터의 자료형을 다른 자료형으로 강제로 바꾸는 작업이다. 만일 유사한 자료형을 작은 크기에서 큰 크기로 변환할 시, 이를 *암시적* 자료형 변환이라고 한다. 암시적 자료형 변환은 데이터 손실이 없기 때문에 컴파일러에서 자연적으로 처리된다.
 
 ```c
-float A = 1.9;  // 4 BYTES FLOAT
-int B = (int)A; // 4 BYTES INTEGER - INCOMPATIBLE: only returns its integer value.
+short A = 1;	// 2 바이트 정수형
+int B = A;		// 4 바이트 정수형
+```
+
+이에 반대되는 *명시적* 자료형 변환은 데이터 손실의 위험을 감수하며 데이터의 자료형을 바꾼다. C 언어 형식의 명시적 자료형 변환은 아래와 같이 소괄호(`()`)를 활용한다.
+
+```c
+float A = 1.9;  // 4 바이트 부동소수점
+int B = (int)A; // 4 바이트 정수형 - 완전 호환 불가: 정수 부분만 반환된다.
 ```
 
 ```
 1
 ```
 
-## Operator
+## 연산자
 
 Operator is the simplest form of data processing unit which can manipulate the value of operands. It operates simply by placing before, after, or between the operands.
 
@@ -495,6 +471,27 @@ Logical operator consist of AND, OR, and NOT logic. When doing so, think of `tru
 | `&&`     | AND   | `true` when all the arguments are `true`, else `false`.    |
 | `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
 | `!`      | NOT   | Change `true` to `false` and vice versa.                   |
+
+### 탈출 문자
+탈출 문자(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 아래는 탈출 문자 중에서 흔히 사용되는 줄바꿈(`\n`)이다.
+
+```c
+printf("안녕하세요.\n처음 뵙겠습니다!");
+```
+
+```
+안녕하세요.
+처음 뵙겠습니다!
+```
+
+| 구문 | 설명           |
+|:----:| -------------- |
+| `\n` | 줄바꿈       |
+| `\t` | 탭 |
+| `\\` | 백슬래시      |
+| `\b` | 백스페이스      |
+| `\'` | 작은 따옴표    |
+| `\"` | 큰 따옴표      |
 
 # **C: CONDITIONAL AND LOOP**
 
