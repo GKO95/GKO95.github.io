@@ -411,66 +411,56 @@ int B = (int)A; // 4 바이트 정수형 - 완전 호환 불가: 정수 부분�
 ```
 
 ## 연산자
+연산자(operator)는 피연산자의 데이터를 조작할 수 있는 가장 간단한 데이터 처리요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다.
 
-Operator is the simplest form of data processing unit which can manipulate the value of operands. It operates simply by placing before, after, or between the operands.
+### 산술 연산자
+산술 연산자(arithmetic operator)는 숫자 자료형을 처리하는 데 집중한다. 다음은 숫자 자료형에 사용되는 산술 연산자의 목록이다.
 
-### Arithmetic Operator
+|             이름             | 연산자 | 설명                                                  |
+| :--------------------------: |:--------:| ------------------------------------------------------------ |
+|           덧셈           | `+`      | -                                                            |
+|         뺄셈          | `-`      | -                                                            |
+|        곱셈        | `*`      | -                                                            |
+|           나눗셈           | `/`      | 두 피연산자가 정수일 경우: 정수형 몫만 반환된다.<br/>피연산자 중 실수가 있을 경우: `float` 혹은 `double` 실수로 반환된다. |
+| 나머지 (모듈로 연산) | `%`      | 나눗셈의 나머지를 정수형으로 반환한다.                              |
+    
+산술 연산을 쉽게 읽을 수 있도록 숫자 사이에 공백을 넣어도 된다. 이 공백은 숫자나 산술 연산에 아무런 영향을 주지 않는다.
 
-Arithmetic operator is mainly focused on processing numeric data type. Following is a list of arithmetic operator used by numeric data type:
+### 할당 연산자
+할당 연산자(assignment operator)는 숫자 자료형에 사용되는 또다른 연산자이다. 이에 대한 설명은 아래의 도표를 참고한다.
 
-|             NAME             | OPERATOR | DESCRIPTION                                                  |
-| :--------------------------: | -------- | ------------------------------------------------------------ |
-|           Addition           | `+`      | -                                                            |
-|         Subtraction          | `-`      | -                                                            |
-|        Multiplication        | `*`      | -                                                            |
-|           Division           | `/`      | When both operands are integer: dividend is an integer without remainder.<br/>When at least one operand is real (float or double): dividend is a real (float or double). |
-| Remainder (Modulus Division) | `%`      | Remainder only returns integer.                              |
-
-For easier readability of the arithmetic operator, you can place blank space between number and operator, and it doesn’t affect anything on output.
-
-### Assignment Operator
-
-Assignment operator is another operation used within numeric data type. Following is a list of assignment operator used by numeric data type:
-
-| OPERATOR | EXAMPLE  | EQUIVALENT  |
-| -------- | -------- | ----------- |
+| 연산자 | 예시  | 동일  |
+|:--------:| -------- | ----------- |
 | `+=`     | `x += 1` | `x = x + 1` |
 | `-=`     | `x -= 1` | `x = x - 1` |
 | `*=`     | `x *= 1` | `x = x * 1` |
 | `/=`     | `x /= 1` | `x = x / 1` |
 | `%=`     | `x %= 1` | `x = x % 1` |
 
-Although not an assignment operator, a similar **increment and decrement** of the numerical value can be expressed as follow on C-based programming language:
+비록 할당 연산자는 아니지만, 이와 유사한 증감 연산자(increment & decrement)는 C 기반 언어에서 다음과 같은 표현식을 의미한다.
 
-| OPERATOR    | EXAMPLE   | DESCRIPTION       |
+| 연산자    | 예시   | 설명       |
 | ----------- | --------- | ----------------- |
-| `++` prefix | `x = y++` | `x = y; y = y+1;` |
-| `++` suffix | `x = ++y` | `y = y+1; x = y;` |
-| `--` prefix | `x = y--` | `x = y; y = y-1;` |
-| `--` suffix | `x = --y` | `y = y-1; x = y;` |
+| `++` 접두사 | `x = y++` | `x = y; y = y+1;` |
+| `++` 접미사 | `x = ++y` | `y = y+1; x = y;` |
+| `--` 접두사 | `x = y--` | `x = y; y = y-1;` |
+| `--` 접미사 | `x = --y` | `y = y-1; x = y;` |
 
-### Relational Operator
+### 비교 연산자
+비교 연산자(relational operator)는 두 데이터 간의 비교 조건을 확인하며, 이에 대한 결과로 참(`true`) 혹은 거짓(`false`) 논리값을 반환한다. 비교 연산자는 아래의 도표에서 확인할 수 있다.
 
-Relational operator is for checking whether the relational condition between two numeric values and returns Boolean value whether condition is true or false. Following is a list of relational operator:
+| 미만 | 이하 | 동일 | 상이 | 이상 | 초과 |
+|:----:|:----:|:----:|:----:|:----:|:----:|
+| `<`  | `<=` | `==` | `!=` | `>=` | `>`  |
 
-| OPERATOR | DESCRIPTION              |
-| -------- | ------------------------ |
-| `<`      | Lesser than              |
-| `<=`     | Lesser than or equal to  |
-| `>`      | Greater than             |
-| `>=`     | Greater than or equal to |
-| `==`     | Equal to                 |
-| `!=`     | Not equal to             |
+### 논리 연산자
+논리 연산자(logical operator)에는 논리곱, 논리합, 그리고 보수가 있다. 논리 연산자를 사용할 시, `true`와 `false` 논리값을 각각 이진수의 1과 0으로 간주하면 된다.
 
-### Logical Operator
-
-Logical operator consist of AND, OR, and NOT logic. When doing so, think of `true` and `false` as binary 1 and 0, respectively. In wider sense, any non-zero number is deemed `true`.
-
-| OPERATOR | LOGIC | DESCRIPTION                                                |
-| -------- | ----- | ---------------------------------------------------------- |
-| `&&`     | AND   | `true` when all the arguments are `true`, else `false`.    |
-| `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
-| `!`      | NOT   | Change `true` to `false` and vice versa.                   |
+| 연산자 | 논리 | 설명                                                |
+|:--------:| ----- | ---------------------------------------------------------- |
+| `&&`     | 논리곱   | 모든 인수가 `true`이면 `true`이고, 그렇지 않으면 `false`이다.    |
+| `||`     | 논리합    | 하나 이상의 인수가 `true`이면 `true`이고, 그렇지 않으면 `false`이다. |
+| `!`      | 보수   | `true`를 `false`로 변경 혹은 `false`를 `true`로 변경한다.                   |
 
 ### 탈출 문자
 탈출 문자(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 아래는 탈출 문자 중에서 흔히 사용되는 줄바꿈(`\n`)이다.
@@ -493,79 +483,81 @@ printf("안녕하세요.\n처음 뵙겠습니다!");
 | `\'` | 작은 따옴표    |
 | `\"` | 큰 따옴표      |
 
-# **C: CONDITIONAL AND LOOP**
+# **C: 조건 및 루프**
+조건문 및 반복문(혹은 루프문)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 C 프로그래밍의 조건에 따라 실행하는 조건문(conditional statement)과 반복적으로 실행하는 반복문(loop statement)을 소개한다.
 
-Conditional and loop statement is commonly used and one of the essential pieces of code in programming. This chapter introduces list of conditional and loop statements in C programming.
-
-## `if` Statement
-
-Conditional `if` statement runs code if the condition is true. When the condition evaluates `true`, the statements are carried out but otherwise ignored.
+## `if` 조건문
+`if` 조건문은 조건이 참일 경우 코드를 실행한다. 조건이 `true`일 때 문장이 수행되지만 그렇지 않으면 무시된다.
 
 ```c
-if (condition) {
+if (condition)
+{
 	statements;
 }
 
-// SIMPLIFIED STATEMENT
+// 간략화된 문장
 if (condition) statement;
 ```
 
-It is possible to place`if` statement in another `if` statement, called "nested `if`". It is recommended to use code block (`{}`) to distinguish between `if` statements to avoid computer’s misinterpretation.
+`if` 조건문 안에 또다른 `if` 조건문을 넣을 수 있으며, 이를 *네스티드(nested)* `if` 조건문이라고 부른다. 이러한 경우, 코드 블록(`{}`)을 사용하여 두 `if` 조건문의 경계를 명확히 구별하기를 권장한다.
 
 ```c
-if (condition) {
-    if (condtion) { 
+if (condition)
+{
+    if (condtion)
+    { 
         statements;
     } 
 }
 ```
 
-### `else` Statement
-
-Conditional `else` statement must be followed after `if` statement as it cannot be used alone. The statement contains code that is called when the condition evaluates `false`.
+### `else` 조건문
+`else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 실행문에는 조건부가 `false`로 평가되었을 경우 호출되는 코드가 포함되어 있다.
 
 ```c
-if (condition) {
+if (condition)
+{
     statements;
 }
-else {
+else
+{
     statements; 
 }
 ```
 
 ### `else if` Statement
-
-Conditional `else`-`if` statement is a combination of `if` and `else` statement; when the first condition evaluates `false`, the `else if` statement provides second (or more) chance to evaluate condition different from the first one.
+`else if` 조건문은 `else`와 `if` 조건문의 조합으로 첫 번째 조건이 거짓일 경우, 첫 번째 조건과 다른 새로운 조건을 제시한다.
 
 ```c
-if (condition) {
+if (condition)
+{
     statements;
 }
-else if (condition) {
+else if (condition)
+{
     statements;
 }
-else {
+else
+{
     statements;
 }
 ```
 
-However, this is not the same as chain of `else`-`if` conditional statement as that is a combination of two different conditional set, while `else if` statement guarantees a single conditional set.
+하지만 우선 소개된 `else`-`if` 연쇄 조건문은 두 조건부가 함께 사용되는 점과 비교해 `else if` 조건문은 여전히 하나의 조건부에서 처리되므로, 이 둘은 구체적으로 서로 다른 조건문임을 명시해야 한다.
 
-### Ternary Operator
-
-Conditional statement can be expressed simply using ternary (`?:`) operator as shown below:
+### 조건 연산자
+조건문은 아래와 같이 조건 연산자(ternary operator; `?:`)를 사용하여 간략히 표현될 수 있다.
 
 ```c
-condition ? return_true : return_false;
+condition ? true_return : false_return;
 ```
 
-The vocabulary *ternary* represents the statement takes three arguments. Ternary operator should not be overused as it reduces readability, but useful on variable assignment.
+조건 연산자는 영어로 *ternary operator*로, 이는 세 가지 인수를 사용하는 것을 의미한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에는 유용하다.
 
-## `switch` Statement
+## `switch` 조건문
+`switch` 조건문은 건네받은 데이터를 `case` 키워드에서 제공하는 값과 일치하는지 비교하며, 참일 경우 코드를 실행한다. 참 조건 이후, 더 이상의 조건 평가를 방지하기 위해 모든 `case` 키워드에는 `break`라는 탈출문이 필요하다.
 
-Conditional `switch` statement checks the argument passed to the function and compare its value referenced on `case` keyword. Every case needs `break` at the end of the group of statements to prevent the statement from proceeding condition evaluation afterward.
-
-When no case is true to the expression, the statements from `default` keyword is returned. This case does not need `break` statement but must to be presented no matter what.
+모든 경우에 조건이 부합하지 않을 시, `default` 키워드에 연동된 문장이 실행되며, `switch` 조건문에는 반드시 있어야 한다. 그러나 `case` 키워드와 달리 `break` 탈출문을 필요로 하지 않는다.
 
 ```c
 switch (argument)
@@ -581,7 +573,7 @@ switch (argument)
 }
 ```
 
-The `switch` statement can have its cases grouped together for a single label:
+`switch` 조건문은 복수의 경우가 하나의 실행문을 공유할 수 있다.
 
 ```c
 switch (argument)
@@ -600,100 +592,96 @@ switch (argument)
 }
 ```
 
+### `break` 문
+`break` 문(일명 탈출문)은 반복이 완료되기 전에 루프를 조기 종료하는데 사용된다. 루프 내부에서 탈출문을 마주치는 즉시 현재 루프에서 탈출하지만 그 바깥 루프로부터는 탈출하지 않는다.
 
-### `break` Statement
+### `continue` 문
+`continue` 문은 반복문 내에서 나머지 실행문을 전부 건너뛰고 다시 조건 판정부분으로 돌아가게 한다. 이는 반복문을 종료하는 `break` 문과 달리 반복문의 루프를 유지한다.
 
-The `break` statement can be used to end a loop prematurely, before complete iteration is made. When encountered inside a loop, immediately escapes from the loop but does not break from its outer loop.
-
-### `continue` Statement
-
-The `continue` statement skips the rest of the statement below in the loop and jumps back to the conditioning part. This maintains the loop iteration rather than escaping the loop like `break` statement.
-
-## `while` Loop
-
-The `while` loop statement repeatedly execute statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `false`.
+## `while` 반복문
+`while` 반복문은 조건이 유지되는 한 내부 코드를 반복적으로 실행한다. 조건이 `false`임이 판정되면 반복문을 종료한다.
 
 ```c
-while (condition) {
+while (condition)
+{
     statements;
 }
 
-// SIMPLIFIED STATEMENT
+// 간략화된 문장
 while (condition) statement;
 ```
 
-### `do`-`while` Statement
-
-The `do`-`while` loop statement is alternative of the `while` statement. Instead of checking the condition before executing looping statement, this statement is does opposite: execute looping statement first, then check the condition.
+### `do`-`while` 반복문
+`do`-`while` 반복문은 `while` 반복문과 유사한다. 그러나 후자는 조건을 먼저 확인하고 문장을 실행하였으면, 전자는 문장을 우선 실행하고 조건을 확인한다.
 
 ```c
-do {
+do
+{
     statements
 } while (condition);
 ```
 
-## `for` Loop
-
-The `for` loop statements repeatedly execute statements inside (aka. iterate) as long as the local variable holds the condition. On each loop, value (generally number) of the variable is incremented/decremented.
+## `for` 반복문
+`for` 반복문은 선언된 지역 변수가 조건에 만족하는 한 지속적으로 반복한다. 한 번 반복할 때마다 지역 변수에는 반복문에 명시된 대로 변화가 발생하며, 일반적으로 정수형 증감을 사용한다.
 
 ```c
 for (variable; condition; increment) {
     statements;
 }
 
-// SIMPLIFIED STATEMENT
+// 간략화된 문장
 for (variable; condition; increment) statement;
 ```
 
-# **C: ARRAY**
+# **C: 배열**
+C 언어는 여러 데이터를 하나의 변수에 저장하는 배열(array)을 생성할 수 있다. 배열은 여러 데이터를 한 번에 관리하는 편리성을 제공한다. 배열은 *포인터*와 밀접한 관계가 있으며, 이에 대해서는 차후 설명할 예정이다. 본 장에서는 포인터 언급을 최소화하며 배열에 대하여 설명할 것이다.
 
-C language can create array which stores collection of data. Array provides convenience on managing multiple data at once. This concept is also highly related to the *pointer* which will be introduced later. For now, this chapter will try to explain what array is without referencing pointer too much.
-
-## Array
-
-Array is a container used to store an indexed of item of same data type. To declare an array, bracket `[]` is used to define the size of the container how many value it can store:
+## 배열
+배열(array)은 동일한 자료형의 데이터를 순번대로 담는 저장공간이다. 배열을 선언할 시, 대괄호(`[]`) 안에는 얼마나 많은 데이터를 담을 수 있는지 용량을 정해야 한다.
 
 ```c
-// DECLARATION
+// 배열 선언
 int arr[size];
 ```
 
-and curly bracket `{}` is for assigning value to each element in sequence:
+단, 배열 용량을 결정할 때는 변수를 사용할 수 없다(상수 변수 제외). 이는 배열의 크기는 정적이며, 선언 이후 크기를 줄이거나 늘릴 수 없다는 의미이다.
+
+배열의 초기화는 중괄호(`{}`)를 사용하여 데이터를 순번에 맞게 배열 요소에 할당한다.
 
 ```c
-// INITIALIZATION 1
+// 초기화 1
 int arr[size] = {value1, value2, ... };
 
-// INITIALIZATION 2
+// 초기화 2: 배열 용량을 지정하지 않은 채 초기화하면, 배열 크기는 데이터 개수만큼이다.
 int arr[] = {value1, value2, ... };
 ```
 
-Upon initialization, a number of initialized value should not exceed than its declared size, thou it may be smaller which fills leftover with `0` or `NULL` value. The declared size cannot be changed afterward, but leaving the array size empty will automatically set to fit the content.
+초기화가 이루어질 시, 할당되는 데이터 개수는 선언된 배열 용량을 초과해서는 안된다. 그렇지만 데이터 개수가 용량을 미치지 못할 경우 나머지 요소에는 `0` 혹은 `NULL` 값이 할당된다.
 
-Calling array itself does not show the whole elements inside the array; instead it returns the memory address the array data is assigned to (aka. pointer) and is equivalent to the memory address of its first element.
+배열 자체를 호출하면 할당된 데이터를 불러오지 않으며, 그 대신 배열이 저장된 메모리 주소(즉, 포인터)가 반환된다. 여기서 배열의 메모리 주소는 첫 번째 요소의 주소와 일치한다.
 
 ```c
 int arr[3] = {value1, value2, valu3};
 
-arr;		// >> OUTPUT: 0139F854
-&arr[0];	// >> OUTPUT: 0139F854
-&arr[1];	// >> OUTPUT: 0139F858 ( = 0139F854 + 4 BYTES from integer data type)
+arr;		// >> 출력: 0x0139F854
+&arr[0];	// >> 출력: 0x0139F854
+&arr[1];	// >> 출력: 0x0139F858 ( = 0139F854 + 정수형 4 바이트)
 ```
 
-This will be explained later on next chapter *C: POINTER* in detail, so just understand there is such a thing.
+자세한 내용은 다음 장 *C: 포인터*에서 다루게 될 것이므로, 지금으로써는 이러한 개념이 있다는 정도로만 이해하면 된다.
 
-Because of this characteristic of array data, array definition cannot be done as a whole; unlike initialization, definition after declaration must be done element-by-element. Each element can be accessed using a bracket `[]` with index starting from 0.
+위에서 설명한 배열의 특징으로 인해, 배열은 초기화 이외에는 한꺼번에 할당이 불가능하다. 그렇지만 각 요소당 할당은 가능하며, 요소 순번은 0번부터 시작하며 대괄호(`[]`)로 호출한다.
 
 ```c
 int arr[3];
 
-// DEFINITION
+// 배열의 개별 요소 할당
 arr[0] = value1;
 arr[1] = value2;
 arr[2] = value3;
 ```
 
-### Length of Array
+### 배열의 크기
 
 When `sizeof()` operator is used on the array, it returns the total assigned byte size considering its data type, thus "$\mathrm{data \ type \ byte} \times \mathrm{number \ of \ elements}$". Hence, divided by data type byte results array length:
 
@@ -703,7 +691,7 @@ int arr[3];
 sizeof(arr)/sizeof(int);	// >> OUTPUT: 3 ( = LENGTH OF ARRAY)
 ```
 
-### Multi-dimensional Array
+### 다차원 배열
 
 Array can contain another array as an element, under the condition these arrays shares the same length. Multi-dimensional array can also be initialized without definite size but limited to its first boundary only.
 
@@ -715,29 +703,29 @@ int arr[size1][size2] = { {value11, value12, ... }, {value21, value22, ...}, ...
 int arr[     ][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 ```
 
-## String
+## 문자열
 
 C language does not have a string data type, but represented using array of character with null terminator `\0` at the end:
 
 ```c
-// C-STYLE STRING
+// C-형식 문자열
 char arr[] = "Hello";
 char* ptr = "World!";
 ```
 
 The following list shows several string functions available in C programming language:
 
-| FUNCTION   | EXAMPLE               | DESCRIPTION                                                  |
+| 함수   | 예시               | 설명                                                  |
 | ---------- | --------------------- | ------------------------------------------------------------ |
 | `strcat()` | `strcat(str1, str2);` | Append `str2` string at the end of `str1` string variable.   |
 | `strcpy()` | `strcpy(str1, str2);` | Copy `str2` string to `str1` string variable.                |
 | `strlen()` | `strlen(str);`        | Return the length of `str` string, excluding null terminator. |
 
-# **C: FUNCTION**
+# **C: 함수**
 
 C/C++ language is executed based around a single key function called `main()`. Understanding the concept of functions is important in C/C++ languages, which can also be used to create and implement custom function to serve specific purpose.
 
-## Function
+## 함수
 
 Function is an independent block of code which can process the data and present newly processed data once it’s called, allowing dynamic program scripting. The programming based around use of custom functions is called *functional programming*.
 
