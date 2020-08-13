@@ -328,9 +328,9 @@ printf("%3d", variable);
 | `bool`     | 논리형                | 논리의 참과 거짓을 `true`(0이 아닌 정수)와 `false`(정수 0)로 표시.<br />크기: 1 바이트 |
 | `void`     | 보이드                   | 불특정 자료형.<br />크기: 1 바이트                    |
 
-### `sizeof()` 연산자
+### `sizeof()` 함수
 
-`sizeof()` 연산자는 자료형이나 데이터가 차지하고 있는 메모리 용량을 확인하기 위해 사용하며, 단위는 바이트(byte)이다.
+`sizeof()` 함수는 자료형이나 데이터가 차지하고 있는 메모리 용량을 확인하기 위해 사용하며, 단위는 바이트(byte)이다.
 
 ```c
 sizeof(int);		// 크기: 4 바이트
@@ -682,57 +682,64 @@ arr[2] = value3;
 ```
 
 ### 배열의 크기
-
-When `sizeof()` operator is used on the array, it returns the total assigned byte size considering its data type, thus "$\mathrm{data \ type \ byte} \times \mathrm{number \ of \ elements}$". Hence, divided by data type byte results array length:
+`sizeof()` 함수가 배열에 사용되면 배열의 크기가 아닌, 배열이 차지하는 총 바이트 수를 반환한다. 이는 배열의 자료형과 직접적인 영향이 있으므로, 배열의 크기를 구하기 위해서는 다음과 같은 표현식을 사용한다.
 
 ```c
 int arr[3];
 
-sizeof(arr)/sizeof(int);	// >> OUTPUT: 3 ( = LENGTH OF ARRAY)
+sizeof(arr)/sizeof(int);	// >> 출력: 3 ( = 배열의 크기)
 ```
+
+즉, 자료형의 요소들로 구성된 배열을 해당 자료형으로 나누면 요소의 개수가 계산된다.
 
 ### 다차원 배열
 
-Array can contain another array as an element, under the condition these arrays shares the same length. Multi-dimensional array can also be initialized without definite size but limited to its first boundary only.
+배열은 또다른 배열을 요소로 가질 수 있으나, 이들은 모두 동일한 자료형과 배열 크기를 가져야 한다. 비록 국한적이지만, 일반 배열과 마찬가지로 다차원 배열의 첫 번째 차원은 초기화할 시 크기를 지정하지 않아도 된다.
 
 ```c
-// INITIALIZATION 1
+// 다차원 배열의 초기화 1
 int arr[size1][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 
-// INITIALIZATION 2
-int arr[     ][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
+// 다차원 배열의 초기화 2
+int arr[][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 ```
 
 ## 문자열
 
-C language does not have a string data type, but represented using array of character with null terminator `\0` at the end:
+C 언어는 일련의 문자들, 일명 문자열(string)을 자체적으로 자료형으로 지원하지 않는다. 하지만 이를 문자들 널 문자(`\0`)로 구성된 배열로 문자열을 표현할 수 있다.
 
 ```c
 // C-형식 문자열
-char arr[] = "Hello";
-char* ptr = "World!";
+char arr[] = "Hello";    // 즉, arr[] = {'H', 'e', 'l', 'l', 'o', '\0'};
+char* ptr = "World!";    // 포인터를 활용한 문자열 표현 방법
 ```
 
-The following list shows several string functions available in C programming language:
+아래는 C 언어에서 문자열과 관련된 함수들의 목록이다.
 
 | 함수   | 예시               | 설명                                                  |
-| ---------- | --------------------- | ------------------------------------------------------------ |
-| `strcat()` | `strcat(str1, str2);` | Append `str2` string at the end of `str1` string variable.   |
-| `strcpy()` | `strcpy(str1, str2);` | Copy `str2` string to `str1` string variable.                |
-| `strlen()` | `strlen(str);`        | Return the length of `str` string, excluding null terminator. |
+|:----------:| --------------------- | ------------------------------------------------------------ |
+| `strcat()` | `strcat(str1, str2);` | 문자열 `str2`를 문자열 `str1` 뒤에 덧붙인다.   |
+| `strcpy()` | `strcpy(str1, str2);` | 문자열 `str2`을 문자열 `str1`에 복사한다.                |
+| `strlen()` | `strlen(str);`        | 문자열 `str` 크기를 반환하며, 이때 널 문자는 제외된다. |
 
 # **C: 함수**
-
-C/C++ language is executed based around a single key function called `main()`. Understanding the concept of functions is important in C/C++ languages, which can also be used to create and implement custom function to serve specific purpose.
+C 언어는 하나의 핵심 함수인 `main()`을 기점으로 모든 프로그램이 실행된다. 함수에 대한 이해는 매우 중요하며, 직접 함수를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있다. 그러므로  본 장은 C 언어에서 함수형 프로그래밍을 구현하기 위한 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
 
 ## 함수
+함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 사용자 지정 함수 사용을 중심으로 한 프로그래밍을 *함수형 프로그래밍*이라고 한다.
 
-Function is an independent block of code which can process the data and present newly processed data once it’s called, allowing dynamic program scripting. The programming based around use of custom functions is called *functional programming*.
+함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
+
+```c
+int variable = {0, 3, 5, 9};
+printf(sizeof(variable));
+// "printf()" 함수, 그리고 바이트 용량을 반환하는 "sizeof()" 함수
+```
 
 Function can be distinguished by its declaration with parenthesis after its name; `function()`. Its definition is stated inside a code block (`{}`), which is executed when called.
 
 ```c
-// FUNCTION DEFINITION(AKA. IMPLEMENTATION)
+// 함수의 정의(AKA. IMPLEMENTATION)
 float function(int arg1, float arg2)
 {
 	return arg1 + arg2;
@@ -760,33 +767,33 @@ float function(int arg1, float arg2)
 
 However, defining a function inside another function (aka nested function) is invalid in C/C++ language.
 
-### `return` Statement
+### `return` 반환문
+`return` 반환문은 함수로부터 데이터를 함수에 지정된 자료형으로 반환하는 함수 전용 문장이다. 반환문이 실행되면 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 
 
-The `return` statement is a function-exclusive statement that outputs indicated data under the data type declared on the function. Once the `return` statement is executed, the function ends immediately despite there are codes still left inside.
+만일 함수의 자료형이 `void`이면 반환문은 필요가 없으나, 조기 종료를 위해 아무런 데이터를 반환하지 않는 `return;`을 사용할 수 있다.
 
-If the function is a `void` data type, function can be returned by `return;` statement alone without any data to return.
+### 매개변수 & 전달인자
 
-### Parameter & Argument
+다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
 
-Following are the difference between parameters and arguments that is referred significantly when discussing function.
+* **전달인자 (argument)**
+    : 전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.
+* **매개변수 (parameter)**
+    : 매개변수는 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다.
 
-**Parameter**
-Parameter is a function-internal local variable: because parameters is a function-exclusive local variable, it cannot be called from outside.
+매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
 
-| OPERATOR |   SYNTAX    | DESCRIPTION                                                  |
-| :------: | :---------: | ------------------------------------------------------------ |
-|   `=`    | `arg=value` | Parameter `arg` is assigned `value` by default when no other value is passed. Must locate after normal parameter. |
+| 연산자 |    구문    | 설명                                                 |
+| :------: | :----------: | ------------------------------------------------------------ |
+|   `=`    | `arg=value` | 매개변수에 전달인자가 없으면 기본값 `value`가 대신 반환된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
 
-**Argument**
-Argument is a value or object being passed to the function parameter and those passed values and objects will be processed by the function code. However, argument is independent from parameter: change on parameter does not affect value or object passed as argument.
-
-Examples below show how function parameter and argument works:
+아래의 예제는 함수의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
 
 ```c
 float function(int arg1, float arg2);
 
-function(1);             // >> OUTPUT: 3.0
-function(1, 3.0);        // >> OUTPUT: 4.0
+function(1);             // >> 출력: 3.0
+function(1, 3.0);        // >> 출력: 4.0
 
 float function(int arg1, float arg2 = 2.0)
 {
@@ -826,11 +833,11 @@ void function(int *arg) {
 
 This is possible because array itself returns a memory address. Again, pointer will be explanation on next chapter in detail.
 
-## Entry Point
+## 시작점
 
 Entry point is the startup function where a program execution begins. There are three major entry points that can to be discussed in C++.
 
-### `main()` Function
+### `main()` 함수
 
 As the only entry point available in traditional C++ console application, a project must have one and only `main()` function within the project. Creating multiple `main()` functions or not having any `main()` function will cause error on running the program.
 
@@ -868,7 +875,9 @@ int wmain(int argc, wchar_t **argv /* ALTERNATIVE: wchar_t *argv[] */) {
 
 C/C++ language is originated from UNIX platform which is different from Windows platform. Meaning, certain language characters (e.g. Greek, Cyrillic characters) may not be fully supported due to different encoding on `main()` entry point.
 
-## Recursion Function
+비록 이전 코드 예시에는 `main()` 함수가 직접적으로 언급되지 않았으나, 전역 변수와 함수를 제외한 모든 코드들은 `main()` 함수 내에서 작성되어야만 실행된다.
+
+## 회귀 함수
 
 Recursive function is a function that calls itself (recursion). Factorial $!$ in mathematic is the best example of recursive function implementation.
 
@@ -911,7 +920,7 @@ float function(int arg1, float arg2) {
 FUNC(&function, 1, 3.0);	// >> OUTPUT: 4.0
 ```
 
-# **C: POINTER**
+# **C: 포인터**
 
 Starting from *C: Array* chapter, a new data called "pointer" was mentioned quite often. Pointer is very important concept in C/C++ programming language and is one of the commonly used data to develop advanced program.
 
