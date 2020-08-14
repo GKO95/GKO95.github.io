@@ -296,7 +296,7 @@ printf("%3d", variable);
 
 ```
 입력: 1234567
-12345			// 지정된 "%3d" 형식에 따라 "123"이라고 표시되지 않는다.
+12345            // 지정된 "%3d" 형식에 따라 "123"이라고 표시되지 않는다.
 ```
 
 | 형식   | 설명       |
@@ -333,8 +333,8 @@ printf("%3d", variable);
 `sizeof()` 함수는 자료형이나 데이터가 차지하고 있는 메모리 용량을 확인하기 위해 사용하며, 단위는 바이트(byte)이다.
 
 ```c
-sizeof(int);		// 크기: 4 바이트
-sizeof(char);		// 크기: 1 바이트
+sizeof(int);        // 크기: 4 바이트
+sizeof(char);        // 크기: 1 바이트
 ```
 
 ## 변수
@@ -395,8 +395,8 @@ const int variable = 1;
 자료형 변환은 변수 혹은 데이터의 자료형을 다른 자료형으로 강제로 바꾸는 작업이다. 만일 유사한 자료형을 작은 크기에서 큰 크기로 변환할 시, 이를 *암시적* 자료형 변환이라고 한다. 암시적 자료형 변환은 데이터 손실이 없기 때문에 컴파일러에서 자연적으로 처리된다.
 
 ```c
-short A = 1;	// 2 바이트 정수형
-int B = A;		// 4 바이트 정수형
+short A = 1;    // 2 바이트 정수형
+int B = A;        // 4 바이트 정수형
 ```
 
 이에 반대되는 *명시적* 자료형 변환은 데이터 손실의 위험을 감수하며 데이터의 자료형을 바꾼다. C 언어 형식의 명시적 자료형 변환은 아래와 같이 소괄호(`()`)를 활용한다.
@@ -492,7 +492,7 @@ printf("안녕하세요.\n처음 뵙겠습니다!");
 ```c
 if (condition)
 {
-	statements;
+    statements;
 }
 
 // 간략화된 문장
@@ -658,17 +658,17 @@ int arr[] = {value1, value2, ... };
 
 초기화가 이루어질 시, 할당되는 데이터 개수는 선언된 배열 용량을 초과해서는 안된다. 그렇지만 데이터 개수가 용량을 미치지 못할 경우 나머지 요소에는 `0` 혹은 `NULL` 값이 할당된다.
 
-배열 자체를 호출하면 할당된 데이터를 불러오지 않으며, 그 대신 배열이 저장된 메모리 주소(즉, 포인터)가 반환된다. 여기서 배열의 메모리 주소는 첫 번째 요소의 주소와 일치한다.
+배열 자체를 호출하면 할당된 데이터를 불러오지 않으며, 그 대신 배열이 저장된 메모리 주소(즉, 포인터)가 반환된다. 여기서 배열의 메모리 주소는 첫 번째 요소의 주소와 일치하며, 바로 옆 메모리 주소에는 다음 요소가 연쇄적으로 할당되어 있다.
 
 ```c
 int arr[3] = {value1, value2, valu3};
 
-arr;		// >> 출력: 0x0139F854
-&arr[0];	// >> 출력: 0x0139F854
-&arr[1];	// >> 출력: 0x0139F858 ( = 0139F854 + 정수형 4 바이트)
+arr;        // >> 출력: 0x0139F854
+&arr[0];    // >> 출력: 0x0139F854
+&arr[1];    // >> 출력: 0x0139F858 ( = 0139F854 + 정수형 4 바이트)
 ```
 
-자세한 내용은 다음 장 *C: 포인터*에서 다루게 될 것이므로, 지금으로써는 이러한 개념이 있다는 정도로만 이해하면 된다.
+자세한 내용은 차후 *C: 포인터* 장에서 다루게 될 것이므로, 지금으로써는 이러한 개념이 있다는 정도로만 이해하면 된다.
 
 위에서 설명한 배열의 특징으로 인해, 배열은 초기화 이외에는 한꺼번에 할당이 불가능하다. 그렇지만 각 요소당 할당은 가능하며, 요소 순번은 0번부터 시작하며 대괄호(`[]`)로 호출한다.
 
@@ -687,7 +687,7 @@ arr[2] = value3;
 ```c
 int arr[3];
 
-sizeof(arr)/sizeof(int);	// >> 출력: 3 ( = 배열의 크기)
+sizeof(arr)/sizeof(int);    // >> 출력: 3 ( = 배열의 크기)
 ```
 
 즉, 자료형의 요소들로 구성된 배열을 해당 자료형으로 나누면 요소의 개수가 계산된다.
@@ -723,10 +723,10 @@ char* ptr = "World!";    // 포인터를 활용한 문자열 표현 방법
 | `strlen()` | `strlen(str);`        | 문자열 `str` 크기를 반환하며, 이때 널 문자는 제외된다. |
 
 # **C: 함수**
-C 언어는 하나의 핵심 함수인 `main()`을 기점으로 모든 프로그램이 실행된다. 함수에 대한 이해는 매우 중요하며, 직접 함수를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있다. 그러므로  본 장은 C 언어에서 함수형 프로그래밍을 구현하기 위한 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
+C 언어는 하나의 핵심 함수인 `main()`을 기점으로 모든 프로그램이 실행된다. 함수에 대한 이해는 매우 중요하며, 직접 함수를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있는데, 이러한 프로그래밍 기법을 *함수형 프로그래밍(functional programming)*이라고 한다. 본 장은 C 언어에서 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
 
 ## 함수
-함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 사용자 지정 함수 사용을 중심으로 한 프로그래밍을 *함수형 프로그래밍*이라고 한다.
+함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다.
 
 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
@@ -736,36 +736,40 @@ printf(sizeof(variable));
 // "printf()" 함수, 그리고 바이트 용량을 반환하는 "sizeof()" 함수
 ```
 
-Function can be distinguished by its declaration with parenthesis after its name; `function()`. Its definition is stated inside a code block (`{}`), which is executed when called.
+함수의 기능을 정의(definition)하기 위해서는 두 가지의 구성요소가 반드시 필요하다:
+* 코드 블록(`{}`): 함수를 호출할 때, 실행되는 코드가 들어있다.
+* 자료형: 함수가 종료될 때, 반환되는 데이터의 자료형을 결정한다. 
 
 ```c
-// 함수의 정의(AKA. IMPLEMENTATION)
-float function(int arg1, float arg2)
+// 함수 정의
+int function()
 {
-	return arg1 + arg2;
+    return 1 + 2;
 }
 
-function(1, 3.0);		// >> OUTPUT: 4.0
+// 함수 호출
+function();    // >> 출력: 3
 ```
 
-Because C/C++ programming is executed from top to bottom sequentially, function won't be executable unless it is defined firsthand. This creates difficulty with script and function management when the project becomes larger.
+C 언어는 위에서부터 순차적으로 코드가 실행되기 때문에, 아직 정의가 되지 않은 상태에서 함수를 호출할 수 없다. 이를 고려하여 모든 함수의 정의를 스크립트 맨 위에 위치시키면 가독성이 저하되고 관리하기 매우 힘들어질 수 있다.
 
-Function has a prototype used to let compiler know the function's existence recognizing its definition. Prototype shares same syntax of function declaration of its definition but without a code block.
+함수 프로토타입(prototype)은 컴파일러에게 미리 함수의 존재를 알리는 역할을 하며, 변수의 선언과 동일한 역할을 가지지만 필수요소는 아니다. 프로토타입은 대체로 스크립트의 상단부에 위치하며, 함수 정의 구문에서 코드 블록(`{}`)을 세미콜론(`;`)으로 대체하면 된다.
 
 ```c
-// FUNCTION PROTOTYPE (AKA. FORWARD DECLARATION)
-float function(int arg1, float arg2);
+// 함수 프로토타입
+int function();
 
-function(1, 3.0);		// >> OUTPUT: 4.0
+// 함수 호출
+function();    // >> 출력: 3
 
-// FUNCTION DEFINITION (AKA. IMPLEMENTATION)
-float function(int arg1, float arg2)
+// 함수 정의
+int function()
 {
-	return arg1 + arg2;
+    return 1 + 2;
 }
 ```
 
-However, defining a function inside another function (aka nested function) is invalid in C/C++ language.
+그러나 함수 내에서 또다른 함수를 정의하는 것은 C 언어에서 허용되지 않는다.
 
 ### `return` 반환문
 `return` 반환문은 함수로부터 데이터를 함수에 지정된 자료형으로 반환하는 함수 전용 문장이다. 반환문이 실행되면 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 
@@ -779,7 +783,7 @@ However, defining a function inside another function (aka nested function) is in
 * **전달인자 (argument)**
     : 전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.
 * **매개변수 (parameter)**
-    : 매개변수는 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다.
+    : 매개변수는 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수의 선언은 함수의 소괄호(`()`) 내에서 이루어진다.
 
 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
 
@@ -790,29 +794,32 @@ However, defining a function inside another function (aka nested function) is in
 아래의 예제는 함수의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
 
 ```c
-float function(int arg1, float arg2);
+// 함수 프로토타입
+int function(int arg1, float arg2);
 
-function(1);             // >> 출력: 3.0
-function(1, 3.0);        // >> 출력: 4.0
+// 함수 호출
+function(1);            // >> 출력: 3
+function(1, 3.14);      // >> 출력: 4 ( = 1 + 3.14의 정수형만 추출)
 
-float function(int arg1, float arg2 = 2.0)
+// 함수 정의
+int function(int arg1, float arg2 = 2.0)
 {
-	return arg1 + arg2;
+    return arg1 + arg2;
 }
 ```
 
-However, passing container such as array cannot be passed using the syntax above, requiring different method. There are two possible methods available: argument as an array, and as a memory address (pointer).
+하지만 배열과 같은 저장공간은 위와 동일한 구문으로 인자를 매개변수로 건네줄 수 없다. 인자를 건네는 방법에는 두 가지가 있으며, 매개변수를 배열로 혹은 배열의 메모리 주소(즉, 포인터)로 선언하는 것이다.
 
 ```c
 void function(int arg[]);
 
 int arr[3] = {value1, value2, value3};
-function(arr);              // PASSING ARRAY TO FUNCTION ARGUMENT
+function(arr);              // 배열을 함수의 인자로 넘겨준다.
 
-// ACCEPT ARGUMENT AS AN ARRAY
+// 넘겨받은 인자를 배열 그대로 받아들인다.
 void function(int arg[]) {
     statements;
-	return;
+    return;
 }
 ```
 
@@ -822,16 +829,16 @@ void function(int arg[]) {
 void function(int *arg);
 
 int arr[3] = {value1, value2, value3};
-function(arr);              // PASSING ARRAY TO FUNCTION ARGUMENT
+function(arr);              // 배열을 함수의 인자로 넘겨준다.
 
-// ACCEPT ARGUMENT AS A POINTER
+// 넘겨받은 인자를 배열이 아닌 포인터로 받아들인다.
 void function(int *arg) {
     statements;
-	return;
+    return;
 }
 ```
 
-This is possible because array itself returns a memory address. Again, pointer will be explanation on next chapter in detail.
+후자의 방법이 가능한 이유는 배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오며, 바로 옆 메모리 주소에는 다음 요소가 연쇄적으로 할당되어 있기 때문이다. 상세한 내용은 다음 장인 *C: 포인터*에서 설명할 것이다.
 
 ## 시작점
 
@@ -907,17 +914,17 @@ Do not try to understand the script below for now as this requires understanding
 ```c
 // CALLING FUNCTION
 float FUNC(float (*callback)(int, float), int arg1, float arg2) {
-	float var = callback(arg1, arg2);		// FUNCTION CALLBACK
+    float var = callback(arg1, arg2);        // FUNCTION CALLBACK
     return var;
 }
 
 // CALLBACK FUNCTION
 float function(int arg1, float arg2) {
-	return arg1 + arg2;
+    return arg1 + arg2;
 }
 
 // THEREFORE...
-FUNC(&function, 1, 3.0);	// >> OUTPUT: 4.0
+FUNC(&function, 1, 3.0);    // >> OUTPUT: 4.0
 ```
 
 # **C: 포인터**
@@ -932,7 +939,7 @@ Pointer is a variable that stores memory address of where the value is located, 
 
 ``` c
 // POINTER DECLARATION
-int* ptr;				// WARNING C4700: unintialized local variable 'ptr' used
+int* ptr;                // WARNING C4700: unintialized local variable 'ptr' used
 ```
 
 Memory address can be called from non-pointer variable as well using ampersand (`&`) operator:
@@ -940,7 +947,7 @@ Memory address can be called from non-pointer variable as well using ampersand (
 ```c
 // NON-POINTER DECLARATION
 int variable;
-&variable;				// >> OUTPUT: 0139F854
+&variable;                // >> OUTPUT: 0139F854
 ```
 
 Since this hexadecimal memory address cannot be written by hand, the only way to either define or initialize the pointer is by assigning already existing memory address. Beware, data type must matched when defining pointer.
@@ -950,8 +957,8 @@ Since this hexadecimal memory address cannot be written by hand, the only way to
 int variable = 3;
 int* ptr = &variable;
 
-printf("%x",  ptr);		// >> OUTPUT: 0139F854	(ADDRESS)
-printf("%d", *ptr);		// >> OUTPUT: 3			(VALUE)
+printf("%x",  ptr);        // >> OUTPUT: 0139F854    (ADDRESS)
+printf("%d", *ptr);        // >> OUTPUT: 3            (VALUE)
 ```
 
 As seen above, it is possible to return value assigned to the pointer by placing dereference (`*`) operator. While pointer declaration also used asterisk, they are different existence but only sharing the same symbol.
@@ -968,7 +975,7 @@ Interestingly, any changes made on variable is also affects contents of the poin
 Null pointer is a pointer that points to nothing. This can be done by assigning pointer with `nullptr` keyword:
 
 ```c
-int* ptr = nullptr;		// >> OUTPUT: 00000000
+int* ptr = nullptr;        // >> OUTPUT: 00000000
 ```
 
 ### Void Pointer
@@ -994,7 +1001,7 @@ void function(int, int);
 void (*ptr)(int, int) = function;
 
 void function(int arg1, int arg2) {
-	statements;
+    statements;
     return 0;
 }
 ```
@@ -1052,10 +1059,10 @@ union UNION {
 
 // VARAIBLE DECLARATION & ASSIGNMENT
 union UNION variable;
-variable.field1 = 22136;    // >> OUTPUT: 22136		(0x 00 00 56 78)
+variable.field1 = 22136;    // >> OUTPUT: 22136        (0x 00 00 56 78)
 
-variable.field2[0];         // >> OUTPUT: 'x'		(0x -- -- -- 78)
-variable.field2[1];         // >> OUTPUT: 'V'		(0x -- -- 56 --)
+variable.field2[0];         // >> OUTPUT: 'x'        (0x -- -- -- 78)
+variable.field2[1];         // >> OUTPUT: 'V'        (0x -- -- 56 --)
 ```
 
 Since union shares a single memory location to store the value, data allocation size is set based on the member with data type of largest byte size. Member fields with smaller byte-size data type is represented as a portion of the overall.
@@ -1088,14 +1095,14 @@ While this is not officially supported in C++ programming language, structure an
 ```c
 // TYPEDEF STRUCTURE
 typedef struct {
-	int 	field1;
-	float 	field2;
+    int     field1;
+    float     field2;
 } STRUCTURE;
 
 // TYPEDEF UNION
 typedef union {
-	int		field1;
-	float	field2;
+    int        field1;
+    float    field2;
 } UNION;
 
 // VARIABLE DECLARATION
@@ -1430,12 +1437,12 @@ Compilers have common standard and compiler-specific predefined macros available
 Preprocessor has a conditional directives that are used for conditional compilation. These directives are not to be used as a substitution of `if` and `else` conditional statement.
 
 ```cpp
-#if		SOMETHING > value
-	statements;
-#elif	SOMETHING < value
-	statements;
+#if        SOMETHING > value
+    statements;
+#elif    SOMETHING < value
+    statements;
 #else
-	statements;
+    statements;
 #endif
 ```
 
@@ -1445,13 +1452,13 @@ Conditional inclusion can check condition whether the macro is already defined o
 
 ```cpp
 // IF COMPILED ON 64-BIT ARM OR x64
-#ifdef	_WIN64
-	statments;
+#ifdef    _WIN64
+    statments;
 #endif
 
 // IF NOT COMPILED ON 64-BIT ARM OR x64
-#ifndef	_WIN64
-	statements;
+#ifndef    _WIN64
+    statements;
 #endif
 ```
 
@@ -1481,7 +1488,7 @@ The following code is an example of include guard without using `#pragma once` p
 #ifndef HEADER_FILE
 #define HEADER_FILE
 
-#endif	/* HEADER_FILE */
+#endif    /* HEADER_FILE */
 ```
 
 If `header.h` has not been processed, the compiler defines the `HEADER_FILE` for the first time. However, upon second encounter, compiler will not process the header file again because of the macro conditioning.
@@ -1492,6 +1499,6 @@ Though it does not affect any on compilation, `#pragma region` and `#pragma endr
 
 ```cpp
 #pragma region REGIONNAME
-	statements;
+    statements;
 #pragma endregion
 ```
