@@ -1,5 +1,14 @@
 # Welcome to GKO95's GitHub Pages
 
+## Bundler
+
+```ruby
+bundle exec jekyll serve
+```
+
+
+## Syntax Highlight
+
 Code highlight: `rouge`
 ```
 gem install rouge

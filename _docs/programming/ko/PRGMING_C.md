@@ -306,6 +306,7 @@ printf("%3d", variable);
 | `%c` | 문자       |
 | `%s` | 문자열      |
 | `%x` | 십육진수     |
+| `%p` | 포인터  |
 
 > 위의 예시에서의 `%3d` 형식은 앞 혹은 뒤의 세 자리만 추출하는 게 아니며, 숫자 3은 오히려 최소 표시 자릿수를 의미한다. 즉, 형식 지정자가 `%7d`이었으면 `0012345`로 최소 일곱 자리로 정수를 표시한다.
 
@@ -368,20 +369,43 @@ int variable = 1;
 
 C 언어에는 크게 세 종류의 변수로 나뉘어진다.
 
-* **지역 변수(local variable)**는 함수(function)나 클래스(class)와 같은 코드 블록 내부에서 선언된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다. 그러므로 지역 변수는 외부에서 선언된 변수의 이름을 가질 수 있다.
-
-* **전역 변수(global variable)**는 스크립트 내에서 어떠한 코드 블록에도 속하지 않은 외부에 선언된 변수이다. 코드 블록 내부에 있는 지역 변수와 함께 사용하기 위해서는 `extern` 키워드로 변수를 선언한다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수의 사용은 피하도록 한다.
+* **지역 변수(local variable)**는 함수(function)와 같은 코드 블록 내부에서 선언된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다. 그러므로 지역 변수는 외부에서 선언된 변수의 이름을 가질 수 있다.
 
   ```c
-  // 전역 변수 선언
-  extern int variable;
+  int main() {
+      // 여기서부터 코드 입력...
+
+      /* 지역 변수 */
+      int variable;
+
+      return 0;
+  }
   ```
 
-* **정적 변수(static variable)**는 특수한 지역 변수로 함수나 클래스와 같은 코드 블록을 탈출하여도 데이터가 소멸되지 않고 보존된다. 그러므로 해당 코드 블록을 재실행하면 탈출 직전의 데이터를 이어서 사용할 수 있다. 정적 변수는 `static` 키워드로 선언한다.
+* **전역 변수(global variable)**는 함수와 같은 코드 블록 속하지 않은 외부에 선언된 변수이며, 전역 변수는 특별한 키워드가 필요없이 호출만으로도 코드 블록 내의 지역 변수와 함께 사용할 수 있다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수의 사용은 피하도록 한다.
 
   ```c
-  // 정적 변수 선언
-  static int variable;
+  /* 전역 변수 */
+  int variable;
+
+  int main() {
+      // 여기서부터 코드 입력...
+
+      return 0;
+  }
+  ```
+
+* **정적 변수(static variable)**는 특수한 지역 변수로 프로그램이 종료되지 않는 한 함수와 같은 코드 블록을 탈출하여도 데이터가 소멸되지 않고 보존된다. 그러므로 해당 코드 블록을 재실행하면 탈출 직전의 데이터를 이어서 사용할 수 있다. 정적 변수는 `static` 키워드로 선언한다.
+
+  ```c
+  int main() {
+      // 여기서부터 코드 입력...
+
+      /* 정적 변수 */
+      static int variable;
+
+      return 0;
+  }
   ```
 
 ### 상수 변수
@@ -396,7 +420,7 @@ const int variable = 1;
 
 ```c
 short A = 1;    // 2 바이트 정수형
-int B = A;        // 4 바이트 정수형
+int B = A;      // 4 바이트 정수형
 ```
 
 이에 반대되는 *명시적* 자료형 변환은 데이터 손실의 위험을 감수하며 데이터의 자료형을 바꾼다. C 언어 형식의 명시적 자료형 변환은 아래와 같이 소괄호(`()`)를 활용한다.
@@ -817,7 +841,8 @@ int arr[3] = {value1, value2, value3};
 function(arr);              // 배열을 함수의 인자로 넘겨준다.
 
 // 넘겨받은 인자를 배열 그대로 받아들인다.
-void function(int arg[]) {
+void function(int arg[])
+{
     statements;
     return;
 }
@@ -832,7 +857,8 @@ int arr[3] = {value1, value2, value3};
 function(arr);              // 배열을 함수의 인자로 넘겨준다.
 
 // 넘겨받은 인자를 배열이 아닌 포인터로 받아들인다.
-void function(int *arg) {
+void function(int *arg)
+{
     statements;
     return;
 }
@@ -841,57 +867,62 @@ void function(int *arg) {
 후자의 방법이 가능한 이유는 배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오며, 바로 옆 메모리 주소에는 다음 요소가 연쇄적으로 할당되어 있기 때문이다. 상세한 내용은 다음 장인 *C: 포인터*에서 설명할 것이다.
 
 ## 시작점
-
-Entry point is the startup function where a program execution begins. There are three major entry points that can to be discussed in C++.
-
-### `main()` 함수
-
-As the only entry point available in traditional C++ console application, a project must have one and only `main()` function within the project. Creating multiple `main()` functions or not having any `main()` function will cause error on running the program.
+시작점(entry point)는 프로그램이 시작되는 부분이다. C 언어의 시작점은 `main()` 함수 정의이며, 해당 함수는 프로토타입 및 호출이 존재하지 않는다. 이는 C 언어의 유일한 시작점으로 복수의 `main()` 함수가 존재하거나 없을 경우 에러가 발생해 프로그램이 실행되지 않는다.
 
 ```c
-int main(int argc, char **argv /* ALTERNATIVE: char *argv[] */) {
+// C 언어 프로그램 시작점: main()
+int main(int argc, char **argv)
+{
+    // 아래에 코드를 입력하세요.
 
     return 0;
 }
 ```
 
-According to C++ standard, `main()` function must return `int` data: `EXIT_SUCCESS` (traditionally `0`) and `EXIT_FAILURE`. When return value is omitted by the programmer, the compiler implicitly insert `return 0;` at the end of the entry point.
+본 문서의 대부분 코드 예시에는 `main()` 함수가 직접 언급되지 않았으나, 전역 변수와 함수를 제외한 모든 코드들은 `main()` 함수 내에서 작성되어야만 실행된다.
 
-Entry point `main()` function can have arguments mentioned above: argument count `argc` and argument vector `argv`. These arguments are apparent when executed through command-line:
+C 프로그래밍 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을 반환해야 하며, `EXIT_SUCCESS`(혹은 정수 `0`) 그리고 `EXIT_FAILURE`이 있다. 만일 반환문이 없을 시, 컴파일러는 자동적으로 `return 0;` 문장을 `main()` 함수의 말단에 삽입한다.
+
+`main()` 시작점은 위와 같은 매개변수를 함축적으로 가진다.
+* `argc`: 전달인자 개수(argument count).
+* `argv`: 전달인자 데이터 배열(argument vector); 매개변수 선언은 `char *argv[]`로 대체 가능하다.
+
+위의 전달인자 동작은 터미널 명령창을 통해 시 명백히 관측할 수 있다.
 
 ```
 ./app.exe option1 option2
 ```
 
-| Arguments | Data        |
-| --------- | ----------- |
+| 전달인자 | 데이터        |
+|:---------:| ----------- |
 | `argv[0]` | `./app.exe` |
 | `argv[1]` | `option1`   |
 | `argv[2]` | `option2`   |
 
-This indicates `argc` is always greater than 0 as the first element is an executing program.
+전달인자 데이터 배열 `argv`는 항상 첫 번째 요소를 실행 프로그램을 할당받으므로 전달인자의 개수 `argc`는 항상 0보다 크다.
 
-Meanwhile, Windows OS has its exclusive entry point called `wmain()` function which supports wide character arguments encoded in UTF-16 Unicode (where UTF-8 Unicode encodes common character such as English and numbers).
+한편, 윈도우 OS는 `wmain()` 함수라는 독자적인 시작점을 가지며, 이는 UTF-16 유니코드로 인코딩된 확장 문자(wide character)를 통해 더 많은 언어를 지원한다. 여기서 영문과 숫자와 같은 공통 문자는 UTF-8 유니코드만으로 인코딩된다.
 
 ```c
-int wmain(int argc, wchar_t **argv /* ALTERNATIVE: wchar_t *argv[] */) {
+// 윈도우 OS 확장 문자 지원 C 언어 프로그램 시작점: wmain()
+int wmain(int argc, wchar_t **argv)
+{
+    // 아래에 코드를 입력하세요.
 
     return 0;
 }
 ```
 
-C/C++ language is originated from UNIX platform which is different from Windows platform. Meaning, certain language characters (e.g. Greek, Cyrillic characters) may not be fully supported due to different encoding on `main()` entry point.
+확장 문자를 지원하는 `wmain()` 함수가 소개된 이유는 C 언어가 UTF-8을 일반 인터페이스로 사용하는 UNIX 운영체제 기반에서 개발되었기 때문이다. 그러므로 윈도우 OS에서 일반 `main()` 시작점으로는 일부 언어(예를 들어 그리스 및 키릴 문자)를 표현할 수 없는 호환성 문제가 발생한다.
 
-비록 이전 코드 예시에는 `main()` 함수가 직접적으로 언급되지 않았으나, 전역 변수와 함수를 제외한 모든 코드들은 `main()` 함수 내에서 작성되어야만 실행된다.
-
-## 회귀 함수
-
-Recursive function is a function that calls itself (recursion). Factorial $!$ in mathematic is the best example of recursive function implementation.
+## 재귀 함수
+재귀 함수(recursive function)는 스스로를 호출하는 함수이다. 수학에서의 펙토리얼이 재귀 함수 구현의 대표적인 예제이다.
 
 ```c
-// EXAMPLE: FACTORIAL "!"
-int factorial(int num) {
-    // BASE CASE: a case when to escape from the recursion.
+// 예제: 펙토리얼 "!"
+int factorial(int num)
+{
+    // 기저 조건: 재귀로부터 탈출하는 조건
     if (num == 1)
         return (1);
     else
@@ -899,100 +930,118 @@ int factorial(int num) {
 }
 ```
 
-Recursion can occur indirectly by multiple number of functions calling one to another, then back to the beginning.
+여러 함수가 서로를 호출하는 간접적 재귀도 가능하다.
 
-## External Function
+## 콜백 함수
 
+콜백 함수(callback function)은 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 코드 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
 
+> 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
 
-## Callback Function
-
-Aka. "call-after" function, it is a function that is passed as an argument to other function (calling function) which expects the argument (callback function) to execute on some time.
-
-Do not try to understand the script below for now as this requires understanding of a pointer which will be dealt on *C: POINTER § Function Pointer*.
+아래는 콜백 함수의 예시이며, 이에 대한 자세한 원리는 *C: 포인터 § 함수 포인터*에서 설명할 예정이다.
 
 ```c
-// CALLING FUNCTION
-float FUNC(float (*callback)(int, float), int arg1, float arg2) {
-    float var = callback(arg1, arg2);        // FUNCTION CALLBACK
+// 호출 함수
+int calling(float (*function)(int, float), int arg)
+{
+    // 콜백 함수의 호출
+    float var = function(arg, 3.0);
     return var;
 }
 
-// CALLBACK FUNCTION
-float function(int arg1, float arg2) {
+// 콜백 함수
+int callback(int arg1, float arg2)
+{
     return arg1 + arg2;
 }
 
-// THEREFORE...
-FUNC(&function, 1, 3.0);    // >> OUTPUT: 4.0
+// 그러므로...
+calling(&callback, 1);    // >> 출력: 4.0
 ```
 
 # **C: 포인터**
+본 문서는 *C: 배열*에서부터 시작하여 "포인터"라는 새로운 데이터가 소개되어 자주 언급되었다. 포인터는 C 언어에서 매우 중요한 개념 중 하나로써 더 발전된 프로그램 개발을 가능케 한다. 그러므로 이번 장에서는 포인터에 대한 설명과 이전 장에서 소개된 배열과 함수를 포인터를 활용한 심화된 처리 방식을 소개하려 한다.
 
-Starting from *C: Array* chapter, a new data called "pointer" was mentioned quite often. Pointer is very important concept in C/C++ programming language and is one of the commonly used data to develop advanced program.
-
-This chapter mainly focuses on the pointer and its application that can improve performance and functionality of previously mentioned programming, especially on function.
-
-## Pointer
-
-Pointer is a variable that stores memory address of where the value is located, rather than the value itself. Despite being a memory address, pointer also must to be distinguished by a data type of value. When declaring pointer, compound specifier `*` (aka. asterisk) is placed between data type and identifier:
-
-``` c
-// POINTER DECLARATION
-int* ptr;                // WARNING C4700: unintialized local variable 'ptr' used
-```
-
-Memory address can be called from non-pointer variable as well using ampersand (`&`) operator:
+## 포인터
+포인터(pointer)는 변수에 저장된 값이 아닌, 변수가 저장된 메모리 주소를 가리키는 데이터이다. 32비트와 64비트 운영체제에서 하나의 메모리 주소는 각각 8바이트와 16바이트로 구성된 십육진수 값을 가진다. 포인터 데이터 또한 변수에 저장할 수 있으며, 일반 변수와 마찬가지로 포인터 변수를 선언할 때 자료형이 요구되나 별표(`*`)가 자료형과 식별자 사이에 위치해야 한다.
 
 ```c
-// NON-POINTER DECLARATION
-int variable;
-&variable;                // >> OUTPUT: 0139F854
+/* 정수형 포인터 변수 선언 */
+int *ptr;            // WARNING C4700: 초기화되지 않은 지역 변수 'ptr'이 사용되었습니다.
+printf("%p", ptr); 
+```
+```
+0x0
 ```
 
-Since this hexadecimal memory address cannot be written by hand, the only way to either define or initialize the pointer is by assigning already existing memory address. Beware, data type must matched when defining pointer.
+변수의 포인터(즉, 메모리 주소)를 호출하기 위해서는 앰퍼샌드 기호(`&`) 연산자를 사용하여 확인할 수 있다.
 
 ```c
-// POINTER INITIALIZATION
-int variable = 3;
-int* ptr = &variable;
-
-printf("%x",  ptr);        // >> OUTPUT: 0139F854    (ADDRESS)
-printf("%d", *ptr);        // >> OUTPUT: 3            (VALUE)
+/* 정수형 변수 선언 */
+int variable = 365;
+printf("%p", &variable);
+```
+```
+0x1014eb010
 ```
 
-As seen above, it is possible to return value assigned to the pointer by placing dereference (`*`) operator. While pointer declaration also used asterisk, they are different existence but only sharing the same symbol.
+십육진수의 메모리 주소는 수기로 직접 작성할 수 있는 것이 아니며, 이는 매우 위험한 행위이다! 포인터 변수를 초기화하는 방법으로는 기존하는 변수의 메모리 주소를 할당하는 것이 유일하다. 여기서 포인터 변수와 변수 간의 자료형은 일치하도록 한다.
 
-|          OPERATOR          |  VARIABLE   |     RETURN     |
-| :------------------------: | :---------: | :------------: |
-| Address-on (`&`) Operator  | Non-pointer | Memory address |
-| Contents-of (`*`) Operator |   Pointer   |     Value      |
-
-Interestingly, any changes made on variable is also affects contents of the pointer as the pointer shares the same memory address. This feature is the most important when it comes to using pointer in C/C++.
-
-### Null Pointer
-
-Null pointer is a pointer that points to nothing. This can be done by assigning pointer with `nullptr` keyword:
+비록 하나의 메모리 주소는 8 바이트(32비트 아키텍쳐) 혹은 16 바이트(64비트 아키텍쳐)의 십육진수로 구성되어 있지만, 각 메모리 주소는 한 바이트의 데이터만 수용할 수 있다. 1 바이트만 있으면 충분한 `char` 문자형 데이터와 달리, `int` 정수형이나 `float` 부동소수점수형 데이터를 표현하기 위해서는 4 바이트의 메모리 용량이 필요하다. 그러나 포인터는 변수가 사용하고 있는 전체 메모리 주소 중에서 맨 첫 주소만 반환하므로 자료형이 언급되지 않으면 포인터는 어느 메모리 주소까지가 하나의 완전한 데이터인지 알 수 없다.
 
 ```c
-int* ptr = nullptr;        // >> OUTPUT: 00000000
+/* 포인터 변수 초기화 */
+int variable = 365;
+
+// 동일한 자료형의 포인터 변수
+int *ptr1 = &variable;
+printf("%p\n",  ptr1);        // >> 출력: 0x1014eb010  (주소)
+printf("%d\n", *ptr1);        // >> 출력: 365          (값)
+
+// 상이한 자료형의 포인터 변수
+char *ptr2 = &variable;
+printf("%p\n",  ptr2);        // >> 출력: 0x1014eb010  (주소)
+printf("%d\n", *ptr2);        // >> 출력: 109          (값)
 ```
 
-### Void Pointer
+위의 예시 코드에서 보이듯이, 포인터 변수가 가리키는 메모리 주소에 할당된 값을 역참조 연산자(`*`)를 통해 호출하는 것이 가능하다. 포인터 변수의 선언에서도 별표를 사용하였으나, 이 둘은 동일한 기호만 사용할 뿐이며 서로 다른 존재이다.
 
-Void pointer is a pointer with no specific data type (thus, `void`). This has advantage of being able to point to any kind of data type value by using static casting.
+| 연산자          | 변수     | 반환     |
+|:------------:|:------:|:------:|
+| 참조 연산자(`&`)  | 일반 변수  | 메모리 주소 |
+| 역참조 연산자(`*`) | 포인터 변수 | 값      |
+
+만일 일반 변수에서 데이터 변동이 발생하였으면 포인터 변수의 역참조에서도 동일한 데이터 변동을 목격할 수 있다. 이는 두 변수가 동일한 메모리 주소를 공유하고 있기 때문이다. 이러한 C 언어 프로그래밍의 포인터 성질은 매우 중요하게 다루어지는 개념 중 하나이며, 이를 "참조에 의한 호출(call by reference)"이라고 부른다.
+
+### 널 포인터
+
+널 포인터(null pointer)는 아무런 메모리 주소를 가리키지 않는 포인터이다. C 언어에서 포인터 사용은 자칫 메모리 접근 오류 등의 민감한 문제를 야기시킬 수 있기에, 안전한 포인터 사용을 위해 널 포인터을 `NULL` 키워드로 할당한다.
 
 ```c
-// POINTER DECLARATION
-void* ptr;
-
-int variable;
-(int*)ptr = &variable;
+int *ptr = NULL;
+printf("%p", ptr);
+```
+```
+0x0
 ```
 
-### Function Pointer
+### 보이드 포인터
+보이드 포인터(void pointer)는 지정된 자료형이 없는 포인터이다(즉, `void`). 이러한 포인터는 어떠한 자료형이라도 자료형 변환을 통해 메모리 주소를 가리킬 수 있는 장점을 가진다.
 
-Pointer can also be assigned with function, called function pointer. This pointer points to the first line function execution, similar to array pointing to its first element. Function pointer is initialized as below:
+```c
+/* 보이드 포인터 선언 */
+void *ptr;
+
+int variable = 356;
+ptr = &variable;
+printf("%d", *(int*)ptr);
+```
+```
+365
+```
+
+### 함수 포인터
+함수 포인터(function pointer)는 함수를 가리키는 보이드 포인터이다. 배열에서의 포인터가 첫 번째 요소 메모리 주소를 가리키는 것과 동일한 맥락으로, 함수에서 포인터는 첫 번째 실행문이 담긴 메모리 주소를 가리킨다. 함수 포인터는 아래와 같은 구문으로 초기화한다.
 
 ```c
 void function(int, int);
@@ -1010,7 +1059,7 @@ When assigning function pointer, not only should function data type is considere
 
 While function returns value when used with parenthesis `function()`, function also returns memory address to its starting point when used without parentheses `function`. 
 
-# **C: USER-DEFINED DATA TYPE**
+# **C: 사용자 정의 자료형**
 
 Commonly used data type such as `int`, `float`, `char`, and more are already defined in `stdio.h` header. Developer may create and use custom data type based on these pre-defined data types.
 
