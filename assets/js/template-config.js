@@ -2,17 +2,11 @@
 // >> AUTO-FIT MAIN
 //========================================
 var __initsize__;
-const __autosize__ = () => {
-    document.getElementsByTagName("MAIN")[0].style.height 
-        = (window.innerHeight < parseInt(getComputedStyle(document.body).minHeight) ? parseInt(getComputedStyle(document.body).minHeight) : window.innerHeight)
-            - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height
-            - document.getElementsByTagName("FOOTER")[0].offsetHeight + "px"
-};
-
 document.addEventListener("readystatechange", function() {
 if (document.readyState == "complete") {
 
     __initsize__ = document.body.getBoundingClientRect().height;
+    //alert(__initsize__ + " : " + window.innerHeight);
     if (window.innerHeight < parseInt(getComputedStyle(document.body).minHeight))
     {
         if (__initsize__ <= parseInt(getComputedStyle(document.body).minHeight))
@@ -29,6 +23,13 @@ if (document.readyState == "complete") {
             document.getElementsByTagName("MAIN")[0].style.height
                 = window.innerHeight - document.getElementsByTagName("FOOTER")[0].offsetHeight
                     - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height + "px";
+        }
+        else if (__initsize__ < window.innerHeight)
+        {
+            document.getElementsByTagName("MAIN")[0].style.height
+                = window.innerHeight - document.getElementsByTagName("FOOTER")[0].offsetHeight
+                    - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height + "px";
+
         }
     }
     /*
@@ -155,7 +156,9 @@ document.onkeydown = function(e) {
 // >> FUNCTION: RESIZE WINDOW
 //========================================
 window.addEventListener('resize', event => {
-    //alert(document.body.getBoundingClientRect().height + " : " + window.innerHeight);
+    document.getElementsByTagName("MAIN")[0].style.height = null;
+
+    __initsize__ = document.body.getBoundingClientRect().height;
     if (window.innerHeight < parseInt(getComputedStyle(document.body).minHeight))
     {
         if (__initsize__ <= parseInt(getComputedStyle(document.body).minHeight))
@@ -173,6 +176,15 @@ window.addEventListener('resize', event => {
                 = window.innerHeight - document.getElementsByTagName("FOOTER")[0].offsetHeight
                     - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height + "px";
         }
+        else if (__initsize__ < window.innerHeight)
+        {
+            document.getElementsByTagName("MAIN")[0].style.height
+                = window.innerHeight - document.getElementsByTagName("FOOTER")[0].offsetHeight
+                    - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height + "px";
+        }
+
+
     }
+    
     __menusize__();
 });

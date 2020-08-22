@@ -77,9 +77,9 @@ const TitleSize = () => {
     }
 }; TitleSize();
 
-/*========================================
->> MAIN: AUTO-SIZING
-========================================*/
+//========================================
+// MAIN: AUTO-SIZING
+//========================================
 // >> "home-main" SIZING
 var mainHeight = (window.innerHeight < parseInt(getComputedStyle(document.body).minHeight) ? parseInt(getComputedStyle(document.body).minHeight) : window.innerHeight)
     - __FOOTER__.offsetHeight - __HEADER__.getBoundingClientRect().height;
@@ -95,9 +95,9 @@ __LOWER__.style.height = lowerHeight + "px";
 
 //alert(mainHeight + " = " + upperHeight + " + " + lowerHeight);
 
-/*========================================
->> REGISTER: "BIT"-"BYTE"-"REG" SIZING
-========================================*/
+//========================================
+// REGISTER: "BIT"-"BYTE"-"REG" SIZING
+//========================================
 // >> BYTE NAVIGATION INDEX
 var currIndex = 0;
 const InitRegister = () => {
@@ -166,9 +166,9 @@ const InitRegister = () => {
 
 }; InitRegister();
 
-/*========================================
->> REGISTER: MOUSEOVER
-========================================*/
+//========================================
+// REGISTER: MOUSEOVER
+//========================================
 // >> FOR EACH BYTE
 for (let index = 0; index < __BYTES__.length; index++)
 {
@@ -212,9 +212,17 @@ for (let shift of __SHIFTS__)
     });
 }
 
-/*========================================
->> BULLETIN: POST ALIGNMENT
-========================================*/
+//========================================
+// BULLETIN: RECENT ANNOUNCEMENT
+//========================================
+for(let index = 1; index < document.getElementById("home-announcement").getElementsByTagName("UL")[0].children.length; index++)
+{
+    document.getElementById("home-announcement").getElementsByTagName("UL")[0].children[index].innerHTML = null;
+}
+
+//========================================
+// BULLETIN: POST ALIGNMENT
+//========================================
 for (let msg = 1; msg < __ANNOUNCE__.children.length; msg++)
 { __ANNOUNCE__.removeChild(__ANNOUNCE__.children[msg]); }
 
