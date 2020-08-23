@@ -58,11 +58,10 @@ const Raw2Chapter = () => { // >> "docs-content" INITIALLY HIDDEN!
 }; Raw2Chapter();
 
 //========================================
-// >> MENU: ORGANIZATION
+// >> PLUGIN: SELECT CATEGORY
 //========================================
-const MenuDesign = () => {
+const SelectCategory = () => {
 
-    // >> TOP-SIDE
     let category;
     switch(__CATEGORY__)
     {
@@ -73,6 +72,34 @@ const MenuDesign = () => {
             category = "LIBRARY";
             break;
     }
+
+    return category;
+}
+
+//========================================
+// >> PLUGIN: SWITCH LANGUAGE
+//========================================
+const SwitchLanguage = () => {
+
+    let category = SelectCategory();
+
+    // >> TOGGLE LANGUAGE
+    let button = document.createElement("A");
+    button.style.backgroundImage = "url(/assets/images/logo/logo-language.png)";
+    if (__LANGUAGE__ == "en") path = "./../../ko/"+category+"_"+__PAGENAME__+"/";
+    else if (__LANGUAGE__ == "ko") path = "./../../en/"+category+"_"+__PAGENAME__+"/";
+    button.setAttribute("href", path); button.setAttribute("title", "Toggle language");
+    document.getElementById("navigation-logo").appendChild(button);
+
+}; SwitchLanguage();
+
+//========================================
+// >> MENU: ORGANIZATION
+//========================================
+const MenuDesign = () => {
+
+    // >> TOP-SIDE
+    let category = SelectCategory();
 
     document.getElementById("menu-title").innerText = category + ": " + __PAGENAME__;
 
@@ -108,15 +135,6 @@ const MenuDesign = () => {
     });
     document.getElementById("menu-select").appendChild(button);
     */
-
-    // >> TOGGLE LANGUAGE
-    button = document.createElement("A");
-    button.style.backgroundImage = "url(/assets/images/logo/logo-language.png)";
-    if (__LANGUAGE__ == "en") path = "./../../ko/"+category+"_"+__PAGENAME__+"/";
-    else if (__LANGUAGE__ == "ko") path = "./../../en/"+category+"_"+__PAGENAME__+"/";
-    button.setAttribute("href", path); button.setAttribute("title", "Toggle language");
-    document.getElementById("menu-select").appendChild(button);
-
 
     // >> BOTTOM-SIDE
     for (let index = 0; index < 2; index++) 

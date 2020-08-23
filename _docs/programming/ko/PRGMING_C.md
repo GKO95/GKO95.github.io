@@ -185,7 +185,6 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
     : 현재 소스 파일이 위치한 경로를 위주로 헤더 파일을 찾는다. 만일 찾지 못하였을 시, ` #include <header.h>`와 같이 지정된 경로에서 헤더 파일을 재탐색한다. 일반적으로 사용자 정의 헤더 파일에 사용된다.
 
 ### 컴파일된 헤더
-
 컴파일된 헤더(precompiled header)는 컴파일러에서 더 빠른 속도로 처리할 수 있도록 중간체 형태로 컴파일된 헤더 파일이다. 컴파일 시간을 줄일 수 있는 장점을 가져 수많은 헤더 파일을 가진 프로젝트 혹은 큰 용량을 가진 헤더 파일에 효율적이다.
 
 하지만 컴파일된 헤더를 사용하면 컴파일 작업 자체에는 시간이 다소 걸리는 단점이 있다. 그러므로 용량이 작은 프로젝트나 자주 수정을 해야 하는 헤더 파일이 있다면 컴파일된 헤더 파일은 오히려 비효율적이다. 
@@ -194,6 +193,11 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 |:------------------:| ------------------------------------- |
 | `stdafx.h`         | 비주얼 스튜디오 2015 (msvc14) 혹은 이전 버전 |
 | `pch.h`            | 비주얼 스튜디오 2017 (msvc15) 혹은 이후 버전 |
+
+## 문장 종단자
+프로그래밍에서 문장(statement)이란, 실질적으로 무언가를 실행하는 코드를 의미한다. C 언어에서는 모든 문장의 끝에는 항상 문장 종단자(statement terminator)가 위치해야 하며 세미콜론(`;`) 기호를 사용한다.
+
+많은 프로그래밍 입문자가 가장 많이 저지르는 실수 중 하나로 문장 종단자를 잊어버리고 컴파일을 진행하는 것이다. 그러므로 C 기반 언어(C++과 C# 포함)에는 세미콜론을 넣는 것을 습관화해야 한다.
 
 ## 주석
 
@@ -212,32 +216,25 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 // 한줄 주석: 코드 한 줄을 차지하는 주석이다.
 ```
 
-## 식별자
-식별자(identifier)는 프로그래밍을 구성하는 데이터(일명 구성체; construct)를 구별하기 위해 사용되는 명칭이다. 다시 말해, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
+## 입력 & 출력
 
-* 오직 영문, 숫자, 밑줄(`_`)만 허용된다.
-* 첫 문자는 숫자로 시작할 수 없다.
-* 공백은 허용되지 않는다.
+C 언어는 다음과 같은 텍스트 기반의 입력 및 출력 함수를 가진다. 아래는 출력 함수를 우선적으로 나열였다.
 
-## Input & Output
-
-C languages displays the results by writing on the console windows and has several different version of output:
-
-| OUTPUT      | SYNTAX                            | DESCRIPTION                                                  |
-| ----------- | --------------------------------- | ------------------------------------------------------------ |
-| `putchar()` | `putchar('A');`                   | Prints a single character on a console.                      |
-| `puts()`    | `puts("Text");`                   | Prints sequence of characters (aka. string) on a console; auto new-line. |
-| `printf()`  | `printf("format", var);`          | Prints sequence of characters (aka. string) on a console, with format support. |
-| `fprintf()` | `fprintf(stream, "format", var);` | Extension of `printf()` function, available with `stream` selection.<br />`printf(...)` is equivalent to `fprintf(stdout, ...)`, where `stdout` is *standard output stream*. |
+| 출력      | 구문                            | 설명                                                  |
+|:-----------:| --------------------------------- | ------------------------------------------------------------ |
+| `putchar()` | `putchar('A');`                   | 문자 하나를 터미널에 출력한다.                      |
+| `puts()`    | `puts("Text");`                   | 일련의 문자들(일명 문자열)을 터미널에 출력하며, 자동 줄바꿈이 된다. |
+| `printf()`  | `printf("format", var);`          | 일련의 문자들(일명 문자열)을 터미널에 출력하며, 형식 지원이 된다. |
+| `fprintf()` | `fprintf(stream, "format", var);` | 출력 함수 `printf()`의 확장된 개념으로, `stream`에서 스트림 선택이 가능하다. 여기서 `printf(...)`는 `fprintf(stdout, ...)`와 동일하며, `stdout`는 *표준 출력 스트림*을 의미한다. |
 
 ```c
-// PUTCHAR()
+// "putchar()" 출력 함수
 putchar('A');
 
-// PUTS()
+// "puts()" 출력 함수
 puts("Hello World!");
 
-// PRINTF()
+// "printf()" 출력 함수
 float variable = 3.14159;
 printf("variable: %.2f", variable);
 ```
@@ -247,328 +244,361 @@ AHello World!
 variable: 3.14
 ```
 
-Meanwhile, there are several different version of input which it reads the input data from the console:
+출력 함수와 마찬가지로, 터미널을 통해 데이터를 받는 입력 함수에도 여러 종류가 존재한다.
 
-| INPUT       | RETURN                        | DESCRIPTION                                                  |
-| ----------- | ----------------------------- | ------------------------------------------------------------ |
-| `getchar()` | Character                     | Accepts foremost character as an input.                      |
-| `gets()`    | String (aka. character array) | Accepts sequence of characters (aka. string) as an input.    |
-| `scanf()`   | Format-specific               | Accepts inputs matching format specifier; requires address (`&`) operator, except for string. |
+| 입력       | 반환                        | 설명                                                  |
+|:-----------:| ----------------------------- | ------------------------------------------------------------ |
+| `getchar()` | 문자                     | 맨 앞에 있는 문자를 입력으로 받는다.                      |
+| `gets()`    | 문자열 (일명 문자 배열) | 일련의 문자(일명 문자열)을 입력으로 받는다.    |
+| `scanf()`   | 지정 형식               | 지정된 형식에 맞게 입력을 받는다. 문자열을 제외한 입력을 받을 모든 데이터는 주소 연산자(`&`)가 필요하다. |
 
 ```c
-// GETCHAR()
-char var1;
-var1 = getchar();
+// "getchar()" 입력 함수
+char variable1;
+variable1 = getchar();
 
-// GETS()
-char var2[20];
-gets(var2);
+// "gets()" 츨력 함수
+char variable2[20];
+gets(variable2);
 
-// SCANF()
-float var3; char var4[10];
-scanf("%f %3s", &var3, var4);
+// "scanf()" 출력 함수
+float variable3; char variable4[10];
+scanf("%f %3s", &variable3, variable4);
 ```
 
 ```
 A
->>> var1 = 'A'
+>>> variable1 = 'A'
 
 Hello World!
->>> var2 = "Hello World!"
+>>> variable2 = "Hello World!"
 
 3.0 Program
->>> var3 = 3.000000
->>> var4 = "Pro"
+>>> variable3 = 3.000000
+>>> variable4 = "Pro"
 ```
 
-### Formatted Specifier
+### 형식 지정자
 
-Format specifier is to specify the format of data to be accepted as input. While format specifier is available on both `scanf()` input function and `printf()` output function, splicing data (`Program -> Pro`) should be formatted on input-side and how it is presented without modifying data (`3.14159 -> 3.14`) should be formatted on output-side function.
+형식 지정자(format specifier)는 입출력 함수에서 데이터를 어떻게 받아들일 것인지 지정한다. 그러나 형식 지정자가 `scanf()` 입력 함수에서 사용되는지, 혹은 `printf()` 출력 함수에서 사용하는지에 따라 데이터는 달리 처리된다.
+
+* 입력 측에서 형식 지정자를 사용하면 본래 데이터의 성질이나 값이 변한다. 대표적인 예로 일련의 문자에서 원하는 부분만 추출한 작업이 있다(`Program`에서 `Pro`만 추출).
+
+* 출력 측에서 형식 지정자를 사용하면 본래 데이터의 성질과 값은 그대로 유지되나, 어떻게 표시되는지만 달라진다. 대표적인 예로 소수점 버림 작업이 있다(`3.14159`에서 `3.14`로 소수 두 자리만 표시).
 
 ```c
 int variable;
-printf("Enter: ");
+printf("입력: ");
 scanf("%5d", &variable);
 
 printf("%3d", variable);
 ```
 
 ```
-Enter: 1234567
-12345			// NOT "123" AS SPECIFIED USING "%3d"
+입력: 1234567
+12345            // 지정된 "%3d" 형식에 따라 "123"이라고 표시되지 않는다.
 ```
 
-| FORMAT | DESCRIPTION           |
-| :----: | --------------------- |
-|  `%d`  | Decimal               |
-|  `%f`  | Floating point number |
-|  `%c`  | Character             |
-|  `%s`  | String                |
-|  `%x`  | Hexadecimal           |
+| 형식   | 설명       |
+|:----:|----------|
+| `%d` | 정수 (십진수) |
+| `%f` | 부동소수점수   |
+| `%c` | 문자       |
+| `%s` | 문자열      |
+| `%x` | 십육진수     |
+| `%p` | 포인터  |
 
-### Escape Character
+> 위의 예시에서의 `%3d` 형식은 앞 혹은 뒤의 세 자리만 추출하는 게 아니며, 숫자 3은 오히려 최소 표시 자릿수를 의미한다. 즉, 형식 지정자가 `%7d`이었으면 `0012345`로 최소 일곱 자리로 정수를 표시한다.
 
-Escape character `\` is used to escape from sequence of character and execute certain operation within text-base data.
+## 식별자
+식별자(identifier)는 프로그래밍을 구성하는 데이터(일명 구성체; construct)를 구별하기 위해 사용되는 명칭이다. 다시 말해, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
+
+* 오직 영문, 숫자, 밑줄(`_`)만 허용된다.
+* 첫 문자는 숫자로 시작할 수 없다.
+* 공백은 허용되지 않는다.
+
+## 자료형
+자료형은 프로그래밍에서 자료 형식과 바이트 크기를 결정하는 매우 중요한 구성요소 중 하나이다. 자료형에 따라 프로그램의 메모리 및 처리속도에 효율을 보여줄 수 있다. 아래는 C 프로그래밍 언어가 가지는 자료형이다.
+
+| 식별자 | 자료형              | 설명                                                  |
+|:----------:| ---------------------- | ------------------------------------------------------------ |
+| `int`      | 정수                | 32비트 단정도 정수.<br />크기: 4 바이트         |
+| `float`    | 부동소수점수  | 소수점을 포함한 실수.<br />크기: 4 바이트          |
+| `double`   | 배정도 부동소수점수 | 배의 메모리를 가진 배정도 실수.<br />크기: 8 바이트  |
+| `char`     | 문자: `''`        | 단일 문자: `'A'` 및 `'?'`.<br />크기: 1 바이트  |
+| `bool`     | 논리형                | 논리의 참과 거짓을 `true`(0이 아닌 정수)와 `false`(정수 0)로 표시.<br />크기: 1 바이트 |
+| `void`     | 보이드                   | 불특정 자료형.<br />크기: 1 바이트                    |
+
+### `sizeof()` 함수
+
+`sizeof()` 함수는 자료형이나 데이터가 차지하고 있는 메모리 용량을 확인하기 위해 사용하며, 단위는 바이트(byte)이다.
 
 ```c
-printf("First Line\nSecond Line");
+sizeof(int);        // 크기: 4 바이트
+sizeof(char);        // 크기: 1 바이트
 ```
 
-```
-First Line
-Second Line
-```
+## 변수
+변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당할 수 있는 저장공간이다. C 언어의 변수는 자료형이 정해져 있으며, 해당하는 자료형 데이터만 할당받을 수 있다. 
 
-| SYNTAX | DESCRIPTION    |
-| ------ | -------------- |
-| `\n`   | New line       |
-| `\t`   | Horizontal tab |
-| `\\`   | Backslash      |
-| `\b`   | Backspace      |
-| `\'`   | Single quote   |
-| `\"`   | Double quote   |
-
-## Data Type
-
-Data type is one of the important factor which determines type and byte size of the data. A well-implemented data type can results memory and time efficiency when processing the script.
-
-C programming language have several number of pre-defined type identifier as follows:
-
-| IDENTIFIER | DATA TYPE              | DESCRIPTION                                                  |
-| ---------- | ---------------------- | ------------------------------------------------------------ |
-| `int`      | Integer                | 32-bits precision integer number.<br />Size: 4 bytes         |
-| `float`    | Floating point number  | Real number with decimal points.<br />Size: 4 bytes          |
-| `double`   | Double-precision float | Float with doubled precision and memory.<br />Size: 8 bytes  |
-| `char`     | Character: `''`        | A single character, e.g. `'A'` and `'?'`.<br />Size: 1 byte  |
-| `bool`     | Boolean                | Non-zero represents `true` while zero is `false`.<br />Size: 1 byte |
-| `void`     | Void                   | Non-specific data type.<br />Size: 1 byte                    |
-
-### `sizeof()` Operator
-
-An operator that returns the allocating memory size of data type or variable in bytes.
+아래의 예시는 `variable`이란 식별자를 가진 변수가 정수 자료형만 할당받을 수 있는 존재임을 컴파일러에게 알리는 동시에 메모리 할당을 통해 데이터를 가지는 데, 이를 프로그래밍에서는 *정의(definition)*이라고 부른다.
 
 ```c
-sizeof(int);		// SIZE: 4 BYTE
-sizeof(char);		// SIZE: 1 BYTE
+/* 변수 "variable"의 정의 */
+int variable = 3;
 ```
 
-## Variable
-
-Variable is a container for the data assigned using assignment (`=`) operator. There are three different common stages in variable: declaration, definition, and initialization.
-
-* **Declaration**
-    : declaration is declaring existence of the construct of such as variables, objects, and more. The declaring also includes specifying which data type the construct is.
-
-    ```c
-    int variable;
-    ```
-
-**선언**
-: 선언(declaration)이란 변수, 함수, 객체와 같은 구성체에 이름(일명 식별자)을 붙여 존재를 알리는 단계이다. 다른 프로그래밍 언어에서 선언은 일반적으로 구성체에 자료형을 지정하지만, 파이썬은 예외적으로 구성체에 자료형 지정이 없다.
-
-* **Definition**
-    : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
-
-    
-    
-    ```c
-variable = 3;
-    ```
-
-**정의**
-: 정의(definition)란 구성체가 가지는 데이터 값(혹은 실행 가능한 기능)을 담는 코드 블록을 의미한다. 일부 경우, 변수와 함수의 정의는 각각 *할당(assignment)*과 *구현(implementation)*이라고도 부른다.
-
-* **Initialization**
-    : initialization is assigning the initial value to the construct, simply the *first* definition. Since the first definition is generally done on the same time when declaring the construct. Hence, initialization is commonly thought by people as *declaration + definition* which is not always true.
-
-    ```c
-    int variable = 3;
-    ```
-
-**초기화**
-: 초기화(initialization)는 구성체에 초기값을 할당하는 것이며, 간단히 *최초* 정의라고 간주할 수 있다. 구성체의 가장 첫 정의는 일반적으로 선언 단계와 함께 이루어진다. 이러한 이유로 초기화는 *선언 + 정의*라고 흔히 여겨지지만 이는 사실이 아니다.
-
-
-
-Once the declaration sets data type to a variable, that variable can only take the value of that designated data type.
-
-### Local & Global Variable
-
-**Local variable** is a variable declared inside a code block, such as namespace, function, and class. Data stored in local variable is destroyed when exiting the code block, thus cannot be used outside. Local variable is allowed to have same variable name declared outside (technically, is borrowing the name as a different identity).
-
-**Global variable** is a variable declared on a global scope of the script which is outside a code block using `extern` keyword. Global variable can be used inside a code block without any special keyword. However, global variable should be avoided if possible to prevent unexpected result and error caused by conflicting variables.
-
-### Constant Variable
-
-Constant variable is a special type of variable that cannot be changed after its initialization. The keyword `const` is used to declare it as a constant variable.
+만일 데이터 할당이 이루어지지 않고 컴파일러에게 변수의 존재만 알리면 *선언(declaration)*이라고 부른다.
 
 ```c
-const int variable = 3;
+/* 변수 "variable"의 선언 */
+int variable;
 ```
 
-### Static Variable
+[C++ ISO 표준](https://www.iso.org/standard/68564.html)에 의하면 일반적인 변수의 경우 **선언은 정의**이며, 그에 대한 내용은 § 3.1.2 부문을 그대로 복사한 아래를 참고한다(영문).
 
-Static variable is a special local variable which maintain its value even when escaped and re-entered a function code block. The keyword `static` is used to declare it as a static variable.
+> A declaration is a definition unless it declares a function without specifying the function’s body (8.4), it contains the extern specifier (7.1.1) or a linkage-specification25 (7.5) and neither an initializer nor a function- body, it declares a static data member in a class definition (9.2, 9.4), it is a class name declaration (9.1), it is an opaque-enum-declaration (7.2), it is a template-parameter (14.1), it is a parameter-declaration (8.3.5) in a function declarator that is not the declarator of a function-definition, or it is a typedef declaration (7.1.3), an alias-declaration (7.1.3), a using-declaration (7.3.3), a static_assert-declaration (Clause 7), an attribute- declaration (Clause 7), an empty-declaration (Clause 7), a using-directive (7.3.4), an explicit instantiation declaration (14.7.2), or an explicit specialization (14.7.3) whose declaration is not a definition.
+
+위의 표준은 C++에 비롯되지만, C 프로그래밍 언어만을 고려하였을 때 아래의 세 가지 선언들의 경우로 압축하여 정리된다.
+* 함수 프로토타입
+* `typedef` 선언
+* `extern` 키워드 선언
+
+실제로 위의 변수를 출력하면 값이 반환되는 것을 보아 할당은 되지 않았으나 데이터를 가지고 있음을 확인할 수 있다. 한 번 정의된 변수는 컴파일러가 어떠한 데이터 종류를 할당받을 수 있는지 알고 있으므로 더이상 자료형을 표시할 필요가 없다. 또한 모든 프로그래밍 언어는 할당 연산자를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)를 놓는다. 반대로 위치시키면 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
+
+### 초기화
+
+초기화(initialization)란, 변수의 정의 과정에서 이루어진 할당(assignment)을 가리킨다.
 
 ```c
-static int variable = 3;
+/* 변수의 초기화 */
+int variable = 3;
 ```
 
-## Data Type Casting
-
-Data type casting force-changes data type stored in a variable into other desired type. Casting the smaller size data to its compatible type of a larger size data is called *implicit* data type casting. This is a natural data type conversion automatically done by compiler as no data loss occurs.
+위와 같은 예시 코드로 인해 통상적으로 정의를 "선언 + 초기화"로 보는 경향이 많지만, 이는 매우 잘못된 견해이다. 이전에도 언급한듯이 일반적으로 선언은 하나의 정의로써 아래의 예시 코드도 변수의 정의가 된다. 그러나 데이터 할당이 없어 초기화는 이루어지지 않았다.
 
 ```c
-short A = 1;	// 2 BYTES INTEGER
-int B = A;		// 4 BYTES INTEGER
+/* 변수의 정의; 그러나 초기화 X */
+int variable;
 ```
 
-On the other hand, its opposite conversion is called *explicit* data type casting which do have a risk of data loss/corruption upon casting data. C-style casting syntax is as follows:
+### 지역 변수 & 전역 변수
+
+C 언어에는 크게 세 종류의 변수로 나뉘어진다.
+
+* **지역 변수(local variable)**는 함수(function)와 같은 코드 블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다. 그러므로 지역 변수는 외부에서 정의된 변수의 이름을 가질 수 있다.
+
+  ```c
+  int main() {
+      // 여기서부터 코드 입력...
+
+      /* 지역 변수 */
+      int variable;
+
+      return 0;
+  }
+  ```
+
+* **전역 변수(global variable)**는 함수와 같은 코드 블록 속하지 않은 외부에 정의된 변수이며, 전역 변수는 특별한 키워드가 필요없이 호출만으로도 코드 블록 내의 지역 변수와 함께 사용할 수 있다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수의 사용은 피하도록 한다.
+
+  ```c
+  /* 전역 변수 */
+  int variable;
+
+  int main() {
+      // 여기서부터 코드 입력...
+
+      return 0;
+  }
+  ```
+
+* **정적 변수(static variable)**는 특수한 지역 변수로 프로그램이 종료되지 않는 한 함수와 같은 코드 블록을 탈출하여도 데이터가 소멸되지 않고 보존된다. 그러므로 해당 코드 블록을 재실행하면 탈출 직전의 데이터를 이어서 사용할 수 있다. 정적 변수는 `static` 키워드로 정의한다.
+
+  ```c
+  int main() {
+      // 여기서부터 코드 입력...
+
+      /* 정적 변수 */
+      static int variable;
+
+      return 0;
+  }
+  ```
+
+### 상수 변수
+상수 변수(constant variable)는 초기화 이후 변경할 수 없는 특별한 변수이다. 상수 변수는 `const` 키워드를 통해 정의한다.
 
 ```c
-float A = 1.9;  // 4 BYTES FLOAT
-int B = (int)A; // 4 BYTES INTEGER - INCOMPATIBLE: only returns its integer value.
+const int variable = 1;
+```
+
+## 자료형 변환
+자료형 변환은 변수 혹은 데이터의 자료형을 다른 자료형으로 강제로 바꾸는 작업이다. 만일 유사한 자료형을 작은 크기에서 큰 크기로 변환할 시, 이를 *암시적* 자료형 변환이라고 한다. 암시적 자료형 변환은 데이터 손실이 없기 때문에 컴파일러에서 자연적으로 처리된다.
+
+```c
+short A = 1;    // 2 바이트 정수형
+int B = A;      // 4 바이트 정수형
+```
+
+이에 반대되는 *명시적* 자료형 변환은 데이터 손실의 위험을 감수하며 데이터의 자료형을 바꾼다. C 언어 형식의 명시적 자료형 변환은 아래와 같이 소괄호(`()`)를 활용한다.
+
+```c
+float A = 1.9;  // 4 바이트 부동소수점
+int B = (int)A; // 4 바이트 정수형 - 완전 호환 불가: 정수 부분만 반환된다.
 ```
 
 ```
 1
 ```
 
-## Operator
+## 연산자
+연산자(operator)는 피연산자의 데이터를 조작할 수 있는 가장 간단한 데이터 처리요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다.
 
-Operator is the simplest form of data processing unit which can manipulate the value of operands. It operates simply by placing before, after, or between the operands.
+### 산술 연산자
+산술 연산자(arithmetic operator)는 숫자 자료형을 처리하는 데 집중한다. 다음은 숫자 자료형에 사용되는 산술 연산자의 목록이다.
 
-### Arithmetic Operator
+|             이름             | 연산자 | 설명                                                  |
+| :--------------------------: |:--------:| ------------------------------------------------------------ |
+|           덧셈           | `+`      | -                                                            |
+|         뺄셈          | `-`      | -                                                            |
+|        곱셈        | `*`      | -                                                            |
+|           나눗셈           | `/`      | 두 피연산자가 정수일 경우: 정수형 몫만 반환된다.<br/>피연산자 중 실수가 있을 경우: `float` 혹은 `double` 실수로 반환된다. |
+| 나머지 (모듈로 연산) | `%`      | 나눗셈의 나머지를 정수형으로 반환한다.                              |
+    
+산술 연산을 쉽게 읽을 수 있도록 숫자 사이에 공백을 넣어도 된다. 이 공백은 숫자나 산술 연산에 아무런 영향을 주지 않는다.
 
-Arithmetic operator is mainly focused on processing numeric data type. Following is a list of arithmetic operator used by numeric data type:
+### 할당 연산자
+할당 연산자(assignment operator)는 숫자 자료형에 사용되는 또다른 연산자이다. 이에 대한 설명은 아래의 도표를 참고한다.
 
-|             NAME             | OPERATOR | DESCRIPTION                                                  |
-| :--------------------------: | -------- | ------------------------------------------------------------ |
-|           Addition           | `+`      | -                                                            |
-|         Subtraction          | `-`      | -                                                            |
-|        Multiplication        | `*`      | -                                                            |
-|           Division           | `/`      | When both operands are integer: dividend is an integer without remainder.<br/>When at least one operand is real (float or double): dividend is a real (float or double). |
-| Remainder (Modulus Division) | `%`      | Remainder only returns integer.                              |
-
-For easier readability of the arithmetic operator, you can place blank space between number and operator, and it doesn’t affect anything on output.
-
-### Assignment Operator
-
-Assignment operator is another operation used within numeric data type. Following is a list of assignment operator used by numeric data type:
-
-| OPERATOR | EXAMPLE  | EQUIVALENT  |
-| -------- | -------- | ----------- |
+| 연산자 | 예시  | 동일  |
+|:--------:| -------- | ----------- |
 | `+=`     | `x += 1` | `x = x + 1` |
 | `-=`     | `x -= 1` | `x = x - 1` |
 | `*=`     | `x *= 1` | `x = x * 1` |
 | `/=`     | `x /= 1` | `x = x / 1` |
 | `%=`     | `x %= 1` | `x = x % 1` |
 
-Although not an assignment operator, a similar **increment and decrement** of the numerical value can be expressed as follow on C-based programming language:
+비록 할당 연산자는 아니지만, 이와 유사한 증감 연산자(increment & decrement)는 C 기반 언어에서 다음과 같은 표현식을 의미한다.
 
-| OPERATOR    | EXAMPLE   | DESCRIPTION       |
+| 연산자    | 예시   | 설명       |
 | ----------- | --------- | ----------------- |
-| `++` prefix | `x = y++` | `x = y; y = y+1;` |
-| `++` suffix | `x = ++y` | `y = y+1; x = y;` |
-| `--` prefix | `x = y--` | `x = y; y = y-1;` |
-| `--` suffix | `x = --y` | `y = y-1; x = y;` |
+| `++` 접두사 | `x = y++` | `x = y; y = y+1;` |
+| `++` 접미사 | `x = ++y` | `y = y+1; x = y;` |
+| `--` 접두사 | `x = y--` | `x = y; y = y-1;` |
+| `--` 접미사 | `x = --y` | `y = y-1; x = y;` |
 
-### Relational Operator
+### 비교 연산자
+비교 연산자(relational operator)는 두 데이터 간의 비교 조건을 확인하며, 이에 대한 결과로 참(`true`) 혹은 거짓(`false`) 논리값을 반환한다. 비교 연산자는 아래의 도표에서 확인할 수 있다.
 
-Relational operator is for checking whether the relational condition between two numeric values and returns Boolean value whether condition is true or false. Following is a list of relational operator:
+| 미만 | 이하 | 동일 | 상이 | 이상 | 초과 |
+|:----:|:----:|:----:|:----:|:----:|:----:|
+| `<`  | `<=` | `==` | `!=` | `>=` | `>`  |
 
-| OPERATOR | DESCRIPTION              |
-| -------- | ------------------------ |
-| `<`      | Lesser than              |
-| `<=`     | Lesser than or equal to  |
-| `>`      | Greater than             |
-| `>=`     | Greater than or equal to |
-| `==`     | Equal to                 |
-| `!=`     | Not equal to             |
+### 논리 연산자
+논리 연산자(logical operator)에는 논리곱, 논리합, 그리고 보수가 있다. 논리 연산자를 사용할 시, `true`와 `false` 논리값을 각각 이진수의 1과 0으로 간주하면 된다.
 
-### Logical Operator
+| 연산자 | 논리 | 설명                                                |
+|:--------:| ----- | ---------------------------------------------------------- |
+| `&&`     | 논리곱   | 모든 인수가 `true`이면 `true`이고, 그렇지 않으면 `false`이다.    |
+| `||`     | 논리합    | 하나 이상의 인수가 `true`이면 `true`이고, 그렇지 않으면 `false`이다. |
+| `!`      | 보수   | `true`를 `false`로 변경 혹은 `false`를 `true`로 변경한다.                   |
 
-Logical operator consist of AND, OR, and NOT logic. When doing so, think of `true` and `false` as binary 1 and 0, respectively. In wider sense, any non-zero number is deemed `true`.
-
-| OPERATOR | LOGIC | DESCRIPTION                                                |
-| -------- | ----- | ---------------------------------------------------------- |
-| `&&`     | AND   | `true` when all the arguments are `true`, else `false`.    |
-| `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
-| `!`      | NOT   | Change `true` to `false` and vice versa.                   |
-
-# **C: CONDITIONAL AND LOOP**
-
-Conditional and loop statement is commonly used and one of the essential pieces of code in programming. This chapter introduces list of conditional and loop statements in C programming.
-
-## `if` Statement
-
-Conditional `if` statement runs code if the condition is true. When the condition evaluates `true`, the statements are carried out but otherwise ignored.
+### 탈출 문자
+탈출 문자(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 아래는 탈출 문자 중에서 흔히 사용되는 줄바꿈(`\n`)이다.
 
 ```c
-if (condition) {
-	statements;
+printf("안녕하세요.\n처음 뵙겠습니다!");
+```
+
+```
+안녕하세요.
+처음 뵙겠습니다!
+```
+
+| 구문 | 설명           |
+|:----:| -------------- |
+| `\n` | 줄바꿈       |
+| `\t` | 탭 |
+| `\\` | 백슬래시      |
+| `\b` | 백스페이스      |
+| `\'` | 작은 따옴표    |
+| `\"` | 큰 따옴표      |
+
+# **C: 조건 및 루프**
+조건문 및 반복문(혹은 루프문)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 C 프로그래밍의 조건에 따라 실행하는 조건문(conditional statement)과 반복적으로 실행하는 반복문(loop statement)을 소개한다.
+
+## `if` 조건문
+`if` 조건문은 조건이 참일 경우 코드를 실행한다. 조건이 `true`일 때 문장이 수행되지만 그렇지 않으면 무시된다.
+
+```c
+if (condition)
+{
+    statements;
 }
 
-// SIMPLIFIED STATEMENT
+// 간략화된 문장
 if (condition) statement;
 ```
 
-It is possible to place`if` statement in another `if` statement, called "nested `if`". It is recommended to use code block (`{}`) to distinguish between `if` statements to avoid computer’s misinterpretation.
+`if` 조건문 안에 또다른 `if` 조건문을 넣을 수 있으며, 이를 *네스티드(nested)* `if` 조건문이라고 부른다. 이러한 경우, 코드 블록(`{}`)을 사용하여 두 `if` 조건문의 경계를 명확히 구별하기를 권장한다.
 
 ```c
-if (condition) {
-    if (condtion) { 
+if (condition)
+{
+    if (condtion)
+    { 
         statements;
     } 
 }
 ```
 
-### `else` Statement
-
-Conditional `else` statement must be followed after `if` statement as it cannot be used alone. The statement contains code that is called when the condition evaluates `false`.
+### `else` 조건문
+`else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 실행문에는 조건부가 `false`로 평가되었을 경우 호출되는 코드가 포함되어 있다.
 
 ```c
-if (condition) {
+if (condition)
+{
     statements;
 }
-else {
+else
+{
     statements; 
 }
 ```
 
 ### `else if` Statement
-
-Conditional `else`-`if` statement is a combination of `if` and `else` statement; when the first condition evaluates `false`, the `else if` statement provides second (or more) chance to evaluate condition different from the first one.
+`else if` 조건문은 `else`와 `if` 조건문의 조합으로 첫 번째 조건이 거짓일 경우, 첫 번째 조건과 다른 새로운 조건을 제시한다.
 
 ```c
-if (condition) {
+if (condition)
+{
     statements;
 }
-else if (condition) {
+else if (condition)
+{
     statements;
 }
-else {
+else
+{
     statements;
 }
 ```
 
-However, this is not the same as chain of `else`-`if` conditional statement as that is a combination of two different conditional set, while `else if` statement guarantees a single conditional set.
+하지만 우선 소개된 `else`-`if` 연쇄 조건문은 두 조건부가 함께 사용되는 점과 비교해 `else if` 조건문은 여전히 하나의 조건부에서 처리되므로, 이 둘은 구체적으로 서로 다른 조건문임을 명시해야 한다.
 
-### Ternary Operator
-
-Conditional statement can be expressed simply using ternary (`?:`) operator as shown below:
+### 조건 연산자
+조건문은 아래와 같이 조건 연산자(ternary operator; `?:`)를 사용하여 간략히 표현될 수 있다.
 
 ```c
-condition ? return_true : return_false;
+condition ? true_return : false_return;
 ```
 
-The vocabulary *ternary* represents the statement takes three arguments. Ternary operator should not be overused as it reduces readability, but useful on variable assignment.
+조건 연산자는 영어로 *ternary operator*로, 이는 세 가지 인수를 사용하는 것을 의미한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에는 유용하다.
 
-## `switch` Statement
+## `switch` 조건문
+`switch` 조건문은 건네받은 데이터를 `case` 키워드에서 제공하는 값과 일치하는지 비교하며, 참일 경우 코드를 실행한다. 참 조건 이후, 더 이상의 조건 평가를 방지하기 위해 모든 `case` 키워드에는 `break`라는 탈출문이 필요하다.
 
-Conditional `switch` statement checks the argument passed to the function and compare its value referenced on `case` keyword. Every case needs `break` at the end of the group of statements to prevent the statement from proceeding condition evaluation afterward.
-
-When no case is true to the expression, the statements from `default` keyword is returned. This case does not need `break` statement but must to be presented no matter what.
+모든 경우에 조건이 부합하지 않을 시, `default` 키워드에 연동된 문장이 실행되며, `switch` 조건문에는 반드시 있어야 한다. 그러나 `case` 키워드와 달리 `break` 탈출문을 필요로 하지 않는다.
 
 ```c
 switch (argument)
@@ -584,7 +614,7 @@ switch (argument)
 }
 ```
 
-The `switch` statement can have its cases grouped together for a single label:
+`switch` 조건문은 복수의 경우가 하나의 실행문을 공유할 수 있다.
 
 ```c
 switch (argument)
@@ -603,224 +633,235 @@ switch (argument)
 }
 ```
 
+### `break` 문
+`break` 문(일명 탈출문)은 반복이 완료되기 전에 루프를 조기 종료하는데 사용된다. 루프 내부에서 탈출문을 마주치는 즉시 현재 루프에서 탈출하지만 그 바깥 루프로부터는 탈출하지 않는다.
 
-### `break` Statement
+### `continue` 문
+`continue` 문은 반복문 내에서 나머지 실행문을 전부 건너뛰고 다시 조건 판정부분으로 돌아가게 한다. 이는 반복문을 종료하는 `break` 문과 달리 반복문의 루프를 유지한다.
 
-The `break` statement can be used to end a loop prematurely, before complete iteration is made. When encountered inside a loop, immediately escapes from the loop but does not break from its outer loop.
-
-### `continue` Statement
-
-The `continue` statement skips the rest of the statement below in the loop and jumps back to the conditioning part. This maintains the loop iteration rather than escaping the loop like `break` statement.
-
-## `while` Loop
-
-The `while` loop statement repeatedly execute statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `false`.
+## `while` 반복문
+`while` 반복문은 조건이 유지되는 한 내부 코드를 반복적으로 실행한다. 조건이 `false`임이 판정되면 반복문을 종료한다.
 
 ```c
-while (condition) {
+while (condition)
+{
     statements;
 }
 
-// SIMPLIFIED STATEMENT
+// 간략화된 문장
 while (condition) statement;
 ```
 
-### `do`-`while` Statement
-
-The `do`-`while` loop statement is alternative of the `while` statement. Instead of checking the condition before executing looping statement, this statement is does opposite: execute looping statement first, then check the condition.
+### `do`-`while` 반복문
+`do`-`while` 반복문은 `while` 반복문과 유사한다. 그러나 후자는 조건을 먼저 확인하고 문장을 실행하였으면, 전자는 문장을 우선 실행하고 조건을 확인한다.
 
 ```c
-do {
+do
+{
     statements
 } while (condition);
 ```
 
-## `for` Loop
-
-The `for` loop statements repeatedly execute statements inside (aka. iterate) as long as the local variable holds the condition. On each loop, value (generally number) of the variable is incremented/decremented.
+## `for` 반복문
+`for` 반복문은 정의된 지역 변수가 조건에 만족하는 한 지속적으로 반복한다. 한 번 반복할 때마다 지역 변수에는 반복문에 명시된 대로 변화가 발생하며, 일반적으로 정수형 증감을 사용한다.
 
 ```c
 for (variable; condition; increment) {
     statements;
 }
 
-// SIMPLIFIED STATEMENT
+// 간략화된 문장
 for (variable; condition; increment) statement;
 ```
 
-# **C: ARRAY**
+# **C: 배열**
+C 언어는 여러 데이터를 하나의 변수에 저장하는 배열(array)을 생성할 수 있다. 배열은 여러 데이터를 한 번에 관리하는 편리성을 제공한다. 배열은 *포인터*와 밀접한 관계가 있으며, 이에 대해서는 차후 설명할 예정이다. 본 장에서는 포인터 언급을 최소화하며 배열에 대하여 설명할 것이다.
 
-C language can create array which stores collection of data. Array provides convenience on managing multiple data at once. This concept is also highly related to the *pointer* which will be introduced later. For now, this chapter will try to explain what array is without referencing pointer too much.
-
-## Array
-
-Array is a container used to store an indexed of item of same data type. To declare an array, bracket `[]` is used to define the size of the container how many value it can store:
+## 배열
+배열(array)은 동일한 자료형의 데이터를 순번대로 담는 저장공간이다. 배열을 정의할 시, 대괄호(`[]`) 안에는 얼마나 많은 데이터를 담을 수 있는지 용량을 정해야 한다.
 
 ```c
-// DECLARATION
+/* 배열 선언 */
 int arr[size];
 ```
 
-and curly bracket `{}` is for assigning value to each element in sequence:
+단, 배열 용량을 결정할 때는 변수를 사용할 수 없다(상수 변수 제외). 이는 배열의 크기는 정적이며, 정의 이후 크기를 줄이거나 늘릴 수 없다는 의미이다.
+
+배열의 초기화는 중괄호(`{}`)를 사용하여 데이터를 순번에 맞게 배열 요소에 할당한다.
 
 ```c
-// INITIALIZATION 1
+/* 배열 초기화 1 */
 int arr[size] = {value1, value2, ... };
 
-// INITIALIZATION 2
+/* 배열 초기화 2: 배열 용량을 지정하지 않은 채 초기화하면, 배열 크기는 데이터 개수만큼이다. */
 int arr[] = {value1, value2, ... };
 ```
 
-Upon initialization, a number of initialized value should not exceed than its declared size, thou it may be smaller which fills leftover with `0` or `NULL` value. The declared size cannot be changed afterward, but leaving the array size empty will automatically set to fit the content.
+초기화가 이루어질 시, 할당되는 데이터 개수는 정의된 배열 용량을 초과해서는 안된다. 그렇지만 데이터 개수가 용량을 미치지 못할 경우 나머지 요소에는 `0` 혹은 `NULL` 값이 할당된다.
 
-Calling array itself does not show the whole elements inside the array; instead it returns the memory address the array data is assigned to (aka. pointer) and is equivalent to the memory address of its first element.
+배열 자체를 호출하면 할당된 데이터를 불러오지 않으며, 그 대신 배열이 저장된 메모리 주소(즉, 포인터)가 반환된다. 여기서 배열의 메모리 주소는 첫 번째 요소의 주소와 일치하며, 바로 옆 메모리 주소에는 다음 요소가 연쇄적으로 할당되어 있다.
 
 ```c
 int arr[3] = {value1, value2, valu3};
 
-arr;		// >> OUTPUT: 0139F854
-&arr[0];	// >> OUTPUT: 0139F854
-&arr[1];	// >> OUTPUT: 0139F858 ( = 0139F854 + 4 BYTES from integer data type)
+arr;        // >> 출력: 0x0139F854
+&arr[0];    // >> 출력: 0x0139F854
+&arr[1];    // >> 출력: 0x0139F858 ( = 0139F854 + 정수형 4 바이트)
 ```
 
-This will be explained later on next chapter *C: POINTER* in detail, so just understand there is such a thing.
+자세한 내용은 차후 *C: 포인터* 장에서 다루게 될 것이므로, 지금으로써는 이러한 개념이 있다는 정도로만 이해하면 된다.
 
-Because of this characteristic of array data, array definition cannot be done as a whole; unlike initialization, definition after declaration must be done element-by-element. Each element can be accessed using a bracket `[]` with index starting from 0.
+위에서 설명한 배열의 특징으로 인해, 배열은 초기화 이외에는 한꺼번에 할당이 불가능하다. 그렇지만 각 요소당 할당은 가능하며, 요소 순번은 0번부터 시작하며 대괄호(`[]`)로 호출한다.
 
 ```c
 int arr[3];
 
-// DEFINITION
+/* 배열의 개별 요소 할당 */
 arr[0] = value1;
 arr[1] = value2;
 arr[2] = value3;
 ```
 
-### Length of Array
-
-When `sizeof()` operator is used on the array, it returns the total assigned byte size considering its data type, thus "$\mathrm{data \ type \ byte} \times \mathrm{number \ of \ elements}$". Hence, divided by data type byte results array length:
+### 배열의 크기
+`sizeof()` 함수가 배열에 사용되면 배열의 크기가 아닌, 배열이 차지하는 총 바이트 수를 반환한다. 이는 배열의 자료형과 직접적인 영향이 있으므로, 배열의 크기를 구하기 위해서는 다음과 같은 표현식을 사용한다.
 
 ```c
 int arr[3];
 
-sizeof(arr)/sizeof(int);	// >> OUTPUT: 3 ( = LENGTH OF ARRAY)
+sizeof(arr)/sizeof(int);    // >> 출력: 3 ( = 배열의 크기)
 ```
 
-### Multi-dimensional Array
+즉, 자료형의 요소들로 구성된 배열을 해당 자료형으로 나누면 요소의 개수가 계산된다.
 
-Array can contain another array as an element, under the condition these arrays shares the same length. Multi-dimensional array can also be initialized without definite size but limited to its first boundary only.
+### 다차원 배열
+
+배열은 또다른 배열을 요소로 가질 수 있으나, 이들은 모두 동일한 자료형과 배열 크기를 가져야 한다. 비록 국한적이지만, 일반 배열과 마찬가지로 다차원 배열의 첫 번째 차원은 초기화할 시 크기를 지정하지 않아도 된다.
 
 ```c
-// INITIALIZATION 1
+/* 다차원 배열의 초기화 1 */
 int arr[size1][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 
-// INITIALIZATION 2
-int arr[     ][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
+/* 다차원 배열의 초기화 2 */
+int arr[][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 ```
 
-## String
+## 문자열
 
-C language does not have a string data type, but represented using array of character with null terminator `\0` at the end:
+C 언어는 일련의 문자들, 일명 문자열(string)을 자체적으로 자료형으로 지원하지 않는다. 하지만 이를 문자들 널 문자(`\0`)로 구성된 배열로 문자열을 표현할 수 있다.
 
 ```c
-// C-STYLE STRING
-char arr[] = "Hello";
-char* ptr = "World!";
+/* C-형식 문자열 */
+char arr[] = "Hello";    // 즉, arr[] = {'H', 'e', 'l', 'l', 'o', '\0'};
+char* ptr = "World!";    // 포인터를 활용한 문자열 표현 방법
 ```
 
-The following list shows several string functions available in C programming language:
+아래는 C 언어에서 문자열과 관련된 함수들의 목록이다.
 
-| FUNCTION   | EXAMPLE               | DESCRIPTION                                                  |
-| ---------- | --------------------- | ------------------------------------------------------------ |
-| `strcat()` | `strcat(str1, str2);` | Append `str2` string at the end of `str1` string variable.   |
-| `strcpy()` | `strcpy(str1, str2);` | Copy `str2` string to `str1` string variable.                |
-| `strlen()` | `strlen(str);`        | Return the length of `str` string, excluding null terminator. |
+| 함수   | 예시               | 설명                                                  |
+|:----------:| --------------------- | ------------------------------------------------------------ |
+| `strcat()` | `strcat(str1, str2);` | 문자열 `str2`를 문자열 `str1` 뒤에 덧붙인다.   |
+| `strcpy()` | `strcpy(str1, str2);` | 문자열 `str2`을 문자열 `str1`에 복사한다.                |
+| `strlen()` | `strlen(str);`        | 문자열 `str` 크기를 반환하며, 이때 널 문자는 제외된다. |
 
-# **C: FUNCTION**
+# **C: 함수**
+C 언어는 하나의 핵심 함수인 `main()`을 기점으로 모든 프로그램이 실행된다. 함수에 대한 이해는 매우 중요하며, 직접 함수를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있는데, 이러한 프로그래밍 기법을 *함수형 프로그래밍(functional programming)*이라고 한다. 본 장은 C 언어에서 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
 
-C/C++ language is executed based around a single key function called `main()`. Understanding the concept of functions is important in C/C++ languages, which can also be used to create and implement custom function to serve specific purpose.
+## 함수
+함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다.
 
-## Function
-
-Function is an independent block of code which can process the data and present newly processed data once it’s called, allowing dynamic program scripting. The programming based around use of custom functions is called *functional programming*.
-
-Function can be distinguished by its declaration with parenthesis after its name; `function()`. Its definition is stated inside a code block (`{}`), which is executed when called.
+함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
 ```c
-// FUNCTION DEFINITION(AKA. IMPLEMENTATION)
-float function(int arg1, float arg2)
+int variable = {0, 3, 5, 9};
+printf(sizeof(variable));
+// "printf()" 함수, 그리고 바이트 용량을 반환하는 "sizeof()" 함수
+```
+
+함수의 기능을 정의(definition)하기 위해서는 두 가지의 구성요소가 반드시 필요하다:
+* 코드 블록(`{}`): 함수를 호출할 때, 실행되는 코드가 들어있다.
+* 자료형: 함수가 종료될 때, 반환되는 데이터의 자료형을 결정한다. 
+
+```c
+/* 함수 정의 */
+int function()
 {
-	return arg1 + arg2;
+    return 1 + 2;
 }
 
-function(1, 3.0);		// >> OUTPUT: 4.0
+/* 함수 호출 */
+function();    // >> 출력: 3
 ```
 
-Because C/C++ programming is executed from top to bottom sequentially, function won't be executable unless it is defined firsthand. This creates difficulty with script and function management when the project becomes larger.
+C 언어는 위에서부터 순차적으로 코드가 실행되기 때문에, 아직 정의가 되지 않은 상태에서 함수를 호출할 수 없다. 이를 고려하여 모든 함수의 정의를 스크립트 맨 위에 위치시키면 가독성이 저하되고 관리하기 매우 힘들어질 수 있다.
 
-Function has a prototype used to let compiler know the function's existence recognizing its definition. Prototype shares same syntax of function declaration of its definition but without a code block.
-
-```c
-// FUNCTION PROTOTYPE (AKA. FORWARD DECLARATION)
-float function(int arg1, float arg2);
-
-function(1, 3.0);		// >> OUTPUT: 4.0
-
-// FUNCTION DEFINITION (AKA. IMPLEMENTATION)
-float function(int arg1, float arg2)
-{
-	return arg1 + arg2;
-}
-```
-
-However, defining a function inside another function (aka nested function) is invalid in C/C++ language.
-
-### `return` Statement
-
-The `return` statement is a function-exclusive statement that outputs indicated data under the data type declared on the function. Once the `return` statement is executed, the function ends immediately despite there are codes still left inside.
-
-If the function is a `void` data type, function can be returned by `return;` statement alone without any data to return.
-
-### Parameter & Argument
-
-Following are the difference between parameters and arguments that is referred significantly when discussing function.
-
-**Parameter**
-Parameter is a function-internal local variable: because parameters is a function-exclusive local variable, it cannot be called from outside.
-
-| OPERATOR |   SYNTAX    | DESCRIPTION                                                  |
-| :------: | :---------: | ------------------------------------------------------------ |
-|   `=`    | `arg=value` | Parameter `arg` is assigned `value` by default when no other value is passed. Must locate after normal parameter. |
-
-**Argument**
-Argument is a value or object being passed to the function parameter and those passed values and objects will be processed by the function code. However, argument is independent from parameter: change on parameter does not affect value or object passed as argument.
-
-Examples below show how function parameter and argument works:
+함수 프로토타입(prototype)은 컴파일러에게 미리 함수의 존재를 알리는 선언 역할을 하지만, *C: 기초 § 변수*에서 언급한대로 함수의 선언은 함수의 정의와 전혀 다른 존재이다. 프로토타입은 필수요소는 아니지만 대체로 스크립트의 상단부에 위치하며, 함수 정의 구문에서 코드 블록(`{}`)을 세미콜론(`;`)으로 대체하면 된다.
 
 ```c
-float function(int arg1, float arg2);
+/* 함수 프로토타입 */
+int function();
 
-function(1);             // >> OUTPUT: 3.0
-function(1, 3.0);        // >> OUTPUT: 4.0
+/* 함수 호출 */
+function();    // >> 출력: 3
 
-float function(int arg1, float arg2 = 2.0)
+/* 함수 정의 */
+int function()
 {
-	return arg1 + arg2;
+    return 1 + 2;
 }
 ```
 
-However, passing container such as array cannot be passed using the syntax above, requiring different method. There are two possible methods available: argument as an array, and as a memory address (pointer).
+그러나 함수 내에서 또다른 함수를 정의하는 것은 C 언어에서 허용되지 않는다.
+
+### `return` 반환문
+`return` 반환문은 함수로부터 데이터를 함수에 지정된 자료형으로 반환하는 함수 전용 문장이다. 반환문이 실행되면 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 
+
+만일 함수의 자료형이 `void`이면 반환문은 필요가 없으나, 조기 종료를 위해 아무런 데이터를 반환하지 않는 `return;`을 사용할 수 있다.
+
+### 매개변수 & 전달인자
+
+다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
+
+* **전달인자 (argument)**
+    : 전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.
+* **매개변수 (parameter)**
+    : 매개변수는 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수의 정의은 함수의 소괄호(`()`) 내에서 이루어진다.
+
+매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+
+| 연산자 |    구문    | 설명                                                 |
+| :------: | :----------: | ------------------------------------------------------------ |
+|   `=`    | `arg=value` | 매개변수에 전달인자가 없으면 기본값 `value`가 대신 반환된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
+
+아래의 예제는 함수의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
+
+```c
+/* 함수 프로토타입 */
+int function(int arg1, float arg2);
+
+/* 함수 호출 */
+function(1);            // >> 출력: 3
+function(1, 3.14);      // >> 출력: 4 ( = 1 + 3.14의 정수형만 추출)
+
+/* 함수 정의 */
+int function(int arg1, float arg2 = 2.0)
+{
+    return arg1 + arg2;
+}
+```
+
+하지만 배열과 같은 저장공간은 위와 동일한 구문으로 인자를 매개변수로 건네줄 수 없다. 인자를 건네는 방법에는 두 가지가 있으며, 매개변수를 배열로 혹은 배열의 메모리 주소(즉, 포인터)로 정의하는 것이다.
 
 ```c
 void function(int arg[]);
 
 int arr[3] = {value1, value2, value3};
-function(arr);              // PASSING ARRAY TO FUNCTION ARGUMENT
+function(arr);              // 배열을 함수의 인자로 넘겨준다.
 
-// ACCEPT ARGUMENT AS AN ARRAY
-void function(int arg[]) {
+// 넘겨받은 인자를 배열 그대로 받아들인다.
+void function(int arg[])
+{
     statements;
-	return;
+    return;
 }
 ```
 
@@ -830,67 +871,75 @@ void function(int arg[]) {
 void function(int *arg);
 
 int arr[3] = {value1, value2, value3};
-function(arr);              // PASSING ARRAY TO FUNCTION ARGUMENT
+function(arr);              // 배열을 함수의 인자로 넘겨준다.
 
-// ACCEPT ARGUMENT AS A POINTER
-void function(int *arg) {
+// 넘겨받은 인자를 배열이 아닌 포인터로 받아들인다.
+void function(int *arg)
+{
     statements;
-	return;
+    return;
 }
 ```
 
-This is possible because array itself returns a memory address. Again, pointer will be explanation on next chapter in detail.
+후자의 방법이 가능한 이유는 배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오며, 바로 옆 메모리 주소에는 다음 요소가 연쇄적으로 할당되어 있기 때문이다. 상세한 내용은 다음 장인 *C: 포인터*에서 설명할 것이다.
 
-## Entry Point
-
-Entry point is the startup function where a program execution begins. There are three major entry points that can to be discussed in C++.
-
-### `main()` Function
-
-As the only entry point available in traditional C++ console application, a project must have one and only `main()` function within the project. Creating multiple `main()` functions or not having any `main()` function will cause error on running the program.
+## 시작점
+시작점(entry point)는 프로그램이 시작되는 부분이다. C 언어의 시작점은 `main()` 함수 정의이며, 해당 함수는 프로토타입 및 호출이 존재하지 않는다. 이는 C 언어의 유일한 시작점으로 복수의 `main()` 함수가 존재하거나 없을 경우 에러가 발생해 프로그램이 실행되지 않는다.
 
 ```c
-int main(int argc, char **argv /* ALTERNATIVE: char *argv[] */) {
+/* C 언어 프로그램 시작점: main() */
+int main(int argc, char **argv)
+{
+    // 아래에 코드를 입력하세요.
 
     return 0;
 }
 ```
 
-According to C++ standard, `main()` function must return `int` data: `EXIT_SUCCESS` (traditionally `0`) and `EXIT_FAILURE`. When return value is omitted by the programmer, the compiler implicitly insert `return 0;` at the end of the entry point.
+본 문서의 대부분 코드 예시에는 `main()` 함수가 직접 언급되지 않았으나, 전역 변수와 함수를 제외한 모든 코드들은 `main()` 함수 내에서 작성되어야만 실행된다.
 
-Entry point `main()` function can have arguments mentioned above: argument count `argc` and argument vector `argv`. These arguments are apparent when executed through command-line:
+C 프로그래밍 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을 반환해야 하며, `EXIT_SUCCESS`(혹은 정수 `0`) 그리고 `EXIT_FAILURE`이 있다. 만일 반환문이 없을 시, 컴파일러는 자동적으로 `return 0;` 문장을 `main()` 함수의 말단에 삽입한다.
+
+`main()` 시작점은 위와 같은 매개변수를 함축적으로 가진다.
+* `argc`: 전달인자 개수(argument count).
+* `argv`: 전달인자 데이터 배열(argument vector); 매개변수 정의는 `char *argv[]`로 대체 가능하다.
+
+위의 전달인자 동작은 터미널 명령창을 통해 시 명백히 관측할 수 있다.
 
 ```
 ./app.exe option1 option2
 ```
 
-| Arguments | Data        |
-| --------- | ----------- |
+| 전달인자 | 데이터        |
+|:---------:| ----------- |
 | `argv[0]` | `./app.exe` |
 | `argv[1]` | `option1`   |
 | `argv[2]` | `option2`   |
 
-This indicates `argc` is always greater than 0 as the first element is an executing program.
+전달인자 데이터 배열 `argv`는 항상 첫 번째 요소를 실행 프로그램을 할당받으므로 전달인자의 개수 `argc`는 항상 0보다 크다.
 
-Meanwhile, Windows OS has its exclusive entry point called `wmain()` function which supports wide character arguments encoded in UTF-16 Unicode (where UTF-8 Unicode encodes common character such as English and numbers).
+한편, 윈도우 OS는 `wmain()` 함수라는 독자적인 시작점을 가지며, 이는 UTF-16 유니코드로 인코딩된 확장 문자(wide character)를 통해 더 많은 언어를 지원한다. 여기서 영문과 숫자와 같은 공통 문자는 UTF-8 유니코드만으로 인코딩된다.
 
 ```c
-int wmain(int argc, wchar_t **argv /* ALTERNATIVE: wchar_t *argv[] */) {
+/* 윈도우 OS 확장 문자 지원 C 언어 프로그램 시작점: wmain() */
+int wmain(int argc, wchar_t **argv)
+{
+    // 아래에 코드를 입력하세요.
 
     return 0;
 }
 ```
 
-C/C++ language is originated from UNIX platform which is different from Windows platform. Meaning, certain language characters (e.g. Greek, Cyrillic characters) may not be fully supported due to different encoding on `main()` entry point.
+확장 문자를 지원하는 `wmain()` 함수가 소개된 이유는 C 언어가 UTF-8을 일반 인터페이스로 사용하는 UNIX 운영체제 기반에서 개발되었기 때문이다. 그러므로 윈도우 OS에서 일반 `main()` 시작점으로는 일부 언어(예를 들어 그리스 및 키릴 문자)를 표현할 수 없는 호환성 문제가 발생한다.
 
-## Recursion Function
-
-Recursive function is a function that calls itself (recursion). Factorial $!$ in mathematic is the best example of recursive function implementation.
+## 재귀 함수
+재귀 함수(recursive function)는 스스로를 호출하는 함수이다. 수학에서의 펙토리얼이 재귀 함수 구현의 대표적인 예제이다.
 
 ```c
-// EXAMPLE: FACTORIAL "!"
-int factorial(int num) {
-    // BASE CASE: a case when to escape from the recursion.
+/* 예제: 펙토리얼 "!" */
+int factorial(int num)
+{
+    // 기저 조건: 재귀로부터 탈출하는 조건
     if (num == 1)
         return (1);
     else
@@ -898,361 +947,456 @@ int factorial(int num) {
 }
 ```
 
-Recursion can occur indirectly by multiple number of functions calling one to another, then back to the beginning.
+여러 함수가 서로를 호출하는 간접적 재귀도 가능하다.
 
-## External Function
+## 콜백 함수
 
+콜백 함수(callback function)은 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 코드 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
 
+> 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
 
-## Callback Function
-
-Aka. "call-after" function, it is a function that is passed as an argument to other function (calling function) which expects the argument (callback function) to execute on some time.
-
-Do not try to understand the script below for now as this requires understanding of a pointer which will be dealt on *C: POINTER § Function Pointer*.
+아래는 콜백 함수의 예시이며, 이에 대한 자세한 원리는 *C: 포인터 § 함수 포인터*에서 설명할 예정이다.
 
 ```c
-// CALLING FUNCTION
-float FUNC(float (*callback)(int, float), int arg1, float arg2) {
-	float var = callback(arg1, arg2);		// FUNCTION CALLBACK
+/* 호출 함수 */
+int calling(float (*function)(int, float), int arg)
+{
+    // 콜백 함수의 호출
+    float var = function(arg, 3.0);
     return var;
 }
 
-// CALLBACK FUNCTION
-float function(int arg1, float arg2) {
-	return arg1 + arg2;
+/* 콜백 함수 */
+int callback(int arg1, float arg2)
+{
+    return arg1 + arg2;
 }
 
-// THEREFORE...
-FUNC(&function, 1, 3.0);	// >> OUTPUT: 4.0
+// 그러므로...
+calling(&callback, 1);    // >> 출력: 4.0
 ```
 
-# **C: POINTER**
+# **C: 포인터**
+본 문서는 *C: 배열*에서부터 시작하여 "포인터"라는 새로운 데이터가 소개되어 자주 언급되었다. 포인터는 C 언어에서 매우 중요한 개념 중 하나로써 더 발전된 프로그램 개발을 가능케 한다. 그러므로 이번 장에서는 포인터에 대한 설명과 이전 장에서 소개된 배열과 함수를 포인터를 활용한 심화된 처리 방식을 소개하려 한다.
 
-Starting from *C: Array* chapter, a new data called "pointer" was mentioned quite often. Pointer is very important concept in C/C++ programming language and is one of the commonly used data to develop advanced program.
-
-This chapter mainly focuses on the pointer and its application that can improve performance and functionality of previously mentioned programming, especially on function.
-
-## Pointer
-
-Pointer is a variable that stores memory address of where the value is located, rather than the value itself. Despite being a memory address, pointer also must to be distinguished by a data type of value. When declaring pointer, compound specifier `*` (aka. asterisk) is placed between data type and identifier:
-
-``` c
-// POINTER DECLARATION
-int* ptr;				// WARNING C4700: unintialized local variable 'ptr' used
-```
-
-Memory address can be called from non-pointer variable as well using ampersand (`&`) operator:
+## 포인터
+포인터(pointer)는 변수에 저장된 값이 아닌, 변수가 저장된 메모리 주소를 가리키는 데이터이다. 32비트와 64비트 운영체제에서 하나의 메모리 주소는 각각 8바이트와 16바이트로 구성된 십육진수 값을 가진다. 포인터 데이터 또한 변수에 저장할 수 있으며, 일반 변수와 마찬가지로 포인터 변수를 정의할 때 자료형이 요구되나 별표(`*`)가 자료형과 식별자 사이에 위치해야 한다.
 
 ```c
-// NON-POINTER DECLARATION
-int variable;
-&variable;				// >> OUTPUT: 0139F854
+/* 정수형 포인터 변수 선언 */
+int *ptr;            // WARNING C4700: 초기화되지 않은 지역 변수 'ptr'이 사용되었습니다.
+printf("%p", ptr); 
+```
+```
+0x0
 ```
 
-Since this hexadecimal memory address cannot be written by hand, the only way to either define or initialize the pointer is by assigning already existing memory address. Beware, data type must matched when defining pointer.
+변수의 포인터(즉, 메모리 주소)를 호출하기 위해서는 앰퍼샌드 기호(`&`) 연산자를 사용하여 확인할 수 있다.
 
 ```c
-// POINTER INITIALIZATION
-int variable = 3;
-int* ptr = &variable;
-
-printf("%x",  ptr);		// >> OUTPUT: 0139F854	(ADDRESS)
-printf("%d", *ptr);		// >> OUTPUT: 3			(VALUE)
+/* 정수형 변수 선언 */
+int variable = 365;
+printf("%p", &variable);
+```
+```
+0x1014eb010
 ```
 
-As seen above, it is possible to return value assigned to the pointer by placing dereference (`*`) operator. While pointer declaration also used asterisk, they are different existence but only sharing the same symbol.
+십육진수의 메모리 주소는 수기로 직접 작성할 수 있는 것이 아니며, 이는 매우 위험한 행위이다! 포인터 변수를 초기화하는 방법으로는 기존하는 변수의 메모리 주소를 할당하는 것이 유일하다. 여기서 포인터 변수와 변수 간의 자료형은 일치하도록 한다.
 
-|          OPERATOR          |  VARIABLE   |     RETURN     |
-| :------------------------: | :---------: | :------------: |
-| Address-on (`&`) Operator  | Non-pointer | Memory address |
-| Contents-of (`*`) Operator |   Pointer   |     Value      |
-
-Interestingly, any changes made on variable is also affects contents of the pointer as the pointer shares the same memory address. This feature is the most important when it comes to using pointer in C/C++.
-
-### Null Pointer
-
-Null pointer is a pointer that points to nothing. This can be done by assigning pointer with `nullptr` keyword:
+비록 하나의 메모리 주소는 8 바이트(32비트 아키텍쳐) 혹은 16 바이트(64비트 아키텍쳐)의 십육진수로 구성되어 있지만, 각 메모리 주소는 한 바이트의 데이터만 수용할 수 있다. 1 바이트만 있으면 충분한 `char` 문자형 데이터와 달리, `int` 정수형이나 `float` 부동소수점수형 데이터를 표현하기 위해서는 4 바이트의 메모리 용량이 필요하다. 그러나 포인터는 변수가 사용하고 있는 전체 메모리 주소 중에서 맨 첫 주소만 반환하므로 자료형이 언급되지 않으면 포인터는 어느 메모리 주소까지가 하나의 완전한 데이터인지 알 수 없다.
 
 ```c
-int* ptr = nullptr;		// >> OUTPUT: 00000000
+/* 포인터 변수 초기화 */
+int variable = 365;
+
+// 동일한 자료형의 포인터 변수
+int *ptr1 = &variable;
+printf("%p\n",  ptr1);        // >> 출력: 0x1014eb010  (주소)
+printf("%d\n", *ptr1);        // >> 출력: 365          (값)
+
+// 상이한 자료형의 포인터 변수
+char *ptr2 = &variable;
+printf("%p\n",  ptr2);        // >> 출력: 0x1014eb010  (주소)
+printf("%d\n", *ptr2);        // >> 출력: 109          (값)
 ```
 
-### Void Pointer
+위의 예시 코드에서 보이듯이, 포인터 변수가 가리키는 메모리 주소에 할당된 값을 역참조 연산자(`*`)를 통해 호출하는 것이 가능하다. 포인터 변수의 정의에서도 별표를 사용하였으나, 이 둘은 동일한 기호만 사용할 뿐이며 서로 다른 존재이다.
 
-Void pointer is a pointer with no specific data type (thus, `void`). This has advantage of being able to point to any kind of data type value by using static casting.
+| 연산자          | 변수     | 반환     |
+|:------------:|:------:|:------:|
+| 참조 연산자(`&`)  | 일반 변수  | 메모리 주소 |
+| 역참조 연산자(`*`) | 포인터 변수 | 값      |
+
+만일 일반 변수에서 데이터 변동이 발생하였으면 포인터 변수의 역참조에서도 동일한 데이터 변동을 목격할 수 있다. 이는 두 변수가 동일한 메모리 주소를 공유하고 있기 때문이다. 이러한 C 언어 프로그래밍의 포인터 성질은 매우 중요하게 다루어지는 개념 중 하나이며, 이를 "참조에 의한 호출(call by reference)"이라고 부른다.
+
+### 널 포인터
+
+널 포인터(null pointer)는 아무런 메모리 주소를 가리키지 않는 포인터이다. C 언어에서 포인터 사용은 자칫 메모리 접근 오류 등의 민감한 문제를 야기시킬 수 있기에, 안전한 포인터 사용을 위해 널 포인터을 `NULL` 키워드로 할당한다.
 
 ```c
-// POINTER DECLARATION
-void* ptr;
-
-int variable;
-(int*)ptr = &variable;
+int *ptr = NULL;
+printf("%p", ptr);
+```
+```
+0x0
 ```
 
-### Function Pointer
-
-Pointer can also be assigned with function, called function pointer. This pointer points to the first line function execution, similar to array pointing to its first element. Function pointer is initialized as below:
+### 보이드 포인터
+보이드 포인터(void pointer)는 지정된 자료형이 없는 포인터이다(즉, `void`). 이러한 포인터는 어떠한 자료형이라도 자료형 변환을 통해 메모리 주소를 가리킬 수 있는 장점을 가진다.
 
 ```c
-void function(int, int);
+/* 보이드 포인터 선언 */
+void *ptr;
 
-// FUNCTION POINTER INITIALIZATION
-void (*ptr)(int, int) = function;
+int variable = 356;
+ptr = &variable;
+printf("%d", *(int*)ptr);
+```
+```
+365
+```
 
-void function(int arg1, int arg2) {
-	statements;
+### 함수 포인터
+함수 포인터(function pointer)는 함수를 가리키는 보이드 포인터이다. 배열에서의 포인터가 첫 번째 요소 메모리 주소를 가리키는 것과 동일한 맥락으로, 함수에서 포인터는 첫 번째 실행문이 담긴 메모리 주소를 가리킨다. 함수 포인터는 아래와 같은 구문으로 초기화한다.
+
+```c
+// 함수 정의
+int function(int arg1, float arg2) {
+    statements;
+    return 0;
+}
+
+int main() {
+    // 여기서부터 코드 입력...
+
+    /* 함수 포인터 초기화 및 호출 */
+    int (*ptr)(int, float) = function;
+    ptr(1, 3.14);
+
     return 0;
 }
 ```
 
-When assigning function pointer, not only should function data type is considered but also the parameters and its number. Failed to meet all these conditions cause compilation error.
+함수 포인터를 초기화 시, 포인터 함수의 자료형은 함수 자료형과 일치해야 하며 매개변수 또한 자료형과 개수가 동일해야 한다. 이들을 만족하지 않으면 컴파일 작업 오류가 발생하게 된다. 함수를 `function()`과 같이 소괄호와 함께 호출되면 함수 `return` 문의 데이터가 반환되지만, 소괄호가 없이 `function`만 호출하면 메모리 주소가 대신 반환된다.
 
-While function returns value when used with parenthesis `function()`, function also returns memory address to its starting point when used without parentheses `function`. 
+# **C: 사용자 정의 자료구조**
+C 언어에서 흔히 사용되는 `int`, `float`, `char` 등과 같은 데이터 자료형은 이미 `stdio.h` 헤더 파일에 정의되어 있다. 이러한 내부 자료형을 기반으로 목적에 알맞은 사용자 정의 자료구조을 새롭게 지정할 수 있으며, 본 장은 자료형처럼 사용할 수 있는 사용자 정의 자료구조의 정의 및 활용법을 설명한다.
 
-# **C: USER-DEFINED DATA TYPE**
-
-Commonly used data type such as `int`, `float`, `char`, and more are already defined in `stdio.h` header. Developer may create and use custom data type based on these pre-defined data types.
-
-## Structure
-
-Structure groups multiple member variables under a single structure tag, regardless of data type of member variable.
+## 구조체
+구조체(structure)는 자료형과 상관없이 여러 내부 변수(일명, 맴버; member)를 하나의 단일 데이터로 통합시킨 자료구조 구성체이다. 구조체의 정의는 `struct` 키워드를 통해 이루어진다.
 
 ```c
-// STRUCTURE DECLARATION
+/* 구조체 정의: 총 5 바이트 활용 */
 struct STRUCTURE {
-    int   field1;
-    float field2;
+    // 내부 변수 정의
+    int    field1;    // 자료형 크기: 4 바이트
+    char   field2;    // 자료형 크기: 1 바이트
 };
+```
 
-// VARIABLE INITIALIZATION
-struct STRUCTURE variable1 = {1, 3.0};
-struct STRUCTURE variable2 = {.field2 = 3.0, .field1 = 1};
+정의된 구조체를 자료구조로 사용하는 구조체 변수는 아래와 같은 두 가지 정의 방법이 존재하며, 둘 다 `struct` 키워드가 요구된다.
+
+```c
+/* 구조체 변수 초기화 1 */
+struct STRUCTURE variable1 = {3, 'A'};
+struct STRUCTURE variable2 = {.field2 = 'A', .field1 = 3};
 ```
 
 ----
 
 ```c
-// STRUCTURE DECLARATION
-struct STRUCTURE {
-    int   field1;
-    float field2;
-};
-
-// VARIABLE DECLARATION
+// 구조체 변수 정의
 struct STRUCTURE variable;
 
-// VARIABLE ASSIGNMENT
-variable = (struct STRUCTURE) {1, 3.0};
+/* 구조체 변수 초기화 2 */
+variable = (struct STRUCTURE) {3, 'A'};
 ```
 
-## Union
-
-Union groups multiple member variables under a single structure tag and shares memory address, regardless of data type of member variable. In other word, union is mainly used to present single data in different types of data (such as `int`, `char`, `bool`, et cetera). Because of this, union only requires value assignment on one member field.
+구조체 정의 이후, 구조체 변수의 내부 변수는 `struct` 키워드가 필요없이 맴버 연산자(`.`)만을 통해 접근할 수 있다.
 
 ```c
-// UNION DECLARATION
-union UNION {
-    int  field1;
-    char field2[2];
+variable.field1;    // >> 출력: 3
+variable.field2;    // >> 출력: A
+```
+
+### 일회용 구조체
+위에서 설명한 구문은 한 번 정의된 구조체를 재사용하여 동일한 자료구조의 여러 구조체 변수를 정의할 수 있도록 한다. 만일 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 구조체를 생성하려면 아래와 같은 정의 구문을 사용한다.
+
+```c
+/* 일회용 구조체 정의 및 변수 초기화 */
+struct {
+    int    field1;
+    char   field2;
+} variable = {3, 'A'};
+```
+
+## 열거형
+열거형(enumeration)은 열거된 항목들을 정수로 순번을 매기는 구성체이며, 열거자(enumerator)라고 부르는 열거 항목들은 기본적으로 정수 0부터 시작하여 순서대로 1만큼 값이 증가한다.
+
+> 초창기 C 컴파일러인 "K&R C"에는 존재하지 않았으나, 본 문서에서 다루는 보편적인 컴파일러 버전인 "ANSI C"부터 추가된 구성체이다.
+
+```c
+/* 열거형 정의 */
+enum ENUMERATION {
+    enumerator1,     // 열거자 = 0
+    enumerator2,     // 열거자 = 1
+    enumerator3,     // 열거자 = 2
+    enumerator4      // 열거자 = 3
+};
+```
+
+열거자들에 할당되는 정수는 할당 연산자(`=`)를 통해 달리 지정이 가능하며, 다른 열거자와 동일한 값이 할당되어도 상관없다.
+
+```c
+enum ENUMERATION {
+    enumerator1 = 3, // 열거자 = 3
+    enumerator2 = 1, // 열거자 = 1
+    enumerator3,     // 열거자 = 2
+    enumerator4      // 열거자 = 3
+};
+```
+
+그러나 동일한 이름의 열거자는 유일해야 하는데, 이는 열거자가 상수 전역 변수와 같은 개념이 적용되기 때문이다. 즉, C 프로젝트 전체에 사용이 가능하나 초기화 이후 값 변동이 불가능한 데이터라고 볼 수 있다.
+
+```c
+enum ENUMERATION1 {
+    enumerator1,
+    enumerator2,
+    enumerator3,
+    enumerator4
 };
 
-// VARAIBLE DECLARATION & ASSIGNMENT
-union UNION variable;
-variable.field1 = 22136;    // >> OUTPUT: 22136		(0x 00 00 56 78)
-
-variable.field2[0];         // >> OUTPUT: 'x'		(0x -- -- -- 78)
-variable.field2[1];         // >> OUTPUT: 'V'		(0x -- -- 56 --)
+enum ENUMERATION2 {
+    enumeration4,    // 오류: 열거자 'enumerator4'가 재정의 되었습니다.
+    enumeration5,
+    enumeration6
+}
 ```
 
-Since union shares a single memory location to store the value, data allocation size is set based on the member with data type of largest byte size. Member fields with smaller byte-size data type is represented as a portion of the overall.
-
-### Array Union
-
-When declaring array from union, that array can store different types of data due to the nature of union able to express single data into other data types.
+열거형은 정확히 자료구조가 아니며, 정수값을 각자의 식별자를 통해 호출하는 특수한 배열(즉, 일종의 연관 배열; associative array)이라고 분류할 수 있다. 여기서 열거자가 바로 정수값의 식별자 역할을 한다.
 
 ```c
-// UNION DECLARATION
-union UNION {
-    int   field1;
-    float field2;
-};
-
-// ARRAY DECLARATION
-union UNION arr[3];
+/* 열거형 할당 1 */
+int variable1 = enumerator1;
+```
+----
+```c
+/* 열거형 할당 2 */
+enum ENUMERATION variable2 = enumerator2;
 ```
 
-## Typedef Declaration
-
-The `typedef` keyword is used to create an alias name for existing data type, providing better readability
+## 공용체
+공용체(union)는 구조체와 유사하게 자료형과 상관없이 여러 내부 변수(일명, 맴버; member)를 하나의 단일 데이터로 통합시킨 자료구성 구성체이지만, 내부 변수들은 하나의 메모리 공간을 공유한다. 즉, 공용체의 한 내부 변수 데이터가 변하면 하나의 메모리 주소를 공용하기 때문에 나머지 내부 변수의 값에 영향을 미친다. 공용체의 정의는 `union` 키워드를 통해 이루어진다.
 
 ```c
+/* 공용체 정의: 총 4 바이트 활용 */
+union UNION {    
+    // 내부 변수 정의
+    int    field1;    // 자료형 크기: 4 바이트
+    char   field2;    // 자료형 크기: 1 바이트
+}
+```
+
+공용체에 할당되는 메모리 크기는 내부 변수 중에서 가장 큰 메모리 용량이 요구되는 자료형과 동일한 데, 이는 나머지 내부 변수도 하나의 메모리 공간에서 처리할 수 있도록 하기 위해서이다.
+
+정의된 공용체를 자료구조로 사용하는 공용체 변수는 아래와 같은 정의 방법이 존재하며 `union` 키워드가 요구된다. 비록 공용체가 두 개 이상의 내부 변수를 가진다 하더라도 하나의 메모리 공간만을 사용하기 때문에 초기화 단계에서 하나의 데이터만 할당하면 된다.
+
+```c
+/* 공용체 변수 초기화 */
+union UNION variable = (union UNION) {365};    // >> 결과: 0x 00 00 01 6D
+
+printf("Field1: %d (%#010x)\n", variable.field1, variable.field1);
+printf("Field2: %d (%#010x)\n", variable.field2, variable.field2);
+```
+
+```
+Field1: 365 (0x0000016d)
+Field2: 109 (0x0000006d)
+```
+
+첫 번째 내부 변수 `field1`은 4 바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되는 반면, 두 번째 내부 변수 `field2`는 1 바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 109 정수가 출력되었다.
+
+### 일회용 공용체
+위에서 설명한 구문은 한 번 정의된 공용체를 재사용하여 동일한 자료구조의 여러 공용체 변수를 정의할 수 있도록 한다. 만일 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 공용체를 생성하려면 아래와 같은 정의 구문을 사용한다.
+
+```c
+/* 일회용 공용체 정의 및 변수 초기화 */
+union {
+    int    field1;
+    char   field2;
+} variable = {365};
+```
+
+## Typedef 키워드
+
+`typedef` 키워드는 기존에 존재하는 자료형을 다른 명칭(일명 가명; alias name)으로 선언하여 가독성을 높이는 역할을 한다.
+
+```c
+/* int 정수 자료형의 가명 선언 */
 typedef int dtypeName;
 ```
 
-While this is not officially supported in C++ programming language, structure and union can be declared without tag as part of the C programming syntax. This is called *anonymous structure* and *anonymous union* which is for a single use:
+C 프로그래밍에서 `typedef` 키워드는 그 외에 구조체와 공용체 정의을 간략화하는 역할도 지니며, 이를 통해 정의된 자료구조를 익명 구조체(anonymous structure) 그리고 익명 공용체(anonymous union)라고 부른다.
 
 ```c
-// TYPEDEF STRUCTURE
+/* 간략화된 구조체 정의 */
 typedef struct {
-	int 	field1;
-	float 	field2;
+    int    field1;
+    char   field2;
 } STRUCTURE;
 
-// TYPEDEF UNION
+STRUCTURE variable;                // struct STRUCTURE variable;
+variable = (STRUCTURE) {3, 'A'};   // variable = (struct STRUCTURE) {3, 'A'};
+```
+----
+```c
+/* 간략화된 공용체 정의 */
 typedef union {
-	int		field1;
-	float	field2;
+    int    field1;
+    char   field2;
 } UNION;
 
-// VARIABLE DECLARATION
-STRUCTURE variable1;
-UNION     variable2;
+UNION variable;                    // union UNION variable;
+variable = (UNION) {365};          // variable = (union UNION) {365};
 ```
 
-## User-Defined Data Pointer
-
-C language do not support object-oriented programming paradigm. Despite not having a concept called object and class, it can still be implemented similarly on user-defined data.
-
-When user-defined data is assigned by pointer, members can be accessed using arrow member selection (`->`) operator. This method is generally used when the user-defined data needs to be passed as function argument.
+## 사용자 정의 포인터
+사용자 정의 자료구조가 포인터로 메모리 주소가 가리켜진 경우, 자료구조의 내부 변수는 화살표 연산자(`->`)를 통해 접근할 수 있다. 화살표 연산자는 주로 사용자 정의 자료구조 데이터가 함수의 인자로 전달되어야 할 시 사용된다.
 
 ```c
-// TYPEDEF STRUCTURE
-typedef struct {
-    int   field1;
-    float field2;
-} STRUCTURE;
+/* 구조체 정의 */
+struct STRUCTURE {
+    int    field1;
+    char   field2;
+};
 
-// VARIABLE & POINTER DECLARATION
-STRUCTURE variable;
-STRUCTURE* ptr = &variable;
+// 변수 및 포인터 정의
+struct STRUCTURE variable;
+struct STRUCTURE *ptr = &variable;
 
-// THEREFORE...
-ptr->field1 = 1;
-ptr->field2 = 3.0;
+ptr->field1 = 3;
+ptr->field2 = 'A';
+
+// 그러므로...
+printf("%d\n", ptr->field1);
+printf("%c\n", ptr->field2);
 ```
 
-# **C: DYNAMIC MEMORY**
+```
+3
+A
+```
 
-Memory management is one of the crucial factors in C/C++ programming language. Dynamic memory allocation is one of the management for greater memory efficiency. And because this concept is closely related to the pointer, understanding the concept cannot be neglected.
+# **C: 메모리 할당**
+메모리 관리는 C 프로그래밍 언어에서 매우 중대한 비중을 차지한다. 그 중에서 동적 메모리 할당은 보다 더 나은 메모리 효율성을 위해 사용되며, 포인터와 깊은 연관성을 지니므로 이전 *C: 포인터* 장의 충분한 개념적 이해는 반드시 요구된다. 여기서 메모리란, 컴퓨터에서 임시기억장치 역할을 하는 주기억 장치인 RAM(random access memory)을 가리킨다.
 
-## Stack Structure
+## 스택 구조
+스택(stack)은 선형적 LIFO(Last-In-First-Out), 즉 마지막에 입력된 데이터가 먼저 출력되는 데이터 나열 구조이다. 빠른 메모리 접근성의 장점을 가지고 있기 때문에, 컴파일러는 정의되는 데이터의 메모리 공간 할당 및 제거되는 데이터의 메모리 공간 해제를 하는 데 스택을 기본 메모리 구조로 사용한다. 하지만 컴파일러가 사용하는 스택 기반의 메모리 할당은 관리가 힘들다는 치명적인 단점을 가진다.
 
-Stack is a linear LIFO (Last-In-First-Out) data structure; the first entered data is last to be freed from the memory structure. It is a main memory structure used by the compiler which automatically allocates and deallocates data upon declaration and destruction of data (e.g. variables and functions).
+스택 구조 특성이 두드러지는 대표적인 예시로써 조건문, 반복문, 혹은 함수 내에서 정의된 지역 변수가 해당 코드 블록 외에서 사용할 수 없는 성질이 있다.
 
-The reason compiler uses stack memory structure is due to its fast memory access. However, stack memory has a drawback that its size is fixed and cannot be expanded.
+### 큐 구조
+큐(queue) 구조는 선형적 FIFO(First-In-First-Out), 즉 먼저 입력된 데이터가 먼저 출력되는 데이터 나열 구조이다. 스택 구조와 대조되는 특성을 가지며, 대표적인 예시로는 USB 혹은 이더넷에서 사용되는 직렬 통신(serial communication)이 존재한다.
 
-One of the example of stack structure characteristic can be seen on property of local variable; variable defined inside a scope such as function or namespace cannot be used outside the scope.
+## 동적 할당
+비록 스택 기반 메모리 할당은 빠르다는 장점이 존재하나 연속성을 지닌 메모리 구조인 관계로 관리가 힘든 단점을 가진다. 또한 컴파일러의 스택 기반 메모리 할당 주목적은 데이터 저장이 아닌 "데이터 처리"이므로 RAM에서의 스택 메모리 영역 용량은 크게 제한되어 있다. 그러나 컴파일러가 접근할 수 있는 RAM 영역에는 스택 이외에도 힙(heap) 메모리 영역이 존재한다. 힙은 스택보다 메모리 접근 속도는 느리지만 데이터 관리가 용이하고 프로그램이 종료될 때까지 유지되는 장점을 지닌다.
 
-### Queue Structure
+> 힙 메모리 영역은 [힙 자료구조](https://ko.wikipedia.org/wiki/힙_(자료_구조))와 전혀 상관이 없으며, 순수히 RAM의 메모리 공간을 지칭하는 용어이다.
 
-As opposite to stack structure, queue is a linear FIFO (First-In-First-Out) data structure. The first entered data is first to be released from the memory structure. The best example of queue memory structure is a serial communication port.
+힙 메모리에 데이터를 할당하는 작업을 동적 할당(dynamic allocation)이라고 부른다. 개발자가 특정 함수를 직접 입력해야만 동적 할당할 수 있는 데 메모리 주소는 무작위로 선택된다. 동적 할당 데이터는 컴파일러가 자동적으로 할당한 데이터가 아니므로 모든 힙 메모리 데이터는 반드시 개발자가 수동으로 메모리 해제가 되어야 한다. 동적 할당 해제를 하지 않을 시, 프로그램이 컴파일되어도 비정상적으로 동작하거나 메모리 오류로 중단되기도 한다.
 
-## Dynamic Allocation
+동적 할당을 활용하려면 `stdlib.h` 헤더 파일이 필요하다.
 
-While stack memory is fast but its memory capacity is fixed, there is also heap memory that is resizable though slower access speed. Heap memory is irrelevant to heap data structure and stores data in random heap memory location.
-
-Allocating data to heap memory is done by developer manually, thus dynamic allocation. However, since dynamically allocated memory is not managed by the compiler, developer needs to be cautious on deallocating data manually afterward as well. Dynamic allocation requires `stdlib.h` header.
-
-| FUNCTION    | EXAMPLE               | DESCRIPTION                                                  |
-| ----------- | --------------------- | ------------------------------------------------------------ |
-| `malloc()`  | `malloc(size);`       | Allocate `size`-byte heap memory block; memory uninitialized, resulting `SEGFAULT` error. |
-| `calloc()`  | `calloc(num, size);`  | Allocate `size`-byte heap memory blocks ($\times$ `num`) contiguously; initialized to 0 but slower than `malloc()`. |
-| `realloc()` | `realloc(ptr, size);` | Reallocate to `size`-byte heap memory block.                 |
-| `free()`    | `free(ptr);`          | Release dynamically allocated memory.                        |
+| 함수    | 예제               | 설명                                                  |
+|:-----------:| --------------------- | ------------------------------------------------------------ |
+| `malloc()`  | `malloc(size);`       | `size` 바이트 크기의 힙 메모리 공간을 할당한다; 할당된 메모리는 초기화되지 않아 방치할 시 `SEGFAULT` 오류가 발생할 수 있다. |
+| `calloc()`  | `calloc(num, size);`  | `size` 바이트 크기의 힙 메모리 공간을 `num` 번 연속적으로 할당한다; 기본적으로 할당된 메모리는 0으로 초기화되지만 `malloc()` 함수보다 속도가 느리다. |
+| `realloc()` | `realloc(ptr, size);` | `size` 바이트 크기의 힙 메모리 공간으로 재할당한다.                 |
+| `free()`    | `free(ptr);`          | 동적 할당 메모리를 해제한다.                        |
 
 ```c
 #include <stdlib.h>
 
-// DYNAMIC ALLOCATION
+/* 동적 할당: 10 바이트 */
 int* ptr = malloc(10);
 
-// REALLOCATION (10 -> 20 BYTES)
+/* 재할당: 10 -> 20 바이트 */
 ptr = realloc(ptr, 20);
 
-// DYNAMIC DEALLOCATION
+/* 동적 할당 해제 */
 free(ptr);
 ```
 
-### Dynamic Array
-
-Dynamic array is an array that can change its size dynamically. This implementation is widely used to allow expansion of array size as needed. As common array is static, thus cannot change size after declaration or even define size using non-constant integer.
-
-Dynamic array is generally managed using structure, allow keeping track of array size and current capacity possible.
+### 동적 배열
+동적 배열은 크기 변경이 가능한 배열을 의미한다. 일반 배열의 정의는 정적인 관계로 크기 변경이 불가능하며, 또한 비상수 정수형 변수로 크기를 지정할 수도 없다. 한편, 구조체 및 동적 할당을 활용하여 크기 변경이 가능한 배열인 동적 배열(dynamic array)를 생성할 수 있다.
 
 ```c
 #include <stdlib.h>
 
-// TYPEDEF STRUCTURE
+/* 갼략화된 구조체 정의 */
 typedef struct {
-    char* arr;
-    int   size;        // ASSIGNED
-    int   capacity;    // CAPACITY
-} dyn_arr;
+    int*   arr;         // 배열 요소
+    int    size;        // 할당된 크기
+    int    capacity;    // 최대 허용 용량
+} dynamicArr;
 
-// VARIABLE DECLARATION
-dyn_arr variable;
+// 정수형 동적 배열 정의
+dynamicArr variable;
 
-// DYNAMIC ARRAY (1 BYTE)
+/* 동적 배열: 최대 1 바이트 */
 variable.arr = calloc(1, sizeof(*variable.arr));
 variable.capacity = 1;
 
-// RESIZE DYNAMIC ARRAY (1 + 5 BYTES)
+/* 동적 배열: +5 바이트 재할당 */
 variable.arr = realloc(variable.arr, (variable.capacity + 5) * sizeof(*variable.arr));
 variable.capacity += 5;
 ```
 
-### Memory Leak
-
-Memory leak is caused by mismanagement of heap memory when dynamically allocated data is not released (deallocated) and accumulated that no more heap memory space is available. Shortage of memory will eventually lead to system failure.
-
-Prevent memory leak by deallocating data on heap memory using `delete` keyword:
+### 메모리 누수
+메모리 누수(memory leak)는 메모리 관리 오류로써, 동적 할당 메모리가 제때 해제되지 않고 축적되어 더이상 사용 가능한 힙 영역 메모리가 없을 때 발생한다. 메모리 부족 현상은 결과적으로 컴퓨터 시스템 고장까지 유래할 수 있다. 메모리 누수 현상을 방지하기 위해 `free()` 함수로 더이상 사용되지 않는 동적 할당 메모리를 해제시킨다.
 
 ```c
+/* 동적 할당 해제 */
 free(ptr);
 ```
 
-### Dangling Pointer
-
-By deallocating data on heap memory prevents memory leak from happening. While the data addressed by the pointer is gone, the pointer still holds the address that now points to nothing. This is called dangling pointer and calling this pointer may result segmentation fault, aka. `SEGFAULT`.
-
-To prevent this, it is advised to assign `nullptr` so the pointer would point at least to nothing than pointing aimlessly after deleting the heap memory data.
+### 허상 포인터
+비록 `free()` 함수로 동적 할당 메모리를 해제하였어도, 해당 메모리를 접근하는 데 사용된 포인터는 아직 동일한 메모리 주소를 가리키고 있다. 메모리 해제로 더이상 아무런 데이터가 없는 메모리 주소를 여전히 가리키는 포인터를 허상 포인터(dangling pointer)라고 부르는 데, 이는 결과적으로 `SEGFAULT` 메모리 오류를 야기할 수 있다. 허상 포인터를 방지하기 위해 해제된 동적 할당 메모리를 가리키는 포인터를 `NULL`을 할당하여 널 포인터로 만든다. 즉, 의미없이 메모리 주소를 가리킬 바에 아무런 주소를 가리키지 않도록 변경하는 것이다.
 
 ```c
-// PROPER DEALLOCATION: DELETE DATA ON ADDRESS -> NULLIFY ADDRESS
+/* 올바른 동적 할당 해제: 메모리 주소의 데이터 반납 -> 널 포인터 할당 */
 free(ptr);
 ptr = NULL;
 ```
 
-# **C: FILE MANAGEMENT**
+# **C: 파일 관리**
+C 언어는 외부 파일을 읽음으로써 데이터를 불러오거나 작성함으로써 데이터를 저장할 수 있다. 본 장은 주로 외부 `.txt` 텍스트 파일을 접근하고 변경하는 데 집중한다.
 
-C language can read and write external file to save or import data. This chapter is mainly focused on accessing and modifying `.txt` extension text file.
-
-## Opening Files
-
-The file first needs to be opened to either read or write. Opening the file is done using `fopen()` function which returns pointer to `FILE` data type. The `mode` argument must be selected to specify whether the file is for read or write:
+## 파일 열기
+C 프로그램에서 파일을 처리하기 전에, 우선 파일을 열어야 한다. `fopen()` 함수를 통해 원하는 파일을 열 수 있으며, 파일 스트림을 처리하는 `FILE` 자료형 데이터를 반환한다. 함수의 전달인자로는 처리하려는 파일 이름 및 경로, 그리고 파일 처리 모드를 입력해야 한다.
 
 ```c
 FILE* fptr = fopen("sample.txt", mode);
 ```
 
-| MODE   | DESCRIPTION                                     |
-| ------ | ----------------------------------------------- |
-| `"r"`  | Open for reading (file must exist)              |
-| `"w"`  | Open for writing (create file if not exist)     |
-| `"a"`  | Open for append (create file if not exist)      |
-| `"r+"` | Open for reading and writing from beginning     |
-| `"w+"` | Open for reading and writing, overwriting file  |
-| `"a+"` | Open for reading and writing, appending to file |
+| 모드   | 설명                                     |
+|:------:| ----------------------------------------------- |
+| `"r"`  | 읽기 모드 (파일 부재시 미생성)              |
+| `"w"`  | 덮어쓰기 모드 (파일 부재시 생성)     |
+| `"a"`  | 덧붙이기 모드 (파일 부재시 생성)      |
+| `"r+"` | 읽기 및 쓰기 모드 (파일 부재시 미생성)  |
+| `"w+"` | 읽기 및 덮어쓰기 모드 (파일 부재시 생성) |
+| `"a+"` | 읽기 및 덧붙이기 모드 (파일 부재시 생성) |
 
-## Reading Files
+## 파일 읽기
+C 언어는 세 종류의 파일 읽기 함수를 가졌으며, 입력 함수와 매우 유사하다.
 
-C languages has three different version of file reading functions, similar to input (from file to program) functions:
-
-| INPUT      | SYNTAX                     | DESCRIPTION                                                  |
-| ---------- | -------------------------- | ------------------------------------------------------------ |
-| `fgetc()`  | `fgetc(fptr);`             | Returns the next character from the selected `fptr` file stream. |
-| `fgets()`  | `fgets(buff,n,fptr)`       | Stores `n-1` long characters to buffer (ex. `char buff[100];`) with null terminator at the end. |
-| `fscanf()` | `fscanf(fptr,format,vars)` | Stores data, separated by space or new line, to variables with matching format specifier; requires address (`&`) operator, except for string. |
+| 입력      | 구문                     | 설명                                                  |
+|:----------:| -------------------------- | ------------------------------------------------------------ |
+| `fgetc()`  | `fgetc(fptr);`             | 선택된 파일 스트림을 가리키는 `fptr` 포인터를 통해 다음 문자를 반환한다. |
+| `fgets()`  | `fgets(buff,n,fptr)`       | `fptr` 포인터가 가리키는 파일에서 `char buff[100]`와 같은 버퍼에 널 종단자(`\0`)을 포함한 `n`개 만큼의 문자를 저장한다. |
+| `fscanf()` | `fscanf(fptr,"format",vars)` | `fptr` 포인터가 가리키는 파일에서 데이터를 스페이스 혹은 줄바꿈을 기준으로 나누어 지정된 `"format"` 형식에 맞게 변수 `vars`에 저장한다. 문자열을 제외한 입력을 받을 모든 데이터는 주소 연산자(`&`)가 필요하다. |
 
 ```
 <sample.txt>
@@ -1261,41 +1405,45 @@ Hello World!
 ```
 
 ```cpp
+/* 파일 읽기 */
 FILE* fptr = fopen("sample.txt", "r");
 
-// FGETC()
-char var1;
-var1 = fgets(fptr);    // >> RESULT: var1 = H
+// "fgetc()" 함수
+char variable1;
+var1 = fgets(fptr);
+// >> 결과: variable1 = 'H'
 
-// FGETS()
+// "fgets()" 함수
 char buff[10];
-fgets(buff, 7, fptr);  // >> RESULT: buff = "ello W"
+fgets(buff, 7, fptr);
+// >> 결과: buff = "ello W"
 
-// FSCANF()
-char[10] var2; int var3; float var4;
-fscanf(fptr, "%s %d %f", var2, &var3, &var4);    // >> RESULT: var2 = "orld!", var3 = 65, var4 = 3.141590
+// "fscanf()" 함수
+char[10] variable2; int variable3; float variable4;
+fscanf(fptr, "%s %d %f", var2, &var3, &var4);
+// >> 결과: variable2 = "orld!", variable3 = 65, variable4 = 3.141590
 ```
 
-## Writing Files
+## 파일 쓰기
+C 언어는 세 종류의 파일 쓰기 함수를 가졌으며, 출력 함수와 매우 유사하다.
 
-C languages has three different version of file writing functions, similar to output (from program to file) functions:
-
-| OUTPUT      | SYNTAX               | DESCRIPTION                                                  |
-| ----------- | -------------------- | ------------------------------------------------------------ |
-| `fputc()`   | `fputc(char,fptr);`  | Writes a single character on a selected `fptr` file stream.  |
-| `fputs()`   | `fputs(str,fptr);`   | Writes sequence of characters (aka. string) on a selected `fptr` file stream. |
-| `fprintf()` | `fprintf("%d",var);` | Writes sequence of characters (aka. string) on a selected `fptr` file stream, with format support. |
+| 출력      | 구문               | 설명                                                  |
+|:-----------:| -------------------- | ------------------------------------------------------------ |
+| `fputc()`   | `fputc(char,fptr);`  | 선택된 파일 스트림을 가리키는 `fptr` 포인터를 통해 단일 문자를 입력한다.  |
+| `fputs()`   | `fputs(str,fptr);`   | `fptr` 포인터가 가리키는 파일에 문자열 `str`을 입력한다. |
+| `fprintf()` | `fprintf(fptr,"format",vars);` | `fptr` 포인터가 가리키는 파일에 데이터 혹은 변수 `vars`를 지정된 `"format"` 형식에 맞게 입력한다. |
 
 ```c
+/* 파일 쓰기 */
 FILE* fptr = fopen("sample.txt", "w");
 
-// FPUTC()
+// "fputc()" 함수
 fgets('A', fptr);
 
-// FPUTS()
+// "fputs()" 함수
 fgets("Hello World!\n", fptr);
 
-// FPRINTF()
+// "fprintf()" 함수
 fprintf(fptr, "%d %.2f %s", 1, 3.14159, "Program");
 ```
 
@@ -1305,50 +1453,162 @@ AHello World!
 1 3.14 Program
 ```
 
-### Creating Files
-
-New file can be created using the same method of writing file which does not bound by just writing on existing file. Creating file is simply done by designating file name is doesn't exist on the specified path.
+### 파일 생성
+덮어쓰기 및 덧붙이기와 같은 파일 쓰기 모드는 이미 존재하는 파일 내용을 수정하는 것 외에도 파일을 새롭게 생성할 수 있다. 단순히 파일 경로 및 이름을 지정하므로써 새로운 파일을 생성할 수 있다.
 
 ```c
+/* 파일 생성 */
 FILE* fptr = fopen("path\\new_file.txt", "w");
 fgets("Hello World!\n", fptr);
 ```
 
-## Closing Files
-
-After opening the file, it should be closed manually. Just like opening with `fopen()` function, opened file is closed using `fclose()` function:
+## 파일 닫기
+안전한 파일 관리를 위해 작업이 마무리된 파일은 반드시 닫도록 한다. 파일을 닫기 위해서는 `fclose()` 함수를 사용한다.
 
 ```c
+/* 파일 닫기 */
 fclose(fptr);
 ```
 
-The function returns 0 if closed successfully, else returns EOF (end of file).
+파일이 정상적으로 닫혔으면 정수 0을 반환하며, 실패하였으면 음의 정수인 `EOF`(End-of-File)를 반환한다.
 
-# **C: EXCEPTION**
+# **C: 다중 스크립트**
+현재까지 본 문서는 `main()` 함수를 가지는 하나의 메인 스크립트만을 사용하여 프로그램을 빌드하였다. 그러나 프로젝트 규모가 커지면 코드를 다른 부가적인 스크립트로 분산하여 효율적으로 프로젝트를 관리하는 방법을 채택할 수 있다. 본 장은 프로젝트 내의 스크립트 간 데이터나 함수를 주고받을 수 있도록 구축하는 방법과 이에 대한 설명을 제공한다.
 
-Exception is a problem encountered during a program execution (not during compilation). C programming language offers macro and functions for controlling exceptions: `errno`, `perror()`, and `strerror()`. Through exception handling, stable program can be compiled and executed without any halt or crash.
+## 포함 지시문
+`#include` 포함 지시문(inclusive directive)은 전처리기 지시문 중 하나로 대표적으로 `stdio.h`와 같은 헤더 파일을 불러오는 데 매번 사용된다. 헤더 파일에 선언된 기능들을 불러오는 데 사용된 `#include` 지시문의 정확한 기능은 헤더 파일의 전체 코드를 지시문이 위치한 곳에 그대로 붙여넣는다.
 
-## Error Number
-
-The macro `errno`, short for "error number", is a global variable defined inside `errno.h` header file. The macro must first be initialized to 0 before using, and is automatically assigned with new error number if anything goes wrong.
-
-Following script is one of the best example of `errno` by attempting to open a non-existing file:
+### 헤더와 소스 파일 나누기
+문서 초반의 *C: 기초* 장에서 처음 언급된 소스(source) 파일과 헤더(header) 파일의 역할을 다시 정리하면 전자는 데이터나 함수의 정의, 그리고 후자는 데이터나 함수의 선언이 위주인 스크립트이다. 다만, 시작점인 `main()` 함수는 선언부가 없다는 점을 고려하면 메인 스크립트를 다음과 같이 구성할 수도 있다.
 
 ```c
-#include <errno.h>    // ERRNO HEADER
-extern int errno;     // ERRNO DECLARATION (GLOBAL)
+/* 헤더 파일: main.h */
+#include <stdio.h>
+
+int variable;
+void function(int, float);
+
+```
+```c
+/* 소스 파일: main.c */
+#include "main.h"
 
 int main(){
-    // INITIALIZATION
+    
+    variable = 'A';
+    printf("%c\n", variable);
+
+    function(1, 3.14);
+
+    return 0;
+}
+
+void function(int arg1, float arg2){
+    printf("%.3d\n", arg1 + arg2);
+}
+```
+```
+A
+4.140
+```
+
+위의 소스 파일의 헤더 파일 포함은 결과적으로 `#include` 지시문으로 인해 다음과 같이 표현된 것과 동일하다.
+
+```c
+/* #include "main.h" 코드 시작 */
+#include <stdio.h>
+
+int variable;
+void function(int, float);
+/* #include "main.h" 코드 끝 */
+
+int main(){
+    
+    variable = 'A';
+    printf("%c\n", variable);
+
+    function(1, 3.14);
+
+    return 0;
+}
+
+void function(int arg1, float arg2){
+    printf("%.3d\n", arg1 + arg2);
+}
+```
+
+## `extern` 키워드
+`extern` 키워드는 변수를 정의없이 선언만 가능케 한다. 앞에서 언급한 바로는 선언은 정의와 동일하다고 하였으나, `extern` 키워드의 사용은 특수한 경우에 해당된다. 즉, 이번 내용에서는 선언과 정의의 명확한 차이를 짚고 넘어가야 한다.
+
+변수나 함수를 정의하면 해당 데이터에 대한 메모리가 할당되므로 각 데이터마다 한 번만 정의할 수 있다. 반면, 선언은 메모리 할당 없이 컴파일러에게 변수나 함수의 존재만 알려줄 뿐이므로 데이터 할당은 허용되지 않으나 여러 번 선언이 가능하다. 이러한 성질이 스크립트 간 데이터 및 함수 공유에 매우 중요한 역할을 한다.
+
+```c
+/* 헤더 파일: module.h */
+#include <stdio.h>
+
+// "extern" 키워드로 변수 "variable" 선언
+extern char variable;
+void function(int, float);
+```
+
+```c
+/* 소스 파일: module.c */
+#include "module.h"
+
+// 본격 변수 "variable" 정의
+char variable = 'A';
+void function(int arg1, float arg2){
+    printf("%.3f\n", arg1 + arg2);
+}
+```
+
+```c
+/* 메인 스크립트 */
+#include <stdio.h>
+#include "module.h"
+
+int main() {
+
+    printf("%c\n", variable);
+    function(1, 3.14);
+
+    return 0;
+}
+```
+```
+A
+4.140
+```
+
+만일 `module.h` 헤더 파일에서 `extern` 키워드를 사용하지 않았으면 변수는 선언이 아닌 정의가 되어버린다. 오로지 한 번만 정의가 가능한 변수가 `module.c` 소스 파일과 메인 스크립트에서 동시에 정의되어 결과적으로 반복 정의로 의한 컴파일 오류가 발생한다.
+
+반면 `extern` 키워드를 사용하면 변수는 여러 번 선언이 가능하다. `module.c` 소스 파일과 메인 스크립트에서 동시에 선언되는 것으로 컴파일 작업에는 전혀 문제가 없으나, 변수를 사용하기 위해서는 단 한 번의 정의가 반드시 필요하다. 이러한 이유로 `module.c`에 `char variable = 'A';` 정의가 존재하는 것이며, 메인 스크립트에서는 `variable` 전역 변수의 값을 그대로 출력할 수 있게 된다.
+
+# **C: 예외 처리**
+예외(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 컴파일러에서 걸러지는 오류가 아니기에 정상적인 프로그램 빌드가 이루어질 수 있으나, 예외가 발생하면 프로그램이 즉시 중단된다. C 프로그래밍 언어에서는 예외를 처리할 수 있는 함수 및 매크로가 존재하며, 대표적으로 `errno`, `perror()`, 그리고 `strerror()` 등이 있다. 예외 처리는 빌드된 프로그램이 중단이나 충돌 없이 안정적으로 실행되는 것을 주목표로 한다.
+
+## 오류 번호
+오류 번호(error number) 혹은 `errno` 매크로는 `errno.h` 헤더 파일 내에 정의된 전역 변수이다. 매크로를 사용하기 위해서는 먼저 정수 0으로 정수되어야 하며, 어떠한 오류가 발생하면 새로운 정수가 자동적으로 할당된다. 윈도우 OS의 경우, 오류 번호와 내용은 [Microsoft 개발자](https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes) 문서에서 확인할 수 있다.
+
+아래의 예시 코드는 존재하지 않는 파일을 읽기 모드로 열려고 할 때 발생하는 오류를 `errno` 매크로로 감지한다.
+
+```c
+/* "errno.h" 헤더 파일 */
+#include <errno.h>
+
+/* errno 전역 변수 선언 */
+extern int errno;
+
+int main(){
+    /* errno 전역 변수 초기화 */
     errno = 0;
     
-    // ATTEMPT TO OPEN (NON-EXISTING) FILE
     FILE* fptr = fopen("./non_existance.txt", "r");
     
-    // FAILED TO OPEN...
+    // 파일 열기 실패 경우...
     if (fptr == NULL) {
-        // ERROR NAME: ENOENT 2 (No such file or directory)
-        fprintf(stderr, "Error opening file. Error code: %d\n", errno);
+        // 오류명 및 번호: ENOENT 2 (해당 파일 혹은 경로 미발견)
+        fprintf(stderr, "파일 열기 오류 발생! 오류 코드: %d\n", errno);
         exit(-1);
     }
 
@@ -1358,30 +1618,30 @@ int main(){
 ```
 
 ```
-Error opening file. Error code: 2
+파일 열기 오류 발생! 오류 코드: 2
 ```
 
-### Standard Error Stream
+### 표준 오류 스트림
+이전 *C: 기초 § 입력 & 출력* 장에서 가장 흔히 사용되는 출력 스트림인 "표준 출력" `stdout`을 소개하였다. C 프로그래밍에는 다른 스트림도 존재하는데, 그 중에는 오류 내용을 전달을 목적으로 하는 "표준 오류(standard error)" `stderr` 스트림이 존재한다.
 
-Previously on *C: BASIC § Input & Output* first introduced the most common output stream called *standard output* `stdout`. There are other kinds of stream, specifically designed for streaming error, namely *standard error* `stderr`.
+> 여기서 스트림(stream)이란, 사전적 의미로 물이 흐르는 개울을 의미한다. 즉, 컴퓨터 통신 용어에서 스트림은 데이터가 흐르는 길을 의미한다.
 
 ```c
 fprintf(stderr, "Hello World!");
 ```
 
-These difference on stream allows control of streaming data from program to target devices/locations, such as console and file.
+이렇게 나뉘어진 스트림은 프로그램으로부터 데이터가 장치 혹은 파일로 전송되는 데 선택적 제어를 가능케 한다.
 
-## Error Description
-
-Error type can be expressed and stored as integer number using `errno` macro. However, these error can also be shown on console terminal in human-readable English, describing what is the cause of the error. This can be done using `perror()` function, without a need of `errno.h` header file.
+## 오류 설명
+각종 오류들은 정수형으로 표현되어 `errno` 매크로를 통해 전역 변수에 저장된다. 그러나 해당 오류를 정수가 아닌 텍스트로 된 내용을 보기 위해서는 `perror()` 함수를 사용한다.
 
 ```c
 int main(){
     
     FILE* fptr = fopen("./non_existance.txt", "r");
     if (fptr == NULL) {
-        // ERROR NAME: ENOENT 2 (No such file or directory)
-        perror("ERROR Description");
+        // 오류명 및 번호: ENOENT 2 (해당 파일 혹은 경로 미발견)
+        perror("오류 설명");
         exit(-1);
     }
 
@@ -1391,113 +1651,106 @@ int main(){
 ```
 
 ```
-ERROR Description: No such file or directory
+오류 설명: No such file or directory
 ```
 
-# **C: PREPROCESSOR**
+# **C: 전처리기**
+C 프로그래밍 언어 컴파일 작업은 두 단계를 거쳐 빌드가 진행되는 데, 전처리 작업과 컴파일 작업으로 나뉘어진다. 전처리 작업에서 `#include`와 같은 전처리기 지시문은 컴파일러에 의해 처리된다. 이러한 전처리기 지시문은 C 언어 프로그래밍에 있어 편리성을 제공하는 데, 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
 
-C/C++ program language compiler processes the script into two divided stages: preprocessing and compilation. On the stage of preprocessing, preprocessor directive such as `#include` is taken care of by the compiler.
+## 매크로 정의
+매크로(macro)란 식별자가 있는 코드 조각이다. 여기서 코드 조각이란 숫자나 문자와 같은 간단한 데이터가 될 수 있으며, 혹은 전달인자를 받는 표현식이나 문장이 될 수 있다. 전자와 후자는 각각 "객체형식(object-like)" 그리고 "함수형식(function-like)" 매크로라고 부른다.
 
-This chapter will introduce useful and commonly used preprocessor directives that is actually being implemented on development.
+한 번 정의된 매크로는 프로그램 실행 시 변경될 수 없다는 장점을 가진다. 정의된 매크로는 마치 전역 변수인 마냥 헤더 파일에서 `#include`와 같은 포함 지시문을 통해 다른 스크립트에서도 사용할 수 있다.
 
-## Macro Definition
-
-Macro is a fragment of code that is given a name (aka. identifier). A fragment of code can be a simple data (e.g. number, character, string) or an expression with arguments. The formal and latter is respectively called *object-like* and *function-like* macro.
-
-The benefit of macro is it cannot be changed on runtime. The defined macro can be used on the script passed from a header file through `#include` directive.
-
-### `#define` Directive
-
-The `#define` directive is used to create macro:
+### `#define` 지시문
+`#define` 지시문은 새로운 매크로를 생성하는 데 사용한다.
 
 ```cpp
-#define SOMETHING       value                // MACRO
-#define ANYTHING(x, y)  (x * SOMETHING - y)  // MACRO WITH ARGUMENTS
+#define SOMETHING       value                // 객체형식 매크로
+#define ANYTHING(x, y)  (x * SOMETHING - y)  // 함수형식 매크로
 ```
 
-### `#undef` Directive
-
-In some cases, macro can cause naming collision that cannot be fixed on compilation stage. This macro can be removed by `#undef` directive:
+### `#undef` 지시문
+`#undef` 지시문은 매크로 정의를 제거하는 데 사용한다. 때때로 서로 다른 데이터가 동일한 이름을 가져 생기는 식별자 충돌 문제가 매크로로부터 발생하기 때문이다.
 
 ```cpp
 #undef SOMETHING
 ```
 
-### Predefined Macros
-
-Compilers have common standard and compiler-specific predefined macros available for developers.
+### 컴파일러 내장 매크로
+컴파일러는 개발자가 사용할 수 있는 공통된 표준 매크로 및 컴파일러 특정 내장 매크로를 가진다. 아래는 MSVC, GCC, 그리고 그 외의 컴파일러가 가지는 내장 매크로 목록을 보여주는 문서이다(영문).
 
 * MSVC: [Microsoft Docs - Predefined Macros](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
 * GCC: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
-* Others: https://sourceforge.net/p/predef/wiki/Compilers/
+* 그 외: https://sourceforge.net/p/predef/wiki/Compilers/
 
-## Conditional Inclusion
-
-Preprocessor has a conditional directives that are used for conditional compilation. These directives are not to be used as a substitution of `if` and `else` conditional statement.
+## 조건 포함문
+조건 포함문(conditional inclusion)은 조건을 제시하여 부합 여부에 따라 특정 코드를 컴파일 작업 시 포함시킬 것인지 배제할 것인지 결정한다. 
 
 ```cpp
-#if		SOMETHING > value
-	statements;
-#elif	SOMETHING < value
-	statements;
+#if        SOMETHING > value
+    statements;
+#elif    SOMETHING < value
+    statements;
 #else
-	statements;
+    statements;
 #endif
 ```
 
-### Macro Condition
+비록 조건 포함문이 일반 조건문의 키워드와 유사할지라도 절대 `if` 및 `else` 조건문을 대체하기 위해 사용되지 말아야 한다.
 
-Conditional inclusion can check condition whether the macro is already defined or not:
+### 매크로 조건
+조건 포함문은 매크로의 정의 여부를 판단할 수 있다.
 
 ```cpp
-// IF COMPILED ON 64-BIT ARM OR x64
-#ifdef	_WIN64
-	statments;
+// 만일 64비트 ARM 혹은 x64 아키텍쳐로 컴파일 할 경우...
+#ifdef    _WIN64
+    statments;
 #endif
 
-// IF NOT COMPILED ON 64-BIT ARM OR x64
-#ifndef	_WIN64
-	statements;
+// 만일 64비트 ARM 혹은 x64 아키텍쳐로 컴파일되지 않은 경우...
+#ifndef    _WIN64
+    statements;
 #endif
 ```
 
-## Pragma Directive
+## Pragma 지시문
 
-Pragma directive is used to configure features and options for a compiler. Each compiler differs from each other, and this makes pragma a non-standard compiler-specific preprocessor directive.
+Pragma 지시문(pragma directive)은 컴파일러의 기능과 옵션을 설정하기 위해 사용되는 전처리기 지시문이다. 개발사마다 제작한 컴파일러는 기술적 성능이 각각 다른 관계로, pragma는 비공통적인 컴파일러 특정 전처리기 지시문이다.
+
+> Pragma란 용어는 pragmatic의 줄임말로, 사전적 의미로는 "실용적인"을 뜻한다. 이는 실질적 컴파일러 동작 및 처리 방식에 관여한 것을 보아 붙여진 용어라고 판단된다.
 
 * MSVC: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://docs.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
 * GCC: [GCC Online Documentation - Pragmas](https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html)
 
-This chapter mainly focuses on pragma directive from MSVC as it is the most common and widely used C/C++ compiler provided by Microsoft Visual Studio.
+본 장은 마이크로소프트의 비주얼 스튜디어에서 제공하는 가장 흔하고 널리 사용되는 MSVC 컴파일러의 pragma 지시문을 위주로 다룬다.
 
 ### `#pragma once`
-
-The `#pragma once` pragma directive is extremely useful upon compilation by only including the header file once instead of multiple time on every inclusion. 
+`#pragma once`는 컴파일 작업 시 `#include` 지시문을 통해 중복 포함된 헤더 파일을 한 번만 포함시키는 pragma 지시문이다.
 
 ```cpp
 #pragma once
 ```
 
-Through this pragma directive can reduce compilation time. Additionally, because it prevents multiple inclusion can this pragma function as *include guard*.
+결과적으로 하나의 소스 파일에 헤더 파일이 중복적으로 포함이 되는 것을 제한하므로써 정의가 반본되는 현상을 막을 수 있는 데, 이러한 기능을 *헤더 중복 방지(include guard)*라고 부른다. 추가적으로 `#pragma once` 지시문을 사용하면 처리하는 헤더 파일 횟수가 줄어들어 컴파일 작업 시간도 함께 줄이게 된다.
 
-The following code is an example of include guard without using `#pragma once` pragma directive:
+아래의 코드는 `#pragma once` 지시문을 사용하지 않고 헤더 중복 방지 기능을 구현하는 방법이다.
 
 ```cpp
-// "header.h"
+/* 헤더 파일: "header.h" */
 #ifndef HEADER_FILE
 #define HEADER_FILE
 
-#endif	/* HEADER_FILE */
+#endif    /* HEADER_FILE */
 ```
 
-If `header.h` has not been processed, the compiler defines the `HEADER_FILE` for the first time. However, upon second encounter, compiler will not process the header file again because of the macro conditioning.
+만일 `header.h` 헤더 파일이 아직 처리되지 않았으면 컴파일러는 처음으로 `HEADER_FILE` 매크로를 정의한다. 그러나 헤더 파일을 다시 한 번 마주하였을 시, `HEADER_FILE`이 이미 정의되어 있기에 매크로 조건에 의해 컴파일러는 헤더 파일을 처리하지 않는다.
 
 ### `#pragma region`
-
-Though it does not affect any on compilation, `#pragma region` and `#pragma endregion` pair supports expanding and collapsing code block on Visual Studio Code Editor:
+컴파일 작업에는 직접적인 영향을 미치지 않으나, `#pragma region` 및 `#pragma endregion` 쌍은 가독성을 위해 비주얼 스튜디오 내에서 지정된 코드 부분을 한 줄로 압축하거나 펼치는 기능을 제공한다.
 
 ```cpp
 #pragma region REGIONNAME
-	statements;
+    statements;
 #pragma endregion
 ```
