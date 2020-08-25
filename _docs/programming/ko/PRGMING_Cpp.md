@@ -9,100 +9,195 @@ logo: "/assets/images/logo/logo-cpp.png"
 summary: "."
 order: 0x02
 ---
-# **C++: INTRO**
+# **C++: 소개**
 
-General-purpose programming language that was based on C programming language. While C language only supports procedural programming, C++ allows object-oriented programming as well; thus, C++ is called hybrid language.
+C++ 프로그래밍 언어는 C 언어에서 기반된 범목적(general-purpose) 저급(low-level) 프로그래밍 언어이다. 코드를 순서대로 실행하는 절차적 프로그래밍 언어인 C와 달리, 객체지향적 프로그래밍도 지원하는 C++를 하이브리드 언어라고 부른다. C 언어의 확장판으로 볼 수 있는 C++ 프로그래밍 언어는 더 많은 기능을 제공하므로써 폭넓은 활용도를 보장한다.
 
-## Compilation
+## 컴파일 언어
 
-C/C++ language uses compiler to create executable file from the source code. Compiler translates C++ source code (written in high-level language: English) to a language computer can understand like binary code (low-level language). Compiled application can be executed without compiler afterward.
+프로그래밍 언어를 실행하는 방법에는 크게 두 가지로 나뉘어진다: 컴파일 언어와 인터프리트 언어이다.
 
-Compiler has a several standard revision for ISO (International Organization of Standardization) based on the time it was released. The most renowned revision is a C++11 and C++17. This document will instruct the programming language based on C++11 at minimum.
+인터프리터(interpreter)는 영문으로 작성된 소스 코드를 컴퓨터가 곧바로 해독하여 실행하며, 인터프리터가 있는 한 하나의 소스 코드를 서로 다른 시스템에서 동일하게 실행할 수 있는 장점을 가진다(일명 크로스 플랫폼; cross platform). 대표적인 인터프리트 언어로는 파이썬(Python)이 있다. 반면, 컴파일러(compiler)는 소스 코드를 컴퓨터 운영체제와 아키텍처에 따라 이진코드로 번역한 부산물을 생성하여 실행한다. 
 
-Compilation of C/C++ language is divided into two stage that is done by preprocessor and compiler (technically, preprocessor is included inside a compiler).
+C++ 언어는 컴파일 언어이며, 크로스 플랫폼이 지원되지 않는 단점이 있지만 컴파일러의 최적화로 인해 인터프리터보다 실행 속도가 매우 빠르다.
 
-### Preprocessor
+### 컴파일러
 
-Preprocessing is a first stage of compilation done by a preprocessor. Preprocessor directive (aka. compiler directive) which is denoted by octothorpe symbol `#` in the script commands for preprocessor to perform certain actions before compiler does.
+C++ 언어의 컴파일러는 국제표준기구(ISO)에서 표준을 발표한 년도에 따라 버전이 나뉘어진다. 가장 널리 사용되고 있는 버전으로는 C++98과 C++11, 그리고 가장 최신인 C++17이 존재한다. 상당한 C++ 프로그래밍 교재들이 C++98 표준을 기반으로 설명하나, 본 문서는 최소한 다양한 기능들이 추가된 C++11 표준을 기준으로 C++ 프로그래밍 언어에 대하여 설명한다.
 
-| Preprocessor Directive | Example               | Summery                                          |
-|:-----------------------|-----------------------|--------------------------------------------------|
-| `#include`             | `#include <iostream>` | Include header file to the script.               |
-| `#define`              | `#define SQUARE`      | Define new macro that can be used in the script. |
-| `#pragma`              | `#pragma once`        | Provide additional options to the compiler.      |
+### 전처리기
 
-Preprocessor does not read the C/C++ language but accepts preprocessor directive, comments, declaration, and et cetera within a source code and returns modified source code with preprocessor directive activated, comments removed, header files included, et cetera for compiler to process.
+전처리기(preprocessor)는 컴파일러가 소스 코드를 이진코드 컴퓨터 언어로 변역하기 전의 컴파일 작업 준비하는 역할을 이행한다. 전처리기가 수행하는 명령어는 해쉬 기호(`#`)로 표시되며, 이를 전처리기 지시문(preprocessor directive)라고 부른다.
 
-Preprocessor directive is not necessary when programming and does not observe C++ language grammar, but it does make programming much easier. Preprocessor is one of the components included in a compiler. 
+| 전처리기 지시문 | 예시                  | 설명                                              |
+| :-------------: | --------------------- | ------------------------------------------------- |
+|   `#include`    | `#include <iostream>` | 스크립트에 헤더 파일을 추가한다.                  |
+|    `#define`    | `#define SQUARE`      | 스크립트 내에서 사용할 수 있는 매크로를 정의한다. |
+|    `#pragma`    | `#pragma once`        | 컴파일러에 추가적 설정을 제공한다.                |
 
-### Compiler
+전처리기는 C++ 언어를 읽지 않을 뿐더러 C++ 언어 문법을 따르지 않는다. 오로지 전처리기 지시문을 처리하고 주석을 없애는 등의 작업을 하여 컴파일러에 제공한다. 전처리기 지시문은 필수요소가 아니지만 프로그래밍을 더 편리하도록 한다. 전처리기는 컴파일러의 일부 중 하나이다.
 
-After preprocessing is finished, the official stage of compilation is processed by the compiler. Compiler starts translating C++ source code to a language computer can understand, supported by those activated by preprocessor directives.
+# **C++: 설치**
 
-## Header File
+C++ 프로그래밍 언어로 개발하기 위해서는 C++ 컴파일러가 반드시 필요하며, 컴파일러 제작 회사 및 목적에 따라 종류가 다양하다. 어떤 컴파일러를 사용하는지에 따라 소스 코드를 실행 프로그램으로 컴파일하는 방식이 다를 수가 있으나, 모든 컴파일러는 동일한 ISO 표준에 따라 동작하므로 일반적인 경우에는 어떠한 컴파일러를 사용하던 상관이 없다.
 
-A file that contains function declaration and macro definition which can be used on source code. There exist two different ways of including the header file to the source code: angled brackets `<>` and double quotations `""`.
+통합 개발 환경(integrated development environment; IDE)은 코드 편집기 기능을 제공하며 컴파일러를 통해 실행 가능한 프로그램을 생성한다. 그러므로 본 장에서는 IDE 설치 및 초기설정 위주에 대하여 설명한다.
 
-```cpp
+## 비주얼 스튜디오
+
+[비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 윈도우 OS의 대표적인 IDE이며 MSVC 컴파일러를 제공한다. 비주얼 스튜디오는 총 세 가지의 에디션이 존재하며, 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. 그 중에서 C++ 프로그래밍 언어를 위해 "Desktop development with C++"를 선택한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. 비주얼 스튜디오 C++ 프로그래밍을 위한 구성요소.</center>
+
+만일 한국어 지원을 원한다면 Language packs 탭에서 한국어를 함께 선택하면 된다.
+
+비주얼 스튜디오를 실행하면 아래와 같은 시작화면이 나타난다. 새로운 프로젝트를 생성하려면 오른쪽 하단의 Create a new project 버튼을 클릭한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 2. 비주얼 스튜디오 시작화면.</center>
+
+C++로 만들 수 있는 프로그램은 다양하여 비주얼 스튜디오에서 선택할 수 있는 프로젝트 종류도 여러 가지가 있다. C++ 언어 프로젝트 생성을 위해서는 아래의 절차를 따라야 한다:
+
+1. 프로그래밍 언어를 C++로 선택하여 Console App(콘솔 어플리케이션)을 클릭한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 3. 비주얼 스튜디오 C++ 프로젝트 생성 (1단계).</center>
+
+2. 프로젝트 및 솔루션 이름을 선정한다. 여기서 프로젝트란, 소스 코드와 컴파일러 설정 등의 실질적인 코딩 내용을 관리하는 `.vcxproj` 확장자 파일이며, 솔루션은 여러 프로젝트 파일을 하나의 폴더처럼 담는 `.sln` 파일이다. 비주얼 스튜디오에서 프로젝트는 `.sln` 파일로 열기를 권장한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 4. 비주얼 스튜디오 C++ 프로젝트 생성 (2단계).</center>
+
+3. 비주얼 스튜디오에서 알아서 준비한 프로젝트를 그대로 사용한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 4. 비주얼 스튜디오 C++ 프로젝트 생성 (3단계).</center>
+
+위의 3단계 절차는 콘솔 어플리케이션 프로젝트를 생성하는 가장 간단한 방법이다. 만일 아무것도 없는 빈 프로젝트에서 생성하기를 원하면 *PRGMING_C* 문서의 설치 항목을 참조한다.
+
+비주얼 스튜디오에서 C++ 언어 프로그램을 실행하는 방법에는 두 가지가 존재한다: 디버그(debug) 모드(`F5`)와 일반 실행 모드(`Ctrl+F5`)이다. 프로그램에 문제가 발생하여 하나씩 짚어보아야 할 경우 디버깅 모드를 사용하지만, 그렇지 않은 경우에는 일반 실행 모드를 사용할 것을 권장한다.
+
+## 엑스코드
+
+[엑스코드](https://developer.apple.com/download/release/)(Xcode)는 애플에서 개발한 macOS의 대표적인 IDE이며 Clang을 기본 컴파일러로 사용한다. 엑스코드 또한 다른 프로그래밍 언어를 지원하는데, 비주얼 스튜디오와 마찬가지로 엑스코드는 C++ 프로그램 언어를 지원한다
+
+엑스코드를 실행한 다음, 새로운 프로젝트를 `File > New > Project...`로 통해 생성한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_xcode_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 5. 엑스코드 시작화면.</center>
+
+본격적인 엑스코드 창이 나타나게 되는데, 애플 제품의 어플리케이션 제작에 특화되어 있으며 프로젝트 종류도 여러 가지가 있다. C++ 언어 프로젝트 생성을 위해서는 아래의 절차를 따라야 한다:
+
+1. 사용하고 있는 컴퓨터가 macOS 운영체제이므로, macOS 탭에서 가장 간단한 터미널 형식의 프로그램을 위해 Command Line Tool을 선택한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_xcode_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 6. 엑스코드 C++ 프로젝트 생성 (1단계).</center>
+
+2. Product Name에는 프로젝트 이름을 선정하고, Language에는 C++로 선택한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_xcode_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 7. 엑스코드 C++ 프로젝트 생성 (2단계).</center>
+
+3. 프로젝트를 저장할 경로를 고른다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_xcode_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 8. 엑스코드 C++ 프로젝트 생성 (3단계).</center>
+
+4. 왼쪽 패널에는 Experiment 폴더 아래에 `main.cpp`라는 C 소스 파일이 생성되어 있으며, 최소한의 기본 코드가 작성되어 있다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_xcode_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 9. 엑스코드 C++ 프로젝트 생성 (4단계).</center>
+
+엑스코드에서 C++ 언어 프로그램을 실행하는 방법에는 두 가지가 존재한다: 디버그(debug) 모드와 일반 실행 모드이다. 실행 단축키는 `⌘+R` 하나로 통일되어 있다. 프로그램에 문제가 발생하여 검토가 필요한 경우, 관측하고자 하는 코드에 중단점(breakpoint)을 설정하여 디버깅을 한다. 활성화된 중단점을 모두 비활성화하여 프로그램을 일반적으로 실행하기 위해서는 단축키 `⌘+Y`로 중단점 활성화 토글을 한다.
+
+## 터미널
+
+리눅스 OS는 기본적으로 G++ 컴파일러가 설치되어 있으나, 위의 비주얼 스튜디오와 엑스코드를 사용할 수 없다. IDE는 컴파일에 반드시 필요한 요소가 아니며, 터미널에서도 컴파일 작업이 가능하다. 최근에는 라즈베리파이와 같은 단일 보드 컴퓨터(single-board computer; SBC)를 사용한 팀 프로젝트가 많아져, 본 내용과 같은 리눅스 사용법은 큰 도움이 될 수 있다.
+
+간단한 예시를 보여주기 위해, *그림 9. 엑스코드 C++ 프로젝트 생성 (4단계)*에 나온 코드를 그대로 가져와 `main.cpp`라는 소스 파일에 저장하였다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_g++_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 10. G++ 컴파일 작업 예시 코드.</center>
+
+위의 `main.cpp` 소스 파일은 `~/Workspace/Cpp/Experiment` 경로에 저장되었다고 하자.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_g++_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 11. GCC 컴파일러의 C++ 언어 프로그램 생성 (1단계).</center>
+
+터미널을 실행하여 소스 파일이 위치한 경로로 이동한다. 터미널에서 경로 이동은 `cd` 명령어를 사용한다. 소스 파일을 컴파일하기 위해서는 아래의 명령어를 입력한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_g++_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 12. G++ 컴파일러의 C++ 언어 프로그램 생성 (2단계).</center>
+
+본 명령어을 해석하면 `main.cpp` 소스 파일을 컴파일하여 이진 파일을 생성(`-o`)하는데, 생성된 이진 파일 이름은 `main`이라고 지정한다는 의미이다. 해당 예시는 GCC 컴파일러의 매우 간단한 예시 중 하나이며, 프로젝트 성질에 따라 외부 라이브러리 링크와 관련된 옵션도 추가할 수 있다.
+
+소스 파일이 위치한 폴더를 다시 한 번 확인하면 컴파일로 생성된 `main` 이진 파일을 확인할 수 있다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_g++_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 13. G++ 컴파일러의 C++ 언어 프로그램 생성 (3단계).</center>
+
+이진 파일 `main`을 실행하기 위해서는 터미널에서 `./`와 함께 실행 파일 이름을 입력한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_g++_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 14. G++ 컴파일러의 C++ 언어 프로그램 생성 (4단계).</center>
+
+여기서 `./`은 현재 경로를 의미한다. 현재 경로를 표시하는 구문이 없으면 리눅스 터미널은 `main`이란 파일과 전혀 연관이 없는 환경 변수에서 찾으려고 하며, 결국 파일을 찾지 못해 실행하지 못한다.
+
+# **C++: 기초**
+
+각 프로그래밍 언어마다 준수되어야 할 규칙과 기반이 되는 데이터들이 존재한다. 이를 어길 시에는 프로그램에 오류가 발생하거나 정상적인 동작을 보장할 수 없다. 실질적인 프로그래밍에 있어, 본 장에서는 C++ 프로그램 코딩에 기초적인 정보 제공을 목표로 한다.
+
+## 헤더 파일
+
+헤더 파일(header file)은 데이터 혹은 기능의 존재를 알리는 역할을 하며, 일반 C 언어와 호환가능한 `.h` 혹은 C++ 전용 `.hpp` 확장자를 가진다. 통상적으로 헤더 파일은 동일한 이름의 소스 파일과 짝을 이루며, 소스 파일에서 작성된 데이터와 코드를 헤더 파일로 통해 다른 소스 파일에서도 사용할 수 있도록 한다.
+
+프로그래밍 언어에서 흔히 사용되는 데이터와 기능들은 바로 사용할 수 있도록 미리 컴파일되어 있다. 이를 표준 라이브러리(standard library)라고 하며, 아래의 헤더 파일는 일부 표준 라이브러리를 소스 파일에 사용하게 한다.
+
+| 헤더 파일 | 구문                | 설명                                                      |
+|:------------:| --------------------- | ------------------------------------------------------------ |
+| `iostream`      | `#include <iostream>`  | 표준 입출력 함수를 정의한다:<br />`operator >>`, `operator <<`  |
+| `string`     | `#include <string>` | 텍스트 데이터 처리 함수를 정의한다:<br />`append()`, `length()` |
+| `cmath`       | `#include <cmath>`   | 수학적 계산 관련 함수를 정의한다:<br />`exp()`, `cos()` |
+| `chrono`       | `#include <chrono>`   | 날짜 및 시간 처리 함수를 정의한다:<br />`system_clock()`, `duration()` |
+
+소스 파일에 헤더 파일을 불러오는 방식에는 두 가지가 존재하며, 홑화살괄호(`<>`)와 큰 따옴표(`""`)가 있다.
+
+```c
 #include <iostream>
 #include "header.hpp"
 ```
 
-The difference is which location preprocessor searches for the including header files.
+이 둘은 전처리기가 헤더 파일을 어느 위치에서 찾을 것인지 차이점을 가진다.
 
-* `#include <header>`
-    : searches directories pre-designated by the compiler or IDE, generally used for system header.
-* `#include "header.hpp"`
-    : searches current local directories where source file is located firsthand. If failed to find the match automatically searches in the pre-designated directories, just like `#include <header>`. This method is generally used for user-defined header.
+* `#include <header.hpp>`
+    : 컴파일러 혹은 IDE에서 지정한 경로를 위주로 헤더 파일을 찾으며, 일반적으로 시스템 헤더 파일에 사용된다.
+* `#include "header.hpp"`:
+    : 현재 소스 파일이 위치한 경로를 위주로 헤더 파일을 찾는다. 만일 찾지 못하였을 시, ` #include <header.hpp>`와 같이 지정된 경로에서 헤더 파일을 재탐색한다. 일반적으로 사용자 정의 헤더 파일에 사용된다.
 
-Following is the list of header files that is often used when programming with C++ language.
+### 컴파일된 헤더
+컴파일된 헤더(precompiled header)는 컴파일러에서 더 빠른 속도로 처리할 수 있도록 중간체 형태로 컴파일된 헤더 파일이다. 컴파일 시간을 줄일 수 있는 장점을 가져 수많은 헤더 파일을 가진 프로젝트 혹은 큰 용량을 가진 헤더 파일에 효율적이다.
 
-| Header Files | Syntax                | Summery                                                                       |
-|--------------|-----------------------|-------------------------------------------------------------------------------|
-| `iostream`   | `#include <iostream>` | Defines standard input/output function:<br />`operator >>`, `operator <<`     |
-| `string`     | `#include <string>`   | Defines string-handling functions:<br />`append()`, `length()`                |
-| `cmath`      | `#include <cmath>`    | Define common mathematical functions:<br />`exp()`, `cos()`                   |
-| `chrono`     | `#include <chrono>`   | Defines date and time-handling functions:<br />`system_clock()`, `duration()` |
+하지만 컴파일된 헤더를 사용하면 컴파일 작업 자체에는 시간이 다소 걸리는 단점이 있다. 그러므로 용량이 작은 프로젝트나 자주 수정을 해야 하는 헤더 파일이 있다면 컴파일된 헤더 파일은 오히려 비효율적이다. 
 
-### Precompiled Header
+| 컴파일된 헤더 | 컴파일러                              |
+|:------------------:| ------------------------------------- |
+| `stdafx.h`         | 비주얼 스튜디오 2015 (msvc14) 혹은 이전 버전 |
+| `pch.h`            | 비주얼 스튜디오 2017 (msvc15) 혹은 이후 버전 |
 
-Precompiled header is a header that is compiled into an intermediate form that is faster to process for the compiler. Having benefit of reducing compilation time, precompiled header is used on the project that includes large amount of header files, or a header file with huge data.
+## 문장 종단자
+프로그래밍에서 문장(statement)이란, 실질적으로 무언가를 실행하는 코드를 의미한다. C++ 언어에서는 모든 문장의 끝에는 항상 문장 종단자(statement terminator)가 위치해야 하며 세미콜론(`;`) 기호를 사용한다.
 
-However, precompiled header is not always beneficial as using precompiled header does take more time to prepare for compilation. For a header file that is small or often subject to change, precompiled header is unnecessary.
+많은 프로그래밍 입문자가 가장 많이 저지르는 실수 중 하나로 문장 종단자를 잊어버리고 컴파일을 진행하는 것이다. 그러므로 C 기반 언어(C++과 C# 포함)에는 세미콜론을 넣는 것을 습관화해야 한다.
 
-| Precompiled Header | Compiler                              |
-|--------------------|---------------------------------------|
-| `stdafx.h`         | Visual Studio 2015 (msvc14) and below |
-| `pch.h`            | Visual Studio 2017 (msvc15) and above |
+## 주석
 
-# **C++: BASIC**
+주석(comment)은 프로그래밍에 있어 실행되지 않는 부분이며, 흔히 어떠한 정보를 간략히 스크립트 내에 입력하는데 사용된다. C++ 언어에는 두 가지의 주석이 존재하며, 이들은 각각 "한줄 주석"과 "블록 주석"이라 부른다.
 
-General programming language has essential, fundamental, or even helpful data and syntax that needs to be observed and acknowledged when coding. As the beginning of the practical coding, this chapter will introduce basic information on C++ language coding.
-
-## Comment
-
-There are two different comments in C++: line comment and block comment.
-
-* **Line comment**
-    : a comment worth a single line of code, and is declared by `//` (double slash).
-* **Block comment**
-    : a comment with multiple lines of code by using pairs of slash asterisk `/* */`.
+* **한줄 주석**
+    : 코드 한 줄을 차지하는 주석이며, 두 개의 슬래시(`//`)로 표시된다.
+* **블록 주석**
+    : 코드 여러 줄을 차지하는 주석이며, 한 쌍의 슬래시와 별표(`/* */`)로 표시된다.
 
 ```cpp
 /*
-BLOCK COMMENT:
-multiple line of comment can be placed here.
+블록 주석:
+코드 여러 줄을 차지하는 주석이다.
 */  
-// LINE COMMENT: for a single line of code.
+// 한줄 주석: 코드 한 줄을 차지하는 주석이다.
 ```
 
-## Identifier
+## 식별자
+식별자(identifier)는 프로그래밍을 구성하는 데이터(일명 구성체; construct)를 구별하기 위해 사용되는 명칭이다. 다시 말해, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C++ 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
 
-Identifier is a name used to identify a data such as namespace, variable, function, object, class, and more. In other word, it is just a (user-defined) name. There are rules identifier has to observe:
-
-* First character is only allowed to have an alphabet letters and underscore `_`.
-* Beside the first character may use alphabet letters, digits, or underscores.
-* Black spaces are prohibited.
+* 오직 영문, 숫자, 밑줄(`_`)만 허용된다.
+* 첫 문자는 숫자로 시작할 수 없다.
+* 공백은 허용되지 않는다.
 
 ## Namespace
 
@@ -166,7 +261,7 @@ using namespace1::function();
 using namespace namespace2;
 ```
 
-## Input & Output
+## 입력 & 출력
 
 C++ has an input and output under `std` namespace for a text-base console terminal using extraction (`>>`) operator and insertion (`<<`) operator:
 
