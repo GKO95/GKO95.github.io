@@ -45,7 +45,7 @@ order: 0x00
 
 다운로드 할 인터프리터를 결정하였으면 설치 방법을 선택해야 한다. 대체로 아래와 같은 설치 항목이 존재한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Python/python_interpreter_download.png" width="100%"></div><center style="font-weight: bold;">그림 1. 파이썬 3 공식 웹사이트 인터프리터 다운로드 목록.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Python/python_interpreter_download.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. 파이썬 3 공식 웹사이트 인터프리터 다운로드 목록.</center>
 
 윈도우 OS(예. 윈도우 10, 윈도우 8.1, 윈도우 7 등)에서는 64비트와 32비트 인터프리터를 제공하며, 이는 각각 `x86-64` 및 `x86`으로 표시된다. 해당 컴퓨터의 운영체제 및 아키텍처는 아래의 파일 탐색기 주소를 통해 확인할 수 있다.
 
@@ -69,11 +69,11 @@ Control Panel\System and Security\System
 
 다운로드가 완료된 설치 프로그램을 실행하면 아래와 같은 화면이 나타난다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Python/python_interpreter_install.png" width="100%"></div><center style="font-weight: bold;">그림 2. 파이썬 3 설치 프로그램 실행 화면.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Python/python_interpreter_install.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 2. 파이썬 3 설치 프로그램 실행 화면.</center>
 
 설치 화면에 있는 "Add Python 3.7 to PATH" 옵션은 환경 변수 설정 여부를 의미하며, 윈도우 명령 프롬프트에서 파이썬을 실행할 수 있도록 한다. 다음 그림은 윈도우 명령 프롬프트에서 파이썬을 실행하였을 시의 모습이다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Python/python_interpreter_cmd.png" width="100%"></div><center style="font-weight: bold;">그림 3. 윈도우 명령 프롬프트에서 실행된 파이썬 3.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Python/python_interpreter_cmd.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 3. 윈도우 명령 프롬프트에서 실행된 파이썬 3.</center>
 
 환경 변수 설정은 순수히 파이썬만 사용할 경우 필요가 없으나, 외부 소프트웨어 및 라이브러리와 연동할 경우에는 반드시 필요한 설정이다. 그러므로 본 문서는 환경 변수 설정을 적극 권장한다. 비록 설치 당시에 해당 옵션을 선택하지 않아도, 재설치 없이 설정이 가능하다.
 
@@ -87,7 +87,7 @@ Control Panel\System and Security\System
 
 [비주얼 스튜디오 코드](https://code.visualstudio.com/download)(Visual Studio Code; VS Code)는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 기술적으로 IDE는 아니지만, 편집기 설정을 통해 IDE 역할을 수행할 수 있다. 파이썬 프로그래밍 언어의 경우에는 파이썬 확장도구 설치 및 인터프리터를 불러오기만 하면 된다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Python/python_vscode_extension.png" width="100%"></div><center style="font-weight: bold;">그림 4. VS Code에서 파이썬 확장도구 설치.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Python/python_vscode_extension.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 4. VS Code에서 파이썬 확장도구 설치.</center>
 
 파이썬 확장도구는 VS Code를 파이썬 IDE로 사용할 수 있도록 한다. 즉, 소스 코드 편집 이외에도 프로그램 실행 및 디버깅도 가능하다는 의미이다. 확장도구 설치 방법은 다음과 같다: `F1` 키를 눌러 `Extensions: Install Extensions`을 입력하고, 왼쪽에 나타난 검색창에 `Python`을 검색한다. 그러면 위의 그림과 같은 화면이 나타나며, 초록색 `Install` 버튼을 눌러 설치한다.
 
@@ -389,7 +389,7 @@ print(4 * "2")
 
 | 메소드            | 예시                        | 설명                                                                                                                   |
 |:--------------:|---------------------------|----------------------------------------------------------------------------------------------------------------------|
-| `format()`     | ` text.format(value)`     | 문자열 또는 비문자열 `value`를 지정된 `{}` 공간에 위치별 혹은 이름별로 할당한다.                                                                  |
+| `format()`     | `text.format(value)`     | 문자열 또는 비문자열 `value`를 지정된 `{}` 공간에 위치별 혹은 이름별로 할당한다.                                                                  |
 | `join()`       | `text.join(str_list)`     | 문자열로 이루어진 리스트 객체인 `str_list` 내의 문자열들 사이에 `text` 문자열을 삽입하여 하나의 문자열로 결합한다.                                             |
 | `split()`      | `text.split()`            | 괄호 안에 문자열이 없는 경우, 공백에 따라 `text` 문자열을 구분하여 리스트 객체로 변환한다.<br/>*[선택사항: 괄호 안에 `str1`이 존재하면 `text`는 `str1`을 기준으로 나뉘어진다.]* |
 | `replace()`    | `text.replace(str1,str2)` | `text` 문자열 내에서 `str1`을 `str2`로 바꾼다.                                                                                  |

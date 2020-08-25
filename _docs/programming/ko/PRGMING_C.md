@@ -31,7 +31,7 @@ C 언어의 컴파일러는 국제표준기구(ISO)에서 표준을 발표한 �
 
 | 전처리기 지시문 | 예시                  | 설명                                              |
 | :-------------: | --------------------- | ------------------------------------------------- |
-|   `#include`    | `#include <iostream>` | 스크립트에 헤더 파일을 추가한다.                  |
+|   `#include`    | `#include <stdio.h>` | 스크립트에 헤더 파일을 추가한다.                  |
 |    `#define`    | `#define SQUARE`      | 스크립트 내에서 사용할 수 있는 매크로를 정의한다. |
 |    `#pragma`    | `#pragma once`        | 컴파일러에 추가적 설정을 제공한다.                |
 
@@ -47,31 +47,31 @@ C 프로그래밍 언어로 개발하기 위해서는 C 컴파일러가 반드�
 
 [비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 윈도우 OS의 대표적인 IDE이며 MSVC 컴파일러를 제공한다. 비주얼 스튜디오는 총 세 가지의 에디션이 존재하며, 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. 그 중에서 C 프로그래밍 언어를 위해 "Desktop development with C++"를 선택한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_component.png" width="100%"></div><center style="font-weight: bold;">그림 1. 비주얼 스튜디오 C 프로그래밍을 위한 구성요소.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. 비주얼 스튜디오 C 프로그래밍을 위한 구성요소.</center>
 
 C++ 구성요소를 선택한 이유는 C++ 컴파일러가 C 프로그래밍 언어 또한 컴파일하기 때문이다. 이러한 이유로 공식적으로 순수 C 프로그래밍 언어 구성요소가 따로 존재하지 않는다. 만일 한국어 지원을 원한다면 Language packs 탭에서 한국어를 함께 선택하면 된다.
 
 비주얼 스튜디오를 실행하면 아래와 같은 시작화면이 나타난다. 새로운 프로젝트를 생성하려면 오른쪽 하단의 Create a new project 버튼을 클릭한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project1.png" width="100%"></div><center style="font-weight: bold;">그림 2. 비주얼 스튜디오 시작화면.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 2. 비주얼 스튜디오 시작화면.</center>
 
 위에서 언급하였듯이 비주얼 스튜디오는 공식적으로 C 프로그래밍 언어에 대한 선택 옵션이 존재하지 않으므로, 프로젝트 생성 메뉴에서 C 프로그래밍 언어 선택은 찾을 수 없다. 그러므로 C 언어 프로젝트 생성을 위해서는 아래의 절차를 따라야 한다:
 
 1. 프로그래밍 언어를 C++로 선택하여 Empty Project(빈 프로젝트)를 클릭한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project2.png" width="100%"></div><center style="font-weight: bold;">그림 3. 비주얼 스튜디오 C 프로젝트 생성 (1단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 3. 비주얼 스튜디오 C 프로젝트 생성 (1단계).</center>
 
 2. 프로젝트 및 솔루션 이름을 선정한다. 여기서 프로젝트란, 소스 코드와 컴파일러 설정 등의 실질적인 코딩 내용을 관리하는 `.vcxproj` 확장자 파일이며, 솔루션은 여러 프로젝트 파일을 하나의 폴더처럼 담는 `.sln` 파일이다. 비주얼 스튜디오에서 프로젝트는 `.sln` 파일로 열기를 권장한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project3.png" width="100%"></div><center style="font-weight: bold;">그림 4. 비주얼 스튜디오 C 프로젝트 생성 (2단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 4. 비주얼 스튜디오 C 프로젝트 생성 (2단계).</center>
 
 3. 오른쪽의 솔루션 탐색기(Solution Explorer)에서 소스 파일(Source Files)에 오른쪽 클릭하여 `추가 > 새 항목`을 클릭한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project4.png" width="100%"></div><center style="font-weight: bold;">그림 4. 비주얼 스튜디오 C 프로젝트 생성 (3단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 4. 비주얼 스튜디오 C 프로젝트 생성 (3단계).</center>
 
 4. 새 항목 추가 창에서 C++ 파일을 선택하나, 파일 이름에서 확장자를 C++ 소스 파일 확장자의 `.cpp`에서 C 소스 파일 확장자인 `.c`로 변경한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project5.png" width="100%"></div><center style="font-weight: bold;">그림 5. 비주얼 스튜디오 C 프로젝트 생성 (4단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 5. 비주얼 스튜디오 C 프로젝트 생성 (4단계).</center>
 
 단, 빈 프로젝트를 통해 추가된 소스 파일인 만큼 내부에는 어떠한 기본적인 코드가 작성되어 있지 않는다. 아래의 코드를 소스 파일에 붙여넣으며, 코드에 대한 설명은 차후 진행될 예정이다.
 
@@ -103,25 +103,25 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 
 엑스코드를 실행한 다음, 새로운 프로젝트를 `File > New > Project...`로 통해 생성한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project1.png" width="100%"></div><center style="font-weight: bold;">그림 6. 엑스코드 시작화면.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 6. 엑스코드 시작화면.</center>
 
 본격적인 엑스코드 창이 나타나게 되는데, 애플 제품의 어플리케이션 제작에 특화되어 있으며 프로젝트 종류도 여러 가지가 있다. C 언어 프로젝트 생성을 위해서는 아래의 절차를 따라야 한다:
 
 1. 사용하고 있는 컴퓨터가 macOS 운영체제이므로, macOS 탭에서 가장 간단한 터미널 형식의 프로그램을 위해 Command Line Tool을 선택한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project2.png" width="100%"></div><center style="font-weight: bold;">그림 7. 엑스코드 C 프로젝트 생성 (1단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 7. 엑스코드 C 프로젝트 생성 (1단계).</center>
 
 2. Product Name에는 프로젝트 이름을 선정하고, Language에는 C로 선택한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project3.png" width="100%"></div><center style="font-weight: bold;">그림 7. 엑스코드 C 프로젝트 생성 (2단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 8. 엑스코드 C 프로젝트 생성 (2단계).</center>
 
 3. 프로젝트를 저장할 경로를 고른다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project4.png" width="100%"></div><center style="font-weight: bold;">그림 8. 엑스코드 C 프로젝트 생성 (3단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 9. 엑스코드 C 프로젝트 생성 (3단계).</center>
 
 4. 왼쪽 패널에는 Experiment 폴더 아래에 `main.c`라는 C 소스 파일이 생성되어 있으며, 최소한의 기본 코드가 작성되어 있다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project5.png" width="100%"></div><center style="font-weight: bold;">그림 9. 엑스코드 C 프로젝트 생성 (4단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 10. 엑스코드 C 프로젝트 생성 (4단계).</center>
 
 엑스코드에서 C 언어 프로그램 실행 모드는 한 가지만 존재하며, 단축키는 `⌘+R`이다. 프로그램에 문제가 발생하여 검토가 필요한 경우, 관측하고자 하는 코드에 중단점(breakpoint)을 설정하여 디버깅을 한다. 활성화된 중단점을 모두 비활성화하여 프로그램을 일반적으로 실행하기 위해서는 단축키 `⌘+Y`로 중단점 활성화 토글을 한다.
 
@@ -131,25 +131,25 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 
 간단한 예시를 보여주기 위해, *그림 9. 엑스코드 C 프로젝트 생성 (4단계)*에 나온 코드를 그대로 가져와 `main.c`라는 소스 파일에 저장하였다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project1.png" width="100%"></div><center style="font-weight: bold;">그림 10. GCC 컴파일 작업 예시 코드.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" style="display:block" src="./../../../assets/images/docs/C/c_gcc_project1.png" width="100%"></div><center style="font-weight: bold;">그림 11. GCC 컴파일 작업 예시 코드.</center>
 
 위의 `main.c` 소스 파일은 `~/Workspace/C/Experiment` 경로에 저장되었다고 하자.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project2.png" width="100%"></div><center style="font-weight: bold;">그림 11. GCC 컴파일러의 C 언어 프로그램 생성 (1단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 12. GCC 컴파일러의 C 언어 프로그램 생성 (1단계).</center>
 
 터미널을 실행하여 소스 파일이 위치한 경로로 이동한다. 터미널에서 경로 이동은 `cd` 명령어를 사용한다. 소스 파일을 컴파일하기 위해서는 아래의 명령어를 입력한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project3.png" width="100%"></div><center style="font-weight: bold;">그림 12. GCC 컴파일러의 C 언어 프로그램 생성 (2단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 13. GCC 컴파일러의 C 언어 프로그램 생성 (2단계).</center>
 
 본 명령어을 해석하면 `main.c` 소스 파일을 컴파일하여 이진 파일을 생성(`-o`)하는데, 생성된 이진 파일 이름은 `main`이라고 지정한다는 의미이다. 해당 예시는 GCC 컴파일러의 매우 간단한 예시 중 하나이며, 프로젝트 성질에 따라 외부 라이브러리 링크와 관련된 옵션도 추가할 수 있다.
 
 소스 파일이 위치한 폴더를 다시 한 번 확인하면 컴파일로 생성된 `main` 이진 파일을 확인할 수 있다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project4.png" width="100%"></div><center style="font-weight: bold;">그림 13. GCC 컴파일러의 C 언어 프로그램 생성 (3단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 14. GCC 컴파일러의 C 언어 프로그램 생성 (3단계).</center>
 
 이진 파일 `main`을 실행하기 위해서는 터미널에서 `./`와 함께 실행 파일 이름을 입력한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project5.png" width="100%"></div><center style="font-weight: bold;">그림 14. GCC 컴파일러의 C 언어 프로그램 생성 (4단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 15. GCC 컴파일러의 C 언어 프로그램 생성 (4단계).</center>
 
 여기서 `./`은 현재 경로를 의미한다. 현재 경로를 표시하는 구문이 없으면 리눅스 터미널은 `main`이란 파일과 전혀 연관이 없는 환경 변수에서 찾으려고 하며, 결국 파일을 찾지 못해 실행하지 못한다.
 
