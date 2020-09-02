@@ -201,6 +201,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     box-sizing: border-box;
     border: solid rgb(64, 64, 64) 4px;
@@ -213,6 +214,25 @@
     padding: 4px 8px;
     list-style-type: none;
     //height: calc(100% - 4px * 2);
+}
+
+.home-alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    left: 0px;
+    top: 0px;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: 2.4em;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+
+    background-color: rgb(80, 80, 80);
 }
 
 //================================

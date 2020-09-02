@@ -61,15 +61,25 @@ if (document.readyState == "complete") {
 // >> COMMON MENU
 //========================================
 // >> MENU SIZING
-document.getElementById("menu");
 const __menusize__ = () => {
     document.getElementById("menu").style.top = document.getElementsByTagName("NAV")[0].getBoundingClientRect().bottom + "px";
     document.getElementById("menu").style.height = window.innerHeight - document.getElementsByTagName("NAV")[0].offsetHeight + "px";
+
+    const MENU_HEIGHT = 80; // PERCENTAGE
+    document.getElementById("menu-main").style.height = MENU_HEIGHT + "%";
+
+    const MENU_WIDTH_LANDSCAPE = 64;    // PERCENTAGE
+    const MENU_WIDTH_PORTRAIT  = 88;    // PERCENTAGE
+    if (window.outerHeight < window.outerWidth)
+        document.getElementById("menu-main").style.width = MENU_WIDTH_LANDSCAPE + "%";
+    else
+        document.getElementById("menu-main").style.width = MENU_WIDTH_PORTRAIT + "%";
 
     document.getElementById("menu-content").style.height = document.getElementById("menu-main").offsetHeight - document.getElementById("menu-option").offsetHeight
         - parseInt(getComputedStyle(document.getElementById("menu-option")).marginTop) - parseInt(getComputedStyle(document.getElementById("menu-content")).marginBottom)
         - ( parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) > parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop)
             ? parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) : parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop) ) + "px";
+
 }; 
 
 // >> PREVENT DOCUMENT SCROLLING ON MENU
@@ -89,6 +99,7 @@ const __scrollenable__ = () => {
 
 // >> MENU BUTTON CLICK (INCLUDING CONVENIENT CLICK)
 const __menuclick__ = (event) => {
+    const MENU_HEIGHT = parseInt(document.getElementById("menu-main").style.height);
 
     let animate; let opacityMenuBkgd; let sizeMenuMain; let opacityMenuMain;
     if (document.getElementById("menu").style.visibility == "hidden")
@@ -97,14 +108,14 @@ const __menuclick__ = (event) => {
         opacityMenuBkgd = 0.0; sizeMenuMain = 0; opacityMenuMain = 0.0;
         animate = setInterval(function() {
             document.getElementById("menu").style.visibility = "visible";
-            if (opacityMenuBkgd == 7 && sizeMenuMain == 80 && opacityMenuMain == 10) 
+            if (opacityMenuBkgd == 7 && sizeMenuMain == MENU_HEIGHT && opacityMenuMain == 10) 
             {
                 clearInterval(animate);
             }
             else
             {
                 if (opacityMenuBkgd < 7) {opacityMenuBkgd++;}
-                if (sizeMenuMain < 80) {sizeMenuMain += 20;}
+                if (sizeMenuMain < MENU_HEIGHT) {sizeMenuMain += 20;}
                 if (opacityMenuMain < 10) {opacityMenuMain++;}
                 document.getElementById("menu-bkgd").style.backgroundColor = "rgba(128,128,128,"+(opacityMenuBkgd/10)+")";
                 document.getElementById("menu-main").style.height = sizeMenuMain + "%";
@@ -115,7 +126,7 @@ const __menuclick__ = (event) => {
     else
     {
         __scrollenable__();
-        opacityMenuBkgd = 7; sizeMenuMain = 80; opacityMenuMain = 10;
+        opacityMenuBkgd = 7; sizeMenuMain = MENU_HEIGHT; opacityMenuMain = 10;
         animate = setInterval(function() {
             if (opacityMenuBkgd <= 0.0 && sizeMenuMain <= 0 && opacityMenuMain <= 0.0)
             {

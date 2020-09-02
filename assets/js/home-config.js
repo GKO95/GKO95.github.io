@@ -13,6 +13,7 @@ const __SHIFTS__    = document.getElementsByClassName("home-shift");
 const __LOWER__     = document.getElementById("home-lower");
 const __ANNOUNCE__  = document.getElementById("home-announcement").getElementsByTagName("UL")[0];
 const __BULLETIN__  = document.getElementById("home-bulletin").getElementsByTagName("UL")[0];
+const __ALERT__     = document.getElementById("home-alert");
 
 //========================================
 // TITLE: IMPLEMENTATION
@@ -193,6 +194,40 @@ for (let index = 0; index < __BYTES__.length; index++)
 //========================================
 // REGSITER: SHIFTING BYTES
 //========================================
+const ByteAlert = (index) => {
+
+    let popup = document.createElement("DIV");
+    popup.setAttribute("CLASS","home-alert");
+
+    let timer = Date.now();
+    popup.style.zIndex = timer -  Math.floor(timer/100000) * 100000;
+
+    switch(index)
+    {
+        case 0:
+            popup.innerHTML = "LANGUAGE";
+            break;
+        case 1: 
+            popup.innerHTML = "LIBRARY";
+            break;
+    }
+
+    document.getElementById("home-announcement").prepend(popup);
+    setTimeout(() => {
+        let opacity = 100;
+        let animate = setInterval(() => {
+            if (opacity == 0)
+            {
+                clearInterval(animate);
+                popup.remove();
+            }
+            popup.style.opacity = opacity/100;
+            opacity -= 10;
+        }, 20);
+    }, 500);
+    
+};
+
 for (let shift of __SHIFTS__)
 {
     shift.addEventListener("click", function() {
@@ -201,14 +236,14 @@ for (let shift of __SHIFTS__)
         {
             if (currIndex == 0) {currIndex = (__BYTES__.length - 1);}
             else {currIndex--;}
-            InitRegister();
         }
         else if (shift.id == "shift-right")
         {
             if (currIndex == (__BYTES__.length - 1)) {currIndex = 0;}
             else {currIndex++;}
-            InitRegister();
         }
+        InitRegister();
+        ByteAlert(currIndex);
     });
 }
 
