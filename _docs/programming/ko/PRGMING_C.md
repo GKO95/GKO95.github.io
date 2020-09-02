@@ -10,6 +10,7 @@ summary: "."
 order: 0x01
 ---
 # **C: 소개**
+> *참조: [Microsoft Docs C 언어 설명서 (한국어)](https://docs.microsoft.com/ko-kr/cpp/c-language/)*
 
 C 언어는 유닉스(UNIX) 컴퓨터를 위한 소프트웨어 제작을 위해 개발된 *B* 언어의 후속작이다. 현재 C 언어는 가장 널리 사용되고 있는 프로그래밍 언어로 C++, C#, 파이썬, 자바 등 여러 프로그래밍 언어에 영향을 주었다. C 언어의 다른 프로그래밍 언어에 비해 매우 빠른 처리 속도와 훌륭한 호환성을 가지고 있어 소프트웨어 및 펌웨어 개발에 여전히 사용되고 있다.
 
@@ -49,15 +50,15 @@ C 프로그래밍 언어로 개발하기 위해서는 C 컴파일러가 반드�
 
 <div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. 비주얼 스튜디오 C 프로그래밍을 위한 구성요소.</center>
 
-C++ 구성요소를 선택한 이유는 C++ 컴파일러가 C 프로그래밍 언어 또한 컴파일하기 때문이다. 이러한 이유로 공식적으로 순수 C 프로그래밍 언어 구성요소가 따로 존재하지 않는다. 만일 한국어 지원을 원한다면 Language packs 탭에서 한국어를 함께 선택하면 된다.
+C++ 구성요소를 선택한 이유는 C++ 컴파일러가 C 프로그래밍 언어 또한 컴파일하기 때문이다. 이러한 이유로 공식적으로 순수 C 프로그래밍 언어 구성요소가 따로 존재하지 않는다. 만일 한국어 지원을 원한다면 "Language packs" 탭에서 한국어를 함께 선택하면 된다.
 
-비주얼 스튜디오를 실행하면 아래와 같은 시작화면이 나타난다. 새로운 프로젝트를 생성하려면 오른쪽 하단의 Create a new project 버튼을 클릭한다.
+비주얼 스튜디오를 실행하면 아래와 같은 시작화면이 나타난다. 새로운 프로젝트를 생성하려면 오른쪽 하단의 "Create a new project" 버튼을 클릭한다.
 
 <div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 2. 비주얼 스튜디오 시작화면.</center>
 
 위에서 언급하였듯이 비주얼 스튜디오는 공식적으로 C 프로그래밍 언어에 대한 선택 옵션이 존재하지 않으므로, 프로젝트 생성 메뉴에서 C 프로그래밍 언어 선택은 찾을 수 없다. 그러므로 C 언어 프로젝트 생성을 위해서는 아래의 절차를 따라야 한다:
 
-1. 프로그래밍 언어를 C++로 선택하여 Empty Project(빈 프로젝트)를 클릭한다.
+1. 프로그래밍 언어를 C++로 선택하여 "Empty Project"(빈 프로젝트)를 클릭한다.
 
 <div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 3. 비주얼 스튜디오 C 프로젝트 생성 (1단계).</center>
 
@@ -67,11 +68,11 @@ C++ 구성요소를 선택한 이유는 C++ 컴파일러가 C 프로그래밍 �
 
 3. 오른쪽의 솔루션 탐색기(Solution Explorer)에서 소스 파일(Source Files)에 오른쪽 클릭하여 `추가 > 새 항목`을 클릭한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 4. 비주얼 스튜디오 C 프로젝트 생성 (3단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 5. 비주얼 스튜디오 C 프로젝트 생성 (3단계).</center>
 
 4. 새 항목 추가 창에서 C++ 파일을 선택하나, 파일 이름에서 확장자를 C++ 소스 파일 확장자의 `.cpp`에서 C 소스 파일 확장자인 `.c`로 변경한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 5. 비주얼 스튜디오 C 프로젝트 생성 (4단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_vs_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 6. 비주얼 스튜디오 C 프로젝트 생성 (4단계).</center>
 
 단, 빈 프로젝트를 통해 추가된 소스 파일인 만큼 내부에는 어떠한 기본적인 코드가 작성되어 있지 않는다. 아래의 코드를 소스 파일에 붙여넣으며, 코드에 대한 설명은 차후 진행될 예정이다.
 
@@ -103,53 +104,53 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 
 엑스코드를 실행한 다음, 새로운 프로젝트를 `File > New > Project...`로 통해 생성한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 6. 엑스코드 시작화면.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 7. 엑스코드 시작화면.</center>
 
 본격적인 엑스코드 창이 나타나게 되는데, 애플 제품의 어플리케이션 제작에 특화되어 있으며 프로젝트 종류도 여러 가지가 있다. C 언어 프로젝트 생성을 위해서는 아래의 절차를 따라야 한다:
 
 1. 사용하고 있는 컴퓨터가 macOS 운영체제이므로, macOS 탭에서 가장 간단한 터미널 형식의 프로그램을 위해 Command Line Tool을 선택한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 7. 엑스코드 C 프로젝트 생성 (1단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 8. 엑스코드 C 프로젝트 생성 (1단계).</center>
 
 2. Product Name에는 프로젝트 이름을 선정하고, Language에는 C로 선택한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 8. 엑스코드 C 프로젝트 생성 (2단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 9. 엑스코드 C 프로젝트 생성 (2단계).</center>
 
 3. 프로젝트를 저장할 경로를 고른다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 9. 엑스코드 C 프로젝트 생성 (3단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 10. 엑스코드 C 프로젝트 생성 (3단계).</center>
 
 4. 왼쪽 패널에는 Experiment 폴더 아래에 `main.c`라는 C 소스 파일이 생성되어 있으며, 최소한의 기본 코드가 작성되어 있다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 10. 엑스코드 C 프로젝트 생성 (4단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_xcode_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 11. 엑스코드 C 프로젝트 생성 (4단계).</center>
 
-엑스코드에서 C 언어 프로그램을 실행하는 방법에는 두 가지가 존재한다: 디버그(debug) 모드와 일반 실행 모드이다. 실행 단축키는 `⌘+R` 하나로 통일되어 있다. 프로그램에 문제가 발생하여 검토가 필요한 경우, 관측하고자 하는 코드에 중단점(breakpoint)을 설정하여 디버깅을 한다. 활성화된 중단점을 모두 비활성화하여 프로그램을 일반적으로 실행하기 위해서는 단축키 `⌘+Y`로 중단점 활성화 토글을 한다.
+엑스코드에서 C 언어 프로그램을 실행하는 방법에는 두 가지가 존재한다: 디버그(debug) 모드와 일반 실행 모드이다. 두 실행 모드는 단축키 `⌘+R` 하나로 통일되어 있으며, 실행 모드 변경은 프로젝트 설정에서 한다. 프로그램에 문제가 발생하여 검토가 필요한 경우, 관측하고자 하는 코드에 중단점(breakpoint)을 설정하여 디버깅을 한다. 활성화된 중단점을 모두 비활성화하여 프로그램을 일반적으로 실행하기 위해서는 단축키 `⌘+Y`로 중단점 활성화 토글을 한다.
 
 ## 터미널
 
 리눅스 OS는 기본적으로 GCC 컴파일러가 설치되어 있으나, 위의 비주얼 스튜디오와 엑스코드를 사용할 수 없다. IDE는 컴파일에 반드시 필요한 요소가 아니며, 터미널에서도 컴파일 작업이 가능하다. 최근에는 라즈베리파이와 같은 단일 보드 컴퓨터(single-board computer; SBC)를 사용한 팀 프로젝트가 많아져, 본 내용과 같은 리눅스 사용법은 큰 도움이 될 수 있다.
 
-간단한 예시를 보여주기 위해, *그림 10. 엑스코드 C 프로젝트 생성 (4단계)*에 나온 코드를 그대로 가져와 `main.c`라는 소스 파일에 저장하였다.
+간단한 예시를 보여주기 위해, *그림 11. 엑스코드 C 프로젝트 생성 (4단계)*에 나온 코드를 그대로 가져와 `main.c`라는 소스 파일에 저장하였다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" style="display:block" src="./../../../assets/images/docs/C/c_gcc_project1.png" width="100%"></div><center style="font-weight: bold;">그림 11. GCC 컴파일 작업 예시 코드.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" style="display:block" src="./../../../assets/images/docs/C/c_gcc_project1.png" width="100%"></div><center style="font-weight: bold;">그림 12. GCC 컴파일 작업 예시 코드.</center>
 
 위의 `main.c` 소스 파일은 `~/Workspace/C/Experiment` 경로에 저장되었다고 하자.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 12. GCC 컴파일러의 C 언어 프로그램 생성 (1단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 13. GCC 컴파일러의 C 언어 프로그램 생성 (1단계).</center>
 
 터미널을 실행하여 소스 파일이 위치한 경로로 이동한다. 터미널에서 경로 이동은 `cd` 명령어를 사용한다. 소스 파일을 컴파일하기 위해서는 아래의 명령어를 입력한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 13. GCC 컴파일러의 C 언어 프로그램 생성 (2단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 14. GCC 컴파일러의 C 언어 프로그램 생성 (2단계).</center>
 
 본 명령어을 해석하면 `main.c` 소스 파일을 컴파일하여 이진 파일을 생성(`-o`)하는데, 생성된 이진 파일 이름은 `main`이라고 지정한다는 의미이다. 해당 예시는 GCC 컴파일러의 매우 간단한 예시 중 하나이며, 프로젝트 성질에 따라 외부 라이브러리 링크와 관련된 옵션도 추가할 수 있다.
 
 소스 파일이 위치한 폴더를 다시 한 번 확인하면 컴파일로 생성된 `main` 이진 파일을 확인할 수 있다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 14. GCC 컴파일러의 C 언어 프로그램 생성 (3단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 15. GCC 컴파일러의 C 언어 프로그램 생성 (3단계).</center>
 
 이진 파일 `main`을 실행하기 위해서는 터미널에서 `./`와 함께 실행 파일 이름을 입력한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 15. GCC 컴파일러의 C 언어 프로그램 생성 (4단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/C/c_gcc_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 16. GCC 컴파일러의 C 언어 프로그램 생성 (4단계).</center>
 
 여기서 `./`은 현재 경로를 의미한다. 현재 경로를 표시하는 구문이 없으면 리눅스 터미널은 `main`이란 파일과 전혀 연관이 없는 환경 변수에서 찾으려고 하며, 결국 파일을 찾지 못해 실행하지 못한다.
 
@@ -335,7 +336,7 @@ printf("%3d", variable);
 
 ```c
 sizeof(int);        // 크기: 4 바이트
-sizeof(char);        // 크기: 1 바이트
+sizeof(char);       // 크기: 1 바이트
 ```
 
 ## 변수
@@ -359,10 +360,11 @@ int variable;
 
 > A declaration is a definition unless it declares a function without specifying the function’s body (8.4), it contains the extern specifier (7.1.1) or a linkage-specification25 (7.5) and neither an initializer nor a function- body, it declares a static data member in a class definition (9.2, 9.4), it is a class name declaration (9.1), it is an opaque-enum-declaration (7.2), it is a template-parameter (14.1), it is a parameter-declaration (8.3.5) in a function declarator that is not the declarator of a function-definition, or it is a typedef declaration (7.1.3), an alias-declaration (7.1.3), a using-declaration (7.3.3), a static_assert-declaration (Clause 7), an attribute- declaration (Clause 7), an empty-declaration (Clause 7), a using-directive (7.3.4), an explicit instantiation declaration (14.7.2), or an explicit specialization (14.7.3) whose declaration is not a definition.
 
-위의 표준은 C++에 비롯되지만, C 프로그래밍 언어만을 고려하였을 때 아래의 세 가지 선언들의 경우로 압축하여 정리된다.
-* 함수 프로토타입
-* `typedef` 선언
+위의 표준은 C++에 비롯되지만, C 프로그래밍 언어만을 고려하였을 때 아래의 네 가지 선언들은 정의가 아닌 것으로 정리된다.
+* 함수 전방선언
+* 함수 매개변수 선언
 * `extern` 키워드 선언
+* `typedef` 선언
 
 실제로 위의 변수를 출력하면 값이 반환되는 것을 보아 할당은 되지 않았으나 데이터를 가지고 있음을 확인할 수 있다. 한 번 정의된 변수는 컴파일러가 어떠한 데이터 종류를 할당받을 수 있는지 알고 있으므로 더이상 자료형을 표시할 필요가 없다. 또한 모든 프로그래밍 언어는 할당 연산자를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)를 놓는다. 반대로 위치시키면 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
@@ -425,10 +427,11 @@ C 언어에는 크게 세 종류의 변수로 나뉘어진다.
   }
   ```
 
-### 상수 변수
-상수 변수(constant variable)는 초기화 이후 변경할 수 없는 특별한 변수이다. 상수 변수는 `const` 키워드를 통해 정의한다.
+### 상수
+상수(constant)는 초기화 이후 변경할 수 없는 특별한 변수이다. 상수는 `const` 키워드를 통해 정의한다.
 
 ```c
+/* 상수 정의 */
 const int variable = 1;
 ```
 
@@ -440,7 +443,7 @@ short A = 1;    // 2 바이트 정수형
 int B = A;      // 4 바이트 정수형
 ```
 
-이에 반대되는 *명시적* 자료형 변환은 데이터 손실의 위험을 감수하며 데이터의 자료형을 바꾼다. C 언어 형식의 명시적 자료형 변환은 아래와 같이 소괄호(`()`)를 활용한다.
+이에 반대되는 *명시적* 자료형 변환(일명 캐스트; cast)은 데이터 손실의 위험을 감수하며 데이터의 자료형을 바꾼다. C 언어 형식의 캐스팅은 아래와 같이 소괄호(`()`)를 활용한다.
 
 ```c
 float A = 1.9;  // 4 바이트 부동소수점
@@ -681,7 +684,7 @@ C 언어는 여러 데이터를 하나의 변수에 저장하는 배열(array)�
 배열(array)은 동일한 자료형의 데이터를 순번대로 담는 저장공간이다. 배열을 정의할 시, 대괄호(`[]`) 안에는 얼마나 많은 데이터를 담을 수 있는지 용량을 정해야 한다.
 
 ```c
-/* 배열 선언 */
+/* 배열 정의 */
 int arr[size];
 ```
 
@@ -747,7 +750,7 @@ int arr[][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 
 ## 문자열
 
-C 언어는 일련의 문자들, 일명 문자열(string)을 자체적으로 자료형으로 지원하지 않는다. 하지만 이를 문자들 널 문자(`\0`)로 구성된 배열로 문자열을 표현할 수 있다.
+C 언어는 일련의 문자들, 일명 문자열(string)을 자체적으로 자료형으로 지원하지 않는다. 하지만 이를 문자들과 널 문자(`\0`)로 구성된 배열로 문자열을 표현할 수 있다.
 
 ```c
 /* C-형식 문자열 */
@@ -794,7 +797,7 @@ function();    // >> 출력: 3
 
 C 언어는 위에서부터 순차적으로 코드가 실행되기 때문에, 아직 정의가 되지 않은 상태에서 함수를 호출할 수 없다. 이를 고려하여 모든 함수의 정의를 스크립트 맨 위에 위치시키면 가독성이 저하되고 관리하기 매우 힘들어질 수 있다.
 
-함수 프로토타입(prototype)은 컴파일러에게 미리 함수의 존재를 알리는 선언 역할을 하지만, *C: 기초 § 변수*에서 언급한대로 함수의 선언은 함수의 정의와 전혀 다른 존재이다. 프로토타입은 필수요소는 아니지만 대체로 스크립트의 상단부에 위치하며, 함수 정의 구문에서 코드 블록(`{}`)을 세미콜론(`;`)으로 대체하면 된다.
+함수 프로토타입(prototype), 일명 전방선언(forward declaration)은 컴파일러에게 미리 함수의 존재를 알리는 선언 역할을 하지만, *C: 기초 § 변수*에서 언급한대로 함수의 선언은 함수의 정의와 전혀 다른 존재이다. 프로토타입은 필수요소는 아니지만 대체로 스크립트의 상단부에 위치하며, 함수 정의 구문에서 코드 블록(`{}`)을 세미콜론(`;`)으로 대체하면 된다.
 
 ```c
 /* 함수 프로토타입 */
@@ -884,7 +887,7 @@ void function(int *arg)
 후자의 방법이 가능한 이유는 배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오며, 바로 옆 메모리 주소에는 다음 요소가 연쇄적으로 할당되어 있기 때문이다. 상세한 내용은 다음 장인 *C: 포인터*에서 설명할 것이다.
 
 ## 시작점
-시작점(entry point)는 프로그램이 시작되는 부분이다. C 언어의 시작점은 `main()` 함수 정의이며, 해당 함수는 프로토타입 및 호출이 존재하지 않는다. 이는 C 언어의 유일한 시작점으로 복수의 `main()` 함수가 존재하거나 없을 경우 에러가 발생해 프로그램이 실행되지 않는다.
+시작점(entry point)는 프로그램이 시작되는 부분이다. C 언어의 시작점은 `main()` 함수 정의이며, 해당 함수는 프로토타입 및 호출이 존재하지 않는다. 이는 C 언어의 유일한 시작점으로 복수의 `main()` 함수가 존재하거나 아예 없을 경우 에러가 발생해 프로그램이 실행되지 않는다.
 
 ```c
 /* C 언어 프로그램 시작점: main() */
@@ -984,11 +987,8 @@ calling(&callback, 1);    // >> 출력: 4.0
 
 ```c
 /* 정수형 포인터 변수 선언 */
-int *ptr;            // WARNING C4700: 초기화되지 않은 지역 변수 'ptr'이 사용되었습니다.
-printf("%p", ptr); 
-```
-```
-0x0
+int *ptr;
+printf("%p", ptr);   // ERROR C4700: 초기화되지 않은 지역 변수 'ptr'이 사용되었습니다.
 ```
 
 변수의 포인터(즉, 메모리 주소)를 호출하기 위해서는 앰퍼샌드 기호(`&`) 연산자를 사용하여 확인할 수 있다.
@@ -999,7 +999,7 @@ int variable = 365;
 printf("%p", &variable);
 ```
 ```
-0x1014eb010
+1014eb010
 ```
 
 십육진수의 메모리 주소는 수기로 직접 작성할 수 있는 것이 아니며, 이는 매우 위험한 행위이다! 포인터 변수를 초기화하는 방법으로는 기존하는 변수의 메모리 주소를 할당하는 것이 유일하다. 여기서 포인터 변수와 변수 간의 자료형은 일치하도록 한다.
@@ -1080,8 +1080,8 @@ int main() {
 
 함수 포인터를 초기화 시, 포인터 함수의 자료형은 함수 자료형과 일치해야 하며 매개변수 또한 자료형과 개수가 동일해야 한다. 이들을 만족하지 않으면 컴파일 작업 오류가 발생하게 된다. 함수를 `function()`과 같이 소괄호와 함께 호출되면 함수 `return` 문의 데이터가 반환되지만, 소괄호가 없이 `function`만 호출하면 메모리 주소가 대신 반환된다.
 
-# **C: 사용자 정의 자료구조**
-C 언어에서 흔히 사용되는 `int`, `float`, `char` 등과 같은 데이터 자료형은 이미 `stdio.h` 헤더 파일에 정의되어 있다. 이러한 내부 자료형을 기반으로 목적에 알맞은 사용자 정의 자료구조을 새롭게 지정할 수 있으며, 본 장은 자료형처럼 사용할 수 있는 사용자 정의 자료구조의 정의 및 활용법을 설명한다.
+# **C: 자료구조**
+C 언어에서 흔히 사용되는 `int`, `float`, `char` 등과 같은 데이터 자료형은 이미 `stdio.h` 헤더 파일에 정의되어 있다. 이러한 내부 자료형을 기반으로 목적에 알맞은 자료구조을 새롭게 지정할 수 있으며, 본 장은 자료형처럼 사용할 수 있는 자료구조의 정의 및 활용법을 설명한다.
 
 ## 구조체
 구조체(structure)는 자료형과 상관없이 여러 내부 변수(일명, 맴버; member)를 하나의 단일 데이터로 통합시킨 자료구조 구성체이다. 구조체의 정의는 `struct` 키워드를 통해 이루어진다.
@@ -1090,8 +1090,8 @@ C 언어에서 흔히 사용되는 `int`, `float`, `char` 등과 같은 데이�
 /* 구조체 정의: 총 5 바이트 활용 */
 struct STRUCTURE {
     // 내부 변수 정의
-    int    field1;    // 자료형 크기: 4 바이트
-    char   field2;    // 자료형 크기: 1 바이트
+    int   field1;    // 자료형 크기: 4 바이트
+    char  field2;    // 자료형 크기: 1 바이트
 };
 ```
 
@@ -1113,26 +1113,68 @@ struct STRUCTURE variable;
 variable = (struct STRUCTURE) {3, 'A'};
 ```
 
-구조체 정의 이후, 구조체 변수의 내부 변수는 `struct` 키워드가 필요없이 맴버 연산자(`.`)만을 통해 접근할 수 있다.
+구조체 정의 이후, 구조체 변수의 내부 변수는 `struct` 키워드가 필요없이 맴버 연산자(`.`)를 통해 접근한다.
 
 ```c
 variable.field1;    // >> 출력: 3
 variable.field2;    // >> 출력: A
 ```
 
-### 일회용 구조체
-위에서 설명한 구문은 한 번 정의된 구조체를 재사용하여 동일한 자료구조의 여러 구조체 변수를 정의할 수 있도록 한다. 만일 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 구조체를 생성하려면 아래와 같은 정의 구문을 사용한다.
+### 익명 구조체
+위에서 설명한 구문은 한 번 정의된 구조체를 재사용하여 동일한 자료구조의 여러 구조체 변수를 정의할 수 있도록 한다. 만일 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 구조체를 생성하려면 아래와 같은 구문으로 익명 구조체(anonymous structure)를 정의한다.
 
 ```c
 /* 일회용 구조체 정의 및 변수 초기화 */
 struct {
-    int    field1;
-    char   field2;
+    int   field1;
+    char  field2;
 } variable = {3, 'A'};
 ```
 
+## 공용체
+공용체(union)는 구조체와 유사하게 자료형과 상관없이 여러 내부 변수(일명, 맴버; member)를 하나의 단일 데이터로 통합시킨 자료구성 구성체이지만, 내부 변수들은 하나의 메모리 공간을 공유한다. 즉, 공용체의 한 내부 변수 데이터가 변하면 하나의 메모리 주소를 공용하기 때문에 나머지 내부 변수의 값에 영향을 미친다. 공용체의 정의는 `union` 키워드를 통해 이루어진다.
+
+```c
+/* 공용체 정의: 총 4 바이트 활용 */
+union UNION {    
+    // 내부 변수 정의
+    int    field1;    // 자료형 크기: 4 바이트
+    char   field2;    // 자료형 크기: 1 바이트
+}
+```
+
+공용체에 할당되는 메모리 크기는 내부 변수 중에서 가장 큰 메모리 용량이 요구되는 자료형과 동일한데, 이는 나머지 내부 변수도 하나의 메모리 공간에서 처리할 수 있도록 하기 위해서이다.
+
+정의된 공용체를 자료구조로 사용하는 공용체 변수는 아래와 같은 정의 방법이 존재하며 `union` 키워드가 요구된다. 비록 공용체가 두 개 이상의 내부 변수를 가지지만 하나의 메모리 공간만을 사용하기 때문에 초기화 단계에서 하나의 내부 변수만 할당하면 된다.
+
+```c
+/* 공용체 변수 초기화 */
+union UNION variable = (union UNION) {365};    // >> 결과: 0x 00 00 01 6D
+
+printf("Field1: %d (%#010x)\n", variable.field1, variable.field1);
+printf("Field2: %d (%#010x)\n", variable.field2, variable.field2);
+```
+
+```
+Field1: 365 (0x0000016d)
+Field2: 109 (0x0000006d)
+```
+
+첫 번째 내부 변수 `field1`은 4 바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되는 반면, 두 번째 내부 변수 `field2`는 1 바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 109 정수가 출력되었다.
+
+### 익명 공용체
+위에서 설명한 구문은 한 번 정의된 공용체를 재사용하여 동일한 자료구조의 여러 공용체 변수를 정의할 수 있도록 한다. 만일 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 공용체를 생성하려면 아래와 같은 구문으로 익명 공용체(anonymous union)를 정의한다.
+
+```c
+/* 일회용 공용체 정의 및 변수 초기화 */
+union {
+    int    field1;
+    char   field2;
+} variable = {365};
+```
+
 ## 열거형
-열거형(enumeration)은 열거된 항목들을 정수로 순번을 매기는 구성체이며, 열거자(enumerator)라고 부르는 열거 항목들은 기본적으로 정수 0부터 시작하여 순서대로 1만큼 값이 증가한다.
+열거형(enumeration)은 열거된 항목들을 정수로 순번을 매기는 자료형으로, 자료구조가 아니다. 열거자(enumerator)라고 부르는 열거 항목들은 각각 정수값이 할당되어 있으며, 기본적으로 정수 0부터 시작하여 순서대로 1만큼 값이 증가한다.
 
 > 초창기 C 컴파일러인 "K&R C"에는 존재하지 않았으나, 본 문서에서 다루는 보편적인 컴파일러 버전인 "ANSI C"부터 추가된 구성체이다.
 
@@ -1171,73 +1213,31 @@ enum ENUMERATION2 {
     enumeration4,    // 오류: 열거자 'enumerator4'가 재정의 되었습니다.
     enumeration5,
     enumeration6
-}
+};
 ```
 
-열거형은 정확히 자료구조가 아니며, 정수값을 각자의 식별자를 통해 호출하는 특수한 배열(즉, 일종의 연관 배열; associative array)이라고 분류할 수 있다. 여기서 열거자가 바로 정수값의 식별자 역할을 한다.
+열거형 정의 이후, 열거형 변수는 `enum` 키워드를 통해 정의되며 열거자 자체는 키워드를 필요로 하지 않는다. 또한 열거형 변수가 아닌 정수형 변수로도 열거자를 할당받을 수 있다.
 
 ```c
-/* 열거형 할당 1 */
-int variable1 = enumerator1;
+/* 열거형 변수에 열거자 할당 */
+enum ENUMERATION variable = enumerator1;
 ```
 ----
 ```c
-/* 열거형 할당 2 */
-enum ENUMERATION variable2 = enumerator2;
-```
-
-## 공용체
-공용체(union)는 구조체와 유사하게 자료형과 상관없이 여러 내부 변수(일명, 맴버; member)를 하나의 단일 데이터로 통합시킨 자료구성 구성체이지만, 내부 변수들은 하나의 메모리 공간을 공유한다. 즉, 공용체의 한 내부 변수 데이터가 변하면 하나의 메모리 주소를 공용하기 때문에 나머지 내부 변수의 값에 영향을 미친다. 공용체의 정의는 `union` 키워드를 통해 이루어진다.
-
-```c
-/* 공용체 정의: 총 4 바이트 활용 */
-union UNION {    
-    // 내부 변수 정의
-    int    field1;    // 자료형 크기: 4 바이트
-    char   field2;    // 자료형 크기: 1 바이트
-}
-```
-
-공용체에 할당되는 메모리 크기는 내부 변수 중에서 가장 큰 메모리 용량이 요구되는 자료형과 동일한 데, 이는 나머지 내부 변수도 하나의 메모리 공간에서 처리할 수 있도록 하기 위해서이다.
-
-정의된 공용체를 자료구조로 사용하는 공용체 변수는 아래와 같은 정의 방법이 존재하며 `union` 키워드가 요구된다. 비록 공용체가 두 개 이상의 내부 변수를 가진다 하더라도 하나의 메모리 공간만을 사용하기 때문에 초기화 단계에서 하나의 데이터만 할당하면 된다.
-
-```c
-/* 공용체 변수 초기화 */
-union UNION variable = (union UNION) {365};    // >> 결과: 0x 00 00 01 6D
-
-printf("Field1: %d (%#010x)\n", variable.field1, variable.field1);
-printf("Field2: %d (%#010x)\n", variable.field2, variable.field2);
-```
-
-```
-Field1: 365 (0x0000016d)
-Field2: 109 (0x0000006d)
-```
-
-첫 번째 내부 변수 `field1`은 4 바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되는 반면, 두 번째 내부 변수 `field2`는 1 바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 109 정수가 출력되었다.
-
-### 일회용 공용체
-위에서 설명한 구문은 한 번 정의된 공용체를 재사용하여 동일한 자료구조의 여러 공용체 변수를 정의할 수 있도록 한다. 만일 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 공용체를 생성하려면 아래와 같은 정의 구문을 사용한다.
-
-```c
-/* 일회용 공용체 정의 및 변수 초기화 */
-union {
-    int    field1;
-    char   field2;
-} variable = {365};
+/* 정수형 변수에 열거자 할당 */
+int variable = enumerator1;
 ```
 
 ## Typedef 키워드
 
-`typedef` 키워드는 기존에 존재하는 자료형을 다른 명칭(일명 가명; alias name)으로 선언하여 가독성을 높이는 역할을 한다.
+`typedef` 키워드는 기존에 존재하는 자료형 혹은 자료구조를 다른 명칭(일명 별칭; alias)으로 선언하여 가독성을 높이는 역할을 한다.
 
 ```c
 /* int 정수 자료형의 가명 선언 */
 typedef int dtypeName;
 ```
 
-C 프로그래밍에서 `typedef` 키워드는 그 외에 구조체와 공용체 정의을 간략화하는 역할도 지니며, 이를 통해 정의된 자료구조를 익명 구조체(anonymous structure) 그리고 익명 공용체(anonymous union)라고 부른다.
+C 프로그래밍에서 `typedef` 키워드는 그 외에 구조체와 공용체 정의을 간략화하는 역할도 지닌다.
 
 ```c
 /* 간략화된 구조체 정의 */
@@ -1680,7 +1680,7 @@ C 프로그래밍 언어 컴파일 작업은 두 단계를 거쳐 빌드가 진�
 ### 컴파일러 내장 매크로
 컴파일러는 개발자가 사용할 수 있는 공통된 표준 매크로 및 컴파일러 특정 내장 매크로를 가진다. 아래는 MSVC, GCC, 그리고 그 외의 컴파일러가 가지는 내장 매크로 목록을 보여주는 문서이다(영문).
 
-* MSVC: [Microsoft Docs - Predefined Macros](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
+* MSVC: [Microsoft Docs - 미리 정의된 매크로](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
 * GCC: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
 * 그 외: https://sourceforge.net/p/predef/wiki/Compilers/
 
@@ -1688,9 +1688,9 @@ C 프로그래밍 언어 컴파일 작업은 두 단계를 거쳐 빌드가 진�
 조건 포함문(conditional inclusion)은 조건을 제시하여 부합 여부에 따라 특정 코드를 컴파일 작업 시 포함시킬 것인지 배제할 것인지 결정한다. 
 
 ```cpp
-#if        SOMETHING > value
+#if    SOMETHING > value
     statements;
-#elif    SOMETHING < value
+#elif  SOMETHING < value
     statements;
 #else
     statements;
