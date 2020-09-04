@@ -56,7 +56,7 @@ C++ 프로그래밍 언어로 개발하기 위해서는 C++ 컴파일러가 반�
 
 <div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 2. 비주얼 스튜디오 시작화면.</center>
 
-C++로 만들 수 있는 프로그램은 다양하여 비주얼 스튜디오에서 선택할 수 있는 프로젝트 종류도 여러 가지가 있다. C++ 언어 프로젝트 생성을 위해서는 아래의 절차를 따라야 한다:
+C++로 만들 수 있는 프로그램은 다양하여 비주얼 스튜디오에서 선택할 수 있는 프로젝트 종류도 여러 가지가 있다. C++ 언어 프로젝트 생성을 위해서는 아래의 절차를 따른다:
 
 1. 프로그래밍 언어를 C++로 선택하여 "Console App"(콘솔 어플리케이션)을 클릭한다.
 
@@ -553,7 +553,7 @@ std::cout << "안녕하세요.\n처음 뵙겠습니다!";
 ## `if` 조건문
 `if` 조건문은 조건이 참일 경우 코드를 실행한다. 조건이 `true`일 때 문장이 수행되지만 그렇지 않으면 무시된다.
 
-```c
+```cpp
 if (condition)
 {
     statements;
@@ -565,7 +565,7 @@ if (condition) statement;
 
 `if` 조건문 안에 또다른 `if` 조건문을 넣을 수 있으며, 이를 *네스티드(nested)* `if` 조건문이라고 부른다. 이러한 경우, 코드 블록(`{}`)을 사용하여 두 `if` 조건문의 경계를 명확히 구별하기를 권장한다.
 
-```c
+```cpp
 if (condition)
 {
     if (condtion)
@@ -578,7 +578,7 @@ if (condition)
 ### `else` 조건문
 `else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 실행문에는 조건부가 `false`로 평가되었을 경우 호출되는 코드가 포함되어 있다.
 
-```c
+```cpp
 if (condition)
 {
     statements;
@@ -589,10 +589,10 @@ else
 }
 ```
 
-### `else if` Statement
+### `else if` 조건문
 `else if` 조건문은 `else`와 `if` 조건문의 조합으로 첫 번째 조건이 거짓일 경우, 첫 번째 조건과 다른 새로운 조건을 제시한다.
 
-```c
+```cpp
 if (condition)
 {
     statements;
@@ -612,7 +612,7 @@ else
 ### 조건 연산자
 조건문은 아래와 같이 조건 연산자(ternary operator; `?:`)를 사용하여 간략히 표현될 수 있다.
 
-```c
+```cpp
 condition ? true_return : false_return;
 ```
 
@@ -623,7 +623,7 @@ condition ? true_return : false_return;
 
 모든 경우에 조건이 부합하지 않을 시, `default` 키워드에 연동된 문장이 실행되며, `switch` 조건문에는 반드시 있어야 한다. 그러나 `case` 키워드와 달리 `break` 탈출문을 필요로 하지 않는다.
 
-```c
+```cpp
 switch (argument)
 {
     case value1:
@@ -639,7 +639,7 @@ switch (argument)
 
 `switch` 조건문은 복수의 경우가 하나의 실행문을 공유할 수 있다.
 
-```c
+```cpp
 switch (argument)
 {
     case value1:
@@ -665,7 +665,7 @@ switch (argument)
 ## `while` 반복문
 `while` 반복문은 조건이 유지되는 한 내부 코드를 반복적으로 실행한다. 조건이 `false`임이 판정되면 반복문을 종료한다.
 
-```c
+```cpp
 while (condition)
 {
     statements;
@@ -678,7 +678,7 @@ while (condition) statement;
 ### `do`-`while` 반복문
 `do`-`while` 반복문은 `while` 반복문과 유사한다. 그러나 후자는 조건을 먼저 확인하고 문장을 실행하였으면, 전자는 문장을 우선 실행하고 조건을 확인한다.
 
-```c
+```cpp
 do
 {
     statements
@@ -688,7 +688,7 @@ do
 ## `for` 반복문
 `for` 반복문은 정의된 지역 변수가 조건에 만족하는 한 지속적으로 반복한다. 한 번 반복할 때마다 지역 변수에는 반복문에 명시된 대로 변화가 발생하며, 일반적으로 정수형 증감을 사용한다.
 
-```c
+```cpp
 for (variable; condition; increment) {
     statements;
 }
@@ -1301,7 +1301,7 @@ C++ 문자열 자료형은 `iostream` 헤더의 일부인 `string` 헤더 파일
 
 ```cpp
 /* C++ 문자열 */
-std∷string str = "Hello World!";
+std::string str = "Hello World!";
 ```
 
 ### 문자열 배열
@@ -1312,7 +1312,7 @@ std∷string str = "Hello World!";
 std::string arr[] = {"Hello", "World!"};
 ```
 
-# **C++: 객체지향 프로그래밍**
+# **C++: 객체 및 클래스**
 
 본 문서에서 현재까지 절차적 및 함수형 프로그래밍에 대하여 소개하였다. 세 번째 프로그래밍 방법인 객체지향 프로그래밍(object-oriennted programming; OOP)은 함수 대신 클래스와 객체 사용을 기반으로 한다.  본 장은 C++에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
 

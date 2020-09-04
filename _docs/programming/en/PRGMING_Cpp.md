@@ -1168,7 +1168,7 @@ C++ string data type is included in `string.h` header which is part of the `iost
 
 ```cpp
 // C++ STRING
-std∷string str = "Hello World!";
+std::string str = "Hello World!";
 ```
 
 ### String Array
@@ -2283,7 +2283,7 @@ The `rand()` function is a pseudo random number generator; it generates number r
 #include <cstdlib>
 
 for (int index = 0; index < 3; index++) {
-    std∷cout << rand() << " ";
+    std::cout << rand() << " ";
 }
 
 // >> OUTPUT: 1 7 4 (1ST EXECUTION)
@@ -2303,7 +2303,7 @@ However, `rand()` function is still required to generate random number. Thus, nu
 srand(98);	// SEED FOR RANDOMNESS
 
 for (int index = 0; index < 3; index++) {
-    std∷cout << rand() << " ";
+    std::cout << rand() << " ";
 }
 
 // >> OUTPUT: 8 7 5 (1ST EXECUTION)
@@ -2324,7 +2324,7 @@ Timestamp can be acquired using `time()` function included in `ctime.h` header. 
 srand(time(0));	// TIMESTAMP AS SEED FOR RANDOMNESS
 
 for (int index = 0; index < 3; index++) {
-    std∷cout << rand() << " ";
+    std::cout << rand() << " ";
 }
 
 // >> OUTPUT: 4 0 0 (1ST EXECUTION)

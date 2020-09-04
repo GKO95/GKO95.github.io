@@ -32,25 +32,7 @@ if (document.readyState == "complete") {
 
         }
     }
-    /*
-    if (__initsize__ <= window.innerHeight)
-    { 
-        if (window.innerHeight < parseInt(getComputedStyle(document.body).minHeight))
-        {
-            document.getElementsByTagName("MAIN")[0].style.height
-                = parseInt(getComputedStyle(document.body).minHeight)
-                    - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height
-                    - document.getElementsByTagName("FOOTER")[0].offsetHeight + "px";
-        }
-        else
-        {
-            document.getElementsByTagName("MAIN")[0].style.height
-                = window.innerHeight
-                    - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height
-                    - document.getElementsByTagName("FOOTER")[0].offsetHeight + "px";
-        }
-    }
-    */
+
     document.getElementsByTagName("MAIN")[0].style.visibility = "visible";
     document.getElementsByTagName("FOOTER")[0].style.visibility = "visible";
     //alert(__initsize__ + " : " +document.body.getBoundingClientRect().height);
@@ -68,12 +50,13 @@ const __menusize__ = () => {
     const MENU_HEIGHT = 80; // PERCENTAGE
     document.getElementById("menu-main").style.height = MENU_HEIGHT + "%";
 
-    const MENU_WIDTH_LANDSCAPE = 64;    // PERCENTAGE
-    const MENU_WIDTH_PORTRAIT  = 88;    // PERCENTAGE
-    if (window.outerHeight < window.outerWidth)
-        document.getElementById("menu-main").style.width = MENU_WIDTH_LANDSCAPE + "%";
-    else
-        document.getElementById("menu-main").style.width = MENU_WIDTH_PORTRAIT + "%";
+    const MENU_WIDTH = 88;    // PERCENTAGE
+
+    document.getElementById("menu-main").style.width = MENU_WIDTH + "%";
+    if (window.outerWidth * (MENU_WIDTH/100) > 1.5 * window.outerHeight * (MENU_HEIGHT/100) )
+    {
+        document.getElementById("menu-main").style.width = (1.5 * window.outerHeight * (MENU_HEIGHT/100)) + "px";
+    }
 
     document.getElementById("menu-content").style.height = document.getElementById("menu-main").offsetHeight - document.getElementById("menu-option").offsetHeight
         - parseInt(getComputedStyle(document.getElementById("menu-option")).marginTop) - parseInt(getComputedStyle(document.getElementById("menu-content")).marginBottom)
@@ -193,8 +176,6 @@ window.addEventListener('resize', event => {
                 = window.innerHeight - document.getElementsByTagName("FOOTER")[0].offsetHeight
                     - document.getElementsByTagName("HEADER")[0].getBoundingClientRect().height + "px";
         }
-
-
     }
     
     __menusize__();

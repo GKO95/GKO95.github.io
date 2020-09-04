@@ -56,6 +56,11 @@ table {
     border-width: 1px;
 
     border-collapse: collapse;
+    
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
 }
 
 th {
