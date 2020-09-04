@@ -229,10 +229,10 @@
     height: 100%;
 
     font-size: 2.4em;
-    font-weight: bold;
+    font-weight: bolder;
     letter-spacing: 0.1em;
 
-    background-color: rgb(80, 80, 80);
+    background-color: rgb(96, 96, 96);
 }
 
 //================================
@@ -244,7 +244,12 @@
     margin-bottom: 8px;
 
     //background-color: rgb(24, 24, 24);
-    height: calc(100% - 64px - 8px * 2);
+    height: calc(100% - (8px * 2) - (64px) - (32px + 8px));
+    /*
+    64px    : home-announcement.height
+    8px(x2) : home-bulletin.marginTop and marginBottom
+
+    */
 }
 
 #home-bulletin ul {
@@ -275,6 +280,9 @@
 }
 
 #home-bulletin li {
+    display: flex;
+    align-items: center;
+
     background-color: rgb(64, 64, 64);
     height: 100%;
     color: white;
@@ -283,6 +291,20 @@
 #home-bulletin span {
     display: inline-block;
     margin: 16px;
+}
+
+#home-archive {
+    display: block;
+
+    height: 32px;
+    margin: 8px 0px;
+
+    background-color: rgb(64, 64, 64);
+    color: rgb(255,255,255);
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
 //================================
