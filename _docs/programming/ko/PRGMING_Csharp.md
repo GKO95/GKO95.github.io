@@ -63,9 +63,9 @@ C#은 "객체"라는 데이터를 위주로 프로그램을 개발하는 객체�
 
 클래스(class)는 객체를 생성하는 데 사용된다. 객체의 필드가 어떠한 값을 가지며 메소드는 어떻게 동작하는지 모두 클래스 내에 정의되어 있다. 정의된 맴버들은 클래스에서 바로 사용할 수 없으며 객체를 통해서만 사용할 수 있다. 여기서 클래스로부터 객체를 생성하는 과정을 *객체화(instantiation)*라고 부른다.
 
-### `static` 한정자
+### `static` 접근 한정자
 
-`static` 한정자(modifier) 키워드를 가지는 맴버는 객체화가 필요없이 클래스에서 바로 접근하여 사용할 수 있다. 객체를 생성하지 않아도 메소드를 사용할 수 있는 점에서 매우 편리함을 제공하지만, `static` 한정자가 가지는 특성으로 인해 빈번한 사용은 결과적으로 코드를 복잡하게 만들 수 있다.
+`static` 접근 한정자(access modifier), 혹은 접근 지정자(access specifier) 키워드를 가지는 맴버는 객체화가 필요없이 클래스에서 바로 접근하여 사용할 수 있다. 객체를 생성하지 않아도 메소드를 사용할 수 있는 점에서 매우 편리함을 제공하지만, `static` 한정자가 가지는 특성으로 인해 빈번한 사용은 결과적으로 코드를 복잡하게 만들 수 있다.
 
 ## 시작점
 
@@ -159,74 +159,77 @@ C#로 만들 수 있는 프로그램은 다양하여 비주얼 스튜디오에�
 
 네임스페이스(혹은 이름공간; namespace)은 식별자의 유일성을 보장하기 위한 데이터 분류 공간이다. 컴퓨터와 비교하면, 동일한 이름의 파일(데이터)을 서로 다른 폴더(네임스페이스)에 넣어 관리하는 것과 동일한 이치이다.
 
-네임스페이스는 `namespace` 키워드를 통해 생성되며, 데이터는 코드 블록(`{}`) 내에 저장된다. 네임스페이스에 들어있는 데이터를 접근하기 위해서는 맴버 연산자(member access operator; `.`)를 사용한다. 그러나 네임스페이스 또한 구성체 중 하나이므로 유일한 식별자를 가져야 하며, 다른 구성체와 동일한 이름을 가져서는 안된다.
+네임스페이스는 `namespace` 키워드를 통해 선언되며, 데이터는 코드 블록(`{}`) 내에 저장된다. 네임스페이스에 들어있는 데이터를 접근하기 위해서는 맴버 연산자(member access operator; `.`)를 사용한다. 그러나 네임스페이스 또한 구성체 중 하나이므로 유일한 식별자를 가져야 하며, 다른 구성체와 동일한 이름을 가져서는 안된다.
 
 ```csharp
 namespace NAMESPCAE1
 {
 	class Program{
         static void Main(){
-            // CALLING DATA IN DIFFERENT NAMESPACES
+            /* 다른 네임스페이스의 클래스 및 맴버 호출하기 */
             NAMESPACE2.CLASS.field;
-            NAMESPACE3.CLASS.method();
+            NAMESPACE3.NAMESPACE4.CLASS.method();
         }
     }
     
-    // NESTED NAMESCOPE
+    /* 네스티드(NESTED) 네임스페이스 */
     namespace NAMESPACE2
     {
         static class CLASS { public var field; }
     }
 }
 
-// INDEPENDENT NAMESCOPE
+/* NAMESPACE1과 독립된 별도의 네임스페이스 */
 namespace NAMESPACE3
 {
-	static class CLASS { public void method() statement; }
+    namespace NAMESPACE4
+    {
+	    static class CLASS { public void method() statement; }
+    }
 }
 ```
 
-### Global Namespace
+### 전역 네임스페이스
 
-Aka. "root namespace", global namespace represents calling the data not included in any namespace, thus root of the namespace. Global namespace can be identified by a leading `::` operator (aka. qualifier) with `global` keyword.
+전역 네임스페이스(global namespace), 일명 "루트(root; 근본)" 네임스페이스는 어떠한 네임스페이스에도 속하지 않는 최외각 영역범위를 의미한다. 전역 네임스페이스의 데이터는 `global` 키워드와 함께 네임스페이스 별칭 한정자(namespace alias qualifier)인 `::` 연산자를 데이터 식별자의 접두부에 위치하여 접근할 수 있다.
 
-```c#
+```csharp
 global::variable;
 ```
 
-### `using` Declaration
+### `using` 선언
 
-Declaration with `using` keyword is used to simplify code by reducing repetitive typing of namespace upon using data.
+`using` 키워드는 네임스페이스 내의 데이터를 간편하게 접근할 수 있도록 한다. 다시 말해, 네임스페이스 명시없이 데이터 호출이 가능하다.
 
-```c#
-// ACCESSING NAMESPACE
+```csharp
+/* using 선언: System 네임스페이스 생략 가능 */
 using System;
 ```
 
-While `using` keyword is convenient, declaring too many namespace can lead to identity collision problem. Hence, C# supports aliasing namespace that is not available in C/C++.
+그러나 `using` 키워드를 무분별하게 사용할 시 컴파일러는 네임스페이스로 나뉘어진 동일한 이름의 데이터를 구별하지 못하는 문제가 발생한다. 그러므로 C#은 네임스페이스 별칭 기능을 지원한다.
 
-Namespace aliasing can either reference namespace, or reference data type such as class, structure, and more. The difference between these two is formal can dive deeper into using qualifier (`::`), but latter cannot.
+네임스페이스 별칭은 네임스페이스 자체를 참조하거나, 혹은 네임스페이스에 내포된 데이터를 참조할 수 있다. 전자의 경우는 네임스페이스 내에 어떠한 데이터를 호출할지 `::` 연산자로 선택할 수 있으나, 후자는 이미 선택된 데이터만 호출할 수 있다.
 
-```c#
-// NAMESPACE ALIASES: REFERENCING NAMESPACE
-using scope1 = System;            // namespace "System"
+```csharp
+// 네임스페이스 별칭: 네임스페이스 참조
+using scope1 = System;            // "System" 네임스페이스
 scope1::Console.WriteLine("First Line");
 
-// NAMESPACE ALIASES: REFERENCING TYPE
-using scope2 = System.Console;    // class "System.Console"
+// 네임스페이스 별칭: 데이터 참조
+using scope2 = System.Console;    // "System.Console" 클래스
 scope2.WriteLine("Second Line");
 ```
 
-## Input & Output
+## 입력 & 출력
 
-C# displays the results by writing on the console windows and has two different version of output:
+C# 언어는 콘솔 터미널에 텍스트를 출력하는 기능이 `System.Conosle` 클래스에 두 개의 메소드로 정의되어 있으며, 각각 다음과 같이 출력한다:
 
-| OUTPUT                | SYNTAX                      | DESCRIPTION                             |
+| 출력                | 구문                      | 설명                             |
 |-----------------------|-----------------------------|-----------------------------------------|
-| `Console.Write()`     | `Console.Write("Text")`     | Write function without line terminator. |
-| `Console.WriteLine()` | `Console.WriteLine("Text")` | Write function with new line feature.   |
+| `Console.Write()`     | `Console.Write("Text")`     | 줄바꿈 없이 텍스트를 터미널에 출력한다. |
+| `Console.WriteLine()` | `Console.WriteLine("Text")` | 줄바꿈과 함께 텍스트를 터미널에 출력한다.   |
 
-```c#
+```csharp
 class Program{
     static void Main(){
         System.Console.Write("Hello");
@@ -242,15 +245,15 @@ HelloWorld!Spam
 Egg
 ```
 
-Meanwhile, there are three different of input which it reads the input data from the console:
+한편, 동일한 클래스 내에는 콘솔 터미널로부터 데이터를 받는 세 개의 입력 메소드가 존재한다:
 
-| INPUT                | RETURN         | DESCRIPTION                                         |
+| 입력                | 반환         | 설명                                         |
 |----------------------|----------------|-----------------------------------------------------|
-| `Console.Read()`     | Integer        | Read function for a single character in ASCII.      |
-| `Console.ReadLine()` | String         | Read function for a single line of text in string.  |
-| `Console.ReadKey()`  | ConsoleKeyInfo | Read function for a single keyboard button pressed. |
+| `Console.Read()`     | UTF 코드 번호  | 하나의 문자를 읽는다.      |
+| `Console.ReadLine()` | 텍스트         | 한 줄의 텍스트를 읽는다.  |
+| `Console.ReadKey()`  | ConsoleKeyInfo | 키보드 버튼 입력을 읽는다 |
 
-```c#
+```csharp
 using System;
 
 class Program{
@@ -281,211 +284,221 @@ Console.ReadKey:
 >>> Spacebar
 ```
 
-### Placeholder
+### 자리 표시자
 
-Placeholder is used in formatted string to place variable value to certain location of text.
+자리 표시자(placeholder)는 데이터를 텍스트의 특정 위치에 삽입하도록 하며, 중괄호(`{}`) 사이에 0부터 시작하여 숫자를 넣어서 표시한다. 형식 텍스트 이후부터를 0번 데이터가 되어 순차적으로 번호가 증가한다.   
 
-```c#
-int variable1 = 3;
-char variable2 = 'G';
-System.Console.Write("First: {0}, Second: {1}, Return to {0}.", variable1, variable2);
+```csharp
+System.Console.Write("첫 번째: {0}, 두 번째: {1}, 그리고 다시 {0}.", 3, 'G');
 ```
 
 ```
-First 3, Second G, Return to 3.
+첫 번쨰: 3, 두 번째: G, 그리고 다시 3.
 ```
 
-### Escape Character
+### 탈출 문자
 
-Escape character `\` is used to escape from sequence of character and execute certain operation within text-base data.
+탈출 문자(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 아래는 탈출 문자 중에서 흔히 사용되는 줄바꿈(`\n`)이다.
 
-```c#
-System.Console.Write("First Line\nSecond Line");
+```csharp
+System.Console.Write("Hello\nWorld!");
 ```
 
 ```
-First Line
-Second Line
+Hello
+World!
 ```
 
-| SYNTAX | DESCRIPTION    |
-|--------|----------------|
-| `\n`   | New line       |
-| `\t`   | Horizontal tab |
-| `\\`   | Backslash      |
-| `\b`   | Backspace      |
-| `\'`   | Single quote   |
-| `\"`   | Double quote   |
+| 구문 | 설명           |
+|:----:| -------------- |
+| `\n` | 줄바꿈       |
+| `\t` | 탭 |
+| `\\` | 백슬래시      |
+| `\b` | 백스페이스      |
+| `\'` | 작은 따옴표    |
+| `\"` | 큰 따옴표      |
 
-## Data Type
+## 자료형
 
-Data type is one of the important factor which determines type and byte size of the data. A well-implemented data type can results memory and time efficiency when processing the script.
+자료형은 프로그래밍에서 자료 형식과 바이트 크기를 결정하는 매우 중요한 구성요소 중 하나이다. 자료형에 따라 프로그램의 메모리 및 처리속도에 효율을 보여줄 수 있다. 아래는 C# 프로그래밍 언어가 가지는 자료형이다.
 
-C# programming language have several number of pre-defined type identifier as follows:
-
-| IDENTIFIER | DATA TYPE               | DESCRIPTION                                                                                          |
+| 식별자 | 자료형               | 설명                                                                                          |
 |------------|-------------------------|------------------------------------------------------------------------------------------------------|
-| `int`      | Integer                 | 32-bits precision integer number.<br />Size: 4 bytes                                                 |
-| `float`    | Floating point number   | Real number with decimal points<br />Size: 4 bytes (requires suffix `f` or `F`)                      |
-| `double`   | Double-precision float  | Float with doubled precision and memory.<br />Size: 8 bytes (with or without suffix `d` or `D`)      |
-| `decimal`  | Highest-precision float | Float with greater precision and memory<br/>Size: 16 bytes (requires suffix `m` or `M`)              |
-| `char`     | Character: `''`         | A single character, e.g., `'A'` and `'?'`.<br />Size: 1 byte                                         |
-| `string`   | String: `""`            | Series of characters under the namespace `std`.<br />Size: N/A (depends on overall character length) |
-| `bool`     | Boolean                 | Non-zero represents `True` while zero is `False`.<br />Size: 1 byte                                  |
-| `var`      | Automatic               | Data type is declared automatically.<br />Useful for declaring new variable with complex data type.  |
-| `void`     | Void                    | Non-specific data type.<br />Size: 1 byte                                                            |
+| `int`      | 정수                 | 32비트 단정도 정수.<br />크기: 4 바이트                                                 |
+| `float`    | 부동소수점수   | 소수점을 포함한 실수.<br />크기: 4 바이트 (`f` 혹은 `F` 접미사 필요)                      |
+| `double`   | 배정도 부동소수점수  | 배의 메모리를 가진 배정도 실수.<br />크기: 8 바이트 (`d` 혹은 `D` 접미사 사용; 선택사항)      |
+| `decimal`  | 10진 부동소수점수 | 보다 더 높은 정밀도를 가진 실수.<br/>크기: 16 bytes (`m` 혹은 `M` 접미사 필요)            |
+| `char`     | 문자: `''`         | 단일 문자: `'A'` 및 `'?'`.<br />크기: 1 바이트                                         |
+| `string`   | 문자열: `""`            | 일련의 문자들: `"Hello World!"`<br />크기: 알수 없음 (문자 개수에 따라 다름) |
+| `bool`     | 논리형                 | 논리의 참과 거짓을 `true`(0이 아닌 정수)와 `false`(정수 0)로 표시.<br />크기: 1 바이트                                  |
+| `var`      | 자동               | 적절한 자료형으로 자동 선택.<br />복잡한 자료형을 간략히 정의하는데 매우 유용하다.  |
+| `void`     | 보이드                    | 불특정 자료형.<br />크기: 1 바이트                                                            |
 
-### `sizeof()` Operator
+### `sizeof()` 연산자
 
-An operator that returns the allocating memory size of data type or variable in bytes.
+`sizeof()` 연산자는 자료형이나 데이터가 차지하고 있는 메모리 용량을 확인하기 위해 사용하며, 단위는 바이트(byte)이다.
 
-```c#
-sizeof(int);		// SIZE: 4 BYTE
-sizeof(char);		// SIZE: 1 BYTE
+```csharp
+sizeof(int);        // 크기: 4 바이트
+sizeof(char);       // 크기: 1 바이트
 ```
 
-## Variable
+## 변수
+변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당할 수 있는 저장공간이다. C# 언어의 변수는 자료형이 정해져 있으며, 해당하는 자료형 데이터만 할당받을 수 있다. 즉, 객체 및 클래스의 맴버 필드는 변수를 가리킨다. 
 
-Variable is a container for the data which can be assigned using assignment operator `=`. There are three different common stages in variable: declaration, definition, and initialization.
+아래의 예시는 `variable`이란 식별자를 가진 변수가 정수 자료형만 할당받을 수 있는 존재임을 컴파일러에게 알리는 동시에 메모리 할당을 통해 데이터를 가지는 데, 이를 프로그래밍에서는 *정의(definition)*이라고 부른다.
 
-* **Declaration**
-  : declaration is declaring existence of the construct of such as variables, objects, and more. The declaring also includes specifying which data type the construct is.
+```c
+/* 변수 "variable"의 정의 */
+int variable = 3;
+```
 
-  ```c#
-  int variable;
+만일 데이터 할당이 이루어지지 않고 컴파일러에게 변수의 존재만 알리면 *선언(declaration)*이라고 부른다.
+
+```c
+/* 변수 "variable"의 선언 */
+int variable;
+```
+
+실제로 위의 변수를 출력하면 값이 반환되는 것을 보아 할당은 되지 않았으나 데이터를 가지고 있음을 확인할 수 있다. 한 번 정의된 변수는 컴파일러가 어떠한 데이터 종류를 할당받을 수 있는지 알고 있으므로 더이상 자료형을 표시할 필요가 없다. 또한 모든 프로그래밍 언어는 할당 연산자를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)를 놓는다. 반대로 위치시키면 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
+
+### 초기화
+
+초기화(initialization)란, 변수의 정의 과정에서 이루어진 할당(assignment)을 가리킨다.
+
+```c
+/* 변수의 초기화 */
+int variable = 3;
+```
+
+위와 같은 예시 코드로 인해 통상적으로 정의를 "선언 + 초기화"로 보는 경향이 많지만, 이는 매우 잘못된 견해이다. 선언 및 정의와 초기화는 전혀 다른 분류의 개념이며, 메모리가 할당되지 않는 선언 자체에 데이터를 할당한다는 자체가 모순이다.
+
+### 지역 변수 & 전역 변수
+
+C# 언어에는 다음과 같은 종류의 변수가 존재한다.
+
+* **지역 변수(local variable)**는 함수(function)와 같은 코드 블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다. 그러므로 지역 변수는 외부에서 정의된 변수의 이름을 가질 수 있다.
+
+  ```csharp
+  class Program {
+      static void Main() {
+          // 여기서부터 코드 입력...
+
+          /* 지역 변수 */
+          int variable;
+      }
+  }
   ```
-  
-* **Definition**
-  : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
 
-  ```c#
-  variable = 3;
+* **전역 변수(global variable)**는 C# 프로그래밍 언어에 공식적으로 지원되지 않는다. 이론적으로는 스크립트의 최외각 영역에 정의되어 코드 블록 상관없이 사용할 수 있는 변수이지만, 객체지향 프로그래밍인 C#은 클래스 외부에 변수를 정의할 수 없다.
+
+* **정적 변수(static variable)**는 클래스에서 `static` 접근 한정자 키워드를 가지는 변수로 객체화가 필요없이 클래스에서 바로 접근하여 사용할 수 있다. 또한 정적 변수는 지역 변수와 달리 데이터가 소멸되지 않아 이전 값을 그대로 유지한다. 이러한 성질로 인해 정적 변수는 C# 언어에서 전역 변수의 대안으로 사용되고 있다.
+
+  ```csharp
+  class Program {
+
+      /* 정적 변수: public은 외부에서 변수 접근이 가능하도록 한다. */
+      public static int variable;
+
+      static void Main() {
+          // 여기서부터 코드 입력...
+
+      }
+  }
   ```
 
-* **Initialization**
-  : initialization is assigning the initial value to the construct, simply the *first* definition. Since the first definition is generally done on the same time when declaring the construct. Hence, initialization is commonly thought by people as *declaration + definition* which is not always true.
+### 상수
+상수(constant)는 초기화 이후 변경할 수 없는 특별한 변수이다. 상수는 `const` 키워드를 통해 정의한다.
 
-  ```c#
-  int variable = 3;
-  ```
-
-Once the declaration sets data type to a variable, that variable can only take the value of that designated data type.
-
-### Local & Global Variable
-
-**Local variable** is a variable declared inside a code block, such as namespace, function, and class. Data stored in local variable is destroyed when exiting the code block, thus cannot be used outside. Local variable is allowed to have same variable name declared outside (technically, is borrowing the name as a different identity).
-
-**Global variable** is not supported in C# programming language. Theoretically, it is a variable declared on a global scope of the script which is outside a class code block and accessible on any class within the script. However, `global` keyword is not to declare global variable but specify global namespace instead.
-
-### Constant Variable
-
-Constant variable is a special type of variable that cannot be changed after its initialization. The keyword `const` is used to declare it as a constant variable.
-
-```c#
+```csharp
+/* 상수 정의 */
 const int variable = 3;
 ```
 
-### Static Variable
+## 자료형 변환
 
-Static variable is a special local variable which maintain its value even when escaped and re-entered a function code block. The keyword `static` is used to declare it as a static variable.
+자료형 변환은 변수 혹은 데이터의 자료형을 다른 자료형으로 강제로 바꾸는 작업이다. 만일 유사한 자료형을 작은 크기에서 큰 크기로 변환할 시, 이를 *암시적* 자료형 변환이라고 한다. 암시적 자료형 변환은 데이터 손실이 없기 때문에 컴파일러에서 자연적으로 처리된다.
 
-```c#
-static int variable = 3;
+```csharp
+short A = 1;    // 2 바이트 정수형
+int B = A;      // 4 바이트 정수형
 ```
 
-## Data Type Conversion
+이에 반대되는 *명시적* 자료형 변환(일명 캐스트; cast)은 데이터 손실의 위험을 감수하며 데이터의 자료형을 바꾼다. C 언어 형식의 캐스팅은 아래와 같이 소괄호(`()`)를 활용한다.
 
-Data type conversion force-changes data type stored in a variable into other desired type. C# programming language has three different data type conversion methods available:
-
-### Implicit Conversion
-
-Implicit conversion automatically converts smaller size data to its compatible type of a larger size data by the compiler. No special syntax is needed and is safe from any data loss/corruption.
-
-```c#
-short A = 1;	// 2 BYTES INTEGER
-int B = A;		// 4 BYTES INTEGER
+```csharp
+float A = 1.9;  // 4 바이트 부동소수점
+int B = (int)A; // 4 바이트 정수형 - 완전 호환 불가: 정수 부분만 반환된다.
 ```
 
-### Explicit Conversion
-
-Explicit conversion (aka. casting) is done when converting larger size data to smaller size data but with a risk of data loss/corruption. Conversion is done using parentheses and there's no guarantee the conversion would succeed as intended.
-
-```c#
-double A = 1.9;	// 8 BYTES FLOAT
-int B = (int)A;	// 4 BYTES INTEGER - INCOMPATIBLE: only returns its integer value.
+```
+1
 ```
 
-### Helper Class Conversion
+### 도우미 클래스 변환
 
-Helper Class is a category of class that *helps* do something by providing functionalities. Class `System.Convert` is one of the helper class used for converting data type.
+도우미 클래스(helper class)는 어떠한 기능을 제공하므로써 *도와주는* 클래스 분류이다. `System.Convert` 클래스는 도우미 클래스 중 하나로써 자료형 변환에 사용된다.
 
-```c#
+```csharp
 int    ivalue = System.Convert.ToInt32(Console.ReadLine());
 bool   bvalue = System.Convert.ToBoolean(Console.ReadLine());
 double dvalue = System.Convert.ToDouble(Console.ReadLine());
 ```
 
-## Operator
+## 연산자
 
-Operator is the simplest form of data processing unit which can manipulate the value of operands. It operates simply by placing before, after, or between the operands.
+연산자(operator)는 피연산자의 데이터를 조작할 수 있는 가장 간단한 데이터 처리요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다.
 
-### Arithmetic Operation
+### 산술 연산자
 
-Arithmetic operator is mainly focused on processing numeric data type. Following is a list of arithmetic operator used by numeric data type:
+산술 연산자(arithmetic operator)는 숫자 자료형을 처리하는 데 집중한다. 다음은 숫자 자료형에 사용되는 산술 연산자의 목록이다.
 
-| NAME                         | OPERATOR | DESCRIPTION                                                                                                                                                              |
-|:----------------------------:|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Addition                     | `+`      | -                                                                                                                                                                        |
-| Subtraction                  | `-`      | -                                                                                                                                                                        |
-| Multiplication               | `*`      | -                                                                                                                                                                        |
-| Division                     | `/`      | When both operands are integer: dividend is an integer without remainder.<br/>When at least one operand is real (float or double): dividend is a real (float or double). |
-| Remainder (Modulus Division) | `%`      | Remainder only returns integer.                                                                                                                                          |
+|             이름             | 연산자 | 설명                                                  |
+| :--------------------------: |:--------:| ------------------------------------------------------------ |
+|           덧셈           | `+`      | -                                                            |
+|         뺄셈          | `-`      | -                                                            |
+|        곱셈        | `*`      | -                                                            |
+|           나눗셈           | `/`      | 두 피연산자가 정수일 경우: 정수형 몫만 반환된다.<br/>피연산자 중 실수가 있을 경우: `float` 혹은 `double` 실수로 반환된다. |
+| 나머지 (모듈로 연산) | `%`      | 나눗셈의 나머지를 정수형으로 반환한다.                              |
+    
+산술 연산을 쉽게 읽을 수 있도록 숫자 사이에 공백을 넣어도 된다. 이 공백은 숫자나 산술 연산에 아무런 영향을 주지 않는다.
 
-For easier readability of the arithmetic operator, you can place blank space between number and operator, and it doesn’t affect anything on output.
+### 할당 연산자
+할당 연산자(assignment operator)는 숫자 자료형에 사용되는 또다른 연산자이다. 이에 대한 설명은 아래의 도표를 참고한다.
 
-### Assignment Operation
+| 연산자 | 예시  | 동일  |
+|:--------:| -------- | ----------- |
+| `+=`     | `x += 1` | `x = x + 1` |
+| `-=`     | `x -= 1` | `x = x - 1` |
+| `*=`     | `x *= 1` | `x = x * 1` |
+| `/=`     | `x /= 1` | `x = x / 1` |
+| `%=`     | `x %= 1` | `x = x % 1` |
 
-Assignment operator is another operation used within numeric data type. Following is a list of assignment operator used by numeric data type:
+비록 할당 연산자는 아니지만, 이와 유사한 증감 연산자(increment & decrement)는 C 기반 언어에서 다음과 같은 표현식을 의미한다.
 
-| OPERATOR | EXAMPLE | EQUIVALENT |
-|----------|---------|------------|
-| `+=`     | `x+=1`  | `x=x+1`    |
-| `-=`     | `x-=1`  | `x=x-1`    |
-| `*=`     | `x*=1`  | `x=x*1`    |
-| `/=`     | `x/=1`  | `x=x/1`    |
-| `%=`     | `x%=1`  | `x=x%1`    |
+| 연산자    | 예시   | 설명       |
+| ----------- | --------- | ----------------- |
+| `++` 접두사 | `x = y++` | `x = y; y = y+1;` |
+| `++` 접미사 | `x = ++y` | `y = y+1; x = y;` |
+| `--` 접두사 | `x = y--` | `x = y; y = y-1;` |
+| `--` 접미사 | `x = --y` | `y = y-1; x = y;` |
 
-Although not an assignment operator, a similar **increment and decrement** of the numerical value can be expressed as follow on C-based programming language:
+### 비교 연산자
+비교 연산자(relational operator)는 두 데이터 간의 비교 조건을 확인하며, 이에 대한 결과로 참(`true`) 혹은 거짓(`false`) 논리값을 반환한다. 비교 연산자는 아래의 도표에서 확인할 수 있다.
 
-| OPERATOR    | EXAMPLE | DESCRIPTION   |
-|-------------|---------|---------------|
-| `++` prefix | `x=y++` | `x=y; y=y+1;` |
-| `++` suffix | `x=++y` | `y=y+1; x=y;` |
-| `--` prefix | `x=y--` | `x=y; y=y-1;` |
-| `--` suffix | `x=--y` | `y=y-1; x=y;` |
+| 미만 | 이하 | 동일 | 상이 | 이상 | 초과 |
+|:----:|:----:|:----:|:----:|:----:|:----:|
+| `<`  | `<=` | `==` | `!=` | `>=` | `>`  |
 
-### Relational Operation
 
-Relational operator is for checking whether the relational condition between two numeric values and returns Boolean value whether condition is true or false. Following is a list of relational operator:
+### 논리 연산자
+논리 연산자(logical operator)에는 논리곱, 논리합, 그리고 보수가 있다. 논리 연산자를 사용할 시, `true`와 `false` 논리값을 각각 이진수의 1과 0으로 간주하면 된다.
 
-| OPERATOR | DESCRIPTION              |
-|----------|--------------------------|
-| `<`      | Lesser than              |
-| `<=`     | Lesser than or equal to  |
-| `>`      | Greater than             |
-| `>=`     | Greater than or equal to |
-| `==`     | Equal to                 |
-| `!=`     | Not equal to             |
-
-### Logical Operation
-
-Logical operator consist of AND, OR, and NOT logic. When doing so, think of `true` and `false` as binary 1 and 0, respectively. In wider sense, any non-zero number is deemed `true`.
-
-| OPERATOR | LOGIC | DESCRIPTION                                             |
-|----------|-------|---------------------------------------------------------|
-| `&&`     | AND   | `true` when all the arguments are `true`, else `false`. |
-| `        |       | `                                                       | OR | `true` when at least one argument is `true`, else `false`. |
-| `!`      | NOT   | Change `true` to `false` and vice versa.                |
+| 연산자 | 논리 | 설명                                                |
+|:--------:| ----- | ---------------------------------------------------------- |
+| `&&`     | 논리곱   | 모든 인수가 `true`이면 `true`이고, 그렇지 않으면 `false`이다.    |
+| `||`     | 논리합    | 하나 이상의 인수가 `true`이면 `true`이고, 그렇지 않으면 `false`이다. |
+| `!`      | 보수   | `true`를 `false`로 변경 혹은 `false`를 `true`로 변경한다.                   |
 
 # **C++: 조건 및 루프**
 조건문 및 반복문(혹은 루프문)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 C# 프로그래밍의 조건에 따라 실행하는 조건문(conditional statement)과 반복적으로 실행하는 반복문(loop statement)을 소개한다.
@@ -638,119 +651,120 @@ for (variable; condition; increment) {
 for (variable; condition; increment) statement;
 ```
 
-### Infinite `for` Loop
+### 무한 `for` 반복문
 
-The `for` loop can run infinite loop using the following syntax:
+`for` 반복문은 아래와 같은 구문을 통해 무한히 루프를 돌 수 있다:
 
-```c#
+```csharp
 for ( ; ; ) { 
 	statements;
 }
 ```
-## `foreach` Loop
+## `foreach` 반복문
 
-The `foreach` loop statement execute statements while in range. The range is generally refers to Collection such as array which its element can be sequenced one-by-one.
+`foreach` 반복문은 조건 만족여부가 아닌 주어진 범위 내에서만 반복한다. 범위로 사용되는 데이터는 일반적으로 요소를 하나씩 나열할 수 있는 컬렉션(collection)을 사용한다.
 
-```c#
+```csharp
 foreach (variable in range) {
 	statements;
 }
 
-// SIMPLIFIED STATEMENT
+// 간략화된 문장
 foreach (variable in range) statement;
 ```
 
-The Collection in C# will be introduced in *C#: COLLECTION* chapter.
+여기서 C++ 언어의 컬렉션은 다음 장인 *C++: 컬렉션* 장에서 구체적으로 설명한다.
 
-# **C#: COLLECTION**
+# **C#: 컬렉션**
 
-C# has a Collection that can store multiple data of the same type at once. While the most common and general collection is an array, there are various other collections available in .NET that are worth knowing.
+C# 언어는 여러 데이터를 하나의 변수에 저장하는 컬렉션(collection)을 가진다. 대표적인 컬렉션으로 배열이 있지만, 그 외에도 .NET에는 여러가지 알아볼 가치가 있는 컬렉션들이 존재한다.
 
-## Array
+## 배열
 
-Array is a collection used to store an indexed of item of same data type. Bracket `[]` is placed after the data type to declare an array.
+배열(array)은 동일한 자료형의 데이터를 순번대로 담는 저장공간이다. 배열을 정의할 시, 대괄호(`[]`) 안에는 얼마나 많은 데이터를 담을 수 있는지 용량을 정해야 한다.
 
-```c#
-// ARRAY DECLARATION
+```csharp
+// 배열 선언
 int[] arr;
 ```
 
-Creating and defining size of an array is done by `new` keyword used for instantiation:
+새로운 배열 데이터를 생성하기 위해서는 `new` 키워드로 배열 객체를 생성한다(일명, 객체화; instantiation).
 
-```c#
-// INITIALIZATION
+```csharp
+// 객체화
 int[] arr = new int[size];
 ```
 
-which creates array filled with element of `0` or `NULL` value. Elements can be assigned with value after initialization by accessing individually using bracket `[]`:
+생성된 배열의 요소는 전부 `0` 혹은 `NULL`로 채워져 있다. 객체화 이후, 배열 요소 값은 대괄호(`[]`)를 사용하여 개별 요소에 접근해 값을 변경할 수 있다.
 
-```c#
+```csharp
 int[] arr = new int[size];
 
-// ASSIGNMENT: ELEMENTWISE
+// 개별 요소 할당
 arr[0] = value1;
 arr[1] = value2;
 ```
 
-To assign values on initialization instead, curly bracket `{}` is used to assign values to each element in sequence. Following is a three different methods of assignment with explanation:
+객체화 동시 초기화를 하기 위해서는 중괄호(`{}`)를 사용하여 각 요소마다 순서대로 값을 할당한다. 다음은 C# 언어에서 배열 초기화의 세 가지 방법 및 설명이다:
 
-```c#
-// ASSIGNMENT 1
+```csharp
+// 초기화 1
 int[] arr = new int[size] {value1, value2, ... };
 
-// ASSIGNMENT 2
+// 초기화 2
 int[] arr = new int[] {value1, value2, ... };
 
-// ASSIGNMENT 3
+// 초기화 3
 int[] arr = {value1, value2, ... };
 ```
 
-1. `// ASSIGNMENT 1`: values must be fulfilled on every elements in the array, else results compilation error.
-2. `// ASSIGNMENT 2`: initial array size can dynamically designated based on the number of assigned value.
-3. `// ASSIGNMENT 3`: more simplified version of "`// ASSIGNMENT 2`" method.
+1. `// 초기화 1`: 정해진 `size` 개수만큼 요소를 채워야 하며, 그렇지 않을 시 컴파일 오류가 발생한다.
+2. `// 초기화 2`: 초기의 배열 크기는 할당되는 요소 개수만큼 동적으로 설정된다.
+3. `// 초기화 3`: 위의 "`// 초기화 2`" 방법보다 더 간략화된 구문이다.
 
-Calling array itself does not return a sequence of elements within; instead will return the information of array data. Only a single element at a time can be called.
+배열 자체를 호출하면 할당된 데이터를 불러오지 않으며, 그 대신 배열의 자료형이 반환된다. 단, 문자 배열의 경우는 요소 값들을 하나의 문자열처럼 볼 수 있지만 정확히는 문자열이 아니다. 
 
-```c#
+저장된 메모리 주소(즉, 포인터)가 반환된다. 여기서 배열의 메모리 주소는 첫 번째 요소의 주소와 일치하며, 바로 옆 메모리 주소에는 다음 요소가 연쇄적으로 할당되어 있다. 그러므로 배열은 요소 하나씩만 접근할 수 있다.
+
+```csharp
 int[] arr = new int[size] {value1, value2, ... };
 
 System.Console.WriteLine(arr);
 System.Console.WriteLine(arr[0]);
 ```
-
 ```
 System.Int32[]
 value1
 ```
 
-### `new` Keyword
+### `new` 키워드
 
-The `new` operator is used to create new instance of a type.
+`new` 키워드는 해당 자료형의 객체를 생성, 즉 객체화를 위해 사용되는 연산자이다.
 
-> While in C/C++ represented dynamic allocation, in C# is used on most of the classes to create instance.
+> C++ 언어에서는 `new` 키워드가 동적 할당에 사용되지만, C# 언어에서는 객체화 역할을 한다. C# 프로그래밍 언어은 개발자가 직접 동적 할당을 하는 기능이 없기 때문이다.
 
-### Multi-dimensional Array
+### 다차원 배열
 
-Multi-dimensional array can be declared and initialized that holds values under subarrays which shares the same length:
+배열은 또다른 배열을 요소로 가질 수 있으나, 이들은 모두 동일한 자료형과 배열 크기를 가져야 한다.
 
-```c#
-// MULTI-DIMENSIONAL 1
+```csharp
+// 다차원 배열 1
 int[ , ] arr = new int[3,2] { {value1, value2}, {value3, value4}, {value5, value6} };
 
-// MULTI-DIMENSIONAL 2
+// 다차원 배열 2
 int[ , ] arr = new int[ , ] { {value1, value2}, {value3, value4}, {value5, value6} };
 
-// MULTI-DIMENSIONAL 3
+// 다차원 배열 3
 int[ , ] arr = { {value1, value2}, {value3, value4}, {value5, value6} };
 ```
 
-Since multi-dimensional array is created from a single declaration, array data is stored in a single block of memory.
+다차원 배열은 한 번의 객체화로 생성되었기 때문에, 비록 배열 안에 또다른 배열이 있다 하더라도 전부 하나의 메모리 블록에 저장된다.
 
-### Jagged Array
+### 가변 배열
 
-Jagged array can have another arrays as its elements irrelevant to its size.
+가변 배열(jagged array)는 크기와 상관없이 또다른 배열을 요소로 가질 수 있다.
 
-```c#
+```csharp
 int[][] arr = new int[3][] {
     new int[] {3}, 
     new int[] {1, 4, 1}, 
@@ -758,279 +772,246 @@ int[][] arr = new int[3][] {
 };
 ```
 
-Because the array contains already declared stored in separate memory location, jagged array implements more than single block of memory.
+가변 배열은 이미 객체화를 통해 메모리가 할당된 배열을 요소로 가지고 있으므로, 가변 배열은 하나 이상의 메모리 블록이 활용된다.
 
-## Collection
+## 컬렉션
 
-*To better understand this section, it is recommended to read chapter "C#: GENERIC" beforehand.*
+> 본 내용은 차후에 소개될 *C#: 제네릭*과 연관이 깊은 부분이므로, 필수는 아니지만 해당 장을 읽으면 이해에 도움이 된다.
 
-Collection is an advanced version of array that can shrink and extend size flexibly to accommodate any number of data, each of them having unique special features.
+컬렉션(collection)은 내장된 데이터 요소에 따라 크기를 확장하고 축소시킬 수 있는 또다른 배열 형식의 데이터이며, 컬렉션마다 고유의 특징과 기능이 탑재되어 있다.
 
-Collection is divided into two categories: generic and non-generic collection. While the term "generic" will be introduced on later chapter, brief explanation is its data type can be designated upon declaration using angled bracket (`<>`).
+컬렉션은 두 가지의 분류로 나눌 수 있다: 제네릭(generic) 및 비제네릭(non-generic) 컬렉션이 있다. 비록 "제네릭"이란 용어는 이후에 소개될 예정이지만, 간단히 설명하자면 홑화살괄호(`<>`) 안애 원하는 자료형을 넣어 객체화 할 수 있는 클래스이다.
 
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF GENERIC COLLECTION (EXAMPLE)
+/* 제네릭 컬렉션<정수형>의 객체화 */
 Collection<int> collectionName = new Collection<int>();
 ```
 
-### Lists
+### `List` 컬렉션
 
-List is a generic collection similar to array but its flexible sizing allows inserting and removing the elements more dynamic. This can be considered as C# version of `std::vector` class in C++ language.
+`List<T>`는 배열과 유사한 제네릭 컬렉션이지만, 요소 추가 및 제거를 통해 컬렉션 크기 및 요소 관리를 유동적으로 제어할 수 있도록 한다. 만일 C++ 프로그래밍 언어의 벡터 클래스와 동일하다고 간주할 수 있다.
 
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF LIST COLLECTION (EMPTY)
+/* List<T> 컬렉션<정수형>의 객체화 */
 List<int> LIST = new List<int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF LIST COLLECTION
-List<int> LIST = new List <int>() {3, 1, 4, 1, 5};
+/* List<T> 컬렉션<정수형>의 초기화 */
+List<int> LIST = new List<int>() {3, 1, 4, 1, 5};
 
 System.Console.WriteLine(LIST[0]);
 ```
-
 ```
 3
 ```
 
-### Sorted List
+### `SortedList` 컬렉션
 
-Sorted list is a variation of the list generic collection where elements are paired in `{key, value}` format. Here, key is a unique element identifier used to access the element value instead of integer index.
+`SortedList<TKey,TValue>`는 기존의 `List<T>` 컬렉션에서 요소가 `{key, value}` 형식으로 변경된 제네릭 컬렉션이다. 여기서 `key`는 요소의 `value`를 호출하는데 사용되는 식별자 역할을 한다. 요소의 순서는 `key`를 기준으로 자동적으로 정리된다.
 
-Sorted list automatically sorts elements by the key.
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF SORTED LIST COLLECTION (EMPTY)
+/* SortedList<TKey,TValue> 컬렉션<문자열,정수형>의 객체화 */
 SortedList<string, int> SLIST = new SortedList<string, int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF SORTED LIST COLLECTION
+/* SortedList<TKey,TValue> 컬렉션<문자열,정수형>의 초기화 */
 SortedList<string, int> SLIST = new SortedList<string, int>() { {"B", 3}, {"A", 1} };
 
 System.Console.WriteLine(SLIST["B"]);
 ```
-
 ```
 3
 ```
 
-### Dictionary
+### `Dictionary` 컬렉션
 
-Dictionary is a variation of the list generic collection where elements are paired in `{key, value}` format. Here, key is a unique element identifier used to access the element value instead of integer index.
+`Dictionary<TKey,TValue>`는 기존의 `List<T>` 컬렉션에서 요소가 `{key, value}` 형식으로 변경된 제네릭 컬렉션이다. 여기서 `key`는 요소의 `value`를 호출하는데 사용되는 식별자 역할을 한다. 요소의 순서는 자동적으로 정리되지 않는다.
 
-Dictionary do not sorts elements by the key.
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF DICTIONARY COLLECTION (EMPTY)
+/* Dictionary<TKey,TValue> 컬렉션<문자열,정수형>의 객체화 */
 Dictionary<string, int> DICT = new Dictionary<string, int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF DICTIONARY COLLECTION
+/* Dictionary<TKey,TValue> 컬렉션<문자열,정수형>의 초기화 */
 Dictionary<string, int> DICT = new Dictionary<string, int>() { {"B", 3}, {"A", 1} };
 
 System.Console.WriteLine(DICT["B"]);
 ```
-
 ```
 3
 ```
 
-### BitArray
+### `BitArray` 컬렉션
 
-BitArray is another variation of list collection that stores bit data either 0 (`false`) and 1 (`true`). Because the data type is already defined as Boolean, BitArray collection is non-generic. The size of the BitArray cannot be changed after declaration.
+`BitArray`는 오로지 논리형 자료인 0 (`false`) 혹은 1 (`true`) 값만 저장하는 컬렉션이다. 이미 자료형이 논리형으로 굳혀졌기 때문에 비제네릭 컬렉션으로 분류된다. `BitArray` 컬렉션의 크기는 객체화 이후에 변경 불가하다.
 
-```c#
+```csharp
 using System.Collections;
 
-// DECLARATION OF BIRARRAY COLLECTION
+/* BitArray 컬렉션의 객체화 */
 BitArray BITARR = new BitArray(4);
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections;
 
-// INITIALIZATION OF BIRARRAY COLLECTION
+/* BitArray 컬렉션의 초기화 */
 bool[] arr = new bool[4] {false, true, false, true};
 BitArray BITARR = new BitArray(arr);
 
 System.Console.WriteLine(BITARR[0]);
 ```
-
 ```
 False
 ```
 
-### Stack
+### `Stack` 컬렉션
 
-Stack is a LIFO (Last In First Out) memory-structured generic collection where last element to append (push) to the collection is to come out (pop) first. Stack collection cannot use bracket (`[]`) to access individual elements.
+`Stack<T>`은 선형적 LIFO(Last-In-First-Out), 즉 마지막에 입력된 데이터가 먼저 출력되는 스택 메모리 구조를 따르는 제네릭 컬렉션이다. `Stack<T>` 컬렉션은 개별 요소를 대괄호(`[]`)로 호출할 수 없다.
 
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF STACK COLLECTION (EMPTY)
+/* Stack<T> 컬렉션<정수형>의 객체화 */
 Stack<int> STACK = new Stack<int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF STACK COLLECTION
+/* Stack<T> 컬렉션<정수형>의 초기화 */
 int[] arr = new bool[4] {1, 2, 3, 4};
 Stack<int> STACK = new Stack<int>(arr);
 
 System.Console.WriteLine(STACK.Pop());
 System.Console.WriteLine(STACK.Pop());
 ```
-
 ```
 4
 3
 ```
 
-### Queue
+### `Queue` 컬렉션
 
-Queue is a FIFO (First In First Out) memory-structured generic collection where last element to append (push) to the collection is to come out (pop) first. Queue collection cannot use bracket (`[]`) to access individual elements.
+`Queue<T>`는 선형적 FIFO(First-In-First-Out), 즉 먼저 입력된 데이터가 먼저 출력되는 큐 메모리 구조를 따르는 제네릭 컬렉션이다. `Queue<T>` 컬렉션은 개별 요소를 대괄호(`[]`)로 호출할 수 없다.
 
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF QUEUE COLLECTION (EMPTY)
+/* Queue<T> 컬렉션<정수형>의 객체화 */
 Queue<int> QUEUE = new Queue<int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF QUEUE COLLECTION
+/* Queue<T> 컬렉션<정수형>의 초기화 */
 int[] arr = new bool[4] {1, 2, 3, 4};
 Queue<int> QUEUE = new Queue<int>(arr);
 
 System.Console.WriteLine(STACK.Dequeue());
 System.Console.WriteLine(STACK.Dequeue());
 ```
-
 ```
 1
 2
 ```
 
-### HashSet
+### `HashSet` 컬렉션
 
-HashSet is a generic collection where elements are unique and does not allow duplicates. HashSet provides high-performance mathematical set operations, but the collection cannot use bracket (`[]`) to access individual elements.
+`HashSet<T>`는 중복되는 요소를 갖지 않으므로써 유일성을 유지하는 제네릭 컬렉션이다. `HashSet<T>`는 고성능의 수학 집합 연산을 수행하나, 개별 요소를 대괄호(`[]`)로 호출할 수 없다.
 
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF HASHSET COLLECTION (EMPTY)
+/* HashSet<T> 컬렉션<정수형>의 객체화 */
 HashSet<int> HSET = new HashSet<int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF HASHSET COLLECTION
+/* HashSet<T> 컬렉션<정수형>의 초기화 */
 int[] arr = new bool[6] {1, 2, 3, 4, 1, 3};
 HashSet<int> HSET = new HashSet<int>(arr);
 
 System.Console.WriteLine(HSET.Count);
 ```
-
 ```
 4
 ```
 
+# **C#: 메소드**
 
-# **C#: METHOD**
+C# 언어는 하나의 핵심 메소드인 `Main()`을 기점으로 모든 프로그램이 실행된다. 메소드에 대한 이해는 매우 중요하며, 직접 메소드를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있는다. 본 장은 C# 언어에서 메소드 생성 및 사용 방법에 대하여 소개한다.
 
-C# language is executed based around a single key method called `Main()`. Understanding the concept of method is important in C# languages, which can also be used to create and implement custom method to serve specific purpose.
+## 메소드
 
-## Method
+메소드(method)는 데이터를 처리하는 클래스와 객체의 구성 맴버 중 하나이며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다.
 
-Method one of the component comprising an object, and is a block of code responsible for processing passed data and presenting newly processed data once the method is called.
+메소드는 클래스와 함께 이름 뒤에 소괄호가 있는 `object.method()` 형식으로 구별된다.
 
-Method can be distinguished by its declaration with parenthesis after its name; `method()`. Its definition is stated inside a code block (`{}`), which is executed when called.
-
-```c#
-// METHOD DEFINITION
-static double method(int arg1, double arg2)
-{
-    return arg1 + arg2;
-}
-
-method(1, 3.0);		// >> OUTPUT: 4.0
+```csharp
+System.Console.WriteLine("Hello World!");
+// "System.Console" 클래스의 "WriteLine()" 메소드
 ```
 
-Because C# language paradigm is OOP means method do not requires forward declaration (aka. prototype) to call the method. However, defining a method inside another method (aka nested method) is invalid in C# language.
+C# 언어는 객체지향 프로그래밍 언어이므로, 객체의 성질상 메소드가 나중에 정의되었다고 이전에 사용할 수 없는 게 아니다. 즉, 메소드 정의 순서는 OOP에서는 신경쓰지 않아도 된다. 하지만 메소드 안에 또다른 메소드를 정의하는 것은 허용되지 않는다.
 
-### `return` Statement
+### `return` 반환문
+`return` 반환문은 메소드로부터 데이터를 함수에 지정된 자료형으로 반환하는 메소드 전용 문장이다. 반환문이 실행되면 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 
 
-The `return` statement is a method-exclusive statement that outputs indicated data under the data type declared on the method. Once the `return` statement is executed, the method ends immediately despite there are codes still left inside.
+만일 메소드의 자료형이 `void`이면 반환문은 필요가 없으나, 조기 종료를 위해 아무런 데이터를 반환하지 않는 `return;`을 사용할 수 있다.
 
-If the method is a `void` data type, method can be returned by `return;` statement alone without any data to return.
+### 매개변수 & 전달인자
 
-### Parameter & Argument
+다음은 메소드에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
 
-Following are the difference between parameters and arguments that is referred significantly when discussing function.
+* **전달인자 (argument)**
+    : 전달인자, 혹은 간략하게 "인자"는 메소드로 전달되는 데이터이다.
+* **매개변수 (parameter)**
+    : 매개변수는 전달인자를 할당받는 메소드 내의 지역 변수이다. 그러므로 매개변수는 메소드 외부에서 호출이 불가능하다. 매개변수의 정의은 메소드의 소괄호(`()`) 내에서 이루어진다.
 
-**Parameter**
-Parameter is a method-internal local variable: because parameters is a method-exclusive local variable, it cannot be called from outside.
+매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
 
-| OPERATOR |    SYNTAX     | DESCRIPTION                                                  |
-| :------: | :-----------: | ------------------------------------------------------------ |
-|   `=`    | `arg = value` | Parameter `arg` is assigned `value` by default when no other value is passed. Must locate after normal parameter. |
-
-**Argument**
-Argument is a value or object being passed to the method parameter and those passed values and objects will be processed by the method code. However, argument is independent from parameter: change on parameter does not affect value or object passed as argument.
-
-| OPERATOR |    SYNTAX    | DESCRIPTION                                                  |
+| 연산자 |    구문    | 설명                                                 |
 | :------: | :----------: | ------------------------------------------------------------ |
-|   `:`    | `arg: value` | Assign argument `value` to method parameter namely `arg`. Does not have to follow parameter order. |
+|   `=`    | `arg=value` | 매개변수에 전달인자가 없으면 기본값 `value`가 대신 반환된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
+|   `:`    | `arg:value` | 전달인자 `value`를 매개변수 `arg`로 넘겨주며, 매개변수의 순서는 중요하지 않다. |
 
-Examples below show how function parameter and argument works:
+아래의 예제는 메소드의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
 
-```c#
+```csharp
 using System;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine(method(1, 3.0));                // >> OUTPUT: 4.0
-        Console.WriteLine(method(1));                     // >> OUTPUT: 8.0
-        Console.WriteLine(method(arg2: 3.0, arg1: 1));    // >> OUTPUT: 4.0
+        /* 메소드 호출 */
+        Console.WriteLine(method(1, 3.0));                // >> 출력: 4.0
+        Console.WriteLine(method(1));                     // >> 출력: 8.0
+        Console.WriteLine(method(arg2: 3.0, arg1: 1));    // >> 출력: 4.0
     }
     
+    /* 메소드 정의 */
     static double method(int arg1, double arg2 = 7.0)
     {
         return arg1 + arg2;
@@ -1038,13 +1019,13 @@ class Program
 }
 ```
 
-There are three different method of passing arguments to parameters: call by value, reference and output.
+메소드에서 전달인자를 매개변수로 전달하는 세 가지의 방법이 존재한다: 값에 의한 호출, 참조에 의한 호출, 그리고 출력에 의한 호출이 있다.
 
-* **By Value**
+* **값에 의한 호출**
 
-    Requiring no special syntax, call by value passes only the value of the argument. In other word, argument and parameter are separate identities. Hence, changes made on parameter does not affect variable passed as an argument.
+    값에 의한 호출(call by value)은 오로지 전달인자의 값만 매개변수로 건네준다. 다시 말해, 전달인자와 매개변수는 별개의 존재로 취급되어, 매개변수의 변화는 전달인자에 아무런 영향을 주지 않는다.
 
-    ```c#
+    ```csharp
     using System.Console;
     
     class Program
@@ -1054,10 +1035,11 @@ There are three different method of passing arguments to parameters: call by val
             int A = 1;
             int B = 3;
             
-            Console.WriteLine(A, B);    // >> OUTPUT: 4 (1 + 3.0)
-            Console.WriteLine(A, B);    // >> OUTPUT: 4 (1 + 3.0)
+            Console.WriteLine(A, B);    // >> 출력: 4 (1 + 3.0)
+            Console.WriteLine(A, B);    // >> 출력: 4 (1 + 3.0)
         }
         
+        /* 값에 의한 호출 */
         static int method(int arg1, int arg2)
         {
             arg1 += arg2;
@@ -1066,11 +1048,11 @@ There are three different method of passing arguments to parameters: call by val
     }
     ```
 
-* **By Reference**
+* **참조에 의한 호출**
 
-    Using `ref` keyword, call by reference passes the address of the variable of argument. In other word, argument and parameter are a single identity. Hence, changes made on parameter does affect variable passed as an argument.
+    참조에 의한 호출(call by reference)는 `ref` 키워드를 사용하여, 전달인자 자체를 매개변수로 건네준다. 다시 말해, 전달인자와 매개변수는 하나의 존재로 취급되어, 매개변수의 변화는 전달인자에 그대로 영향을 준다.
 
-    ```c#
+    ```csharp
     using System.Console;
     
     class Program
@@ -1080,10 +1062,11 @@ There are three different method of passing arguments to parameters: call by val
             int A = 1;
             int B = 3;
             
-            Console.WriteLine(ref A, ref B);    // >> OUTPUT: 4 (1 + 3.0)
-            Console.WriteLine(ref A, ref B);    // >> OUTPUT: 7 ((1 + 3.0) + 3.0)
+            Console.WriteLine(ref A, ref B);    // >> 출력: 4 (1 + 3.0)
+            Console.WriteLine(ref A, ref B);    // >> 출력: 7 ((1 + 3.0) + 3.0)
         }
         
+        /* 참조에 의한 호출 */
         static int method(ref int arg1, ref int arg2)
         {
             arg1 += arg2;
@@ -1091,12 +1074,10 @@ There are three different method of passing arguments to parameters: call by val
         }
     }
     ```
-
     ---
+    참조에 의한 호출을 `in` 키워드를 사용하여서도 구현할 수 있다. 전달인자와 매개변수는 하나의 존재로 취급되지만 매개변수는 읽기 전용이 되어 데이터 변동이 불가능하다. 매개변수 데이터를 수정할 수 없으므로 전달인자는 그대로 유지된다.
 
-    Using `in` keyword, call by reference passes the address of the variable of argument but the parameter is read-only and unmodifiable. Simply put, argument and parameter are a single constant identity. Hence, no changes can be made on parameter which eventually not affecting variable passed as an argument.
-
-    ```c#
+    ```csharp
     using System.Console;
     
     class Program
@@ -1106,9 +1087,10 @@ There are three different method of passing arguments to parameters: call by val
             int A = 1;
             int B = 3;
             
-            Console.WriteLine(in A, in B);    // COMPILATION ERROR: CANNOT EXECUTE "arg1 += arg2;" STATEMENT!
+            Console.WriteLine(in A, in B);    // 컴파일 오류: "arg1 += arg2;" 실행 불가!
         }
         
+        /* 참조에 의한 호출: in 키워드 */
         static int method(in int arg1, in int arg2)
         {
             arg1 += arg2;
@@ -1120,24 +1102,23 @@ There are three different method of passing arguments to parameters: call by val
     ```
     Cannot assign to variable 'in int' because it is a readonly variable
     ```
-
     ----
+    참조에 의한 호출을 `out` 키워드를 사용하여서도 구현할 수 있다. 전달인자와 매개변수는 하나의 존재로 취급되지만 오로지 초기화되지 않은 전달인자만 가능하다. 그리고 매개변수는 메소드가 종료되기 전 반드시 초기화되어야 한다.
 
-    Using `out` keyword, call by reference passes the address of the variable of argument but only uninitialized argument is allowed. This is mainly used on method whose purpose is to initialized the variable called by reference, and must initialize the value before end of the method.
-
-    ```c#
+    ```csharp
     using System.Console;
     
     class Program
     {
         static void Main(string[] args)
         {
-            int A, B;    // UNINITIALIZED VARIABLE
+            int A, B;    // 초기화되지 않은 변수
             
-            Console.WriteLine(out A, out B);              // >> OUTPUT: 4 (1 + 3.0)
-            Console.WriteLine("A: {0}, B: {1}", A, B);    // >> OUTPUT: "A: 4, B: 3"
+            Console.WriteLine(out A, out B);              // >> 출력: 4 (1 + 3.0)
+            Console.WriteLine("A: {0}, B: {1}", A, B);    // >> 출력: "A: 4, B: 3"
         }
         
+        /* 참조에 의한 호출: out 키워드 */
         static int method(out int arg1, out int arg2)
         {
             arg1 = 1; arg2 = 3;
@@ -1147,28 +1128,28 @@ There are three different method of passing arguments to parameters: call by val
     }
     ```
 
-### Method Overloading
+### 메소드 오버로딩
 
-Multiple functions with the same name can exist as long as they are unique in arguments (such as number of arguments and its data type). This is called function overloading and these functions can have their own separate definition. Function data type does not overload functions.
+메소드 오버로딩(method overloading)은 동일한 이름의 메소드가 전달받은 인자의 자료형 및 개수에 따라 달리 동작하는 것을 의미한다. 이들은 동일한 자료형과 식별자를 가지지만, 제각각의 정의를 가진다.
 
-```c#
+```csharp
 using System;
 
 class Program
 {
 	static void Main(string[] args)
     {
-        Console.WriteLine(method(1, 3));        // >> OUTPUT: 4
-        Consoel.WriteLine(method(1.0, 3.0));    // >> OUTPUT: -2.0
+        Console.WriteLine(method(1, 3));        // >> 출력: 4
+        Consoel.WriteLine(method(1.0, 3.0));    // >> 출력: -2.0
     }
     
-    // DEFINITION OF OVERLOADED METHOD 1
+    // 오버로딩된 메소드의 정의 1
     static double method(int arg1, int arg2)
     {
         return arg1 + arg2;
     }
     
-    // DEFINITION OF OVERLOADED METHOD 2
+    // 오버로딩된 메소드의 정의 2
     static double method(double arg1, double arg2)
     {
         return arg1 - arg2;
@@ -1176,14 +1157,13 @@ class Program
 }
 ```
 
-## Entry Point
+## 시작점
+시작점(entry point)는 프로그램이 시작되는 부분이다. C# 언어의 시작점은 `Main()` *정적* 메소드이며, 해당 메소드는 프로토타입 및 호출이 존재하지 않는다. 이는 C# 언어의 유일한 시작점으로 복수의 `Main()` 함수가 존재하거나 아예 없을 경우 에러가 발생해 프로그램이 실행되지 않는다.
 
-Entry point is the starting point where a program execution begins. In C# programming language, the entry point is `Main()` *static* method. A project must have one and only `Main()` static function within the project. Creating multiple `Main()` method or not having any `Main()` method will cause error on running the program.
-
-```c#
+```csharp
 class Program
 {
-    // ENTRY POINT: Main() METHOD WITH PARAMETER
+    // 시작점: 매개변수를 가진 Main() 정적 메소드
     static void Main(string[] args)
     {
     	statements;
@@ -1191,48 +1171,57 @@ class Program
 }
 ```
 
-Entry point `Main()` static method can have argument which is apparent when executed through command-line:
+`Main()` 시작점의 `string[] args` 매개변수는 터미널 명령창을 통해 전달된 텍스트 데이터를 문자열 배열로 받는다. 만일 `app.exe`라는 프로그램이 있을 시, 다음과 같은 명령어를 입력하면 전달인자는 다음과 같이 할당된다.
 
 ```
 ./app.exe option1 option2
 ```
 
-| Arguments | Data      |
+| 전달인자 | 데이터      |
 | --------- | --------- |
 | `args[0]` | `option1` |
 | `args[1]` | `option2` |
 
-# **C#: OBJECT-ORIENTED PROGRAMMING**
+# **C#: 객체 및 클래스**
 
-Object-oriented programming (OOP) is a programming paradigm based on usage of objects to structure the program. This chapter is mainly focuses on object and class in detail which was briefly explained on the very beginning of the document *C#: INTRO*.
+프로그래밍 방법 중 하나인 객체지향 프로그래밍(object-oriennted programming; OOP)은 클래스와 객체 사용을 기반으로 한다. 본 장은 C#에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
 
-## Objects
+## 객체
 
-Previous chapters have introduced variable (which can store data) and method (which can process data). Object, aka. instance, is a block of data which encapsulate these variables and methods as members of a single identity, called *member variable* (or *member field*) and *method* respectively.
+객체(object 혹은 instance)는 데이터를 저장할 수 있는 필드(field)와 데이터를 처리 할 수 있는 메소드(method)들을 하나의 데이터로 캡슐화한 구성체이다. 메소드 중에서도 필드의 값만 반환해주는 메소드를 프로퍼티(property)라고 하는데, 이는 필드에 직접 접근하지 못하게 하여 의도치 않은 필드 데이터 변경을 방지한다.
 
-Object also has a method called *property* whose purpose is to return field value generally restricted on directly access from external code.
+| 맴버   | 구문              | 설명                                                                                 |
+|:----------:|---------------------|---------------------------------------------------------------------------------------------|
+| 필드    | `object.field`      | 클래스 및 객체에서 데이터를 저장하는 변수를 지칭한다; 메소드의 매개변수 및 지역변수는 필드가 아니다. |
+| 메소드   | `object.method()`   | 클래스 및 객체에서 데이터를 처리하거나 역할을 한다; 메소드에 따라 인자를 전달받거나 데이터를 반환할 수 있다. |
+| 프로퍼티 | `object.property()` | 클래스 및 객체의 필드 값을 간접적으로 반환하는 메소드를 지칭한다; 필드를 직접 접근하지 않으므로, 필드의 값이 의도치 않게 변경되는 것을 방지한다. |
 
-The programming based around use of a custom objects is called *object-oriented programming*.
+사용자 정의 객체 중심으로 한 프로그래밍을 *객체지향 프로그래밍*이라고 한다.
 
-```c#
-string x = "Hello World!";
-System.Console.WriteLine(x.Length);
-// Accessing "Length" field that stores number of characters.
+```csharp
+string variable = "Hello World!";
+System.Console.WriteLine(variable.Length);
+// "variable"이란 이름을 가진 문자열 객체의 "Length" 필드를 사용하여 값 널 문자를 제외한 총 문자 개수를 반환한다.
+```
+```
+12
 ```
 
-### Encapsulation
+## 캡슐화
 
-Encapsulation is the core concept in object which...
+캡슐화(encapsulation)는 객체의 핵심으로 아래의 특성을 가진다.
 
-1. combines variables and method into a single object
-2. restrict direct access to these variables and methods to prevent accidental modification from external code. 
+1. 변수와 함수를 하나의 객체로 결합한다.
+2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
 
-## Class
+## 클래스
 
-Class is used to create objects (aka. instance), hence can be deemed as a blueprint of the object. Classes are created using keyword `class` and inside defines variables and methods which becomes member variable and methods for the object. Act of creating an instance from a class is called *instantiation*.
+클래스(class)는 객체를 생성하는 데 사용된다. 클래스는 `class` 키워드를 사용하여 정의되며, 내부는 객체 필드와 메소드가 되는 변수와 함수를 정의한다. 아래는 `class` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이며, 변수 및 함수와의 유사성을 확인할 수 있다.
 
-```c#
-// CREATING CLASS
+클래스로부터 객체를 생성하는 절차를 *객체화(instantiation)*라고 한다.
+
+```csharp
+/* 클래스 생성하기 */
 class CLASS
 {
     public int field1 = 1;
@@ -1244,26 +1233,32 @@ class CLASS
     }
 }
 
-// INSTANTIATION
-CLASS instance = new CLASS();
+class Program
+{
+    static void Main(string[] args)
+    {
+    	// 객체화
+        CLASS instance = new CLASS();
 
-// THEREFORE...
-instance.field1;       // >> OUTPUT: 1
-instance.field2;       // >> OUTPUT: 3.0
-instance.method(2);    // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
+        // 그러므로...
+        instance.field1;       // >> 출력: 1
+        instance.field2;       // >> 출력: 3.0
+        instance.method(2);    // >> 출력: 2.0 (= 1 + 3.0 - 2)
+    }
+}
 ```
 
-### Constructor
+### 생성자
 
-Constructor is a special method automatically executed whenever instantiation has occurred and can define the number of arguments to pass to the instance. Name of a constructor must be same as the class name and does not require data type.
+생성자(constructor)는 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 메소드이며, 객체로 전달할 인자의 자료형과 개수를 결정한다. 생성자 메소드의 이름은 클래스 식별자와 동일해야 하며, `return` 키워드를 사용하지 않으므로 자료형 지정도 없다.
 
-One of the common usage of constructor is initialization of member fields upon instantiation.
+생성자는 흔히 객체화 단계에서 맴버 필드를 초기화하는 용도로 사용된다.
 
-```c#
-// CREATING CLASS
+```csharp
+/* 클래스 생성하기 */
 class CLASS
 {
-    // CONSTRUCTOR
+    /* 생성자 */
     public CLASS(int arg1, double arg2)
     {
         field1 = arg1;
@@ -1279,21 +1274,27 @@ class CLASS
     }
 }
 
-// INSTANTIATION
-CLASS instance = new CLASS(1, 3.0);
+class Program
+{
+    static void Main(string[] args)
+    {
+        // 객체화
+        CLASS instance = new CLASS(1, 3.0);
+    }
+}
 ```
 
-Constructor is an optional member method and can be defined when developer wants. However, when constructor that takes argument(s) is presented, parenthesis `()` is required upon instantiation. Multiple constructor is allowed per class as long as rule of function overloading is observed.
+생성자는 선택사항이지만, 만일 생성자가 전달인자를 받도록 정의되었으면 반드시 소괄호(`()`)를 통해 값을 전달하도록 한다. 단, 전달인자가 없거나 기본값이 정해져 있을 시에는 소괄호가 필요하지 않다. 함수 오버로딩에 의하여 여러 생성자를 정의할 수 있다.
 
-### Finalizer
+### 종료자
 
-Finalizer (aka. destructor) is a special method automatically executed whenever instance is released (every time object is destroyed either systematically by compiler or manually by developer). Name of a destructor must be same as the class name with tilde `~` prefix and does not require data type.
+종료자(finalizer), 혹은 소멸자(destructor)는 객체가 메모리에서 비할당(소멸)되어 해당 객체를 더이상 호출할 수 없을 시 자동적으로 실행되는 특수한 메소드이다. 생성자 메소드의 이름은 클래스 식별자와 동일하되 물결표(`~`)를 접두사로 가지며, `return` 키워드를 사용하지 않으므로 자료형 지정도 없다.
 
-```c#
-// CREATING CLASS
+```csharp
+/* 클래스 생성하기 */
 class CLASS
 {
-    // DESTRUCTOR
+    /* 종료자 */
     ~CLASS()
     {
         statements
@@ -1308,13 +1309,19 @@ class CLASS
     }
 }
 
-// INSTANTIATION
-CLASS instance = new CLASS(1, 3.0);
+class Program
+{
+    static void Main(string[] args)
+    {
+        // 객체화
+        CLASS instance = new CLASS(1, 3.0);
+    }
+}
 ```
 
-Destructor is an optional member method and can be defined when developer wants. Only one destructor is allowed per class and does not take any argument and modifier.
+소멸자는 선택사항이며, 전달인자를 허용하지 않아 함수 오버로딩이 불가하므로 하나만 정의할 수 있다.
 
-### `this` Keyword
+### `this` 키워드
 
 The `this` keyword is used within a class to refer the current class itself.
 
@@ -1329,7 +1336,7 @@ class CLASS{
 }
 ```
 
-## Static Class
+## 정적 클래스
 
 Class itself cannot use the its members directly and need to create instance to access them. However, declaring the class itself as static allows the class to access the members without needing any instantiation. Hence, it is impossible to create an instance from the static class.
 
@@ -1347,9 +1354,9 @@ static class CLASS
 }
 
 // THEREFORE...
-CLASS.field1;       // >> OUTPUT: 1
-CLASS.field2;       // >> OUTUPT: 3.0
-CLASS.method(2);    // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
+CLASS.field1;       // >> 출력: 1
+CLASS.field2;       // >> 출력: 3.0
+CLASS.method(2);    // >> 출력: 2.0 (= 1 + 3.0 - 2)
 
 // [ERROR] INSTANTIATION
 CLASS instance = new CLASS();
@@ -1362,7 +1369,7 @@ Error	CS0712	Cannot create an instance of the static class 'CLASS'
 
 Static class is generally used as a collection of member for specific purpose which does not (or should not) need instantiation; e.g., `Math`, `Array`, `String`, `DataTime`, `Console`, and more.
 
-### Static Constructor
+### 정적 생성자
 
 Static constructor is executed when any static member is called even when it is not instantiated.
 
@@ -1388,7 +1395,7 @@ static class CLASS
 
 Static constructor is an optional member method and can be defined when developer wants. Only one static constructor is allowed per class and does not take any argument and modifier.
 
-## Modifier
+## 한정자
 
 Modifier keywords are used to define characteristic of object members upon member declaration.
 
@@ -1446,18 +1453,18 @@ Modifier keywords are used to define characteristic of object members upon membe
     abstract void method();
     ```
 
-### Access Modifier
+### 접근 한정자
 
-Access modifier is used to define characteristic of object members on access authorization. There are four different access modifiers available in C# classes: public, private, protected, and internal.
+접근 한정자(access modifier) is used to define characteristic of object members on access authorization. There are four different access modifiers available in C# classes: public, private, protected, and internal.
 
-| A.MODIFIER | KEYWORD     | DESCRIPTION                                                  |
-| ---------- | ----------- | ------------------------------------------------------------ |
-| Public     | `public`    | Accessible from the code outside the class.                  |
-| Private    | `private`   | Accessible only within the class.                            |
-| Protected  | `protected` | Accessible from derived class but still restricted from outside the class; refer to inheritance. |
-| Internal   | `internal`  | Accessible only within the assembly.                         |
+| 키워드     | 설명                                                |
+|:-----------:| ------------------------------------------------------------ |
+| `public`    | Accessible from the code outside the class.|
+| `private`   | Accessible only within the class.|
+| `protected` | Accessible from derived class but still restricted from outside the class; refer to inheritance. |
+| `internal`  | Accessible only within the assembly.                         |
 
-## Inheritance
+## 상속
 
 Inheritance is an act of base class providing member variables and methods to derived class. When the same name of members exists on both base class and derived class, members from base class are overridden by derived class's.
 
@@ -1502,74 +1509,76 @@ Console.WriteLine("{0}, {1}, {2}", instance.field1, instance.field2, instance.fi
 
 Derived class in C# generally cannot inherit from multiple base classes; a derived class can inherit only a single base class. For multiple inheritance, refer to *interface*.
 
-## Polymorphism
+## 다형성
 
-Overloading operator is another compile-time polymorphism which is customizing operator to function differently on certain classes or portion of the script. Just like function overloading, a single operator can have multiple implementation as long as the arguments are unique. Overloaded operators are exclusive to the class and won't be applied elsewhere.
+다형성(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, C++에서는 상황과 용도에 따라 달리 동작하는 것을 의미한다. 객체지향 프로그래밍에서 다형성은 매우 중요한 특징이며 두 가지로 분류할 수 있다:
 
-The `operator` keyword is used to specify the operator for customization. Declaring and defining operator functionality follows syntax identical to member function.
+* 컴파일타임 다형성(compile-time polymorphism)
+    : 컴파일 시 이루어지는 다형성 (일명 정적 다형성; static polymorphism).
+* 런타임 다형성(run-time polymorphism)
+    : 프로그램 실행 시 이루어지는 다형성 (일명 동적 다형성; dynamic polymorphism).
 
-Polymorphism means "having many forms", which in C# programming means having different functionality based on the situation and usage. Polymorphism is one of the important features in OOP and is categorized into two types:
+컴파일타임 다형성 중 하나는 이미 소개가 되었으며, 바로 전달인자의 자료형과 개수에 따라 달리 동작하는 *함수 오버로딩*이다.
 
-* Compile-time Polymorphism
-    : polymorphism achieved on compilation (aka. static polymorphism).
-* Run-time Polymorphism
-    : polymorphism achieved on run-time (aka. dynamic polymorphism).
+### 연산자 오버로딩
 
-One of the compile-time polymorphism has been introduced already; *method overloading* which functions differently according to passed arguments.
+연산자 오버로딩(operator overloading)은 또다른 컴파일타임 다형성으로, 특정 클래스에서 연산자가 달리 동작하도록 한다. 함수 오버로딩과 마찬가지로 전달인자의 유일성이 보장되는 한, 하나의 연산자에 여러 다른 정의가 가능하다. 오버로딩된 연산자는 클래스 한정이므로 해당 클래스 및 객체 외에는 적용되지 않는다.
 
-### Operator Overloading
+`operator` 키워드는 기능성을 새로 정의할 연산자를 명시하기 위해 사용되며, 연산자 정의 구문은 메소드 정의와 동일하다.
 
-Overloading operator is another compile-time polymorphism which is customizing operator to function differently on certain classes or portion of the script. Just like method overloading, a single operator can have multiple implementation as long as the arguments are unique. Overloaded operators are exclusive to the class and won't be applied elsewhere.
-
-The `operator` keyword is used to specify the operator for customization. Declaring and defining operator functionality follows syntax identical to static method.
-
-```c#
-// CREATING CLASS
+```csharp
+/* 클래스 생성 */
 class CLASS
 {
-    // OPERATOR OVERLOADING
+    public int field;
+
+    // 연산자 오버로딩
     public static int operator + (CLASS arg1, CLASS arg2)
     {
         return arg1.field + arg2.field;
     }
-    
-    public int field;
 }
 ```
 
-### Method Overriding
+### 메소드 오버라이딩
 
-Overriding method is a run-time polymorphism where derived class redefine member inherited from the base class. The difference between overloading and overriding is, the formal *selects* functionality when the latter *redefines* functionality.
+메소드 오버라이딩(method overriding)은 런타임 다형성으로 파생 클래스가 기반 클래스의 맴버를 재정의하는 행위이다. 여기서 오버로딩은 여러 개의 기능 중에서 하나를 *선택*한다면, 오버라이딩은 히나의 기능을 *다시 정의*한다는 것이다.
 
-Virtual method is a special method specifically designed for method overriding, and is declared by `virtual` keyword. Declaration of the virtual method is only necessary in base class but not in derived class.
+가상 메소드(virtual method)은 메소드 오버라이딩을 위한 특수한 메소드이며, `virtual` 키워드를 통해 선언된다. `virtual` 키워드는 기반 클래스에서만 명시하면 된다.
 
-```c#
-// CREATING BASE CLASS
+```csharp
+/* 기반 클래스 생성 */
 class BASECLASS
 {
-    // VIRTUAL METHOD
-    public virtual void polymorph() { statements1; }
-};
+    // 가상 메소드
+    public virtual void polymorph()
+    {
+        statements1; 
+    }
+}
 
-// CREATING DERIVED CLASS
+/* 파생 클래스 생성 */
 class DERIVEDCLASS1
     : BASECLASS
 {
-    // OVERRIDE METHOD
-    public override void polymorph() { statements2; }
-};
+    // 메소드 오버라이딩
+    public override void polymorph()
+    {
+        statements2;
+    }
+}
 ```
 
-Virtual method with definition implemented on base class can either (1) use behavior directly from base class or (2) use behavior from derived class in case no function override has occurred. Meanwhile, virtual method without any definition implemented is called **abstract method**.
+가상 메소드는 기반 클래스에서 실행문을 갖도록 정의될 수 있으며, 이는 (1) 기반 클래스에서 사용할 때 동작하도록 하거나 (2) 파생 클래스가 오버라이딩 메소드를 가지지 않을 시 동작할 수 있도록 한다. 한편, 가상 메소드는 정의없이 선언만 될 수 있는데 이를 **추상 메소드(abstract method)**이라고 부른다.
 
-```c#
-// ABSTRACT METHOD
+```csharp
+/* 추상 메소드 */
 public abstract void polymorph();
 ```
 
-Because abstract method has no definition in base class, it is a virtual method that *must be* overridden when inherited to derived class. Failed to do so will cause a compilation error.
+추상 메소드는 기반 클래스에서 정의되지 않았으므로, 파생 클래스에서는 *반드시* 오버라이딩을 해야 한다. 오버라이딩하지 않으면 컴파일 오류가 발생한다.
 
-### Abstract Class
+### 추상 클래스
 
 Abstract class is a special class declared using `abstract` keyword, designed not meant for class instantiation but as a base class purely to inherit members to derived class. Attempting to instantiate causes compilation error.
 
@@ -1630,7 +1639,7 @@ class DERIVEDCLASS
 }
 ```
 
-## Properties
+## 프로퍼티
 
 Property is a member used to supports data hiding by dividing a single field into two separate portions: `getter`, and `setter`. The property looks similar to methods but properties do not have a pair of parenthesis, behaving just like member field.
 
@@ -1716,11 +1725,11 @@ instance[0] = 1;        // >> OUTPUT: 1
 instance[1] = 3;        // >> OUTPUT: 3
 ```
 
-# **C#: USER-DEFINED DATA TYPE**
+# **C#: 자료구조**
 
 Commonly used value type such as `int`, `float`, `char`, and more are already defined in `iostream.h` header. Developer may create and use custom data type based on these pre-defined data types.
 
-## Structure
+## 구조체
 
 Structure groups multiple member variables under a single structure tag, regardless of value type of member variable. 
 
@@ -1777,7 +1786,7 @@ Class and structure do share similarity but have distinct differences:
 | Inheritance is allowed.                    | Inheritance is not allowed.                                  |
 | May initialized member fields.             | May not initialize member fields.                            |
 
-## Enumeration
+## 열거형
 
 Enumeration means "action of mentioning a number of things one by one", thus is a user-defined data type which can only be assigned with a single enumerators that has corresponding integer.
 
@@ -1808,11 +1817,11 @@ enum ENUMERATION {
 };
 ```
 
-# **C#: GENERICS**
+# **C#: 제네릭**
 
 Generics (aka. template in C++) provides a format of code regardless of considering what data type it uses. Hence, generics are used to define multiple number of similar functions or classes in efficient way.
 
-## Generic Methods
+## 제네릭 메소드
 
 A generic for a method is created using the following syntax:
 
@@ -1828,7 +1837,7 @@ static U method<T, U>(T arg1, U arg2)
 method<int, double>(1, 3.0);
 ```
 
-## Generic Classes
+## 제네릭 클래스
 
 A generic for a class is created using the following syntax:
 
@@ -1852,11 +1861,11 @@ class CLASS<T, U>
 CLASS<int, double> instance = new CLASS(1, 3.0);
 ```
 
-# **C#: EXCEPTION**
+# **C#: 예외 처리**
 
 Exception is a problem encountered during a program execution (not during compilation). C# programming language offers keyword and blocks for controlling exceptions: `throw`, `try`, and `catch`. Through exception handling, stable program can be compiled and executed without any halt or crash.
 
-## `try`/`catch` Blocks
+## `try`/`catch` 블록
 
 Two code block pair, `try` block and `catch` block, is used to handle exception occurred during runtime. Following paragraphs explains what each code block is responsible for on exception handling.
 
@@ -1889,7 +1898,7 @@ catch(Exception e)
 }
 ```
 
-## `throw` Keyword
+## `throw` 키워드
 
 The `throw` keyword is used to manually halt execution and "throws" expression to `catch` keyword. It throws the exception instance created from `System.Exception` reference type (aka. class), hence requires `new` operator and designate which exception to throw.
 
@@ -1947,13 +1956,13 @@ finally
 }
 ```
 
-# **C#: FILE MANAGEMENT**
+# **C#: 파일 관리**
 
 C# programming language can read and write external file to save or import data. This chapter is mainly focused on accessing and modifying `.txt` extension text file.
 
 Unlike other languages like C/C++ and Python, C# does not have to specify opening and closing of the file. This makes managing the file much easier since programmer just have to write the code that needs working by inserting inside the API alone.
 
-## Reading Files
+## 파일 읽기
 
 Below is one example of reading, in other word, extracting the whole file content to a variable. The core method is `System.IO.File.ReadAllText()`:
 
@@ -1964,7 +1973,7 @@ static void Main(){
 }
 ```
 
-## Writing Files
+## 파일 쓰기
 
 Writing the file is can be done using `System.IO.File.WriteAllText()` method:
 
@@ -1977,7 +1986,7 @@ static void Main(){
 
 If such file does not exist, the method creates the file; when there is a file, it is overwritten.
 
-### Creating File
+### 파일 생성
 
 Creating the file is also possible by using `System.IO.File.Create()` method:
 

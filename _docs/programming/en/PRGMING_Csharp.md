@@ -1468,10 +1468,6 @@ Derived class in C# generally cannot inherit from multiple base classes; a deriv
 
 ## Polymorphism
 
-Overloading operator is another compile-time polymorphism which is customizing operator to function differently on certain classes or portion of the script. Just like function overloading, a single operator can have multiple implementation as long as the arguments are unique. Overloaded operators are exclusive to the class and won't be applied elsewhere.
-
-The `operator` keyword is used to specify the operator for customization. Declaring and defining operator functionality follows syntax identical to member function.
-
 Polymorphism means "having many forms", which in C# programming means having different functionality based on the situation and usage. Polymorphism is one of the important features in OOP and is categorized into two types:
 
 * Compile-time Polymorphism

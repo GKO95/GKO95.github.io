@@ -356,16 +356,16 @@ Where's my "Cat in the Hat" book?
 
 ```python
 # 다중 문자열 객체로 여러 줄의 텍스트 작성 및 출력.
-print("안녕하세요.\n처음 뵙겠습니다!")
-print("""안녕하세요.
-처음 뵙겠습니다!""")
+print("Hello\nWorld!")
+print("""Hello
+World!""")
 ```
 
 ```
-안녕하세요.
-처음 뵙겠습니다!    
-안녕하세요.
-처음 뵙겠습니다!
+Hello
+World!   
+Hello
+World!
 ```
 
 파이썬의 문자열 객체는 숫자 자료형처럼 덧셈과 곱셈이 가능하다.
@@ -442,6 +442,14 @@ this is a sentence.
 
 ## 탈출 문자
 탈출 문자(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 문자열 자료형을 소개할 때 문자열 줄바꿈을 위해 `\n` 탈출 문자를 사용하였다.
+
+```python
+print("Hello\nWorld!")
+```
+```
+Hello
+World!
+```
 
 | 구문 | 설명           |
 |:----:| -------------- |
