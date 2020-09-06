@@ -56,7 +56,7 @@ C++ 프로그래밍 언어로 개발하기 위해서는 C++ 컴파일러가 반�
 
 <div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 2. 비주얼 스튜디오 시작화면.</center>
 
-C++로 만들 수 있는 프로그램은 다양하여 비주얼 스튜디오에서 선택할 수 있는 프로젝트 종류도 여러 가지가 있다. C++ 언어 프로젝트 생성을 위해서는 아래의 절차를 따라야 한다:
+C++로 만들 수 있는 프로그램은 다양하여 비주얼 스튜디오에서 선택할 수 있는 프로젝트 종류도 여러 가지가 있다. C++ 언어 프로젝트 생성을 위해서는 아래의 절차를 따른다:
 
 1. 프로그래밍 언어를 C++로 선택하여 "Console App"(콘솔 어플리케이션)을 클릭한다.
 
@@ -257,6 +257,8 @@ using namespace1::function();
 using namespace namespace2;
 ```
 
+그러나 `using` 키워드를 무분별하게 사용할 시 컴파일러는 네임스페이스로 나뉘어진 동일한 이름의 데이터를 구별하지 못하는 문제가 발생한다.
+
 ## 입력 & 출력
 C++는 `iostream` 헤더 파일의 `std` 네임스페이스에 텍스트 기반의 입력 및 출력 함수를 가지며, 각각 추출 연산자(`>>`)와 삽입 연산자(`<<`)를 사용한다:
 
@@ -318,7 +320,7 @@ sizeof(char);       // 크기: 1 바이트
 ## 변수
 변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당할 수 있는 저장공간이다. C++ 언어의 변수는 자료형이 정해져 있으며, 해당하는 자료형 데이터만 할당받을 수 있다. 
 
-아래의 예시는 `variable`이란 식별자를 가진 변수가 정수 자료형만 할당받을 수 있는 존재임을 컴파일러에게 알리는 동시에 메모리 할당을 통해 데이터를 가지는 데, 이를 프로그래밍에서는 *정의(definition)*이라고 부른다.
+아래의 예시는 `variable`이란 식별자를 가진 변수가 정수 자료형만 할당받을 수 있는 존재임을 컴파일러에게 알리는 동시에 메모리 할당을 통해 데이터를 가지는데, 이를 프로그래밍에서는 *정의(definition)*이라고 부른다.
 
 ```c
 /* 변수 "variable"의 정의 */
@@ -349,7 +351,7 @@ int variable;
 
 ### 초기화
 
-초기화(initialization)란, 변수의 정의 과정에서 이루어진 할당(assignment)을 가리킨다.
+초기화(initialization)란, 변수의 첫 데이터 할당(assignment)을 가리키며 일반적으로 정의 과정에서 이루어진다.
 
 ```c
 /* 변수의 초기화 */
@@ -530,12 +532,12 @@ reinterpret_cast<double *>(variable)
 탈출 문자(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 아래는 탈출 문자 중에서 흔히 사용되는 줄바꿈(`\n`)이다.
 
 ```c
-std::cout << "안녕하세요.\n처음 뵙겠습니다!";
+std::cout << "Hello\nWorld!";
 ```
 
 ```
-안녕하세요.
-처음 뵙겠습니다!
+Hello
+World!
 ```
 
 | 구문 | 설명           |
@@ -553,7 +555,7 @@ std::cout << "안녕하세요.\n처음 뵙겠습니다!";
 ## `if` 조건문
 `if` 조건문은 조건이 참일 경우 코드를 실행한다. 조건이 `true`일 때 문장이 수행되지만 그렇지 않으면 무시된다.
 
-```c
+```cpp
 if (condition)
 {
     statements;
@@ -565,7 +567,7 @@ if (condition) statement;
 
 `if` 조건문 안에 또다른 `if` 조건문을 넣을 수 있으며, 이를 *네스티드(nested)* `if` 조건문이라고 부른다. 이러한 경우, 코드 블록(`{}`)을 사용하여 두 `if` 조건문의 경계를 명확히 구별하기를 권장한다.
 
-```c
+```cpp
 if (condition)
 {
     if (condtion)
@@ -578,7 +580,7 @@ if (condition)
 ### `else` 조건문
 `else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 실행문에는 조건부가 `false`로 평가되었을 경우 호출되는 코드가 포함되어 있다.
 
-```c
+```cpp
 if (condition)
 {
     statements;
@@ -589,10 +591,10 @@ else
 }
 ```
 
-### `else if` Statement
+### `else if` 조건문
 `else if` 조건문은 `else`와 `if` 조건문의 조합으로 첫 번째 조건이 거짓일 경우, 첫 번째 조건과 다른 새로운 조건을 제시한다.
 
-```c
+```cpp
 if (condition)
 {
     statements;
@@ -612,7 +614,7 @@ else
 ### 조건 연산자
 조건문은 아래와 같이 조건 연산자(ternary operator; `?:`)를 사용하여 간략히 표현될 수 있다.
 
-```c
+```cpp
 condition ? true_return : false_return;
 ```
 
@@ -623,7 +625,7 @@ condition ? true_return : false_return;
 
 모든 경우에 조건이 부합하지 않을 시, `default` 키워드에 연동된 문장이 실행되며, `switch` 조건문에는 반드시 있어야 한다. 그러나 `case` 키워드와 달리 `break` 탈출문을 필요로 하지 않는다.
 
-```c
+```cpp
 switch (argument)
 {
     case value1:
@@ -639,7 +641,7 @@ switch (argument)
 
 `switch` 조건문은 복수의 경우가 하나의 실행문을 공유할 수 있다.
 
-```c
+```cpp
 switch (argument)
 {
     case value1:
@@ -665,7 +667,7 @@ switch (argument)
 ## `while` 반복문
 `while` 반복문은 조건이 유지되는 한 내부 코드를 반복적으로 실행한다. 조건이 `false`임이 판정되면 반복문을 종료한다.
 
-```c
+```cpp
 while (condition)
 {
     statements;
@@ -678,7 +680,7 @@ while (condition) statement;
 ### `do`-`while` 반복문
 `do`-`while` 반복문은 `while` 반복문과 유사한다. 그러나 후자는 조건을 먼저 확인하고 문장을 실행하였으면, 전자는 문장을 우선 실행하고 조건을 확인한다.
 
-```c
+```cpp
 do
 {
     statements
@@ -688,7 +690,7 @@ do
 ## `for` 반복문
 `for` 반복문은 정의된 지역 변수가 조건에 만족하는 한 지속적으로 반복한다. 한 번 반복할 때마다 지역 변수에는 반복문에 명시된 대로 변화가 발생하며, 일반적으로 정수형 증감을 사용한다.
 
-```c
+```cpp
 for (variable; condition; increment) {
     statements;
 }
@@ -1301,7 +1303,7 @@ C++ 문자열 자료형은 `iostream` 헤더의 일부인 `string` 헤더 파일
 
 ```cpp
 /* C++ 문자열 */
-std∷string str = "Hello World!";
+std::string str = "Hello World!";
 ```
 
 ### 문자열 배열
@@ -1312,7 +1314,7 @@ std∷string str = "Hello World!";
 std::string arr[] = {"Hello", "World!"};
 ```
 
-# **C++: 객체지향 프로그래밍**
+# **C++: 객체 및 클래스**
 
 본 문서에서 현재까지 절차적 및 함수형 프로그래밍에 대하여 소개하였다. 세 번째 프로그래밍 방법인 객체지향 프로그래밍(object-oriennted programming; OOP)은 함수 대신 클래스와 객체 사용을 기반으로 한다.  본 장은 C++에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
 
@@ -1433,7 +1435,7 @@ CLASS instance(1, 3.0);
 
 맴버 초기화 목록의 장점은 직접 초기화로는 불가능한 상수 맴버 필드의 초기화가 가능하다는 것이다.
 
-생성자는 선택사항이지만, 만일 생성자가 전달인자를 받도록 정의되었으면 반드시 소괄호(`()`)를 통해 값을 전달하도록 한다. 단, 전달인자가 없거나 기본값이 정해져 있을 시에는 소괄호가 필요하지 않다. 함수 오버로딩에 의하여 여러 생성자를 정의할 수 있다.
+생성자는 선택사항이지만, 만일 생성자가 전달인자를 받도록 정의되었으면 반드시 소괄호(`()`)를 통해 값을 전달하도록 한다. 단, 전달인자가 없거나 기본값이 정해져 있을 시에는 소괄호를 사용하지 않는다. 함수 오버로딩에 의하여 여러 생성자를 정의할 수 있다.
 
 ### 소멸자
 
@@ -1598,7 +1600,7 @@ public:
 
 ## 상속
 
-상속(inheritance)는 하나의 클래스가 다른 클래스에게 맴버 필드와 메소드를 그대로 사용할 수 있도록 제공해주는 행위이며, 이를 각각 기반 클래스(base class)와 파생 클래스(derived class)라고 부른다. 동일한 이름의 맴버가 기반 클래스와 파생 클래스에 존재할 시, 기반 클래스의 맴버 정의가 파생 클래스의 맴버 정의에 묻히게 된다 (일명 오버라이딩; overriding).
+상속(inheritance)는 하나의 클래스가 다른 클래스에게 맴버 필드와 메소드를 그대로 사용할 수 있도록 제공해주는 행위이며, 이를 각각 기반 클래스(base class)와 파생 클래스(derived class)라고 부른다. 동일한 이름의 맴버가 기반 클래스와 파생 클래스에 존재할 시, 기반 클래스의 맴버 정의가 파생 클래스의 맴버 정의에 묻히게 된다.
 
 ```cpp
 /* 기반 클래스 생성 */
@@ -1615,8 +1617,8 @@ public:
 class DERIVEDCLASS
     : public BASECLASS {
 public:
-    DERIVEDCLASS() { std::cout << "파생 클래스: 생성자\n" << std::endl; }
-    ~DERIVEDCLASS() { std::cout << "\n파생 클래스: 소멸자" << std::endl; }
+    DERIVEDCLASS() { std::cout << "파생 클래스: 생성자" << std::endl; }
+    ~DERIVEDCLASS() { std::cout << "파생 클래스: 생성자" << std::endl; }
     
     float field2 = 7.0;
     char field3 = 'A';
@@ -1710,7 +1712,7 @@ public:
 };
 
 /* 파생 클래스 생성 */
-class DERIVEDCLASS1
+class DERIVEDCLASS
     : public BASECLASS {
 public:	
     // 함수 오버라이딩
@@ -1719,6 +1721,8 @@ public:
     }  
 };
 ```
+
+단, *C++: 객체 및 클래스 § 상속*에서 보여준 기반 클래스의 맴버가 파생 클래스 맴버로 대체되는 것은 절대 함수 오버로딩이 아니다. 이는 단순히 기반 클래스 맴버가 파생 클래스 맴버에 묻힌 것 뿐이다.
 
 가상 함수는 기반 클래스에서 실행문을 갖도록 정의될 수 있으며, 이는 (1) 기반 클래스에서 사용할 때 동작하도록 하거나 (2) 파생 클래스가 오버라이딩 함수를 가지지 않을 시 동작할 수 있도록 한다. 한편, 가상 함수는 정의없이 선언만 될 수 있는데 이를 **순수 가상 함수(pure virtual function)**이라고 부른다.
 
