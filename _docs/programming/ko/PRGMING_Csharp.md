@@ -57,11 +57,11 @@ C#은 "객체"라는 데이터를 위주로 프로그램을 개발하는 객체�
 |:----------:|---------------------|---------------------------------------------------------------------------------------------|
 | 필드    | `object.field`      | 데이터 값을 저장하는 객체 맴버이다.                                                          |
 | 메소드   | `object.method()`   | 데이터를 처리하거나 반환하는 객체 맴버이다.                                           |
-| 프로퍼티 | `object.property()` | 필드 값을 간접적으로 반환하는 메소드를 지칭한다; 필드를 직접 접근하지 않으므로, 필드의 값이 의도치 않게 변경되는 것을 방지한다. |
+| 속성 | `object.property()` | 필드 값을 간접적으로 반환하는 메소드를 지칭한다; 필드를 직접 접근하지 않으므로, 필드의 값이 의도치 않게 변경되는 것을 방지한다. |
 
 ### 클래스
 
-클래스(class)는 객체를 생성하는 데 사용된다. 객체의 필드가 어떠한 값을 가지며 메소드는 어떻게 동작하는지 모두 클래스 내에 정의되어 있다. 정의된 맴버들은 클래스에서 바로 사용할 수 없으며 객체를 통해서만 사용할 수 있다. 여기서 클래스로부터 객체를 생성하는 과정을 *객체화(instantiation)*라고 부른다.
+클래스(class)는 객체를 생성하는 데 사용된다. 객체의 필드가 어떠한 값을 가지며 메소드는 어떻게 동작하는지 모두 클래스 내에 선언 및 정의되어 있다. 맴버들은 클래스에서 바로 사용할 수 없으며 객체를 통해서만 사용할 수 있다. 여기서 클래스로부터 객체를 생성하는 과정을 *객체화(instantiation)*라고 부른다.
 
 ### `static` 접근 한정자
 
@@ -331,7 +331,7 @@ World!
 | `char`     | 문자: `''`         | 단일 문자: `'A'` 및 `'?'`.<br />크기: 1 바이트                                         |
 | `string`   | 문자열: `""`            | 일련의 문자들: `"Hello World!"`<br />크기: 알수 없음 (문자 개수에 따라 다름) |
 | `bool`     | 논리형                 | 논리의 참과 거짓을 `true`(0이 아닌 정수)와 `false`(정수 0)로 표시.<br />크기: 1 바이트                                  |
-| `var`      | 자동               | 적절한 자료형으로 자동 선택.<br />복잡한 자료형을 간략히 정의하는데 매우 유용하다.  |
+| `var`      | 자동               | 적절한 자료형으로 자동 선택.<br />복잡한 자료형을 간략히 선언하는데 매우 유용하다.  |
 | `void`     | 보이드                    | 불특정 자료형.<br />크기: 1 바이트                                                            |
 
 ### `sizeof()` 연산자
@@ -344,40 +344,33 @@ sizeof(char);       // 크기: 1 바이트
 ```
 
 ## 변수
-변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당할 수 있는 저장공간이다. C# 언어의 변수는 자료형이 정해져 있으며, 해당하는 자료형 데이터만 할당받을 수 있다. 즉, 객체 및 클래스의 맴버 필드는 변수를 가리킨다. 
+변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당할 수 있는 저장공간이다. C# 언어의 변수는 자료형이 정해져 있으며, 해당하는 자료형 데이터만 할당받을 수 있다. 즉, 객체 및 클래스의 필드는 변수를 가리킨다. 
 
-아래의 예시는 `variable`이란 식별자를 가진 변수가 정수 자료형만 할당받을 수 있는 존재임을 컴파일러에게 알리는 동시에 메모리 할당을 통해 데이터를 가지는 데, 이를 프로그래밍에서는 *정의(definition)*이라고 부른다.
+아래의 예시는 `variable`이란 식별자를 가진 변수가 정수 자료형만 할당받을 수 있는 존재임을 컴파일러에게 알리는 동시에 메모리 할당을 통해 데이터를 가지는데, 이를 프로그래밍에서는 *선언(declaration)* 혹은 *정의(definition)*이라고 부른다.
 
-```c
-/* 변수 "variable"의 정의 */
-int variable = 3;
-```
-
-만일 데이터 할당이 이루어지지 않고 컴파일러에게 변수의 존재만 알리면 *선언(declaration)*이라고 부른다.
-
-```c
+```csharp
 /* 변수 "variable"의 선언 */
 int variable;
 ```
 
-실제로 위의 변수를 출력하면 값이 반환되는 것을 보아 할당은 되지 않았으나 데이터를 가지고 있음을 확인할 수 있다. 한 번 정의된 변수는 컴파일러가 어떠한 데이터 종류를 할당받을 수 있는지 알고 있으므로 더이상 자료형을 표시할 필요가 없다. 또한 모든 프로그래밍 언어는 할당 연산자를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)를 놓는다. 반대로 위치시키면 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
+C/C++ 언어와 달리, C# 프로그래밍 언어는 ECMA-334 표준에 의하면 선언과 정의의 개념이 명확히 구분되어 있지 않으며, 오히려 선언과 정의가 동일한 개념으로 보고 있다. 이는 객체지향 C# 프로그래밍 언어가 가지는 컴파일 작업이 기존의 C/C++ 언어와 다르기 때문이다.
+
+한 번 선언된 변수는 컴파일러가 어떠한 데이터 종류를 할당받을 수 있는지 알고 있으므로 더이상 자료형을 표시할 필요가 없다. 또한 모든 프로그래밍 언어는 할당 연산자를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)를 놓는다. 반대로 위치시키면 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
 ### 초기화
 
-초기화(initialization)란, 변수의 정의 과정에서 이루어진 할당(assignment)을 가리킨다.
+초기화(initialization)란, 변수의 첫 데이터 할당(assignment)을 가리키며 일반적으로 선언 과정에서 이루어진다.
 
 ```c
 /* 변수의 초기화 */
 int variable = 3;
 ```
 
-위와 같은 예시 코드로 인해 통상적으로 정의를 "선언 + 초기화"로 보는 경향이 많지만, 이는 매우 잘못된 견해이다. 선언 및 정의와 초기화는 전혀 다른 분류의 개념이며, 메모리가 할당되지 않는 선언 자체에 데이터를 할당한다는 자체가 모순이다.
-
 ### 지역 변수 & 전역 변수
 
 C# 언어에는 다음과 같은 종류의 변수가 존재한다.
 
-* **지역 변수(local variable)**는 함수(function)와 같은 코드 블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다. 그러므로 지역 변수는 외부에서 정의된 변수의 이름을 가질 수 있다.
+* **지역 변수(local variable)**는 함수(function)와 같은 코드 블록 내부에서 선언된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다. 그러므로 지역 변수는 외부에서 선언된 변수의 이름을 가질 수 있다.
 
   ```csharp
   class Program {
@@ -390,7 +383,7 @@ C# 언어에는 다음과 같은 종류의 변수가 존재한다.
   }
   ```
 
-* **전역 변수(global variable)**는 C# 프로그래밍 언어에 공식적으로 지원되지 않는다. 이론적으로는 스크립트의 최외각 영역에 정의되어 코드 블록 상관없이 사용할 수 있는 변수이지만, 객체지향 프로그래밍인 C#은 클래스 외부에 변수를 정의할 수 없다.
+* **전역 변수(global variable)**는 C# 프로그래밍 언어에 공식적으로 지원되지 않는다. 이론적으로는 스크립트의 최외각 영역에 선언되어 코드 블록 상관없이 사용할 수 있는 변수이지만, 객체지향 프로그래밍인 C#은 클래스 외부에 변수를 선언할 수 없다.
 
 * **정적 변수(static variable)**는 클래스에서 `static` 접근 한정자 키워드를 가지는 변수로 객체화가 필요없이 클래스에서 바로 접근하여 사용할 수 있다. 또한 정적 변수는 지역 변수와 달리 데이터가 소멸되지 않아 이전 값을 그대로 유지한다. 이러한 성질로 인해 정적 변수는 C# 언어에서 전역 변수의 대안으로 사용되고 있다.
 
@@ -408,10 +401,10 @@ C# 언어에는 다음과 같은 종류의 변수가 존재한다.
   ```
 
 ### 상수
-상수(constant)는 초기화 이후 변경할 수 없는 특별한 변수이다. 상수는 `const` 키워드를 통해 정의한다.
+상수(constant)는 초기화 이후 변경할 수 없는 특별한 변수이다. 상수는 `const` 키워드를 통해 선언한다.
 
 ```csharp
-/* 상수 정의 */
+/* 상수 선언 */
 const int variable = 3;
 ```
 
@@ -640,7 +633,7 @@ do
 ```
 
 ## `for` 반복문
-`for` 반복문은 정의된 지역 변수가 조건에 만족하는 한 지속적으로 반복한다. 한 번 반복할 때마다 지역 변수에는 반복문에 명시된 대로 변화가 발생하며, 일반적으로 정수형 증감을 사용한다.
+`for` 반복문은 선언된 지역 변수가 조건에 만족하는 한 지속적으로 반복한다. 한 번 반복할 때마다 지역 변수에는 반복문에 명시된 대로 변화가 발생하며, 일반적으로 정수형 증감을 사용한다.
 
 ```csharp
 for (variable; condition; increment) {
@@ -681,7 +674,7 @@ C# 언어는 여러 데이터를 하나의 변수에 저장하는 컬렉션(coll
 
 ## 배열
 
-배열(array)은 동일한 자료형의 데이터를 순번대로 담는 저장공간이다. 배열을 정의할 시, 대괄호(`[]`) 안에는 얼마나 많은 데이터를 담을 수 있는지 용량을 정해야 한다.
+배열(array)은 동일한 자료형의 데이터를 순번대로 담는 저장공간이다. 배열을 선언할 시, 대괄호(`[]`) 안에는 얼마나 많은 데이터를 담을 수 있는지 용량을 정해야 한다.
 
 ```csharp
 // 배열 선언
@@ -973,7 +966,7 @@ System.Console.WriteLine("Hello World!");
 // "System.Console" 클래스의 "WriteLine()" 메소드
 ```
 
-C# 언어는 객체지향 프로그래밍 언어이므로, 객체의 성질상 메소드가 나중에 정의되었다고 이전에 사용할 수 없는 게 아니다. 즉, 메소드 정의 순서는 OOP에서는 신경쓰지 않아도 된다. 하지만 메소드 안에 또다른 메소드를 정의하는 것은 허용되지 않는다.
+C# 언어는 객체지향 프로그래밍 언어이므로, 객체의 성질상 메소드가 나중에 선언되었다고 이전에 사용할 수 없는 게 아니다. 즉, 메소드 정의 순서는 OOP에서는 신경쓰지 않아도 된다. 하지만 메소드 안에 또다른 메소드를 정의하는 것은 허용되지 않는다.
 
 ### `return` 반환문
 `return` 반환문은 메소드로부터 데이터를 함수에 지정된 자료형으로 반환하는 메소드 전용 문장이다. 반환문이 실행되면 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 
@@ -987,7 +980,7 @@ C# 언어는 객체지향 프로그래밍 언어이므로, 객체의 성질상 �
 * **전달인자 (argument)**
     : 전달인자, 혹은 간략하게 "인자"는 메소드로 전달되는 데이터이다.
 * **매개변수 (parameter)**
-    : 매개변수는 전달인자를 할당받는 메소드 내의 지역 변수이다. 그러므로 매개변수는 메소드 외부에서 호출이 불가능하다. 매개변수의 정의은 메소드의 소괄호(`()`) 내에서 이루어진다.
+    : 매개변수는 전달인자를 할당받는 메소드 내의 지역 변수이다. 그러므로 매개변수는 메소드 외부에서 호출이 불가능하다. 매개변수의 선언은 메소드의 소괄호(`()`) 내에서 이루어진다.
 
 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
 
@@ -1011,7 +1004,7 @@ class Program
         Console.WriteLine(method(arg2: 3.0, arg1: 1));    // >> 출력: 4.0
     }
     
-    /* 메소드 정의 */
+    /* 메소드 선언 */
     static double method(int arg1, double arg2 = 7.0)
     {
         return arg1 + arg2;
@@ -1188,13 +1181,13 @@ class Program
 
 ## 객체
 
-객체(object 혹은 instance)는 데이터를 저장할 수 있는 필드(field)와 데이터를 처리 할 수 있는 메소드(method)들을 하나의 데이터로 캡슐화한 구성체이다. 메소드 중에서도 필드의 값만 반환해주는 메소드를 프로퍼티(property)라고 하는데, 이는 필드에 직접 접근하지 못하게 하여 의도치 않은 필드 데이터 변경을 방지한다.
+객체(object 혹은 instance)는 데이터를 저장할 수 있는 필드(field)와 데이터를 처리 할 수 있는 메소드(method)들을 하나의 데이터로 캡슐화한 구성체이다. 메소드 중에서도 필드의 값만 반환해주는 메소드를 속성(property)이라고 하는데, 이는 필드에 직접 접근하지 못하게 하여 의도치 않은 필드 데이터 변경을 방지한다.
 
 | 맴버   | 구문              | 설명                                                                                 |
 |:----------:|---------------------|---------------------------------------------------------------------------------------------|
 | 필드    | `object.field`      | 클래스 및 객체에서 데이터를 저장하는 변수를 지칭한다; 메소드의 매개변수 및 지역변수는 필드가 아니다. |
 | 메소드   | `object.method()`   | 클래스 및 객체에서 데이터를 처리하거나 역할을 한다; 메소드에 따라 인자를 전달받거나 데이터를 반환할 수 있다. |
-| 프로퍼티 | `object.property()` | 클래스 및 객체의 필드 값을 간접적으로 반환하는 메소드를 지칭한다; 필드를 직접 접근하지 않으므로, 필드의 값이 의도치 않게 변경되는 것을 방지한다. |
+| 속성 | `object.property()` | 클래스 및 객체의 필드 값을 간접적으로 반환하는 메소드를 지칭한다; 필드를 직접 접근하지 않으므로, 필드의 값이 의도치 않게 변경되는 것을 방지한다. |
 
 사용자 정의 객체 중심으로 한 프로그래밍을 *객체지향 프로그래밍*이라고 한다.
 
@@ -1216,7 +1209,7 @@ System.Console.WriteLine(variable.Length);
 
 ## 클래스
 
-클래스(class)는 객체를 생성하는 데 사용된다. 클래스는 `class` 키워드를 사용하여 정의되며, 내부는 객체 필드와 메소드가 되는 변수와 함수를 정의한다. 아래는 `class` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이며, 변수 및 함수와의 유사성을 확인할 수 있다.
+클래스(class)는 객체를 생성하는 데 사용된다. 클래스는 `class` 키워드를 사용하여 선언되며, 내부는 객체 필드와 메소드를 선언한다. 아래는 `class` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이며, 변수 및 함수와의 유사성을 확인할 수 있다.
 
 클래스로부터 객체를 생성하는 절차를 *객체화(instantiation)*라고 한다.
 
@@ -1284,7 +1277,7 @@ class Program
 }
 ```
 
-생성자는 선택사항이지만, 만일 생성자가 전달인자를 받도록 정의되었으면 반드시 소괄호(`()`)를 통해 값을 전달하도록 한다. 단, 전달인자가 없거나 기본값이 정해져 있을 시에는 소괄호가 필요하지 않다. 함수 오버로딩에 의하여 여러 생성자를 정의할 수 있다.
+생성자는 선택사항이지만, 만일 생성자가 전달인자를 받도록 선언되었으면 반드시 소괄호(`()`)를 통해 값을 전달하도록 한다. 단, 전달인자가 없거나 기본값이 정해져 있을 시에는 소괄호가 필요하지 않다. 함수 오버로딩에 의하여 여러 생성자를 정의할 수 있다.
 
 ### 종료자
 
@@ -1323,10 +1316,10 @@ class Program
 
 ### `this` 키워드
 
-The `this` keyword is used within a class to refer the current class itself.
+`this` 키워드는 객체 스스로를 가리키는 연산자로, 이를 통해 객체 내에서 맴버 필드 및 메소드 접근이 가능하다.
 
-```c#
-// CREATING CLASS
+```csharp
+/* 클래스 생성 */
 class CLASS{
     private int field;
     
@@ -1338,10 +1331,10 @@ class CLASS{
 
 ## 정적 클래스
 
-Class itself cannot use the its members directly and need to create instance to access them. However, declaring the class itself as static allows the class to access the members without needing any instantiation. Hence, it is impossible to create an instance from the static class.
+클래스에 선언된 맴버들은 객체를 통해 접근할 수 있으나, 클래스 자체에서 직접 접근할 수는 없다. 그러나 `static` 키워드로 정적 클래스(static class)로 선언하면 객체화 없이 클래스에서 맴버를 접근할 수 있다. 단, 정적 클래스는 오로지 정적 맴버만 가질 수 있으며 객체화를 할 수 없다.
 
 ```c#
-// CREATING STATIC CLASS
+/* 정적 클래스 생성 */
 static class CLASS
 {
     public static int field1 = 1;
@@ -1353,31 +1346,36 @@ static class CLASS
     }
 }
 
-// THEREFORE...
-CLASS.field1;       // >> 출력: 1
-CLASS.field2;       // >> 출력: 3.0
-CLASS.method(2);    // >> 출력: 2.0 (= 1 + 3.0 - 2)
-
-// [ERROR] INSTANTIATION
-CLASS instance = new CLASS();
+class Program
+{
+    static void Main(string[] args)
+    {
+        // 그러므로...
+        CLASS.field1;       // >> 출력: 1
+        CLASS.field2;       // >> 출력: 3.0
+        CLASS.method(2);    // >> 출력: 2.0 (= 1 + 3.0 - 2)
+        
+        // 객체화: 오류!
+        CLASS instance = new CLASS();
+    }
+}
 ```
-
 ```
 Error	CS0723	Cannot declare a variable of static type 'CLASS'
 Error	CS0712	Cannot create an instance of the static class 'CLASS'
 ```
 
-Static class is generally used as a collection of member for specific purpose which does not (or should not) need instantiation; e.g., `Math`, `Array`, `String`, `DataTime`, `Console`, and more.
+정적 클래스의 대표적인 예시로는 콘솔 터미널 입출력 기능이 내포된 `Console` 클래스가 있으며, 이들은 객체화 없이도 특정 목적의 필드 및 메소드만을 제공하는 역할을 가진다.
 
 ### 정적 생성자
 
-Static constructor is executed when any static member is called even when it is not instantiated.
+정적 생성자(static constructor)는 정적 클래스의 맴버가 호출될 때마다 실행되는 메소드이다.
 
-```c#
-// CREATING STATIC CLASS
+```csharp
+/* 정적 클래스 생성 */
 static class CLASS
 {
-    // STATIC CONSTRUCTOR
+    /* 정적 생성자 */
     public static CLASS()
     {
         statements;
@@ -1393,121 +1391,136 @@ static class CLASS
 }
 ```
 
-Static constructor is an optional member method and can be defined when developer wants. Only one static constructor is allowed per class and does not take any argument and modifier.
+정적 생성자는 선택사항이며, 전달인자를 허용하지 않아 함수 오버로딩이 불가하므로 하나만 선언할 수 있다.
 
 ## 한정자
 
-Modifier keywords are used to define characteristic of object members upon member declaration.
+한정자(modifier)는 객체 맴버를 선언할 때 성질을 지정하기 위해 사용된다.
 
-1. **Static** modifier (`static` keyword)
-    : a modifier used to declare either static member which can be used without instantiation, or static class that only has static members.
+1. `static` 한정자
+    : 객체화 없이 클래스에서 바로 접근하 수 있는 정적 맴버, 혹은 정적 맴버만을 가지는 정적 클래스를 선언하는데 사용된다.
 
-    ```c#
-    // STATIC MEMBER FIELD
+    ```csharp
+    // 정적 필드
     static int field = 3;
     
-    // STATIC MEMBER METHOD
-    static void method() { statements; }
+    // 정적 메소드
+    static void method()
+    { 
+        statements;
+    }
     ```
 
-2. **Constant** modifier (`const` keyword)
-    : a static modifier used to declare constant member field; constant member only allows value assignment through initialization. This also means constant member must be initialized with value upon declaration.
+2. `const` 한정자
+    : 초기화 이후 값 변동이 불가한 정적 상수(constant) 필드를 선언하는데 사용된다. 해당 맴버는 반드시 선언 시 초기화가 되어야 하며, 그렇지 않으면 컴파일 오류가 발생한다.
 
-    ```c#
-    // CONSTANT (STATIC) MEMBER FIELD
+    ```csharp
+    // (정적) 상수 필드
     const int field = 3;
     ```
 
-3. **Read-Only** modifier (`readonly` keyword)
-    : a non-static modifier used to declare semi-constant member field; read-only member allows value assignment using both initialization and on constructor. This also means read-only member does not have to be initialized upon declaration.
+3. `readonly` 한정자
+    : 초기화 이후 값 변동이 불가한 비정적(non-static) 비완전상수(semi-constant) 필드를 선언하는데 사용된다. 해당 맴버는 선언 단계는 물론, 생성자를 통해서도 초기화가 될 수 있다.
 
-    ```c#
-    // READ-ONLY (NON-STATIC) MEMBER FIELD
+    ```csharp
+    // (비정적) 읽기전용 필드
     readonly int field;
     ```
 
-4. **Sealed** modifier (`sealed` keyword)
-    : a modifier used on base class or member of the base class to prevent derived class from inheriting.
+4. `sealed` 한정자
+    : 기반 클래스 혹은 기반 클래스의 맴버에 사용되어 파생 클래스가 상속받지 못하도록 제한하는 한정자이다.
 
-    ```c#
-    // SEALED MEMBER
+    ```csharp
+    // 봉인 필드
     sealed int field;
     ```
 
-5. **Virtual**-**Override** modifier pair (`virtual` and `override` keyword)
-    : a modifier used for method overriding; `virtual` modifier allows base class method to be overridden, and `override` modifier on derived class overrides inherited virtual method from base class.
+5. `virtual` 및 `override` 한정자
+    : 오버라이딩을 위해 사용되는 한정자 쌍이다: `virtual` 한정자는 기반 클래스의 맴버가 오버라이딩 될 수 있도록 하며, `override` 한정자는 파생 클래스가 해당 맴버를 오버라이딩 할 수 있도록 한다.
 
-    ```c#
-    // VIRTUAL METHOD
-    virtual void method() { statements; }
+    ```csharp
+    // 가상 메소드
+    virtual void method()
+    {
+        statements;
+    }
     
-    // OVERRIDDEN METHOD
-    override void method() { statements; }
+    // 오버라이드 메소드
+    override void method()
+    {
+        statements; 
+    }
     ```
 
-6. **Abstract** modifier (`abstract` keyword)
-    : a virtual modifier specifically for method without any implementation (or definition); this modifier can be used on class as well to declare abstract class.
+6. `abstract` 한정자
+    : 코드 블록 없는 가상 메소드를 선언하는데 사용되는 한정자이다. 해당 한정자는 메소드 이외에도 클래스 자체에도 사용할 수 있다.
 
-    ```c#
-    // ABSTRACT METHOD
+    ```csharp
+    // 추상 메소드
     abstract void method();
     ```
 
 ### 접근 한정자
 
-접근 한정자(access modifier) is used to define characteristic of object members on access authorization. There are four different access modifiers available in C# classes: public, private, protected, and internal.
+접근 한정자(access modifier)는 외부에서 클래스 맴버의 접근성을 지정한다. C# 언어에는 세 가지의 접근 지정자가 존재하며, 이는 각각 `public`, `private`, `protected`, 그리고 `internal`이 있다.
 
 | 키워드     | 설명                                                |
 |:-----------:| ------------------------------------------------------------ |
-| `public`    | Accessible from the code outside the class.|
-| `private`   | Accessible only within the class.|
-| `protected` | Accessible from derived class but still restricted from outside the class; refer to inheritance. |
-| `internal`  | Accessible only within the assembly.                         |
+| `public`    | 클래스 외부에서도 접근이 가능하다. |
+| `private`   | 클래스 내에서만 접근이 가능하다 (기본값). |
+| `protected` | 파생 클래스는 접근할 수 있으나, 여전히 클래스 외부에서는 접근할 수 없다 (클래스 *상속* 부문 참조). |
+| `internal`  | 클래스 외부에서도 접근이 가능하나, 해당 어셈블리 내에서만 한정되어 있다 (타 어셈블리 접근 불가).                         |
 
 ## 상속
 
-Inheritance is an act of base class providing member variables and methods to derived class. When the same name of members exists on both base class and derived class, members from base class are overridden by derived class's.
+상속(inheritance)는 하나의 클래스가 다른 클래스에게 맴버 필드와 메소드를 그대로 사용할 수 있도록 제공해주는 행위이며, 이를 각각 기반 클래스(base class)와 파생 클래스(derived class)라고 부른다. 동일한 이름의 맴버가 기반 클래스와 파생 클래스에 존재할 시, 파생 클래스의 맴버 정의가 기반 클래스의 맴버 정의에 묻히게 된다.
 
-```c#
+```csharp
 using System;
 
-// CREATING BASE CLASS
+/* 기반 클래스 생성 */
 class BASECLASS
 {
-    public BASECLASS() { Console.WriteLine("BASE CLASS: Constructor"); }
-    ~BASECLASS() { Console.WriteLine("BASE CLASS: Destructor"); }
+    public BASECLASS() { Console.WriteLine("기반 클래스: 생성자"); }
+    ~BASECLASS() { Console.WriteLine("기반 클래스: 종료자"); }
     
     public int field1 = 1;
     public double field2 = 3.0;
 }
 
-// CREATING DERIVED CLASS
+/* 파생 클래스 생성 */
 class DERIVEDCLASS
     : BASECLASS
 {
-    public DERIVEDCLASS() { Console.WriteLine("DERIVED CLASS: Constructor\n"); }
-    ~DERIVEDCLASS() { Console.WriteLine("\nDERIVED CLASS: Destructor"); }
+    public DERIVEDCLASS() { Console.WriteLine("파생 클래스: 생성자"); }
+    ~DERIVEDCLASS() { Console.WriteLine("파생 클래스: 종료자"); }
     
     public double field2 = 7.0;
     public char field3 = 'A';
 }
 
-// INSTANTIATION
-DERIVEDCLASS instance = new DERIVEDCLASS();
-Console.WriteLine("{0}, {1}, {2}", instance.field1, instance.field2, instance.field3);
+class Program
+{
+    static void Main(string[] args)
+    {
+        // 객체화
+        DERIVEDCLASS instance = new DERIVEDCLASS();
+        Console.WriteLine("{0}, {1}, {2}",
+            instance.field1, instance.field2, instance.field3);
+    }
+}
 ```
-
 ```
-"BASE CLASS: Constructor"
-"DERIVED CLASS: Constructor"
+"기반 클래스: 생성자"
+"파생 클래스: 생성자"
 
 1, 7.0, A
 
-"DERIVED CLASS: Destructor"
-"BASE CLASS: Destructor"
+"파생 클래스: 소멸자"
+"기반 클래스: 소멸자"
 ```
 
-Derived class in C# generally cannot inherit from multiple base classes; a derived class can inherit only a single base class. For multiple inheritance, refer to *interface*.
+C# 프로그래밍 언어에서 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 없다. 오로지 한 기반 클래스로부터만 파생될 수 있다. 여러 기반 클래스로부터 동시에 상속받기 위해서는 *인터페이스*를 참고한다.
 
 ## 다형성
 
@@ -1524,7 +1537,7 @@ Derived class in C# generally cannot inherit from multiple base classes; a deriv
 
 연산자 오버로딩(operator overloading)은 또다른 컴파일타임 다형성으로, 특정 클래스에서 연산자가 달리 동작하도록 한다. 함수 오버로딩과 마찬가지로 전달인자의 유일성이 보장되는 한, 하나의 연산자에 여러 다른 정의가 가능하다. 오버로딩된 연산자는 클래스 한정이므로 해당 클래스 및 객체 외에는 적용되지 않는다.
 
-`operator` 키워드는 기능성을 새로 정의할 연산자를 명시하기 위해 사용되며, 연산자 정의 구문은 메소드 정의와 동일하다.
+`operator` 키워드는 기능성을 새로 정의할 연산자를 명시하기 위해 사용되며, 연산자 선언 구문은 메소드 선언와 동일하다.
 
 ```csharp
 /* 클래스 생성 */
@@ -1569,53 +1582,58 @@ class DERIVEDCLASS1
 }
 ```
 
-가상 메소드는 기반 클래스에서 실행문을 갖도록 정의될 수 있으며, 이는 (1) 기반 클래스에서 사용할 때 동작하도록 하거나 (2) 파생 클래스가 오버라이딩 메소드를 가지지 않을 시 동작할 수 있도록 한다. 한편, 가상 메소드는 정의없이 선언만 될 수 있는데 이를 **추상 메소드(abstract method)**이라고 부른다.
+가상 메소드는 기반 클래스에서 실행문을 갖도록 정의될 수 있으며, 이는 (1) 기반 클래스에서 사용할 때 동작하도록 하거나 (2) 파생 클래스가 오버라이딩 메소드를 가지지 않을 시 동작할 수 있도록 한다. 한편, 가상 메소드는 코드 블록(`{}`) 없이 선언만 될 수 있는데 이를 **추상 메소드(abstract method)**이라고 부른다.
 
 ```csharp
 /* 추상 메소드 */
 public abstract void polymorph();
 ```
 
-추상 메소드는 기반 클래스에서 정의되지 않았으므로, 파생 클래스에서는 *반드시* 오버라이딩을 해야 한다. 오버라이딩하지 않으면 컴파일 오류가 발생한다.
+추상 메소드는 코드 블록(`{}`)을 갖지 않았으므로, 파생 클래스에서는 *반드시* 오버라이딩을 해야 한다. 오버라이딩하지 않으면 컴파일 오류가 발생한다.
 
 ### 추상 클래스
 
-Abstract class is a special class declared using `abstract` keyword, designed not meant for class instantiation but as a base class purely to inherit members to derived class. Attempting to instantiate causes compilation error.
+추상 클래스(abstract class)는 `abstract` 키워드로 선언된 특수한 클래스로, 객체화를 하지 못하며 오로지 상속을 위해 존재하는 기반 클래스를 의미한다. 객체화 시도 시, 컴파일 오류가 발생한다.
 
-```c#
-// CREATING ABSTRACT CLASS
+```csharp
+/* 추상 클래스 생성 */
 abstract class CLASS
 {
     public int field1 = 1;
     public double field2 = 3.0;
     
-    // ABSTRACT METHOD
+    /* 추상 메소드 */
     public abstract void polymorph();
 }
 
-// [ERROR] INSTANTIATION
-CLASS instance = new CLASS();
+class Program
+{
+    static void Main(string[] args)
+    {
+        // 객체화: 오류!
+        CLASS instance = new CLASS();
+    }
+}
 ```
-
 ```
 Error	CS0144	Cannot create an instance of the abstract class or interface 'CLASS'
 ```
 
-Abstract class can have multiple members with different access modifier too. However, inherited non-abstract derived class *must* include actual implementation for the abstract member declared on the base class.
+추상 클래스는 서로 다른 접근 한정자를 가진 여러 맴버를 가질 수 있다. 하지만 추상 클래스에서 파생된 클래스는 *반드시* 추상 메소드들을 오버라이딩을 해야 한다.
 
-### Interface
+### 인터페이스
 
-Interface is a variation of abstract class where all its member are nonetheless `abstract` and `public` by default. There is no need to and is not allowed to specify the modifier. Interface can have methods and properties but cannot have member field.
+인터페이스(interface)는 추상 클래스의 변이로, 모든 맴버가 기본적으로 `abstract` 및 `public`으로 선언된다. 그러므로 인터페이스 내에는 한정자를 명시할 필요가 없다. 단, 인터페이스는 필드를 맴버로 가질 수 없다.
 
-```c#
-// CREATING INTERFACE
+```csharp
+/* 인터페이스 생성 */
 class interface INTERFACE
 {
     int property {get; set;}
     void polymorph();
 }
 
-// CREATING DERIVED CLASS
+/* 파생 클래스 생성 */
 class DERIVEDCLASS
     : INTERFACE
 {
@@ -1627,11 +1645,10 @@ class DERIVEDCLASS
 }
 ```
 
-Unlike derived class inherited from abstract class which needs `override` modifier to corresponds to `virtual` or `abstract` modifier, interface does not need such modifiers when overriding method.
+인터페이스의 파생 클래스는 메소드 오버라이딩을 하는데 `override` 한정자가 사용되지 않으며, 한정자를 필요로 하지 않는다. 또한 파생 클래스는 아래의 구문을 통해 여러 인터페이스를 동시에 상속받을 수 있다.
 
-Multiple interface can inherit their members to a single derived class, using the following syntax:
-
-```c#
+```csharp
+/* 파생 클래스 생성: 두 인터페이스로부터 상속 */
 class DERIVEDCLASS
     : INTERFACE1, INTERFACE2
 {
@@ -1639,56 +1656,62 @@ class DERIVEDCLASS
 }
 ```
 
-## 프로퍼티
+## 속성
 
-Property is a member used to supports data hiding by dividing a single field into two separate portions: `getter`, and `setter`. The property looks similar to methods but properties do not have a pair of parenthesis, behaving just like member field.
+속성(property)은 하나의 필드를 두 개의 영역인 `getter`와 `setter`로 나누어 데이터 숨기기를 지원한다. 속성은 메소드와 유사하게 생겼지만 소괄호(`()`)가 없어 필드처럼 사용된다.
 
-| ACCESSOR | KEYWORD | DESCRIPTION                                     |
-| -------- | ------- | ----------------------------------------------- |
-| Getter   | `get`   | Member for getting the value from member field. |
-| Setter   | `set`   | Member for setting the value to member field.   |
+| 접근자 | 키워드 | 설명                                     |
+|:--------:| ------- | ----------------------------------------------- |
+| Getter   | `get`   | 필드로부터 값을 반환받는 맴버이다. |
+| Setter   | `set`   | 필드로부터 값을 설정하는 맴버이다. |
 
-```c#
+```csharp
 using System;
 
-// CREATING CLASS
+/* 클래스 생성 */
 class CLASS
 {
     private int field;
     
-    // PROPERTY
+    /* 속성 */
     public int property
     {
-        get => field;            // GETTER IMPLEMENTATION
-        set => field = value;    // SETTER IMPLEMENTATION
+        get => field;            // GETTER 속성
+        set => field = value;    // SETTER 속성
         
-        /* EQUIVALETN:
+        /* 동일:
         get { return field; }
         set {field = value; }
         */
     }
 }
 
-// INSTANTIATION
-CLASS instance = new CLASS();
-
-instance.method = 1;
-instance.method;        // >> OUTPUT: 1
+class Program
+{
+    static void Main(string[] args)
+    {
+        // 객체화
+        CLASS instance = new CLASS();
+        
+        instance.method = 1;
+        instance.method;        // >> OUTPUT: 1
+    }
+}
 ```
 
-The property syntax itself explains it cannot pass more than a single data as an argument. While there exists an argument means there is also a (auto-defined) parameter that should accept the passed argument, pre-declared as `value` keyword.
+속성은 위의 예시 코드 구문에서도 볼 수 있듯이 전달인자를 하나만 받을 수 있다. 인자는 속성이 가지는 매개변수로 전달되는데, 해당 매개변수는 `value` 연산자를 통해 접근한다.
 
-Separating code using property encapsulate sensitive code that shouldn't be modified by the user (such as `setter`), while providing constant access to the method via `getter` method despite any changes were made on `setter`.
+속성을 통해 필드를 나누므로써 수정되지 말아야 하는 `setter`와 같은 민감한 코드를 숨기면서 `getter` 메소드만을 통해서 필드 값을 반환받을 수 있다.
 
-### Auto-Implemented Property
+### 자동 구현 속성
 
-Simplified version of property is available, called "auto-implemented property". However, custom statements cannot be implemented on this particular property.
+자동 구현 속성(auto-implemented property)는 간략화된 속성이지만, `getter` 및 `setter` 영역의 코드를 수정할 수 없다.
 
-```c#
-// PROPERTY
+```csharp
+/* 클래스 생성 */
 public int property {get; set;}
 
-/* EQUIVALENT:
+/* 동일:
 string field;
 public int property{
     get => field;
@@ -1697,20 +1720,20 @@ public int property{
 */
 ```
 
-## Indexer
+## 인덱서
 
-Indexer member allows instance to be indexed just like array. Similar to property which uses both `getter` and `setter` accessors, indexer stores data in collection object declared in private member field.
+인덱서(indexer) 맴버는 객체를 배열과 같이 사용할 수 있도록 한다. 속성과 유사하게 `getter`와 `setter` 접근자를 사용하며, 인덱서는 데이터를 `private` 필드에 선언된 컬렉션에 저장한다.
 
-```c#
+```csharp
 using System;
 
-// CREATING CLASS
+/* 클래스 생성 */
 class CLASS
 {
-    // COLLECTION FOR INDEXER
+    /* 인덱서를 위한 컬렉션 */
     private int[] arr = new int[2];
     
-    // INDEXER
+    /* 인덱서 */
     public int this[int index]
     {
         get => arr[index];
@@ -1718,23 +1741,29 @@ class CLASS
     }
 }
 
-// INSTANTIATION
-CLASS instance = new CLASS();
-
-instance[0] = 1;        // >> OUTPUT: 1
-instance[1] = 3;        // >> OUTPUT: 3
+class Program
+{
+    static void Main(string[] args)
+    {
+        // 객체화
+        CLASS instance = new CLASS();
+        
+        instance[0] = 1;        // >> 출력: 1
+        instance[1] = 3;        // >> 출력: 3
+    }
+}
 ```
 
 # **C#: 자료구조**
 
-Commonly used value type such as `int`, `float`, `char`, and more are already defined in `iostream.h` header. Developer may create and use custom data type based on these pre-defined data types.
+C# 언어에서 흔히 사용되는 `int`, `float`, `char` 등과 같은 내부 자료형을 기반으로 목적에 알맞은 자료구조을 새롭게 지정할 수 있다. 본 장은 자료형처럼 사용할 수 있는 자료구조의 정의 및 활용법을 설명한다.
 
 ## 구조체
 
-Structure groups multiple member variables under a single structure tag, regardless of value type of member variable. 
+구조체(structure)는 자료형과 상관없이 여러 맴버 변수(일명 맴버 필드)를 하나의 단일 데이터로 통합시킨 자료구조 구성체이다. 구조체의 정의는 `struct` 키워드를 통해 이루어진다.
 
-```c#
-// CREATING STRUCTURE
+```csharp
+/* 구조체 선언 */
 public struct STRUCTURE
 {
     public int    field1;
@@ -1746,18 +1775,22 @@ public struct STRUCTURE
     }
 }
 
-// VARIABLE DECLARATION
-STRUCTURE variable;
-
-variable.field1 = 1;
-variable.field2 = 3.0;
-System.Console.WriteLine(variable.method(2));    // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
+class Program
+{
+    static void Main(string[] args)
+    {
+        /* 구조체 변수 선언 */
+        STRUCTURE variable;
+        
+        variable.field1 = 1;
+        variable.field2 = 3.0;
+        System.Console.WriteLine(variable.method(2));    // >> 출력: 2.0 (= 1 + 3.0 - 2)
+    }
+}
 ```
-
 ----
-
-```c#
-// CREATING STRUCTURE w/ CONSTRUCTOR
+```csharp
+/* 구조체 선언: 생성자 포함 */
 public struct STRUCTURE
 {
     public STRUCTURE(int arg1, double arg2)
@@ -1772,77 +1805,96 @@ public struct STRUCTURE
     }
 }
 
-// VARIABLE INITIALIZATION
-STRUCTURE variable = new STRUCTURE(1, 3.0);
-
-System.Console.WriteLine(variable.method(2));    // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
+class Program
+{
+    static void Main(string[] args)
+    {
+        /* 구조체 변수 초기화 */
+        STRUCTURE variable = new STRUCTURE(1, 3.0);
+        
+        System.Console.WriteLine(variable.method(2));    // >> 출력: 2.0 (= 1 + 3.0 - 2)
+    }
+}
 ```
 
-Class and structure do share similarity but have distinct differences:
+클래스와 구조체는 서로 유사하지만 확연한 차이점이 존재한다:
 
-| CLASS                                      | STRUCTURE                                                    |
-| ------------------------------------------ | ------------------------------------------------------------ |
-| Allocated on heap memory (reference type). | Allocated on stack memory (value type; e.g. `int`, `double`). |
-| Inheritance is allowed.                    | Inheritance is not allowed.                                  |
-| May initialized member fields.             | May not initialize member fields.                            |
+| 클래스             | 구조체               |
+|-----------------|-------------------|
+| 힙 영역 메모리에 할당된다. | 스택 영역 메모리에 할당된다.  |
+| 상속이 허용된다.       | 상속이 허용되지 않는다.     |
+| 필드 초기화가 허용된다.   | 필드 초기화가 허용되지 않는다. |
 
 ## 열거형
 
-Enumeration means "action of mentioning a number of things one by one", thus is a user-defined data type which can only be assigned with a single enumerators that has corresponding integer.
+열거형(enumeration)은 열거된 항목들을 정수로 순번을 매기는 자료형으로, 자료구조가 아니다. 열거자(enumerator)라고 부르는 열거 항목들은 기본적으로 정수 0부터 시작하여 순서대로 1만큼 값이 증가한다.
 
-```cpp
-// ENUMERATION DELCARATION
+```csharp
+/* 열거형 선언 */
 enum ENUMERATION {
     enumerator1,    // = 0
     enumerator2,    // = 1
     enumerator3     // = 2
 };
 
-// VARIABLE INITIALIZATION
-ENUMERATION variable = ENUMERATION.enumerator1;
-
-System.Console.WriteLine(variable);         // >> OUTPUT: enumerator1
-System.Console.WriteLine((int)variable);    // >> OUTPUT: 0
+class Program
+{
+    static void Main(string[] args)
+    {
+        /* 열거형 변수 초기화 */
+        ENUMERATION variable = ENUMERATION.enumerator1;
+        
+        System.Console.WriteLine(variable);         // >> 출력: enumerator1
+        System.Console.WriteLine((int)variable);    // >> 출력: 0
+    }
+}
 ```
 
-As a default, integer 0 is assigned to the first enumerator which is incremented by one on next enumerator. While enumerator itself must be unique which cannot share name, same integer value can be assigned to different enumerators using assignment (`=`) operator.
+열거자들에 할당되는 정수는 할당 연산자(`=`)를 통해 달리 지정이 가능하며, 다른 열거자와 동일한 값이 할당되어도 상관없다. C/C++ 언어와 달리 동일한 이름의 열거자 다른 열거형에 존재할 수 있다.
 
-```cpp
+```csharp
 enum ENUMERATION {
-    enumerator1 = 2,    // >> OUTPUT: 2
-    enumerator2,        // >> OUTPUT: 3
-    enumerator3 = 1,    // >> OUTPUT: 1
-    enumerator4,        // >> OUTPUT: 2
-    enumerator5	        // >> OUTPUT: 3
+    enumerator1 = 2,    // >> 출력: 2
+    enumerator2,        // >> 출력: 3
+    enumerator3 = 1,    // >> 출력: 1
+    enumerator4,        // >> 출력: 2
+    enumerator5	        // >> 출력: 3
 };
 ```
 
 # **C#: 제네릭**
 
-Generics (aka. template in C++) provides a format of code regardless of considering what data type it uses. Hence, generics are used to define multiple number of similar functions or classes in efficient way.
+제네릭(generic)은 자료형과 무관하게 메소드 또는 클래스의 형식 틀을 제공한다. 개발자는 템플릿을 활용해 여러 유사한 함수 및 클래스를 손쉽게 생성할 수 있다. 본 장은 제네릭 선언 및 활용법을 설명한다.
 
 ## 제네릭 메소드
 
-A generic for a method is created using the following syntax:
+제니릭 메소드(generic method)는 다음과 같은 구문으로 선언된다.
 
-```c#
-// GENERIC METHOD DECLARATION
-static U method<T, U>(T arg1, U arg2)
+```csharp
+class CLASS
 {
-    statements;
-    return something;
+    /* 제네릭 메소드 선언 */
+    static U method<T, U>(T arg1, U arg2)
+    {
+        statements;
+        return something;
+    }
 }
+```
 
-// CALLING GENERIC METHOD (PARAMETERIZED METHOD)
-method<int, double>(1, 3.0);
+정의된 제네릭 메소드는 다음과 같이 사용된다.
+
+```csharp
+/* 제네릭 메소드 호출 */
+CLASS.method<int, double>(1, 3.0);
 ```
 
 ## 제네릭 클래스
 
-A generic for a class is created using the following syntax:
+제네릭 클래스(generic class)는 다음과 같은 구문으로 선언된다.
 
-```c#
-// GENERIC CLASS DECLARATION
+```csharp
+/* 제네릭 클래스 선언 */
 class CLASS<T, U>
 {
     public CLASS(T arg1, U arg2) { field1 = arg1,=; field2 = arg2; }
@@ -1856,100 +1908,119 @@ class CLASS<T, U>
         return field1 + field2 - arg;
     }
 }
+```
 
-// CALLING GENERIC CLASS (PARAMETERIZED CLASS)
+정의된 제네릭 클래스는 다음과 같이 사용된다.
+
+```csharp
+/* 제네릭 클래스 호출 */
 CLASS<int, double> instance = new CLASS(1, 3.0);
 ```
 
 # **C#: 예외 처리**
 
-Exception is a problem encountered during a program execution (not during compilation). C# programming language offers keyword and blocks for controlling exceptions: `throw`, `try`, and `catch`. Through exception handling, stable program can be compiled and executed without any halt or crash.
+예외(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 컴파일러에서 걸러지는 오류가 아니기에 정상적인 프로그램 빌드가 이루어질 수 있으나, 예외가 발생하면 프로그램이 즉시 중단된다. C++ 프로그래밍 언어에서는 예외를 처리할 수 있는 `throw` 키워드, `try` 및 `catch` 블록이 존재한다. 예외 처리는 빌드된 프로그램이 중단이나 충돌 없이 안정적으로 실행되는 것을 주목표로 한다.
 
 ## `try`/`catch` 블록
 
-Two code block pair, `try` block and `catch` block, is used to handle exception occurred during runtime. Following paragraphs explains what each code block is responsible for on exception handling.
+`try` 블록과 `catch` 블록 쌍은 프로그램 실행 도중에 발생하는 예외를 처리하는데 사용된다. 아래의 문단은 예외 처리에 있어 각 블록의 역할을 설명한다.
 
-The `try` block is a code block that attempts whether the code contains exception or not. If it encounters an exception inside the block, the remaining code won't be executed but skipped to corresponding exception `catch` block.
+`try` 블록은 코드에 예외가 발생하는지 확인한다. 만일 예외가 코드 블록 내에 발생하였을 시, 블록 내의 나머지 코드는 동작하지 않으며, 예외 종류에 따라 해당하는 `catch` 블록으로 넘어간다.
 
-The `catch` block is a code block that contains code to be executed when exception occurred in `try` block. While there can only be one `try` block, multiple `catch` block can exist for different exceptions. If there is no `catch` block with corresponding exception, compilation error will occur (which is not an exception).
+`catch` 블록은 `try` 블록에서 예외가 발생하였을 시 실행되는 코드를 포함한다. 하나의 `try` 블록에는 여러 `catch` 블록을 사용하여 다양한 예외에 대비할 수 있다. 만일 해당 예외를 처리할 수 있는 `catch` 블록이 없으면 컴파일 오류가 발생한다 (컴파일 오류는 예외가 아니다).
 
-```c#
-// TRY BLOCK
+```csharp
+/* try 블록 */
 try
 {
 	statements;
 }
 catch(IndexOutOfRangeException e)
 {
-	// CATCH: ERROR FOR ACCESSING ELEMENT OUT OF RANGE
+	// catch: 범위를 벗어난 요소 접근 시 발생 예외
 }
 catch(DivideByZeroException e)
 {
-	// CATCH: ERROR FOR ATTEMPTING TO DIVIDE BY ZERO
+	// catch: 숫자를 0으로 나눌 시 발생 예외
 }
 ```
 
-For exception handler to catch every exception, place ellipsis `Exception` between parentheses.
+`catch` 블록이 모든 예외 사항을 처리하도록 하기 위해서는 소괄호 내에 `Exception` 클래스 매개변수를 넣는다. 
 
-```cpp
+```csharp
 catch(Exception e)
 {
-	// CATCH: EVERY PARAMETER TYPE & EXCEPTION
+	// catch: 모든 예외
 }
 ```
 
 ## `throw` 키워드
 
-The `throw` keyword is used to manually halt execution and "throws" expression to `catch` keyword. It throws the exception instance created from `System.Exception` reference type (aka. class), hence requires `new` operator and designate which exception to throw.
+`throw` 키워드는 `try` 블록 내에서 실행되는 코드를 일부로 예외를 일으켜 중단시키고, `catch` 블록으로 데이터를 "건네주는" 역할을 한다. `System.Exception` 참조형(일명 클래스)에서 생성된 객체를 통해 발생시킬 예외를 지정하므로, 객체화에 사용되는 `new` 연산자가 필요하다.
 
-```c#
+```csharp
 try
 {
     statements;
     
-    // THROW EXCEPTION: "INDEX OUT OF RANGE"
-	throw new IndexOutOfRangeException("Error Message!");
+    // 예외 발생: "INDEX OUT OF RANGE"
+	throw new IndexOutOfRangeException("오류 메시지!");
 }
-catch(IndexOutOfRangeException e) { statements; }
-catch(DivideByZeroException e)    { statements; }
+catch(IndexOutOfRangeException e)
+{
+    statements;
+}
+catch(DivideByZeroException e)
+{
+    statements;
+}
+```
+```
+오류 메시지!
 ```
 
-### Re-throw Exception
+### 예외 건네주기
 
-Caught exception can be thrown again to another `try`/`catch` code block pair and let them handle the exception instead:
+`catch` 블록에서 감지한 예외는 또다른 `try`/`catch` 블록 쌍으로 넘겨주어 나머지 예외 처리를 맡길 수 있다.
 
-```c#
+```csharp
 class Program
 {
-    static void Main(string[] args)
-    {
-        try { method(); }                // RECEIVED RE-THROWN EXCEPTION
-        catch (Exception e) { System.Console.WriteLine(e.Message) }
-    }
-    
     static void method()
     {
-        try { throw new IndexOutOfRangeException("Error Message!"); }
-        catch(Exception e) { throw; }    // RE-THROW EXCEPTION: method() -> Main()
+        try { throw new IndexOutOfRangeException("오류 메시지!"); }
+        catch(Exception e) { throw; }    // 예외 건네주기: method() -> Main()
+    }
+
+    static void Main(string[] args)
+    {
+        try { method(); }                // 건네진 예외 수신
+        catch (Exception e) { System.Console.WriteLine(e.Message) }
     }
 }
 ```
-
 ```
-Error Message!
+오류 메시지!
 ```
 
-## `finaly` Block
+## `finaly` 블록
 
-The optional `final` block is executed after the `catch` block no matter what exception has occurred, including when exception was caught.
+선택사항인 `final` 블록은 `try`/`catch` 블록 쌍 실행이 마무로될 때, 예외 발생 여부를 떠나 무조건 실행되는 블록이다.
 
-```c#
-try { statements; }
-
-catch(IndexOutOfRangeException e) { statements; }
-catch(DivideByZeroException e)    { statements; }
-
-// POST-EXECUTION AFTER TRY/CATCH
+```csharp
+try
+{
+    statements;
+}
+catch(IndexOutOfRangeException e)
+{
+    statements;
+}
+catch(DivideByZeroException e)
+{
+    statements;
+}
+/* "try"/"catch" 이후의 실행 코드 */
 finally
 {
 	statements;
@@ -1958,15 +2029,15 @@ finally
 
 # **C#: 파일 관리**
 
-C# programming language can read and write external file to save or import data. This chapter is mainly focused on accessing and modifying `.txt` extension text file.
+C# 언어는 외부 파일을 읽음으로써 데이터를 불러오거나 작성함으로써 데이터를 저장할 수 있다. 본 장은 주로 외부 `.txt` 텍스트 파일을 접근하고 변경하는 데 집중한다.
 
-Unlike other languages like C/C++ and Python, C# does not have to specify opening and closing of the file. This makes managing the file much easier since programmer just have to write the code that needs working by inserting inside the API alone.
+C/C++ 및 파이썬(Python) 언어와 달리, C# 언어는 파일을 열고 닫는 매커니즘이 존재하지 않는다. 이는 개발자들의 관점에서 C# 언어로의 파일 관리를 더욱 편리하게 만든다.
 
 ## 파일 읽기
 
-Below is one example of reading, in other word, extracting the whole file content to a variable. The core method is `System.IO.File.ReadAllText()`:
+파일 읽기, 즉 파일로부터 데이터를 불러오는 작업은 `System.IO.File` 클래스의 `ReadAllText()` 정적 메소드를 사용한다. 
 
-```c#
+```csharp
 static void Main(){
     string output = System.IO.File.ReadAllText("./sample.txt");
     System.Console.WriteLine(output);
@@ -1975,22 +2046,22 @@ static void Main(){
 
 ## 파일 쓰기
 
-Writing the file is can be done using `System.IO.File.WriteAllText()` method:
+파일 쓰기는 `System.IO.File` 클래스의 `WriteAllText()` 정적 메소드를 사용한다.
 
-```c#
+```csharp
 static void Main(){
     string input = "Hello World!";
     System.IO.File.WriteAllText("./sample.txt", input);
 }
 ```
 
-If such file does not exist, the method creates the file; when there is a file, it is overwritten.
+만일 해당 파일이 존재하지 않으면 새로운 파일을 생성한다. 반면, 파일이 이미 존재하면 기존의 내용은 덮어쓰여진다.
 
 ### 파일 생성
 
-Creating the file is also possible by using `System.IO.File.Create()` method:
+파일 생성은 `System.IO.File` 클래스의 `Create()` 정적 메소드를 사용한다.
 
-```c#
+```csharp
 static void Main(){
     System.IO.File.FileStream file = System.IO.File.Create("./sample.txt");
 }
