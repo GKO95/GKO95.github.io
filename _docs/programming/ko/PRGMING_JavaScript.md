@@ -9,190 +9,314 @@ logo: "/assets/images/logo/logo-js.png"
 summary: "."
 order: 0x04
 ---
-# **JAVASCRIPT: BASIC**
+# **자바스크립트: 소개**
 
-Previously, JavaScript has been used mainly on providing interactable webpages. The usage of the JavaScript has grown and is also used on data processing as well as creating an application itself nowadays.
+자바스크립트(JavaScript)는 절차형 웹프로그래밍 언어로 HTML & CSS 웹디자인 언어와 함께 사용되어, 상호작용 가능한 동적 웹페이지를 만드는데 기여한다. 현재 자바스크립트의 용도는 데이터 처리 및 어플리케이션 제작 등 범위가 넓어지고 있다.
 
-The JavaScript documents also introduces newly added syntax since after the release of ECMAScript 2015, also known as ES6 which is a standardization for script-language.
+## 인터프리트 언어
 
-## **Script**
+프로그래밍 언어를 실행하는 방법에는 크게 두 가지로 나뉘어진다: 컴파일 언어와 인터프리트 언어이다.
 
-JavaScript is commonly used in HTML & CSS to provide dynamic interaction. HTML supports JavaScript with `<script>` tag either by internal scripting or external script file:
+프로그래밍 언어의 소스 코드는 영문으로 작성되어 있어 컴퓨터가 실행하기 위해서는 이진코드와 같은 컴퓨터 언어로 번역을 해야 한다. 이러한 역할을 하는 것이 컴파일러(compiler)라고 하며, 대표적인 컴파일 언어로는 C/C++이 있다. 반면 인터프리터(interpreter)는 소스 코드를 컴퓨터 언어로 번역하지 않고 곧바로 실행하나, 컴파일 언어보다 실행 속도가 느리다는 치명적인 단점이 존재한다.
+
+자바스크립트는 인터프리트 언어이며, 인터프리터가 있는 한 하나의 소스 코드를 서로 다른 시스템에서 동일하게 실행할 수 있는 장점을 가진다(일명 크로스 플랫폼; cross platform).
+
+## HTML 웹프로그래밍 언어
+
+HTML(Hypertext Markup Language) 선언형 웹디자인 프로그래밍 언어는 정적 웹사이트를 생성하는데 흔히 사용되는 언어이다. 여기서 정적 웹사이트(static website)란 모든 웹페이지 방문자들에게 동일한 콘텐츠를 보여주는 것을 의미한다. 즉, HTML 언어만으로는 웹사이트에 다양한 기능을 구현할 수가 없다.
+
+하지만 자바스크립트를 배우기 전에 HTML을 공부하기 적극 추천한다: HTML은 매우 쉬운 언어이며, 자바스크립트만으로 웹페이지를 만들 수 있으나 상당히 불편하고 비효율적인 작업이다. HTML으로 우선적으로 디자인을 마치고 자바스크립트로 기능을 추가하는 방법이 가장 보편적이다.
+
+아래는 HTML 언어의 사용 예시이다.
 
 ```html
-<!-- INTERNAL SCRIPTING -->
+<html>
+    <!-- HTML 주석 -->
+    <body style="text-align: center">
+        <span class="example">Hello World!</span>
+    </body>
+</html>
+```
+
+### CSS 스크립팅 언어
+
+CSS(Cascade Style Sheets) 스크립팅 언어는 HTML을 보조하는 언어로, HTML에 사용되는 구성요소(예를 들어 태크, 아이디, 클래스 등)의 디자인 내용만을 담고 있다. HTML을 공부하면 CSS 또한 함께 공부할 가치가 있는 매우 간단한 언어이다.
+
+아래는 CSS 언어의 사용 예시이다.
+
+```css
+body {
+    background-color: rgb(42, 45, 46);
+    border: solid 3px black;
+}
+
+.example {
+    font-family: 'Consola', monospace;
+    color: white;
+}
+```
+
+# **자바스크립트: 실행**
+
+자바스크립트를 실행하기 위해서는 인터넷 브라우저만 있으면 된다: 마이크로소프트 엣지(Edge), 구글 크롬(Chrome), 모질라 파이어폭스(FireFox), 애플 사파리(Safari) 등 모두 자바스크립트를 실행할 수 있다.
+
+하지만 `.js` 파일만으로 인터넷 브라우저로 자바스크립트를 실행할 수 없으며, 실행한다 하더라도 자바스크립트 파일의 내용을 텍스트로 보여줄 뿐이다. Node.js 프로그램을 사용하면 HTML 없이 자바스크립트를 실행시킬 수 있으나, "입문자를 위한 자바스크립트 설명"이란 본질과 멀어지게 된다. 그러므로 본 장에서는 브라우저를 활용한 간단한 자바스크립트 작업 환경을 구축하는 방법을 설명한다.
+
+## 비주얼 스튜디오 코드
+[비주얼 스튜디오 코드](https://code.visualstudio.com/download)(Visual Studio Code; VS Code)는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 특히 마이크로소프트에서 타입스크립트(TypeScript)라는 자바스크립트의 상위호환 언어 사용을 적극적으로 권장하므로써 자바스크립트 개발 환경에도 같이 신경쓰고 있다.
+
+VS Code에서 자바스크립트 작업 환경을 구축하기 위해서는 최소 세 가지의 파일이 필요하다: 자바스크립트, HTML, 그리고 JSON 파일이다.
+
+### `script.js` 파일
+
+자바스크립트 파일은 당연히 현재 배우고자 하는 자바스크립트 언어를 작성하는 파일이다. 자바스크립트 파일명은 `script.js`라고 가정한다.
+
+### `index.html` 파일
+
+HTML 파일을 통해 자바스크립트를 실행할 수 있는 런타임 환경을 제공한다. 자바스크립트 파일명이 `script.js`일 경우, 아래와 같이 HTML 파일을 생성하고 파일명은 간편하게 `index.html`로 지정한다.
+
+```html
+<html>
+    <!-- 자바스크립트 불러오기 -->
+    <script type="text/javascript" src="script.js"></script>
+</html>
+```
+
+### `.vscode/launch.json` 파일
+
+VS Code에서 자바스크립트를 실행하기 위해서는 확장도구가 필요하다: `F1` 키를 눌러 `Extensions: Install Extensions`을 입력한다. 선호하는 브라우저에 따라 왼쪽에 나타난 검색창에 다음과 같이 검색한다.
+
+* 구글 크롬: `Debugger for Chrome`
+* 모질라 파이어폭스: `Debugger for FireFox`
+* 마이크로소프트 엣지: `Debugger for Microsoft Edge`
+
+선택한 후, 초록색 `Install` 버튼을 눌러 설치한다. 이후 `F5` 버튼을 누르면 자바스크립트를 선택한 브라우저로 실행하는 옵션을 볼 수 있으며, 클릭할 시 자동적으로 `.vscode/launch.json` 파일이 생성된다.
+
+해당 파일에 설정을 추가해야 한다: `"file": "${workspaceFolder}/index.html"`. 여기서 설정을 추가할 시 쉼표(`,`)를 잊지말고 넣어주어야 한다. 아래는 브라우저를 마이크로소프트 엣지로 선택하였을 때의 예시이다.
+
+```json
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "edge",
+            "request": "launch",
+            "name": "Launch Edge against localhost",
+            "url": "http://localhost:8080",
+            "file": "${workspaceFolder}/index.html"
+        }
+    ]
+}
+```
+
+종합적으로 아래와 같이 파일들이 준비되어야 한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/JavaScript/js_vs_workspace.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. VS Code의 자바스크립트 작업 환경.</center>
+
+현 상태에서 `F5` 버튼을 누르면 자바스크립트를 디벙깅 모드로 실행, 그리고 `CTRL+F5` 버튼을 누르면 디버깅 없이 실행된다. 여기서 디버깅 모드란, 코드를 단계별로 실행하여 데이터가 어떻게 변하는지 확인할 수 있도록 한다.
+
+# **자바스크립트: 기초**
+
+각 프로그래밍 언어마다 준수되어야 할 규칙과 기반이 되는 데이터들이 존재한다. 이를 어길 시에는 프로그램에 오류가 발생하거나 정상적인 동작을 보장할 수 없다.  실질적인 프로그래밍에 있어, 본 장에서는 자바스크립트 프로그램 코딩에 기초적인 정보 제공을 목표로 한다.
+
+여기서 본 문서는 ECMAScript 2015, 일명 ES6 스크립트 언어 표준에서부터 소개된 자바스크립트 데이터 및 구문을 함께 설명한다.
+
+## `<script>` 태그
+
+HTML에서 자바스크립트를 사용하기 위해서는 `<script>` 태그가 반드시 필요하다. `<script>` 태그 안에 자바스크립트를 작성할 수 있으며, 혹은 외부 자바스크립트 파일을 불러올 수 있다.
+
+```html
+<!-- 자바스크립트 작성하기 -->
 <script type="text/javascript">
 	Write JavaScript Here... 
 </script>
 
-<!-- EXTERNAL SCRIPT FILE -->
+<!-- 자바스크립트 불러오기 -->
 <script type="text/javascript" src="path/to/script.js"></script>
 ```
 
-## **Comment**
+## 주석
 
-Line comment is used to place a comment worth one line of code, using `//` (double slash).
+주석(comment)은 프로그래밍에 있어 실행되지 않는 부분이며, 흔히 어떠한 정보를 간략히 스크립트 내에 입력하는데 사용된다. 자바스크립트에는 두 가지의 주석이 존재하며, 이들은 각각 "한줄 주석"과 "블록 주석"이라 부른다.
 
-Block comment places a comment that requires more than one line, using `/* */` (slash asterisk).
-
-```cpp
-/*
-This is a block comment:
-multiple line of comment can be placed here.
-*/
-    
-std::cout << 1 << std::endl;
-std::cout << 2 << std::endl; // This is a line comment that for a single line of code.
-std::cout << 3 << std::endl;
-```
+* **한줄 주석**
+    : 코드 한 줄을 차지하는 주석이며, 두 개의 슬래시(`//`)로 표시된다.
+* **블록 주석**
+    : 코드 여러 줄을 차지하는 주석이며, 한 쌍의 슬래시와 별표(`/* */`)로 표시된다.
 
 ```js
 /*
-	BLOCK COMMENT:
-	this whole block is designated for a comment section.
-*/
-var tmp = "Hello World!";
-console.log(tmp);	// LINE COMMENT: a single line of comment.
+블록 주석:
+코드 여러 줄을 차지하는 주석이다.
+*/  
+// 한줄 주석: 코드 한 줄을 차지하는 주석이다.
 ```
 
-```
-Hello World!
-```
+## 출력
 
-## **Output**
+자바스크립트는 두 가지 종류의 출력이 존재한다:
 
-JavaScript has two different version of output keyword based on the platforms:
+| 출력             | 예시                         | 설명                                                  |
+|------------------ | ------------------------------ | ------------------------------------------------------------ |
+| `document.write()` | `document.write("text")` | HTML에 직접 텍스트를 삽입한다; HTML 콘텐츠에 영향을 주기 때문에 권장되지 않는다. |
+| `console.log()`    | `console.log("text")`    | 데이터를 터미널로 출력한다; 브라우저에서 `F12` 버튼을 눌러 "Console" 탭을 확인한다.                                  |
 
-| OUTPUT             | SYNTAX                         | DESCRIPTION                                                  |
-| ------------------ | ------------------------------ | ------------------------------------------------------------ |
-| `document.write()` | `document.write("Return", 10)` | HTML version of output within `<script>` or external webpage JS script. |
-| `console.log()`    | `console.log("Return", 10)`    | Terminal version of output.                                  |
-| `alert()`          | `alert("Descript")`            | A small borderless pop-up box with `"Descript"` text and an OK button. |
-| `prompt()`         | `prompt("Descript","Default")` | A small borderless pop-up box with `"Descript"` text and input form `"Default"`. |
+하나의 출력 함수에서 두 가지 이상의 데이터를 한꺼번에 출력하는 데 두 가지의 방법이 존재하며, 이들의 출력 방식은 약간 다르다.
 
-Printing output of multiple data-type can be done with two method: comma `,` and plus sign `+`. Former always have space for each comma, while latter does not.
+1. 쉼표(`,`)를 사용하여 연속적으로 데이터를 나열할 수 있으나, 쉼표에는 항상 공백이 놓여진다.
 
-```js
-console.log("Return", 10);
-console.log("Output" + 0);
-```
+    ```js
+    console.log("Hello World!", 1);
+    ```
+    ```
+    Hello World! 1
+    ```
 
-```
-Return 10
-Output0
-```
+2. 더하기 기호(`+`)를 문자열 연결에 사용하면 사이에 공백이 생기지 않는다. 그러나 문자열 자료형이 아닌 데이터는 우선 문자열로 변환해야 한다.
 
-HTML version of the output is coded as follows:
+    ```js
+    console.log("Hello World!", 1);
+    ```
+    ```
+    Hello World!1
+    ```
 
-```html
-<!--HTML VERSION OF JAVASCRIPT-->
-<script>
-    document.write("Return", 10);
-</script>
-```
+## 팝업창
 
-## **Pop-up Box**
+자바스크립트에는 HTML과 함께 사용할 수 있는 세 가지 종류의 팝업창(pop-up box)가 존재한다:
 
-JavaScript has three different pop-up box that can be integrated with HTML & CSS:
-
-| OUTPUT      | SYNTAX                         | DESCRIPTION                                                  |
+| 팝업창      | 예시                         | 설명                                                  |
 | ----------- | ------------------------------ | ------------------------------------------------------------ |
-| `alert()`   | `alert("Descript")`            | A pop-up box with `"Descript"` text and an OK button.        |
-| `prompt()`  | `prompt("Descript","Default")` | A pop-up box with `"Descript"` text and input form which has `"Default"` as an default input text. |
-| `confirm()` | `confirm("Descript")`          | A pop-up box with `"Descript"` text and an OK, Cancel button which returns True and False. |
+| `alert()`   | `alert("설명")`            | `"설명"` 텍스트와 함께 OK 버튼이 있는 팝업창이다.        |
+| `prompt()`  | `prompt("설명","데이터")` | A pop-up box with `"설명"` 텍스트와 함께 `데이터`가 기본값으로 입력된 입력창이 있는 팝업창이다. |
+| `confirm()` | `confirm("설명")`          | A pop-up box with `"설명"` 텍스트와 함께 OK 및 Cancel 버튼이 있어 논리값 `True` 혹은 `False`를 반환한다. |
 
-## **Identifier**
+## 식별자
 
-Identifier is a name used to identify a variable, function, object, class, and more. In another word, it is just a name. There are rules identifier has to observe:
+식별자(identifier)는 프로그래밍을 구성하는 데이터(일명 구성체; construct)를 구별하기 위해 사용되는 명칭이다. 다시 말해, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. 자바스크립트 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
 
-- First character must be an alphabet letter, an underscore `_`, or a dollar sign `$`.
-- Beside the first character may use alphabet letters, digits, underscores, or dollar signs.
-- Mathematical and logical operators, special characters, and blank spaces are not allowed.
-- Reserved words such as a type identifier and function name are not allowed.
+- 오직 영문, 숫자, 밑줄(`_`), 그리고 달러 표시(`$`)만 허용된다.
+- 첫 문자는 숫자로 시작할 수 없다.
+- 산술 및 논리 연산자, 특수 문자, 그리고 공백은 사용할 수 없다.
+- 예약어 및 키워드는 식별자로 사용할 수 없다.
 
-## **Variable**
+## 변수
 
-Assigning a variable is very simple in JavaScript: initialize value using a single assignment operator `=` after the variable name. Naming variable's name inherits the rule of identifier. Variables are not data type fixed, allowing programmer to change the value and its data type whatever and whenever they want even from a single variable.
+변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당할 수 있는 저장공간이다. ECMAScript 2015 이후부터, 자바스크립트에는 세 가지 종류의 변수가 존재한다.
 
-However, starting from ECMAScript 2015, there are now three different types of variable.
-
-| VARIABLE | EXAMPLE            | DESCRIPTION                       |
+| 변수 | 예시            | 설명                       |
 | -------- | ------------------ | --------------------------------- |
-| `var`    | `var x = value;`   | Global variable.                  |
-| `let`    | `let x = value;`   | Local variable (scope-sensitive). |
-| `const`  | `const x = value;` | Unchangeable local variable.      |
+| `var`    | `var x = value;`   | 전역 변수                  |
+| `let`    | `let x = value;`   | 지역 변수 |
+| `const`  | `const x = value;` | 변경불가 전역/지역 변수      |
 
-```js
-/* VAR VARIABLE TYPE. */
-var x = 123.456;
-console.log(x);
+한 번 선언된 변수는 이후 `var`, `let`, 혹은 `const` 키워드를 사용하지 않고 호출된다. 자바스크립트의 변수는 데이터 종류와 상관없이 새로운 데이터를 언제든지 할당받을 수 있다.
 
-x = "This is a string.";
-console.log(x);
+### 지역 변수 & 전역 변수
 
-/* LET VARIABLE TYPE. */
-let y = "Outer Scope";
-if (true) {
-    let y = "Inner Scope";
+자바스크립트에는 전역 변수와 지역 변수라는 개념이 존재한다.
+
+* **지역 변수(local variable)**는 함수(function)와 같은 코드 블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다. 그러므로 지역 변수는 외부에서 정의된 변수의 이름을 가질 수 있다.
+
+    ```js
+    /* "let" 지역 변수 */
+    let y = "Outer Scope";
+    if (true) {
+        let y = "Inner Scope";
+        console.log(y);
+    }
     console.log(y);
-}
-console.log(y);
-```
+    ```
+    ```
+    Outer Scope
+    Inner Scope
+    ```
+    
+* **전역 변수(global variable)**는 스크립트 내에서 어떠한 코드 블록에도 속하지 않은 외부에 정의된 변수이다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수의 사용은 피하도록 한다.
 
-```
-/* VAR VARIABLE TYPE. */
-123.456
-This is a string
-/* LET VARIABLE TYPE. */
-Outer Scope
-Inner Scope
-```
+    ```js
+    /* "var" 전역 변수 */
+    var x = 123.456;
+    console.log(x);
+    
+    x = "This is a string.";
+    console.log(x);
+    ```
+    ```
+    123.456
+    This is a string
+    ```
 
-## **Data Type**
+### 상수
+상수(constant)는 한 번 데이터를 할당한 후 변경할 수 없는 특별한 변수이다. 상수는 어디서 선언되었는지에 따라 전역 변수인지 지역 변수인지 나뉘어진다: 만일 코드 블록 외에 선언되었으면 전역 변수가 되며, 코드 블록 내에 선언되었으면 지역 변수가 된다.
 
-Data type of the JavaScript can be categorized into three different type: numeric, string, and Boolean data type.
+## **자료형**
 
-### Number Data Type
+파이썬은 기본적으로 세 가지의 데이터 유형이 존재하며, 이들은 숫자, 논리, 그리고 문자열 자료형(data type)으로 구분된다.
 
-While most of the programming language (such as C++, Java, and Python) have numerical data type of more than one in general, **JavaScript only has one which is simply called *"number" data type***. Number data type can either be expressed as integer and floating-point number accordingly.
+### 숫자 자료형
 
-Arithmetic operation of a number data type is as follows:
+일반적으로 C/C++, 파이썬, 그리고 자바와 같은 프로그래밍 언어는 두 개 이상의 숫자 자료형을 가진다 (예를 들어 `int`, `float` 등). 하지만 자바스크립트는 `number` 자료형이란 오로지 하나의 숫자 자료형을 가지며, 이는 정수와 실수 모두 표현할 수 있다.
 
-| NAME           | OPERATOR | DESCRIPTION                                                  |
-| -------------- | :------: | ------------------------------------------------------------ |
-| Addition       |   `+`    | -                                                            |
-| Subtraction    |   `-`    | -                                                            |
-| Multiplication |   `*`    | -                                                            |
-| Division       |   `/`    | When divided, the value automatically changes to data type of `float` if the number cannot be divided without a remainder. |
-| Modulus        |   `%`    | When divided, gives an output a remainder of the division.   |
+자바스크립트에는 다음과 같은 숫자 자료형의 산술 연산이 존재한다. 
 
-Increment and decrement is possible using the syntax below:
+| 이름  | 연산자 | 설명                      |
+|-----|:---:|-------------------------|
+| 덧셈  | `+` | -                       |
+| 뺄셈  | `-` | -                       |
+| 곱셈  | `*` | -                       |
+| 나눗셈 | `/` | -                       |
+| 나머지 | `%` | 나눗셈에서 몫을 제외한 나머지만 도출한다. |
 
-|  OPERATOR   | EXAMPLE | DESCRIPTION   |
-| :---------: | ------- | ------------- |
-| `++` prefix | `x=y++` | `x=y; y=y+1;` |
-| `++` suffix | `x=++y` | `y=y+1; x=y;` |
-| `--` prefix | `x=y--` | `x=y; y=y-1;` |
-| `--` suffix | `x=--y` | `y=y-1; x=y;` |
+할당 연산자(assignment operator)는 숫자 자료형에 사용되는 또다른 연산자이다. 이에 대한 설명은 아래의 도표를 참고한다.
 
-Assignment operators `=` can be combined with arithmetic operator to execute in-place operation:
+| 연산자 | 예시  | 동일  |
+|:--------:| -------- | ----------- |
+| `+=`     | `x += 1` | `x = x + 1` |
+| `-=`     | `x -= 1` | `x = x - 1` |
+| `*=`     | `x *= 1` | `x = x * 1` |
+| `/=`     | `x /= 1` | `x = x / 1` |
+| `%=`     | `x %= 1` | `x = x % 1` |
 
-| OPERATOR | EXAMPLE  | EQUIVALENT  |
-| :------: | -------- | ----------- |
-|   `+=`   | `x += 1` | `x = x + 1` |
-|   `-=`   | `x -= 1` | `x = x - 1` |
-|   `*=`   | `x *= 1` | `x = x * 1` |
-|   `/=`   | `x /= 1` | `x = x / 1` |
-|   `%=`   | `x %= 1` | `x = x % 1` |
+비록 할당 연산자는 아니지만, 이와 유사한 증감 연산자(increment & decrement)는 C 기반 언어에서 다음과 같은 표현식을 의미한다.
 
-### String Data Type
+| 연산자    | 예시   | 설명       |
+| ----------- | --------- | ----------------- |
+| `++` 접두사 | `x = y++` | `x = y; y = y+1;` |
+| `++` 접미사 | `x = ++y` | `y = y+1; x = y;` |
+| `--` 접두사 | `x = y--` | `x = y; y = y-1;` |
+| `--` 접미사 | `x = --y` | `y = y-1; x = y;` |
 
-String object is a value assigned to string data type that is created by entering text between a pair of single quotation marks `' '` or double quotation marks `" "`.
+### 논리 자료형
+논리 자료형(Boolean data type)은 문장이 참인지 거짓인지 판별하는 논리 조건에 사용되는 데이터 유형이다.
 
-To place single or double quotes inside a string, place a backslash `\` before the quotes to escape from premature end of string.
+| 값             | 이름            | 설명                          |
+|:--------------:|:---------------:| ----------------------------- |
+| `True`  | 논리적 참  | 논리가 참일 때 반환된다.  |
+| `False` | 논리적 거짓 | 논리가 거짓일 때 반환된다. |
+
+논리값은 숫자 자료형으로도 표현이 가능하다. 0이 아닌 양의 정수는 `True`로 표현되며, 반대로 `False`는 오로지 숫자 0으로만 표현된다.
+
+비교 연산자는 두 개의 데이터 관계를 비교하는데 사용되며, 조건이 참인지 거짓인지 여부에 따라 해당하는 논리값을 반환한다.
+
+| 미만 | 이하 | 동일 | 일치 | 상이 | 이상 | 초과 |
+|:----:|:----:|:----:|:---:|:----:|:----:|:----:|
+| `<`  | `<=` | `==` | `===` | `!=` | `>=` | `>`  |
+
+여기서 `===` 연산자는 `==` 연산자보다 더욱 엄격하며, 값의 일치 여부와 자료형의 동일성도 함께 확인하다.
+
+논리 연산자(logical operator)에는 논리곱, 논리합, 그리고 보수가 있다. 논리 연산자를 사용할 시, `true`와 `false` 논리값을 각각 이진수의 1과 0으로 간주하면 된다.
+
+| 연산자 | 논리 | 설명                                                |
+|:--------:| ----- | ---------------------------------------------------------- |
+| `&&`     | 논리곱   | 모든 인수가 `true`이면 `true`이고, 그렇지 않으면 `false`이다.    |
+| `||`     | 논리합    | 하나 이상의 인수가 `true`이면 `true`이고, 그렇지 않으면 `false`이다. |
+| `!`      | 보수   | `true`를 `false`로 변경 혹은 `false`를 `true`로 변경한다.                   |
+
+### 문자열 자료형
+문자열 자료형(string data type)은 한 쌍의 작은 따옴표(`''`) 또는 큰 따옴표(`""`)로 구별되는 텍스트 데이터이다. 문자열 데이터에 따옴표를 넣을 시, 해당 따옴표 앞에 백슬래시(`\`)를 배치하여 문자열이 도중이 끊기는 문제를 방지한다.
 
 ```js
-// Comparison between improper and proper way of typing strings.
+/* 문자열 작성의 부적절한 예시와 적절한 예시의 비교. */
 console.log('Where's my "Cat in the Hat" book?');
 console.log('Where\'s my "Cat in the Hat" book?');
 ```
@@ -202,145 +326,120 @@ Where
 Where's my "Cat in the Hat" book?
 ```
 
-Placing a new line within a string can be done with `\n` which is one of the example of how escape character is used in strings.
+문자열 데이터 줄바꿈은 탈출 문자 중 하나인 `\n`을 직접 삽입하여 구현할 수 있으며, 아래의 예시는 줄바꿈 사용 예시를 보여준다.
 
 ```js
-// Printing and writing string in multiple lines.
-console.log("Thank you!\nYou're welcome.");
+console.log("Hello\nWorld!");
 ```
 
 ```
-Thank you!
-You're welcome.
+Hello
+World!
 ```
 
-While placing value inside a string has been painstaking due to a need to place concatenation sign  `+` between every string and variable, template literals in ES6 introduced easier way to resolve this matter using a pair of backtick `` ` ` `` with a placeholder `${ }` for the variable.
+이전 자바스크립트 구문은 데이터를 문자열에 넣기 위해 문자열을 나누어 더하기 기호(`+`)를 매번 넣어야 하는 불편함이 있었다. 하지만 ES6 이후부터 템플릿 리터럴(template literal)이 소개되면서 `${}` 연산자만으로 원하는 위치에 문자열을 나눌 필요없이 데이터 삽입이 가능해졌다.
 
 ```js
-/* BEFORE ES6. */
+/* ES6 이전 */
 let x_new = 6;
 let x = "This is before ES" + x_new + "!";
 console.log(x);
 
-/* AFTER ES6. */
+/* ES6 이후 */
 let y_new = 6;
 let y = `This is after ES${y_new}!`
 ```
 
-### Boolean Data Type
+### 탈출 문자
+탈출 문자(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 아래는 탈출 문자 중에서 흔히 사용되는 줄바꿈(`\n`)이다.
 
-Boolean data type is useful for a code that requires logical conditioning whether it is true or false:
+| 구문 | 설명           |
+|:----:| -------------- |
+| `\n` | 줄바꿈       |
+| `\t` | 탭 |
+| `\\` | 백슬래시      |
+| `\b` | 백스페이스      |
+| `\'` | 작은 따옴표    |
+| `\"` | 큰 따옴표      |
 
-| KEYWORD        | DATA TYPE       | DESCRIPTION                   |
-| -------------- | --------------- | ----------------------------- |
-| `True` or `1`  | Logically true  | Returned when logic is true.  |
-| `False` or `0` | Logically false | Returned when logic is false. |
+# **자바스크립트: 조건 및 루프**
 
-Any non-zero positive number can represents Boolean value of `True`. In other word, Boolean value of `2` or `3` are also equivalent to `True` while `False` is only represented by the number `0`.
+조건문 및 반복문(혹은 루프문)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 자바스크립트 프로그래밍의 조건에 따라 실행하는 조건문(conditional statement)과 반복적으로 실행하는 반복문(loop statement)을 소개한다.
 
-Comparison operators are used to compare relation of two or more values, returning corresponding Boolean data type depending on whether the condition is held true or false. 
+## `if` 조건문
+`if` 조건문은 조건이 참일 경우 코드를 실행한다. 조건이 `True`일 때 문장이 수행되지만 그렇지 않으면 무시된다.
 
-| OPERATOR | DESCRIPTION                        |
-| -------- | ---------------------------------- |
-| `<`      | Lesser than                        |
-| `<=`     | Lesser than or equal to            |
-| `>`      | Greater than                       |
-| `>=`     | Greater than or equal to           |
-| `==`     | Equal to                           |
-| `===`    | Identical (equal and of same type) |
-| `!=`     | Not equal to                       |
-
-Logical operators are similar to comparison operators but evaluates the expression rather than the values. The expression itself is either True or False, and the operators does Boolean operation on these Boolean operands.
-
-| OPERATOR | LOGIC | DESCRIPTION                                         |
-| :------: | ----- | --------------------------------------------------- |
-|   `&&`   | AND   | True when all the operands are True, else False.    |
-|   `||`   | OR    | True when at least one operand is True, else False. |
-|   `!`    | NOT   | Change operand True to False and vice versa.        |
-
-# **JAVASCRIPT: CONDITIONAL AND LOOP**
-
-Procedural programming uses the sequential script execution property. It is the basic programming style using mostly with conditional and loops statements with functions as additional assistance.
-
-## **`if` Statement**
-
-`if` statements run code if a certain condition holds. If condition evaluates True, the statements are carried out. Otherwise, they aren't carried out.
-
-```cpp
-if( logical_condition ) {   // E.g. x==1
-    statements;             // E.g. printf("Hello World\n");
+```js
+if (condition)
+{
+    statements;
 }
+
+// 간략화된 문장
+if (condition) statement;
 ```
 
-`if` statement can be placed inside another `if` statement. It is recommended to use curly bracket `{}` to distinguish between `if` statements to avoid computer’s misinterpretation.
+`if` 조건문 안에 또다른 `if` 조건문을 넣을 수 있으며, 이를 *네스티드(nested)* `if` 조건문이라고 부른다. 이러한 경우, 코드 블록(`{}`)을 사용하여 두 `if` 조건문의 경계를 명확히 구별하기를 권장한다.
 
-```cpp
-if (condition){
-    if (condtion){ 
+```js
+if (condition)
+{
+    if (condtion)
+    { 
         statements;
     } 
 }
 ```
 
-### Non-zero Condition
+### `else` 조건문
+`else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 실행문에는 조건부가 `false`로 평가되었을 경우 호출되는 코드가 포함되어 있다.
 
-An expression that evaluates to a non-zero value is considered true.
-
-```cpp
-if (3)
-    printf(\"Order received!\n");
-```
-
-```
-Order received!
-```
-
-### `else` Statement
-
-A statement that follows an IF statement, and contains code that is called when evaluated False.
-
-```cpp
-if (condition) {
+```js
+if (condition)
+{
     statements;
 }
-else {
+else
+{
     statements; 
 }
 ```
 
-### `else`-`if` Statement
+### `else if` 조건문
+`else if` 조건문은 `else`와 `if` 조건문의 조합으로 첫 번째 조건이 거짓일 경우, 첫 번째 조건과 다른 새로운 조건을 제시한다.
 
-Additional condition evaluation after failing the previous condition.
-
-```cpp
-if (condition) {
+```js
+if (condition)
+{
     statements;
 }
-else if (condition) {
+else if (condition)
+{
     statements;
 }
-else {
+else
+{
     statements;
 }
 ```
 
-## **Ternary Operator**
+하지만 우선 소개된 `else`-`if` 연쇄 조건문은 두 조건부가 함께 사용되는 점과 비교해 `else if` 조건문은 여전히 하나의 조건부에서 처리되므로, 이 둘은 구체적으로 서로 다른 조건문임을 명시해야 한다.
 
-Conditional expression with a functionality same as if statement but much simpler. The operator is called “ternary” since they take three arguments.
+### 조건 연산자
+조건문은 아래와 같이 조건 연산자(ternary operator; `?:`)를 사용하여 간략히 표현될 수 있다.
 
-```cpp
-variable = logic_condition ? true_return : false_return;
+```js
+condition ? true_return : false_return;
 ```
 
-Ternary operator should not be overused as it reduces readability, but useful on variable assignment.
+조건 연산자는 영어로 *ternary operator*로, 이는 세 가지 인수를 사용하는 것을 의미한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에는 유용하다.
 
-## **`switch` Statement**
+## `switch` 조건문
+`switch` 조건문은 건네받은 데이터를 `case` 키워드에서 제공하는 값과 일치하는지 비교하며, 참일 경우 코드를 실행한다. 참 조건 이후, 더 이상의 조건 평가를 방지하기 위해 모든 `case` 키워드에는 `break`라는 탈출문이 필요하다.
 
-Another conditional statement which execute one case of statements out of many cases assigned with value, selected when it’s True to argument expression. Every case needs `break`  at the end of the group of statements to not iterate over again.
+모든 경우에 조건이 부합하지 않을 시, `default` 키워드에 연동된 문장이 실행되며, `switch` 조건문에는 반드시 있어야 한다. 그러나 `case` 키워드와 달리 `break` 탈출문을 필요로 하지 않는다.
 
-When no case is True to the expression, the statements from default is returned. Default case does not need break statement but must to be presented in switch statement no matter what.
-
-```cpp
+```js
 switch ( argument ) {
     case value_1:
         statements;
@@ -353,79 +452,71 @@ switch ( argument ) {
 }
 ```
 
-Group of multiple cases can have one single label.
+`switch` 조건문은 복수의 경우가 하나의 실행문을 공유할 수 있다.
 
-```cpp
-switch ( argument ) {
-    case value_1:
-    case value_2:
-    case value_3:
-        statements;
-        break;
-    case value_4:
-    case value_5:
-    case value_6:
-        statements;
-        break;
+```js
+switch (argument)
+{
+    case value1:
     default:
         statements;
+        break;
+    case value2:
+    case value3:
+        statements;
+        break;
+    case value4:
+        statements;
+        break;
 }
 ```
 
-### `break` Statement
+### `break` 문
+`break` 문(일명 탈출문)은 반복이 완료되기 전에 루프를 조기 종료하는데 사용된다. 루프 내부에서 탈출문을 마주치는 즉시 현재 루프에서 탈출하지만 그 바깥 루프로부터는 탈출하지 않는다.
 
-The `break` statement can be used to end a nearest loop or a switch statement prematurely. When encountered inside a loop, the `break` statement causes the loop to finish immediately. However, it does not break from its outer loop.
+### `continue` 문
+`continue` 문은 반복문 내에서 나머지 실행문을 전부 건너뛰고 다시 조건 판정부분으로 돌아가게 한다. 이는 반복문을 종료하는 `break` 문과 달리 반복문의 루프를 유지한다.
 
-### `continue` Statement
+## `while` 반복문
+`while` 반복문은 조건이 유지되는 한 내부 코드를 반복적으로 실행한다. 조건이 `false`임이 판정되면 반복문을 종료한다.
 
-Although `continue` statement is exclusive only to a loop statement and cannot be applied to a switch statement, it is a statement that works similarly to `break` statement. `continue` statement skips the rest of the statements and jumps back to the nearest conditioning of the loop, rather than stopping it.
-
-## **`while` Loop**
-
-The statements inside are repeatedly executed (iteration) as long as the condition holds. The loop ends once it evaluates to False.
-
-```cpp
-// statements repeate until condition is False,skipping without performing statements.
-while (condition) {
+```js
+while (condition)
+{
     statements;
 }
 
-// simplified while loop when the loop statement is simple as a single line.
+// 간략화된 문장
 while (condition) statement;
 ```
 
-## **`do`-`while` Statement**
+### `do`-`while` 반복문
+`do`-`while` 반복문은 `while` 반복문과 유사한다. 그러나 후자는 조건을 먼저 확인하고 문장을 실행하였으면, 전자는 문장을 우선 실행하고 조건을 확인한다.
 
-Works same as the While Loop, but condition decides whether to proceed to next iteration instead rather than whether to execute statements. The loop ends once it evaluates to False.
-
-```cpp
-// statements are repeated until condition is False,stopping the iteration.
-do {
+```js
+do
+{
     statements
 } while (condition);
 ```
 
-## **`for` Loop**
+## `for` 반복문
+`for` 반복문은 정의된 지역 변수가 조건에 만족하는 한 지속적으로 반복한다. 한 번 반복할 때마다 지역 변수에는 반복문에 명시된 대로 변화가 발생하며, 일반적으로 정수형 증감을 사용한다.
 
-The statements inside it are repeatedly executed (iteration) as long as it’s in the valid range. The loop ends once it’s out of range.
-
-```cpp
-// statements are repeated while in valid range.
-for ( initial_value ; condition ; increment ) {
+```js
+for (variable; condition; increment) {
     statements;
 }
 
-// simplified for loop when the loop statement is simple as a single line.
-for ( initial_value ; condition ; increment ) statement;
+// 간략화된 문장
+for (variable; condition; increment) statement;
 ```
 
-It is possible to skip initial_value, condition, and increment.
+### 범위형 `for` 반복문
 
-### Ranged-based `for` Loop
+ES6 표준부터 범위형 `for` 반복문 변형이 새로 소개되었으며, 조건 만족여부가 아닌 주어진 범위 내에서만 반복한다. 범위로 사용되는 데이터는 일반적으로 여러 데이터를 하나로 묶은 배열(array)을 사용한다.
 
-ES6 standardization introduces two different ranged-based `for` loop: `for-of` and `for-in`. The functionality is similar, but the passed argument and returned data is different.
-
-Loop of `for-of` enumerates from array data and returns the elements of the array.
+`for-of` 형식의 반복문은 배열 요소들의 값을 하나씩 변수에 반환한다.
 
 ```js
 for (let i of [1, 2, 3]) {
@@ -439,7 +530,7 @@ for (let i of [1, 2, 3]) {
 3
 ```
 
-Meanwhile, `for-in` enumerates from object data and returns the key (properties name) instead.
+한편, `for-in` 형식의 반복문은 배열 요소들의 값을 호출하는데 사용되는 이름을 하나씩 변수에 반환한다.
 
 ```js
 for (let i in {a:1, b:2, c:3}) {
@@ -453,24 +544,115 @@ b
 c
 ```
 
-The concept of array and object in JavaScript will be explained in future chapter.
+여기서 자바스크립트 언어의 배열은 차후 *자바스크립트: 이터러블* 장에서 구체적으로 설명한다.
 
-# **JAVASCRIPT: FUNCTION**
+# **자바스크립트: 이터러블**
 
-## **Function**
-Function is an independent reusable block of code which can process the data and present processed/new data once it’s called. Function can be distinguished from its code format which has parenthesis after its name; `function()`. Naming function's name inherits the rule of identifier.
+자바스크립트는 여러 데이터를 하나의 변수에 저장하는 이터러블을 가진다. 위에서 언급된 바가 있는 배열과 문자열은 자바스크립트에 내장된 이터러블 중 하나이다. 본 장에서는 가장 흔히 사용되는 배열을 중점으로 설명할 것이다.
+
+## 배열
+
+배열(array)은 동일한 자료형의 데이터를 순번대로 담는 저장공간이다. 배열의 초기화는 대괄호(`[]`)를 사용하여 데이터를 순번에 맞게 배열 요소에 할당한다.
 
 ```js
-/* ORIGINAL SYNTAX. */
+/* 배열 선언 */
+var arr = [value1, value2, value3];
+```
+
+배열은 `Array()` 생성자(constructor)와 괄호 안에 요소에 할당될 데이터를 입력하므로써 생성 및 초기화될 수 있다.
+
+```js
+/* 배열 선언: Array 생성자 사용 */
+var arr = new Array(value1, value2, value3);
+```
+
+`Array()` 생성자에 단 하나의 정수만을 입력하여 크기만 존재하는 빈 배열을 생성할 수 있다. 하지만 자바스크립트의 배열은 항상 동적, 즉 크기가 언제든지 변경할 수 있어 무의미한 절차이다.
+
+```js
+/* 크기 3의 빈 배열 선언 */
+var arr1 = new Array(3);
+
+/* 크기 0의 빈 배열 선언 */
+var arr2 = new Array();
+var arr3 = [];
+```
+
+### 전개 연산자
+
+전개 연산자(spread operator; `...`)는 배열의 접두부에 위치시켜, 하나의 배열을 출력하는 게 아닌 배열 내의 요소들을 전개하여 한꺼번에 출력한다.
+
+```js
+let arr = [value1, value2, value3];
+
+console.log(arr);
+console.log(...arr);
+```
+
+```
+Array [value1, value2, value3]
+value1, value2, value3
+```
+
+또한 전개 연산자는 나머지 데이터를 모두 할당받는 데에도 사용되며, 대표적인 예시로는 아래의 *베열 구조 분해*의 예시 코드를 참고한다.
+
+### 배열 구조 분해
+
+배열의 구조 분해(destructuring array)는 배열의 각 요소마다 변수에 할당하는 작업을 의미한다. 
+
+```js
+let arr = [value1, value2, value3, value4, value5];
+
+/* 배열의 구조 분해 할당 */
+let [variable1, , ...variable3] = arr;
+
+// 그러므로...
+console.log(variable1);
+console.log(variable3);
+```
+
+```
+value1
+Array [value3, value4, value5]
+```
+
+## 연관 배열
+
+자바스크립트는 배열의 값을 정수가 아닌 문자열로 호출하는 연관 배열을 공식적으로 지원하지 않는다. 방법은 존재하나 권장되지는 않으며, 오히려 객체를 사용할 것을 권고한다.
+
+```js
+var arr = [];
+
+/* 비록 배열을 선언하였으나, 아래의 코드로 인해 배열이 아닌 일반 객체로 변환 */
+arr['property1'] = value1;
+arr['proprety2'] = value2;
+
+// 그러므로 배열 정보나 함수를 더이상 사용할 수 없다!
+console.log(arr.length)
+```
+```
+0
+```
+
+# **자바스크립트: 함수**
+개발자가 직접 함수를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있는데, 이러한 프로그래밍 기법을 *함수형 프로그래밍(functional programming)*이라고 한다. 본 장은 자바스크립트 언어에서 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
+
+## 함수
+함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다.
+
+함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
+
+```js
+/* ES6 이전 */
 function functionName() {
 	console.log(4)
 }
 
-/* ES6 SYNTAX. */
+/* ES6 이후 */
 const functionName = () => {
     console.log(4);
 }
 
+// 함수 호출
 functionName();
 ```
 
@@ -478,35 +660,47 @@ functionName();
 4
 ```
 
-ES6 syntax is especially useful when creating a simple in-line function.
+ES6 구문은 특히 한줄 함수를 생성하는데 매우 유용하게 사용된다.
 
 ```js
-/* A FUNCTION DEFINED ONLY USING A SINGLE LINE (ES6). */
-const functionName = param1 => console.log(param1);
-functionName(arg1);
+/* 한 줄만 사용하여 함수 정의 (ES6). */
+const functionName = (arg) => console.log(arg);
+functionName(value1);
 
-/* IMPLEMENTATION ON ARRAY ENUMERATION (ES6). */
-const arrayName = [1, 2, 3, 4];
-arrayName.forEach(param1 => {console.log(param1*2);} );
+/* 배열 요소 열거에 적용 (ES6). */
+let arr = [1, 2, 3, 4];
+arr.forEach((arg) => console.log(arg*2) );
 ```
 
-### Parameter & Argument
+### 매개변수 & 전달인자
 
-Argument value is passed over to parameter of the function, but parameter and argument is processed in different memory thus does not affect each other (i.e., change of value). To make parameter and argument influential to each other, a pointer is used to do the job.
+다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
 
-It is possible to define default arguments for function execution even without external arguments. However, you cannot skip to next argument passing by typing double comma
+* **전달인자 (argument)**
+    : 전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.
+* **매개변수 (parameter)**
+    : 매개변수는 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수의 정의은 함수의 소괄호(`()`) 내에서 이루어진다.
+
+매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+
+| 연산자 |    구문    | 설명                                                 |
+| :------: | :----------: | ------------------------------------------------------------ |
+|   `=`    | `arg=value` | 매개변수에 전달인자가 없으면 기본값 `value`가 대신 반환된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
+
+아래의 예제는 함수의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
 
 ```js
-/* ORIGINAL SYNTAX. */
-function functionName(param1 = value1, param2 = value2) {
-    console.log(param1 + param2);
+/* ES6 이전 */
+function functionName(arg1 = value1, arg2 = value2) {
+    console.log(arg1 + arg2);
 }
 
-/* ES6 SYNTAX. */
-const functionName = (param1 = value1, param2 = value2) => {
-    console.log(param1 + param2);
+/* ES6 이후 */
+const functionName = (arg1 = value1, arg2 = value2) => {
+    console.log(arg1 + arg2);
 }
 
+// 함수 호출
 functionName(2,3);
 ```
 
@@ -514,48 +708,42 @@ functionName(2,3);
 5
 ```
 
-### Rest Parameter
+### 나머지 매개변수
 
-Rest parameter is an array of remaining parameter which will be passed from extra arguments.
+나머지 매개변수(rest parameter)는 전개 연산자(`...`)를 가지는 매개변수로, 보다 더 많은 전달인자들을 배열로 받아낸다. 만일 추가 전달인자가 없으면 나머지 매개변수는 단순히 빈 배열인 상태가 된다.
 
 ```js
-// FUNCTION WITH REST PARAMETER
-function functionName(param1, ...restParameter) {
-	for(let extraParameter of restParameter){
+/* 나머지 매개변수를 가지는 함수 */
+function functionName(arg, ...rest) {
+	for(let variable of rest) {
     	statements;
     }
 } 
-
-// EXTRA ARGUMETNS ARE SENT TO THE REST PARAMETER.
-functionName(arg1,extraArg2, extraArg3);
 ```
 
-When no extra argument is presented, the array will simply be empty but never be undefined. The rest parameter is defined using a spread operator `...`. This operator will be introduced again in object and array chapter.
+### `return` 반환문
 
-### Return Statement
-
-Return statement terminates a function and returns indicated value.
+`return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수는 반환문을 반드시 필요로 하지 않으며, 이러한 경우에는 `undefined` 값이 반환되어 변수에 전달되거나 콘솔창에 출력되어 나타난다. 
 
 ```js
-/* ORIGINAL SYNTAX. */
-function functionName(param1 = value1, param2 = value2) {
-    return param1 + param2;
+/* ES6 이전 */
+function functionName(arg1 = value1, arg2 = value2) {
+    return arg1 + arg2;
 }
 
-/* ES6 SYNTAX. */
-const functionName = (param1 = value1, param2 = value2) => {
-    return param1 + param2;
+/* ES6 이후 */
+const functionName = (arg1 = value1, arg2 = value2) => {
+    return arg1 + arg2;
 }
 
-var result = functionName(2,3);
-console.log(result);
+console.log(functionName(2,3));
 ```
 
 ```
 5
 ```
 
-# **JAVASCRIPT: OBJECT**
+# **자바스크립트: 객체**
 
 ## **Object**
 
@@ -846,7 +1034,7 @@ const objectName = class {
 
 The difference between the object type is that it uses constructor method that is made into the class rather than using the function as constructor.
 
-### Inheritance
+### 상속
 
 Class inheritance is done using `extends` keyword and its properties' value and methods can be accessed using `super` keyword.
 
@@ -981,132 +1169,8 @@ The object also provides methods for the calculation.
 | `getDate()`     | `dateName.getDate()`     | Gets the day of the month from stored date in `dateName`. |
 | `getHours()`    | `dateName.getHours()`    | Gets the hour from stored date in `dateName`.             |
 
-# **JAVASCRIPT: ARRAY**
 
-## **Array**
-
-An iterable object used to store an indexed list of items of same data-type. Bracket `[]` is used  to assign value to each element of the array:
-
-```js
-/* DECLARATION of an array. */
-var arrayName = [element1, element2, element3];
-```
-
-Another way to create an array is by using `Array()` constructor with value of elements placed inside.
-
-```js
-/* ALTERNATIVE DECLARATION of an array. */
-var arrayName = new Array(element1, element2, element3);
-```
-
-It is possible to create an size-defined empty array using the same constructor but by passing a single integer as an argument. However, this is meaningless since array in JavaScript is always dynamic. That is, more element can be added anytime wanted. 
-
-```js
-/* DECLARATION of an empty array of size three. */
-var arrayName1 = new Array(3);
-
-/* DECLARATION of an dynamic empty array. */
-var arrayName2 = new Array();
-var arrayName3 = [];
-```
-
-The syntax `new Array(3)` will understand as creating an empty array with size of three instead of creating an array with a single size of value of `3`. This is done automatically based on whether there is only one integer argument or else.
-
-### Destructuring Array
-
-Destructuring array means assigning each value of the array to separate individual variables.
-
-```js
-var arrayName = [value1, value2, value3];
-
-// DESTRUCTURING ARRAY
-let [var1, , var3] = arrayName;
-
-// RESULT
-console.log(var1);
-console.log(var3);
-```
-
-```
-value1
-value3
-```
-
-### Spread Operator in Array
-
-Spread operator `...` used with array will spread its value one by one sequentially.
-
-```js
-let arrayName1 = [value3, value4];
-let arrayName2 = [value1, value2, ...arrayName1, value5];
-console.log(...arrayName2);
-```
-
-```
-value1 value2 value3 value4 value5
-```
-
-### `filter()` Function
-
-The function `filter()` is an array exclusive function to filter out the values and create a new array based on the conditional function passed as an argument.
-
-```js
-// FILTER() METHOD PASSING EXT. FUNCTION AS AN ARGUMENT.
-let arrayName = [value1, value2, value3, ...].filter(conditionalFuncName);
-
-// FILTER() METHOD PASSING NEWLY DEFINED FUNCTION AS AN ARGUMENT.
-let arrayName = [value1, value2, value3, ...].filter(param1 => {conditions;} );
-```
-
-Only the value that passed the the condition will be filtered in while the rest is filtered out.
-
-### `map()` Function
-
-
-
-```js
-
-```
-
-
-
-## **Associative Array**
-
-JavaScript does not support associative array where elements are indexed by strings instead of numbers, such as a dictionary in Python. There is an alternative way but not recommended; it is advised to use an object instead.
-
-```js
-// DECLARATION of an empty array.
-var arrayName = [];
-
-// arrayName is not an array anymore; is converted to object.
-arrayName['property1'] = value1;
-arrayName['proprety2'] = value2;
-
-// Methods for array object do not apply anymore as it is now an object. 
-console.log(arrayName.length);
-```
-
-```
-0
-```
-
-## Iterator Object
-
-Creating iterator object can be done using `Symbol.iterator` and generator function `function*`.
-
-```js
-let iterableObject = {
-	[Symbol.iterator] : function* () {
-    	value1; value2; value3; ...
-    }
-}
-```
-
-### Generator Function
-
-
-
-# **JAVASCRIPT: DOM**
+# **자바스크립트: DOM**
 
 This chapter is specifically for integration with HTML & CSS. Document object model (DOM) represents a document in a logical structure and its HTML counterpart is shown as the figure below:
 
@@ -1319,48 +1383,3 @@ Event propagation can be set using `addEventListener()` method in `useCapture` B
 | METHOD               | EXAMPLE                                              | DESCRIPTION                                                  |
 | -------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
 | `addEventListener()` | `elem.addEventListener("event",funcName,useCapture)` | `useCapture` is a Boolean value: `true/false` for capture/bubble. |
-
-# **JAVASCRIPT: MODULE**
-
-Starting from ES6, JavaScript now supports modules to be imported made by the other developer, just like Python programming language.
-
-```js
-/* JAVASCRIPT LOCATED IN "PATH/TO/MODULE.JS". */
-// EXPORT THE VARIABLE AND FUNCTION FOR OTHER JAVASCRIPT.
-export const variableName = value1;
-export const functionName = (param1) => {
-	return statement;
-}
-
-/* JAVASCRIPT TO CALL THE MODULE FROM "PATH/TO/MODULE.JS". */
-// IMPORT SELECTED MODULE CONTENT
-import {variableName, functionName} from "path/to/module.js"
-
-// IMPORT ENTIRE MODULE CONTENT
-import * as moduleName from "path/to/module.js";
-```
-
-
-
-
-
-# **JQUERY**
-
-Either download jQuery library from jQuery.com
-
-or include from CDN provided by Microsoft or Google, etc...
-
-```html
-<!-- MICROSOFT CDN -->
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-
-<!-- GOOGLE CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-```
-
-
-
-# **JSON**
-
-# **NODE.JS**
-
