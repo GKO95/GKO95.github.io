@@ -286,12 +286,12 @@ Hello World!10
 줄바꿈 조작자(new-line manipulator; `std::endl`)는 C++ 표준 라이브러리로 현재 텍스트 줄을 종단하고 새 텍스트 줄을 시작한다:
 
 ```cpp
-std::cout << "안녕하세요." << std::endl << "처음 뵙겠습니다!"; 
+std::cout << "Hello" << std::endl << "World!"; 
 ```
 
 ```
-안녕하세요.
-처음 뵙겠습니다!
+Hello
+World!
 ```
 
 ## 자료형
