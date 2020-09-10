@@ -12,7 +12,7 @@ layout: template
                 <div class="home-shift" id="shift-right"><span>&#x25b6;</span></div>
                 <!-- PROGRAMMING -->
                 <ul class="home-byte">
-                    {% assign programmings = site.docs | where: "category", "Programming" | where: "lang", "en" | sort:"order" %}
+                    {% assign programmings = site.docs | where: "category", "Programming" | where: "lang", "ko" | sort:"order" %}
                     {% for programming in programmings %}
                     <a class="home-bit" href="{{ programming.url }}" title="{{ programming.title }}">
                         <li>
@@ -23,7 +23,7 @@ layout: template
                 </ul>
                 <!-- LIBRARY -->
                 <ul class="home-byte">
-                    {% assign libraries = site.docs | where: "category", "Library" | where: "lang", "en" | sort:"order" %}
+                    {% assign libraries = site.docs | where: "category", "Library" | where: "lang", "ko" | sort:"order" %}
                     {% for library in libraries %}
                     <a class="home-bit" href="{{ library.url }}" title="{{ library.title }}">
                         <li>

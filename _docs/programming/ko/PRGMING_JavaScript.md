@@ -13,6 +13,8 @@ order: 0x04
 
 자바스크립트(JavaScript)는 절차형 웹프로그래밍 언어로 HTML & CSS 웹디자인 언어와 함께 사용되어, 상호작용 가능한 동적 웹페이지를 만드는데 기여한다. 현재 자바스크립트의 용도는 데이터 처리 및 어플리케이션 제작 등 범위가 넓어지고 있다.
 
+본 문서는 전체적으로 웹프로그래밍 위주의 자바스크립트를 소개하기 때문에, 구체적인 내용은 생략하고 가장 중요하다고 판단되는 개념들만 함축적으로 설명할 예정이다.
+
 ## 인터프리트 언어
 
 프로그래밍 언어를 실행하는 방법에는 크게 두 가지로 나뉘어진다: 컴파일 언어와 인터프리트 언어이다.
@@ -341,13 +343,12 @@ World!
 
 ```js
 /* ES6 이전 */
-let x_new = 6;
-let x = "This is before ES" + x_new + "!";
-console.log(x);
+let variable = 6;
+let text = "This is before ES" + variable + "!";
 
 /* ES6 이후 */
-let y_new = 6;
-let y = `This is after ES${y_new}!`
+let variable = 6;
+let text = `This is after ES${variable}!`
 ```
 
 ### 탈출 문자
@@ -745,641 +746,563 @@ console.log(functionName(2,3));
 
 # **자바스크립트: 객체**
 
-## **Object**
+프로그래밍 방법 중 하나인 객체지향 프로그래밍(object-oriennted programming; OOP)은 함수 대신 클래스와 객체 사용을 기반으로 한다. 본 장은 자바스크립트에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 객체의 생성 및 사용 방법에 대하여 소개한다.
 
-Object in JavaScript is a group of unordered list of related data: every object can have its own exclusive properties and bounded-functions, called method. Accessing properties and methods are done by syntax of `object.property` and `object.method()` respectively.
+## 객체
+
+이전 챕터에서는 (데이터를 저장할 수 있는) 변수와 (데이터를 처리 할 수 있는) 함수를 소개하였다. 객체(object 혹은 instance)는 이러한 변수와 함수를 하나의 데이터로 캡슐화한 구성체이다.
+
+여기서 캡슐화(encapsulation)은 다음과 같은 역할을 지닌다.
+
+1. 변수와 함수를 하나의 객체로 결합한다.
+2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
+
+사용자 정의 객체 중심으로 한 프로그래밍을 *객체지향 프로그래밍*이라고 한다.
 
 ```js
-/* INTIALIZATION OF AN OBJECT. */
-var objectName = {
-    // Properties
-	property1: value1,
+let variable = "Hello World!";
+console.log(variable.search("World"));
+// variable 이름을 가진 문자열 객체의 "search()" 메소드를 사용하여 단어의 위치를 반환한다.
+```
+
+```
+6
+```
+
+### 속성 & 메소드
+
+속성(property)과 메소드(method)는 객체에 캡슐화된 변수와 함수를 의미하며 아래와 같은 방법으로 접근한다.
+
+| 객체 구성요소 | 구문                 |
+| :-----------: | -------------------- |
+|     속성      | `instance.property` 혹은 `instance["property"]` |
+|    메소드     | `instnace.method()`  |
+
+### 사용자 정의 객체
+
+개발자는 직접 객체를 정의하여 사용할 수 있다.
+
+메소드가 객체 내의 속성이나 또다른 메소드를 접근하기 위해서는 `this` 키워드를 사용해야 한다. 이는 객체 스스로를 가리키는 연산자로, 해당 키워드 없이는 인터프리터는 변수로 인식한다.
+
+```js
+/* 사용자 정의 객체 생성: ES6 이전 */
+const variable = {
+    /* 속성 (변수와 비슷함) */
+    property1: value1,
     property2: value2,
-    
-    // Methods
-    method1: ext_functionName,
-    method2: function (param1) {
-    	// statements for method.
-    }
-};
 
-
-/* INITIALIZATION OF AN OBJECT (ES6). */
-var property1 = value1;
-var property2 = value2;
-
-var objectName = {
-    // Properties initialized from variable.
-    property1,
-    property2,
-    property2 = value3;		// Overwrites previous value of "properties2".
-    
-    // Methods simplified.
-    method1() {
+    /* 메소드 (함수와 비슷함) */
+    method: function(arg) {
         statements;
+        return this.property1 + this.property2 - arg;    
+    }
+};
+```
+----
+```js
+var property1 = value1;
+
+/* 사용자 정의 객체 생성: ES6 이후 */
+const variable = {
+    /* 속성 (변수와 비슷함) */
+    property1,
+    ["property2"]: value2,
+
+    /* 메소드 (함수와 비슷함) */
+    method(arg) {
+        statements;
+        return this.property1 + this.property2 - arg;   
     }
 };
 ```
 
-Upon calling external function `ext_functionName()` do not requires parenthesis `()` but just the name.
+## 클래스
 
-There are two ways to access the properties of the object:
-
-```js
-objectName.property
-objectName['property']
-```
-
-### Properties & Methods
-
-Below is a difference between properties and methods:
-
-* **Property**: a named value stored inside an object.
-* **Method**: an object-dependent function which cannot be called without an object.
-
-### Destructuring Object
-
-Destructuring object means assigning each property value of the object to separate individual variables. However, the name of the variables should be same as the name of the properties.
+클래스(class)는 객체를 생성하는 데 사용된다. 클래스는 `class` 키워드를 사용하여 정의되며, 내부는 객체 속성과 메소드가 되는 변수와 함수를 정의한다. 아래는 `class` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이다.
 
 ```js
-let objectName = {propertyName1 = value1, propertyName2 = value2};
+/* 클래스 생성하기 */
+class CLASS {
+    /* 속성 */
+    property1 = value1;
+    property2 = value2;
 
-// DESTRUCTURING ARRAY
-let {propertyName1, propertyName2} = objectName;
-
-// RESULT
-console.log(propertyName1);
-console.log(propertyName2);
+    /* 메소드 */
+    method(arg) {
+        statements;
+        return this.property1 + this.property2 - arg;   
+    }
+}
 ```
+
+클래스를 통해 객체를 생성, 즉 객체화(instantiation)를 하기 위해서는 `new` 키워드를 사용해야 한다. 아래는 하나의 클래스로 두 개 이상의 객체를 생성하는 예시 코드이다.
 
 ```js
-// DESTRUCTURING ARRAY: ALTERNATIVE 1
-let {propertyName1, propertyName2} = {propertyName1 = value1, propertyName2 = value2};
-```
+const variable1 = new CLASS;
+const variable2 = new CLASS;
 
-```js
-// DESTRUCTURING ARRAY: ALTERNATIVE 2
-let propertyName1, propertyName2;
-({propertyName1, propertyName2} = {propertyName1 = value1, propertyName2 = value2});
+console.log(variable1.property1);
+console.log(variable2.property2);
 ```
-
 ```
 value1
 value2
 ```
 
-To change the variable name to something else, simply place a new variable name after colon of the property name.
+### 생성자 메소드
+
+생성자(constructor) 메소드는 객체를 생성하는 데 필요한 가장 중요한 메소드이다. 해당 메소드는 클래스에서 객체를 만들 때 자동으로 호출되며 객체 초기화에 필요한 인수의 수를 결정한다.
 
 ```js
-let objectName = {propertyName1 = value1, propertyName2 = value2};
+/* 클래스 생성하기 */
+class CLASS {
+    /* 생성자 메소드 */
+    constructor(arg1, arg2) {
+        this.property1 = arg1;
+        this.property2 = arg2;
+    }
 
-// DESTRUCTURING ARRAY WITH NEW VARIABLE NAME
-let {propertyName1: variableName1, propertyName2: variableName2} = objectName;
-
-// RESULT
-console.log(variableName1);
-console.log(variableName2);
+    /* 메소드 */
+    method(arg) {
+        statements;
+        return this.property1 + this.property2 - arg;   
+    }
+}
 ```
 
-```
-value1
-value2
-```
-
-
-### Computed Property Names
-
-Starting from ES6, the name of properties can be defined as a form of expression just like general expression used in JavaScript coding. The expression for the property name should be just inside a square bracket `[]`. 
+만일 위와 같이 생성자가 따로 정의되지 않아도 클래스는 기본적으로 아래와 같은 생성자를 가진다.
 
 ```js
-/* COMPUTED PROPERTY NAMES. */
-let property1 = propertyName1;
-let property2 = propertyName2;
-
-let objectName = {
-    [property1]: value1;
-    [`computed_${property2}`]: value2;
-};
+/* 생성자 메소드: 기본값 */
+constructor() {}
 ```
 
-### Sourcing Multiple Objects
+### 정적 메소드
 
-Creating a new object by merging multiple sources of different objects using `Object.assign()`. Order of the sources in the method matters since the properties can overwrite the previous objects.
+정적 메소드(static method)는 객체화없이 클래스에서 바로 호출할 수 있으며, `static` 키워드로 선언된다. 그러나 객체는 정적 메소드를 접근할 수 없다. 다시 말해, 정적 메소드는 단순히 클래스에 속해있는 일반 함수와 동일하게 취급하면 된다.
 
 ```js
-// OBJECT SOURCE 1
-let objectName1 = {
-    property1: value11;
-    property2: value12;
-};
+class CLASS {
+    /* 정적 메소드 */
+    static method(arg) {
+        return arg * arg;
+    }
+}
 
-// OBJECT SOURCE 2
-let objectName2 = {
-    property2: value22;
-    property3: value23;
-};
-
-// CREATE "objectName3" OBJECT SOURCING FROM "objectName1" AND "objectName2".
-let objectName3 = Object.assign({property4: value34},objectName1,objectName2);
-console.log(objectName3.property1);
-console.log(objectName3.property2);		// "objectName1" overwritten by "objectName2".
-console.log(objectName3.property3);
-console.log(objectName3.property4);
+console.log(CLASS.method(3));
+```
+```
+9
 ```
 
-```
-value11
-value22
-value23
-value34
-```
+### Setter 및 Getter 메소드
 
-...where `{}` represents pre-existing properties of `objectName3` and this too can be overwritten by either `objectName1` and `objectName2`.
-
-Because this is creating a new object and not an assignment of existing object to the variable, changing the value of the properties does not affect the sourced objects.
+Setter 및 Getter 메소드는 클래스에 정의된 하나의 속성을 할당 전용 메소드와 반환 전용 메소드로 나누어 접근한다. 각 메소드는 `set`와 `get`으로 선언되며, 이는 코드의 민감한 부분은 숨기면서 지속적으로 접근할 수 있도록 하는 데이터 숨기기(data hiding)의 일종이다.
 
 ```js
-/* ASSIGNMENT OF OBJECT. */
-let objectName1 = {
-    property1: value1;
-    property2: value2;
-};
-
-let objectName2 = objectName1;
-objectName2.property = value3;
-
-console.log(objectName1.property1);
-console.log(objectName2.property1);
-
-
-/* DUPLICATE USING OBJECT.ASSIGN() METHOD. */
-let objectName1 = {
-    property1: value1;
-    property2: value2;
-};
-
-let objectName2 = Object.assign({},objectName1);
-objectName2.property1 = value3;
-// ALTERNATIVE: let objectName2 = Object.assign({}, objectName1, {property1: value3});
-
-console.log(objectName1.property1);
-console.log(objectName2.property1);
-```
-
-```
-/* ASSIGNMENT OF OBJECT. */
-value3
-value3
-/* DUPLICATE USING OBJECT.ASSIGN() METHOD. */
-value1
-value3
-```
-
-### Spread Operator in Object
-
-Spread operator in object will spread its properties and its value in a format of iterator. Copying this iterator to other objects will eventually be same as cloning and even merging the objects as one.
-
-```js
-const objectName1 = {property1: value11, property2: value12};
-const objectName2 = {property1: value21, property3: value23};
-
-// SPREAD OPERATOR USED TO CLONE AND MERGE OBJECT(S) VIA ITERATOR(S).
-const clonedObject = {...objectName1};
-const mergedObject = {...objectName1, ...objectName2};
-
-// clonedObject = {property1: value11, property2: value12};
-// mergedObject = {property1: value21, property2: value12, property3: value23};
-```
-
-However, it is impossible to spread the object to show the list of properties and values using the print function such as `console.log()` since the iterator from an object is non-callable.
-
-
-
-## Object Type
-
-Object type is used to create multiple objects of the same kind, using constructor function. This concept is very similar to the concept of "class" in other programming language such as C++ and Python, but JavaScript too have "class" starting from ES6.
-
-```js
-/* DEFINITION of an object type by constructor function */
-function className(param1, param2) {
-    // Properties
-	this.property1 = param1;
- 	this.property2 = param2;
+class CLASS {
     
-    // Methods
-    this.method1 = ext_functionName;
-    this.method2 = function (param3) {
-    	// statements for method.
+    /* SETTER 메소드 */
+    set method(arg) {
+        this.property = arg * arg;
+    }
+
+    /* GETTER 메소드 */
+    get method(arg) {
+        return `Property: ${this.property}`;
     }
 }
 
-/* DECLARATION of a new object using object type. */
-var variableName = new className(argument1, argument2);
+// 객체화
+const variable = new CLASS;
+
+variable.method = 3;
+console.log(varible.method);
+```
+```
+Property: 9
 ```
 
-Upon calling external function `ext_functionName()` do not requires parenthesis `()` but just the name.
+이를 통해 `CLASS.property` 속성을 직접 호출하지 않고 데이터 할당과 반환 메소드를 개별적으로 정의하므로써, 속성을 더욱 유동적으로 접근 및 관리할 수 있게 된다.
 
-### `this` keyword
+## 클래스 표현식
 
-`this` keyword points to (represents) the current object.
-
-
-## **Classes**
-
-Class is used to create multiple objects of the same kind, using constructor method.
+클래스 표현식(class expression)은 이름없는 클래스를 정의하는 동시 객체를 선언하는 표현식이다. `new` 연산자 없이도 객체화가 되어 코드가 간략화되지만, 클래스는 한 객체만 정의할 수 있는 단점을 가진다.
 
 ```js
-// CLASS DEFINITION
-class className {
-	constructor(param1, param2){
-        this.property1 = param1;
-    	this.property2 = param2;
-    }
-    // PROTOTYPE METHOD: ACCESSABLE BY OBJECT OF THE CLASS.
-    method1(param3) {
-    	statements;
-    }
-    // STATIC METHOD: CANNOT BE ACCESSED BY OBJECT BUT REQUIRES CLASS ITSELF.
-    static method2(objectParameter) {
-    	statements;
-    }
-    // SETTER INTIALIZE AND COMPUTE THE VALUES FOR GETTER.
-    set method3(param4) {
-    	statement;
-    }
-    // GETTER RETURNS WHAT IS SET BY SETTER METHOD.
-    get method3() {
-    	return statement;
-    }
-}
-
-// CLASS DECLARATION
-const objectName = new className(value1, value2);
-console.log(objectName.method1());			// PROTOTYPE METHOD.
-console.log(className.method2(objectName));	// STATIC METHOD.
-console.log(objectName.method3(value4));	// GETTER DOES NOT NEED PARENTHESIS.
-```
-
-There is an alternative way to declare new object in a single expression.
-
-```js
-// COMBINATION OF (UNNAMED) DEFINITION AND DECLARATION.
-const objectName = class {
-	constructor(param1, param2){
-        this.property1 = param1;
-    	this.property2 = param2;
+/* 클래스 표현식을 사용한 객체 선언 */
+const variable = class {
+	constructor(arg1, arg2){
+        this.property1 = arg1;
+    	this.property2 = arg2;
     }
 }
 ```
 
-The difference between the object type is that it uses constructor method that is made into the class rather than using the function as constructor.
+## 객체형
 
-### 상속
-
-Class inheritance is done using `extends` keyword and its properties' value and methods can be accessed using `super` keyword.
+객체형(object type)은 함수를 통해 동일한 객체를 여러 개 생성한다. 이는 클래스와 매우 유사하며, 객체형은 함수 자체가 생성자 메소드 역할을 한다.
 
 ```js
-// DEFINITION OF THE PARENT CLASS.
-class parentClass {
-	constructor(param1, param2) {
-    	this.property1 = param1;
-        this.property2 = param2;
-    }
-    method1() {
-    	statements;
-    }
-}
-
-// DEFITION OF THE CHILD CLASS INHERITED FROM PARENT CLASS.
-class childClass extends parentClass {
+/* 생성자 함수를 통한 객체형 정의 */
+function OBJTYPE(arg1, arg2) {
+    /* 속성 */
+	this.property1 = arg1;
+ 	this.property2 = arg2;
     
-    // SUPER USED IN CONSTRUCTOR OF THE CHILD CLASS CALLS THE PARAMETER FROM PARENT CLASS.
-    constructor(param1, param2) {
-    	super(param1, param2)
-    }
-    method2() {
+    /* 메소드 */
+    this.method(arg) {
     	statements;
+        return this.property1 + this.property2 - arg;
     }
-	method3() {
-        // SUPER USED WITH ITS METHOD CALLS THE METHOD OF THE PARENT CLASS.
-        super.method1();
+}
+
+// 객체화
+const variable = new OBJTYPE(value1, value2);
+```
+
+## 상속
+
+상속(inheritance)는 하나의 클래스가 다른 클래스에게 속성과 메소드를 그대로 사용할 수 있도록 제공해주는 행위이며, 이를 각각 기반 클래스(base class)와 파생 클래스(derived class)라고 부른다.
+
+파생 클래스는 `extend` 키워드를 통해 어느 기반 클래스로부터 상속되었는지 명시한다. 파생 클래스로부터 기반 클래스의 속성 및 메소드에 접근하기 위해서는 `super` 키워드가 사용된다. 단, `super()`는 기반 클래스의 생성자를 호출한다.
+
+```js
+/* 기반 클래스 생성 */
+class BASECLASS {
+	constructor(arg1, arg2) {
+    	this.property1 = arg1;
+        this.property2 = arg2;
+    }
+
+    method(arg) {
+    	statements;
+        return this.property1 + this.property2 - arg;
+    }
+}
+
+/* 파생 클래스 생성 */
+class DERIVEDCLASS extends BASECLASS {
+    
+    /* "SUPER()" 함수는 기반 클래스의 생성자 메소드를 호출 */
+    constructor(arg1, arg2) {
+    	super(arg1, arg2)
+    }
+
+    /* 이름이 동일한 메소드가 정의되면, 기반 클래스가 파생 클래스에 묻힘 */
+    method(arg1) {
+    	statements;
+        return (this.property1 + this.property2) * arg;
+    }
+
+	method2() {
+        /* 기반 클래스의 속성 및 메소드 호출은 `super` 키워드 사용 */
+        let temp = super.method();
     	statements;
     }
 }
 ```
 
-## List of Objects
+## 내장 객체
 
-### `Math` Object
+흔히 사용되는 객체는 이미 자바스크립트에 내장되어 있어, 단순히 호출만 하여 사용할 수 있다. 아래는 자바스크립트의 대표적이고 매우 유용한 내장 객체 몇 가지를 소개한다.
 
-`Math` is a pre-defined object useful for mathematical calculation.
+### `Math` 객체
 
-| PROPERTY | EXAMPLE       | DESCRIPTION                                               |
-| -------- | ------------- | --------------------------------------------------------- |
-| `E`      | `Math.E`      | Euler's constant ($\varepsilon$).                         |
-| `PI`     | `Math.PI`     | Constant Pi ($\pi$).                                      |
-| `LN2`    | `Math.LN2`    | Natural log of the value 2 ($\ln 2$).                     |
-| `LOG10E` | `Math.LOG10E` | The base 10 log of Euler's constant ($\log \varepsilon$). |
+`Math`는 수학적 계산을 위해 사용되는 자바스크립트 내장 객체이며, 흔히 사용되는 상수들을 속성으로 가진다.
 
-The object also provides methods for the calculation.
+| 속성       | 구문            | 설명                |
+|----------|---------------|-------------------|
+| `E`      | `Math.E`      | 오일러 상수            |
+| `PI`     | `Math.PI`     | 파이 상수             |
+| `LN2`    | `Math.LN2`    | 2의 자연로그           |
+| `LOG10E` | `Math.LOG10E` | 오일러 상수의 로그 (밑 10) |
 
-| METHOD     | EXAMPLE           | DESCRIPTION                       |
+`Math` 객체는 일부 수학 계산식을 메소드로 가진다.
+
+| 메소드     | 예시           | 설명                       |
 | ---------- | ----------------- | --------------------------------- |
-| `abs()`    | `math.abs(-3)`    | Absolute value.                   |
-| `sqrt()`   | `math.sqrt(36)`   | Square root.                      |
-| `power()`  | `math.power(x,y)` | Value of `x` to the power of `y`. |
-| `random()` | `math.random()`   | Random number between 0 and 1.    |
+| `abs()`    | `Math.abs(-3)`    | 절대값                   |
+| `sqrt()`   | `Math.sqrt(36)`   | 제곱근                      |
+| `power()`  | `Math.power(x,y)` | `x`의 `y` 거듭제곱 |
+| `random()` | `Math.random()`   | 0과 1 사이의 난수 발생기    |
 
-### `Map` Object
+### `Date` 객체형
 
-An object to hold key and its corresponding value, just like a [dictionary](PRGMING_Python.md#**PYTHON: ITERABLE OBJECT**) iterable object in Python.
-
-```js
-let mapObject = new Map([[key1, value1], [key2, value2]]);
-```
-
-Map can take any iterable that is comprised of an array. While the key is a symbol or a string, its value can be a function, object, or any primitive.
-
-The object also provides methods as the following:
-
-| METHOD      | EXAMPLE              | DESCRIPTION                                           |
-| ----------- | -------------------- | ----------------------------------------------------- |
-| `set()`     | `map.set(key,value)` | Append the key and value.                             |
-| `get()`     | `map.get(key)`       | Acquire the corresponding value of the key.           |
-| `has()`     | `map.has(key)`       | Return Boolean `true` if the specified key exist.     |
-| `entries()` | `map.entries()`      | Return array `[key,value]` which iterates one-by-one. |
-
-### `Set` Object
-
-An object is unique in value where repeated value is removed, just like a set iterable object in Python.
+`Date` 객체형은 날짜와 관련된 객체를 생성하여 시간 측정, 일자 날짜 확인 및 계산 등의 용도로 사용된다. 아무런 전달인자가 건네지지 않으면 객체는 현재 시각 데이터를 갖는다.
 
 ```js
-let setObject = new Set([value1, value2, value3, value1])
-//  setObject = [value1, value2, value3];
+/* 객체화: 현재 날짜 및 시각 (실시간이 아님) */
+var variable = new Date();
 ```
 
-The object also provides methods as the following:
+만일 전달인자가 건네지면 객체는 전달된 데이터를 기반하여 계산된 날짜 및 시각을 저장한다. 세 가지의 전달인자를 건네줄 수 있으며, 이들은 다음과 같다:
 
-| METHOD     | EXAMPLE             | DESCRIPTION                                         |
-| ---------- | ------------------- | --------------------------------------------------- |
-| `add()`    | `set.add(value)`    | Append the value.                                   |
-| `delete()` | `set.delete(value)` | Delete the value.                                   |
-| `has()`    | `set.has(value)`    | Return Boolean `true` if the specified value exist. |
-| `value()`  | `set.value()`       | Return list of values which iterates one-by-one.    |
+| 전달인자                      | 예시                                      |
+|:-------------------------:|-----------------------------------------|
+| 타임스탬프 (1970년 1월 1일 00시부터) | `new Date(789971670000)`                |
+| 날짜 및 시간 문자열               | `new Date("January 13, 1995 13:34:30")` |
+| 년, 월, 일, 시, 분, 초, 밀리초     | `new Date(95,0,13,13,34,30,0)`          |
 
-### `Promise` Object
+생성된 객체는 날짜와 시간 계산을 위한 메소드를 제공한다.
 
-
-
-```js
-new Promise(function(param1, param2) {
-		if(condition)
-            param1(statement1); // EXECUTE STATEMENT1 ON TRUE.
-    	else
-            param2(statement2);	// EXECUTE STATEMENT2 ON FALSE.
-	}       
-);
-```
-
-
-
-### `Date` Object Type
-
-`Date` object type can creates date-related objects which can be used for measuring time, checking date, calculating days and so forth.
-
-```js
-// Stores current date and time (non-realtime).
-var dateName = new Date();
-```
-
-Passing value to its parameter can assign designated date to the variable. Following methods point to the same date but with three different approach: 
-
-| ARGUMENT                  | EXAMPLE                                 |
-| ------------------------- | --------------------------------------- |
-| Milliseconds (since 1970) | `new Date(789971670000)`                |
-| Date string               | `new Date("January 13, 1995 13:34:30")` |
-| Y, M, D, H, M, S, MS      | `new Date(95,0,13,13,34,30,0)`          |
-
-The object also provides methods for the calculation.
-
-| METHOD          | EXAMPLE                  | DESCRIPTION                                               |
+| 메소드          | 구문                  | 설명                                               |
 | --------------- | ------------------------ | --------------------------------------------------------- |
-| `getFullYear()` | `dateName.getFullYear()` | Gets the year from stored date in `dateName`.             |
-| `getMonth()`    | `dateName.getMonth()`    | Gets the month from stored date in `dateName`.            |
-| `getDate()`     | `dateName.getDate()`     | Gets the day of the month from stored date in `dateName`. |
-| `getHours()`    | `dateName.getHours()`    | Gets the hour from stored date in `dateName`.             |
-
+| `getFullYear()` | `variable.getFullYear()` | `variable` 객체에 저장된 데이터에서 연도를 반환한다.             |
+| `getMonth()`    | `variable.getMonth()`    | `variable` 객체에 저장된 데이터에서 월(月)을 반환한다.            |
+| `getDate()`     | `variable.getDate()`     | `variable` 객체에 저장된 데이터에서 일(日)을 반환한다. |
+| `getHours()`    | `variable.getHours()`    | `variable` 객체에 저장된 데이터에서 시(時)를 반환한다. |
 
 # **자바스크립트: DOM**
 
-This chapter is specifically for integration with HTML & CSS. Document object model (DOM) represents a document in a logical structure and its HTML counterpart is shown as the figure below:
+자바스크립트는 HTML 및 CSS와 함께 사용하여 다양한 기능을 제공하는 데 기여한다. 선언형 언어인 HTML은 아래와 같이 트리 구조(tree structure)의 문서 객체 모델(Document Object Model; DOM)로 문서를 표현한다.
 
-<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\JavaScript\DOM.png" width=100%></div>
-<center style="font-weight:bold">Figure #. General DOM of the HTML.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/JavaScript\js_html_dom.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 2. 문서 객체 모델 <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">위키백과</a></i></sub></center>
 
-JavaScript has an ability to access and manipulate the DOM, thus can dynamically add, remove, and even modify the HTML elements. Every block of square which represents element in HTML is called **node** in DOM.
+자바스크립트는 HTML의 DOM에 접근하여 요소를 추가, 제거, 그리고 변경할 수 있어 동적이고 유연한 웹사이트를 표현할 수 있도록 한다. 트리 구조의 각 블록은 HTML의 요소를 의미하며, 이는 DOM에서 노드(node)라고 부른다.
 
-## **Node Relationship**
+본 장은 본격적으로 자바스크립트를 HTML 및 CSS와 함께 통합하여 사용하는 방법을 간략하게 설명한다.
 
-Each element such as `<html>`, `<head>`,  `<h1>` and et cetera is a node of the structure. Nodes have a relation with other nodes like a family: parent, child, and sibling.
+## 노드 관계
 
-| RELATIONSHIP | DESCRIPTION                                 |
-| :----------: | ------------------------------------------- |
-|    Parent    | Node that is directly enclosing it.         |
-|    Child     | Node that is directly being enclosed by it. |
-|   Sibling    | Nodes that share same parent.               |
+`<html>`, `<head>`, `<h1>`과 같은 HTML의 요소는 DOM의 노드에 해당한다. 노드는 다른 노들들과 상하 관계가 존재하며, 이는 가족 구성에 빗대어 부모(parent), 자식(child), 그리고 형제(sibling)이라 부른다.
 
-## `document` Object
+| 관계 | 설명                     |
+|:--:|------------------------|
+| 부모 | 해당 노드를 포함하고 있는 상위 노드.  |
+| 자식 | 해당 노드가 포함하고 있는 하위 노드.  |
+| 형제 | 해당 노드와 동일한 부모를 가지는 노드. |
 
-A pre-defined `document` object is used to access the nodes in DOM,. In other word, the object is a DOM counterpart of root user (superuser) in Unix-like operating system.
+## `document` 객체
 
-### Selecting Elements
+자바스크립트의 `document` 내장 객체는 DOM의 노드를 최상위 권한으로 접근하는 데 사용된다. 노드 생성, 스타일 변경, 이벤트 설정 등은 전부 `document` 객체를 통해서 이루어진다.
 
-Selecting which node of element to access can be done as follows:
+### 요소 선택
 
-| SYNTAX                                         | DESCRIPTION                                                  |
+DOM에서 원하는 요소 선택은 다음과 같은 `document` 객체 메소드를 통해 실현된다. 
+
+| 메소드                                         | 설명                                                  |
 | ---------------------------------------------- | ------------------------------------------------------------ |
-| `document.getElementById("idName")`            | Access the element ID of `idName`.                           |
-| `document.getElementsByClassName("className")` | Acquire the list of element of the same `className` class in an array format. |
-| `document.getElementsByTagName("tagName")`     | Acquire the list of element of the same `tagName` tag in an array format. |
+| `getElementById("ID")`            | `ID`란 아이디를 가진 요소를 접근한다.                           |
+| `getElementsByClassName("CLASS")[index]` | `CLASS`란 클래스를 가진 `index` 번째 요소를 접근한다 (JS의 클래스가 아님). |
+| `getElementsByTagName("DIV")[index]`     | `DIV` 태그를 가진 `index` 번째 요소를 접근한다. |
 
-Once accessed the element, you can use following properties to operates or select other elements of in relationship.
+여기서 `document.getElementById()`만 배열 형식이 아닌 이유는 아이디는 DOM 내에서 하나의 요소에만 할당할 수 있는 유일성을 지녔기 때문이다.
 
-| PROPERTY          | EXAMPLE                | DESCRIPTION                                                  |
+이렇게 선택된 요소는 아래의 속성을 통해서 해당 요소의 부모, 자식, 혹은 형제 노드를 선택할 수도 있다.
+
+| 속성          | 구문                | 설명                                                  |
 | ----------------- | ---------------------- | ------------------------------------------------------------ |
-| `parentNode`      | `node.parentNode`      | Returns the parent node of an element.                       |
-| `childNodes`      | `node.childNodes`      | Returns an array of an element's child nodes.                |
-| `firstChild`      | `node.firstChild`      | Returns the first child node of an element.                  |
-| `lasChild`        | `node.lastChild`       | Returns the last child node of an element.                   |
-| `hasChildNodes`   | `node.hasChildNodes`   | Returns true if an element has any child nodes, otherwise false. |
-| `nextSibling`     | `node.nextSibling`     | Returns the next node at the same tree level.                |
-| `previousSibling` | `node.previousSibling` | Returns the previous node at the same tree level.            |
+| `parentNode`      | `node.parentNode`      | `node`의 부모 노드를 호출한다.                       |
+| `childNodes`      | `node.childNodes[0]`      | `node`의 0 번째 자식 노드를 호출한다.                |
+| `firstChild`      | `node.firstChild`      | `node`의 첫 자식 노드를 호출한다.                  |
+| `lastChild`        | `node.lastChild`       | `node`의 마지막 자식 노드를 호출한다.                   |
+| `hasChildNodes`   | `node.hasChildNodes`   | `node`가 자식 노드를 가지면 `true`, 아니면 `false`를 반환한다. |
+| `nextSibling`     | `node.nextSibling`     | `node`의 다음 형제를 호출한다.                |
+| `previousSibling` | `node.previousSibling` | `node`의 이전 형제를 호출한다.            |
 
-### Changing Elements
+### 요소 스타일 변경
 
-DOM sees each elements as an object; thus, the elements' attribute can be accessed like an object's.
+DOM은 각 요소를 개별 객체로 간주한다. 즉, 요소의 특성(attribute)들은 객체의 속성처럼 접근할 수 있다.
 
 ```html
-<!--SAMPLE HTML-->
-<div>
-    <img id="sample" src="image_path1.png" style="width:400px; height:300px;">
-    <span>Figure 1. This is an example image.</span>
+<!-- 예시 HTML -->
+<div id="SAMPLE">
+    <img src="path/to/image1.png" style="width:400px; height:300px;">
+    <span>그림 1. 예시 이미지</span>
 </div>
 
-<!--JAVASCRIPT-->
+<!-- 자바스크립트 -->
 <script>
-    /* ACQUIRING ELEMENT OF INTEREST. */
-    var node = document.getElementById("sample").getChildNodes;
+    /* "SAMPLE" 아이디를 가진 요소의 자식 노드 배열 접근 */
+    const node = document.getElementById("SAMPLE").ChildNodes;
     
-    /* CHANGING ELEMENT ATTRIBUTES. */
-    node[0].src = "image_path2.png";
+    /* 0 번째 자식 노드, 즉 <IMG> 요소 접근 및 스타일 변경 */
+    node[0].src = "path/to/image2.png";
     node[0].style.width = "800px";
     node[0].style.height = "600px";
 </script>
 ```
 
-Animation is possible by changing elements' properties using  `setInterval` and `clearInterval`.
+### 요소 생성
 
-| METHOD            | EXAMPLE                          | DESCRIPTION                                          |
-| ----------------- | -------------------------------- | ---------------------------------------------------- |
-| `setInterval()`   | `setInterval(funcName,millisec)` | `funcName` is executed with delayed `millisec` time. |
-| `clearInterval()` | `clearInterval(setInterval)`     | Disable `setInterval()` object.                      |
+HTML이 아닌 자바스크립트를 사용해서 새로운 요소를 생성할 수 있다.
 
-### Adding & Removing Elements
+| 메소드             | 설명                                                  |
+| ------------------  | ------------------------------------------------------------ |
+| `createElement("DIV")` | `DIV` 요소를 생성하지만, 아직 DOM 내에는 위치하지 않은 상태이다.  |
+| `createTextNode("String")` | Create a `String` 텍스트를 가진 노드를 생성하지만, 아직 DOM 내에는 위치하지 않은 상태이다. |
 
-Adding element can be using methods below:
+생성된 요소는 도표에서 설명한 대로 아직 DOM 어딘가에도 속하지 않은 상태이므로 웹사이트에 표시되지 않는다. 웹사이트에 나타나게 하기 위해서는 DOM에 추가해야 한다.
 
-| METHOD             | EXAMPLE                             | DESCRIPTION                                                  |
-| ------------------ | ----------------------------------- | ------------------------------------------------------------ |
-| `createElement()`  | `document.createElement("tagName")` | Create a `tagName` element node not yet placed in anywhere.  |
-| `createTextNode()` | `document.createTextNode("String")` | Create a `string` text node to be placed in other nodes.     |
-| `appendChild()`    | `node.appendChild("newNodw")`       | Place `newNode` as its child node.                           |
-| `insertBefore()`   | `node.insertBefore("node1,node2")`  | Place `node1` as a child node before already existing `node2` child. |
-| `cloneNode()`      | `node.cloneNode()`                  | Clone a current node.                                        |
+### 요소 추가 및 제거
 
-Removing element can be done using method below:
+DOM에 요소를 추가하는 방법은 다음과 같다:
 
-| METHOD          | EXAMPLE                       | DESCRIPTION                    |
-| --------------- | ----------------------------- | ------------------------------ |
-| `removeChild()` | `node.removeChild(childNode)` | Remove `childNode` child node. |
+| 메소드             | 설명                                                  |
+| ------------------  | ------------------------------------------------------------ |
+| `appendChild(node)`  | `node`를 현재 노드의 자식 노드로 둔다.                           |
+| `insertBefore(node1,node2)` | `node1`을 현재 노드의 자식 노드로 두지만, `node2` 다음 형제로 위치시킨다. |
+| `insertAfter(node1,node2)` | `node1`을 현재 노드의 자식 노드로 두지만, `node2` 이전 형제로 위치시킨다. |
 
-Replacing the element is also possible.
+DOM에 요소를 제거하는 방법은 다음과 같다:
 
-| METHOD           | EXAMPLE                          | DESCRIPTION                                  |
-| ---------------- | -------------------------------- | -------------------------------------------- |
-| `replaceChild()` | `node.replaceChild(node1,node2)` | Replace `node2` child to `node1` child node. |
+| 메소드           | 설명                    |
+| ---------------  | ------------------------------ |
+| `remove()`| 현재 노드를 제거한다. |
+| `removeChild(node)`| 현재 노드에서 `node` 자식 노드를 제거한다. |
 
 ```html
-<!--SAMPLE HTML-->
+<!-- 예시 HTML -->
 <div>
-    <p id="p1">First paragraph.</p>
-    <p id="p2">Second paragraph.</p>
+    <p id="P1">첫 번째 문장.</p>
+    <p id="P2">두 번째 문장.</p>
 </div>
 
-<!--JAVASCRIPT-->
+<!-- 자바스크립트 -->
 <script>
-    /* APPEND TEXT NODE TO NEWLY CREATED PARAGRAPH ELEMENT. */
-    var textNode = document.createTextNode("New Text from JS.");
-    var paraNode = document.createElement("p");
+    /* 텍스트 노드를 새로 생성된 <P> 요소에 삽입 */
+    const textNode = document.createTextNode("JS로 생성된 텍스트.");
+    const paraNode = document.createElement("p");
     paraNode.appendChild(textNode);
     
-    /* APPEND PARAGRAPH ELEMENT TO DIV ELEMENT. */
+    /* 새로 생성된 <P> 요소를 <DIV> 자식 노드의 맨 끝에 추가 */
     document.getElementsByTagName("div")[0].appendChild(paraNode);
 </script>
 ```
 
-## **Events**
+## 이벤트
 
-JavaScript can executes code upon occurrence of events, such as click, keypress, and submit. Although events are recognized by the HTML & CSS, its function called **event handler** is defined in JavaScript.
+자바스크립트는 클릭이나 키보드 입력, 혹은 입력창 데이터 제출 등과 같은 이벤트(event)가 발생할 시 코드를 수행할 수 있다. 비록 이벤트는 HTML에서 인식하나, 해당 이벤트에 대한 동작(일명 이벤트 처리자; event handler)은 자바스크립트에서 정의된다.
 
-There are several ways to execute events: one way is to inform the HTML source code what event to expect and define its handler in JavaScript.
+이벤트를 실행하는 방법에는 몇 가지가 존재한다: 그 중 하나는 HTML 소스 코드에 요소들이 어떠한 이벤트를 인식할지 미리 지정해 두는 것이다.
 
 ```html
-<!--SAMPLE HTML-->
+<!-- 예시 1 -->
 <div>
-    <!-- EVENT ON CLICKING. -->
-    <button onclick="functionName()">CLICK</button>
+    <!-- <BUTTON> 요소는 클릭 이벤트 발생 시 "functionName()" 이벤트 처리자 실행 -->
+    <button onclick="functionName()">클릭</button>
 </div>
 
-<!--JAVASCRIPT-->
+<!-- 자바스크립트 -->
 <script>
-    /* EVENT HANDLER. */
-    function functionName() {
+    /* "functionName()" 이벤트 처리자 */
+    const functionName = () => {
         statements;
     }
 </script>
 ```
 
-More flexible and dynamic way to execute events without disturbing any HTML source code is by using DOM of JavaScript.
+하지만 HTML의 특성을 활용하지 않고 직접 자바스크립트에서 직접 이벤트를 동적으로 할당할 수 있다.
 
 ```html
-<!--SAMPLE HTML-->
+<!-- 예시 2 -->
 <div>
-    <!-- EVENT WILL BE ADDED USING DOM. -->
-    <button id="btn">CLICK</button>
+    <!-- DOM으로 이벤트 지정 예정 -->
+    <button>클릭</button>
 </div>
 
-<!--JAVASCRIPT-->
+<!-- 자바스크립트 -->
 <script>
-    /* EVENT HANDLER USING DOM. */
-    var x = document.getElementById("btn");	// Searches for an element to add event.
-    x.onclick = function () {				// a function without a name.
+    /* DOM을 통한 <BUTTON> 요소 이벤트 지정 및 이벤트 처리자 정의 */
+    const variable = document.getElementsByTagName("BUTTON")[0];
+    variable.onclick = () => {
         statements;
     }
 </script>
 ```
 
-The `addEventListener()` method is another way to add event and its event handler using JavaScript's DOM. Beware, the name of the event is not identical from the method introduced on previous section.
+`addEventListener()` 메소드는 DOM에서 이벤트와 이벤트 처리자를 동시에 지정하는 자바스크립트 메소드이다. 여기서 주의할 점은 이벤트 이름이 이전 이벤트 관련 예시 코드와 다르다는 것이다.
 
-| METHOD                  | EXAMPLE                                      | DESCRIPTION                                    |
+| 메소드                  | 설명                                    |
 | ----------------------- | -------------------------------------------- | ---------------------------------------------- |
-| `addEventListener()`    | `elem.addEventListener("event",funcName)`    | Add `event` that does `funcName` in `elem`.    |
-| `removeEventListener()` | `elem.removeEventListener("event,funcName")` | Remove `event` that does `funcName` in `elem`. |
+| `addEventListener("click",funcName)`   | `funcName` 함수를 실행하는 `click` 이벤트를 해당 요소에 추가한다.   |
+| `removeEventListener("click",funcName)` | `funcName` 함수를 실행하는 `click` 이벤트를 해당 요소로부터 제거한다. |
 
 ```html
-<!--SAMPLE HTML-->
+<!-- 예시 3 -->
 <div>
-    <!-- EVENT WILL BE ADDED USING addEventListener() METHOD. -->
-    <button id="btn">CLICK</button>
+    <!-- DOM에서 "addEventListener()" 메소드로 이벤트 지정 예정 -->
+    <button>클릭</button>
 </div>
 
-<!--JAVASCRIPT-->
+<!-- 자바스크립트 -->
 <script>
-    /* EVENT HANDLER USING DOM. */
-    var x = document.getElementById("btn");		// Searches for an element to add event.
-    x.addEventListener("click", functionName);	// Add event and its handler.
+    /* "addEventListener()"로 <BUTTON> 요소 이벤트 지정 및 이벤트 처리자 정의 */
+    const variable = document.getElementsByTagName("BUTTON")[0];
+    variable.addEventListener("click", functionName);
     
+    /* "functionName()" 이벤트 처리자 */
     function functionName() {
         statements;
         
-        /* REMOVE EVENT AFTER EVENT HANDLER IS EXECUTED; MAKE FUNCTION SINGLE-USE. */
-        // Without the code below ables event handler to execute multiple times.
-        x.removeEventListener("click", functionName);
+        // 이벤트 실행 시, statements 이후 마지막에 이벤트 할당 해제: 일회용 이벤트
+        variable.removeEventListener("click", functionName);
     }
 </script>
 ```
 
-### Event Propagation
+### 이벤트 전파
 
-Event propagation defines priority order of the event handlers. For example, suppose there's an HTML source code as below:
+이벤트 전파(event propagation)은 이벤트 처리자의 실행 순서를 결정한다. 아래의 HTML 소스 코드를 예시로 들어본다.
 
 ```html
-<div>
-    <P>
+<div onclick="functionDIV()">
+    <span onclick="functionSPAN()">
         Hello World!
-    </P>
+    </span>
 </div>
 ```
 
-When both elements have an event, which event handler should be executed first: `<div>` or `<p>`?
+만일 "Hello World!" 텍스트를 클릭하였을 시, 어떤 요소의 이벤트 처리자가 우선적으로 실행되는가: `<DIV>` 아니면 `<SPAN>`인가?
 
-* **Capturing**
-  : goes down the tree structure of DOM (`<div>` first, `<p>` later).
-* **Bubbling**
-  : goes up the tree structure of DOM (`<p>` first, `<div>` later).
+* **캡쳐링 (capturing)**
+  : DOM 트리 구조에서 상위 노드에서 하위 노드 순서로 내려간다 (`<DIV>` 먼자, `<SPAN>` 이후).
+* **버블링 (bubbling)**
+  : DOM 트리 구조에서 하위 노드에서 상위 노드 순서로 올라간다 (`<SPAN>` 먼자, `<DIV>` 이후).
 
-Event propagation can be set using `addEventListener()` method in `useCapture` Boolean parameter (default value is `useCapture = false`, bubbling).
+이러한 이벤트 전파는 `addEventListener()` 메소드에서 `useCapture` 논리형 매개변수를 통해 설정할 수 있다. 기본적으로 `usvCapture = faluse`로 버블링이 설정되어 있다.
 
-| METHOD               | EXAMPLE                                              | DESCRIPTION                                                  |
-| -------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
-| `addEventListener()` | `elem.addEventListener("event",funcName,useCapture)` | `useCapture` is a Boolean value: `true/false` for capture/bubble. |
+| 예시                                              | 
+|:----------------------------------------------------:| 
+| `elem.addEventListener("click",funcName,useCapture)` | 
+|`useCapture`는 논리 자료형을 받는 매개변수로, `true`이면 캡쳐링이고 `false`이면 버블링으로 설정된다. |
+
+## 반복 실행
+
+자바스크립트는 하나의 함수를 일정 주기에 맞춰 반복적으로 실행하도록 할 수 있으며, 이는 `setInterval` 및 `clearInterval` 쌍으로 구현할 수 있다.
+
+| 함수            | 예시                          | 설명                                          |
+| ----------------- | -------------------------------- | ---------------------------------------------------- |
+| `setInterval()`   | `setInterval(funcName,millisec)` | `funcName` is executed with delayed `millisec` time. |
+| `clearInterval()` | `clearInterval(setInterval)`     | Disable `setInterval()` object.                      |
+
+```html
+<!-- 예시 HTML -->
+<div>
+    <span>Hello World!</span>
+</div>
+
+<!-- 자바스크립트 -->
+<script>
+    /* "functionName()" 함수를 매 0.5초 동안 반복 실행 */
+    let variable = setInterval(functionName, 500);
+
+    var index = 0;    // 전역 변수
+    const functionName = () => {
+        /* 세 번 반복하도록 설정 */
+        if (index == 3)
+        {
+            /* 반복 실행 해제 */
+            clearInterval(variable);
+        }
+        else
+        {
+            statements;
+            index++;    // 전역 변수이기에 값이 유지된다.
+        }
+    }
+</script>
+```
+
+이러한 반복 실행은 결국 HTML 요소의 위치 이동 및 스타일이 시간에 따라 서서히 변하는 애니메이션 동작을 구현하는데 흔히 활용된다.

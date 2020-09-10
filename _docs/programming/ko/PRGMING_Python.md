@@ -1405,8 +1405,7 @@ def function():
 
 # **파이썬: 객체 및 클래스**
 
-본 문서에서 현재까지 절차적 및 함수형 프로그래밍에 대하여 소개하였다. 세 번째 프로그래밍 방법인 객체지향 프로그래밍(object-oriennted programming; OOP)은 함수 대신 클래스와 객체 사용을 기반으로 한다.  본 장은 파이썬에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
-
+본 문서에서 현재까지 절차적 및 함수형 프로그래밍에 대하여 소개하였다. 세 번째 프로그래밍 방법인 객체지향 프로그래밍(object-oriennted programming; OOP)은 함수 대신 클래스와 객체 사용을 기반으로 한다. 본 장은 파이썬에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
 
 ## 객체
 
@@ -1448,13 +1447,13 @@ print(variable.index(5))
 ```python
 # 클래스 생성하기
 class CLASS:
-    # 인스턴스 초기화(= 생성자)
+    # 인스턴스 초기화 (= 생성자)
     def __init__(self, arg1, arg2):
-        # 속성(변수와 비슷함)
+        # 속성 (변수와 비슷함)
         self.attr1 = arg1
         self.attr2 = arg2
         
-    # 메소드(함수와 비슷함)
+    # 메소드 (함수와 비슷함)
     def method(self, arg3):
         self.attr3 = arg3
         return self.attr1 + self.attr2 - self.attr3

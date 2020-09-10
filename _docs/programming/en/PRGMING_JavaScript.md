@@ -1110,8 +1110,7 @@ let iterableObject = {
 
 This chapter is specifically for integration with HTML & CSS. Document object model (DOM) represents a document in a logical structure and its HTML counterpart is shown as the figure below:
 
-<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\JavaScript\DOM.png" width=100%></div>
-<center style="font-weight:bold">Figure #. General DOM of the HTML.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/JavaScript\js_html_dom.png" style="display:block" width="100%"></div><center style="font-weight:bold">Figure #. General DOM of the HTML.</center>
 
 JavaScript has an ability to access and manipulate the DOM, thus can dynamically add, remove, and even modify the HTML elements. Every block of square which represents element in HTML is called **node** in DOM.
 
