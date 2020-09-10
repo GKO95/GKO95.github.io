@@ -86,8 +86,16 @@ const SwitchLanguage = () => {
     // >> TOGGLE LANGUAGE
     let button = document.createElement("A");
     button.style.backgroundImage = "url(/assets/images/logo/logo-language.png)";
-    if (__LANGUAGE__ == "en") path = "./../../ko/"+category+"_"+__PAGENAME__+"/";
-    else if (__LANGUAGE__ == "ko") path = "./../../en/"+category+"_"+__PAGENAME__+"/";
+    if (__LANGUAGE__ == "en") 
+    {
+        __LOCAL__.setItem("LANG", 'en');
+        path = "./../../ko/"+category+"_"+__PAGENAME__+"/";
+    }
+    else if (__LANGUAGE__ == "ko")
+    {
+        __LOCAL__.setItem("LANG", 'ko');
+        path = "./../../en/"+category+"_"+__PAGENAME__+"/";
+    }
     button.setAttribute("href", path); button.setAttribute("title", "Toggle language");
     document.getElementById("navigation-logo").appendChild(button);
 
