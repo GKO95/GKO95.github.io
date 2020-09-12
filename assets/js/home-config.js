@@ -13,7 +13,8 @@ const __SHIFTS__    = document.getElementsByClassName("home-shift");
 const __LOWER__     = document.getElementById("home-lower");
 const __ANNOUNCE__  = document.getElementById("home-announcement").getElementsByTagName("UL")[0];
 const __BULLETIN__  = document.getElementById("home-bulletin").getElementsByTagName("UL")[0];
-const __ALERT__     = document.getElementById("home-alert");
+const __ALERT__     = document.getElementsByClassName("home-alert");
+const __ARCHIVE__   = document.getElementById("home-archive");
 
 //========================================
 // TITLE: IMPLEMENTATION
@@ -28,6 +29,8 @@ const TitleSize = () => {
 
     let heightHeader = __HEADER__.getBoundingClientRect().height;
     let heightNav = __NAV__.getBoundingClientRect().bottom;
+
+    __TITLE__.style.borderColor = __TITLE__.style.color;
 
     // SHRINKING HEADER
     if (heightHeader - heightNav < _CSS_fontSizeTitle + 16) {  // VERTICAL MARGIN: 12px
@@ -197,7 +200,7 @@ for (let index = 0; index < __BYTES__.length; index++)
 const ByteAlert = (index) => {
 
     let popup = document.createElement("DIV");
-    popup.setAttribute("CLASS","home-alert");
+    popup.setAttribute("CLASS",__ALERT__[0].className);
 
     let timer = Date.now();
     popup.style.zIndex = timer -  Math.floor(timer/100000) * 100000;
@@ -275,6 +278,27 @@ else if (__BULLETIN__.children.length > 2)
 const InitBulletin = () => {
 
 }; InitBulletin();
+
+//========================================
+// >> LOADING THEME
+//========================================
+const loadThemeHome = (theme) => {
+    
+    let bkgdColor = (theme == 'Light') ? 160 : 48;   // BACKGROUND COLOR = CONDITION ? LIGHT : DARK
+    let textColor = (theme == 'Light') ? 48 : 255;
+    document.styleSheets[0].insertRule(`.home-bit { background-color: rgb(${bkgdColor}, ${bkgdColor}, ${bkgdColor}); }`);
+    document.styleSheets[0].insertRule(`#home-archive { background-color: rgb(${bkgdColor}, ${bkgdColor}, ${bkgdColor}); color: rgb(${textColor}, ${textColor}, ${textColor}); }`);
+
+    bkgdColor = (theme == 'Light') ? 176 : 80;
+    document.styleSheets[0].insertRule(`.home-alert { background-color: rgb(${bkgdColor}, ${bkgdColor}, ${bkgdColor}); }`);
+
+    bkgdColor = (theme == 'Light') ? 200 : 64;
+    textColor = (theme == 'Light') ? 0 : 255;
+    document.styleSheets[0].insertRule(`#home-bulletin li { background-color: rgb(${bkgdColor}, ${bkgdColor}, ${bkgdColor}); color: rgb(${textColor}, ${textColor}, ${textColor}); }`);
+    document.styleSheets[0].insertRule(`#home-register { background-color: rgb(${bkgdColor}, ${bkgdColor}, ${bkgdColor}); }`);
+    document.styleSheets[0].insertRule(`#home-announcement { border-color: rgb(${bkgdColor}, ${bkgdColor}, ${bkgdColor}); }`);
+
+}; loadThemeHome(__LOCAL__.getItem("THEME"));
 
 //========================================
 // FUNCTION: RESIZE WINDOW

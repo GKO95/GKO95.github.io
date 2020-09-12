@@ -62,8 +62,45 @@ const __menusize__ = () => {
         - parseInt(getComputedStyle(document.getElementById("menu-option")).marginTop) - parseInt(getComputedStyle(document.getElementById("menu-content")).marginBottom)
         - ( parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) > parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop)
             ? parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) : parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop) ) + "px";
+};
 
-}; 
+// >> DEFAULT MENU OPTIONS
+const __menudefault__ = (theme) => {
+
+    let button; let path;
+
+    // >> THEME SELECTION
+    button = document.createElement("A");
+    switch(theme)
+    {
+        case "Dark":
+        default:
+            button.style.backgroundImage = `url(/assets/images/logo/logo-themeLight4${theme}.png)`;
+            button.setAttribute("title", "Switch to Light theme");
+            break;
+        case "Light":
+            button.style.backgroundImage = `url(/assets/images/logo/logo-themeDark4${theme}.png)`;
+            button.setAttribute("title", "Switch to Dark theme");
+            break;
+    }
+
+    button.addEventListener("click", ()=>{
+        switch(theme)
+        {
+            case "Dark":
+            default:
+                __LOCAL__.setItem("THEME", "Light");
+                break;
+            case "Light":
+                __LOCAL__.setItem("THEME", "Dark");
+                break;
+        }
+        location.reload();
+    });
+    //document.getElementById("menu-select").insertBefore(button, document.getElementById("menu-select").firstChild);
+    document.getElementById("menu-select").appendChild(button);
+
+}; __menudefault__(__LOCAL__.getItem("THEME"));
 
 // >> PREVENT DOCUMENT SCROLLING ON MENU
 // SOURCE: https://www.geeksforgeeks.org/how-to-disable-scrolling-temporarily-using-javascript/
@@ -83,6 +120,7 @@ const __scrollenable__ = () => {
 // >> MENU BUTTON CLICK (INCLUDING CONVENIENT CLICK)
 const __menuclick__ = (event) => {
     const MENU_HEIGHT = parseInt(document.getElementById("menu-main").style.height);
+    const STYLETEXT = getComputedStyle(document.getElementById("menu-bkgd")).backgroundColor.slice(0,-4);
 
     let animate; let opacityMenuBkgd; let sizeMenuMain; let opacityMenuMain;
     if (document.getElementById("menu").style.visibility == "hidden")
@@ -100,7 +138,7 @@ const __menuclick__ = (event) => {
                 if (opacityMenuBkgd < 7) {opacityMenuBkgd++;}
                 if (sizeMenuMain < MENU_HEIGHT) {sizeMenuMain += 20;}
                 if (opacityMenuMain < 10) {opacityMenuMain++;}
-                document.getElementById("menu-bkgd").style.backgroundColor = "rgba(128,128,128,"+(opacityMenuBkgd/10)+")";
+                document.getElementById("menu-bkgd").style.backgroundColor = `${STYLETEXT}, ${(opacityMenuBkgd/10)})`;
                 document.getElementById("menu-main").style.height = sizeMenuMain + "%";
                 document.getElementById("menu-main").style.opacity = opacityMenuMain/10;
             }
@@ -121,7 +159,7 @@ const __menuclick__ = (event) => {
                 if(opacityMenuBkgd > 0) {opacityMenuBkgd--;}
                 if(sizeMenuMain > 0) {sizeMenuMain -= 10;}
                 if (opacityMenuMain > 0) {opacityMenuMain--;}
-                document.getElementById("menu-bkgd").style.backgroundColor = "rgba(128,128,128,"+(opacityMenuBkgd/10)+")";
+                document.getElementById("menu-bkgd").style.backgroundColor = `${STYLETEXT} ${(opacityMenuBkgd/10)})`;
                 document.getElementById("menu-main").style.height = sizeMenuMain + "%";
                 document.getElementById("menu-main").style.opacity = opacityMenuMain/10;
             }

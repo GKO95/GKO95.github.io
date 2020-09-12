@@ -108,6 +108,7 @@ const MenuDesign = () => {
 
     // >> TOP-SIDE
     let category = SelectCategory();
+    const STYLETEXT = getComputedStyle(document.getElementById("menu-bkgd")).backgroundColor.slice(0,-4);
 
     document.getElementById("menu-title").innerText = category + ": " + __PAGENAME__;
 
@@ -115,7 +116,7 @@ const MenuDesign = () => {
 
     // >> VIEW RAW DOCUMENT
     button = document.createElement("A");
-    button.style.backgroundImage = "url(/assets/images/logo/logo-code.png)";
+    button.style.backgroundImage = `url(/assets/images/logo/logo-code4${__LOCAL__.getItem("THEME")}.png)`;
     path = "https://github.com/GKO95/GKO95.github.io/blob/master/_docs/"+__CATEGORY__.toLowerCase()+"/"+__LANGUAGE__.toLowerCase()+"/"+category+"_"+__PAGENAME__+".md";
     button.setAttribute("href", path); button.setAttribute("title", "View raw in GitHub");
     document.getElementById("menu-select").appendChild(button);
@@ -158,7 +159,10 @@ const MenuDesign = () => {
     document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.width = "50%";
 
     document.getElementById("menu-content").getElementsByTagName("SECTION")[0].style.backgroundColor = "inherit";
-    document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.backgroundColor = "rgb(32,32,32)";
+    if (__LOCAL__.getItem("THEME")=='Light')
+        document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.backgroundColor = "rgb(232,232,232)";
+    else
+        document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.backgroundColor = "rgb(32,32,32)";
 
     let anchor; let subanchor;
     for (let chapter of __CONTENT__.children)
@@ -177,9 +181,9 @@ const MenuDesign = () => {
                 for (let element of chapter.children){ 
                     if (element.tagName == "H1")
                     {
-                        subanchor = document.createElement("A"); subanchor.innerHTML = element.innerHTML;
+                        subanchor = document.createElement("A"); subanchor.innerHTML = element.innerHTML; subanchor.style.float = "none";
                         subanchor.style.margin = "16px 16px 8px 16px"; subanchor.style.fontStyle = "bold"; subanchor.style.fontSize = "1.6em";
-                        subanchor.style.borderBottom = "solid white 2px"; subanchor.style.float = "none";
+                        subanchor.style.borderBottom = (__LOCAL__.getItem("THEME") == 'Light') ? "solid black 2px" : "solid white 2px"; 
                     }
                     else if (element.tagName == "H2")
                     {
@@ -208,7 +212,7 @@ const MenuDesign = () => {
                                 if(opacityMenuBkgd > 0) {opacityMenuBkgd--;}
                                 if(sizeMenuMain > 0) {sizeMenuMain -= 10;}
                                 if (opacityMenuMain > 0) {opacityMenuMain--;}
-                                document.getElementById("menu-bkgd").style.backgroundColor = "rgba(128,128,128,"+(opacityMenuBkgd/10)+")";
+                                document.getElementById("menu-bkgd").style.backgroundColor = `${STYLETEXT}, ${(opacityMenuBkgd/10)})`;
                                 document.getElementById("menu-main").style.height = sizeMenuMain + "%";
                                 document.getElementById("menu-main").style.opacity = opacityMenuMain/10;
                             }
@@ -277,4 +281,3 @@ const MenuParser = () => {
 window.addEventListener('resize', event => {
 
 });
-

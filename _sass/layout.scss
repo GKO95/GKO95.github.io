@@ -76,16 +76,14 @@
     justify-content: center;
     align-items: center;
 
-    background-color: rgb(128,128,128);
     width: 100%;
     height: 100%;
 }
 
 #menu-main {
     width: 64%;
-    
     margin: auto;
-    background-color: rgb(40,40,40);
+    overflow: hidden;
 
     // Disable selection.
     user-select: none;
@@ -93,8 +91,6 @@
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
-
-    overflow: hidden;
 }
 
 #menu-option {
@@ -103,7 +99,6 @@
     justify-content: space-between;
     align-items: center;
 
-    background-color: rgb(24,24,24);
     height: 64px;
     width: 90%;
 
@@ -186,5 +181,6 @@
 
 .highlighter-rouge code {
     background-color: inherit;
+    color: white;
     padding: 0px;
 }

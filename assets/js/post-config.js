@@ -48,4 +48,3 @@ if (document.readyState == "complete") {
 window.addEventListener('resize', event => {
 
 });
-

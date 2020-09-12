@@ -3,35 +3,41 @@ layout: template
 ---
 
 <style type="text/css" media="screen">
-  .container {
+.container {
     margin: 10px auto;
     max-width: 600px;
     text-align: center;
-  }
-  h1 {
+}
+h1 {
     margin: 32px 0;
     font-size: 4em;
     line-height: 1;
     letter-spacing: -1px;
-  }
-  span {
+}
+span {
     display: inline-block;
     background-image:url('/assets/images/logo/logo-404.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 224px;
 
+    border-radius: 1.6em;
+
     width:256px;
     height:256px;
-  }
-  p {
+}
+p {
     margin: 8px 0px;
-  }
+}
 </style>
 
 <div class="container">
-  <h1>404</h1>
-  <span></span>
-  <p style="font-family:'Consolas', 'Nanum Gothic Coding', monospace; font-size: 1.6em;"><strong>"KEEP IT CLEAN!"</strong></p>
-  <p>The requested page could not be found.</p>
+    <h1>404</h1>
+    <span></span>
+    <p style="font-family:'Consolas', 'Nanum Gothic Coding', monospace; font-size: 1.6em;"><strong>"KEEP IT CLEAN!"</strong></p>
+    <p>The requested page could not be found.</p>
 </div>
+
+<script>
+    if (__LOCAL__.getItem("THEME") == 'Light') document.getElementsByTagName("SPAN")[0].style.backgroundColor = "rgb(34,30,31)";
+</script>
