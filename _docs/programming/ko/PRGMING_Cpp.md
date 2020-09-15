@@ -48,27 +48,27 @@ C++ 프로그래밍 언어로 개발하기 위해서는 C++ 컴파일러가 반�
 
 [비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 윈도우 OS의 대표적인 IDE이며 MSVC 컴파일러를 제공한다. 비주얼 스튜디오는 총 세 가지의 에디션이 존재하며, 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. 그 중에서 C++ 프로그래밍 언어를 위해 "Desktop development with C++"를 선택한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. 비주얼 스튜디오 C++ 프로그래밍을 위한 구성요소.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. 비주얼 스튜디오 C++ 프로그래밍을 위한 구성요소.</center>
 
 만일 한국어 지원을 원한다면 "Language packs" 탭에서 한국어를 함께 선택하면 된다.
 
 비주얼 스튜디오를 실행하면 아래와 같은 시작화면이 나타난다. 새로운 프로젝트를 생성하려면 오른쪽 하단의 "Create a new project" 버튼을 클릭한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 2. 비주얼 스튜디오 시작화면.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 2. 비주얼 스튜디오 시작화면.</center>
 
 C++로 만들 수 있는 프로그램은 다양하여 비주얼 스튜디오에서 선택할 수 있는 프로젝트 종류도 여러 가지가 있다. C++ 언어 프로젝트 생성을 위해서는 아래의 절차를 따른다:
 
 1. 프로그래밍 언어를 C++로 선택하여 "Console App"(콘솔 어플리케이션)을 클릭한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 3. 비주얼 스튜디오 C++ 프로젝트 생성 (1단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 3. 비주얼 스튜디오 C++ 프로젝트 생성 (1단계).</center>
 
 2. 프로젝트 및 솔루션 이름을 선정한다. 여기서 프로젝트란, 소스 코드와 컴파일러 설정 등의 실질적인 코딩 내용을 관리하는 `.vcxproj` 확장자 파일이며, 솔루션은 여러 프로젝트 파일을 하나의 폴더처럼 담는 `.sln` 파일이다. 비주얼 스튜디오에서 프로젝트는 `.sln` 파일로 열기를 권장한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 4. 비주얼 스튜디오 C++ 프로젝트 생성 (2단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 4. 비주얼 스튜디오 C++ 프로젝트 생성 (2단계).</center>
 
 3. 비주얼 스튜디오에서 알아서 준비한 프로젝트를 그대로 사용한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 5. 비주얼 스튜디오 C++ 프로젝트 생성 (3단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 5. 비주얼 스튜디오 C++ 프로젝트 생성 (3단계).</center>
 
 위의 3단계 절차는 콘솔 어플리케이션 프로젝트를 생성하는 가장 간단한 방법이다. 만일 아무것도 없는 빈 프로젝트에서 생성하기를 원하면 *PRGMING_C* 문서의 설치 항목을 참조한다.
 
@@ -80,25 +80,25 @@ C++로 만들 수 있는 프로그램은 다양하여 비주얼 스튜디오에�
 
 엑스코드를 실행한 다음, 새로운 프로젝트를 `File > New > Project...`로 통해 생성한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_xcode_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 6. 엑스코드 시작화면.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 6. 엑스코드 시작화면.</center>
 
 본격적인 엑스코드 창이 나타나게 되는데, 애플 제품의 어플리케이션 제작에 특화되어 있으며 프로젝트 종류도 여러 가지가 있다. C++ 언어 프로젝트 생성을 위해서는 아래의 절차를 따라야 한다:
 
 1. 사용하고 있는 컴퓨터가 macOS 운영체제이므로, macOS 탭에서 가장 간단한 터미널 형식의 프로그램을 위해 Command Line Tool을 선택한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_xcode_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 7. 엑스코드 C++ 프로젝트 생성 (1단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 7. 엑스코드 C++ 프로젝트 생성 (1단계).</center>
 
 2. Product Name에는 프로젝트 이름을 선정하고, Language에는 C++로 선택한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_xcode_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 8. 엑스코드 C++ 프로젝트 생성 (2단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 8. 엑스코드 C++ 프로젝트 생성 (2단계).</center>
 
 3. 프로젝트를 저장할 경로를 고른다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_xcode_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 9. 엑스코드 C++ 프로젝트 생성 (3단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 9. 엑스코드 C++ 프로젝트 생성 (3단계).</center>
 
 4. 왼쪽 패널에는 Experiment 폴더 아래에 `main.cpp`라는 C++ 소스 파일이 생성되어 있으며, 최소한의 기본 코드가 작성되어 있다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_xcode_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 10. 엑스코드 C++ 프로젝트 생성 (4단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 10. 엑스코드 C++ 프로젝트 생성 (4단계).</center>
 
 엑스코드에서 C++ 언어 프로그램을 실행하는 방법에는 두 가지가 존재한다: 디버그(debug) 모드와 일반 실행 모드이다. 두 실행 모드는 단축키 `⌘+R` 하나로 통일되어 있으며, 실행 모드 변경은 프로젝트 설정에서 한다. 프로그램에 문제가 발생하여 검토가 필요한 경우, 관측하고자 하는 코드에 중단점(breakpoint)을 설정하여 디버깅을 한다. 활성화된 중단점을 모두 비활성화하여 프로그램을 일반적으로 실행하기 위해서는 단축키 `⌘+Y`로 중단점 활성화 토글을 한다.
 
@@ -108,25 +108,25 @@ C++로 만들 수 있는 프로그램은 다양하여 비주얼 스튜디오에�
 
 간단한 예시를 보여주기 위해, *그림 10. 엑스코드 C++ 프로젝트 생성 (4단계)*에 나온 코드를 그대로 가져와 `main.cpp`라는 소스 파일에 저장하였다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_g++_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 11. g++ 컴파일 작업 예시 코드.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 11. g++ 컴파일 작업 예시 코드.</center>
 
 위의 `main.cpp` 소스 파일은 `~/Workspace/Cpp/Experiment` 경로에 저장되었다고 하자.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_g++_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 12. g++ 컴파일러의 C++ 언어 프로그램 생성 (1단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 12. g++ 컴파일러의 C++ 언어 프로그램 생성 (1단계).</center>
 
 터미널을 실행하여 소스 파일이 위치한 경로로 이동한다. 터미널에서 경로 이동은 `cd` 명령어를 사용한다. 소스 파일을 컴파일하기 위해서는 아래의 명령어를 입력한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_g++_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 13. g++ 컴파일러의 C++ 언어 프로그램 생성 (2단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 13. g++ 컴파일러의 C++ 언어 프로그램 생성 (2단계).</center>
 
 본 명령어을 해석하면 `main.cpp` 소스 파일을 컴파일하여 이진 파일을 생성(`-o`)하는데, 생성된 이진 파일 이름은 `main`이라고 지정한다는 의미이다. 해당 예시는 g++ 컴파일러의 매우 간단한 예시 중 하나이며, 프로젝트 성질에 따라 외부 라이브러리 링크와 관련된 옵션도 추가할 수 있다.
 
 소스 파일이 위치한 폴더를 다시 한 번 확인하면 컴파일로 생성된 `main` 이진 파일을 확인할 수 있다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_g++_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 14. g++ 컴파일러의 C++ 언어 프로그램 생성 (3단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 14. g++ 컴파일러의 C++ 언어 프로그램 생성 (3단계).</center>
 
 이진 파일 `main`을 실행하기 위해서는 터미널에서 `./`와 함께 실행 파일 이름을 입력한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_g++_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 15. g++ 컴파일러의 C++ 언어 프로그램 생성 (4단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 15. g++ 컴파일러의 C++ 언어 프로그램 생성 (4단계).</center>
 
 여기서 `./`은 현재 경로를 의미한다. 현재 경로를 표시하는 구문이 없으면 리눅스 터미널은 `main`이란 파일과 전혀 연관이 없는 환경 변수에서 찾으려고 하며, 결국 파일을 찾지 못해 실행하지 못한다.
 
@@ -1739,7 +1739,7 @@ virtual void polymorph() = 0;
 
 C++ 프로젝트를 더 쉽고 효율적으로 관리하기 위해서 클래스를 파일로 생성하는 것을 권장한다. 비주얼 스튜디오에서 클래스 파일은 솔루션 탐색기(Solution Explorer)에서 소스 파일(Source Files) 혹은 헤더 파일(Header Files) 필터를 오른쪽 클릭하여 `추가 >> 클래스...`을 선택한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_class.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 16. 비주얼 스튜디오에서 클래스 파일 추가하기.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_class.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 16. 비주얼 스튜디오에서 클래스 파일 추가하기.</center>
 
 "**C<u>l</u>ass Name:**" 란에 입력한 클래스 이름은 자동적으로 "**.h <u>f</u>ile:**"와 "**.c<u>p</u>p file:**"에 동일한 파일 이름이 입력된다. OK 버튼을 눌러 클래스의 헤더 파일과 소스 파일을 생성한다.
 

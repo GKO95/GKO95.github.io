@@ -113,7 +113,7 @@ VS Code에서 자바스크립트를 실행하기 위해서는 확장도구가 �
 
 종합적으로 아래와 같이 파일들이 준비되어야 한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/JavaScript/js_vs_workspace.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. VS Code의 자바스크립트 작업 환경.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/JavaScript/js_vs_workspace.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. VS Code의 자바스크립트 작업 환경.</center>
 
 현 상태에서 `F5` 버튼을 누르면 자바스크립트를 디벙깅 모드로 실행, 그리고 `CTRL+F5` 버튼을 누르면 디버깅 없이 실행된다. 여기서 디버깅 모드란, 코드를 단계별로 실행하여 데이터가 어떻게 변하는지 확인할 수 있도록 한다.
 
@@ -177,7 +177,7 @@ HTML에서 자바스크립트를 사용하기 위해서는 `<script>` 태그가 
 2. 더하기 기호(`+`)를 문자열 연결에 사용하면 사이에 공백이 생기지 않는다. 그러나 문자열 자료형이 아닌 데이터는 우선 문자열로 변환해야 한다.
 
     ```js
-    console.log("Hello World!", 1);
+    console.log("Hello World!" + 1);
     ```
     ```
     Hello World!1
@@ -1058,7 +1058,7 @@ var variable = new Date();
 
 자바스크립트는 HTML 및 CSS와 함께 사용하여 다양한 기능을 제공하는 데 기여한다. 선언형 언어인 HTML은 아래와 같이 트리 구조(tree structure)의 문서 객체 모델(Document Object Model; DOM)로 문서를 표현한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/JavaScript\js_html_dom.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 2. 문서 객체 모델 <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">위키백과</a></i></sub></center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/JavaScript\js_html_dom.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 2. 문서 객체 모델 <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">위키백과</a></i></sub></center>
 
 자바스크립트는 HTML의 DOM에 접근하여 요소를 추가, 제거, 그리고 변경할 수 있어 동적이고 유연한 웹사이트를 표현할 수 있도록 한다. 트리 구조의 각 블록은 HTML의 요소를 의미하며, 이는 DOM에서 노드(node)라고 부른다.
 

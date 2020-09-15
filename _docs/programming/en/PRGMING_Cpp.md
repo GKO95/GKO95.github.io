@@ -1603,7 +1603,7 @@ Base class that has at least one pure virtual function is called **abstract clas
 
 For easier and efficient management of the project, creating a class as files is recommended. On Visual Studio 2019, the class file can be created by right clicking either *Source Files* or *Header Files* filter and select *Add >> Class...*. A new window will pop up shown as follows:
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Cpp/cpp_vs_class.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure #. Adding class in Visual Studio 2019</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_class.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure #. Adding class in Visual Studio 2019</center>
 Class name typed on "**C<u>l</u>ass Name:**" automatically fills "**.h <u>f</u>ile:**" and "**.c<u>p</u>p file:**" with the same name. Click OK button to create two files: header file and source file in the project's *Header Files* and *Source Files* filter respectively.
 
 Despite having separated into two different files, the class can be imported to the C++ script using `#include` directive.

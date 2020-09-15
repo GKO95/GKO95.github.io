@@ -26,7 +26,7 @@ The framework is constituted by CoreFX *(FCL)* and CoreCLR *(CRL)*. Following is
 | Framework Class Library (FCL) | Provides Standard Libraries for .NET programming and execution. |
 | Common Language Runtime (CLR) | Compiles and executes .NET application using JIT compiler.      |
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/Csharp/csharp_wiki_netframework.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. .NET Common Language Infrastructure (CLI)</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_wiki_netframework.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. .NET Common Language Infrastructure (CLI)</center>
 
 .NET implements Common Language Infrastructure (CLI) which is standardized by ISO and ECMA. The standardization specifies that CLI should allow multiple high-level programming languages and support cross-platform despite having different architectures.
 
