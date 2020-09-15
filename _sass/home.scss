@@ -304,3 +304,28 @@
 #home #menu {
     display: block;
 }
+
+#home #menu-content {
+    overflow-y: auto;
+}
+
+#home #menu-content .menu-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    list-style-type: none;
+}
+
+#home #menu-content .logo {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 64px;
+    background-color: rgb(24, 24, 24);
+    border-radius: 0.5em;
+
+    margin: 0px 4px;
+
+    width: 88px;
+    height: 88px;
+}

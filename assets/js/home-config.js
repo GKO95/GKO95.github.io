@@ -197,7 +197,7 @@ for (let index = 0; index < __BYTES__.length; index++)
 //========================================
 // REGSITER: SHIFTING BYTES
 //========================================
-const ByteAlert = (index) => {
+const ByteAlert = (index, lang) => {
 
     let popup = document.createElement("DIV");
     popup.setAttribute("CLASS",__ALERT__[0].className);
@@ -208,10 +208,10 @@ const ByteAlert = (index) => {
     switch(index)
     {
         case 0:
-            popup.innerHTML = "LANGUAGE";
+            popup.innerHTML = (lang == 'en') ? "LANGUAGE" : "프로그래밍 언어";
             break;
         case 1: 
-            popup.innerHTML = "LIBRARY";
+            popup.innerHTML = (lang == 'en') ? "LIBRARY" : "라이브러리";
             break;
     }
 
@@ -246,7 +246,7 @@ for (let shift of __SHIFTS__)
             else {currIndex++;}
         }
         InitRegister();
-        ByteAlert(currIndex);
+        ByteAlert(currIndex, __LOCAL__.getItem("LANG"));
     });
 }
 
@@ -280,23 +280,92 @@ const InitBulletin = () => {
 }; InitBulletin();
 
 //========================================
+// >> MENU: CONFIGURATION
+//========================================
+const MenuDesign = (storage) => {
+
+    let lang = storage.getItem("LANG");
+    let theme = storage.getItem("THEME");
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET',`/assets/html/${lang}.instruction.html`);
+    xhr.onreadystatechange = () => {
+        if(xhr.readyState === XMLHttpRequest.DONE) {
+            // In local files, status is 0 upon success in Mozilla Firefox
+            if (xhr.status === 0 || (xhr.status >= 200 && xhr.status < 400)) {
+                // The request has been completed successfully
+                document.getElementById("menu-content").innerHTML = xhr.responseText;
+            } else {
+                alert("ERROR: Unable to request external HTML!")
+            }
+        }
+    };
+    
+    document.getElementById("menu-title").innerText = (lang == 'en') ? "Instruction" : "사용 설명서";
+    document.styleSheets[0].insertRule(`#home #menu-content h1 { border-bottom: solid ${(theme=='Light')?'black':'white'} 4px; }`);
+
+    xhr.send();
+
+}; MenuDesign(__LOCAL__);
+
+
+
+//========================================
+// >> PLUGIN: SWITCH LANGUAGE
+//========================================
+const SwitchLanguage = (lang) => {
+
+    // >> SWITCH LANGUAGE
+    let button = document.createElement("A");
+    button.style.backgroundImage = "url(/assets/images/logo/logo-language.png)";
+    button.setAttribute("title", "Switch language");
+    button.style.cursor = "pointer";
+
+    button.addEventListener("click", () => {
+        switch(lang)
+        {
+            case "en":
+            default:
+                __LOCAL__.setItem("LANG", "ko");
+                break;
+            case "ko":
+                __LOCAL__.setItem("LANG", "en");
+                break;
+        }
+        location.reload();
+    });
+
+    document.getElementById("navigation-logo").appendChild(button);
+
+}; SwitchLanguage(__LOCAL__.getItem("LANG"));
+
+for (let element of __BITS__)
+{
+    let href = element.getAttribute("href").split("/");
+    element.setAttribute("href", `/${href[1]}/${href[2]}/${__LOCAL__.getItem("LANG")}/${href[4]}/`);
+}
+
+if(__LOCAL__.getItem("LANG") == 'en') document.getElementById("home-archive").innerHTML = "▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MORE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼"
+else document.getElementById("home-archive").innerHTML = "▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;더 보기&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼"
+
+//========================================
 // >> LOADING THEME
 //========================================
 const loadThemeHome = (theme) => {
     
-    let bkgdColor = (theme == 'Light') ? 160 : 48;   // BACKGROUND COLOR = CONDITION ? LIGHT : DARK
-    let textColor = (theme == 'Light') ? 48 : 255;
-    document.styleSheets[0].insertRule(`.home-bit { background-color: rgb(${bkgdColor}, ${bkgdColor}, ${bkgdColor}); }`);
-    document.styleSheets[0].insertRule(`#home-archive { background-color: rgb(${bkgdColor}, ${bkgdColor}, ${bkgdColor}); color: rgb(${textColor}, ${textColor}, ${textColor}); }`);
+    let bkgdColor = (theme == 'Light') ? "rgb(160, 160, 160)" : "rgb(48, 48, 48)";   // BACKGROUND COLOR = CONDITION ? LIGHT : DARK
+    let textColor = (theme == 'Light') ? "rgb(48, 48, 48)" : "rgb(255, 255, 255)";
+    document.styleSheets[0].insertRule(`.home-bit { background-color: ${bkgdColor}; }`);
+    document.styleSheets[0].insertRule(`#home-archive { background-color: ${bkgdColor}; color: ${textColor}; }`);
 
-    bkgdColor = (theme == 'Light') ? 176 : 80;
-    document.styleSheets[0].insertRule(`.home-alert { background-color: rgb(${bkgdColor}, ${bkgdColor}, ${bkgdColor}); }`);
+    bkgdColor = (theme == 'Light') ? "rgb(176, 176, 176)" : "rgb(80, 80, 80)";
+    document.styleSheets[0].insertRule(`.home-alert { background-color: ${bkgdColor}; }`);
 
-    bkgdColor = (theme == 'Light') ? 200 : 64;
-    textColor = (theme == 'Light') ? 0 : 255;
-    document.styleSheets[0].insertRule(`#home-bulletin li { background-color: rgb(${bkgdColor}, ${bkgdColor}, ${bkgdColor}); color: rgb(${textColor}, ${textColor}, ${textColor}); }`);
-    document.styleSheets[0].insertRule(`#home-register { background-color: rgb(${bkgdColor}, ${bkgdColor}, ${bkgdColor}); }`);
-    document.styleSheets[0].insertRule(`#home-announcement { border-color: rgb(${bkgdColor}, ${bkgdColor}, ${bkgdColor}); }`);
+    bkgdColor = (theme == 'Light') ? "rgb(200, 200, 200)" : "rgb(64, 64, 64)";
+    textColor = (theme == 'Light') ? "rgb(0, 0, 0)" : "rgb(255, 255, 255)";
+    document.styleSheets[0].insertRule(`#home-bulletin li { background-color: ${bkgdColor}; color: ${textColor}; }`);
+    document.styleSheets[0].insertRule(`#home-register { background-color: ${bkgdColor}; }`);
+    document.styleSheets[0].insertRule(`#home-announcement { border-color: ${bkgdColor}; }`);
 
 }; loadThemeHome(__LOCAL__.getItem("THEME"));
 

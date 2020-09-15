@@ -57,7 +57,11 @@ const __menusize__ = () => {
     {
         document.getElementById("menu-main").style.width = (1.5 * window.outerHeight * (MENU_HEIGHT/100)) + "px";
     }
-
+    else if (window.innerWidth < parseInt(getComputedStyle(document.body).minWidth) )
+    {
+        document.getElementById("menu-main").style.width = parseInt(getComputedStyle(document.body).minWidth) * (MENU_WIDTH/100) + "px";
+    }
+    
     document.getElementById("menu-content").style.height = document.getElementById("menu-main").offsetHeight - document.getElementById("menu-option").offsetHeight
         - parseInt(getComputedStyle(document.getElementById("menu-option")).marginTop) - parseInt(getComputedStyle(document.getElementById("menu-content")).marginBottom)
         - ( parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) > parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop)

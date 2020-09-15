@@ -83,7 +83,7 @@ const SwitchLanguage = () => {
 
     let category = SelectCategory();
 
-    // >> TOGGLE LANGUAGE
+    // >> SWITCH LANGUAGE
     let button = document.createElement("A");
     button.style.backgroundImage = "url(/assets/images/logo/logo-language.png)";
     if (__LANGUAGE__ == "en") 
@@ -96,13 +96,13 @@ const SwitchLanguage = () => {
         __LOCAL__.setItem("LANG", 'ko');
         path = "./../../en/"+category+"_"+__PAGENAME__+"/";
     }
-    button.setAttribute("href", path); button.setAttribute("title", "Toggle language");
+    button.setAttribute("href", path); button.setAttribute("title", "Swtich language");
     document.getElementById("navigation-logo").appendChild(button);
 
 }; SwitchLanguage();
 
 //========================================
-// >> MENU: ORGANIZATION
+// >> MENU: CONFIGURATION
 //========================================
 const MenuDesign = () => {
 
