@@ -4,7 +4,7 @@ lang: ko
 layout: docs
 author: GKO95
 category: Programming
-title: "Programming | C#"
+title: "프로그래밍 | C#"
 logo: "/assets/images/logo/logo-csharp.png"
 summary: "."
 order: 0x03
@@ -438,6 +438,16 @@ bool   bvalue = System.Convert.ToBoolean(Console.ReadLine());
 double dvalue = System.Convert.ToDouble(Console.ReadLine());
 ```
 
+### `is` 연산자
+
+`is` 키워드는 주어진 데이터가 비교하고자 하는 자료형과 호환되는지 확인하는 C# 언어의 연산자이다.
+
+```csharp
+variable is Type;
+```
+
+만일 `variable`이 자료형 `Type`와 호환되면 논리값 `true`이 반환되며, 그렇지 않을 시 `false` 논리값이 반환된다.
+
 ## 연산자
 
 연산자(operator)는 피연산자의 데이터를 조작할 수 있는 가장 간단한 데이터 처리요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다.
@@ -555,7 +565,7 @@ else
 
 하지만 우선 소개된 `else`-`if` 연쇄 조건문은 두 조건부가 함께 사용되는 점과 비교해 `else if` 조건문은 여전히 하나의 조건부에서 처리되므로, 이 둘은 구체적으로 서로 다른 조건문임을 명시해야 한다.
 
-### 조건 연산자
+## 조건 연산자
 조건문은 아래와 같이 조건 연산자(ternary operator; `?:`)를 사용하여 간략히 표현될 수 있다.
 
 ```csharp
@@ -563,6 +573,22 @@ condition ? true_return : false_return;
 ```
 
 조건 연산자는 영어로 *ternary operator*로, 이는 세 가지 인수를 사용하는 것을 의미한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에는 유용하다.
+
+### `as` 연산자
+
+`as` 키워드는 자료형 변환에 사용되는 C# 언어의 연산자이며, 만일 해당 자료형이 호환성의 문제로 변환이 불가하면 `null`이 반환된다.
+
+```csharp
+/* "as" 연산자 */
+variable as Type;
+```
+
+위의 예시 코드는 `variable`을 `Type` 자료형으로 캐스팅을 시도한다. 이는 아래의 문장과 동일하게 동작한다.
+
+```csharp
+/* "as" 연산자의 동일 표현식 */
+variable is Type ? (Type)variable : (Type)null;
+```
 
 ## `switch` 조건문
 

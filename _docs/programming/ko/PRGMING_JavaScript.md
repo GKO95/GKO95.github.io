@@ -4,7 +4,7 @@ lang: ko
 layout: docs
 author: GKO95
 category: Programming
-title: "Programming | JavaScript"
+title: "프로그래밍 | 자바스크립트"
 logo: "/assets/images/logo/logo-js.png"
 summary: "."
 order: 0x04
