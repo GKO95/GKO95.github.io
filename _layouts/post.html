@@ -6,6 +6,26 @@ layout: template
     <main id="post-main">
         <div id="post-content">
             {{ content }}
+            {% if page.tags.size > 0 %}
+				<div style="text-align: right; margin-block-start: 1em; margin-block-end: 1em; 
+					user-select: none;
+					-ms-user-select: none;
+					-moz-user-select: none;
+					-khtml-user-select: none;
+					-webkit-user-select: none;">
+                    {% case page.lang %}
+                        {% when "ko" %}
+                        <span>태그:</span>
+						{% else %}
+                        <span>Tags:</span>
+                    {% endcase %}
+                    {% for tag in page.tags %}
+                    <a>
+                        <code class="post-tags">#{{ tag }}</code>
+                    </a>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
     </main>
     {%- include .footer.html -%}

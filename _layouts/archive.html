@@ -1,3 +1,85 @@
 ---
 layout: template
 ---
+<style>
+    #archive header {
+        background-color: inherit;
+        height: 25vh;
+        min-height: 128px;
+        max-height: 128px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        overflow: hidden;
+        width:100%;
+    }
+
+    #archive-content {
+        display: block;
+
+        max-width: calc(1200px - (30px * 2));
+        margin-left: auto;
+        margin-right: auto;
+
+        padding-left: 30px;
+        padding-right: 30px;
+
+        background-color: inherit;
+    }
+
+    .archive-tags {
+        margin: 0em 0.4em;
+
+        /* Disable selection. */
+        user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+
+        /* Disable hyperlink underline. */
+        text-decoration: none;
+    }
+</style>
+
+<body id="archive">
+    {%- include .header.html -%}
+    <main id="archive-main">
+        <div id="archive-content">
+
+            <section id="archive-tags">
+                {% assign list = "" %}
+                {%- for post in site.posts -%}{%- for tag in post.tags -%}
+                    {%- assign list = list | append: " " | append: tag -%}
+                {%- endfor -%}{%- endfor -%}
+                {%- assign arr = list | split: " " -%}
+                {%- assign set = arr | uniq | join: " " | split: " " -%}
+                {%- for item in set -%}
+                    <code class="archive-tags">#{{item}}</code>
+                {%- endfor -%}
+            </section>
+
+            <div>
+                <ul>
+                    {% for post in site.posts %}
+                    <a href="{{ post.url }}">
+                        <li>
+                            <span>{{ post.title }}</span>
+                        </li>
+                    </a>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <script>
+            
+            </script>
+
+        </div>
+    </main>
+    {%- include .footer.html -%}
+    {%- include .menu.html -%}
+</body>
+<script>const __PAGENAME__ = "{{page.name}}"; const __CATEGORY__ = "{{page.category}}"; const __LANGUAGE__ = "{{page.lang}}";</script>
