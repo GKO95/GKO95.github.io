@@ -29,8 +29,9 @@ layout: template
         background-color: inherit;
     }
 
-    .archive-tags {
+    .archive-tag {
         margin: 0em 0.4em;
+        cursor: pointer;
 
         /* Disable selection. */
         user-select: none;
@@ -55,28 +56,86 @@ layout: template
                     {%- assign list = list | append: " " | append: tag -%}
                 {%- endfor -%}{%- endfor -%}
                 {%- assign arr = list | split: " " -%}
-                {%- assign set = arr | uniq | join: " " | split: " " -%}
+                {%- assign set = arr | uniq | sort | join: " " | split: " " -%}
                 {%- for item in set -%}
-                    <code class="archive-tags">#{{item}}</code>
+                    <a><code class="archive-tag">#{{item}}</code></a>
                 {%- endfor -%}
             </section>
 
             <div>
-                <ul>
-                    {% for post in site.posts %}
-                    <a href="{{ post.url }}">
-                        <li>
-                            <span>{{ post.title }}</span>
-                        </li>
-                    </a>
+                <ul id="archive-list">
+                    {%- for post in site.posts -%}
+                    {%- assign index = post.tags.size -%}
+                    <li class='{%- if post.tags.size > 0 -%}{%- for tag in post.tags -%}
+                        {%- if tag == post.tags.first -%}{{ tag | prepend: "#" }}{%- else -%}{{ tag | prepend: " #" }}{%- endif -%}
+                        {%- endfor -%}{%- endif -%}'><a href="{{ post.url }}">
+                        <span>{{ post.title }}</span>
+                    </a></li>
                     {% endfor %}
                 </ul>
             </div>
-            
-            <script>
-            
-            </script>
 
+            <script>
+                const __colorYES__  = (__LOCAL__.getItem("THEME") == 'Light') ? "rgb(0, 128, 0)" : "rgb(0, 128, 0)";
+                const __colorNO__   = (__LOCAL__.getItem("THEME") == 'Light') ? "red" : "red";
+
+                for(let tag of document.getElementsByClassName("archive-tag"))
+                {
+                    tag.addEventListener("click", ()=>{
+                        switch(tag.style.backgroundColor)
+                        {
+                            // IF SELECT TO REMOVE
+                            case __colorYES__:
+                                tag.style.backgroundColor = __colorNO__;
+                                tagFilterNO(tag.innerHTML);
+                                break;
+                            // IF SELECT TO RESET
+                            case __colorNO__:
+                                tag.style.backgroundColor = "";
+                                tagFilterRESET(tag.innerHTML);
+                                break;
+                            // IF SELECT TO FILTER
+                            default:
+                                tag.style.backgroundColor = __colorYES__;
+                                tagFilterYES(tag.innerHTML);
+                                break;
+                        }
+                    });
+                }
+
+                // FIXME: INCOMPLETE FILTER ALGORITHM!
+                const tagFilterYES = (tagName) => {
+                    for(let post of document.getElementById("archive-list").children)
+                    {
+                        if(!post.getAttribute("class").split(" ").includes(tagName))
+                        {
+                            post.style.display = "none";
+                        }
+                    }
+                };
+
+                const tagFilterNO = (tagName) => {
+                    for(let post of document.getElementById("archive-list").children)
+                    {
+                        if(post.getAttribute("class").split(" ").includes(tagName))
+                        {
+                            post.style.display = "none";
+                        }
+                    }
+                };
+
+                const tagFilterRESET = (tagName) => {
+                    for(let post of document.getElementById("archive-list").children)
+                    {
+                        if(post.getAttribute("class").split(" ").includes(tagName))
+                        {
+                            post.style.display = "list-item";
+                        }
+                    }
+                };
+            </script>
+            <!--<script type="text/javascript" src="{{ '/assets/js/archive-config.js' | relative_url }}"></script>-->
+            
         </div>
     </main>
     {%- include .footer.html -%}
