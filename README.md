@@ -33,5 +33,5 @@ The style for the syntax highlighter will now applied to every code fence availa
 
 Browse the [Google Fonts](https://fonts.google.com/) for your Jekyll, and select one or more font styles to be implemented. A new section will appear on the right; once finished selecting the font style, click on the *Embed* tab and copy & paste the `<link>` tag to head of HTML.
 
-## ICON
+## Icons
 > **Resource:** *iconmonstr: https://iconmonstr.com/*
