@@ -354,7 +354,7 @@ else document.getElementById("home-archive").innerHTML = "▼&nbsp;&nbsp;&nbsp;&
 const loadThemeHome = (theme) => {
     
     let bkgdColor = (theme == 'Light') ? "rgb(160, 160, 160)" : "rgb(48, 48, 48)";   // BACKGROUND COLOR = CONDITION ? LIGHT : DARK
-    let textColor = (theme == 'Light') ? "rgb(48, 48, 48)" : "rgb(255, 255, 255)";
+    let textColor = (theme == 'Light') ? "rgb(0, 0, 0)" : "rgb(255, 255, 255)";
     document.styleSheets[0].insertRule(`.home-bit { background-color: ${bkgdColor}; }`);
     document.styleSheets[0].insertRule(`#home-archive { background-color: ${bkgdColor}; color: ${textColor}; }`);
 
