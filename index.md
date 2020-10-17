@@ -9,4 +9,7 @@ layout: home
 * <span style="font-size:1.2em; font-weight:bold;">[파이썬](./docs/programming/ko/PRGMING_Python/)과 [C](./docs/programming/ko/PRGMING_C/)/[C++](./docs/programming/ko/PRGMING_Cpp/) 문서를 한국어로 확인하세요!</span>
 * <span style="font-size:1.2em; font-weight:bold;">[파이썬](./docs/programming/ko/PRGMING_Python/)과 [C](./docs/programming/ko/PRGMING_C/) 문서를 한국어로 확인하세요!</span>
 * <span style="font-size:1.2em; font-weight:bold;">파이썬3 문서를 [한국어](./docs/programming/ko/PRGMING_Python/)로 확인하세요!</span>
-* News & updates will be announced here!
+* [한국어] 알림 및 업데이트는 여기에 입력하시오!
+
+1. <span style="font-size:1.2em; font-weight:bold;">Light vs Dark: select your theme preference!</span>
+1. [English] News & updates will be announced here!

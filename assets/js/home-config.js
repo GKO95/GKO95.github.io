@@ -253,11 +253,22 @@ for (let shift of __SHIFTS__)
 //========================================
 // BULLETIN: RECENT ANNOUNCEMENT
 //========================================
-for(let index = 1; index < document.getElementById("home-announcement").getElementsByTagName("UL")[0].children.length; index++)
+if (__LOCAL__.getItem("LANG") == "en")
 {
-    document.getElementById("home-announcement").getElementsByTagName("UL")[0].children[index].innerHTML = null;
+    document.getElementById("home-announcement").removeChild(document.getElementById("home-announcement").getElementsByTagName("UL")[0]);
+    for (let index = 1; index < document.getElementById("home-announcement").getElementsByTagName("OL")[0].children.length; index++)
+    {
+        document.getElementById("home-announcement").getElementsByTagName("OL")[0].children[index].innerHTML = null;
+    }
 }
-
+else
+{
+    document.getElementById("home-announcement").removeChild(document.getElementById("home-announcement").getElementsByTagName("OL")[0]);
+    for(let index = 1; index < document.getElementById("home-announcement").getElementsByTagName("UL")[0].children.length; index++)
+    {
+        document.getElementById("home-announcement").getElementsByTagName("UL")[0].children[index].innerHTML = null;
+    }
+}
 //========================================
 // BULLETIN: POST ALIGNMENT
 //========================================
