@@ -1,3 +1,169 @@
 ---
 layout: template
 ---
+<style>
+    #archive header {
+        background-color: inherit;
+        height: 25vh;
+        min-height: 128px;
+        max-height: 128px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        overflow: hidden;
+        width:100%;
+    }
+
+    #archive-content {
+        display: block;
+
+        max-width: calc(1200px - (30px * 2));
+        margin-left: auto;
+        margin-right: auto;
+
+        padding-left: 30px;
+        padding-right: 30px;
+
+        background-color: inherit;
+    }
+
+    #archive-tags {
+        padding: 0 1.6em 1.6em 1.6em;
+        /*border-style: inset;*/
+        border-width: 8px;
+        border-style: solid;
+        border-radius: 1.0em;
+    }
+
+    #archive-tags code {
+        font-size: 1.6em;
+        font-style: normal;
+        font-weight: bold;
+    }
+    #archive .archive-tag {
+        margin: 0em 0.4em;
+        cursor: pointer;
+
+        /* Disable selection. */
+        user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+
+        /* Disable hyperlink underline. */
+        text-decoration: none;
+    }
+
+    #archive #archive-list
+    {
+        font-size: 1.2em;
+    }
+</style>
+
+<body id="archive">
+    {%- include .header.html -%}
+    <main id="archive-main">
+        <div id="archive-content">
+            <section id="archive-tags">
+                <p id="archive-caption" style="font-weight: bold; font-size: 1.0em; letter-spacing: 0.1em; text-align: left; user-select: none;
+                -ms-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none;">TAGS:</p>
+                {% assign list = "" %}
+                {%- for post in site.posts -%}{%- for tag in post.tags -%}
+                    {%- assign list = list | append: " " | append: tag -%}
+                {%- endfor -%}{%- endfor -%}
+                {%- assign arr = list | split: " " -%}
+                {%- assign set = arr | uniq | sort | join: " " | split: " " -%}
+                {%- for item in set -%}
+                    <a><code class="archive-tag">#{{item}}</code></a>
+                {%- endfor -%}
+            </section>
+
+            <div>
+                <ul id="archive-list" style="list-style-type:square">
+                    {%- for post in site.posts -%}
+                    {%- assign index = post.tags.size -%}
+                    <li class='{%- if post.tags.size > 0 -%}{%- for tag in post.tags -%}
+                        {%- if tag == post.tags.first -%}{{ tag | prepend: "#" }}{%- else -%}{{ tag | prepend: " #" }}{%- endif -%}
+                        {%- endfor -%}{%- endif -%}'><a href="{{ post.url }}">
+                        <span>{{ post.title }}</span>
+                    </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <script>
+                const SwitchLanguage = (lang) => {
+                    let button = document.createElement("A"); 
+                    button.style.backgroundImage = "url(/assets/images/logo/logo-language.png)";
+                    button.setAttribute("title", "Switch language");
+                    button.style.cursor = "pointer";
+                    button.addEventListener("click", () => {
+                    switch(lang) { case "en": default: __LOCAL__.setItem("LANG", "ko"); break;
+                    case "ko": __LOCAL__.setItem("LANG", "en"); break; } location.reload(); });
+                    document.getElementById("navigation-logo").appendChild(button);
+                }; SwitchLanguage(__LOCAL__.getItem("LANG"));
+
+                document.getElementById("archive-tags").style.backgroundColor = (__LOCAL__.getItem("THEME") == 'Light') ? "rgb(232, 232, 232)" : "rgb(16, 16, 16)";
+                document.styleSheets[0].insertRule(`#archive #archive-list a { color: ${(__LOCAL__.getItem("THEME") == 'Light') ? "black" : "white"}; }`);
+                document.styleSheets[0].insertRule(`#archive-tags { border-color: ${(__LOCAL__.getItem("THEME") == 'Light') ? "rgb(216, 216, 216)" : "rgb(24, 24, 24)"}; }`);
+                document.styleSheets[0].insertRule(`#archive-tags code { color: ${(__LOCAL__.getItem("THEME") == 'Light') ? "black" : "white"}; background-color: ${(__LOCAL__.getItem("THEME") == 'Light') ? "rgb(208, 208, 208)" : "rgb(48, 48, 48)"}; }`);
+                document.getElementById("archive-caption").innerHTML = (__LOCAL__.getItem("LANG") == 'en') ? "TAGS:" : "태그:";
+
+                const __colorYES__  = (__LOCAL__.getItem("THEME") == 'Light') ? "rgb(48, 200, 48)" : "rgb(0, 128, 0)";
+                const __colorNO__   = (__LOCAL__.getItem("THEME") == 'Light') ? "red" : "red";
+
+                const filterTags = (item) => {
+                    const __TAGNAME__ = item.innerHTML;
+                    let __FILTERYES__ = []; let __FILTERNO__  = [];
+                    for(let tag of document.getElementsByClassName("archive-tag"))
+                    {
+                        if (tag.style.backgroundColor == __colorNO__) { __FILTERNO__.push(tag.innerHTML); }
+                        else if (tag.style.backgroundColor == __colorYES__) { __FILTERYES__.push(tag.innerHTML); }
+                    }
+
+                    for(let post of document.getElementById("archive-list").children)
+                    {
+                        post.style.display = "";
+
+                        for(let tag of __FILTERYES__)
+                        {
+                            if(!post.getAttribute("class").split(" ").includes(tag))
+                            { post.style.display = "none"; break;}
+                        }
+
+                        for(let tag of __FILTERNO__)
+                        {
+                            if(post.getAttribute("class").split(" ").includes(tag))
+                            { post.style.display = "none"; break;}
+                        }
+                    }
+                }
+
+                for(let item of document.getElementsByClassName("archive-tag"))
+                {   
+                    item.addEventListener("click", ()=>{
+                        switch(item.style.backgroundColor)
+                        {
+                            case __colorNO__    : item.style.backgroundColor = ""; break;
+                            case __colorYES__   : item.style.backgroundColor = __colorNO__; break;
+                            default             : item.style.backgroundColor = __colorYES__; break;
+                        } filterTags(item);
+                    });
+                    
+                    if (item.innerHTML == window.location.hash)
+                    {
+                        item.style.backgroundColor = __colorYES__;
+                        filterTags(item);
+                    }
+                }
+            </script>
+            
+        </div>
+    </main>
+    {%- include .footer.html -%}
+    {%- include .menu.html -%}
+</body>
+<script>const __PAGENAME__ = "{{page.name}}"; const __CATEGORY__ = "{{page.category}}"; const __LANGUAGE__ = "{{page.lang}}";</script>

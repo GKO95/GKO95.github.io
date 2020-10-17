@@ -131,3 +131,11 @@
     overflow-y: auto;
     overflow-x: wrap;
 }
+
+#post .post-tags {
+    margin: 0em 0.1em;
+    font-size: 1.2em;
+
+    // Disable hyperlink underline.
+    text-decoration: none;
+}

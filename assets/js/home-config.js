@@ -253,11 +253,22 @@ for (let shift of __SHIFTS__)
 //========================================
 // BULLETIN: RECENT ANNOUNCEMENT
 //========================================
-for(let index = 1; index < document.getElementById("home-announcement").getElementsByTagName("UL")[0].children.length; index++)
+if (__LOCAL__.getItem("LANG") == "en")
 {
-    document.getElementById("home-announcement").getElementsByTagName("UL")[0].children[index].innerHTML = null;
+    document.getElementById("home-announcement").removeChild(document.getElementById("home-announcement").getElementsByTagName("UL")[0]);
+    for (let index = 1; index < document.getElementById("home-announcement").getElementsByTagName("OL")[0].children.length; index++)
+    {
+        document.getElementById("home-announcement").getElementsByTagName("OL")[0].children[index].innerHTML = null;
+    }
 }
-
+else
+{
+    document.getElementById("home-announcement").removeChild(document.getElementById("home-announcement").getElementsByTagName("OL")[0]);
+    for(let index = 1; index < document.getElementById("home-announcement").getElementsByTagName("UL")[0].children.length; index++)
+    {
+        document.getElementById("home-announcement").getElementsByTagName("UL")[0].children[index].innerHTML = null;
+    }
+}
 //========================================
 // BULLETIN: POST ALIGNMENT
 //========================================
@@ -354,7 +365,7 @@ else document.getElementById("home-archive").innerHTML = "▼&nbsp;&nbsp;&nbsp;&
 const loadThemeHome = (theme) => {
     
     let bkgdColor = (theme == 'Light') ? "rgb(160, 160, 160)" : "rgb(48, 48, 48)";   // BACKGROUND COLOR = CONDITION ? LIGHT : DARK
-    let textColor = (theme == 'Light') ? "rgb(48, 48, 48)" : "rgb(255, 255, 255)";
+    let textColor = (theme == 'Light') ? "rgb(0, 0, 0)" : "rgb(255, 255, 255)";
     document.styleSheets[0].insertRule(`.home-bit { background-color: ${bkgdColor}; }`);
     document.styleSheets[0].insertRule(`#home-archive { background-color: ${bkgdColor}; color: ${textColor}; }`);
 
