@@ -20,7 +20,7 @@ layout: template
                         <span>Tags:</span>
                     {% endcase %}
                     {% for tag in page.tags %}
-                    <a>
+                    <a href="/archive.html#{{tag}}">
                         <code class="post-tags">#{{ tag }}</code>
                     </a>
                     {% endfor %}
