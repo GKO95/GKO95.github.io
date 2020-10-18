@@ -9,17 +9,89 @@ logo: "/assets/images/logo/logo-python.png"
 order: 0x00
 ---
 # **PYTHON: INTRO**
-Python is a high-level programming language with applications in numerous areas, including web programming, scientific computing, and artificial intelligence. The language is executed sequentially line-after-line and doesn't need semicolon `;` to end the line of the statement.
+Python is a high-level programming language with applications in numerous areas, including web programming, scientific computing, and artificial intelligence. Python is simple, easy to learn, and has various development software (such as a library, framework) available thanks to the contribution from vast communities. For the beginner, Python is an excellent language to learn how to program.
 
 ## Interpreter
-A programming language such as C/C++ uses compiler that translates (English-written) source codes to (binary code) machine language computer can understand and execute. However, the interpreter allows a computer to execute the program directly from source code without translation.
+There are two different categories of program languages based on its execution: compiled language and interpreted language.
 
-Python is interpreter-driven high-level language: this allows scripting the code much easier than a compiler, but its execution time can be slower in comparison.
+Source code written in English needs to be translated to binary computer language for the computer to understand. The compiler is responsible for the translation, and its best examples are C/C++ language. On the other hand, the interpreter executes code without translation but has a drawback on a slower speed.
+
+Python is the interpreted language, and the code runs equivalently despite running on a different system as long as it has the interpreter (aka. cross-platform).
 
 ### CPython
-A Python interpreter was first developed with C programming language, called CPython, and is the most widely used implementation of all. Other notable implementations are Jython (Java-implementation), IronPython (.NET-implementation), and PyPy (Python-implementation).
+The first interpreter for Python was developed using the C programming language, called CPython. CPython is the most widely used Python interpreter, and there are others developed using different languages such as Jython (Java implemented), IronPython (.NET implemented), and PyPy (pure Python implemented).
 
-While Python is introduced as an interpreter language, it uses both interpreter and compiler: CPython first processes Python code into intermediate bytecode which is then executed by CPython interpreter. Because of this, Python execution takes a long time on the first run from the compilation.
+Although introduced as the interpreted language, CPython technically uses both compiler and interpreter. First, the compiler translates Python code to bytecode, then the interpreter executes the bytecode. This bytecode is the one that guarantees Python's cross-platform property.
+
+# **PYTHON: INSTALLATION**
+
+Two programs are required to develop using Python language: the interpreter and integrated development environment(IDE). Linux and macOS have Python 2 and 3 installed on the system by default but needs manual installation for different versions. This chapter teaches on installing and applying the Python interpreter to IDE, which helps understand how interpreted language works.
+
+## Select Interpreter
+
+Python interpreter, the essential program to execute Python, can be downloaded from the official website [here](https://www.python.org/downloads/). There are various versions of the Python interpreter numbered `3.x.y`, where `x` and `y` are minor and patch number. Interpreter functionality differs slightly by the minor version, and a higher patch number means the interpreter version `3.x` is more stable. Therefore, only check the version number `3.x` when selecting an interpreter.
+
+> Python 3.7.4 and 3.6.4 are interpreters used to execute Python 3. If there are changes in functionalities between versions 3.6 and 3.7, two interpreters may run the same Python code differently. On the other hand, Python 3.7.1 and 3.7.4 are considered the same interpreter, but the latter version is more stable and recommended.
+
+Developers should be cautious when selecting an interpreter as the version impacts synchronization with other libraries and software. However, the latest version is good enough when it comes to learning the Python programming language. Beware, the interpreter doesn't have an update feature; you need to install a different version to use another interpreter.
+
+> Python 2 is a Python programming language that has a version number `2.x.y`. Some Python lectures use Python 2, but its service has ended on January 1st, 2020. Additionally, there is Python 1 which has its latest version released in 2000, currently improper to use due to compatibility and efficiency matter.
+>
+> Many Python-related programs are developed based on version 3. Therefore, Python 3 is recommended than using Python 2.
+
+## Download Interpreter
+
+Install the Python interpreter after selecting the version. There are several options for downloading interpreters.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Python/python_interpreter_download.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 1. Download list of interpreter installers in Python 3 official website.</center>
+
+The website provides 64-bit and 32-bit interpreter for Windows OS (ex. Windows 10, Windows 8.1, Windows 7, etc.), namely `x86-64` and `x86`. To find out the operating system and architecture of the computer, go to the following path on File Explorer.
+
+```
+Control Panel\System and Security\System
+```
+
+Download `Windows x86` interpreter if the architecture is 32-bit, and `Windows x86-64` interpreter if the architecture is 64-bit.
+
+> A 64-bit architecture computer can also install a 32-bit interpreter as compatibility is guaranteed. Generally, a 32-bit interpreter on 64-bit architecture is used to develop programs for 32-bit architecture or synchronize with development software limited to 32-bit.
+
+Following are three different installation methods available:
+
+1. Embeddable zip file: a compressed zip file of components necessary for the Python interpreter.
+2. Executable installer: executable Python interpreter installer without a need for an online connection.
+3. Web-based installer: executable Python interpreter installer that requires an online connection. 
+
+In other words, the second and third option is the same, but whether to download components beforehand or while installing. A third option is available if you have a stable internet connection but generally select the second option.
+
+## Install Interpreter
+
+Executing the downloaded interpreter installer shows the following window:
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Python/python_interpreter_install.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Startup of Python 3 installer program.</center>
+
+"Add Python 3.7 to PATH" checkbox decides whether to setup environment variables, which allows Python execution on command prompt. The following figure is an execution of Python on the command prompt.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Python/python_interpreter_cmd.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 3. Python 3 execution on Windows command prompt.</center>
+
+Environment variable setting is not necessary when Python is the only software to be used, but it is essential if to use it with external software or libraries. Therefore, this document strongly recommends enabling the checkbox. Even it the Python interpreter was installed without an environment variable setting, it can manually setup later.
+
+Clicking the "Install Now" button will begin the installation, and can run Python when the process is over.
+
+## Integrated Development Environment
+
+An integrated development environment is a software development program that provides at least a source code editor, program build tools, and debugger. Python interpreter is a software for running a Python-based program, but it is not a source code editor. Therefore, IDE is essential to edit a Python source code, run the program, and examine the execution when encountering problems.
+
+### Visual Studio Code
+
+[Visual Studio Code](https://code.visualstudio.com/download) (VS Code) is a free source code editor developed by Microsoft. Although technically not an IDE, it can still play a role as an IDE. All that requires are an extension tool that can load the interpreter to VS Code.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Python/python_vscode_extension.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 4. Install Python extension on VS Code.</center>
+
+The Python extension allows VS Code to use a Python interpreter; meaning, it can be used to build and debug like an IDE. To install the extension, press the `F1` key and select `Extensions: Install Extensions`. Search `Python` and install the extension by clicking the green `Install` button shown as above.
+
+After installation, select and load a Python interpreter to the VS Code. Again, press the `F1` key and enter `Python: Select Interpreter` that automatically queries installed Python interpreters. Select the interpreter, and everything is all set.
+
+There are two different methods when running Python on VS Code: Run with debugging (`F5`) and run without debugging (`Ctrl+F5`). Use the debugging mode when the program encounters an error to identify the cause, but run without debugging when executing in general.
 
 # **PYTHON: BASIC**
 The general programming language has essential, fundamental, or even helpful data and syntax that needs to be observed and acknowledged when coding. As for the beginning of the practical coding, this chapter will introduce basic information on Python language coding.
