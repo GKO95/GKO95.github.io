@@ -945,7 +945,7 @@ print(dictionary.get(key3, "not in dictionary"))    # >> OUTPUT: not in dictiona
 ```
 
 ## Set
-Set is an iterable object that guarantees uniqueness, meaning it does not allow duplicate elements within the object. Just like a dictionary object, set uses curly bracket `{}` to assign values but without `key`-`value` pair. Due to the reasons above, set objects are much faster to check the elements than lists.
+Set is an iterable object that guarantees uniqueness, meaning it does not allow duplicate elements. Just like a dictionary object, set uses curly bracket `{}` to assign values but without `key: value` pair. Due to this reason, a set is much faster to check the elements than a list.
 
 ```python
 st = {value1, value2, value3}
@@ -956,14 +956,14 @@ print(st)
 {value1, value2, value3}
 ```
 
-Set have mathematical operations available which works exactly like a set in mathematics.
+Set have mathematical operations available that works exactly like a set in mathematics.
 
-| OPERATION | NAME                 | DESCRIPTION                                                     |
-|-----------|----------------------|-----------------------------------------------------------------|
-| `|`       | Union                | Returns a combined set of two sets.               |
-| `&`       | Intersection         | Returns set of data that only exist in both sets.                     |
+| OPERATION | NAME                 | DESCRIPTION                                                    |
+|-----------|----------------------|----------------------------------------------------------------|
+| `|`       | Union                | Returns a combined set of two sets.                            |
+| `&`       | Intersection         | Returns set of data that only exist in both sets.              |
 | `-`       | Difference           | Returns data that only exist in subtrahend and not in minuend. |
-| `^`       | Symmetric difference | Returns data exclusive to each set, but not on both sets.                |
+| `^`       | Symmetric difference | Returns data exclusive to each set, but not on both sets.      |
 
 ```python
 set1 = {1, 2, 3, 4, 5, 6}
@@ -979,34 +979,34 @@ print(set2 - set1)        # >> OUTPUT: {7, 8, 9}
 print(set1 ^ set2)        # >> OUTPUT: {1, 2, 3, 7, 8, 9}
 ```
 
-Set have its unique functions to execute certain features exclusive for sets:
+Set object can perform unique operations using specific functions and methods:
 
-| FUNCTION | EXAMPLE         | DESCRIPTION                                                                                                              |
-|----------|-----------------|--------------------------------------------------------------------------------------------------------------------------|
-| `set()`  | `set(iterable)` | Function for creating a set: lists and tuples can be converted to a set with this function, except for dictionaries. |
+| FUNCTION | EXAMPLE         | DESCRIPTION                                                            |
+|----------|-----------------|------------------------------------------------------------------------|
+| `set()`  | `set(iterable)` | Create a set: list and tuple can be converted, excluding a dictionary. |
 
-The function above is necessary when creating an empty set, as `{}` creates an empty dictionary instead. Meanwhile, the methods used by set objects are as follows:
+The function above is necessary when creating an empty set, as `{}` alone defines an empty dictionary. Meanwhile, methods used by a set object are as follows:
 
 | METHOD     | EXAMPLE             | DESCRIPTION                                                 |
 |------------|---------------------|-------------------------------------------------------------|
-| `add()`    | `set.add(value)`    | Add `value` at the end of the set.                          |
-| `remove()` | `set.remove(value)` | Remove `value` in the set.                                  |
-| `pop()`    | `set.pop()`         | Randomly selected element is popped (removed) from the set. |
+| `add()`    | `set.add(value)`    | Add `value` at the end of a set.                          |
+| `remove()` | `set.remove(value)` | Remove `value` in a set.                                  |
+| `pop()`    | `set.pop()`         | Randomly selected element is popped (removed) from a set. |
 
 ```python
 st = set([value1, value2, value3, value1])
-print(st)                # >> OUTPUT: {value1, value2, value3}
+print(st)              # >> OUTPUT: {value1, value2, value3}
 
 set0.add(value4)
 set0.remove(value1)
-print(st)                # >> OUTPUT: {value2, value3, value4}
+print(st)              # >> OUTPUT: {value2, value3, value4}
 
-print(st.pop())            # >> OUTPUT: value2 (randomly popped)
-print(st)                # >> OUTPUT: {value3, value4}
+print(st.pop())        # >> OUTPUT: value2 (randomly popped)
+print(st)              # >> OUTPUT: {value3, value4}
 ```
 
 ## Generator
-A generator is an iterable object that can be created by developers using `yield` and `for` loop statement. The generator is especially useful due to its absence of memory restrictions, allowing generators to yield an infinite number of data.
+A generator is an iterable object that can be created by developers using `yield` and `for` loop statement. It is especially useful due to its absence of memory restrictions, allowing generators to yield an infinite number of data.
 
 ```python
 # CREATING THE GENERATOR.
@@ -1035,27 +1035,25 @@ print(lst)
 ```
 
 ### `yield` Keyword
-A keyword used to create a generator; the keyword returns the value when iterated by `for` loop statement.
+An essential keyword to create a generator; the keyword returns the value when iterated by a `for` loop statement.
 
 # **PYTHON: FUNCTIONAL PROGRAMMING**
-Functional programming is a style of program scripting that is based mostly around usage of the functions. This chapter will be introducing the guide on how to create and use function in Python for functional programming.
+Functional programming is a style of program scripting that is based mostly on the usage of functions. This chapter will be introducing the guide on how to create and use functions in Python for functional programming.
 
 ## Function
-A function is an independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. Functions can be distinguished by parenthesis after its name; `function()`.
-
-The programming based around uses of custom functions is called *functional programming*.
+A function is a reusable independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. Function is distinguished by parenthesis after its name; `function()`.
 
 ```python
 x = [0, 3, 5, 9]
 print(len(x))
-# Using "print()" function, and "len( )" function that returns the length of list object.
+# Using "print()" and "len( )" function that returns the length of list object.
 ```
 
 ```
 4
 ```
 
-Although function acts quite different from variables, they can be treated just the same when assigned to a variable.
+Although variable and function are different, a variable can have a function assigned and treated just the same.
 
 ```python
 # ORIGINAL FUNCTION
@@ -1066,26 +1064,16 @@ variable = function
 print(variable(arg1, arg2))
 ```
 
-Not only can it be assigned to a variable, but function can also be passed as parameters of other functions. Therefore, developers can create new functions using other existing functions.
+Not only can function assigned to a variable but can pass as an argument to other functions. Therefore, developers can define a new function using already existing ones.
 
 ### Pure Function
-A function that returns a value that depends only on their arguments without any side effects.
-
-As for an example, cosine function `cos(x)` that only has a single parameter `x` returns the value which depends only on the argument `x`; hence, the cosine function is considered as a pure function.
-
-```python
-# FUNCTION WITH x AND y PARAMETER.
-def function(x,y):
-    variable = 2 * x
-    vairable += y
-    return variable            # RETURN DEPENDS ONLY ON x AND y PARAMETER.
-```
+A pure function is a function that returns the same value for the same arguments without any side effects (such as a static and global variable). As for an example, cosine function `cos(x)` depends only on the argument `x` and returns the same value when given the same number; hence, the cosine function is a pure function.
 
 ### Higher-Order Function
-A function that takes other functions as parameters or returns functions as a result.
+A higher-order function is a function that takes other functions as argument(s) or returns a function as a result.
 
 ## `def` Keyword
-The `def` keyword is used to create a custom function. Calling a custom function before implementation will raise an exception. Since Python executes sequentially, it is considered calling non-existing function.
+The `def` keyword creates a custom function. Calling a custom function before definition will raise an exception. Because Python executes codes sequentially, such an attempt is like calling a non-existing function.
 
 ```python
 def function(arg1, ar2):
@@ -1105,9 +1093,7 @@ WorldWorld
 Parentheses `()` is necessary upon function definition even if the function does not have any parameter.
 
 ### `return` Statement
-The `return` statement is a function-exclusive statement that returns the value processed in the function. Once a return statement is executed, the function ends immediately despite the remaining codes.
-
-Functions do not need to have a `return` statement, which will return `None` when passed to variables.
+The `return` statement is a function-exclusive statement that returns the value processed by a function. Once encountering a return statement, the function ends immediately despite having remaining codes. The `return` statement is not essential, which returns `None` if not present.
 
 ```python
 def function_name():
@@ -1122,21 +1108,23 @@ None
 ```
 
 ### Parameter & Argument
-Following is a difference between parameter and argument, which will be mentioned significantly when discussing function:
-
-**Parameter**
-Parameters are local variables located inside a function. Because parameters are exclusive inside the function code block, these cannot be called from outside.
+Following is a difference between parameter and argument mentioned when discussing function:
 
 **Argument**
-Arguments are values or objects passed to the function parameter.
+    : An argument is a value or object passed to a function parameter.
 
-| OPERATOR | SYNTAX      | DESCRIPTION                                                                                                                                                                   |
-|:--------:|:-----------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `*`      | `*args`     | Allows multiple number of arguments.<br />Call by `args`(arguments) without asterisk, and returns tuple of arguments. Must locate after normal parameter.                     |
-| `**`     | `**kwargs`  | Allows use of undefined parameter in advance.<br />Call by `kwargs`(keyword arguments) without asterisks, and returns a dictionary of arguments' name and corresponding values. |
-| `=`      | `arg=value` | Passes default value to parameter unless argument value is specified. Must locate after normal parameter.                                                                     |
+**Parameter**
+    : A parameter is a local variable assigned with an argument. Meaning, parameters are only available inside the function.
 
-Examples below show how function parameters and arguments work:
+Although parameters and arguments are a different existence, two terms are used interchangeably as both stores the same data.
+
+| OPERATOR | SYNTAX      | DESCRIPTION                                                                                                                                                                     |
+|:--------:|:-----------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `*`      | `*args`     | A parameter that accepts one or more arguments.<br />Call parameter by `args`(abbrev. arguments) without asterisk, which returns a tuple of arguments. Must locate after normal parameter.           |
+| `**`     | `**kwargs`  | A parameter that accepts one or more named arguments.<br />Call parameter by `kwargs`(abbrev. keyword arguments) without asterisks, which returns a dictionary of arguments' name and their value. Must locate after normal parameter. |
+| `=`      | `arg=value` | A parameter that has default value when no argument is passed. Must locate after normal parameter.                                                                       |
+
+Examples below show how parameter and argument work in function:
 
 ```python
 # PARAMETER *args ALLOWS MORE ARGUMENT TO BE PASSED.
@@ -1185,25 +1173,25 @@ World!
 ```
 
 ## Anonymous Function
-Also known as **Lambda function (express)**, is an unnamed function without declaration (thus, anonymous) and does not store data, returning value only from a single expression. An anonymous function is generally used as a single-use function, or as an argument of higher-order function's parameter.
+An anonymous function (aka. **lambda function** or **lambda expression**) is a function without a name and declaration (that is, anonymous), does not store data, returning value only from a single expression. It is generally used as a single-use or as an argument of a higher-order function.
 
-| SYNTAX                                                       |
-| ------------------------------------------------------------ |
-| `lambda param0, param1 ∶ expression`                         |
-| The main body of an anonymous function, consisting of parameters and its return expression. |
+| SYNTAX                                                                                       |
+|:--------------------------------------------------------------------------------------------:|
+| `lambda arg1, arg2 : expression`                                                             |
+| An anonymous function, consisting of parameters `arg` and returning expression `expression`. |
 
-Although an anonymous function is a function without a name for a single-use, it can be assigned to variables and called when the function is needed. The anonymous function of the example from *PYTHON: FUNCTIONAL PROGRAMMING § Pure Function* can be expressed as follows:
+Although an anonymous function is without a name for a single-use, it can be assigned to variables and called whenever needed. Below is an example from *Pure Function* with the implementation of anonymous function:
 
 ```python
 # NAMED FUNCTION
-def function(x, y):
+def function(arg1, arg2):
     return 2 * x + y
 
 # ANONYMOUS FUNCTION
-(lambda x, y: 2 * x + y)(2, 3)
+(lambda arg1, arg2: 2 * x + y)(2, 3)
 
 # ANONYMOUS FUNCTION ASSIGNED TO VARIABLE
-variable = lambda x, y: 2 * x + y
+variable = lambda arg1, arg2: 2 * x + y
 variable(2,3)
 ```
 
@@ -1211,22 +1199,22 @@ variable(2,3)
 7
 ```
 
-## Map Function
-A built-in function that takes iterable objects and a function with parameters as arguments. Map function returns a list object consisting of values returned from the function with iterable objects passed as its arguments.
+## `map()` Function
+The `map()` function is a built-in function that takes iterable object(s) and a parameterized function as arguments. The `map()` returns an iterable object that maps the iterable object through the parameterized function.
 
 | SYNTAX                                                       |
 | ------------------------------------------------------------ |
 | `map(function, iterable1, iterable2, ...)`                   |
-| In higher-order `map` function, iterable object `iterable1` and `iterable2` are passed as argument for `function`. |
+| A higher-order `map()` function passes iterable object `iterable1` and `iterable2` to parameterized function `function`. |
 
-Conversion to an iterable object, such as `list()` function is necessary to avoid an exception such as "SyntaxError".
+Conversion to an iterable object such as a list or tuple is necessary to avoid an exception such as "SyntaxError".
 
 ```python 
 lst1 = [1, 2, 3, 4, 5]
 lst2 = [0, 9, 8, 7, 6, 5]
 
-variable1 = map(lambda x, y: x ** 2 + y, lst1, lst2)
-variable2 = map(lambda y, x: x ** 2 + y, lst2, lst1)
+variable1 = map(lambda arg1, arg2: arg1 ** 2 + arg2, lst1, lst2)
+variable2 = map(lambda arg2, arg1: arg1 ** 2 + arg2, lst2, lst1)
 
 print(list(variable1))
 print(list(variable2))
@@ -1237,20 +1225,20 @@ print(list(variable2))
 [1, 83, 67, 53, 41]
 ```
 
-## Filter Function
-A built-in function that takes an iterable object and Boolean conditioning function (aka. predicate) as arguments and returns an iterable object containing only with the data that passed the predicate.
+## `filter()` Function
+The `filter()` function is a built-in function that takes iterable object(s) and conditioning function (aka. predicate) as arguments. The `filter()` returns an iterable object consists of elements that passed the predicate.
 
 | SYNTAX                                                                                               |
 |------------------------------------------------------------------------------------------------------|
 | `filter(predicate, iterable)`                                                                        |
-| In higher-order `filter` function, iterable object `iterable` is passed as argument for `predicate`. |
+| A higher-order `filter` function passes iterable object `iterable` to conditional function `predicate` for evaluation. |
 
-Conversion to an iterable object, such as `list()` function is necessary to avoid an exception such as "SyntaxError".
+Conversion to an iterable object such as a list or tuple is necessary to avoid an exception such as "SyntaxError".
 
 ```python
 lst = [1, 2, 3, 4, 5]
 
-variable = filter(lambda x: x % 2 is 0, lst)
+variable = filter(lambda arg: arg % 2 is 0, lst)
 
 print(list(variable))
 ```
@@ -1264,14 +1252,14 @@ A recursive function is a function that calls itself (recursion). Factorial $!$ 
 
 ```python
 # EXAMPLE: FACTORIAL "!"
-def factorial( x ):
+def factorial(arg):
     # BASE CASE: a case when to escape from the recursion.
-    if x == 1: 
+    if arg == 1: 
         return 1
     else:
-        return x * factorial(x-1)
+        return arg * factorial(arg-1)
 
-print( factorial(5) )
+print(factorial(5))
 ```
 
 ```
@@ -1281,14 +1269,14 @@ print( factorial(5) )
 Recursion can occur indirectly by multiple functions calling one to another, then back to the beginning.
 
 ### Base Case
-A case of recursion which doesn't involve referring to itself anymore. It can be deemed as an exit condition. Without a base case, recursion results infinitely and thus crash due to memory shortage:
+A base case is a case of recursion which doesn't involve referring to itself anymore; an exit condition. Without a base case, recursion results infinitely and thus crash due to memory shortage:
 
 ```
 RuntimeError: maximum recursion depth exceeded
 ```
 
 ## Decorator
-A decorator is a function that modifies the original function's functionality and returns the modified "function" itself (rather than returning a value). Hence, assignment to a variable is needed for a function to properly work after processing through the decorator. Its function will then have the same name as the variable.
+A decorator is a function that modifies the original function's functionality and returns the modified "function" itself (instead of returning a value). Hence, an assignment to a variable is needed after modifying it with a decorator to use the function.
 
 ```python
 # ORIGINAL FUNCTION
@@ -1312,12 +1300,12 @@ function = decorator(function)
 function()
 ```
 
-The decorator above has decorated (modified) `function()` and assigned the decorated function to a variable `variable` and `function`, where the latter maintains the function name.
+The decorator above has modified `function()` and assigned it to a variable `variable` and `function`, where the latter maintains the function name.
 
-When passing function as a parameter of a decorator, no parenthesis are needed like `function()`. This is because the former passes function itself and the latter passes returned value from the function.
+Exclude parenthesis when passing a function to a decorator, which indicates a function itself rather than a value or code execution.
 
 ### `@` Symbol
-A decorator symbol `@` used for pre-pending the function definition, placed before pre-decorated function.
+A decorator symbol `@` is for pre-pending the function definition, placed before the function that needs decorating.
 
 | OPERATOR | EXAMPLE      | DESCRIPTION                                               |
 |:--------:|--------------|-----------------------------------------------------------|
@@ -1341,7 +1329,7 @@ def function():    # ORIGINAL FUNCTION OF "function()"
 function()
 ```
 
-Additionally, more than one decorator can be applied to a single pre-decorated function.
+More than one decorator can modify a single function:
 
 ```python
 @decorator1
@@ -1351,7 +1339,6 @@ def function():
 ```
 
 A decorator located closest to the pre-decorated function will be applied firsthand. Thus, the function object `function()` will first be decorated by `@decorator2`  then `@decorator1` sequentially.
-
 
 # **PYTHON: OBJECT-ORIENTED PROGRAMMING**
 The previous chapter has explained and dealt with procedural and functional programming. The third scripting method, object-oriented programming (abbrev. OOP) is based around the usage of classes and objects instead of functions.
