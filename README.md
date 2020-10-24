@@ -1,5 +1,7 @@
 # Welcome to GKO95's GitHub Pages
 
+This GitHub Pages implements local storage from JavaScript for language and theme selection.
+
 ## Syntax Highlight
 > **Resource:** *Monokai - https://raw.githubusercontent.com/jwarby/pygments-css/master/monokai.css*
 
