@@ -1276,7 +1276,7 @@ RuntimeError: maximum recursion depth exceeded
 ```
 
 ## Decorator
-A decorator is a function that modifies the original function's functionality and returns the modified "function" itself (instead of returning a value). Hence, an assignment to a variable is needed after modifying it with a decorator to use the function.
+Decorator is a function that modifies the original function's functionality and returns the modified "function" itself (instead of returning a value). Hence, an assignment to a variable is needed after modifying it with a decorator to use the function.
 
 ```python
 # ORIGINAL FUNCTION
@@ -1341,10 +1341,10 @@ def function():
 A decorator located closest to the pre-decorated function will be applied firsthand. Thus, the function object `function()` will first be decorated by `@decorator2`  then `@decorator1` sequentially.
 
 # **PYTHON: OBJECT-ORIENTED PROGRAMMING**
-The previous chapter has explained and dealt with procedural and functional programming. The third scripting method, object-oriented programming (abbrev. OOP) is based around the usage of classes and objects instead of functions.
+The current document has explained and dealt with procedural and functional programming. The third scripting method, object-oriented programming (abbrev. OOP), focuses on the usage of classes and objects instead of functions.
 
 ## Object
-Previously, variables (which can store data) and functions (which can process data) were introduced. Object (aka. instance) is a block of data that encapsulates these variables and functions into a single identity.
+Previous chapters introduced a variable and function, which is for storing and processing data, respectively. Object (aka. instance) is a block of data that encapsulates these variables and functions into a single identity.
 
 The programming based around the use of custom objects is called *object-oriented programming*.
 
@@ -1359,19 +1359,21 @@ print(x.index(5))
 ```
 
 ### Encapsulation
-Encapsulation is the core concept in an object with the following characteristics.
+Encapsulation is the core concept in an object with the following characteristics:
 
-1. Combines variables and functions into a single object.
+1. Combines variables and functions into a single data.
 2. Restrict direct access to these variables and functions to prevent accidental modification from external code. 
 
 ### Attribute & Method
-The variables and function encapsulated to the object are called differently:
+Attribute and method refer to a variable and function encapsulated to an object, which is accessed by the following syntax:
 
-* **Attribute** is an object-dependent variable, accessed by `object.attribute` format.
-* **Method** is an object-dependent function, accessed by `object.method()` format.
+| Components | Syntax               |
+|:----------:|----------------------|
+| Attribute  | `instance.attribute` |
+| Method     | `instnace.method()`  |
 
 ## Class
-A class is used to create objects (aka. instance). Classes are defined using keyword `class` while variables and functions inside the class become attributes and methods for the object.
+A class creates objects (aka. instance) and is defined using the `class` keyword. Definitions of an object's attributes and methods are also inside a class definition. The following example is a simple user-defined class with attributes and methods:
 
 ```python
 # CREATING CLASS
@@ -1401,9 +1403,7 @@ value1 + value2 - value3
 ```
 
 ### `self` Variable
-The `self` variable is a conventional name to indicate an instance itself. Placing `self` on variables or functions bounds them to an object, thus declares as attributes and methods. These attributes and methods can be accessed only from the instance.
-
-Variables and functions without `self` are local variables and functions inside the instance and are not accessible. Attempting to do so results "AttributeError".
+The `self` variable is a conventional name to indicate an instance itself. Placing `self` on variables or functions bounds them to an object, thus declaring them as attributes and methods. These attributes and methods are only accessible from an instance. Variables and functions without `self` are local variables and functions, which results in "AttributeError" when an attempt to access.
 
 ```python
 # CREATING CLASS
@@ -1421,18 +1421,16 @@ Class.__init__(self = instance, arg1 = 1, arg2 = 2)
 '''
 
 # THEREFORE...
-instance.attr1        # >> OUTPUT: 1
-instance.attr2        # >> OUTPUT: None
-instance.attr3        # AttributeError: 'CLASS' object has no attribute 'C'
+instance.attr1    # >> OUTPUT: 1
+instance.attr2    # >> OUTPUT: None
+instance.attr3    # AttributeError: 'CLASS' object has no attribute 'C'
 ```
 
 ### `__init__` Method
-The `__init__` method is the most important method needed to create an instance. As the name implies (an abbreviation of *initialization*), this method is automatically called when creating an object from the class and is responsible for defining the number of arguments needed on instance initialization.
+The `__init__` method is the most crucial method for creating an instance. From the name implies (an abbreviation of *initialization*), this method is automatically called when creating an object from the class and defines the number of parameters needed for instance initialization.
 
-## Instance Attribute/Method
-Every attribute and method that are declared normally within the class with `self` for self-indication are called instance attribute and methods.
-
-No special syntax is required to declare instance methods. However, instance attributes cannot be defined outside instance methods where the `self` variable is invalid. Variables declared outside the method becomes class attribute instead.
+## Instance Attribute & Method
+Instance attribute and instance method is an attribute and method defined with the `self` variable and accessible only through an instance. However, an instance attribute can only be defined in an instance method.instead.
 
 ```python
 # CREATING CLASS
@@ -1448,17 +1446,14 @@ class CLASS:
         self.attr3 = arg3
 ```
 
-
 ## Class Attribute/Method
-Class attributes and methods can be accessed both from instance and class without any instantiation. Class attributes are declared without under class definition, indented along with methods. `self` variable is not used.
+Class attribute and class method is an attribute and method accessible through an instance and class. A class attribute is defined under a class directly instead of an instance method, and a class method requires a decorator below:
 
-Class methods are a method which can be accessed through class alone without needing to create an instance.
+| SYNTAX         | DESCRIPTION                                 |
+|:--------------:|---------------------------------------------|
+| `@classmethod` | A decorator used to declare a class method. |
 
-|     SYNTAX     | DESCRIPTION                              |
-| :------------: | ---------------------------------------- |
-| `@classmethod` | Decorator used to declare class methods. |
-
-Though class methods are defined using the decorator above, the method also requires a parameter to indicate the class itself (just like instance method has `self` parameter to mention instance itself), conventionally written as `cls`.
+Just like the `self` variable for an instance method, a class method needs a variable that refers to its class, conventionally named `cls`.
 
 ```python
 # CREATING CLASS
@@ -1481,8 +1476,8 @@ class CLASS:
     
     # CLASS METHOD FOR INSTANTIATION
     @classmethod
-    def method3(cls, x, y):
-        return cls(x**2, y**2)
+    def method3(cls, arg5, arg6):
+        return cls(arg5**2, arg6**2)
     
     
 # INSTANTIATION
@@ -1493,26 +1488,26 @@ instance2 = CLASS.method3(1, 2)    # INSTANTIATE: arg1 = 1**1, arg2 = 2**2
 instance2.method1(4)
 
 # THEREFORE...
-CLASS.attribute            # >> OUTPUT: value
-CLASS.method2(3)        # >> OUTPUT: 3
+CLASS.attribute        # >> OUTPUT: value
+CLASS.method2(3)       # >> OUTPUT: 3
 
-instance1.attribute         # >> OUTPUT: value
-instance1.attr1            # >> OUTPUT: 1
-instance1.attr2            # >> OUTPUT: 2
-instance1.attr3            # >> OUTPUT: 4
+instance1.attribute    # >> OUTPUT: value
+instance1.attr1        # >> OUTPUT: 1
+instance1.attr2        # >> OUTPUT: 2
+instance1.attr3        # >> OUTPUT: 4
 
-instance2.attribute         # >> OUTPUT: value
-instance2.attr1            # >> OUTPUT: 1 (= 1**2)
-instance2.attr2            # >> OUTPUT: 4 (= 2**2)
-instance2.attr3            # >> OUTPUT: 4
+instance2.attribute    # >> OUTPUT: value
+instance2.attr1        # >> OUTPUT: 1 (= 1**2)
+instance2.attr2        # >> OUTPUT: 4 (= 2**2)
+instance2.attr3        # >> OUTPUT: 4
 ```
 
 ## Static Method
-Static methods are a method that can be called without instantiation, but without parameter to call itself like `self` and `cls`.
+Static method is a method accessible without instantiation. Because a static method does not require a variable such as `self` or `class,` it cannot access instance/class attributes and methods. In other words, a static method is just another function bounded by a class, which requires a decorator below to declare:
 
-| SYNTAX          | DESCRIPTION                               |
-| --------------- | ----------------------------------------- |
-| `@staticmethod` | Decorator used to declare static methods. |
+| SYNTAX          | DESCRIPTION                                  |
+|-----------------|----------------------------------------------|
+| `@staticmethod` | A decorator used to declare a static method. |
 
 Since static methods do not have a parameter to call itself, static methods cannot access or modify any attribute from class and instance. This makes static methods identical to normal functions that belong to a class.
 
@@ -1546,9 +1541,7 @@ CLASS.method2(4)        # >> OUTPUT: True
 ```
 
 ## Magic Method
-A magic method is a special method that has Double UNDERscores(dunder) on both sides of its name. These methods generally represent operators and are used to overload operators to modify their functionality. 
-
-The `__init__` method used for instance initialization is one of the widely used magic methods. More can be seen on the table below:
+The magic method is a method with dunder (double underscore) on both sides of an identifier. Most of the operators have their magic method used for operator overloading that modifies the operator's functionality. The `__init__` method is the most commonly used magic method for initialization.
 
 | OPERATOR | NAME           | MAGIC METHOD               |
 |----------|----------------|----------------------------|
@@ -1559,18 +1552,19 @@ The `__init__` method used for instance initialization is one of the widely used
 | `&`      | AND            | `__and__(self, other)`     |
 | `^`      | XOR            | `__xor__(self, other)`     |
 | `|`      | OR             | `__or__(self, other)`      |
+| `()`     | Argument       | `__call__(self, other)`    |
 
 ### Operator Overloading
-Overloading operators means customizing operators to function differently on certain classes or portions of the script. Magic methods are used to overload operators but overloaded functionality is only exclusive to that specific class. As an example, `x + y`  is expressed as `x.__add__(y)` .
+Operator overloading customizes an operator's functionality for specific classes or data types. Magic method overloads an operator but applies to a specified class exclusively. For example, `x + y`  is expressed as `x.__add__(y)`.
 
 ```python
 # CREATING CLASS
 class CLASS:
     def __init__(self, arg1):
-        self.A = arg1
+        self.attribute = arg1
         
     def __add__(self, arg2):
-        return "\0".join([self.A, arg2.A])        # INSERT "\0" BETWEEN TWO STRING OBJECTS.
+        return "\0".join([self.attribute, arg2.attribute])  # INSERT "\0" BETWEEN TWO STRING OBJECTS.
 
 # INSTANTIATION
 instance1 = CLASS("Hello")
@@ -1580,7 +1574,7 @@ instance1 + instance2        # >> OUTPUT: "Hello World!"
 ```
 
 ## Inheritance
-Inheritance is an act of superclass (base class) providing attributes and methods to derived subclass (child class). When the same name of attributes and methods exists in both superclass and subclass, the superclass is overridden by the subclass.
+Inheritance is an act of providing attributes and methods of a superclass(base class) to a derived subclass(child class). When superclass and subclass share the same name of attributes or methods, those are overridden by the subclass.
 
 ```python
 # CREATING SUPERCLASS
@@ -1603,14 +1597,14 @@ instance.attr3        # >> OUTPUT: value3
 ```
 
 ### Super Function
-A `super()` function is used to access the superclass attributes and methods directly. This function is mainly used to avoid overriding superclass attributes and methods.
+The `super()` function accesses superclass attributes and methods directly. It is to avoid overriding superclass attributes and methods.
 
 ```python
 # CREATING SUPERCLASS
 class SUPERCLASS:
     def __init__(self, arg1):
         print("Hello World!")
-        self.attr = arg1
+        self.attribute = arg1
 
 # CREATING SUBCLASS
 class SUBCLASS(SUPERCLASS):
@@ -1622,7 +1616,7 @@ class SUBCLASS(SUPERCLASS):
 instance = SUBCLASS(3)
 
 # THEREFORE...
-print(instance.attr)
+print(instance.attribute)
 ```
 
 ```
@@ -1630,9 +1624,9 @@ print(instance.attr)
 AttributeError: 'SUBCLASS' object has no attribute 'attribute'
 ```
 
-The `__init__()` method in `SUPERCLASS` would have been overridden by `SUBCLASS` since both methods share the same name. This is the reason `print(Hello World")` did not appear and `self.attribute` cause an exception despite inheritance.
+The `__init__()` method in `SUPERCLASS` would have been overridden by `SUBCLASS` since both methods share the same name. Hence, the `print(Hello World")` is not executed, and `self.attribute` causes an exception despite inheritance.
 
-On the other hand, when using a super function to called the `__init__()` method directly from the `SUPERCLASS`
+Meanwhile, when using a super function to called the `__init__()` method directly from the `SUPERCLASS`.
 
 ```python
 # CREATING SUPERCLASS
@@ -1663,17 +1657,15 @@ print(instance.attribute)
 ```
 
 ## Data Hiding
-Previously on *Encapsulation* subsection mentioned creating an object provides restriction on accessing attributes and methods, called *Data Hiding*. In Python, however, data hiding is not guaranteed and can be accessed easily from the code outside the class.
+Encapsulation in Python does not fully guarantee data hiding. External code can still access a class's attributes and methods. Hiding attributes and methods inside a class are generally possible by name mangling.
 
-Still, manual approach such as name mangling is possible to prevent access to attributes and methods of the class:
-
-| SYMBOL | EXAMPLE       | DESCRIPTION                                                                                                                                            |
-|:------:|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `_`    | `_attribute`  | Though not a name mangling, it can prevent accessing attributes and methods from being passed via module import but not from codes outside the class.  |
-| `__`   | `__attribute` | Name mangling: this prevents accessing attributes and methods from being passed via module import and codes outside the class, thus becomes "private". |
+| SYMBOL | EXAMPLE       | DESCRIPTION                                                                                                               |
+|:------:|---------------|---------------------------------------------------------------------------------------------------------------------------|
+| `_`    | `_attribute`  | Though not a name mangling, it prevents accessing attributes and methods when imported as a module.                       |
+| `__`   | `__attribute` | Name mangling, which prevents accessing attributes and methods when imported as a module and from code outside the class. |
 
 ### Properties
-Property is a decorator that supports data hiding by dividing a method into `getter`, `setter`, and `deleter` method. Because properties are declared using a decorator, it can only be used on method.
+Property is a decorator that supports data hiding by dividing a method into `getter`, `setter`, and `deleter` method. Property is only available on method as it is declared using a decorator.
 
 | METHOD  | SYNTAX            | DESCRIPTION                                           |
 |---------|-------------------|-------------------------------------------------------|
@@ -1690,17 +1682,17 @@ class CLASS:
     # DEFINITION: GETTER METHOD
     @property
     def method(self):
-        return self.attr1
+        return self.attribute
     
     # DEFINITION: SETTER METHOD
     @method.setter
     def method(self, arg3):
-        self.attr1 = arg3
+        self.attribute = arg3
     
     # DEFINITION: DELETER METHOD
     @method.deleter
     def method(self):
-        del self.attr1
+        del self.attribute
         
 # INSTANTIATION
 instance = CLASS(3)
@@ -1721,22 +1713,22 @@ print(instance.method)
 AttributeError: 'CLASS' object has no attribute 'attr1'
 ```
 
-Separating method using property encapsulate sensitive code that shouldn't be modified by the user (such as `setter` and `deleter` method) while providing constant access to the method via `getter` method despite any changes were made on `setter` and `deleter`.
+Separating a method using property hides sensitive code such as `setter` and `deleter` property, and only the `getter` property is available for use. End-user can use a method with `getter` property while modifying functionality is done through `setter` property.
 
-Although the `getter` method is essential in property, the `setter` and `deleter` are optional; using the `getter` method alone would make an unmodifiable read-only method.
+Although the `getter` is essential in property, the `setter` and `deleter` are optional; using the `getter` alone would make an unmodifiable read-only method.
 
 # **PYTHON: EXCEPTION**
-An exception is an inexecutable code error due to incorrect coding or input, halting the program immediately. Through exception handling, stable program can be compiled and executed without any halt or crash.
+An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon running, a program immediately halts when encountering an exception. Exception handling aims to provide a stable program without any halt or crash.
 
 ### `try`/`except` Statement
-The `try`/`except` statement pair is used to handle exceptions and call certain statements corresponding to an exception occurred. There are additional statements that can be used together with the pair:
+The `try`/`except` statement pair detect exceptions and executes a code accordingly. There are additional statements that can use together with:
 
-| KEYWORD   | DESCRIPTION                                                                                                 |
-|-----------|-------------------------------------------------------------------------------------------------------------|
-| `try`     | A block of code to be checked for exception.                                                                |
-| `except`  | A code to be executed when certain exception occurs.                                                        |
-| `else`    | [OPTIONAL: A code to be executed when the code has passed with no error (exception) occurred.]              |
-| `finally` | [OPTIONAL: A block of code executed no matter what exception has occurred, and even when there's no error.] |
+| KEYWORD   | DESCRIPTION                                                                            |
+|-----------|----------------------------------------------------------------------------------------|
+| `try`     | A block of code to check for exception.                                           |
+| `except`  | Executed when certain exception occurs.                                                |
+| `else`    | [OPTIONAL] Executed when the code has passed with no error (exception).                |
+| `finally` | [OPTIONAL] Executed no matter what exception has occurred, even when there's no error. |
 
 ```python
 try:
@@ -1751,11 +1743,10 @@ finally:
     statements
 ```
 
-Even after the `try`/`except` statement is executed, the program does not stop and continues onward.
+Even after the `try`/`except` statement, the program does not stop and continues.
 
 ### `raise` Statement
-The `raise` statement is used to manually raise exception intentionally. As the statement raises an error, it also stops the runtime immediately, preventing further program execution.
-
+The `raise` statement manually raises exception intentionally. It also stops the runtime immediately, preventing further program execution.
 
 ```python
 # EXPLICITLY RAISE EXCEPTION: can be used alone, even inside an 'except' code above.
@@ -1766,13 +1757,13 @@ raise exception_description
 ```
 
 ### `assert` Statement
-The `assert` statement checks expressions for validity (aka. assertion). When the tested expression is valid with no problem, assertion returns `True`; when an exception is raised, assertion returns `False`.
+The `assert` statement checks expressions for validity (aka. assertion). When a tested expression is valid with no problem, the statement returns `True`; when an exception occurs, it returns `False`.
 
 ```python
 print(0)
 assert TRUE_expression
 print(1)
-assert FALSE_expression,"exception_type"
+assert FALSE_expression, "exception_type"
 print(2)
 ```
 
@@ -1783,30 +1774,28 @@ AssertionError: exception_type
 ```
 
 # **PYTHON: PYTHONICNESS**
-As learning to understand how the Python is used on programming, there is a Python's unique style of programming recommended for Python developers to implement as possible.
+This chapter introduces the programming coding style of Python recommended by various Python developers, called *pythonic*.
 
 ## Zen of Python
-A set of principle guides when coding Python, provided within Python itself. Accessible via example below.
+Zen of Python is a set of principle guides when coding Python. To view Zen of Python, enter the statement below:
 
 ```python
 import this
 ```
 
 ## Python Enhancement Proposals
-Eight scripting style guides for Python suggested by experienced Python developers, aka. **PEP8**.
-1.    Module should have short, all-lowercase name.
-2.    Class name should be in the CapWords style.
-3.    Most variables and function names should be lowercase_with_underscores.
-4.    Constants (variables that never change value) should be CAPS_WITH_UNDERSCORES.
-5.    Names that would clash with Python keywords (such as 'class' or 'if') should have a trailing underscore.
-6.    Line shouldn't be longer than 80 characters.
-7.    `from module import *` should be avoided.
-8.    There should be only one statement per line.
+Python Enhancement Proposals (abbrev. PEP8) are eight scripting style guides for Python suggested by experienced Python developers.
+1. Module should have short, all-lowercase name.
+2. Class name should be in the CapWords style.
+3. Most variables and function names should be lowercase_with_underscores.
+4. Constants (variables that never change value) should be CAPS_WITH_UNDERSCORES.
+5. Names that would clash with Python keywords (such as 'class' or 'if') should have a trailing underscore.
+6. Line shouldn't be longer than 80 characters.
+7. `from module import *` should be avoided.
+8. There should be only one statement per line.
 
 ## Entry Point
-While program language such as C/C++ has a traditional entry point called `main()` which is the function where the program execution starts, Python does not have one.
-
-Instead, Python uses special variable `__name__` which indicates the current Python script being executed. When this script is the main executing file, the `__name__` variable is assigned as `"__main__"` value.
+An entry point is a part of the script where a program begins; C/C++ programming has the `main()` function, but Python does not have one. However, Python can tell which script is the main running script by checking whether the `__name__` magic method has `"__main__"` value.
 
 ```python
 # ENTRY POINT
@@ -1814,13 +1803,13 @@ if __name__ == "__main__":
     statements
 ```
 
-Codes and statements indented under this condition will not be executed when it is imported as a module to the other script. Beware, the `==` operator cannot be replaced by `is` operator.
+Codes and statements indented under this condition won't run when imported as a module to the other script. Beware, the `is` operator cannot substitute the `==` operator.
 
 # **PYTHON: FILE MANAGEMENT**
-When using the Python in programmings such as scientific research purpose and artificial intelligence, the input data that needs to be computed cannot be stored through console command of the Python and may need to read through files if necessary.
+It is inefficient to input data through a console terminal when using Python for advanced purposes such as scientific research. Instead, a program can load data saved in a file and process them.
 
 ## Opening Files
-Before reading or manipulating files in Python, the file must be opened firsthand, using the `open()` function.
+Python must open a file before reading or manipulating a file using the `open()` function.
 
 ```python
 open("filename.txt")
@@ -1834,7 +1823,7 @@ open("filename.txt")
 | `rb`   | Binary read mode (non-text files)  |
 | `wb`   | Binary write mode (non-text files) |
 
-A `close()` method is used to close the currently opened file. Closing files are important to avoid wasting resources. Ensure files are always closed even on exception by using `try`/`except` or `with` statement.
+The `close()` method closes currently opened file. Closing a file is important to avoid wasting resources. Ensure a file is always closed even on exception by using the `try`/`except` or `with` statement.
 
 ```python
 file = open("filename.txt", "r")
@@ -1842,7 +1831,7 @@ file.close()
 ```
 
 ### `with` Statement
-A `with` statement creates a temporary variable only available inside an indented code block of the statement. When the file is opened using `with` statement, the file automatically closes at the end of the code block even if an exception occurs.
+The `with` statement creates a temporary variable only available inside its indented code block. When opening a file with the `with` statement, the file automatically closes when it ends.
 
 ```python
 with open("filename.txt") as file:
@@ -1850,7 +1839,9 @@ with open("filename.txt") as file:
 ```
 
 ### Context Manager
-Context manager is an interface that allows support of `with` statement. There are two methods available for setting object method and function as context manager: (1) using `__enter__()` & `__exit__()` method pair and (2) using `contextlib` module.
+A context manager is an interface that supports the `with` statement. There are two methods available for setting an object method and function as a context manager:
+
+1. `__enter__()` and `__exit__()` method
 
 ```python
 # CONTEXT MANAGER 1
@@ -1868,7 +1859,7 @@ class CLASS:
         statements
 ```
 
-----
+2. `contextlib` module
 
 ```python
 from contextlib import contextmanager
@@ -1886,7 +1877,7 @@ class CLASS:
         statements
 ```
 
-Returned attribute or yielded variable becomes the resource handled by the context manager. The implicitly determined resource makes `as` keyword unnecessary unless there is a need to alias the name.
+The `return` or `yield` data becomes a processible resource within the `with` statement when implements context manager. This implicit resource can alias with the `as` keyword but not necessary.
 
 ```python
 # INSTANTIATION
@@ -1897,7 +1888,7 @@ with instance.method():
     statements
 ```
 
-One of the actual implementation of this syntax can be found on chapter *TENSORFLOW: BASIC § TensorBoard* in [*LIBRARY_TensorFlow*](./../../../library/en/LIBRARY_TensorFlow/) document.
+One of the actual implementations of this syntax can be found in chapter *TENSORFLOW: BASIC § TensorBoard* in [*LIBRARY_TensorFlow.md*](./../../../library/en/LIBRARY_TensorFlow/) document.
 
 ### Absolute & Relative Paths
 Python has two different types of paths: absolute and relative path. When designating a file path, use double backslash `\\` since using a single backslash will escape string object and can cause unwanted operation.
@@ -1907,9 +1898,7 @@ variable = open("path\\filename.txt")
 ```
 
 ## Reading Files
-After opening the text-based file, Python can read its content using `read()` method. The argument inside the method represents the number of bytes to read in the content.
-
-Read method can be used on the same file over again, but it will continue from where Python last read. When there is no argument, the read method reads the rest of the text from where it last left off.
+After opening a text-based file, Python can read its content using the `read()` method. The argument inside the method represents the number of bytes to read but reads everything by default. Running `read()` method again continues from where it last read.
 
 ```python
 with open("path\\filename.txt") as file:
@@ -1919,9 +1908,7 @@ with open("path\\filename.txt") as file:
     print(file.read())        # READ NO TEXT AS NO MORE CONTENT TO READ.
 ```
 
-The `read-lines()` method is used to return a list of text of each line. The method does accept an argument and works the same as a read method: it designates how many bytes to read.
-
-Don't get confused with `Readline()` method which only reads the first line in a string.
+The `readlines()` method returns a list of text of each line. The method does accept an argument that represents how many bytes to read. Similarly, the `readline()` method that only reads a single line.
 
 ```
 [filename.txt]
@@ -1942,7 +1929,7 @@ First line here.
 ```
 
 ### Printing Line using Loop
-Each line of text-base content can be retrieved using `for` loop statement:
+Each line of text-base content can be retrieved using the `for` loop statement:
 
 ```python
 for file in variable:
@@ -1950,9 +1937,7 @@ for file in variable:
 ```
 
 ## Writing Files
-In Python, a file can be created or (over)written using a `write()` method. There are two options developers can choose when writing: overwrite and append.
-
-Suppose there is a file with text content written as follows:
+Python creates and writes a text-based file using the `write()` method. There are two options when writing a file: (1) overwrite and (2) append. Suppose there is a text file shown below.
 
 ```
 [filename.txt]
@@ -1961,7 +1946,7 @@ Second line there.
 Last line somewhere.
 ```
 
-Overwrite mode `w` deletes all of previously existing content and write down fresh from the beginning.
+Overwrite mode `w` deletes all the previously existing content and write down fresh from the beginning.
 
 ```python
 with open("path\\filename.txt", "w") as file:
@@ -1988,10 +1973,10 @@ Second line there.
 Last line somewhere.TEXT APPENDED.
 ```
 
-Upon successfully written, `write()` method returns the number of bytes written.
+Upon successfully written, the `write()` method returns the number of bytes written.
 
 ### Creating Files
-A new file can be created using the same `write()` method. Creating a file is simply done by designating a file name that does not exist in the specified path.
+The `write()` method also creates a new file. Creating a file is done by designating a file name that does not exist in the specified path.
 
 ```python
 with open("path\\NEW-filename.txt", "w") as file:
@@ -2007,24 +1992,24 @@ NEW FILE CREATED!
 Python has a variety of packages that can be easily downloaded and used on-demand. This chapter describes what the package is and how to implement it to the script.
 
 ## Modules
-A Python module is simply a Python source code file with `.py` extension. Developers may create their module containing classes or functions, and calling these codes from distributed Python files can be done using `import` keyword.
+A Python module is simply a Python source code file with a `.py` extension. Developers may create their module containing classes or functions, and calling these codes from distributed Python files can be done using the `import` keyword. Below is an example of importing the `module.py` Python script.
 
 ```python
 import module
 module.function()
 ```
 
-The above approach still requires the name of the module to be mentioned every time when using its classes or functions. To ignore referring the name of modules, use the `from` keyword beforehand.
+The above approach still requires the name of the module to be mentioned every time when using its classes or functions. To ignore referring to the name of modules, use the `from` keyword beforehand.
 
 ```python
 from module import function1, function2
 from module import function as name
 ```
 
-However, without the name of modules when using the function, there is a potential conflict caused by function naming. Unless the function is named with guaranteed uniqueness, it is safe to use the previous approach to import modules.
+However, without the name of modules when using the function, there is a potential conflict caused by function naming. Unless the name of the function guarantees uniqueness, it is safe to use the previous approach to import modules.
 
 ## Package
-A package is a directory that holds a collection of Python modules or sub-packages. Every package folder must have a special Python file called `__init__.py` which can be blank or contains directory path of current package to prevent directories error caused by a common name.
+A package is a directory that holds a collection of Python modules or sub-packages. Every package folder must have a Python file called `__init__.py` that can be blank or contains the directory path of the current package to prevent directories error caused by a common name.
 
 ```python
 import package.module
@@ -2032,50 +2017,52 @@ from package.module import function
 ```
 
 ## Python Package Index
-Python Package Index (aka. PyPI) is an external module storage website (*https://pypi.python.org/pypi*). To download and install the modules and packages, a software called pip is necessary.
+Python Package Index (abbrev. PyPI) is an external module storage website (*https://pypi.python.org/pypi*). To download and install the modules and packages, a software called pip is necessary.
 
 ### PIP
-The pip software is a package management system required to install and manage the Python package. Nowadays, pip comes installed by default with the modern distribution of Python. Developers can install pip separately online. Installation and management of packages are done using Command Prompt.
+The pip software is a package management system required to install and manage the Python package. The software comes installed by default with the modern distribution of Python. Installation and management of packages are done using Command Prompt or Powershell.
 
-| NAME         | DESCRIPTION               | COMMAND                 |
-|--------------|---------------------------|-------------------------|
-| Installation | Install the package       | `pip install package`   |
-| Remove       | Uninstall the package     | `pip uninstall package` |
-| List         | Show the list of packages | `pip list`              |
+| NAME        | DESCRIPTION               | COMMAND                 |
+|-------------|---------------------------|-------------------------|
+| `install`   | Install the package       | `pip install package`   |
+| `uninstall` | Uninstall the package     | `pip uninstall package` |
+| `list`      | Show the list of packages | `pip list`              |
 
-When using Python on Windows, it is recommended to use `python -m pip` instead of `pip` alone. 
+On Windows OS exclusively, it is recommended using the command `python -m pip` rather than `pip` alone.
 
 ```
 python -m pip
 ```
 
-In case `python` command does not work but opens Microsoft Store, type `py` instead.
+Entering `python` on a terminal opens Microsoft Store on Windows 10 OS. There ways to bypass and prevent this:
 
-The command means accessing the pip under the python interpreter specified as `python` in the environment variable. This allows package management by each interpreter more controllable, even when using a virtual environment. When there is another version of Python installed, say 32 bits of Python 3.5
+1. Use a Python Launcher program; replace`python` with `py`.
+2. On `Setting > Apps > Apps & features > App execution aliases`, switch `python.exe` and `python3.exe` off.
+
+The command means accessing the pip under the python interpreter specified in the environment variable. It reduces confusion on managing packages between interpreters. When there is another version of Python installed, say 32 bits of Python 3.5
 
 ```
 py -3.5-32 -m pip
 ```
 
 # **PYTHON: VIRTUAL ENVIRONMENT**
-A programming language such as C/C++ needs to include header files and libraries before compiling. Similarly, Python requires installing necessary packages on the interpreter before running the script.
+Python installs every package to the interpreter directory. However, a single interpreter cannot have more than one of the same package, 
+which is a problem when managing multiple Python projects. If two projects require a different version, a developer has to reinstall every time switching a project.
 
-However, when working with multiple Python projects, having all the packages installed in a single interpreter is inconvenient and inefficient. This is why separating Python environments is essential which can be done by a virtual environment.
+A virtual environment duplicates interpreter for a separate project, preventing package conflict with easier management.
 
 ## `venv` Package
-The Python3 has a virtual environment package `venv` included by default. The package creates lightweight virtual environments with their site directory, optionally isolated from the system site directory.
-
-Each virtual environment has its distinct Python binary (which matches the version of the binary that was used to create this environment) and can have its own independent set of installed Python packages in its site directory.
+The Python3 has a virtual environment package included by default. It creates lightweight virtual environments with their site directory, optionally isolated from the system site directory. Packages installed with this interpreter's pip all go to the virtual environment.
 
 ### Creating Environment
-Creating a virtual environment under the name `.venv` on desired project directory is done as follows:
+Creating a virtual environment under the name `.venv` on the desired project directory is done as follows:
 
 ```
 python -m venv D:\Workspace\Python\project\.venv
 ```
 
 ### Activate Environment
-Here, the term "activating" means activating a virtual environment on the command prompt or terminal. While this is unnecessary when running the script under a virtual environment, activation is required when installing packages using pip on a terminal.
+Here, the term "activating" means activating a virtual environment on a terminal. While this is unnecessary when running the script under a virtual environment, activation is required when installing packages on a virtual environment.
 
 * Windows:
 
@@ -2090,16 +2077,16 @@ Here, the term "activating" means activating a virtual environment on the comman
     ```
 
 ### Deactivate Environment
-To exit from a virtual environment activated console, developers need to "deactivate" virtual environment.
+To exit from a virtual environment activated console, it needs to be "deactivate" on a terminal.
 
 ```
 deactivate
 ```
 
-This is the same as entering the command `PATH=D:\Workspace\Python\.venv\Scripts\deactivate.bat`. Because of this, relocating the virtual environment directory will cause `deactivate` command unable to recognize its path.
+The above is the same as entering the command `PATH=D:\Workspace\Python\.venv\Scripts\deactivate.bat`. Because of this, relocating the virtual environment directory will cause the `deactivate` command unable to recognize its path.
 
 # **PYTHON: NUMPY**
-NumPy is an extremely powerful and useful library used in Python which supports multi-dimensional matrix (aka. NumPy array). As one of the best known scientific libraries, it is implemented on other well-recognized libraries such as [Matplotlib](https://matplotlib.org/), [TensorFlow](https://www.tensorflow.org/), et cetera.
+NumPy is a powerful and useful library used in Python that supports multi-dimensional matrix (aka. NumPy array). As one of the best known scientific libraries, other well-recognized libraries also implements NumPy such as Matplotlib, TensorFlow, and more.
 
 To install NumPy library, open command prompt window and enter the command below: 
 
@@ -2107,12 +2094,10 @@ To install NumPy library, open command prompt window and enter the command below
 python -m pip install numpy
 ```
 
-Since NumPy is a huge scientific library and is still growing, this chapter will briefly introduce basic usage of the array. For more information on its API, refer to the following URL: https://numpy.org/
+Since NumPy is a scientific library and is still growing, this chapter will briefly introduce simple usage of the array. For more information on its API, refer to the following URL: https://numpy.org/
 
 ## NumPy Array
-NumPy array is a very flexible matrix. Compared to a list object in Python, the array has faster speed and higher efficiency on memory management.
-
-Declaration of the NumPy array is be done as follows:
+NumPy array is a very flexible matrix. Compared to a list object in Python, it has faster speed and higher efficiency on memory management. Declaration of the NumPy array is as follows:
 
 ```python
 import numpy as np
@@ -2127,9 +2112,7 @@ print(variable)
  [    32765 870097920     32765]]
 ```
 
-This creates a NumPy array object based on the given size, but its value is randomly generated.
-
-Initialization of a NumPy array is done as follows:
+The above creates a NumPy array object based on the given size, but its values are random. Initialization of a NumPy array is as follows:
 
 ```python
 import numpy as np
@@ -2144,9 +2127,9 @@ print(variable)
  [4 5 6]]
 ```
 
-This creates a NumPy array object based on the given value but has a disadvantage on creating the array with a huge size or deeper dimension. 
+This creates a NumPy array object based on the given value but has a disadvantage on creating the array with a bigger size or deeper dimension. 
 
-More NumPy methods exist that is used to create the array with better convenience:
+More NumPy methods exist that creates the array with better convenience:
 
 | NUMPY ARRAY             | DESCRIPTION                                                   |
 |-------------------------|---------------------------------------------------------------|
@@ -2167,7 +2150,7 @@ print(variable[0, 1])    # >> OUTPUT: 2
 ```
 
 ### NumPy Shape
-The shape of the NumPy cannot be extracted using methods of Python's iterable object such as `len()`. Instead, NumPy has its unique attribute containing the length of each dimension.
+The shape of the NumPy cannot be found with the `len()` function. Instead, NumPy has its unique attribute containing the length of each dimension.
 
 ```python
 import numpy as np
@@ -2178,9 +2161,9 @@ variable.shape[0]    # >> OUTPUT: 2
 ```
 
 ## NumPy Indexing
-The term "indexing" means slicing the array to a specific range only. Each dimension is indexed using colon `:` and are distinguished via comma `,`. Indexing shares the same rules as the slicing of iterable objects.
+The term "indexing" means slicing the array to a specific range only. Each dimension is indexed using colon `:` and distinguished via comma `,`. Indexing shares the same rules as the slicing of an iterable object.
 
-* `n:m` : start indexing from n^th^ element (included) to m^th^ element (excluded)
+* `n:m` : start indexing from n<sup>th</sup> element (included) to m<sup>th</sup> element (excluded).
 * `:` : start indexing from beginning to the end, thus skip indexing.
 
 ```python
