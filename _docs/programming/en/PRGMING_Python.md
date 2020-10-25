@@ -24,11 +24,9 @@ The first interpreter for Python was developed using the C programming language,
 Although introduced as the interpreted language, CPython technically uses both compiler and interpreter. First, the compiler translates Python code to bytecode, then the interpreter executes the bytecode. This bytecode is the one that guarantees Python's cross-platform property.
 
 # **PYTHON: INSTALL**
-
 Two programs are required to develop using Python language: the interpreter and integrated development environment(IDE). Linux and macOS have Python 2 and 3 installed on the system by default but needs manual installation for different versions. This chapter teaches on installing and applying the Python interpreter to IDE, which helps understand how interpreted language works.
 
 ## Select Interpreter
-
 Python interpreter, the essential program to execute Python, can be downloaded from the official website [here](https://www.python.org/downloads/). There are various versions of the Python interpreter numbered `3.x.y`, where `x` and `y` are minor and patch number. Interpreter functionality differs slightly by the minor version, and a higher patch number means the interpreter version `3.x` is more stable. Therefore, only check the version number `3.x` when selecting an interpreter.
 
 > Python 3.7.4 and 3.6.4 are interpreters used to execute Python 3. If there are changes in functionalities between versions 3.6 and 3.7, two interpreters may run the same Python code differently. On the other hand, Python 3.7.1 and 3.7.4 are considered the same interpreter, but the latter version is more stable and recommended.
@@ -40,7 +38,6 @@ Developers should be cautious when selecting an interpreter as the version impac
 > Many Python-related programs are developed based on version 3. Therefore, Python 3 is recommended than using Python 2.
 
 ## Download Interpreter
-
 Install the Python interpreter after selecting the version. There are several options for downloading interpreters.
 
 <div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Python/python_interpreter_download.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 1. Download list of interpreter installers in Python 3 official website.</center>
@@ -64,7 +61,6 @@ Following are three different installation methods available:
 In other words, the second and third option is the same, but whether to download components beforehand or while installing. A third option is available if you have a stable internet connection but generally select the second option.
 
 ## Install Interpreter
-
 Executing the downloaded interpreter installer shows the following window:
 
 <div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Python/python_interpreter_install.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Startup of Python 3 installer program.</center>
@@ -78,11 +74,9 @@ Environment variable setting is not necessary when Python is the only software t
 Clicking the "Install Now" button will begin the installation, and can run Python when the process is over.
 
 ## Integrated Development Environment
-
 An integrated development environment is a software development program that provides at least a source code editor, program build tools, and debugger. Python interpreter is a software for running a Python-based program, but it is not a source code editor. Therefore, IDE is essential to edit a Python source code, run the program, and examine the execution when encountering problems.
 
 ### Visual Studio Code
-
 [Visual Studio Code](https://code.visualstudio.com/download) (VS Code) is a free source code editor developed by Microsoft. Although technically not an IDE, it can still play a role as an IDE. All that requires are an extension tool that can load the interpreter to VS Code.
 
 <div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Python/python_vscode_extension.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 4. Install Python extension on VS Code.</center>
@@ -186,7 +180,6 @@ print(variable)
 ```
 
 ### Initialization
-
 Initialization is the first assignment to a variable where it commonly occurs on the *definition* process.
 
 ```python
@@ -208,7 +201,7 @@ A constant variable is a variable that cannot change its value after initializat
 CONSTANT_VARIABLE = "Hello World!"
 ```
 
-### `del` 키워드
+### `del` Keyword
 The `del` keyword is used to delete a variable. Deleted variable can be reassigned later.
 
 ```python
@@ -238,7 +231,7 @@ There are three categories of data in Python: numeric, boolean, and string data 
 
 Though the article has not yet introduced function and method, understanding the difference between these three will help avoid misunderstanding on the concept of programming language.
 
-### Numeric Data Type 자료형
+### Numeric Data Type
 A numeric data type is a data that stores a number. Following is the list of numeric data types:
 
 | KEYWORD   | DATA TYPE             | DESCRIPTION                                                                        |
@@ -317,7 +310,7 @@ Assignment operator is a combination of an arithmetic and an assignment symbol `
 
 Increment `++` and decrement `--` do not exist in Python programming language.
 
-### 논리 자료형
+### Boolean Data Type
 A boolean data type is useful for a code that requires logical condition whether the statement is true or false.
 
 | VALUE          | NAME            | DESCRIPTION                   |
@@ -1785,6 +1778,7 @@ import this
 
 ## Python Enhancement Proposals
 Python Enhancement Proposals (abbrev. PEP8) are eight scripting style guides for Python suggested by experienced Python developers.
+
 1. Module should have short, all-lowercase name.
 2. Class name should be in the CapWords style.
 3. Most variables and function names should be lowercase_with_underscores.
