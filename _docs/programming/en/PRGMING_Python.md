@@ -190,9 +190,11 @@ variable = 1
 ### Local & Global Variable
 There are two types of variable in Python:
 
-* **Local variable**: a variable defined within the code block, such as functions and classes. However, this does not apply to conditional, loop, `with` statements, and more. Data stored inside local variables are released when the program escapes from the code block, and the variables are unavailable outside. Due to this property, local variables may have the same name as other variables defined outside the code block.
+* **Local variable**
+    : a variable defined within the code block, such as functions and classes. However, this does not apply to conditional, loop, `with` statements, and more. Data stored inside local variables are released when the program escapes from the code block, and the variables becomes unavailable outside. Due to this property, local variables may have the same name as other variables defined outside the code block.
 
-* **Global variable**: a variable that does not belong to any code blocks within the script. Place the `global` keyword to use the global variable with local variables inside the code block.
+* **Global variable**
+    : a variable that does not belong to any code blocks within the script. Place the `global` keyword to use the global variable with local variables inside the code block.
 
 ### Constant Variable
 A constant variable is a variable that cannot change its value after initialization. However, Python cannot declare constant due to the absence of *declaration*. Python developers should be careful not to mess up the what-is-used-as-constant variable. The conventional name for a Python's constant is using all UPPERCASE.
@@ -320,7 +322,7 @@ A boolean data type is useful for a code that requires logical condition whether
 
 An integer value can substitute boolean logic values; any non-zero numbers represent `True`, while `False` is only expressed by zero.
 
-A comparison operator is used to compare the relation of two or more values, returning corresponding Boolean data type depending on whether the condition holds or not. 
+A comparison operator is used to compare the relation of two or more values, returning corresponding boolean data type depending on whether the condition holds or not. 
 
 | OPERATOR | DESCRIPTION              |
 |----------|--------------------------|
@@ -628,7 +630,7 @@ statement2
 ```
 
 ## `for` Loop
-The `for` loop statements repeatedly execute statements inside (aka. iterate) as long as it is in the valid range. The loop ends once all the values in the range are enumerated.
+The `for` loop statement repeatedly executes statements inside (aka. iterate) as long as it is in the valid range. The loop ends once all the values in the range are enumerated.
 
 ```python
 for index in iterable:
