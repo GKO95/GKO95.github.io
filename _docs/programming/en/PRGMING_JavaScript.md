@@ -533,124 +533,87 @@ c
 The concept of an array and object in JavaScript will be explained in later chapters.
 
 # **JAVASCRIPT: ITERABLE**
+JavaScript has an iterable object that stores the collection of data. An array and string mentioned above is also an iterable object built inside JavaScript. This chapter describes the most commonly used iterable object called an array.
 
-## **Array**
+## Array
 
-An iterable object used to store an indexed list of items of same data-type. Bracket `[]` is used  to assign value to each element of the array:
+An array is a container for data of the same data type in sequence. Assign values in order within a pair of bracket `[]` to initialize an array:
 
 ```js
-/* DECLARATION of an array. */
-var arrayName = [element1, element2, element3];
+/* ARRAY DECLARATION */
+var arr = [value1, value2, value3];
 ```
 
-Another way to create an array is by using `Array()` constructor with value of elements placed inside.
+Alternatively, placing values in the `Array()` constructor will also create and initialize an array.
 
 ```js
-/* ALTERNATIVE DECLARATION of an array. */
-var arrayName = new Array(element1, element2, element3);
+/* ARRAY DECLARATION USING CONSTRUCTOR */
+var arr = new Array(value1, value2, value3);
 ```
 
-It is possible to create an size-defined empty array using the same constructor but by passing a single integer as an argument. However, this is meaningless since array in JavaScript is always dynamic. That is, more element can be added anytime wanted. 
+The `Array()` constructor can create an empty array with a defined size by placing an integer. However, this may not be necessary as JavaScript's array shrink and expand anytime.
 
 ```js
-/* DECLARATION of an empty array of size three. */
-var arrayName1 = new Array(3);
+/* EMPTY THREE-LENGTH ARRAY DECLARATION */
+var arr1 = new Array(3);
 
-/* DECLARATION of an dynamic empty array. */
-var arrayName2 = new Array();
-var arrayName3 = [];
+/* EMPTY ZERO-LENGTH ARRAY DECLARATION */
+var arr2 = new Array();
+var arr3 = [];
 ```
 
-The syntax `new Array(3)` will understand as creating an empty array with size of three instead of creating an array with a single size of value of `3`. This is done automatically based on whether there is only one integer argument or else.
-
-### Destructuring Array
-
-Destructuring array means assigning each value of the array to separate individual variables.
+### Spread Operator
+Spread operator `...` is placed before an array to enumerate elements within rather than calling the array itself.
 
 ```js
-var arrayName = [value1, value2, value3];
+let arr = [value1, value2, value3];
 
-// DESTRUCTURING ARRAY
-let [var1, , var3] = arrayName;
+console.log(arr);
+console.log(...arr);
+```
 
-// RESULT
-console.log(var1);
-console.log(var3);
+```
+Array [value1, value2, value3]
+value1, value2, value3
+```
+
+Additionally, the spread operator can also assign the remaining data, as shown in the section *Destructuring Array*.
+
+### Array Destructuring
+Destructuring an array is a process of assigning elements in an array to individual variables.
+
+```js
+let arr = [value1, value2, value3, value4, value5];
+
+/* ARRAY DESTRUCTURING */
+let [variable1, , ...variable3] = arr;
+
+// THEREFORE...
+console.log(variable1);
+console.log(variable3);
 ```
 
 ```
 value1
-value3
+Array [value3, value4, value5]
 ```
 
-### Spread Operator in Array
-
-Spread operator `...` used with array will spread its value one by one sequentially.
+## Associative Array
+JavaScript does not support associative array where strings index an array instead of integers, like a dictionary in Python. Although there is a way to do it, it is not recommended and advise on using an object instead.
 
 ```js
-let arrayName1 = [value3, value4];
-let arrayName2 = [value1, value2, ...arrayName1, value5];
-console.log(...arrayName2);
-```
+var arr = [];
 
-```
-value1 value2 value3 value4 value5
-```
+/* ARRAY "arr" IS NOT AN ARRAY ANYMORE AND IS CONVERTED TO AN OBJECT */
+arr['property1'] = value1;
+arr['proprety2'] = value2;
 
-### `filter()` Function
-
-The function `filter()` is an array exclusive function to filter out the values and create a new array based on the conditional function passed as an argument.
-
-```js
-// FILTER() METHOD PASSING EXT. FUNCTION AS AN ARGUMENT.
-let arrayName = [value1, value2, value3, ...].filter(conditionalFuncName);
-
-// FILTER() METHOD PASSING NEWLY DEFINED FUNCTION AS AN ARGUMENT.
-let arrayName = [value1, value2, value3, ...].filter(param1 => {conditions;} );
-```
-
-Only the value that passed the the condition will be filtered in while the rest is filtered out.
-
-### `map()` Function
-
-
-
-```js
-
-```
-
-
-
-## **Associative Array**
-
-JavaScript does not support associative array where elements are indexed by strings instead of numbers, such as a dictionary in Python. There is an alternative way but not recommended; it is advised to use an object instead.
-
-```js
-// DECLARATION of an empty array.
-var arrayName = [];
-
-// arrayName is not an array anymore; is converted to object.
-arrayName['property1'] = value1;
-arrayName['proprety2'] = value2;
-
-// Methods for array object do not apply anymore as it is now an object. 
-console.log(arrayName.length);
+// THEREFORE, METHOD FOR AN ARRAY IS NOT AVAILABLE! 
+console.log(arr.length);
 ```
 
 ```
 0
-```
-
-## Iterator Object
-
-Creating iterator object can be done using `Symbol.iterator` and generator function `function*`.
-
-```js
-let iterableObject = {
-	[Symbol.iterator] : function* () {
-    	value1; value2; value3; ...
-    }
-}
 ```
 
 # **JAVASCRIPT: FUNCTION**

@@ -582,7 +582,7 @@ value1, value2, value3
 또한 전개 연산자는 나머지 데이터를 모두 할당받는 데에도 사용되며, 대표적인 예시로는 아래의 *베열 구조 분해*의 예시 코드를 참고한다.
 
 ### 배열 구조 분해
-배열의 구조 분해(destructuring array)는 배열의 각 요소마다 변수에 할당하는 작업을 의미한다. 
+배열의 구조 분해(array destructuring)는 배열의 각 요소마다 변수에 할당하는 작업을 의미한다. 
 
 ```js
 let arr = [value1, value2, value3, value4, value5];
@@ -613,6 +613,7 @@ arr['proprety2'] = value2;
 // 그러므로 배열 정보나 함수를 더이상 사용할 수 없다!
 console.log(arr.length)
 ```
+
 ```
 0
 ```
