@@ -1105,10 +1105,10 @@ None
 ### Parameter & Argument
 Following is a difference between parameter and argument mentioned when discussing function:
 
-**Argument**
+* **Argument**
     : An argument is a value or object passed to a function parameter.
 
-**Parameter**
+* **Parameter**
     : A parameter is a local variable assigned with an argument. Meaning, parameters are only available inside the function.
 
 Although parameters and arguments are a different existence, two terms are used interchangeably as both stores the same data.
