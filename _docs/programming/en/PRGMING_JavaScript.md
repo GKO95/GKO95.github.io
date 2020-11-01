@@ -617,21 +617,23 @@ console.log(arr.length);
 ```
 
 # **JAVASCRIPT: FUNCTION**
+Functional programming is a style of program scripting that is based mostly on the usage of functions. This chapter will be introducing the guide on how to create and use functions in Python for functional programming.
 
 ## Function
-Function is an independent reusable block of code which can process the data and present processed/new data once it’s called. Function can be distinguished from its code format which has parenthesis after its name; `function()`. Naming function's name inherits the rule of identifier.
+A function is a reusable independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. Function is distinguished by parenthesis after its name; `function()`.
 
 ```js
-/* ORIGINAL SYNTAX. */
+/* BEFORE ES6 */
 function functionName() {
 	console.log(4)
 }
 
-/* ES6 SYNTAX. */
+/* AFTER ES6 */
 const functionName = () => {
     console.log(4);
 }
 
+// CALLING FUNCTION
 functionName();
 ```
 
@@ -643,30 +645,43 @@ ES6 syntax is especially useful when creating a simple in-line function.
 
 ```js
 /* A FUNCTION DEFINED ONLY USING A SINGLE LINE (ES6). */
-const functionName = param1 => console.log(param1);
-functionName(arg1);
+const functionName = (arg) => console.log(arg);
+functionName(value);
 
 /* IMPLEMENTATION ON ARRAY ENUMERATION (ES6). */
-const arrayName = [1, 2, 3, 4];
-arrayName.forEach(param1 => {console.log(param1*2);} );
+let arr = [1, 2, 3, 4];
+arr.forEach(arg => {console.log(arg*2);} );
 ```
 
 ### Parameter & Argument
-Argument value is passed over to parameter of the function, but parameter and argument is processed in different memory thus does not affect each other (i.e., change of value). To make parameter and argument influential to each other, a pointer is used to do the job.
+Following is a difference between parameter and argument mentioned when discussing function:
 
-It is possible to define default arguments for function execution even without external arguments. However, you cannot skip to next argument passing by typing double comma
+* **Argument**
+    : An argument is a value or object passed to a function parameter.
+
+* **Parameter**
+    : A parameter is a local variable assigned with an argument. Meaning, parameters are only available inside the function.
+
+Although parameters and arguments are a different existence, two terms are used interchangeably as both stores the same data.
+
+| OPERATOR | SYNTAX      | DESCRIPTION                                                                                        |
+|:--------:|:-----------:|----------------------------------------------------------------------------------------------------|
+| `=`      | `arg=value` | A parameter that has default value when no argument is passed. Must locate after normal parameter. |
+
+Examples below show how parameter and argument work in function:
 
 ```js
-/* ORIGINAL SYNTAX. */
-function functionName(param1 = value1, param2 = value2) {
-    console.log(param1 + param2);
+/* BEFORE ES6 */
+function functionName(arg1 = value1, arg2 = value2) {
+    console.log(arg1 + arg2);
 }
 
-/* ES6 SYNTAX. */
-const functionName = (param1 = value1, param2 = value2) => {
-    console.log(param1 + param2);
+/* AFTER ES6 */
+const functionName = (arg1 = value1, arg2 = value2) => {
+    console.log(arg1 + arg2);
 }
 
+// CALLING FUNCTION
 functionName(2,3);
 ```
 
@@ -675,40 +690,32 @@ functionName(2,3);
 ```
 
 ### Rest Parameter
-
-Rest parameter is an array of remaining parameter which will be passed from extra arguments.
+The rest parameter is a parameter with the spread operator, able to accept more than one argument as an array. If there is no argument, the rest parameter becomes an empty array.
 
 ```js
-// FUNCTION WITH REST PARAMETER
-function functionName(param1, ...restParameter) {
-	for(let extraParameter of restParameter){
+/* FUNCTION WITH REST PARAMETER */
+function functionName(arg1, ...rest) {
+	for(let variable of rest){
     	statements;
     }
-} 
-
-// EXTRA ARGUMETNS ARE SENT TO THE REST PARAMETER.
-functionName(arg1,extraArg2, extraArg3);
+}
 ```
 
-When no extra argument is presented, the array will simply be empty but never be undefined. The rest parameter is defined using a spread operator `...`. This operator will be introduced again in object and array chapter.
-
-### Return Statement
-
-Return statement terminates a function and returns indicated value.
+### `return` Statement
+The `return` statement is a function-exclusive statement that returns the value processed by a function. Once encountering a return statement, the function ends immediately despite having remaining codes. The `return` statement is not essential, which returns `undefined` if not present.
 
 ```js
-/* ORIGINAL SYNTAX. */
-function functionName(param1 = value1, param2 = value2) {
-    return param1 + param2;
+/* BEFORE ES6 */
+function functionName(arg1 = value1, arg2 = value2) {
+    return arg1 + arg2;
 }
 
-/* ES6 SYNTAX. */
-const functionName = (param1 = value1, param2 = value2) => {
-    return param1 + param2;
+/* AFTER ES6 */
+const functionName = (arg1 = value1, arg2 = value2) => {
+    return arg1 + arg2;
 }
 
-var result = functionName(2,3);
-console.log(result);
+console.log(functionName(2,3));
 ```
 
 ```
@@ -716,344 +723,267 @@ console.log(result);
 ```
 
 # **JAVASCRIPT: OBJECT**
+Object-oriented programming (abbrev. OOP), one of the programming style, focuses on the usage of classes and objects instead of functions. This chapter will be introducing how to create a custom object and use it to achieve OOP in JavaScript.
 
-## **Object**
+## Object
+Previous chapters introduced a variable and function, which is for storing and processing data, respectively. Object (aka. instance) is a block of data that encapsulates these variables and functions into a single identity.
 
-Object in JavaScript is a group of unordered list of related data: every object can have its own exclusive properties and bounded-functions, called method. Accessing properties and methods are done by syntax of `object.property` and `object.method()` respectively.
+Encapsulation is the core concept in an object with the following characteristics:
+
+1. Combines variables and functions into a single data.
+2. Restrict direct access to these variables and functions to prevent accidental modification from external code. 
+
+The programming based around the use of custom objects is called *object-oriented programming*.
 
 ```js
-/* INTIALIZATION OF AN OBJECT. */
-var objectName = {
-    // Properties
-	property1: value1,
+let variable = "Hello World!";
+console.log(variable.search("World"));
+// STRING OBJECT "variable" USING "search()" METHOD TO LOCATE A WORD.
+```
+
+```
+6
+```
+
+### Propertiy & Method
+Property and method refer to a variable and function encapsulated to an object, which is accessed by the following syntax:
+
+| Components | Syntax              |
+|:----------:|---------------------|
+| Property   | `instance.property` |
+| Method     | `instnace.method()` |
+
+### Custom Object
+Developers can create a custom object and use it.
+
+For a method in a custom object to access its properties or other methods requires `this` keyword. The keyword is an operator that represents the current object itself, and the interpreter would recognize these properties as variables instead.
+
+```js
+/* CREATING A CUSTOM OBJECT: BEFORE ES6 */
+const variable = {
+    /* PROPERTY (similar to VARIABLE) */
+    property1: value1,
     property2: value2,
-    
-    // Methods
-    method1: ext_functionName,
-    method2: function (param1) {
-    	// statements for method.
-    }
-};
 
-
-/* INITIALIZATION OF AN OBJECT (ES6). */
-var property1 = value1;
-var property2 = value2;
-
-var objectName = {
-    // Properties initialized from variable.
-    property1,
-    property2,
-    property2 = value3;		// Overwrites previous value of "properties2".
-    
-    // Methods simplified.
-    method1() {
+    /* METHOD (similar to FUNCTION) */
+    method: function(arg) {
         statements;
+        return this.property1 + this.property2 - arg;    
+    }
+};
+```
+----
+```js
+var property1 = value1;
+
+/* CREATING A CUSTOM OBJECT: AFTER ES6 */
+const variable = {
+    /* PROPERTY (similar to VARIABLE) */
+    property1,
+    ["property2"]: value2,
+
+    /* METHOD (similar to FUNCTION) */
+    method(arg) {
+        statements;
+        return this.property1 + this.property2 - arg;   
     }
 };
 ```
 
-Upon calling external function `ext_functionName()` do not requires parenthesis `()` but just the name.
-
-There are two ways to access the properties of the object:
-
-```js
-objectName.property
-objectName['property']
-```
-
-### Properties & Methods
-
-Below is a difference between properties and methods:
-
-* **Property**: a named value stored inside an object.
-* **Method**: an object-dependent function which cannot be called without an object.
-
-### Destructuring Object
-
-Destructuring object means assigning each property value of the object to separate individual variables. However, the name of the variables should be same as the name of the properties.
+## Class
+A class creates objects (aka. instance) and is defined using the `class` keyword. Definitions of an object's properties and methods are also inside a class definition. The following example is a simple user-defined class with properties and methods:
 
 ```js
-let objectName = {propertyName1 = value1, propertyName2 = value2};
+/* CREATING CLASS */
+class CLASS {
+    /* PROPERTY */
+    property1 = value1;
+    property2 = value2;
 
-// DESTRUCTURING ARRAY
-let {propertyName1, propertyName2} = objectName;
-
-// RESULT
-console.log(propertyName1);
-console.log(propertyName2);
+    /* METHOD */
+    method(arg) {
+        statements;
+        return this.property1 + this.property2 - arg;   
+    }
+}
 ```
+
+The `new` keyword is necessary to create (or instantiate) an object from a class. The example below instantiates two instances from a single class.
 
 ```js
-// DESTRUCTURING ARRAY: ALTERNATIVE 1
-let {propertyName1, propertyName2} = {propertyName1 = value1, propertyName2 = value2};
-```
+const variable1 = new CLASS;
+const variable2 = new CLASS;
 
-```js
-// DESTRUCTURING ARRAY: ALTERNATIVE 2
-let propertyName1, propertyName2;
-({propertyName1, propertyName2} = {propertyName1 = value1, propertyName2 = value2});
+console.log(variable1.property1);
+console.log(variable2.property2);
 ```
-
 ```
 value1
 value2
 ```
 
-To change the variable name to something else, simply place a new variable name after colon of the property name.
+### Constructor
+A constructor is an essential method for creating an instance. The method executes automatically on instantiation and determines the number of required arguments.
 
 ```js
-let objectName = {propertyName1 = value1, propertyName2 = value2};
+/* CREATING CLASS */
+class CLASS {
+    /* CONSTRUCTOR */
+    constructor(arg1, arg2) {
+        this.property1 = arg1;
+        this.property2 = arg2;
+    }
 
-// DESTRUCTURING ARRAY WITH NEW VARIABLE NAME
-let {propertyName1: variableName1, propertyName2: variableName2} = objectName;
-
-// RESULT
-console.log(variableName1);
-console.log(variableName2);
+    /* METHOD */
+    method(arg) {
+        statements;
+        return this.property1 + this.property2 - arg;   
+    }
+}
 ```
 
-```
-value1
-value2
-```
-
-
-### Computed Property Names
-
-Starting from ES6, the name of properties can be defined as a form of expression just like general expression used in JavaScript coding. The expression for the property name should be just inside a square bracket `[]`. 
+A constructor is defined as below by default; hence does not need to be defined separately.
 
 ```js
-/* COMPUTED PROPERTY NAMES. */
-let property1 = propertyName1;
-let property2 = propertyName2;
-
-let objectName = {
-    [property1]: value1;
-    [`computed_${property2}`]: value2;
-};
+/* CONSTRUCTOR: DEFAULT DEFINITION */
+constructor() {}
 ```
 
-### Sourcing Multiple Objects
-
-Creating a new object by merging multiple sources of different objects using `Object.assign()`. Order of the sources in the method matters since the properties can overwrite the previous objects.
+### Static Method
+A static method is a method accessible without instantiation, declared by the `static` keyword. However, an instance cannot access a static method. In other words, a static method is just another function bounded by a class.
 
 ```js
-// OBJECT SOURCE 1
-let objectName1 = {
-    property1: value11;
-    property2: value12;
-};
+class CLASS {
+    /* STATIC METHOD */
+    static method(arg) {
+        return arg * arg;
+    }
+}
 
-// OBJECT SOURCE 2
-let objectName2 = {
-    property2: value22;
-    property3: value23;
-};
-
-// CREATE "objectName3" OBJECT SOURCING FROM "objectName1" AND "objectName2".
-let objectName3 = Object.assign({property4: value34},objectName1,objectName2);
-console.log(objectName3.property1);
-console.log(objectName3.property2);		// "objectName1" overwritten by "objectName2".
-console.log(objectName3.property3);
-console.log(objectName3.property4);
+console.log(CLASS.method(3));
+```
+```
+9
 ```
 
-```
-value11
-value22
-value23
-value34
-```
-
-...where `{}` represents pre-existing properties of `objectName3` and this too can be overwritten by either `objectName1` and `objectName2`.
-
-Because this is creating a new object and not an assignment of existing object to the variable, changing the value of the properties does not affect the sourced objects.
+### Setter & Getter Method
+A setter and getter divide a single property in a class into two methods for assigning and accessing value, respectively. The `set` and `get` keyword declares a setter and getter method, hiding a sensitive part of the code but still accessible by end-users.
 
 ```js
-/* ASSIGNMENT OF OBJECT. */
-let objectName1 = {
-    property1: value1;
-    property2: value2;
-};
+class CLASS {
+    
+    /* SETTER METHOD */
+    set method(arg) {
+        this.property = arg * arg;
+    }
 
-let objectName2 = objectName1;
-objectName2.property = value3;
+    /* GETTER METHOD */
+    get method(arg) {
+        return `Property: ${this.property}`;
+    }
+}
 
-console.log(objectName1.property1);
-console.log(objectName2.property1);
+// INSTANTIATION
+const variable = new CLASS;
 
-
-/* DUPLICATE USING OBJECT.ASSIGN() METHOD. */
-let objectName1 = {
-    property1: value1;
-    property2: value2;
-};
-
-let objectName2 = Object.assign({},objectName1);
-objectName2.property1 = value3;
-// ALTERNATIVE: let objectName2 = Object.assign({}, objectName1, {property1: value3});
-
-console.log(objectName1.property1);
-console.log(objectName2.property1);
+variable.method = 3;
+console.log(varible.method);
+```
+```
+Property: 9
 ```
 
-```
-/* ASSIGNMENT OF OBJECT. */
-value3
-value3
-/* DUPLICATE USING OBJECT.ASSIGN() METHOD. */
-value1
-value3
-```
+By defining methods for setting and getting value individually for a `CLASS.property` property, managing and accessing the property becomes more flexible.
 
-### Spread Operator in Object
-
-Spread operator in object will spread its properties and its value in a format of iterator. Copying this iterator to other objects will eventually be same as cloning and even merging the objects as one.
+## Class Expression
+The class expression defines a nameless class and instantiates at the same time. Although it shortens the code as it does not need the `new` operator, the class can only instantiate once.
 
 ```js
-const objectName1 = {property1: value11, property2: value12};
-const objectName2 = {property1: value21, property3: value23};
-
-// SPREAD OPERATOR USED TO CLONE AND MERGE OBJECT(S) VIA ITERATOR(S).
-const clonedObject = {...objectName1};
-const mergedObject = {...objectName1, ...objectName2};
-
-// clonedObject = {property1: value11, property2: value12};
-// mergedObject = {property1: value21, property2: value12, property3: value23};
+/* OBJECT DECLARED BY CLASS EXPRESSION */
+const variable = class {
+	constructor(arg1, arg2){
+        this.property1 = arg1;
+    	this.property2 = arg2;
+    }
+}
 ```
-
-However, it is impossible to spread the object to show the list of properties and values using the print function such as `console.log()` since the iterator from an object is non-callable.
-
-
 
 ## Object Type
-
-Object type is used to create multiple objects of the same kind, using constructor function. This concept is very similar to the concept of "class" in other programming language such as C++ and Python, but JavaScript too have "class" starting from ES6.
+An object type can create multiple objects of the same type using a function, just like a class. While a class uses a constructor to instantiate, an object type uses a (constructor) function instead.
 
 ```js
-/* DEFINITION of an object type by constructor function */
-function className(param1, param2) {
-    // Properties
-	this.property1 = param1;
- 	this.property2 = param2;
+/*  OBJECT TYPE DEFINITION USING A FUNCTION */
+function OBJTYPE(arg1, arg2) {
+    /* PROPERTY */
+	this.property1 = arg1;
+ 	this.property2 = arg2;
     
-    // Methods
-    this.method1 = ext_functionName;
-    this.method2 = function (param3) {
-    	// statements for method.
-    }
-}
-
-/* DECLARATION of a new object using object type. */
-var variableName = new className(argument1, argument2);
-```
-
-Upon calling external function `ext_functionName()` do not requires parenthesis `()` but just the name.
-
-### `this` keyword
-
-`this` keyword points to (represents) the current object.
-
-
-## **Classes**
-
-Class is used to create multiple objects of the same kind, using constructor method.
-
-```js
-// CLASS DEFINITION
-class className {
-	constructor(param1, param2){
-        this.property1 = param1;
-    	this.property2 = param2;
-    }
-    // PROTOTYPE METHOD: ACCESSABLE BY OBJECT OF THE CLASS.
-    method1(param3) {
+    /* METHOD */
+    this.method(arg) {
     	statements;
-    }
-    // STATIC METHOD: CANNOT BE ACCESSED BY OBJECT BUT REQUIRES CLASS ITSELF.
-    static method2(objectParameter) {
-    	statements;
-    }
-    // SETTER INTIALIZE AND COMPUTE THE VALUES FOR GETTER.
-    set method3(param4) {
-    	statement;
-    }
-    // GETTER RETURNS WHAT IS SET BY SETTER METHOD.
-    get method3() {
-    	return statement;
+        return this.property1 + this.property2 - arg;
     }
 }
 
-// CLASS DECLARATION
-const objectName = new className(value1, value2);
-console.log(objectName.method1());			// PROTOTYPE METHOD.
-console.log(className.method2(objectName));	// STATIC METHOD.
-console.log(objectName.method3(value4));	// GETTER DOES NOT NEED PARENTHESIS.
+// INSTANTIATION
+const variable = new OBJTYPE(value1, value2);
 ```
-
-There is an alternative way to declare new object in a single expression.
-
-```js
-// COMBINATION OF (UNNAMED) DEFINITION AND DECLARATION.
-const objectName = class {
-	constructor(param1, param2){
-        this.property1 = param1;
-    	this.property2 = param2;
-    }
-}
-```
-
-The difference between the object type is that it uses constructor method that is made into the class rather than using the function as constructor.
 
 ### Inheritance
+Inheritance is an act of class providing properties and methods to another, where former and latter is called a base class and derived class.
 
-Class inheritance is done using `extends` keyword and its properties' value and methods can be accessed using `super` keyword.
+A derived class specifies which base class it inherits from with the `extend` keyword. Use the `super` keyword to access properties and methods of the base class from a derived class. For a constructor, use the `super()` method.
 
 ```js
-// DEFINITION OF THE PARENT CLASS.
-class parentClass {
-	constructor(param1, param2) {
-    	this.property1 = param1;
-        this.property2 = param2;
+/* CREATING BASE CLASS */
+class BASECLASS {
+	constructor(arg1, arg2) {
+    	this.property1 = arg1;
+        this.property2 = arg2;
     }
-    method1() {
+
+    method(arg) {
     	statements;
+        return this.property1 + this.property2 - arg;
     }
 }
 
-// DEFITION OF THE CHILD CLASS INHERITED FROM PARENT CLASS.
-class childClass extends parentClass {
+/* CREATING DERIVED CLASS */
+class DERIVEDCLASS extends BASECLASS {
     
-    // SUPER USED IN CONSTRUCTOR OF THE CHILD CLASS CALLS THE PARAMETER FROM PARENT CLASS.
-    constructor(param1, param2) {
-    	super(param1, param2)
+    /* "super()" METHOD FOR CALLING CONSTRUCTOR FROM THE BASE CLASS */
+    constructor(arg1, arg2) {
+    	super(arg1, arg2)
     }
-    method2() {
+
+    /* OVERRIDDEN BY DERIVED CLASS METHOD IF METHOD SHARES THE SAME NAME */
+    method(arg1) {
     	statements;
+        return (this.property1 + this.property2) * arg;
     }
-	method3() {
-        // SUPER USED WITH ITS METHOD CALLS THE METHOD OF THE PARENT CLASS.
-        super.method1();
+
+	method2() {
+        /* `super` KEYWORD FOR ACCESSING BASE CLASS PROPERTY AND METHOD */
+        let temp = super.method();
     	statements;
     }
 }
 ```
 
-## List of Objects
+## Built-in Object
+Most of the commonly used objects are already built inside JavaScript. Below introduces some of the well-known and useful built-in objects in JavaScript.
 
 ### `Math` Object
+The `Math` is a built-in object in JavaScript for mathematical calculation and has certain constants as its properties.
 
-`Math` is a pre-defined object useful for mathematical calculation.
+| PROPERTY | EXAMPLE       | DESCRIPTION                          |
+|----------|---------------|--------------------------------------|
+| `E`      | `Math.E`      | Euler's constant.                    |
+| `PI`     | `Math.PI`     | Constant Pi.                         |
+| `LN2`    | `Math.LN2`    | Natural log of the value 2.          |
+| `LOG10E` | `Math.LOG10E` | The base 10 log of Euler's constant. |
 
-| PROPERTY | EXAMPLE       | DESCRIPTION                                               |
-| -------- | ------------- | --------------------------------------------------------- |
-| `E`      | `Math.E`      | Euler's constant ($\varepsilon$).                         |
-| `PI`     | `Math.PI`     | Constant Pi ($\pi$).                                      |
-| `LN2`    | `Math.LN2`    | Natural log of the value 2 ($\ln 2$).                     |
-| `LOG10E` | `Math.LOG10E` | The base 10 log of Euler's constant ($\log \varepsilon$). |
-
-The object also provides methods for the calculation.
+The `Math` object also provides methods for the calculation.
 
 | METHOD     | EXAMPLE           | DESCRIPTION                       |
 | ---------- | ----------------- | --------------------------------- |
@@ -1062,69 +992,15 @@ The object also provides methods for the calculation.
 | `power()`  | `math.power(x,y)` | Value of `x` to the power of `y`. |
 | `random()` | `math.random()`   | Random number between 0 and 1.    |
 
-### `Map` Object
-
-An object to hold key and its corresponding value, just like a [dictionary](PRGMING_Python.md#**PYTHON: ITERABLE OBJECT**) iterable object in Python.
-
-```js
-let mapObject = new Map([[key1, value1], [key2, value2]]);
-```
-
-Map can take any iterable that is comprised of an array. While the key is a symbol or a string, its value can be a function, object, or any primitive.
-
-The object also provides methods as the following:
-
-| METHOD      | EXAMPLE              | DESCRIPTION                                           |
-| ----------- | -------------------- | ----------------------------------------------------- |
-| `set()`     | `map.set(key,value)` | Append the key and value.                             |
-| `get()`     | `map.get(key)`       | Acquire the corresponding value of the key.           |
-| `has()`     | `map.has(key)`       | Return Boolean `true` if the specified key exist.     |
-| `entries()` | `map.entries()`      | Return array `[key,value]` which iterates one-by-one. |
-
-### `Set` Object
-
-An object is unique in value where repeated value is removed, just like a set iterable object in Python.
-
-```js
-let setObject = new Set([value1, value2, value3, value1])
-//  setObject = [value1, value2, value3];
-```
-
-The object also provides methods as the following:
-
-| METHOD     | EXAMPLE             | DESCRIPTION                                         |
-| ---------- | ------------------- | --------------------------------------------------- |
-| `add()`    | `set.add(value)`    | Append the value.                                   |
-| `delete()` | `set.delete(value)` | Delete the value.                                   |
-| `has()`    | `set.has(value)`    | Return Boolean `true` if the specified value exist. |
-| `value()`  | `set.value()`       | Return list of values which iterates one-by-one.    |
-
-### `Promise` Object
-
-
-
-```js
-new Promise(function(param1, param2) {
-		if(condition)
-            param1(statement1); // EXECUTE STATEMENT1 ON TRUE.
-    	else
-            param2(statement2);	// EXECUTE STATEMENT2 ON FALSE.
-	}       
-);
-```
-
-
-
 ### `Date` Object Type
-
-`Date` object type can creates date-related objects which can be used for measuring time, checking date, calculating days and so forth.
+The `Date` object type creates a date-related object for measuring time, checking date, calculating days, and so forth.
 
 ```js
-// Stores current date and time (non-realtime).
+/* INSTANTIATION: CURRENT DATE AND TIME (NON-REALTIME) */
 var dateName = new Date();
 ```
 
-Passing value to its parameter can assign designated date to the variable. Following methods point to the same date but with three different approach: 
+Passing an argument designates the date and time for the variable. There are three different valid arguments for the object type as follows: 
 
 | ARGUMENT                  | EXAMPLE                                 |
 | ------------------------- | --------------------------------------- |
@@ -1132,7 +1008,7 @@ Passing value to its parameter can assign designated date to the variable. Follo
 | Date string               | `new Date("January 13, 1995 13:34:30")` |
 | Y, M, D, H, M, S, MS      | `new Date(95,0,13,13,34,30,0)`          |
 
-The object also provides methods for the calculation.
+The object type also has methods for date and time calculation.
 
 | METHOD          | EXAMPLE                  | DESCRIPTION                                               |
 | --------------- | ------------------------ | --------------------------------------------------------- |
@@ -1142,16 +1018,16 @@ The object also provides methods for the calculation.
 | `getHours()`    | `dateName.getHours()`    | Gets the hour from stored date in `dateName`.             |
 
 # **JAVASCRIPT: DOM**
+JavaScript contributes to various dynamic features for webpages when used with HTML and CSS. HTML declarative language presents its document as a tree-structured Document Object Model (DOM). 
 
-This chapter is specifically for integration with HTML & CSS. Document object model (DOM) represents a document in a logical structure and its HTML counterpart is shown as the figure below:
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/JavaScript\js_html_dom.png" style="display:block" width="100%"></div><center style="font-weight:bold">Figure 2. Document Object Model<sub><i>ref: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">Wikipedia.org</a></i></sub></center>
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/JavaScript\js_html_dom.png" style="display:block" width="100%"></div><center style="font-weight:bold">Figure #. General DOM of the HTML.</center>
+JavaScript can present a dynamic and flexible website by adding, removing, and modifying an element via accessing the DOM of HTML. Each block in the tree-structure is called a *node* in the DOM and represents an HTML element.
 
-JavaScript has an ability to access and manipulate the DOM, thus can dynamically add, remove, and even modify the HTML elements. Every block of square which represents element in HTML is called **node** in DOM.
+This chapter will briefly introduce the integration of JavaScript to HTML & CSS for practical web development.
 
-## **Node Relationship**
-
-Each element such as `<html>`, `<head>`,  `<h1>` and et cetera is a node of the structure. Nodes have a relation with other nodes like a family: parent, child, and sibling.
+## Node Relationship
+Each HTML element, such as `<html>`, `<head>`,  `<h1>` and more, is a node of the DOM. Nodes have a relation with other nodes like a family: parent, child, and sibling.
 
 | RELATIONSHIP | DESCRIPTION                                 |
 | :----------: | ------------------------------------------- |
@@ -1160,216 +1036,229 @@ Each element such as `<html>`, `<head>`,  `<h1>` and et cetera is a node of the 
 |   Sibling    | Nodes that share same parent.               |
 
 ## `document` Object
+A built-in `document` object accesses the nodes in the DOM with top-most authorization. Node creation, style modification, and event configuration are all done using the `document` object.
 
-A pre-defined `document` object is used to access the nodes in DOM,. In other word, the object is a DOM counterpart of root user (superuser) in Unix-like operating system.
-
-### Selecting Elements
-
-Selecting which node of element to access can be done as follows:
+### Selecting Element
+The `document` object can select HTML element(s) in the DOM using the methods below:
 
 | SYNTAX                                         | DESCRIPTION                                                  |
 | ---------------------------------------------- | ------------------------------------------------------------ |
-| `document.getElementById("idName")`            | Access the element ID of `idName`.                           |
-| `document.getElementsByClassName("className")` | Acquire the list of element of the same `className` class in an array format. |
-| `document.getElementsByTagName("tagName")`     | Acquire the list of element of the same `tagName` tag in an array format. |
+| `getElementById("ID")`            | Access the element ID of `ID`.                           |
+| `getElementsByClassName("CLASS")[index]` | Acquire an array of element of the same `CLASS` class (not a class in JS). |
+| `getElementsByTagName("DIV")[index]`     | Acquire an array of element of the same `DIV` tag. |
 
-Once accessed the element, you can use following properties to operates or select other elements of in relationship.
+The `document.getElementById()` does not return as an array since the ID attribute in HTML has a characteristic of uniqueness that can only be assigned to a single element.
+
+The selected element can access its parent, child, and sibling nodes with the following methods:
 
 | PROPERTY          | EXAMPLE                | DESCRIPTION                                                  |
 | ----------------- | ---------------------- | ------------------------------------------------------------ |
 | `parentNode`      | `node.parentNode`      | Returns the parent node of an element.                       |
 | `childNodes`      | `node.childNodes`      | Returns an array of an element's child nodes.                |
 | `firstChild`      | `node.firstChild`      | Returns the first child node of an element.                  |
-| `lasChild`        | `node.lastChild`       | Returns the last child node of an element.                   |
+| `lastChild`        | `node.lastChild`       | Returns the last child node of an element.                   |
 | `hasChildNodes`   | `node.hasChildNodes`   | Returns true if an element has any child nodes, otherwise false. |
 | `nextSibling`     | `node.nextSibling`     | Returns the next node at the same tree level.                |
 | `previousSibling` | `node.previousSibling` | Returns the previous node at the same tree level.            |
 
-### Changing Elements
-
-DOM sees each elements as an object; thus, the elements' attribute can be accessed like an object's.
+### Changing Element Style
+The DOM considers each element as an individual object; access attributes of an HTML element using the same syntax for properties of an object.
 
 ```html
-<!--SAMPLE HTML-->
-<div>
-    <img id="sample" src="image_path1.png" style="width:400px; height:300px;">
-    <span>Figure 1. This is an example image.</span>
+<!-- SAMPLE HTML -->
+<div id="SAMPLE">
+    <img src="path/to/image1.png" style="width:400px; height:300px;">
+    <span>Figure 1. sample image</span>
 </div>
 
-<!--JAVASCRIPT-->
+<!-- JAVASCRIPT -->
 <script>
-    /* ACQUIRING ELEMENT OF INTEREST. */
-    var node = document.getElementById("sample").getChildNodes;
+    /* ACCESSING ARRAY OF CHILD NODE OF ELEMENT OF "SAMPLE" ID */
+    const node = document.getElementById("SAMPLE").ChildNodes;
     
-    /* CHANGING ELEMENT ATTRIBUTES. */
-    node[0].src = "image_path2.png";
+    /* SELECTING <IMG> ELEMENT, THE 0TH CHILDREN, AND MODIFYING ITS STYLE*/
+    node[0].src = "path/to/image2.png";
     node[0].style.width = "800px";
     node[0].style.height = "600px";
 </script>
 ```
 
-Animation is possible by changing elements' properties using  `setInterval` and `clearInterval`.
+### Creating Element
+JavaScript can create a new element without editing HTML.
 
-| METHOD            | EXAMPLE                          | DESCRIPTION                                          |
-| ----------------- | -------------------------------- | ---------------------------------------------------- |
-| `setInterval()`   | `setInterval(funcName,millisec)` | `funcName` is executed with delayed `millisec` time. |
-| `clearInterval()` | `clearInterval(setInterval)`     | Disable `setInterval()` object.                      |
+| METHOD                     | DESCRIPTION                                                                    |
+|----------------------------|--------------------------------------------------------------------------------|
+| `createElement("DIV")`     | Create a `DIV` element but not yet allocated within the DOM.                   |
+| `createTextNode("String")` | Create a text node with `String` written but not yet allocated within the DOM. |
 
-### Adding & Removing Elements
+Due to the reason described in the table, the created element won't show on a webpage yet. HTML element appears on a webpage when added to the DOM.
 
-Adding element can be using methods below:
+### Adding & Removing Element
+Adding an element to the DOM is done using the following methods:
 
-| METHOD             | EXAMPLE                             | DESCRIPTION                                                  |
-| ------------------ | ----------------------------------- | ------------------------------------------------------------ |
-| `createElement()`  | `document.createElement("tagName")` | Create a `tagName` element node not yet placed in anywhere.  |
-| `createTextNode()` | `document.createTextNode("String")` | Create a `string` text node to be placed in other nodes.     |
-| `appendChild()`    | `node.appendChild("newNodw")`       | Place `newNode` as its child node.                           |
-| `insertBefore()`   | `node.insertBefore("node1,node2")`  | Place `node1` as a child node before already existing `node2` child. |
-| `cloneNode()`      | `node.cloneNode()`                  | Clone a current node.                                        |
+| METHOD           | DESCRIPTION                                                          |
+|------------------|----------------------------------------------------------------------|
+| `appendChild(node)`  | Place the `node` as its child node.                                   |
+| `insertBefore(node1,node2)` | Place the `node1` as a child node right before existing `node2` child node. |
+| `insertAfter(node1,node2)` | Place the `node1` as a child node right after existing `node2` child node. |
 
-Removing element can be done using method below:
+Removing an element to the DOM is done using the following methods:
 
-| METHOD          | EXAMPLE                       | DESCRIPTION                    |
-| --------------- | ----------------------------- | ------------------------------ |
-| `removeChild()` | `node.removeChild(childNode)` | Remove `childNode` child node. |
-
-Replacing the element is also possible.
-
-| METHOD           | EXAMPLE                          | DESCRIPTION                                  |
-| ---------------- | -------------------------------- | -------------------------------------------- |
-| `replaceChild()` | `node.replaceChild(node1,node2)` | Replace `node2` child to `node1` child node. |
+| METHOD              | DESCRIPTION                         |
+|---------------------|-------------------------------------|
+| `remove()`          | Remove the currently selected node. |
+| `removeChild(node)` | Remove the `node` child node.       |
 
 ```html
-<!--SAMPLE HTML-->
+<!-- SAMPLE HTML -->
 <div>
-    <p id="p1">First paragraph.</p>
-    <p id="p2">Second paragraph.</p>
+    <p id="P1">First paragraph.</p>
+    <p id="P2">Second paragraph.</p>
 </div>
 
-<!--JAVASCRIPT-->
+<!-- JAVASCRIPT -->
 <script>
-    /* APPEND TEXT NODE TO NEWLY CREATED PARAGRAPH ELEMENT. */
-    var textNode = document.createTextNode("New Text from JS.");
-    var paraNode = document.createElement("p");
+    /* APPEND TEXT NODE TO NEWLY CREATED PARAGRAPH ELEMENT */
+    const textNode = document.createTextNode("New Text from JS.");
+    const paraNode = document.createElement("p");
     paraNode.appendChild(textNode);
     
-    /* APPEND PARAGRAPH ELEMENT TO DIV ELEMENT. */
+    /* ADD PARAGRAPH ELEMENT AS A CHILD NODE OF THE DIV ELEMENT */
     document.getElementsByTagName("div")[0].appendChild(paraNode);
 </script>
 ```
 
-## **Events**
+## Events
+JavaScript can make a function executed when an event occurs, such as mouse click, keypress, submitting a form, and more. Although HTML is the one that detects events, JavaScript is the one that defines an event handler that executes code for those events.
 
-JavaScript can executes code upon occurrence of events, such as click, keypress, and submit. Although events are recognized by the HTML & CSS, its function called **event handler** is defined in JavaScript.
-
-There are several ways to execute events: one way is to inform the HTML source code what event to expect and define its handler in JavaScript.
+There are several ways of adding an event handler: one of them is directly determining what event to detect in an HTML source code.
 
 ```html
-<!--SAMPLE HTML-->
+<!-- SAMPLE 1 -->
 <div>
-    <!-- EVENT ON CLICKING. -->
+    <!-- <BUTTON> SIGNALS EVENT TO "functionName()" UPON CLICKING -->
     <button onclick="functionName()">CLICK</button>
 </div>
 
-<!--JAVASCRIPT-->
+<!-- JAVASCRIPT -->
 <script>
-    /* EVENT HANDLER. */
+    /* "functionName()" EVENT HANDLER */
     function functionName() {
         statements;
     }
 </script>
 ```
 
-More flexible and dynamic way to execute events without disturbing any HTML source code is by using DOM of JavaScript.
+A more flexible and dynamic way to execute events without disturbing any HTML source code is by using DOM of JavaScript.
 
 ```html
-<!--SAMPLE HTML-->
+<!-- SAMPLE 2 -->
 <div>
-    <!-- EVENT WILL BE ADDED USING DOM. -->
-    <button id="btn">CLICK</button>
+    <!-- EVENT HANDLER WILL BE ADDED ON THE DOM -->
+    <button>CLICK</button>
 </div>
 
-<!--JAVASCRIPT-->
+<!-- JAVASCRIPT -->
 <script>
-    /* EVENT HANDLER USING DOM. */
-    var x = document.getElementById("btn");	// Searches for an element to add event.
-    x.onclick = function () {				// a function without a name.
+    /* DEFINE AND ASSIGN AN EVENT HANDLER FOR THE <BUTTON> USING THE DOM. */
+    const variable = document.getElementsByTagName("BUTTON")[0];
+
+    /* "functionName()" EVENT HANDLER */
+    variable.onclick = () => {
         statements;
     }
 </script>
 ```
 
-The `addEventListener()` method is another way to add event and its event handler using JavaScript's DOM. Beware, the name of the event is not identical from the method introduced on previous section.
+The `addEventListener()` method is another way to add an event and possibly define its event handler using the DOM. Beware, the name of the events are not identical to the previous approaches.
 
-| METHOD                  | EXAMPLE                                      | DESCRIPTION                                    |
-| ----------------------- | -------------------------------------------- | ---------------------------------------------- |
-| `addEventListener()`    | `elem.addEventListener("event",funcName)`    | Add `event` that does `funcName` in `elem`.    |
-| `removeEventListener()` | `elem.removeEventListener("event,funcName")` | Remove `event` that does `funcName` in `elem`. |
+| METHOD                  | DESCRIPTION                                    |
+| ----------------------- | ---------------------------------------------- |
+| `addEventListener("click",funcName)`    | Add an event handler `funcName` to an element when the `click` event occurs.    |
+| `removeEventListener("click",funcName)` | Remove an event handler `funcName` from an element for the `click` event. |
 
 ```html
-<!--SAMPLE HTML-->
+<!-- SAMPLE 3 -->
 <div>
-    <!-- EVENT WILL BE ADDED USING addEventListener() METHOD. -->
-    <button id="btn">CLICK</button>
+    <!-- EVENT HANDLER WILL BE ADDED ON THE DOM -->
+    <button>CLICK</button>
 </div>
 
-<!--JAVASCRIPT-->
+<!-- JAVASCRIPT -->
 <script>
-    /* EVENT HANDLER USING DOM. */
-    var x = document.getElementById("btn");		// Searches for an element to add event.
-    x.addEventListener("click", functionName);	// Add event and its handler.
+    /* EVENT HANDLER FOR THE <BUTTON> USING "addEventListener()" */
+    const variable = document.getElementsByTagName("BUTTON")[0];
+    variable.addEventListener("click", functionName);
     
+    /* "functionName()" EVENT HANDLER */
     function functionName() {
         statements;
         
-        /* REMOVE EVENT AFTER EVENT HANDLER IS EXECUTED; MAKE FUNCTION SINGLE-USE. */
-        // Without the code below ables event handler to execute multiple times.
-        x.removeEventListener("click", functionName);
+        /* REMOVE EVENT AFTER EXECUTION; MAKES A FUNCTION SINGLE-USE. */
+        variable.removeEventListener("click", functionName);
     }
 </script>
 ```
 
 ### Event Propagation
-
-Event propagation defines priority order of the event handlers. For example, suppose there's an HTML source code as below:
+Event propagation defines the priority order of event handlers. For example, suppose there is an HTML source code shown below:
 
 ```html
-<div>
-    <P>
+<div onclick="functionDIV()">
+    <span onclick="functionSPAN()">
         Hello World!
-    </P>
+    </span>
 </div>
 ```
 
-When both elements have an event, which event handler should be executed first: `<div>` or `<p>`?
+When clicking the "Hello World!" text, which event handler is executed first: `<DIV>` or `<SPAN>`?
 
 * **Capturing**
-  : goes down the tree structure of DOM (`<div>` first, `<p>` later).
+  : event propagation goes down the tree structure of the DOM (`<DIV>` first, `<SPAN>` later).
 * **Bubbling**
-  : goes up the tree structure of DOM (`<p>` first, `<div>` later).
+  : event propagation goes up the tree structure of the DOM (`<SPAN>` first, `<DIV>` later).
 
-Event propagation can be set using `addEventListener()` method in `useCapture` Boolean parameter (default value is `useCapture = false`, bubbling).
+Event propagation is configured by the `useCapture` boolean parameter in the `addEventListener()` method in . Default setting is `useCapture = false` for bubbling.
 
-| METHOD               | EXAMPLE                                              | DESCRIPTION                                                  |
-| -------------------- | ---------------------------------------------------- | ------------------------------------------------------------ |
-| `addEventListener()` | `elem.addEventListener("event",funcName,useCapture)` | `useCapture` is a Boolean value: `true/false` for capture/bubble. |
+| EXAMPLE                                              | 
+|:----------------------------------------------------:| 
+| `elem.addEventListener("click",funcName,useCapture)` | 
+| The `useCapture` is a boolean parameter that captures when `true` and bubbles when `false`. |
 
-# **JAVASCRIPT: MODULE**
+## Repetitive Execution
+JavaScript can repetitively execute a code periodically with `setInterval()` and `clearInterval()` pair.
 
-Starting from ES6, JavaScript now supports modules to be imported made by the other developer, just like Python programming language.
+| METHOD            | EXAMPLE                          | DESCRIPTION                                          |
+| ----------------- | -------------------------------- | ---------------------------------------------------- |
+| `setInterval()`   | `setInterval(funcName,millisec)` | The function `funcName` is executed on every `millisec` interval. |
+| `clearInterval()` | `clearInterval(setInterval)`     | Disable repetitive execution of a `setInterval()` object.                      |
 
-```js
-/* JAVASCRIPT LOCATED IN "PATH/TO/MODULE.JS". */
-// EXPORT THE VARIABLE AND FUNCTION FOR OTHER JAVASCRIPT.
-export const variableName = value1;
-export const functionName = (param1) => {
-	return statement;
-}
+```html
+<!-- SAMPLE HTML -->
+<div>
+    <span>Hello World!</span>
+</div>
 
-/* JAVASCRIPT TO CALL THE MODULE FROM "PATH/TO/MODULE.JS". */
-// IMPORT SELECTED MODULE CONTENT
-import {variableName, functionName} from "path/to/module.js"
+<!-- JAVASCRIPT -->
+<script>
+    /* EXECUTE "functionName()" ON EVERY 0.5 SECOND */
+    let variable = setInterval(functionName, 500);
 
-// IMPORT ENTIRE MODULE CONTENT
-import * as moduleName from "path/to/module.js";
+    var index = 0;    // GLOBAL VARIABLE
+    const functionName = () => {
+        /* ON THIRD EXECUTION... */
+        if (index == 3)
+        {
+            /* DISABLE REPETITIVE EXECUTION OF "variable" */
+            clearInterval(variable);
+        }
+        else
+        {
+            statements;
+            index++;    // VALUE IN GLOBAL VARIALBE IS RETAINED
+        }
+    }
+</script>
 ```
+
+The repetitive execution eventually animates a smooth transition of the HTML element by changing its style attribute.
