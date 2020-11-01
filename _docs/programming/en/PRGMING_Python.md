@@ -11,15 +11,15 @@ order: 0x00
 # **PYTHON: INTRO**
 Python is a high-level programming language with applications in numerous areas, including web programming, scientific computing, and artificial intelligence. Python is simple, easy to learn, and has various development software (such as a library, framework) available thanks to the contribution from vast communities. For the beginner, Python is an excellent language to learn how to program.
 
-## Interpreter
+## Interpreted Language
 There are two different categories of program languages based on its execution: compiled language and interpreted language.
 
 Source code written in English needs to be translated to binary computer language for the computer to understand. The compiler is responsible for the translation, and its best examples are C/C++ language. On the other hand, the interpreter executes code without translation but has a drawback on a slower speed.
 
 Python is the interpreted language, and the code runs equivalently despite running on a different system as long as it has the interpreter (aka. cross-platform).
 
-### CPython
-The first interpreter for Python was developed using the C programming language, called CPython. CPython is the most widely used Python interpreter, and there are others developed using different languages such as Jython (Java implemented), IronPython (.NET implemented), and PyPy (pure Python implemented).
+### CPython Interpreter
+The first interpreter for Python was developed using C programming language, called CPython. CPython is the most widely used Python interpreter, and there are others developed using different languages such as Jython (Java implemented), IronPython (.NET implemented), and PyPy (pure Python implemented).
 
 Although introduced as the interpreted language, CPython technically uses both compiler and interpreter. First, the compiler translates Python code to bytecode, then the interpreter executes the bytecode. This bytecode is the one that guarantees Python's cross-platform property.
 

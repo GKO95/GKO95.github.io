@@ -14,7 +14,7 @@ JavaScript is a procedural web development language used together with HTML & CS
 
 This document focuses on JavaScript application in web development, thus only introduces crucial fundamental concepts while ignoring irrelevant.
 
-## Interpreter
+## Interpreted Language
 There are two different categories of program languages based on its execution: compiled language and interpreted language.
 
 Source code written in English needs to be translated to binary computer language for the computer to understand. The compiler is responsible for the translation, and its best examples are C/C++ language. On the other hand, the interpreter executes code without translation but has a drawback on a slower speed.
