@@ -10,81 +10,146 @@ summary: "."
 order: 0x01
 ---
 # **C: INTRO**
+> *Refernce: [Microsoft Docs C Language Documentation](https://docs.microsoft.com/en-us/cpp/c-language/)*
 
-General-purpose programming language successor to *B* language developed at Bell Labs, designed to construct utilities for Unix. Currently, C is the most widely used programming language and has influenced on numerous programming languages such as C++, C#, Python, Java, and more. 
+C programming language is a predecessor of the *B* programming language for UNIX software development. Currently, C language is the most widely used programming language and had influenced C++, C#, Python, Java, and more. The C language has a faster processing speed and excellent compatibility, making it still great use for application and firmware development.
 
-Though C++ is a superset of C programming language as it provides more functionality, C still has far better advantage on execution speed with greater compatibility and portability. This makes C a common language on many firmware & software development; Python is originally developed using C language!
+## Compiled Language
+There are two different categories of program languages based on its execution: compiled language and interpreted language.
 
-## Paradigm
+An interpreter allows a computer to reads the source code written in English and execute directly, mostly benefitting from cross-platform support that can run the program on a different system and architecture. Python is one of the best examples of an interpreted language. However, a compiler generates an object file written in machine-friendly code by translating from English-written source code.
 
-Paradigm is a classification of programming language based on their features. Paradigms are mainly categorized into two different groups: imperative, and declarative programming.
-
-### Imperative Programming
-
-Imperative programming is a paradigm that executes program using statements (a line of code that performs certain action) in sequence; it is a programming that focuses on defining how to execute. Below is an example of imperative programming in C language:
-
-```c
-// HOW TO EXECUTE: CONDITIONAL (CHECKS MODULUS AND ASSIGN "even" OR "false")
-auto variable = value % 2 == 0 ? "even" : "odd";
-```
-
-The list of imperative programming languages are: C/C++, C#, Python, JavaScript, Java, and more.
-
-*Procedural Programming* is one of the subcategory of imperative programming paradigm. Just like imperative, procedural programming executes code in sequence but supports structuring procedures (aka. functions).
-
-*Object-Oriented Programming* (abbrev. OOP) is another subcategory of imperative programming paradigm, mainly using object that can store data (fields) and procedures (methods). OOP is considered imperative programming since the procedures within objects can access and modify the data fields.
-
-### Declarative Programing
-
-Declarative programming is a paradigm that executes program purely by declaration but without describing the flow, often defined as any style of programming that is not imperative; it is a programming that focuses on defining what to execute. Below is an example of declarative programming in HTML language:
-
-```html
-<!-- WHAT TO EXECUTE: "IMG" TAG (PRESENT IMAGE "./image.png" IN 400x300) -->
-<img src="./image.png" width="400" height="300" />
-```
-
-The list of imperative programming languages are: HTML, Prolog, SQL, QML, Regex, and more
-
-*Functional programming* is one of the declarative paradigm that focuses on using pure functions. While this paradigm is similar to procedural programming from imperative, there is a main difference: functional programming do not have side-effects which can occur on procedural programming, depending purely on arguments and return value (aka. *pure function*).
-
-## Compilation
-
-C/C++ language uses compiler to create executable file from the source code. Compiler translates C source code (written in high-level language: English) to a language computer can understand like binary code (low-level language). Compiled application can be executed without compiler afterward.
-
-Compiler has a several standard revision for ISO (International Organization of Standardization) based on the time it was released. The most renowned revision is a ANSI C (aka. C89) and C99. This document will instruct the programming language based on ANSI C at minimum.
-
-Compilation of C/C++ language is divided into two stage that is done by preprocessor and compiler (technically, preprocessor is included inside a compiler).
-
-### Preprocessor
-
-Preprocessing is a first stage of compilation done by a preprocessor. Preprocessor directive (aka. compiler directive) which is denoted by octothorpe symbol `#` in the script commands for preprocessor to perform certain actions before compiler does.
-
-| Preprocessor Directive | Example               | Summery                                          |
-| :--------------------- | --------------------- | ------------------------------------------------ |
-| `#include`             | `#include <iostream>` | Include header file to the script.               |
-| `#define`              | `#define SQUARE`      | Define new macro that can be used in the script. |
-| `#pragma`              | `#pragma once`        | Provide additional options to the compiler.      |
-
-Preprocessor does not read the C/C++ language but accepts preprocessor directive, comments, declaration, and et cetera within a source code and returns modified source code with preprocessor directive activated, comments removed, header files included, et cetera for compiler to process.
-
-Preprocessor directive is not necessary when programming and does not observe C/C++ language grammar, but it does make programming much easier. Preprocessor is one of the components included in a compiler. 
+C language is a compiled language that doesn't support cross-platform, but it processes faster than interpreted language due to its optimization to the current system.
 
 ### Compiler
+C language categorizes its compiler version by the year of standard released by the International Organization for Standardization(ISO); ANSI C (aka. C89) and C99 is the most commonly used version. This document introduces C language based on the ANSI C compiler at minimum.
 
-After preprocessing is finished, the official stage of compilation is processed by the compiler. Compiler starts translating C/C++ source code to a language computer can understand, supported by those activated by preprocessor directives.
+### Preprocessor
+A preprocessor is responsible for optimizing the source code before the compiler translates to binary code. A command for a preprocessor is called *preprocessor directive* and has octothorpe `#` at its prefix.
+
+| DIRECTIVES | EXAMPLE               | DESCRIPTION                                          |
+| :--------------------- | --------------------- | ------------------------------------------------ |
+| `#include`             | `#include <iostream>` | Includes header file to the script.               |
+| `#define`              | `#define SQUARE`      | Defines new macro for the project. |
+| `#pragma`              | `#pragma once`        | Provides additional options for the compiler.      |
+
+A preprocessor does not read C language source code nor follows C language syntax. It only processes its directives, removes comments, and provides optimized source code to the compiler. A preprocessor directive isn't necessary but makes the coding easier and convenient. The preprocessor resides within the compiler program.
+
+# **C: INSTALL**
+A compiler for C is essential when developing with C programming language, and there are various C compilers available designed by different companies and organizations. The compilation method may differ depending on the compiler, but it doesn't matter for general users as every compiler observes the same ISO standard that defines the working mechanism.
+
+An integrated development environment is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C language project.
+
+## Visual Studio
+[Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C programming, select the "Desktop development with C++" workload.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 1. Workload for C programming on Visual Studio.</center>
+
+The reason to select the C++ workload is that the MSVC compiler is mainly a C++ compiler that also compiles C language. Visual Studio does not have a workload for pure C language development.
+
+Visual Studio will start with the window shown below. To create a new project for C language, select the "Create a new project" button.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Startup window of Visual Studio.</center>
+
+However, Visual Studio does not have an option to create a project for C language since it is all integrated into C++ components. To create a C project, follow the procedure below:
+
+1. Select the language as C++ and choose the "Empty Project" option.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 3. Creating a C project on Visual Studio (step 1).</center>
+
+2. Designate names for the project and solution. Here, the project is a `.vcxproj` extension file that manages its source codes and compilation options, and the solution is a `.sln` extension file that can contain multiple projects. It is recommended to open the solution file on Visual Studio unless you only want to open a single project.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 4. Creating a C project on Visual Studio (step 2).</center>
+
+3. On the Solution Explorer, right-click the Source Files filter and select the `Add > New Items...` option.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 5. Creating a C project on Visual Studio (step 3).</center>
+
+4. On the Add New Item window, change the extension from `.cpp` to `.c`, which is a source code extension for C language.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 6. Creating a C project on Visual Studio (step 4).</center>
+
+Since this is an empty project, there won't be any code written on the source code. Paste the code below to make the source code at least compilable for the C project.
+
+```c
+#include <stdio.h>
+
+int main() {
+    // Insert code here...
+    printf("Hello, World!\n");
+    return 0;
+}
+```
+
+Visual Studio can run a C language program in two different ways: debugging mode (`F5`) and without debugging mode (`Ctrl+F5`). Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
 
 ### CRT Security Warning
+C Run-time Library (CRT) is a C++ standard library that also contains the ISO C99 standard library. For stability reason, the MSVC compiler has restricted some functions and replaced them with more stable ones suffixed by `_s`. Attempting to use restricted functions results in compilation error `C4996` related to stability warning.
 
-C Run-time Library (CRT) is the part of the C++ Standard Library that incorporates ISO C99 standard library. However, there are several functions not recommended as more secure version of functions are available, suffixed by `_s`. Attempting to utilize these less secured function can alert `C4996` compilation error related to function security warning.
-
-CRT security warning is often found when programming with C language. To override this warning, enter the macro definition shown below:
+CRT warning commonly appears when programming with C language. However, this is just a warning that can be ignored by the preprocessor directive below:
 
 ```c
 #define _CRT_SECURE_NO_WARNINGS
 ```
 
-## Header File
+## Xcode
+[Xcode](https://developer.apple.com/download/release/) is the most renowned IDE for macOS developed by Apple, which uses the clang compiler. Xcode supports various languages, and unlike Visual Studio, Xcode has a project option for C language.
 
+Start Xcode, then create a new project by selecting `File > New > Project...`.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 7. Startup window of Xcode.</center>
+
+There are various projects available for developing an application for Apple's product. To create a C project, follow the procedure below:
+
+1. Since the computer is macOS, select the macOS tab, then the Command Line Tool to execute a terminal-based program.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 8. Creating a C project on Xcode (step 1).</center>
+
+2. Name a project in the Product Name and select the Language as C.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 9. Creating a C project on Xcode (step 2).</center>
+
+3. Designate a path for the project.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 10. Creating a C project on Xcode (steo 3).</center>
+
+4. The left panel shows there is the `main.c` source file under the `Experiment` folder with minimum codes required to run the program.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 11. Creating a C project on Xcode (step 4).</center>
+
+Xcode can run a C language program in two different ways: debugging mode and without debugging mode. Hotkey for both are `⌘+R` and whether to debug or not is configured on project setting. Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
+
+## Terminal
+Linux OS has GCC (GNU Compiler Collection) compiler installed by default but without an IDE. However, IDE is not essential when compiling a source code, which is possible on a terminal as well. With the increasing number of projects starting to use a single-board computer (SBC) like Raspberry Pi, knowing how to develop software in Linux OS became crucial.
+
+This section uses the code from *Figure 11. Creating a C project on Xcode (step 4)* to the `main.c` source file to show how to compile on Linux OS.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" style="display:block" src="./../../../assets/images/docs/programming/C/c_gcc_project1.png" width="100%"></div><center style="font-weight: bold;">Figure 12. Example code for GCC compiler.</center>
+
+Suppose the `main.c` source file is at `~/Workspace/C/Experiment` directory.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_gcc_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 13. Creating C language program using GCC compiler (step 1).</center>
+
+Run a terminal and move to the directory where the source file is; change the current directory with the `cd` command. Enter the following command to compile the source code with GCC compiler.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_gcc_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 14. Creating C language program using GCC compiler (step 2).</center>
+
+The command is ordering to compile the `main.c` source file and outputs (`-o`) the `main` object file. It is one of the simple commands of GCC compiler, and linking external libraries is also possible by adding more options.
+
+The directory now has an object file called `main`, compiled from the source code.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_gcc_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 15. Creating C language program using GCC compiler (step 3).</center>
+
+To execute an object file from a terminal, place `./` followed by the file name.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_gcc_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 16. Creating C language program using GCC compiler (step 4).</center>
+
+Here, the command `./` represents the current directory. Without this command, a terminal wouldn't be able to find the `main` file unless the directory is specified by the environment variable.
+
+# **C: BASIC**
+Every programming language has its own rules to be observed and fundamental data that works as a basis of the program. Failed to observe this causes either error or unexpected results. As for the beginning of the practical coding, this chapter will introduce basic knowledge of C language coding.
+
+## Header File
 A file that contains function declaration and macro definition which can be used on source code. There exist two different ways of including the header file to the source code: angled brackets `<>` and double quotations `""`.
 
 ```cpp
@@ -109,7 +174,6 @@ Following is the list of header files that is often used when programming with C
 | `time`       | `#include <time.h>`   | Defines date and time-handling functions (`ctime` in C++):<br />`time()`, `clock()` |
 
 ### Precompiled Header
-
 Precompiled header is a header that is compiled into an intermediate form that is faster to process for the compiler. Having benefit of reducing compilation time, precompiled header is used on the project that includes large amount of header files, or a header file with huge data.
 
 However, precompiled header is not always beneficial as using precompiled header does take more time to prepare for compilation. For a header file that is small or often subject to change, precompiled header is unnecessary.
@@ -118,10 +182,6 @@ However, precompiled header is not always beneficial as using precompiled header
 | ------------------ | ------------------------------------- |
 | `stdafx.h`         | Visual Studio 2015 (msvc14) and below |
 | `pch.h`            | Visual Studio 2017 (msvc15) and above |
-
-# **C: BASIC**
-
-General programming language has essential, fundamental, or even helpful data and syntax that needs to be observed and acknowledged when coding. As the beginning of the practical coding, this chapter will introduce basic information on C++ language coding.
 
 ## Comment
 
@@ -141,7 +201,6 @@ multiple line of comment can be placed here.
 ```
 
 ## Identifier
-
 Identifier is a name used to identify a data such as namespace, variable, function, object, class, and more. In other word, it is just a (user-defined) name. There are rules identifier has to observe:
 
 * First character is only allowed to have an alphabet letters and underscore `_`.
@@ -149,7 +208,6 @@ Identifier is a name used to identify a data such as namespace, variable, functi
 * Black spaces are prohibited.
 
 ## Input & Output
-
 C languages displays the results by writing on the console windows and has several different version of output:
 
 | OUTPUT      | SYNTAX                            | DESCRIPTION                                                  |
@@ -211,7 +269,6 @@ Hello World!
 ```
 
 ### Formatted Specifier
-
 Format specifier is to specify the format of data to be accepted as input. While format specifier is available on both `scanf()` input function and `printf()` output function, splicing data (`Program -> Pro`) should be formatted on input-side and how it is presented without modifying data (`3.14159 -> 3.14`) should be formatted on output-side function.
 
 ```c
