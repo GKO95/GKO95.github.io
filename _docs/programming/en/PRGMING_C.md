@@ -150,47 +150,53 @@ Here, the command `./` represents the current directory. Without this command, a
 Every programming language has its own rules to be observed and fundamental data that works as a basis of the program. Failed to observe this causes either error or unexpected results. As for the beginning of the practical coding, this chapter will introduce basic knowledge of C language coding.
 
 ## Header File
-A file that contains function declaration and macro definition which can be used on source code. There exist two different ways of including the header file to the source code: angled brackets `<>` and double quotations `""`.
+A header file is a `.h` extension file responsible for letting the script know the existence of data or functionalities. Commonly paired with a `.c` source file, header files can let the other source files to use the data and functionalities defined by its pair.
+
+C language has header files for the source codes already compiled for developers to use, aka. a library. These libraries that come along with a compiler is called the standard library. Following are the header files for some of the C standard library:
+
+| HEADER FILES | SYNTAX                | DESCRIPTION                                                      |
+| ------------ | --------------------- | ------------------------------------------------------------ |
+| `stdio`      | `#include <stdio.h>`  | Defines standard input/output function:<br />`printf()`, `scanf()` |
+| `stdlib`     | `#include <stdlib.h>` | Defines various features, such as memory allocation, exception management (`cstdlib` in C++):<br />`rand()`, `malloc()` |
+| `math`       | `#include <math.h>`   | Defines common mathematical functions (`cmath` in C++):<br />`exp()`, `cos()` |
+| `time`       | `#include <time.h>`   | Defines date and time-handling functions (`ctime` in C++):<br />`time()`, `clock()` |
+
+There are two different ways of including a header file to the source code: angled brackets `<>` and double quotations `""`.
 
 ```cpp
 #include <stdio.h>
 #include "header.h"
 ```
 
-The difference is which location preprocessor searches for the including header files.
+The difference between these twos is where the preprocessor should search for the header file from:
 
 * `#include <header.h>`
-    : searches directories pre-designated by the compiler or IDE, generally used for system header.
+    : search directories pre-designated by the system, compiler, or IDE; this syntax is used to include a system header.
 * `#include "header.h"`
-    : searches current local directories where source file is located firsthand. If failed to find the match automatically searches in the pre-designated directories, just like `#include <header.h>`. This method is generally used for user-defined header.
-
-Following is the list of header files that is often used when programming with C language.
-
-| Header Files | Syntax                | Summery                                                      |
-| ------------ | --------------------- | ------------------------------------------------------------ |
-| `stdio`      | `#include <stdio.h>`  | Defines standard input/output function:<br />`printf()`, `scanf()` |
-| `stdlib`     | `#include <stdlib.h>` | Defines various features, such as memory allocation, exception management (`cstdlib` in C++):<br />`rand()`, `malloc()` |
-| `math`       | `#include <math.h>`   | Define common mathematical functions (`cmath` in C++):<br />`exp()`, `cos()` |
-| `time`       | `#include <time.h>`   | Defines date and time-handling functions (`ctime` in C++):<br />`time()`, `clock()` |
+    : search from the current local directories where the source file is located. If failed to find the header, automatically search from pre-designated directories, just like `#include <header.h>` does; this syntax is used to include a user-defined header.
 
 ### Precompiled Header
-Precompiled header is a header that is compiled into an intermediate form that is faster to process for the compiler. Having benefit of reducing compilation time, precompiled header is used on the project that includes large amount of header files, or a header file with huge data.
+A precompiled header is a header file that compiles into an intermediate form that is faster to process for a compiler. Because it reduces compilation time, a precompiled header is used on the project that includes many header files or a header file with enormous data.
 
-However, precompiled header is not always beneficial as using precompiled header does take more time to prepare for compilation. For a header file that is small or often subject to change, precompiled header is unnecessary.
+However, using a precompiled header is not always beneficial because it takes more time to prepare for compilation. For a header file that is small or subject to change frequently, a precompiled header is unnecessary.
 
-| Precompiled Header | Compiler                              |
+| PRECOMPILED HEADER | COMPILER                              |
 | ------------------ | ------------------------------------- |
 | `stdafx.h`         | Visual Studio 2015 (msvc14) and below |
 | `pch.h`            | Visual Studio 2017 (msvc15) and above |
 
-## Comment
+## Statement Terminator
+The "statement" in programming represents a code that executes or processes data. In C language, every statement needs to end with a statement terminator denoted by a semicolon `;`.
 
-There are two different comments in C/C++: line comment and block comment.
+One of the common mistakes made by C language beginners is the absence of a statement terminator. Therefore, developers need to keep this in mind when programming with languages based on C (such as C++ and C#).
+
+## Comment
+Comment in a programming language is not executed and is commonly used to write down information related to the programming on source codes. There exist two comments in C language: line comment and block comment.
 
 * **Line comment**
-    : a comment worth a single line of code, and is declared by `//` (double slash).
+    : a comment worth a single line of code, declared by `//`.
 * **Block comment**
-    : a comment with multiple lines of code by using pairs of slash asterisk `/* */`.
+    : a comment with multiple lines of code, declared by `/* */`.
 
 ```c
 /*
@@ -200,31 +206,24 @@ multiple line of comment can be placed here.
 // LINE COMMENT: for a single line of code.
 ```
 
-## Identifier
-Identifier is a name used to identify a data such as namespace, variable, function, object, class, and more. In other word, it is just a (user-defined) name. There are rules identifier has to observe:
-
-* First character is only allowed to have an alphabet letters and underscore `_`.
-* Beside the first character may use alphabet letters, digits, or underscores.
-* Black spaces are prohibited.
-
 ## Input & Output
-C languages displays the results by writing on the console windows and has several different version of output:
+C language has several input and output functions for a text-based terminal. Below is a list of output functions:
 
 | OUTPUT      | SYNTAX                            | DESCRIPTION                                                  |
 | ----------- | --------------------------------- | ------------------------------------------------------------ |
 | `putchar()` | `putchar('A');`                   | Prints a single character on a console.                      |
 | `puts()`    | `puts("Text");`                   | Prints sequence of characters (aka. string) on a console; auto new-line. |
-| `printf()`  | `printf("format", var);`          | Prints sequence of characters (aka. string) on a console, with format support. |
-| `fprintf()` | `fprintf(stream, "format", var);` | Extension of `printf()` function, available with `stream` selection.<br />`printf(...)` is equivalent to `fprintf(stdout, ...)`, where `stdout` is *standard output stream*. |
+| `printf()`  | `printf("format", var);`          | Prints sequence of characters (aka. string) on a console with formatting. |
+| `fprintf()` | `fprintf(stream, "format", var);` | Extension of the `printf()` function, available with a `stream` selection; the `printf(...)` is equivalent to the `fprintf(stdout, ...)`, where `stdout` is the *standard output stream*. |
 
 ```c
-// PUTCHAR()
+// "putchar()" OUTPUT FUNCTION
 putchar('A');
 
-// PUTS()
+// "puts()" OUTPUT FUNCTION
 puts("Hello World!");
 
-// PRINTF()
+// "printf()" OUTPUT FUNCTION
 float variable = 3.14159;
 printf("variable: %.2f", variable);
 ```
@@ -234,42 +233,46 @@ AHello World!
 variable: 3.14
 ```
 
-Meanwhile, there are several different version of input which it reads the input data from the console:
+Below is a list of input functions in C language:
 
 | INPUT       | RETURN                        | DESCRIPTION                                                  |
 | ----------- | ----------------------------- | ------------------------------------------------------------ |
-| `getchar()` | Character                     | Accepts foremost character as an input.                      |
-| `gets()`    | String (aka. character array) | Accepts sequence of characters (aka. string) as an input.    |
-| `scanf()`   | Format-specific               | Accepts inputs matching format specifier; requires address (`&`) operator, except for string. |
+| `getchar()` | Character                     | Reads foremost character as an input.                      |
+| `gets()`    | String (aka. character array) | Reads sequence of characters (aka. string) as an input.    |
+| `scanf()`   | Format-specific               | Reads data as an input in the specified format; requires address (`&`) operator except for a string. |
 
 ```c
-// GETCHAR()
-char var1;
-var1 = getchar();
+// "getchar()" INPUT FUNCTION
+char variable1;
+variable1 = getchar();
 
-// GETS()
-char var2[20];
-gets(var2);
+// "gets()" INPUT FUNCTION
+char variable2[20];
+gets(variable2);
 
-// SCANF()
-float var3; char var4[10];
-scanf("%f %3s", &var3, var4);
+// "scanf()" INPUT FUNCTION
+float variable3; char variable4[10];
+scanf("%f %3s", &variable3, variable4);
 ```
 
 ```
 A
->>> var1 = 'A'
+>>> variable1 = 'A'
 
 Hello World!
->>> var2 = "Hello World!"
+>>> variable2 = "Hello World!"
 
 3.0 Program
->>> var3 = 3.000000
->>> var4 = "Pro"
+>>> variable3 = 3.000000
+>>> variable4 = "Pro"
 ```
 
 ### Formatted Specifier
-Format specifier is to specify the format of data to be accepted as input. While format specifier is available on both `scanf()` input function and `printf()` output function, splicing data (`Program -> Pro`) should be formatted on input-side and how it is presented without modifying data (`3.14159 -> 3.14`) should be formatted on output-side function.
+The format specifier is to specify the format on how an input of output function should read or print data. The format specifier works differently depending on input and output.
+
+* Format specifier on an input function affects the value of data. Slicing characters from a word is one of the examples.
+
+* Format specifier on an output function maintains the value of data but only affects how it is shown on a terminal. Rounding a decimal point is one of the examples.
 
 ```c
 int variable;
@@ -291,47 +294,31 @@ Enter: 1234567
 |  `%c`  | Character             |
 |  `%s`  | String                |
 |  `%x`  | Hexadecimal           |
+|  `%p`  | Pointer               |
 
-### Escape Character
+> The `%3d` format specifier does not extract only three front numbers but rather shows three digits at minimum. Hence, the `%7d` format specifier would have shown the number `0012345`.
 
-Escape character `\` is used to escape from sequence of character and execute certain operation within text-base data.
+## Identifier
+An identifier is a name used to identify data in programming. In other words, it is just a user-defined name. C language has the following rules when naming an identifier:
 
-```c
-printf("First Line\nSecond Line");
-```
-
-```
-First Line
-Second Line
-```
-
-| SYNTAX | DESCRIPTION    |
-| ------ | -------------- |
-| `\n`   | New line       |
-| `\t`   | Horizontal tab |
-| `\\`   | Backslash      |
-| `\b`   | Backspace      |
-| `\'`   | Single quote   |
-| `\"`   | Double quote   |
+* Only alphabet, number, and underscore `_` is allowed.
+* First letter cannot start with a number.
+* Blank space is prohibited.
 
 ## Data Type
-
-Data type is one of the important factor which determines type and byte size of the data. A well-implemented data type can results memory and time efficiency when processing the script.
-
-C programming language have several number of pre-defined type identifier as follows:
+A data type is one of the crucial factors which determines the type and byte size of the data. A well-implemented data type can make a program efficient on both memory and processing time. C language has several numbers of built-in data type as follows:
 
 | IDENTIFIER | DATA TYPE              | DESCRIPTION                                                  |
 | ---------- | ---------------------- | ------------------------------------------------------------ |
 | `int`      | Integer                | 32-bits precision integer number.<br />Size: 4 bytes         |
-| `float`    | Floating point number  | Real number with decimal points.<br />Size: 4 bytes          |
-| `double`   | Double-precision float | Float with doubled precision and memory.<br />Size: 8 bytes  |
-| `char`     | Character: `''`        | A single character, e.g. `'A'` and `'?'`.<br />Size: 1 byte  |
+| `float`    | Floating point number  | Real number with a decimal point.<br />Size: 4 bytes          |
+| `double`   | Double-precision float | Float with a doubled precision and memory.<br />Size: 8 bytes  |
+| `char`     | Character: `''`        | A single character, such as `'A'` or `'?'`.<br />Size: 1 byte  |
 | `bool`     | Boolean                | Non-zero represents `true` while zero is `false`.<br />Size: 1 byte |
 | `void`     | Void                   | Non-specific data type.<br />Size: 1 byte                    |
 
-### `sizeof()` Operator
-
-An operator that returns the allocating memory size of data type or variable in bytes.
+### `sizeof()` Function
+The `sizeof()` function returns allocated memory size of the type or data in bytes.
 
 ```c
 sizeof(int);		// SIZE: 4 BYTE
@@ -339,8 +326,9 @@ sizeof(char);		// SIZE: 1 BYTE
 ```
 
 ## Variable
+Variable is a container for data that can be assigned using the assignment operator `=`. C language must designate a variable with one of the data types, which can only have data with that data type.
 
-Variable is a container for the data assigned using assignment (`=`) operator. There are three different common stages in variable: declaration, definition, and initialization.
+아래의 예시는 `variable`이란 식별자를 가진 변수가 정수 자료형만 할당받을 수 있는 존재임을 컴파일러에게 알리는 동시에 메모리 할당을 통해 데이터를 가지는데, 이를 프로그래밍에서는 *정의(definition)*이라고 부른다.
 
 * **Declaration**
     : declaration is declaring existence of the construct of such as variables, objects, and more. The declaring also includes specifying which data type the construct is.
@@ -468,6 +456,27 @@ Logical operator consist of AND, OR, and NOT logic. When doing so, think of `tru
 | `&&`     | AND   | `true` when all the arguments are `true`, else `false`.    |
 | `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
 | `!`      | NOT   | Change `true` to `false` and vice versa.                   |
+
+### Escape Character
+Escape character `\` is used to escape from a sequence of characters and execute certain operations within text-based data. In the introduction on string data type, `\n` is used to change to a new line.
+
+```c
+printf("Hello\nWorld!!");
+```
+
+```
+Hello
+World!
+```
+
+| SYNTAX | DESCRIPTION    |
+| ------ | -------------- |
+| `\n`   | New line       |
+| `\t`   | Horizontal tab |
+| `\\`   | Backslash      |
+| `\b`   | Backspace      |
+| `\'`   | Single quote   |
+| `\"`   | Double quote   |
 
 # **C: CONDITIONAL AND LOOP**
 
