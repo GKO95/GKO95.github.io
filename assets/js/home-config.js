@@ -314,6 +314,7 @@ const MenuDesign = (storage) => {
     
     document.getElementById("menu-title").innerText = (lang == 'en') ? "About" : "소개글";
     document.styleSheets[0].insertRule(`#home #menu-content h1 { border-bottom: solid ${(theme=='Light')?'black':'white'} 4px; }`);
+    document.styleSheets[0].insertRule(`#home #menu-about { background-color: ${(theme=='Light')?'rgb(248,248,248)':'rgb(32,32,32)'}; border-color: ${(theme=='Light')?'black':'white'}}`);
 
     xhr.send();
 
