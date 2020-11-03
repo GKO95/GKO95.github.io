@@ -107,7 +107,7 @@ multiple lines of comment can be placed here and can be viewed even on runtime.
 ```
 
 ## Input & Output
-Python has a single input and output function for a terminal text-based:
+Python has a single input and output function for a text-based terminal:
 
 * **Input function `input()`**: the function shows the text inside the parenthesis on a terminal and accepts text data written when pressed Enter/Return key.
 * **Output function `print()`**: the function shows the text inside the parenthesis on a terminal.

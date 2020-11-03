@@ -202,12 +202,12 @@ A declared variable does not need `var,` `let,` or `const` keyword when using. A
 Initialization is the first assignment to a variable where it commonly occurs on the *definition* process.
 
 ```js
-# VARIABLE INITIALIZATION
+// VARIABLE INITIALIZATION
 let variable = 1
 ```
 
 ### Local & Global Variable
-There are two types of variable in Python:
+There are two types of variable in JavaScript:
 
 * **Local variable**
     : a variable defined within the code block, such as functions and classes. Data stored inside local variables are released when the program escapes from the code block, and the variables becomes unavailable outside. Due to this property, local variables may have the same name as other variables defined outside the code block.
