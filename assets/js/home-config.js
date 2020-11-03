@@ -299,7 +299,7 @@ const MenuDesign = (storage) => {
     let theme = storage.getItem("THEME");
 
     let xhr = new XMLHttpRequest();
-    xhr.open('GET',`/assets/html/${lang}.instruction.html`);
+    xhr.open('GET',`/assets/html/${lang}.about.html`);
     xhr.onreadystatechange = () => {
         if(xhr.readyState === XMLHttpRequest.DONE) {
             // In local files, status is 0 upon success in Mozilla Firefox
@@ -312,8 +312,9 @@ const MenuDesign = (storage) => {
         }
     };
     
-    document.getElementById("menu-title").innerText = (lang == 'en') ? "Instruction" : "사용 설명서";
+    document.getElementById("menu-title").innerText = (lang == 'en') ? "About" : "소개글";
     document.styleSheets[0].insertRule(`#home #menu-content h1 { border-bottom: solid ${(theme=='Light')?'black':'white'} 4px; }`);
+    document.styleSheets[0].insertRule(`#home #menu-about { background-color: ${(theme=='Light')?'rgb(248,248,248)':'rgb(32,32,32)'}; border-color: ${(theme=='Light')?'black':'white'}}`);
 
     xhr.send();
 
