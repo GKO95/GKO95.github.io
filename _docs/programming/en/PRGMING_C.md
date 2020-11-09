@@ -1351,32 +1351,33 @@ ptr = NULL;
 ```
 
 # **C: FILE MANAGEMENT**
-C language can read and write external file to save or import data. This chapter is mainly focused on accessing and modifying `.txt` extension text file.
+C language can read and write external files to save or load data. This chapter focuses on accessing and modifying the `.txt` extension text file.
 
 ## Opening Files
-The file first needs to be opened to either read or write. Opening the file is done using `fopen()` function which returns pointer to `FILE` data type. The `mode` argument must be selected to specify whether the file is for read or write:
+The file first needs to be opened to either read or write. Opening the file is done using the `fopen()` function that returns a pointer to the `FILE` data type. The `mode` argument must be selected to specify whether the file is for reading or writing.
 
 ```c
+/* OPENING FILE */
 FILE* fptr = fopen("sample.txt", mode);
 ```
 
-| MODE   | DESCRIPTION                                     |
-| ------ | ----------------------------------------------- |
-| `"r"`  | Open for reading (file must exist)              |
-| `"w"`  | Open for writing (create file if not exist)     |
-| `"a"`  | Open for append (create file if not exist)      |
-| `"r+"` | Open for reading and writing from beginning     |
-| `"w+"` | Open for reading and writing, overwriting file  |
-| `"a+"` | Open for reading and writing, appending to file |
+| MODE   | DESCRIPTION                                         |
+|--------|-----------------------------------------------------|
+| `"r"`  | Open for reading (the file must exist)              |
+| `"w"`  | Open for writing (creates the file if not exist)    |
+| `"a"`  | Open for appending (creates the file if not exist)  |
+| `"r+"` | Open for reading and writing from beginning         |
+| `"w+"` | Open for reading and writing, overwriting the file  |
+| `"a+"` | Open for reading and writing, appending to the file |
 
 ## Reading Files
-C languages has three different version of file reading functions, similar to input (from file to program) functions:
+C languages has three different functions for reading similar to input (from file to program) functions:
 
 | INPUT      | SYNTAX                     | DESCRIPTION                                                  |
 | ---------- | -------------------------- | ------------------------------------------------------------ |
-| `fgetc()`  | `fgetc(fptr);`             | Returns the next character from the selected `fptr` file stream. |
-| `fgets()`  | `fgets(buff,n,fptr)`       | Stores `n-1` long characters to buffer (ex. `char buff[100];`) with null terminator at the end. |
-| `fscanf()` | `fscanf(fptr,format,vars)` | Stores data, separated by space or new line, to variables with matching format specifier; requires address (`&`) operator, except for string. |
+| `fgetc()`  | `fgetc(fptr);`             | Reads the next character from the selected `fptr` file stream. |
+| `fgets()`  | `fgets(buff,n,fptr)`       | Stores `n-1` long characters from the `fptr` file stream to a buffer (ex. `char buff[100];`) with a null terminator `\0` at the end. |
+| `fscanf()` | `fscanf(fptr,"format",vars)` | Stores data, separated by spaces or new lines, to variables `vars` according to the format specifier from the `fptr` file stream; requires address operator `&` except for the string. |
 
 ```
 <sample.txt>
@@ -1385,40 +1386,45 @@ Hello World!
 ```
 
 ```cpp
+/* READING "sample.txt" FILE */
 FILE* fptr = fopen("sample.txt", "r");
 
-// FGETC()
-char var1;
-var1 = fgets(fptr);    // >> RESULT: var1 = H
+// "fgetc()" FUNCTION
+char variable1;
+var1 = fgets(fptr);
+// >> RESULT: variable1 = 'H'
 
-// FGETS()
+// "fgets()" FUNCTION
 char buff[10];
-fgets(buff, 7, fptr);  // >> RESULT: buff = "ello W"
+fgets(buff, 7, fptr);
+// >> RESULT: buff = "ello W"
 
-// FSCANF()
-char[10] var2; int var3; float var4;
-fscanf(fptr, "%s %d %f", var2, &var3, &var4);    // >> RESULT: var2 = "orld!", var3 = 65, var4 = 3.141590
+// "fscanf()" FUNCTION
+char[10] variable2; int variable3; float variable4;
+fscanf(fptr, "%s %d %f", var2, &var3, &var4);
+// >> RESULT: variable2 = "orld!", variable3 = 65, variable4 = 3.141590
 ```
 
 ## Writing Files
-C languages has three different version of file writing functions, similar to output (from program to file) functions:
+C languages has three different functions for writing similar to output (from program to file) functions:
 
 | OUTPUT      | SYNTAX               | DESCRIPTION                                                  |
 | ----------- | -------------------- | ------------------------------------------------------------ |
-| `fputc()`   | `fputc(char,fptr);`  | Writes a single character on a selected `fptr` file stream.  |
-| `fputs()`   | `fputs(str,fptr);`   | Writes sequence of characters (aka. string) on a selected `fptr` file stream. |
-| `fprintf()` | `fprintf("%d",var);` | Writes sequence of characters (aka. string) on a selected `fptr` file stream, with format support. |
+| `fputc()`   | `fputc(char,fptr);`  | Writes a single character to the `fptr` file stream.  |
+| `fputs()`   | `fputs(str,fptr);`   | Writes sequence of characters (aka. string) to the `fptr` file stream. |
+| `fprintf()` | `fprintf("%d",var);` | Writes sequence of characters (aka. string) to the `fptr` file stream with a format support. |
 
 ```c
+/* WRITING FILE */
 FILE* fptr = fopen("sample.txt", "w");
 
-// FPUTC()
+// "fputc()" FUNCTION
 fgets('A', fptr);
 
-// FPUTS()
+// "fputs()" FUNCTION
 fgets("Hello World!\n", fptr);
 
-// FPRINTF()
+// "fprintf()" FUNCTION
 fprintf(fptr, "%d %.2f %s", 1, 3.14159, "Program");
 ```
 
@@ -1429,21 +1435,135 @@ AHello World!
 ```
 
 ### Creating Files
-New file can be created using the same method of writing file which does not bound by just writing on existing file. Creating file is simply done by designating file name is doesn't exist on the specified path.
+A new file can be created using the same method of writing a file that does not bound by just writing on the existing file. Creating a file is done simply by designating a file name is doesn't exist on the specified path.
 
 ```c
+/* CREATING FILE */
 FILE* fptr = fopen("path\\new_file.txt", "w");
 fgets("Hello World!\n", fptr);
 ```
 
 ## Closing Files
-After opening the file, it should be closed manually. Just like opening with `fopen()` function, opened file is closed using `fclose()` function:
+After opening the file, it should be closed manually. Opened file is closed using the `fclose()` function.
 
 ```c
+/* CLOSING FILE */
 fclose(fptr);
 ```
 
-The function returns 0 if closed successfully, else returns EOF (end of file).
+The function returns an integer 0 if successfully closed, otherwise returns EOF (end of file).
+
+# **C: MULTI-SCRIPT PROJECT**
+This article has mainly dealt with a project that only consists of a single script with the `main()` function. If the project starts to grow larger, however, additional scripts can help manage the project more efficiently by dividing and categorizing the codes. This chapter will explain how to create a C language project with multiple scripts sharing the data.
+
+## Inclusive Directive
+The `#include` inclusive directive is one of the preprocessor directives, commonly used to include the `stdio.h` header to a source file. Technically, what the `#include` does is paste the entire codes such as declaration in the header file to where the directive is.
+
+### Header & Source File
+The source and header file first mentioned at the beginning of the chapter *C: BASIC* has its purposes as follows: the former is a script that contains definitions, and the latter contains declarations. Considering that the `main()` function does not have a prototype, the main script can be written as follows:
+
+```c
+/* HEADER FILE: main.h */
+#include <stdio.h>
+
+int variable;
+void function(int, float);
+
+```
+```c
+/* SOURCE FILE: main.c */
+#include "main.h"
+
+int main(){
+    
+    variable = 'A';
+    printf("%c\n", variable);
+
+    function(1, 3.14);
+
+    return 0;
+}
+
+void function(int arg1, float arg2){
+    printf("%.3d\n", arg1 + arg2);
+}
+```
+```
+A
+4.140
+```
+
+The source and header file above is equivalent to the script below due to the property of the `#include` directive.
+
+```c
+/* #include "main.h": START */
+#include <stdio.h>
+
+int variable;
+void function(int, float);
+/* #include "main.h": END */
+
+int main(){
+    
+    variable = 'A';
+    printf("%c\n", variable);
+
+    function(1, 3.14);
+
+    return 0;
+}
+
+void function(int arg1, float arg2){
+    printf("%.3d\n", arg1 + arg2);
+}
+```
+
+## `extern` Keyword
+The `extern` keyword can only declare without definition. Although the declaration is the same as the definition in general, the `extern` keyword is one of the cases that is not. Hence, this section requires to know the difference between declaration and definition for sure.
+
+Defining a variable or function allocates memory for that data, thus can only define once per data. Meanwhile, declaring data does not allocate memory but only lets the compiler know its existence, hence can declare multiple time for a single data. Such property is crucial for a script to share its variables and functions with the other.
+
+```c
+/* HEADER FILE: module.h */
+#include <stdio.h>
+
+// VARIABLE DECLARTION USING "extern" KEYWORD
+extern char variable;
+void function(int, float);
+```
+
+```c
+/* SOURCE FILE: module.c */
+#include "module.h"
+
+// VARIABLE DEFINITION
+char variable = 'A';
+void function(int arg1, float arg2){
+    printf("%.3f\n", arg1 + arg2);
+}
+```
+
+```c
+/* MAIN SCRIPT */
+#include <stdio.h>
+#include "module.h"
+
+int main() {
+
+    printf("%c\n", variable);
+    function(1, 3.14);
+
+    return 0;
+}
+```
+```
+A
+4.140
+```
+
+If the `module.h` header file does not use the `extern` keyword, the variable is defined instead of being declared. Variable defined on both the header and source file results in compilation error due to re-definition.
+
+On the other hand, the `extern` keyword allows data declaration multiple times. Variable declared on both the header and source file doesn't cause any error to the compiler but requires a definition to use the data. The `char variable = 'A';` statement in the `module.c` source file is for that definition, allowing the main script to use the `variable` globally with the defined value.
 
 # **C: EXCEPTION**
 Exception is a problem encountered during a program execution (not during compilation). C programming language offers macro and functions for controlling exceptions: `errno`, `perror()`, and `strerror()`. Through exception handling, stable program can be compiled and executed without any halt or crash.
