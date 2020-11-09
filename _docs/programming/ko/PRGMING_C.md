@@ -1317,14 +1317,14 @@ typedef struct {
     int    capacity;    // 최대 허용 용량
 } dynamicArr;
 
-// 정수형 동적 배열 정의
+/* 정수형 동적 배열 정의 */
 dynamicArr variable;
 
-/* 동적 배열: 최대 1 바이트 */
-variable.arr = calloc(1, sizeof(*variable.arr));
+/* 동적 배열: 최대 4 바이트 */
+variable.arr = calloc(4, sizeof(*variable.arr));
 variable.capacity = 1;
 
-/* 동적 배열: +5 바이트 재할당 */
+/* 동적 배열: +20 바이트 재할당 */
 variable.arr = realloc(variable.arr, (variable.capacity + 5) * sizeof(*variable.arr));
 variable.capacity += 5;
 ```

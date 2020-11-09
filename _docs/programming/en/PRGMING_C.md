@@ -965,282 +965,387 @@ FUNC(&function, 1, 3.0);	// >> OUTPUT: 4.0
 ```
 
 # **C: POINTER**
-Starting from *C: Array* chapter, a new data called "pointer" was mentioned quite often. Pointer is very important concept in C/C++ programming language and is one of the commonly used data to develop advanced program.
-
-This chapter mainly focuses on the pointer and its application that can improve performance and functionality of previously mentioned programming, especially on function.
+This article has mentioned a new "pointer" data type since the *C: ARRAY* chapter. The pointer is one of the crucial concepts in C language, allowing more complex programming. This chapter describes what the pointer is in C language and revisits the array and function.
 
 ## Pointer
-Pointer is a variable that stores memory address of where the value is located, rather than the value itself. Despite being a memory address, pointer also must to be distinguished by a data type of value. When declaring pointer, compound specifier `*` (aka. asterisk) is placed between data type and identifier:
+The pointer is a data type that stores the allocated memory address of a variable instead of its value. A 32-bit and 64-bit operating system have a pointer that is 8 and 16 bytes long. A variable can store a pointer as well; while the data type is required when defining, an asterisk `*` must locate between the data type and identifier.
 
 ``` c
-// POINTER DECLARATION
-int* ptr;				// WARNING C4700: unintialized local variable 'ptr' used
+/* POINTER DECLARATION */
+int* ptr;
+printf("%p", ptr);    // WARNING C4700: UNINTIALIZED LOCAL VARIABLE 'ptr' USED
 ```
 
-Memory address can be called from non-pointer variable as well using ampersand (`&`) operator:
+Memory address can be called from a non-pointer variable as well using the ampersand operator `&`.
 
 ```c
-// NON-POINTER DECLARATION
-int variable;
-&variable;				// >> OUTPUT: 0139F854
+/* INTEGER VARIABLE DEFINITION */
+int variable = 365;
+printf("%p", &variable);
+```
+```
+1014eb010
 ```
 
-Since this hexadecimal memory address cannot be written by hand, the only way to either define or initialize the pointer is by assigning already existing memory address. Beware, data type must matched when defining pointer.
+Since the hexadecimal memory address should not be written by hand, the only way to assign the pointer is by the existing memory address. Beware, the data type must match on assignment to the variable.
 
 ```c
-// POINTER INITIALIZATION
-int variable = 3;
-int* ptr = &variable;
+/* VARIABLE INITIALIZATION */
+int variable = 365;
 
-printf("%x",  ptr);		// >> OUTPUT: 0139F854	(ADDRESS)
-printf("%d", *ptr);		// >> OUTPUT: 3			(VALUE)
+// POINTER VARIABLE OF THE SAME TYPE
+int *ptr1 = &variable;
+printf("%p\n",  ptr1);        // >> OUTPUT: 0x1014eb010  (ADDRESS)
+printf("%d\n", *ptr1);        // >> OUTPUT: 365          (VALUE)
+
+// POINTER VARIABLE OF THE DIFFERENT TYPE
+char *ptr2 = &variable;
+printf("%p\n",  ptr2);        // >> OUTPUT: 0x1014eb010  (ADDRESS)
+printf("%d\n", *ptr2);        // >> OUTPUT: 109          (VALUE)
 ```
 
-As seen above, it is possible to return value assigned to the pointer by placing dereference (`*`) operator. While pointer declaration also used asterisk, they are different existence but only sharing the same symbol.
+As seen above, it is possible to return the value assigned to the pointer by placing the dereference operator `*`. While a pointer declaration also used an asterisk, they are different existence but only sharing the same symbol.
 
 |          OPERATOR          |  VARIABLE   |     RETURN     |
 | :------------------------: | :---------: | :------------: |
-| Address-on (`&`) Operator  | Non-pointer | Memory address |
-| Contents-of (`*`) Operator |   Pointer   |     Value      |
+| Address-on Operator `&`  | Non-pointer | Memory address |
+| Contents-of Operator `*` |   Pointer   |     Value      |
 
-Interestingly, any changes made on variable is also affects contents of the pointer as the pointer shares the same memory address. This feature is the most important when it comes to using pointer in C/C++.
+If the variable value changes, the value dereferenced from the pointer also changes since it shares the same memory address, also known as "call by reference".
 
 ### Null Pointer
-
-Null pointer is a pointer that points to nothing. This can be done by assigning pointer with `nullptr` keyword:
+A null pointer is a pointer that points to nothing. Since C language may cause an error such as memory access violation because of the pointer, assign the `NULL` keyword for safe usage.
 
 ```c
-int* ptr = nullptr;		// >> OUTPUT: 00000000
+int* ptr = NULL;
+printf("%p", ptr);
+```
+```
+0x0
 ```
 
 ### Void Pointer
-Void pointer is a pointer with no specific data type (thus, `void`). This has advantage of being able to point to any kind of data type value by using static casting.
+A void pointer is a pointer with no specific data type (thus, `void`). It has the advantage of being able to point to any data type with help from data type conversion.
 
 ```c
-// POINTER DECLARATION
-void* ptr;
+/* VOID POINTER DECLARATION */
+void *ptr;
 
-int variable;
-(int*)ptr = &variable;
+int variable = 356;
+ptr = &variable;
+printf("%d", *(int*)ptr);
+```
+```
+365
 ```
 
 ### Function Pointer
-Pointer can also be assigned with function, called function pointer. This pointer points to the first line function execution, similar to array pointing to its first element. Function pointer is initialized as below:
+The function pointer is a void pointer that points to a function. Similar to a pointer to an array representing the first element memory address, a function pointer points to the first line of the function code. Initialize the function pointer using the following syntax:
 
 ```c
-void function(int, int);
+/* FUNCTION DEFINITION */
+int function(int arg1, float arg2) {
+    statements;
+    return 0;
+}
 
-// FUNCTION POINTER INITIALIZATION
-void (*ptr)(int, int) = function;
+int main() {
+    // Insert codes here...
 
-void function(int arg1, int arg2) {
-	statements;
+    /* FUNCTION POINTER INITIALIZATION */
+    int (*ptr)(int, float) = function;
+    ptr(1, 3.14);
+
     return 0;
 }
 ```
 
-When assigning function pointer, not only should function data type is considered but also the parameters and its number. Failed to meet all these conditions cause compilation error.
-
-While function returns value when used with parenthesis `function()`, function also returns memory address to its starting point when used without parentheses `function`. 
+The function pointer should match the data type and parameters of the function when initializing. Failed to do so will result in a compilation error. While calling with a parenthesis like `function()` returns data from the `return` statement,  without a parenthesis like `function` returns a memory address instead.
 
 # **C: USER-DEFINED DATA TYPE**
-Commonly used data type such as `int`, `float`, `char`, and more are already defined in `stdio.h` header. Developer may create and use custom data type based on these pre-defined data types.
+Commonly used data types such as `int,` `float,` `char,` and more are already defined and are called through the `stdio.h` header file. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
 
 ## Structure
-
-Structure groups multiple member variables under a single structure tag, regardless of data type of member variable.
+The structure is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type. Use the `struct` keyword to define a structure in C language.
 
 ```c
-// STRUCTURE DECLARATION
+/* STRUCTURE DEFINITION: TOTAL 5 BYTES */
 struct STRUCTURE {
-    int   field1;
-    float field2;
+    // MEMBER VARIABLE DEFINITION
+    int   field1;    // TYPE SIZE: 4-BYTE
+    char  field2;    // TYPE SIZE: 1-BYTE
 };
+```
 
-// VARIABLE INITIALIZATION
-struct STRUCTURE variable1 = {1, 3.0};
-struct STRUCTURE variable2 = {.field2 = 3.0, .field1 = 1};
+There are two methods for defining a variable from the structure, and both require the `struct` keyword.
+
+```c
+/* STRUCTURE VARIABLE INITIALIZATION 1 */
+struct STRUCTURE variable1 = {3, 'A'};
+struct STRUCTURE variable2 = {.field2 = 'A', .field1 = 3};
 ```
 
 ----
 
 ```c
-// STRUCTURE DECLARATION
-struct STRUCTURE {
-    int   field1;
-    float field2;
-};
-
-// VARIABLE DECLARATION
+/* STRUCTURE VARIABLE DEFINITION */
 struct STRUCTURE variable;
 
-// VARIABLE ASSIGNMENT
-variable = (struct STRUCTURE) {1, 3.0};
+/* STRUCTURE VARIABLE INITIALIZATION 2 */
+variable = (struct STRUCTURE) {3, 'A'};
+```
+
+After defining a structure variable, the `struct` keyword is not needed, and its members are accessible by the member access operator `.`.
+
+```c
+variable.field1;    // >> OUTPUT: 3
+variable.field2;    // >> OUTPUT: A
+```
+
+### Anonymous Structure
+The syntax for the structure in the previous section is reusable and can create more than one structure variable of the same type. However, to create a user-defined data type for a single-use, define the anonymous structure using the syntax below:
+
+```c
+/* SINGLE-USE STRUCTURE VARIABLE DEFINITION & INITIALIZATION */
+struct {
+    int   field1;
+    char  field2;
+} variable = {3, 'A'};
 ```
 
 ## Union
-Union groups multiple member variables under a single structure tag and shares memory address, regardless of data type of member variable. In other word, union is mainly used to present single data in different types of data (such as `int`, `char`, `bool`, et cetera). Because of this, union only requires value assignment on one member field.
+The union is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type but shares a memory space. In other words, value changes in one of the members also change the value assigned in the other members. Use the `union` keyword to define a structure in C language.
 
 ```c
-// UNION DECLARATION
+/* UNION DEFINITION: TOTAL 4 BYTES */
 union UNION {
-    int  field1;
-    char field2[2];
-};
-
-// VARAIBLE DECLARATION & ASSIGNMENT
-union UNION variable;
-variable.field1 = 22136;    // >> OUTPUT: 22136		(0x 00 00 56 78)
-
-variable.field2[0];         // >> OUTPUT: 'x'		(0x -- -- -- 78)
-variable.field2[1];         // >> OUTPUT: 'V'		(0x -- -- 56 --)
+    // MEMBER VARIABLE DEFINITION
+    int    field1;    // TYPE SIZE: 4-BYTE
+    char   field2;    // TYPE SIZE: 1-BYTE
+}
 ```
 
-Since union shares a single memory location to store the value, data allocation size is set based on the member with data type of largest byte size. Member fields with smaller byte-size data type is represented as a portion of the overall.
+The byte size of the union is equal to the member variable with the largest byte size; this allows the user-defined data type to use a single memory allocation while still have enough space to store other data types.
 
-### Array Union
-When declaring array from union, that array can store different types of data due to the nature of union able to express single data into other data types.
+Use the following syntax to define a variable from the union, which requires the `union` keyword. Although the union data type may have more than one member, only one member needs initialization as they all shares the same memory space.
 
 ```c
-// UNION DECLARATION
-union UNION {
-    int   field1;
-    float field2;
+/* UNION VARIABLE INITIALIZATION */
+union UNION variable = (union UNION) {365};    // >> OUTPUT: 0x 00 00 01 6D
+
+printf("Field1: %d (%#010x)\n", variable.field1, variable.field1);
+printf("Field2: %d (%#010x)\n", variable.field2, variable.field2);
+```
+
+```
+Field1: 365 (0x0000016d)
+Field2: 109 (0x0000006d)
+```
+
+The first member, `field1`, is a 4-byte data type that processes all of `0x0000016D` bytes and returns an integer 365. However, the second member, `field2`, is a 1-byte data type that can only process a single byte, resulting in an integer 109.
+
+### Anonymous Union
+The syntax for the union in the previous section is reusable and can create more than one union variable of the same type. However, to create a data structure for a single-use, define the anonymous union using the syntax below:
+
+```c
+/* DEFINING & INITIALIZING A SINGLE-USE UNION VARIABLE */
+union {
+    int    field1;
+    char   field2;
+} variable = {365};
+```
+
+## Enumeration
+The enumeration is a user-defined data type numbering enumerating items, called enumerators. Enumerators are assigned with an integer that starts from zero and increments by one by default.
+
+> The original C compiler "K&R C" did not have the enumerator, but is added since the commonly used "ANSI C" compiler.
+
+```c
+/* ENUMERATION DEFINITION */
+enum ENUMERATION {
+    enumerator1,     // ENUMERATOR = 0
+    enumerator2,     // ENUMERATOR = 1
+    enumerator3,     // ENUMERATOR = 2
+    enumerator4      // ENUMERATOR = 3
+};
+```
+
+Assigning an integer is done using the assignment operator `=`. The other enumerators may share the same value.
+
+```c
+enum ENUMERATION {
+    enumerator1 = 3, // ENUMERATOR = 3
+    enumerator2 = 1, // ENUMERATOR = 1
+    enumerator3,     // ENUMERATOR = 2
+    enumerator4      // ENUMERATOR = 3
+};
+```
+
+However, enumerators cannot share the same identifier, which is similar to a global constant. In other words, enumerators are global data used across the project but unchangeable after initialization.
+
+```c
+enum ENUMERATION1 {
+    enumerator1,
+    enumerator2,
+    enumerator3,
+    enumerator4
 };
 
-// ARRAY DECLARATION
-union UNION arr[3];
+enum ENUMERATION2 {
+    enumeration4,    // ERROR: Enumerator 'enumerator4' is re-defined.
+    enumeration5,
+    enumeration6
+};
+```
+
+Defining an enumeration variable requires the `enum` keyword but is not needed when calling the variable afterward. An integer variable can also store an enumerator from the enumeration.
+
+```c
+/* ASSIGNING ENUMERATOR TO AN ENUMERATION VARIABLE */
+enum ENUMERATION variable = enumerator1;
+```
+----
+```c
+/* ASSIGNING ENUMERATOR TO AN INTEGER VARIABLE */
+int variable = enumerator1;
 ```
 
 ## Typedef Declaration
-The `typedef` keyword is used to create an alias name for existing data type, providing better readability
+The `typedef` keyword aliases the existing data type to a different name, providing better readability.
 
 ```c
 typedef int dtypeName;
 ```
 
-While this is not officially supported in C++ programming language, structure and union can be declared without tag as part of the C programming syntax. This is called *anonymous structure* and *anonymous union* which is for a single use:
+The keyword can also simplify the definition of structures and unions in C language programming.
 
 ```c
-// TYPEDEF STRUCTURE
+/* SIMPLIFIED STRUCTURE DEFINITION */
 typedef struct {
-	int 	field1;
-	float 	field2;
+    int    field1;
+    char   field2;
 } STRUCTURE;
 
-// TYPEDEF UNION
+STRUCTURE variable;                // struct STRUCTURE variable;
+variable = (STRUCTURE) {3, 'A'};   // variable = (struct STRUCTURE) {3, 'A'};
+```
+----
+```c
+/* SIMPLIFIED UNION DEFINITION */
 typedef union {
-	int		field1;
-	float	field2;
+    int    field1;
+    char   field2;
 } UNION;
 
-// VARIABLE DECLARATION
-STRUCTURE variable1;
-UNION     variable2;
+UNION variable;                    // union UNION variable;
+variable = (UNION) {365};          // variable = (union UNION) {365};
 ```
 
-## User-Defined Data Pointer
-C language do not support object-oriented programming paradigm. Despite not having a concept called object and class, it can still be implemented similarly on user-defined data.
-
-When user-defined data is assigned by pointer, members can be accessed using arrow member selection (`->`) operator. This method is generally used when the user-defined data needs to be passed as function argument.
+## User-Defined Data Type Pointer
+When defining a user-defined data type as a pointer, access the members using the arrow member selection operator `->`. In general, this syntax is for accessing the members passed to the function parameter by reference.
 
 ```c
-// TYPEDEF STRUCTURE
-typedef struct {
-    int   field1;
-    float field2;
-} STRUCTURE;
+/* STRUCTURE DEFINITION */
+struct STRUCTURE {
+    int    field1;
+    char   field2;
+};
 
-// VARIABLE & POINTER DECLARATION
-STRUCTURE variable;
-STRUCTURE* ptr = &variable;
+/* VARIABLE & POINTER DEFINITION */
+struct STRUCTURE variable;
+struct STRUCTURE *ptr = &variable;
+
+ptr->field1 = 3;
+ptr->field2 = 'A';
 
 // THEREFORE...
-ptr->field1 = 1;
-ptr->field2 = 3.0;
+printf("%d\n", ptr->field1);
+printf("%c\n", ptr->field2);
 ```
 
-# **C: DYNAMIC MEMORY**
-Memory management is one of the crucial factors in C/C++ programming language. Dynamic memory allocation is one of the management for greater memory efficiency. And because this concept is closely related to the pointer, understanding the concept cannot be neglected.
+```
+3
+A
+```
+
+# **C: DYNAMIC ALLOCATION**
+Memory management in C language is a significant task. Dynamic memory allocation provides higher memory efficiency but requires a clear understanding of the pointer as it is deeply involved. Here, the memory indicates random access memory (RAM), the primary memory in a computer.
 
 ## Stack Structure
-Stack is a linear LIFO (Last-In-First-Out) data structure; the first entered data is last to be freed from the memory structure. It is a main memory structure used by the compiler which automatically allocates and deallocates data upon declaration and destruction of data (e.g. variables and functions).
+The stack is a linear LIFO (Last-In-First-Out) data structure; the first entered data is last to be freed from the memory structure. It is the main memory structure used by the compiler that automatically allocates and deallocates data upon declaration and destruction of data, such as variables and functions. The drawback of stack-based memory is poor memory management.
 
-The reason compiler uses stack memory structure is due to its fast memory access. However, stack memory has a drawback that its size is fixed and cannot be expanded.
-
-One of the example of stack structure characteristic can be seen on property of local variable; variable defined inside a scope such as function or namespace cannot be used outside the scope.
+The characteristic of the stack memory is apparent when dealing with a local variable, which is unable to use outside the code block.
 
 ### Queue Structure
-As opposite to stack structure, queue is a linear FIFO (First-In-First-Out) data structure. The first entered data is first to be released from the memory structure. The best example of queue memory structure is a serial communication port.
+The queue is a linear FIFO (First-In-First-Out) data structure. The data that entered first is released first from the memory structure. The best example of a queue-based memory structure is serial communication, such as USB and ethernet.
 
 ## Dynamic Allocation
-While stack memory is fast but its memory capacity is fixed, there is also heap memory that is resizable though slower access speed. Heap memory is irrelevant to heap data structure and stores data in random heap memory location.
+Despite its fast memory allocation, the stack memory is difficult for memory management due to its sequential structure. Additionally, the purpose of a stack-based memory used by the compiler is not for storing data but rather to "process data," hence have limited capacity on RAM. However, the compiler can also access the heap memory region located in the same RAM. Although slower than the stack, it has the benefit of easier management and lasting data until the end of the program.
 
-Allocating data to heap memory is done by developer manually, thus dynamic allocation. However, since dynamically allocated memory is not managed by the compiler, developer needs to be cautious on deallocating data manually afterward as well. Dynamic allocation requires `stdlib.h` header.
+> The heap memory region is irrelevant to the [heap data structure](https://en.wikipedia.org/wiki/Heap_(data_structure)) and is purely a term that indicates part of the RAM.
+
+Allocating memory in the heap region is called *dynamic allocation* in C language. Developers need to use a specific function for dynamic allocation, where the allocation address is randomly designated. Since this process is done manually by the developers, every dynamically allocated data must be freed by the developers as well. Failed to do so will cause the program to crash from memory shortage or function improperly.
+
+Include the `stdlib.h` header file for dynamic allocation.
 
 | FUNCTION    | EXAMPLE               | DESCRIPTION                                                  |
 | ----------- | --------------------- | ------------------------------------------------------------ |
 | `malloc()`  | `malloc(size);`       | Allocate `size`-byte heap memory block; memory uninitialized, resulting `SEGFAULT` error. |
-| `calloc()`  | `calloc(num, size);`  | Allocate `size`-byte heap memory blocks ($\times$ `num`) contiguously; initialized to 0 but slower than `malloc()`. |
+| `calloc()`  | `calloc(num, size);`  | Allocate `size`-byte heap memory blocks `num` times contiguously; initialized to 0 but slower than `malloc()`. |
 | `realloc()` | `realloc(ptr, size);` | Reallocate to `size`-byte heap memory block.                 |
 | `free()`    | `free(ptr);`          | Release dynamically allocated memory.                        |
 
 ```c
 #include <stdlib.h>
 
-// DYNAMIC ALLOCATION
+/* DYNAMIC ALLOCATION: 10 BYTES */
 int* ptr = malloc(10);
 
-// REALLOCATION (10 -> 20 BYTES)
+/* REALLOCATION: 10 -> 20 BYTES */
 ptr = realloc(ptr, 20);
 
-// DYNAMIC DEALLOCATION
+/* DYNAMIC DEALLOCATION */
 free(ptr);
 ```
 
 ### Dynamic Array
-Dynamic array is an array that can change its size dynamically. This implementation is widely used to allow expansion of array size as needed. As common array is static, thus cannot change size after declaration or even define size using non-constant integer.
-
-Dynamic array is generally managed using structure, allow keeping track of array size and current capacity possible.
+A dynamic array represents an array that has dynamic sizing, unlike the usual array in C language that can only have an unchangeable static size. It requires both structure and dynamic allocation, created as shown below:
 
 ```c
 #include <stdlib.h>
 
-// TYPEDEF STRUCTURE
+/* SIMPLIFIED STRUCTURE DEFINITION */
 typedef struct {
-    char* arr;
-    int   size;        // ASSIGNED
-    int   capacity;    // CAPACITY
-} dyn_arr;
+    int*   arr;         // ARRAY ELEMENTS
+    int    size;        // ASSIGNED SIZE
+    int    capacity;    // ARRAY LENGTH
+} dynamicArr;
 
-// VARIABLE DECLARATION
-dyn_arr variable;
+/* DYNAMIC INTEGER ARRAY DEFINITION */
+dynamicArr variable;
 
-// DYNAMIC ARRAY (1 BYTE)
+/* DYNAMIC ARRAY: 4 BYTE LENGTH */
 variable.arr = calloc(1, sizeof(*variable.arr));
 variable.capacity = 1;
 
-// RESIZE DYNAMIC ARRAY (1 + 5 BYTES)
+/* DYNAMIC ARRAY: REALLOCATE ADDITION 20 BYTES */
 variable.arr = realloc(variable.arr, (variable.capacity + 5) * sizeof(*variable.arr));
 variable.capacity += 5;
 ```
 
 ### Memory Leak
-Memory leak is caused by mismanagement of heap memory when dynamically allocated data is not released (deallocated) and accumulated that no more heap memory space is available. Shortage of memory will eventually lead to system failure.
-
-Prevent memory leak by deallocating data on heap memory using `delete` keyword:
+A memory leak is caused by mismanagement of heap memory when dynamically allocated data is not released (deallocated) and accumulated that no more heap memory space is available. A shortage of memory will eventually lead to system failure. Prevent memory leak by deallocating data on heap memory using the `free()` function.
 
 ```c
+/* DYNAMIC DEALLOCATION */
 free(ptr);
 ```
 
 ### Dangling Pointer
-By deallocating data on heap memory prevents memory leak from happening. While the data addressed by the pointer is gone, the pointer still holds the address that now points to nothing. This is called dangling pointer and calling this pointer may result segmentation fault, aka. `SEGFAULT`.
-
-To prevent this, it is advised to assign `nullptr` so the pointer would point at least to nothing than pointing aimlessly after deleting the heap memory data.
+By deallocating data on heap memory prevents memory leak from happening. While the data addressed by the pointer is gone, it still holds the address that now points to the unknown, called *dangling pointer* that may cause the `SEGFAULT,` a segmentation fault error. Assign the `NULL` so the pointer would point at least to nothing rather than point aimlessly after deleting the heap memory data.
 
 ```c
-// PROPER DEALLOCATION: DELETE DATA ON ADDRESS -> NULLIFY ADDRESS
+/* PROPER DEALLOCATION: DELETE DATA ON POINTED MEMORY -> NULLIFY POINTER */
 free(ptr);
 ptr = NULL;
 ```
