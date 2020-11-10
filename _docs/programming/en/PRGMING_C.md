@@ -1566,28 +1566,30 @@ If the `module.h` header file does not use the `extern` keyword, the variable is
 On the other hand, the `extern` keyword allows data declaration multiple times. Variable declared on both the header and source file doesn't cause any error to the compiler but requires a definition to use the data. The `char variable = 'A';` statement in the `module.c` source file is for that definition, allowing the main script to use the `variable` globally with the defined value.
 
 # **C: EXCEPTION**
-Exception is a problem encountered during a program execution (not during compilation). C programming language offers macro and functions for controlling exceptions: `errno`, `perror()`, and `strerror()`. Through exception handling, stable program can be compiled and executed without any halt or crash.
+An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon compilation, a successfully built program immediately halts when encountering an exception. C language has functions and macros for handling exceptions: `errno`, `perror()`, and `strerror()`, and more. Exception handling aims to provide a stable program without any halt or crash.
 
 ## Error Number
-The macro `errno`, short for "error number", is a global variable defined inside `errno.h` header file. The macro must first be initialized to 0 before using, and is automatically assigned with new error number if anything goes wrong.
+The error number, aka. `errno` macro, is a global variable defined in the `errno.h` header file. The variable first needs to be initialized to 0 before using, and a new error number is assigned whenever encountering an error. For Windows OS, the description of the error number is available on [Windows Developer](https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes) document.
 
-Following script is one of the best example of `errno` by attempting to open a non-existing file:
+Following script is one of the examples of the `errno` usage by attempting to open a non-existing file:
 
 ```c
-#include <errno.h>    // ERRNO HEADER
-extern int errno;     // ERRNO DECLARATION (GLOBAL)
+/* "errno.h" HEADER FILE */
+#include <errno.h>
+
+/* errno GLOBAL VARIABLE DECLARATION */
+extern int errno;
 
 int main(){
-    // INITIALIZATION
+    /* errno GLOBAL VARIABLE INITIALIZATION */
     errno = 0;
     
-    // ATTEMPT TO OPEN (NON-EXISTING) FILE
     FILE* fptr = fopen("./non_existance.txt", "r");
     
-    // FAILED TO OPEN...
+    // FAILED TO OPEN THE FILE...
     if (fptr == NULL) {
-        // ERROR NAME: ENOENT 2 (No such file or directory)
-        fprintf(stderr, "Error opening file. Error code: %d\n", errno);
+        // ERROR NAME & NUMBER: ENOENT 2 (No such file or directory)
+        fprintf(stderr, "Error opening a file! ERROR CODE: %d\n", errno);
         exit(-1);
     }
 
@@ -1597,28 +1599,30 @@ int main(){
 ```
 
 ```
-Error opening file. Error code: 2
+Error opening a file! ERROR CODE: 2
 ```
 
 ### Standard Error Stream
-Previously on *C: BASIC § Input & Output* first introduced the most common output stream called *standard output* `stdout`. There are other kinds of stream, specifically designed for streaming error, namely *standard error* `stderr`.
+The *C: BASIC § Input & Output* section first introduced the most common output stream: the `stdout` *standard output stream*. There are other kinds of stream designed for streaming errors, which is `stderr` *standard error stream*.
+
+> A stream is "a continuous flow of liquid, air, or gas." In terms of computer communication, a stream means a path of data flow.
 
 ```c
 fprintf(stderr, "Hello World!");
 ```
 
-These difference on stream allows control of streaming data from program to target devices/locations, such as console and file.
+This distinguishment on streams allows selective control of transmitting data from the program to target devices/locations, such as a terminal or file.
 
 ## Error Description
-Error type can be expressed and stored as integer number using `errno` macro. However, these error can also be shown on console terminal in human-readable English, describing what is the cause of the error. This can be done using `perror()` function, without a need of `errno.h` header file.
+The `errno` macro stores various errors expressed in integer to the global variable. However, to get the description of the error as a text instead, use the `perror()` function as shown below:
 
 ```c
 int main(){
     
     FILE* fptr = fopen("./non_existance.txt", "r");
     if (fptr == NULL) {
-        // ERROR NAME: ENOENT 2 (No such file or directory)
-        perror("ERROR Description");
+        // ERROR NAME & NUMBER: ENOENT 2 (No such file or directory)
+        perror("ERROR DESCRIPTION");
         exit(-1);
     }
 
@@ -1628,43 +1632,41 @@ int main(){
 ```
 
 ```
-ERROR Description: No such file or directory
+ERROR DESCRIPTION: No such file or directory
 ```
 
 # **C: PREPROCESSOR**
-C/C++ program language compiler processes the script into two divided stages: preprocessing and compilation. On the stage of preprocessing, preprocessor directive such as `#include` is taken care of by the compiler.
-
-This chapter will introduce useful and commonly used preprocessor directives that is actually being implemented on development.
+C language compiler processes the script into two divided stages: preprocessing and compilation. On the stage of preprocessing, preprocessor directive such as `#include` is taken care of by the compiler. This chapter will introduce useful and commonly used preprocessor directives that is being implemented on development.
 
 ## Macro Definition
-Macro is a fragment of code that is given a name (aka. identifier). A fragment of code can be a simple data (e.g. number, character, string) or an expression with arguments. The formal and latter is respectively called *object-like* and *function-like* macro.
+A macro is a fragment of code that has a name (aka. identifier). These pieces of code can be simple data (such as a number, character, and string) or an expression with arguments. The formal and latter are respectively called the *object-like* and *function-like* macro.
 
-The benefit of macro is it cannot be changed on runtime. The defined macro can be used on the script passed from a header file through `#include` directive.
+A macro has a benefit that cannot change on runtime. A header file is where macros are generally defined, which passes to the source file via the `#include` inclusive directive.
 
 ### `#define` Directive
-The `#define` directive is used to create macro:
+The `#define` directive creates a new macro.
 
 ```cpp
-#define SOMETHING       value                // MACRO
-#define ANYTHING(x, y)  (x * SOMETHING - y)  // MACRO WITH ARGUMENTS
+#define SOMETHING       value                // OBJECT-LIKE MACRO
+#define ANYTHING(x, y)  (x * SOMETHING - y)  // FUNCTION-LIKE MACRO
 ```
 
 ### `#undef` Directive
-In some cases, macro can cause naming collision that cannot be fixed on compilation stage. This macro can be removed by `#undef` directive:
+The `#undef` directive removes a defined macro. In some cases, this macro can resolve an error caused by naming collision due to other macros.
 
 ```cpp
 #undef SOMETHING
 ```
 
 ### Predefined Macros
-Compilers have common standard and compiler-specific predefined macros available for developers.
+Compilers have common standard and compiler-specific predefined macros available for developers. Below is a list of links to the document on predefined macros such as MSVC, GCC, and more.
 
 * MSVC: [Microsoft Docs - Predefined Macros](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
 * GCC: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
 * Others: https://sourceforge.net/p/predef/wiki/Compilers/
 
 ## Conditional Inclusion
-Preprocessor has a conditional directives that are used for conditional compilation. These directives are not to be used as a substitution of `if` and `else` conditional statement.
+A conditional inclusion is a directive for conditional compilation; the compiler ignores the codes when the condition is false.
 
 ```cpp
 #if		SOMETHING > value
@@ -1676,52 +1678,56 @@ Preprocessor has a conditional directives that are used for conditional compilat
 #endif
 ```
 
+These directives are not for the substitution of `if` and `else` conditional statement despite having similar traits on evaluating the condition.
+
 ### Macro Condition
-Conditional inclusion can check condition whether the macro is already defined or not:
+A conditional inclusion can also evaluate whether the macro is defined or not.
 
 ```cpp
-// IF COMPILED ON 64-BIT ARM OR x64
+// IF COMPILED ON 64-BIT ARM OR x64 ARCHITECTURE...
 #ifdef	_WIN64
 	statments;
 #endif
 
-// IF NOT COMPILED ON 64-BIT ARM OR x64
+// IF NOT COMPILED ON 64-BIT ARM OR x64 ARCHITECTURE...
 #ifndef	_WIN64
 	statements;
 #endif
 ```
 
 ## Pragma Directive
-Pragma directive is used to configure features and options for a compiler. Each compiler differs from each other, and this makes pragma a non-standard compiler-specific preprocessor directive.
+A pragma directive is for configuring features and options for a compiler. Compiler developed by different companies or organizations differs from each other, and this makes pragma a non-standard compiler-specific preprocessor directive.
+
+> The *Pragma* is an abbreviation of the word "pragmatic: a practical consideration." The directive may have been named with such a term as it involves how the compiler practically works and processes.
 
 * MSVC: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://docs.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
 * GCC: [GCC Online Documentation - Pragmas](https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html)
 
-This chapter mainly focuses on pragma directive from MSVC as it is the most common and widely used C/C++ compiler provided by Microsoft Visual Studio.
+This chapter focuses on pragma directives from MSVC as it is the most common and widely used C compiler provided by Microsoft Visual Studio.
 
 ### `#pragma once`
-The `#pragma once` pragma directive is extremely useful upon compilation by only including the header file once instead of multiple time on every inclusion. 
+The `#pragma once` pragma directive only includes the header file once instead of multiple times on every inclusion. 
 
 ```cpp
 #pragma once
 ```
 
-Through this pragma directive can reduce compilation time. Additionally, because it prevents multiple inclusion can this pragma function as *include guard*.
+Because it prevents including the same header file multiple times for a single source file that can cause a re-definition problem, `#pragma once` is commonly used for *include guard*. Additionally, this pragma directive can reduce compilation time as it only includes the header once.
 
-The following code is an example of include guard without using `#pragma once` pragma directive:
+The following code is an example of include guard without using the `#pragma once` directive:
 
 ```cpp
-// "header.h"
+/* HEADER FILE: "header.h" */
 #ifndef HEADER_FILE
 #define HEADER_FILE
 
 #endif	/* HEADER_FILE */
 ```
 
-If `header.h` has not been processed, the compiler defines the `HEADER_FILE` for the first time. However, upon second encounter, compiler will not process the header file again because of the macro conditioning.
+If the `header.h` has not been processed, the compiler defines the `HEADER_FILE` for the first time. However, on the second encounter, the compiler will not process the header file again because of the macro conditioning.
 
 ### `#pragma region`
-Though it does not affect any on compilation, `#pragma region` and `#pragma endregion` pair supports expanding and collapsing code block on Visual Studio Code Editor:
+Although it does not affect any on the compilation, the `#pragma region` and `#pragma endregion` pair supports expanding and collapsing code block on Visual Studio code editor.
 
 ```cpp
 #pragma region REGIONNAME
