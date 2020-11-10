@@ -10,127 +10,193 @@ summary: "."
 order: 0x01
 ---
 # **C: INTRO**
+> *Refernce: [Microsoft Docs C Language Documentation](https://docs.microsoft.com/en-us/cpp/c-language/)*
 
-General-purpose programming language successor to *B* language developed at Bell Labs, designed to construct utilities for Unix. Currently, C is the most widely used programming language and has influenced on numerous programming languages such as C++, C#, Python, Java, and more. 
+C programming language is a predecessor of the *B* programming language for UNIX software development. Currently, C language is the most widely used programming language and had influenced C++, C#, Python, Java, and more. The C language has a faster processing speed and excellent compatibility, making it still great use for application and firmware development.
 
-Though C++ is a superset of C programming language as it provides more functionality, C still has far better advantage on execution speed with greater compatibility and portability. This makes C a common language on many firmware & software development; Python is originally developed using C language!
+## Compiled Language
+There are two different categories of program languages based on its execution: compiled language and interpreted language.
 
-## Paradigm
+An interpreter allows a computer to reads the source code written in English and execute directly, mostly benefitting from cross-platform support that can run the program on a different system and architecture. Python is one of the best examples of an interpreted language. However, a compiler generates an object file written in machine-friendly code by translating from English-written source code.
 
-Paradigm is a classification of programming language based on their features. Paradigms are mainly categorized into two different groups: imperative, and declarative programming.
-
-### Imperative Programming
-
-Imperative programming is a paradigm that executes program using statements (a line of code that performs certain action) in sequence; it is a programming that focuses on defining how to execute. Below is an example of imperative programming in C language:
-
-```c
-// HOW TO EXECUTE: CONDITIONAL (CHECKS MODULUS AND ASSIGN "even" OR "false")
-auto variable = value % 2 == 0 ? "even" : "odd";
-```
-
-The list of imperative programming languages are: C/C++, C#, Python, JavaScript, Java, and more.
-
-*Procedural Programming* is one of the subcategory of imperative programming paradigm. Just like imperative, procedural programming executes code in sequence but supports structuring procedures (aka. functions).
-
-*Object-Oriented Programming* (abbrev. OOP) is another subcategory of imperative programming paradigm, mainly using object that can store data (fields) and procedures (methods). OOP is considered imperative programming since the procedures within objects can access and modify the data fields.
-
-### Declarative Programing
-
-Declarative programming is a paradigm that executes program purely by declaration but without describing the flow, often defined as any style of programming that is not imperative; it is a programming that focuses on defining what to execute. Below is an example of declarative programming in HTML language:
-
-```html
-<!-- WHAT TO EXECUTE: "IMG" TAG (PRESENT IMAGE "./image.png" IN 400x300) -->
-<img src="./image.png" width="400" height="300" />
-```
-
-The list of imperative programming languages are: HTML, Prolog, SQL, QML, Regex, and more
-
-*Functional programming* is one of the declarative paradigm that focuses on using pure functions. While this paradigm is similar to procedural programming from imperative, there is a main difference: functional programming do not have side-effects which can occur on procedural programming, depending purely on arguments and return value (aka. *pure function*).
-
-## Compilation
-
-C/C++ language uses compiler to create executable file from the source code. Compiler translates C source code (written in high-level language: English) to a language computer can understand like binary code (low-level language). Compiled application can be executed without compiler afterward.
-
-Compiler has a several standard revision for ISO (International Organization of Standardization) based on the time it was released. The most renowned revision is a ANSI C (aka. C89) and C99. This document will instruct the programming language based on ANSI C at minimum.
-
-Compilation of C/C++ language is divided into two stage that is done by preprocessor and compiler (technically, preprocessor is included inside a compiler).
-
-### Preprocessor
-
-Preprocessing is a first stage of compilation done by a preprocessor. Preprocessor directive (aka. compiler directive) which is denoted by octothorpe symbol `#` in the script commands for preprocessor to perform certain actions before compiler does.
-
-| Preprocessor Directive | Example               | Summery                                          |
-| :--------------------- | --------------------- | ------------------------------------------------ |
-| `#include`             | `#include <iostream>` | Include header file to the script.               |
-| `#define`              | `#define SQUARE`      | Define new macro that can be used in the script. |
-| `#pragma`              | `#pragma once`        | Provide additional options to the compiler.      |
-
-Preprocessor does not read the C/C++ language but accepts preprocessor directive, comments, declaration, and et cetera within a source code and returns modified source code with preprocessor directive activated, comments removed, header files included, et cetera for compiler to process.
-
-Preprocessor directive is not necessary when programming and does not observe C/C++ language grammar, but it does make programming much easier. Preprocessor is one of the components included in a compiler. 
+C language is a compiled language that doesn't support cross-platform, but it processes faster than interpreted language due to its optimization to the current system.
 
 ### Compiler
+C language categorizes its compiler version by the year of standard released by the International Organization for Standardization(ISO); ANSI C (aka. C89) and C99 is the most commonly used version. This document introduces C language based on the ANSI C compiler at minimum.
 
-After preprocessing is finished, the official stage of compilation is processed by the compiler. Compiler starts translating C/C++ source code to a language computer can understand, supported by those activated by preprocessor directives.
+### Preprocessor
+A preprocessor is responsible for optimizing the source code before the compiler translates to binary code. A command for a preprocessor is called *preprocessor directive* and has octothorpe `#` at its prefix.
+
+| DIRECTIVES | EXAMPLE               | DESCRIPTION                                          |
+| :--------------------- | --------------------- | ------------------------------------------------ |
+| `#include`             | `#include <iostream>` | Includes header file to the script.               |
+| `#define`              | `#define SQUARE`      | Defines new macro for the project. |
+| `#pragma`              | `#pragma once`        | Provides additional options for the compiler.      |
+
+A preprocessor does not read C language source code nor follows C language syntax. It only processes its directives, removes comments, and provides optimized source code to the compiler. A preprocessor directive isn't necessary but makes the coding easier and convenient. The preprocessor resides within the compiler program.
+
+# **C: INSTALL**
+A compiler for C is essential when developing with C programming language, and there are various C compilers available designed by different companies and organizations. The compilation method may differ depending on the compiler, but it doesn't matter for general users as every compiler observes the same ISO standard that defines the working mechanism.
+
+An integrated development environment is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C language project.
+
+## Visual Studio
+[Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C programming, select the "Desktop development with C++" workload.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 1. Workload for C programming on Visual Studio.</center>
+
+The reason to select the C++ workload is that the MSVC compiler is mainly a C++ compiler that also compiles C language. Visual Studio does not have a workload for pure C language development.
+
+Visual Studio will start with the window shown below. To create a new project for C language, select the "Create a new project" button.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Startup window of Visual Studio.</center>
+
+However, Visual Studio does not have an option to create a project for C language since it is all integrated into C++ components. To create a C project, follow the procedure below:
+
+1. Select the language as C++ and choose the "Empty Project" option.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 3. Creating a C project on Visual Studio (step 1).</center>
+
+2. Designate names for the project and solution. Here, the project is a `.vcxproj` extension file that manages its source codes and compilation options, and the solution is a `.sln` extension file that can contain multiple projects. It is recommended to open the solution file on Visual Studio unless you only want to open a single project.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 4. Creating a C project on Visual Studio (step 2).</center>
+
+3. On the Solution Explorer, right-click the Source Files filter and select the `Add > New Items...` option.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 5. Creating a C project on Visual Studio (step 3).</center>
+
+4. On the Add New Item window, change the extension from `.cpp` to `.c`, which is a source code extension for C language.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 6. Creating a C project on Visual Studio (step 4).</center>
+
+Since this is an empty project, there won't be any code written on the source code. Paste the code below to make the source code at least compilable for the C project.
+
+```c
+#include <stdio.h>
+
+int main() {
+    // Insert code here...
+    printf("Hello, World!\n");
+    return 0;
+}
+```
+
+Visual Studio can run a C language program in two different ways: debugging mode (`F5`) and without debugging mode (`Ctrl+F5`). Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
 
 ### CRT Security Warning
+C Run-time Library (CRT) is a C++ standard library that also contains the ISO C99 standard library. For stability reason, the MSVC compiler has restricted some functions and replaced them with more stable ones suffixed by `_s`. Attempting to use restricted functions results in compilation error `C4996` related to stability warning.
 
-C Run-time Library (CRT) is the part of the C++ Standard Library that incorporates ISO C99 standard library. However, there are several functions not recommended as more secure version of functions are available, suffixed by `_s`. Attempting to utilize these less secured function can alert `C4996` compilation error related to function security warning.
-
-CRT security warning is often found when programming with C language. To override this warning, enter the macro definition shown below:
+CRT warning commonly appears when programming with C language. However, this is just a warning that can be ignored by the preprocessor directive below:
 
 ```c
 #define _CRT_SECURE_NO_WARNINGS
 ```
 
-## Header File
+## Xcode
+[Xcode](https://developer.apple.com/download/release/) is the most renowned IDE for macOS developed by Apple, which uses the clang compiler. Xcode supports various languages, and unlike Visual Studio, Xcode has a project option for C language.
 
-A file that contains function declaration and macro definition which can be used on source code. There exist two different ways of including the header file to the source code: angled brackets `<>` and double quotations `""`.
+Start Xcode, then create a new project by selecting `File > New > Project...`.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 7. Startup window of Xcode.</center>
+
+There are various projects available for developing an application for Apple's product. To create a C project, follow the procedure below:
+
+1. Since the computer is macOS, select the macOS tab, then the Command Line Tool to execute a terminal-based program.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 8. Creating a C project on Xcode (step 1).</center>
+
+2. Name a project in the Product Name and select the Language as C.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 9. Creating a C project on Xcode (step 2).</center>
+
+3. Designate a path for the project.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 10. Creating a C project on Xcode (steo 3).</center>
+
+4. The left panel shows there is the `main.c` source file under the `Experiment` folder with minimum codes required to run the program.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 11. Creating a C project on Xcode (step 4).</center>
+
+Xcode can run a C language program in two different ways: debugging mode and without debugging mode. Hotkey for both are `⌘+R` and whether to debug or not is configured on project setting. Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
+
+## Terminal
+Linux OS has GCC (GNU Compiler Collection) compiler installed by default but without an IDE. However, IDE is not essential when compiling a source code, which is possible on a terminal as well. With the increasing number of projects starting to use a single-board computer (SBC) like Raspberry Pi, knowing how to develop software in Linux OS became crucial.
+
+This section uses the code from *Figure 11. Creating a C project on Xcode (step 4)* to the `main.c` source file to show how to compile on Linux OS.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" style="display:block" src="./../../../assets/images/docs/programming/C/c_gcc_project1.png" width="100%"></div><center style="font-weight: bold;">Figure 12. Example code for GCC compiler.</center>
+
+Suppose the `main.c` source file is at `~/Workspace/C/Experiment` directory.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_gcc_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 13. Creating C language program using GCC compiler (step 1).</center>
+
+Run a terminal and move to the directory where the source file is; change the current directory with the `cd` command. Enter the following command to compile the source code with GCC compiler.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_gcc_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 14. Creating C language program using GCC compiler (step 2).</center>
+
+The command is ordering to compile the `main.c` source file and outputs (`-o`) the `main` object file. It is one of the simple commands of GCC compiler, and linking external libraries is also possible by adding more options.
+
+The directory now has an object file called `main`, compiled from the source code.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_gcc_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 15. Creating C language program using GCC compiler (step 3).</center>
+
+To execute an object file from a terminal, place `./` followed by the file name.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_gcc_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 16. Creating C language program using GCC compiler (step 4).</center>
+
+Here, the command `./` represents the current directory. Without this command, a terminal wouldn't be able to find the `main` file unless the directory is specified by the environment variable.
+
+# **C: BASIC**
+Every programming language has its own rules to be observed and fundamental data that works as a basis of the program. Failed to observe this causes either error or unexpected results. As for the beginning of the practical coding, this chapter will introduce basic knowledge of C language coding.
+
+## Header File
+A header file is a `.h` extension file responsible for letting the script know the existence of data or functionalities. Commonly paired with a `.c` source file, header files can let the other source files to use the data and functionalities defined by its pair.
+
+C language has header files for the source codes already compiled for developers to use, aka. a library. These libraries that come along with a compiler is called the standard library. Following are the header files for some of the C standard library:
+
+| HEADER FILES | SYNTAX                | DESCRIPTION                                                      |
+| ------------ | --------------------- | ------------------------------------------------------------ |
+| `stdio`      | `#include <stdio.h>`  | Defines standard input/output function:<br />`printf()`, `scanf()` |
+| `stdlib`     | `#include <stdlib.h>` | Defines various features, such as memory allocation, exception management (`cstdlib` in C++):<br />`rand()`, `malloc()` |
+| `math`       | `#include <math.h>`   | Defines common mathematical functions (`cmath` in C++):<br />`exp()`, `cos()` |
+| `time`       | `#include <time.h>`   | Defines date and time-handling functions (`ctime` in C++):<br />`time()`, `clock()` |
+
+There are two different ways of including a header file to the source code: angled brackets `<>` and double quotations `""`.
 
 ```cpp
 #include <stdio.h>
 #include "header.h"
 ```
 
-The difference is which location preprocessor searches for the including header files.
+The difference between these twos is where the preprocessor should search for the header file from:
 
 * `#include <header.h>`
-    : searches directories pre-designated by the compiler or IDE, generally used for system header.
+    : search directories pre-designated by the system, compiler, or IDE; this syntax is used to include a system header.
 * `#include "header.h"`
-    : searches current local directories where source file is located firsthand. If failed to find the match automatically searches in the pre-designated directories, just like `#include <header.h>`. This method is generally used for user-defined header.
-
-Following is the list of header files that is often used when programming with C language.
-
-| Header Files | Syntax                | Summery                                                      |
-| ------------ | --------------------- | ------------------------------------------------------------ |
-| `stdio`      | `#include <stdio.h>`  | Defines standard input/output function:<br />`printf()`, `scanf()` |
-| `stdlib`     | `#include <stdlib.h>` | Defines various features, such as memory allocation, exception management (`cstdlib` in C++):<br />`rand()`, `malloc()` |
-| `math`       | `#include <math.h>`   | Define common mathematical functions (`cmath` in C++):<br />`exp()`, `cos()` |
-| `time`       | `#include <time.h>`   | Defines date and time-handling functions (`ctime` in C++):<br />`time()`, `clock()` |
+    : search from the current local directories where the source file is located. If failed to find the header, automatically search from pre-designated directories, just like `#include <header.h>` does; this syntax is used to include a user-defined header.
 
 ### Precompiled Header
+A precompiled header is a header file that compiles into an intermediate form that is faster to process for a compiler. Because it reduces compilation time, a precompiled header is used on the project that includes many header files or a header file with enormous data.
 
-Precompiled header is a header that is compiled into an intermediate form that is faster to process for the compiler. Having benefit of reducing compilation time, precompiled header is used on the project that includes large amount of header files, or a header file with huge data.
+However, using a precompiled header is not always beneficial because it takes more time to prepare for compilation. For a header file that is small or subject to change frequently, a precompiled header is unnecessary.
 
-However, precompiled header is not always beneficial as using precompiled header does take more time to prepare for compilation. For a header file that is small or often subject to change, precompiled header is unnecessary.
-
-| Precompiled Header | Compiler                              |
+| PRECOMPILED HEADER | COMPILER                              |
 | ------------------ | ------------------------------------- |
 | `stdafx.h`         | Visual Studio 2015 (msvc14) and below |
 | `pch.h`            | Visual Studio 2017 (msvc15) and above |
 
-# **C: BASIC**
+## Statement Terminator
+The "statement" in programming represents a code that executes or processes data. In C language, every statement needs to end with a statement terminator denoted by a semicolon `;`.
 
-General programming language has essential, fundamental, or even helpful data and syntax that needs to be observed and acknowledged when coding. As the beginning of the practical coding, this chapter will introduce basic information on C++ language coding.
+One of the common mistakes made by C language beginners is the absence of a statement terminator. Therefore, developers need to keep this in mind when programming with languages based on C (such as C++ and C#).
 
 ## Comment
-
-There are two different comments in C/C++: line comment and block comment.
+Comment in a programming language is not executed and is commonly used to write down information related to the programming on source codes. There exist two comments in C language: line comment and block comment.
 
 * **Line comment**
-    : a comment worth a single line of code, and is declared by `//` (double slash).
+    : a comment worth a single line of code, declared by `//`.
 * **Block comment**
-    : a comment with multiple lines of code by using pairs of slash asterisk `/* */`.
+    : a comment with multiple lines of code, declared by `/* */`.
 
 ```c
 /*
@@ -140,33 +206,24 @@ multiple line of comment can be placed here.
 // LINE COMMENT: for a single line of code.
 ```
 
-## Identifier
-
-Identifier is a name used to identify a data such as namespace, variable, function, object, class, and more. In other word, it is just a (user-defined) name. There are rules identifier has to observe:
-
-* First character is only allowed to have an alphabet letters and underscore `_`.
-* Beside the first character may use alphabet letters, digits, or underscores.
-* Black spaces are prohibited.
-
 ## Input & Output
-
-C languages displays the results by writing on the console windows and has several different version of output:
+C language has several input and output functions for a text-based terminal. Below is a list of output functions:
 
 | OUTPUT      | SYNTAX                            | DESCRIPTION                                                  |
 | ----------- | --------------------------------- | ------------------------------------------------------------ |
 | `putchar()` | `putchar('A');`                   | Prints a single character on a console.                      |
 | `puts()`    | `puts("Text");`                   | Prints sequence of characters (aka. string) on a console; auto new-line. |
-| `printf()`  | `printf("format", var);`          | Prints sequence of characters (aka. string) on a console, with format support. |
-| `fprintf()` | `fprintf(stream, "format", var);` | Extension of `printf()` function, available with `stream` selection.<br />`printf(...)` is equivalent to `fprintf(stdout, ...)`, where `stdout` is *standard output stream*. |
+| `printf()`  | `printf("format", var);`          | Prints sequence of characters (aka. string) on a console with formatting. |
+| `fprintf()` | `fprintf(stream, "format", var);` | Extension of the `printf()` function, available with a `stream` selection; the `printf(...)` is equivalent to the `fprintf(stdout, ...)`, where `stdout` is the *standard output stream*. |
 
 ```c
-// PUTCHAR()
+// "putchar()" OUTPUT FUNCTION
 putchar('A');
 
-// PUTS()
+// "puts()" OUTPUT FUNCTION
 puts("Hello World!");
 
-// PRINTF()
+// "printf()" OUTPUT FUNCTION
 float variable = 3.14159;
 printf("variable: %.2f", variable);
 ```
@@ -176,43 +233,46 @@ AHello World!
 variable: 3.14
 ```
 
-Meanwhile, there are several different version of input which it reads the input data from the console:
+Below is a list of input functions in C language:
 
 | INPUT       | RETURN                        | DESCRIPTION                                                  |
 | ----------- | ----------------------------- | ------------------------------------------------------------ |
-| `getchar()` | Character                     | Accepts foremost character as an input.                      |
-| `gets()`    | String (aka. character array) | Accepts sequence of characters (aka. string) as an input.    |
-| `scanf()`   | Format-specific               | Accepts inputs matching format specifier; requires address (`&`) operator, except for string. |
+| `getchar()` | Character                     | Reads foremost character as an input.                      |
+| `gets()`    | String (aka. character array) | Reads sequence of characters (aka. string) as an input.    |
+| `scanf()`   | Format-specific               | Reads data as an input in the specified format; requires address (`&`) operator except for a string. |
 
 ```c
-// GETCHAR()
-char var1;
-var1 = getchar();
+// "getchar()" INPUT FUNCTION
+char variable1;
+variable1 = getchar();
 
-// GETS()
-char var2[20];
-gets(var2);
+// "gets()" INPUT FUNCTION
+char variable2[20];
+gets(variable2);
 
-// SCANF()
-float var3; char var4[10];
-scanf("%f %3s", &var3, var4);
+// "scanf()" INPUT FUNCTION
+float variable3; char variable4[10];
+scanf("%f %3s", &variable3, variable4);
 ```
 
 ```
 A
->>> var1 = 'A'
+>>> variable1 = 'A'
 
 Hello World!
->>> var2 = "Hello World!"
+>>> variable2 = "Hello World!"
 
 3.0 Program
->>> var3 = 3.000000
->>> var4 = "Pro"
+>>> variable3 = 3.000000
+>>> variable4 = "Pro"
 ```
 
 ### Formatted Specifier
+The format specifier is to specify the format on how an input of output function should read or print data. The format specifier works differently depending on input and output.
 
-Format specifier is to specify the format of data to be accepted as input. While format specifier is available on both `scanf()` input function and `printf()` output function, splicing data (`Program -> Pro`) should be formatted on input-side and how it is presented without modifying data (`3.14159 -> 3.14`) should be formatted on output-side function.
+* Format specifier on an input function affects the value of data. Slicing characters from a word is one of the examples.
+
+* Format specifier on an output function maintains the value of data but only affects how it is shown on a terminal. Rounding a decimal point is one of the examples.
 
 ```c
 int variable;
@@ -234,47 +294,31 @@ Enter: 1234567
 |  `%c`  | Character             |
 |  `%s`  | String                |
 |  `%x`  | Hexadecimal           |
+|  `%p`  | Pointer               |
 
-### Escape Character
+> The `%3d` format specifier does not extract only three front numbers but rather shows three digits at minimum. Hence, the `%7d` format specifier would have shown the number `0012345`.
 
-Escape character `\` is used to escape from sequence of character and execute certain operation within text-base data.
+## Identifier
+An identifier is a name used to identify data in programming. In other words, it is just a user-defined name. C language has the following rules when naming an identifier:
 
-```c
-printf("First Line\nSecond Line");
-```
-
-```
-First Line
-Second Line
-```
-
-| SYNTAX | DESCRIPTION    |
-| ------ | -------------- |
-| `\n`   | New line       |
-| `\t`   | Horizontal tab |
-| `\\`   | Backslash      |
-| `\b`   | Backspace      |
-| `\'`   | Single quote   |
-| `\"`   | Double quote   |
+* Only alphabet, number, and underscore `_` is allowed.
+* First letter cannot start with a number.
+* Blank space is prohibited.
 
 ## Data Type
-
-Data type is one of the important factor which determines type and byte size of the data. A well-implemented data type can results memory and time efficiency when processing the script.
-
-C programming language have several number of pre-defined type identifier as follows:
+A data type is one of the crucial factors which determines the type and byte size of the data. A well-implemented data type can make a program efficient on both memory and processing time. C language has several numbers of built-in data type as follows:
 
 | IDENTIFIER | DATA TYPE              | DESCRIPTION                                                  |
 | ---------- | ---------------------- | ------------------------------------------------------------ |
 | `int`      | Integer                | 32-bits precision integer number.<br />Size: 4 bytes         |
-| `float`    | Floating point number  | Real number with decimal points.<br />Size: 4 bytes          |
-| `double`   | Double-precision float | Float with doubled precision and memory.<br />Size: 8 bytes  |
-| `char`     | Character: `''`        | A single character, e.g. `'A'` and `'?'`.<br />Size: 1 byte  |
+| `float`    | Floating point number  | Real number with a decimal point.<br />Size: 4 bytes          |
+| `double`   | Double-precision float | Float with a doubled precision and memory.<br />Size: 8 bytes  |
+| `char`     | Character: `''`        | A single character, such as `'A'` or `'?'`.<br />Size: 1 byte  |
 | `bool`     | Boolean                | Non-zero represents `true` while zero is `false`.<br />Size: 1 byte |
 | `void`     | Void                   | Non-specific data type.<br />Size: 1 byte                    |
 
-### `sizeof()` Operator
-
-An operator that returns the allocating memory size of data type or variable in bytes.
+### `sizeof()` Function
+The `sizeof()` function returns allocated memory size of the type or data in bytes.
 
 ```c
 sizeof(int);		// SIZE: 4 BYTE
@@ -282,64 +326,107 @@ sizeof(char);		// SIZE: 1 BYTE
 ```
 
 ## Variable
+Variable is a container for data that can be assigned using the assignment operator `=`. C language must designate a variable with one of the data types, which can only have data with that data type.
 
-Variable is a container for the data assigned using assignment (`=`) operator. There are three different common stages in variable: declaration, definition, and initialization.
-
-* **Declaration**
-    : declaration is declaring existence of the construct of such as variables, objects, and more. The declaring also includes specifying which data type the construct is.
-
-    ```c
-    int variable;
-    ```
-
-* **Definition**
-    : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
-
-    ```c
-    variable = 3;
-    ```
-
-* **Initialization**
-    : initialization is assigning the initial value to the construct, simply the *first* definition. Since the first definition is generally done on the same time when declaring the construct. Hence, initialization is commonly thought by people as *declaration + definition* which is not always true.
-
-    ```c
-    int variable = 3;
-    ```
-
-Once the declaration sets data type to a variable, that variable can only take the value of that designated data type.
-
-### Local & Global Variable
-
-**Local variable** is a variable declared inside a code block, such as namespace, function, and class. Data stored in local variable is destroyed when exiting the code block, thus cannot be used outside. Local variable is allowed to have same variable name declared outside (technically, is borrowing the name as a different identity).
-
-**Global variable** is a variable declared on a global scope of the script which is outside a code block using `extern` keyword. Global variable can be used inside a code block without any special keyword. However, global variable should be avoided if possible to prevent unexpected result and error caused by conflicting variables.
-
-### Constant Variable
-
-Constant variable is a special type of variable that cannot be changed after its initialization. The keyword `const` is used to declare it as a constant variable.
+The example code below tells a compiler the existence of the `variable` integer variable. The variable has also allocated memory at the same time to store a value, called *definition* in programming.
 
 ```c
-const int variable = 3;
+/* DEFINITION OF THE "variable" VARIABLE */
+int variable = 3;
+```
+A variable may not have any variable but let a compiler know its existence, called *declaration* in programming.
+
+```c
+/* DECLARATION OF THE "variable" VARIABLE */
+int variable;
 ```
 
-### Static Variable
+According to the [ISO standard for C++](https://www.iso.org/standard/68564.html), the definition and declaration are the same in general. The detailed documentation is on § 3.1.2 as follows:
 
-Static variable is a special local variable which maintain its value even when escaped and re-entered a function code block. The keyword `static` is used to declare it as a static variable.
+> A declaration is a definition unless it declares a function without specifying the function’s body (8.4), it contains the extern specifier (7.1.1) or a linkage-specification25 (7.5) and neither an initializer nor a function- body, it declares a static data member in a class definition (9.2, 9.4), it is a class name declaration (9.1), it is an opaque-enum-declaration (7.2), it is a template-parameter (14.1), it is a parameter-declaration (8.3.5) in a function declarator that is not the declarator of a function-definition, or it is a typedef declaration (7.1.3), an alias-declaration (7.1.3), a using-declaration (7.3.3), a static_assert-declaration (Clause 7), an attribute- declaration (Clause 7), an empty-declaration (Clause 7), a using-directive (7.3.4), an explicit instantiation declaration (14.7.2), or an explicit specialization (14.7.3) whose declaration is not a definition.
+
+Although the above documentation is about C++ language, this also applies to C language. Below is a list of cases when a declaration is not a definition.
+* Forward declaration of a function
+* Declaration of a function's parameter
+* `extern` declaration
+* `typedef` declaration
+
+Printing the declared variable above will still show a value, indicating it stores the data despite not having assigned yet. A defined variable does not need to specify the data type as a compiler already knows what type of data it stores. Programming languages, in general, locates assigned data (ex. variable) on the left and assignee (ex. a constant value or another variable) on the right. Otherwise will cause an error or function improperly.
+
+### Initialization
+Initialization is the first assignment to a variable where it commonly occurs in the *definition* process.
 
 ```c
-static int variable = 3;
+/* VARIABLE INITIALIZATION */
+int variable = 3;
+```
+
+Many believe a definition is equivalent to "declaration + initialization" due to the example code above, but this is a huge misunderstanding. As previously mentioned, a declaration is also considered as a definition in general. The code below is also a definition but without initializing any value.
+
+```c
+/* VARIABLE DEFINITION; BUT WITHOUT INITIALIZATION */
+int variable;
+```
+
+### Local & Global Variable
+There are three types of variable in C language:
+
+* **Local variable** is a variable defined within the code block, such as functions. A local variable releases data when escapes from the code block and unavailable to use outside. It may have the same name as other variables defined outside the code block.
+
+  ```c
+  int main() {
+      // Insert code here...
+
+      /* LOCAL VARIABLE */
+      int variable;
+
+      return 0;
+  }
+  ```
+
+* **Global variable** is a variable that does not belong to any code blocks within the script. A global variable can be used with local variables inside other code blocks without any special syntax. Be cautious when using a global variable as it can cause an error related to variable confliction.
+
+  ```c
+  /* GLOBAL VARIABLE */
+  int variable;
+
+  int main() {
+      // Insert code here...
+
+      return 0;
+  }
+  ```
+
+* **Static variable** is a variation of a local variable that retains the data even after escaping from the code block. The data last left off is continued when re-entering the code block. The `static` keyword declares a static variable.
+
+  ```c
+  int main() {
+      // Insert code here...
+
+      /* STATIC VARIABLE */
+      static int variable;
+
+      return 0;
+  }
+  ```
+
+### Constant Variable
+A constant variable is a variable that cannot change its value after initialization. The `const` keyword declares variable as a constant.
+
+```c
+/* CONSTANT DEFINITION */
+const int variable = 1;
 ```
 
 ## Data Type Casting
-
-Data type casting force-changes data type stored in a variable into other desired type. Casting the smaller size data to its compatible type of a larger size data is called *implicit* data type casting. This is a natural data type conversion automatically done by compiler as no data loss occurs.
+Data type casting force-changes data type stored in a variable into other desired type. Casting the small size data to a compatible but larger size data type is called *implicit* casting. Implicit casting is a natural data type conversion automatically done by a compiler as no data loss occurs.
 
 ```c
 short A = 1;	// 2 BYTES INTEGER
 int B = A;		// 4 BYTES INTEGER
 ```
 
-On the other hand, its opposite conversion is called *explicit* data type casting which do have a risk of data loss/corruption upon casting data. C-style casting syntax is as follows:
+On the other hand, *explicit* casting risks data loss/corruption upon converting data type. C-style casting syntax uses parenthesis `()` as follows:
 
 ```c
 float A = 1.9;  // 4 BYTES FLOAT
@@ -351,26 +438,23 @@ int B = (int)A; // 4 BYTES INTEGER - INCOMPATIBLE: only returns its integer valu
 ```
 
 ## Operator
-
-Operator is the simplest form of data processing unit which can manipulate the value of operands. It operates simply by placing before, after, or between the operands.
+An operator is the simplest form of the data processing unit that manipulates the value of operands. It is placed before, after, or between the operands.
 
 ### Arithmetic Operator
-
-Arithmetic operator is mainly focused on processing numeric data type. Following is a list of arithmetic operator used by numeric data type:
+The arithmetic operator mainly focuses on processing numeric data types. Following is a list of arithmetic operators used by numeric data type:
 
 |             NAME             | OPERATOR | DESCRIPTION                                                  |
 | :--------------------------: | -------- | ------------------------------------------------------------ |
 |           Addition           | `+`      | -                                                            |
 |         Subtraction          | `-`      | -                                                            |
 |        Multiplication        | `*`      | -                                                            |
-|           Division           | `/`      | When both operands are integer: dividend is an integer without remainder.<br/>When at least one operand is real (float or double): dividend is a real (float or double). |
-| Remainder (Modulus Division) | `%`      | Remainder only returns integer.                              |
+|           Division           | `/`      | When both operands are integer: an integer dividend without a remainder.<br/>When at least one operand is real (float or double): a real dividend (float or double). |
+| Remainder (Modulus Division) | `%`      | Remainder only returns an integer.                              |
 
-For easier readability of the arithmetic operator, you can place blank space between number and operator, and it doesn’t affect anything on output.
+For easier readability, you may place blank spaces between numbers and operators which does not affect its output.
 
 ### Assignment Operator
-
-Assignment operator is another operation used within numeric data type. Following is a list of assignment operator used by numeric data type:
+The assignment operator is another operation used within numeric data types. Following is a list of assignment operators used by numeric data type:
 
 | OPERATOR | EXAMPLE  | EQUIVALENT  |
 | -------- | -------- | ----------- |
@@ -380,7 +464,7 @@ Assignment operator is another operation used within numeric data type. Followin
 | `/=`     | `x /= 1` | `x = x / 1` |
 | `%=`     | `x %= 1` | `x = x % 1` |
 
-Although not an assignment operator, a similar **increment and decrement** of the numerical value can be expressed as follow on C-based programming language:
+Although not an assignment operator, the similar increment and decrement operator has identical meaning as follows:
 
 | OPERATOR    | EXAMPLE   | DESCRIPTION       |
 | ----------- | --------- | ----------------- |
@@ -390,8 +474,7 @@ Although not an assignment operator, a similar **increment and decrement** of th
 | `--` suffix | `x = --y` | `y = y-1; x = y;` |
 
 ### Relational Operator
-
-Relational operator is for checking whether the relational condition between two numeric values and returns Boolean value whether condition is true or false. Following is a list of relational operator:
+The relational operator is used to compare the relation of two values, returning either `true` or `false` boolean value. Following is a list of relational operators:
 
 | OPERATOR | DESCRIPTION              |
 | -------- | ------------------------ |
@@ -403,25 +486,44 @@ Relational operator is for checking whether the relational condition between two
 | `!=`     | Not equal to             |
 
 ### Logical Operator
-
-Logical operator consist of AND, OR, and NOT logic. When doing so, think of `true` and `false` as binary 1 and 0, respectively. In wider sense, any non-zero number is deemed `true`.
+The logical operator consist of AND, OR, and NOT logic. Consider `true` and `false` as binary counterpart of 1 and 0.
 
 | OPERATOR | LOGIC | DESCRIPTION                                                |
 | -------- | ----- | ---------------------------------------------------------- |
-| `&&`     | AND   | `true` when all the arguments are `true`, else `false`.    |
+| `&&`     | AND   | `true` when all arguments are `true`, else `false`.    |
 | `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
-| `!`      | NOT   | Change `true` to `false` and vice versa.                   |
+| `!`      | NOT   | Changes `true` to `false` and vice versa.                  |
 
-# **C: CONDITIONAL AND LOOP**
-
-Conditional and loop statement is commonly used and one of the essential pieces of code in programming. This chapter introduces list of conditional and loop statements in C programming.
-
-## `if` Statement
-
-Conditional `if` statement runs code if the condition is true. When the condition evaluates `true`, the statements are carried out but otherwise ignored.
+### Escape Character
+Escape character `\` is used to escape from a sequence of characters and execute certain operations within text-based data. In the introduction on string data type, `\n` is used to change to a new line.
 
 ```c
-if (condition) {
+printf("Hello\nWorld!!");
+```
+
+```
+Hello
+World!
+```
+
+| SYNTAX | DESCRIPTION    |
+| ------ | -------------- |
+| `\n`   | New line       |
+| `\t`   | Horizontal tab |
+| `\\`   | Backslash      |
+| `\b`   | Backspace      |
+| `\'`   | Single quote   |
+| `\"`   | Double quote   |
+
+# **C: CONDITIONAL AND LOOP**
+Conditional and iteration (or loop) statements are two of the most commonly used in programming. The "statement" in programming represents a code that executes or processes data. This chapter introduces a list of conditional and iteration statements in C language programming.
+
+## `if` Statement
+Conditional `if` statement runs code if the condition holds. When the condition evaluates `true`, the indented codes are carried out but otherwise ignored.
+
+```c
+if (condition)
+{
 	statements;
 }
 
@@ -429,32 +531,34 @@ if (condition) {
 if (condition) statement;
 ```
 
-It is possible to place`if` statement in another `if` statement, called "nested `if`". It is recommended to use code block (`{}`) to distinguish between `if` statements to avoid computer’s misinterpretation.
+The `if` statement can locate inside another `if` statement, called "nested `if`". Use a code block (`{}`) to distinguish between `if` statements to avoid possible misinterpretation made by a compiler.
 
 ```c
-if (condition) {
-    if (condtion) { 
+if (condition)
+{
+    if (condtion)
+    { 
         statements;
     } 
 }
 ```
 
 ### `else` Statement
-
-Conditional `else` statement must be followed after `if` statement as it cannot be used alone. The statement contains code that is called when the condition evaluates `false`.
+A conditional `else` statement cannot be used alone and must be followed by an `if` condition. The statement contains code that executes when evaluated `false`.
 
 ```c
-if (condition) {
+if (condition)
+{
     statements;
 }
-else {
+else
+{
     statements; 
 }
 ```
 
 ### `else if` Statement
-
-Conditional `else`-`if` statement is a combination of `if` and `else` statement; when the first condition evaluates `false`, the `else if` statement provides second (or more) chance to evaluate condition different from the first one.
+A conditional `else if` statement is a combination of `else` and `if` conditions; when the first condition evaluates `false`, the `else if` statement provides a new condition different from the previous one. 
 
 ```c
 if (condition) {
@@ -468,23 +572,21 @@ else {
 }
 ```
 
-However, this is not the same as chain of `else`-`if` conditional statement as that is a combination of two different conditional set, while `else if` statement guarantees a single conditional set.
+However, this statement is different from the chain of `else`-`if` conditional statement as that is a combination of two sets of conditions. On the other hand, `else if` conditional statement is a continuation of an existing evaluation instead of starting new conditioning.
 
 ### Ternary Operator
-
-Conditional statement can be expressed simply using ternary (`?:`) operator as shown below:
+A conditional statement can be simplified using the ternary operator shown below:
 
 ```c
 condition ? return_true : return_false;
 ```
 
-The vocabulary *ternary* represents the statement takes three arguments. Ternary operator should not be overused as it reduces readability, but useful on variable assignment.
+The vocabulary *ternary* indicates the statement takes three arguments. The ternary operator should not be overused as it reduces readability but useful on variable assignment.
 
 ## `switch` Statement
+Conditional `switch` statement evaluates whether a variable matches a value assigned to the `case` keyword and executes the corresponding code if true. After execution, the `break` statement must locate to prevent further evaluation of the next `case` keyword.
 
-Conditional `switch` statement checks the argument passed to the function and compare its value referenced on `case` keyword. Every case needs `break` at the end of the group of statements to prevent the statement from proceeding condition evaluation afterward.
-
-When no case is true to the expression, the statements from `default` keyword is returned. This case does not need `break` statement but must to be presented no matter what.
+If no condition matches, the statement automatically executes codes under the `default` keyword that is optional. The `default` keyword does not require the `break` statement as opposed to the `case` keyword.
 
 ```c
 switch (argument)
@@ -500,7 +602,7 @@ switch (argument)
 }
 ```
 
-The `switch` statement can have its cases grouped together for a single label:
+Multiple `case` keywords may share the same code as follows:
 
 ```c
 switch (argument)
@@ -519,21 +621,18 @@ switch (argument)
 }
 ```
 
-
 ### `break` Statement
-
-The `break` statement can be used to end a loop prematurely, before complete iteration is made. When encountered inside a loop, immediately escapes from the loop but does not break from its outer loop.
+The `break` statement is to end a loop prematurely. When encountered in the loop, the `break` statement escapes from the current loop but does not escape from the nesting loop.
 
 ### `continue` Statement
-
-The `continue` statement skips the rest of the statement below in the loop and jumps back to the conditioning part. This maintains the loop iteration rather than escaping the loop like `break` statement.
+The `continue` statement skips the rest of the code below in the loop and jumps back to the conditioning part. It maintains the iteration rather than escaping from it like the `break` statement.
 
 ## `while` Loop
-
-The `while` loop statement repeatedly execute statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `false`.
+A `while` loop statement repeatedly executes statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `false`.
 
 ```c
-while (condition) {
+while (condition)
+{
     statements;
 }
 
@@ -542,18 +641,17 @@ while (condition) statement;
 ```
 
 ### `do`-`while` Statement
-
-The `do`-`while` loop statement is alternative of the `while` statement. Instead of checking the condition before executing looping statement, this statement is does opposite: execute looping statement first, then check the condition.
+The `do`-`while` loop statement is similar to the `while` loop statement, but the former executes code first then evaluates, and the latter is vice versa.
 
 ```c
-do {
+do
+{
     statements
 } while (condition);
 ```
 
 ## `for` Loop
-
-The `for` loop statements repeatedly execute statements inside (aka. iterate) as long as the local variable holds the condition. On each loop, value (generally number) of the variable is incremented/decremented.
+The `for` loop statement repeatedly executes statements inside (aka. iterate) as long as the condition holds. Its local variable changes as specified on each iteration, which commonly uses integer increment.
 
 ```c
 for (variable; condition; increment) {
@@ -565,56 +663,55 @@ for (variable; condition; increment) statement;
 ```
 
 # **C: ARRAY**
-
-C language can create array which stores collection of data. Array provides convenience on managing multiple data at once. This concept is also highly related to the *pointer* which will be introduced later. For now, this chapter will try to explain what array is without referencing pointer too much.
+C language can create an array that stores the collection of data. It provides convenience in managing multiple data at once. An array is closely related to a *pointer* introduced in a later chapter. This chapter describes an array in C language without referring to the pointer.
 
 ## Array
-
-Array is a container used to store an indexed of item of same data type. To declare an array, bracket `[]` is used to define the size of the container how many value it can store:
+An array is a container for data of the same data type in sequence. Declare an array by designating its size of how much data it can store using a bracket `[]`.
 
 ```c
-// DECLARATION
+/* ARRAY DEFINITION */
 int arr[size];
 ```
 
-and curly bracket `{}` is for assigning value to each element in sequence:
+A variable is not allowed when defining the size of an array (except a constant). The size of an array is static, meaning it cannot change after the definition.
+
+Assign values in order within a pair of curly bracket `{}` to initialize an array:
 
 ```c
-// INITIALIZATION 1
+/* INITIALIZATION 1 */
 int arr[size] = {value1, value2, ... };
 
-// INITIALIZATION 2
+/* INITIALIZATION 2: SIZE IS SET TO THE NUMBER OF ELEMENTS */
 int arr[] = {value1, value2, ... };
 ```
 
-Upon initialization, a number of initialized value should not exceed than its declared size, thou it may be smaller which fills leftover with `0` or `NULL` value. The declared size cannot be changed afterward, but leaving the array size empty will automatically set to fit the content.
+Upon initialization, the number of initialized values should not exceed its declared size, though it may be smaller, which fills leftover with `0` or `NULL` value.
 
-Calling array itself does not show the whole elements inside the array; instead it returns the memory address the array data is assigned to (aka. pointer) and is equivalent to the memory address of its first element.
+Calling an array itself does not show the whole elements inside; instead, it returns the memory address the array data is assigned to (aka. pointer) and is equivalent to the memory address of its first element.
 
 ```c
-int arr[3] = {value1, value2, valu3};
+int arr[3] = {value1, value2, value3};
 
 arr;		// >> OUTPUT: 0139F854
 &arr[0];	// >> OUTPUT: 0139F854
 &arr[1];	// >> OUTPUT: 0139F858 ( = 0139F854 + 4 BYTES from integer data type)
 ```
 
-This will be explained later on next chapter *C: POINTER* in detail, so just understand there is such a thing.
+This concept is explained later in the next chapter *C: POINTER* in detail.
 
-Because of this characteristic of array data, array definition cannot be done as a whole; unlike initialization, definition after declaration must be done element-by-element. Each element can be accessed using a bracket `[]` with index starting from 0.
+Because of this characteristic, an array cannot assign multiple values at once besides initialization. Access each element using a bracket `[]` with an index starting from 0.
 
 ```c
 int arr[3];
 
-// DEFINITION
+// ASSIGNMENT TO INDIVIDUAL ELEMENT
 arr[0] = value1;
 arr[1] = value2;
 arr[2] = value3;
 ```
 
 ### Length of Array
-
-When `sizeof()` operator is used on the array, it returns the total assigned byte size considering its data type, thus "$\mathrm{data \ type \ byte} \times \mathrm{number \ of \ elements}$". Hence, divided by data type byte results array length:
+When using the `sizeof()` on the array, it returns the total number of bytes allocated. Since allocated memory size is relevant to the data type, use the following expression to acquire the number of elements:
 
 ```c
 int arr[3];
@@ -622,110 +719,123 @@ int arr[3];
 sizeof(arr)/sizeof(int);	// >> OUTPUT: 3 ( = LENGTH OF ARRAY)
 ```
 
-### Multi-dimensional Array
+In other words, the length of an array is found by dividing its allocated bytes by its data type size.
 
-Array can contain another array as an element, under the condition these arrays shares the same length. Multi-dimensional array can also be initialized without definite size but limited to its first boundary only.
+### Multi-dimensional Array
+A multi-dimensional array stores another array as its element. These arrays used as elements must share the same length and data type. A multi-dimensional array can initialize without defining a size but limited to its first boundary only.
 
 ```c
-// INITIALIZATION 1
+/* INITIALIZATION 1 */
 int arr[size1][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 
-// INITIALIZATION 2
-int arr[     ][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
+/* INITIALIZATION 2 */
+int arr[][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 ```
 
 ## String
-
-C language does not have a string data type, but represented using array of character with null terminator `\0` at the end:
+C language does not officially a data type for a string (a sequence of characters) but can substitute with an array of characters with null terminator `\0` at the end.
 
 ```c
-// C-STYLE STRING
-char arr[] = "Hello";
-char* ptr = "World!";
+/* C-STYLE STRING */
+char arr[] = "Hello";    // arr[] = {'H', 'e', 'l', 'l', 'o', '\0'};
+char* ptr = "World!";    // EXPRESSING STRING WITH A POINTER
 ```
 
-The following list shows several string functions available in C programming language:
+Below is a list of functions related to a string in C language:
 
 | FUNCTION   | EXAMPLE               | DESCRIPTION                                                  |
 | ---------- | --------------------- | ------------------------------------------------------------ |
 | `strcat()` | `strcat(str1, str2);` | Append `str2` string at the end of `str1` string variable.   |
 | `strcpy()` | `strcpy(str1, str2);` | Copy `str2` string to `str1` string variable.                |
-| `strlen()` | `strlen(str);`        | Return the length of `str` string, excluding null terminator. |
+| `strlen()` | `strlen(str);`        | Return the length of `str` string, excluding a null terminator. |
 
 # **C: FUNCTION**
-
-C/C++ language is executed based around a single key function called `main()`. Understanding the concept of functions is important in C/C++ languages, which can also be used to create and implement custom function to serve specific purpose.
+C/C++ language is executed based on a single function called the `main()` function. Understanding the concept of functions is crucial in C/C++ languages and can increase efficiency by creating custom functions, called *functional programming*. This chapter will be introducing the guide on how to create and use functions in C language for functional programming.
 
 ## Function
-
-Function is an independent block of code which can process the data and present newly processed data once it’s called, allowing dynamic program scripting. The programming based around use of custom functions is called *functional programming*.
-
-Function can be distinguished by its declaration with parenthesis after its name; `function()`. Its definition is stated inside a code block (`{}`), which is executed when called.
+A function is a reusable independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. Function is distinguished by parenthesis after its name; `function()`.
 
 ```c
-// FUNCTION DEFINITION(AKA. IMPLEMENTATION)
-float function(int arg1, float arg2)
-{
-	return arg1 + arg2;
-}
-
-function(1, 3.0);		// >> OUTPUT: 4.0
+int variable = {0, 3, 5, 9};
+printf(sizeof(variable));
+// USING "printf()" AND "sizeof()" FUNCTION THAT RETURNS THE LENGTH OF A LIST OBJECT.
 ```
 
-Because C/C++ programming is executed from top to bottom sequentially, function won't be executable unless it is defined firsthand. This creates difficulty with script and function management when the project becomes larger.
-
-Function has a prototype used to let compiler know the function's existence recognizing its definition. Prototype shares same syntax of function declaration of its definition but without a code block.
+The function requires two components for a definition:
+* Code block `{}`: a space for codes that execute when called.
+* Data type: a type of data to return when exiting the function.
 
 ```c
-// FUNCTION PROTOTYPE (AKA. FORWARD DECLARATION)
-float function(int arg1, float arg2);
-
-function(1, 3.0);		// >> OUTPUT: 4.0
-
-// FUNCTION DEFINITION (AKA. IMPLEMENTATION)
-float function(int arg1, float arg2)
+/* FUNCTION DEFINITION */
+int function()
 {
-	return arg1 + arg2;
+    return 1 + 2;
+}
+
+/* CALING A FUNCTION */
+function();    // >> OUTPUT: 3
+```
+
+Because C/C++ programming executes from top to bottom sequentially, a function won't be executable unless it is defined firsthand. However, locating every function definition on top of the script will make it difficult to manage for a larger project.
+
+A function prototype, aka a forward declaration, let the compiler know the existence of a function before the definition. As mentioned in the *C: BASIC § Variable* section, a forward declaration is not a definition. The prototype is not essential but mostly locates on top of the script, replacing a code block `{}` to semicolon `;`.
+
+```c
+/* FUNCTION PROTOTYPE (AKA. FORWARD DECLARATION) */
+int function();
+
+/* CALLING A FUNCTION */
+function();    // >> 출력: 3
+
+/* FUNCTION DEFINITION */
+int function()
+{
+    return 1 + 2;
 }
 ```
 
-However, defining a function inside another function (aka nested function) is invalid in C/C++ language.
+Defining a function inside another function (aka nested function) is invalid in C/C++ language.
 
 ### `return` Statement
+The `return` statement is a function-exclusive statement that returns the value processed by a function. Once encountering a return statement, the function ends immediately despite having remaining codes.
 
-The `return` statement is a function-exclusive statement that outputs indicated data under the data type declared on the function. Once the `return` statement is executed, the function ends immediately despite there are codes still left inside.
-
-If the function is a `void` data type, function can be returned by `return;` statement alone without any data to return.
+If the function is a `void` data type, the `return;` statement alone without any data will exit the function.
 
 ### Parameter & Argument
+Following is a difference between parameter and argument mentioned when discussing function:
 
-Following are the difference between parameters and arguments that is referred significantly when discussing function.
+* **Argument**
+    : An argument is a value or object passed to a function parameter.
 
-**Parameter**
-Parameter is a function-internal local variable: because parameters is a function-exclusive local variable, it cannot be called from outside.
+* **Parameter**
+    : A parameter is a local variable assigned with an argument. Meaning, parameters are only available inside the function. Parameters is declared inside a parenthesis `()`.
+
+Although parameters and arguments are a different existence, two terms are used interchangeably as both stores the same data.
 
 | OPERATOR |   SYNTAX    | DESCRIPTION                                                  |
 | :------: | :---------: | ------------------------------------------------------------ |
-|   `=`    | `arg=value` | Parameter `arg` is assigned `value` by default when no other value is passed. Must locate after normal parameter. |
+|   `=`    | `arg=value` | A parameter that has default value when no argument is passed. Must locate after normal parameter. |
 
-**Argument**
-Argument is a value or object being passed to the function parameter and those passed values and objects will be processed by the function code. However, argument is independent from parameter: change on parameter does not affect value or object passed as argument.
-
-Examples below show how function parameter and argument works:
+Examples below show how parameter and argument work in function:
 
 ```c
-float function(int arg1, float arg2);
+/* FUNCTION PROTOTYPE */
+int function(int arg1, float arg2);
 
+/* CALLING A FUNCTION */
 function(1);             // >> OUTPUT: 3.0
-function(1, 3.0);        // >> OUTPUT: 4.0
+function(1, 3.0);        // >> OUTPUT: 4.0 (extract an integer from 1 + 3.14)
 
-float function(int arg1, float arg2 = 2.0)
+/* FUNCTION DEFINITION */
+int function(int arg1, float arg2 = 2.0)
 {
 	return arg1 + arg2;
 }
 ```
 
-However, passing container such as array cannot be passed using the syntax above, requiring different method. There are two possible methods available: argument as an array, and as a memory address (pointer).
+Passing a container such as an array cannot be done using the syntax above and requires a different method. 인자를 건네는 방법에는 두 가지가 있으며, 매개변수를 배열로 혹은 배열의 메모리 주소(즉, 포인터)로 정의하는 것이다.
+
+Passing a container such as an array cannot be done using the syntax above and requires a different method. There are two syntaxes available: defining a parameter as an array or as a memory address (pointer).
 
 ```c
 void function(int arg[]);
@@ -734,7 +844,8 @@ int arr[3] = {value1, value2, value3};
 function(arr);              // PASSING ARRAY TO FUNCTION ARGUMENT
 
 // ACCEPT ARGUMENT AS AN ARRAY
-void function(int arg[]) {
+void function(int arg[])
+{
     statements;
 	return;
 }
@@ -755,56 +866,70 @@ void function(int *arg) {
 }
 ```
 
-This is possible because array itself returns a memory address. Again, pointer will be explanation on next chapter in detail.
+The latter method is possible due to the characteristic where calling an array itself returns the memory address of the first element. Incrementing the pointer will shift to the next element since the memory is allocated in sequence.
 
 ## Entry Point
-
-Entry point is the startup function where a program execution begins. There are three major entry points that can to be discussed in C++.
-
-### `main()` Function
-
-As the only entry point available in traditional C++ console application, a project must have one and only `main()` function within the project. Creating multiple `main()` functions or not having any `main()` function will cause error on running the program.
+The entry point is the startup function where program execution begins; C language is the `main()` function and does not need forward declaration nor needs to be called. There can be only one entry point in the project; having more than one entry point or none will result in an error.
 
 ```c
-int main(int argc, char **argv /* ALTERNATIVE: char *argv[] */) {
+/* C LANGUAGE ENTRY POINT: main() */
+int main(int argc, char **argv)
+{
+    // Insert code here...
 
     return 0;
 }
 ```
 
-According to C++ standard, `main()` function must return `int` data: `EXIT_SUCCESS` (traditionally `0`) and `EXIT_FAILURE`. When return value is omitted by the programmer, the compiler implicitly insert `return 0;` at the end of the entry point.
+As the only entry point available in traditional C++ console application, a project must have one and only `main()` function within the project. Creating multiple `main()` functions or not having any `main()` function will cause error on running the program.
 
-Entry point `main()` function can have arguments mentioned above: argument count `argc` and argument vector `argv`. These arguments are apparent when executed through command-line:
+```c
+int main(int argc, char **argv) {
+
+    return 0;
+}
+```
+
+While this article didn't include the `main()` function on the example codes, every code besides global variables and function definitions must be inside the entry point.
+
+According to the C language standard, the `main()` function must return an integer; the `EXIT_SUCCESS` (equivalent to an integer `0`) or the `EXIT_FAILURE`.
+The compiler implicitly fills in the `return 0;` statement at the end of the entry point if not presented in the function.
+
+The `main()` function has the following parameters:
+* `argc`: the number of arguments (abbrev. of *argument count*)
+* `argv`: the list of argument values (abbrev. of *argument vector*); alternatively can be declared as `char *argv[]`
+
+These arguments are apparent when running the program on a terminal:
 
 ```
 ./app.exe option1 option2
 ```
 
-| Arguments | Data        |
+| ARGUMENTS | VALUE       |
 | --------- | ----------- |
 | `argv[0]` | `./app.exe` |
 | `argv[1]` | `option1`   |
 | `argv[2]` | `option2`   |
 
-This indicates `argc` is always greater than 0 as the first element is an executing program.
+The `argc` parameter always has a value greater than zero since the first element of the `argv` is the name of the program.
 
-Meanwhile, Windows OS has its exclusive entry point called `wmain()` function which supports wide character arguments encoded in UTF-16 Unicode (where UTF-8 Unicode encodes common character such as English and numbers).
+Meanwhile, Windows OS has an exclusive entry point called the `wmain()` function that supports various languages by using wide-character arguments encoded in UTF-8 Unicode (size varying from 1~4 bytes).
 
 ```c
-int wmain(int argc, wchar_t **argv /* ALTERNATIVE: wchar_t *argv[] */) {
+/* C LANGUAGE ENTRY POINT SUPPORTING WIDE-CHARACTER: wmain() */
+int wmain(int argc, wchar_t **argv) {
 
     return 0;
 }
 ```
 
-C/C++ language is originated from UNIX platform which is different from Windows platform. Meaning, certain language characters (e.g. Greek, Cyrillic characters) may not be fully supported due to different encoding on `main()` entry point.
+The `wmain()` function was introduced because C language originated from UNIX operating system interface based on ASCII encoding. Using the `main()` function on Windows OS won't recognize certain characters, such as Greek, Cyrillic, due to encoding compatibility.
 
 ## Recursion Function
-
-Recursive function is a function that calls itself (recursion). Factorial $!$ in mathematic is the best example of recursive function implementation.
+A recursive function is a function that calls itself (recursion). Factorial in mathematic is the best example of recursive function implementation.
 
 ```c
-// EXAMPLE: FACTORIAL "!"
+/* EXAMPLE: FACTORIAL "!" */
 int factorial(int num) {
     // BASE CASE: a case when to escape from the recursion.
     if (num == 1)
@@ -814,26 +939,23 @@ int factorial(int num) {
 }
 ```
 
-Recursion can occur indirectly by multiple number of functions calling one to another, then back to the beginning.
-
-## External Function
-
-
+Recursion can occur indirectly by multiple functions calling one to another, then back to the beginning.
 
 ## Callback Function
+The callback function, aka. "call-after" function, is a function passed as an argument to other functions. The calling function runs the callback function by calling the parameter, thus named as the "callback" function.
 
-Aka. "call-after" function, it is a function that is passed as an argument to other function (calling function) which expects the argument (callback function) to execute on some time.
-
-Do not try to understand the script below for now as this requires understanding of a pointer which will be dealt on *C: POINTER § Function Pointer*.
+The following is the example for the callback function, which is explained in the *C: POINTER § Function Pointer* section.
 
 ```c
-// CALLING FUNCTION
-float FUNC(float (*callback)(int, float), int arg1, float arg2) {
-	float var = callback(arg1, arg2);		// FUNCTION CALLBACK
+/* CALLING FUNCTION */
+int calling(float (*function)(int, float), int arg)
+{
+    // CALLING CALLBACK FUNCTION
+    float var = function(arg, 3.0);
     return var;
 }
 
-// CALLBACK FUNCTION
+/* CALLBACK FUNCTION */
 float function(int arg1, float arg2) {
 	return arg1 + arg2;
 }
@@ -843,332 +965,419 @@ FUNC(&function, 1, 3.0);	// >> OUTPUT: 4.0
 ```
 
 # **C: POINTER**
-
-Starting from *C: Array* chapter, a new data called "pointer" was mentioned quite often. Pointer is very important concept in C/C++ programming language and is one of the commonly used data to develop advanced program.
-
-This chapter mainly focuses on the pointer and its application that can improve performance and functionality of previously mentioned programming, especially on function.
+This article has mentioned a new "pointer" data type since the *C: ARRAY* chapter. The pointer is one of the crucial concepts in C language, allowing more complex programming. This chapter describes what the pointer is in C language and revisits the array and function.
 
 ## Pointer
-
-Pointer is a variable that stores memory address of where the value is located, rather than the value itself. Despite being a memory address, pointer also must to be distinguished by a data type of value. When declaring pointer, compound specifier `*` (aka. asterisk) is placed between data type and identifier:
+The pointer is a data type that stores the allocated memory address of a variable instead of its value. A 32-bit and 64-bit operating system have a pointer that is 8 and 16 bytes long. A variable can store a pointer as well; while the data type is required when defining, an asterisk `*` must locate between the data type and identifier.
 
 ``` c
-// POINTER DECLARATION
-int* ptr;				// WARNING C4700: unintialized local variable 'ptr' used
+/* POINTER DECLARATION */
+int* ptr;
+printf("%p", ptr);    // WARNING C4700: UNINTIALIZED LOCAL VARIABLE 'ptr' USED
 ```
 
-Memory address can be called from non-pointer variable as well using ampersand (`&`) operator:
+Memory address can be called from a non-pointer variable as well using the ampersand operator `&`.
 
 ```c
-// NON-POINTER DECLARATION
-int variable;
-&variable;				// >> OUTPUT: 0139F854
+/* INTEGER VARIABLE DEFINITION */
+int variable = 365;
+printf("%p", &variable);
+```
+```
+1014eb010
 ```
 
-Since this hexadecimal memory address cannot be written by hand, the only way to either define or initialize the pointer is by assigning already existing memory address. Beware, data type must matched when defining pointer.
+Since the hexadecimal memory address should not be written by hand, the only way to assign the pointer is by the existing memory address. Beware, the data type must match on assignment to the variable.
 
 ```c
-// POINTER INITIALIZATION
-int variable = 3;
-int* ptr = &variable;
+/* VARIABLE INITIALIZATION */
+int variable = 365;
 
-printf("%x",  ptr);		// >> OUTPUT: 0139F854	(ADDRESS)
-printf("%d", *ptr);		// >> OUTPUT: 3			(VALUE)
+// POINTER VARIABLE OF THE SAME TYPE
+int *ptr1 = &variable;
+printf("%p\n",  ptr1);        // >> OUTPUT: 0x1014eb010  (ADDRESS)
+printf("%d\n", *ptr1);        // >> OUTPUT: 365          (VALUE)
+
+// POINTER VARIABLE OF THE DIFFERENT TYPE
+char *ptr2 = &variable;
+printf("%p\n",  ptr2);        // >> OUTPUT: 0x1014eb010  (ADDRESS)
+printf("%d\n", *ptr2);        // >> OUTPUT: 109          (VALUE)
 ```
 
-As seen above, it is possible to return value assigned to the pointer by placing dereference (`*`) operator. While pointer declaration also used asterisk, they are different existence but only sharing the same symbol.
+As seen above, it is possible to return the value assigned to the pointer by placing the dereference operator `*`. While a pointer declaration also used an asterisk, they are different existence but only sharing the same symbol.
 
 |          OPERATOR          |  VARIABLE   |     RETURN     |
 | :------------------------: | :---------: | :------------: |
-| Address-on (`&`) Operator  | Non-pointer | Memory address |
-| Contents-of (`*`) Operator |   Pointer   |     Value      |
+| Address-on Operator `&`  | Non-pointer | Memory address |
+| Contents-of Operator `*` |   Pointer   |     Value      |
 
-Interestingly, any changes made on variable is also affects contents of the pointer as the pointer shares the same memory address. This feature is the most important when it comes to using pointer in C/C++.
+If the variable value changes, the value dereferenced from the pointer also changes since it shares the same memory address, also known as "call by reference".
 
 ### Null Pointer
-
-Null pointer is a pointer that points to nothing. This can be done by assigning pointer with `nullptr` keyword:
+A null pointer is a pointer that points to nothing. Since C language may cause an error such as memory access violation because of the pointer, assign the `NULL` keyword for safe usage.
 
 ```c
-int* ptr = nullptr;		// >> OUTPUT: 00000000
+int* ptr = NULL;
+printf("%p", ptr);
+```
+```
+0x0
 ```
 
 ### Void Pointer
-
-Void pointer is a pointer with no specific data type (thus, `void`). This has advantage of being able to point to any kind of data type value by using static casting.
+A void pointer is a pointer with no specific data type (thus, `void`). It has the advantage of being able to point to any data type with help from data type conversion.
 
 ```c
-// POINTER DECLARATION
-void* ptr;
+/* VOID POINTER DECLARATION */
+void *ptr;
 
-int variable;
-(int*)ptr = &variable;
+int variable = 356;
+ptr = &variable;
+printf("%d", *(int*)ptr);
+```
+```
+365
 ```
 
 ### Function Pointer
-
-Pointer can also be assigned with function, called function pointer. This pointer points to the first line function execution, similar to array pointing to its first element. Function pointer is initialized as below:
+The function pointer is a void pointer that points to a function. Similar to a pointer to an array representing the first element memory address, a function pointer points to the first line of the function code. Initialize the function pointer using the following syntax:
 
 ```c
-void function(int, int);
+/* FUNCTION DEFINITION */
+int function(int arg1, float arg2) {
+    statements;
+    return 0;
+}
 
-// FUNCTION POINTER INITIALIZATION
-void (*ptr)(int, int) = function;
+int main() {
+    // Insert codes here...
 
-void function(int arg1, int arg2) {
-	statements;
+    /* FUNCTION POINTER INITIALIZATION */
+    int (*ptr)(int, float) = function;
+    ptr(1, 3.14);
+
     return 0;
 }
 ```
 
-When assigning function pointer, not only should function data type is considered but also the parameters and its number. Failed to meet all these conditions cause compilation error.
-
-While function returns value when used with parenthesis `function()`, function also returns memory address to its starting point when used without parentheses `function`. 
+The function pointer should match the data type and parameters of the function when initializing. Failed to do so will result in a compilation error. While calling with a parenthesis like `function()` returns data from the `return` statement,  without a parenthesis like `function` returns a memory address instead.
 
 # **C: USER-DEFINED DATA TYPE**
-
-Commonly used data type such as `int`, `float`, `char`, and more are already defined in `stdio.h` header. Developer may create and use custom data type based on these pre-defined data types.
+Commonly used data types such as `int,` `float,` `char,` and more are already defined and are called through the `stdio.h` header file. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
 
 ## Structure
-
-Structure groups multiple member variables under a single structure tag, regardless of data type of member variable.
+The structure is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type. Use the `struct` keyword to define a structure in C language.
 
 ```c
-// STRUCTURE DECLARATION
+/* STRUCTURE DEFINITION: TOTAL 5 BYTES */
 struct STRUCTURE {
-    int   field1;
-    float field2;
+    // MEMBER VARIABLE DEFINITION
+    int   field1;    // TYPE SIZE: 4-BYTE
+    char  field2;    // TYPE SIZE: 1-BYTE
 };
+```
 
-// VARIABLE INITIALIZATION
-struct STRUCTURE variable1 = {1, 3.0};
-struct STRUCTURE variable2 = {.field2 = 3.0, .field1 = 1};
+There are two methods for defining a variable from the structure, and both require the `struct` keyword.
+
+```c
+/* STRUCTURE VARIABLE INITIALIZATION 1 */
+struct STRUCTURE variable1 = {3, 'A'};
+struct STRUCTURE variable2 = {.field2 = 'A', .field1 = 3};
 ```
 
 ----
 
 ```c
-// STRUCTURE DECLARATION
-struct STRUCTURE {
-    int   field1;
-    float field2;
-};
-
-// VARIABLE DECLARATION
+/* STRUCTURE VARIABLE DEFINITION */
 struct STRUCTURE variable;
 
-// VARIABLE ASSIGNMENT
-variable = (struct STRUCTURE) {1, 3.0};
+/* STRUCTURE VARIABLE INITIALIZATION 2 */
+variable = (struct STRUCTURE) {3, 'A'};
+```
+
+After defining a structure variable, the `struct` keyword is not needed, and its members are accessible by the member access operator `.`.
+
+```c
+variable.field1;    // >> OUTPUT: 3
+variable.field2;    // >> OUTPUT: A
+```
+
+### Anonymous Structure
+The syntax for the structure in the previous section is reusable and can create more than one structure variable of the same type. However, to create a user-defined data type for a single-use, define the anonymous structure using the syntax below:
+
+```c
+/* SINGLE-USE STRUCTURE VARIABLE DEFINITION & INITIALIZATION */
+struct {
+    int   field1;
+    char  field2;
+} variable = {3, 'A'};
 ```
 
 ## Union
-
-Union groups multiple member variables under a single structure tag and shares memory address, regardless of data type of member variable. In other word, union is mainly used to present single data in different types of data (such as `int`, `char`, `bool`, et cetera). Because of this, union only requires value assignment on one member field.
+The union is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type but shares a memory space. In other words, value changes in one of the members also change the value assigned in the other members. Use the `union` keyword to define a structure in C language.
 
 ```c
-// UNION DECLARATION
+/* UNION DEFINITION: TOTAL 4 BYTES */
 union UNION {
-    int  field1;
-    char field2[2];
-};
-
-// VARAIBLE DECLARATION & ASSIGNMENT
-union UNION variable;
-variable.field1 = 22136;    // >> OUTPUT: 22136		(0x 00 00 56 78)
-
-variable.field2[0];         // >> OUTPUT: 'x'		(0x -- -- -- 78)
-variable.field2[1];         // >> OUTPUT: 'V'		(0x -- -- 56 --)
+    // MEMBER VARIABLE DEFINITION
+    int    field1;    // TYPE SIZE: 4-BYTE
+    char   field2;    // TYPE SIZE: 1-BYTE
+}
 ```
 
-Since union shares a single memory location to store the value, data allocation size is set based on the member with data type of largest byte size. Member fields with smaller byte-size data type is represented as a portion of the overall.
+The byte size of the union is equal to the member variable with the largest byte size; this allows the user-defined data type to use a single memory allocation while still have enough space to store other data types.
 
-### Array Union
-
-When declaring array from union, that array can store different types of data due to the nature of union able to express single data into other data types.
+Use the following syntax to define a variable from the union, which requires the `union` keyword. Although the union data type may have more than one member, only one member needs initialization as they all shares the same memory space.
 
 ```c
-// UNION DECLARATION
-union UNION {
-    int   field1;
-    float field2;
+/* UNION VARIABLE INITIALIZATION */
+union UNION variable = (union UNION) {365};    // >> OUTPUT: 0x 00 00 01 6D
+
+printf("Field1: %d (%#010x)\n", variable.field1, variable.field1);
+printf("Field2: %d (%#010x)\n", variable.field2, variable.field2);
+```
+
+```
+Field1: 365 (0x0000016d)
+Field2: 109 (0x0000006d)
+```
+
+The first member, `field1`, is a 4-byte data type that processes all of `0x0000016D` bytes and returns an integer 365. However, the second member, `field2`, is a 1-byte data type that can only process a single byte, resulting in an integer 109.
+
+### Anonymous Union
+The syntax for the union in the previous section is reusable and can create more than one union variable of the same type. However, to create a data structure for a single-use, define the anonymous union using the syntax below:
+
+```c
+/* DEFINING & INITIALIZING A SINGLE-USE UNION VARIABLE */
+union {
+    int    field1;
+    char   field2;
+} variable = {365};
+```
+
+## Enumeration
+The enumeration is a user-defined data type numbering enumerating items, called enumerators. Enumerators are assigned with an integer that starts from zero and increments by one by default.
+
+> The original C compiler "K&R C" did not have the enumerator, but is added since the commonly used "ANSI C" compiler.
+
+```c
+/* ENUMERATION DEFINITION */
+enum ENUMERATION {
+    enumerator1,     // ENUMERATOR = 0
+    enumerator2,     // ENUMERATOR = 1
+    enumerator3,     // ENUMERATOR = 2
+    enumerator4      // ENUMERATOR = 3
+};
+```
+
+Assigning an integer is done using the assignment operator `=`. The other enumerators may share the same value.
+
+```c
+enum ENUMERATION {
+    enumerator1 = 3, // ENUMERATOR = 3
+    enumerator2 = 1, // ENUMERATOR = 1
+    enumerator3,     // ENUMERATOR = 2
+    enumerator4      // ENUMERATOR = 3
+};
+```
+
+However, enumerators cannot share the same identifier, which is similar to a global constant. In other words, enumerators are global data used across the project but unchangeable after initialization.
+
+```c
+enum ENUMERATION1 {
+    enumerator1,
+    enumerator2,
+    enumerator3,
+    enumerator4
 };
 
-// ARRAY DECLARATION
-union UNION arr[3];
+enum ENUMERATION2 {
+    enumeration4,    // ERROR: Enumerator 'enumerator4' is re-defined.
+    enumeration5,
+    enumeration6
+};
+```
+
+Defining an enumeration variable requires the `enum` keyword but is not needed when calling the variable afterward. An integer variable can also store an enumerator from the enumeration.
+
+```c
+/* ASSIGNING ENUMERATOR TO AN ENUMERATION VARIABLE */
+enum ENUMERATION variable = enumerator1;
+```
+----
+```c
+/* ASSIGNING ENUMERATOR TO AN INTEGER VARIABLE */
+int variable = enumerator1;
 ```
 
 ## Typedef Declaration
-
-The `typedef` keyword is used to create an alias name for existing data type, providing better readability
+The `typedef` keyword aliases the existing data type to a different name, providing better readability.
 
 ```c
 typedef int dtypeName;
 ```
 
-While this is not officially supported in C++ programming language, structure and union can be declared without tag as part of the C programming syntax. This is called *anonymous structure* and *anonymous union* which is for a single use:
+The keyword can also simplify the definition of structures and unions in C language programming.
 
 ```c
-// TYPEDEF STRUCTURE
+/* SIMPLIFIED STRUCTURE DEFINITION */
 typedef struct {
-	int 	field1;
-	float 	field2;
+    int    field1;
+    char   field2;
 } STRUCTURE;
 
-// TYPEDEF UNION
+STRUCTURE variable;                // struct STRUCTURE variable;
+variable = (STRUCTURE) {3, 'A'};   // variable = (struct STRUCTURE) {3, 'A'};
+```
+----
+```c
+/* SIMPLIFIED UNION DEFINITION */
 typedef union {
-	int		field1;
-	float	field2;
+    int    field1;
+    char   field2;
 } UNION;
 
-// VARIABLE DECLARATION
-STRUCTURE variable1;
-UNION     variable2;
+UNION variable;                    // union UNION variable;
+variable = (UNION) {365};          // variable = (union UNION) {365};
 ```
 
-## User-Defined Data Pointer
-
-C language do not support object-oriented programming paradigm. Despite not having a concept called object and class, it can still be implemented similarly on user-defined data.
-
-When user-defined data is assigned by pointer, members can be accessed using arrow member selection (`->`) operator. This method is generally used when the user-defined data needs to be passed as function argument.
+## User-Defined Data Type Pointer
+When defining a user-defined data type as a pointer, access the members using the arrow member selection operator `->`. In general, this syntax is for accessing the members passed to the function parameter by reference.
 
 ```c
-// TYPEDEF STRUCTURE
-typedef struct {
-    int   field1;
-    float field2;
-} STRUCTURE;
+/* STRUCTURE DEFINITION */
+struct STRUCTURE {
+    int    field1;
+    char   field2;
+};
 
-// VARIABLE & POINTER DECLARATION
-STRUCTURE variable;
-STRUCTURE* ptr = &variable;
+/* VARIABLE & POINTER DEFINITION */
+struct STRUCTURE variable;
+struct STRUCTURE *ptr = &variable;
+
+ptr->field1 = 3;
+ptr->field2 = 'A';
 
 // THEREFORE...
-ptr->field1 = 1;
-ptr->field2 = 3.0;
+printf("%d\n", ptr->field1);
+printf("%c\n", ptr->field2);
 ```
 
-# **C: DYNAMIC MEMORY**
+```
+3
+A
+```
 
-Memory management is one of the crucial factors in C/C++ programming language. Dynamic memory allocation is one of the management for greater memory efficiency. And because this concept is closely related to the pointer, understanding the concept cannot be neglected.
+# **C: DYNAMIC ALLOCATION**
+Memory management in C language is a significant task. Dynamic memory allocation provides higher memory efficiency but requires a clear understanding of the pointer as it is deeply involved. Here, the memory indicates random access memory (RAM), the primary memory in a computer.
 
 ## Stack Structure
+The stack is a linear LIFO (Last-In-First-Out) data structure; the first entered data is last to be freed from the memory structure. It is the main memory structure used by the compiler that automatically allocates and deallocates data upon declaration and destruction of data, such as variables and functions. The drawback of stack-based memory is poor memory management.
 
-Stack is a linear LIFO (Last-In-First-Out) data structure; the first entered data is last to be freed from the memory structure. It is a main memory structure used by the compiler which automatically allocates and deallocates data upon declaration and destruction of data (e.g. variables and functions).
-
-The reason compiler uses stack memory structure is due to its fast memory access. However, stack memory has a drawback that its size is fixed and cannot be expanded.
-
-One of the example of stack structure characteristic can be seen on property of local variable; variable defined inside a scope such as function or namespace cannot be used outside the scope.
+The characteristic of the stack memory is apparent when dealing with a local variable, which is unable to use outside the code block.
 
 ### Queue Structure
-
-As opposite to stack structure, queue is a linear FIFO (First-In-First-Out) data structure. The first entered data is first to be released from the memory structure. The best example of queue memory structure is a serial communication port.
+The queue is a linear FIFO (First-In-First-Out) data structure. The data that entered first is released first from the memory structure. The best example of a queue-based memory structure is serial communication, such as USB and ethernet.
 
 ## Dynamic Allocation
+Despite its fast memory allocation, the stack memory is difficult for memory management due to its sequential structure. Additionally, the purpose of a stack-based memory used by the compiler is not for storing data but rather to "process data," hence have limited capacity on RAM. However, the compiler can also access the heap memory region located in the same RAM. Although slower than the stack, it has the benefit of easier management and lasting data until the end of the program.
 
-While stack memory is fast but its memory capacity is fixed, there is also heap memory that is resizable though slower access speed. Heap memory is irrelevant to heap data structure and stores data in random heap memory location.
+> The heap memory region is irrelevant to the [heap data structure](https://en.wikipedia.org/wiki/Heap_(data_structure)) and is purely a term that indicates part of the RAM.
 
-Allocating data to heap memory is done by developer manually, thus dynamic allocation. However, since dynamically allocated memory is not managed by the compiler, developer needs to be cautious on deallocating data manually afterward as well. Dynamic allocation requires `stdlib.h` header.
+Allocating memory in the heap region is called *dynamic allocation* in C language. Developers need to use a specific function for dynamic allocation, where the allocation address is randomly designated. Since this process is done manually by the developers, every dynamically allocated data must be freed by the developers as well. Failed to do so will cause the program to crash from memory shortage or function improperly.
+
+Include the `stdlib.h` header file for dynamic allocation.
 
 | FUNCTION    | EXAMPLE               | DESCRIPTION                                                  |
 | ----------- | --------------------- | ------------------------------------------------------------ |
 | `malloc()`  | `malloc(size);`       | Allocate `size`-byte heap memory block; memory uninitialized, resulting `SEGFAULT` error. |
-| `calloc()`  | `calloc(num, size);`  | Allocate `size`-byte heap memory blocks ($\times$ `num`) contiguously; initialized to 0 but slower than `malloc()`. |
+| `calloc()`  | `calloc(num, size);`  | Allocate `size`-byte heap memory blocks `num` times contiguously; initialized to 0 but slower than `malloc()`. |
 | `realloc()` | `realloc(ptr, size);` | Reallocate to `size`-byte heap memory block.                 |
 | `free()`    | `free(ptr);`          | Release dynamically allocated memory.                        |
 
 ```c
 #include <stdlib.h>
 
-// DYNAMIC ALLOCATION
+/* DYNAMIC ALLOCATION: 10 BYTES */
 int* ptr = malloc(10);
 
-// REALLOCATION (10 -> 20 BYTES)
+/* REALLOCATION: 10 -> 20 BYTES */
 ptr = realloc(ptr, 20);
 
-// DYNAMIC DEALLOCATION
+/* DYNAMIC DEALLOCATION */
 free(ptr);
 ```
 
 ### Dynamic Array
-
-Dynamic array is an array that can change its size dynamically. This implementation is widely used to allow expansion of array size as needed. As common array is static, thus cannot change size after declaration or even define size using non-constant integer.
-
-Dynamic array is generally managed using structure, allow keeping track of array size and current capacity possible.
+A dynamic array represents an array that has dynamic sizing, unlike the usual array in C language that can only have an unchangeable static size. It requires both structure and dynamic allocation, created as shown below:
 
 ```c
 #include <stdlib.h>
 
-// TYPEDEF STRUCTURE
+/* SIMPLIFIED STRUCTURE DEFINITION */
 typedef struct {
-    char* arr;
-    int   size;        // ASSIGNED
-    int   capacity;    // CAPACITY
-} dyn_arr;
+    int*   arr;         // ARRAY ELEMENTS
+    int    size;        // ASSIGNED SIZE
+    int    capacity;    // ARRAY LENGTH
+} dynamicArr;
 
-// VARIABLE DECLARATION
-dyn_arr variable;
+/* DYNAMIC INTEGER ARRAY DEFINITION */
+dynamicArr variable;
 
-// DYNAMIC ARRAY (1 BYTE)
+/* DYNAMIC ARRAY: 4 BYTE LENGTH */
 variable.arr = calloc(1, sizeof(*variable.arr));
 variable.capacity = 1;
 
-// RESIZE DYNAMIC ARRAY (1 + 5 BYTES)
+/* DYNAMIC ARRAY: REALLOCATE ADDITION 20 BYTES */
 variable.arr = realloc(variable.arr, (variable.capacity + 5) * sizeof(*variable.arr));
 variable.capacity += 5;
 ```
 
 ### Memory Leak
-
-Memory leak is caused by mismanagement of heap memory when dynamically allocated data is not released (deallocated) and accumulated that no more heap memory space is available. Shortage of memory will eventually lead to system failure.
-
-Prevent memory leak by deallocating data on heap memory using `delete` keyword:
+A memory leak is caused by mismanagement of heap memory when dynamically allocated data is not released (deallocated) and accumulated that no more heap memory space is available. A shortage of memory will eventually lead to system failure. Prevent memory leak by deallocating data on heap memory using the `free()` function.
 
 ```c
+/* DYNAMIC DEALLOCATION */
 free(ptr);
 ```
 
 ### Dangling Pointer
-
-By deallocating data on heap memory prevents memory leak from happening. While the data addressed by the pointer is gone, the pointer still holds the address that now points to nothing. This is called dangling pointer and calling this pointer may result segmentation fault, aka. `SEGFAULT`.
-
-To prevent this, it is advised to assign `nullptr` so the pointer would point at least to nothing than pointing aimlessly after deleting the heap memory data.
+By deallocating data on heap memory prevents memory leak from happening. While the data addressed by the pointer is gone, it still holds the address that now points to the unknown, called *dangling pointer* that may cause the `SEGFAULT,` a segmentation fault error. Assign the `NULL` so the pointer would point at least to nothing rather than point aimlessly after deleting the heap memory data.
 
 ```c
-// PROPER DEALLOCATION: DELETE DATA ON ADDRESS -> NULLIFY ADDRESS
+/* PROPER DEALLOCATION: DELETE DATA ON POINTED MEMORY -> NULLIFY POINTER */
 free(ptr);
 ptr = NULL;
 ```
 
 # **C: FILE MANAGEMENT**
-
-C language can read and write external file to save or import data. This chapter is mainly focused on accessing and modifying `.txt` extension text file.
+C language can read and write external files to save or load data. This chapter focuses on accessing and modifying the `.txt` extension text file.
 
 ## Opening Files
-
-The file first needs to be opened to either read or write. Opening the file is done using `fopen()` function which returns pointer to `FILE` data type. The `mode` argument must be selected to specify whether the file is for read or write:
+The file first needs to be opened to either read or write. Opening the file is done using the `fopen()` function that returns a pointer to the `FILE` data type. The `mode` argument must be selected to specify whether the file is for reading or writing.
 
 ```c
+/* OPENING FILE */
 FILE* fptr = fopen("sample.txt", mode);
 ```
 
-| MODE   | DESCRIPTION                                     |
-| ------ | ----------------------------------------------- |
-| `"r"`  | Open for reading (file must exist)              |
-| `"w"`  | Open for writing (create file if not exist)     |
-| `"a"`  | Open for append (create file if not exist)      |
-| `"r+"` | Open for reading and writing from beginning     |
-| `"w+"` | Open for reading and writing, overwriting file  |
-| `"a+"` | Open for reading and writing, appending to file |
+| MODE   | DESCRIPTION                                         |
+|--------|-----------------------------------------------------|
+| `"r"`  | Open for reading (the file must exist)              |
+| `"w"`  | Open for writing (creates the file if not exist)    |
+| `"a"`  | Open for appending (creates the file if not exist)  |
+| `"r+"` | Open for reading and writing from beginning         |
+| `"w+"` | Open for reading and writing, overwriting the file  |
+| `"a+"` | Open for reading and writing, appending to the file |
 
 ## Reading Files
-
-C languages has three different version of file reading functions, similar to input (from file to program) functions:
+C languages has three different functions for reading similar to input (from file to program) functions:
 
 | INPUT      | SYNTAX                     | DESCRIPTION                                                  |
 | ---------- | -------------------------- | ------------------------------------------------------------ |
-| `fgetc()`  | `fgetc(fptr);`             | Returns the next character from the selected `fptr` file stream. |
-| `fgets()`  | `fgets(buff,n,fptr)`       | Stores `n-1` long characters to buffer (ex. `char buff[100];`) with null terminator at the end. |
-| `fscanf()` | `fscanf(fptr,format,vars)` | Stores data, separated by space or new line, to variables with matching format specifier; requires address (`&`) operator, except for string. |
+| `fgetc()`  | `fgetc(fptr);`             | Reads the next character from the selected `fptr` file stream. |
+| `fgets()`  | `fgets(buff,n,fptr)`       | Stores `n-1` long characters from the `fptr` file stream to a buffer (ex. `char buff[100];`) with a null terminator `\0` at the end. |
+| `fscanf()` | `fscanf(fptr,"format",vars)` | Stores data, separated by spaces or new lines, to variables `vars` according to the format specifier from the `fptr` file stream; requires address operator `&` except for the string. |
 
 ```
 <sample.txt>
@@ -1177,41 +1386,45 @@ Hello World!
 ```
 
 ```cpp
+/* READING "sample.txt" FILE */
 FILE* fptr = fopen("sample.txt", "r");
 
-// FGETC()
-char var1;
-var1 = fgets(fptr);    // >> RESULT: var1 = H
+// "fgetc()" FUNCTION
+char variable1;
+var1 = fgets(fptr);
+// >> RESULT: variable1 = 'H'
 
-// FGETS()
+// "fgets()" FUNCTION
 char buff[10];
-fgets(buff, 7, fptr);  // >> RESULT: buff = "ello W"
+fgets(buff, 7, fptr);
+// >> RESULT: buff = "ello W"
 
-// FSCANF()
-char[10] var2; int var3; float var4;
-fscanf(fptr, "%s %d %f", var2, &var3, &var4);    // >> RESULT: var2 = "orld!", var3 = 65, var4 = 3.141590
+// "fscanf()" FUNCTION
+char[10] variable2; int variable3; float variable4;
+fscanf(fptr, "%s %d %f", var2, &var3, &var4);
+// >> RESULT: variable2 = "orld!", variable3 = 65, variable4 = 3.141590
 ```
 
 ## Writing Files
-
-C languages has three different version of file writing functions, similar to output (from program to file) functions:
+C languages has three different functions for writing similar to output (from program to file) functions:
 
 | OUTPUT      | SYNTAX               | DESCRIPTION                                                  |
 | ----------- | -------------------- | ------------------------------------------------------------ |
-| `fputc()`   | `fputc(char,fptr);`  | Writes a single character on a selected `fptr` file stream.  |
-| `fputs()`   | `fputs(str,fptr);`   | Writes sequence of characters (aka. string) on a selected `fptr` file stream. |
-| `fprintf()` | `fprintf("%d",var);` | Writes sequence of characters (aka. string) on a selected `fptr` file stream, with format support. |
+| `fputc()`   | `fputc(char,fptr);`  | Writes a single character to the `fptr` file stream.  |
+| `fputs()`   | `fputs(str,fptr);`   | Writes sequence of characters (aka. string) to the `fptr` file stream. |
+| `fprintf()` | `fprintf("%d",var);` | Writes sequence of characters (aka. string) to the `fptr` file stream with a format support. |
 
 ```c
+/* WRITING FILE */
 FILE* fptr = fopen("sample.txt", "w");
 
-// FPUTC()
+// "fputc()" FUNCTION
 fgets('A', fptr);
 
-// FPUTS()
+// "fputs()" FUNCTION
 fgets("Hello World!\n", fptr);
 
-// FPRINTF()
+// "fprintf()" FUNCTION
 fprintf(fptr, "%d %.2f %s", 1, 3.14159, "Program");
 ```
 
@@ -1222,49 +1435,161 @@ AHello World!
 ```
 
 ### Creating Files
-
-New file can be created using the same method of writing file which does not bound by just writing on existing file. Creating file is simply done by designating file name is doesn't exist on the specified path.
+A new file can be created using the same method of writing a file that does not bound by just writing on the existing file. Creating a file is done simply by designating a file name is doesn't exist on the specified path.
 
 ```c
+/* CREATING FILE */
 FILE* fptr = fopen("path\\new_file.txt", "w");
 fgets("Hello World!\n", fptr);
 ```
 
 ## Closing Files
-
-After opening the file, it should be closed manually. Just like opening with `fopen()` function, opened file is closed using `fclose()` function:
+After opening the file, it should be closed manually. Opened file is closed using the `fclose()` function.
 
 ```c
+/* CLOSING FILE */
 fclose(fptr);
 ```
 
-The function returns 0 if closed successfully, else returns EOF (end of file).
+The function returns an integer 0 if successfully closed, otherwise returns EOF (end of file).
 
-# **C: EXCEPTION**
+# **C: MULTI-SCRIPT PROJECT**
+This article has mainly dealt with a project that only consists of a single script with the `main()` function. If the project starts to grow larger, however, additional scripts can help manage the project more efficiently by dividing and categorizing the codes. This chapter will explain how to create a C language project with multiple scripts sharing the data.
 
-Exception is a problem encountered during a program execution (not during compilation). C programming language offers macro and functions for controlling exceptions: `errno`, `perror()`, and `strerror()`. Through exception handling, stable program can be compiled and executed without any halt or crash.
+## Inclusive Directive
+The `#include` inclusive directive is one of the preprocessor directives, commonly used to include the `stdio.h` header to a source file. Technically, what the `#include` does is paste the entire codes such as declaration in the header file to where the directive is.
 
-## Error Number
-
-The macro `errno`, short for "error number", is a global variable defined inside `errno.h` header file. The macro must first be initialized to 0 before using, and is automatically assigned with new error number if anything goes wrong.
-
-Following script is one of the best example of `errno` by attempting to open a non-existing file:
+### Header & Source File
+The source and header file first mentioned at the beginning of the chapter *C: BASIC* has its purposes as follows: the former is a script that contains definitions, and the latter contains declarations. Considering that the `main()` function does not have a prototype, the main script can be written as follows:
 
 ```c
-#include <errno.h>    // ERRNO HEADER
-extern int errno;     // ERRNO DECLARATION (GLOBAL)
+/* HEADER FILE: main.h */
+#include <stdio.h>
+
+int variable;
+void function(int, float);
+
+```
+```c
+/* SOURCE FILE: main.c */
+#include "main.h"
 
 int main(){
-    // INITIALIZATION
+    
+    variable = 'A';
+    printf("%c\n", variable);
+
+    function(1, 3.14);
+
+    return 0;
+}
+
+void function(int arg1, float arg2){
+    printf("%.3d\n", arg1 + arg2);
+}
+```
+```
+A
+4.140
+```
+
+The source and header file above is equivalent to the script below due to the property of the `#include` directive.
+
+```c
+/* #include "main.h": START */
+#include <stdio.h>
+
+int variable;
+void function(int, float);
+/* #include "main.h": END */
+
+int main(){
+    
+    variable = 'A';
+    printf("%c\n", variable);
+
+    function(1, 3.14);
+
+    return 0;
+}
+
+void function(int arg1, float arg2){
+    printf("%.3d\n", arg1 + arg2);
+}
+```
+
+## `extern` Keyword
+The `extern` keyword can only declare without definition. Although the declaration is the same as the definition in general, the `extern` keyword is one of the cases that is not. Hence, this section requires to know the difference between declaration and definition for sure.
+
+Defining a variable or function allocates memory for that data, thus can only define once per data. Meanwhile, declaring data does not allocate memory but only lets the compiler know its existence, hence can declare multiple time for a single data. Such property is crucial for a script to share its variables and functions with the other.
+
+```c
+/* HEADER FILE: module.h */
+#include <stdio.h>
+
+// VARIABLE DECLARTION USING "extern" KEYWORD
+extern char variable;
+void function(int, float);
+```
+
+```c
+/* SOURCE FILE: module.c */
+#include "module.h"
+
+// VARIABLE DEFINITION
+char variable = 'A';
+void function(int arg1, float arg2){
+    printf("%.3f\n", arg1 + arg2);
+}
+```
+
+```c
+/* MAIN SCRIPT */
+#include <stdio.h>
+#include "module.h"
+
+int main() {
+
+    printf("%c\n", variable);
+    function(1, 3.14);
+
+    return 0;
+}
+```
+```
+A
+4.140
+```
+
+If the `module.h` header file does not use the `extern` keyword, the variable is defined instead of being declared. Variable defined on both the header and source file results in compilation error due to re-definition.
+
+On the other hand, the `extern` keyword allows data declaration multiple times. Variable declared on both the header and source file doesn't cause any error to the compiler but requires a definition to use the data. The `char variable = 'A';` statement in the `module.c` source file is for that definition, allowing the main script to use the `variable` globally with the defined value.
+
+# **C: EXCEPTION**
+An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon compilation, a successfully built program immediately halts when encountering an exception. C language has functions and macros for handling exceptions: `errno`, `perror()`, and `strerror()`, and more. Exception handling aims to provide a stable program without any halt or crash.
+
+## Error Number
+The error number, aka. `errno` macro, is a global variable defined in the `errno.h` header file. The variable first needs to be initialized to 0 before using, and a new error number is assigned whenever encountering an error. For Windows OS, the description of the error number is available on [Windows Developer](https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes) document.
+
+Following script is one of the examples of the `errno` usage by attempting to open a non-existing file:
+
+```c
+/* "errno.h" HEADER FILE */
+#include <errno.h>
+
+/* errno GLOBAL VARIABLE DECLARATION */
+extern int errno;
+
+int main(){
+    /* errno GLOBAL VARIABLE INITIALIZATION */
     errno = 0;
     
-    // ATTEMPT TO OPEN (NON-EXISTING) FILE
     FILE* fptr = fopen("./non_existance.txt", "r");
     
-    // FAILED TO OPEN...
+    // FAILED TO OPEN THE FILE...
     if (fptr == NULL) {
-        // ERROR NAME: ENOENT 2 (No such file or directory)
-        fprintf(stderr, "Error opening file. Error code: %d\n", errno);
+        // ERROR NAME & NUMBER: ENOENT 2 (No such file or directory)
+        fprintf(stderr, "Error opening a file! ERROR CODE: %d\n", errno);
         exit(-1);
     }
 
@@ -1274,30 +1599,30 @@ int main(){
 ```
 
 ```
-Error opening file. Error code: 2
+Error opening a file! ERROR CODE: 2
 ```
 
 ### Standard Error Stream
+The *C: BASIC § Input & Output* section first introduced the most common output stream: the `stdout` *standard output stream*. There are other kinds of stream designed for streaming errors, which is `stderr` *standard error stream*.
 
-Previously on *C: BASIC § Input & Output* first introduced the most common output stream called *standard output* `stdout`. There are other kinds of stream, specifically designed for streaming error, namely *standard error* `stderr`.
+> A stream is "a continuous flow of liquid, air, or gas." In terms of computer communication, a stream means a path of data flow.
 
 ```c
 fprintf(stderr, "Hello World!");
 ```
 
-These difference on stream allows control of streaming data from program to target devices/locations, such as console and file.
+This distinguishment on streams allows selective control of transmitting data from the program to target devices/locations, such as a terminal or file.
 
 ## Error Description
-
-Error type can be expressed and stored as integer number using `errno` macro. However, these error can also be shown on console terminal in human-readable English, describing what is the cause of the error. This can be done using `perror()` function, without a need of `errno.h` header file.
+The `errno` macro stores various errors expressed in integer to the global variable. However, to get the description of the error as a text instead, use the `perror()` function as shown below:
 
 ```c
 int main(){
     
     FILE* fptr = fopen("./non_existance.txt", "r");
     if (fptr == NULL) {
-        // ERROR NAME: ENOENT 2 (No such file or directory)
-        perror("ERROR Description");
+        // ERROR NAME & NUMBER: ENOENT 2 (No such file or directory)
+        perror("ERROR DESCRIPTION");
         exit(-1);
     }
 
@@ -1307,49 +1632,41 @@ int main(){
 ```
 
 ```
-ERROR Description: No such file or directory
+ERROR DESCRIPTION: No such file or directory
 ```
 
 # **C: PREPROCESSOR**
-
-C/C++ program language compiler processes the script into two divided stages: preprocessing and compilation. On the stage of preprocessing, preprocessor directive such as `#include` is taken care of by the compiler.
-
-This chapter will introduce useful and commonly used preprocessor directives that is actually being implemented on development.
+C language compiler processes the script into two divided stages: preprocessing and compilation. On the stage of preprocessing, preprocessor directive such as `#include` is taken care of by the compiler. This chapter will introduce useful and commonly used preprocessor directives that is being implemented on development.
 
 ## Macro Definition
+A macro is a fragment of code that has a name (aka. identifier). These pieces of code can be simple data (such as a number, character, and string) or an expression with arguments. The formal and latter are respectively called the *object-like* and *function-like* macro.
 
-Macro is a fragment of code that is given a name (aka. identifier). A fragment of code can be a simple data (e.g. number, character, string) or an expression with arguments. The formal and latter is respectively called *object-like* and *function-like* macro.
-
-The benefit of macro is it cannot be changed on runtime. The defined macro can be used on the script passed from a header file through `#include` directive.
+A macro has a benefit that cannot change on runtime. A header file is where macros are generally defined, which passes to the source file via the `#include` inclusive directive.
 
 ### `#define` Directive
-
-The `#define` directive is used to create macro:
+The `#define` directive creates a new macro.
 
 ```cpp
-#define SOMETHING       value                // MACRO
-#define ANYTHING(x, y)  (x * SOMETHING - y)  // MACRO WITH ARGUMENTS
+#define SOMETHING       value                // OBJECT-LIKE MACRO
+#define ANYTHING(x, y)  (x * SOMETHING - y)  // FUNCTION-LIKE MACRO
 ```
 
 ### `#undef` Directive
-
-In some cases, macro can cause naming collision that cannot be fixed on compilation stage. This macro can be removed by `#undef` directive:
+The `#undef` directive removes a defined macro. In some cases, this macro can resolve an error caused by naming collision due to other macros.
 
 ```cpp
 #undef SOMETHING
 ```
 
 ### Predefined Macros
-
-Compilers have common standard and compiler-specific predefined macros available for developers.
+Compilers have common standard and compiler-specific predefined macros available for developers. Below is a list of links to the document on predefined macros such as MSVC, GCC, and more.
 
 * MSVC: [Microsoft Docs - Predefined Macros](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
 * GCC: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
 * Others: https://sourceforge.net/p/predef/wiki/Compilers/
 
 ## Conditional Inclusion
-
-Preprocessor has a conditional directives that are used for conditional compilation. These directives are not to be used as a substitution of `if` and `else` conditional statement.
+A conditional inclusion is a directive for conditional compilation; the compiler ignores the codes when the condition is false.
 
 ```cpp
 #if		SOMETHING > value
@@ -1361,56 +1678,56 @@ Preprocessor has a conditional directives that are used for conditional compilat
 #endif
 ```
 
-### Macro Condition
+These directives are not for the substitution of `if` and `else` conditional statement despite having similar traits on evaluating the condition.
 
-Conditional inclusion can check condition whether the macro is already defined or not:
+### Macro Condition
+A conditional inclusion can also evaluate whether the macro is defined or not.
 
 ```cpp
-// IF COMPILED ON 64-BIT ARM OR x64
+// IF COMPILED ON 64-BIT ARM OR x64 ARCHITECTURE...
 #ifdef	_WIN64
 	statments;
 #endif
 
-// IF NOT COMPILED ON 64-BIT ARM OR x64
+// IF NOT COMPILED ON 64-BIT ARM OR x64 ARCHITECTURE...
 #ifndef	_WIN64
 	statements;
 #endif
 ```
 
 ## Pragma Directive
+A pragma directive is for configuring features and options for a compiler. Compiler developed by different companies or organizations differs from each other, and this makes pragma a non-standard compiler-specific preprocessor directive.
 
-Pragma directive is used to configure features and options for a compiler. Each compiler differs from each other, and this makes pragma a non-standard compiler-specific preprocessor directive.
+> The *Pragma* is an abbreviation of the word "pragmatic: a practical consideration." The directive may have been named with such a term as it involves how the compiler practically works and processes.
 
 * MSVC: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://docs.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
 * GCC: [GCC Online Documentation - Pragmas](https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html)
 
-This chapter mainly focuses on pragma directive from MSVC as it is the most common and widely used C/C++ compiler provided by Microsoft Visual Studio.
+This chapter focuses on pragma directives from MSVC as it is the most common and widely used C compiler provided by Microsoft Visual Studio.
 
 ### `#pragma once`
-
-The `#pragma once` pragma directive is extremely useful upon compilation by only including the header file once instead of multiple time on every inclusion. 
+The `#pragma once` pragma directive only includes the header file once instead of multiple times on every inclusion. 
 
 ```cpp
 #pragma once
 ```
 
-Through this pragma directive can reduce compilation time. Additionally, because it prevents multiple inclusion can this pragma function as *include guard*.
+Because it prevents including the same header file multiple times for a single source file that can cause a re-definition problem, `#pragma once` is commonly used for *include guard*. Additionally, this pragma directive can reduce compilation time as it only includes the header once.
 
-The following code is an example of include guard without using `#pragma once` pragma directive:
+The following code is an example of include guard without using the `#pragma once` directive:
 
 ```cpp
-// "header.h"
+/* HEADER FILE: "header.h" */
 #ifndef HEADER_FILE
 #define HEADER_FILE
 
 #endif	/* HEADER_FILE */
 ```
 
-If `header.h` has not been processed, the compiler defines the `HEADER_FILE` for the first time. However, upon second encounter, compiler will not process the header file again because of the macro conditioning.
+If the `header.h` has not been processed, the compiler defines the `HEADER_FILE` for the first time. However, on the second encounter, the compiler will not process the header file again because of the macro conditioning.
 
 ### `#pragma region`
-
-Though it does not affect any on compilation, `#pragma region` and `#pragma endregion` pair supports expanding and collapsing code block on Visual Studio Code Editor:
+Although it does not affect any on the compilation, the `#pragma region` and `#pragma endregion` pair supports expanding and collapsing code block on Visual Studio code editor.
 
 ```cpp
 #pragma region REGIONNAME

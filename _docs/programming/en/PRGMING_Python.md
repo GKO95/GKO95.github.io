@@ -11,15 +11,15 @@ order: 0x00
 # **PYTHON: INTRO**
 Python is a high-level programming language with applications in numerous areas, including web programming, scientific computing, and artificial intelligence. Python is simple, easy to learn, and has various development software (such as a library, framework) available thanks to the contribution from vast communities. For the beginner, Python is an excellent language to learn how to program.
 
-## Interpreter
+## Interpreted Language
 There are two different categories of program languages based on its execution: compiled language and interpreted language.
 
 Source code written in English needs to be translated to binary computer language for the computer to understand. The compiler is responsible for the translation, and its best examples are C/C++ language. On the other hand, the interpreter executes code without translation but has a drawback on a slower speed.
 
 Python is the interpreted language, and the code runs equivalently despite running on a different system as long as it has the interpreter (aka. cross-platform).
 
-### CPython
-The first interpreter for Python was developed using the C programming language, called CPython. CPython is the most widely used Python interpreter, and there are others developed using different languages such as Jython (Java implemented), IronPython (.NET implemented), and PyPy (pure Python implemented).
+### CPython Interpreter
+The first interpreter for Python was developed using C programming language, called CPython. CPython is the most widely used Python interpreter, and there are others developed using different languages such as Jython (Java implemented), IronPython (.NET implemented), and PyPy (pure Python implemented).
 
 Although introduced as the interpreted language, CPython technically uses both compiler and interpreter. First, the compiler translates Python code to bytecode, then the interpreter executes the bytecode. This bytecode is the one that guarantees Python's cross-platform property.
 
@@ -107,7 +107,7 @@ multiple lines of comment can be placed here and can be viewed even on runtime.
 ```
 
 ## Input & Output
-Python has a single input and output function for a terminal text-based:
+Python has a single input and output function for a text-based terminal:
 
 * **Input function `input()`**: the function shows the text inside the parenthesis on a terminal and accepts text data written when pressed Enter/Return key.
 * **Output function `print()`**: the function shows the text inside the parenthesis on a terminal.
@@ -180,7 +180,7 @@ print(variable)
 ```
 
 ### Initialization
-Initialization is the first assignment to a variable where it commonly occurs on the *definition* process.
+Initialization is the first assignment to a variable where it commonly occurs in the *definition* process.
 
 ```python
 # VARIABLE INITIALIZATION
@@ -190,11 +190,9 @@ variable = 1
 ### Local & Global Variable
 There are two types of variable in Python:
 
-* **Local variable**
-    : a variable defined within the code block, such as functions and classes. However, this does not apply to conditional, loop, `with` statements, and more. Data stored inside local variables are released when the program escapes from the code block, and the variables becomes unavailable outside. Due to this property, local variables may have the same name as other variables defined outside the code block.
+* **Local variable** is a variable defined within the code block, such as functions and classes. However, this does not apply to conditional, loop, `with` statements, and more. A local variable releases data when escapes from the code block and unavailable to use outside. It may have the same name as other variables defined outside the code block.
 
-* **Global variable**
-    : a variable that does not belong to any code blocks within the script. Place the `global` keyword to use the global variable with local variables inside the code block.
+* **Global variable** is a variable that does not belong to any code blocks within the script. A global variable can be used with local variables inside other code blocks by placing the `global` keyword.
 
 ### Constant Variable
 A constant variable is a variable that cannot change its value after initialization. However, Python cannot declare constant due to the absence of *declaration*. Python developers should be careful not to mess up the what-is-used-as-constant variable. The conventional name for a Python's constant is using all UPPERCASE.
@@ -225,7 +223,7 @@ NameError: name 'variable' is not defined
 There are three categories of data in Python: numeric, boolean, and string data type. Meanwhile, the following three pieces of code can process other external data, called *operation*.
 
 * **Operator**
-  : a construct that can manipulate the value of operands, such as arithmetic operators. It operates by placing it before, after, or between the operands.
+  : a code that can manipulate the value of operands, such as arithmetic operators. It operates by placing it before, after, or between the operands.
 * **Function**
   : a reusable piece of code that is called by name to operates. A function can be distinguished from an operator by parenthesis `()` at the suffix of the function's name; `function()`.
 * **Method**
@@ -263,7 +261,7 @@ print(4 + 1.0)
 5.0
 ```
 
-Arithmetic operation of a numeric data type is as follows:
+The arithmetic operation for numeric data types is as follows:
 
 | NAME                           | OPERATOR | DESCRIPTION                                                                                                                       |
 |--------------------------------|:--------:|-----------------------------------------------------------------------------------------------------------------------------------|
@@ -299,7 +297,7 @@ print(round(164.259763145,2))
 164.26
 ```
 
-Assignment operator is a combination of an arithmetic and an assignment symbol `=`, making numerical calculation code written more concisely.
+The assignment operator is a combination of an arithmetic and an assignment symbol `=`, making numerical calculation code written more concisely.
 
 | OPERATOR | EXAMPLE  | EQUIVALENT                                                |
 |:--------:|----------|-----------------------------------------------------------|
@@ -322,7 +320,7 @@ A boolean data type is useful for a code that requires logical condition whether
 
 An integer value can substitute boolean logic values; any non-zero numbers represent `True`, while `False` is only expressed by zero.
 
-A comparison operator is used to compare the relation of two or more values, returning corresponding boolean data type depending on whether the condition holds or not. 
+A comparison operator is used to compare the relation of two values, returning corresponding boolean data type depending on whether the condition holds or not. 
 
 | OPERATOR | DESCRIPTION              |
 |----------|--------------------------|
@@ -340,7 +338,7 @@ Meanwhile, the boolean data type can be added, multiplied, and complemented as f
 | `is`     | Equivalence    | Boolean evaluator between two data: equivalent to `==`. |
 | `and`    | Multiplication | True when all the arguments are True, else False.       |
 | `or`     | Addition       | True when at least one argument is True, else False.    |
-| `not`    | Complement     | Change True to False and vice versa.                    |
+| `not`    | Complement     | Changes True to False and vice versa.                    |
 
 ### String Data Type
 A string data type is text-based data that is distinguished by a pair of single quotation marks `''` or double quotation marks `""`. Variable or data that is a string data type is called *string object*. To place a quotation mark within a string object, insert a backslash `\` before the quotation mark to prevent the premature ending of the string.
@@ -1041,7 +1039,7 @@ A function is a reusable independent block of code that can process the data and
 ```python
 x = [0, 3, 5, 9]
 print(len(x))
-# Using "print()" and "len( )" function that returns the length of list object.
+# USING "print()" AND "len()" FUNCTION THAT RETURNS THE LENGTH OF A LIST OBJECT.
 ```
 
 ```
@@ -1243,7 +1241,7 @@ print(list(variable))
 ```
 
 ## Recursive Function
-A recursive function is a function that calls itself (recursion). Factorial $!$ in mathematic is the best example of recursive function implementation.
+A recursive function is a function that calls itself (recursion). Factorial in mathematic is the best example of recursive function implementation.
 
 ```python
 # EXAMPLE: FACTORIAL "!"

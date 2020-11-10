@@ -14,7 +14,7 @@ JavaScript is a procedural web development language used together with HTML & CS
 
 This document focuses on JavaScript application in web development, thus only introduces crucial fundamental concepts while ignoring irrelevant.
 
-## Interpreter
+## Interpreted Language
 There are two different categories of program languages based on its execution: compiled language and interpreted language.
 
 Source code written in English needs to be translated to binary computer language for the computer to understand. The compiler is responsible for the translation, and its best examples are C/C++ language. On the other hand, the interpreter executes code without translation but has a drawback on a slower speed.
@@ -199,18 +199,17 @@ Variable is a container for data that can be assigned using the assignment opera
 A declared variable does not need `var,` `let,` or `const` keyword when using. A variable in JavaScript can have any data type (ex. number, text, and more) assigned wherever and whenever.
 
 ### Initialization
-Initialization is the first assignment to a variable where it commonly occurs on the *definition* process.
+Initialization is the first assignment to a variable where it commonly occurs in the *definition* process.
 
 ```js
-# VARIABLE INITIALIZATION
+// VARIABLE INITIALIZATION
 let variable = 1
 ```
 
 ### Local & Global Variable
-There are two types of variable in Python:
+There are two types of variable in JavaScript:
 
-* **Local variable**
-    : a variable defined within the code block, such as functions and classes. Data stored inside local variables are released when the program escapes from the code block, and the variables becomes unavailable outside. Due to this property, local variables may have the same name as other variables defined outside the code block.
+* **Local variable** is a variable defined within the code block, such as functions and classes. A local variable releases data when escapes from the code block and unavailable to use outside. It may have the same name as other variables defined outside the code block.
 
     ```js
     /* LOCAL VARIABLE "let" */
@@ -226,8 +225,7 @@ There are two types of variable in Python:
     Inner Scope
     ```
 
-* **Global variable**
-    : a variable that does not belong to any code blocks within the script. Be cautious when using a global variable as it can affect other JavaScript code, which can lead to variable confliction or results undesired.
+* **Global variable** is a variable that does not belong to any code blocks within the script. A global variable can be used with local variables inside other code blocks without any special syntax. Be cautious when using a global variable as it can cause an error related to variable confliction.
 
     ```js
     /* GLOBAL VARIABLE "var" */
@@ -251,7 +249,7 @@ There are three categories of data in Python: numeric, boolean, and string data 
 ### Numeric Data Type
 While most of the programming language (such as C++, Java, and Python) have numerical data type of more than one in general. However, JavaScript only has one `number` numeric data type that can store both integer and floating-point numbers.
 
-Arithmetic operation of a numeric data type is as follows:
+The arithmetic operation for a number data type is as follows:
 
 | NAME           | OPERATOR | DESCRIPTION                          |
 |----------------|:--------:|--------------------------------------|
@@ -261,7 +259,7 @@ Arithmetic operation of a numeric data type is as follows:
 | Division       | `/`      | -                                    |
 | Modulus        | `%`      | Returns a remainder of the division. |
 
-Assignment operator is a combination of an arithmetic and an assignment symbol `=`, making numerical calculation code written more concisely.
+The assignment operator is a combination of an arithmetic and an assignment symbol `=`, making numerical calculation code written more concisely.
 
 | OPERATOR | EXAMPLE  | EQUIVALENT  |
 | :------: | -------- | ----------- |
@@ -290,7 +288,7 @@ A boolean data type is useful for a code that requires logical condition whether
 
 An integer value can substitute boolean logic values; any non-zero numbers represent `True`, while `False` is only expressed by zero.
 
-A comparison operator is used to compare the relation of two or more values, returning corresponding boolean data type depending on whether the condition holds or not. 
+A comparison operator is used to compare the relation of two values, returning corresponding boolean data type depending on whether the condition holds or not. 
 
 | OPERATOR | DESCRIPTION              |
 |----------|--------------------------|
@@ -310,7 +308,7 @@ Meanwhile, the boolean data type can be added, multiplied, and complemented as f
 |:--------:|-------|------------------------------------------------------|
 | `&&`     | AND   | True when all the arguments are True, else False.    |
 | `||`     | OR    | True when at least one argument is True, else False. |
-| `!`      | NOT   | Change True to False and vice versa.                 |
+| `!`      | NOT   | Changes True to False and vice versa.                 |
 
 ### String Data Type
 A string data type is text-based data that is distinguished by a pair of single quotation marks `''` or double quotation marks `""`. To place a quotation mark within a string object, insert a backslash `\` before the quotation mark to prevent the premature ending of the string.
@@ -536,7 +534,6 @@ The concept of an array and object in JavaScript will be explained in later chap
 JavaScript has an iterable object that stores the collection of data. An array and string mentioned above is also an iterable object built inside JavaScript. This chapter describes the most commonly used iterable object called an array.
 
 ## Array
-
 An array is a container for data of the same data type in sequence. Assign values in order within a pair of bracket `[]` to initialize an array:
 
 ```js
