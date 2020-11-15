@@ -10,83 +10,168 @@ summary: "."
 order: 0x02
 ---
 # **C++: INTRO**
+> *Refernce: [Microsoft Docs C++ Language Documentation](https://docs.microsoft.com/en-us/cpp/cpp/)*
 
-General-purpose programming language that was based on C programming language. While C language only supports procedural programming, C++ allows object-oriented programming as well; thus, C++ is called hybrid language.
+C++ is a general-purpose low-level programming language based on C language. While C is a procedural programming language that executes codes top-to-bottom, C++ allows object-oriented programming as well; thus, C++ is called a hybrid language. C++, an extension of C language, guarantees a wide range of applications from various features.
 
-## Compilation
+## Compiled Language
+There are two different categories of program languages based on its execution: compiled language and interpreted language.
 
-C/C++ language uses compiler to create executable file from the source code. Compiler translates C++ source code (written in high-level language: English) to a language computer can understand like binary code (low-level language). Compiled application can be executed without compiler afterward.
+An interpreter allows a computer to reads the source code written in English and execute directly, mostly benefitting from cross-platform support that can run the program on a different system and architecture. Python is one of the best examples of an interpreted language. However, a compiler generates an object file written in machine-friendly code by translating from English-written source code.
 
-Compiler has a several standard revision for ISO (International Organization of Standardization) based on the time it was released. The most renowned revision is a C++11 and C++17. This document will instruct the programming language based on C++11 at minimum.
-
-Compilation of C/C++ language is divided into two stage that is done by preprocessor and compiler (technically, preprocessor is included inside a compiler).
-
-### Preprocessor
-
-Preprocessing is a first stage of compilation done by a preprocessor. Preprocessor directive (aka. compiler directive) which is denoted by octothorpe symbol `#` in the script commands for preprocessor to perform certain actions before compiler does.
-
-| Preprocessor Directive | Example               | Summery                                          |
-|:-----------------------|-----------------------|--------------------------------------------------|
-| `#include`             | `#include <iostream>` | Include header file to the script.               |
-| `#define`              | `#define SQUARE`      | Define new macro that can be used in the script. |
-| `#pragma`              | `#pragma once`        | Provide additional options to the compiler.      |
-
-Preprocessor does not read the C/C++ language but accepts preprocessor directive, comments, declaration, and et cetera within a source code and returns modified source code with preprocessor directive activated, comments removed, header files included, et cetera for compiler to process.
-
-Preprocessor directive is not necessary when programming and does not observe C++ language grammar, but it does make programming much easier. Preprocessor is one of the components included in a compiler. 
+C++ language is a compiled language that doesn't support cross-platform, but it processes faster than interpreted language due to its optimization to the current system.
 
 ### Compiler
+C++ language categorizes its compiler version by the year of standard released by the International Organization for Standardization(ISO); C++11 and C++17 is the most renowned version. This document introduces C++ language based on the C++11 compiler at minimum.
 
-After preprocessing is finished, the official stage of compilation is processed by the compiler. Compiler starts translating C++ source code to a language computer can understand, supported by those activated by preprocessor directives.
+### Preprocessor
+A preprocessor is responsible for optimizing the source code before the compiler translates to binary code. A command for a preprocessor is called *preprocessor directive* and has octothorpe `#` at its prefix.
+
+| DIRECTIVES | EXAMPLE               | DESCRIPTION                                          |
+| :--------------------- | --------------------- | ------------------------------------------------ |
+| `#include`             | `#include <iostream>` | Includes header file to the script.               |
+| `#define`              | `#define SQUARE`      | Defines new macro for the project. |
+| `#pragma`              | `#pragma once`        | Provides additional options for the compiler.      |
+
+A preprocessor does not read C++ language source code nor follows C++ language syntax. It only processes its directives, removes comments, and provides optimized source code to the compiler. A preprocessor directive isn't necessary but makes the coding easier and convenient. The preprocessor resides within the compiler program.
+
+# **C: INSTALL**
+A compiler for C++ is essential when developing with C++ programming language, and there are various C++ compilers available designed by different companies and organizations. The compilation method may differ depending on the compiler, but it doesn't matter for general users as every compiler observes the same ISO standard that defines the working mechanism.
+
+An integrated development environment is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C++ language project.
+
+## Visual Studio
+[Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C++ programming, select the "Desktop development with C++" workload.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 1. Workload for C++ programming on Visual Studio.</center>
+
+Visual Studio will start with the window shown below. To create a new project for C++ language, select the "Create a new project" button.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Startup window of Visual Studio.</center>
+
+Since C++ can create various applications, there are many different kinds of projects available from Visual Studio as well. To create a C project, follow the procedure below:
+
+1. Select the language as C++ and choose the "Console App" option.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 3. Creating a C++ project on Visual Studio (step 1).</center>
+
+2. Designate names for the project and solution. Here, the project is a `.vcxproj` extension file that manages its source codes and compilation options, and the solution is a `.sln` extension file that can contain multiple projects. It is recommended to open the solution file on Visual Studio unless you only want to open a single project.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 4. Creating a C++ project on Visual Studio (step 2).</center>
+
+3. Use the project automatically prepared by Visual Studio.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 5. Creating a C++ project on Visual Studio (step 3).</center>
+
+The three-step procedure above for creating a C++ console application is the simplest method. To create an empty C++ project, refer to the installation section on the *PRGMING_C* document.
+
+Visual Studio can run a C language program in two different ways: debugging mode (`F5`) and without debugging mode (`Ctrl+F5`). Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
+
+## Xcode
+[Xcode](https://developer.apple.com/download/release/) is the most renowned IDE for macOS developed by Apple, which uses the clang compiler. Xcode supports various languages, and just like Visual Studio, Xcode has a project option for C++ language.
+
+Start Xcode, then create a new project by selecting `File > New > Project...`.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 7. Startup window of Xcode.</center>
+
+There are various projects available for developing an application for Apple's product. To create a C++ project, follow the procedure below:
+
+1. Since the computer is macOS, select the macOS tab, then the Command Line Tool to execute a terminal-based program.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 8. Creating a C++ project on Xcode (step 1).</center>
+
+2. Name a project in the Product Name and select the Language as C++.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 9. Creating a C++ project on Xcode (step 2).</center>
+
+3. Designate a path for the project.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 10. Creating a C++ project on Xcode (steo 3).</center>
+
+4. The left panel shows there is the `main.cpp` source file under the `Experiment` folder with minimum codes required to run the program.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 11. Creating a C++ project on Xcode (step 4).</center>
+
+Xcode can run a C++ language program in two different ways: debugging mode and without debugging mode. Hotkey for both are `⌘+R` and whether to debug or not is configured on project setting. Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
+
+## Terminal
+Linux OS has G++ (GNU Compiler Collection for C++) compiler installed by default but without an IDE. However, IDE is not essential when compiling a source code, which is possible on a terminal as well. With the increasing number of projects starting to use a single-board computer (SBC) like Raspberry Pi, knowing how to develop software in Linux OS became crucial.
+
+This section uses the code from *Figure 10. Creating a C++ project on Xcode (step 4)* to the `main.cpp` source file to show how to compile on Linux OS.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 12. Example code for G++ compiler.</center>
+
+Suppose the `main.c` source file is at `~/Workspace/Cpp/Experiment` directory.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 13. Creating C++ language program using G++ compiler (step 1).</center>
+
+Run a terminal and move to the directory where the source file is; change the current directory with the `cd` command. Enter the following command to compile the source code with GCC compiler.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 14. Creating C++ language program using G++ compiler (step 2).</center>
+
+The command is ordering to compile the `main.cpp` source file and outputs (`-o`) the `main` object file. It is one of the simple commands of GCC compiler, and linking external libraries is also possible by adding more options.
+
+The directory now has an object file called `main`, compiled from the source code.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 15. Creating C++ language program using G++ compiler (step 3).</center>
+
+To execute an object file from a terminal, place `./` followed by the file name.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 16. Creating C++ language program using G++ compiler (step 4).</center>
+
+Here, the command `./` represents the current directory. Without this command, a terminal wouldn't be able to find the `main` file unless the directory is specified by the environment variable.
+
+# **C++: BASIC**
+Every programming language has its own rules to be observed and fundamental data that works as a basis of the program. Failed to observe this causes either error or unexpected results. As for the beginning of the practical coding, this chapter will introduce basic knowledge of C++ language coding.
 
 ## Header File
+A header file is a `.h` (C compatible) or `.hpp` (C++ exclusive) extension file responsible for letting the script know the existence of data or functionalities. Commonly paired with a `.c` source file, header files can let the other source files to use the data and functionalities defined by its pair.
 
-A file that contains function declaration and macro definition which can be used on source code. There exist two different ways of including the header file to the source code: angled brackets `<>` and double quotations `""`.
+C++ language has header files for the source codes already compiled for developers to use, aka. a library. These libraries that come along with a compiler is called the standard library. Following are the header files for some of the C standard library:
+
+| HEADER FILES | SYNTAX                | DESCRIPTION                                                      |
+| ------------ | --------------------- | ------------------------------------------------------------ |
+| `iostream`      | `#include <iostream>`  | Defines standard input/output function:<br />`operator >>`, `operator <<` |
+| `string`     | `#include <string>` | Defines text-based string processing functions:<br />`append()`, `length()` |
+| `cmath`       | `#include <cmath>`   | Defines common mathematical functions:<br />`exp()`, `cos()` |
+| `chrono`       | `#include <chrono>`   | Defines date and time-handling functions:<br />`system_clock()`, `duration()` |
+
+There are two different ways of including a header file to the source code: angled brackets `<>` and double quotations `""`.
 
 ```cpp
 #include <iostream>
 #include "header.hpp"
 ```
 
-The difference is which location preprocessor searches for the including header files.
+The difference between these twos is where the preprocessor should search for the header file from:
 
-* `#include <header>`
-    : searches directories pre-designated by the compiler or IDE, generally used for system header.
+* `#include <header.hpp>`
+    : search directories pre-designated by the system, compiler, or IDE; this syntax is used to include a system header.
 * `#include "header.hpp"`
-    : searches current local directories where source file is located firsthand. If failed to find the match automatically searches in the pre-designated directories, just like `#include <header>`. This method is generally used for user-defined header.
-
-Following is the list of header files that is often used when programming with C++ language.
-
-| Header Files | Syntax                | Summery                                                                       |
-|--------------|-----------------------|-------------------------------------------------------------------------------|
-| `iostream`   | `#include <iostream>` | Defines standard input/output function:<br />`operator >>`, `operator <<`     |
-| `string`     | `#include <string>`   | Defines string-handling functions:<br />`append()`, `length()`                |
-| `cmath`      | `#include <cmath>`    | Define common mathematical functions:<br />`exp()`, `cos()`                   |
-| `chrono`     | `#include <chrono>`   | Defines date and time-handling functions:<br />`system_clock()`, `duration()` |
+    : search from the current local directories where the source file is located. If failed to find the header, automatically search from pre-designated directories, just like `#include <header.hpp>` does; this syntax is used to include a user-defined header.
 
 ### Precompiled Header
+A precompiled header is a header file that compiles into an intermediate form that is faster to process for a compiler. Because it reduces compilation time, a precompiled header is used on the project that includes many header files or a header file with enormous data.
 
-Precompiled header is a header that is compiled into an intermediate form that is faster to process for the compiler. Having benefit of reducing compilation time, precompiled header is used on the project that includes large amount of header files, or a header file with huge data.
+However, using a precompiled header is not always beneficial because it takes more time to prepare for compilation. For a header file that is small or subject to change frequently, a precompiled header is unnecessary.
 
-However, precompiled header is not always beneficial as using precompiled header does take more time to prepare for compilation. For a header file that is small or often subject to change, precompiled header is unnecessary.
-
-| Precompiled Header | Compiler                              |
-|--------------------|---------------------------------------|
+| PRECOMPILED HEADER | COMPILER                              |
+| ------------------ | ------------------------------------- |
 | `stdafx.h`         | Visual Studio 2015 (msvc14) and below |
 | `pch.h`            | Visual Studio 2017 (msvc15) and above |
 
-# **C++: BASIC**
+## Statement Terminator
+The "statement" in programming represents a code that executes or processes data. In C++ language, every statement needs to end with a statement terminator denoted by a semicolon `;`.
 
-General programming language has essential, fundamental, or even helpful data and syntax that needs to be observed and acknowledged when coding. As the beginning of the practical coding, this chapter will introduce basic information on C++ language coding.
+One of the common mistakes made by C++ language beginners is the absence of a statement terminator. Therefore, developers need to keep this in mind when programming with languages based on C (such as C++ and C#).
 
 ## Comment
-
-There are two different comments in C++: line comment and block comment.
+Comment in a programming language is not executed and is commonly used to write down information related to the programming on source codes. There exist two comments in C++ language: line comment and block comment.
 
 * **Line comment**
-    : a comment worth a single line of code, and is declared by `//` (double slash).
+    : a comment worth a single line of code, declared by `//`.
 * **Block comment**
-    : a comment with multiple lines of code by using pairs of slash asterisk `/* */`.
+    : a comment with multiple lines of code, declared by `/* */`.
 
 ```cpp
 /*
@@ -97,18 +182,16 @@ multiple line of comment can be placed here.
 ```
 
 ## Identifier
+An identifier is a name used to identify data in programming. In other words, it is just a user-defined name. C++ language has the following rules when naming an identifier:
 
-Identifier is a name used to identify a data such as namespace, variable, function, object, class, and more. In other word, it is just a (user-defined) name. There are rules identifier has to observe:
-
-* First character is only allowed to have an alphabet letters and underscore `_`.
-* Beside the first character may use alphabet letters, digits, or underscores.
-* Black spaces are prohibited.
+* Only alphabet, number, and underscore `_` is allowed.
+* First letter cannot start with a number.
+* Blank space is prohibited.
 
 ## Namespace
+The namespace is a code space that distinguishes from the others to guarantee the uniqueness of identifiers. It is the same concept as placing files (data) with the same name in different folders (namespace).
 
-Name of data must be unique and cannot be used elsewhere to prevent confliction. This concept is equivalent to a directory (*project*) only allowed to have files (*data*) with unique name. To have the same naming available, these must be stored in separate folder (*namespace*).
-
-Namespace is created using `namespace` keyword and data is stored inside the code block (`{}`). These data inside the namespace can be accessed by scope resolution (`::`) operator. However, name of the namespaces must be unique and cannot be used elsewhere in one program.
+The `namespace` keyword declares the namespace and stores the data inside the code block `{}`. Use the scope resolution operator `::` to access the data inside the namespace. However, namespaces must not share the same name with other namespaces.
 
 ```cpp
 int variable;
@@ -131,49 +214,46 @@ namespace2::variable;
 ```
 
 ### Global Namespace
-
-Aka. "root namespace", some data have leading scope resolution without specific namespace as previously introduced.
+The global namespace is a code space that doesn't belong to any namespace; thus, it is also called "*namespace*. Data from the global namespace is accessed by placing the scope resolution operator before its identifier.
 
 ```cpp
 ::variable;
 ```
 
-This syntax represents calling the data `variable` not included in any namespace, thus root of the namespace.. Consider Unix's path separator `/`: while the symbol indicates path of directory, it also represents root directory.
+The scope resolution operator is a counterpart of the path separator `/` in the UNIX operating system that also represents the root directory when placed leftmost.
 
 ```makefile
 # UNIX DIRECTORY & PATH SEPARATOR (/)
-/Users/<username>/Documents
+/Users/gko95/Documents
 ```
 
 ```cpp
-// C++ NAMESPACE & SCOPR RESOLUTION (::)
+// C++ NAMESPACE & SCOPE RESOLUTION (::)
 ::std::endl
 ```
 
-The above is identical to `std::endl` that is not included in any namespace.
+The above syntax is identical to `std::endl` not included in any namespace.
 
-### `using` Declaration
-
-Declaration with `using` keyword is used to simplify code by reducing repetitive typing of namespace upon using data. There are two different method on using declaration: either individually or as a whole namespace.
-
-For declaration of individual data and whole namespace:
+### `using` Keyword
+The `using` keyword makes accessing data inside the namespace simple. Technically, data becomes available without needing to specify the namespace. The keyword can either simplify individual data (`using` declaration) or the whole namespace (`using` directive).
 
 ```cpp
-// DECLARATION: INDIVIDUAL DATA
+// USING DECLARATION: INDIVIDUAL DATA
 using namespace1::function();
 
-// DECLARATION: WHOLE NAMESPACE
+// USING DIRECTIVE: THE WHOLE NAMESPACE
 using namespace namespace2;
 ```
 
-## Input & Output
+However, the overuse of the `using` keyword has the potential to cause a naming collision as the compiler cannot tell which data the code is referencing.
 
-C++ has an input and output under `std` namespace for a text-base console terminal using extraction (`>>`) operator and insertion (`<<`) operator:
+## Input & Output
+C++ language has input and output for a text-based terminal available from the `std` namespace in the `iostream` header file, using extraction `>>` and insertion operator `<<` respectively.
 
 | INPUT/OUTPUT | SYNTAX                         | DESCRIPTION                            |
 | ------------ | ------------------------------ | -------------------------------------- |
-| `std::cin`   | `std::cin >> variable;`        | Takes variable or string as an input.  |
-| `std::cout`  | `std::cout << "Hello World!";` | Print variable or string on a console. |
+| `std::cin`   | `std::cin >> variable;`        | Insert data to the `variable` from a console.  |
+| `std::cout`  | `std::cout << "Hello World!";` | Prints data on a console |
 
 ```cpp
 int variable;
@@ -190,60 +270,33 @@ Hello World!10
 ```
 
 ### New-Line Manipulator
-
-A new-line manipulator `std::endl` is a C++ Standard Library that ends or breaks and begins new line:
-
-```cpp
-std::cout << "First Line" << std::endl << "Second Line"; 
-```
-
-```
-First Line
-Second Line
-```
-
-### Escape Character
-
-Escape character `\` is used to escape from sequence of character and execute certain operation within text-base data.
+A new-line manipulator `std::endl` is the C++ Standard Library that ends and begins a new line.
 
 ```cpp
-std::cout << "First Line\nSecond Line";
+std::cout << "Hello" << std::endl << "World!"; 
 ```
 
 ```
-First Line
-Second Line
+Hello
+World!
 ```
-
-| SYNTAX | DESCRIPTION    |
-| ------ | -------------- |
-| `\n`   | New line       |
-| `\t`   | Horizontal tab |
-| `\\`   | Backslash      |
-| `\b`   | Backspace      |
-| `\'`   | Single quote   |
-| `\"`   | Double quote   |
 
 ## Data Type
-
-Data type is one of the important factor which determines type and byte size of the data. A well-implemented data type can results memory and time efficiency when processing the script.
-
-C++ programming language have several number of pre-defined type identifier as follows:
+A data type is one of the crucial factors which determines the type and byte size of the data. A well-implemented data type can make a program efficient on both memory and processing time. C++ language has several numbers of built-in data type as follows:
 
 | IDENTIFIER | DATA TYPE              | DESCRIPTION                                                  |
 | ---------- | ---------------------- | ------------------------------------------------------------ |
 | `int`      | Integer                | 32-bits precision integer number.<br />Size: 4 bytes         |
-| `float`    | Floating point number  | Real number with decimal points.<br />Size: 4 bytes          |
-| `double`   | Double-precision float | Float with doubled precision and memory.<br />Size: 8 bytes  |
-| `char`     | Character: `''`        | A single character, e.g. `'A'` and `'?'`.<br />Size: 1 byte  |
-| `string`   | String: `""`           | Series of characters under the namespace `std`.<br />Size: N/A (depends on overall character length) |
+| `float`    | Floating point number  | Real number with a decimal point.<br />Size: 4 bytes          |
+| `double`   | Double-precision float | Float with a doubled precision and memory.<br />Size: 8 bytes  |
+| `char`     | Character: `''`        | A single character, such as `'A'` or `'?'`.<br />Size: 1 byte  |
+| `string`   | String: `""`           | A series of characters, available from the `std` namespace.<br />Size: N/A (varies by the length) |
 | `bool`     | Boolean                | Non-zero represents `true` while zero is `false`.<br />Size: 1 byte |
-| `auto`     | Automatic              | Data type is declared automatically.<br />Useful for declaring new variable with complex data type. |
+| `auto`     | Automatic              | Automatically selected by the compiler.<br />Useful for declaring new variable with complex data type. |
 | `void`     | Void                   | Non-specific data type.<br />Size: 1 byte                    |
 
 ### `sizeof()` Operator
-
-An operator that returns the allocating memory size of data type or variable in bytes.
+The `sizeof()` function returns allocated memory size of the type or data in bytes.
 
 ```cpp
 sizeof(int);		// SIZE: 4 BYTE
@@ -251,64 +304,110 @@ sizeof(char);		// SIZE: 1 BYTE
 ```
 
 ## Variable
+Variable is a container for data that can be assigned using the assignment operator `=`. C++ language must designate a variable with one of the data types, which can only have data with that data type.
 
-Variable is a container for the data assigned using assignment (`=`) operator. There are three different common stages in variable: declaration, definition, and initialization.
-
-* **Declaration**
-  : declaration is declaring existence of the construct of such as variables, objects, and more. The declaring also includes specifying which data type the construct is.
-
-  ```c++
-  int variable;
-  ```
-  
-* **Definition**
-  : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
-
-  ```c++
-  variable = 3;
-  ```
-
-* **Initialization**
-  : initialization is assigning the initial value to the construct, simply the *first* definition. Since the first definition is generally done on the same time when declaring the construct. Hence, initialization is commonly thought by people as *declaration + definition* which is not always true.
-
-  ```c++
-  int variable = 3;
-  ```
-
-Once the declaration sets data type to a variable, that variable can only take the value of that designated data type.
-
-### Local & Global Variable
-
-**Local variable** is a variable declared inside a code block, such as namespace, function, and class. Data stored in local variable is destroyed when exiting the code block, thus cannot be used outside. Local variable is allowed to have same variable name declared outside (technically, is borrowing the name as a different identity).
-
-**Global variable** is a variable declared on a global scope of the script which is outside a code block. Global variable can be used inside a code block without any special keyword. However, global variable should be avoided if possible to prevent unexpected result and error caused by conflicting variables.
-
-### Constant Variable
-
-Constant variable is a special type of variable that cannot be changed after its initialization. The keyword `const` is used to declare it as a constant variable.
+The example code below tells a compiler the existence of the `variable` integer variable. The variable has also allocated memory at the same time to store a value, called *definition* in programming.
 
 ```cpp
-const int variable = 3;
+/* DEFINITION OF THE "variable" VARIABLE */
+int variable = 3;
+```
+A variable may not have any variable but let a compiler know its existence, called *declaration* in programming.
+
+```cpp
+/* DECLARATION OF THE "variable" VARIABLE */
+int variable;
 ```
 
-### Static Variable
+According to the [ISO standard for C++](https://www.iso.org/standard/68564.html), the definition and declaration are the same in general. The detailed documentation is on § 3.1.2 as follows:
 
-Static variable is a special local variable which maintain its value even when escaped and re-entered a function code block. The keyword `static` is used to declare it as a static variable.
+> A declaration is a definition unless it declares a function without specifying the function’s body (8.4), it contains the extern specifier (7.1.1) or a linkage-specification25 (7.5) and neither an initializer nor a function- body, it declares a static data member in a class definition (9.2, 9.4), it is a class name declaration (9.1), it is an opaque-enum-declaration (7.2), it is a template-parameter (14.1), it is a parameter-declaration (8.3.5) in a function declarator that is not the declarator of a function-definition, or it is a typedef declaration (7.1.3), an alias-declaration (7.1.3), a using-declaration (7.3.3), a static_assert-declaration (Clause 7), an attribute- declaration (Clause 7), an empty-declaration (Clause 7), a using-directive (7.3.4), an explicit instantiation declaration (14.7.2), or an explicit specialization (14.7.3) whose declaration is not a definition.
+
+Below is a list of cases when a declaration is not a definition in C++ language.
+* Forward declaration of a function and class
+* Declaration of parameters for a function and template
+* `using` declaration and directive
+* `alias` declaration
+* `extern` declaration
+* `typedef` declaration
+* Et cetera
+
+Printing the declared variable above will still show a value, indicating it stores the data despite not having assigned yet. A defined variable does not need to specify the data type as a compiler already knows what type of data it stores. Programming languages, in general, locates assigned data (ex. variable) on the left and assignee (ex. a constant value or another variable) on the right. Otherwise will cause an error or function improperly.
+
+### Initialization
+Initialization is the first assignment to a variable where it commonly occurs in the *definition* process.
 
 ```cpp
-static int variable = 3;
+/* VARIABLE INITIALIZATION */
+int variable = 3;
+```
+
+Many believe a definition is equivalent to "declaration + initialization" due to the example code above, but this is a huge misunderstanding. As previously mentioned, a declaration is also considered as a definition in general. The code below is also a definition but without initializing any value.
+
+```cpp
+/* VARIABLE DEFINITION; BUT WITHOUT INITIALIZATION */
+int variable;
+```
+
+### Local & Global Variable
+There are three types of variable in C++ language:
+
+* **Local variable** is a variable defined within the code block, such as namespaces, functions, and classes. A local variable releases data when escapes from the code block and unavailable to use outside. It may have the same name as other variables defined outside the code block.
+
+  ```cpp
+  int main() {
+      // Insert code here...
+
+      /* LOCAL VARIABLE */
+      int variable;
+
+      return 0;
+  }
+  ```
+
+* **Global variable** is a variable that does not belong to any code blocks within the script. A global variable can be used with local variables inside other code blocks without any special syntax. Be cautious when using a global variable as it can cause an error related to variable confliction.
+
+  ```cpp
+  /* GLOBAL VARIABLE */
+  int variable;
+
+  int main() {
+      // Insert code here...
+
+      return 0;
+  }
+  ```
+
+* **Static variable** is a variation of a local variable that retains the data even after escaping from the code block. The data last left off is continued when re-entering the code block. The `static` keyword declares a static variable.
+
+  ```cpp
+  int main() {
+      // Insert code here...
+
+      /* STATIC VARIABLE */
+      static int variable;
+
+      return 0;
+  }
+  ```
+
+### Constant Variable
+A constant variable is a variable that cannot change its value after initialization. The `const` keyword declares variable as a constant.
+
+```cpp
+/* CONSTANT DEFINITION */
+const int variable = 1;
 ```
 
 ## Data Type Casting
-
-Data type casting force-changes data type stored in a variable into other desired type. Casting the smaller size data to its compatible type of a larger size data is called *implicit* data type casting. This is a natural data type conversion automatically done by compiler as no data loss occurs.
+Data type casting force-changes data type stored in a variable into other desired type. Casting the small size data to a compatible but larger size data type is called *implicit* casting. Implicit casting is a natural data type conversion automatically done by a compiler as no data loss occurs.
 
 ```cpp
 short A = 1;	// 2 BYTES INTEGER
 int B = A;		// 4 BYTES INTEGER
 ```
 
-On the other hand, its opposite conversion is called *explicit* data type casting which do have a risk of data loss/corruption upon casting data. Traditional C-style casting syntax (before C++11) is as follows:
+On the other hand, *explicit* casting risks data loss/corruption upon converting data type. Traditional C-style casting syntax uses parenthesis `()` as follows:
 
 ```cpp
 float A = 1.9;  // 4 BYTES FLOAT
@@ -319,68 +418,61 @@ int B = (int)A; // 4 BYTES INTEGER - INCOMPATIBLE: only returns its integer valu
 1
 ```
 
-However, starting from C++11 and its later version introduced four new casting syntaxes which traditional syntax lacked distinguishing upon casting data type.
+However, starting from C++11 introduced four new operators for casting to complement what traditional syntax lacked. Hence, C++ recommends using these four operators when converting data type.
 
-### Static Cast
-
-Static cast is general purpose casting responsible for implicit and explicit data-type conversion.
+### `static_cast` Operator
+The `static cast` operator is casting for a general implicit and explicit data type conversion.
 
 ```cpp
 int variable = 3;
 static_cast<double>(variable);
 ```
 
-### Constant Cast
-
-Constant cast is a type casting operator used to type-cast constant variable, and can also change the value of the constant value. Modifying constant value uses "reference" which will be introduced in *C++: POINTER*.
+### `constant_cast` Operator
+The `constant_cast` operator is casting exclusively for converting data type or changing the value of the constant variable, using call by reference introduced in the *C++: POINTER* chapter.
 
 ```cpp
-const int A = 3;				 // OLD: A = 3
+const int A = 3;                // OLD: A = 3
 int *B = const_cast<int *>(&A);
-*B = 1;							// NEW: A = 1
+*B = 1;                         // NEW: A = 1
 ```
 
-### Dynamic Cast
-
-Dynamic cast is used to handle polymorphism (class derived from base-class having different functionality). This casting is specifically designed for converting class. Class will be dealt on *C++: OBJECT-ORIENTED PROGRAMMING*.
+### `dynamic_cast` Operator
+The `dynamic_cast` operator is casting for processing polymorphism. Refer to the *C++: OBJECT-ORIENTED PROGRAMMING* chapter for the detail as it is about converting the class and object.
 
 ```cpp
 derivedClass *A = new derivedClass;
 baseClass *B = dynamic_cast<baseClass *>(A);
 ```
 
-### Reinterpret Cast
-
-Reinterpret cast is used to convert pointer to pointer of other data type. It also allows any integral type to be converted into any pointer type and vice versa. Pointer will be dealt on *C++: POINTER*.
+### `reinterpret_cast` Operator
+The `reinterpret_cast` operator is casting for data type conversion of the pointer introduced in the *C++: POINTER* chapter.
 
 ```cpp
 int *variable = 3
 reinterpret_cast<double *>(variable)
 ```
 
-However, this casting is the most dangerous compared to other three and is suggested only to use with proper data type. 
+Beware, use the `reinterpret_cast` operator with caution as it has a high potential for data loss compared to the other three.
 
 ## Operator
-
-Operator is the simplest form of data processing unit which can manipulate the value of operands. It operates simply by placing before, after, or between the operands.
+An operator is the simplest form of the data processing unit that manipulates the value of operands. It is placed before, after, or between the operands.
 
 ### Arithmetic Operator
-
-Arithmetic operator is mainly focused on processing numeric data type. Following is a list of arithmetic operator used by numeric data type:
+The arithmetic operator mainly focuses on processing numeric data types. Following is a list of arithmetic operators used by numeric data type:
 
 |             NAME             | OPERATOR | DESCRIPTION                                                  |
 | :--------------------------: | -------- | ------------------------------------------------------------ |
 |           Addition           | `+`      | -                                                            |
 |         Subtraction          | `-`      | -                                                            |
 |        Multiplication        | `*`      | -                                                            |
-|           Division           | `/`      | When both operands are integer: dividend is an integer without remainder.<br/>When at least one operand is real (float or double): dividend is a real (float or double). |
-| Remainder (Modulus Division) | `%`      | Remainder only returns integer.                              |
+|           Division           | `/`      | When both operands are integer: an integer dividend without a remainder.<br/>When at least one operand is real (float or double): a real dividend (float or double). |
+| Remainder (Modulus Division) | `%`      | Remainder only returns an integer.                              |
 
-For easier readability of the arithmetic operator, you can place blank space between number and operator, and it doesn’t affect anything on output.
+For easier readability, you may place blank spaces between numbers and operators which does not affect its output.
 
 ### Assignment Operator
-
-Assignment operator is another operation used within numeric data type. Following is a list of assignment operator used by numeric data type:
+The assignment operator is another operation used within numeric data types. Following is a list of assignment operators used by numeric data type:
 
 | OPERATOR | EXAMPLE  | EQUIVALENT  |
 | -------- | -------- | ----------- |
@@ -390,7 +482,7 @@ Assignment operator is another operation used within numeric data type. Followin
 | `/=`     | `x /= 1` | `x = x / 1` |
 | `%=`     | `x %= 1` | `x = x % 1` |
 
-Although not an assignment operator, a similar **increment and decrement** of the numerical value can be expressed as follow on C-based programming language:
+Although not an assignment operator, the similar increment and decrement operator has identical meaning as follows:
 
 | OPERATOR    | EXAMPLE   | DESCRIPTION       |
 | ----------- | --------- | ----------------- |
@@ -400,8 +492,7 @@ Although not an assignment operator, a similar **increment and decrement** of th
 | `--` suffix | `x = --y` | `y = y-1; x = y;` |
 
 ### Relational Operator
-
-Relational operator is for checking whether the relational condition between two numeric values and returns Boolean value whether condition is true or false. Following is a list of relational operator:
+The relational operator is used to compare the relation of two values, returning either `true` or `false` boolean value. Following is a list of relational operators:
 
 | OPERATOR | DESCRIPTION              |
 | -------- | ------------------------ |
@@ -413,25 +504,44 @@ Relational operator is for checking whether the relational condition between two
 | `!=`     | Not equal to             |
 
 ### Logical Operator
-
-Logical operator consist of AND, OR, and NOT logic. When doing so, think of `true` and `false` as binary 1 and 0, respectively. In wider sense, any non-zero number is deemed `true`.
+The logical operator consist of AND, OR, and NOT logic. Consider `true` and `false` as binary counterpart of 1 and 0.
 
 | OPERATOR | LOGIC | DESCRIPTION                                                |
 | -------- | ----- | ---------------------------------------------------------- |
-| `&&`     | AND   | `true` when all the arguments are `true`, else `false`.    |
+| `&&`     | AND   | `true` when all arguments are `true`, else `false`.    |
 | `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
-| `!`      | NOT   | Change `true` to `false` and vice versa.                   |
+| `!`      | NOT   | Changes `true` to `false` and vice versa.                  |
 
-# **C++: CONDITIONAL AND LOOP**
-
-Conditional and loop statement is commonly used and one of the essential pieces of code in programming. This chapter introduces list of conditional and loop statements in C++ programming.
-
-## `if` Statement
-
-Conditional `if` statement runs code if the condition is true. When the condition evaluates `true`, the statements are carried out but otherwise ignored.
+### Escape Character
+Escape character `\` is used to escape from a sequence of characters and execute certain operations within text-based data. In the introduction on string data type, `\n` is used to change to a new line.
 
 ```cpp
-if (condition) {
+printf("Hello\nWorld!!");
+```
+
+```
+Hello
+World!
+```
+
+| SYNTAX | DESCRIPTION    |
+| ------ | -------------- |
+| `\n`   | New line       |
+| `\t`   | Horizontal tab |
+| `\\`   | Backslash      |
+| `\b`   | Backspace      |
+| `\'`   | Single quote   |
+| `\"`   | Double quote   |
+
+# **C++: CONDITIONAL AND LOOP**
+Conditional and iteration (or loop) statements are two of the most commonly used in programming. The "statement" in programming represents a code that executes or processes data. This chapter introduces a list of conditional and iteration statements in C++ language programming.
+
+## `if` Statement
+Conditional `if` statement runs code if the condition holds. When the condition evaluates `true`, the indented codes are carried out but otherwise ignored.
+
+```cpp
+if (condition)
+{
 	statements;
 }
 
@@ -439,32 +549,34 @@ if (condition) {
 if (condition) statement;
 ```
 
-It is possible to place`if` statement in another `if` statement, called "nested `if`". It is recommended to use code block (`{}`) to distinguish between `if` statements to avoid computer’s misinterpretation.
+The `if` statement can locate inside another `if` statement, called "nested `if`". Use a code block (`{}`) to distinguish between `if` statements to avoid possible misinterpretation made by a compiler.
 
 ```cpp
-if (condition) {
-    if (condtion) { 
+if (condition)
+{
+    if (condtion)
+    { 
         statements;
     } 
 }
 ```
 
 ### `else` Statement
-
-Conditional `else` statement must be followed after `if` statement as it cannot be used alone. The statement contains code that is called when the condition evaluates `false`.
+A conditional `else` statement cannot be used alone and must be followed by an `if` condition. The statement contains code that executes when evaluated `false`.
 
 ```cpp
-if (condition) {
+if (condition)
+{
     statements;
 }
-else {
+else
+{
     statements; 
 }
 ```
 
 ### `else if` Statement
-
-Conditional `else`-`if` statement is a combination of `if` and `else` statement; when the first condition evaluates `false`, the `else if` statement provides second (or more) chance to evaluate condition different from the first one.
+A conditional `else if` statement is a combination of `else` and `if` conditions; when the first condition evaluates `false`, the `else if` statement provides a new condition different from the previous one. 
 
 ```cpp
 if (condition) {
@@ -478,23 +590,21 @@ else {
 }
 ```
 
-However, this is not the same as chain of `else`-`if` conditional statement as that is a combination of two different conditional set, while `else if` statement guarantees a single conditional set.
+However, this statement is different from the chain of `else`-`if` conditional statement as that is a combination of two sets of conditions. On the other hand, `else if` conditional statement is a continuation of an existing evaluation instead of starting new conditioning.
 
 ### Ternary Operator
-
-Conditional statement can be expressed simply using ternary (`?:`) operator as shown below:
+A conditional statement can be simplified using the ternary operator shown below:
 
 ```cpp
 condition ? return_true : return_false;
 ```
 
-The vocabulary *ternary* represents the statement takes three arguments. Ternary operator should not be overused as it reduces readability, but useful on variable assignment.
+The vocabulary *ternary* indicates the statement takes three arguments. The ternary operator should not be overused as it reduces readability but useful on variable assignment.
 
 ## `switch` Statement
+Conditional `switch` statement evaluates whether a variable matches a value assigned to the `case` keyword and executes the corresponding code if true. After execution, the `break` statement must locate to prevent further evaluation of the next `case` keyword.
 
-Conditional `switch` statement checks the argument passed to the function and compare its value referenced on `case` keyword. Every case needs `break` at the end of the group of statements to prevent the statement from proceeding condition evaluation afterward.
-
-When no case is true to the expression, the statements from `default` keyword is returned. This case does not need `break` statement but must to be presented no matter what.
+If no condition matches, the statement automatically executes codes under the `default` keyword that is optional. The `default` keyword does not require the `break` statement as opposed to the `case` keyword.
 
 ```cpp
 switch (argument)
@@ -510,7 +620,7 @@ switch (argument)
 }
 ```
 
-The `switch` statement can have its cases grouped together for a single label:
+Multiple `case` keywords may share the same code as follows:
 
 ```cpp
 switch (argument)
@@ -529,21 +639,18 @@ switch (argument)
 }
 ```
 
-
 ### `break` Statement
-
-The `break` statement can be used to end a loop prematurely, before complete iteration is made. When encountered inside a loop, immediately escapes from the loop but does not break from its outer loop.
+The `break` statement is to end a loop prematurely. When encountered in the loop, the `break` statement escapes from the current loop but does not escape from the nesting loop.
 
 ### `continue` Statement
-
-The `continue` statement skips the rest of the statement below in the loop and jumps back to the conditioning part. This maintains the loop iteration rather than escaping the loop like `break` statement.
+The `continue` statement skips the rest of the code below in the loop and jumps back to the conditioning part. It maintains the iteration rather than escaping from it like the `break` statement.
 
 ## `while` Loop
-
-The `while` loop statement repeatedly execute statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `false`.
+A `while` loop statement repeatedly executes statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `false`.
 
 ```cpp
-while (condition) {
+while (condition)
+{
     statements;
 }
 
@@ -552,18 +659,17 @@ while (condition) statement;
 ```
 
 ### `do`-`while` Statement
-
-The `do`-`while` loop statement is alternative of the `while` statement. Instead of checking the condition before executing looping statement, this statement is does opposite: execute looping statement first, then check the condition.
+The `do`-`while` loop statement is similar to the `while` loop statement, but the former executes code first then evaluates, and the latter is vice versa.
 
 ```cpp
-do {
+do
+{
     statements
 } while (condition);
 ```
 
 ## `for` Loop
-
-The `for` loop statements repeatedly execute statements inside (aka. iterate) as long as the local variable holds the condition. On each loop, value (generally number) of the variable is incremented/decremented.
+The `for` loop statement repeatedly executes statements inside (aka. iterate) as long as the condition holds. Its local variable changes as specified on each iteration, which commonly uses integer increment.
 
 ```cpp
 for (variable; condition; increment) {
@@ -575,8 +681,7 @@ for (variable; condition; increment) statement;
 ```
 
 ### Range-based `for` Loop
-
-Since C++11, a new variation of `for` loop statement (aka. `foreach` loop) was introduced that can loop the execution while in range. The range is generally refers to Sequence Container such as array and vector which its element can be sequenced one-by-one.
+C++11 introduced a new variation of the `for` loop that iterates execution while in range. The range is generally given by the Sequence Container, which is the data that can sequence its elements individually.
 
 ```cpp
 for (variable : range) {
@@ -587,14 +692,12 @@ for (variable : range) {
 for (variable : range) statement;
 ```
 
-The Container in C++ will be introduced in *C++: CONTAINER* chapter.
+Refer to the next chapter, *C++: CONTAINER*, to know more about the container data in C++ language.
 
 # **C++: CONTAINER**
-
 C++ has a Container that can store collection of data. The container that can sequence stored data one-by-one is called sequence container. The most widely used (sequence) containers are array and vector.
 
 ## Array
-
 Array is a sequence container used to store an indexed of item of same data type. To declare an array, bracket `[]` is used to define the size of the container how many value it can store:
 
 ```cpp
