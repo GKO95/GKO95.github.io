@@ -1239,52 +1239,44 @@ ptr = nullptr;
 ```
 
 # **C++: STRING**
-Conventional C language does not have a string data type that can hold the string data specifically; it uses array of character data type with extra byte at the end for null terminator `\0`. However, C++ has standard library for string data type.
+Conventional C language does not have a string data type that can hold the string data specifically; it uses an array of a character with the null terminator `\0` at the end. However, C++ has a standard library for the string data type.
 
 ## String
-
-C-Style string, an array of character with null terminator, is expressed as follows:
+The C-Style string is an array of characters with a null terminator that is defined as follows:
 
 ```cpp
-// C-STYLE STRING
+/* C-STYLE STRING */
 char arr[] = "Hello";
 char* ptr = "World!";
 ```
 
-Despite C++ having its own string data, C-Style string is still used on number of C/C++ libraries.
-
 ## String Data Type
-
-C++ string data type is included in `string.h` header which is part of the `iostream.h` header, and under the standard namespace `std`. C++ recommends usage of string data type over conventional C-style string.
+The C++ string data type from the `string` header is part of the `iostream` header, under the `std` standard namespace. The string data is generally called *string object*. C++ recommends using the C++ string data type than the C-style string.
 
 ```cpp
-// C++ STRING
+/* C++ STRING */
 std::string str = "Hello World!";
 ```
 
 ### String Array
-
-An array cannot have elements with different size; for a string data type that can store text with various length, the only possible way to for array to contain collection of array is by storing pointer to the string.
+An array cannot have elements of different sizes; the only possible way to store string data that varies size by the length of characters is by having a pointer to the string as its element instead of the string value.
 
 ```cpp
 std::string arr[] = {"Hello", "World!"};
 ```
 
-
-# **C++: OBJECT-ORIENTED PROGRAMMING**
-
-Previous chapter have introduced conditional and loop statements and functions for processing code. As a hybrid programming language, C++ supports object-oriented programming (abbrev. OOP) paradigm.
+# **C++: OBJECT AND CLASS**
+The current document has explained and dealt with procedural and functional programming. The third scripting method, object-oriented programming (abbrev. OOP), focuses on the usage of classes and objects instead of functions.
 
 ## Object
+Previous chapters introduced a variable and function, which is for storing and processing data, respectively. Object (aka. instance) is a block of data that encapsulates these variables and functions into a single identity.
 
-Previous chapters have introduced variable (which can store data) and function (which can process data). Object, aka. instance, is a block of data which encapsulate these variables and functions as members of a single identity, called *member variable* (or *member field*) and *method* respectively.
-
-The programming based around use of a custom objects is called *object-oriented programming*.
+The programming based around the use of custom objects is called *object-oriented programming*.
 
 ```cpp
-std::string x = "Hello World!";
-std::cout << x.length();
-// Using "length()" method that returns number of characters.
+std::string variable = "Hello World!";
+std::cout << variable.length();
+// Using the "length()" method that returns the number of characters excluding a null terminator from the "variable" string object.
 ```
 
 ```
@@ -1292,35 +1284,31 @@ std::cout << x.length();
 ```
 
 ### Encapsulation
+Encapsulation is the core concept in an object with the following characteristics:
 
-Encapsulation is the core concept in object which...
-
-1. combines variables and functions into a single object
-2. restrict direct access to these variables and functions to prevent accidental modification from external code. 
+1. Combines variables and functions into a single data.
+2. Restrict direct access to these variables and functions to prevent accidental modification from external code. 
 
 ### State & Behavior
+State and behavior refer to a variable and function encapsulated to an object in C++. The encapsulated variable and function are respectively called member variable and member function, accessed using the member access operator `.`.
 
-Object has a properties called state and behavior which is frequently coined in C++:
-
-* **State** of an object is a data stored in object *member variable* (or *member field*), accessed by `object.field` format.
-* **Behavior** of an object is an action that can be done by object *method*, accessed by `object.method()` format.
-
+| MEMBER   | COMPONENT                           | SYNTAX              |
+|:--------:|:-----------------------------------:|---------------------|
+| State    | Member variable (aka. member field) | `instance.field`    |
+| Behavior | Member function (aka. method)       | `instnace.method()` |
 
 ## Class
-
-Class is used to create objects (aka. instance), hence can be deemed as a blueprint of the object. Classes are created using keyword `class` and inside defines variables and functions which becomes member variable and methods for the object.
-
-Class requires semicolon `;` at the end of the code block, and creating an instance from a class is called *instantiation*.
+A class creates objects (aka. instance) and is defined using the `class` keyword. Definitions of an object's fields and methods are also inside a class definition. The following example is a simple user-defined class with attributes and methods:
 
 ```cpp
-// CREATING CLASS
+/* CREATING CLASS */
 class CLASS{
 public:
-    // MEMBER VARIABLE (AKA. MEMBER FIELD)
+    /* MEMBER VARIABLE (AKA. MEMBER FIELD) */
     int field1 = 1;
     float field2 = 3.0;
     
-    // METHOD (AKA. MEMBER FUNCTION)
+    /* METHOD (AKA. MEMBER FUNCTION) */
     float method(int arg) {
         return field1 + field2 - arg;
     }
@@ -1335,17 +1323,18 @@ instance.field2;         // >> OUTPUT: 3.0
 instance.method(2);      // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
 ```
 
+The class requires a semicolon `;` at the end of the code block. Creating an instance from the class is called *instantiation*.
+
 ### Constructor
+A constructor is a method that automatically executes whenever instantiation has occurred, defining the number of arguments and its data type to the instance. The name of a constructor must be the same as the class name but without specifying the returned data type because it has a fixed data type of `void.`
 
-Constructor is a special method automatically executed whenever instantiation has occurred and can define the number of arguments to pass to the instance. Name of a constructor must be same as the class name and does not require data type.
-
-One of the common usage of constructor is initialization of member fields upon instantiation. There are two different initialization methods on constructor: (1) direct initialization and (2) list initialization.
+One of the common usages of a constructor is the initialization of member fields upon instantiation. There are two different initialization approaches: (1) direct initialization and (2) list initialization.
 
 ```cpp
-// CREATING CLASS
+/* CREATING CLASS */
 class CLASS {
 public:
-    // CONSTRUCTOR
+    /* CONSTRUCTOR */
     CLASS(int arg1, float arg2)
     {
         field1 = arg1; field2 = arg2;	// DIRECT INITIALIZATION
@@ -1367,10 +1356,10 @@ CLASS instance(1, 3.0);
 ----
 
 ```cpp
-// CREATING CLASS
+/* CREATING CLASS */
 class CLASS {
 public:
-    // CONSTRUCTOR
+    /* CONSTRUCTOR */
     CLASS(int arg1, float arg2)
         : field1(arg1), field2(arg2)	// LIST INITIALIZATION
     {
@@ -1389,18 +1378,18 @@ public:
 CLASS instance(1, 3.0);
 ```
 
-The advantage on using member initializer list is it can initialize the constant member field that is impossible when initialized directly.
+Using the member initializer list can initialize constant member fields impossible when initialized directly.
 
-Constructor is an optional member function and can be defined when developer wants. However, when constructor that takes argument(s) is presented, parenthesis `()` is required upon instantiation. Multiple constructor is allowed per class as long as rule of function overloading is observed.
+A constructor is an optional method and passes arguments through parenthesis `()` upon initialization. However, initialize without parenthesis when there is no argument for the instance. Multiple constructors are allowed per class as long as the rule of function overloading is observed.
 
 ### Destructor
-
-Destructor is a special method automatically executed whenever instance is released (every time object is destroyed either systematically by compiler or manually by developer). Name of a destructor must be same as the class name with tilde `~` prefix and does not require data type.
+A destructor is a method that automatically executes whenever the instance is destroyed and released from the memory. The name of a destructor must be the same as the class name with a tilde `~` prefix but without specifying the returned data type because it has a fixed data type of `void.`
 
 ```cpp
+/* CREATING CLASS */
 class CLASS {
 public:
-    // DESTRUCTOR
+    /* DESTRUCTOR */
     ~CLASS() {
     	statements;
     }
@@ -1414,23 +1403,20 @@ public:
 };
 ```
 
-Destructor is an optional member function and can be defined when developer wants. Only one destructor is allowed per class and does not take any argument.
+A destructor is an optional method, but only one is allowed per class since the absence of parameters means no support for function overloading.
 
 ### Constant Object
-
-Constant object is an object that cannot change the value of members after instantiation. Because of property of constant data, initialization of the member variables are done using constructor.
-
-Following is a syntax used to create a constant object from a class:
+A constant object is an object that cannot change member value after instantiation. Because of this property, the initialization of the instance is only possible by the list initialization.
 
 ```cpp
-// INSTANTIATION: CONSTANT OBJECT
+// INSTANTIATION: CONSTANT OBJECTs
 const CLASS instance;
 ```
 
-Constant object can only access constant member variables and constant methods, while non-constant object can access both constant and non-constant members. Beware, declaration of a constant method is only available within the class and `const` keyword is located at suffix instead.
+A constant object can only access constant member variables and constant member function. Beware, the constant method is a method declarable only within the class and must place the `const` keyword after the parameter declaration.
 
 ```cpp
-// CREATING CLASS
+/* CREATING CLASS */
 class CLASS {
 public: 
     int field1 = 1;
@@ -1448,18 +1434,16 @@ public:
 ```
 
 ## Access Specifier
+Access specifier defines accessibility to class members from outside the class. There are three access specifiers in C++: `public`, `private`, and `protected`.
 
-Access specifier in class defines accessibility to class members from the elsewhere. There are three access specifiers in C++: public, private, and protected.
-
-| A.MODIFIER | KEYWORD     | DESCRIPTION                                                  |
-| ---------- | ----------- | ------------------------------------------------------------ |
-| Public     | `public`    | Members are accessible from the code outside the class.      |
-| Private    | `private`   | Members are accessible only within the class.                |
-| Protected  | `protected` | Members are accessible from derived class but still restricted from outside the class; refer to inheritance. |
+| KEYWORD     | DESCRIPTION                                                  |
+| ----------- | ------------------------------------------------------------ |
+| `public`    | Members are accessible from outside the class.      |
+| `private`   | Members are accessible only within the class.                |
+| `protected` | Members are accessible from derived class but still restricted from outside the class (refer to the *inheritance* section). |
 
 ## Friend Function
-
-Friend function is a special function which can access private members of an objects. To declare friend function, place the prototype inside the class definition with `friend` keyword.
+A friend function is a function that can access private members within the class despite defined outside the class. To declare a friend function, place the prototype inside the class definition with the `friend` keyword.
 
 ```cpp
 class CLASS {
@@ -1471,11 +1455,11 @@ private:
         return field1 + field2 - arg;
     }
 
-    // FRIEND PROTOTYPE
+    /* FRIEND FUNCTION PROTOTYPE */
     friend void function(CLASS &instance);
 };
 
-// FRIEND DEFINITION
+/* FUNCTION DEFINITION */
 void function(CLASS &instance) {
 	instance.field1 = 2;
 }
@@ -1490,11 +1474,10 @@ instance.field2;	// >> OUTPUT: 3.0
 instance.method(2);	// >> OUTPUT: 3.0 (= 2 + 3.0 - 2)
 ```
 
-Because friend function is not a member, the function is called just like any other functions. Still, the fact that prototype was defined with members of the class grants access to the private members due to encapsulation.
+A friend function is not a member, which means it does not need an object to use. The reason the friend function can access the private members is because of the encapsulation of the prototype.
 
 ## Pointer to Class
-
-Object can be instantiated using pointer instead of variable. When assigned to a pointer, members are accessed via arrow member selection (`->`) operator.
+Objects are assignable to a pointer instead of a variable when instantiated. In the case of a pointer, access members via the arrow member selection operator `->`.
 
 ```cpp
 class CLASS {
@@ -1522,17 +1505,15 @@ instance->method(2);	// >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
 ```
 
 ### Dynamic Object
-
-Dynamic object is another method of instantiating a class, but the data is stored in heap memory instead of stack memory. This is a common method of instantiation when it comes to framework library to prevent releasing objects.
+A dynamic object is an instantiated stored in the heap region memory instead of the stack; this can prevent data corruption caused by the deallocation from the stack memory. It is commonly used on the framework libraries such as MFC.
 
 ```cpp
-// DYNAMIC OBJECT
+/* DYNAMIC OBJECT */
 CLASS *instance = new CLASS(1, 3.0);
 ```
 
 ### Identity
-
-Identity is a third property of an object which distinguishes itself from others, commonly by using memory address to the object itself. Every object has an implicit `this` pointer which points to the address of itself and can be used to access its own member.
+Identity is the third property of an object which distinguishes itself from others, commonly by using the memory address to itself. Every instance has an implicit `this` pointer that points to the address of itself and can be used to access its members.
 
 ```cpp
 class CLASS {
@@ -1545,20 +1526,19 @@ public:
     float field2;
     
     float method1(int arg) {
-        // USAGE OF THIS POINTER
+        // USAGE OF "this" POINTER
         return (this->field1) + (this->field2) - arg;
     }
 };
 ```
 
-For those who are familiar with Python, consider `this` pointer as C++ version of `self` keyword.
+For those who are familiar with Python, consider `this` pointer as a C++ version of the `self` keyword.
 
 ## Inheritance
-
-Inheritance is an act of base class providing member variables and methods to derived class. When the same name of members exists on both base class and derived class, members from base class are overridden by derived class's.
+Inheritance is an act of providing both member fields and methods of a base class to a derived class. When the base class and derived class share the same name of member fields or methods, it uses members from the derived class.
 
 ```cpp
-// CREATING BASE CLASS
+/* CREATING BASE CLASS */
 class BASECLASS {
 public:
     BASECLASS() { std::cout << "BASE CLASS: Constructor" << std::endl; }
@@ -1568,7 +1548,7 @@ public:
     float field2 = 3.0;
 };
 
-// CREATING DERIVED CLASS
+/* CREATING DERIVED CLASS */
 class DERIVEDCLASS
     : public BASECLASS {
 public:
@@ -1596,19 +1576,16 @@ std::cout << instance.field1 << ", " << instance.field2 << ", " << instance.fiel
 ```
 
 ### Type of Inheritance
-
 There are three different types of class inheritance on OOP in C++ language:
-
 
 | INHERITANCE | DESCRIPTION                                                  |
 | :---------: | ------------------------------------------------------------ |
-|   Public    | Private members of base class are not inherited nor accessible.<br />Public and protected members of the base class becomes public and protected members in derived class respectively. |
-|   Private   | Private members of base class are not inherited nor accessible.<br />Public and protected members of the base class becomes private members in derived class. |
-|  Protected  | Private members of base class are not inherited nor accessible.<br />Public and protected members of the base class becomes protected members in derived class. |
-
+|   `public`    | Private members of the base class are not inherited nor accessible.<br /> Public and protected members of the base class become public and protected members of the derived class. |
+|   `private`   | Private members of the base class are not inherited nor accessible.<br />Public and protected members of the base class become private members of the derived class. |
+|  `protected`  | Private members of the base class are not inherited nor accessible.<br />Public and protected members of the base class become protected members of the derived class. |
 
 ```cpp
-// INHERITING BASECLASS1 (PUBLIC) & BASECLASS2 (PROTECTED)
+/* INHERITING BASECLASS1 (PUBLIC) & BASECLASS2 (PROTECTED) */
 class DERIVEDCLASS
     : public BASECLASS1, protected BASECLASS2
 {
@@ -1617,24 +1594,22 @@ class DERIVEDCLASS
 ```
 
 ## Polymorphism
-
-Polymorphism means "having many forms", which in C++ programming means having different functionality based on the situation and usage. Polymorphism is one of the important features in OOP and is categorized into two types:
+Polymorphism means "having many forms," which in C++ programming means having different functionality based on the situation and usage. Polymorphism is one of the core features in OOP categorized into two types:
 
 * Compile-time Polymorphism
     : polymorphism achieved on compilation (aka. static polymorphism).
 * Run-time Polymorphism
     : polymorphism achieved on run-time (aka. dynamic polymorphism).
 
-One of the compile-time polymorphism has been introduced already; *function overloading* which functions differently according to passed arguments.
+One of the compile-time polymorphism has already been introduced; *function overloading* which functions differently according to passed arguments.
 
 ### Operator Overloading
+Operator overloading is another compile-time polymorphism that customizes operator to function differently on specific classes. Just like function overloading, a single operator can have multiple implementations as long as the argument's uniqueness is guaranteed. Overloaded operators are class-exclusive and won't be applied elsewhere.
 
-Overloading operator is another compile-time polymorphism which is customizing operator to function differently on certain classes or portion of the script. Just like function overloading, a single operator can have multiple implementation as long as the arguments are unique. Overloaded operators are exclusive to the class and won't be applied elsewhere.
-
-The `operator` keyword is used to specify the operator for customization. Declaring and defining operator functionality follows syntax identical to member function.
+Use the `operator` keyword to specify the operator to customize. The syntax for defining operator functionality is identical to the method definition.
 
 ```cpp
-// CREATING CLASS
+/* CREATING CLASS */
 class CLASS {
 public:
     // OPERATOR OVERLOADING 1
@@ -1650,16 +1625,15 @@ public:
 };
 ```
 
-On the second operator overloading, `CLASS` type argument is referenced to the member function parameter and constant `const` keyword makes the parameter read-only. The parameters can access `CLASS` object passed from argument but cannot modify it due to constant property.
+On the second overloading, the method parameter `arg` references the `CLASS` type argument, and the `const` keyword makes the parameter read-only. Eventually, the parameter can access the `CLASS` type object directly from its memory space but cannot modify it.
 
 ### Function Overriding
+Function overriding is a run-time polymorphism where the derived class redefines members inherited from the base class. The difference between overloading and overriding is the formal *selects* functionality while the latter *redefines* functionality.
 
-Overriding function is a run-time polymorphism where derived class redefine member inherited from the base class. The difference between overloading and overriding is, the formal *selects* functionality when the latter *redefines* functionality.
-
-Virtual function is a special function specifically designed for function overriding, and is declared by `virtual` keyword. Declaration of the virtual function is only necessary in base class but not in derived class.
+A virtual function is a function specifically for function overriding, declared by the `virtual` keyword from the base class alone.
 
 ```cpp
-// CREATING BASE CLASS
+/* CREATING BASE CLASS */
 class BASECLASS {
 public:
     // VIRTUAL FUNCTION
@@ -1668,7 +1642,7 @@ public:
     }	
 };
 
-// CREATING DERIVED CLASS
+/* CREATING DERIVED CLASS */
 class DERIVEDCLASS1
     : public BASECLASS {
 public:	
@@ -1679,25 +1653,27 @@ public:
 };
 ```
 
-Virtual function can have its definition implemented on base class for either (1) using behavior directly from base class or (2) using behavior from derived class in case no function override has occurred. Meanwhile, virtual function without any definition implemented is called **pure virtual function**.
+Beware, the base class member substituted by the derived class in the *C++: OBJECT AND CLASS § Inheritance* example code is not a function overriding. The member definition of the base class is still intact and did not get redefined.
+
+A virtual function can have its definition implemented in the base class for either using behavior (1) directly from a base class or (2) from a derived class in case no function override has occurred. However, a virtual function without any definition implemented is called **pure virtual function**.
 
 ```cpp
-// PURE VIRTUAL FUNCTION
+/* PURE VIRTUAL FUNCTION */
 virtual void polymorph() = 0;
 ```
 
-Because pure virtual function has no definition in base class, it is a virtual function that *must be* overridden when inherited to derived class. Failed to do so will cause a compilation error.
+Because a pure virtual function has no definition in the base class, it *must be* overridden when inherited to a derived class. Failed to do so will cause a compilation error.
 
-Base class that has at least one pure virtual function is called **abstract class**. Due to the property pure virtual function has, abstract class cannot create its own instances and can only be used to create derived classes.
+A base class that has at least one pure virtual function is called the **abstract class**. Due to the property pure virtual function has, an abstract class cannot create instances directly but is used only to create a derived class.
 
 ## Class in Files
+For efficient management of the project, creating a class as files is highly recommended. On Visual Studio, create a class file by right-clicking either *Source Files* or *Header Files* filter and select *Add >> Class...*.
 
-For easier and efficient management of the project, creating a class as files is recommended. On Visual Studio 2019, the class file can be created by right clicking either *Source Files* or *Header Files* filter and select *Add >> Class...*. A new window will pop up shown as follows:
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_class.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 16. Creating a class file in Visual Studio.</center>
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_class.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure #. Adding class in Visual Studio 2019</center>
-Class name typed on "**C<u>l</u>ass Name:**" automatically fills "**.h <u>f</u>ile:**" and "**.c<u>p</u>p file:**" with the same name. Click OK button to create two files: header file and source file in the project's *Header Files* and *Source Files* filter respectively.
+Class name typed on "**C<u>l</u>ass Name:**" automatically fills "**.h <u>f</u>ile:**" and "**.c<u>p</u>p file:**" with the same name. Click the OK button to create a header and source file in the project.
 
-Despite having separated into two different files, the class can be imported to the C++ script using `#include` directive.
+The header and source file respectively go to the *Header Files* and *Source File* filter. Despite having separated into two different files, the class can be imported to the C++ script by the `#include` directive.
 
 ```cpp
 #include "ClassName.h"
@@ -1711,14 +1687,13 @@ int main() {
 }
 ```
 
-The header file is created as `.h` extension which is compatible for both C/C++ language, while `.hpp` extension is C++ exclusive. Generalizing default extension as `.h` is fine, but it is recommended to specify header extension distinguish base language.
+The header file for the class is generally created with the  C-compatible `.h` extension, while the `.hpp` extension is C++ exclusive. Since C language does not support the OOP, the C++ class may have either header extension.
 
 ### Class Header File
-
-Class header file (.h) contains declaration of the class member fields and member functions:
+The class header file `.h` contains declarations of the class member fields and methods. The purpose of the header file is to declare the existence of the data to another script.
 
 ```cpp
-// HEADER "ClassName.h"
+/* HEADER "ClassName.h" */
 class ClassName {
 public:
     ClassName(int arg1, float arg2);
@@ -1731,11 +1706,10 @@ public:
 ```
 
 ### Class Source File
-
-Source file (.cpp) contains implementation and initialization of the class member which is declared in the header file. Declaration of the class must be imported to the class source code using `#include` directives:
+The source file `.cpp` contains the definition and initialization of the member fields and methods. While the header file declares the existence of data, their state and behavior are all defined in the source file. Link the source code with the header by using the `#include` directive.
 
 ```cpp
-// SOURCE "ClassName.cpp"
+/* SOURCE "ClassName.cpp" */
 #include "ClassName.h"
 
 ClassName::ClassName(int arg1, float arg2)
@@ -1756,11 +1730,9 @@ float ClassName::method(int arg3)
 ```
 
 # **C++: USER-DEFINED DATA TYPE**
-
 Commonly used data type such as `int`, `float`, `char`, and more are already defined in `iostream.h` header. Developer may create and use custom data type based on these pre-defined data types.
 
 ## Structure
-
 Structure groups multiple member variables under a single structure tag, regardless of data type of member variable.
 
 ```cpp
@@ -1801,7 +1773,6 @@ struct STRUCTURE {
 Some C++ project may have structure variable assignment as `struct studenName student1;`. This syntax is still valid but `struct` keyword is not needed anymore starting from C++11 upon variable declaration.
 
 ## Union
-
 Union groups multiple member variables under a single structure tag and shares memory address, regardless of data type of member variable. In other word, union is mainly used to present single data in different types of data (such as `int`, `char`, `bool`, et cetera). Because of this, union only requires value assignment on one member field.
 
 ```cpp
@@ -1838,7 +1809,6 @@ variable.field2[1];         // >> OUTPUT: 'V'		(0x -- -- 56 --)
 Since union shares a single memory location to store the value, data allocation size is set based on the member with data type of largest byte size. Member fields with smaller byte-size data type is represented as a portion of the overall.
 
 ## Enumeration
-
 Enumeration means "action of mentioning a number of things one by one", thus is a user-defined data type which can only be assigned with a single enumerators that has corresponding integer.
 
 ```cpp
@@ -1905,7 +1875,6 @@ enum ENUMERATION2 {
 ```
 
 ### Enumeration Class
-
 Enumeration has a problem where enumerator must be globally unique and cannot share the same name despite located in different enumeration. Enumeration class, on the other hand, allows shared name of enumerator across the enumeration class.
 
 ```cpp
@@ -1923,7 +1892,6 @@ enum class ENUMERATION2 {
 Enumeration class is recommended than enumeration as enumerator conflict can be prevented.
 
 ## Typedef Declaration
-
 The `typedef` keyword is used to create an alias name for existing data type, providing better readability.
 
 ```cpp
@@ -1947,7 +1915,6 @@ typedef union {
 ```
 
 ## Type Alias Declaration
-
 Previously on *C++: BASIC § Namespace* has introduced `using` keyword to simplify the code by reducing repetitive typing of namespace. The `using` keyword is also used on customizing data type to create an alias name for existing data type, serving better readability.
 
 ```cpp
@@ -1957,11 +1924,9 @@ using dtypeName = int;
 There is no difference between type alias declaration and typedef declaration, meaning two are actually equivalent.
 
 # **C++: TEMPLATE**
-
 Template provides developer a format of functions or classes regardless of its data type. Hence, template is used to define multiple number of similar functions and classes in efficient way.
 
 ## Function Template
-
 A template for a function is created using the following syntax:
 
 ```cpp
@@ -1977,7 +1942,6 @@ function<int, float>(1, 3.0)
 ```
 
 ### `typename` Keyword
-
 The `typename` keyword is used to explicitly tell compiler that trailing identifier is in fact a type. In template declaration, however, it is an alternative synonym for `class` keyword used in template parameters.
 
 ```cpp
@@ -1990,7 +1954,6 @@ U function(T arg1, U arg2) {
 ```
 
 ## Class Template
-
 A template for a class is created using the following syntax:	
 
 ```cpp
@@ -2022,7 +1985,6 @@ std::vector<int> vec;        // VECTOR CLASS: <class T>
 ```
 
 ### Class Template in Files
-
 Creating a class template in two separate files is not official, since class template is not a class but a *template*. While there is a workaround, it isn't highly recommended.
 
 ```cpp
@@ -2074,7 +2036,6 @@ int main() {
 ```
 
 ## Template Specialization
-
 Some implementation of function template or class template may need to be defined separately for special occasion. Template specialization allows creating separate definition for specific data type despite already having the template.
 
 ```cpp
@@ -2094,7 +2055,6 @@ bool function<char>(int arg1, float arg2) {
 ```
 
 ## Template Alias
-
 Previously in *C++: USER-DEFINED DATA TYPE § Type Alias* explained on declaring data type with different alias name. This concept can be applied the same in aliasing new name for a template.
 
 ```cpp
@@ -2110,11 +2070,9 @@ template <class X, class Y>
 ```
 
 # **C++: EXCEPTION**
-
 Exception is a problem encountered during a program execution (not during compilation). C++ programming language offers keyword and blocks for controlling exceptions: `throw`, `try`, and `catch`. Through exception handling, stable program can be compiled and executed without any halt or crash.
 
 ## `try`/`catch` Blocks
-
 Two code block pair, `try` block and `catch` block, is used to handle exception occurred during runtime. Following paragraphs explains what each code block is responsible for on exception handling.
 
 The `try` block is a code block that attempts whether the code contains exception or not. If it encounters an exception inside the block, the remaining code won't be executed but skipped to corresponding exception `catch` block.
@@ -2135,7 +2093,6 @@ catch(const std::exception &e) {
 ```
 
 ## `throw` Keyword
-
 The `throw` keyword is used to manually halt execution and "throws" expression to `catch` keyword. Either expression such as numerical data, text data can follow behind, or may have no expression at all.
 
 However, the `catch` exception handler cannot check the thrown value, but only its parameter type. 
@@ -2163,7 +2120,6 @@ catch(...) {
 ```
 
 ### Error Output
-
 Standard output stream for error `std::cerr`, similar to standard output stream `std::cout`, prints text on the console terminal but exclusively designed for error such as exception.
 
 ```cpp
@@ -2173,7 +2129,6 @@ std::cerr << "Hello World!"
 The difference between `std::cout` and `std::cerr` is they are streamed separately.
 
 # **C++: FILE MANAGEMENT**
-
 C++ programming language can read and write external file to save or import data. This chapter is mainly focused on accessing and modifying `.txt` extension text file.
 
 Reading and writing external text file requires following additional header file:
@@ -2185,7 +2140,6 @@ Reading and writing external text file requires following additional header file
 Inside the header file includes `std::ifstream` and `std::ofstream` object which is responsible for data input to the program and data output from program respectively.
 
 ## Opening Files
-
 The file first needs to be opened to either read or write. Opening the file is done using `open()` method which is included in both `std::ifstream` (for reading) and `std::ofstream` (for writing). 
 
 ```cpp
@@ -2202,7 +2156,6 @@ std::ifstream file("sample.txt");
 File that is opened can now be read and written by the program.
 
 ## Reading Files
-
 While there are several methods on reading the file, the best example is using `std::getline()` function. Execution of once will only extract a single text line, thus to extract every line requires loop statement.
 
 The `std::ifstream` object is used since reading means text data input to the program.
@@ -2217,7 +2170,6 @@ while (getline(file, line)) {
 ```
 
 ## Writing Files
-
 Writing text to the file is done using insertion (`<<`) operator followed by the data to be written. The `std::ofstream` object is used since writing means text data output from the program.
 
 ```cpp
@@ -2228,7 +2180,6 @@ file << "Hello World!\n";
 ```
 
 ### Creating Files
-
 New file can be created using the same method of writing file which does not bound by just writing on existing file. Creating file is simply done by designating file name is doesn't exist on the specified path.
 
 ```cpp
@@ -2239,7 +2190,6 @@ file << "Hello World!\n";
 ```
 
 ## Closing Files
-
 After opening the file, it should be closed manually. Just like opening with `open()` method, opened file is closed using `close()` method:
 
 ```cpp
@@ -2251,19 +2201,16 @@ file.close();
 ```
 
 # **C++: PREPROCESSOR**
-
 C/C++ program language compiler processes the script into two divided stages: preprocessing and compilation. On the stage of preprocessing, preprocessor directive such as `#include` is taken care of by the compiler.
 
 This chapter will introduce useful and commonly used preprocessor directives that is actually being implemented on development.
 
 ## Macro Definition
-
 Macro is a fragment of code that is given a name (aka. identifier). A fragment of code can be a simple data (e.g. number, character, string) or an expression with arguments. The formal and latter is respectively called *object-like* and *function-like* macro.
 
 The benefit of macro is it cannot be changed on runtime. The defined macro can be used on the script passed from a header file through `#include` directive.
 
 ### `#define` Directive
-
 The `#define` directive is used to create macro:
 
 ```cpp
@@ -2272,7 +2219,6 @@ The `#define` directive is used to create macro:
 ```
 
 ### `#undef` Directive
-
 In some cases, macro can cause naming collision that cannot be fixed on compilation stage. This macro can be removed by `#undef` directive:
 
 ```cpp
@@ -2280,7 +2226,6 @@ In some cases, macro can cause naming collision that cannot be fixed on compilat
 ```
 
 ### Predefined Macros
-
 Compilers have common standard and compiler-specific predefined macros available for developers.
 
 * MSVC: [Microsoft Docs - Predefined Macros](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
@@ -2288,7 +2233,6 @@ Compilers have common standard and compiler-specific predefined macros available
 * Others: https://sourceforge.net/p/predef/wiki/Compilers/
 
 ## Conditional Inclusion
-
 Preprocessor has a conditional directives that are used for conditional compilation. These directives are not to be used as a substitution of `if` and `else` conditional statement.
 
 ```cpp
@@ -2302,7 +2246,6 @@ Preprocessor has a conditional directives that are used for conditional compilat
 ```
 
 ### Macro Condition
-
 Conditional inclusion can check condition whether the macro is already defined or not:
 
 ```cpp
@@ -2318,7 +2261,6 @@ Conditional inclusion can check condition whether the macro is already defined o
 ```
 
 ## Pragma Directive
-
 Pragma directive is used to configure features and options for a compiler. Each compiler differs from each other, and this makes pragma a non-standard compiler-specific preprocessor directive.
 
 * MSVC: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://docs.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
@@ -2327,7 +2269,6 @@ Pragma directive is used to configure features and options for a compiler. Each 
 This chapter mainly focuses on pragma directive from MSVC as it is the most common and widely used C/C++ compiler provided by Microsoft Visual Studio.
 
 ### `#pragma once`
-
 The `#pragma once` pragma directive is extremely useful upon compilation by only including the header file once instead of multiple time on every inclusion. 
 
 ```cpp
@@ -2349,7 +2290,6 @@ The following code is an example of include guard without using `#pragma once` p
 If `header.h` has not been processed, the compiler defines the `HEADER_FILE` for the first time. However, upon second encounter, compiler will not process the header file again because of the macro conditioning.
 
 ### `#pragma region`
-
 Though it does not affect any on compilation, `#pragma region` and `#pragma endregion` pair supports expanding and collapsing code block on Visual Studio Code Editor:
 
 ```cpp
@@ -2359,7 +2299,6 @@ Though it does not affect any on compilation, `#pragma region` and `#pragma endr
 ```
 
 # **C++: RANDOM**
-
 Randomization may be necessary in some programming such as game development and statistical modeling. Random number generation requires following additional header file:
 
 |   HEADER    | DESCRIPTION                                                  |
@@ -2367,7 +2306,6 @@ Randomization may be necessary in some programming such as game development and 
 | `cstdlib.h` | Contains general purpose function such as random number, communication, et cetera. |
 
 ## `rand()` Function
-
 The `rand()` function is a pseudo random number generator; it generates number randomly, but generated numbers are always same on every program execution.
 
 ```cpp
@@ -2383,7 +2321,6 @@ for (int index = 0; index < 3; index++) {
 ```
 
 ## `srand()` Function
-
 The `srand()` function does not generate random number but only determines the randomness based on the argument of seed. Each seed will provide randomness unique from others.
 
 However, `rand()` function is still required to generate random number. Thus, numbers are always generated in same pattern on every program execution in spite of having `srand()` function.
@@ -2403,7 +2340,6 @@ for (int index = 0; index < 3; index++) {
 ```
 
 ## Truly Random Number
-
 For different randomness requires renewed seed on each program execution. The best method for seed renewal is using timestamp which is an integer representation of data and time.
 
 Timestamp can be acquired using `time()` function included in `ctime.h` header. To get the timestamp of an executed time of a `time()` function, pass the number 0 as its argument.
