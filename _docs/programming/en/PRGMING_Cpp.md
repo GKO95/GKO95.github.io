@@ -10,83 +10,168 @@ summary: "."
 order: 0x02
 ---
 # **C++: INTRO**
+> *Refernce: [Microsoft Docs C++ Language Documentation](https://docs.microsoft.com/en-us/cpp/cpp/)*
 
-General-purpose programming language that was based on C programming language. While C language only supports procedural programming, C++ allows object-oriented programming as well; thus, C++ is called hybrid language.
+C++ is a general-purpose low-level programming language based on C language. While C is a procedural programming language that executes codes top-to-bottom, C++ allows object-oriented programming as well; thus, C++ is called a hybrid language. C++, an extension of C language, guarantees a wide range of applications from various features.
 
-## Compilation
+## Compiled Language
+There are two different categories of program languages based on its execution: compiled language and interpreted language.
 
-C/C++ language uses compiler to create executable file from the source code. Compiler translates C++ source code (written in high-level language: English) to a language computer can understand like binary code (low-level language). Compiled application can be executed without compiler afterward.
+An interpreter allows a computer to reads the source code written in English and execute directly, mostly benefitting from cross-platform support that can run the program on a different system and architecture. Python is one of the best examples of an interpreted language. However, a compiler generates an object file written in machine-friendly code by translating from English-written source code.
 
-Compiler has a several standard revision for ISO (International Organization of Standardization) based on the time it was released. The most renowned revision is a C++11 and C++17. This document will instruct the programming language based on C++11 at minimum.
-
-Compilation of C/C++ language is divided into two stage that is done by preprocessor and compiler (technically, preprocessor is included inside a compiler).
-
-### Preprocessor
-
-Preprocessing is a first stage of compilation done by a preprocessor. Preprocessor directive (aka. compiler directive) which is denoted by octothorpe symbol `#` in the script commands for preprocessor to perform certain actions before compiler does.
-
-| Preprocessor Directive | Example               | Summery                                          |
-|:-----------------------|-----------------------|--------------------------------------------------|
-| `#include`             | `#include <iostream>` | Include header file to the script.               |
-| `#define`              | `#define SQUARE`      | Define new macro that can be used in the script. |
-| `#pragma`              | `#pragma once`        | Provide additional options to the compiler.      |
-
-Preprocessor does not read the C/C++ language but accepts preprocessor directive, comments, declaration, and et cetera within a source code and returns modified source code with preprocessor directive activated, comments removed, header files included, et cetera for compiler to process.
-
-Preprocessor directive is not necessary when programming and does not observe C++ language grammar, but it does make programming much easier. Preprocessor is one of the components included in a compiler. 
+C++ language is a compiled language that doesn't support cross-platform, but it processes faster than interpreted language due to its optimization to the current system.
 
 ### Compiler
+C++ language categorizes its compiler version by the year of standard released by the International Organization for Standardization(ISO); C++11 and C++17 is the most renowned version. This document introduces C++ language based on the C++11 compiler at minimum.
 
-After preprocessing is finished, the official stage of compilation is processed by the compiler. Compiler starts translating C++ source code to a language computer can understand, supported by those activated by preprocessor directives.
+### Preprocessor
+A preprocessor is responsible for optimizing the source code before the compiler translates to binary code. A command for a preprocessor is called *preprocessor directive* and has octothorpe `#` at its prefix.
+
+| DIRECTIVES | EXAMPLE               | DESCRIPTION                                          |
+| :--------------------- | --------------------- | ------------------------------------------------ |
+| `#include`             | `#include <iostream>` | Includes header file to the script.               |
+| `#define`              | `#define SQUARE`      | Defines new macro for the project. |
+| `#pragma`              | `#pragma once`        | Provides additional options for the compiler.      |
+
+A preprocessor does not read C++ language source code nor follows C++ language syntax. It only processes its directives, removes comments, and provides optimized source code to the compiler. A preprocessor directive isn't necessary but makes the coding easier and convenient. The preprocessor resides within the compiler program.
+
+# **C: INSTALL**
+A compiler for C++ is essential when developing with C++ programming language, and there are various C++ compilers available designed by different companies and organizations. The compilation method may differ depending on the compiler, but it doesn't matter for general users as every compiler observes the same ISO standard that defines the working mechanism.
+
+An integrated development environment is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C++ language project.
+
+## Visual Studio
+[Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C++ programming, select the "Desktop development with C++" workload.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 1. Workload for C++ programming on Visual Studio.</center>
+
+Visual Studio will start with the window shown below. To create a new project for C++ language, select the "Create a new project" button.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Startup window of Visual Studio.</center>
+
+Since C++ can create various applications, there are many different kinds of projects available from Visual Studio as well. To create a C project, follow the procedure below:
+
+1. Select the language as C++ and choose the "Console App" option.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 3. Creating a C++ project on Visual Studio (step 1).</center>
+
+2. Designate names for the project and solution. Here, the project is a `.vcxproj` extension file that manages its source codes and compilation options, and the solution is a `.sln` extension file that can contain multiple projects. It is recommended to open the solution file on Visual Studio unless you only want to open a single project.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 4. Creating a C++ project on Visual Studio (step 2).</center>
+
+3. Use the project automatically prepared by Visual Studio.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 5. Creating a C++ project on Visual Studio (step 3).</center>
+
+The three-step procedure above for creating a C++ console application is the simplest method. To create an empty C++ project, refer to the installation section on the *PRGMING_C* document.
+
+Visual Studio can run a C language program in two different ways: debugging mode (`F5`) and without debugging mode (`Ctrl+F5`). Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
+
+## Xcode
+[Xcode](https://developer.apple.com/download/release/) is the most renowned IDE for macOS developed by Apple, which uses the clang compiler. Xcode supports various languages, and just like Visual Studio, Xcode has a project option for C++ language.
+
+Start Xcode, then create a new project by selecting `File > New > Project...`.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 7. Startup window of Xcode.</center>
+
+There are various projects available for developing an application for Apple's product. To create a C++ project, follow the procedure below:
+
+1. Since the computer is macOS, select the macOS tab, then the Command Line Tool to execute a terminal-based program.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 8. Creating a C++ project on Xcode (step 1).</center>
+
+2. Name a project in the Product Name and select the Language as C++.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 9. Creating a C++ project on Xcode (step 2).</center>
+
+3. Designate a path for the project.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 10. Creating a C++ project on Xcode (steo 3).</center>
+
+4. The left panel shows there is the `main.cpp` source file under the `Experiment` folder with minimum codes required to run the program.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_xcode_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 11. Creating a C++ project on Xcode (step 4).</center>
+
+Xcode can run a C++ language program in two different ways: debugging mode and without debugging mode. Hotkey for both are `⌘+R` and whether to debug or not is configured on project setting. Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
+
+## Terminal
+Linux OS has G++ (GNU Compiler Collection for C++) compiler installed by default but without an IDE. However, IDE is not essential when compiling a source code, which is possible on a terminal as well. With the increasing number of projects starting to use a single-board computer (SBC) like Raspberry Pi, knowing how to develop software in Linux OS became crucial.
+
+This section uses the code from *Figure 10. Creating a C++ project on Xcode (step 4)* to the `main.cpp` source file to show how to compile on Linux OS.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 12. Example code for G++ compiler.</center>
+
+Suppose the `main.c` source file is at `~/Workspace/Cpp/Experiment` directory.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 13. Creating C++ language program using G++ compiler (step 1).</center>
+
+Run a terminal and move to the directory where the source file is; change the current directory with the `cd` command. Enter the following command to compile the source code with GCC compiler.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 14. Creating C++ language program using G++ compiler (step 2).</center>
+
+The command is ordering to compile the `main.cpp` source file and outputs (`-o`) the `main` object file. It is one of the simple commands of GCC compiler, and linking external libraries is also possible by adding more options.
+
+The directory now has an object file called `main`, compiled from the source code.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 15. Creating C++ language program using G++ compiler (step 3).</center>
+
+To execute an object file from a terminal, place `./` followed by the file name.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_g++_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 16. Creating C++ language program using G++ compiler (step 4).</center>
+
+Here, the command `./` represents the current directory. Without this command, a terminal wouldn't be able to find the `main` file unless the directory is specified by the environment variable.
+
+# **C++: BASIC**
+Every programming language has its own rules to be observed and fundamental data that works as a basis of the program. Failed to observe this causes either error or unexpected results. As for the beginning of the practical coding, this chapter will introduce basic knowledge of C++ language coding.
 
 ## Header File
+A header file is a `.h` (C compatible) or `.hpp` (C++ exclusive) extension file responsible for letting the script know the existence of data or functionalities. Commonly paired with a `.c` source file, header files can let the other source files to use the data and functionalities defined by its pair.
 
-A file that contains function declaration and macro definition which can be used on source code. There exist two different ways of including the header file to the source code: angled brackets `<>` and double quotations `""`.
+C++ language has header files for the source codes already compiled for developers to use, aka. a library. These libraries that come along with a compiler is called the standard library. Following are the header files for some of the C standard library:
+
+| HEADER FILES | SYNTAX                | DESCRIPTION                                                      |
+| ------------ | --------------------- | ------------------------------------------------------------ |
+| `iostream`      | `#include <iostream>`  | Defines standard input/output function:<br />`operator >>`, `operator <<` |
+| `string`     | `#include <string>` | Defines text-based string processing functions:<br />`append()`, `length()` |
+| `cmath`       | `#include <cmath>`   | Defines common mathematical functions:<br />`exp()`, `cos()` |
+| `chrono`       | `#include <chrono>`   | Defines date and time-handling functions:<br />`system_clock()`, `duration()` |
+
+There are two different ways of including a header file to the source code: angled brackets `<>` and double quotations `""`.
 
 ```cpp
 #include <iostream>
 #include "header.hpp"
 ```
 
-The difference is which location preprocessor searches for the including header files.
+The difference between these twos is where the preprocessor should search for the header file from:
 
-* `#include <header>`
-    : searches directories pre-designated by the compiler or IDE, generally used for system header.
+* `#include <header.hpp>`
+    : search directories pre-designated by the system, compiler, or IDE; this syntax is used to include a system header.
 * `#include "header.hpp"`
-    : searches current local directories where source file is located firsthand. If failed to find the match automatically searches in the pre-designated directories, just like `#include <header>`. This method is generally used for user-defined header.
-
-Following is the list of header files that is often used when programming with C++ language.
-
-| Header Files | Syntax                | Summery                                                                       |
-|--------------|-----------------------|-------------------------------------------------------------------------------|
-| `iostream`   | `#include <iostream>` | Defines standard input/output function:<br />`operator >>`, `operator <<`     |
-| `string`     | `#include <string>`   | Defines string-handling functions:<br />`append()`, `length()`                |
-| `cmath`      | `#include <cmath>`    | Define common mathematical functions:<br />`exp()`, `cos()`                   |
-| `chrono`     | `#include <chrono>`   | Defines date and time-handling functions:<br />`system_clock()`, `duration()` |
+    : search from the current local directories where the source file is located. If failed to find the header, automatically search from pre-designated directories, just like `#include <header.hpp>` does; this syntax is used to include a user-defined header.
 
 ### Precompiled Header
+A precompiled header is a header file that compiles into an intermediate form that is faster to process for a compiler. Because it reduces compilation time, a precompiled header is used on the project that includes many header files or a header file with enormous data.
 
-Precompiled header is a header that is compiled into an intermediate form that is faster to process for the compiler. Having benefit of reducing compilation time, precompiled header is used on the project that includes large amount of header files, or a header file with huge data.
+However, using a precompiled header is not always beneficial because it takes more time to prepare for compilation. For a header file that is small or subject to change frequently, a precompiled header is unnecessary.
 
-However, precompiled header is not always beneficial as using precompiled header does take more time to prepare for compilation. For a header file that is small or often subject to change, precompiled header is unnecessary.
-
-| Precompiled Header | Compiler                              |
-|--------------------|---------------------------------------|
+| PRECOMPILED HEADER | COMPILER                              |
+| ------------------ | ------------------------------------- |
 | `stdafx.h`         | Visual Studio 2015 (msvc14) and below |
 | `pch.h`            | Visual Studio 2017 (msvc15) and above |
 
-# **C++: BASIC**
+## Statement Terminator
+The "statement" in programming represents a code that executes or processes data. In C++ language, every statement needs to end with a statement terminator denoted by a semicolon `;`.
 
-General programming language has essential, fundamental, or even helpful data and syntax that needs to be observed and acknowledged when coding. As the beginning of the practical coding, this chapter will introduce basic information on C++ language coding.
+One of the common mistakes made by C++ language beginners is the absence of a statement terminator. Therefore, developers need to keep this in mind when programming with languages based on C (such as C++ and C#).
 
 ## Comment
-
-There are two different comments in C++: line comment and block comment.
+Comment in a programming language is not executed and is commonly used to write down information related to the programming on source codes. There exist two comments in C++ language: line comment and block comment.
 
 * **Line comment**
-    : a comment worth a single line of code, and is declared by `//` (double slash).
+    : a comment worth a single line of code, declared by `//`.
 * **Block comment**
-    : a comment with multiple lines of code by using pairs of slash asterisk `/* */`.
+    : a comment with multiple lines of code, declared by `/* */`.
 
 ```cpp
 /*
@@ -97,18 +182,16 @@ multiple line of comment can be placed here.
 ```
 
 ## Identifier
+An identifier is a name used to identify data in programming. In other words, it is just a user-defined name. C++ language has the following rules when naming an identifier:
 
-Identifier is a name used to identify a data such as namespace, variable, function, object, class, and more. In other word, it is just a (user-defined) name. There are rules identifier has to observe:
-
-* First character is only allowed to have an alphabet letters and underscore `_`.
-* Beside the first character may use alphabet letters, digits, or underscores.
-* Black spaces are prohibited.
+* Only alphabet, number, and underscore `_` is allowed.
+* First letter cannot start with a number.
+* Blank space is prohibited.
 
 ## Namespace
+The namespace is a code space that distinguishes from the others to guarantee the uniqueness of identifiers. It is the same concept as placing files (data) with the same name in different folders (namespace).
 
-Name of data must be unique and cannot be used elsewhere to prevent confliction. This concept is equivalent to a directory (*project*) only allowed to have files (*data*) with unique name. To have the same naming available, these must be stored in separate folder (*namespace*).
-
-Namespace is created using `namespace` keyword and data is stored inside the code block (`{}`). These data inside the namespace can be accessed by scope resolution (`::`) operator. However, name of the namespaces must be unique and cannot be used elsewhere in one program.
+The `namespace` keyword declares the namespace and stores the data inside the code block `{}`. Use the scope resolution operator `::` to access the data inside the namespace. However, namespaces must not share the same name with other namespaces.
 
 ```cpp
 int variable;
@@ -131,49 +214,46 @@ namespace2::variable;
 ```
 
 ### Global Namespace
-
-Aka. "root namespace", some data have leading scope resolution without specific namespace as previously introduced.
+The global namespace is a code space that doesn't belong to any namespace; thus, it is also called "*namespace*. Data from the global namespace is accessed by placing the scope resolution operator before its identifier.
 
 ```cpp
 ::variable;
 ```
 
-This syntax represents calling the data `variable` not included in any namespace, thus root of the namespace.. Consider Unix's path separator `/`: while the symbol indicates path of directory, it also represents root directory.
+The scope resolution operator is a counterpart of the path separator `/` in the UNIX operating system that also represents the root directory when placed leftmost.
 
 ```makefile
 # UNIX DIRECTORY & PATH SEPARATOR (/)
-/Users/<username>/Documents
+/Users/gko95/Documents
 ```
 
 ```cpp
-// C++ NAMESPACE & SCOPR RESOLUTION (::)
+// C++ NAMESPACE & SCOPE RESOLUTION (::)
 ::std::endl
 ```
 
-The above is identical to `std::endl` that is not included in any namespace.
+The above syntax is identical to `std::endl` not included in any namespace.
 
-### `using` Declaration
-
-Declaration with `using` keyword is used to simplify code by reducing repetitive typing of namespace upon using data. There are two different method on using declaration: either individually or as a whole namespace.
-
-For declaration of individual data and whole namespace:
+### `using` Keyword
+The `using` keyword makes accessing data inside the namespace simple. Technically, data becomes available without needing to specify the namespace. The keyword can either simplify individual data (`using` declaration) or the whole namespace (`using` directive).
 
 ```cpp
-// DECLARATION: INDIVIDUAL DATA
+// USING DECLARATION: INDIVIDUAL DATA
 using namespace1::function();
 
-// DECLARATION: WHOLE NAMESPACE
+// USING DIRECTIVE: THE WHOLE NAMESPACE
 using namespace namespace2;
 ```
 
-## Input & Output
+However, the overuse of the `using` keyword has the potential to cause a naming collision as the compiler cannot tell which data the code is referencing.
 
-C++ has an input and output under `std` namespace for a text-base console terminal using extraction (`>>`) operator and insertion (`<<`) operator:
+## Input & Output
+C++ language has input and output for a text-based terminal available from the `std` namespace in the `iostream` header file, using extraction `>>` and insertion operator `<<` respectively.
 
 | INPUT/OUTPUT | SYNTAX                         | DESCRIPTION                            |
 | ------------ | ------------------------------ | -------------------------------------- |
-| `std::cin`   | `std::cin >> variable;`        | Takes variable or string as an input.  |
-| `std::cout`  | `std::cout << "Hello World!";` | Print variable or string on a console. |
+| `std::cin`   | `std::cin >> variable;`        | Insert data to the `variable` from a console.  |
+| `std::cout`  | `std::cout << "Hello World!";` | Prints data on a console |
 
 ```cpp
 int variable;
@@ -190,60 +270,33 @@ Hello World!10
 ```
 
 ### New-Line Manipulator
-
-A new-line manipulator `std::endl` is a C++ Standard Library that ends or breaks and begins new line:
-
-```cpp
-std::cout << "First Line" << std::endl << "Second Line"; 
-```
-
-```
-First Line
-Second Line
-```
-
-### Escape Character
-
-Escape character `\` is used to escape from sequence of character and execute certain operation within text-base data.
+A new-line manipulator `std::endl` is the C++ Standard Library that ends and begins a new line.
 
 ```cpp
-std::cout << "First Line\nSecond Line";
+std::cout << "Hello" << std::endl << "World!"; 
 ```
 
 ```
-First Line
-Second Line
+Hello
+World!
 ```
-
-| SYNTAX | DESCRIPTION    |
-| ------ | -------------- |
-| `\n`   | New line       |
-| `\t`   | Horizontal tab |
-| `\\`   | Backslash      |
-| `\b`   | Backspace      |
-| `\'`   | Single quote   |
-| `\"`   | Double quote   |
 
 ## Data Type
-
-Data type is one of the important factor which determines type and byte size of the data. A well-implemented data type can results memory and time efficiency when processing the script.
-
-C++ programming language have several number of pre-defined type identifier as follows:
+A data type is one of the crucial factors which determines the type and byte size of the data. A well-implemented data type can make a program efficient on both memory and processing time. C++ language has several numbers of built-in data type as follows:
 
 | IDENTIFIER | DATA TYPE              | DESCRIPTION                                                  |
 | ---------- | ---------------------- | ------------------------------------------------------------ |
 | `int`      | Integer                | 32-bits precision integer number.<br />Size: 4 bytes         |
-| `float`    | Floating point number  | Real number with decimal points.<br />Size: 4 bytes          |
-| `double`   | Double-precision float | Float with doubled precision and memory.<br />Size: 8 bytes  |
-| `char`     | Character: `''`        | A single character, e.g. `'A'` and `'?'`.<br />Size: 1 byte  |
-| `string`   | String: `""`           | Series of characters under the namespace `std`.<br />Size: N/A (depends on overall character length) |
+| `float`    | Floating point number  | Real number with a decimal point.<br />Size: 4 bytes          |
+| `double`   | Double-precision float | Float with a doubled precision and memory.<br />Size: 8 bytes  |
+| `char`     | Character: `''`        | A single character, such as `'A'` or `'?'`.<br />Size: 1 byte  |
+| `string`   | String: `""`           | A series of characters, available from the `std` namespace.<br />Size: N/A (varies by the length) |
 | `bool`     | Boolean                | Non-zero represents `true` while zero is `false`.<br />Size: 1 byte |
-| `auto`     | Automatic              | Data type is declared automatically.<br />Useful for declaring new variable with complex data type. |
+| `auto`     | Automatic              | Automatically selected by the compiler.<br />Useful for declaring new variable with complex data type. |
 | `void`     | Void                   | Non-specific data type.<br />Size: 1 byte                    |
 
 ### `sizeof()` Operator
-
-An operator that returns the allocating memory size of data type or variable in bytes.
+The `sizeof()` function returns allocated memory size of the type or data in bytes.
 
 ```cpp
 sizeof(int);		// SIZE: 4 BYTE
@@ -251,64 +304,110 @@ sizeof(char);		// SIZE: 1 BYTE
 ```
 
 ## Variable
+Variable is a container for data that can be assigned using the assignment operator `=`. C++ language must designate a variable with one of the data types, which can only have data with that data type.
 
-Variable is a container for the data assigned using assignment (`=`) operator. There are three different common stages in variable: declaration, definition, and initialization.
-
-* **Declaration**
-  : declaration is declaring existence of the construct of such as variables, objects, and more. The declaring also includes specifying which data type the construct is.
-
-  ```c++
-  int variable;
-  ```
-  
-* **Definition**
-  : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
-
-  ```c++
-  variable = 3;
-  ```
-
-* **Initialization**
-  : initialization is assigning the initial value to the construct, simply the *first* definition. Since the first definition is generally done on the same time when declaring the construct. Hence, initialization is commonly thought by people as *declaration + definition* which is not always true.
-
-  ```c++
-  int variable = 3;
-  ```
-
-Once the declaration sets data type to a variable, that variable can only take the value of that designated data type.
-
-### Local & Global Variable
-
-**Local variable** is a variable declared inside a code block, such as namespace, function, and class. Data stored in local variable is destroyed when exiting the code block, thus cannot be used outside. Local variable is allowed to have same variable name declared outside (technically, is borrowing the name as a different identity).
-
-**Global variable** is a variable declared on a global scope of the script which is outside a code block. Global variable can be used inside a code block without any special keyword. However, global variable should be avoided if possible to prevent unexpected result and error caused by conflicting variables.
-
-### Constant Variable
-
-Constant variable is a special type of variable that cannot be changed after its initialization. The keyword `const` is used to declare it as a constant variable.
+The example code below tells a compiler the existence of the `variable` integer variable. The variable has also allocated memory at the same time to store a value, called *definition* in programming.
 
 ```cpp
-const int variable = 3;
+/* DEFINITION OF THE "variable" VARIABLE */
+int variable = 3;
+```
+A variable may not have any variable but let a compiler know its existence, called *declaration* in programming.
+
+```cpp
+/* DECLARATION OF THE "variable" VARIABLE */
+int variable;
 ```
 
-### Static Variable
+According to the [ISO standard for C++](https://www.iso.org/standard/68564.html), the definition and declaration are the same in general. The detailed documentation is on § 3.1.2 as follows:
 
-Static variable is a special local variable which maintain its value even when escaped and re-entered a function code block. The keyword `static` is used to declare it as a static variable.
+> A declaration is a definition unless it declares a function without specifying the function’s body (8.4), it contains the extern specifier (7.1.1) or a linkage-specification25 (7.5) and neither an initializer nor a function- body, it declares a static data member in a class definition (9.2, 9.4), it is a class name declaration (9.1), it is an opaque-enum-declaration (7.2), it is a template-parameter (14.1), it is a parameter-declaration (8.3.5) in a function declarator that is not the declarator of a function-definition, or it is a typedef declaration (7.1.3), an alias-declaration (7.1.3), a using-declaration (7.3.3), a static_assert-declaration (Clause 7), an attribute- declaration (Clause 7), an empty-declaration (Clause 7), a using-directive (7.3.4), an explicit instantiation declaration (14.7.2), or an explicit specialization (14.7.3) whose declaration is not a definition.
+
+Below is a list of cases when a declaration is not a definition in C++ language.
+* Forward declaration of a function and class
+* Declaration of parameters for a function and template
+* `using` declaration and directive
+* `alias` declaration
+* `extern` declaration
+* `typedef` declaration
+* Et cetera
+
+Printing the declared variable above will still show a value, indicating it stores the data despite not having assigned yet. A defined variable does not need to specify the data type as a compiler already knows what type of data it stores. Programming languages, in general, locates assigned data (ex. variable) on the left and assignee (ex. a constant value or another variable) on the right. Otherwise will cause an error or function improperly.
+
+### Initialization
+Initialization is the first assignment to a variable where it commonly occurs in the *definition* process.
 
 ```cpp
-static int variable = 3;
+/* VARIABLE INITIALIZATION */
+int variable = 3;
+```
+
+Many believe a definition is equivalent to "declaration + initialization" due to the example code above, but this is a huge misunderstanding. As previously mentioned, a declaration is also considered as a definition in general. The code below is also a definition but without initializing any value.
+
+```cpp
+/* VARIABLE DEFINITION; BUT WITHOUT INITIALIZATION */
+int variable;
+```
+
+### Local & Global Variable
+There are three types of variable in C++ language:
+
+* **Local variable** is a variable defined within the code block, such as namespaces, functions, and classes. A local variable releases data when escapes from the code block and unavailable to use outside. It may have the same name as other variables defined outside the code block.
+
+  ```cpp
+  int main() {
+      // Insert code here...
+
+      /* LOCAL VARIABLE */
+      int variable;
+
+      return 0;
+  }
+  ```
+
+* **Global variable** is a variable that does not belong to any code blocks within the script. A global variable can be used with local variables inside other code blocks without any special syntax. Be cautious when using a global variable as it can cause an error related to variable confliction.
+
+  ```cpp
+  /* GLOBAL VARIABLE */
+  int variable;
+
+  int main() {
+      // Insert code here...
+
+      return 0;
+  }
+  ```
+
+* **Static variable** is a variation of a local variable that retains the data even after escaping from the code block. The data last left off is continued when re-entering the code block. The `static` keyword declares a static variable.
+
+  ```cpp
+  int main() {
+      // Insert code here...
+
+      /* STATIC VARIABLE */
+      static int variable;
+
+      return 0;
+  }
+  ```
+
+### Constant Variable
+A constant variable is a variable that cannot change its value after initialization. The `const` keyword declares variable as a constant.
+
+```cpp
+/* CONSTANT DEFINITION */
+const int variable = 1;
 ```
 
 ## Data Type Casting
-
-Data type casting force-changes data type stored in a variable into other desired type. Casting the smaller size data to its compatible type of a larger size data is called *implicit* data type casting. This is a natural data type conversion automatically done by compiler as no data loss occurs.
+Data type casting force-changes data type stored in a variable into other desired type. Casting the small size data to a compatible but larger size data type is called *implicit* casting. Implicit casting is a natural data type conversion automatically done by a compiler as no data loss occurs.
 
 ```cpp
 short A = 1;	// 2 BYTES INTEGER
 int B = A;		// 4 BYTES INTEGER
 ```
 
-On the other hand, its opposite conversion is called *explicit* data type casting which do have a risk of data loss/corruption upon casting data. Traditional C-style casting syntax (before C++11) is as follows:
+On the other hand, *explicit* casting risks data loss/corruption upon converting data type. Traditional C-style casting syntax uses parenthesis `()` as follows:
 
 ```cpp
 float A = 1.9;  // 4 BYTES FLOAT
@@ -319,68 +418,61 @@ int B = (int)A; // 4 BYTES INTEGER - INCOMPATIBLE: only returns its integer valu
 1
 ```
 
-However, starting from C++11 and its later version introduced four new casting syntaxes which traditional syntax lacked distinguishing upon casting data type.
+However, starting from C++11 introduced four new operators for casting to complement what traditional syntax lacked. Hence, C++ recommends using these four operators when converting data type.
 
-### Static Cast
-
-Static cast is general purpose casting responsible for implicit and explicit data-type conversion.
+### `static_cast` Operator
+The `static cast` operator is casting for a general implicit and explicit data type conversion.
 
 ```cpp
 int variable = 3;
 static_cast<double>(variable);
 ```
 
-### Constant Cast
-
-Constant cast is a type casting operator used to type-cast constant variable, and can also change the value of the constant value. Modifying constant value uses "reference" which will be introduced in *C++: POINTER*.
+### `constant_cast` Operator
+The `constant_cast` operator is casting exclusively for converting data type or changing the value of the constant variable, using call by reference introduced in the *C++: POINTER* chapter.
 
 ```cpp
-const int A = 3;				 // OLD: A = 3
+const int A = 3;                // OLD: A = 3
 int *B = const_cast<int *>(&A);
-*B = 1;							// NEW: A = 1
+*B = 1;                         // NEW: A = 1
 ```
 
-### Dynamic Cast
-
-Dynamic cast is used to handle polymorphism (class derived from base-class having different functionality). This casting is specifically designed for converting class. Class will be dealt on *C++: OBJECT-ORIENTED PROGRAMMING*.
+### `dynamic_cast` Operator
+The `dynamic_cast` operator is casting for processing polymorphism. Refer to the *C++: OBJECT-ORIENTED PROGRAMMING* chapter for the detail as it is about converting the class and object.
 
 ```cpp
 derivedClass *A = new derivedClass;
 baseClass *B = dynamic_cast<baseClass *>(A);
 ```
 
-### Reinterpret Cast
-
-Reinterpret cast is used to convert pointer to pointer of other data type. It also allows any integral type to be converted into any pointer type and vice versa. Pointer will be dealt on *C++: POINTER*.
+### `reinterpret_cast` Operator
+The `reinterpret_cast` operator is casting for data type conversion of the pointer introduced in the *C++: POINTER* chapter.
 
 ```cpp
 int *variable = 3
 reinterpret_cast<double *>(variable)
 ```
 
-However, this casting is the most dangerous compared to other three and is suggested only to use with proper data type. 
+Beware, use the `reinterpret_cast` operator with caution as it has a high potential for data loss compared to the other three.
 
 ## Operator
-
-Operator is the simplest form of data processing unit which can manipulate the value of operands. It operates simply by placing before, after, or between the operands.
+An operator is the simplest form of the data processing unit that manipulates the value of operands. It is placed before, after, or between the operands.
 
 ### Arithmetic Operator
-
-Arithmetic operator is mainly focused on processing numeric data type. Following is a list of arithmetic operator used by numeric data type:
+The arithmetic operator mainly focuses on processing numeric data types. Following is a list of arithmetic operators used by numeric data type:
 
 |             NAME             | OPERATOR | DESCRIPTION                                                  |
 | :--------------------------: | -------- | ------------------------------------------------------------ |
 |           Addition           | `+`      | -                                                            |
 |         Subtraction          | `-`      | -                                                            |
 |        Multiplication        | `*`      | -                                                            |
-|           Division           | `/`      | When both operands are integer: dividend is an integer without remainder.<br/>When at least one operand is real (float or double): dividend is a real (float or double). |
-| Remainder (Modulus Division) | `%`      | Remainder only returns integer.                              |
+|           Division           | `/`      | When both operands are integer: an integer dividend without a remainder.<br/>When at least one operand is real (float or double): a real dividend (float or double). |
+| Remainder (Modulus Division) | `%`      | Remainder only returns an integer.                              |
 
-For easier readability of the arithmetic operator, you can place blank space between number and operator, and it doesn’t affect anything on output.
+For easier readability, you may place blank spaces between numbers and operators which does not affect its output.
 
 ### Assignment Operator
-
-Assignment operator is another operation used within numeric data type. Following is a list of assignment operator used by numeric data type:
+The assignment operator is another operation used within numeric data types. Following is a list of assignment operators used by numeric data type:
 
 | OPERATOR | EXAMPLE  | EQUIVALENT  |
 | -------- | -------- | ----------- |
@@ -390,7 +482,7 @@ Assignment operator is another operation used within numeric data type. Followin
 | `/=`     | `x /= 1` | `x = x / 1` |
 | `%=`     | `x %= 1` | `x = x % 1` |
 
-Although not an assignment operator, a similar **increment and decrement** of the numerical value can be expressed as follow on C-based programming language:
+Although not an assignment operator, the similar increment and decrement operator has identical meaning as follows:
 
 | OPERATOR    | EXAMPLE   | DESCRIPTION       |
 | ----------- | --------- | ----------------- |
@@ -400,8 +492,7 @@ Although not an assignment operator, a similar **increment and decrement** of th
 | `--` suffix | `x = --y` | `y = y-1; x = y;` |
 
 ### Relational Operator
-
-Relational operator is for checking whether the relational condition between two numeric values and returns Boolean value whether condition is true or false. Following is a list of relational operator:
+The relational operator is used to compare the relation of two values, returning either `true` or `false` boolean value. Following is a list of relational operators:
 
 | OPERATOR | DESCRIPTION              |
 | -------- | ------------------------ |
@@ -413,25 +504,44 @@ Relational operator is for checking whether the relational condition between two
 | `!=`     | Not equal to             |
 
 ### Logical Operator
-
-Logical operator consist of AND, OR, and NOT logic. When doing so, think of `true` and `false` as binary 1 and 0, respectively. In wider sense, any non-zero number is deemed `true`.
+The logical operator consist of AND, OR, and NOT logic. Consider `true` and `false` as binary counterpart of 1 and 0.
 
 | OPERATOR | LOGIC | DESCRIPTION                                                |
 | -------- | ----- | ---------------------------------------------------------- |
-| `&&`     | AND   | `true` when all the arguments are `true`, else `false`.    |
+| `&&`     | AND   | `true` when all arguments are `true`, else `false`.    |
 | `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
-| `!`      | NOT   | Change `true` to `false` and vice versa.                   |
+| `!`      | NOT   | Changes `true` to `false` and vice versa.                  |
 
-# **C++: CONDITIONAL AND LOOP**
-
-Conditional and loop statement is commonly used and one of the essential pieces of code in programming. This chapter introduces list of conditional and loop statements in C++ programming.
-
-## `if` Statement
-
-Conditional `if` statement runs code if the condition is true. When the condition evaluates `true`, the statements are carried out but otherwise ignored.
+### Escape Character
+Escape character `\` is used to escape from a sequence of characters and execute certain operations within text-based data. In the introduction on string data type, `\n` is used to change to a new line.
 
 ```cpp
-if (condition) {
+printf("Hello\nWorld!!");
+```
+
+```
+Hello
+World!
+```
+
+| SYNTAX | DESCRIPTION    |
+| ------ | -------------- |
+| `\n`   | New line       |
+| `\t`   | Horizontal tab |
+| `\\`   | Backslash      |
+| `\b`   | Backspace      |
+| `\'`   | Single quote   |
+| `\"`   | Double quote   |
+
+# **C++: CONDITIONAL AND LOOP**
+Conditional and iteration (or loop) statements are two of the most commonly used in programming. The "statement" in programming represents a code that executes or processes data. This chapter introduces a list of conditional and iteration statements in C++ language programming.
+
+## `if` Statement
+Conditional `if` statement runs code if the condition holds. When the condition evaluates `true`, the indented codes are carried out but otherwise ignored.
+
+```cpp
+if (condition)
+{
 	statements;
 }
 
@@ -439,32 +549,34 @@ if (condition) {
 if (condition) statement;
 ```
 
-It is possible to place`if` statement in another `if` statement, called "nested `if`". It is recommended to use code block (`{}`) to distinguish between `if` statements to avoid computer’s misinterpretation.
+The `if` statement can locate inside another `if` statement, called "nested `if`". Use a code block (`{}`) to distinguish between `if` statements to avoid possible misinterpretation made by a compiler.
 
 ```cpp
-if (condition) {
-    if (condtion) { 
+if (condition)
+{
+    if (condtion)
+    { 
         statements;
     } 
 }
 ```
 
 ### `else` Statement
-
-Conditional `else` statement must be followed after `if` statement as it cannot be used alone. The statement contains code that is called when the condition evaluates `false`.
+A conditional `else` statement cannot be used alone and must be followed by an `if` condition. The statement contains code that executes when evaluated `false`.
 
 ```cpp
-if (condition) {
+if (condition)
+{
     statements;
 }
-else {
+else
+{
     statements; 
 }
 ```
 
 ### `else if` Statement
-
-Conditional `else`-`if` statement is a combination of `if` and `else` statement; when the first condition evaluates `false`, the `else if` statement provides second (or more) chance to evaluate condition different from the first one.
+A conditional `else if` statement is a combination of `else` and `if` conditions; when the first condition evaluates `false`, the `else if` statement provides a new condition different from the previous one. 
 
 ```cpp
 if (condition) {
@@ -478,23 +590,21 @@ else {
 }
 ```
 
-However, this is not the same as chain of `else`-`if` conditional statement as that is a combination of two different conditional set, while `else if` statement guarantees a single conditional set.
+However, this statement is different from the chain of `else`-`if` conditional statement as that is a combination of two sets of conditions. On the other hand, `else if` conditional statement is a continuation of an existing evaluation instead of starting new conditioning.
 
 ### Ternary Operator
-
-Conditional statement can be expressed simply using ternary (`?:`) operator as shown below:
+A conditional statement can be simplified using the ternary operator shown below:
 
 ```cpp
 condition ? return_true : return_false;
 ```
 
-The vocabulary *ternary* represents the statement takes three arguments. Ternary operator should not be overused as it reduces readability, but useful on variable assignment.
+The vocabulary *ternary* indicates the statement takes three arguments. The ternary operator should not be overused as it reduces readability but useful on variable assignment.
 
 ## `switch` Statement
+Conditional `switch` statement evaluates whether a variable matches a value assigned to the `case` keyword and executes the corresponding code if true. After execution, the `break` statement must locate to prevent further evaluation of the next `case` keyword.
 
-Conditional `switch` statement checks the argument passed to the function and compare its value referenced on `case` keyword. Every case needs `break` at the end of the group of statements to prevent the statement from proceeding condition evaluation afterward.
-
-When no case is true to the expression, the statements from `default` keyword is returned. This case does not need `break` statement but must to be presented no matter what.
+If no condition matches, the statement automatically executes codes under the `default` keyword that is optional. The `default` keyword does not require the `break` statement as opposed to the `case` keyword.
 
 ```cpp
 switch (argument)
@@ -510,7 +620,7 @@ switch (argument)
 }
 ```
 
-The `switch` statement can have its cases grouped together for a single label:
+Multiple `case` keywords may share the same code as follows:
 
 ```cpp
 switch (argument)
@@ -529,21 +639,18 @@ switch (argument)
 }
 ```
 
-
 ### `break` Statement
-
-The `break` statement can be used to end a loop prematurely, before complete iteration is made. When encountered inside a loop, immediately escapes from the loop but does not break from its outer loop.
+The `break` statement is to end a loop prematurely. When encountered in the loop, the `break` statement escapes from the current loop but does not escape from the nesting loop.
 
 ### `continue` Statement
-
-The `continue` statement skips the rest of the statement below in the loop and jumps back to the conditioning part. This maintains the loop iteration rather than escaping the loop like `break` statement.
+The `continue` statement skips the rest of the code below in the loop and jumps back to the conditioning part. It maintains the iteration rather than escaping from it like the `break` statement.
 
 ## `while` Loop
-
-The `while` loop statement repeatedly execute statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `false`.
+A `while` loop statement repeatedly executes statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `false`.
 
 ```cpp
-while (condition) {
+while (condition)
+{
     statements;
 }
 
@@ -552,18 +659,17 @@ while (condition) statement;
 ```
 
 ### `do`-`while` Statement
-
-The `do`-`while` loop statement is alternative of the `while` statement. Instead of checking the condition before executing looping statement, this statement is does opposite: execute looping statement first, then check the condition.
+The `do`-`while` loop statement is similar to the `while` loop statement, but the former executes code first then evaluates, and the latter is vice versa.
 
 ```cpp
-do {
+do
+{
     statements
 } while (condition);
 ```
 
 ## `for` Loop
-
-The `for` loop statements repeatedly execute statements inside (aka. iterate) as long as the local variable holds the condition. On each loop, value (generally number) of the variable is incremented/decremented.
+The `for` loop statement repeatedly executes statements inside (aka. iterate) as long as the condition holds. Its local variable changes as specified on each iteration, which commonly uses integer increment.
 
 ```cpp
 for (variable; condition; increment) {
@@ -575,8 +681,7 @@ for (variable; condition; increment) statement;
 ```
 
 ### Range-based `for` Loop
-
-Since C++11, a new variation of `for` loop statement (aka. `foreach` loop) was introduced that can loop the execution while in range. The range is generally refers to Sequence Container such as array and vector which its element can be sequenced one-by-one.
+C++11 introduced a new variation of the `for` loop that iterates execution while in range. The range is generally given by the Sequence Container, which is the data that can sequence its elements individually.
 
 ```cpp
 for (variable : range) {
@@ -587,59 +692,58 @@ for (variable : range) {
 for (variable : range) statement;
 ```
 
-The Container in C++ will be introduced in *C++: CONTAINER* chapter.
+Refer to the next chapter, *C++: CONTAINER*, to know more about the container data in C++ language.
 
 # **C++: CONTAINER**
-
-C++ has a Container that can store collection of data. The container that can sequence stored data one-by-one is called sequence container. The most widely used (sequence) containers are array and vector.
+C++ has containers that can store a collection of data, and the one that sequences data in order is called a sequence container; an array and vector are the most renowned. This chapter focuses on a sequence container commonly used in C++ language.
 
 ## Array
-
-Array is a sequence container used to store an indexed of item of same data type. To declare an array, bracket `[]` is used to define the size of the container how many value it can store:
+An array is a container for data of the same data type in sequence. Declare an array by designating its size of how much data it can store using a bracket `[]`.
 
 ```cpp
-// DECLARATION
+/* ARRAY DEFINITION */
 int arr[size];
 ```
 
-and curly bracket `{}` is for assigning value to each element in sequence:
+A variable is not allowed when defining the size of an array (except a constant). The size of an array is static, meaning it cannot change after the definition.
+
+Assign values in order within a pair of curly bracket `{}` to initialize an array:
 
 ```cpp
-// INITIALIZATION 1
+/* INITIALIZATION 1 */
 int arr[size] = {value1, value2, ... };
 
-// INITIALIZATION 2
+/* INITIALIZATION 2: SIZE IS SET TO THE NUMBER OF ELEMENTS */
 int arr[] = {value1, value2, ... };
 ```
 
-Upon initialization, a number of initialized value should not exceed than its declared size, thou it may be smaller which fills leftover with `0` or `NULL` value. The declared size cannot be changed afterward, but leaving the array size empty will automatically set to fit the content.
+Upon initialization, the number of initialized values should not exceed its declared size, though it may be smaller, which fills leftover with `0` or `NULL` value.
 
-Calling array itself does not show the whole elements inside the array; instead it returns the memory address the array data is assigned to (aka. pointer) and is equivalent to the memory address of its first element.
+Calling an array itself does not show the whole elements inside; instead, it returns the memory address the array data is assigned to (aka. pointer) and is equivalent to the memory address of its first element.
 
 ```cpp
-int arr[3] = {value1, value2, valu3};
+int arr[3] = {value1, value2, value3};
 
 arr;		// >> OUTPUT: 0139F854
 &arr[0];	// >> OUTPUT: 0139F854
 &arr[1];	// >> OUTPUT: 0139F858 ( = 0139F854 + 4 BYTES from integer data type)
 ```
 
-This will be explained later on next chapter *C++: POINTER* in detail, so just understand there is such a thing.
+This concept is explained later in the next chapter *C++: POINTER* in detail.
 
-Because of this characteristic of array data, array definition cannot be done as a whole; unlike initialization, definition after declaration must be done element-by-element. Each element can be accessed using a bracket `[]` with index starting from 0.
+Because of this characteristic, an array cannot assign multiple values at once besides initialization. Access each element using a bracket `[]` with an index starting from 0.
 
 ```cpp
 int arr[3];
 
-// DEFINITION
+// ASSIGNMENT TO INDIVIDUAL ELEMENT
 arr[0] = value1;
 arr[1] = value2;
 arr[2] = value3;
 ```
 
 ### Length of Array
-
-When `sizeof()` operator is used on the array, it returns the total assigned byte size considering its data type, thus "$\mathrm{data \ type \ byte} \times \mathrm{number \ of \ elements}$". Hence, divided by data type byte results array length:
+When using the `sizeof()` on the array, it returns the total number of bytes allocated. Since allocated memory size is relevant to the data type, use the following expression to acquire the number of elements:
 
 ```cpp
 int arr[3];
@@ -647,36 +751,37 @@ int arr[3];
 sizeof(arr)/sizeof(int);	// >> OUTPUT: 3 ( = LENGTH OF ARRAY)
 ```
 
-### Multi-dimensional Array
+In other words, the length of an array is found by dividing its allocated bytes by its data type size.
 
-Array can contain another array as an element, under the condition these arrays shares the same length. Multi-dimensional array can also be initialized without definite size but limited to its first boundary only.
+### Multi-dimensional Array
+A multi-dimensional array stores another array as its element. These arrays used as elements must share the same length and data type. A multi-dimensional array can initialize without defining a size but limited to its first boundary only.
 
 ```cpp
-// INITIALIZATION 1
+/* INITIALIZATION 1 */
 int arr[size1][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 
-// INITIALIZATION 2
-int arr[     ][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
+/* INITIALIZATION 2 */
+int arr[][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 ```
 
 ## Array Class
+> *Reference: [http://www.cplusplus.com/reference/array/](http://www.cplusplus.com/reference/array/)*
 
-Array class is one of the C++ Standard Library that can also provide C-style array as introduced above, but with better accessibility and handling such as sequencing. To use array class, `<array>` header needs to be included.
+The array class is one of the C++ Standard Library that can also provide C-style array as introduced above, but with better accessibility and handling such as sequencing. Include the `<array>` header to use an array class.
 
 ```cpp
 #include <array>
 
-// DECLARATION
+// ARRAY DECLARATION: C++ STANDARD LIBRARY
 std::array<int, 3> arr;
 ```
 
-Since there is not performance difference between these two, developer may freely choose which method to use unless sequencing matters.
-
-*Reference: http://www.cplusplus.com/reference/array/*
+Since there is no performance difference between the array declared by both C-style and C++ Standard Library, developers are free to choose whatever they are confident. However, the ranged-based `for` loop statement has to use an array class.
 
 ## Vector Class
+> *Reference: [http://www.cplusplus.com/reference/vector/](http://www.cplusplus.com/reference/vector/)*
 
-Vector is a sequence container much like an array but has a feature where it can change its size dynamically since the data is stored in separate memory where developer has to allocate manually (and dynamically). Thankfully, the memory management is all done by the system, thus no need to worry about allocation.
+The vector class is a sequence container like an array but with a feature that can change its size dynamically; vector stores the data in a separate memory space that must allocate manually by developers. Thankfully, memory management is all done by the system, hence no need to worry about allocation.
 
 ```cpp
 #include <vector>
@@ -685,84 +790,93 @@ Vector is a sequence container much like an array but has a feature where it can
 std::vector<int> vec;
 ```
 
-Benefit of using the vector is container size can be flexibly (or dynamically) changed, due to its memory allocation property. When it comes to performance speed, array is much faster than vector.
-
-*Reference: http://www.cplusplus.com/reference/vector/*
+The benefit of using the vector class is the container size can change flexibly (and dynamically) due to its memory allocation property. However, vectors are slower than arrays when it comes to performance.
 
 # **C++: FUNCTION**
-
-C/C++ language is executed based around a single key function called `main()`. Understanding the concept of functions is important in C/C++ languages, which can also be used to create and implement custom function to serve specific purpose.
+C/C++ language is executed based on a single function called the `main()` function. Understanding the concept of functions is crucial in C/C++ languages and can increase efficiency by creating custom functions, called *functional programming*. This chapter will be introducing the guide on how to create and use functions in C++ language for functional programming.
 
 ## Function
-
-Function is an independent block of code which can process the data and present newly processed data once it’s called, allowing dynamic program scripting. The programming based around use of custom functions is called *functional programming*.
-
-Function can be distinguished by its declaration with parenthesis after its name; `function()`. Its definition is stated inside a code block (`{}`), which is executed when called.
+A function is a reusable independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. Function is distinguished by parenthesis after its name; `function()`.
 
 ```cpp
-// FUNCTION DEFINITION(AKA. IMPLEMENTATION)
-float function(int arg1, float arg2)
-{
-	return arg1 + arg2;
-}
-
-function(1, 3.0);		// >> OUTPUT: 4.0
+int variable = {0, 3, 5, 9};
+printf(sizeof(variable));
+// USING "printf()" AND "sizeof()" FUNCTION THAT RETURNS THE LENGTH OF A LIST OBJECT.
 ```
 
-Because C++ programming is executed from top to bottom sequentially, function won't be executable unless it is defined firsthand. This creates difficulty with script and function management when the project becomes larger.
-
-Function has a prototype used to let compiler know the function's existence recognizing its definition. Prototype shares same syntax of function declaration of its definition but without a code block.
+The function requires two components for a definition:
+* Code block `{}`: a space for codes that execute when called.
+* Data type: a type of data to return when exiting the function.
 
 ```cpp
-// FUNCTION PROTOTYPE (AKA. FORWARD DECLARATION)
-float function(int arg1, float arg2);
-
-function(1, 3.0);		// >> OUTPUT: 4.0
-
-// FUNCTION DEFINITION (AKA. IMPLEMENTATION)
-float function(int arg1, float arg2)
+/* FUNCTION DEFINITION */
+int function()
 {
-	return arg1 + arg2;
+    return 1 + 2;
+}
+
+/* CALING A FUNCTION */
+function();    // >> OUTPUT: 3
+```
+
+Because C/C++ programming executes from top to bottom sequentially, a function won't be executable unless it is defined firsthand. However, locating every function definition on top of the script will make it difficult to manage for a larger project.
+
+A function prototype, aka a forward declaration, let the compiler know the existence of a function before the definition. As mentioned in the *C: BASIC § Variable* section, a forward declaration is not a definition. The prototype is not essential but mostly locates on top of the script, replacing a code block `{}` to semicolon `;`.
+
+```cpp
+/* FUNCTION PROTOTYPE (AKA. FORWARD DECLARATION) */
+int function();
+
+/* CALLING A FUNCTION */
+function();    // >> 출력: 3
+
+/* FUNCTION DEFINITION */
+int function()
+{
+    return 1 + 2;
 }
 ```
 
-However, defining a function inside another function (aka nested function) is invalid in C/C++ language.
+Defining a function inside another function (aka nested function) is invalid in C/C++ language.
 
 ### `return` Statement
+The `return` statement is a function-exclusive statement that returns the value processed by a function. Once encountering a return statement, the function ends immediately despite having remaining codes.
 
-The `return` statement is a function-exclusive statement that outputs indicated data under the data type declared on the function. Once the `return` statement is executed, the function ends immediately despite there are codes still left inside.
-
-If the function is a `void` data type, function can be returned by `return;` statement alone without any data to return.
+If the function is a `void` data type, the `return;` statement alone without any data will exit the function.
 
 ### Parameter & Argument
+Following is a difference between parameter and argument mentioned when discussing function:
 
-Following are the difference between parameters and arguments that is referred significantly when discussing function.
+* **Argument**
+    : An argument is a value or object passed to a function parameter.
 
-**Parameter**
-Parameter is a function-internal local variable: because parameters is a function-exclusive local variable, it cannot be called from outside.
+* **Parameter**
+    : A parameter is a local variable assigned with an argument. Meaning, parameters are only available inside the function. Parameters is declared inside a parenthesis `()`.
 
-| OPERATOR | SYNTAX      | DESCRIPTION                                                                                                       |
-|:--------:|:-----------:|-------------------------------------------------------------------------------------------------------------------|
-| `=`      | `arg=value` | Parameter `arg` is assigned `value` by default when no other value is passed. Must locate after normal parameter. |
+Although parameters and arguments are a different existence, two terms are used interchangeably as both stores the same data.
 
-**Argument**
-Argument is a value or object being passed to the function parameter and those passed values and objects will be processed by the function code. However, argument is independent from parameter: change on parameter does not affect value or object passed as argument.
+| OPERATOR |   SYNTAX    | DESCRIPTION                                                  |
+| :------: | :---------: | ------------------------------------------------------------ |
+|   `=`    | `arg=value` | A parameter that has default value when no argument is passed. Must locate after normal parameter. |
 
-Examples below show how function parameter and argument works:
+Examples below show how parameter and argument work in function:
 
 ```cpp
-float function(int arg1, float arg2);
+/* FUNCTION PROTOTYPE */
+int function(int arg1, float arg2);
 
+/* CALLING A FUNCTION */
 function(1);             // >> OUTPUT: 3.0
-function(1, 3.0);        // >> OUTPUT: 4.0
+function(1, 3.0);        // >> OUTPUT: 4.0 (extract an integer from 1 + 3.14)
 
-float function(int arg1, float arg2 = 2.0)
+/* FUNCTION DEFINITION */
+int function(int arg1, float arg2 = 2.0)
 {
 	return arg1 + arg2;
 }
 ```
 
-However, passing container such as array cannot be passed using the syntax above, requiring different method. There are two possible methods available: argument as an array, and as a memory address (pointer).
+Passing a container such as an array cannot be done using the syntax above and requires a different method. There are two syntaxes available: defining a parameter as an array or as a memory address (pointer).
 
 ```cpp
 void function(int arg[]);
@@ -771,7 +885,8 @@ int arr[3] = {value1, value2, value3};
 function(arr);              // PASSING ARRAY TO FUNCTION ARGUMENT
 
 // ACCEPT ARGUMENT AS AN ARRAY
-void function(int arg[]) {
+void function(int arg[])
+{
     statements;
 	return;
 }
@@ -792,11 +907,10 @@ void function(int *arg) {
 }
 ```
 
-This is possible because array itself returns a memory address. Again, pointer will be explanation on next chapter in detail.
+The latter method is possible due to the characteristic where calling an array itself returns the memory address of the first element. Incrementing the pointer will shift to the next element since the memory is allocated in sequence.
 
 ### Function Overloading
-
-Multiple functions with the same name can exist as long as they are unique in arguments (such as number of arguments and its data type). This is called function overloading and these functions can have their own separate definition. Function data type does not overload functions.
+The function overloading is the concept where functions with the same name behaving differently based on the number of arguments and their data type. While these functions may have a different definition, the returned data type must be the same.
 
 ```c++
 float function(int arg1, float arg2);		// PROTOTYPE OF OVERLOADED FUNCTION 1
@@ -817,50 +931,57 @@ float function(float arg1, float arg2) {
 ```
 
 ## Entry Point
-
-Entry point is the startup function where a program execution begins. There are three major entry points that can to be discussed in C++.
+An entry point is the startup function where program execution begins; they do not need forward declaration nor needs to be called. There can be only one entry point in the project; having more than one entry point or none will result in an error.
 
 ### `main()` Function
-
 As the only entry point available in traditional C++ console application, a project must have one and only `main()` function within the project. Creating multiple `main()` functions or not having any `main()` function will cause error on running the program.
 
 ```cpp
-int main(int argc, char **argv /* ALTERNATIVE: char *argv[] */) {
+int main(int argc, char **argv) {
 
     return 0;
 }
 ```
 
-According to C++ standard, `main()` function must return `int` data: `EXIT_SUCCESS` (traditionally `0`) and `EXIT_FAILURE`. When return value is omitted by the programmer, the compiler implicitly insert `return 0;` at the end of the entry point.
+While this article didn't include the `main()` function on the example codes, every code besides global variables and function definitions must be inside the entry point.
 
-Entry point `main()` function can have arguments mentioned above: argument count `argc` and argument vector `argv`. These arguments are apparent when executed through command-line:
+According to the C++ language standard, the `main()` function must return an integer; the `EXIT_SUCCESS` (equivalent to an integer `0`) or the `EXIT_FAILURE`.
+The compiler implicitly fills in the `return 0;` statement at the end of the entry point if not presented in the function.
+
+The `main()` function has the following parameters:
+* `argc`: the number of arguments (abbrev. of *argument count*)
+* `argv`: the list of argument values (abbrev. of *argument vector*); alternatively can be declared as `char *argv[]`
+
+These arguments are apparent when running the program on a terminal:
 
 ```
 ./app.exe option1 option2
 ```
 
-| Arguments | Data        |
+| ARGUMENTS | VALUE       |
 | --------- | ----------- |
 | `argv[0]` | `./app.exe` |
 | `argv[1]` | `option1`   |
 | `argv[2]` | `option2`   |
 
-This indicates `argc` is always greater than 0 as the first element is an executing program.
+The `argc` parameter always has a value greater than zero since the first element of the `argv` is the name of the program.
 
-Meanwhile, Windows OS has its exclusive entry point called `wmain()` function which supports wide character arguments encoded in UTF-16 Unicode (where UTF-8 Unicode encodes common character such as English and numbers).
+Meanwhile, Windows OS has an exclusive entry point called the `wmain()` function that supports various languages by using wide-character arguments encoded in UTF-8 Unicode (size varying from 1~4 bytes).
 
 ```cpp
-int wmain(int argc, wchar_t **argv /* ALTERNATIVE: wchar_t *argv[] */) {
+/* C LANGUAGE ENTRY POINT SUPPORTING WIDE-CHARACTER: wmain() */
+int wmain(int argc, wchar_t **argv) {
 
     return 0;
 }
 ```
 
-C/C++ language is originated from UNIX platform which is different from Windows platform. Meaning, certain language characters (e.g. Greek, Cyrillic characters) may not be fully supported due to different encoding on `main()` entry point.
+The `wmain()` function was introduced because C language originated from UNIX operating system interface based on ASCII encoding. Using the `main()` function on Windows OS won't recognize certain characters, such as Greek, Cyrillic, due to encoding compatibility.
 
 ### `WinMain()` Function
+> *Reference: [https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain](https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain)*
 
-The startup `WinMain()` function is an entry point for the application framework such as Win32 and MFC.
+The `WinMain()` function is an entry point for the application framework, such as Win32 and MFC Library.
 
 ```cpp
 int WinMain(HINSTANCE 	hInstance,
@@ -876,15 +997,14 @@ int WinMain(HINSTANCE 	hInstance,
 }
 ```
 
-The core functionality of `WinMain()` function is entering a message retrieval-and-dispatch loop, called Message Loop. More information on how framework application works, *PRGMING_MFC.md* is highly recommended for the reference and *PRGMING_Qt.md* for additional universal framework mechanism.
+The core functionality of the `WinMain()` function is entering a message retrieval-and-dispatch loop called Message Loop. For more information on how framework application works, refer to the [*LIBRARY_MFC.md*](/docs/library/en/LIBRARY_MFC/) article.
 
-When receiving a `WM_QUIT` message will terminate the Loop and exit the application by returning the `WM_QUIT`'s *wParam* parameter. Failed to enter the Loop will continue to `return 0;` statement in case above, exiting application program.
-
-*Reference: https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain*
+Receiving the `WM_QUIT` message will terminate the Loop and exit the application by returning its *wParam* parameter. Failed to enter the Loop will continue to `return 0;` statement, exiting the application program immediately.
 
 ### `DllMain()` Function
+> *Reference: [https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain](https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain)*
 
-The startup `DllMain()` function is an entry point for the dynamic linked library.
+The `DllMain()` function is an entry point for the dynamic link library.
 
 ```cpp
 int DllMain(_In_ HINSTANCE hinstDLL,
@@ -896,14 +1016,11 @@ int DllMain(_In_ HINSTANCE hinstDLL,
 }
 ```
 
-*Reference: https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain*
-
 ## Recursion Function
-
-Recursive function is a function that calls itself (recursion). Factorial $!$ in mathematic is the best example of recursive function implementation.
+A recursive function is a function that calls itself (recursion). Factorial in mathematic is the best example of recursive function implementation.
 
 ```cpp
-// EXAMPLE: FACTORIAL "!"
+/* EXAMPLE: FACTORIAL "!" */
 int factorial(int num) {
     // BASE CASE: a case when to escape from the recursion.
     if (num == 1)
@@ -913,22 +1030,23 @@ int factorial(int num) {
 }
 ```
 
-Recursion can occur indirectly by multiple number of functions calling one to another, then back to the beginning.
+Recursion can occur indirectly by multiple functions calling one to another, then back to the beginning.
 
 ## Callback Function
+The callback function, aka. "call-after" function, is a function passed as an argument to other functions. The calling function runs the callback function by calling the parameter, thus named as the "callback" function.
 
-Aka. "call-after" function, it is a function that is passed as an argument to other function (calling function) which expects the argument (callback function) to execute on some time.
-
-Do not try to understand the script below for now as this requires understanding of a pointer which will be dealt on *C++: POINTER § Function Pointer*.
+The following is the example for the callback function, which is explained in the *C++: POINTER § Function Pointer* section.
 
 ```cpp
-// CALLING FUNCTION
-float FUNC(float (*callback)(int, float), int arg1, float arg2) {
-	float var = callback(arg1, arg2);		// FUNCTION CALLBACK
+/* CALLING FUNCTION */
+int calling(float (*function)(int, float), int arg)
+{
+    // CALLING CALLBACK FUNCTION
+    float var = function(arg, 3.0);
     return var;
 }
 
-// CALLBACK FUNCTION
+/* CALLBACK FUNCTION */
 float function(int arg1, float arg2) {
 	return arg1 + arg2;
 }
@@ -938,262 +1056,227 @@ FUNC(&function, 1, 3.0);	// >> OUTPUT: 4.0
 ```
 
 # **C++: POINTER**
-
-Starting from *C++: Array* chapter, a new data called "pointer" was mentioned quite often. Pointer is very important concept in C/C++ programming language and is one of the commonly used data to develop advanced program.
-
-This chapter mainly focuses on the pointer and its application that can improve performance and functionality of previously mentioned programming, especially on function.
+This article has mentioned a new "pointer" data type since the *C++: CONTAINER* chapter. The pointer is one of the crucial concepts in C language, allowing more complex programming. This chapter describes what the pointer is in C language and revisits the array and function.
 
 ## Pointer
-
-Pointer is a variable that stores memory address of where the value is located, rather than the value itself. Despite being a memory address, pointer also must to be distinguished by a data type of value. When declaring pointer, compound specifier `*` (aka. asterisk) is placed between data type and identifier:
+The pointer is a data type that stores the allocated memory address of a variable instead of its value. A 32-bit and 64-bit operating system have a pointer that is 8 and 16 bytes long. A variable can store a pointer as well; while the data type is required when defining, an asterisk `*` must locate between the data type and identifier.
 
 ``` cpp
-// POINTER DECLARATION
-int* ptr;				// WARNING C4700: unintialized local variable 'ptr' used
+/* POINTER DECLARATION */
+int* ptr;
+printf("%p", ptr);    // WARNING C4700: UNINTIALIZED LOCAL VARIABLE 'ptr' USED
 ```
 
-Memory address can be called from non-pointer variable as well using ampersand (`&`) operator:
+Memory address can be called from a non-pointer variable as well using the ampersand operator `&`.
 
 ```cpp
-// NON-POINTER DECLARATION
-int variable;
-&variable;				// >> OUTPUT: 0139F854
+/* INTEGER VARIABLE DEFINITION */
+int variable = 365;
+printf("%p", &variable);
+```
+```
+1014eb010
 ```
 
-Since this hexadecimal memory address cannot be written by hand, the only way to either define or initialize the pointer is by assigning already existing memory address. Beware, data type must matched when defining pointer.
+Since the hexadecimal memory address should not be written by hand, the only way to assign the pointer is by the existing memory address. Beware, the data type must match on assignment to the variable.
+
+While a memory address is expressed in eight bytes (32-bit architecture) or sixteen bytes (64-bit architecture) of hexadecimal, a single memory is limited to hold data of one byte. The `char` data type is enough with a single byte, but the `int` integer or `float` floating-point number requires four bytes of memory space. However, since the pointer only returns the first memory address of overall memory space, the compiler won't know whether the data is complete when the data type is not specified.
 
 ```cpp
-// POINTER INITIALIZATION
-int variable = 3;
-int* ptr = &variable;
+/* VARIABLE INITIALIZATION */
+int variable = 365;
 
-std::cout << ptr;		// >> OUTPUT: 0139F854	(ADDRESS)
-std::cout << *ptr;		// >> OUTPUT: 3			(VALUE)
+// POINTER VARIABLE OF THE SAME TYPE
+int *ptr1 = &variable;
+printf("%p\n",  ptr1);        // >> OUTPUT: 0x1014eb010  (ADDRESS)
+printf("%d\n", *ptr1);        // >> OUTPUT: 365          (VALUE)
+
+// POINTER VARIABLE OF THE DIFFERENT TYPE
+char *ptr2 = &variable;
+printf("%p\n",  ptr2);        // >> OUTPUT: 0x1014eb010  (ADDRESS)
+printf("%d\n", *ptr2);        // >> OUTPUT: 109          (VALUE)
 ```
 
-As seen above, it is possible to return value assigned to the pointer by placing dereference (`*`) operator. While pointer declaration also used asterisk, they are different existence but only sharing the same symbol.
+As seen above, it is possible to return the value assigned to the pointer by placing the dereference operator `*`. While a pointer declaration also used an asterisk, they are different existence but only sharing the same symbol.
 
 |          OPERATOR          |  VARIABLE   |     RETURN     |
 | :------------------------: | :---------: | :------------: |
-| Address-on (`&`) Operator  | Non-pointer | Memory address |
-| Contents-of (`*`) Operator |   Pointer   |     Value      |
+| Address-on Operator `&`  | Non-pointer | Memory address |
+| Contents-of Operator `*` |   Pointer   |     Value      |
 
-Interestingly, any changes made on variable is also affects contents of the pointer as the pointer shares the same memory address. This feature is the most important when it comes to using pointer in C/C++.
+If the variable value changes, the value dereferenced from the pointer also changes since it shares the same memory address, also known as "call by reference".
 
 ### Null Pointer
-
-Null pointer is a pointer that points to nothing. This can be done by assigning pointer with `nullptr` keyword:
+A null pointer is a pointer that points to nothing. Since C++ language may cause an error such as memory access violation because of the pointer, assign the `nullptr` keyword for safe usage.
 
 ```cpp
 int* ptr = nullptr;		// >> OUTPUT: 00000000
 ```
 
 ### Void Pointer
-
-Void pointer is a pointer with no specific data type (thus, `void`). This has advantage of being able to point to any kind of data type value by using static casting.
+A void pointer is a pointer with no specific data type (thus, `void`). It has the advantage of being able to point to any data type with help from data type conversion, such as the `reinterpret_cast` operator.
 
 ```cpp
-// POINTER DECLARATION
+/* VOID POINTER DECLARATION */
 void* ptr;
 
-int variable;
-static_cast<int*>(ptr) = &variable;
+int variable = 365;
+ptr = &variable;
+std::cout << *(reinterpret_cast<int*>(ptr));
+```
+```
+365
 ```
 
 ### Function Pointer
-
-Pointer can also be assigned with function, called function pointer. This pointer points to the first line function execution, similar to array pointing to its first element. Function pointer is initialized as below:
+The function pointer is a void pointer that points to a function. Similar to a pointer to an array representing the first element memory address, a function pointer points to the first line of the function code. Initialize the function pointer using the following syntax:
 
 ```cpp
-void function(int, int);
+/* FUNCTION DEFINITION */
+int function(int arg1, float arg2) {
+    statements;
+    return 0;
+}
 
-// FUNCTION POINTER INITIALIZATION
-void (*ptr)(int, int) = function;
+int main() {
+    // Insert codes here...
 
-void function(int arg1, int arg2) {
-	statements;
+    /* FUNCTION POINTER INITIALIZATION */
+    int (*ptr)(int, float) = function;
+    ptr(1, 3.14);
+
     return 0;
 }
 ```
 
-When assigning function pointer, not only should function data type is considered but also the parameters and its number. Failed to meet all these conditions cause compilation error.
-
-While function returns value when used with parenthesis `function()`, function also returns memory address to its starting point when used without parentheses `function`. 
+The function pointer should match the data type and parameters of the function when initializing. Failed to do so will result in a compilation error. While calling with a parenthesis like `function()` returns data from the `return` statement, without a parenthesis like `function` returns a memory address instead.
 
 ## Reference
-
-Reference is a variable that aliases already existing variable. This can be thought as a constant pointer to the variable, with constant pointer declaration `*` applied by the compiler automatically.
+The reference is a variable that processes data of another existing variable. By having two variables share a single memory, it is considered as aliasing a variable.
 
 ```cpp
-// REFERENCE DECLARATION
+/* THE "ref" VARIABLE REFERENCES THE "variable" VARIABLE. */
 int variable;
 int &ref = variable;
+
+ref = 3;    // >> RESULT: variable = ref = 3
 ```
 
-Reference must be declared and defined at the same time as reference is deemed as constant pointer; reference that is assigned once cannot be re-assigned afterward.
-
-Unlike pointer that has its own memory address to store the memory address of another, reference shares the memory address and its value of the original variable. Instead, reference takes some space on the stack.
-
-Reference is implemented in (1) passing arguments to function parameters, and (2) assigning return type at the function's end: this is where the term *call by reference* is derived from.
-
-## Handle
-
-*This article is specifically for intermediate-level developer for libraries such as MFC.*
-
-Handle is a unique identifier for the specific data. The handle obtained from the specific data cannot be used to represent other data that includes same handle type. While handle can be integral type and stores certain information, it is generally the pointer that is defined as the name such as `HANDLE`. 
-
-When expressed using the pointer:
+The reference is equivalent to a constant pointer to the variable, with constant pointer declaration `*` applied by the compiler automatically.
 
 ```cpp
-// RETURN OBJECT POINTER BY ID
-void * GetHandle(UINT ID) {
+/* REFERENCE USING A CONSTANT POINTER */
+int variable;
+const int* ref = &variable;
 
-	char variable = findObjectByID(ID);
-
-	return reinterpret_cast<void *>(variable);	// RETURN POINTER
-}
+*ref = 3;    // >> RESULT: variable = *ref = 3
 ```
 
-The function returns memory address of `variable` as void pointer.
-
-The code above can be simplified by replacing certain portion using `typedef` aliasing:
-
-```cpp
-// RETURN OBJECT HANDLE(POINTER) BY ID
-typedef void * HANDLE;
-HANDLE GetHandle(UINT ID) {
-
-	dType obj = findObjectByName(ID);
-
-	return reinterpret_cast<HANDLE>(obj);	// RETURN HANDLE(POINTER)
-}
-```
-
-Using a handle provides an opaque (concealing) wall between user code and internal representation. Advantage of using handle is the same user code can be implemented despite any update has been made in the library.
-
-*Reference: https://stackoverflow.com/questions/902967/what-is-a-windows-handle*
+Initialization is mandatory since the reference uses a constant pointer, and the variable that referenced once cannot re-reference another variable. The *call by reference* in programming is referring to this reference.
 
 # **C++: DYNAMIC MEMORY**
-
-Memory management is one of the crucial factors in C/C++ programming language. Dynamic memory allocation is one of the management for greater memory efficiency. And because this concept is closely related to the pointer, understanding the concept cannot be neglected.
+Memory management in C++ language is a significant task. Dynamic memory allocation provides higher memory efficiency but requires a clear understanding of the pointer as it is deeply involved. Here, the memory indicates random access memory (RAM), the primary memory in a computer.
 
 ## Stack Structure
+The stack is a linear LIFO (Last-In-First-Out) data structure; the first entered data is last to be freed from the memory structure. It is the main memory structure used by the compiler that automatically allocates and deallocates data upon declaration and destruction of data, such as variables and functions. The drawback of stack-based memory is poor memory management.
 
-Stack is a linear LIFO (Last-In-First-Out) data structure; the first entered data is last to be freed from the memory structure. It is a main memory structure used by the compiler which automatically allocates and deallocates data upon declaration and destruction of data (e.g. variables and functions).
-
-The reason compiler uses stack memory structure is due to its fast memory access. However, stack memory has a drawback that its size is fixed and cannot be expanded.
-
-One of the example of stack structure characteristic can be seen on property of local variable; variable defined inside a scope such as function or namespace cannot be used outside the scope.
+The characteristic of the stack memory is apparent when dealing with a local variable, which is unable to use outside the code block.
 
 ### Queue Structure
-
-As opposite to stack structure, queue is a linear FIFO (First-In-First-Out) data structure. The first entered data is first to be released from the memory structure. The best example of queue memory structure is a serial communication port.
+The queue is a linear FIFO (First-In-First-Out) data structure. The data that entered first is released first from the memory structure. The best example of a queue-based memory structure is serial communication, such as USB and ethernet.
 
 ## Dynamic Allocation
+Despite its fast memory allocation, the stack memory is difficult for memory management due to its sequential structure. Additionally, the purpose of a stack-based memory used by the compiler is not for storing data but rather to "process data," hence have limited capacity on RAM. However, the compiler can also access the heap memory region located in the same RAM. Although slower than the stack, it has the benefit of easier management and lasting data until the end of the program.
 
-While stack memory is fast but its memory capacity is fixed, there is also heap memory that is resizable though slower access speed. Heap memory is irrelevant to heap data structure and stores data in random heap memory location.
+> The heap memory region is irrelevant to the [heap data structure](https://en.wikipedia.org/wiki/Heap_(data_structure)) and is purely a term that indicates part of the RAM.
 
-Allocating data to heap memory is done by developer manually, thus dynamic allocation. However, since dynamically allocated memory is not managed by the compiler, developer needs to be cautious on deallocating data manually afterward as well.
+Allocating memory in the heap region is called *dynamic allocation* in C++ language. Developers need to use a specific function for dynamic allocation, where the allocation address is randomly designated. Since this process is done manually by the developers, every dynamically allocated data must be freed by the developers as well. Failed to do so will cause the program to crash from memory shortage or function improperly.
 
-Dynamic allocation and deallocation to heap memory is done using `new` keyword and `delete` keyword:
+Dynamic allocation and deallocation to heap memory use the `new` and `delete` keyword:
 
 ```cpp
-// DYNAMIC ALLOCATION
+/* DYNAMIC ALLOCATION */
 int* ptr1 = new int;
 int* ptr2 = new int();
 
-// DYNAMIC DEALLOCATION
+/* DYNAMIC DEALLOCATION */
 delete ptr1;
 delete ptr2;
 ```
 
-The difference between former and latter dynamic allocation is default-initialization and value-initialization.
+The former and latter dynamic allocation is called default-initialization and value-initialization.
 
-* **Default-initialization**: initialized with undetermined value.
-* **Value-initialization**: initialized with value inside parentheses (data type), or construction call (class).
+* **Default-initialization**: initializes data with undetermined or pre-determined (exclusive to classes) value.
+* **Value-initialization**: initializes data to the value inside parentheses.
 
-Dynamic allocation and deallocation of array data is similar to the method above:
+Dynamic allocation and deallocation of array data are similar to the method above:
 
 ```cpp
-// DYNAMIC ALLOCATION  (ARRAY)
+/* DYNAMIC ALLOCATION: ARRAY */
 int* ptr = new int[];
 
-// DYNAMIC DEALLOCATION (ARRAY)
+/* DYNAMIC DEALLOCATION: ARRAY */
 delete[] ptr;
 ```
 
-This process is extremely important as failed to do so will cause (1) memory leak and (2) dangling pointer.
+Deallocating is an extremely crucial task, as failure to do so can result in memory leaks or dangling pointer.
 
 ### Memory Leak
-
-Memory leak is caused by mismanagement of heap memory when dynamically allocated data is not released (deallocated) and accumulated that no more heap memory space is available. Shortage of memory will eventually lead to system failure.
-
-Prevent memory leak by deallocating data on heap memory using `delete` keyword:
+A memory leak is caused by mismanagement of heap memory when dynamically allocated data is not released (deallocated) and accumulated that no more heap memory space is available. A shortage of memory will eventually lead to system failure. Prevent memory leak by deallocating data on heap memory using the `delete` keyword.
 
 ```cpp
+/* DYNAMIC DEALLOCATION */
 delete ptr;
 ```
 
 ### Dangling Pointer
-
-By deallocating data on heap memory prevents memory leak from happening. While the data addressed by the pointer is gone, the pointer still holds the address that now points to nothing. This is called dangling pointer and calling this pointer may result segmentation fault, aka. SEGFAULT.
-
-To prevent this, it is advised to assign `nullptr` so the pointer would point at least to nothing than pointing aimlessly after deleting the heap memory data.
+By deallocating data on heap memory prevents memory leak from happening. While the data addressed by the pointer is gone, it still holds the address that now points to the unknown, called *dangling pointer* that may cause the `SEGFAULT,` a segmentation fault error. Assign the `nullptr` so the pointer would point at least to nothing rather than point aimlessly after deleting the heap memory data.
 
 ```cpp
-// PROPER DEALLOCATION: DELETE DATA ON ADDRESS -> NULLIFY ADDRESS
+/* PROPER DEALLOCATION: DELETE DATA ON ADDRESS -> NULLIFY ADDRESS */
 delete ptr;
 ptr = nullptr;
 ```
 
 # **C++: STRING**
-
-Conventional C language does not have a string data type that can hold the string data specifically; it uses array of character data type with extra byte at the end for null terminator `\0`. However, C++ has standard library for string data type.
+Conventional C language does not have a string data type that can hold the string data specifically; it uses an array of a character with the null terminator `\0` at the end. However, C++ has a standard library for the string data type.
 
 ## String
-
-C-Style string, an array of character with null terminator, is expressed as follows:
+The C-Style string is an array of characters with a null terminator that is defined as follows:
 
 ```cpp
-// C-STYLE STRING
+/* C-STYLE STRING */
 char arr[] = "Hello";
 char* ptr = "World!";
 ```
 
-Despite C++ having its own string data, C-Style string is still used on number of C/C++ libraries.
-
 ## String Data Type
-
-C++ string data type is included in `string.h` header which is part of the `iostream.h` header, and under the standard namespace `std`. C++ recommends usage of string data type over conventional C-style string.
+The C++ string data type from the `string` header is part of the `iostream` header, under the `std` standard namespace. The string data is generally called *string object*. C++ recommends using the C++ string data type than the C-style string.
 
 ```cpp
-// C++ STRING
+/* C++ STRING */
 std::string str = "Hello World!";
 ```
 
 ### String Array
-
-An array cannot have elements with different size; for a string data type that can store text with various length, the only possible way to for array to contain collection of array is by storing pointer to the string.
+An array cannot have elements of different sizes; the only possible way to store string data that varies size by the length of characters is by having a pointer to the string as its element instead of the string value.
 
 ```cpp
 std::string arr[] = {"Hello", "World!"};
 ```
 
-
-# **C++: OBJECT-ORIENTED PROGRAMMING**
-
-Previous chapter have introduced conditional and loop statements and functions for processing code. As a hybrid programming language, C++ supports object-oriented programming (abbrev. OOP) paradigm.
+# **C++: OBJECT AND CLASS**
+The current document has explained and dealt with procedural and functional programming. The third scripting method, object-oriented programming (abbrev. OOP), focuses on the usage of classes and objects instead of functions.
 
 ## Object
+Previous chapters introduced a variable and function, which is for storing and processing data, respectively. Object (aka. instance) is a block of data that encapsulates these variables and functions into a single identity.
 
-Previous chapters have introduced variable (which can store data) and function (which can process data). Object, aka. instance, is a block of data which encapsulate these variables and functions as members of a single identity, called *member variable* (or *member field*) and *method* respectively.
-
-The programming based around use of a custom objects is called *object-oriented programming*.
+The programming based around the use of custom objects is called *object-oriented programming*.
 
 ```cpp
-std::string x = "Hello World!";
-std::cout << x.length();
-// Using "length()" method that returns number of characters.
+std::string variable = "Hello World!";
+std::cout << variable.length();
+// Using the "length()" method that returns the number of characters excluding a null terminator from the "variable" string object.
 ```
 
 ```
@@ -1201,35 +1284,31 @@ std::cout << x.length();
 ```
 
 ### Encapsulation
+Encapsulation is the core concept in an object with the following characteristics:
 
-Encapsulation is the core concept in object which...
-
-1. combines variables and functions into a single object
-2. restrict direct access to these variables and functions to prevent accidental modification from external code. 
+1. Combines variables and functions into a single data.
+2. Restrict direct access to these variables and functions to prevent accidental modification from external code. 
 
 ### State & Behavior
+State and behavior refer to a variable and function encapsulated to an object in C++. The encapsulated variable and function are respectively called member variable and member function, accessed using the member access operator `.`.
 
-Object has a properties called state and behavior which is frequently coined in C++:
-
-* **State** of an object is a data stored in object *member variable* (or *member field*), accessed by `object.field` format.
-* **Behavior** of an object is an action that can be done by object *method*, accessed by `object.method()` format.
-
+| MEMBER   | COMPONENT                           | SYNTAX              |
+|:--------:|:-----------------------------------:|---------------------|
+| State    | Member variable (aka. member field) | `instance.field`    |
+| Behavior | Member function (aka. method)       | `instnace.method()` |
 
 ## Class
-
-Class is used to create objects (aka. instance), hence can be deemed as a blueprint of the object. Classes are created using keyword `class` and inside defines variables and functions which becomes member variable and methods for the object.
-
-Class requires semicolon `;` at the end of the code block, and creating an instance from a class is called *instantiation*.
+A class creates objects (aka. instance) and is defined using the `class` keyword. Definitions of an object's fields and methods are also inside a class definition. The following example is a simple user-defined class with attributes and methods:
 
 ```cpp
-// CREATING CLASS
+/* CREATING CLASS */
 class CLASS{
 public:
-    // MEMBER VARIABLE (AKA. MEMBER FIELD)
+    /* MEMBER VARIABLE (AKA. MEMBER FIELD) */
     int field1 = 1;
     float field2 = 3.0;
     
-    // METHOD (AKA. MEMBER FUNCTION)
+    /* METHOD (AKA. MEMBER FUNCTION) */
     float method(int arg) {
         return field1 + field2 - arg;
     }
@@ -1244,17 +1323,18 @@ instance.field2;         // >> OUTPUT: 3.0
 instance.method(2);      // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
 ```
 
+The class requires a semicolon `;` at the end of the code block. Creating an instance from the class is called *instantiation*.
+
 ### Constructor
+A constructor is a method that automatically executes whenever instantiation has occurred, defining the number of arguments and its data type to the instance. The name of a constructor must be the same as the class name but without specifying the returned data type because it has a fixed data type of `void.`
 
-Constructor is a special method automatically executed whenever instantiation has occurred and can define the number of arguments to pass to the instance. Name of a constructor must be same as the class name and does not require data type.
-
-One of the common usage of constructor is initialization of member fields upon instantiation. There are two different initialization methods on constructor: (1) direct initialization and (2) list initialization.
+One of the common usages of a constructor is the initialization of member fields upon instantiation. There are two different initialization approaches: (1) direct initialization and (2) list initialization.
 
 ```cpp
-// CREATING CLASS
+/* CREATING CLASS */
 class CLASS {
 public:
-    // CONSTRUCTOR
+    /* CONSTRUCTOR */
     CLASS(int arg1, float arg2)
     {
         field1 = arg1; field2 = arg2;	// DIRECT INITIALIZATION
@@ -1276,10 +1356,10 @@ CLASS instance(1, 3.0);
 ----
 
 ```cpp
-// CREATING CLASS
+/* CREATING CLASS */
 class CLASS {
 public:
-    // CONSTRUCTOR
+    /* CONSTRUCTOR */
     CLASS(int arg1, float arg2)
         : field1(arg1), field2(arg2)	// LIST INITIALIZATION
     {
@@ -1298,18 +1378,18 @@ public:
 CLASS instance(1, 3.0);
 ```
 
-The advantage on using member initializer list is it can initialize the constant member field that is impossible when initialized directly.
+Using the member initializer list can initialize constant member fields impossible when initialized directly.
 
-Constructor is an optional member function and can be defined when developer wants. However, when constructor that takes argument(s) is presented, parenthesis `()` is required upon instantiation. Multiple constructor is allowed per class as long as rule of function overloading is observed.
+A constructor is an optional method and passes arguments through parenthesis `()` upon initialization. However, initialize without parenthesis when there is no argument for the instance. Multiple constructors are allowed per class as long as the rule of function overloading is observed.
 
 ### Destructor
-
-Destructor is a special method automatically executed whenever instance is released (every time object is destroyed either systematically by compiler or manually by developer). Name of a destructor must be same as the class name with tilde `~` prefix and does not require data type.
+A destructor is a method that automatically executes whenever the instance is destroyed and released from the memory. The name of a destructor must be the same as the class name with a tilde `~` prefix but without specifying the returned data type because it has a fixed data type of `void.`
 
 ```cpp
+/* CREATING CLASS */
 class CLASS {
 public:
-    // DESTRUCTOR
+    /* DESTRUCTOR */
     ~CLASS() {
     	statements;
     }
@@ -1323,23 +1403,20 @@ public:
 };
 ```
 
-Destructor is an optional member function and can be defined when developer wants. Only one destructor is allowed per class and does not take any argument.
+A destructor is an optional method, but only one is allowed per class since the absence of parameters means no support for function overloading.
 
 ### Constant Object
-
-Constant object is an object that cannot change the value of members after instantiation. Because of property of constant data, initialization of the member variables are done using constructor.
-
-Following is a syntax used to create a constant object from a class:
+A constant object is an object that cannot change member value after instantiation. Because of this property, the initialization of the instance is only possible by the list initialization.
 
 ```cpp
-// INSTANTIATION: CONSTANT OBJECT
+// INSTANTIATION: CONSTANT OBJECTs
 const CLASS instance;
 ```
 
-Constant object can only access constant member variables and constant methods, while non-constant object can access both constant and non-constant members. Beware, declaration of a constant method is only available within the class and `const` keyword is located at suffix instead.
+A constant object can only access constant member variables and constant member function. Beware, the constant method is a method declarable only within the class and must place the `const` keyword after the parameter declaration.
 
 ```cpp
-// CREATING CLASS
+/* CREATING CLASS */
 class CLASS {
 public: 
     int field1 = 1;
@@ -1357,18 +1434,16 @@ public:
 ```
 
 ## Access Specifier
+Access specifier defines accessibility to class members from outside the class. There are three access specifiers in C++: `public`, `private`, and `protected`.
 
-Access specifier in class defines accessibility to class members from the elsewhere. There are three access specifiers in C++: public, private, and protected.
-
-| A.MODIFIER | KEYWORD     | DESCRIPTION                                                  |
-| ---------- | ----------- | ------------------------------------------------------------ |
-| Public     | `public`    | Members are accessible from the code outside the class.      |
-| Private    | `private`   | Members are accessible only within the class.                |
-| Protected  | `protected` | Members are accessible from derived class but still restricted from outside the class; refer to inheritance. |
+| KEYWORD     | DESCRIPTION                                                  |
+| ----------- | ------------------------------------------------------------ |
+| `public`    | Members are accessible from outside the class.      |
+| `private`   | Members are accessible only within the class.                |
+| `protected` | Members are accessible from derived class but still restricted from outside the class (refer to the *inheritance* section). |
 
 ## Friend Function
-
-Friend function is a special function which can access private members of an objects. To declare friend function, place the prototype inside the class definition with `friend` keyword.
+A friend function is a function that can access private members within the class despite defined outside the class. To declare a friend function, place the prototype inside the class definition with the `friend` keyword.
 
 ```cpp
 class CLASS {
@@ -1380,11 +1455,11 @@ private:
         return field1 + field2 - arg;
     }
 
-    // FRIEND PROTOTYPE
+    /* FRIEND FUNCTION PROTOTYPE */
     friend void function(CLASS &instance);
 };
 
-// FRIEND DEFINITION
+/* FUNCTION DEFINITION */
 void function(CLASS &instance) {
 	instance.field1 = 2;
 }
@@ -1399,11 +1474,10 @@ instance.field2;	// >> OUTPUT: 3.0
 instance.method(2);	// >> OUTPUT: 3.0 (= 2 + 3.0 - 2)
 ```
 
-Because friend function is not a member, the function is called just like any other functions. Still, the fact that prototype was defined with members of the class grants access to the private members due to encapsulation.
+A friend function is not a member, which means it does not need an object to use. The reason the friend function can access the private members is because of the encapsulation of the prototype.
 
 ## Pointer to Class
-
-Object can be instantiated using pointer instead of variable. When assigned to a pointer, members are accessed via arrow member selection (`->`) operator.
+Objects are assignable to a pointer instead of a variable when instantiated. In the case of a pointer, access members via the arrow member selection operator `->`.
 
 ```cpp
 class CLASS {
@@ -1431,17 +1505,15 @@ instance->method(2);	// >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
 ```
 
 ### Dynamic Object
-
-Dynamic object is another method of instantiating a class, but the data is stored in heap memory instead of stack memory. This is a common method of instantiation when it comes to framework library to prevent releasing objects.
+A dynamic object is an instantiated stored in the heap region memory instead of the stack; this can prevent data corruption caused by the deallocation from the stack memory. It is commonly used on the framework libraries such as MFC.
 
 ```cpp
-// DYNAMIC OBJECT
+/* DYNAMIC OBJECT */
 CLASS *instance = new CLASS(1, 3.0);
 ```
 
 ### Identity
-
-Identity is a third property of an object which distinguishes itself from others, commonly by using memory address to the object itself. Every object has an implicit `this` pointer which points to the address of itself and can be used to access its own member.
+Identity is the third property of an object which distinguishes itself from others, commonly by using the memory address to itself. Every instance has an implicit `this` pointer that points to the address of itself and can be used to access its members.
 
 ```cpp
 class CLASS {
@@ -1454,20 +1526,19 @@ public:
     float field2;
     
     float method1(int arg) {
-        // USAGE OF THIS POINTER
+        // USAGE OF "this" POINTER
         return (this->field1) + (this->field2) - arg;
     }
 };
 ```
 
-For those who are familiar with Python, consider `this` pointer as C++ version of `self` keyword.
+For those who are familiar with Python, consider `this` pointer as a C++ version of the `self` keyword.
 
 ## Inheritance
-
-Inheritance is an act of base class providing member variables and methods to derived class. When the same name of members exists on both base class and derived class, members from base class are overridden by derived class's.
+Inheritance is an act of providing both member fields and methods of a base class to a derived class. When the base class and derived class share the same name of member fields or methods, it uses members from the derived class.
 
 ```cpp
-// CREATING BASE CLASS
+/* CREATING BASE CLASS */
 class BASECLASS {
 public:
     BASECLASS() { std::cout << "BASE CLASS: Constructor" << std::endl; }
@@ -1477,7 +1548,7 @@ public:
     float field2 = 3.0;
 };
 
-// CREATING DERIVED CLASS
+/* CREATING DERIVED CLASS */
 class DERIVEDCLASS
     : public BASECLASS {
 public:
@@ -1505,19 +1576,16 @@ std::cout << instance.field1 << ", " << instance.field2 << ", " << instance.fiel
 ```
 
 ### Type of Inheritance
-
 There are three different types of class inheritance on OOP in C++ language:
-
 
 | INHERITANCE | DESCRIPTION                                                  |
 | :---------: | ------------------------------------------------------------ |
-|   Public    | Private members of base class are not inherited nor accessible.<br />Public and protected members of the base class becomes public and protected members in derived class respectively. |
-|   Private   | Private members of base class are not inherited nor accessible.<br />Public and protected members of the base class becomes private members in derived class. |
-|  Protected  | Private members of base class are not inherited nor accessible.<br />Public and protected members of the base class becomes protected members in derived class. |
-
+|   `public`    | Private members of the base class are not inherited nor accessible.<br /> Public and protected members of the base class become public and protected members of the derived class. |
+|   `private`   | Private members of the base class are not inherited nor accessible.<br />Public and protected members of the base class become private members of the derived class. |
+|  `protected`  | Private members of the base class are not inherited nor accessible.<br />Public and protected members of the base class become protected members of the derived class. |
 
 ```cpp
-// INHERITING BASECLASS1 (PUBLIC) & BASECLASS2 (PROTECTED)
+/* INHERITING BASECLASS1 (PUBLIC) & BASECLASS2 (PROTECTED) */
 class DERIVEDCLASS
     : public BASECLASS1, protected BASECLASS2
 {
@@ -1526,24 +1594,22 @@ class DERIVEDCLASS
 ```
 
 ## Polymorphism
-
-Polymorphism means "having many forms", which in C++ programming means having different functionality based on the situation and usage. Polymorphism is one of the important features in OOP and is categorized into two types:
+Polymorphism means "having many forms," which in C++ programming means having different functionality based on the situation and usage. Polymorphism is one of the core features in OOP categorized into two types:
 
 * Compile-time Polymorphism
     : polymorphism achieved on compilation (aka. static polymorphism).
 * Run-time Polymorphism
     : polymorphism achieved on run-time (aka. dynamic polymorphism).
 
-One of the compile-time polymorphism has been introduced already; *function overloading* which functions differently according to passed arguments.
+One of the compile-time polymorphism has already been introduced; *function overloading* which functions differently according to passed arguments.
 
 ### Operator Overloading
+Operator overloading is another compile-time polymorphism that customizes operator to function differently on specific classes. Just like function overloading, a single operator can have multiple implementations as long as the argument's uniqueness is guaranteed. Overloaded operators are class-exclusive and won't be applied elsewhere.
 
-Overloading operator is another compile-time polymorphism which is customizing operator to function differently on certain classes or portion of the script. Just like function overloading, a single operator can have multiple implementation as long as the arguments are unique. Overloaded operators are exclusive to the class and won't be applied elsewhere.
-
-The `operator` keyword is used to specify the operator for customization. Declaring and defining operator functionality follows syntax identical to member function.
+Use the `operator` keyword to specify the operator to customize. The syntax for defining operator functionality is identical to the method definition.
 
 ```cpp
-// CREATING CLASS
+/* CREATING CLASS */
 class CLASS {
 public:
     // OPERATOR OVERLOADING 1
@@ -1559,16 +1625,15 @@ public:
 };
 ```
 
-On the second operator overloading, `CLASS` type argument is referenced to the member function parameter and constant `const` keyword makes the parameter read-only. The parameters can access `CLASS` object passed from argument but cannot modify it due to constant property.
+On the second overloading, the method parameter `arg` references the `CLASS` type argument, and the `const` keyword makes the parameter read-only. Eventually, the parameter can access the `CLASS` type object directly from its memory space but cannot modify it.
 
 ### Function Overriding
+Function overriding is a run-time polymorphism where the derived class redefines members inherited from the base class. The difference between overloading and overriding is the formal *selects* functionality while the latter *redefines* functionality.
 
-Overriding function is a run-time polymorphism where derived class redefine member inherited from the base class. The difference between overloading and overriding is, the formal *selects* functionality when the latter *redefines* functionality.
-
-Virtual function is a special function specifically designed for function overriding, and is declared by `virtual` keyword. Declaration of the virtual function is only necessary in base class but not in derived class.
+A virtual function is a function specifically for function overriding, declared by the `virtual` keyword from the base class alone.
 
 ```cpp
-// CREATING BASE CLASS
+/* CREATING BASE CLASS */
 class BASECLASS {
 public:
     // VIRTUAL FUNCTION
@@ -1577,7 +1642,7 @@ public:
     }	
 };
 
-// CREATING DERIVED CLASS
+/* CREATING DERIVED CLASS */
 class DERIVEDCLASS1
     : public BASECLASS {
 public:	
@@ -1588,25 +1653,27 @@ public:
 };
 ```
 
-Virtual function can have its definition implemented on base class for either (1) using behavior directly from base class or (2) using behavior from derived class in case no function override has occurred. Meanwhile, virtual function without any definition implemented is called **pure virtual function**.
+Beware, the base class member substituted by the derived class in the *C++: OBJECT AND CLASS § Inheritance* example code is not a function overriding. The member definition of the base class is still intact and did not get redefined.
+
+A virtual function can have its definition implemented in the base class for either using behavior (1) directly from a base class or (2) from a derived class in case no function override has occurred. However, a virtual function without any definition implemented is called **pure virtual function**.
 
 ```cpp
-// PURE VIRTUAL FUNCTION
+/* PURE VIRTUAL FUNCTION */
 virtual void polymorph() = 0;
 ```
 
-Because pure virtual function has no definition in base class, it is a virtual function that *must be* overridden when inherited to derived class. Failed to do so will cause a compilation error.
+Because a pure virtual function has no definition in the base class, it *must be* overridden when inherited to a derived class. Failed to do so will cause a compilation error.
 
-Base class that has at least one pure virtual function is called **abstract class**. Due to the property pure virtual function has, abstract class cannot create its own instances and can only be used to create derived classes.
+A base class that has at least one pure virtual function is called the **abstract class**. Due to the property pure virtual function has, an abstract class cannot create instances directly but is used only to create a derived class.
 
 ## Class in Files
+For efficient management of the project, creating a class as files is highly recommended. On Visual Studio, create a class file by right-clicking either *Source Files* or *Header Files* filter and select *Add >> Class...*.
 
-For easier and efficient management of the project, creating a class as files is recommended. On Visual Studio 2019, the class file can be created by right clicking either *Source Files* or *Header Files* filter and select *Add >> Class...*. A new window will pop up shown as follows:
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_class.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 16. Creating a class file in Visual Studio.</center>
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_class.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure #. Adding class in Visual Studio 2019</center>
-Class name typed on "**C<u>l</u>ass Name:**" automatically fills "**.h <u>f</u>ile:**" and "**.c<u>p</u>p file:**" with the same name. Click OK button to create two files: header file and source file in the project's *Header Files* and *Source Files* filter respectively.
+Class name typed on "**C<u>l</u>ass Name:**" automatically fills "**.h <u>f</u>ile:**" and "**.c<u>p</u>p file:**" with the same name. Click the OK button to create a header and source file in the project.
 
-Despite having separated into two different files, the class can be imported to the C++ script using `#include` directive.
+The header and source file respectively go to the *Header Files* and *Source File* filter. Despite having separated into two different files, the class can be imported to the C++ script by the `#include` directive.
 
 ```cpp
 #include "ClassName.h"
@@ -1620,14 +1687,13 @@ int main() {
 }
 ```
 
-The header file is created as `.h` extension which is compatible for both C/C++ language, while `.hpp` extension is C++ exclusive. Generalizing default extension as `.h` is fine, but it is recommended to specify header extension distinguish base language.
+The header file for the class is generally created with the  C-compatible `.h` extension, while the `.hpp` extension is C++ exclusive. Since C language does not support the OOP, the C++ class may have either header extension.
 
 ### Class Header File
-
-Class header file (.h) contains declaration of the class member fields and member functions:
+The class header file `.h` contains declarations of the class member fields and methods. The purpose of the header file is to declare the existence of the data to another script.
 
 ```cpp
-// HEADER "ClassName.h"
+/* HEADER "ClassName.h" */
 class ClassName {
 public:
     ClassName(int arg1, float arg2);
@@ -1640,11 +1706,10 @@ public:
 ```
 
 ### Class Source File
-
-Source file (.cpp) contains implementation and initialization of the class member which is declared in the header file. Declaration of the class must be imported to the class source code using `#include` directives:
+The source file `.cpp` contains the definition and initialization of the member fields and methods. While the header file declares the existence of data, their state and behavior are all defined in the source file. Link the source code with the header by using the `#include` directive.
 
 ```cpp
-// SOURCE "ClassName.cpp"
+/* SOURCE "ClassName.cpp" */
 #include "ClassName.h"
 
 ClassName::ClassName(int arg1, float arg2)
@@ -1665,157 +1730,200 @@ float ClassName::method(int arg3)
 ```
 
 # **C++: USER-DEFINED DATA TYPE**
-
-Commonly used data type such as `int`, `float`, `char`, and more are already defined in `iostream.h` header. Developer may create and use custom data type based on these pre-defined data types.
+Commonly used data types such as `int,` `float,` `char,` and more are already defined and are called through the `iostream` header file. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
 
 ## Structure
-
-Structure groups multiple member variables under a single structure tag, regardless of data type of member variable.
+The structure is a user-defined data type that integrates multiple member fields as a single structure tag regardless of their data type. Use the `struct` keyword to define a structure in C++ language.
 
 ```cpp
-// STRUCTURE DECLARATION
+/* STRUCTURE DEFINITION: 5-BYTE SIZE */
 struct STRUCTURE {
-    int   field1;
-    float field2;
+    // MEMBER FIELD DEFINITION
+    int   field1;    // DATA SIZE: 4 BYTES
+    char  field2;    // DATA SIZE: 1 BYTE
 };
 
-// VARIABLE INITIALIZATION
-STRUCTURE variable = {1, 3.0};
+/* STRUCTURE VARIABLE DEFINITION & INITIALIZATION */
+STRUCTURE variable = {3, 'A'};
 ```
-
 ----
-
 ```cpp
-// STRUCTURE DECLARATION & VARIABLE DECLARATION
+/* STRUCTURE DEFINITION & VARIABLE DEFINITION */
 struct STRUCTURE {
-    int	  field1;
-    float field2;
+    int   field1;
+    char  field2;
 } varialbe;
 
-// VARIABLE ASSIGNMENT
-variable.field1 = 1;
-variable.field2 = 3.0;
+/* STRUCTURE VARIABLE INITIALIZATION*/
+variable = {3, 'A'};
 ```
-
 ----
-
 ```cpp
-// STRUCTURE INITIALIZATION
+/* STRUCTURE DEFINITION & VARIABLE DEFINITION AND INITIALIZATION */
 struct STRUCTURE {
     int   field1;
-    float field2;
-} 	varialbe = {1, 3.0};
+    char  field2;
+} 	variable = {3, 'A'};
 ```
 
-Some C++ project may have structure variable assignment as `struct studenName student1;`. This syntax is still valid but `struct` keyword is not needed anymore starting from C++11 upon variable declaration.
+After defining a structure, use the member access operator `.` to access the member field.
+
+```cpp
+variable.field1;    // >> OUTPUT: 3
+variable.field2;    // >> OUTPUT: A
+```
+
+Some C++ projects may have C-style structure variable assignments such as `struct STRUCTURE variable;` but it is a deprecated syntax since C++11. Compared to the original C language, C++ syntax has become more simplified.
+
+
+### Anonymous Structure
+The syntax for the structure in the previous section is reusable and can create more than one structure variable of the same type. However, to create a user-defined data type for a single-use, define the anonymous structure using the syntax below:
+
+```cpp
+/* SINGLE-USE STRUCTURE VARIABLE DEFINITION & INITIALIZATION */
+struct {
+    int   field1;
+    char  field2;
+} variable = {3, 'A'};
+```
 
 ## Union
-
-Union groups multiple member variables under a single structure tag and shares memory address, regardless of data type of member variable. In other word, union is mainly used to present single data in different types of data (such as `int`, `char`, `bool`, et cetera). Because of this, union only requires value assignment on one member field.
+The union is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type but shares a memory space. In other words, value changes in one of the members also change the value assigned in the other members. Use the `union` keyword to define a structure in C++ language.
 
 ```cpp
-// UNION DECLARATION
+/* UNION DEFINITION: 4-BYTE SIZE */
 union UNION {
-    int  field1;
-    char field2[2];
+    // MEMBER FIELD DEFINITION
+    int   field1;    // DATA SIZE: 4 BYTES
+    char  field2;    // DATA SIZE: 1 BYTE
 };
 
-// VARAIBLE DECLARATION & ASSIGNMENT
-UNION variable;
-variable.field1 = 22136;    // >> OUTPUT: 22136		(0x 00 00 56 78)
-
-variable.field2[0];         // >> OUTPUT: 'x'		(0x -- -- -- 78)
-variable.field2[1];         // >> OUTPUT: 'V'		(0x -- -- 56 --)
+/* UNION VARIABLE DEFINITION & INITIALIZATION */
+UNION variable = {365};
 ```
-
 ----
-
 ```cpp
-// UNION DECLARATION & VARIABLE DECLARATION
+/* UNION DEFINITION & VARIABLE DEFINITION */
 union UNION {
-    int  field1;
-    char field2[2];
+    int   field1;
+    char  field2;
 } variable;
 
-// VARAIBLE DECLARATION & ASSIGNMENT
-variable.field1 = 22136;    // >> OUTPUT: 22136		(0x 00 00 56 78)
-
-variable.field2[0];         // >> OUTPUT: 'x'		(0x -- -- -- 78)
-variable.field2[1];         // >> OUTPUT: 'V'		(0x -- -- 56 --)
+/* UNION VARIABLE INITIALIZATION*/
+variable = {365};
+```
+----
+```cpp
+/* STRUCTURE DEFINITION & VARIABLE DEFINITION AND INITIALIZATION */
+union UNION {
+    int   field1;
+    char  field2;
+} variable = {365};
 ```
 
-Since union shares a single memory location to store the value, data allocation size is set based on the member with data type of largest byte size. Member fields with smaller byte-size data type is represented as a portion of the overall.
+The byte size of the union is equal to the member variable with the largest byte size; this allows the user-defined data type to use a single memory allocation while still have enough space to store other data types. Although the union data type may have more than one member, only one member needs initialization as they all shares the same memory space.
+
+After defining a union, use the member access operator `.` to access the member field.
+
+```cpp
+variable.field1;    // >> OUTPUT: 365 (0x0000016d)
+variable.field2;    // >> OUTPUT: 109 (0x0000006d)
+```
+
+The member field `field1` and `field2` are integer and character data that each store 4-byte and 1-byte. Hence, each member has `0x0000016D` and `0x6D` equivalent to decimal number 365 and 109.
+
+### Anonymous Union
+The syntax for the union in the previous section is reusable and can create more than one union variable of the same type. However, to create a data structure for a single-use, define the anonymous union using the syntax below:
+
+```cpp
+/* DEFINING & INITIALIZING A SINGLE-USE UNION VARIABLE */
+union {
+    int    field1;
+    char   field2;
+} variable = {365};
+```
 
 ## Enumeration
-
-Enumeration means "action of mentioning a number of things one by one", thus is a user-defined data type which can only be assigned with a single enumerators that has corresponding integer.
+The enumeration is a user-defined data type numbering enumerating items, called enumerators. Enumerators are assigned with an integer that starts from zero and increments by one by default.
 
 ```cpp
-// ENUMERATION DELCARATION
+/* ENUMERATION DEFINITION */
 enum ENUMERATION {
-    enumerator1,    // = 0
-    enumerator2,    // = 1
-    enumerator3     // = 2
+    enumerator1,    // ENUMERATOR = 0
+    enumerator2,    // ENUMERATOR = 1
+    enumerator3,    // ENUMERATOR = 2
+    enumerator4     // ENUMERATOR = 3
 };
 
-// VARIABLE INITIALIZATION
-ENUMERATION variable = enumerator1;		// >> OUTPUT: 0
+/* ENUMERATION VARIABLE DEFINITION AND INITIALIZATION */
+ENUMERATION variable = enumerator1;
 ```
-
 ----
-
 ```cpp
-// ENUMERATION DELCARATION & VARIABLE DECLARATION
+/* ENUMERATION DELCARATION & VARIABLE DECLARATION */
 enum ENUMERATION {
-    enumerator1,    // = 0
-    enumerator2,    // = 1
-    enumerator3     // = 2
+    enumerator1,    // ENUMERATOR = 0
+    enumerator2,    // ENUMERATOR = 1
+    enumerator3,    // ENUMERATOR = 2
+    enumerator4     // ENUMERATOR = 3
 } variable;
 
-// VARIABLE ASSIGNMENT
-variable = enumerator1;		// >> OUTPUT: 0
+/* ENUMERATION VARIABLE ASSIGNMENT */
+variable = enumerator1;
 ```
-
 ----
-
 ```cpp
-// ENUMERATION INITIALIZATION
+/* ENUMERATION DEFINITION & VARIABLE DEFINITION AND INITIALIZATION */
 enum ENUMERATION {
-    enumerator1,    // = 0
-    enumerator2,    // = 1
-    enumerator3     // = 2
-} variable = enumerator1;	// >> OUTPUT: 0
+    enumerator1,    // ENUMERATOR = 0
+    enumerator2,    // ENUMERATOR = 1
+    enumerator3,    // ENUMERATOR = 2
+    enumerator4     // ENUMERATOR = 3
+} variable = enumerator1;
 ```
 
-As a default, integer 0 is assigned to the first enumerator which is incremented by one on next enumerator. While enumerator itself must be unique which cannot share name, same integer value can be assigned to different enumerators using assignment (`=`) operator.
+Assigning an integer is done using the assignment operator `=`. The other enumerators may share the same value.
 
 ```cpp
 enum ENUMERATION {
-    enumerator1 = 2,    // >> OUTPUT: 2
-    enumerator2,        // >> OUTPUT: 3
-    enumerator3 = 1,    // >> OUTPUT: 1
-    enumerator4,        // >> OUTPUT: 2
-    enumerator5	        // >> OUTPUT: 3
+    enumerator1 = 3, // ENUMERATOR = 3
+    enumerator2 = 1, // ENUMERATOR = 1
+    enumerator3,     // ENUMERATOR = 2
+    enumerator4      // ENUMERATOR = 3
 };
 ```
 
-Uniqueness of enumerators is global and must be observed even across enumerations. Hence, enumerator with the same name cannot exist under different enumeration, else would can cause compilation error.
+However, enumerators cannot share the same identifier, which is similar to a global constant. In other words, enumerators are global data used across the project but unchangeable after initialization.
 
 ```cpp
 enum ENUMERATION1 {
-	enumerator1,
-    enumerator2
+    enumerator1,
+    enumerator2,
+    enumerator3,
+    enumerator4
 };
 
 enum ENUMERATION2 {
-	enumerator2,		// COMPILATION ERROR: MULTIPLE "enumerator2" EXIST!
-    enumerator3
+    enumeration4,    // COMPILATION ERROR: MULTIPLE "enumerator4" EXIST!
+    enumeration5,
+    enumeration6
 };
 ```
 
-### Enumeration Class
+After defining an enumeration, initialize an enumeration variable with one of the enumerators. An integer variable can also store an enumerator from the enumeration.
 
-Enumeration has a problem where enumerator must be globally unique and cannot share the same name despite located in different enumeration. Enumeration class, on the other hand, allows shared name of enumerator across the enumeration class.
+```cpp
+/* ASSIGNING ENUMERATOR TO AN ENUMERATION VARIABLE */
+ENUMERATION variable = enumerator1;
+```
+----
+```cpp
+/* ASSIGNING ENUMERATOR TO AN INTEGER VARIABLE */
+int variable = enumerator1;
+```
+
+### Enumeration Class
+Conventional enumeration must have an enumerator with a unique identifier across the project. However, enumerators of the enumeration class can have the same name in other enumeration classes.
 
 ```cpp
 enum class ENUMERATION1 {
@@ -1829,68 +1937,60 @@ enum class ENUMERATION2 {
 };
 ```
 
-Enumeration class is recommended than enumeration as enumerator conflict can be prevented.
+Unlike the enumeration, an integer variable cannot store an enumerator from the enumeration class. Use the scope resolution operator `::` to access the enumerators.
+
+```cpp
+/* ENUMRATION CLASS ASSIGNMENT */
+ENUMERATION1 variable = ENUMERATION::enumerator2;
+```
+
+C++ recommends using enumeration class than conventional enumeration to prevent identifier confliction of enumerators.
 
 ## Typedef Declaration
-
-The `typedef` keyword is used to create an alias name for existing data type, providing better readability.
+The `typedef` keyword aliases the existing data type to a different name, providing better readability.
 
 ```cpp
 typedef int dtypeName;
 ```
 
-While this is not officially supported in C++ programming language, structure and union can be declared without tag as part of the C programming syntax. This is called *anonymous structure* and *anonymous union* which is for a single use:
-
-```cpp
-// ANONYMOUS STRUCTURE
-typedef struct {
-	int 	field1;
-	float 	field2;
-} variable1;
-
-// ANONYMOUS UNION
-typedef union {
-	int		field1;
-	float	field2;
-} variable2;
-```
+C language uses the `typedef` keyword to simplify the definition syntax of the user-defined data type such as structure and union since C language requires the keyword on every user-defined data definition. On the other hand, C++ does not need these keywords.
 
 ## Type Alias Declaration
-
-Previously on *C++: BASIC § Namespace* has introduced `using` keyword to simplify the code by reducing repetitive typing of namespace. The `using` keyword is also used on customizing data type to create an alias name for existing data type, serving better readability.
+The *C++: BASIC § Namespace* section first introduced the `using` keyword on preventing calling the namespace repetitively. The `using` keyword increases the readability by aliasing the original data type with a different name, called *type alias declaration*.
 
 ```cpp
 using dtypeName = int;
 ```
 
-There is no difference between type alias declaration and typedef declaration, meaning two are actually equivalent.
+There is no difference between the type alias declaration and typedef declaration, and these two are equivalent.
 
 # **C++: TEMPLATE**
-
-Template provides developer a format of functions or classes regardless of its data type. Hence, template is used to define multiple number of similar functions and classes in efficient way.
+A template provides a format of function or class definition regardless of its data type. Developers can utilize this template to create similar functions and classes with ease. This chapter introduces defining and using a template.
 
 ## Function Template
-
-A template for a function is created using the following syntax:
+Define a template for a function using the following syntax:
 
 ```cpp
-// FUNCTION TEMPLATE DECLARATION
+/* FUNCTION TEMPLATE DEFINITION */
 template <class T, class U>
 U function(T arg1, U arg2) {
     statements;
     return something;
 }
+```
 
-// CALLING FUNCTION TEMPLATE (PARAMETERIZED FUNCTION)
+Instantiate a function template to use by specifying the data type in the angled bracket `<>`.
+
+```cpp
+/* FUNCTION TEMPLATE INSTANTIATION */
 function<int, float>(1, 3.0)
 ```
 
 ### `typename` Keyword
-
-The `typename` keyword is used to explicitly tell compiler that trailing identifier is in fact a type. In template declaration, however, it is an alternative synonym for `class` keyword used in template parameters.
+The `typename` keyword explicitly tells the compiler the trailing identifier is indeed a type. In the template definition, the keyword is a synonym for the `class` keyword.
 
 ```cpp
-// FUNCTION TEMPLATE DECLARATION (USING "typename" KEYWORD)
+/* FUNCTION TEMPLATE DEFINITION: USING "typename" KEYWORD */
 template <typename T, typename U>
 U function(T arg1, U arg2) {
     statements;
@@ -1899,11 +1999,10 @@ U function(T arg1, U arg2) {
 ```
 
 ## Class Template
-
-A template for a class is created using the following syntax:	
+Define a template for a class (aka. parameterized class) using the following syntax:
 
 ```cpp
-// CLASS TEMPLATE DECLARATION
+/* CLASS TEMPLATE DEFINITION */
 template <class T, class U>
 class CLASS {
 public:
@@ -1918,24 +2017,27 @@ public:
         return field1 + field2 - arg;
     }
 };
+```
 
-// CALLING CLASS TEMPLATE (PARAMETERIZED CLASS)
+Instantiate a class template to use by specifying the data type in the angled bracket `<>`.
+
+```cpp
+/* CLASS TEMPLATE INSTANTIATION */
 CLASS<int, float> instance(1, 3.0);
 ```
 
-Built-in parameterized classes were previously introduced in *C++: CONTAINER § Array Class* and *§ Vector Class*.
+The *C++: CONTAINER* chapter has already introduced two parameterized classes, which are array class and vector class.
 
 ```cpp
 std::array<int, 3> arr;      // ARRAY CLASS : <class T, size_t N>
 std::vector<int> vec;        // VECTOR CLASS: <class T>
 ```
 
-### Class Template in Files
-
-Creating a class template in two separate files is not official, since class template is not a class but a *template*. While there is a workaround, it isn't highly recommended.
+### Class Template as Files
+Since the class template is not a class but a *template*, C++ does not officially support creating a class template as a header-source file pair. Though not recommended, there is a possible approach.
 
 ```cpp
-// HEADER "ClassName.h"
+/* HEADER "ClassName.h" */
 template<class T, class U>
 class ClassName
 {
@@ -1951,7 +2053,7 @@ public:
 ```
 
 ```cpp
-// SOURCE "ClassName.cpp"
+/* SOURCE "ClassName.cpp" */
 #include "ClassName.h"
 
 template<class T, class U>
@@ -1968,7 +2070,7 @@ U ClassName<T, U>::method(T arg3) {
 ```
 
 ```cpp
-// SOURCE "main.cpp"
+/* MAIN SCRIPT "main.cpp" */
 #include <iostream>
 #include "ClassName.h"
 #include "ClassName.cpp"  // REQUIRED TO PREVENT LINKING ERROR!
@@ -1983,18 +2085,17 @@ int main() {
 ```
 
 ## Template Specialization
-
-Some implementation of function template or class template may need to be defined separately for special occasion. Template specialization allows creating separate definition for specific data type despite already having the template.
+Some function or class templates may need an individual definition for a special occasion. Creating a distinct template definition when instantiated using a specific data type is called *template specialization*.
 
 ```cpp
-// FUNCTION TEMPLATE DECLARATION
+/* FUNCTION TEMPLATE DEFINITION */
 template <class T, class U>
 U function(T arg1, U arg2) {
     statements;
     return something;
 }
 
-// FUNCTION TEMPLATE SPECIALIZATION
+/* FUNCTION TEMPLATE SPECIALIZATION: CHAR-EXCLUSIVE */
 template <>
 bool function<char>(int arg1, float arg2) {
     statements;
@@ -2003,99 +2104,37 @@ bool function<char>(int arg1, float arg2) {
 ```
 
 ## Template Alias
-
-Previously in *C++: USER-DEFINED DATA TYPE § Type Alias* explained on declaring data type with different alias name. This concept can be applied the same in aliasing new name for a template.
+The *C++: USER-DEFINED DATA TYPE § Type Alias* section explained declaring data type with a different alias name. This concept can be applied the same in aliasing a new name for a template, increasing readability with the `using` keyword.
 
 ```cpp
+/* FUNCTION TEMPLATE DEFINITION */
 template <class T, class U>
 U function(T arg1, U arg2) {
     statements;
     return something;
 }
 
-// ALIASING TEMPLATE
+/* ALIASING TEMPLATE */
 template <class X, class Y>
     using aliasName = function<X, Y>;
+
+/* FUNCTION TEMPLATE INSTANTIATION: USING ALIAS */
+aliasName<int>(1, 3)
 ```
-
-# **C++: EXCEPTION**
-
-Exception is a problem encountered during a program execution (not during compilation). C++ programming language offers keyword and blocks for controlling exceptions: `throw`, `try`, and `catch`. Through exception handling, stable program can be compiled and executed without any halt or crash.
-
-## `try`/`catch` Blocks
-
-Two code block pair, `try` block and `catch` block, is used to handle exception occurred during runtime. Following paragraphs explains what each code block is responsible for on exception handling.
-
-The `try` block is a code block that attempts whether the code contains exception or not. If it encounters an exception inside the block, the remaining code won't be executed but skipped to corresponding exception `catch` block.
-
-The `catch` block is a code block that contains code to be executed when exception occurred in `try` block. While there can only be one `try` block, multiple `catch` block can exist for different exceptions. If there is no `catch` block with corresponding exception, compilation error will occur (which is not an exception).
-
-```cpp
-// TRY BLOCK
-try {
-	statements;
-}
-catch(const std::out_of_range &e) {
-	// CATCH: ERROR FOR ACCESSING ELEMENT OUT OF RANGE
-}
-catch(const std::exception &e) {
-	// CATCH: ERROR FOR EVERY EXCEPTION
-}
-```
-
-## `throw` Keyword
-
-The `throw` keyword is used to manually halt execution and "throws" expression to `catch` keyword. Either expression such as numerical data, text data can follow behind, or may have no expression at all.
-
-However, the `catch` exception handler cannot check the thrown value, but only its parameter type. 
-
-```cpp
-// TRY BLOCK
-try {
-    statements;
-	throw expression;
-}
-catch(int e) {
-	// CATCH: INTEGER EXPRESSION
-}
-catch(char e) {
-	// CATCH: CHARACTER EXPRESSION
-}
-```
-
-For exception handler to catch every exception and parameter type, place ellipsis `...` between parentheses.
-
-```c++
-catch(...) {
-	// CATCH: EVERY EXCEPTION & PARAMETER TYPE
-}
-```
-
-### Error Output
-
-Standard output stream for error `std::cerr`, similar to standard output stream `std::cout`, prints text on the console terminal but exclusively designed for error such as exception.
-
-```cpp
-std::cerr << "Hello World!"
-```
-
-The difference between `std::cout` and `std::cerr` is they are streamed separately.
 
 # **C++: FILE MANAGEMENT**
+C++ language can read and write external files to save or load data. This chapter focuses on accessing and modifying the `.txt` extension text file.
 
-C++ programming language can read and write external file to save or import data. This chapter is mainly focused on accessing and modifying `.txt` extension text file.
-
-Reading and writing external text file requires following additional header file:
+Reading and writing external text file requires the following header:
 
 |   HEADER    | DESCRIPTION                     |
 | :---------: | ------------------------------- |
 | `fstream.h` | Input/output file stream class. |
 
-Inside the header file includes `std::ifstream` and `std::ofstream` object which is responsible for data input to the program and data output from program respectively.
+Inside this header includes the `std::ifstream` and `std::ofstream` class that is respectively for data input to the program and data output from the program.
 
 ## Opening Files
-
-The file first needs to be opened to either read or write. Opening the file is done using `open()` method which is included in both `std::ifstream` (for reading) and `std::ofstream` (for writing). 
+The file first needs to be opened to either read or write. Opening the file is done using the `open()` method that is available on both `std::ifstream` (for reading) and `std::ofstream` (for writing) class.
 
 ```cpp
 #include <fstream>
@@ -2108,13 +2147,10 @@ std::ifstream file("sample.txt");
 */
 ```
 
-File that is opened can now be read and written by the program.
-
 ## Reading Files
+While there are several methods for reading the file, the best example is using the `std::getline()` function. Executing once will only extract a single text line, so getting every line of content requires a loop statement.
 
-While there are several methods on reading the file, the best example is using `std::getline()` function. Execution of once will only extract a single text line, thus to extract every line requires loop statement.
-
-The `std::ifstream` object is used since reading means text data input to the program.
+Aternatively, the extraction operator `>>` can get the text separated by the blank space and new line. Use the `std::ifstream` class for reading the external file.
 
 ```cpp
 #include <fstream>
@@ -2126,8 +2162,7 @@ while (getline(file, line)) {
 ```
 
 ## Writing Files
-
-Writing text to the file is done using insertion (`<<`) operator followed by the data to be written. The `std::ofstream` object is used since writing means text data output from the program.
+The insertion operator `<<` can write text data to the file. Use the `std::ofstream` class for writing the external file.
 
 ```cpp
 #include <fstream>
@@ -2137,8 +2172,7 @@ file << "Hello World!\n";
 ```
 
 ### Creating Files
-
-New file can be created using the same method of writing file which does not bound by just writing on existing file. Creating file is simply done by designating file name is doesn't exist on the specified path.
+A new file can be created using the same method of writing a file that does not bound by just writing on the existing file. Creating a file is done simply by designating a file name that doesn't exist on the specified path.
 
 ```cpp
 #include <fstream>
@@ -2148,8 +2182,7 @@ file << "Hello World!\n";
 ```
 
 ## Closing Files
-
-After opening the file, it should be closed manually. Just like opening with `open()` method, opened file is closed using `close()` method:
+After opening the file, it should be closed manually. Opened file is closed using the `close()` method.
 
 ```cpp
 #include <fstream>
@@ -2159,46 +2192,99 @@ statements;
 file.close();
 ```
 
-# **C++: PREPROCESSOR**
+# **C++: EXCEPTION**
+An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon compilation, a successfully built program immediately halts when encountering an exception. C language has keywords and code blocks for handling exceptions: `throw`, `try` and `catch`, and more. Exception handling aims to provide a stable program without any halt or crash.
 
-C/C++ program language compiler processes the script into two divided stages: preprocessing and compilation. On the stage of preprocessing, preprocessor directive such as `#include` is taken care of by the compiler.
+## `try`/`catch` Blocks
+The `try` and `catch` block pair handles exceptions that occurred during the program execution. The paragraphs below explain the purpose of each code block.
 
-This chapter will introduce useful and commonly used preprocessor directives that is actually being implemented on development.
+The `try` block detects the exception that occurred inside, and when it does, the program immediately skips to the `catch` code block corresponding to the type of exception even if there are remaining codes.
 
-## Macro Definition
-
-Macro is a fragment of code that is given a name (aka. identifier). A fragment of code can be a simple data (e.g. number, character, string) or an expression with arguments. The formal and latter is respectively called *object-like* and *function-like* macro.
-
-The benefit of macro is it cannot be changed on runtime. The defined macro can be used on the script passed from a header file through `#include` directive.
-
-### `#define` Directive
-
-The `#define` directive is used to create macro:
+The `catch` block contains the codes to execute when triggered by the `try` block. A single `try` block can have several `catch` blocks to prepare for various types of exceptions. If there is no `catch` block, the compilation error occurs, which is not an exception.
 
 ```cpp
-#define SOMETHING       value                // MACRO
-#define ANYTHING(x, y)  (x * SOMETHING - y)  // MACRO WITH ARGUMENTS
+/* "try" BLOCK */
+try {
+	statements;
+}
+catch(const std::out_of_range &e) {
+	// "catch" BLOCK: ERROR FOR ACCESSING ELEMENT OUT OF RANGE
+}
+catch(const std::exception &e) {
+	// "catch" BLOCK: ERROR FOR EVERY EXCEPTION
+}
+```
+
+## `throw` Keyword
+The `throw` keyword manually halts execution and "throws" expression to the `catch` keyword. The keyword may throw numerical data or text data but also trigger exception without throwing any data by leaving blank.
+
+However, the `catch` exception handler cannot check the thrown value, but only its parameter type. 
+
+```cpp
+/* "try" BLOCK */
+try {
+    statements;
+	throw expression;
+}
+catch(int e) {
+	// "catch" BLOCK: INTEGER EXPRESSION
+}
+catch(char e) {
+	// "catch" BLOCK: CHARACTER EXPRESSION
+}
+```
+
+For exception handler to catch every exception and parameter type, place ellipsis `...` between parenthesis.
+
+```cpp
+catch(...) {
+	// "catch" BLOCK: EVERY EXCEPTION & PARAMETER TYPE
+}
+```
+
+### Standard Error Stream
+The *C: BASIC § Input & Output* section first introduced the most common output stream: the `std::cout` *standard output stream*. There are other kinds of stream designed for streaming errors, which is `std::cerr` *standard error stream*.
+
+> A stream is "a continuous flow of liquid, air, or gas." In terms of computer communication, a stream means a path of data flow.
+
+```cpp
+std::cerr << "Hello World!"
+```
+
+This distinguishment on streams allows selective control of transmitting data from the program to target devices/locations, such as a terminal or file.
+
+# **C++: PREPROCESSOR**
+C++ language compiler processes the script into two divided stages: preprocessing and compilation. On the stage of preprocessing, preprocessor directive such as `#include` is taken care of by the compiler. This chapter will introduce useful and commonly used preprocessor directives that is being implemented on development.
+
+## Macro Definition
+A macro is a fragment of code that has a name (aka. identifier). These pieces of code can be simple data (such as a number, character, and string) or an expression with arguments. The formal and latter are respectively called the *object-like* and *function-like* macro.
+
+A macro has a benefit that cannot change on runtime. A header file is where macros are generally defined, which passes to the source file via the `#include` inclusive directive.
+
+### `#define` Directive
+The `#define` directive creates a new macro.
+
+```cpp
+#define SOMETHING       value                // OBJECT-LIKE MACRO
+#define ANYTHING(x, y)  (x * SOMETHING - y)  // FUNCTION-LIKE MACRO
 ```
 
 ### `#undef` Directive
-
-In some cases, macro can cause naming collision that cannot be fixed on compilation stage. This macro can be removed by `#undef` directive:
+The `#undef` directive removes a defined macro. In some cases, this macro can resolve an error caused by naming collision due to other macros.
 
 ```cpp
 #undef SOMETHING
 ```
 
 ### Predefined Macros
-
-Compilers have common standard and compiler-specific predefined macros available for developers.
+Compilers have common standard and compiler-specific predefined macros available for developers. Below is a list of links to the document on predefined macros such as MSVC, GCC, and more.
 
 * MSVC: [Microsoft Docs - Predefined Macros](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
 * GCC: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
 * Others: https://sourceforge.net/p/predef/wiki/Compilers/
 
 ## Conditional Inclusion
-
-Preprocessor has a conditional directives that are used for conditional compilation. These directives are not to be used as a substitution of `if` and `else` conditional statement.
+A conditional inclusion is a directive for conditional compilation; the compiler ignores the codes when the condition is false.
 
 ```cpp
 #if		SOMETHING > value
@@ -2210,56 +2296,56 @@ Preprocessor has a conditional directives that are used for conditional compilat
 #endif
 ```
 
-### Macro Condition
+These directives are not for the substitution of `if` and `else` conditional statement despite having similar traits on evaluating the condition.
 
-Conditional inclusion can check condition whether the macro is already defined or not:
+### Macro Condition
+A conditional inclusion can also evaluate whether the macro is defined or not.
 
 ```cpp
-// IF COMPILED ON 64-BIT ARM OR x64
+// IF COMPILED ON 64-BIT ARM OR x64 ARCHITECTURE...
 #ifdef	_WIN64
 	statments;
 #endif
 
-// IF NOT COMPILED ON 64-BIT ARM OR x64
+// IF NOT COMPILED ON 64-BIT ARM OR x64 ARCHITECTURE...
 #ifndef	_WIN64
 	statements;
 #endif
 ```
 
 ## Pragma Directive
+A pragma directive is for configuring features and options for a compiler. Compiler developed by different companies or organizations differs from each other, and this makes pragma a non-standard compiler-specific preprocessor directive.
 
-Pragma directive is used to configure features and options for a compiler. Each compiler differs from each other, and this makes pragma a non-standard compiler-specific preprocessor directive.
+> The *Pragma* is an abbreviation of the word "pragmatic: a practical consideration." The directive may have been named with such a term as it involves how the compiler practically works and processes.
 
 * MSVC: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://docs.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
 * GCC: [GCC Online Documentation - Pragmas](https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html)
 
-This chapter mainly focuses on pragma directive from MSVC as it is the most common and widely used C/C++ compiler provided by Microsoft Visual Studio.
+This chapter focuses on pragma directives from MSVC as it is the most common and widely used C compiler provided by Microsoft Visual Studio.
 
 ### `#pragma once`
-
-The `#pragma once` pragma directive is extremely useful upon compilation by only including the header file once instead of multiple time on every inclusion. 
+The `#pragma once` pragma directive only includes the header file once instead of multiple times on every inclusion. 
 
 ```cpp
 #pragma once
 ```
 
-Through this pragma directive can reduce compilation time. Additionally, because it prevents multiple inclusion can this pragma function as *include guard*.
+Because it prevents including the same header file multiple times for a single source file that can cause a re-definition problem, `#pragma once` is commonly used for *include guard*. Additionally, this pragma directive can reduce compilation time as it only includes the header once.
 
-The following code is an example of include guard without using `#pragma once` pragma directive:
+The following code is an example of include guard without using the `#pragma once` directive:
 
 ```cpp
-// "header.h"
+/* HEADER FILE: "header.h" */
 #ifndef HEADER_FILE
 #define HEADER_FILE
 
 #endif	/* HEADER_FILE */
 ```
 
-If `header.h` has not been processed, the compiler defines the `HEADER_FILE` for the first time. However, upon second encounter, compiler will not process the header file again because of the macro conditioning.
+If the `header.h` has not been processed, the compiler defines the `HEADER_FILE` for the first time. However, on the second encounter, the compiler will not process the header file again because of the macro conditioning.
 
 ### `#pragma region`
-
-Though it does not affect any on compilation, `#pragma region` and `#pragma endregion` pair supports expanding and collapsing code block on Visual Studio Code Editor:
+Although it does not affect any on the compilation, the `#pragma region` and `#pragma endregion` pair supports expanding and collapsing code block on Visual Studio code editor.
 
 ```cpp
 #pragma region REGIONNAME
@@ -2268,16 +2354,14 @@ Though it does not affect any on compilation, `#pragma region` and `#pragma endr
 ```
 
 # **C++: RANDOM**
-
-Randomization may be necessary in some programming such as game development and statistical modeling. Random number generation requires following additional header file:
+Randomization may be necessary for some programming, such as game development and statistical modeling. Random numbers generation requires the following header:
 
 |   HEADER    | DESCRIPTION                                                  |
 | :---------: | ------------------------------------------------------------ |
-| `cstdlib.h` | Contains general purpose function such as random number, communication, et cetera. |
+| `cstdlib.h` | Contains general-purpose functions such as random numbers, communication, and more. |
 
 ## `rand()` Function
-
-The `rand()` function is a pseudo random number generator; it generates number randomly, but generated numbers are always same on every program execution.
+The `rand()` function is a pseudo-random number generator; it generates numbers randomly, but generated numbers are always the same on every program execution.
 
 ```cpp
 #include <cstdlib>
@@ -2292,15 +2376,14 @@ for (int index = 0; index < 3; index++) {
 ```
 
 ## `srand()` Function
+The `srand()` function does not generate random numbers but only determines the randomness based on the argument of seed. Each seed will provide randomness unique from others.
 
-The `srand()` function does not generate random number but only determines the randomness based on the argument of seed. Each seed will provide randomness unique from others.
-
-However, `rand()` function is still required to generate random number. Thus, numbers are always generated in same pattern on every program execution in spite of having `srand()` function.
+However, the `rand()` function is still required to generate a random number. Thus, the generated numbers always follow the same pattern on every program execution despite having the `srand()` function.
 
 ```cpp
 #include <cstdlib>
 
-srand(98);	// SEED FOR RANDOMNESS
+srand(98);	// SEED FOR RANDOMNESS: INTEGER 98
 
 for (int index = 0; index < 3; index++) {
     std::cout << rand() << " ";
@@ -2312,16 +2395,15 @@ for (int index = 0; index < 3; index++) {
 ```
 
 ## Truly Random Number
+For different randomness requires renewed seed on each program execution. The best method for seed renewal is by using a timestamp that is an integer representation of data and time.
 
-For different randomness requires renewed seed on each program execution. The best method for seed renewal is using timestamp which is an integer representation of data and time.
-
-Timestamp can be acquired using `time()` function included in `ctime.h` header. To get the timestamp of an executed time of a `time()` function, pass the number 0 as its argument.
+Timestamp can be acquired using `time()` function included in `ctime.h` header. To get the timestamp of an executed time of a `time()` function, pass the integer 0 as its argument.
 
 ```cpp
 #include <cstdlib>
 #include <ctime>
 
-srand(time(0));	// TIMESTAMP AS SEED FOR RANDOMNESS
+srand(time(0));	// SEED FOR RANDOMNESS: TIMESTAMP
 
 for (int index = 0; index < 3; index++) {
     std::cout << rand() << " ";

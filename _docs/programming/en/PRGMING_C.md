@@ -833,8 +833,6 @@ int function(int arg1, float arg2 = 2.0)
 }
 ```
 
-Passing a container such as an array cannot be done using the syntax above and requires a different method. 인자를 건네는 방법에는 두 가지가 있으며, 매개변수를 배열로 혹은 배열의 메모리 주소(즉, 포인터)로 정의하는 것이다.
-
 Passing a container such as an array cannot be done using the syntax above and requires a different method. There are two syntaxes available: defining a parameter as an array or as a memory address (pointer).
 
 ```c
@@ -869,7 +867,7 @@ void function(int *arg) {
 The latter method is possible due to the characteristic where calling an array itself returns the memory address of the first element. Incrementing the pointer will shift to the next element since the memory is allocated in sequence.
 
 ## Entry Point
-The entry point is the startup function where program execution begins; C language is the `main()` function and does not need forward declaration nor needs to be called. There can be only one entry point in the project; having more than one entry point or none will result in an error.
+An entry point is the startup function where program execution begins; C language is the `main()` function and does not need forward declaration nor needs to be called. There can be only one entry point in the project; having more than one entry point or none will result in an error.
 
 ```c
 /* C LANGUAGE ENTRY POINT: main() */
@@ -881,7 +879,7 @@ int main(int argc, char **argv)
 }
 ```
 
-As the only entry point available in traditional C++ console application, a project must have one and only `main()` function within the project. Creating multiple `main()` functions or not having any `main()` function will cause error on running the program.
+As the only entry point available in traditional C console application, a project must have one and only `main()` function within the project. Creating multiple `main()` functions or not having any `main()` function will cause error on running the program.
 
 ```c
 int main(int argc, char **argv) {
@@ -989,6 +987,8 @@ printf("%p", &variable);
 
 Since the hexadecimal memory address should not be written by hand, the only way to assign the pointer is by the existing memory address. Beware, the data type must match on assignment to the variable.
 
+While a memory address is expressed in eight bytes (32-bit architecture) or sixteen bytes (64-bit architecture) of hexadecimal, a single memory is limited to hold data of one byte. The `char` data type is enough with a single byte, but the `int` integer or `float` floating-point number requires four bytes of memory space. However, since the pointer only returns the first memory address of overall memory space, the compiler won't know whether the data is complete when the data type is not specified.
+
 ```c
 /* VARIABLE INITIALIZATION */
 int variable = 365;
@@ -1060,7 +1060,7 @@ int main() {
 }
 ```
 
-The function pointer should match the data type and parameters of the function when initializing. Failed to do so will result in a compilation error. While calling with a parenthesis like `function()` returns data from the `return` statement,  without a parenthesis like `function` returns a memory address instead.
+The function pointer should match the data type and parameters of the function when initializing. Failed to do so will result in a compilation error. While calling with a parenthesis like `function()` returns data from the `return` statement, without a parenthesis like `function` returns a memory address instead.
 
 # **C: USER-DEFINED DATA TYPE**
 Commonly used data types such as `int,` `float,` `char,` and more are already defined and are called through the `stdio.h` header file. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
@@ -1435,7 +1435,7 @@ AHello World!
 ```
 
 ### Creating Files
-A new file can be created using the same method of writing a file that does not bound by just writing on the existing file. Creating a file is done simply by designating a file name is doesn't exist on the specified path.
+A new file can be created using the same method of writing a file that does not bound by just writing on the existing file. Creating a file is done simply by designating a file name that doesn't exist on the specified path.
 
 ```c
 /* CREATING FILE */
@@ -1646,7 +1646,7 @@ A macro has a benefit that cannot change on runtime. A header file is where macr
 ### `#define` Directive
 The `#define` directive creates a new macro.
 
-```cpp
+```c
 #define SOMETHING       value                // OBJECT-LIKE MACRO
 #define ANYTHING(x, y)  (x * SOMETHING - y)  // FUNCTION-LIKE MACRO
 ```
@@ -1654,7 +1654,7 @@ The `#define` directive creates a new macro.
 ### `#undef` Directive
 The `#undef` directive removes a defined macro. In some cases, this macro can resolve an error caused by naming collision due to other macros.
 
-```cpp
+```c
 #undef SOMETHING
 ```
 
@@ -1668,7 +1668,7 @@ Compilers have common standard and compiler-specific predefined macros available
 ## Conditional Inclusion
 A conditional inclusion is a directive for conditional compilation; the compiler ignores the codes when the condition is false.
 
-```cpp
+```c
 #if		SOMETHING > value
 	statements;
 #elif	SOMETHING < value
@@ -1683,7 +1683,7 @@ These directives are not for the substitution of `if` and `else` conditional sta
 ### Macro Condition
 A conditional inclusion can also evaluate whether the macro is defined or not.
 
-```cpp
+```c
 // IF COMPILED ON 64-BIT ARM OR x64 ARCHITECTURE...
 #ifdef	_WIN64
 	statments;
@@ -1708,7 +1708,7 @@ This chapter focuses on pragma directives from MSVC as it is the most common and
 ### `#pragma once`
 The `#pragma once` pragma directive only includes the header file once instead of multiple times on every inclusion. 
 
-```cpp
+```c
 #pragma once
 ```
 
@@ -1716,7 +1716,7 @@ Because it prevents including the same header file multiple times for a single s
 
 The following code is an example of include guard without using the `#pragma once` directive:
 
-```cpp
+```c
 /* HEADER FILE: "header.h" */
 #ifndef HEADER_FILE
 #define HEADER_FILE
@@ -1729,7 +1729,7 @@ If the `header.h` has not been processed, the compiler defines the `HEADER_FILE`
 ### `#pragma region`
 Although it does not affect any on the compilation, the `#pragma region` and `#pragma endregion` pair supports expanding and collapsing code block on Visual Studio code editor.
 
-```cpp
+```c
 #pragma region REGIONNAME
 	statements;
 #pragma endregion
