@@ -1730,152 +1730,200 @@ float ClassName::method(int arg3)
 ```
 
 # **C++: USER-DEFINED DATA TYPE**
-Commonly used data type such as `int`, `float`, `char`, and more are already defined in `iostream.h` header. Developer may create and use custom data type based on these pre-defined data types.
+Commonly used data types such as `int,` `float,` `char,` and more are already defined and are called through the `iostream` header file. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
 
 ## Structure
-Structure groups multiple member variables under a single structure tag, regardless of data type of member variable.
+The structure is a user-defined data type that integrates multiple member fields as a single structure tag regardless of their data type. Use the `struct` keyword to define a structure in C++ language.
 
 ```cpp
-// STRUCTURE DECLARATION
+/* STRUCTURE DEFINITION: 5-BYTE SIZE */
 struct STRUCTURE {
-    int   field1;
-    float field2;
+    // MEMBER FIELD DEFINITION
+    int   field1;    // DATA SIZE: 4 BYTES
+    char  field2;    // DATA SIZE: 1 BYTE
 };
 
-// VARIABLE INITIALIZATION
-STRUCTURE variable = {1, 3.0};
+/* STRUCTURE VARIABLE DEFINITION & INITIALIZATION */
+STRUCTURE variable = {3, 'A'};
 ```
-
 ----
-
 ```cpp
-// STRUCTURE DECLARATION & VARIABLE DECLARATION
+/* STRUCTURE DEFINITION & VARIABLE DEFINITION */
 struct STRUCTURE {
-    int	  field1;
-    float field2;
+    int   field1;
+    char  field2;
 } varialbe;
 
-// VARIABLE ASSIGNMENT
-variable.field1 = 1;
-variable.field2 = 3.0;
+/* STRUCTURE VARIABLE INITIALIZATION*/
+variable = {3, 'A'};
 ```
-
 ----
-
 ```cpp
-// STRUCTURE INITIALIZATION
+/* STRUCTURE DEFINITION & VARIABLE DEFINITION AND INITIALIZATION */
 struct STRUCTURE {
     int   field1;
-    float field2;
-} 	varialbe = {1, 3.0};
+    char  field2;
+} 	variable = {3, 'A'};
 ```
 
-Some C++ project may have structure variable assignment as `struct studenName student1;`. This syntax is still valid but `struct` keyword is not needed anymore starting from C++11 upon variable declaration.
+After defining a structure, use the member access operator `.` to access the member field.
+
+```cpp
+variable.field1;    // >> OUTPUT: 3
+variable.field2;    // >> OUTPUT: A
+```
+
+Some C++ projects may have C-style structure variable assignments such as `struct STRUCTURE variable;` but it is a deprecated syntax since C++11. Compared to the original C language, C++ syntax has become more simplified.
+
+
+### Anonymous Structure
+The syntax for the structure in the previous section is reusable and can create more than one structure variable of the same type. However, to create a user-defined data type for a single-use, define the anonymous structure using the syntax below:
+
+```cpp
+/* SINGLE-USE STRUCTURE VARIABLE DEFINITION & INITIALIZATION */
+struct {
+    int   field1;
+    char  field2;
+} variable = {3, 'A'};
+```
 
 ## Union
-Union groups multiple member variables under a single structure tag and shares memory address, regardless of data type of member variable. In other word, union is mainly used to present single data in different types of data (such as `int`, `char`, `bool`, et cetera). Because of this, union only requires value assignment on one member field.
+The union is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type but shares a memory space. In other words, value changes in one of the members also change the value assigned in the other members. Use the `union` keyword to define a structure in C++ language.
 
 ```cpp
-// UNION DECLARATION
+/* UNION DEFINITION: 4-BYTE SIZE */
 union UNION {
-    int  field1;
-    char field2[2];
+    // MEMBER FIELD DEFINITION
+    int   field1;    // DATA SIZE: 4 BYTES
+    char  field2;    // DATA SIZE: 1 BYTE
 };
 
-// VARAIBLE DECLARATION & ASSIGNMENT
-UNION variable;
-variable.field1 = 22136;    // >> OUTPUT: 22136		(0x 00 00 56 78)
-
-variable.field2[0];         // >> OUTPUT: 'x'		(0x -- -- -- 78)
-variable.field2[1];         // >> OUTPUT: 'V'		(0x -- -- 56 --)
+/* UNION VARIABLE DEFINITION & INITIALIZATION */
+UNION variable = {365};
 ```
-
 ----
-
 ```cpp
-// UNION DECLARATION & VARIABLE DECLARATION
+/* UNION DEFINITION & VARIABLE DEFINITION */
 union UNION {
-    int  field1;
-    char field2[2];
+    int   field1;
+    char  field2;
 } variable;
 
-// VARAIBLE DECLARATION & ASSIGNMENT
-variable.field1 = 22136;    // >> OUTPUT: 22136		(0x 00 00 56 78)
-
-variable.field2[0];         // >> OUTPUT: 'x'		(0x -- -- -- 78)
-variable.field2[1];         // >> OUTPUT: 'V'		(0x -- -- 56 --)
+/* UNION VARIABLE INITIALIZATION*/
+variable = {365};
+```
+----
+```cpp
+/* STRUCTURE DEFINITION & VARIABLE DEFINITION AND INITIALIZATION */
+union UNION {
+    int   field1;
+    char  field2;
+} variable = {365};
 ```
 
-Since union shares a single memory location to store the value, data allocation size is set based on the member with data type of largest byte size. Member fields with smaller byte-size data type is represented as a portion of the overall.
+The byte size of the union is equal to the member variable with the largest byte size; this allows the user-defined data type to use a single memory allocation while still have enough space to store other data types. Although the union data type may have more than one member, only one member needs initialization as they all shares the same memory space.
+
+After defining a union, use the member access operator `.` to access the member field.
+
+```cpp
+variable.field1;    // >> OUTPUT: 365 (0x0000016d)
+variable.field2;    // >> OUTPUT: 109 (0x0000006d)
+```
+
+The member field `field1` and `field2` are integer and character data that each store 4-byte and 1-byte. Hence, each member has `0x0000016D` and `0x6D` equivalent to decimal number 365 and 109.
+
+### Anonymous Union
+The syntax for the union in the previous section is reusable and can create more than one union variable of the same type. However, to create a data structure for a single-use, define the anonymous union using the syntax below:
+
+```cpp
+/* DEFINING & INITIALIZING A SINGLE-USE UNION VARIABLE */
+union {
+    int    field1;
+    char   field2;
+} variable = {365};
+```
 
 ## Enumeration
-Enumeration means "action of mentioning a number of things one by one", thus is a user-defined data type which can only be assigned with a single enumerators that has corresponding integer.
+The enumeration is a user-defined data type numbering enumerating items, called enumerators. Enumerators are assigned with an integer that starts from zero and increments by one by default.
 
 ```cpp
-// ENUMERATION DELCARATION
+/* ENUMERATION DEFINITION */
 enum ENUMERATION {
-    enumerator1,    // = 0
-    enumerator2,    // = 1
-    enumerator3     // = 2
+    enumerator1,    // ENUMERATOR = 0
+    enumerator2,    // ENUMERATOR = 1
+    enumerator3,    // ENUMERATOR = 2
+    enumerator4     // ENUMERATOR = 3
 };
 
-// VARIABLE INITIALIZATION
-ENUMERATION variable = enumerator1;		// >> OUTPUT: 0
+/* ENUMERATION VARIABLE DEFINITION AND INITIALIZATION */
+ENUMERATION variable = enumerator1;
 ```
-
 ----
-
 ```cpp
-// ENUMERATION DELCARATION & VARIABLE DECLARATION
+/* ENUMERATION DELCARATION & VARIABLE DECLARATION */
 enum ENUMERATION {
-    enumerator1,    // = 0
-    enumerator2,    // = 1
-    enumerator3     // = 2
+    enumerator1,    // ENUMERATOR = 0
+    enumerator2,    // ENUMERATOR = 1
+    enumerator3,    // ENUMERATOR = 2
+    enumerator4     // ENUMERATOR = 3
 } variable;
 
-// VARIABLE ASSIGNMENT
-variable = enumerator1;		// >> OUTPUT: 0
+/* ENUMERATION VARIABLE ASSIGNMENT */
+variable = enumerator1;
 ```
-
 ----
-
 ```cpp
-// ENUMERATION INITIALIZATION
+/* ENUMERATION DEFINITION & VARIABLE DEFINITION AND INITIALIZATION */
 enum ENUMERATION {
-    enumerator1,    // = 0
-    enumerator2,    // = 1
-    enumerator3     // = 2
-} variable = enumerator1;	// >> OUTPUT: 0
+    enumerator1,    // ENUMERATOR = 0
+    enumerator2,    // ENUMERATOR = 1
+    enumerator3,    // ENUMERATOR = 2
+    enumerator4     // ENUMERATOR = 3
+} variable = enumerator1;
 ```
 
-As a default, integer 0 is assigned to the first enumerator which is incremented by one on next enumerator. While enumerator itself must be unique which cannot share name, same integer value can be assigned to different enumerators using assignment (`=`) operator.
+Assigning an integer is done using the assignment operator `=`. The other enumerators may share the same value.
 
 ```cpp
 enum ENUMERATION {
-    enumerator1 = 2,    // >> OUTPUT: 2
-    enumerator2,        // >> OUTPUT: 3
-    enumerator3 = 1,    // >> OUTPUT: 1
-    enumerator4,        // >> OUTPUT: 2
-    enumerator5	        // >> OUTPUT: 3
+    enumerator1 = 3, // ENUMERATOR = 3
+    enumerator2 = 1, // ENUMERATOR = 1
+    enumerator3,     // ENUMERATOR = 2
+    enumerator4      // ENUMERATOR = 3
 };
 ```
 
-Uniqueness of enumerators is global and must be observed even across enumerations. Hence, enumerator with the same name cannot exist under different enumeration, else would can cause compilation error.
+However, enumerators cannot share the same identifier, which is similar to a global constant. In other words, enumerators are global data used across the project but unchangeable after initialization.
 
 ```cpp
 enum ENUMERATION1 {
-	enumerator1,
-    enumerator2
+    enumerator1,
+    enumerator2,
+    enumerator3,
+    enumerator4
 };
 
 enum ENUMERATION2 {
-	enumerator2,		// COMPILATION ERROR: MULTIPLE "enumerator2" EXIST!
-    enumerator3
+    enumeration4,    // COMPILATION ERROR: MULTIPLE "enumerator4" EXIST!
+    enumeration5,
+    enumeration6
 };
 ```
 
+After defining an enumeration, initialize an enumeration variable with one of the enumerators. An integer variable can also store an enumerator from the enumeration.
+
+```cpp
+/* ASSIGNING ENUMERATOR TO AN ENUMERATION VARIABLE */
+ENUMERATION variable = enumerator1;
+```
+----
+```cpp
+/* ASSIGNING ENUMERATOR TO AN INTEGER VARIABLE */
+int variable = enumerator1;
+```
+
 ### Enumeration Class
-Enumeration has a problem where enumerator must be globally unique and cannot share the same name despite located in different enumeration. Enumeration class, on the other hand, allows shared name of enumerator across the enumeration class.
+Conventional enumeration must have an enumerator with a unique identifier across the project. However, enumerators of the enumeration class can have the same name in other enumeration classes.
 
 ```cpp
 enum class ENUMERATION1 {
@@ -1889,63 +1937,60 @@ enum class ENUMERATION2 {
 };
 ```
 
-Enumeration class is recommended than enumeration as enumerator conflict can be prevented.
+Unlike the enumeration, an integer variable cannot store an enumerator from the enumeration class. Use the scope resolution operator `::` to access the enumerators.
+
+```cpp
+/* ENUMRATION CLASS ASSIGNMENT */
+ENUMERATION1 variable = ENUMERATION::enumerator2;
+```
+
+C++ recommends using enumeration class than conventional enumeration to prevent identifier confliction of enumerators.
 
 ## Typedef Declaration
-The `typedef` keyword is used to create an alias name for existing data type, providing better readability.
+The `typedef` keyword aliases the existing data type to a different name, providing better readability.
 
 ```cpp
 typedef int dtypeName;
 ```
 
-While this is not officially supported in C++ programming language, structure and union can be declared without tag as part of the C programming syntax. This is called *anonymous structure* and *anonymous union* which is for a single use:
-
-```cpp
-// ANONYMOUS STRUCTURE
-typedef struct {
-	int 	field1;
-	float 	field2;
-} variable1;
-
-// ANONYMOUS UNION
-typedef union {
-	int		field1;
-	float	field2;
-} variable2;
-```
+C language uses the `typedef` keyword to simplify the definition syntax of the user-defined data type such as structure and union since C language requires the keyword on every user-defined data definition. On the other hand, C++ does not need these keywords.
 
 ## Type Alias Declaration
-Previously on *C++: BASIC § Namespace* has introduced `using` keyword to simplify the code by reducing repetitive typing of namespace. The `using` keyword is also used on customizing data type to create an alias name for existing data type, serving better readability.
+The *C++: BASIC § Namespace* section first introduced the `using` keyword on preventing calling the namespace repetitively. The `using` keyword increases the readability by aliasing the original data type with a different name, called *type alias declaration*.
 
 ```cpp
 using dtypeName = int;
 ```
 
-There is no difference between type alias declaration and typedef declaration, meaning two are actually equivalent.
+There is no difference between the type alias declaration and typedef declaration, and these two are equivalent.
 
 # **C++: TEMPLATE**
-Template provides developer a format of functions or classes regardless of its data type. Hence, template is used to define multiple number of similar functions and classes in efficient way.
+A template provides a format of function or class definition regardless of its data type. Developers can utilize this template to create similar functions and classes with ease. This chapter introduces defining and using a template.
 
 ## Function Template
-A template for a function is created using the following syntax:
+Define a template for a function using the following syntax:
 
 ```cpp
-// FUNCTION TEMPLATE DECLARATION
+/* FUNCTION TEMPLATE DEFINITION */
 template <class T, class U>
 U function(T arg1, U arg2) {
     statements;
     return something;
 }
+```
 
-// CALLING FUNCTION TEMPLATE (PARAMETERIZED FUNCTION)
+Instantiate a function template to use by specifying the data type in the angled bracket `<>`.
+
+```cpp
+/* FUNCTION TEMPLATE INSTANTIATION */
 function<int, float>(1, 3.0)
 ```
 
 ### `typename` Keyword
-The `typename` keyword is used to explicitly tell compiler that trailing identifier is in fact a type. In template declaration, however, it is an alternative synonym for `class` keyword used in template parameters.
+The `typename` keyword explicitly tells the compiler the trailing identifier is indeed a type. In the template definition, the keyword is a synonym for the `class` keyword.
 
 ```cpp
-// FUNCTION TEMPLATE DECLARATION (USING "typename" KEYWORD)
+/* FUNCTION TEMPLATE DEFINITION: USING "typename" KEYWORD */
 template <typename T, typename U>
 U function(T arg1, U arg2) {
     statements;
@@ -1954,10 +1999,10 @@ U function(T arg1, U arg2) {
 ```
 
 ## Class Template
-A template for a class is created using the following syntax:	
+Define a template for a class (aka. parameterized class) using the following syntax:
 
 ```cpp
-// CLASS TEMPLATE DECLARATION
+/* CLASS TEMPLATE DEFINITION */
 template <class T, class U>
 class CLASS {
 public:
@@ -1972,23 +2017,27 @@ public:
         return field1 + field2 - arg;
     }
 };
+```
 
-// CALLING CLASS TEMPLATE (PARAMETERIZED CLASS)
+Instantiate a class template to use by specifying the data type in the angled bracket `<>`.
+
+```cpp
+/* CLASS TEMPLATE INSTANTIATION */
 CLASS<int, float> instance(1, 3.0);
 ```
 
-Built-in parameterized classes were previously introduced in *C++: CONTAINER § Array Class* and *§ Vector Class*.
+The *C++: CONTAINER* chapter has already introduced two parameterized classes, which are array class and vector class.
 
 ```cpp
 std::array<int, 3> arr;      // ARRAY CLASS : <class T, size_t N>
 std::vector<int> vec;        // VECTOR CLASS: <class T>
 ```
 
-### Class Template in Files
-Creating a class template in two separate files is not official, since class template is not a class but a *template*. While there is a workaround, it isn't highly recommended.
+### Class Template as Files
+Since the class template is not a class but a *template*, C++ does not officially support creating a class template as a header-source file pair. Though not recommended, there is a possible approach.
 
 ```cpp
-// HEADER "ClassName.h"
+/* HEADER "ClassName.h" */
 template<class T, class U>
 class ClassName
 {
@@ -2004,7 +2053,7 @@ public:
 ```
 
 ```cpp
-// SOURCE "ClassName.cpp"
+/* SOURCE "ClassName.cpp" */
 #include "ClassName.h"
 
 template<class T, class U>
@@ -2021,7 +2070,7 @@ U ClassName<T, U>::method(T arg3) {
 ```
 
 ```cpp
-// SOURCE "main.cpp"
+/* MAIN SCRIPT "main.cpp" */
 #include <iostream>
 #include "ClassName.h"
 #include "ClassName.cpp"  // REQUIRED TO PREVENT LINKING ERROR!
@@ -2036,17 +2085,17 @@ int main() {
 ```
 
 ## Template Specialization
-Some implementation of function template or class template may need to be defined separately for special occasion. Template specialization allows creating separate definition for specific data type despite already having the template.
+Some function or class templates may need an individual definition for a special occasion. Creating a distinct template definition when instantiated using a specific data type is called *template specialization*.
 
 ```cpp
-// FUNCTION TEMPLATE DECLARATION
+/* FUNCTION TEMPLATE DEFINITION */
 template <class T, class U>
 U function(T arg1, U arg2) {
     statements;
     return something;
 }
 
-// FUNCTION TEMPLATE SPECIALIZATION
+/* FUNCTION TEMPLATE SPECIALIZATION: CHAR-EXCLUSIVE */
 template <>
 bool function<char>(int arg1, float arg2) {
     statements;
@@ -2055,92 +2104,37 @@ bool function<char>(int arg1, float arg2) {
 ```
 
 ## Template Alias
-Previously in *C++: USER-DEFINED DATA TYPE § Type Alias* explained on declaring data type with different alias name. This concept can be applied the same in aliasing new name for a template.
+The *C++: USER-DEFINED DATA TYPE § Type Alias* section explained declaring data type with a different alias name. This concept can be applied the same in aliasing a new name for a template, increasing readability with the `using` keyword.
 
 ```cpp
+/* FUNCTION TEMPLATE DEFINITION */
 template <class T, class U>
 U function(T arg1, U arg2) {
     statements;
     return something;
 }
 
-// ALIASING TEMPLATE
+/* ALIASING TEMPLATE */
 template <class X, class Y>
     using aliasName = function<X, Y>;
+
+/* FUNCTION TEMPLATE INSTANTIATION: USING ALIAS */
+aliasName<int>(1, 3)
 ```
-
-# **C++: EXCEPTION**
-Exception is a problem encountered during a program execution (not during compilation). C++ programming language offers keyword and blocks for controlling exceptions: `throw`, `try`, and `catch`. Through exception handling, stable program can be compiled and executed without any halt or crash.
-
-## `try`/`catch` Blocks
-Two code block pair, `try` block and `catch` block, is used to handle exception occurred during runtime. Following paragraphs explains what each code block is responsible for on exception handling.
-
-The `try` block is a code block that attempts whether the code contains exception or not. If it encounters an exception inside the block, the remaining code won't be executed but skipped to corresponding exception `catch` block.
-
-The `catch` block is a code block that contains code to be executed when exception occurred in `try` block. While there can only be one `try` block, multiple `catch` block can exist for different exceptions. If there is no `catch` block with corresponding exception, compilation error will occur (which is not an exception).
-
-```cpp
-// TRY BLOCK
-try {
-	statements;
-}
-catch(const std::out_of_range &e) {
-	// CATCH: ERROR FOR ACCESSING ELEMENT OUT OF RANGE
-}
-catch(const std::exception &e) {
-	// CATCH: ERROR FOR EVERY EXCEPTION
-}
-```
-
-## `throw` Keyword
-The `throw` keyword is used to manually halt execution and "throws" expression to `catch` keyword. Either expression such as numerical data, text data can follow behind, or may have no expression at all.
-
-However, the `catch` exception handler cannot check the thrown value, but only its parameter type. 
-
-```cpp
-// TRY BLOCK
-try {
-    statements;
-	throw expression;
-}
-catch(int e) {
-	// CATCH: INTEGER EXPRESSION
-}
-catch(char e) {
-	// CATCH: CHARACTER EXPRESSION
-}
-```
-
-For exception handler to catch every exception and parameter type, place ellipsis `...` between parentheses.
-
-```c++
-catch(...) {
-	// CATCH: EVERY EXCEPTION & PARAMETER TYPE
-}
-```
-
-### Error Output
-Standard output stream for error `std::cerr`, similar to standard output stream `std::cout`, prints text on the console terminal but exclusively designed for error such as exception.
-
-```cpp
-std::cerr << "Hello World!"
-```
-
-The difference between `std::cout` and `std::cerr` is they are streamed separately.
 
 # **C++: FILE MANAGEMENT**
-C++ programming language can read and write external file to save or import data. This chapter is mainly focused on accessing and modifying `.txt` extension text file.
+C++ language can read and write external files to save or load data. This chapter focuses on accessing and modifying the `.txt` extension text file.
 
-Reading and writing external text file requires following additional header file:
+Reading and writing external text file requires the following header:
 
 |   HEADER    | DESCRIPTION                     |
 | :---------: | ------------------------------- |
 | `fstream.h` | Input/output file stream class. |
 
-Inside the header file includes `std::ifstream` and `std::ofstream` object which is responsible for data input to the program and data output from program respectively.
+Inside this header includes the `std::ifstream` and `std::ofstream` class that is respectively for data input to the program and data output from the program.
 
 ## Opening Files
-The file first needs to be opened to either read or write. Opening the file is done using `open()` method which is included in both `std::ifstream` (for reading) and `std::ofstream` (for writing). 
+The file first needs to be opened to either read or write. Opening the file is done using the `open()` method that is available on both `std::ifstream` (for reading) and `std::ofstream` (for writing) class.
 
 ```cpp
 #include <fstream>
@@ -2153,12 +2147,10 @@ std::ifstream file("sample.txt");
 */
 ```
 
-File that is opened can now be read and written by the program.
-
 ## Reading Files
-While there are several methods on reading the file, the best example is using `std::getline()` function. Execution of once will only extract a single text line, thus to extract every line requires loop statement.
+While there are several methods for reading the file, the best example is using the `std::getline()` function. Executing once will only extract a single text line, so getting every line of content requires a loop statement.
 
-The `std::ifstream` object is used since reading means text data input to the program.
+Aternatively, the extraction operator `>>` can get the text separated by the blank space and new line. Use the `std::ifstream` class for reading the external file.
 
 ```cpp
 #include <fstream>
@@ -2170,7 +2162,7 @@ while (getline(file, line)) {
 ```
 
 ## Writing Files
-Writing text to the file is done using insertion (`<<`) operator followed by the data to be written. The `std::ofstream` object is used since writing means text data output from the program.
+The insertion operator `<<` can write text data to the file. Use the `std::ofstream` class for writing the external file.
 
 ```cpp
 #include <fstream>
@@ -2180,7 +2172,7 @@ file << "Hello World!\n";
 ```
 
 ### Creating Files
-New file can be created using the same method of writing file which does not bound by just writing on existing file. Creating file is simply done by designating file name is doesn't exist on the specified path.
+A new file can be created using the same method of writing a file that does not bound by just writing on the existing file. Creating a file is done simply by designating a file name that doesn't exist on the specified path.
 
 ```cpp
 #include <fstream>
@@ -2190,7 +2182,7 @@ file << "Hello World!\n";
 ```
 
 ## Closing Files
-After opening the file, it should be closed manually. Just like opening with `open()` method, opened file is closed using `close()` method:
+After opening the file, it should be closed manually. Opened file is closed using the `close()` method.
 
 ```cpp
 #include <fstream>
@@ -2200,40 +2192,99 @@ statements;
 file.close();
 ```
 
-# **C++: PREPROCESSOR**
-C/C++ program language compiler processes the script into two divided stages: preprocessing and compilation. On the stage of preprocessing, preprocessor directive such as `#include` is taken care of by the compiler.
+# **C++: EXCEPTION**
+An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon compilation, a successfully built program immediately halts when encountering an exception. C language has keywords and code blocks for handling exceptions: `throw`, `try` and `catch`, and more. Exception handling aims to provide a stable program without any halt or crash.
 
-This chapter will introduce useful and commonly used preprocessor directives that is actually being implemented on development.
+## `try`/`catch` Blocks
+The `try` and `catch` block pair handles exceptions that occurred during the program execution. The paragraphs below explain the purpose of each code block.
 
-## Macro Definition
-Macro is a fragment of code that is given a name (aka. identifier). A fragment of code can be a simple data (e.g. number, character, string) or an expression with arguments. The formal and latter is respectively called *object-like* and *function-like* macro.
+The `try` block detects the exception that occurred inside, and when it does, the program immediately skips to the `catch` code block corresponding to the type of exception even if there are remaining codes.
 
-The benefit of macro is it cannot be changed on runtime. The defined macro can be used on the script passed from a header file through `#include` directive.
-
-### `#define` Directive
-The `#define` directive is used to create macro:
+The `catch` block contains the codes to execute when triggered by the `try` block. A single `try` block can have several `catch` blocks to prepare for various types of exceptions. If there is no `catch` block, the compilation error occurs, which is not an exception.
 
 ```cpp
-#define SOMETHING       value                // MACRO
-#define ANYTHING(x, y)  (x * SOMETHING - y)  // MACRO WITH ARGUMENTS
+/* "try" BLOCK */
+try {
+	statements;
+}
+catch(const std::out_of_range &e) {
+	// "catch" BLOCK: ERROR FOR ACCESSING ELEMENT OUT OF RANGE
+}
+catch(const std::exception &e) {
+	// "catch" BLOCK: ERROR FOR EVERY EXCEPTION
+}
+```
+
+## `throw` Keyword
+The `throw` keyword manually halts execution and "throws" expression to the `catch` keyword. The keyword may throw numerical data or text data but also trigger exception without throwing any data by leaving blank.
+
+However, the `catch` exception handler cannot check the thrown value, but only its parameter type. 
+
+```cpp
+/* "try" BLOCK */
+try {
+    statements;
+	throw expression;
+}
+catch(int e) {
+	// "catch" BLOCK: INTEGER EXPRESSION
+}
+catch(char e) {
+	// "catch" BLOCK: CHARACTER EXPRESSION
+}
+```
+
+For exception handler to catch every exception and parameter type, place ellipsis `...` between parenthesis.
+
+```cpp
+catch(...) {
+	// "catch" BLOCK: EVERY EXCEPTION & PARAMETER TYPE
+}
+```
+
+### Standard Error Stream
+The *C: BASIC § Input & Output* section first introduced the most common output stream: the `std::cout` *standard output stream*. There are other kinds of stream designed for streaming errors, which is `std::cerr` *standard error stream*.
+
+> A stream is "a continuous flow of liquid, air, or gas." In terms of computer communication, a stream means a path of data flow.
+
+```cpp
+std::cerr << "Hello World!"
+```
+
+This distinguishment on streams allows selective control of transmitting data from the program to target devices/locations, such as a terminal or file.
+
+# **C++: PREPROCESSOR**
+C++ language compiler processes the script into two divided stages: preprocessing and compilation. On the stage of preprocessing, preprocessor directive such as `#include` is taken care of by the compiler. This chapter will introduce useful and commonly used preprocessor directives that is being implemented on development.
+
+## Macro Definition
+A macro is a fragment of code that has a name (aka. identifier). These pieces of code can be simple data (such as a number, character, and string) or an expression with arguments. The formal and latter are respectively called the *object-like* and *function-like* macro.
+
+A macro has a benefit that cannot change on runtime. A header file is where macros are generally defined, which passes to the source file via the `#include` inclusive directive.
+
+### `#define` Directive
+The `#define` directive creates a new macro.
+
+```cpp
+#define SOMETHING       value                // OBJECT-LIKE MACRO
+#define ANYTHING(x, y)  (x * SOMETHING - y)  // FUNCTION-LIKE MACRO
 ```
 
 ### `#undef` Directive
-In some cases, macro can cause naming collision that cannot be fixed on compilation stage. This macro can be removed by `#undef` directive:
+The `#undef` directive removes a defined macro. In some cases, this macro can resolve an error caused by naming collision due to other macros.
 
 ```cpp
 #undef SOMETHING
 ```
 
 ### Predefined Macros
-Compilers have common standard and compiler-specific predefined macros available for developers.
+Compilers have common standard and compiler-specific predefined macros available for developers. Below is a list of links to the document on predefined macros such as MSVC, GCC, and more.
 
 * MSVC: [Microsoft Docs - Predefined Macros](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
 * GCC: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
 * Others: https://sourceforge.net/p/predef/wiki/Compilers/
 
 ## Conditional Inclusion
-Preprocessor has a conditional directives that are used for conditional compilation. These directives are not to be used as a substitution of `if` and `else` conditional statement.
+A conditional inclusion is a directive for conditional compilation; the compiler ignores the codes when the condition is false.
 
 ```cpp
 #if		SOMETHING > value
@@ -2245,52 +2296,56 @@ Preprocessor has a conditional directives that are used for conditional compilat
 #endif
 ```
 
+These directives are not for the substitution of `if` and `else` conditional statement despite having similar traits on evaluating the condition.
+
 ### Macro Condition
-Conditional inclusion can check condition whether the macro is already defined or not:
+A conditional inclusion can also evaluate whether the macro is defined or not.
 
 ```cpp
-// IF COMPILED ON 64-BIT ARM OR x64
+// IF COMPILED ON 64-BIT ARM OR x64 ARCHITECTURE...
 #ifdef	_WIN64
 	statments;
 #endif
 
-// IF NOT COMPILED ON 64-BIT ARM OR x64
+// IF NOT COMPILED ON 64-BIT ARM OR x64 ARCHITECTURE...
 #ifndef	_WIN64
 	statements;
 #endif
 ```
 
 ## Pragma Directive
-Pragma directive is used to configure features and options for a compiler. Each compiler differs from each other, and this makes pragma a non-standard compiler-specific preprocessor directive.
+A pragma directive is for configuring features and options for a compiler. Compiler developed by different companies or organizations differs from each other, and this makes pragma a non-standard compiler-specific preprocessor directive.
+
+> The *Pragma* is an abbreviation of the word "pragmatic: a practical consideration." The directive may have been named with such a term as it involves how the compiler practically works and processes.
 
 * MSVC: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://docs.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
 * GCC: [GCC Online Documentation - Pragmas](https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html)
 
-This chapter mainly focuses on pragma directive from MSVC as it is the most common and widely used C/C++ compiler provided by Microsoft Visual Studio.
+This chapter focuses on pragma directives from MSVC as it is the most common and widely used C compiler provided by Microsoft Visual Studio.
 
 ### `#pragma once`
-The `#pragma once` pragma directive is extremely useful upon compilation by only including the header file once instead of multiple time on every inclusion. 
+The `#pragma once` pragma directive only includes the header file once instead of multiple times on every inclusion. 
 
 ```cpp
 #pragma once
 ```
 
-Through this pragma directive can reduce compilation time. Additionally, because it prevents multiple inclusion can this pragma function as *include guard*.
+Because it prevents including the same header file multiple times for a single source file that can cause a re-definition problem, `#pragma once` is commonly used for *include guard*. Additionally, this pragma directive can reduce compilation time as it only includes the header once.
 
-The following code is an example of include guard without using `#pragma once` pragma directive:
+The following code is an example of include guard without using the `#pragma once` directive:
 
 ```cpp
-// "header.h"
+/* HEADER FILE: "header.h" */
 #ifndef HEADER_FILE
 #define HEADER_FILE
 
 #endif	/* HEADER_FILE */
 ```
 
-If `header.h` has not been processed, the compiler defines the `HEADER_FILE` for the first time. However, upon second encounter, compiler will not process the header file again because of the macro conditioning.
+If the `header.h` has not been processed, the compiler defines the `HEADER_FILE` for the first time. However, on the second encounter, the compiler will not process the header file again because of the macro conditioning.
 
 ### `#pragma region`
-Though it does not affect any on compilation, `#pragma region` and `#pragma endregion` pair supports expanding and collapsing code block on Visual Studio Code Editor:
+Although it does not affect any on the compilation, the `#pragma region` and `#pragma endregion` pair supports expanding and collapsing code block on Visual Studio code editor.
 
 ```cpp
 #pragma region REGIONNAME
@@ -2299,14 +2354,14 @@ Though it does not affect any on compilation, `#pragma region` and `#pragma endr
 ```
 
 # **C++: RANDOM**
-Randomization may be necessary in some programming such as game development and statistical modeling. Random number generation requires following additional header file:
+Randomization may be necessary for some programming, such as game development and statistical modeling. Random numbers generation requires the following header:
 
 |   HEADER    | DESCRIPTION                                                  |
 | :---------: | ------------------------------------------------------------ |
-| `cstdlib.h` | Contains general purpose function such as random number, communication, et cetera. |
+| `cstdlib.h` | Contains general-purpose functions such as random numbers, communication, and more. |
 
 ## `rand()` Function
-The `rand()` function is a pseudo random number generator; it generates number randomly, but generated numbers are always same on every program execution.
+The `rand()` function is a pseudo-random number generator; it generates numbers randomly, but generated numbers are always the same on every program execution.
 
 ```cpp
 #include <cstdlib>
@@ -2321,14 +2376,14 @@ for (int index = 0; index < 3; index++) {
 ```
 
 ## `srand()` Function
-The `srand()` function does not generate random number but only determines the randomness based on the argument of seed. Each seed will provide randomness unique from others.
+The `srand()` function does not generate random numbers but only determines the randomness based on the argument of seed. Each seed will provide randomness unique from others.
 
-However, `rand()` function is still required to generate random number. Thus, numbers are always generated in same pattern on every program execution in spite of having `srand()` function.
+However, the `rand()` function is still required to generate a random number. Thus, the generated numbers always follow the same pattern on every program execution despite having the `srand()` function.
 
 ```cpp
 #include <cstdlib>
 
-srand(98);	// SEED FOR RANDOMNESS
+srand(98);	// SEED FOR RANDOMNESS: INTEGER 98
 
 for (int index = 0; index < 3; index++) {
     std::cout << rand() << " ";
@@ -2340,15 +2395,15 @@ for (int index = 0; index < 3; index++) {
 ```
 
 ## Truly Random Number
-For different randomness requires renewed seed on each program execution. The best method for seed renewal is using timestamp which is an integer representation of data and time.
+For different randomness requires renewed seed on each program execution. The best method for seed renewal is by using a timestamp that is an integer representation of data and time.
 
-Timestamp can be acquired using `time()` function included in `ctime.h` header. To get the timestamp of an executed time of a `time()` function, pass the number 0 as its argument.
+Timestamp can be acquired using `time()` function included in `ctime.h` header. To get the timestamp of an executed time of a `time()` function, pass the integer 0 as its argument.
 
 ```cpp
 #include <cstdlib>
 #include <ctime>
 
-srand(time(0));	// TIMESTAMP AS SEED FOR RANDOMNESS
+srand(time(0));	// SEED FOR RANDOMNESS: TIMESTAMP
 
 for (int index = 0; index < 3; index++) {
     std::cout << rand() << " ";

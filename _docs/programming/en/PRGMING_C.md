@@ -1435,7 +1435,7 @@ AHello World!
 ```
 
 ### Creating Files
-A new file can be created using the same method of writing a file that does not bound by just writing on the existing file. Creating a file is done simply by designating a file name is doesn't exist on the specified path.
+A new file can be created using the same method of writing a file that does not bound by just writing on the existing file. Creating a file is done simply by designating a file name that doesn't exist on the specified path.
 
 ```c
 /* CREATING FILE */
