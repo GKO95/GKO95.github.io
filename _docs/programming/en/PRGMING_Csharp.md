@@ -10,69 +10,60 @@ summary: "."
 order: 0x03
 ---
 # **C#: INTRO**
+> *Reference: [Microsoft Docs C# Language Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/)*
 
-C# (pronounced as "C sharp") is an object-oriented programming (OOP) language which holds similarity to Java. It has an advantage of ability to access .NET, thus is crucial to understand what .NET really is before proceeding.
-
-It is highly recommended to read [*PRGMING_Cpp.md*](./PRGMING_Cpp.md) document beforehand as C/C++ is referenced quite often to show comparison between these two similar but different programming language.
+C# (pronounced as "C sharp") is object-oriented programming (OOP) language developed by Microsoft to counter against another OOP language called Java by Oracle. While being similar to Java, it implements a lot of familiar concepts from C/C++ language. The language supports convenience on development by providing an enormous amount of various libraries from the .NET framework.
 
 ## .NET
+.NET (successor of the .NET Core) is an open-source software framework by Microsoft. The framework is for developing and running C# applications, available in Windows, Linux, and macOS operating systems.
 
-.NET (previously known as .NET Core) is an open-source software framework developed by Microsoft. It is widely-used for developing and running C# application, available in Windows, Linux, and macOS operating system.
-
-The framework is constituted by CoreFX *(FCL)* and CoreCLR *(CRL)*. Following is a brief description on FCL and CLR:
+The framework is constituted by CoreFX (FCL) and CoreCLR (CRL). The following table briefly describes FCL and CLR:
 
 | COMPONENTS                    | DESCRIPTION                                                     |
 |-------------------------------|-----------------------------------------------------------------|
-| Framework Class Library (FCL) | Provides Standard Libraries for .NET programming and execution. |
-| Common Language Runtime (CLR) | Compiles and executes .NET application using JIT compiler.      |
+| Framework Class Library (FCL) | Provides a standard library for developing the .NET application. |
+| Common Language Runtime (CLR) | Compiles and executes the .NET application using the JIT compiler.       |
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_wiki_netframework.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. .NET Common Language Infrastructure (CLI)</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_wiki_netframework.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. .NET Common Language Infrastructure (CLI)<sub><i>Ref: <a href="https://commons.wikimedia.org/wiki/File:Overview_of_the_Common_Language_Infrastructure.svg">Wikipedia</a></i></sub></center>
 
-.NET implements Common Language Infrastructure (CLI) which is standardized by ISO and ECMA. The standardization specifies that CLI should allow multiple high-level programming languages and support cross-platform despite having different architectures.
+.NET implements Common Language Infrastructure (CLI) that is standardized by ISO and ECMA. The standardization specifies that CLI should allow multiple high-level programming languages and support cross-platform despite having different architectures.
 
 ### Assembly
+C/C++ language uses a compiler such as MSVC, GCC, and Clang to generates the `.exe` executable file or `.dll` library file from the source code to a machine-readable binary code.
 
-In C/C++ programming language, a compiler (e.g. MSVC, GCC, Clang, et cetera) generates *binary* executable file translated from the source code to a machine-readable binary code.
+> These binary files do not need any more compilation to execute the application: thus called *ahead-of-time (AOT) compilation*. 
 
-> This binary executable file does not need anymore compilation to execute application: aka. *ahead-of-time (AOT) compilation*. 
+On the other hand, the .NET Compiler Platform (C# compiler aliased "Roslyn") translates the source code to the Common Intermediate Language (CIL) instead of binary code. The CLI refers to a bytecode that is not machine-readable but machine-independent code supporting cross-platform.
 
-On the other hand, .NET Compiler Platform (C# compiler aliased "Roslyn") generates *bytecode* executable file translated from the source code to the Common Intermediate Language (CIL) instead. Bytecode is a machine-independent code providing advantage on cross-platform support, but is not a machine-readable.
+> The bytecode file requires additional compilation on runtime to execute the application, translating from bytecode to binary code: thus called *runtime* or *just-in-time (JIT) compilation*.
 
->This bytecode executable file requires additional compilation on runtime to execute application, translating from bytecode to binary code: aka. *runtime* or *just-in-time (JIT) compilation*
-
-Assembly, therefore, is a *bytecode executable file* in C# programming language. Just like binary executable, there are two different assembly file type: process assemblies `.exe` and library assemblies `.dll`. However, because assemblies does not contain machine code, C# application cannot be executed without .NET (more specifically, CoreCLR).
+Assembly, therefore, is a *bytecode file* in C# language. Just like binary executable in C/C++ language, there are two different types of assembly: process assemblies `.exe` and library assemblies `.dll`. Because assembly is not a binary code file, the C# application won't execute without the .NET (more specifically, CoreCLR).
 
 ### .NET Framework
-
-.NET Framework is a predecessor of .NET which is deprecated on November, 2020. .NET Framework is only available on desktop version of Windows OS.
+The .NET Framework is a predecessor of .NET that is deprecated in November 2020. The .NET Framework is only available on the desktop version of Windows OS.
 
 ## Object-Oriented Programming
-
-C# is an object-oriented programming which mainly uses "object (aka. instance)" for structuring program. While more detail explanation will be made on later chapter, it is important to know even briefly on what the object and class is to able to understand with no doubt.
+C# is object-oriented programming (abbrev. OOP) language that focuses on program development using data called "object (aka. instance)." Though explained in detail later, it is crucial to understand the concept of object and class in C# language.
 
 ### Object
-
-Objects (aka. instances) are independent unit of data composed of members called *fields* and *methods*. Object members can be accessed using dot (`.`):
+Object (aka. instance) is an independent unit of data composed of members called *field* and *method*. Members of an object are accessed using the member access operator `.`:
 
 | MEMBER   | SYNTAX              | DESCRIPTION                                                                                 |
 |----------|---------------------|---------------------------------------------------------------------------------------------|
-| Field    | `object.field`      | A member of object to store value.                                                          |
-| Method   | `object.method()`   | A member of object to process and/or output data.                                           |
-| Property | `object.property()` | A method specifically designed to output field value, to protect direct field modification. |
+| Field    | `object.field`      | A member that stores value.                                                          |
+| Method   | `object.method()`   | A member that processes and/or outputs data.                                           |
+| Property | `object.property()` | A method specifically designed to output field value without directly accessing the member; this protects the member field from accidental modification. |
 
 ### Class
+The class creates an object where fields and methods are all defined inside the code block. Members cannot be accessed directly from the class but only from an object. Creating an instance from the class is called *instantiation*.
 
-Class is used to create an object. Fields and methods of an object are all schematically defined inside the class. The process of creating instance from the class is called *instantiation*.
+### `static` Modifier
+The `static` access modifier (or access specifier) keyword allows the member accessible from the class without instantiation. Thought convenient to use since it doesn't need an object, the `static` access modifier can make the code a bit more complicating due to its property.
 
-### Static Modifier
+## Eentry Point
+Unlike C/C++ language, C# has a lot of code blocks `{}` but every .NET application starts from the `static void Main()` entry point.
 
-The member prefixed with `static` modifier keyword is accessible without instantiation. This modifier will be used quite often on method declaration because static method can be easily called even without needing to create an instance.
-
-## Startup
-
-This document is mainly focuses on C# project created from Visual Studio 2019 Community Edition. Upon creating project, IDE will automatically create a sample source code shown as follows:
-
-```c#
+```csharp
 using System;
 
 namespace PROJECT
@@ -81,13 +72,13 @@ namespace PROJECT
     {
         static void Main(string[] args)
         {
-            // PLACE YOUR CODE HERE.
+            // Insert code here...
         }
     }
 }
 ```
 
-Most of the code fences in this document will not have full code shown above but only the expression or statements that are necessary. This is to simplify and shorten the length of document for better readability.
+Most of the examples in this document will not have the full code shown above, but only the expression or statements that are necessary. However, be sure to know that the code only functions when inside the `static void Main()` entry point.
 
 # **C#: BASIC**
 
