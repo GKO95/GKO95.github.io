@@ -38,7 +38,7 @@ A preprocessor does not read C++ language source code nor follows C++ language s
 # **C: INSTALL**
 A compiler for C++ is essential when developing with C++ programming language, and there are various C++ compilers available designed by different companies and organizations. The compilation method may differ depending on the compiler, but it doesn't matter for general users as every compiler observes the same ISO standard that defines the working mechanism.
 
-An integrated development environment is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C++ language project.
+An integrated development environment (IDE) is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C++ language project.
 
 ## Visual Studio
 [Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C++ programming, select the "Desktop development with C++" workload.
@@ -49,7 +49,7 @@ Visual Studio will start with the window shown below. To create a new project fo
 
 <div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Startup window of Visual Studio.</center>
 
-Since C++ can create various applications, there are many different kinds of projects available from Visual Studio as well. To create a C project, follow the procedure below:
+Since C++ can create various applications, there are many different kinds of projects available from Visual Studio as well. To create a C++ project, follow the procedure below:
 
 1. Select the language as C++ and choose the "Console App" option.
 
@@ -65,7 +65,7 @@ Since C++ can create various applications, there are many different kinds of pro
 
 The three-step procedure above for creating a C++ console application is the simplest method. To create an empty C++ project, refer to the installation section on the *PRGMING_C* document.
 
-Visual Studio can run a C language program in two different ways: debugging mode (`F5`) and without debugging mode (`Ctrl+F5`). Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
+Visual Studio can run a C++ language program in two different ways: debugging mode (`F5`) and without debugging mode (`Ctrl+F5`). Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
 
 ## Xcode
 [Xcode](https://developer.apple.com/download/release/) is the most renowned IDE for macOS developed by Apple, which uses the clang compiler. Xcode supports various languages, and just like Visual Studio, Xcode has a project option for C++ language.
@@ -214,7 +214,7 @@ namespace2::variable;
 ```
 
 ### Global Namespace
-The global namespace is a code space that doesn't belong to any namespace; thus, it is also called "*namespace*. Data from the global namespace is accessed by placing the scope resolution operator before its identifier.
+The global namespace is a code space that doesn't belong to any namespace. Data from the global namespace is accessed by placing the scope resolution operator before its identifier.
 
 ```cpp
 ::variable;

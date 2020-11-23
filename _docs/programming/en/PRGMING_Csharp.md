@@ -24,7 +24,7 @@ The framework is constituted by CoreFX (FCL) and CoreCLR (CRL). The following ta
 | Framework Class Library (FCL) | Provides a standard library for developing the .NET application. |
 | Common Language Runtime (CLR) | Compiles and executes the .NET application using the JIT compiler.       |
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_wiki_netframework.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. .NET Common Language Infrastructure (CLI)<sub><i>Ref: <a href="https://commons.wikimedia.org/wiki/File:Overview_of_the_Common_Language_Infrastructure.svg">Wikipedia</a></i></sub></center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_wiki_netframework.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 1. .NET Common Language Infrastructure (CLI)<sub><i>Ref: <a href="https://commons.wikimedia.org/wiki/File:Overview_of_the_Common_Language_Infrastructure.svg">Wikipedia</a></i></sub></center>
 
 .NET implements Common Language Infrastructure (CLI) that is standardized by ISO and ECMA. The standardization specifies that CLI should allow multiple high-level programming languages and support cross-platform despite having different architectures.
 
@@ -80,20 +80,55 @@ namespace PROJECT
 
 Most of the examples in this document will not have the full code shown above, but only the expression or statements that are necessary. However, be sure to know that the code only functions when inside the `static void Main()` entry point.
 
-# **C#: BASIC**
+# **C#: INSTALL**
+Although the .NET supports cross-platform, this chapter introduces mainly on installation and preparation for Windows OS. And if possible, focuses on utilizing .NET Core rather than .NET Framework.
 
-General programming language has essential, fundamental, or even helpful data and syntax that needs to be observed and acknowledged when coding. As the beginning of the practical coding, this chapter will introduce basic information on C# language coding.
+An integrated development environment (IDE) is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. Since C# is the language developed by Microsoft, there is one most suitable IDE.
+
+## Visual Studio
+[Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C++ programming, select the ".NET desktop development" workload.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Workload for C# programming on Visual Studio.</center>
+
+Visual Studio will start with the window shown below. To create a new project for C# language, select the "Create a new project" button.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 3. Startup window of Visual Studio.</center>
+
+Since C# can create various applications, there are many different kinds of projects available from Visual Studio as well. To create a C# project, follow the procedure below:
+
+1. Select the language as C# and choose the "Console App (.NET Core)" option.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 4. Creating a C# project on Visual Studio (step 1).</center>
+
+2. Designate names for the project and solution. Here, the project is a `.vcxproj` extension file that manages its source codes and compilation options, and the solution is a `.sln` extension file that can contain multiple projects. It is recommended to open the solution file on Visual Studio unless you only want to open a single project.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 5. Creating a C# project on Visual Studio (step 2).</center>
+
+3. Use the project automatically prepared by Visual Studio.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 6. Creating a C# project on Visual Studio (step 3).</center>
+
+The three-step procedure above for creating a C++ console application is the simplest method. To create an empty C++ project, refer to the installation section on the *PRGMING_C* document.
+
+Visual Studio can run a C# language program in two different ways: debugging mode (`F5`) and without debugging mode (`Ctrl+F5`). Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
+
+# **C#: BASIC**
+Every programming language has its own rules to be observed and fundamental data that works as a basis of the program. Failed to observe this causes either error or unexpected results. As for the beginning of the practical coding, this chapter will introduce basic knowledge of C# language coding.
+
+## Statement Terminator
+The "statement" in programming represents a code that executes or processes data. In C# language, every statement needs to end with a statement terminator denoted by a semicolon `;`.
+
+One of the common mistakes made by C# language beginners is the absence of a statement terminator. Therefore, developers need to keep this in mind when programming with languages based on C (such as C++ and C#).
 
 ## Comment
-
-There are two different comments in C#: line comment and block comment.
+Comment in a programming language is not executed and is commonly used to write down information related to the programming on source codes. There exist two comments in C# language: line comment and block comment.
 
 * **Line comment**
-    : a comment worth a single line of code, and is declared by `//` (double slash).
+    : a comment worth a single line of code, declared by `//`.
 * **Block comment**
-    : a comment with multiple lines of code by using pairs of slash asterisk `/* */`.
+    : a comment with multiple lines of code, declared by `/* */`.
 
-```c#
+```csharp
 /*
 BLOCK COMMENT:
 multiple line of comment can be placed here.
@@ -102,85 +137,83 @@ multiple line of comment can be placed here.
 ```
 
 ## Identifier
+An identifier is a name used to identify data in programming. In other words, it is just a user-defined name. C# language has the following rules when naming an identifier:
 
-Identifier is a name used to identify a data such as namespace, variable, function, object, class, and more. In other word, it is just a (user-defined) name. There are rules identifier has to observe:
-
-* First character is only allowed to have an alphabet letters and underscore `_`.
-* Beside the first character may use alphabet letters, digits, or underscores.
-* Black spaces are prohibited.
+* Only alphabet, number, and underscore `_` is allowed.
+* First letter cannot start with a number.
+* Blank space is prohibited.
 
 ## Namespace
+The namespace is a code space that distinguishes from the others to guarantee the uniqueness of identifiers. It is the same concept as placing files (data) with the same name in different folders (namespace).
 
-Name of data must be unique and cannot be used elsewhere to prevent confliction. This concept is equivalent to a directory (*project*) only allowed to have files (*data*) with unique name. To have the same naming available, these must be stored in separate folder (*namespace*).
+The `namespace` keyword declares the namespace and stores the data inside the code block `{}`. Use the member access operator `.` to access the data inside the namespace. However, namespaces must not share the same name with other namespaces.
 
-Namespace is created using `namespace` keyword and data is stored inside the code block (`{}`). These data inside the namespace can be accessed by dot (`.`) operator. However, name of the namespaces must be unique and cannot be used elsewhere in one program.
-
-```c#
+```csharp
 namespace NAMESPCAE1
 {
 	class Program{
         static void Main(){
-            // CALLING DATA IN DIFFERENT NAMESPACES
+            /* CALLING CLASS AND MEMBERS FROM ANOTHER NAMESPACE */
             NAMESPACE2.CLASS.field;
-            NAMESPACE3.CLASS.method();
+            NAMESPACE3.NAMESPACE4.CLASS.method();
         }
     }
     
-    // NESTED NAMESCOPE
+    /* NESTED NAMESPACE */
     namespace NAMESPACE2
     {
         static class CLASS { public var field; }
     }
 }
 
-// INDEPENDENT NAMESCOPE
+/* NAMESPACE INDEPENDENT FROM NAMESPACE1 */
 namespace NAMESPACE3
 {
-	static class CLASS { public void method() statement; }
+    namespace NAMESPACE4
+    {
+	    static class CLASS { public void method() statement; }
+    }
 }
 ```
 
 ### Global Namespace
+The global namespace (aka. root namespace) is a code space that doesn't belong to any namespace. Data from the global namespace is accessed by placing the `global` keyword and namespace alias qualifier `::` before its identifier.
 
-Aka. "root namespace", global namespace represents calling the data not included in any namespace, thus root of the namespace. Global namespace can be identified by a leading `::` operator (aka. qualifier) with `global` keyword.
-
-```c#
+```csharp
 global::variable;
 ```
 
 ### `using` Declaration
+The `using` keyword makes accessing data inside the namespace simple. Technically, data becomes available without needing to specify the namespace.
 
-Declaration with `using` keyword is used to simplify code by reducing repetitive typing of namespace upon using data.
-
-```cpp
-// ACCESSING NAMESPACE
+```csharp
+/* USING DECLARATION: "System" NAMESPACE */
 using System;
 ```
 
-While `using` keyword is convenient, declaring too many namespace can lead to identity collision problem. Hence, C# supports aliasing namespace that is not available in C/C++.
+However, the overuse of the `using` keyword has the potential to cause a naming collision as the compiler cannot tell which data the code is referencing. Hence, C# supports aliasing namespace that is not available in C/C++.
 
-Namespace aliasing can either reference namespace, or reference data type such as class, structure, and more. The difference between these two is formal can dive deeper into using qualifier (`::`), but latter cannot.
+Namespace aliasing either references namespace or data types such as class, structure, and more. The formal can call the data using the qualifier `::`, but the latter can only call the data already chosen.
 
-```c#
-// NAMESPACE ALIASES: REFERENCING NAMESPACE
-using scope1 = System;            // namespace "System"
+```csharp
+// NAMESPACE ALIASING: REFERENCING NAMESPACE
+using scope1 = System;            // "System" namespace
 scope1::Console.WriteLine("First Line");
 
-// NAMESPACE ALIASES: REFERENCING TYPE
-using scope2 = System.Console;    // class "System.Console"
+// NAMESPACE ALIASING: REFERENCING TYPE
+using scope2 = System.Console;    // "System.Console" class
 scope2.WriteLine("Second Line");
 ```
 
 ## Input & Output
-
-C# displays the results by writing on the console windows and has two different version of output:
+C# language has two outputs for a text-based terminal available as methods of the `System.Console` class:
 
 | OUTPUT                | SYNTAX                      | DESCRIPTION                             |
 |-----------------------|-----------------------------|-----------------------------------------|
-| `Console.Write()`     | `Console.Write("Text")`     | Write function without line terminator. |
-| `Console.WriteLine()` | `Console.WriteLine("Text")` | Write function with new line feature.   |
+| `Console.Write()`     | `Console.Write("Text")`     | Print text to a terminal without a new line. |
+| `Console.WriteLine()` | `Console.WriteLine("Text")` | Print text to a terminal with a new line.  |
 
-```c#
+```csharp
 class Program{
     static void Main(){
         System.Console.Write("Hello");
@@ -196,15 +229,15 @@ HelloWorld!Spam
 Egg
 ```
 
-Meanwhile, there are three different of input which it reads the input data from the console:
+Meanwhile, there are three inputs for a text-based terminal available as methods of the same class:
 
 | INPUT                | RETURN         | DESCRIPTION                                         |
 |----------------------|----------------|-----------------------------------------------------|
-| `Console.Read()`     | Integer        | Read function for a single character in ASCII.      |
-| `Console.ReadLine()` | String         | Read function for a single line of text in string.  |
-| `Console.ReadKey()`  | ConsoleKeyInfo | Read function for a single keyboard button pressed. |
+| `Console.Read()`     | Integer        | Read the input of a single character in ASCII.      |
+| `Console.ReadLine()` | String         | Read the input for a single line of text as a string.  |
+| `Console.ReadKey()`  | ConsoleKeyInfo | Read the input of a single keypress on a keyboard. |
 
-```c#
+```csharp
 using System;
 
 class Program{

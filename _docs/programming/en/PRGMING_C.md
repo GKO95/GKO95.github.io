@@ -38,7 +38,7 @@ A preprocessor does not read C language source code nor follows C language synta
 # **C: INSTALL**
 A compiler for C is essential when developing with C programming language, and there are various C compilers available designed by different companies and organizations. The compilation method may differ depending on the compiler, but it doesn't matter for general users as every compiler observes the same ISO standard that defines the working mechanism.
 
-An integrated development environment is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C language project.
+An integrated development environment (IDE) is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C language project.
 
 ## Visual Studio
 [Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C programming, select the "Desktop development with C++" workload.
