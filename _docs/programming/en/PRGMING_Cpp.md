@@ -508,7 +508,7 @@ The logical operator consist of AND, OR, and NOT logic. Consider `true` and `fal
 
 | OPERATOR | LOGIC | DESCRIPTION                                                |
 | -------- | ----- | ---------------------------------------------------------- |
-| `&&`     | AND   | `true` when all arguments are `true`, else `false`.    |
+| `&&`     | AND   | `true` when all arguments are `true`, else `false`.        |
 | `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
 | `!`      | NOT   | Changes `true` to `false` and vice versa.                  |
 
@@ -549,7 +549,7 @@ if (condition)
 if (condition) statement;
 ```
 
-The `if` statement can locate inside another `if` statement, called "nested `if`". Use a code block (`{}`) to distinguish between `if` statements to avoid possible misinterpretation made by a compiler.
+The `if` statement can locate inside another `if` statement, called "nested `if`". Use a code block `{}` to distinguish between `if` statements to avoid possible misinterpretation made by a compiler.
 
 ```cpp
 if (condition)
@@ -604,7 +604,7 @@ The vocabulary *ternary* indicates the statement takes three arguments. The tern
 ## `switch` Statement
 Conditional `switch` statement evaluates whether a variable matches a value assigned to the `case` keyword and executes the corresponding code if true. After execution, the `break` statement must locate to prevent further evaluation of the next `case` keyword.
 
-If no condition matches, the statement automatically executes codes under the `default` keyword that is optional. The `default` keyword does not require the `break` statement as opposed to the `case` keyword.
+If no condition matches, the statement automatically executes codes under the `default` keyword that is mandatory. The `default` keyword does not require the `break` statement as opposed to the `case` keyword.
 
 ```cpp
 switch (argument)

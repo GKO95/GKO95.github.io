@@ -60,7 +60,7 @@ The class creates an object where fields and methods are all defined inside the 
 ### `static` Modifier
 The `static` access modifier (or access specifier) keyword allows the member accessible from the class without instantiation. Thought convenient to use since it doesn't need an object, the `static` access modifier can make the code a bit more complicating due to its property.
 
-## Eentry Point
+## Entry Point
 Unlike C/C++ language, C# has a lot of code blocks `{}` but every .NET application starts from the `static void Main()` entry point.
 
 ```csharp
@@ -269,13 +269,10 @@ Console.ReadKey:
 ```
 
 ### Placeholder
+A placeholder designates where data should locate within the text using zero-based integers surrounded by a curly bracket. The data that comes after the formatted text goes to the placeholder in ascending order.
 
-Placeholder is used in formatted string to place variable value to certain location of text.
-
-```c#
-int variable1 = 3;
-char variable2 = 'G';
-System.Console.Write("First: {0}, Second: {1}, Return to {0}.", variable1, variable2);
+```csharp
+System.Console.Write("First: {0}, Second: {1}, Return to {0}.", 3, 'G');
 ```
 
 ```
@@ -283,20 +280,19 @@ First 3, Second G, Return to 3.
 ```
 
 ### Escape Character
+Escape character `\` is used to escape from a sequence of characters and execute certain operations within text-based data. In the introduction on string data type, `\n` is used to change to a new line.
 
-Escape character `\` is used to escape from sequence of character and execute certain operation within text-base data.
-
-```c#
-System.Console.Write("First Line\nSecond Line");
+```csharp
+System.Console.Write("Hello\nWorld!");
 ```
 
 ```
-First Line
-Second Line
+Hello
+World!
 ```
 
 | SYNTAX | DESCRIPTION    |
-|--------|----------------|
+| ------ | -------------- |
 | `\n`   | New line       |
 | `\t`   | Horizontal tab |
 | `\\`   | Backslash      |
@@ -305,71 +301,89 @@ Second Line
 | `\"`   | Double quote   |
 
 ## Data Type
+A data type is one of the crucial factors which determines the type and byte size of the data. A well-implemented data type can make a program efficient on both memory and processing time. C# language has several numbers of built-in data type as follows:
 
-Data type is one of the important factor which determines type and byte size of the data. A well-implemented data type can results memory and time efficiency when processing the script.
-
-C# programming language have several number of pre-defined type identifier as follows:
-
-| IDENTIFIER | DATA TYPE               | DESCRIPTION                                                                                          |
-|------------|-------------------------|------------------------------------------------------------------------------------------------------|
-| `int`      | Integer                 | 32-bits precision integer number.<br />Size: 4 bytes                                                 |
-| `float`    | Floating point number   | Real number with decimal points<br />Size: 4 bytes (requires suffix `f` or `F`)                      |
-| `double`   | Double-precision float  | Float with doubled precision and memory.<br />Size: 8 bytes (with or without suffix `d` or `D`)      |
-| `decimal`  | Highest-precision float | Float with greater precision and memory<br/>Size: 16 bytes (requires suffix `m` or `M`)              |
-| `char`     | Character: `''`         | A single character, e.g., `'A'` and `'?'`.<br />Size: 1 byte                                         |
-| `string`   | String: `""`            | Series of characters under the namespace `std`.<br />Size: N/A (depends on overall character length) |
-| `bool`     | Boolean                 | Non-zero represents `True` while zero is `False`.<br />Size: 1 byte                                  |
-| `var`      | Automatic               | Data type is declared automatically.<br />Useful for declaring new variable with complex data type.  |
-| `void`     | Void                    | Non-specific data type.<br />Size: 1 byte                                                            |
+| IDENTIFIER | DATA TYPE               | DESCRIPTION                                                                                            |
+|------------|-------------------------|--------------------------------------------------------------------------------------------------------|
+| `int`      | Integer                 | 32-bits precision integer number.<br />Size: 4 bytes                                                   |
+| `float`    | Floating point number   | Real number with decimal points<br />Size: 4 bytes (suffixes `f` or `F`)                               |
+| `double`   | Double-precision float  | Float with doubled precision and memory.<br />Size: 8 bytes (suffixes `d` or `D` or none)              |
+| `decimal`  | Highest-precision float | Float with greater precision and memory<br/>Size: 16 bytes (suffixes `m` or `M`)                       |
+| `char`     | Character: `''`         | A single character, such as `'A'` or `'?'`.<br />Size: 2 bytes                                         |
+| `string`   | String: `""`            | A series of characters, such as `"Hello World!"`<br />Size: N/A (varies by the length)                 |
+| `bool`     | Boolean                 | Non-zero represents `true` while zero is `false`.<br />Size: 1 byte                                    |
+| `var`      | Automatic               | Automatically selected by the compiler.<br />Useful for declaring new variable with complex data type. |
+| `void`     | Void                    | Non-specific data type.<br />Size: 1 byte                                                              |
 
 ### `sizeof()` Operator
+The `sizeof()` function returns allocated memory size of the type or data in bytes.
 
-An operator that returns the allocating memory size of data type or variable in bytes.
-
-```c#
+```cpp
 sizeof(int);		// SIZE: 4 BYTE
-sizeof(char);		// SIZE: 1 BYTE
+sizeof(char);		// SIZE: 2 BYTE
 ```
 
 ## Variable
+Variable is a container for data that can be assigned using the assignment operator `=`. C# language must designate a variable with one of the data types, which can only have data with that data type.
 
-Variable is a container for the data which can be assigned using assignment operator `=`. There are three different common stages in variable: declaration, definition, and initialization.
+The example code below tells a compiler the existence of the `variable` integer variable. The variable has also allocated memory at the same time to store a value, called *declaration* or *definition* in programming.
 
-* **Declaration**
-  : declaration is declaring existence of the construct of such as variables, objects, and more. The declaring also includes specifying which data type the construct is.
+```csharp
+/* "variable" VARIABLE DECLARATION */
+int variable;
+```
 
-  ```c#
-  int variable;
-  ```
-  
-* **Definition**
-  : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
+Unlike C/C++ language, the ECMA-334 standard does not distinguish the difference between declaration and definition but rather considers them the same instead. It is because the OOP C# language compiler is different from the compiler for C/C++ language.
 
-  ```c#
-  variable = 3;
-  ```
+A defined variable does not need to specify the data type as a compiler already knows what type of data it stores. Programming languages, in general, locates assigned data (ex. variable) on the left and assignee (ex. a constant value or another variable) on the right. Otherwise will cause an error or function improperly.
 
-* **Initialization**
-  : initialization is assigning the initial value to the construct, simply the *first* definition. Since the first definition is generally done on the same time when declaring the construct. Hence, initialization is commonly thought by people as *declaration + definition* which is not always true.
+### Initialization
+Initialization is the first assignment to a variable where it commonly occurs in the *definition* process.
 
-  ```c#
-  int variable = 3;
-  ```
-
-Once the declaration sets data type to a variable, that variable can only take the value of that designated data type.
+```csharp
+/* VARIABLE INITIALIZATION */
+int variable = 3;
+```
 
 ### Local & Global Variable
+There are three types of variable in C# language:
 
-**Local variable** is a variable declared inside a code block, such as namespace, function, and class. Data stored in local variable is destroyed when exiting the code block, thus cannot be used outside. Local variable is allowed to have same variable name declared outside (technically, is borrowing the name as a different identity).
+* **Local variable** is a variable defined within the code block, such as namespaces, functions, and classes. A local variable releases data when escapes from the code block and unavailable to use outside. It may have the same name as other variables defined outside the code block.
 
-**Global variable** is not supported in C# programming language. Theoretically, it is a variable declared on a global scope of the script which is outside a class code block and accessible on any class within the script. However, `global` keyword is not to declare global variable but specify global namespace instead.
+  ```csharp
+  class Program {
+      static void Main() {
+          // Insert code here...
+
+          /* LOCAL VARIABLE */
+          int variable;
+      }
+  }
+  ```
+
+* **Global variable** is officially not supported in C# language. Conceptually, a variable that does not belong to any code blocks within the script, but C# is an OOP language that cannot declare a variable outside the code block.
+
+* **Static variable** is a variable with the `static` access modifier that is accessible directly from the class without instantiation. Unlike a local variable, it retains the data even after escaping from the code block, making a static variable an alternative to a global variable in C# language.
+
+  ```csharp
+  class Program {
+
+      /* STATIC VARIABLE: "public" keyword makes accessible from outside. */
+      public static int variable;
+
+      static void Main() {
+          // Insert code here...
+
+      }
+  }
+  ```
 
 ### Constant Variable
+A constant variable is a variable that cannot change its value after initialization. The `const` keyword declares variable as a constant.
 
-Constant variable is a special type of variable that cannot be changed after its initialization. The keyword `const` is used to declare it as a constant variable.
-
-```c#
-const int variable = 3;
+```csharp
+/* CONSTANT DEFINITION */
+const int variable = 1;
 ```
 
 ### Static Variable
@@ -381,82 +395,83 @@ static int variable = 3;
 ```
 
 ## Data Type Conversion
+Data type conversion changes data type stored in a variable into other desired type. Conversion from the small size data to a compatible but larger size data type is called *implicit* conversion. Implicit conversion is a natural data type conversion automatically done by a compiler as no data loss occurs.
 
-Data type conversion force-changes data type stored in a variable into other desired type. C# programming language has three different data type conversion methods available:
-
-### Implicit Conversion
-
-Implicit conversion automatically converts smaller size data to its compatible type of a larger size data by the compiler. No special syntax is needed and is safe from any data loss/corruption.
-
-```c#
-short A = 1;	// 2 BYTES INTEGER
-int B = A;		// 4 BYTES INTEGER
+```csharp
+short A = 1;    // 2 BYTES INTEGER
+int B = A;      // 4 BYTES INTEGER
 ```
 
-### Explicit Conversion
+On the other hand, *explicit* conversion (aka. casting) risks data loss/corruption upon converting data type. Traditional C-style casting syntax uses parenthesis `()` as follows:
 
-Explicit conversion (aka. casting) is done when converting larger size data to smaller size data but with a risk of data loss/corruption. Conversion is done using parentheses and there's no guarantee the conversion would succeed as intended.
+```cpp
+float A = 1.9f;  // 4 BYTES FLOAT
+int B = (int)A;  // 4 BYTES INTEGER - INCOMPATIBLE: only returns its integer value.
+```
 
-```c#
-double A = 1.9;	// 8 BYTES FLOAT
-int B = (int)A;	// 4 BYTES INTEGER - INCOMPATIBLE: only returns its integer value.
+```
+1
 ```
 
 ### Helper Class Conversion
+A helper class is a class that *helps* do something by providing specific functionalities. The `System.Convert` is one of the helper classes for converting data type.
 
-Helper Class is a category of class that *helps* do something by providing functionalities. Class `System.Convert` is one of the helper class used for converting data type.
-
-```c#
+```csharp
 int    ivalue = System.Convert.ToInt32(Console.ReadLine());
 bool   bvalue = System.Convert.ToBoolean(Console.ReadLine());
 double dvalue = System.Convert.ToDouble(Console.ReadLine());
 ```
 
+### `is` Operator
+The `is` operator asserts whether the given data is compatible with another data type in C# language.
+
+```csharp
+variable is Type;
+```
+
+If the `variable` is compatible with the `Type` data type, the statement returns the `true` boolean value, otherwise `false`.
+
 ## Operator
+An operator is the simplest form of the data processing unit that manipulates the value of operands. It is placed before, after, or between the operands.
 
-Operator is the simplest form of data processing unit which can manipulate the value of operands. It operates simply by placing before, after, or between the operands.
+### Arithmetic Operator
+The arithmetic operator mainly focuses on processing numeric data types. Following is a list of arithmetic operators used by numeric data type:
 
-### Arithmetic Operation
+|             NAME             | OPERATOR | DESCRIPTION                                                  |
+| :--------------------------: | -------- | ------------------------------------------------------------ |
+|           Addition           | `+`      | -                                                            |
+|         Subtraction          | `-`      | -                                                            |
+|        Multiplication        | `*`      | -                                                            |
+|           Division           | `/`      | When both operands are integer: an integer dividend without a remainder.<br/>When at least one operand is real (float or double): a real dividend (float or double). |
+| Remainder (Modulus Division) | `%`      | Remainder only returns an integer.                              |
 
-Arithmetic operator is mainly focused on processing numeric data type. Following is a list of arithmetic operator used by numeric data type:
+For easier readability, you may place blank spaces between numbers and operators which does not affect its output.
 
-| NAME                         | OPERATOR | DESCRIPTION                                                                                                                                                              |
-|:----------------------------:|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Addition                     | `+`      | -                                                                                                                                                                        |
-| Subtraction                  | `-`      | -                                                                                                                                                                        |
-| Multiplication               | `*`      | -                                                                                                                                                                        |
-| Division                     | `/`      | When both operands are integer: dividend is an integer without remainder.<br/>When at least one operand is real (float or double): dividend is a real (float or double). |
-| Remainder (Modulus Division) | `%`      | Remainder only returns integer.                                                                                                                                          |
+### Assignment Operator
+The assignment operator is another operation used within numeric data types. Following is a list of assignment operators used by numeric data type:
 
-For easier readability of the arithmetic operator, you can place blank space between number and operator, and it doesn’t affect anything on output.
+| OPERATOR | EXAMPLE  | EQUIVALENT  |
+| -------- | -------- | ----------- |
+| `+=`     | `x += 1` | `x = x + 1` |
+| `-=`     | `x -= 1` | `x = x - 1` |
+| `*=`     | `x *= 1` | `x = x * 1` |
+| `/=`     | `x /= 1` | `x = x / 1` |
+| `%=`     | `x %= 1` | `x = x % 1` |
 
-### Assignment Operation
+Although not an assignment operator, the similar increment and decrement operator has identical meaning as follows:
 
-Assignment operator is another operation used within numeric data type. Following is a list of assignment operator used by numeric data type:
+| OPERATOR    | EXAMPLE   | DESCRIPTION       |
+| ----------- | --------- | ----------------- |
+| `++` prefix | `x = y++` | `x = y; y = y+1;` |
+| `++` suffix | `x = ++y` | `y = y+1; x = y;` |
+| `--` prefix | `x = y--` | `x = y; y = y-1;` |
+| `--` suffix | `x = --y` | `y = y-1; x = y;` |
 
-| OPERATOR | EXAMPLE | EQUIVALENT |
-|----------|---------|------------|
-| `+=`     | `x+=1`  | `x=x+1`    |
-| `-=`     | `x-=1`  | `x=x-1`    |
-| `*=`     | `x*=1`  | `x=x*1`    |
-| `/=`     | `x/=1`  | `x=x/1`    |
-| `%=`     | `x%=1`  | `x=x%1`    |
-
-Although not an assignment operator, a similar **increment and decrement** of the numerical value can be expressed as follow on C-based programming language:
-
-| OPERATOR    | EXAMPLE | DESCRIPTION   |
-|-------------|---------|---------------|
-| `++` prefix | `x=y++` | `x=y; y=y+1;` |
-| `++` suffix | `x=++y` | `y=y+1; x=y;` |
-| `--` prefix | `x=y--` | `x=y; y=y-1;` |
-| `--` suffix | `x=--y` | `y=y-1; x=y;` |
-
-### Relational Operation
-
-Relational operator is for checking whether the relational condition between two numeric values and returns Boolean value whether condition is true or false. Following is a list of relational operator:
+### Relational Operator
+The relational operator is used to compare the relation of two values, returning either `true` or `false` boolean value. Following is a list of relational operators:
 
 | OPERATOR | DESCRIPTION              |
-|----------|--------------------------|
+| -------- | ------------------------ |
 | `<`      | Lesser than              |
 | `<=`     | Lesser than or equal to  |
 | `>`      | Greater than             |
@@ -464,61 +479,61 @@ Relational operator is for checking whether the relational condition between two
 | `==`     | Equal to                 |
 | `!=`     | Not equal to             |
 
-### Logical Operation
+### Logical Operator
+The logical operator consist of AND, OR, and NOT logic. Consider `true` and `false` as binary counterpart of 1 and 0.
 
-Logical operator consist of AND, OR, and NOT logic. When doing so, think of `true` and `false` as binary 1 and 0, respectively. In wider sense, any non-zero number is deemed `true`.
-
-| OPERATOR | LOGIC | DESCRIPTION                                             |
-|----------|-------|---------------------------------------------------------|
-| `&&`     | AND   | `true` when all the arguments are `true`, else `false`. |
-| `        |       | `                                                       | OR | `true` when at least one argument is `true`, else `false`. |
-| `!`      | NOT   | Change `true` to `false` and vice versa.                |
+| OPERATOR | LOGIC | DESCRIPTION                                                |
+| -------- | ----- | ---------------------------------------------------------- |
+| `&&`     | AND   | `true` when all arguments are `true`, else `false`.        |
+| `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
+| `!`      | NOT   | Changes `true` to `false` and vice versa.                  |
 
 # **C#: CONDITIONAL AND LOOP**
-
-Conditional and loop statement is commonly used and one of the essential pieces of code in programming. This chapter introduces list of conditional and loop statements in C# programming.
+Conditional and iteration (or loop) statements are two of the most commonly used in programming. The "statement" in programming represents a code that executes or processes data. This chapter introduces a list of conditional and iteration statements in C# language programming.
 
 ## `if` Statement
+Conditional `if` statement runs code if the condition holds. When the condition evaluates `true`, the indented codes are carried out but otherwise ignored.
 
-Conditional `if` statement runs code if the condition is true. When the condition evaluates `true`, the statements are carried out but otherwise ignored.
-
-```c#
-if (condition) {
-    statements;
+```csharp
+if (condition)
+{
+	statements;
 }
 
 // SIMPLIFIED STATEMENT
 if (condition) statement;
 ```
 
-It is possible to place`if` statement in another `if` statement, called "nested `if`". It is recommended to use  code block (`{}`) to distinguish between `if` statements to avoid computer’s misinterpretation.
+The `if` statement can locate inside another `if` statement, called "nested `if`". Use a code block `{}` to distinguish between `if` statements to avoid possible misinterpretation made by a compiler.
 
-```c#
-if (condition) {
-    if (condtion) { 
+```csharp
+if (condition)
+{
+    if (condtion)
+    { 
         statements;
     } 
 }
 ```
 
 ### `else` Statement
+A conditional `else` statement cannot be used alone and must be followed by an `if` condition. The statement contains code that executes when evaluated `false`.
 
-Conditional `else` statement must be followed after `if` statement as it cannot be used alone. The statement contains code that is called when the condition evaluates `false`.
-
-```c#
-if (condition) {
+```csharp
+if (condition)
+{
     statements;
 }
-else {
+else
+{
     statements; 
 }
 ```
 
 ### `else if` Statement
+A conditional `else if` statement is a combination of `else` and `if` conditions; when the first condition evaluates `false`, the `else if` statement provides a new condition different from the previous one. 
 
-Conditional `else`-`if` statement is a combination of `if` and `else` statement; when the first condition evaluates `false`, the `else if` statement provides second (or more) chance to evaluate condition different from the first one.
-
-```c#
+```csharp
 if (condition) {
     statements;
 }
@@ -530,25 +545,38 @@ else {
 }
 ```
 
-However, this is not the same as chain of `else`-`if` conditional statement as that is a combination of two different conditional set, while `else if` statement guarantees a single conditional set.
+However, this statement is different from the chain of `else`-`if` conditional statement as that is a combination of two sets of conditions. On the other hand, `else if` conditional statement is a continuation of an existing evaluation instead of starting new conditioning.
 
 ### Ternary Operator
+A conditional statement can be simplified using the ternary operator shown below:
 
-Conditional statement can be expressed simply using ternary (`?:`) operator as shown below:
-
-```c#
+```csharp
 condition ? return_true : return_false;
 ```
 
-The vocabulary *ternary* represents the statement takes three arguments. Ternary operator should not be overused as it reduces readability, but useful on variable assignment.
+The vocabulary *ternary* indicates the statement takes three arguments. The ternary operator should not be overused as it reduces readability but useful on variable assignment.
+
+### `as` Operator
+The `as` operator converts the given data to another data type in C# language; the operator returns `null` if the conversion is invalid.
+
+```csharp
+/* "as" OPERATOR */
+variable as Type;
+```
+
+The example above attempts to convert the `variable` data to the `Type` data type. The operator is equivalent to the expression below.
+
+```csharp
+/* EQUIVALENCE OF THE "as" OPERATOR */
+variable is Type ? (Type)variable : (Type)null;
+```
 
 ## `switch` Statement
+Conditional `switch` statement evaluates whether a variable matches a value assigned to the `case` keyword and executes the corresponding code if true. After execution, the `break` statement must locate to prevent further evaluation of the next `case` keyword.
 
-Conditional `switch` statement checks the argument passed to the function and compare its value referenced on `case` keyword. Every case needs `break` at the end of the group of statements to prevent the statement from proceeding condition evaluation afterward.
+If no condition matches, the statement automatically executes codes under the `default` keyword that is optional. The `default` keyword does not require the `break` statement as opposed to the `case` keyword.
 
-When no case is true to the expression, the statements from `default` keyword is returned. Default case is not necessary as well but is recommended for cases not listed.
-
-```c#
+```csharp
 switch (argument)
 {
     case value1:
@@ -559,13 +587,12 @@ switch (argument)
         break;
     default:
         statements;
-        break;
 }
 ```
 
-The `switch` statement can have its cases grouped together for a single label:
+Multiple `case` keywords may share the same code as follows:
 
-```c#
+```csharp
 switch (argument) {
     case value1:
     default:
@@ -581,43 +608,39 @@ switch (argument) {
 }
 ```
 
-
 ### `break` Statement
-
-The `break` statement can be used to end a loop prematurely, before complete iteration is made. When encountered inside a loop, immediately escapes from the loop but does not break from its outer loop.
+The `break` statement is to end a loop prematurely. When encountered in the loop, the `break` statement escapes from the current loop but does not escape from the nesting loop.
 
 ### `continue` Statement
-
-The `continue` statement skips the rest of the statement below in the loop and jumps back to the conditioning part. This maintains the loop iteration rather than escaping the loop like `break` statement.
+The `continue` statement skips the rest of the code below in the loop and jumps back to the conditioning part. It maintains the iteration rather than escaping from it like the `break` statement.
 
 ## `while` Loop
+A `while` loop statement repeatedly executes statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `false`.
 
-The `while` loop statement repeatedly execute statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `false`.
-
-```cpp
-while (condition) {
+```csharp
+while (condition)
+{
     statements;
 }
 
 // SIMPLIFIED STATEMENT
-while(condition) statement;
+while (condition) statement;
 ```
 
 ## `do`-`while` Statement
+The `do`-`while` loop statement is similar to the `while` loop statement, but the former executes code first then evaluates, and the latter is vice versa.
 
-The `do`-`while` loop statement is alternative of the `while` statement. Instead of checking the condition before executing looping statement, this statement is does opposite: execute looping statement first, then check the condition.
-
-```cpp
-do {
+```csharp
+do
+{
     statements
 } while (condition);
 ```
 
 ## `for` Loop
+The `for` loop statement repeatedly executes statements inside (aka. iterate) as long as the condition holds. Its local variable changes as specified on each iteration, which commonly uses integer increment.
 
-The `for` loop statements repeatedly execute statements inside (aka. iterate) as long as the local variable holds the condition. On each loop, value (generally number) of the variable is incremented/decremented.
-
-```cpp
+```csharp
 for (variable; condition; increment) {
     statements;
 }
@@ -627,19 +650,18 @@ for(variable; condition; increment) statement;
 ```
 
 ### Infinite `for` Loop
+The `for` loop can run an infinite loop using the following syntax:
 
-The `for` loop can run infinite loop using the following syntax:
-
-```c#
+```csharp
 for ( ; ; ) { 
 	statements;
 }
 ```
+
 ## `foreach` Loop
+The `foreach` loop statement iterates execution while in range. The range is generally given by the Collection, which is the data that can sequence its elements individually.
 
-The `foreach` loop statement execute statements while in range. The range is generally refers to Collection such as array which its element can be sequenced one-by-one.
-
-```c#
+```csharp
 foreach (variable in range) {
 	statements;
 }
@@ -648,10 +670,9 @@ foreach (variable in range) {
 foreach (variable in range) statement;
 ```
 
-The Collection in C# will be introduced in *C#: COLLECTION* chapter.
+Refer to the next chapter, *C#: COLLECTION*, to know more about the collection data in C# language.
 
 # **C#: COLLECTION**
-
 C# has a Collection that can store multiple data of the same type at once. While the most common and general collection is an array, there are various other collections available in .NET that are worth knowing.
 
 ## Array
