@@ -764,6 +764,7 @@ int arr[size1][size2] = { {value11, value12, ... }, {value21, value22, ...}, ...
 /* 다차원 배열의 초기화 2 */
 int arr[][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 ```
+
 ## 배열 클래스
 > *참고: [http://www.cplusplus.com/reference/array/](http://www.cplusplus.com/reference/array/)*
 
@@ -796,9 +797,7 @@ std::vector<int> vec;
 C++ 언어는 하나의 핵심 함수인 `main()`을 기점으로 모든 프로그램이 실행된다. 함수에 대한 이해는 매우 중요하며, 직접 함수를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있는데, 이러한 프로그래밍 기법을 *함수형 프로그래밍(functional programming)*이라고 한다. 본 장은 C++ 언어에서 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
 
 ## 함수
-함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다.
-
-함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
+함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
 ```cpp
 int variable = {0, 3, 5, 9};

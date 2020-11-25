@@ -673,54 +673,53 @@ foreach (variable in range) statement;
 Refer to the next chapter, *C#: COLLECTION*, to know more about the collection data in C# language.
 
 # **C#: COLLECTION**
-C# has a Collection that can store multiple data of the same type at once. While the most common and general collection is an array, there are various other collections available in .NET that are worth knowing.
+C# has a collection that can store multiple data of the same type. Aside from the best-renowned "array" collection, there are various other collections available in .NET that are worth knowing.
 
 ## Array
+An array is a container for data of the same data type in sequence. Declare an array by designating its size of how much data it can store using a bracket `[]`.
 
-Array is a collection used to store an indexed of item of same data type. Bracket `[]` is placed after the data type to declare an array.
-
-```c#
-// ARRAY DECLARATION
+```csharp
+/* ARRAY DECLARATION */
 int[] arr;
 ```
 
-Creating and defining size of an array is done by `new` keyword used for instantiation:
+The `new` keyword creates (that is, instantiate) an array instance that stores multiple data.
 
-```c#
-// INITIALIZATION
+```csharp
+/* INSTANTIATION */
 int[] arr = new int[size];
 ```
 
-which creates array filled with element of `0` or `NULL` value. Elements can be assigned with value after initialization by accessing individually using bracket `[]`:
+The newly created array is filled with `0` or `NULL` value. After instantiation, access each element using a bracket `[]` with an index starting from 0.
 
-```c#
+```csharp
 int[] arr = new int[size];
 
-// ASSIGNMENT: ELEMENTWISE
+/* ASSIGNMENT TO INDIVIDUAL ELEMENT */
 arr[0] = value1;
 arr[1] = value2;
 ```
 
-To assign values on initialization instead, curly bracket `{}` is used to assign values to each element in sequence. Following is a three different methods of assignment with explanation:
+Assign values in order within a pair of curly bracket `{}` to initialize an array with instantiation. C# has three ways of initializing an array.
 
-```c#
-// ASSIGNMENT 1
+```csharp
+/* ASSIGNMENT 1 */
 int[] arr = new int[size] {value1, value2, ... };
 
-// ASSIGNMENT 2
+/* ASSIGNMENT 2 */
 int[] arr = new int[] {value1, value2, ... };
 
-// ASSIGNMENT 3
+/* ASSIGNMENT 3 */
 int[] arr = {value1, value2, ... };
 ```
 
-1. `// ASSIGNMENT 1`: values must be fulfilled on every elements in the array, else results compilation error.
-2. `// ASSIGNMENT 2`: initial array size can dynamically designated based on the number of assigned value.
-3. `// ASSIGNMENT 3`: more simplified version of "`// ASSIGNMENT 2`" method.
+1. `ASSIGNMENT 1`: must fill every element of an array, else results in a compilation error.
+2. `ASSIGNMENT 2`: dynamically designates an array size based on the number of assigned values.
+3. `ASSIGNMENT 3`: more simplified version of the "`ASSIGNMENT 2`" method.
 
-Calling array itself does not return a sequence of elements within; instead will return the information of array data. Only a single element at a time can be called.
+Calling an array itself does not return elements but instead returns the information of array data. However, a character array shows characters in sequence like a string, which technically is not.
 
-```c#
+```csharp
 int[] arr = new int[size] {value1, value2, ... };
 
 System.Console.WriteLine(arr);
@@ -733,33 +732,30 @@ value1
 ```
 
 ### `new` Keyword
+The `new` keyword creates a new instance (aka. instantiate) of the specified data type.
 
-The `new` operator is used to create new instance of a type.
-
-> While in C/C++ represented dynamic allocation, in C# is used on most of the classes to create instance.
+> While C++ uses the `new` keyword for a dynamic allocation, C# uses as an operator for instantiation. C# language does not have a feature where the developer has to allocate memory manually.
 
 ### Multi-dimensional Array
+A multi-dimensional array stores another array as its element. These arrays used as elements must share the same length and data type.
 
-Multi-dimensional array can be declared and initialized that holds values under subarrays which shares the same length:
-
-```c#
-// MULTI-DIMENSIONAL 1
+```csharp
+/* MULTI-DIMENSIONAL ARRAY 1 */
 int[ , ] arr = new int[3,2] { {value1, value2}, {value3, value4}, {value5, value6} };
 
-// MULTI-DIMENSIONAL 2
+/* MULTI-DIMENSIONAL ARRAY 2 */
 int[ , ] arr = new int[ , ] { {value1, value2}, {value3, value4}, {value5, value6} };
 
-// MULTI-DIMENSIONAL 3
+/* MULTI-DIMENSIONAL ARRAY 3 */
 int[ , ] arr = { {value1, value2}, {value3, value4}, {value5, value6} };
 ```
 
-Since multi-dimensional array is created from a single declaration, array data is stored in a single block of memory.
+A multi-dimensional array only uses a block of memory as it is instantiated from a single declaration despite having multiple array data.
 
 ### Jagged Array
+A jagged array can have another same data type of array data as its elements irrelevant to its size.
 
-Jagged array can have another arrays as its elements irrelevant to its size.
-
-```c#
+```csharp
 int[][] arr = new int[3][] {
     new int[] {3}, 
     new int[] {1, 4, 1}, 
@@ -767,279 +763,231 @@ int[][] arr = new int[3][] {
 };
 ```
 
-Because the array contains already declared stored in separate memory location, jagged array implements more than single block of memory.
+Because these array elements are already instantiated and allocated to individual memory space, a jagged array utilizes more than a single memory block.
 
 ## Collection
+> Though not necessary, referring to the *C#: GENERIC* chapter will help understand this chapter better.
 
-*To better understand this section, it is recommended to read chapter "C#: GENERIC" beforehand.*
+The collection is an advanced version of an array that can shrink and extend size flexibly to accommodate any number of data, each of them having unique special features.
 
-Collection is an advanced version of array that can shrink and extend size flexibly to accommodate any number of data, each of them having unique special features.
+The collection has two categories: generic and non-generic. Though explained in a later chapter, the term "generic" refers to the data that designate its data type upon instatiation using angled bracket `<>`.
 
-Collection is divided into two categories: generic and non-generic collection. While the term "generic" will be introduced on later chapter, brief explanation is its data type can be designated upon declaration using angled bracket (`<>`).
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF GENERIC COLLECTION (EXAMPLE)
+/* INSTATIATION OF GENERIC COLLECTION: INTEGER */
 Collection<int> collectionName = new Collection<int>();
 ```
 
-### Lists
+### `List` Collection
+The `list<T>` is a generic collection similar to an array but with flexible sizings, such as inserting and removing the elements. It is a C# counterpart of the vector class in C++ language.
 
-List is a generic collection similar to array but its flexible sizing allows inserting and removing the elements more dynamic. This can be considered as C# version of `std::vector` class in C++ language.
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF LIST COLLECTION (EMPTY)
+/* INSTANTIATION OF List<T> COLLECTION: INT */
 List<int> LIST = new List<int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF LIST COLLECTION
+/* INITIALIZATION OF List<T> COLLECTION: INT */
 List<int> LIST = new List <int>() {3, 1, 4, 1, 5};
 
 System.Console.WriteLine(LIST[0]);
 ```
-
 ```
 3
 ```
 
-### Sorted List
+### `SortedList` Collection
+The `SortedList<TKey, TValue>` is a variation of the `List<T>` collection where the element is now in `{key, value}` format. Here, the key is a unique element identifier for accessing the value. The collection automatically sorts elements by the key.
 
-Sorted list is a variation of the list generic collection where elements are paired in `{key, value}` format. Here, key is a unique element identifier used to access the element value instead of integer index.
-
-Sorted list automatically sorts elements by the key.
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF SORTED LIST COLLECTION (EMPTY)
+/* INSTATIATION OF SortedList<TKey,TValue> COLLECTION: STRING, INT */
 SortedList<string, int> SLIST = new SortedList<string, int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF SORTED LIST COLLECTION
-SortedList<string, int> SLIST = new SortedList<string, int>() { {"B", 3}, {"A", 1} };
+/* INITIALIZATION OF SortedList<TKey,TValue> COLLECTION: STRING, INT */SortedList<string, int> SLIST = new SortedList<string, int>() { {"B", 3}, {"A", 1} };
 
 System.Console.WriteLine(SLIST["B"]);
 ```
-
 ```
 3
 ```
 
-### Dictionary
+### `Dictionary` Collection
+The `Dictionary<TKey, TValue>` is a variation of the `List<T>` collection where the element is now in `{key, value}` format. Here, the key is a unique element identifier for accessing the value. The collection does not automatically sort elements by the key.
 
-Dictionary is a variation of the list generic collection where elements are paired in `{key, value}` format. Here, key is a unique element identifier used to access the element value instead of integer index.
-
-Dictionary do not sorts elements by the key.
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF DICTIONARY COLLECTION (EMPTY)
+/* INSTATIATION OF Dictionary<TKey,TValue> COLLECTION: STRING, INT */
 Dictionary<string, int> DICT = new Dictionary<string, int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF DICTIONARY COLLECTION
-Dictionary<string, int> DICT = new Dictionary<string, int>() { {"B", 3}, {"A", 1} };
+/* INITIALIZATION OF Dictionary<TKey,TValue> COLLECTION: STRING, INT */Dictionary<string, int> DICT = new Dictionary<string, int>() { {"B", 3}, {"A", 1} };
 
 System.Console.WriteLine(DICT["B"]);
 ```
-
 ```
 3
 ```
 
-### BitArray
+### `BitArray` Collection
+The `BitArray` is a collection that can only store a boolean value: 0 (`false`) and 1 (`true`). Because of the fixed data type, the `BitArray` is a non-generic collection. The collection cannot change size after instantiation.
 
-BitArray is another variation of list collection that stores bit data either 0 (`false`) and 1 (`true`). Because the data type is already defined as Boolean, BitArray collection is non-generic. The size of the BitArray cannot be changed after declaration.
-
-```c#
+```csharp
 using System.Collections;
 
-// DECLARATION OF BIRARRAY COLLECTION
+/* INSTATIATION OF BitArray COLLECTION */
 BitArray BITARR = new BitArray(4);
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections;
 
-// INITIALIZATION OF BIRARRAY COLLECTION
+/* INITIALIZATION OF BitArray COLLECTION */
 bool[] arr = new bool[4] {false, true, false, true};
 BitArray BITARR = new BitArray(arr);
 
 System.Console.WriteLine(BITARR[0]);
 ```
-
 ```
 False
 ```
 
-### Stack
+### `Stack` Collection
+The `Stack<T>` is a generic collection that observes the linear LIFO (Last-In-First-Out) property of stack memory structure. The `Stack<T>` collection cannot use bracket `[]` to access individual elements.
 
-Stack is a LIFO (Last In First Out) memory-structured generic collection where last element to append (push) to the collection is to come out (pop) first. Stack collection cannot use bracket (`[]`) to access individual elements.
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF STACK COLLECTION (EMPTY)
+/* INSTANTIATION OF Stack<T> COLLECTION: INT */
 Stack<int> STACK = new Stack<int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF STACK COLLECTION
+/* INSTANTIATION OF Stack<T> COLLECTION: INT */
 int[] arr = new bool[4] {1, 2, 3, 4};
 Stack<int> STACK = new Stack<int>(arr);
 
 System.Console.WriteLine(STACK.Pop());
 System.Console.WriteLine(STACK.Pop());
 ```
-
 ```
 4
 3
 ```
 
-### Queue
+### `Queue` Collection
+The `Queue<T>` is a generic collection that observes the linear FIFO (First-In-First-Out) property of queue memory structure. The `Queue<T>` collection cannot use bracket `[]` to access individual elements.
 
-Queue is a FIFO (First In First Out) memory-structured generic collection where last element to append (push) to the collection is to come out (pop) first. Queue collection cannot use bracket (`[]`) to access individual elements.
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF QUEUE COLLECTION (EMPTY)
+/* INSTANTIATION OF Queue<T> COLLECTION: INT */
 Queue<int> QUEUE = new Queue<int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF QUEUE COLLECTION
+/* INSTANTIATION OF Queue<T> COLLECTION: INT */
 int[] arr = new bool[4] {1, 2, 3, 4};
 Queue<int> QUEUE = new Queue<int>(arr);
 
 System.Console.WriteLine(STACK.Dequeue());
 System.Console.WriteLine(STACK.Dequeue());
 ```
-
 ```
 1
 2
 ```
 
-### HashSet
+### `HashSet` Collection
+The `HashSet<T>` is a generic collection that does not have duplicate element values. Though the `HashSet<T>` collection utilizes high-performance mathematical set operations, it cannot use bracket `[]` to access individual elements.
 
-HashSet is a generic collection where elements are unique and does not allow duplicates. HashSet provides high-performance mathematical set operations, but the collection cannot use bracket (`[]`) to access individual elements.
-
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF HASHSET COLLECTION (EMPTY)
+/* INSTANTIATION OF HashSet<T> COLLECTION: INT */
 HashSet<int> HSET = new HashSet<int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF HASHSET COLLECTION
+/* INSTANTIATION OF HashSet<T> COLLECTION: INT */
 int[] arr = new bool[6] {1, 2, 3, 4, 1, 3};
 HashSet<int> HSET = new HashSet<int>(arr);
 
 System.Console.WriteLine(HSET.Count);
 ```
-
 ```
 4
 ```
 
-
 # **C#: METHOD**
-
-C# language is executed based around a single key method called `Main()`. Understanding the concept of method is important in C# languages, which can also be used to create and implement custom method to serve specific purpose.
+C# language is executed based on a single method called the `Main()` method. Understanding the concept of method is crucial in C# languages and can increase efficiency by creating custom method. This chapter will be introducing the guide on how to create and use method in C# language.
 
 ## Method
+A method is a reusable independent block of code comprising the class and object, processing the data and presenting newly processed data once it's called, allowing dynamic program scripting. A method is distinguished by parenthesis after its name followed by the class or object; `object.method()`.
 
-Method one of the component comprising an object, and is a block of code responsible for processing passed data and presenting newly processed data once the method is called.
-
-Method can be distinguished by its declaration with parenthesis after its name; `method()`. Its definition is stated inside a code block (`{}`), which is executed when called.
-
-```c#
-// METHOD DEFINITION
-static double method(int arg1, double arg2)
-{
-    return arg1 + arg2;
-}
-
-method(1, 3.0);		// >> OUTPUT: 4.0
+```csharp
+System.Console.WriteLine("Hello World!");
+// "WriteLine()" METHOD OF THE "System.Console" CLASS
 ```
 
-Because C# language paradigm is OOP means method do not requires forward declaration (aka. prototype) to call the method. However, defining a method inside another method (aka nested method) is invalid in C# language.
+C# is an object-oriented programming language, and the procedural doesn't have much significance as C/C++ language does. Meaning, there is no such thing as the forward declaration in OOP. However, defining a method inside another method (aka nested method) is invalid.
 
 ### `return` Statement
+The `return` statement is a method-exclusive statement that returns the value processed by a method. Once encountering a return statement, the method ends immediately despite having remaining codes.
 
-The `return` statement is a method-exclusive statement that outputs indicated data under the data type declared on the method. Once the `return` statement is executed, the method ends immediately despite there are codes still left inside.
-
-If the method is a `void` data type, method can be returned by `return;` statement alone without any data to return.
+If the method is a `void` data type, the `return;` statement alone without any data will exit the method.
 
 ### Parameter & Argument
+Following is a difference between parameter and argument mentioned when discussing method:
 
-Following are the difference between parameters and arguments that is referred significantly when discussing function.
+* **Argument**
+    : An argument is a value or object passed to a method parameter.
 
-**Parameter**
-Parameter is a method-internal local variable: because parameters is a method-exclusive local variable, it cannot be called from outside.
+* **Parameter**
+    : A parameter is a local variable assigned with an argument. Meaning, parameters are only available inside the method. Parameters is declared inside a parenthesis `()`.
 
-| OPERATOR |    SYNTAX     | DESCRIPTION                                                  |
-| :------: | :-----------: | ------------------------------------------------------------ |
-|   `=`    | `arg = value` | Parameter `arg` is assigned `value` by default when no other value is passed. Must locate after normal parameter. |
+Although parameters and arguments are a different existence, two terms are used interchangeably as both stores the same data.
 
-**Argument**
-Argument is a value or object being passed to the method parameter and those passed values and objects will be processed by the method code. However, argument is independent from parameter: change on parameter does not affect value or object passed as argument.
+| OPERATOR |   SYNTAX    | DESCRIPTION                                                  |
+| :------: | :---------: | ------------------------------------------------------------ |
+|   `=`    | `arg=value` | A parameter that has default value when no argument is passed. Must locate after normal parameter. |
 
-| OPERATOR |    SYNTAX    | DESCRIPTION                                                  |
-| :------: | :----------: | ------------------------------------------------------------ |
-|   `:`    | `arg: value` | Assign argument `value` to method parameter namely `arg`. Does not have to follow parameter order. |
+Examples below show how parameter and argument work in methjod:
 
-Examples below show how function parameter and argument works:
-
-```c#
+```csharp
 using System;
 
 class Program
 {
     static void Main(string[] args)
     {
+        /* CALLING METHOD */
         Console.WriteLine(method(1, 3.0));                // >> OUTPUT: 4.0
         Console.WriteLine(method(1));                     // >> OUTPUT: 8.0
         Console.WriteLine(method(arg2: 3.0, arg1: 1));    // >> OUTPUT: 4.0
     }
     
+    /* METHOD DECLARATION */
     static double method(int arg1, double arg2 = 7.0)
     {
         return arg1 + arg2;
@@ -1047,13 +995,12 @@ class Program
 }
 ```
 
-There are three different method of passing arguments to parameters: call by value, reference and output.
+There are two different ways of passing arguments to parameters: call by value, and call by reference.
 
-* **By Value**
+* **Call By Value**
+    The *call by value* only passes the value of an argument to a parameter. In other words, argument and parameter are separate identities that do not influence each other.
 
-    Requiring no special syntax, call by value passes only the value of the argument. In other word, argument and parameter are separate identities. Hence, changes made on parameter does not affect variable passed as an argument.
-
-    ```c#
+    ```csharp
     using System.Console;
     
     class Program
@@ -1067,6 +1014,7 @@ There are three different method of passing arguments to parameters: call by val
             Console.WriteLine(A, B);    // >> OUTPUT: 4 (1 + 3.0)
         }
         
+        /* CALL BY VALUE */
         static int method(int arg1, int arg2)
         {
             arg1 += arg2;
@@ -1075,11 +1023,10 @@ There are three different method of passing arguments to parameters: call by val
     }
     ```
 
-* **By Reference**
+* **Call By Reference**
+    The *call by reference* uses the `ref` keyword and passes the argument itself to a parameter. In other words, argument and parameter are a single identity, influencing the argument when the parameter changes.
 
-    Using `ref` keyword, call by reference passes the address of the variable of argument. In other word, argument and parameter are a single identity. Hence, changes made on parameter does affect variable passed as an argument.
-
-    ```c#
+   ```csharp
     using System.Console;
     
     class Program
@@ -1093,6 +1040,7 @@ There are three different method of passing arguments to parameters: call by val
             Console.WriteLine(ref A, ref B);    // >> OUTPUT: 7 ((1 + 3.0) + 3.0)
         }
         
+        /* CALL BY REFERENCE */
         static int method(ref int arg1, ref int arg2)
         {
             arg1 += arg2;
@@ -1100,12 +1048,10 @@ There are three different method of passing arguments to parameters: call by val
         }
     }
     ```
-
     ---
+    The `in` keyword implements call by reference. While the argument and parameter become a single identity, the parameter is unchangeable as it sets to read-only, keeping the argument data protected from any changes.
 
-    Using `in` keyword, call by reference passes the address of the variable of argument but the parameter is read-only and unmodifiable. Simply put, argument and parameter are a single constant identity. Hence, no changes can be made on parameter which eventually not affecting variable passed as an argument.
-
-    ```c#
+    ```csharp
     using System.Console;
     
     class Program
@@ -1118,6 +1064,7 @@ There are three different method of passing arguments to parameters: call by val
             Console.WriteLine(in A, in B);    // COMPILATION ERROR: CANNOT EXECUTE "arg1 += arg2;" STATEMENT!
         }
         
+        /* CALL BY REFERENCE: "in" KEYWORD */
         static int method(in int arg1, in int arg2)
         {
             arg1 += arg2;
@@ -1125,14 +1072,11 @@ There are three different method of passing arguments to parameters: call by val
         }
     }
     ```
-
     ```
     Cannot assign to variable 'in int' because it is a readonly variable
     ```
-
     ----
-
-    Using `out` keyword, call by reference passes the address of the variable of argument but only uninitialized argument is allowed. This is mainly used on method whose purpose is to initialized the variable called by reference, and must initialize the value before end of the method.
+    The `out` keyword also implements call by reference. While the argument and parameter become a single identity, only the uninitialized argument is allowed. The parameter must initialize the argument before exiting the method.
 
     ```c#
     using System.Console;
@@ -1146,7 +1090,8 @@ There are three different method of passing arguments to parameters: call by val
             Console.WriteLine(out A, out B);              // >> OUTPUT: 4 (1 + 3.0)
             Console.WriteLine("A: {0}, B: {1}", A, B);    // >> OUTPUT: "A: 4, B: 3"
         }
-        
+       
+        /* CALL BY REFERENCE: "out" KEYWORD */ 
         static int method(out int arg1, out int arg2)
         {
             arg1 = 1; arg2 = 3;
@@ -1157,10 +1102,9 @@ There are three different method of passing arguments to parameters: call by val
     ```
 
 ### Method Overloading
+The method overloading is the concept where method with the same name behaving differently based on the number of arguments and their data type. While these method may have a different definition, the returned data type must be the same.
 
-Multiple functions with the same name can exist as long as they are unique in arguments (such as number of arguments and its data type). This is called function overloading and these functions can have their own separate definition. Function data type does not overload functions.
-
-```c#
+```csharp
 using System;
 
 class Program
@@ -1186,13 +1130,12 @@ class Program
 ```
 
 ## Entry Point
-
-Entry point is the starting point where a program execution begins. In C# programming language, the entry point is `Main()` *static* method. A project must have one and only `Main()` static function within the project. Creating multiple `Main()` method or not having any `Main()` method will cause error on running the program.
+An entry point is the startup method where program execution begins. In C# language, the `Main()` *static* method is the entry point that doesn't need to be called. Creating multiple `Main()` method or not having any `Main()` method will cause error on running the program.
 
 ```c#
 class Program
 {
-    // ENTRY POINT: Main() METHOD WITH PARAMETER
+    // ENTRY POINT: "Main()" METHOD WITH PARAMETER
     static void Main(string[] args)
     {
     	statements;
@@ -1200,19 +1143,18 @@ class Program
 }
 ```
 
-Entry point `Main()` static method can have argument which is apparent when executed through command-line:
+The `Main()` entry point parameter `string[] args` takes text-input passed from terminal command as an array of string data. Suppose there is an application `app.exe`, the following command will assign the argument as shown below.
 
 ```
 ./app.exe option1 option2
 ```
 
-| Arguments | Data      |
+| ARGUMENTS | DATA      |
 | --------- | --------- |
 | `args[0]` | `option1` |
 | `args[1]` | `option2` |
 
-# **C#: OBJECT-ORIENTED PROGRAMMING**
-
+# **C#: OBJECT AND CLASS**
 Object-oriented programming (OOP) is a programming paradigm based on usage of objects to structure the program. This chapter is mainly focuses on object and class in detail which was briefly explained on the very beginning of the document *C#: INTRO*.
 
 ## Objects
