@@ -38,7 +38,7 @@ A preprocessor does not read C language source code nor follows C language synta
 # **C: INSTALL**
 A compiler for C is essential when developing with C programming language, and there are various C compilers available designed by different companies and organizations. The compilation method may differ depending on the compiler, but it doesn't matter for general users as every compiler observes the same ISO standard that defines the working mechanism.
 
-An integrated development environment is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C language project.
+An integrated development environment (IDE) is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C language project.
 
 ## Visual Studio
 [Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C programming, select the "Desktop development with C++" workload.
@@ -531,7 +531,7 @@ if (condition)
 if (condition) statement;
 ```
 
-The `if` statement can locate inside another `if` statement, called "nested `if`". Use a code block (`{}`) to distinguish between `if` statements to avoid possible misinterpretation made by a compiler.
+The `if` statement can locate inside another `if` statement, called "nested `if`". Use a code block `{}` to distinguish between `if` statements to avoid possible misinterpretation made by a compiler.
 
 ```c
 if (condition)
@@ -586,7 +586,7 @@ The vocabulary *ternary* indicates the statement takes three arguments. The tern
 ## `switch` Statement
 Conditional `switch` statement evaluates whether a variable matches a value assigned to the `case` keyword and executes the corresponding code if true. After execution, the `break` statement must locate to prevent further evaluation of the next `case` keyword.
 
-If no condition matches, the statement automatically executes codes under the `default` keyword that is optional. The `default` keyword does not require the `break` statement as opposed to the `case` keyword.
+If no condition matches, the statement automatically executes codes under the `default` keyword that is mandatory. The `default` keyword does not require the `break` statement as opposed to the `case` keyword.
 
 ```c
 switch (argument)
@@ -753,7 +753,7 @@ Below is a list of functions related to a string in C language:
 C/C++ language is executed based on a single function called the `main()` function. Understanding the concept of functions is crucial in C/C++ languages and can increase efficiency by creating custom functions, called *functional programming*. This chapter will be introducing the guide on how to create and use functions in C language for functional programming.
 
 ## Function
-A function is a reusable independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. Function is distinguished by parenthesis after its name; `function()`.
+A function is a reusable independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. A function is distinguished by parenthesis after its name; `function()`.
 
 ```c
 int variable = {0, 3, 5, 9};
@@ -1066,7 +1066,7 @@ The function pointer should match the data type and parameters of the function w
 Commonly used data types such as `int,` `float,` `char,` and more are already defined and are called through the `stdio.h` header file. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
 
 ## Structure
-The structure is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type. Use the `struct` keyword to define a structure in C language.
+The structure is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type. Use the `struct` keyword to define a structure.
 
 ```c
 /* STRUCTURE DEFINITION: TOTAL 5 BYTES */
@@ -1114,7 +1114,7 @@ struct {
 ```
 
 ## Union
-The union is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type but shares a memory space. In other words, value changes in one of the members also change the value assigned in the other members. Use the `union` keyword to define a structure in C language.
+The union is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type but shares a memory space. In other words, value changes in one of the members also change the value assigned in the other members. Use the `union` keyword to define a union.
 
 ```c
 /* UNION DEFINITION: TOTAL 4 BYTES */

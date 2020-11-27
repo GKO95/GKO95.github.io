@@ -38,7 +38,7 @@ A preprocessor does not read C++ language source code nor follows C++ language s
 # **C: INSTALL**
 A compiler for C++ is essential when developing with C++ programming language, and there are various C++ compilers available designed by different companies and organizations. The compilation method may differ depending on the compiler, but it doesn't matter for general users as every compiler observes the same ISO standard that defines the working mechanism.
 
-An integrated development environment is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C++ language project.
+An integrated development environment (IDE) is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C++ language project.
 
 ## Visual Studio
 [Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C++ programming, select the "Desktop development with C++" workload.
@@ -49,7 +49,7 @@ Visual Studio will start with the window shown below. To create a new project fo
 
 <div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Cpp/cpp_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Startup window of Visual Studio.</center>
 
-Since C++ can create various applications, there are many different kinds of projects available from Visual Studio as well. To create a C project, follow the procedure below:
+Since C++ can create various applications, there are many different kinds of projects available from Visual Studio as well. To create a C++ project, follow the procedure below:
 
 1. Select the language as C++ and choose the "Console App" option.
 
@@ -65,7 +65,7 @@ Since C++ can create various applications, there are many different kinds of pro
 
 The three-step procedure above for creating a C++ console application is the simplest method. To create an empty C++ project, refer to the installation section on the *PRGMING_C* document.
 
-Visual Studio can run a C language program in two different ways: debugging mode (`F5`) and without debugging mode (`Ctrl+F5`). Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
+Visual Studio can run a C++ language program in two different ways: debugging mode (`F5`) and without debugging mode (`Ctrl+F5`). Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
 
 ## Xcode
 [Xcode](https://developer.apple.com/download/release/) is the most renowned IDE for macOS developed by Apple, which uses the clang compiler. Xcode supports various languages, and just like Visual Studio, Xcode has a project option for C++ language.
@@ -214,7 +214,7 @@ namespace2::variable;
 ```
 
 ### Global Namespace
-The global namespace is a code space that doesn't belong to any namespace; thus, it is also called "*namespace*. Data from the global namespace is accessed by placing the scope resolution operator before its identifier.
+The global namespace is a code space that doesn't belong to any namespace. Data from the global namespace is accessed by placing the scope resolution operator before its identifier.
 
 ```cpp
 ::variable;
@@ -508,7 +508,7 @@ The logical operator consist of AND, OR, and NOT logic. Consider `true` and `fal
 
 | OPERATOR | LOGIC | DESCRIPTION                                                |
 | -------- | ----- | ---------------------------------------------------------- |
-| `&&`     | AND   | `true` when all arguments are `true`, else `false`.    |
+| `&&`     | AND   | `true` when all arguments are `true`, else `false`.        |
 | `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
 | `!`      | NOT   | Changes `true` to `false` and vice versa.                  |
 
@@ -549,7 +549,7 @@ if (condition)
 if (condition) statement;
 ```
 
-The `if` statement can locate inside another `if` statement, called "nested `if`". Use a code block (`{}`) to distinguish between `if` statements to avoid possible misinterpretation made by a compiler.
+The `if` statement can locate inside another `if` statement, called "nested `if`". Use a code block `{}` to distinguish between `if` statements to avoid possible misinterpretation made by a compiler.
 
 ```cpp
 if (condition)
@@ -604,7 +604,7 @@ The vocabulary *ternary* indicates the statement takes three arguments. The tern
 ## `switch` Statement
 Conditional `switch` statement evaluates whether a variable matches a value assigned to the `case` keyword and executes the corresponding code if true. After execution, the `break` statement must locate to prevent further evaluation of the next `case` keyword.
 
-If no condition matches, the statement automatically executes codes under the `default` keyword that is optional. The `default` keyword does not require the `break` statement as opposed to the `case` keyword.
+If no condition matches, the statement automatically executes codes under the `default` keyword that is mandatory. The `default` keyword does not require the `break` statement as opposed to the `case` keyword.
 
 ```cpp
 switch (argument)
@@ -736,7 +736,7 @@ Because of this characteristic, an array cannot assign multiple values at once b
 ```cpp
 int arr[3];
 
-// ASSIGNMENT TO INDIVIDUAL ELEMENT
+/* ASSIGNMENT TO INDIVIDUAL ELEMENT */
 arr[0] = value1;
 arr[1] = value2;
 arr[2] = value3;
@@ -796,7 +796,7 @@ The benefit of using the vector class is the container size can change flexibly 
 C/C++ language is executed based on a single function called the `main()` function. Understanding the concept of functions is crucial in C/C++ languages and can increase efficiency by creating custom functions, called *functional programming*. This chapter will be introducing the guide on how to create and use functions in C++ language for functional programming.
 
 ## Function
-A function is a reusable independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. Function is distinguished by parenthesis after its name; `function()`.
+A function is a reusable independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. A function is distinguished by parenthesis after its name; `function()`.
 
 ```cpp
 int variable = {0, 3, 5, 9};
@@ -1440,7 +1440,7 @@ Access specifier defines accessibility to class members from outside the class. 
 | ----------- | ------------------------------------------------------------ |
 | `public`    | Members are accessible from outside the class.      |
 | `private`   | Members are accessible only within the class.                |
-| `protected` | Members are accessible from derived class but still restricted from outside the class (refer to the *inheritance* section). |
+| `protected` | Members are accessible from the derived class but still restricted from outside the class (refer to the *inheritance* section). |
 
 ## Friend Function
 A friend function is a function that can access private members within the class despite defined outside the class. To declare a friend function, place the prototype inside the class definition with the `friend` keyword.
@@ -1733,7 +1733,7 @@ float ClassName::method(int arg3)
 Commonly used data types such as `int,` `float,` `char,` and more are already defined and are called through the `iostream` header file. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
 
 ## Structure
-The structure is a user-defined data type that integrates multiple member fields as a single structure tag regardless of their data type. Use the `struct` keyword to define a structure in C++ language.
+The structure is a user-defined data type that integrates multiple member fields as a single structure tag regardless of their data type. Use the `struct` keyword to define a structure.
 
 ```cpp
 /* STRUCTURE DEFINITION: 5-BYTE SIZE */
@@ -1788,7 +1788,7 @@ struct {
 ```
 
 ## Union
-The union is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type but shares a memory space. In other words, value changes in one of the members also change the value assigned in the other members. Use the `union` keyword to define a structure in C++ language.
+The union is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type but shares a memory space. In other words, value changes in one of the members also change the value assigned in the other members. Use the `union` keyword to define a union.
 
 ```cpp
 /* UNION DEFINITION: 4-BYTE SIZE */
@@ -2193,7 +2193,7 @@ file.close();
 ```
 
 # **C++: EXCEPTION**
-An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon compilation, a successfully built program immediately halts when encountering an exception. C language has keywords and code blocks for handling exceptions: `throw`, `try` and `catch`, and more. Exception handling aims to provide a stable program without any halt or crash.
+An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon compilation, a successfully built program immediately halts when encountering an exception. C++ language has keywords and code blocks for handling exceptions: `throw`, `try` and `catch`, and more. Exception handling aims to provide a stable program without any halt or crash.
 
 ## `try`/`catch` Blocks
 The `try` and `catch` block pair handles exceptions that occurred during the program execution. The paragraphs below explain the purpose of each code block.

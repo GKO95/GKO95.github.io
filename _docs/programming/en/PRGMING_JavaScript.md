@@ -617,7 +617,7 @@ console.log(arr.length);
 Functional programming is a style of program scripting that is based mostly on the usage of functions. This chapter will be introducing the guide on how to create and use functions in Python for functional programming.
 
 ## Function
-A function is a reusable independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. Function is distinguished by parenthesis after its name; `function()`.
+A function is a reusable independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. A function is distinguished by parenthesis after its name; `function()`.
 
 ```js
 /* BEFORE ES6 */

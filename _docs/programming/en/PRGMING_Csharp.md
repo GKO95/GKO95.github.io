@@ -10,69 +10,60 @@ summary: "."
 order: 0x03
 ---
 # **C#: INTRO**
+> *Reference: [Microsoft Docs C# Language Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/)*
 
-C# (pronounced as "C sharp") is an object-oriented programming (OOP) language which holds similarity to Java. It has an advantage of ability to access .NET, thus is crucial to understand what .NET really is before proceeding.
-
-It is highly recommended to read [*PRGMING_Cpp.md*](./PRGMING_Cpp.md) document beforehand as C/C++ is referenced quite often to show comparison between these two similar but different programming language.
+C# (pronounced as "C sharp") is object-oriented programming (OOP) language developed by Microsoft to counter against another OOP language called Java by Oracle. While being similar to Java, it implements a lot of familiar concepts from C/C++ language. The language supports convenience on development by providing an enormous amount of various libraries from the .NET framework.
 
 ## .NET
+.NET (successor of the .NET Core) is an open-source software framework by Microsoft. The framework is for developing and running C# applications, available in Windows, Linux, and macOS operating systems.
 
-.NET (previously known as .NET Core) is an open-source software framework developed by Microsoft. It is widely-used for developing and running C# application, available in Windows, Linux, and macOS operating system.
-
-The framework is constituted by CoreFX *(FCL)* and CoreCLR *(CRL)*. Following is a brief description on FCL and CLR:
+The framework is constituted by CoreFX (FCL) and CoreCLR (CRL). The following table briefly describes FCL and CLR:
 
 | COMPONENTS                    | DESCRIPTION                                                     |
 |-------------------------------|-----------------------------------------------------------------|
-| Framework Class Library (FCL) | Provides Standard Libraries for .NET programming and execution. |
-| Common Language Runtime (CLR) | Compiles and executes .NET application using JIT compiler.      |
+| Framework Class Library (FCL) | Provides a standard library for developing the .NET application. |
+| Common Language Runtime (CLR) | Compiles and executes the .NET application using the JIT compiler.       |
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_wiki_netframework.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. .NET Common Language Infrastructure (CLI)</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_wiki_netframework.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 1. .NET Common Language Infrastructure (CLI)<sub><i>Ref: <a href="https://commons.wikimedia.org/wiki/File:Overview_of_the_Common_Language_Infrastructure.svg">Wikipedia</a></i></sub></center>
 
-.NET implements Common Language Infrastructure (CLI) which is standardized by ISO and ECMA. The standardization specifies that CLI should allow multiple high-level programming languages and support cross-platform despite having different architectures.
+.NET implements Common Language Infrastructure (CLI) that is standardized by ISO and ECMA. The standardization specifies that CLI should allow multiple high-level programming languages and support cross-platform despite having different architectures.
 
 ### Assembly
+C/C++ language uses a compiler such as MSVC, GCC, and Clang to generates the `.exe` executable file or `.dll` library file from the source code to a machine-readable binary code.
 
-In C/C++ programming language, a compiler (e.g. MSVC, GCC, Clang, et cetera) generates *binary* executable file translated from the source code to a machine-readable binary code.
+> These binary files do not need any more compilation to execute the application: thus called *ahead-of-time (AOT) compilation*. 
 
-> This binary executable file does not need anymore compilation to execute application: aka. *ahead-of-time (AOT) compilation*. 
+On the other hand, the .NET Compiler Platform (C# compiler aliased "Roslyn") translates the source code to the Common Intermediate Language (CIL) instead of binary code. The CLI refers to a bytecode that is not machine-readable but machine-independent code supporting cross-platform.
 
-On the other hand, .NET Compiler Platform (C# compiler aliased "Roslyn") generates *bytecode* executable file translated from the source code to the Common Intermediate Language (CIL) instead. Bytecode is a machine-independent code providing advantage on cross-platform support, but is not a machine-readable.
+> The bytecode file requires additional compilation on runtime to execute the application, translating from bytecode to binary code: thus called *runtime* or *just-in-time (JIT) compilation*.
 
->This bytecode executable file requires additional compilation on runtime to execute application, translating from bytecode to binary code: aka. *runtime* or *just-in-time (JIT) compilation*
-
-Assembly, therefore, is a *bytecode executable file* in C# programming language. Just like binary executable, there are two different assembly file type: process assemblies `.exe` and library assemblies `.dll`. However, because assemblies does not contain machine code, C# application cannot be executed without .NET (more specifically, CoreCLR).
+Assembly, therefore, is a *bytecode file* in C# language. Just like binary executable in C/C++ language, there are two different types of assembly: process assemblies `.exe` and library assemblies `.dll`. Because assembly is not a binary code file, the C# application won't execute without the .NET (more specifically, CoreCLR).
 
 ### .NET Framework
-
-.NET Framework is a predecessor of .NET which is deprecated on November, 2020. .NET Framework is only available on desktop version of Windows OS.
+The .NET Framework is a predecessor of .NET that is deprecated in November 2020. The .NET Framework is only available on the desktop version of Windows OS.
 
 ## Object-Oriented Programming
-
-C# is an object-oriented programming which mainly uses "object (aka. instance)" for structuring program. While more detail explanation will be made on later chapter, it is important to know even briefly on what the object and class is to able to understand with no doubt.
+C# is object-oriented programming (abbrev. OOP) language that focuses on program development using data called "object (aka. instance)." Though explained in detail later, it is crucial to understand the concept of object and class in C# language.
 
 ### Object
-
-Objects (aka. instances) are independent unit of data composed of members called *fields* and *methods*. Object members can be accessed using dot (`.`):
+Object (aka. instance) is an independent unit of data composed of members called *field* and *method*. Members of an object are accessed using the member access operator `.`:
 
 | MEMBER   | SYNTAX              | DESCRIPTION                                                                                 |
 |----------|---------------------|---------------------------------------------------------------------------------------------|
-| Field    | `object.field`      | A member of object to store value.                                                          |
-| Method   | `object.method()`   | A member of object to process and/or output data.                                           |
-| Property | `object.property()` | A method specifically designed to output field value, to protect direct field modification. |
+| Field    | `object.field`      | A member that stores value.                                                          |
+| Method   | `object.method()`   | A member that processes and/or outputs data.                                           |
+| Property | `object.property()` | A method specifically designed to output field value without directly accessing the member; this protects the member field from accidental modification. |
 
 ### Class
+The class creates an object where fields and methods are all defined inside the code block. Members cannot be accessed directly from the class but only from an object. Creating an instance from the class is called *instantiation*.
 
-Class is used to create an object. Fields and methods of an object are all schematically defined inside the class. The process of creating instance from the class is called *instantiation*.
+### `static` Modifier
+The `static` access modifier (or access specifier) keyword allows the member accessible from the class without instantiation. Thought convenient to use since it doesn't need an object, the `static` access modifier can make the code a bit more complicating due to its property.
 
-### Static Modifier
+## Entry Point
+Unlike C/C++ language, C# has a lot of code blocks `{}` but every .NET application starts from the `static void Main()` entry point.
 
-The member prefixed with `static` modifier keyword is accessible without instantiation. This modifier will be used quite often on method declaration because static method can be easily called even without needing to create an instance.
-
-## Startup
-
-This document is mainly focuses on C# project created from Visual Studio 2019 Community Edition. Upon creating project, IDE will automatically create a sample source code shown as follows:
-
-```c#
+```csharp
 using System;
 
 namespace PROJECT
@@ -81,28 +72,63 @@ namespace PROJECT
     {
         static void Main(string[] args)
         {
-            // PLACE YOUR CODE HERE.
+            // Insert code here...
         }
     }
 }
 ```
 
-Most of the code fences in this document will not have full code shown above but only the expression or statements that are necessary. This is to simplify and shorten the length of document for better readability.
+Most of the examples in this document will not have the full code shown above, but only the expression or statements that are necessary. However, be sure to know that the code only functions when inside the `static void Main()` entry point.
+
+# **C#: INSTALL**
+Although the .NET supports cross-platform, this chapter introduces mainly on installation and preparation for Windows OS. And if possible, focuses on utilizing .NET Core rather than .NET Framework.
+
+An integrated development environment (IDE) is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. Since C# is the language developed by Microsoft, there is one most suitable IDE.
+
+## Visual Studio
+[Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C++ programming, select the ".NET desktop development" workload.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Workload for C# programming on Visual Studio.</center>
+
+Visual Studio will start with the window shown below. To create a new project for C# language, select the "Create a new project" button.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 3. Startup window of Visual Studio.</center>
+
+Since C# can create various applications, there are many different kinds of projects available from Visual Studio as well. To create a C# project, follow the procedure below:
+
+1. Select the language as C# and choose the "Console App (.NET Core)" option.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 4. Creating a C# project on Visual Studio (step 1).</center>
+
+2. Designate names for the project and solution. Here, the project is a `.vcxproj` extension file that manages its source codes and compilation options, and the solution is a `.sln` extension file that can contain multiple projects. It is recommended to open the solution file on Visual Studio unless you only want to open a single project.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 5. Creating a C# project on Visual Studio (step 2).</center>
+
+3. Use the project automatically prepared by Visual Studio.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 6. Creating a C# project on Visual Studio (step 3).</center>
+
+The three-step procedure above for creating a C++ console application is the simplest method. To create an empty C++ project, refer to the installation section on the *PRGMING_C* document.
+
+Visual Studio can run a C# language program in two different ways: debugging mode (`F5`) and without debugging mode (`Ctrl+F5`). Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
 
 # **C#: BASIC**
+Every programming language has its own rules to be observed and fundamental data that works as a basis of the program. Failed to observe this causes either error or unexpected results. As for the beginning of the practical coding, this chapter will introduce basic knowledge of C# language coding.
 
-General programming language has essential, fundamental, or even helpful data and syntax that needs to be observed and acknowledged when coding. As the beginning of the practical coding, this chapter will introduce basic information on C# language coding.
+## Statement Terminator
+The "statement" in programming represents a code that executes or processes data. In C# language, every statement needs to end with a statement terminator denoted by a semicolon `;`.
+
+One of the common mistakes made by C# language beginners is the absence of a statement terminator. Therefore, developers need to keep this in mind when programming with languages based on C (such as C++ and C#).
 
 ## Comment
-
-There are two different comments in C#: line comment and block comment.
+Comment in a programming language is not executed and is commonly used to write down information related to the programming on source codes. There exist two comments in C# language: line comment and block comment.
 
 * **Line comment**
-    : a comment worth a single line of code, and is declared by `//` (double slash).
+    : a comment worth a single line of code, declared by `//`.
 * **Block comment**
-    : a comment with multiple lines of code by using pairs of slash asterisk `/* */`.
+    : a comment with multiple lines of code, declared by `/* */`.
 
-```c#
+```csharp
 /*
 BLOCK COMMENT:
 multiple line of comment can be placed here.
@@ -111,85 +137,83 @@ multiple line of comment can be placed here.
 ```
 
 ## Identifier
+An identifier is a name used to identify data in programming. In other words, it is just a user-defined name. C# language has the following rules when naming an identifier:
 
-Identifier is a name used to identify a data such as namespace, variable, function, object, class, and more. In other word, it is just a (user-defined) name. There are rules identifier has to observe:
-
-* First character is only allowed to have an alphabet letters and underscore `_`.
-* Beside the first character may use alphabet letters, digits, or underscores.
-* Black spaces are prohibited.
+* Only alphabet, number, and underscore `_` is allowed.
+* First letter cannot start with a number.
+* Blank space is prohibited.
 
 ## Namespace
+The namespace is a code space that distinguishes from the others to guarantee the uniqueness of identifiers. It is the same concept as placing files (data) with the same name in different folders (namespace).
 
-Name of data must be unique and cannot be used elsewhere to prevent confliction. This concept is equivalent to a directory (*project*) only allowed to have files (*data*) with unique name. To have the same naming available, these must be stored in separate folder (*namespace*).
+The `namespace` keyword declares the namespace and stores the data inside the code block `{}`. Use the member access operator `.` to access the data inside the namespace. However, namespaces must not share the same name with other namespaces.
 
-Namespace is created using `namespace` keyword and data is stored inside the code block (`{}`). These data inside the namespace can be accessed by dot (`.`) operator. However, name of the namespaces must be unique and cannot be used elsewhere in one program.
-
-```c#
+```csharp
 namespace NAMESPCAE1
 {
 	class Program{
         static void Main(){
-            // CALLING DATA IN DIFFERENT NAMESPACES
+            /* CALLING CLASS AND MEMBERS FROM ANOTHER NAMESPACE */
             NAMESPACE2.CLASS.field;
-            NAMESPACE3.CLASS.method();
+            NAMESPACE3.NAMESPACE4.CLASS.method();
         }
     }
     
-    // NESTED NAMESCOPE
+    /* NESTED NAMESPACE */
     namespace NAMESPACE2
     {
         static class CLASS { public var field; }
     }
 }
 
-// INDEPENDENT NAMESCOPE
+/* NAMESPACE INDEPENDENT FROM NAMESPACE1 */
 namespace NAMESPACE3
 {
-	static class CLASS { public void method() statement; }
+    namespace NAMESPACE4
+    {
+	    static class CLASS { public void method() statement; }
+    }
 }
 ```
 
 ### Global Namespace
+The global namespace (aka. root namespace) is a code space that doesn't belong to any namespace. Data from the global namespace is accessed by placing the `global` keyword and namespace alias qualifier `::` before its identifier.
 
-Aka. "root namespace", global namespace represents calling the data not included in any namespace, thus root of the namespace. Global namespace can be identified by a leading `::` operator (aka. qualifier) with `global` keyword.
-
-```c#
+```csharp
 global::variable;
 ```
 
 ### `using` Declaration
+The `using` keyword makes accessing data inside the namespace simple. Technically, data becomes available without needing to specify the namespace.
 
-Declaration with `using` keyword is used to simplify code by reducing repetitive typing of namespace upon using data.
-
-```cpp
-// ACCESSING NAMESPACE
+```csharp
+/* USING DECLARATION: "System" NAMESPACE */
 using System;
 ```
 
-While `using` keyword is convenient, declaring too many namespace can lead to identity collision problem. Hence, C# supports aliasing namespace that is not available in C/C++.
+However, the overuse of the `using` keyword has the potential to cause a naming collision as the compiler cannot tell which data the code is referencing. Hence, C# supports aliasing namespace that is not available in C/C++.
 
-Namespace aliasing can either reference namespace, or reference data type such as class, structure, and more. The difference between these two is formal can dive deeper into using qualifier (`::`), but latter cannot.
+Namespace aliasing either references namespace or data types such as class, structure, and more. The formal can call the data using the qualifier `::`, but the latter can only call the data already chosen.
 
-```c#
-// NAMESPACE ALIASES: REFERENCING NAMESPACE
-using scope1 = System;            // namespace "System"
+```csharp
+// NAMESPACE ALIASING: REFERENCING NAMESPACE
+using scope1 = System;            // "System" namespace
 scope1::Console.WriteLine("First Line");
 
-// NAMESPACE ALIASES: REFERENCING TYPE
-using scope2 = System.Console;    // class "System.Console"
+// NAMESPACE ALIASING: REFERENCING TYPE
+using scope2 = System.Console;    // "System.Console" class
 scope2.WriteLine("Second Line");
 ```
 
 ## Input & Output
-
-C# displays the results by writing on the console windows and has two different version of output:
+C# language has two outputs for a text-based terminal available as methods of the `System.Console` class:
 
 | OUTPUT                | SYNTAX                      | DESCRIPTION                             |
 |-----------------------|-----------------------------|-----------------------------------------|
-| `Console.Write()`     | `Console.Write("Text")`     | Write function without line terminator. |
-| `Console.WriteLine()` | `Console.WriteLine("Text")` | Write function with new line feature.   |
+| `Console.Write()`     | `Console.Write("Text")`     | Print text to a terminal without a new line. |
+| `Console.WriteLine()` | `Console.WriteLine("Text")` | Print text to a terminal with a new line.  |
 
-```c#
+```csharp
 class Program{
     static void Main(){
         System.Console.Write("Hello");
@@ -205,15 +229,15 @@ HelloWorld!Spam
 Egg
 ```
 
-Meanwhile, there are three different of input which it reads the input data from the console:
+Meanwhile, there are three inputs for a text-based terminal available as methods of the same class:
 
 | INPUT                | RETURN         | DESCRIPTION                                         |
 |----------------------|----------------|-----------------------------------------------------|
-| `Console.Read()`     | Integer        | Read function for a single character in ASCII.      |
-| `Console.ReadLine()` | String         | Read function for a single line of text in string.  |
-| `Console.ReadKey()`  | ConsoleKeyInfo | Read function for a single keyboard button pressed. |
+| `Console.Read()`     | Integer        | Read the input of a single character in ASCII.      |
+| `Console.ReadLine()` | String         | Read the input for a single line of text as a string.  |
+| `Console.ReadKey()`  | ConsoleKeyInfo | Read the input of a single keypress on a keyboard. |
 
-```c#
+```csharp
 using System;
 
 class Program{
@@ -245,13 +269,10 @@ Console.ReadKey:
 ```
 
 ### Placeholder
+A placeholder designates where data should locate within the text using zero-based integers surrounded by a curly bracket. The data that comes after the formatted text goes to the placeholder in ascending order.
 
-Placeholder is used in formatted string to place variable value to certain location of text.
-
-```c#
-int variable1 = 3;
-char variable2 = 'G';
-System.Console.Write("First: {0}, Second: {1}, Return to {0}.", variable1, variable2);
+```csharp
+System.Console.Write("First: {0}, Second: {1}, Return to {0}.", 3, 'G');
 ```
 
 ```
@@ -259,20 +280,19 @@ First 3, Second G, Return to 3.
 ```
 
 ### Escape Character
+Escape character `\` is used to escape from a sequence of characters and execute certain operations within text-based data. In the introduction on string data type, `\n` is used to change to a new line.
 
-Escape character `\` is used to escape from sequence of character and execute certain operation within text-base data.
-
-```c#
-System.Console.Write("First Line\nSecond Line");
+```csharp
+System.Console.Write("Hello\nWorld!");
 ```
 
 ```
-First Line
-Second Line
+Hello
+World!
 ```
 
 | SYNTAX | DESCRIPTION    |
-|--------|----------------|
+| ------ | -------------- |
 | `\n`   | New line       |
 | `\t`   | Horizontal tab |
 | `\\`   | Backslash      |
@@ -281,71 +301,89 @@ Second Line
 | `\"`   | Double quote   |
 
 ## Data Type
+A data type is one of the crucial factors which determines the type and byte size of the data. A well-implemented data type can make a program efficient on both memory and processing time. C# language has several numbers of built-in data type as follows:
 
-Data type is one of the important factor which determines type and byte size of the data. A well-implemented data type can results memory and time efficiency when processing the script.
-
-C# programming language have several number of pre-defined type identifier as follows:
-
-| IDENTIFIER | DATA TYPE               | DESCRIPTION                                                                                          |
-|------------|-------------------------|------------------------------------------------------------------------------------------------------|
-| `int`      | Integer                 | 32-bits precision integer number.<br />Size: 4 bytes                                                 |
-| `float`    | Floating point number   | Real number with decimal points<br />Size: 4 bytes (requires suffix `f` or `F`)                      |
-| `double`   | Double-precision float  | Float with doubled precision and memory.<br />Size: 8 bytes (with or without suffix `d` or `D`)      |
-| `decimal`  | Highest-precision float | Float with greater precision and memory<br/>Size: 16 bytes (requires suffix `m` or `M`)              |
-| `char`     | Character: `''`         | A single character, e.g., `'A'` and `'?'`.<br />Size: 1 byte                                         |
-| `string`   | String: `""`            | Series of characters under the namespace `std`.<br />Size: N/A (depends on overall character length) |
-| `bool`     | Boolean                 | Non-zero represents `True` while zero is `False`.<br />Size: 1 byte                                  |
-| `var`      | Automatic               | Data type is declared automatically.<br />Useful for declaring new variable with complex data type.  |
-| `void`     | Void                    | Non-specific data type.<br />Size: 1 byte                                                            |
+| IDENTIFIER | DATA TYPE               | DESCRIPTION                                                                                            |
+|------------|-------------------------|--------------------------------------------------------------------------------------------------------|
+| `int`      | Integer                 | 32-bits precision integer number.<br />Size: 4 bytes                                                   |
+| `float`    | Floating point number   | Real number with decimal points<br />Size: 4 bytes (suffixes `f` or `F`)                               |
+| `double`   | Double-precision float  | Float with doubled precision and memory.<br />Size: 8 bytes (suffixes `d` or `D` or none)              |
+| `decimal`  | Highest-precision float | Float with greater precision and memory<br/>Size: 16 bytes (suffixes `m` or `M`)                       |
+| `char`     | Character: `''`         | A single character, such as `'A'` or `'?'`.<br />Size: 2 bytes                                         |
+| `string`   | String: `""`            | A series of characters, such as `"Hello World!"`<br />Size: N/A (varies by the length)                 |
+| `bool`     | Boolean                 | Non-zero represents `true` while zero is `false`.<br />Size: 1 byte                                    |
+| `var`      | Automatic               | Automatically selected by the compiler.<br />Useful for declaring new variable with complex data type. |
+| `void`     | Void                    | Non-specific data type.<br />Size: 1 byte                                                              |
 
 ### `sizeof()` Operator
+The `sizeof()` function returns allocated memory size of the type or data in bytes.
 
-An operator that returns the allocating memory size of data type or variable in bytes.
-
-```c#
+```cpp
 sizeof(int);		// SIZE: 4 BYTE
-sizeof(char);		// SIZE: 1 BYTE
+sizeof(char);		// SIZE: 2 BYTE
 ```
 
 ## Variable
+Variable is a container for data that can be assigned using the assignment operator `=`. C# language must designate a variable with one of the data types, which can only have data with that data type.
 
-Variable is a container for the data which can be assigned using assignment operator `=`. There are three different common stages in variable: declaration, definition, and initialization.
+The example code below tells a compiler the existence of the `variable` integer variable. The variable has also allocated memory at the same time to store a value, called *declaration* or *definition* in programming.
 
-* **Declaration**
-  : declaration is declaring existence of the construct of such as variables, objects, and more. The declaring also includes specifying which data type the construct is.
+```csharp
+/* "variable" VARIABLE DECLARATION */
+int variable;
+```
 
-  ```c#
-  int variable;
-  ```
-  
-* **Definition**
-  : definition refers to block of codes on values and performance the construct has and is capable of. In case of variable which can acquire new data, the term *assignment* is more likely to use.
+Unlike C/C++ language, the ECMA-334 standard does not distinguish the difference between declaration and definition but rather considers them the same instead. It is because the OOP C# language compiler is different from the compiler for C/C++ language.
 
-  ```c#
-  variable = 3;
-  ```
+A defined variable does not need to specify the data type as a compiler already knows what type of data it stores. Programming languages, in general, locates assigned data (ex. variable) on the left and assignee (ex. a constant value or another variable) on the right. Otherwise will cause an error or function improperly.
 
-* **Initialization**
-  : initialization is assigning the initial value to the construct, simply the *first* definition. Since the first definition is generally done on the same time when declaring the construct. Hence, initialization is commonly thought by people as *declaration + definition* which is not always true.
+### Initialization
+Initialization is the first assignment to a variable where it commonly occurs in the *definition* process.
 
-  ```c#
-  int variable = 3;
-  ```
-
-Once the declaration sets data type to a variable, that variable can only take the value of that designated data type.
+```csharp
+/* VARIABLE INITIALIZATION */
+int variable = 3;
+```
 
 ### Local & Global Variable
+There are three types of variable in C# language:
 
-**Local variable** is a variable declared inside a code block, such as namespace, function, and class. Data stored in local variable is destroyed when exiting the code block, thus cannot be used outside. Local variable is allowed to have same variable name declared outside (technically, is borrowing the name as a different identity).
+* **Local variable** is a variable defined within the code block, such as namespaces, functions, and classes. A local variable releases data when escapes from the code block and unavailable to use outside. It may have the same name as other variables defined outside the code block.
 
-**Global variable** is not supported in C# programming language. Theoretically, it is a variable declared on a global scope of the script which is outside a class code block and accessible on any class within the script. However, `global` keyword is not to declare global variable but specify global namespace instead.
+  ```csharp
+  class Program {
+      static void Main() {
+          // Insert code here...
+
+          /* LOCAL VARIABLE */
+          int variable;
+      }
+  }
+  ```
+
+* **Global variable** is officially not supported in C# language. Conceptually, a variable that does not belong to any code blocks within the script, but C# is an OOP language that cannot declare a variable outside the code block.
+
+* **Static variable** is a variable with the `static` access modifier that is accessible directly from the class without instantiation. Unlike a local variable, it retains the data even after escaping from the code block, making a static variable an alternative to a global variable in C# language.
+
+  ```csharp
+  class Program {
+
+      /* STATIC VARIABLE: "public" keyword makes accessible from outside. */
+      public static int variable;
+
+      static void Main() {
+          // Insert code here...
+
+      }
+  }
+  ```
 
 ### Constant Variable
+A constant variable is a variable that cannot change its value after initialization. The `const` keyword declares variable as a constant.
 
-Constant variable is a special type of variable that cannot be changed after its initialization. The keyword `const` is used to declare it as a constant variable.
-
-```c#
-const int variable = 3;
+```csharp
+/* CONSTANT DEFINITION */
+const int variable = 1;
 ```
 
 ### Static Variable
@@ -357,82 +395,83 @@ static int variable = 3;
 ```
 
 ## Data Type Conversion
+Data type conversion changes data type stored in a variable into other desired type. Conversion from the small size data to a compatible but larger size data type is called *implicit* conversion. Implicit conversion is a natural data type conversion automatically done by a compiler as no data loss occurs.
 
-Data type conversion force-changes data type stored in a variable into other desired type. C# programming language has three different data type conversion methods available:
-
-### Implicit Conversion
-
-Implicit conversion automatically converts smaller size data to its compatible type of a larger size data by the compiler. No special syntax is needed and is safe from any data loss/corruption.
-
-```c#
-short A = 1;	// 2 BYTES INTEGER
-int B = A;		// 4 BYTES INTEGER
+```csharp
+short A = 1;    // 2 BYTES INTEGER
+int B = A;      // 4 BYTES INTEGER
 ```
 
-### Explicit Conversion
+On the other hand, *explicit* conversion (aka. casting) risks data loss/corruption upon converting data type. Traditional C-style casting syntax uses parenthesis `()` as follows:
 
-Explicit conversion (aka. casting) is done when converting larger size data to smaller size data but with a risk of data loss/corruption. Conversion is done using parentheses and there's no guarantee the conversion would succeed as intended.
+```cpp
+float A = 1.9f;  // 4 BYTES FLOAT
+int B = (int)A;  // 4 BYTES INTEGER - INCOMPATIBLE: only returns its integer value.
+```
 
-```c#
-double A = 1.9;	// 8 BYTES FLOAT
-int B = (int)A;	// 4 BYTES INTEGER - INCOMPATIBLE: only returns its integer value.
+```
+1
 ```
 
 ### Helper Class Conversion
+A helper class is a class that *helps* do something by providing specific functionalities. The `System.Convert` is one of the helper classes for converting data type.
 
-Helper Class is a category of class that *helps* do something by providing functionalities. Class `System.Convert` is one of the helper class used for converting data type.
-
-```c#
+```csharp
 int    ivalue = System.Convert.ToInt32(Console.ReadLine());
 bool   bvalue = System.Convert.ToBoolean(Console.ReadLine());
 double dvalue = System.Convert.ToDouble(Console.ReadLine());
 ```
 
+### `is` Operator
+The `is` operator asserts whether the given data is compatible with another data type in C# language.
+
+```csharp
+variable is Type;
+```
+
+If the `variable` is compatible with the `Type` data type, the statement returns the `true` boolean value, otherwise `false`.
+
 ## Operator
+An operator is the simplest form of the data processing unit that manipulates the value of operands. It is placed before, after, or between the operands.
 
-Operator is the simplest form of data processing unit which can manipulate the value of operands. It operates simply by placing before, after, or between the operands.
+### Arithmetic Operator
+The arithmetic operator mainly focuses on processing numeric data types. Following is a list of arithmetic operators used by numeric data type:
 
-### Arithmetic Operation
+|             NAME             | OPERATOR | DESCRIPTION                                                  |
+| :--------------------------: | -------- | ------------------------------------------------------------ |
+|           Addition           | `+`      | -                                                            |
+|         Subtraction          | `-`      | -                                                            |
+|        Multiplication        | `*`      | -                                                            |
+|           Division           | `/`      | When both operands are integer: an integer dividend without a remainder.<br/>When at least one operand is real (float or double): a real dividend (float or double). |
+| Remainder (Modulus Division) | `%`      | Remainder only returns an integer.                              |
 
-Arithmetic operator is mainly focused on processing numeric data type. Following is a list of arithmetic operator used by numeric data type:
+For easier readability, you may place blank spaces between numbers and operators which does not affect its output.
 
-| NAME                         | OPERATOR | DESCRIPTION                                                                                                                                                              |
-|:----------------------------:|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Addition                     | `+`      | -                                                                                                                                                                        |
-| Subtraction                  | `-`      | -                                                                                                                                                                        |
-| Multiplication               | `*`      | -                                                                                                                                                                        |
-| Division                     | `/`      | When both operands are integer: dividend is an integer without remainder.<br/>When at least one operand is real (float or double): dividend is a real (float or double). |
-| Remainder (Modulus Division) | `%`      | Remainder only returns integer.                                                                                                                                          |
+### Assignment Operator
+The assignment operator is another operation used within numeric data types. Following is a list of assignment operators used by numeric data type:
 
-For easier readability of the arithmetic operator, you can place blank space between number and operator, and it doesn’t affect anything on output.
+| OPERATOR | EXAMPLE  | EQUIVALENT  |
+| -------- | -------- | ----------- |
+| `+=`     | `x += 1` | `x = x + 1` |
+| `-=`     | `x -= 1` | `x = x - 1` |
+| `*=`     | `x *= 1` | `x = x * 1` |
+| `/=`     | `x /= 1` | `x = x / 1` |
+| `%=`     | `x %= 1` | `x = x % 1` |
 
-### Assignment Operation
+Although not an assignment operator, the similar increment and decrement operator has identical meaning as follows:
 
-Assignment operator is another operation used within numeric data type. Following is a list of assignment operator used by numeric data type:
+| OPERATOR    | EXAMPLE   | DESCRIPTION       |
+| ----------- | --------- | ----------------- |
+| `++` prefix | `x = y++` | `x = y; y = y+1;` |
+| `++` suffix | `x = ++y` | `y = y+1; x = y;` |
+| `--` prefix | `x = y--` | `x = y; y = y-1;` |
+| `--` suffix | `x = --y` | `y = y-1; x = y;` |
 
-| OPERATOR | EXAMPLE | EQUIVALENT |
-|----------|---------|------------|
-| `+=`     | `x+=1`  | `x=x+1`    |
-| `-=`     | `x-=1`  | `x=x-1`    |
-| `*=`     | `x*=1`  | `x=x*1`    |
-| `/=`     | `x/=1`  | `x=x/1`    |
-| `%=`     | `x%=1`  | `x=x%1`    |
-
-Although not an assignment operator, a similar **increment and decrement** of the numerical value can be expressed as follow on C-based programming language:
-
-| OPERATOR    | EXAMPLE | DESCRIPTION   |
-|-------------|---------|---------------|
-| `++` prefix | `x=y++` | `x=y; y=y+1;` |
-| `++` suffix | `x=++y` | `y=y+1; x=y;` |
-| `--` prefix | `x=y--` | `x=y; y=y-1;` |
-| `--` suffix | `x=--y` | `y=y-1; x=y;` |
-
-### Relational Operation
-
-Relational operator is for checking whether the relational condition between two numeric values and returns Boolean value whether condition is true or false. Following is a list of relational operator:
+### Relational Operator
+The relational operator is used to compare the relation of two values, returning either `true` or `false` boolean value. Following is a list of relational operators:
 
 | OPERATOR | DESCRIPTION              |
-|----------|--------------------------|
+| -------- | ------------------------ |
 | `<`      | Lesser than              |
 | `<=`     | Lesser than or equal to  |
 | `>`      | Greater than             |
@@ -440,61 +479,61 @@ Relational operator is for checking whether the relational condition between two
 | `==`     | Equal to                 |
 | `!=`     | Not equal to             |
 
-### Logical Operation
+### Logical Operator
+The logical operator consist of AND, OR, and NOT logic. Consider `true` and `false` as binary counterpart of 1 and 0.
 
-Logical operator consist of AND, OR, and NOT logic. When doing so, think of `true` and `false` as binary 1 and 0, respectively. In wider sense, any non-zero number is deemed `true`.
-
-| OPERATOR | LOGIC | DESCRIPTION                                             |
-|----------|-------|---------------------------------------------------------|
-| `&&`     | AND   | `true` when all the arguments are `true`, else `false`. |
-| `        |       | `                                                       | OR | `true` when at least one argument is `true`, else `false`. |
-| `!`      | NOT   | Change `true` to `false` and vice versa.                |
+| OPERATOR | LOGIC | DESCRIPTION                                                |
+| -------- | ----- | ---------------------------------------------------------- |
+| `&&`     | AND   | `true` when all arguments are `true`, else `false`.        |
+| `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
+| `!`      | NOT   | Changes `true` to `false` and vice versa.                  |
 
 # **C#: CONDITIONAL AND LOOP**
-
-Conditional and loop statement is commonly used and one of the essential pieces of code in programming. This chapter introduces list of conditional and loop statements in C# programming.
+Conditional and iteration (or loop) statements are two of the most commonly used in programming. The "statement" in programming represents a code that executes or processes data. This chapter introduces a list of conditional and iteration statements in C# language programming.
 
 ## `if` Statement
+Conditional `if` statement runs code if the condition holds. When the condition evaluates `true`, the indented codes are carried out but otherwise ignored.
 
-Conditional `if` statement runs code if the condition is true. When the condition evaluates `true`, the statements are carried out but otherwise ignored.
-
-```c#
-if (condition) {
-    statements;
+```csharp
+if (condition)
+{
+	statements;
 }
 
 // SIMPLIFIED STATEMENT
 if (condition) statement;
 ```
 
-It is possible to place`if` statement in another `if` statement, called "nested `if`". It is recommended to use  code block (`{}`) to distinguish between `if` statements to avoid computer’s misinterpretation.
+The `if` statement can locate inside another `if` statement, called "nested `if`". Use a code block `{}` to distinguish between `if` statements to avoid possible misinterpretation made by a compiler.
 
-```c#
-if (condition) {
-    if (condtion) { 
+```csharp
+if (condition)
+{
+    if (condtion)
+    { 
         statements;
     } 
 }
 ```
 
 ### `else` Statement
+A conditional `else` statement cannot be used alone and must be followed by an `if` condition. The statement contains code that executes when evaluated `false`.
 
-Conditional `else` statement must be followed after `if` statement as it cannot be used alone. The statement contains code that is called when the condition evaluates `false`.
-
-```c#
-if (condition) {
+```csharp
+if (condition)
+{
     statements;
 }
-else {
+else
+{
     statements; 
 }
 ```
 
 ### `else if` Statement
+A conditional `else if` statement is a combination of `else` and `if` conditions; when the first condition evaluates `false`, the `else if` statement provides a new condition different from the previous one. 
 
-Conditional `else`-`if` statement is a combination of `if` and `else` statement; when the first condition evaluates `false`, the `else if` statement provides second (or more) chance to evaluate condition different from the first one.
-
-```c#
+```csharp
 if (condition) {
     statements;
 }
@@ -506,25 +545,38 @@ else {
 }
 ```
 
-However, this is not the same as chain of `else`-`if` conditional statement as that is a combination of two different conditional set, while `else if` statement guarantees a single conditional set.
+However, this statement is different from the chain of `else`-`if` conditional statement as that is a combination of two sets of conditions. On the other hand, `else if` conditional statement is a continuation of an existing evaluation instead of starting new conditioning.
 
 ### Ternary Operator
+A conditional statement can be simplified using the ternary operator shown below:
 
-Conditional statement can be expressed simply using ternary (`?:`) operator as shown below:
-
-```c#
+```csharp
 condition ? return_true : return_false;
 ```
 
-The vocabulary *ternary* represents the statement takes three arguments. Ternary operator should not be overused as it reduces readability, but useful on variable assignment.
+The vocabulary *ternary* indicates the statement takes three arguments. The ternary operator should not be overused as it reduces readability but useful on variable assignment.
+
+### `as` Operator
+The `as` operator converts the given data to another data type in C# language; the operator returns `null` if the conversion is invalid.
+
+```csharp
+/* "as" OPERATOR */
+variable as Type;
+```
+
+The example above attempts to convert the `variable` data to the `Type` data type. The operator is equivalent to the expression below.
+
+```csharp
+/* EQUIVALENCE OF THE "as" OPERATOR */
+variable is Type ? (Type)variable : (Type)null;
+```
 
 ## `switch` Statement
+Conditional `switch` statement evaluates whether a variable matches a value assigned to the `case` keyword and executes the corresponding code if true. After execution, the `break` statement must locate to prevent further evaluation of the next `case` keyword.
 
-Conditional `switch` statement checks the argument passed to the function and compare its value referenced on `case` keyword. Every case needs `break` at the end of the group of statements to prevent the statement from proceeding condition evaluation afterward.
+If no condition matches, the statement automatically executes codes under the `default` keyword that is optional. The `default` keyword does not require the `break` statement as opposed to the `case` keyword.
 
-When no case is true to the expression, the statements from `default` keyword is returned. Default case is not necessary as well but is recommended for cases not listed.
-
-```c#
+```csharp
 switch (argument)
 {
     case value1:
@@ -535,13 +587,12 @@ switch (argument)
         break;
     default:
         statements;
-        break;
 }
 ```
 
-The `switch` statement can have its cases grouped together for a single label:
+Multiple `case` keywords may share the same code as follows:
 
-```c#
+```csharp
 switch (argument) {
     case value1:
     default:
@@ -557,43 +608,39 @@ switch (argument) {
 }
 ```
 
-
 ### `break` Statement
-
-The `break` statement can be used to end a loop prematurely, before complete iteration is made. When encountered inside a loop, immediately escapes from the loop but does not break from its outer loop.
+The `break` statement is to end a loop prematurely. When encountered in the loop, the `break` statement escapes from the current loop but does not escape from the nesting loop.
 
 ### `continue` Statement
-
-The `continue` statement skips the rest of the statement below in the loop and jumps back to the conditioning part. This maintains the loop iteration rather than escaping the loop like `break` statement.
+The `continue` statement skips the rest of the code below in the loop and jumps back to the conditioning part. It maintains the iteration rather than escaping from it like the `break` statement.
 
 ## `while` Loop
+A `while` loop statement repeatedly executes statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `false`.
 
-The `while` loop statement repeatedly execute statements inside (aka. iterate) as long as the condition holds. The loop ends once the condition evaluates `false`.
-
-```cpp
-while (condition) {
+```csharp
+while (condition)
+{
     statements;
 }
 
 // SIMPLIFIED STATEMENT
-while(condition) statement;
+while (condition) statement;
 ```
 
 ## `do`-`while` Statement
+The `do`-`while` loop statement is similar to the `while` loop statement, but the former executes code first then evaluates, and the latter is vice versa.
 
-The `do`-`while` loop statement is alternative of the `while` statement. Instead of checking the condition before executing looping statement, this statement is does opposite: execute looping statement first, then check the condition.
-
-```cpp
-do {
+```csharp
+do
+{
     statements
 } while (condition);
 ```
 
 ## `for` Loop
+The `for` loop statement repeatedly executes statements inside (aka. iterate) as long as the condition holds. Its local variable changes as specified on each iteration, which commonly uses integer increment.
 
-The `for` loop statements repeatedly execute statements inside (aka. iterate) as long as the local variable holds the condition. On each loop, value (generally number) of the variable is incremented/decremented.
-
-```cpp
+```csharp
 for (variable; condition; increment) {
     statements;
 }
@@ -603,19 +650,18 @@ for(variable; condition; increment) statement;
 ```
 
 ### Infinite `for` Loop
+The `for` loop can run an infinite loop using the following syntax:
 
-The `for` loop can run infinite loop using the following syntax:
-
-```c#
+```csharp
 for ( ; ; ) { 
 	statements;
 }
 ```
+
 ## `foreach` Loop
+The `foreach` loop statement iterates execution while in range. The range is generally given by the Collection, which is the data that can sequence its elements individually.
 
-The `foreach` loop statement execute statements while in range. The range is generally refers to Collection such as array which its element can be sequenced one-by-one.
-
-```c#
+```csharp
 foreach (variable in range) {
 	statements;
 }
@@ -624,58 +670,56 @@ foreach (variable in range) {
 foreach (variable in range) statement;
 ```
 
-The Collection in C# will be introduced in *C#: COLLECTION* chapter.
+Refer to the next chapter, *C#: COLLECTION*, to know more about the collection data in C# language.
 
 # **C#: COLLECTION**
-
-C# has a Collection that can store multiple data of the same type at once. While the most common and general collection is an array, there are various other collections available in .NET that are worth knowing.
+C# has a collection that can store multiple data of the same type. Aside from the best-renowned "array" collection, there are various other collections available in .NET that are worth knowing.
 
 ## Array
+An array is a container for data of the same data type in sequence. Declare an array by designating its size of how much data it can store using a bracket `[]`.
 
-Array is a collection used to store an indexed of item of same data type. Bracket `[]` is placed after the data type to declare an array.
-
-```c#
-// ARRAY DECLARATION
+```csharp
+/* ARRAY DECLARATION */
 int[] arr;
 ```
 
-Creating and defining size of an array is done by `new` keyword used for instantiation:
+The `new` keyword creates (that is, instantiate) an array instance that stores multiple data.
 
-```c#
-// INITIALIZATION
+```csharp
+/* INSTANTIATION */
 int[] arr = new int[size];
 ```
 
-which creates array filled with element of `0` or `NULL` value. Elements can be assigned with value after initialization by accessing individually using bracket `[]`:
+The newly created array is filled with `0` or `NULL` value. After instantiation, access each element using a bracket `[]` with an index starting from 0.
 
-```c#
+```csharp
 int[] arr = new int[size];
 
-// ASSIGNMENT: ELEMENTWISE
+/* ASSIGNMENT TO INDIVIDUAL ELEMENT */
 arr[0] = value1;
 arr[1] = value2;
 ```
 
-To assign values on initialization instead, curly bracket `{}` is used to assign values to each element in sequence. Following is a three different methods of assignment with explanation:
+Assign values in order within a pair of curly bracket `{}` to initialize an array with instantiation. C# has three ways of initializing an array.
 
-```c#
-// ASSIGNMENT 1
+```csharp
+/* ASSIGNMENT 1 */
 int[] arr = new int[size] {value1, value2, ... };
 
-// ASSIGNMENT 2
+/* ASSIGNMENT 2 */
 int[] arr = new int[] {value1, value2, ... };
 
-// ASSIGNMENT 3
+/* ASSIGNMENT 3 */
 int[] arr = {value1, value2, ... };
 ```
 
-1. `// ASSIGNMENT 1`: values must be fulfilled on every elements in the array, else results compilation error.
-2. `// ASSIGNMENT 2`: initial array size can dynamically designated based on the number of assigned value.
-3. `// ASSIGNMENT 3`: more simplified version of "`// ASSIGNMENT 2`" method.
+1. `ASSIGNMENT 1`: must fill every element of an array, else results in a compilation error.
+2. `ASSIGNMENT 2`: dynamically designates an array size based on the number of assigned values.
+3. `ASSIGNMENT 3`: more simplified version of the "`ASSIGNMENT 2`" method.
 
-Calling array itself does not return a sequence of elements within; instead will return the information of array data. Only a single element at a time can be called.
+Calling an array itself does not return elements but instead returns the information of array data. However, a character array shows characters in sequence like a string, which technically is not.
 
-```c#
+```csharp
 int[] arr = new int[size] {value1, value2, ... };
 
 System.Console.WriteLine(arr);
@@ -688,33 +732,30 @@ value1
 ```
 
 ### `new` Keyword
+The `new` keyword creates a new instance (aka. instantiate) of the specified data type.
 
-The `new` operator is used to create new instance of a type.
-
-> While in C/C++ represented dynamic allocation, in C# is used on most of the classes to create instance.
+> While C++ uses the `new` keyword for a dynamic allocation, C# uses as an operator for instantiation. C# language does not have a feature where the developer has to allocate memory manually.
 
 ### Multi-dimensional Array
+A multi-dimensional array stores another array as its element. These arrays used as elements must share the same length and data type.
 
-Multi-dimensional array can be declared and initialized that holds values under subarrays which shares the same length:
-
-```c#
-// MULTI-DIMENSIONAL 1
+```csharp
+/* MULTI-DIMENSIONAL ARRAY 1 */
 int[ , ] arr = new int[3,2] { {value1, value2}, {value3, value4}, {value5, value6} };
 
-// MULTI-DIMENSIONAL 2
+/* MULTI-DIMENSIONAL ARRAY 2 */
 int[ , ] arr = new int[ , ] { {value1, value2}, {value3, value4}, {value5, value6} };
 
-// MULTI-DIMENSIONAL 3
+/* MULTI-DIMENSIONAL ARRAY 3 */
 int[ , ] arr = { {value1, value2}, {value3, value4}, {value5, value6} };
 ```
 
-Since multi-dimensional array is created from a single declaration, array data is stored in a single block of memory.
+A multi-dimensional array only uses a block of memory as it is instantiated from a single declaration despite having multiple array data.
 
 ### Jagged Array
+A jagged array can have another same data type of array data as its elements irrelevant to its size.
 
-Jagged array can have another arrays as its elements irrelevant to its size.
-
-```c#
+```csharp
 int[][] arr = new int[3][] {
     new int[] {3}, 
     new int[] {1, 4, 1}, 
@@ -722,279 +763,231 @@ int[][] arr = new int[3][] {
 };
 ```
 
-Because the array contains already declared stored in separate memory location, jagged array implements more than single block of memory.
+Because these array elements are already instantiated and allocated to individual memory space, a jagged array utilizes more than a single memory block.
 
 ## Collection
+> Though not necessary, referring to the *C#: GENERIC* chapter will help understand this chapter better.
 
-*To better understand this section, it is recommended to read chapter "C#: GENERIC" beforehand.*
+The collection is an advanced version of an array that can shrink and extend size flexibly to accommodate any number of data, each of them having unique special features.
 
-Collection is an advanced version of array that can shrink and extend size flexibly to accommodate any number of data, each of them having unique special features.
+The collection has two categories: generic and non-generic. Though explained in a later chapter, the term "generic" refers to the data that designate its data type upon instatiation using angled bracket `<>`.
 
-Collection is divided into two categories: generic and non-generic collection. While the term "generic" will be introduced on later chapter, brief explanation is its data type can be designated upon declaration using angled bracket (`<>`).
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF GENERIC COLLECTION (EXAMPLE)
+/* INSTATIATION OF GENERIC COLLECTION: INTEGER */
 Collection<int> collectionName = new Collection<int>();
 ```
 
-### Lists
+### `List` Collection
+The `list<T>` is a generic collection similar to an array but with flexible sizings, such as inserting and removing the elements. It is a C# counterpart of the vector class in C++ language.
 
-List is a generic collection similar to array but its flexible sizing allows inserting and removing the elements more dynamic. This can be considered as C# version of `std::vector` class in C++ language.
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF LIST COLLECTION (EMPTY)
+/* INSTANTIATION OF List<T> COLLECTION: INT */
 List<int> LIST = new List<int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF LIST COLLECTION
+/* INITIALIZATION OF List<T> COLLECTION: INT */
 List<int> LIST = new List <int>() {3, 1, 4, 1, 5};
 
 System.Console.WriteLine(LIST[0]);
 ```
-
 ```
 3
 ```
 
-### Sorted List
+### `SortedList` Collection
+The `SortedList<TKey, TValue>` is a variation of the `List<T>` collection where the element is now in `{key, value}` format. Here, the key is a unique element identifier for accessing the value. The collection automatically sorts elements by the key.
 
-Sorted list is a variation of the list generic collection where elements are paired in `{key, value}` format. Here, key is a unique element identifier used to access the element value instead of integer index.
-
-Sorted list automatically sorts elements by the key.
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF SORTED LIST COLLECTION (EMPTY)
+/* INSTATIATION OF SortedList<TKey,TValue> COLLECTION: STRING, INT */
 SortedList<string, int> SLIST = new SortedList<string, int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF SORTED LIST COLLECTION
-SortedList<string, int> SLIST = new SortedList<string, int>() { {"B", 3}, {"A", 1} };
+/* INITIALIZATION OF SortedList<TKey,TValue> COLLECTION: STRING, INT */SortedList<string, int> SLIST = new SortedList<string, int>() { {"B", 3}, {"A", 1} };
 
 System.Console.WriteLine(SLIST["B"]);
 ```
-
 ```
 3
 ```
 
-### Dictionary
+### `Dictionary` Collection
+The `Dictionary<TKey, TValue>` is a variation of the `List<T>` collection where the element is now in `{key, value}` format. Here, the key is a unique element identifier for accessing the value. The collection does not automatically sort elements by the key.
 
-Dictionary is a variation of the list generic collection where elements are paired in `{key, value}` format. Here, key is a unique element identifier used to access the element value instead of integer index.
-
-Dictionary do not sorts elements by the key.
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF DICTIONARY COLLECTION (EMPTY)
+/* INSTATIATION OF Dictionary<TKey,TValue> COLLECTION: STRING, INT */
 Dictionary<string, int> DICT = new Dictionary<string, int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF DICTIONARY COLLECTION
-Dictionary<string, int> DICT = new Dictionary<string, int>() { {"B", 3}, {"A", 1} };
+/* INITIALIZATION OF Dictionary<TKey,TValue> COLLECTION: STRING, INT */Dictionary<string, int> DICT = new Dictionary<string, int>() { {"B", 3}, {"A", 1} };
 
 System.Console.WriteLine(DICT["B"]);
 ```
-
 ```
 3
 ```
 
-### BitArray
+### `BitArray` Collection
+The `BitArray` is a collection that can only store a boolean value: 0 (`false`) and 1 (`true`). Because of the fixed data type, the `BitArray` is a non-generic collection. The collection cannot change size after instantiation.
 
-BitArray is another variation of list collection that stores bit data either 0 (`false`) and 1 (`true`). Because the data type is already defined as Boolean, BitArray collection is non-generic. The size of the BitArray cannot be changed after declaration.
-
-```c#
+```csharp
 using System.Collections;
 
-// DECLARATION OF BIRARRAY COLLECTION
+/* INSTATIATION OF BitArray COLLECTION */
 BitArray BITARR = new BitArray(4);
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections;
 
-// INITIALIZATION OF BIRARRAY COLLECTION
+/* INITIALIZATION OF BitArray COLLECTION */
 bool[] arr = new bool[4] {false, true, false, true};
 BitArray BITARR = new BitArray(arr);
 
 System.Console.WriteLine(BITARR[0]);
 ```
-
 ```
 False
 ```
 
-### Stack
+### `Stack` Collection
+The `Stack<T>` is a generic collection that observes the linear LIFO (Last-In-First-Out) property of stack memory structure. The `Stack<T>` collection cannot use bracket `[]` to access individual elements.
 
-Stack is a LIFO (Last In First Out) memory-structured generic collection where last element to append (push) to the collection is to come out (pop) first. Stack collection cannot use bracket (`[]`) to access individual elements.
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF STACK COLLECTION (EMPTY)
+/* INSTANTIATION OF Stack<T> COLLECTION: INT */
 Stack<int> STACK = new Stack<int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF STACK COLLECTION
+/* INSTANTIATION OF Stack<T> COLLECTION: INT */
 int[] arr = new bool[4] {1, 2, 3, 4};
 Stack<int> STACK = new Stack<int>(arr);
 
 System.Console.WriteLine(STACK.Pop());
 System.Console.WriteLine(STACK.Pop());
 ```
-
 ```
 4
 3
 ```
 
-### Queue
+### `Queue` Collection
+The `Queue<T>` is a generic collection that observes the linear FIFO (First-In-First-Out) property of queue memory structure. The `Queue<T>` collection cannot use bracket `[]` to access individual elements.
 
-Queue is a FIFO (First In First Out) memory-structured generic collection where last element to append (push) to the collection is to come out (pop) first. Queue collection cannot use bracket (`[]`) to access individual elements.
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF QUEUE COLLECTION (EMPTY)
+/* INSTANTIATION OF Queue<T> COLLECTION: INT */
 Queue<int> QUEUE = new Queue<int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF QUEUE COLLECTION
+/* INSTANTIATION OF Queue<T> COLLECTION: INT */
 int[] arr = new bool[4] {1, 2, 3, 4};
 Queue<int> QUEUE = new Queue<int>(arr);
 
 System.Console.WriteLine(STACK.Dequeue());
 System.Console.WriteLine(STACK.Dequeue());
 ```
-
 ```
 1
 2
 ```
 
-### HashSet
+### `HashSet` Collection
+The `HashSet<T>` is a generic collection that does not have duplicate element values. Though the `HashSet<T>` collection utilizes high-performance mathematical set operations, it cannot use bracket `[]` to access individual elements.
 
-HashSet is a generic collection where elements are unique and does not allow duplicates. HashSet provides high-performance mathematical set operations, but the collection cannot use bracket (`[]`) to access individual elements.
-
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// DECLARATION OF HASHSET COLLECTION (EMPTY)
+/* INSTANTIATION OF HashSet<T> COLLECTION: INT */
 HashSet<int> HSET = new HashSet<int>();
 ```
-
 ----
-
-```c#
+```csharp
 using System.Collections.Generic;
 
-// INITIALIZATION OF HASHSET COLLECTION
+/* INSTANTIATION OF HashSet<T> COLLECTION: INT */
 int[] arr = new bool[6] {1, 2, 3, 4, 1, 3};
 HashSet<int> HSET = new HashSet<int>(arr);
 
 System.Console.WriteLine(HSET.Count);
 ```
-
 ```
 4
 ```
 
-
 # **C#: METHOD**
-
-C# language is executed based around a single key method called `Main()`. Understanding the concept of method is important in C# languages, which can also be used to create and implement custom method to serve specific purpose.
+C# language is executed based on a single method called the `Main()` method. Understanding the concept of method is crucial in C# languages and can increase efficiency by creating custom method. This chapter will be introducing the guide on how to create and use method in C# language.
 
 ## Method
+A method is a reusable independent block of code comprising the class and object, processing the data and presenting newly processed data once it's called, allowing dynamic program scripting. A method is distinguished by parenthesis after its name followed by the class or object; `object.method()`.
 
-Method one of the component comprising an object, and is a block of code responsible for processing passed data and presenting newly processed data once the method is called.
-
-Method can be distinguished by its declaration with parenthesis after its name; `method()`. Its definition is stated inside a code block (`{}`), which is executed when called.
-
-```c#
-// METHOD DEFINITION
-static double method(int arg1, double arg2)
-{
-    return arg1 + arg2;
-}
-
-method(1, 3.0);		// >> OUTPUT: 4.0
+```csharp
+System.Console.WriteLine("Hello World!");
+// "WriteLine()" METHOD OF THE "System.Console" CLASS
 ```
 
-Because C# language paradigm is OOP means method do not requires forward declaration (aka. prototype) to call the method. However, defining a method inside another method (aka nested method) is invalid in C# language.
+C# is an object-oriented programming language, and the procedural doesn't have much significance as C/C++ language does. Meaning, there is no such thing as the forward declaration in OOP. However, defining a method inside another method (aka nested method) is invalid.
 
 ### `return` Statement
+The `return` statement is a method-exclusive statement that returns the value processed by a method. Once encountering a return statement, the method ends immediately despite having remaining codes.
 
-The `return` statement is a method-exclusive statement that outputs indicated data under the data type declared on the method. Once the `return` statement is executed, the method ends immediately despite there are codes still left inside.
-
-If the method is a `void` data type, method can be returned by `return;` statement alone without any data to return.
+If the method is a `void` data type, the `return;` statement alone without any data will exit the method.
 
 ### Parameter & Argument
+Following is a difference between parameter and argument mentioned when discussing method:
 
-Following are the difference between parameters and arguments that is referred significantly when discussing function.
+* **Argument**
+    : An argument is a value or object passed to a method parameter.
 
-**Parameter**
-Parameter is a method-internal local variable: because parameters is a method-exclusive local variable, it cannot be called from outside.
+* **Parameter**
+    : A parameter is a local variable assigned with an argument. Meaning, parameters are only available inside the method. Parameters is declared inside a parenthesis `()`.
 
-| OPERATOR |    SYNTAX     | DESCRIPTION                                                  |
-| :------: | :-----------: | ------------------------------------------------------------ |
-|   `=`    | `arg = value` | Parameter `arg` is assigned `value` by default when no other value is passed. Must locate after normal parameter. |
+Although parameters and arguments are a different existence, two terms are used interchangeably as both stores the same data.
 
-**Argument**
-Argument is a value or object being passed to the method parameter and those passed values and objects will be processed by the method code. However, argument is independent from parameter: change on parameter does not affect value or object passed as argument.
+| OPERATOR |   SYNTAX    | DESCRIPTION                                                  |
+| :------: | :---------: | ------------------------------------------------------------ |
+|   `=`    | `arg=value` | A parameter that has default value when no argument is passed. Must locate after normal parameter. |
 
-| OPERATOR |    SYNTAX    | DESCRIPTION                                                  |
-| :------: | :----------: | ------------------------------------------------------------ |
-|   `:`    | `arg: value` | Assign argument `value` to method parameter namely `arg`. Does not have to follow parameter order. |
+Examples below show how parameter and argument work in methjod:
 
-Examples below show how function parameter and argument works:
-
-```c#
+```csharp
 using System;
 
 class Program
 {
     static void Main(string[] args)
     {
+        /* CALLING METHOD */
         Console.WriteLine(method(1, 3.0));                // >> OUTPUT: 4.0
         Console.WriteLine(method(1));                     // >> OUTPUT: 8.0
         Console.WriteLine(method(arg2: 3.0, arg1: 1));    // >> OUTPUT: 4.0
     }
     
+    /* METHOD DECLARATION */
     static double method(int arg1, double arg2 = 7.0)
     {
         return arg1 + arg2;
@@ -1002,13 +995,12 @@ class Program
 }
 ```
 
-There are three different method of passing arguments to parameters: call by value, reference and output.
+There are two different ways of passing arguments to parameters: call by value, and call by reference.
 
-* **By Value**
+* **Call By Value**
+    The *call by value* only passes the value of an argument to a parameter. In other words, argument and parameter are separate identities that do not influence each other.
 
-    Requiring no special syntax, call by value passes only the value of the argument. In other word, argument and parameter are separate identities. Hence, changes made on parameter does not affect variable passed as an argument.
-
-    ```c#
+    ```csharp
     using System.Console;
     
     class Program
@@ -1022,6 +1014,7 @@ There are three different method of passing arguments to parameters: call by val
             Console.WriteLine(A, B);    // >> OUTPUT: 4 (1 + 3.0)
         }
         
+        /* CALL BY VALUE */
         static int method(int arg1, int arg2)
         {
             arg1 += arg2;
@@ -1030,11 +1023,10 @@ There are three different method of passing arguments to parameters: call by val
     }
     ```
 
-* **By Reference**
+* **Call By Reference**
+    The *call by reference* uses the `ref` keyword and passes the argument itself to a parameter. In other words, argument and parameter are a single identity, influencing the argument when the parameter changes.
 
-    Using `ref` keyword, call by reference passes the address of the variable of argument. In other word, argument and parameter are a single identity. Hence, changes made on parameter does affect variable passed as an argument.
-
-    ```c#
+   ```csharp
     using System.Console;
     
     class Program
@@ -1048,6 +1040,7 @@ There are three different method of passing arguments to parameters: call by val
             Console.WriteLine(ref A, ref B);    // >> OUTPUT: 7 ((1 + 3.0) + 3.0)
         }
         
+        /* CALL BY REFERENCE */
         static int method(ref int arg1, ref int arg2)
         {
             arg1 += arg2;
@@ -1055,12 +1048,10 @@ There are three different method of passing arguments to parameters: call by val
         }
     }
     ```
-
     ---
+    The `in` keyword implements call by reference. While the argument and parameter become a single identity, the parameter is unchangeable as it sets to read-only, keeping the argument data protected from any changes.
 
-    Using `in` keyword, call by reference passes the address of the variable of argument but the parameter is read-only and unmodifiable. Simply put, argument and parameter are a single constant identity. Hence, no changes can be made on parameter which eventually not affecting variable passed as an argument.
-
-    ```c#
+    ```csharp
     using System.Console;
     
     class Program
@@ -1073,6 +1064,7 @@ There are three different method of passing arguments to parameters: call by val
             Console.WriteLine(in A, in B);    // COMPILATION ERROR: CANNOT EXECUTE "arg1 += arg2;" STATEMENT!
         }
         
+        /* CALL BY REFERENCE: "in" KEYWORD */
         static int method(in int arg1, in int arg2)
         {
             arg1 += arg2;
@@ -1080,14 +1072,11 @@ There are three different method of passing arguments to parameters: call by val
         }
     }
     ```
-
     ```
     Cannot assign to variable 'in int' because it is a readonly variable
     ```
-
     ----
-
-    Using `out` keyword, call by reference passes the address of the variable of argument but only uninitialized argument is allowed. This is mainly used on method whose purpose is to initialized the variable called by reference, and must initialize the value before end of the method.
+    The `out` keyword also implements call by reference. While the argument and parameter become a single identity, only the uninitialized argument is allowed. The parameter must initialize the argument before exiting the method.
 
     ```c#
     using System.Console;
@@ -1101,7 +1090,8 @@ There are three different method of passing arguments to parameters: call by val
             Console.WriteLine(out A, out B);              // >> OUTPUT: 4 (1 + 3.0)
             Console.WriteLine("A: {0}, B: {1}", A, B);    // >> OUTPUT: "A: 4, B: 3"
         }
-        
+       
+        /* CALL BY REFERENCE: "out" KEYWORD */ 
         static int method(out int arg1, out int arg2)
         {
             arg1 = 1; arg2 = 3;
@@ -1112,10 +1102,9 @@ There are three different method of passing arguments to parameters: call by val
     ```
 
 ### Method Overloading
+The method overloading is the concept where method with the same name behaving differently based on the number of arguments and their data type. While these method may have a different definition, the returned data type must be the same.
 
-Multiple functions with the same name can exist as long as they are unique in arguments (such as number of arguments and its data type). This is called function overloading and these functions can have their own separate definition. Function data type does not overload functions.
-
-```c#
+```csharp
 using System;
 
 class Program
@@ -1141,13 +1130,12 @@ class Program
 ```
 
 ## Entry Point
+An entry point is the startup method where program execution begins. In C# language, the `Main()` *static* method is the entry point that doesn't need to be called. Creating multiple `Main()` method or not having any `Main()` method will cause error on running the program.
 
-Entry point is the starting point where a program execution begins. In C# programming language, the entry point is `Main()` *static* method. A project must have one and only `Main()` static function within the project. Creating multiple `Main()` method or not having any `Main()` method will cause error on running the program.
-
-```c#
+```csharp
 class Program
 {
-    // ENTRY POINT: Main() METHOD WITH PARAMETER
+    // ENTRY POINT: "Main()" METHOD WITH PARAMETER
     static void Main(string[] args)
     {
     	statements;
@@ -1155,48 +1143,53 @@ class Program
 }
 ```
 
-Entry point `Main()` static method can have argument which is apparent when executed through command-line:
+The `Main()` entry point parameter `string[] args` takes text-input passed from terminal command as an array of string data. Suppose there is an application `app.exe`, the following command will assign the argument as shown below.
 
 ```
 ./app.exe option1 option2
 ```
 
-| Arguments | Data      |
+| ARGUMENTS | DATA      |
 | --------- | --------- |
 | `args[0]` | `option1` |
 | `args[1]` | `option2` |
 
-# **C#: OBJECT-ORIENTED PROGRAMMING**
-
-Object-oriented programming (OOP) is a programming paradigm based on usage of objects to structure the program. This chapter is mainly focuses on object and class in detail which was briefly explained on the very beginning of the document *C#: INTRO*.
+# **C#: OBJECT AND CLASS**
+Object-oriented programming (abbrev. OOP) focuses on the usage of classes and objects that was briefly explained at the very beginning of the *C#: INTRO* chapter.
 
 ## Objects
+Object (aka. instance) is a block of data that encapsulates variables and methods into a single identity. An object also has a method called *property* whose purpose is to return field value indirectly to prevent accidental field modification.
 
-Previous chapters have introduced variable (which can store data) and method (which can process data). Object, aka. instance, is a block of data which encapsulate these variables and methods as members of a single identity, called *member variable* (or *member field*) and *method* respectively.
+| MEMBER   | SYNTAX              | DESCRIPTION                                                                                 |
+|:----------:|---------------------|---------------------------------------------------------------------------------------------|
+| Field    | `object.field`      | 
+Variable declared within the class and object; parameters and local variables inside the method are not fields. |
+| Method   | `object.method()`   | Responsible for processing data within the class and object; some methods can acquire argument or return data. |
+| Property | `object.property()` | A method that returns the field value indirectly; this allows acquiring the field value possible while preventing accidental field modification.  |
 
-Object also has a method called *property* whose purpose is to return field value generally restricted on directly access from external code.
+The programming based around the use of custom objects is called *object-oriented programming*.
 
-The programming based around use of a custom objects is called *object-oriented programming*.
+```csharp
+string variable = "Hello World!";
+System.Console.WriteLine(variable.Length);
+// Using the "Length()" method that returns the number of characters excluding a null terminator from the "variable" string object.
+```
 
-```c#
-string x = "Hello World!";
-System.Console.WriteLine(x.Length);
-// Accessing "Length" field that stores number of characters.
+```
+12
 ```
 
 ### Encapsulation
+Encapsulation is the core concept in an object with the following characteristics:
 
-Encapsulation is the core concept in object which...
-
-1. combines variables and method into a single object
-2. restrict direct access to these variables and methods to prevent accidental modification from external code. 
+1. Combines variables and functions into a single data.
+2. Restrict direct access to these variables and functions to prevent accidental modification from external code. 
 
 ## Class
+A class creates objects (aka. instance) and is declared using the `class` keyword. Declaration of an object's fields and methods are also inside a class declaration. The following example is a simple user-defined class with fields and methods:
 
-Class is used to create objects (aka. instance), hence can be deemed as a blueprint of the object. Classes are created using keyword `class` and inside defines variables and methods which becomes member variable and methods for the object. Act of creating an instance from a class is called *instantiation*.
-
-```c#
-// CREATING CLASS
+```csharp
+/* CREATING CLASS */
 class CLASS
 {
     public int field1 = 1;
@@ -1208,26 +1201,33 @@ class CLASS
     }
 }
 
-// INSTANTIATION
-CLASS instance = new CLASS();
+class Program
+{
+    static void Main(string[] args)
+    {
+    	// INSTANTIATION
+        CLASS instance = new CLASS();
 
-// THEREFORE...
-instance.field1;       // >> OUTPUT: 1
-instance.field2;       // >> OUTPUT: 3.0
-instance.method(2);    // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
+        // THEREFORE...
+        instance.field1;       // >> OUTPUT: 1
+        instance.field2;       // >> OUTPUT: 3.0
+        instance.method(2);    // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
+    }
+}
 ```
 
+Creating an instance from the class is called *instantiation*.
+
 ### Constructor
+A constructor is a method that automatically executes whenever instantiation has occurred, defining the number of arguments and its data type to the instance. The name of a constructor must be the same as the class name but without specifying the returned data type because it has a fixed data type of `void.`
 
-Constructor is a special method automatically executed whenever instantiation has occurred and can define the number of arguments to pass to the instance. Name of a constructor must be same as the class name and does not require data type.
+One of the common usages of a constructor is the initialization of member fields upon instantiation.
 
-One of the common usage of constructor is initialization of member fields upon instantiation.
-
-```c#
-// CREATING CLASS
+```csharp
+/* CREATING CLASS */
 class CLASS
 {
-    // CONSTRUCTOR
+    /* CONSTRUCTOR */
     public CLASS(int arg1, double arg2)
     {
         field1 = arg1;
@@ -1243,21 +1243,26 @@ class CLASS
     }
 }
 
-// INSTANTIATION
-CLASS instance = new CLASS(1, 3.0);
+class Program
+{
+    static void Main(string[] args)
+    {
+        // INSTANTIATION
+        CLASS instance = new CLASS(1, 3.0);
+    }
+}
 ```
 
-Constructor is an optional member method and can be defined when developer wants. However, when constructor that takes argument(s) is presented, parenthesis `()` is required upon instantiation. Multiple constructor is allowed per class as long as rule of function overloading is observed.
+A constructor is an optional method and passes arguments through parenthesis `()` upon initialization. However, initialize without parenthesis when there is no argument for the instance. Multiple constructors are allowed per class as long as the rule of function overloading is observed.
 
 ### Finalizer
+A finalizer (aka. destructor) is a method that automatically executes whenever the instance is destroyed and released from the memory. The name of a finalizer must be the same as the class name with a tilde `~` prefix but without specifying the returned data type because it has a fixed data type of `void.`
 
-Finalizer (aka. destructor) is a special method automatically executed whenever instance is released (every time object is destroyed either systematically by compiler or manually by developer). Name of a destructor must be same as the class name with tilde `~` prefix and does not require data type.
-
-```c#
-// CREATING CLASS
+```csharp
+/* CREATING CLASS */
 class CLASS
 {
-    // DESTRUCTOR
+    /* FINALIZER */
     ~CLASS()
     {
         statements
@@ -1272,18 +1277,23 @@ class CLASS
     }
 }
 
-// INSTANTIATION
-CLASS instance = new CLASS(1, 3.0);
+class Program
+{
+    static void Main(string[] args)
+    {
+        // INSTANTIATION
+        CLASS instance = new CLASS(1, 3.0);
+    }
+}
 ```
 
-Destructor is an optional member method and can be defined when developer wants. Only one destructor is allowed per class and does not take any argument and modifier.
+A destructor is an optional method, but only one is allowed per class since the absence of parameters means no support for function overloading.
 
 ### `this` Keyword
+The `this` keyword is an operator used within a class to refer to an object itself; it can also access its members.
 
-The `this` keyword is used within a class to refer the current class itself.
-
-```c#
-// CREATING CLASS
+```csharp
+/* CREATING CLASS */
 class CLASS{
     private int field;
     
@@ -1294,11 +1304,10 @@ class CLASS{
 ```
 
 ## Static Class
+Members defined inside the class cannot be accessed directly but only through instantiation. The static class, declared with the `static` keyword, can access the members without instantiation. However, it cannot instantiate, and only static members are available.
 
-Class itself cannot use the its members directly and need to create instance to access them. However, declaring the class itself as static allows the class to access the members without needing any instantiation. Hence, it is impossible to create an instance from the static class.
-
-```c#
-// CREATING STATIC CLASS
+```csharp
+/* CREATING STATIC CLASS */
 static class CLASS
 {
     public static int field1 = 1;
@@ -1310,31 +1319,35 @@ static class CLASS
     }
 }
 
-// THEREFORE...
-CLASS.field1;       // >> OUTPUT: 1
-CLASS.field2;       // >> OUTUPT: 3.0
-CLASS.method(2);    // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
-
-// [ERROR] INSTANTIATION
-CLASS instance = new CLASS();
+class Program
+{
+    static void Main(string[] args)
+    {
+        // THEREFORE...
+        CLASS.field1;       // >> OUTPUT: 1
+        CLASS.field2;       // >> OUTPUT: 3.0
+        CLASS.method(2);    // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
+        
+        // INSTANTIATION: ERROR!
+        CLASS instance = new CLASS();
+    }
+}
 ```
-
 ```
 Error	CS0723	Cannot declare a variable of static type 'CLASS'
 Error	CS0712	Cannot create an instance of the static class 'CLASS'
 ```
 
-Static class is generally used as a collection of member for specific purpose which does not (or should not) need instantiation; e.g., `Math`, `Array`, `String`, `DataTime`, `Console`, and more.
+The most renowned static class in C# language is the `Console` class that has input and output for a terminal, providing fields and methods even without instantiation.
 
 ### Static Constructor
+A static constructor is a method executed whenever the member of the static class is called.
 
-Static constructor is executed when any static member is called even when it is not instantiated.
-
-```c#
-// CREATING STATIC CLASS
+```csharp
+/* CREATING STATIC CLASS */
 static class CLASS
 {
-    // STATIC CONSTRUCTOR
+    /* STATIC CONSTRUCTOR */
     public static CLASS()
     {
         statements;
@@ -1350,110 +1363,122 @@ static class CLASS
 }
 ```
 
-Static constructor is an optional member method and can be defined when developer wants. Only one static constructor is allowed per class and does not take any argument and modifier.
+A static constructor is an optional method, but only one is allowed per static class since the absence of parameters means no support for function overloading.
 
 ## Modifier
+A modifier sets the property of the member upon declaration inside the class.
 
-Modifier keywords are used to define characteristic of object members upon member declaration.
+1. `static` modifier
+    : a modifier that is for declaring either a static member or a static class that can only have static members.
 
-1. **Static** modifier (`static` keyword)
-    : a modifier used to declare either static member which can be used without instantiation, or static class that only has static members.
-
-    ```c#
-    // STATIC MEMBER FIELD
+    ```csharp
+    /* STATIC FIELD */
     static int field = 3;
     
-    // STATIC MEMBER METHOD
-    static void method() { statements; }
+    /* STATIC METHOD */
+    static void method()
+    { 
+        statements;
+    }
     ```
 
-2. **Constant** modifier (`const` keyword)
-    : a static modifier used to declare constant member field; constant member only allows value assignment through initialization. This also means constant member must be initialized with value upon declaration.
+2. `const` modifier
+    : a static modifier that is for declaring an unmodifiable constant member field. It must initialize upon declaration; otherwise results in a compilation error.
 
-    ```c#
-    // CONSTANT (STATIC) MEMBER FIELD
+    ```csharp
+    /* CONSTANT (STATIC) MEMBER FIELD */
     const int field = 3;
     ```
 
-3. **Read-Only** modifier (`readonly` keyword)
-    : a non-static modifier used to declare semi-constant member field; read-only member allows value assignment using both initialization and on constructor. This also means read-only member does not have to be initialized upon declaration.
+3. `readonly` modifier
+    : a non-static and semi-constant modifier that cannot change after initialization. It can initialize using either field declaration or using a constructor.
 
-    ```c#
-    // READ-ONLY (NON-STATIC) MEMBER FIELD
+    ```csharp
+    /* READ-ONLY (NON-STATIC) MEMBER FIELD */
     readonly int field;
     ```
 
-4. **Sealed** modifier (`sealed` keyword)
-    : a modifier used on base class or member of the base class to prevent derived class from inheriting.
+4. `sealed` modifier
+    : a modifier that is declared on the base class or base class member to prevent inheritance to a derived class.
 
-    ```c#
-    // SEALED MEMBER
+    ```csharp
+    /* SEALED MEMBER */
     sealed int field;
     ```
 
-5. **Virtual**-**Override** modifier pair (`virtual` and `override` keyword)
-    : a modifier used for method overriding; `virtual` modifier allows base class method to be overridden, and `override` modifier on derived class overrides inherited virtual method from base class.
+5. `virtual` & `override` modifier
+    : a pair of modifiers that are for overriding: the `virtual` modifier declares the base class member is overridable, and the `override` modifier overrides the virtual member from the base class.
 
-    ```c#
-    // VIRTUAL METHOD
-    virtual void method() { statements; }
+    ```csharp
+    /* VIRTUAL METHOD */
+    virtual void method()
+    {
+        statements;
+    }
     
-    // OVERRIDDEN METHOD
-    override void method() { statements; }
+    /* OVERRIDE METHOD */
+    override void method()
+    {
+        statements; 
+    }
     ```
 
-6. **Abstract** modifier (`abstract` keyword)
-    : a virtual modifier specifically for method without any implementation (or definition); this modifier can be used on class as well to declare abstract class.
+6. `abstract` modifier
+    : a modifier that is for declaring a method without a code block or a class that has members without a code block.
 
-    ```c#
+    ```csharp
     // ABSTRACT METHOD
     abstract void method();
     ```
 
 ### Access Modifier
+Access modifioer defines accessibility to class members from outside the class. There are four access modifiers in C#: `public`, `private`, `protected`, and `internal`.
 
-Access modifier is used to define characteristic of object members on access authorization. There are four different access modifiers available in C# classes: public, private, protected, and internal.
-
-| A.MODIFIER | KEYWORD     | DESCRIPTION                                                  |
-| ---------- | ----------- | ------------------------------------------------------------ |
-| Public     | `public`    | Accessible from the code outside the class.                  |
-| Private    | `private`   | Accessible only within the class.                            |
-| Protected  | `protected` | Accessible from derived class but still restricted from outside the class; refer to inheritance. |
-| Internal   | `internal`  | Accessible only within the assembly.                         |
+| KEYWORD     | DESCRIPTION                                                  |
+| ----------- | ------------------------------------------------------------ |
+| `public`    | Members are accessible from outside the class.      |
+| `private`   | Members are accessible only within the class.                |
+| `protected` | Members are accessible from the derived class but still restricted from outside the class (refer to the *inheritance* section). |
+| `internal`  | Members are accessible from outside the class but restricted to the current assembly (inaccessible from other assemblies). |
 
 ## Inheritance
+Inheritance is an act of providing both member fields and methods of a base class to a derived class. When the base class and derived class share the same name of member fields or methods, it uses members from the derived class.
 
-Inheritance is an act of base class providing member variables and methods to derived class. When the same name of members exists on both base class and derived class, members from base class are overridden by derived class's.
-
-```c#
+```csharp
 using System;
 
-// CREATING BASE CLASS
+/* CREATING BASE CLASS */
 class BASECLASS
 {
     public BASECLASS() { Console.WriteLine("BASE CLASS: Constructor"); }
-    ~BASECLASS() { Console.WriteLine("BASE CLASS: Destructor"); }
+    ~BASECLASS() { Console.WriteLine("BASE CLASS: Finalizer"); }
     
     public int field1 = 1;
     public double field2 = 3.0;
 }
 
-// CREATING DERIVED CLASS
+/* CREATING DERIVED CLASS */
 class DERIVEDCLASS
     : BASECLASS
 {
     public DERIVEDCLASS() { Console.WriteLine("DERIVED CLASS: Constructor\n"); }
-    ~DERIVEDCLASS() { Console.WriteLine("\nDERIVED CLASS: Destructor"); }
+    ~DERIVEDCLASS() { Console.WriteLine("\nDERIVED CLASS: Finalizer"); }
     
     public double field2 = 7.0;
     public char field3 = 'A';
 }
 
-// INSTANTIATION
-DERIVEDCLASS instance = new DERIVEDCLASS();
-Console.WriteLine("{0}, {1}, {2}", instance.field1, instance.field2, instance.field3);
+class Program
+{
+    static void Main(string[] args)
+    {
+        // INSTANTIATION
+        DERIVEDCLASS instance = new DERIVEDCLASS();
+        Console.WriteLine("{0}, {1}, {2}",
+            instance.field1, instance.field2, instance.field3);
+    }
+}
 ```
-
 ```
 "BASE CLASS: Constructor"
 "DERIVED CLASS: Constructor"
@@ -1464,109 +1489,115 @@ Console.WriteLine("{0}, {1}, {2}", instance.field1, instance.field2, instance.fi
 "BASE CLASS: Destructor"
 ```
 
-Derived class in C# generally cannot inherit from multiple base classes; a derived class can inherit only a single base class. For multiple inheritance, refer to *interface*.
+C# language cannot derive from multiple base classes at once and only allows one per inheritance. To derive from several base classes at once, refer to the *Interface* section.
 
 ## Polymorphism
-
-Polymorphism means "having many forms", which in C# programming means having different functionality based on the situation and usage. Polymorphism is one of the important features in OOP and is categorized into two types:
+Polymorphism means "having many forms," which in C# programming means having different functionality based on the situation and usage. Polymorphism is one of the core features in OOP categorized into two types:
 
 * Compile-time Polymorphism
     : polymorphism achieved on compilation (aka. static polymorphism).
 * Run-time Polymorphism
     : polymorphism achieved on run-time (aka. dynamic polymorphism).
 
-One of the compile-time polymorphism has been introduced already; *method overloading* which functions differently according to passed arguments.
+One of the compile-time polymorphism has already been introduced; *method overloading* which functions differently according to passed arguments.
 
 ### Operator Overloading
+Operator overloading is another compile-time polymorphism that customizes operator to method differently on specific classes. Just like function overloading, a single operator can have multiple implementations as long as the argument's uniqueness is guaranteed. Overloaded operators are class-exclusive and won't be applied elsewhere.
 
-Overloading operator is another compile-time polymorphism which is customizing operator to function differently on certain classes or portion of the script. Just like method overloading, a single operator can have multiple implementation as long as the arguments are unique. Overloaded operators are exclusive to the class and won't be applied elsewhere.
+Use the `operator` keyword to specify the operator to customize. The syntax for defining operator functionality is identical to the method declaration.
 
-The `operator` keyword is used to specify the operator for customization. Declaring and defining operator functionality follows syntax identical to static method.
-
-```c#
-// CREATING CLASS
+```csharp
+/* CREATING CLASS */
 class CLASS
 {
+    public int field;
+
     // OPERATOR OVERLOADING
     public static int operator + (CLASS arg1, CLASS arg2)
     {
         return arg1.field + arg2.field;
     }
-    
-    public int field;
 }
 ```
 
 ### Method Overriding
+Method overriding is a run-time polymorphism where the derived class redefines members inherited from the base class. The difference between overloading and overriding is the formal *selects* functionality while the latter *redefines* functionality.
 
-Overriding method is a run-time polymorphism where derived class redefine member inherited from the base class. The difference between overloading and overriding is, the formal *selects* functionality when the latter *redefines* functionality.
+A virtual method is a function specifically for method overriding, declared by the `virtual` keyword from the base class alone.
 
-Virtual method is a special method specifically designed for method overriding, and is declared by `virtual` keyword. Declaration of the virtual method is only necessary in base class but not in derived class.
-
-```c#
-// CREATING BASE CLASS
+```csharp
+/* CREATING BASE CLASS */
 class BASECLASS
 {
-    // VIRTUAL METHOD
-    public virtual void polymorph() { statements1; }
-};
+    // METHOD OVERRIDING
+    public virtual void polymorph()
+    {
+        statements1; 
+    }
+}
 
-// CREATING DERIVED CLASS
+/* CREATING DERIVED CLASS */
 class DERIVEDCLASS1
     : BASECLASS
 {
-    // OVERRIDE METHOD
-    public override void polymorph() { statements2; }
-};
+    // METHOD OVERRIDING
+    public override void polymorph()
+    {
+        statements2;
+    }
+}
 ```
 
-Virtual method with definition implemented on base class can either (1) use behavior directly from base class or (2) use behavior from derived class in case no function override has occurred. Meanwhile, virtual method without any definition implemented is called **abstract method**.
+A virtual method can have its definition implemented in the base class for either using behavior (1) directly from a base class or (2) from a derived class in case no method override has occurred. However, a virtual method without any definition implemented is called **abstract method**.
 
-```c#
-// ABSTRACT METHOD
+```csharp
+/* ABSTRACT METHOD */
 public abstract void polymorph();
 ```
 
-Because abstract method has no definition in base class, it is a virtual method that *must be* overridden when inherited to derived class. Failed to do so will cause a compilation error.
+Because an abstract method has no definition in the base class, it *must be* overridden when inherited to a derived class. Failed to do so will cause a compilation error.
 
 ### Abstract Class
+An abstract class is a class declared with the `abstract` modifier, which is unable to instantiate but only exists for inheritance. Attempt to instantiate will results in a compilation error.
 
-Abstract class is a special class declared using `abstract` keyword, designed not meant for class instantiation but as a base class purely to inherit members to derived class. Attempting to instantiate causes compilation error.
-
-```c#
-// CREATING ABSTRACT CLASS
+```csharp
+/* CREATING ABSTRACT CLASS */
 abstract class CLASS
 {
     public int field1 = 1;
     public double field2 = 3.0;
     
-    // ABSTRACT METHOD
+    /* ABSTRACT METHOD */
     public abstract void polymorph();
 }
 
-// [ERROR] INSTANTIATION
-CLASS instance = new CLASS();
+class Program
+{
+    static void Main(string[] args)
+    {
+        // INSTANTIATION: ERROR!
+        CLASS instance = new CLASS();
+    }
+}
 ```
-
 ```
 Error	CS0144	Cannot create an instance of the abstract class or interface 'CLASS'
 ```
 
-Abstract class can have multiple members with different access modifier too. However, inherited non-abstract derived class *must* include actual implementation for the abstract member declared on the base class.
+An abstract class can have members with different access modifiers, but eventually, it *must be* overridden when inherited to a derived class.
 
 ### Interface
+An interface is a variation of an abstract class, which declares every member with the `abstract` and `public` modifier by default. No modifier needs to be specified but cannot have a member field.
 
-Interface is a variation of abstract class where all its member are nonetheless `abstract` and `public` by default. There is no need to and is not allowed to specify the modifier. Interface can have methods and properties but cannot have member field.
-
-```c#
-// CREATING INTERFACE
+```csharp
+/* CREATING INTERFACE */
 class interface INTERFACE
 {
     int property {get; set;}
     void polymorph();
 }
 
-// CREATING DERIVED CLASS
+/* CREATING DERIVED CLASS */
 class DERIVEDCLASS
     : INTERFACE
 {
@@ -1578,11 +1609,11 @@ class DERIVEDCLASS
 }
 ```
 
-Unlike derived class inherited from abstract class which needs `override` modifier to corresponds to `virtual` or `abstract` modifier, interface does not need such modifiers when overriding method.
 
-Multiple interface can inherit their members to a single derived class, using the following syntax:
+A class derived from an interface does not require the `override` modifier for method overriding. Additionally, a class can derive from multiple interfaces at once using the syntax below.
 
-```c#
+```csharp
+/* CREATING DERIVED CLASS: INHERITED FROM TWO INTERFACES */
 class DERIVEDCLASS
     : INTERFACE1, INTERFACE2
 {
@@ -1591,52 +1622,56 @@ class DERIVEDCLASS
 ```
 
 ## Properties
+A property supports data hiding by dividing a single field into two separate `get` and `set` portion. Though similar to a method, it doesn't have parenthesis `()` like a field.
 
-Property is a member used to supports data hiding by dividing a single field into two separate portions: `getter`, and `setter`. The property looks similar to methods but properties do not have a pair of parenthesis, behaving just like member field.
+| ACCESSOR | KEYWORD | DESCRIPTION                                  |
+|----------|---------|----------------------------------------------|
+| Getter   | `get`   | A member for getting a value from the field. |
+| Setter   | `set`   | A member for setting a value to the field.   |
 
-| ACCESSOR | KEYWORD | DESCRIPTION                                     |
-| -------- | ------- | ----------------------------------------------- |
-| Getter   | `get`   | Member for getting the value from member field. |
-| Setter   | `set`   | Member for setting the value to member field.   |
-
-```c#
+```csharp
 using System;
 
-// CREATING CLASS
+/* CREATING CLASS */
 class CLASS
 {
     private int field;
     
-    // PROPERTY
+    /* PROPERTY */
     public int property
     {
-        get => field;            // GETTER IMPLEMENTATION
-        set => field = value;    // SETTER IMPLEMENTATION
+        get => field;            // GETTER PROPERTY
+        set => field = value;    // SETTER PROPERTY
         
-        /* EQUIVALETN:
+        /* EQUIVALENT:
         get { return field; }
         set {field = value; }
         */
     }
 }
 
-// INSTANTIATION
-CLASS instance = new CLASS();
-
-instance.method = 1;
-instance.method;        // >> OUTPUT: 1
+class Program
+{
+    static void Main(string[] args)
+    {
+        // INSTANTIATION
+        CLASS instance = new CLASS();
+        
+        instance.method = 1;
+        instance.method;        // >> OUTPUT: 1
+    }
+}
 ```
 
-The property syntax itself explains it cannot pass more than a single data as an argument. While there exists an argument means there is also a (auto-defined) parameter that should accept the passed argument, pre-declared as `value` keyword.
+A property can only accept one argument, as shown in the example above. This argument is automatically passed to the property parameter, the `value` operator.
 
-Separating code using property encapsulate sensitive code that shouldn't be modified by the user (such as `setter`), while providing constant access to the method via `getter` method despite any changes were made on `setter`.
+Separating a field using property hides sensitive code using the setter property while getting a field value from the getter property.
 
 ### Auto-Implemented Property
+An auto-implemented property is a simplified property that cannot customize the getter and setter property.
 
-Simplified version of property is available, called "auto-implemented property". However, custom statements cannot be implemented on this particular property.
-
-```c#
-// PROPERTY
+```csharp
+/* CREATING CLASS */
 public int property {get; set;}
 
 /* EQUIVALENT:
@@ -1649,19 +1684,18 @@ public int property{
 ```
 
 ## Indexer
+An indexer is a member that utilizes an instance just like an array. Similar to a property, it has a getter and setter accessor, storing data in a private collection field.
 
-Indexer member allows instance to be indexed just like array. Similar to property which uses both `getter` and `setter` accessors, indexer stores data in collection object declared in private member field.
-
-```c#
+```csharp
 using System;
 
-// CREATING CLASS
+/* CREATING CLASS */
 class CLASS
 {
-    // COLLECTION FOR INDEXER
+    /* COLLECTION FOR INDEXER */
     private int[] arr = new int[2];
     
-    // INDEXER
+    /* INDEXER */
     public int this[int index]
     {
         get => arr[index];
@@ -1669,23 +1703,27 @@ class CLASS
     }
 }
 
-// INSTANTIATION
-CLASS instance = new CLASS();
-
-instance[0] = 1;        // >> OUTPUT: 1
-instance[1] = 3;        // >> OUTPUT: 3
+class Program
+{
+    static void Main(string[] args)
+    {
+        // INSTANTIATION
+        CLASS instance = new CLASS();
+        
+        instance[0] = 1;        // >> OUTPUT: 1
+        instance[1] = 3;        // >> OUTPUT: 3
+    }
+}
 ```
 
 # **C#: USER-DEFINED DATA TYPE**
-
-Commonly used value type such as `int`, `float`, `char`, and more are already defined in `iostream.h` header. Developer may create and use custom data type based on these pre-defined data types.
+Commonly used data types such as `int,` `float,` `char,` and more are already defined. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
 
 ## Structure
+The structure is a user-defined data type that integrates multiple member fields as a single structure tag regardless of their data type. Use the `struct` keyword to define a structure.
 
-Structure groups multiple member variables under a single structure tag, regardless of value type of member variable. 
-
-```c#
-// CREATING STRUCTURE
+```csharp
+/* CREATING STRUCTURE */
 public struct STRUCTURE
 {
     public int    field1;
@@ -1697,18 +1735,22 @@ public struct STRUCTURE
     }
 }
 
-// VARIABLE DECLARATION
-STRUCTURE variable;
-
-variable.field1 = 1;
-variable.field2 = 3.0;
-System.Console.WriteLine(variable.method(2));    // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
+class Program
+{
+    static void Main(string[] args)
+    {
+        /* STRUCTURE VARIABLE DECLARATION */
+        STRUCTURE variable;
+        
+        variable.field1 = 1;
+        variable.field2 = 3.0;
+        System.Console.WriteLine(variable.method(2));    // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
+    }
+}
 ```
-
 ----
-
-```c#
-// CREATING STRUCTURE w/ CONSTRUCTOR
+```csharp
+/* CREATING STRUCTURE: WITH CONSTRUCTOR */
 public struct STRUCTURE
 {
     public STRUCTURE(int arg1, double arg2)
@@ -1723,42 +1765,53 @@ public struct STRUCTURE
     }
 }
 
-// VARIABLE INITIALIZATION
-STRUCTURE variable = new STRUCTURE(1, 3.0);
-
-System.Console.WriteLine(variable.method(2));    // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
+class Program
+{
+    static void Main(string[] args)
+    {
+        /* STRUCTURE VARIABLE INITIALIZATION */
+        STRUCTURE variable = new STRUCTURE(1, 3.0);
+        
+        System.Console.WriteLine(variable.method(2));    // >> OUTPUT: 2.0 (= 1 + 3.0 - 2)
+    }
+}
 ```
 
 Class and structure do share similarity but have distinct differences:
 
-| CLASS                                      | STRUCTURE                                                    |
-| ------------------------------------------ | ------------------------------------------------------------ |
-| Allocated on heap memory (reference type). | Allocated on stack memory (value type; e.g. `int`, `double`). |
-| Inheritance is allowed.                    | Inheritance is not allowed.                                  |
-| May initialized member fields.             | May not initialize member fields.                            |
+| CLASS                         | STRUCTURE                        |
+|:-----------------------------:|:--------------------------------:|
+| Allocates on the heap memory. | Allocated on the stack memory.   |
+| Inheritance is allowed.       | Inheritance is not allowed.      |
+| May initialize member fields. | Cannot initialize member fields. |
 
 ## Enumeration
+The enumeration is a user-defined data type numbering enumerating items, called enumerators. Enumerators are assigned with an integer that starts from zero and increments by one by default.
 
-Enumeration means "action of mentioning a number of things one by one", thus is a user-defined data type which can only be assigned with a single enumerators that has corresponding integer.
-
-```cpp
-// ENUMERATION DELCARATION
+```csharp
+/* CREATING ENUMERATION */
 enum ENUMERATION {
     enumerator1,    // = 0
     enumerator2,    // = 1
     enumerator3     // = 2
 };
 
-// VARIABLE INITIALIZATION
-ENUMERATION variable = ENUMERATION.enumerator1;
-
-System.Console.WriteLine(variable);         // >> OUTPUT: enumerator1
-System.Console.WriteLine((int)variable);    // >> OUTPUT: 0
+class Program
+{
+    static void Main(string[] args)
+    {
+        /* ENUMERATION VARIABLE INITIALIZATION */
+        ENUMERATION variable = ENUMERATION.enumerator1;
+        
+        System.Console.WriteLine(variable);         // >> OUTPUT: enumerator1
+        System.Console.WriteLine((int)variable);    // >> OUTPUT: 0
+    }
+}
 ```
 
-As a default, integer 0 is assigned to the first enumerator which is incremented by one on next enumerator. While enumerator itself must be unique which cannot share name, same integer value can be assigned to different enumerators using assignment (`=`) operator.
+Assigning an integer is done using the assignment operator `=`. The other enumerators may share the same value. Unlike C/C++ language, the enumerators of the same name can exist in different enumerations.
 
-```cpp
+```csharp
 enum ENUMERATION {
     enumerator1 = 2,    // >> OUTPUT: 2
     enumerator2,        // >> OUTPUT: 3
@@ -1769,31 +1822,35 @@ enum ENUMERATION {
 ```
 
 # **C#: GENERICS**
+A generic provides a format of function or class definition regardless of its data type. Developers can utilize this generic to create similar methods and classes with ease. This chapter introduces defining and using a generic.
 
-Generics (aka. template in C++) provides a format of code regardless of considering what data type it uses. Hence, generics are used to define multiple number of similar functions or classes in efficient way.
+## Generic Method
+Define a generic for a method using the following syntax:
 
-## Generic Methods
-
-A generic for a method is created using the following syntax:
-
-```c#
-// GENERIC METHOD DECLARATION
-static U method<T, U>(T arg1, U arg2)
+```csharp
+class CLASS
 {
-    statements;
-    return something;
+    /* GENERIC METHOD DECLARATION */
+    static U method<T, U>(T arg1, U arg2)
+    {
+        statements;
+        return something;
+    }
 }
-
-// CALLING GENERIC METHOD (PARAMETERIZED METHOD)
-method<int, double>(1, 3.0);
 ```
 
-## Generic Classes
+Instantiate a generic method to use by specifying the data type in the angled bracket `<>`.
 
-A generic for a class is created using the following syntax:
+```csharp
+/* GENERIC METHOD INSTANTIATION */
+CLASS.method<int, double>(1, 3.0);
+```
 
-```c#
-// GENERIC CLASS DECLARATION
+## Generic Class
+Define a template for a class (aka. parameterized class) using the following syntax:
+
+```csharp
+/* GENERIC CLASS DECLARATION */
 class CLASS<T, U>
 {
     public CLASS(T arg1, U arg2) { field1 = arg1,=; field2 = arg2; }
@@ -1807,53 +1864,54 @@ class CLASS<T, U>
         return field1 + field2 - arg;
     }
 }
+```
 
-// CALLING GENERIC CLASS (PARAMETERIZED CLASS)
+Instantiate a generic class to use by specifying the data type in the angled bracket `<>`.
+
+```csharp
+/* GENERIC CLASS INSTANTIATION */
 CLASS<int, double> instance = new CLASS(1, 3.0);
 ```
 
 # **C#: EXCEPTION**
-
-Exception is a problem encountered during a program execution (not during compilation). C# programming language offers keyword and blocks for controlling exceptions: `throw`, `try`, and `catch`. Through exception handling, stable program can be compiled and executed without any halt or crash.
+An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon compilation, a successfully built program immediately halts when encountering an exception. C# language has keywords and code blocks for handling exceptions: `throw`, `try` and `catch`, and more. Exception handling aims to provide a stable program without any halt or crash.
 
 ## `try`/`catch` Blocks
+The `try` and `catch` block pair handles exceptions that occurred during the program execution. The paragraphs below explain the purpose of each code block.
 
-Two code block pair, `try` block and `catch` block, is used to handle exception occurred during runtime. Following paragraphs explains what each code block is responsible for on exception handling.
+The `try` block detects the exception that occurred inside, and when it does, the program immediately skips to the `catch` code block corresponding to the type of exception even if there are remaining codes.
 
-The `try` block is a code block that attempts whether the code contains exception or not. If it encounters an exception inside the block, the remaining code won't be executed but skipped to corresponding exception `catch` block.
+The `catch` block contains the codes to execute when triggered by the `try` block. A single `try` block can have several `catch` blocks to prepare for various types of exceptions. If there is no `catch` block, the compilation error occurs, which is not an exception.
 
-The `catch` block is a code block that contains code to be executed when exception occurred in `try` block. While there can only be one `try` block, multiple `catch` block can exist for different exceptions. If there is no `catch` block with corresponding exception, compilation error will occur (which is not an exception).
-
-```c#
-// TRY BLOCK
+```csharp
+/* "try" BLOCK */
 try
 {
 	statements;
 }
 catch(IndexOutOfRangeException e)
 {
-	// CATCH: ERROR FOR ACCESSING ELEMENT OUT OF RANGE
+	// "catch" BLOCK: ERROR FOR ACCESSING ELEMENT OUT OF RANGE
 }
 catch(DivideByZeroException e)
 {
-	// CATCH: ERROR FOR ATTEMPTING TO DIVIDE BY ZERO
+    // "catch" BLOCK: ERROR FOR ATTEMPTING TO DIVIDE BY ZERO
 }
 ```
 
-For exception handler to catch every exception, place ellipsis `Exception` between parentheses.
+For exception handler to catch every exception, place the `Exception` class between parentheses.
 
-```cpp
+```csharp
 catch(Exception e)
 {
-	// CATCH: EVERY PARAMETER TYPE & EXCEPTION
+	// "catch" BLOCK: EVERY PARAMETER TYPE & EXCEPTION
 }
 ```
 
 ## `throw` Keyword
+The `throw` keyword manually halts execution and "throws" expression to the `catch` keyword. The `new` operator is necessary since C# throws the exception by instantiating the `System.Exception` reference type (aka. class).
 
-The `throw` keyword is used to manually halt execution and "throws" expression to `catch` keyword. It throws the exception instance created from `System.Exception` reference type (aka. class), hence requires `new` operator and designate which exception to throw.
-
-```c#
+```csharp
 try
 {
     statements;
@@ -1861,46 +1919,59 @@ try
     // THROW EXCEPTION: "INDEX OUT OF RANGE"
 	throw new IndexOutOfRangeException("Error Message!");
 }
-catch(IndexOutOfRangeException e) { statements; }
-catch(DivideByZeroException e)    { statements; }
+catch(IndexOutOfRangeException e)
+{
+    statements;
+}
+catch(DivideByZeroException e)
+{
+    statements;
+}
+```
+```
+Error Message!
 ```
 
 ### Re-throw Exception
+The exception caught on the `catch` block can be thrown to another `try`/`catch` block pair and processed.
 
-Caught exception can be thrown again to another `try`/`catch` code block pair and let them handle the exception instead:
-
-```c#
+```csharp
 class Program
 {
-    static void Main(string[] args)
-    {
-        try { method(); }                // RECEIVED RE-THROWN EXCEPTION
-        catch (Exception e) { System.Console.WriteLine(e.Message) }
-    }
-    
     static void method()
     {
         try { throw new IndexOutOfRangeException("Error Message!"); }
-        catch(Exception e) { throw; }    // RE-THROW EXCEPTION: method() -> Main()
+        catch(Exception e) { throw; }  // RE-THROW EXCEPTION: method() -> Main()
+    }
+
+    static void Main(string[] args)
+    {
+        try { method(); }              // RECEIVE THROWN EXCEPTION
+        catch (Exception e) { System.Console.WriteLine(e.Message) }
     }
 }
 ```
-
 ```
 Error Message!
 ```
 
 ## `finaly` Block
+The optional `final` block executes after the `catch` block regardless of the exception occurrence.
 
-The optional `final` block is executed after the `catch` block no matter what exception has occurred, including when exception was caught.
-
-```c#
-try { statements; }
-
-catch(IndexOutOfRangeException e) { statements; }
-catch(DivideByZeroException e)    { statements; }
-
-// POST-EXECUTION AFTER TRY/CATCH
+```csharp
+try
+{
+    statements;
+}
+catch(IndexOutOfRangeException e)
+{
+    statements;
+}
+catch(DivideByZeroException e)
+{
+    statements;
+}
+/* EXECUTES AFTER "try"/"catch" BLOCKS */
 finally
 {
 	statements;
@@ -1908,16 +1979,14 @@ finally
 ```
 
 # **C#: FILE MANAGEMENT**
+C# language can read and write external files to save or load data. This chapter focuses on accessing and modifying the `.txt` extension text file.
 
-C# programming language can read and write external file to save or import data. This chapter is mainly focused on accessing and modifying `.txt` extension text file.
-
-Unlike other languages like C/C++ and Python, C# does not have to specify opening and closing of the file. This makes managing the file much easier since programmer just have to write the code that needs working by inserting inside the API alone.
+Unlike C/C++ language, C# does not have to open and close the file manually, making file management much easier for developers.
 
 ## Reading Files
+Read a file (that is, importing data from an external file) using the `ReadAllText()` method of the `System.IO.File.` static class:
 
-Below is one example of reading, in other word, extracting the whole file content to a variable. The core method is `System.IO.File.ReadAllText()`:
-
-```c#
+```csharp
 static void Main(){
     string output = System.IO.File.ReadAllText("./sample.txt");
     System.Console.WriteLine(output);
@@ -1925,23 +1994,21 @@ static void Main(){
 ```
 
 ## Writing Files
+Write a file using the `WriteAllText()` method of the `System.IO.File.` static class:
 
-Writing the file is can be done using `System.IO.File.WriteAllText()` method:
-
-```c#
+```csharp
 static void Main(){
     string input = "Hello World!";
     System.IO.File.WriteAllText("./sample.txt", input);
 }
 ```
 
-If such file does not exist, the method creates the file; when there is a file, it is overwritten.
+The method creates a new file if it doesn't exist; otherwise, overwrite the existing file.
 
 ### Creating File
+Create a file using the `Create()` method of the `System.IO.File.` static class:
 
-Creating the file is also possible by using `System.IO.File.Create()` method:
-
-```c#
+```csharp
 static void Main(){
     System.IO.File.FileStream file = System.IO.File.Create("./sample.txt");
 }

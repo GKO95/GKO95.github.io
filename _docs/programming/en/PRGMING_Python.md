@@ -74,7 +74,7 @@ Environment variable setting is not necessary when Python is the only software t
 Clicking the "Install Now" button will begin the installation, and can run Python when the process is over.
 
 ## Integrated Development Environment
-An integrated development environment is a software development program that provides at least a source code editor, program build tools, and debugger. Python interpreter is a software for running a Python-based program, but it is not a source code editor. Therefore, IDE is essential to edit a Python source code, run the program, and examine the execution when encountering problems.
+An integrated development environment (IDE) is a software development program that provides at least a source code editor, program build tools, and debugger. Python interpreter is a software for running a Python-based program, but it is not a source code editor. Therefore, IDE is essential to edit a Python source code, run the program, and examine the execution when encountering problems.
 
 ### Visual Studio Code
 [Visual Studio Code](https://code.visualstudio.com/download) (VS Code) is a free source code editor developed by Microsoft. Although technically not an IDE, it can still play a role as an IDE. All that requires are an extension tool that can load the interpreter to VS Code.
@@ -1034,7 +1034,7 @@ An essential keyword to create a generator; the keyword returns the value when i
 Functional programming is a style of program scripting that is based mostly on the usage of functions. This chapter will be introducing the guide on how to create and use functions in Python for functional programming.
 
 ## Function
-A function is a reusable independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. Function is distinguished by parenthesis after its name; `function()`.
+A function is a reusable independent block of code that can process the data and present newly processed data once it's called, allowing dynamic program scripting. A function is distinguished by parenthesis after its name; `function()`.
 
 ```python
 x = [0, 3, 5, 9]
