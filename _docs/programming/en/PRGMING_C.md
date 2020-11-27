@@ -1066,7 +1066,7 @@ The function pointer should match the data type and parameters of the function w
 Commonly used data types such as `int,` `float,` `char,` and more are already defined and are called through the `stdio.h` header file. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
 
 ## Structure
-The structure is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type. Use the `struct` keyword to define a structure in C language.
+The structure is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type. Use the `struct` keyword to define a structure.
 
 ```c
 /* STRUCTURE DEFINITION: TOTAL 5 BYTES */
@@ -1114,7 +1114,7 @@ struct {
 ```
 
 ## Union
-The union is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type but shares a memory space. In other words, value changes in one of the members also change the value assigned in the other members. Use the `union` keyword to define a structure in C language.
+The union is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type but shares a memory space. In other words, value changes in one of the members also change the value assigned in the other members. Use the `union` keyword to define a union.
 
 ```c
 /* UNION DEFINITION: TOTAL 4 BYTES */

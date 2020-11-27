@@ -1440,7 +1440,7 @@ Access specifier defines accessibility to class members from outside the class. 
 | ----------- | ------------------------------------------------------------ |
 | `public`    | Members are accessible from outside the class.      |
 | `private`   | Members are accessible only within the class.                |
-| `protected` | Members are accessible from derived class but still restricted from outside the class (refer to the *inheritance* section). |
+| `protected` | Members are accessible from the derived class but still restricted from outside the class (refer to the *inheritance* section). |
 
 ## Friend Function
 A friend function is a function that can access private members within the class despite defined outside the class. To declare a friend function, place the prototype inside the class definition with the `friend` keyword.
@@ -1733,7 +1733,7 @@ float ClassName::method(int arg3)
 Commonly used data types such as `int,` `float,` `char,` and more are already defined and are called through the `iostream` header file. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
 
 ## Structure
-The structure is a user-defined data type that integrates multiple member fields as a single structure tag regardless of their data type. Use the `struct` keyword to define a structure in C++ language.
+The structure is a user-defined data type that integrates multiple member fields as a single structure tag regardless of their data type. Use the `struct` keyword to define a structure.
 
 ```cpp
 /* STRUCTURE DEFINITION: 5-BYTE SIZE */
@@ -1788,7 +1788,7 @@ struct {
 ```
 
 ## Union
-The union is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type but shares a memory space. In other words, value changes in one of the members also change the value assigned in the other members. Use the `union` keyword to define a structure in C++ language.
+The union is a user-defined data type that integrates multiple variables as members of a single structure tag regardless of their data type but shares a memory space. In other words, value changes in one of the members also change the value assigned in the other members. Use the `union` keyword to define a union.
 
 ```cpp
 /* UNION DEFINITION: 4-BYTE SIZE */
@@ -2193,7 +2193,7 @@ file.close();
 ```
 
 # **C++: EXCEPTION**
-An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon compilation, a successfully built program immediately halts when encountering an exception. C language has keywords and code blocks for handling exceptions: `throw`, `try` and `catch`, and more. Exception handling aims to provide a stable program without any halt or crash.
+An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon compilation, a successfully built program immediately halts when encountering an exception. C++ language has keywords and code blocks for handling exceptions: `throw`, `try` and `catch`, and more. Exception handling aims to provide a stable program without any halt or crash.
 
 ## `try`/`catch` Blocks
 The `try` and `catch` block pair handles exceptions that occurred during the program execution. The paragraphs below explain the purpose of each code block.
