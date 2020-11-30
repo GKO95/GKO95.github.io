@@ -512,7 +512,7 @@ The logical operator consist of AND, OR, and NOT logic. Consider `true` and `fal
 | `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
 | `!`      | NOT   | Changes `true` to `false` and vice versa.                  |
 
-### Escape Character
+## Escape Character
 Escape character `\` is used to escape from a sequence of characters and execute certain operations within text-based data. In the introduction on string data type, `\n` is used to change to a new line.
 
 ```cpp
