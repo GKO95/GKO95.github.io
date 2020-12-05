@@ -87,19 +87,20 @@
 
 #post-content h2 {
     font-size: 1.6em;
-
-    padding-left: 0.4em;
     margin-bottom: 0.5em;
     //font-family: 'OpenSans';
 }   
 
 #post-content h3 {
     font-size: 1.2em;
-
-    padding-left: 1.6em;
+    padding-left: 0.8em;
     margin-bottom: 0.5em;
     //font-family: 'OpenSans';
-    font-style: italic;
+}
+
+#post-content h4 {
+    margin: 1em;
+    //font-family: 'OpenSans';
 }
 
 #post-content h1::before, #docs-content h2::before, #docs-content h3::before {

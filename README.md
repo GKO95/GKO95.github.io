@@ -28,8 +28,9 @@ The style for the syntax highlighter will now applied to every code fence availa
 ```
 </pre>
 
-## Google Fonts
+## Fonts
 > **Resource:**
+> - *JetBrains Mono v2.001 - https://www.jetbrains.com/lp/mono/*
 > - *Noto Sans KR - https://fonts.google.com/specimen/Noto+Sans+KR*
 > - *Nanum Gothic Coding - https://fonts.google.com/specimen/Nanum+Gothic+Coding?category=Monospace*
 
