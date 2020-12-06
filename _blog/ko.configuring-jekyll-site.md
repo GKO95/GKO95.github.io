@@ -2,17 +2,17 @@
 layout: post
 lang: ko
 title: "GitHub Pages를 위한 Jekyll 설정하기"
-edited: 2020-12-05 18:20:00 +0900
-categories: bulletin blog
+date: 2020-12-05 00:00:00 + 0900
+edited: 2020-12-06 13:38:00 +0900
 tags: GitHub_Pages Jekyll
 ---
 # GitHub Pages를 위한 Jekyll 설정하기
-이전 *["GitHub Pages를 위한 Jekyll 생성하기"](/bulletin/blog/2020/09/04/ko.creating-jekyll-site.html)* 게시글에서는 Jeykll을 사용하여 GitHub Pages를 생성하는 방법을 설명하였습니다. 하지만 Jekyll을 처음으로 접한 대다수의 사용자는 원하는 내용을 어디서 그리고 어떻게 추가하거나 수정해야 하는지 모릅니다. 결국 의욕이 떨어져 생성한 Jekyll을 방치하는 대학교 후배를 보기도 하였습니다. 이러한 문제점을 인식하고 이번 내용은 생성된 Jekyll 사이트의 이해와 활용도를 향상시키기 위한 구조 및 설정 방법에 대하여 설명합니다. 
+이전 *["GitHub Pages를 위한 Jekyll 생성하기"](/blog/ko.creating-jekyll-site.html)* 게시글에서는 Jeykll을 사용하여 GitHub Pages를 생성하는 방법을 설명하였습니다. 하지만 Jekyll을 처음으로 접한 대다수의 사용자는 원하는 내용을 어디서 그리고 어떻게 추가하거나 수정해야 하는지 모릅니다. 결국 의욕이 떨어져 생성한 Jekyll을 방치하는 대학교 후배를 보기도 하였습니다. 이러한 문제점을 인식하고 이번 내용은 생성된 Jekyll 사이트의 이해와 활용도를 향상시키기 위한 구조 및 설정 방법에 대하여 설명합니다. 
 
-## Jekyll 사이트 구조
+## Jekyll 폴더 구조
 이전 게시글에서 설명한 Jekyll 생성 방법을 그대로 따랐으면 아래와 같은 폴더와 파일로 이루어진 것을 볼 수 있습니다.
 
-![20201205ko.cjs-01](/assets/images/post/2020-12-05-ko.configuring-jekyll-site/20201205ko.cjs-01.png)
+![20201205ko.cjs-01](/assets/images/post/ko.configuring-jekyll-site/20201205ko.cjs-01.png)
 
 위에 보이는 파일들은 다음과 같은 역할을 합니다:
 
@@ -31,7 +31,7 @@ tags: GitHub_Pages Jekyll
 ### `_posts` 폴더
 블로그 형식 게시글을 담는 폴더입니다. Jekyll 사이트를 생성하였으면 기본적으로 게시글 하나가 해당 폴더 안에 들어있으며, 이는 HTML에서는 아래와 같이 보여집니다.
 
-![20201205ko.cjs-02](/assets/images/post/2020-12-05-ko.configuring-jekyll-site/20201205ko.cjs-02.png)
+![20201205ko.cjs-02](/assets/images/post/ko.configuring-jekyll-site/20201205ko.cjs-02.png)
 
 이를 바탕으로 Jekyll을 처음 접하는 사용자들은 `_posts` 폴더에 게시글을 올리려고 하지만 대부분 실패합니다. 왜냐하면 직접 작성한 마크다운이 보이지 않기 때문입니다. 이는 `_posts` 폴더가 가지는 고질적인 문제로 *마크다운 파일명을 날짜로 시작*해야만 나타납니다.
 
@@ -59,20 +59,20 @@ Python 언어에서 모듈(module)이란 배포용 라이브러리가 있으면,
 
 `jekyll` 젬을 Gemfile에서 제거하였는데 여전히 Jekyll을 사용할 수 있는 이유는 바로 `github-pages` 젬이 내부적으로 `jekyll` 젬을 호출하기 때문입니다. Ruby 언어의 젬 저장소인 [rubygems.org](https://rubygems.org/)을 확인하면 `github-pages`가 `jekyll`을 디펜던시(dependency), 즉 의존하므로 자동적으로 두 젬을 함께 사용하게 됩니다.
 
-`Gemfile`을 내용을 보며 각 문장의 의미를 하나씩 설명해 드리겠습니다.
+`Gemfile`을 내용을 보며 각 문장의 의미를 하나씩 설명해 드리겠습니다. 아래는 젬을 호출하는 기본 서버를 선정하는 코드입니다.
 
 ```ruby
 source "https://rubygems.org"
 ```
 
-이는 `https://rubygems.org`를 기본 서버로 선정한다는 겁니다. 기본 서버를 변경하지 않는 이상, 이는 수정할 일이 없습니다.
+서버 선정 이후, 가져올 젬을 코드에 입력하면 해당 젬을 서버에서 불러와 Ruby 언어에 사용할 수 있게 됩니다. 아래 문장은 그 중에서 현재 Jekyll 사이트에 적용되고 있는 minima 테마 젬에 대한 내용입니다.
 
 ```ruby
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 gem "minima", "~> 2.0"
 ```
 
-기본 서버에서 `minima` 젬을 적용하되, 버전은 2.0 이상(`">= 2.0"`)이고 3.0 미만(`"< 3.0"`)이어야 함을 의미합니다. 참고로 해당 젬은 바로 현재 적용되고 있는 Jekyll 테마입니다.
+기본 서버에서 `minima` 젬을 적용하되, 버전은 2.0 이상(`">= 2.0"`)이고 3.0 미만(`"< 3.0"`)이어야 함을 의미합니다. 만일 2.1 버전을 원한다면 간단히 `"2.1"`이라고 입력하면 됩니다.
 
 ```ruby
 gem "github-pages", group: :jekyll_plugins
@@ -87,7 +87,7 @@ end
 
 이렇게 매우 기본적이면서 필수적인 `Gemfile` 구문을 확인하였습니다. 특히 버전 선택은 매우 중요하며, 버전 차이로 인해 의도치 않은 방식으로 동작하거나 호환성 문제가 발생할 수 있습니다. 간단한 예를 들어 `minima` 젬을 확인하도록 합시다. 현재 설치된 젬을 확인하기 위해 터미널에 아래 명령어를 입력합니다.
 
-```
+```powershell
 gem list
 ```
 
@@ -95,7 +95,7 @@ gem list
 
 `Gemfile.lock` 내용을 확인하면 여러 젬들과 버전들이 명시되어 있는 것을 확인할 수 있습니다. 이들은 실제로 Ruby에 적용되는 젬들이며, 한 번 생성되면 업데이트 명령어를 입력하거나 삭제되지 않는 이상 버전을 그대로 유지합니다. 업데이트 명령어는 다음과 같습니다.
 
-```
+```powershell
 bundle install
 ```
 
@@ -117,34 +117,32 @@ twitter_username: jekyllrb
 github_username:  jekyll
 ```
 
-이들은 실제 HTML에 직접 적용되는 설정이 아니며, Jekyll에 지원되는 [Liquid](https://shopify.github.io/liquid/) 템플릿 언어를 위한 데이터입니다. Jekyll 테마를 사용하고 있으면 어떻게 사용되고 있는지 잘 이해가 가지 않는 부분입니다. 또한 `F12`를 눌러 열리는 브라우저 개발자 도구에서도 확인할 수 없으므로 직접 소스 코드를 확인해야 합시다. [여기](https://github.com/jekyll/minima/blob/3cdd14dff1216f561c68329e0b7420c2dc9b796a/_includes/footer.html#L27)를 클릭하면 `description` 데이터가 어떻게 페이지 하단부에 적용되었는지 보여줍니다.
+이들은 사실 HTML과 직접적으로 연동된 데이터가 아닙니다: `title`을 수정하면 이게 바로 HTML 웹사이트 제목이 되지 않습니다. 정확히 말하자면 Jekyll에 지원되는 [Liquid](https://shopify.github.io/liquid/) 템플릿 언어를 위한 데이터입니다. Liquid 템플릿 언어는 브라우저에 `F12`를 눌러 열리는 개발자 도구에서도 확인할 수 없으므로 직접 소스 코드를 확인해야 합시다. 아래는 minima 테마 하단부에 어떻게 웹사이트 제목이 어떻게 나타나는지 보여주는 소스 코드의 일부입니다.
 
 ```html
-<p>{% raw %}{{ site.description | escape }}{% endraw %}</p>
+<h2 class="footer-heading">{% raw %}{{ site.title | escape }}{% endraw %}</h2>
 ```
 
-개발자 도구로 확인이 불가능한 이유는 HTML 사이트로 변환하면서 Liquid 템플릿 언어는 해당 위치를 `description` 데이터로 채워 넣기 때문입니다. 다시 말해, `_config.yml`에 입력한 내용들은 Liquid 언어를 통해 HTML에 지정된 위치에 반영되는 겁니다. 만일 테마를 유지하면서 일부 HTML 요소들을 위치나 속성을 바꾸고 싶다면 Jekyll 테마를 젬으로 불러오는 게 아닌 소스 코드 자체를 가져와야 합니다.
+개발자 도구로 확인이 불가능한 이유는 HTML 사이트로 변환하면서 Liquid 템플릿 언어가 해당 위치를 `title` 데이터로 채워 넣기 때문입니다. 다시 말해, `_config.yml`에 입력한 내용들은 Liquid 언어를 통해 HTML에 지정된 위치에 반영되는 겁니다.
 
 ## Jekyll 테마 변경
-Jekyll을 꾸미는 방법 중 가장 간단한 방법은 기존에 존재하는 테마를 가져오는 불러오는 겁니다. 테마 변경을 하기 위해서는 `Gemfile`과 `_config.yml` 파일을 수정해야 하므로, 이번 게시글을 마무리하기 딱 좋은 내용으로 보여 준비하였습니다.
-
-Jekyll에서 다른 테마를 불러오는 방법은 두 가지가 있습니다.
+Jekyll을 꾸미는 방법 중 가장 간단한 방법은 이미 존재하는 테마를 불러오는 겁니다. 테마 변경을 위해서는 `Gemfile`과 `_config.yml` 파일을 수정해야 하므로 이번 게시글을 마무리하기 딱 좋은 내용입니다. Jekyll에서 다른 테마를 불러오는 방법으로 `theme`과 `remote_theme` 옵션을 이용하는 게 있습니다.
  
-### `theme` 테마 변경
-Jekyll 테마를 변경하는 가장 기본적인 방법으로 서버에 등록된 테마 젬을 불러오는 겁니다. 예시로 [minimal-mistakes](https://github.com/mmistakes/minimal-mistakes) 테마를 적용해 보도록 하겠습니다.
+### `theme` 옵션
+Jekyll 테마를 변경하는 가장 기본적인 방법으로 서버에 등록된 테마 젬을 불러오는 것이며, 현재 minima 테마가 `theme` 옵션으로 Jekyll에 적용되어 있습니다. 본 예시로 [minimal-mistakes](https://github.com/mmistakes/minimal-mistakes) 테마를 적용해 보도록 하겠습니다.
 
 > 본 내용은 테마를 설정하는 방법을 아주 간략하게 소개합니다. 각 테마마다 요구하는 플러그인이 있을 수 있으므로 반드시 README.md를 주의깊게 읽으시기 바랍니다.
 
-우선 `Gemfile` 파일에서 사용하고자 하는 테마를 명시해야 합니다. 기존에 있던 minima 테마를 주석처리하여 호출하지 않도록 만듭니다.
+우선 `Gemfile` 파일에서 사용하고자 하는 테마를 명시해야 합니다. 기존에 있던 minima 테마를 주석처리하여 호출하지 않도록 만드면서 추가하고자 하는 minimal-mistakes 테마를 아래와 같이 입력합니다.
 
 ```ruby
 # gem "minima", "~> 2.0"
 gem 'minimal-mistakes-jekyll', '~> 4.21'
 ```
 
-이대로 실행하면 `Gemfile.lock` 파일로 인해 이전에 적용한 minima 테마가 그대로 나타납니다. `Gemfile.lock`의 젬 목록을 업데이트하기 위해 아래의 명령어를 입력합니다.
+그러나 이대로 번들을 실행하면 `Gemfile.lock` 파일로 인해 이전에 적용된 minima 테마가 그대로 나타납니다. `Gemfile.lock`을 업데이트하기 위해 아래의 명령어를 입력합니다.
 
-```
+```powershell
 bundle update
 ```
 
@@ -155,18 +153,18 @@ bundle update
 theme: minimal-mistakes-jekyll
 ```
 
-그러나 가장 좋은 방법은 해당 테마에서 사용하는 `_config.yml`을 그대로 가져와 사용하는 겁니다. 즉, [여기](https://raw.githubusercontent.com/mmistakes/minimal-mistakes/master/_config.yml)에 있는 내용을 그대로 복사해 가져오면 됩니다.
+하지만 가장 좋은 방법은 해당 테마에서 사용하는 `_config.yml`을 그대로 가져와 사용하는 겁니다. 그 이유는 Jekyll을 위해 추가로 설치한 젬이나 레이아웃 등을 테마와 제대로 연동시키기 위해서는 `theme` 옵션만 바꿔서는 되지 않기 때문입니다. [여기](https://raw.githubusercontent.com/mmistakes/minimal-mistakes/master/_config.yml)에 있는 내용을 그대로 복사해 사용하셔도 됩니다.
 
-이제 Jekyll을 `bundle exec jekyll serve` 명령어로 실행하면 테마가 변경된 것을 직접 확인할 수 있습니다. 하지만 일부 경우에는 아래와 같은 경고문이 나타납니다.
+이제 `bundle exec jekyll serve` 명령어로 Jekyll을 실행하면 변경된 테마를 직접 확인할 수 있습니다. 일부 경우에는 터미널에 아래와 같은 경고문이 나타납니다.
 
 ```
 Build Warning: Layout 'page' requested in about.md does not exist.
 ```
 
-이는 테마에서 선정한 레이아웃 이름이 아닌 다른 레이아웃을 발견하였을 때 나타나는 경고문입니다. Jekyll 사이트는 정상적으로 실행되겠지만, 위의 경고문에서 알려준 `about.md` 문서는 레이아웃이 적용되지 않은 채로 나타나게 됩니다. 해당 문서를 들어가서 `layout` 측을 README.md에서 설명한 대로 수정하거나 혹은 아예 삭제하시면 됩니다.
+이는 테마에서 선정한 레이아웃 이름이 아닌 다른 레이아웃을 발견하였을 때 나타나는 경고문입니다. Jekyll 사이트는 정상적으로 실행되겠지만, 위의 경고문에서 알려준 `about.md` 문서는 레이아웃이 적용되지 않은 채로 나타나게 됩니다. 레이아웃에 대한 내용은 다음 게시물인 *["GitHub Pages를 위한 Jekyll 디자인하기"](/blog/ko.designing-jekyll-site.html)*에서 설명하도록 하겠습니다.
 
-### `remote_theme` 테마 변경
-일부 테마는 `theme`이 아닌 `remote_theme`을 통해 변경해야 하기도 합니다. 예시로 [jekyll-rtd-theme](https://github.com/rundocs/jekyll-rtd-theme)를 사용하도록 하겠습니다. 이는 Jekyll의 플러그인 `jekyll-remote-theme`을 필요로 하며 다음과 같이 `Gemfile`에 젬을 추가합니다 (`group :jekyll-plugins` 그룹 안에 넣기를 권장).
+### `remote_theme` 옵션
+일부 테마는 `theme`이 아닌 `remote_theme` 옵션으로 설정해야 합니다. 이번에는 [jekyll-rtd-theme](https://github.com/rundocs/jekyll-rtd-theme) 테마를 예시로 사용하겠습니다. 해당 옵션을 사용하기 위해서는 Jekyll의 플러그인 `jekyll-remote-theme`이 필요하며 다음과 같이 `Gemfile`에 젬을 추가합니다 (`group :jekyll-plugins` 그룹 안에 넣기를 권장).
 
 ```ruby
 # theme: minima
@@ -176,9 +174,9 @@ group :jekyll_plugins do
 end
 ```
 
-이대로 실행하면 `Gemfile.lock` 파일로 인해 새로 입력한 플러그인이 적용되지 않게 됩니다. `Gemfile.lock`의 젬 목록을 업데이트하기 위해 아래의 명령어를 입력합니다.
+그러나 이대로 번들을 실행하면 `Gemfile.lock` 파일로 인해 새로 넣은 플러그인이 적용되지 않게 됩니다. `Gemfile.lock`을 업데이트하기 위해 아래의 명령어를 입력합니다.
 
-```
+```powershell
 bundle update
 ```
 
@@ -189,6 +187,4 @@ bundle update
 remote_theme: minimal-mistakes-jekyll
 ```
 
-그러나 가장 좋은 방법은 해당 테마에서 사용하는 `_config.yml`을 그대로 가져와 사용하는 겁니다. 즉, [여기](https://raw.githubusercontent.com/rundocs/jekyll-rtd-theme/develop/_config.yml)에 있는 내용을 그대로 복사해 가져오면 됩니다.
-
-위의 방법은 전부 기존 테마를 그대로 사용합니다. 만족할 테마를 찾았으면 다행이지만, 개성이 강하거나 직접 웹디자인을 시도하시고 싶으신 사용자는 오히려 직접 자신만의 테마를 제작하겠다고 다짐할 수 있습니다. 이러한 분들을 위해 다음 게시글에서는 Jekyll을 활용하여 자신만의 테마를 직접 제작하는 방법을 알려드리겠습니다.
+하지만 가장 좋은 방법은 해당 테마에서 사용하는 `_config.yml`을 그대로 가져와 사용하는 겁니다. 그 이유는 Jekyll을 위해 추가로 설치한 젬이나 레이아웃 등을 테마와 제대로 연동시키기 위해서는 `remote_theme` 옵션만 바꿔서는 되지 않기 때문입니다. [여기](https://raw.githubusercontent.com/rundocs/jekyll-rtd-theme/develop/_config.yml)에 있는 내용을 그대로 복사해 사용하셔도 됩니다.

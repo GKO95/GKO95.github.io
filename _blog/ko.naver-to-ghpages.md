@@ -2,7 +2,8 @@
 layout: post
 lang: ko
 title: "네이버에서 GitHub Pages로 이전"
-categories: bulletin notice
+date: 2020-08-10 00:00:00 + 0900
+edited: #2020-12-05 18:20:00 +0900
 tags: GitHub_Pages Naver
 ---
 # 네이버에서 GitHub Pages로 이전
