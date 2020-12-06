@@ -43,7 +43,7 @@ layout: template
             <!-- POSTS -->
             <div id="home-bulletin">
                 <ul>
-                    {% assign blogs = site.blog | sort: date | reverse %}
+                    {% assign blogs = site.blog | reverse %}
                     {% for blog in blogs limit:6 %}
                     <a href="{{ blog.url }}">
                         <li>

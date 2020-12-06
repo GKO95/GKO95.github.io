@@ -45,15 +45,7 @@ collections:
   blog:
     output: true
     permalink: /:collection/:path/
-
-# Front Matter setting
-defaults:
-  # _articles
-  - scope:
-      path: ""
-      type: "docs"
-    values:
-      layout: "docs"
+    sort_by: date
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
