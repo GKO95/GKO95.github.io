@@ -27,6 +27,7 @@ const __initlocal__ = () => {
     let bkgdColor = (theme == 'Light') ? "rgb(255, 255, 255)" : "rgb(32, 32, 32)";   // BACKGROUND COLOR = CONDITION ? LIGHT : DARK
     let textColor = (theme == 'Light') ? "rgb(0, 0, 0)" : "rgb(255, 255, 255)";   // FONT COLOR = CONDITION ? LIGHT : DARK
     document.styleSheets[0].insertRule(`body { background-color: ${bkgdColor}; color: ${textColor}; }`);
+    document.styleSheets[0].insertRule(`blockquote a { color: ${textColor}; }`);
 
     textColor = (theme == 'Light') ? "rgb(144, 144, 144)" : "rgb(192, 192, 192)";   // HYPERLINK COLOR = CONDITION ? LIGHT : DARK
     document.styleSheets[0].insertRule(`a { color: ${textColor}; }`);

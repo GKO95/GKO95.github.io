@@ -222,7 +222,7 @@ The global namespace is a code space that doesn't belong to any namespace. Data 
 
 The scope resolution operator is a counterpart of the path separator `/` in the UNIX operating system that also represents the root directory when placed leftmost.
 
-```makefile
+```powershell
 # UNIX DIRECTORY & PATH SEPARATOR (/)
 /Users/gko95/Documents
 ```
