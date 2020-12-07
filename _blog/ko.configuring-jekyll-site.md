@@ -3,11 +3,10 @@ layout: post
 lang: ko
 title: "GitHub Pages를 위한 Jekyll 설정하기"
 date: 2020-12-05 00:00:00 + 0900
-edited: 2020-12-06 13:38:00 +0900
 tags: GitHub_Pages Jekyll
 ---
 # GitHub Pages를 위한 Jekyll 설정하기
-이전 *["GitHub Pages를 위한 Jekyll 생성하기"](/blog/ko.creating-jekyll-site.html)* 게시글에서는 Jeykll을 사용하여 GitHub Pages를 생성하는 방법을 설명하였습니다. 하지만 Jekyll을 처음으로 접한 대다수의 사용자는 원하는 내용을 어디서 그리고 어떻게 추가하거나 수정해야 하는지 모릅니다. 결국 의욕이 떨어져 생성한 Jekyll을 방치하는 대학교 후배를 보기도 하였습니다. 이러한 문제점을 인식하고 이번 내용은 생성된 Jekyll 사이트의 이해와 활용도를 향상시키기 위한 구조 및 설정 방법에 대하여 설명합니다. 
+이전 *["GitHub Pages를 위한 Jekyll 생성하기"](/blog/ko.creating-jekyll-site/)* 게시글에서는 Jeykll을 사용하여 GitHub Pages를 생성하는 방법을 설명하였습니다. 하지만 Jekyll을 처음으로 접한 대다수의 사용자는 원하는 내용을 어디서 그리고 어떻게 추가하거나 수정해야 하는지 모릅니다. 결국 의욕이 떨어져 생성한 Jekyll을 방치하는 대학교 후배를 보기도 하였습니다. 이러한 문제점을 인식하고 이번 내용은 생성된 Jekyll 사이트의 이해와 활용도를 향상시키기 위한 구조 및 설정 방법에 대하여 설명합니다. 
 
 ## Jekyll 폴더 구조
 이전 게시글에서 설명한 Jekyll 생성 방법을 그대로 따랐으면 아래와 같은 폴더와 파일로 이루어진 것을 볼 수 있습니다.
@@ -161,7 +160,7 @@ theme: minimal-mistakes-jekyll
 Build Warning: Layout 'page' requested in about.md does not exist.
 ```
 
-이는 테마에서 선정한 레이아웃 이름이 아닌 다른 레이아웃을 발견하였을 때 나타나는 경고문입니다. Jekyll 사이트는 정상적으로 실행되겠지만, 위의 경고문에서 알려준 `about.md` 문서는 레이아웃이 적용되지 않은 채로 나타나게 됩니다. 레이아웃에 대한 내용은 다음 게시물인 *["GitHub Pages를 위한 Jekyll 디자인하기"](/blog/ko.designing-jekyll-site.html)*에서 설명하도록 하겠습니다.
+이는 테마에서 선정한 레이아웃 이름이 아닌 다른 레이아웃을 발견하였을 때 나타나는 경고문입니다. Jekyll 사이트는 정상적으로 실행되겠지만, 위의 경고문에서 알려준 `about.md` 문서는 레이아웃이 적용되지 않은 채로 나타나게 됩니다. 레이아웃에 대한 내용은 다음 게시물인 *["GitHub Pages를 위한 Jekyll 디자인하기"](/blog/ko.designing-jekyll-site/)*에서 설명하도록 하겠습니다.
 
 ### `remote_theme` 옵션
 일부 테마는 `theme`이 아닌 `remote_theme` 옵션으로 설정해야 합니다. 이번에는 [jekyll-rtd-theme](https://github.com/rundocs/jekyll-rtd-theme) 테마를 예시로 사용하겠습니다. 해당 옵션을 사용하기 위해서는 Jekyll의 플러그인 `jekyll-remote-theme`이 필요하며 다음과 같이 `Gemfile`에 젬을 추가합니다 (`group :jekyll-plugins` 그룹 안에 넣기를 권장).

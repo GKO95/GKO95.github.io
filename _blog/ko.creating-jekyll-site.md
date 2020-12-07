@@ -3,7 +3,6 @@ layout: post
 lang: ko
 title: "GitHub Pages를 위한 Jekyll 생성하기"
 date: 2020-09-04 00:00:00 + 0900
-edited: 2020-12-05 18:07:00 +0900
 tags: GitHub_Pages Jekyll
 ---
 # GitHub Pages를 위한 Jekyll 생성하기

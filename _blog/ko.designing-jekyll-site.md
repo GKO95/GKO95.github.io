@@ -3,11 +3,10 @@ layout: post
 lang: ko
 title: "GitHub Pages를 위한 Jekyll 디자인하기"
 date: 2020-12-06 00:00:00 + 0900
-edited: #2020-12-05 18:20:00 +0900
 tags: GitHub_Pages Jekyll
 ---
 # GitHub Pages를 위한 Jekyll 디자인하기
-이전 *["GitHub Pages를 위한 Jekyll 생성하기"](/blog/ko.creating-jekyll-site.html)* 그리고 *["GitHub Pages를 위한 Jekyll 설정하기"](/blog/ko.configuring-jekyll-site.html)* 게시글에서는 Jeykll을 사용하여 GitHub Pages를 생성 및 설정하는 방법을 설명하였습니다. 이에 추가적으로 테마를 변경하는 방법까지 설명하였으나, 이번에는 직접 테마를 디자인 및 스타일을 적용하는 방법을 설명하려 합니다. 해당 내용까지 이해하였으면 스스로 Jekyll 관리를 해낼 수 있을 정도로 개념과 원리를 충분히 터득하였다고 단언할 수 있습니다.
+이전 *["GitHub Pages를 위한 Jekyll 생성하기"](/blog/ko.creating-jekyll-site/)* 그리고 *["GitHub Pages를 위한 Jekyll 설정하기"](/blog/ko.configuring-jekyll-site/)* 게시글에서는 Jeykll을 사용하여 GitHub Pages를 생성 및 설정하는 방법을 설명하였습니다. 이에 추가적으로 테마를 변경하는 방법까지 설명하였으나, 이번에는 직접 테마를 디자인 및 스타일을 적용하는 방법을 설명하려 합니다. 해당 내용까지 이해하였으면 스스로 Jekyll 관리를 해낼 수 있을 정도로 개념과 원리를 충분히 터득하였다고 단언할 수 있습니다.
 
 ## Jekyll 테마 구조
 저번에는 Jekyll 설정 방법에서는 폴더 구조 및 파일에 대하여 설명을 하였습니다. 이번 내용은 Jekyll이 어떻게 HTML로 반영이 되는지에 대한 테마 구조를 소개하려 합니다. 그러기 위해서는 테마 코드를 직접 확인할 필요가 있으며, 이번에도 가장 기본적인 minima 테마를 예시로 사용하겠습니다.

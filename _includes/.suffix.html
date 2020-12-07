@@ -1,0 +1,19 @@
+
+<section style="text-align: right; margin-block-start: 1em; margin-block-end: 1em; 
+    user-select: none; -ms-user-select: none; -moz-user-select: none; -khtml-user-select: none; -webkit-user-select: none;">
+    {%- if page.tags.size > 0 -%}
+    {%- case page.lang -%}
+        {% when "ko" %}
+        <span>태그: </span>
+        {%- else -%}
+        <span>Tags: </span>
+    {%- endcase -%}
+    {%- for tag in page.tags -%}
+    <a href="/archive.html#{{tag}}">
+        <code class="post-tags">#{{ tag }}</code>
+    </a>
+    {%- endfor -%}
+    <br/>
+    {%- endif -%}
+    <span style="font-size: smaller;">{%- case page.lang -%}{%- when "ko" -%}마지막 편집:&nbsp;{%- else -%}Last edited:&nbsp;{%- endcase -%}{{ page.last_modified_at | date: '%Y-%m-%d %H:%M:%S' }}&nbsp;KST</span>
+</section>
