@@ -6,11 +6,11 @@ layout: template
     <main id="docs-main">
         <div id="docs-content">
             {{ content }}
-            {%- include .suffix.html -%}
+            {%- include .comment.html url=page.url -%}
         </div>
     </main>
     {%- include .footer.html -%}
     {%- include .menu.html -%}
 </body>
-<script>const __PAGENAME__ = "{{page.name}}"; const __CATEGORY__ = "{{page.category}}"; const __LANGUAGE__ = "{{page.lang}}";</script>
+<script>const __PAGENAME__ = "{{page.name}}"; const __CATEGORY__ = "{{page.category}}";</script>
 <script type="text/javascript" src="{{ '/assets/js/docs-config.js' | relative_url }}"></script>

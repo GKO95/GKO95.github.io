@@ -278,7 +278,7 @@
 #home-bulletin li {
     display: flex;
     align-items: center;
-
+    border-radius: 0.4em;
     height: 100%;
 }
 
@@ -289,6 +289,7 @@
 
 #home-archive {
     display: block;
+    border-radius: 0.8em;
 
     height: 32px;
     margin: 8px 0px;
