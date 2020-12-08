@@ -38,7 +38,14 @@
 		//if we have no comments, show the 'no comments available' section
 		if (comments == null || comments === "") {
 			if (visibleComments.length == 0) {
-				$("#no-comments").show()
+				let newItem = $(`
+					<div id="no-comments" class="comment-info">
+						<p>{%- case page.lang -%}{%- when "ko" -%}해당 게시글에는 아직 댓글이 없습니다.
+							{%- else -%}There are currently no comments on this article.{%- endcase -%}
+						</p>
+					</div>
+				`)
+				$("#comment-section").append(newItem)
 			}
 			return;
 		}
@@ -47,6 +54,19 @@
 		comments = `timestamp,name,comment,isAuthor\n${comments}`
     	commentList = $.csv.toObjects(comments)
     	console.log(commentList)
+
+		//append button for viewing comments
+		let newItem = $(`
+			<button id="view-comments">
+				{%- case page.lang -%}{%- when "ko" -%}댓글보기
+				{%- else -%}View comments{%- endcase -%}
+			</button>
+		`).click(function() {
+			$(".comment-item").each(function(index) {
+				this.fadeIn()
+			});
+		});
+		$("#comment-section").append(newItem)
 
     	//iterate over each comment that came from Google Sheets
     	commentList.forEach(function(element) {
@@ -73,9 +93,6 @@
     		$("#comment-section").append(newItem)
     		newItem.fadeIn()
     		visibleComments.push(JSON.stringify(element))
-
-    		//Hide the 'no comments available' section since we have added a comment
-    		$("#no-comments").hide()
     	});
 	}
 
@@ -173,10 +190,6 @@
 	</div>
 
 	<div id="comment-section" class="comments">
-		<div id="no-comments" class="comment-info">
-			<p>{%- case page.lang -%}{%- when "ko" -%}해당 게시글에는 아직 댓글이 없습니다.
-				{%- else -%}There are currently no comments on this article.{%- endcase -%}</p>
-		</div>
 	</div>
 
 </div>
@@ -198,22 +211,38 @@
 	 -khtml-user-select: none;
 	 -webkit-user-select: none;
 }
-#comment-header {
+ #comment-header {
 	 display: flex;
 	 flex-direction: row;
 	 justify-content: space-between;
 }
-#comment-header h4 {
+ #comment-header h4 {
 	 margin-block-start: 0.8em;
 	 margin-block-end: 0.4em;
 }
-#comment-header span {
+ #comment-header span {
 	 font-size: smaller;
 	 align-self: flex-end;
 	 padding-bottom: 4px;
 }
-#comment-section {
+ #comment-section {
 	 border-top: 0.5px none #e5e5e5;
+}
+ #comment-section button {
+	 text-align: center;
+	 padding: 0.2em;
+	 background: rgb(80,80,80);
+	 margin-block-start: 1em;
+	 margin-block-end: 1em;
+	 margin-left: auto;
+	 margin-right: auto;
+	 border: none;
+     border-radius: 0.4em;
+	 width: 100%;
+     color: inherit;
+     font-family: inherit;
+     font-size: inherit;
+     cursor: pointer;
 }
  .comment-item {
 	 position: relative;
@@ -275,7 +304,7 @@
 	 border: 0;
 	 border-radius: 8px;
 	 padding: 10px 10px;
-	 background: rgb(128,128,128);
+	 background: rgb(80,80,80);
 	 color: #fff;
 	 font-family: "Source Sans Pro", sans-serif;
 	 font-weight: bold;
