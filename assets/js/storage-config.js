@@ -6,7 +6,7 @@ const __LOCAL__ = window.localStorage;
 const __initlocal__ = () => {
 
     if (__LOCAL__.getItem("THEME") == 'Dark' || __LOCAL__.getItem("THEME") == 'Light') { }
-    else { __LOCAL__.setItem("THEME", 'Light'); }
+    else { __LOCAL__.setItem("THEME", 'Dark'); }
 
     if (__LOCAL__.getItem("LANG") == 'ko' || __LOCAL__.getItem("LANG") == 'en') { }
     else { __LOCAL__.setItem("LANG", 'ko'); }
