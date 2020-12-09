@@ -48,6 +48,11 @@ collections:
     permalink: /:collection/:path/
     sort_by: date
 
+# Comment for Jekyll: https://jdvp.me/articles/Google-Forms-Jekyll-Comments
+comment-post: https://docs.google.com/forms/d/e/1FAIpQLSf00acq6akraC5QUruKRwG7SnS7SwZmgjXSoBRHCI95oTs1Yg
+comment-read: https://docs.google.com/spreadsheets/d/1Gw7hZRiRHYgneTpDISgJcyPzV-cmKyBAj21-Bguf_dM
+comment-post-fields: [entry.1606664112, entry.579796376, entry.1867861362]
+
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.

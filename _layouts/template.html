@@ -2,6 +2,7 @@
 <html lang="{{ page.lang |default: site.lang | default: 'en' }}">
     {%- include .head.html -%}
     <script type="text/javascript" src="{{ '/assets/js/storage-config.js' | relative_url }}"></script>
+    <script>const __LANGUAGE__ = "{{ page.lang }}";</script>
     {{ content }}
     <script type="text/javascript" src="{{ '/assets/js/template-config.js' | relative_url }}"></script>
 </html>
