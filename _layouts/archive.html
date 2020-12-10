@@ -103,21 +103,23 @@ layout: template
 
             <script>
                 const SwitchLanguage = (lang) => {
-                    let button = document.createElement("A"); 
-                    button.style.backgroundImage = "url(/assets/images/logo/logo-language.png)";
-                    button.setAttribute("title", "Switch language");
-                    button.style.cursor = "pointer";
-                    button.addEventListener("click", () => {
-                    switch(lang) { case "en": default: __LOCAL__.setItem("LANG", "ko"); break;
-                    case "ko": __LOCAL__.setItem("LANG", "en"); break; } location.reload(); });
-                    document.getElementById("navigation-logo").appendChild(button);
+                    let button = $(`<a></a>`).css({
+                        "cursor" : "pointer",
+                        "background-image" : "url(/assets/images/logo/logo-language.png)"
+                    }).attr("title", "Switch language").click(function() {
+                        switch(lang)  { case "en": default: __LOCAL__.setItem("LANG", "ko"); break;
+                    case "ko": __LOCAL__.setItem("LANG", "en"); break; } location.reload();
+                    })
+                    $(`#navigation-logo`).append(button)
                 }; SwitchLanguage(__LOCAL__.getItem("LANG"));
 
-                document.getElementById("archive-tags").style.backgroundColor = (__LOCAL__.getItem("THEME") == 'Light') ? "rgb(232, 232, 232)" : "rgb(16, 16, 16)";
+                $(`#archive-caption`).text(`${(__LOCAL__.getItem("LANG") == 'en') ? "TAGS:" : "태그:"}`)
                 document.styleSheets[0].insertRule(`#archive #archive-list a { color: ${(__LOCAL__.getItem("THEME") == 'Light') ? "black" : "white"}; }`);
                 document.styleSheets[0].insertRule(`#archive-tags { border-color: ${(__LOCAL__.getItem("THEME") == 'Light') ? "rgb(216, 216, 216)" : "rgb(24, 24, 24)"}; }`);
                 document.styleSheets[0].insertRule(`#archive-tags code { color: ${(__LOCAL__.getItem("THEME") == 'Light') ? "black" : "white"}; background-color: ${(__LOCAL__.getItem("THEME") == 'Light') ? "rgb(208, 208, 208)" : "rgb(48, 48, 48)"}; }`);
-                document.getElementById("archive-caption").innerHTML = (__LOCAL__.getItem("LANG") == 'en') ? "TAGS:" : "태그:";
+                $(`#archive-tags`).css({
+                    "background-color" : `${(__LOCAL__.getItem("THEME") == 'Light') ? "rgb(232, 232, 232)" : "rgb(16, 16, 16)"}`
+                })
 
                 const __colorYES__  = (__LOCAL__.getItem("THEME") == 'Light') ? "rgb(48, 200, 48)" : "rgb(0, 128, 0)";
                 const __colorNO__   = (__LOCAL__.getItem("THEME") == 'Light') ? "red" : "red";
@@ -125,6 +127,30 @@ layout: template
                 const filterTags = (item) => {
                     const __TAGNAME__ = item.innerHTML;
                     let __FILTERYES__ = []; let __FILTERNO__  = [];
+
+                    /*
+                    $(`.archive-tag`).each(function(index) {
+                        if ($(this).css("background-color") === __colorNO__) { __FILTERNO__.push($(this).text())}
+                        else if ($(this).css("background-color") === __colorYES__) { __FILTERYES__.push($(this).text())}
+                    })
+
+                    $(`.archive-list`).each(function(index) {
+                        $(this).css("display", "")
+
+                        for(let tag of __FILTERYES__)
+                        {
+                            if(!$(this).attr("class").split(" ").includes(tag))
+                            { $(this).css("display", "none"); break;}
+                        }
+
+                        for(let tag of __FILTERNO__)
+                        {   
+                            if(!$(this).attr("class").split(" ").includes(tag))
+                            { $(this).css("display", "none"); break;}
+                        }
+                    })
+                    */
+
                     for(let tag of document.getElementsByClassName("archive-tag"))
                     {
                         if (tag.style.backgroundColor == __colorNO__) { __FILTERNO__.push(tag.innerHTML); }
@@ -148,6 +174,25 @@ layout: template
                         }
                     }
                 }
+
+                /*
+                $(`.archive-tag`).each(function(index) {
+                    $(this).click(function() {
+                        switch($(this).css("background-color"))
+                        {
+                            case __colorNO__    : $(this).css("background-color", ""); break;
+                            case __colorYES__   : $(this).css("background-color", __colorNO__); break;
+                            default             : $(this).css("background-color", __colorYES__); break;
+                        } filterTags($(this));
+                    })
+
+                    if ($(this).text() == window.location.hash)
+                    {
+                        $(this).css("background-color", __colorYES__)
+                        filterTags($(this).get(0))
+                    }
+                })
+                */
 
                 for(let item of document.getElementsByClassName("archive-tag"))
                 {   
@@ -173,4 +218,4 @@ layout: template
     {%- include .footer.html -%}
     {%- include .menu.html -%}
 </body>
-<script>const __PAGENAME__ = "{{page.name}}"; const __CATEGORY__ = "{{page.category}}"; const __LANGUAGE__ = "{{page.lang}}";</script>
+<script>const __PAGENAME__ = "{{page.name}}"; const __CATEGORY__ = "{{page.category}}";</script>

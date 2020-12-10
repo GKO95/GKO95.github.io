@@ -289,14 +289,23 @@
 
 #home-archive {
     display: block;
+    border: none;
     border-radius: 0.8em;
-
+    
+    width: 100%;
     height: 32px;
     margin: 8px 0px;
 
     text-align: center;
     font-weight: bold;
     font-size: 1.2em;
+    cursor: pointer;
+}
+
+#home-archive:focus
+{
+    outline: none;
+    box-shadow: none;
 }
 
 //================================
