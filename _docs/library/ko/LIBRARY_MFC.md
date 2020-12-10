@@ -15,7 +15,43 @@ order: 0x00
 MFC(Microsoft Foundation Class)는 1992년에 마이크로소프트에서 소개한 윈도우 OS 데스크톱 프로그램 개발을 위한 C++ 객체지향 라이브러리이다. 이후 마이크로소프트에서는 여러 다른 종류의 어플리케이션 프레임워크를 출시하였으나, MFC는 현재까지도 개발 관련 분야에서 여전히 널리 사용되고 있다. 특히 C++ 라이브러리라는 점이 C 언어와 최적의 호환성을 보여주기 때문에 펌웨어 혹은 임베디드 분야에서는 MFC 수요가 상당한 편이다.
 
 ## 구조
-MFC의 구조를 
+MFC와 같은 어플리케이션 프레임워크의 대표적인 기능 중 하나로 그래픽 사용자 인터페이스, 일명 GUI를 제공하는 것이다. 응용 프로그램에 GUI를 사용하기 위해서는 MFC 라이브러리 프레임워크가 어떻게 구성되어야 하는지 알아야 한다. 이들은 상당히 추상적인 개념인 관계로, MFC 구조의 이해를 돕기 위해 메모장 프로그램을 예시로 들어 설명한다. 
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_architecture_example.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 #. MFC 구조 설명을 위한 예시.</center>
+
+
+
+### 문서
+`CDocument` 클래스의 객체인 문서(document)는 MFC 구조 중에서 가장 작은 요소이며, 응용 프로그램이 가지는 텍스트 데이터 혹은 이미지나 오디오와 같은 미디어 자료를 가리킨다. 위의 메모장 예시에서 문서는 아래에 해당한다.
+
+```
+Hello World!
+Welcome to GKO95's GitHub Pages.
+```
+
+### 뷰
+`CView` 클래스의 객체인 뷰(view)는 문서를 어떻게 보여줄 것인지 혹은 처리할 것인지 등의 상호작용 방식을 결정한다. 마치 이미지 파일을 사진으로 볼 수 있는 반면, 메모장으로 열어 이미지 파일을 구성하는 자료를 텍스트로 확인할 수도 있는 이치이다. 문서를 담고있기 때문에 문서 창(document window)라고 부르기도 한다. 위의 메모장 예시에서 뷰는 아래에 해당한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; margin-left:auto; margin-right: auto; width: fit-content"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_architecture_view.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 #. 메모장의 뷰(view) 구조물.</center>
+
+### 프레임 창
+우선 윈도우 OS에서 창(window)란 무엇인지 확실히 짚고 갈 필요가 있다. 영어를 공부하면 아시다시피, window는 창문을 의미한다: 우리는 창문 너머 무언가를 바라보는데, 바로 윈도우 OS 명칭이 이런 사각형 창문에서 따온 이름이다. 그리고 동일한 이유로 직사각형 모양의 프로그램 GUI를 어플리케이션 창(application window)라고 부른다.
+
+프레임 창(frame window)은 뷰 구조물을 담을 수 있는 테두리(frame)를 제공한다. 그러나 MFC에서는 프레임 창을 생성하는 클래스가 크게 두 가지로 나뉘어지며, 이는 각각 SDI 및 MDI로 구별된다:
+
+* 단일 문서 인터페이스(Single Document Interface; SDI)는 하나의 문서만을 처리하도록 되어있으며, `CFrameWnd` 클래스로부터 객체화된다. 메모장 프로그램이 바로 SDI 형식에 해당한다.
+
+* 다중 문서 인터페이스(Multiple Document Interface; MDI)는 여러 문서들을 하나의 프로그램에서 처리할 수 있도록 하며, `CMDIFrameWnd` 및 `CMDIChildWnd` 클래스로부터 객체화된다. 여기서 `CMDIFrameWnd` 클래스가 프레임 창의 본체이며, `CMDIChildWnd` 클래스를 자식으로 두어 각 문서들을 보여준다. 비주얼 스튜디오가 MDI 형식의 프로그램 중 하나이다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; margin-left:auto; margin-right: auto; width: fit-content"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_architecture_framewnd.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 #. 메모장의 프레임 창(frame window) 구조물.</center>
+
+### 어플리케이션
+`CWinApp` 클래스 객체인 어플리케이션(application)은 본격적으로 프로그램을 초기화하고 실행하는 역할을 담당한다. 그래픽 사용자 인터페이스를 마련하여도 어플리케이션이 해당 창을 호출하여 실행하지 않으면 GUI가 없는 프로그램이 되거나, 일반적으로 프로그램이 즉시 종료된다. 위의 메모장 예시에서 어플리케이션은 아래에 해당한다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; margin-left:auto; margin-right: auto; width: fit-content"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_architecture_application.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 #. 메모장의 어플리케이션(frame window) 구조물.</center>
+
+### 쓰레드
+`CWinThread` 클래스 객체인 쓰레드(thread) 여러 작업을 동시에 진행할 수 있도록 한다. 비록 GUI 요소가 아니지만 어플리케이션 객체를 생성하는 `CWinApp` 클래스의 기반 클래스로 상당한 중요성을 가진다. 다시 말해, 어플리케이션은 쓰레드 중 하나이지만 가장 핵심이 되는 쓰레드이다.
 
 ## 리소스
 MFC에서 리소스는 사용자에게 정보를 제공하는 상호작용 요소이다.
