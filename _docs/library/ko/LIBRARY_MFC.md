@@ -54,27 +54,39 @@ Welcome to GKO95's GitHub Pages.
 `CWinThread` 클래스 객체인 쓰레드(thread) 여러 작업을 동시에 진행할 수 있도록 한다. 비록 GUI 요소가 아니지만 어플리케이션 객체를 생성하는 `CWinApp` 클래스의 기반 클래스로 상당한 중요성을 가진다. 다시 말해, 어플리케이션은 쓰레드 중 하나이지만 가장 핵심이 되는 쓰레드이다.
 
 ## 리소스
-MFC에서 리소스는 사용자에게 정보를 제공하는 상호작용 요소이다.
+Resources are interface elements that provide information to the user. Bitmap and icon images, mouse cursors, dialog boxes, menu and toolbars are all considered resource in MFC.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_resource_menu.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 #. 비주얼 스튜디오 메뉴.</center>
+Resources used in current MFC project are defined in resource.h resource header file and are stored, categorized, and styled in .rc extension text-based file. These two essential files are automatically configured together when edited on Resource Editors in Visual Studio IDE.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_resource_toolbar.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 #. 비주얼 스튜디오 툴바.</center>
+리소스는 어플리케이션을 사용하기 위해 필요한 데이터와 정보를 제공한다. 비트맵 이미지 및 아이콘, 마우스 포인터, 메뉴와 툴바, 다이얼로그 창 등이 MFC의 리소스에 해당한다.
+
+| 리소스        | 설명                                |
+|:------------:|------------------------------------|
+| Accelerator  | 프로그램 전용 단축키                        |
+| Bitmap       | 비트맵 이미지                            |
+| Cursor       | 마우스 포인터                            |
+| Dialog       | 다이얼로그 (일명 팝업창)                     |
+| HTML         | HTML 파일                               |
+| Icon         | 프로그램 아이콘                           |
+| Menu         | 텍스트로 구성된 프로그램 기본 컨트롤바              |
+| Ribbon       | *Menu* 그리고 *Toolbar* 리소스가 병합된 컨트롤바 |
+| String Table | 사전등록 문자열 목록; 각 문자열마다 할당된 ID로 호출    |
+| Toolbar      | 비트맵 및 아이콘으로 구성된 프로그램 보조 컨트롤바       |
+| Version      | 프로그램 버전 정보                         |
+
+여기서 메뉴와 툴바의 차이점이 명확하지 않아 잘 구분이 되지 않을 수 있다. 비주얼 스튜디오를 예를 들어보면 메뉴는 아래와 같다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_resource_menu.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 #. 비주얼 스튜디오 메뉴 리소스.</center>
+
+메뉴는 각 프레임 창마다 하나만 가질 수 있는 특징이 있으며, 주로 프로그램 옵션 및 설정에 자주 사용된다. 메모장 프로그램에도 메뉴 리소스가 존재하는 것을 확인할 수 있다.
+
+한편, 비주얼 스튜디오에서 툴바는 아래와 같다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_resource_toolbar.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 #. 비주얼 스튜디오 툴바 리소스.</center>
+
+비트맵 이미지나 아이콘이 버튼을 구성하고 있으며, 일반적으로 도구의 접근성을 제공하기 위해 사용된다. 그러한 이유로 메뉴와 달리, 하나의 프레임 창에 여러 개의 툴바를 삽입할 수 있다. 메모장 프로그램에서는 툴바가 존재하지 않는다.
 
 <div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; margin-left:auto; margin-right: auto; width: fit-content"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_resource_dialog.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 #. 비주얼 스튜디오 다이얼로그.</center>
-
-| 리소스    | 설명                                                 |
-|:------------:| ------------------------------------------------------------ |
-| Accelerator  | Application-exclusive hotkey for faster action using keyboard only. |
-| Bitmap       | 비트맵 이미지 |
-| Cursor       | 마우스 포인터 |
-| Dialog  | 다이얼로그 (일명 팝업창)  |
-| HTML         |                                                              |
-| Icon         | 프로그램 아이콘 |
-| Menu         | 문자Control bar containing text-only; mainly for options.        |
-| Ribbon       | *Menu* 그리고 *Toolbar* 리소스가 병합된 컨트롤바 |
-| String Table | 미리 등록된 문자열 목록; 각 문자열마다 할당된 ID로 호출 |
-| Toolbar      | Control bar containing bitmaps and icons; mainly for tools.  |
-| Version      | 프로그램 버전 정보 |
 
 # **MFC: 프로젝트 생성**
 > 본 내용부터 실질적인 MFC 프로그래밍을 소개하므로, 반드시 C++ 내용을 숙지하도록 한다.
