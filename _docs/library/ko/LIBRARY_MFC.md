@@ -153,11 +153,17 @@ MFC는 윈도우 OS 어플리케이션을 위한 C++ 객체지향 라이브러�
 비록 SDI나 MDI가 아닌 다이얼로그 창을 선택하였으나 간단하면서도 넓은 활용도를 가지는 어플리케이션 종류이다. SDI 및 MDI 어플리케이션이 아닌 관계로 Document Template Properties 단계는 비활성화 되어있다.
 
 User Interface Feature 단계에서는 기본적인 프레임 창 구성을 설정한다. 다음은 다이얼로그 기반 어플리케이션을 생성할 시 기본설정 스타일이다.
-* 두꺼운 프레임 (Thick frame): 프레임 창이 두꺼운 테두리를 가진다.
-* 시스템 메뉴 (System menu): 아이콘, 최소화(Minimize box) 및 최대화(Maximize box) 그리고 닫기(close) 버튼을 제공하는 어플리케이션 최상단의 프레임 창 제어요소이다.
-* About 상자 (About box): 프로그램 기본 정보를 제공하는 다이얼로그 창이다.
+* 두꺼운 프레임 (Thick frame)
+* 시스템 메뉴 (System menu)
+* About 상자 (About box)
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_vs_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 13. 비주얼 스튜디오 MFC 프로젝트 생성 (4단계).</center>
+여기서 시스템 메뉴란, 아래의 이미지처럼 프로그램의 최상단에 위치하여 아이콘, 어플리케이션 이름, 최소화 및 최대화 그리고 닫기 버튼을 제공하는 어플리케이션 창 제어요소이다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; margin-left:auto; margin-right: auto; width: fit-content"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_sysmenu_bar.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 13. MFC 어플리케이션 시스템 메뉴.</center>
+
+비록 MFC 어플리케이션 설정 단계에서 시스템 메뉴를 누락시켜도, 이후 다이얼로그 리소스 속성을 간단히 변경할 수 있다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_vs_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 14. 비주얼 스튜디오 MFC 프로젝트 생성 (4단계).</center>
 
 Advanced Features는 MFC 프로젝트에서 추가적인 고급 옵션 설정을 다룬다. 다음은 다이얼로그 기반 어플리케이션을 생성할 시 기본설정 기능들이다.
 * 프린트 및 프린트 미리보기 (Print and print preview)
@@ -169,15 +175,15 @@ Advanced Features는 MFC 프로젝트에서 추가적인 고급 옵션 설정을
 
 하지만 가장 기본적인 MFC 개념 및 원리 설명이 목적이므로 이번 프로젝트에서는 해당 고급 옵션을 아래와 같이 모두 해제한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_vs_project6.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 14. 비주얼 스튜디오 MFC 프로젝트 생성 (5단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_vs_project6.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 15. 비주얼 스튜디오 MFC 프로젝트 생성 (5단계).</center>
 
 MFC 어플리케이션 설정 마지막 단계로 Generate Classes가 있다. C++ 객체지향 라이브러리이기 때문에 객체를 기반으로 어플리케이션이 실행되며, 다이얼로그 기반 어플리케이션은 기본적으로 두 개의 클래스가 생성된다: 어플리케이션의 `CWinApp` 그리고 다이얼로그 창의 `CDialog`(혹은 확장된 기능을 가진 `CDialogEx`)가 있다. 해당 단계에서는 각 클래스의 이름을 선정하는 작업이며, 이해를 돕기 위해 기본명칭인 `CMFCApplicationApp` 그리고 `CMFCApplicationDlg`를 그대로 사용하였다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_vs_project7.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 15. 비주얼 스튜디오 MFC 프로젝트 생성 (6단계).</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_vs_project7.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 16. 비주얼 스튜디오 MFC 프로젝트 생성 (6단계).</center>
 
 프로젝트 설정을 완료하면 MFC 어플리케이션에서 설정한 내용대로 `CWinApp`을 기반으로 한 `CMFCApplicationApp` 어플리케이션 클래스와 `CDialogEx`을 기반으로 한 `CMFCApplicationDlg` 다이얼로그 클래스가 생성된 것을 확인할 수 있다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_vs_project8.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 16. 비주얼 스튜디오 MFC 프로젝트.</center>
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_vs_project8.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 17. 비주얼 스튜디오 MFC 프로젝트.</center>
 
 그 외에도 솔루션 탐색기를 보면 추가적인 파일이 생성된 것을 볼 수 있다.
 
@@ -225,7 +231,7 @@ CMFCApplicationApp::CMFCApplicationApp()
 }
 ```
 
-`CWinApp`의 객체화 및 생성자 이후부터 본격적으로 `WinMain()` 시작점이 동작한다. 그 중에서 가장 우선적으로 실행되는 메소드가 바로 `InitInstance()`이다. 해당 메소드는 객체 초기화하는데 사용된다.
+`CWinApp`의 객체화 및 생성자 이후부터 본격적으로 `WinMain()` 시작점이 동작한다. 그 중에서 가장 우선적으로 실행되는 메소드가 바로 `InitInstance()`이다. 해당 메소드는 객체(즉, 어플리케이션)를 초기화하는데 사용된다.
 
 ```cpp
 BOOL CMFCApplicationApp::InitInstance()
@@ -237,37 +243,39 @@ BOOL CMFCApplicationApp::InitInstance()
 }
 ```
 
-여기서 `CWinApp::InitInstance()` 메소드가 객체 초기화를 담당하는 가상 메소드이다. 하지만 가상 메소드가 `CMFCApplicationApp::InitInstance()`로 오버라이딩 되어 객체 초기화 기능이 상실된다. 이러한 이유로 내부에 `CWinApp`의 메소드를 별개로 호출한 것이다.
+여기서 `CWinApp::InitInstance()` 메소드가 객체 초기화를 담당하는 가상 메소드이다. 하지만 가상 메소드가 `CMFCApplicationApp::InitInstance()`에 의해 오버라이딩 되어 객체 초기화 기능이 상실된다. 이러한 이유로 내부에 `CWinApp`의 메소드를 별개로 호출한 것이다.
 
-아래는 MFC 어플리케이션에서 명령 프롬프트(command prompt)나 파워셸(powershell)과 같은 셸을 관리할 수 있는 객체를 생성한다. 하지만 MFC 어플리케이션에서 셀을 사용하지 않는다면 해당 코드는 삭제해도 무관하다.
+다음 코드들은 어플리케이션 구동에 영향을 미치지 않는 부가적 기능들에 대한 내용이다. MFC 어플리케이션에 필요가 없으면 삭제해도 전혀 문제가 없다.
 
-```cpp
-    // Create the shell manager, in case the dialog contains
-    // any shell tree view or shell list view controls.
-    CShellManager *pShellManager = new CShellManager;
+* 셸 관리자: 명령 프롬프트나 파워셸을 MFC 어플리케이션에서 접근할 수 있다.
 
-    // Delete the shell manager created above.
-    if (pShellManager != nullptr)
-    {
-        delete pShellManager;
-    }
-```
+  ```cpp
+      // Create the shell manager, in case the dialog contains
+      // any shell tree view or shell list view controls.
+      CShellManager *pShellManager = new CShellManager;
+  
+      // Delete the shell manager created above.
+      if (pShellManager != nullptr)
+      {
+          delete pShellManager;
+      }
+  ```
 
-MFC 어플리케이션에는 비주얼 관리자(visual manager)가 존재한다. 어플리케이션 컨트롤이 어떻게 나타나는지 결정하는 데 사용되며 [여기](https://docs.microsoft.com/ko-kr/cpp/mfc/visualization-manager?view=msvc-160)를 클릭하여 MFC 라이브러리에서 제공하는 일부 예시를 볼 수 있다. 아래는 기본 비주얼 스타일인 "Window Native/Default"를 적용시키는 코드이다. 그러나 "Window Native/Default" 스타일을 그대로 사용할 경우, 위의 코드는 생략해도 된다.
+* 비주얼 관리자: MFC 어플리케이션 컨트롤이 어떠한 스타일로 보여질지 선택한다. 라이브러리에서 제공하는 일부 스타일은 [여기](https://docs.microsoft.com/ko-kr/cpp/mfc/visualization-manager?view=msvc-160)에서 확인할 수 있다. 기본 스타일은 "Window Native/Default"이다.
 
-```cpp
-    // Activate "Windows Native" visual manager for enabling themes in MFC controls
-    CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows));
-```
+  ```cpp
+      // Activate "Windows Native" visual manager for enabling themes in MFC   controls
+      CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS  (CMFCVisualManagerWindows));
+  ```
 
-MFC 어플리케이션은 프로그램 설정과 같은 일부 데이터를 레지스트리(registry)에 저장할 수 있다. 이 또한 선택적인 코드이므로 만일 레지스트리를 사용하지 않을 시에는 응용 프로그램 용량을 줄이기 위해 해당 코드를 삭제하는 것을 권장한다.
+* 레지스트리 키 설정: 프로그램 설정과 같은 일부 데이터를 어떠한 레지스트리(registry)에 저장할 것인지 선정한다. 레지스트리를 사용하지 않을 시에는 프로그램 용량을 줄이기 위해 해당 코드를 삭제하는 것을 권장한다.
 
-```cpp
-    // Standard initialization
-    SetRegistryKey(_T("Local AppWizard-Generated Applications"));
-```
+  ```cpp
+      // Standard initialization
+      SetRegistryKey(_T("Local AppWizard-Generated Applications"));
+  ```
 
-모든 초기 설정이 완료되었으면 다이얼로그 창을 띄워 GUI를 활성화한다. 아래는 MFC 프로젝트 설정 과정에서 선정한 `CMFCApplicationDlg` 다이얼로그 창 클래스를 객체화하여 `DoModal()` 함수로 GUI를 띄어준다.
+모든 초기 설정이 완료되었으면 다이얼로그 리소스를 활성화하여 어플리케이션 창을 보여준다. 아래는 `CMFCApplicationDlg` 다이얼로그 창 클래스를 객체화하여 `DoModal()` 메소드로 다이얼로그 창을 띄어준다.
 
 ```cpp
     CMFCApplicationDlg dlg;
@@ -305,60 +313,55 @@ CMFCApplicationDlg::CMFCApplicationDlg(CWnd* pParent /*=nullptr*/)
 }
 ```
 
-이는 아이콘 리소스를 `m_hIcon` 맴버로 할당하는 코드이며, 주의해야 할 점은 절대로 `m_hIcon`를 메소드 내의 지역 변수로 정의하지 말아야 한다는 것이다. 지역 변수는 스택 메모리에 할당되므로 메소드가 끝나는 즉시 할당 해제되어 데이터가 사라진다. 이러한 이유로 리소스는 클래스 맴버에 할당하여 호출해야 한다.
+이는 아이콘 리소스를 `m_hIcon` 맴버로 할당하는 코드이며, 주의해야 할 점은 절대로 `m_hIcon`를 메소드 내의 지역 변수로 정의하지 말아야 한다는 것이다. 지역 변수는 스택 메모리에 할당되므로 메소드가 끝나는 즉시 할당 해제되어 데이터가 사라진다. 이러한 이유로 리소스는 클래스 맴버 혹은 힙 메모리 영역에 할당하여 호출해야 한다.
 
-`CWinApp`와 유사하게 `CDialog`에서도 객체를 초기화하는 `OnInitDialog()` 메소드가 존재한다. 이 또한 가상 메소드이므로 `CDialog` 클래스에서 직접 호출할 필요가 있다. 이후에 실행되는 다음 코드는 About 상자를 시스템 메뉴에 추가하는 작업이다.
-
-```cpp
-    // Add "About..." menu item to system menu.
-    
-    // IDM_ABOUTBOX must be in the system command range.
-    ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
-    ASSERT(IDM_ABOUTBOX < 0xF000);
-    
-    CMenu* pSysMenu = GetSystemMenu(FALSE);
-    if (pSysMenu != nullptr)
-    {
-        BOOL bNameValid;
-        CString strAboutMenu;
-        bNameValid = strAboutMenu.LoadString(IDS_ABOUTBOX);
-        ASSERT(bNameValid);
-        if (!strAboutMenu.IsEmpty())
-        {
-            pSysMenu->AppendMenu(MF_SEPARATOR);
-            pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
-        }
-    }
-```
-
-위의 코드는 MFC 어플리케이션 시스템 메뉴 우클릭 시 `About MFCApplication...` 옵션이 나타나게 된다. 반면 코드가 없으면 해당 옵션은 나타나지 않는다.
-
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; margin-left:auto; margin-right: auto; width: fit-content"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_sysmenu_about.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 7. MFC 어플리케이션 시스템 메뉴.</center>
-
-아래의 코드는 생성자에서 할당받은 아이콘 리소스를 다이알로그 리소스에 적용시킨다.
+`CWinApp::InitInstance()` 메소드와 유사하게, `CDialog::OnInitDialog()` 메소드는 다이얼로그 리소스 객체를 초기화하는데 사용된다. 이 또한 가상 메소드이므로 `CDialog` 클래스에서 직접 호출할 필요가 있다. 
 
 ```cpp
-    // Set the icon for this dialog.  The framework does this automatically
-    //  when the application's main window is not a dialog
-    SetIcon(m_hIcon, TRUE);         // Set big icon
-    SetIcon(m_hIcon, FALSE);        // Set small icon
-```
-
-GUI에서 반영될 추가적으로 초기화할 데이터가 있으면 `OnInitDialog()` 내에 삽입하면 된다.
-
-시스템 메뉴 우클릭 시, `OnSysCommand()` 메소드가 실행된다. `OnSysCommand()` 또한 가상 메소드로부터 오버라이딩 된 것이다. 기존의 `CDialog::OnSysCommand()` 가상 메소드가 없을 시에는 `About MFCApplication...` 옵션 이외의 모든 시스템 메뉴 기능이 동작하지 않는다.
-
-```cpp
-void CMFCApplicationDlg::OnSysCommand(UINT nID, LPARAM lParam)
+BOOL CMFCApplicationDlg::OnInitDialog()
 {
-    if ((nID & 0xFFF0) == IDM_ABOUTBOX)
-    {
-        CAboutDlg dlgAbout;
-        dlgAbout.DoModal();
-    }
-    else
-    {
-        CDialogEx::OnSysCommand(nID, lParam);
-    }
+    CDialogEx::OnInitDialog();
+
+    ...
+
 }
 ```
+
+다음 코드들은 다이얼로그 창 생성에 영향을 미치지 않는 부가적 기능들에 대한 내용이다. MFC 어플리케이션에 필요가 없으면 삭제해도 전혀 문제가 없다.
+
+* 시스템 메뉴에 About 상자 추가: MFC 어플리케이션 시스템 메뉴 우클릭 시 간단한 프로그램 정보를 알려주는 About 상자를 띄우는 옵션이 나타난다. 만일 About 상자가 시스템 메뉴에 나타나기를 원치 않으면 해당 코드 부문을 삭제하면 된다.
+
+  ```cpp  
+      // IDM_ABOUTBOX must be in the system command range.
+      ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
+      ASSERT(IDM_ABOUTBOX < 0xF000);
+          
+      CMenu* pSysMenu = GetSystemMenu(FALSE);
+      if (pSysMenu != nullptr)
+      {
+          BOOL bNameValid;
+          CString strAboutMenu;
+          bNameValid = strAboutMenu.LoadString(IDS_ABOUTBOX);
+          ASSERT(bNameValid);
+          if (!strAboutMenu.IsEmpty())
+          {
+              pSysMenu->AppendMenu(MF_SEPARATOR);
+              pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
+          }
+      }
+  ```
+
+  위의 코드가 적용될 시, 아래의 이미지처럼 `About MFCApplication...` 옵션이 나타난 것을 확인할 수 있다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; margin-left:auto; margin-right: auto; width: fit-content"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_sysmenu_about.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 19. MFC 어플리케이션 시스템 메뉴 About 상자.</center>
+
+
+* 다이얼로그 창 아이콘 설정: 다이얼로그 클래스 생성자에서 불러온 아이콘 리소스를 어플리케이션 창 아이콘으로 적용시킨다. `TRUE`와 `FALSE` 전달인자는 각각 16비트 및 32비트 아이콘 설정을 구별 짓는다.
+
+  ```cpp
+      SetIcon(m_hIcon, TRUE);         // Set big icon
+      SetIcon(m_hIcon, FALSE);        // Set small icon
+  ```
+
+# MFC: 메시지
+현재까지 MFC 프로젝트 분석 내용은 대체로 몇 가지의 메소드만 콕 집어 정의되어 있는 코드가 어떠한 기능과 역할을 하는지 설명하는 것이었다. 하지만 객체지향 라이브러리인 만큼 어떤 메소드가 언제 실행되는지 전혀 알려진 게 없다. 이를 가능케 하는 데이터가 바로 메시지(message)이며, 본 장에서는 메시지의 구성 및 순환에 대하여 소개한다.
