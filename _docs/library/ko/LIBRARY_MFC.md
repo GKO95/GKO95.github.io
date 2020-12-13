@@ -14,12 +14,43 @@ order: 0x00
 
 MFC(Microsoft Foundation Class)는 1992년에 마이크로소프트에서 소개한 윈도우 OS 데스크톱 프로그램 개발을 위한 C++ 객체지향 라이브러리이다. 이후 마이크로소프트에서는 여러 다른 종류의 어플리케이션 프레임워크를 출시하였으나, MFC는 현재까지도 개발 관련 분야에서 여전히 널리 사용되고 있다. 특히 C++ 라이브러리라는 점이 C 언어와 최적의 호환성을 보여주기 때문에 펌웨어 혹은 임베디드 분야에서는 MFC 수요가 상당한 편이다.
 
+## 윈도우 자료형
+윈도우 OS에는 `minwindef.h` 헤더 파일에 정의된 윈도우 자료형이 존재한다. 이는 Win32이나 MFC와 같은 윈도우 시스템 관련 라이브러리를 사용할 시 반드시 알아야 하는 자료형들이다. 아래는 가장 많이 사용되는 세 가지의 윈도우 자료형에 대한 설명이다.
+
+| 자료형                       | 32비트 | 64비트 |
+|---------------------------|:----:|:----:|
+| `BYTE` (`unsigned char`)  | 1바이트 | 1바이트 |
+| `WORD` (`unsigned short`) | 2바이트 | 2바이트 |
+| `DWORD` (`unsigned long`) | 4바이트 | 4바이트 |
+
+윈도우 자료형 중에서 `WORD`와 `DWORD`의 명칭이 각각 2바이트와 4바이트를 의미하게 된 이유에는 다음과 같은 역사를 바탕으로 결정되었다.
+
+> 1987년에 출시된 윈도우 2.0과 같은 초창기 PC는 16비트, 즉 2바이트 아키텍처 환경의 운영체제였다. 16비트 아키텍처란, 시스템 내에서 데이터를 주고받는데 16비트 단위로 통신이 이루어진다는 의미이다. 그리고 아키텍처가 가지는 가장 자연스러운 데이터 길이 단위를 워드(word)라고 부른다. 이를 기반으로 윈도우 자료형 `WORD`가 2바이트가 된 것이다.
+>
+> 이후 1993년에 출시된 윈도우 NT 3.1 운영체제부터 32비트 아키텍처가 소개되었다. 32비트 아키텍처의 워드 길이는 32비트, 즉 4바이트이다. 그러나 이미 수많은 윈도우 라이브러리에서는 `WORD`가 2바이트 데이터로 고정되어 있다. 이러한 이유로 `WORD` 자료형의 두 배(double) 크기인 `DWORD` 4바이트 자료형을 새로 만들었다.
+>
+> 이와 동일한 원리로 64비트 아키텍처가 소개되면서 기존 워드의 네 배(quadruple) 크기인 `QWORD` 8바이트 자료형이 등장하였다. 
+
+### 핸들
+핸들(handle)은 윈도우 관련 라이브러리에서 수없이 언급되는 또다른 윈도우 자료형 중 하나이다. 핸들이 도대체 무엇인지 이해하기 위해 마이크로소프트 문서를 찾아보아도 "A handle to an object"라는 설명이 전부이다. 하지만 `HANDLE` 핸들 자료형이 어떻게 선언되었는지 확인하면 아래와 같은 코드를 발견하게 된다.
+
+```cpp
+typedef void* HANDLE;
+```
+
+즉, 데이터의 포인터에 불과하다!
+
+하지만 포인터 중에서도 보이드 포인터만이 핸들이 될 수 있다. C/C++ 언어에는 `int` 정수형도 있고 `bool` 논리형도 있고, 심지어 보이드와 동일한 1바이트의 `char` 문자형이 있는데 왜 `void`를 사용하는지 의문을 가질 수 있다. 여기서 명심해야 할 두 가지 정보가 있다:
+
+* 어떠한 자료형의 포인터라도 항상 메모리 주소의 크기인 4바이트(32비트) 혹은 8바이트(64비트)만큼 할당된다. 즉, *포인터의 크기는 자료형의 크기와 무관하다!*
+* 보이드는 자료형이 없다는 의미이지만, 다른 의미로는 자료형이 아직 정해지지 않았다고 해석된다. 핸들은 단순히 데이터의 시작 메모리 위치를 알려줄 뿐이며, 본격적인 데이터 사용은 자료형 변환 후에 진행된다.
+
+위의 내용을 보면 보이드 포인터가 왜 데이터 핸들("손잡이")이라고 불리는지 이해하는데 도움이 될 것이다.
+
 ## MFC 구조
 MFC와 같은 어플리케이션 프레임워크의 대표적인 기능 중 하나로 그래픽 사용자 인터페이스, 일명 GUI를 제공하는 것이다. 응용 프로그램에 GUI를 사용하기 위해서는 MFC 라이브러리 프레임워크가 어떻게 구성되어야 하는지 알아야 한다. 이들은 상당히 추상적인 개념인 관계로, MFC 구조의 이해를 돕기 위해 메모장 프로그램을 예시로 들어 설명한다. 
 
 <div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_architecture_example.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. MFC 구조 설명을 위한 예시.</center>
-
-
 
 ### 문서
 `CDocument` 클래스의 객체인 문서(document)는 MFC 구조 중에서 가장 작은 요소이며, 응용 프로그램이 가지는 텍스트 데이터 혹은 이미지나 오디오와 같은 미디어 자료를 가리킨다. 위의 메모장 예시에서 문서는 아래에 해당한다.
@@ -61,7 +92,7 @@ Welcome to GKO95's GitHub Pages.
 | Accelerator  | 프로그램 전용 단축키                        |
 | Bitmap       | 비트맵 이미지                            |
 | Cursor       | 마우스 포인터                            |
-| Dialog       | 다이얼로그 (일명 팝업창)                     |
+| Dialog       | 다이얼로그 (일명 대화 상자)                     |
 | HTML         | HTML 파일                               |
 | Icon         | 프로그램 아이콘                           |
 | Menu         | 텍스트로 구성된 프로그램 기본 컨트롤바              |
@@ -365,3 +396,122 @@ BOOL CMFCApplicationDlg::OnInitDialog()
 
 # MFC: 메시지
 현재까지 MFC 프로젝트 분석 내용은 대체로 몇 가지의 메소드만 콕 집어 정의되어 있는 코드가 어떠한 기능과 역할을 하는지 설명하는 것이었다. 하지만 객체지향 라이브러리인 만큼 어떤 메소드가 언제 실행되는지 전혀 알려진 게 없다. 이를 가능케 하는 데이터가 바로 메시지(message)이며, 본 장에서는 메시지의 구성 및 순환에 대하여 소개한다.
+
+## 메시지
+MFC 어플리케이션에서 상호작용 혹은 데이터의 변화 등의 이벤트(event)가 발생하면 메시지(message)를 송신한다. 예를 들어 창 크기 조절, 마우스/키보드 버튼 클릭, 혹은 컨트롤 입력란 텍스트 변화 등은 모두 이벤트에 해당한다.
+
+아래는 메시지 자료형인 `MSG` 구조체이다.
+
+```cpp
+typedef struct tagMSG {
+    HWND   hwnd;
+    UINT   message;
+    WPARAM wParam;
+    LPARAM lParam;
+    DWORD  time;
+    POINT  pt;
+} MSG, *PMSG, *NPMSG, *LPMSG;
+```
+
+메시지 구조체는 다음과 같이 구성되어 있다.
+
+| 맴버 | 설명 |
+|---|-----|
+| `HWND hwnd`  | 해당 메시지를 받을 `CWnd` 클래스 기반의 객체 [핸들](./#핸들) |
+| `UINT message`  | [메시지 ID](https://wiki.winehq.org/List_Of_Windows_Messages); 최대 32,767 (0x7FFF) 종류를 나타낼 수 있다. |
+| `WPARAM wParam` | `INT` 기반의 추가 정보; 메시지 종류에 따라 가지는 의미가 다르다. |
+| `LPARAM lParam` | `LONG` 기반의 추가 정보; 메시지 종류에 따라 가지는 의미가 다르다. |
+| `DWORD time` | 메시지가 보내진 시간 |
+| `POINT pt` | 메시지가 보내졌을 때의 마우스 포인터 위치 |
+
+> 위의 도표에서 `WPARAM`과 `LPARAM`을 각각 "`int` 기반" 및 "`long` 기반"이라고 명시하였다. 바로 전자는 `INT` 자료형의 포인터이고 후자는 `LONG` 자료형의 포인터이기 때문에 붙여진 이름이다. 이때 `INT`는 16비트 아키텍처에서 4바이트가 아닌 2바이트, 즉 `WORD`와 동일한 크기를 가졌다.
+
+MFC 어플리케이션에서 메시지는 몇 가지의 분류로 나뉘어진다: *[Microsoft Docs - Message Categories](https://docs.microsoft.com/ko-kr/cpp/mfc/message-categories)*
+
+### 윈도우 메시지
+윈도우 메시지는 `CWnd` 윈도우 클래스 기반의 객체에서 수신하여 처리하는 메시지이다. 일반적으로 윈도우 메시지 ID는 `WM_` 접두사를 가지며, 메시지 종류에 따라 `wParam` 및 `lParam`은 메시지를 어떻게 처리해야 하는지에 대한 정보가 있는가 하면 아예 사용하지 않는 윈도우 메시지도 존재한다.
+
+윈도우 메시지는 크게 두 가지의 종류로 나뉘어진다:
+
+* 알림 메시지 (Notification message)
+
+  알림 메시지는 해당 윈도우에서 이벤트가 발생하였을 때 송신되는 메시지이다. 예를 들어 시스템 메뉴 우클릭 시에 `WM_SYSCOMMAND`가 발송되며, (윈도우 7 이후는 불가능하지만) 최소화된 상태에서 어플리케이션 창을 이동시키면 `WM_QUERYDRAGICON`가 발송된다.
+
+* 컨트롤 알림 메시지 (Control-Notification message)
+
+  알림 메시지와 동일하게 윈도우에게 이벤트가 발생하였다는 것을 알리는 메시지이지만, MFC 컨트롤에서 `WM_COMMAND` 메시지로 발송되는 차이점을 가진다. 컨트롤도 사실상 보면 `CWnd`의 파생 클래스이므로 창(window)으로 간주된다. 컨트롤 알림 메시지는 다음과 같은 정보를 가진다.
+
+  | 메시지 발생지 | `wParam` (상위 2바이트) | `wParam` (하위 2바이트) | `lParam` (전체 4바이트)              |
+  | -------------- |:---------------:|:--------------------------------:|:------:|
+  | MFC 컨트롤        | 알림 코드 | 메시지 발생 컨트롤 ID | 메시지 발생 컨트롤 핸들 |
+
+  여기서 알림 코드는 어떠한 MFC 컨트롤을 사용하는가에 따라 제각각이다. 예를 들어 `CButton` 클래스의 버튼 클릭 알림 코드는 `BN_CLICK` (정수형 0), 그리고 `CEdit` 클래스의 텍스트 입력란 클릭 알림 코드는 `EN_SETFOCUS` (정수형 256)이다.
+
+### 명령 메시지
+명령 메시지는 `WM_COMMAND`를 사용하는 또다른 메시지이지만, MFC 컨트롤 이외의 리소스인 메뉴, 툴바, 혹은 단축키로부터 발송된다. 명령 메시지는 다음과 같은 정보를 가진다. 
+
+| 메시지 발생지 | `wParam` (상위 2바이트) | `wParam` (하위 2바이트) | `lParam` (전체 4바이트)              |
+| -------------- |:---------------:|:--------------------------------:|:------:|
+| 메뉴, 툴바  | 0               | 메시지 발생 메뉴 혹은 툴바 리소스 ID | 0      |
+| 단축키    | 1               | 메시지 발생 단축키 ID            | 0      |
+
+## 메시지 루프
+MFC 어플리케이션에서 이벤트가 발생하면 메시지가 발송된다. 발송된 메시지는 반드시 메시지 큐(Message queue)라는 [큐 구조 메모리](/docs/programming/ko/PRGMING_Cpp/#큐-구조)를 걸쳐 하나씩 순서대로 메시지 루프로 보내어진다.
+
+<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; margin-left:auto; margin-right: auto; width: fit-content"><img class="-tv-ignore-access" src="./../../../assets/images/docs/library/MFC/mfc_msg_execution.gif" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 20. MFC 어플리케이션 실행 절차.</center>
+
+메시지 루프(Message loop)는 메시지 큐로부터 수신받은 메시지가 있으면 최종적으로 메시지를 수신받을 메시지 처리자(message handler)로 보내야 하는지 결정하는 GUI 어플리케이션의 핵심 작업을 수행한다. 위의 흐름도에서 메시지 루프는 "Available Messages?" 단계에서 메시지를 받으며 "Get/Translate/Dispatch" 단계에서 메시지를 올바른 메시지 처리자로 보내는 작업을 반복적으로 실행한다.
+
+메시지 루프를 종료하기 위해서는 `WM_QUIT` 윈도우 메시지를 생성한다. 해당 메시지는 사용자가 파일 메뉴에서 "Exit"을 선택하거나 시스템 메뉴에서 닫기 버튼을 클릭, 혹은 키보드로 `Alt+F4`를 누르면 발송된다.
+
+## 메시지 처리자
+메시지 처리자(Message handler)는 메시지 루프에게 메시지를 어디로 보내야하는지 유도 및 처리하는 역할을 맡는다. 메시지 처리자는 메시지를 수신받을 시작점(entry)와 실질적으로 코드를 수행하는 함수(function)이 한 쌍을 이룬다.
+
+일반 윈도우 메시지와 `WM_COMMAND` 메시지는 유사하지만 서로 다른 형태의 메시지 처리자를 가진다. 전자는 `WM_SYSCOMMAND` 메시지, 후자는 `ID_HELP`에서 발생된 `WM_COMMAND` 메시지를 위한 메시지 처리자이다.
+
+```cpp
+// 일반 윈도우 메시지 처리자 시작점
+ON_WM_SYSCOMMAND()
+
+void CMFCApplicationDlg::OnSysCommand(UINT nID, LPARAM lParam)
+{
+    ...
+}
+```
+
+```cpp
+// ID_HELP에서 발송된 WM_COMMAND 메시지 처리자 시작점
+ON_COMMAND(ID_HELP, &CMFCApplicationDlg::OnHelp)
+
+void CMFCApplicationDlg::OnHelp()
+{
+    ...
+}
+```
+
+## 메시지 맵
+메시지 루프는 발송된 메시지를 체크하여 올바른 메시지 처리자로 보내는 작업을 처리하지만, MFC 라이브러리에는 수많은 종류의 메시지가 있으며 이를 모두 확인하는 것은 매우 비효율적이다. 그렇기 때문에 메시지 루프는 오로지 메시지 맵(Message map)에 입력된 메시지 처리자만 확인한다.
+
+먼저 아래의 `.h` 헤더 파일은 `DELCARE_MESSAGE_MAP()` 매크로로 메시지 맵을 선언하는 코드이다.
+
+```cpp
+protected:
+    // 메시지 처리자 프로토타입
+    afx_msg OnSysCommand(UINT nID, LPARAM lParam);
+    afx_msg OnHelp();
+    DECLARE_MESSAGE_MAP()
+```
+
+그 다음 `.cpp` 소스 파일에서는 `BEGIN_MESSAGE_MAP()`과 `END_MESSAGE_MAP()` 매크로로 메시지 맵의 시작과 끝을 지정하는 매크로이다.
+
+```cpp
+BEGIN_MESSAGE_MAP(CMFCApplicationDlg, CDialogEx)
+    
+    // 메시지 처리자 시작점
+    ON_WM_SYSCOMMAND()
+    ON_COMMAND(ID_HELP, &CMFCApplicationDlg::OnHelp)
+    
+END_MESSAGE_MAP()
+```
+
+여기서 `afx_msg` 매크로는 사실상 무의미하며, 없어도 컴파일하거나 동작하는데 전혀 문제가 발생하지 않는다. 그렇지만 비주얼 스튜디오의 MFC 클래스 마법사가 메시지 처리자를 인식할 수 있도록 넣어주는 것을 권장한다. 또한 함수를 정의하였다 하더라도 해당 메시지 처리자의 시작점이 메시지 맵에 없으면 절대로 동작하지 않는다.
