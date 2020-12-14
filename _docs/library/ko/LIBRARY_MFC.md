@@ -515,3 +515,64 @@ END_MESSAGE_MAP()
 ```
 
 여기서 `afx_msg` 매크로는 사실상 무의미하며, 없어도 컴파일하거나 동작하는데 전혀 문제가 발생하지 않는다. 그렇지만 비주얼 스튜디오의 MFC 클래스 마법사가 메시지 처리자를 인식할 수 있도록 넣어주는 것을 권장한다. 또한 함수를 정의하였다 하더라도 해당 메시지 처리자의 시작점이 메시지 맵에 없으면 절대로 동작하지 않는다.
+
+# **MFC: 실행**
+> *참조: [Microsoft Docs - CWinApp: 어플리케이션 클래스](https://docs.microsoft.com/ko-kr/cpp/mfc/cwinapp-the-application-class)*
+
+전통적인 `main()` 함수를 사용하는 C++ 콘솔 어플리케이션과 달리, 프레임워크 어플리케이션은 `WinMain()` 함수를 중점으로 코드가 수행된다. MFC 라이브러리 또한 프레임워크 어플리케이션을 생성하므로써 `WinMain()` 시작점을 사용하나 표면적으로 드러나지 않는다. 그 대신 MFC 어플리케이션은 `CWinApp` 클래스로 네 단계의 실행 절차로 나뉘어져 진행된다.
+
+### 초기화
+> *참조: [Microsoft Docs - InitInstance 맴버 함수](https://docs.microsoft.com/en-us/cpp/mfc/initinstance-member-function)*
+
+초기화(initialization) 단계는 `CWinApp::InitInstance()` 메소드에서 프레임워크 어플리케이션 시작점인 `WinMain()` 함수가 실행되기 전에 프로세스 초기화 작업을 담당한다. 하지만 해당 메소드의 핵심 기능은 하나의 이상의 객체(즉, 어플리케이션)가 동시에 실행될 수 있도록 한다.
+
+```cpp
+BOOL CApplication::InitInstance() {
+    CWinApp::InitInstance();
+    
+    // 부가적 어플리케이션 초기화 코드
+    
+    return TRUE;
+}
+```
+
+본 메소드는 어플리케이션 실행에 있어 가장 중요하며, 어플리케이션의 메인 윈도우를 가리키는 `m_pMainWnd` 맴버에 프레임 창이나 다이얼로그 창 등을 할당할 수 있는 유일한 메소드이다. 그러므로 `CWinApp::InitInstance()` 함수는 GUI를 가진 어플리케이션 개발을 할 경우 `m_pMainWnd` 맴버 때문이라도 반드시 오버라이드를 거쳐야 한다.
+
+### 실행
+> *참조: [Microsoft Docs - Run 맴버 함수](https://docs.microsoft.com/ko-kr/cpp/mfc/run-member-function)*
+
+초기화 단계를 마친 MFC 어플리케이션은 `WinMain()` 시작점에 진입하는데, 이때 실행(run) 단계에서의 메시지 루프 역할을 `CWinApp::Run()` 메소드가 담당한다. 해당 메소드는 처리되어야 할 새로운 메시지를 확인하기 위해 지속적으로 메시지 루프를 구동한다. 더이상 처리할 메시지가 없을 시, `CWinApp::Run()` 메소드는 `CWinApp::OnIdle()` 메소드를 호출해 어플리케이션은 아무런 작업을 하지 않는 유휴 상태에 진입한다. 만일 어플리케이션이 종료되면 `CWinApp::Run()` 메소드는 `CWinApp::ExitInstance()` 메소드를 호출해 소멸 단계에 들어간다.
+
+일반적으로 `CWinApp::Run()` 메소드는 메시지 루프에 특수한 기능을 추가하지 않는 이상 오버라이딩을 하지 않는다.
+
+### 유휴
+> *참조: [Microsoft Docs - OnIdle 맴버 함수](https://docs.microsoft.com/ko-kr/cpp/mfc/onidle-member-function)*
+
+
+메시지 루프에서 더이상 처리할 메시지가 없을 시, 어플리케이션은 `CWinApp::OnIdle()` 메소드를 통해 유휴(idle) 단계에 진입한다. 하지만 해당 단계에서 어플리케이션은 어떠한 작업도 하지 않는다는 것이 아니다. 기본적으로 유휴 단계에서 어플리케이션은 GUI 요소 업데이트 및 데이터 구조 정리(일명, 코드 리팩터링; code refactoring)를 진행한다. 여기서 데이터 구조 정리란, 내부적으로 메모리 및 파일시스템에 남아있는 잉여 데이터 구조나 불필요한 자료를 정리하는 작업을 의미한다.
+
+```cpp
+BOOL CApplication::OnIdle(LONG lCount) {
+    BOOL bMore = CWinApp::OnIdle(lCount);
+    
+    // 부가적 어플리케이션 유휴 작업 코드
+    
+    return bMore;
+}
+```
+
+유휴 작업을 마무리 하였으면 MFC 어플리케이션은 다시 한 번 메시지 여부를 확인한다. 새로운 메시지를 발견하면 `CWinApp::Run()` 메소드를 통해 메시지 루프가 재가동되지만, 여전히 아무런 메시지를 발견하지 못하면 어떠한 작업도 할 것이 없는 어플리케이션은 대기 상태에 들어간다.
+
+### 소멸
+> *참조: [Microsoft Docs - ExitInstance 맴버 함수](https://docs.microsoft.com/ko-kr/cpp/mfc/exitinstance-member-function)*
+
+소멸(terminate) 단계는 `CWinApp::ExitInstance()` 메소드에서 MFC 어플리케이션을 종료할 때 수행되는 단계로 MFC 라이브러리 데이터나 리소스를 정리하는 작업을 담당한다. MFC 관련 데이터 외의 동적 할당 메모리를 해제하는 등의 부가적인 정리가 필요하면 아래와 같이 메소드 오버라이딩을 한다.
+
+```cpp
+int CApplication::ExitInstance() {
+
+    // 부가적 어플리케이션 정리 코드
+    
+    return CWinApp::ExitInstance();
+}
+```
