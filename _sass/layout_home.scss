@@ -1,0 +1,134 @@
+//================================
+// HOME
+//================================
+#home-announcement, #home-docs, #home-blog {
+    @include HFBkgdStyle;
+}
+
+ul, ol {
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+#home-announcement {
+    text-align: center;
+
+    ul, ol {
+        border: {
+            style: none;
+            width: 0px 16px;
+        }
+        margin: 1.6em;
+    }
+
+    li {
+        font: {
+            family: $TITLEFONT;
+            weight: bold;
+            size: 32px;
+        }
+        padding: 16px 32px;
+    }
+}
+
+#home-docs {
+    border-radius: 1.6em;
+    margin: {
+        top: 1em;
+        bottom: 1em;
+    }
+    padding: {
+        top: 0.4em;
+        bottom: 0.4em;
+    }
+
+    .home-docs-group {
+        width: 96%;
+        margin: 1em auto;
+        border: {
+            radius: 0.8em;
+            style: solid;
+            width: 4px;
+        }
+    }
+
+    .home-docs-header {
+        font-family: $TITLEFONT;;
+        border-radius: 0.8em;
+        text-align: center;
+
+        padding: 0.2em;
+        margin: 0.8em auto 0.4em auto;
+        width: 96%;
+        font: {
+            weight: bold;
+            size: 1.6em;
+        }
+    }
+
+    .home-docs-tile {
+        display: block;
+        background: {
+            size: 200px;
+            repeat: no-repeat;
+            position: center;
+        }
+        border-radius: 0.4em;
+        height:256px;
+        width: 256px;
+        justify-content: center;
+
+    }
+    
+    a {
+        margin: 8px;
+    }
+
+    ul {
+        width: calc(96% - 0.8em * 2);
+        margin: 0.4em auto;
+        display: flex;
+        flex: {
+            wrap: wrap;
+            direction: row;
+        }
+        justify-content: center;
+    }
+}
+
+#home-blog {
+    display: flex;
+    flex-direction: row;
+    margin: {
+        top: 1em;
+        bottom: 1em;
+    }
+
+    #home-blog-about {
+        width: fit-content;
+        border-radius: 1.6em;
+        padding: {
+            top: 0.4em;
+            bottom: 0.4em;
+        }
+    }
+
+    #home-blog-icon {
+        background: {
+            size: 256px;
+            repeat: no-repeat;
+            position: center;
+            image: url(/assets/images/logo/logo-about.png);
+        }
+        width: 296px;
+        height: 296px;
+        display:block;
+    }
+
+    #home-blog-posts {
+    
+    }
+}

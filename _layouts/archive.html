@@ -64,7 +64,7 @@ layout: template
 </style>
 
 <body id="archive">
-    {%- include .header.html -%}
+    {%- include header.html -%}
     <main id="archive-main">
         <div id="archive-content">
             <section id="archive-tags">
@@ -107,22 +107,22 @@ layout: template
                         "cursor" : "pointer",
                         "background-image" : "url(/assets/images/logo/logo-language.png)"
                     }).attr("title", "Switch language").click(function() {
-                        switch(lang)  { case "en": default: __LOCAL__.setItem("LANG", "ko"); break;
-                    case "ko": __LOCAL__.setItem("LANG", "en"); break; } location.reload();
+                        switch(lang)  { case enumLANG.ENGLISH: default: SetLANG(enumLANG.KOREAN); break;
+                    case enumLANG.KOREAN: SetLANG(enumLANG.ENGLISH); break; } location.reload();
                     })
                     $(`#navigation-logo`).append(button)
-                }; SwitchLanguage(__LOCAL__.getItem("LANG"));
+                }; SwitchLanguage(GetLANG);
 
-                $(`#archive-caption`).text(`${(__LOCAL__.getItem("LANG") == 'en') ? "TAGS:" : "태그:"}`)
-                document.styleSheets[0].insertRule(`#archive #archive-list a { color: ${(__LOCAL__.getItem("THEME") == 'Light') ? "black" : "white"}; }`);
-                document.styleSheets[0].insertRule(`#archive-tags { border-color: ${(__LOCAL__.getItem("THEME") == 'Light') ? "rgb(216, 216, 216)" : "rgb(24, 24, 24)"}; }`);
-                document.styleSheets[0].insertRule(`#archive-tags code { color: ${(__LOCAL__.getItem("THEME") == 'Light') ? "black" : "white"}; background-color: ${(__LOCAL__.getItem("THEME") == 'Light') ? "rgb(208, 208, 208)" : "rgb(48, 48, 48)"}; }`);
+                $(`#archive-caption`).text(`${(GetLANG == enumLANG.ENGLISH) ? "TAGS:" : "태그:"}`)
+                document.styleSheets[0].insertRule(`#archive #archive-list a { color: ${(GetTHEME == enumTHEME.LIGHT) ? "black" : "white"}; }`);
+                document.styleSheets[0].insertRule(`#archive-tags { border-color: ${(GetTHEME == enumTHEME.LIGHT) ? "rgb(216, 216, 216)" : "rgb(24, 24, 24)"}; }`);
+                document.styleSheets[0].insertRule(`#archive-tags code { color: ${(GetTHEME == enumTHEME.LIGHT) ? "black" : "white"}; background-color: ${(GetTHEME == enumTHEME.LIGHT) ? "rgb(208, 208, 208)" : "rgb(48, 48, 48)"}; }`);
                 $(`#archive-tags`).css({
-                    "background-color" : `${(__LOCAL__.getItem("THEME") == 'Light') ? "rgb(232, 232, 232)" : "rgb(16, 16, 16)"}`
+                    "background-color" : `${(GetTHEME == 'Light') ? "rgb(232, 232, 232)" : "rgb(16, 16, 16)"}`
                 })
 
-                const __colorYES__  = (__LOCAL__.getItem("THEME") == 'Light') ? "rgb(48, 200, 48)" : "rgb(0, 128, 0)";
-                const __colorNO__   = (__LOCAL__.getItem("THEME") == 'Light') ? "red" : "red";
+                const __colorYES__  = (GetTHEME == enumTHEME.LIGHT) ? "rgb(48, 200, 48)" : "rgb(0, 128, 0)";
+                const __colorNO__   = (GetTHEME == enumTHEME.LIGHT) ? "red" : "red";
 
                 const filterTags = (item) => {
                     const __TAGNAME__ = item.innerHTML;
@@ -215,7 +215,7 @@ layout: template
             
         </div>
     </main>
-    {%- include .footer.html -%}
-    {%- include .menu.html -%}
+    {%- include footer.html -%}
+    {%- include menu.html -%}
 </body>
 <script>const __PAGENAME__ = "{{page.name}}"; const __CATEGORY__ = "{{page.category}}";</script>

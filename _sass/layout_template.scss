@@ -1,0 +1,289 @@
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('../fonts/JetBrainsMonoNL-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-variant-ligatures: normal;
+}
+
+@mixin HFBkgdStyle {
+    margin: {
+        left: auto;
+        right: auto;
+    }
+    width: calc(100% - (1em * 2));
+
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+$MONOSPACE: 'JetBrains Mono';
+$TITLEFONT: Verdana, Geneva, Tahoma, sans-serif;
+
+body {
+    margin: 0px;
+    padding: 0px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min: {
+        height: 600px;
+        width: 800px;
+    }
+
+    //font-family: 'Noto Sans KR', sans-serif;
+    //font-size: large;
+    //letter-spacing: 0px;
+}
+
+header, footer {
+    @include HFBkgdStyle;
+}
+
+header {
+    border-bottom: {
+        left-radius: 1.6em;
+        right-radius: 1.6em;
+    }
+
+    nav {
+        $ICON_SIZE: 48px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: calc(100% - (1em * 2));
+
+        margin: auto {
+            top: 1em;
+            bottom: 1em;
+        }
+
+        #nav-left, #nav-right {
+            display: inline-block;
+            white-space: nowrap;
+            align-self: center;
+        }
+
+        .nav-logo {
+            $MARGIN-SIZE: 0.4em;
+
+            height: $ICON_SIZE;
+            width: $ICON_SIZE;
+    
+            margin: {
+                left: $MARGIN-SIZE;
+                right: $MARGIN-SIZE;
+            }
+
+            background: {
+                position: center;
+                repeat: no-repeat;
+                size: $ICON_SIZE;
+            }
+    
+            display: inline-block;    
+            align-content: center;
+            cursor: pointer;
+        }
+
+        #nav-center {
+            text-align: center;
+            padding: 0 0.4em;
+            font: {
+                family: $TITLEFONT;
+                size: $ICON_SIZE - 8px;
+                weight: bold;
+            }
+        }
+    }
+
+    #title {
+        display: block;
+        text-align: center;
+
+        margin: {
+            bottom: 0.4em;
+        }
+    
+        font: {
+            weight: bolder;
+            family: $MONOSPACE;
+            size: 96px;
+        }
+    
+        span {
+            border: {
+                style: solid;
+                width: 8px;
+            }
+            
+            // Letter affects right padding.
+            letter-spacing: 8px;
+            padding: 0px 0px 0px 10px;
+        }
+    }
+}
+
+footer {
+    text-align: center;
+    border-top: {
+        left-radius: 1.6em;
+        right-radius: 1.6em;
+    }
+    padding: {
+        top: 0.2em;
+        bottom: 0.2em;
+    }
+    font: {
+        size: 1.0em;
+        family: $MONOSPACE;
+    }
+}
+
+h1, h2, h3, h4 {
+    font-family: $TITLEFONT;
+}
+
+a {
+    text-decoration: none;
+}
+
+pre {
+    font-family: $MONOSPACE;
+    text-rendering: geometricPrecision;
+}   
+
+code {
+    font-family: $MONOSPACE;
+    border-radius: 0.2em;
+    padding: {
+        left: 0.2em;
+        right: 0.2em;
+    }
+}
+
+blockquote {
+    border-left: {
+        width: 4px;
+        style: solid;
+    }
+    padding: 2px 16px;
+}
+
+//==============================================================================================================
+//>> SCROLLBAR
+//==============================================================================================================
+::-webkit-scrollbar {
+    //display: none;
+    width: 12px;
+    height: 12px;
+}
+  
+::-webkit-scrollbar-thumb {       // thumb
+    border-radius: 1em;
+}
+
+//==============================================================================================================
+//>> HIGHLIGTER-ROUGE
+//==============================================================================================================
+.highlighter-rouge pre {
+    padding: 0.5em 1em;
+    overflow-x: auto;
+}
+
+.highlighter-rouge code {
+    background-color: inherit;
+    color: white;
+    padding: 0px;
+}
+
+/*
+//==============================================================================================================
+//>> MENU
+//==============================================================================================================
+#menu {
+    visibility: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+#menu-button {
+    cursor: pointer;
+    background-image: url("/assets/images/logo/logo-menu.png");
+}
+
+#menu-bkgd {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+#menu-main {
+    width: 64%;
+    margin: auto;
+    overflow: hidden;
+
+    // Disable selection.
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+#menu-option {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 64px;
+    width: 90%;
+
+    margin: 24px auto;
+}
+
+#menu-title {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 32px;
+
+    margin-left: 16px;
+}
+
+#menu-select {
+    height: 52px;
+}
+
+#menu-select a {
+    display: inline-block;
+    border-radius: 0.5em;
+    width: 52px;
+    height: 52px;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 40px;
+
+    margin-top:auto;
+    margin-bottom: auto;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+#menu-content {
+    position: flex;
+
+    width: 90%;
+    height: 100%;
+    margin: 24px auto;
+}
+*/

@@ -1,7 +1,8 @@
+/*
 //================================
 // DOCS
 //================================
-#post header {
+#docs header {
     background-color: inherit;
     height: 25vh;
     min-height: 128px;
@@ -15,7 +16,7 @@
     width:100%;
 }
 
-#post header #title {
+#docs header #title {
     display: none;
     font-size: 64px;
 
@@ -28,7 +29,7 @@
     font-family: monospace;
 }
 
-#post header #title a {
+#docs header #title a {
     border-style: solid;
     border-color: white;
     border-width: 8px;
@@ -53,14 +54,14 @@
     padding: 0px 0px 0px 10px;
 }
 
-#post-main {
+#docs-main {
     display: block;
     flex: 1 0 auto;
     background-color: inherit;
     color: inherit;
 }
 
-#post-content {
+#docs-content {
     display: block;
     //visibility: hidden;
 
@@ -75,30 +76,27 @@
     //overflow: hidden;
 }
 
-#post-content h1 {
+#docs-content h1 {
     border-bottom-style: solid;
-
-    //font-family: 'OpenSans';
     font-size: 2.4em;
-    
     margin-bottom: 0.6em;
-    //margin-top: 1.2em;
+    //font-family: 'OpenSans';
 }
 
-#post-content h2 {
+#docs-content h2 {
     font-size: 1.6em;
     margin-bottom: 0.5em;
     //font-family: 'OpenSans';
 }   
 
-#post-content h3 {
+#docs-content h3 {
     font-size: 1.2em;
     padding-left: 0.8em;
     margin-bottom: 0.5em;
     //font-family: 'OpenSans';
 }
 
-#post-content h1::before, #docs-content h2::before, #docs-content h3::before {
+#docs-content h1::before, #docs-content h2::before, #docs-content h3::before {
     display: block;
     content: " ";
     height: 64px;  // Give height of your fixed element 
@@ -106,12 +104,26 @@
     visibility: hidden;
 }
 
-.post-chapter {
+#docs-content center{
+    font-weight: bold;
+}
+
+.docs-chapter {
     margin-bottom: 48px;
     //overflow: hidden;
 }
 
-#post #menu-content a {
+.docs-figure {
+    background-color: white;
+    border: solid 4px rgb(64,64,64);
+    border-radius:0.5em;
+}
+
+.docs-figure img {
+    display: block;
+}
+
+#docs #menu-content a {
     display: block;
     float:left;
     clear: left;
@@ -123,15 +135,8 @@
     text-decoration: none;
 }
 
-#post #menu-content section {
+#docs #menu-content section {
     overflow-y: auto;
     overflow-x: wrap;
 }
-
-#post .post-tags {
-    margin: 0em 0.1em;
-    font-size: 1.2em;
-
-    // Disable hyperlink underline.
-    text-decoration: none;
-}
+*/

@@ -1,3 +1,129 @@
+const enumTHEME = {
+    DARK: 0,
+    LIGHT: 1
+}
+
+const enumLANG = {
+    KOREAN: 0,
+    ENGLISH: 1
+}
+
+const GetCONFIG = () => {
+    return parseInt(window.localStorage.getItem("CODE"))
+}
+
+const SetCONFIG = (code = 0) => {
+    window.localStorage.setItem("CODE", `${code}`)
+}
+
+const GetTHEME = () => {
+    return ((0b0001 & parseInt(window.localStorage.getItem("CODE"))) >> 0)
+}
+
+const SetTHEME = (theme = enumTHEME.DARK) => {
+    window.localStorage.setItem("CODE", `${(GetCONFIG() & 0b1110) | (0b0001 & (theme << 0))}`)
+}
+
+const GetLANG = () => {
+    return ((0b0010 & parseInt(window.localStorage.getItem("CODE"))) >> 1)
+}
+
+const SetLANG = (lang = enumLANG.KOREAN) => {
+    window.localStorage.setItem("CODE", `${(GetCONFIG() & 0b1101) | (0b0010 & (lang << 1))}`)
+}
+
+//========================================
+// >> LOCAL STORAGE
+//========================================
+if (isNaN(GetCONFIG())) { SetCONFIG() }
+if (window.localStorage.length != 1) {
+    let config = GetCONFIG()
+    if (config > 0xFF) { config &= 0xFF }
+    else if (config == null || isNaN(config)) { config = 0 }
+    window.localStorage.clear();
+    SetCONFIG(config);
+}
+
+//========================================
+// >> SELECT THEME
+//========================================
+if (GetTHEME() == enumTHEME.DARK) document.documentElement.setAttribute("dark", "true")
+
+//========================================
+// >> IMPORT SCRIPT
+//========================================
+switch($(`body`).attr("id"))
+{
+    case "home":
+        import("./home-config.js")
+        break;
+    case "docs":
+        import("./docs-config.js")
+        break;
+    case "post":
+        import("./post-config.js")
+        break;
+    case "archive":
+        break;
+    default:
+        break;
+}
+
+//========================================
+// >> SWITCH LANGUAGE
+//========================================
+$(`#nav-lang`).click(function() {
+    if (GetLANG() == enumLANG.ENGLISH) {
+        SetLANG(enumLANG.KOREAN)
+    } else {
+        SetLANG(enumLANG.ENGLISH)
+    }
+    location.reload();
+})
+
+//========================================
+// >> SWITCH THEME
+//========================================
+$(`#nav-theme`).click(function() {
+    if (GetTHEME() == enumTHEME.LIGHT) {
+        SetTHEME(enumTHEME.DARK)
+    } else {
+        SetTHEME(enumTHEME.LIGHT)
+    }
+    location.reload();
+})
+
+/*
+// PRE-INITIALIZATION
+let bkgdColor = (GetTHEME == enumTHEME.LIGHT) ? "rgb(255, 255, 255)" : "rgb(32, 32, 32)";   // BACKGROUND COLOR = CONDITION ? LIGHT : DARK
+let textColor = (GetTHEME == enumTHEME.LIGHT) ? "rgb(0, 0, 0)" : "rgb(255, 255, 255)";   // FONT COLOR = CONDITION ? LIGHT : DARK
+let brdrColor = (GetTHEME == enumTHEME.LIGHT) ? "rgb(80, 80, 80)" : "rgb(224, 224, 224)";
+
+bkgdColor = (GetTHEME == enumTHEME.LIGHT) ? "rgb(224, 224, 224)" : "rgb(40, 40, 40)";  // MENU COLOR = CONDITION ? LIGHT : DARK
+document.styleSheets[0].insertRule(`
+    #menu-main { 
+        background-color: ${bkgdColor}; 
+    }
+`);
+
+bkgdColor = (GetTHEME == enumTHEME.LIGHT) ? "rgb(0, 0, 0, 0)" : "rgb(128, 128, 128, 0)";  // MENU BACKGROUND = CONDITION ? LIGHT : DARK
+document.styleSheets[0].insertRule(`
+    #menu-bkgd { 
+        background-color: ${bkgdColor}; 
+    }
+`);
+
+bkgdColor = (GetTHEME == enumTHEME.LIGHT) ? "rgb(240, 240, 240)" : "rgb(24, 24, 24)";  // MENU OPTION & BLOCKQUOTE = CONDITION ? LIGHT : DARK
+textColor = (GetTHEME == enumTHEME.LIGHT) ? "rgb(64, 64, 64)" : "rgb(200, 200, 200)";
+document.styleSheets[0].insertRule(`
+    #menu-option { 
+        background-color: ${bkgdColor}; 
+    }
+`);
+*/
+
+
+/*
 //========================================
 // >> AUTO-FIT MAIN
 //========================================
@@ -43,8 +169,7 @@ const __menuSizing__ = () => {
 
     let contentHeight = document.getElementById("menu-main").offsetHeight - document.getElementById("menu-option").offsetHeight
         - parseInt(getComputedStyle(document.getElementById("menu-option")).marginTop) - parseInt(getComputedStyle(document.getElementById("menu-content")).marginBottom)
-        - (parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) > parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop)
-            ? parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) : parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop));
+        - (parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) > parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop) ? parseInt(getComputedStyle(document.getElementById("menu-option")).marginBottom) : parseInt(getComputedStyle(document.getElementById("menu-content")).marginTop));
 
     $(`#menu-content`).css("height", `${contentHeight}px`)
 };
@@ -54,27 +179,27 @@ const __menuThemeSelect__ = (theme) => {
     let button = $(`<a></a>`)
     let attrCaption, bkgdImage
     switch (theme) {
-        case "Dark":
+        case enumTHEME.DARK:
         default:
             attrCaption = "Switch to Light theme"
             bkgdImage = `url(/assets/images/logo/logo-themeLight4${theme}.png)`
             button.click(function () {
-                __LOCAL__.setItem("THEME", "Light")
+                SetTHEME(enumTHEME.LIGHT)
                 location.reload()
             })
             break;
-        case "Light":
+        case enumTHEME.LIGHT:
             attrCaption = "Switch to Dark theme"
             bkgdImage = `url(/assets/images/logo/logo-themeDark4${theme}.png)`
             button.click(function () {
-                __LOCAL__.setItem("THEME", "Dark")
+                SetTHEME(enumTHEME.DARK)
                 location.reload()
             })
             break;
     }
     button.attr("title", `${attrCaption}`).css("background-image", `${bkgdImage}`)
     $(`#menu-select`).append(button)
-}; __menuThemeSelect__(__LOCAL__.getItem("THEME"));
+}; __menuThemeSelect__(GetTHEME);
 
 // >> PREVENT DOCUMENT SCROLLING ON MENU
 // SOURCE: https://www.geeksforgeeks.org/how-to-disable-scrolling-temporarily-using-javascript/
@@ -101,7 +226,7 @@ const __menuclick__ = (event) => {
         __scrollDisable__();
         opacityMenuBkgd = 0.0; sizeMenuMain = 0; opacityMenuMain = 0.0;
         animate = setInterval(function () {
-            document.getElementById("menu").style.visibility = "visible";
+            $(`#menu`).css("visibility", "visible")
             if (opacityMenuBkgd == 7 && sizeMenuMain == MENU_HEIGHT && opacityMenuMain == 10) {
                 clearInterval(animate);
             }
@@ -121,7 +246,7 @@ const __menuclick__ = (event) => {
         animate = setInterval(function () {
             if (opacityMenuBkgd <= 0.0 && sizeMenuMain <= 0 && opacityMenuMain <= 0.0) {
                 clearInterval(animate);
-                document.getElementById("menu").style.visibility = "hidden";
+                $(`#menu`).css("visibility", "hidden")
             }
             else {
                 if (opacityMenuBkgd > 0) { opacityMenuBkgd--; }
@@ -156,7 +281,6 @@ document.onkeydown = function (e) {
 //========================================
 window.addEventListener('resize', () => {
     $(`main`).css("height", null)
-
     __initSize__ = document.body.getBoundingClientRect().height;
     if (window.innerHeight < parseInt(getComputedStyle(document.body).minHeight)) {
         if (__initSize__ <= parseInt(getComputedStyle(document.body).minHeight)) {
@@ -168,6 +292,6 @@ window.addEventListener('resize', () => {
             $(`main`).css("height", `${window.innerHeight - $(`#footer`).get(0).offsetHeight - $(`#header`).get(0).getBoundingClientRect().height}px`)
         }
     }
-
     __menuSizing__();
 });
+*/

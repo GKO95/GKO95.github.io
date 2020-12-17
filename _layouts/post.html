@@ -2,14 +2,13 @@
 layout: template
 ---
 <body id="post">
-    {%- include .header.html -%}
+    {%- include header.html -%}
     <main id="post-main">
         <div id="post-content">
             {{ content }}
-            {%- include .comment.html url=page.url -%}
+            {%- include comment.html url=page.url -%}
         </div>
     </main>
-    {%- include .footer.html -%}
-    {%- include .menu.html -%}
+    {%- include footer.html -%}
+    {%- include menu.html -%}
 </body>
-<script type="text/javascript" src="{{ '/assets/js/post-config.js' | relative_url }}"></script>

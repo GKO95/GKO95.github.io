@@ -51,12 +51,12 @@ const SwitchLanguage = () => {
     button.style.backgroundImage = "url(/assets/images/logo/logo-language.png)";
     if (__LANGUAGE__ == "en") 
     {
-        __LOCAL__.setItem("LANG", 'en');
+        SetLANG(enumLANG.ENGLISH)
         path = "./../../ko/"+category+"_"+__PAGENAME__+"/";
     }
     else if (__LANGUAGE__ == "ko")
     {
-        __LOCAL__.setItem("LANG", 'ko');
+        SetLANG(enumLANG.KOREAN)
         path = "./../../en/"+category+"_"+__PAGENAME__+"/";
     }
     button.setAttribute("href", path); button.setAttribute("title", "Swtich language");
@@ -79,7 +79,7 @@ const MenuDesign = () => {
 
     // >> VIEW RAW DOCUMENT
     button = document.createElement("A");
-    button.style.backgroundImage = `url(/assets/images/logo/logo-code4${__LOCAL__.getItem("THEME")}.png)`;
+    button.style.backgroundImage = `url(/assets/images/logo/logo-code4${GetTHEME}.png)`;
     path = "https://github.com/GKO95/GKO95.github.io/blob/master/_docs/"+__CATEGORY__.toLowerCase()+"/"+__LANGUAGE__.toLowerCase()+"/"+category+"_"+__PAGENAME__+".md";
     button.setAttribute("href", path); button.setAttribute("title", "View raw in GitHub");
     document.getElementById("menu-select").appendChild(button);
@@ -98,7 +98,7 @@ const MenuDesign = () => {
     document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.width = "50%";
 
     document.getElementById("menu-content").getElementsByTagName("SECTION")[0].style.backgroundColor = "inherit";
-    if (__LOCAL__.getItem("THEME")=='Light')
+    if (GetTHEME == enumTHEME.LIGHT)
         document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.backgroundColor = "rgb(232,232,232)";
     else
         document.getElementById("menu-content").getElementsByTagName("SECTION")[1].style.backgroundColor = "rgb(32,32,32)";
@@ -165,7 +165,7 @@ const MenuDesign = () => {
             case "H1":
                 anchor.style.float = "none";
                 anchor.style.margin = "16px 16px 8px 16px"; anchor.style.fontStyle = "bold"; anchor.style.fontSize = "1.6em";
-                anchor.style.borderBottom = (__LOCAL__.getItem("THEME") == 'Light') ? "solid black 2px" : "solid white 2px"; 
+                anchor.style.borderBottom = (GetTHEME == enumTHEME.LIGHT) ? "solid black 2px" : "solid white 2px"; 
                 break;
             case "H2":
                 anchor.style.margin = "4px 0px 4px 24px"; anchor.style.fontStyle = "normal"; anchor.style.fontSize = "1.0em";
