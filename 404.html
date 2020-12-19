@@ -5,7 +5,7 @@ layout: template
 <style type="text/css" media="screen">
 .container {
     margin: 10px auto;
-    max-width: 600px;
+    max-width: 760px;
     text-align: center;
 }
 h1 {
@@ -14,30 +14,33 @@ h1 {
     line-height: 1;
     letter-spacing: -1px;
 }
-span {
-    display: inline-block;
-    background-image:url('/assets/images/logo/logo-404.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 224px;
-
-    border-radius: 1.6em;
-
-    width:256px;
-    height:256px;
+section {
+    text-align: left;
 }
 p {
-    margin: 8px 0px;
+    font-family: "JetBrains Mono";
+    font-size: 24px;
 }
 </style>
 
 <div class="container">
-    <h1>404</h1>
-    <span></span>
-    <p style="font-family:'Consolas', 'Nanum Gothic Coding', monospace; font-size: 1.6em;"><strong>"KEEP IT CLEAN!"</strong></p>
+    <h1>HTTP 404</h1>
+    <section>{%- include terminal.html -%}</section>
     <p>The requested page could not be found.</p>
 </div>
 
 <script>
-    if (__LOCAL__.getItem("THEME") == 'Light') document.getElementsByTagName("SPAN")[0].style.backgroundColor = "rgb(34,30,31)";
+    $(`.terminal-content`).append(`
+<span>Windows PowerShell</span><br/>
+<span>Copyright (C) Microsoft Corporation. All rights reserved.<span><br/>
+<br/>
+<span>PS {{site.url}}&gt; <span style="color: #F9F1A5;">cd</span> ${$(location).attr('pathname').substring(1)}</span><br/>
+<span style="color: #E74856;">cd : Cannot find path '{{site.url}}${$(location).attr('pathname')}' because it does not exist.
+<br/>At line:1 char:1
+<br/>+ cd sd
+<br/>+ ~~~~~
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;+ CategoryInfo          : ObjectNotFound: ({{site.url}}${$(location).attr('pathname')}:String) [Set-Location], ItemNotFoundException
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;+ FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand</span>
+<br/>
+<br/><span>PS {{site.url}}&gt;<span>`)
 </script>

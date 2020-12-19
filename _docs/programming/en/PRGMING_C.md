@@ -5,7 +5,7 @@ layout: docs
 author: GKO95
 category: Programming
 title: "Programming | C"
-logo: "/assets/images/logo/logo-c.png"
+logo: "/assets/images/res/logo-c.png"
 summary: "."
 order: 0x01
 ---
@@ -43,31 +43,31 @@ An integrated development environment (IDE) is a software development program th
 ## Visual Studio
 [Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C programming, select the "Desktop development with C++" workload.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 1. Workload for C programming on Visual Studio.</center>
+![Figure 1. Workload for C programming on Visual Studio.](/assets/images/docs/programming/C/c_vs_component.png)
 
 The reason to select the C++ workload is that the MSVC compiler is mainly a C++ compiler that also compiles C language. Visual Studio does not have a workload for pure C language development.
 
 Visual Studio will start with the window shown below. To create a new project for C language, select the "Create a new project" button.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Startup window of Visual Studio.</center>
+![Figure 2. Startup window of Visual Studio.](/assets/images/docs/programming/C/c_vs_project1.png)
 
 However, Visual Studio does not have an option to create a project for C language since it is all integrated into C++ components. To create a C project, follow the procedure below:
 
 1. Select the language as C++ and choose the "Empty Project" option.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 3. Creating a C project on Visual Studio (step 1).</center>
+![Figure 3. Creating a C project on Visual Studio (step 1).](/assets/images/docs/programming/C/c_vs_project2.png)
 
 2. Designate names for the project and solution. Here, the project is a `.vcxproj` extension file that manages its source codes and compilation options, and the solution is a `.sln` extension file that can contain multiple projects. It is recommended to open the solution file on Visual Studio unless you only want to open a single project.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 4. Creating a C project on Visual Studio (step 2).</center>
+![Figure 4. Creating a C project on Visual Studio (step 2).](/assets/images/docs/programming/C/c_vs_project3.png)
 
 3. On the Solution Explorer, right-click the Source Files filter and select the `Add > New Items...` option.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 5. Creating a C project on Visual Studio (step 3).</center>
+![Figure 5. Creating a C project on Visual Studio (step 3).](/assets/images/docs/programming/C/c_vs_project4.png)
 
 4. On the Add New Item window, change the extension from `.cpp` to `.c`, which is a source code extension for C language.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_vs_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 6. Creating a C project on Visual Studio (step 4).</center>
+![Figure 6. Creating a C project on Visual Studio (step 4).](/assets/images/docs/programming/C/c_vs_project5.png)
 
 Since this is an empty project, there won't be any code written on the source code. Paste the code below to make the source code at least compilable for the C project.
 
@@ -97,25 +97,25 @@ CRT warning commonly appears when programming with C language. However, this is 
 
 Start Xcode, then create a new project by selecting `File > New > Project...`.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 7. Startup window of Xcode.</center>
+![Figure 7. Startup window of Xcode.](/assets/images/docs/programming/C/c_xcode_project1.png)
 
 There are various projects available for developing an application for Apple's product. To create a C project, follow the procedure below:
 
 1. Since the computer is macOS, select the macOS tab, then the Command Line Tool to execute a terminal-based program.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 8. Creating a C project on Xcode (step 1).</center>
+![Figure 8. Creating a C project on Xcode (step 1).](/assets/images/docs/programming/C/c_xcode_project2.png)
 
 2. Name a project in the Product Name and select the Language as C.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 9. Creating a C project on Xcode (step 2).</center>
+![Figure 9. Creating a C project on Xcode (step 2).](/assets/images/docs/programming/C/c_xcode_project3.png)
 
 3. Designate a path for the project.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 10. Creating a C project on Xcode (steo 3).</center>
+![Figure 10. Creating a C project on Xcode (steo 3).](/assets/images/docs/programming/C/c_xcode_project4.png)
 
 4. The left panel shows there is the `main.c` source file under the `Experiment` folder with minimum codes required to run the program.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_xcode_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 11. Creating a C project on Xcode (step 4).</center>
+![Figure 11. Creating a C project on Xcode (step 4).](/assets/images/docs/programming/C/c_xcode_project5.png)
 
 Xcode can run a C language program in two different ways: debugging mode and without debugging mode. Hotkey for both are `⌘+R` and whether to debug or not is configured on project setting. Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
 
@@ -124,25 +124,25 @@ Linux OS has GCC (GNU Compiler Collection) compiler installed by default but wit
 
 This section uses the code from *Figure 11. Creating a C project on Xcode (step 4)* to the `main.c` source file to show how to compile on Linux OS.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" style="display:block" src="./../../../assets/images/docs/programming/C/c_gcc_project1.png" width="100%"></div><center style="font-weight: bold;">Figure 12. Example code for GCC compiler.</center>
+![Figure 12. Example code for GCC compiler.](/assets/images/docs/programming/C/c_gcc_project1.png)
 
 Suppose the `main.c` source file is at `~/Workspace/C/Experiment` directory.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_gcc_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 13. Creating C language program using GCC compiler (step 1).</center>
+![Figure 13. Creating C language program using GCC compiler (step 1).](/assets/images/docs/programming/C/c_gcc_project2.png)
 
 Run a terminal and move to the directory where the source file is; change the current directory with the `cd` command. Enter the following command to compile the source code with GCC compiler.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_gcc_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 14. Creating C language program using GCC compiler (step 2).</center>
+![Figure 14. Creating C language program using GCC compiler (step 2).](/assets/images/docs/programming/C/c_gcc_project3.png)
 
 The command is ordering to compile the `main.c` source file and outputs (`-o`) the `main` object file. It is one of the simple commands of GCC compiler, and linking external libraries is also possible by adding more options.
 
 The directory now has an object file called `main`, compiled from the source code.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_gcc_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 15. Creating C language program using GCC compiler (step 3).</center>
+![Figure 15. Creating C language program using GCC compiler (step 3).](/assets/images/docs/programming/C/c_gcc_project4.png)
 
 To execute an object file from a terminal, place `./` followed by the file name.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/C/c_gcc_project5.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 16. Creating C language program using GCC compiler (step 4).</center>
+![Figure 16. Creating C language program using GCC compiler (step 4).](/assets/images/docs/programming/C/c_gcc_project5.png)
 
 Here, the command `./` represents the current directory. Without this command, a terminal wouldn't be able to find the `main` file unless the directory is specified by the environment variable.
 
@@ -506,14 +506,9 @@ Hello
 World!
 ```
 
-| SYNTAX | DESCRIPTION    |
-| ------ | -------------- |
-| `\n`   | New line       |
-| `\t`   | Horizontal tab |
-| `\\`   | Backslash      |
-| `\b`   | Backspace      |
-| `\'`   | Single quote   |
-| `\"`   | Double quote   |
+| New line | Horizontal tab | Backslash | Backspace | Single quote | Double quote |
+|:--------:|:--------------:|:---------:|:---------:|:------------:|:------------:|
+| `\n`     | `\t`           | `\\`      | `\b`      | `\'`         | `\"`         |
 
 # **C: CONDITIONAL AND LOOP**
 Conditional and iteration (or loop) statements are two of the most commonly used in programming. The "statement" in programming represents a code that executes or processes data. This chapter introduces a list of conditional and iteration statements in C language programming.

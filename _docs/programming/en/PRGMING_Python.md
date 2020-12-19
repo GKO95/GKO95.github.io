@@ -5,7 +5,7 @@ layout: docs
 author: GKO95
 category: Programming
 title: "Programming | Python"
-logo: "/assets/images/logo/logo-python.png"
+logo: "/assets/images/res/logo-python.png"
 order: 0x00
 ---
 # **PYTHON: INTRO**
@@ -40,7 +40,7 @@ Developers should be cautious when selecting an interpreter as the version impac
 ## Download Interpreter
 Install the Python interpreter after selecting the version. There are several options for downloading interpreters.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Python/python_interpreter_download.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 1. Download list of interpreter installers in Python 3 official website.</center>
+![Figure 1. Download list of interpreter installers in Python 3 official website.](/assets/images/docs/programming/Python/python_interpreter_download.png)
 
 The website provides 64-bit and 32-bit interpreter for Windows OS (ex. Windows 10, Windows 8.1, Windows 7, etc.), namely `x86-64` and `x86`. To find out the operating system and architecture of the computer, go to the following path on File Explorer.
 
@@ -63,11 +63,11 @@ In other words, the second and third option is the same, but whether to download
 ## Install Interpreter
 Executing the downloaded interpreter installer shows the following window:
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Python/python_interpreter_install.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Startup of Python 3 installer program.</center>
+![Figure 2. Startup of Python 3 installer program.](/assets/images/docs/programming/Python/python_interpreter_install.png)
 
 "Add Python 3.7 to PATH" checkbox decides whether to setup environment variables, which allows Python execution on command prompt. The following figure is an execution of Python on the command prompt.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Python/python_interpreter_cmd.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 3. Python 3 execution on Windows command prompt.</center>
+![Figure 3. Python 3 execution on Windows command prompt.](/assets/images/docs/programming/Python/python_interpreter_cmd.png)
 
 Environment variable setting is not necessary when Python is the only software to be used, but it is essential if to use it with external software or libraries. Therefore, this document strongly recommends enabling the checkbox. Even it the Python interpreter was installed without an environment variable setting, it can manually setup later.
 
@@ -79,7 +79,7 @@ An integrated development environment (IDE) is a software development program th
 ### Visual Studio Code
 [Visual Studio Code](https://code.visualstudio.com/download) (VS Code) is a free source code editor developed by Microsoft. Although technically not an IDE, it can still play a role as an IDE. All that requires are an extension tool that can load the interpreter to VS Code.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Python/python_vscode_extension.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 4. Install Python extension on VS Code.</center>
+![Figure 4. Install Python extension on VS Code.](/assets/images/docs/programming/Python/python_vscode_extension.png)
 
 The Python extension allows VS Code to use a Python interpreter; meaning, it can be used to build and debug like an IDE. To install the extension, press the `F1` key and select `Extensions: Install Extensions`. Search `Python` and install the extension by clicking the green `Install` button shown as above.
 
@@ -452,14 +452,9 @@ Hello
 World!
 ```
 
-| SYNTAX | DESCRIPTION    |
-|--------|----------------|
-| `\n`   | New line       |
-| `\t`   | Horizontal tab |
-| `\\`   | Backslash      |
-| `\b`   | Backspace      |
-| `\'`   | Single quote   |
-| `\"`   | Double quote   |
+| New line | Horizontal tab | Backslash | Backspace | Single quote | Double quote |
+|:--------:|:--------------:|:---------:|:---------:|:------------:|:------------:|
+| `\n`     | `\t`           | `\\`      | `\b`      | `\'`         | `\"`         |
 
 Not only does it escape from string to perform operations, but the escape character can make a single long line of code into short consecutive multi-line code.
 

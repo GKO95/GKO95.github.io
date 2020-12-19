@@ -1,0 +1,15 @@
+<nav>
+    <div id="nav-left">
+        <a class="nav-logo" id="nav-home" href="{{ '/' | relative_url }}" title="Home" style="background-image:url('/assets/images/res/icon-home.png');"></a>
+        <a class="nav-logo" id="nav-lang" title="Switch Language" style="background-image:url('/assets/images/res/icon-language.png');"></a>
+    </div>
+    {% if page.title != nil %}
+    <div id="nav-center">
+        <span>{{ page.title }}</span>
+    </div>
+    {% endif %}
+    <div id="nav-right">
+        <a class="nav-logo" id="nav-theme" title="Switch Theme" style="background-image:url('/assets/images/res/icon-theme.png');"></a>
+        <a class="nav-logo" id="nav-github" href="https://github.com/GKO95" title="GitHub" style="background-image:url('/assets/images/res/icon-github.png');"></a>
+    </div>
+</nav>

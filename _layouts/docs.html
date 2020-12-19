@@ -2,15 +2,12 @@
 layout: template
 ---
 <body id="docs">
-    {%- include .header.html -%}
+    {%- include header.html -%}
     <main id="docs-main">
         <div id="docs-content">
             {{ content }}
-            {%- include .comment.html url=page.url -%}
+            {%- include comment.html url=page.url -%}
         </div>
+        {%- include footer.html -%}
     </main>
-    {%- include .footer.html -%}
-    {%- include .menu.html -%}
 </body>
-<script>const __PAGENAME__ = "{{page.name}}"; const __CATEGORY__ = "{{page.category}}";</script>
-<script type="text/javascript" src="{{ '/assets/js/docs-config.js' | relative_url }}"></script>

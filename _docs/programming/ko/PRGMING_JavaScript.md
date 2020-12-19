@@ -5,7 +5,7 @@ layout: docs
 author: GKO95
 category: Programming
 title: "프로그래밍 | 자바스크립트"
-logo: "/assets/images/logo/logo-js.png"
+logo: "/assets/images/res/logo-js.png"
 summary: "."
 order: 0x04
 ---
@@ -105,7 +105,7 @@ VS Code에서 자바스크립트를 실행하기 위해서는 확장도구가 �
 
 종합적으로 아래와 같이 파일들이 준비되어야 한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/JavaScript/js_vs_workspace.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 1. VS Code의 자바스크립트 작업 환경.</center>
+![그림 1. VS Code의 자바스크립트 작업 환경.](/assets/images/docs/programming/JavaScript/js_vs_workspace.png)
 
 현 상태에서 `F5` 버튼을 누르면 자바스크립트를 디벙깅 모드로 실행, 그리고 `CTRL+F5` 버튼을 누르면 디버깅 없이 실행된다. 여기서 디버깅 모드란, 코드를 단계별로 실행하여 데이터가 어떻게 변하는지 확인할 수 있도록 한다.
 
@@ -344,14 +344,9 @@ let text = `This is after ES${variable}!`
 ## 탈출 문자
 탈출 문자(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 아래는 탈출 문자 중에서 흔히 사용되는 줄바꿈(`\n`)이다.
 
-| 구문 | 설명           |
-|:----:| -------------- |
-| `\n` | 줄바꿈       |
-| `\t` | 탭 |
-| `\\` | 백슬래시      |
-| `\b` | 백스페이스      |
-| `\'` | 작은 따옴표    |
-| `\"` | 큰 따옴표      |
+| 줄바꿈 | 탭 | 백슬래시 | 백스페이스 | 작은 따옴표 | 큰 따옴표 |
+|:----:|:----:|:----:|:---:|:----:|:----:|
+| `\n` | `\t` | `\\` | `\b` | `\'` | `\"` |
 
 # **자바스크립트: 조건 및 루프**
 조건문 및 반복문(혹은 루프문)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 자바스크립트 프로그래밍의 조건에 따라 실행하는 조건문(conditional statement)과 반복적으로 실행하는 반복문(loop statement)을 소개한다.
@@ -1021,7 +1016,7 @@ var variable = new Date();
 # **자바스크립트: DOM**
 자바스크립트는 HTML 및 CSS와 함께 사용하여 다양한 기능을 제공하는 데 기여한다. 선언형 언어인 HTML은 아래와 같이 트리 구조(tree structure)의 문서 객체 모델(Document Object Model; DOM)로 문서를 표현한다.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/JavaScript\js_html_dom.png" style="display:block" width="100%"></div><center style="font-weight: bold;">그림 2. 문서 객체 모델 <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">위키백과</a></i></sub></center>
+![그림 2. 문서 객체 모델 <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">위키백과</a></i></sub>](/assets/images/docs/programming/JavaScript\js_html_dom.png)
 
 자바스크립트는 HTML의 DOM에 접근하여 요소를 추가, 제거, 그리고 변경할 수 있어 동적이고 유연한 웹사이트를 표현할 수 있도록 한다. 트리 구조의 각 블록은 HTML의 요소를 의미하며, 이는 DOM에서 노드(node)라고 부른다.
 

@@ -3,64 +3,41 @@ layout: template
 ---
 <body id="home">
     <!-- HEADER -->
-    {%- include .header.html -%}
+    {%- include header.html -%}
     <!-- MAIN -->
     <main id="home-main">
-        <div id="home-upper">
-            <div id="home-register">
-                <div class="home-shift" id="shift-left"><span>&#x25c0;</span></div>
-                <div class="home-shift" id="shift-right"><span>&#x25b6;</span></div>
-                <!-- PROGRAMMING -->
-                <ul class="home-byte">
-                    {% assign programmings = site.docs | where: "category", "Programming" | where: "lang", "en" | sort:"order" %}
-                    {% for programming in programmings %}
-                    <a class="home-bit" href="{{ programming.url }}" title="{{ programming.title }}">
-                        <li>
-                            <span style="background-image:url('{{ programming.logo }}')"></span>
-                        </li>
-                    </a>
-                    {% endfor %}
-                </ul>
-                <!-- LIBRARY -->
-                <ul class="home-byte">
-                    {% assign libraries = site.docs | where: "category", "Library" | where: "lang", "en" | sort:"order" %}
-                    {% for library in libraries %}
-                    <a class="home-bit" href="{{ library.url }}" title="{{ library.title }}">
-                        <li>
-                            <span style="background-image:url('{{ library.logo }}')"></span>
-                        </li>
-                    </a>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <div id="home-lower">
-            <!-- ANNOUNCEMENT -->
-            <div id="home-announcement">
-                <div class="home-alert" style="visibility: hidden;"></div>
+        <!--ANNOUNCEMENT-->
+        <div id="home-announce" style="display: none;">
+            <div id="home-announce-notice">
                 {{ content }}
             </div>
-            <!-- POSTS -->
-            <div id="home-bulletin">
-                <ul>
-                    {% assign blogs = site.blog | reverse %}
-                    {% for blog in blogs limit:6 %}
-                    <a href="{{ blog.url }}">
-                        <li>
-                            <span>{{ blog.title }}</span>
-                        </li>
-                    </a>
-                    {% endfor %}
-                </ul>
-                <a href="./archive.html">
-                    <div id="home-archive"></div>
-                </a>
-            </div>
         </div>
-    </main>
-    <!-- FOOTER -->
-    {%- include .footer.html -%}
-    <!-- MENU -->
-    {%- include .menu.html -%}
+        <!--ANNOUNCE-->
+        <div id="home-blog">
+            <a class="home-blog-post" href="archive">
+                <span id="home-blog-post-more">Blog Archive</span>
+            </a>
+        </div>
+        <!--DOCS-->
+        <div id="home-docs">
+            {%- assign listDocs = "" -%}
+            {%- for document in site.docs -%}
+                {%- assign listDocs = listDocs | append: " " | append: document.category -%}
+            {%- endfor -%}
+                {%- assign arrDocs = listDocs | split: " " -%}
+                {%- assign setDocs = arrDocs | uniq | sort | join: " " | split: " " -%}
+            {%- for group in setDocs -%}
+                <div class="home-docs-group">
+                    <section class="home-docs-header">{{group}}</section>
+                    {%- assign docs = site.docs | where: "category", group | sort: "order" -%}
+                    <ul>
+                    {%- for doc in docs -%}
+                        <a href="{{ doc.url }}" title="{{ doc.title }}"><li class="home-docs-tile" style="background-image:url('{{ doc.logo }}')"></li></a>
+                    {%- endfor -%}
+                    </ul>
+                </div>
+            {%- endfor -%}
+        </div>
+        <!--FOOTER-->
+    {%- include footer.html -%}
 </body>
-<script type="text/javascript" src="{{ '/assets/js/home-config.js' | relative_url }}"></script>

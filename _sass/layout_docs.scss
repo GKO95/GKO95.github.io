@@ -1,0 +1,112 @@
+//================================
+// DOCS
+//================================
+#docs-main, #post-main {
+    display: block;
+    width: calc(100% - (48px * 2));
+    max-width: calc(1200px - (32px * 2));
+    margin: {
+        left: auto;
+        right: auto;
+    }
+    padding: 0 32px;
+
+    background-color: inherit;
+
+    h1 {
+        border-bottom-style: solid;
+        font-size: 2.4em;
+        margin-bottom: 0.6em;
+    }
+
+    h2 {
+        font-size: 1.6em;
+        margin-bottom: 0.5em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+        padding-left: 0.8em;
+        margin-bottom: 0.5em;
+    }
+}
+
+#docs-content, #post-content {
+    img {
+        border: {
+            radius: 8px;
+            style: solid;
+            width: 4px;
+        }
+    }
+
+    table {
+        width: fit-content;
+        max-width: 100%;
+        margin: auto;
+        border: {
+            style: solid;
+            width: 4px;
+            collapse: collapse;
+        }
+        font-size: large;
+    }
+    
+    th {
+        border: {
+            style: solid;
+            width: 1px;
+            bottom: {
+                style: double;
+                width: 4px;
+            }
+        }
+        padding: 0.2em;
+    }
+    
+    td {
+        border: {
+            style: solid;
+            width: 1px;
+        }
+        padding: 0.4em;
+    }
+}
+
+#TOC {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font: {
+        family: $MONOSPACE;
+        size: 56px;
+    }
+    color: #808080;
+
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    margin: 0px;
+    border: {
+        style: solid;
+        radius: 25%;
+        color: #404040;
+        width: 2px;
+    }
+    float: auto;
+    background: {
+        color: #101010;
+        image: url(/assets/images/res/icon-menu.png);
+        repeat: no-repeat;
+        position: center;
+        size: 32px;
+    }
+    cursor: pointer;
+}

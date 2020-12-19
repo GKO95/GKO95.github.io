@@ -5,7 +5,7 @@ layout: docs
 author: GKO95
 category: Programming
 title: "Programming | C#"
-logo: "/assets/images/logo/logo-csharp.png"
+logo: "/assets/images/res/logo-csharp.png"
 summary: "."
 order: 0x03
 ---
@@ -24,7 +24,7 @@ The framework is constituted by CoreFX (FCL) and CoreCLR (CRL). The following ta
 | Framework Class Library (FCL) | Provides a standard library for developing the .NET application. |
 | Common Language Runtime (CLR) | Compiles and executes the .NET application using the JIT compiler.       |
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_wiki_netframework.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 1. .NET Common Language Infrastructure (CLI)<sub><i>Ref: <a href="https://commons.wikimedia.org/wiki/File:Overview_of_the_Common_Language_Infrastructure.svg">Wikipedia</a></i></sub></center>
+![Figure 1. .NET Common Language Infrastructure (CLI)<sub><i>Ref: <a href="https://commons.wikimedia.org/wiki/File:Overview_of_the_Common_Language_Infrastructure.svg">Wikipedia</a></i></sub>](/assets/images/docs/programming/Csharp/csharp_wiki_netframework.png)
 
 .NET implements Common Language Infrastructure (CLI) that is standardized by ISO and ECMA. The standardization specifies that CLI should allow multiple high-level programming languages and support cross-platform despite having different architectures.
 
@@ -88,25 +88,25 @@ An integrated development environment (IDE) is a software development program th
 ## Visual Studio
 [Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C++ programming, select the ".NET desktop development" workload.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_component.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 2. Workload for C# programming on Visual Studio.</center>
+![Figure 2. Workload for C# programming on Visual Studio.](/assets/images/docs/programming/Csharp/csharp_vs_component.png)
 
 Visual Studio will start with the window shown below. To create a new project for C# language, select the "Create a new project" button.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_project1.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 3. Startup window of Visual Studio.</center>
+![Figure 3. Startup window of Visual Studio.](/assets/images/docs/programming/Csharp/csharp_vs_project1.png)
 
 Since C# can create various applications, there are many different kinds of projects available from Visual Studio as well. To create a C# project, follow the procedure below:
 
 1. Select the language as C# and choose the "Console App (.NET Core)" option.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_project2.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 4. Creating a C# project on Visual Studio (step 1).</center>
+![Figure 4. Creating a C# project on Visual Studio (step 1).](/assets/images/docs/programming/Csharp/csharp_vs_project2.png)
 
 2. Designate names for the project and solution. Here, the project is a `.vcxproj` extension file that manages its source codes and compilation options, and the solution is a `.sln` extension file that can contain multiple projects. It is recommended to open the solution file on Visual Studio unless you only want to open a single project.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_project3.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 5. Creating a C# project on Visual Studio (step 2).</center>
+![Figure 5. Creating a C# project on Visual Studio (step 2).](/assets/images/docs/programming/Csharp/csharp_vs_project3.png)
 
 3. Use the project automatically prepared by Visual Studio.
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/Csharp/csharp_vs_project4.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 6. Creating a C# project on Visual Studio (step 3).</center>
+![Figure 6. Creating a C# project on Visual Studio (step 3).](/assets/images/docs/programming/Csharp/csharp_vs_project4.png)
 
 The three-step procedure above for creating a C++ console application is the simplest method. To create an empty C++ project, refer to the installation section on the *PRGMING_C* document.
 
@@ -291,14 +291,9 @@ Hello
 World!
 ```
 
-| SYNTAX | DESCRIPTION    |
-| ------ | -------------- |
-| `\n`   | New line       |
-| `\t`   | Horizontal tab |
-| `\\`   | Backslash      |
-| `\b`   | Backspace      |
-| `\'`   | Single quote   |
-| `\"`   | Double quote   |
+| New line | Horizontal tab | Backslash | Backspace | Single quote | Double quote |
+|:--------:|:--------------:|:---------:|:---------:|:------------:|:------------:|
+| `\n`     | `\t`           | `\\`      | `\b`      | `\'`         | `\"`         |
 
 ## Data Type
 A data type is one of the crucial factors which determines the type and byte size of the data. A well-implemented data type can make a program efficient on both memory and processing time. C# language has several numbers of built-in data type as follows:

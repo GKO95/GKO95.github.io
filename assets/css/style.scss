@@ -1,3 +1,10 @@
 ---
 ---
-@import "main";
+@charset "utf-8";
+$MONOSPACE: 'JetBrains Mono', 'Nanum Gothic Coding', monospace;
+@import
+    "layout_template",
+    "layout_home",
+    "layout_docs",
+    "layout_archive"
+;

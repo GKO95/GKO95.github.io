@@ -3,7 +3,6 @@ Welcome to GKO95's GitHub Pages, my personal GitHub Pages for blogging and archi
 
 ## Features
 Here are some of the featured you can find on this GitHub Pages:
-* ~~Pure JavaScript functionality~~
 * Theme selection - Light & Dark mode
 * Language selection - English & Korean
 * Comment using Google Forms and jQuery

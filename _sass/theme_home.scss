@@ -1,0 +1,37 @@
+html {
+    // LIGHT THEME
+    #home-docs {
+        background-color: $HFLBkgdColor;
+    }
+
+&:not(.style-scope)[dark] {
+    // DARK THEME
+    #home-docs {
+        background-color: $HFDBkgdColor;
+
+        .home-docs-group {
+
+            border-color: #A0A0A0;
+        }
+
+        .home-docs-header {
+            background-color: #202020;
+        }
+
+        .home-docs-tile {
+            background-color: #404040;
+        }
+    }
+
+    #home-blog-notice {
+        ul, ol {
+            border-color: transparent;
+        }
+    }
+
+    .home-blog-post {
+        background-color: #101010;
+        border-color: #303030;
+        color: #FFFFFF;
+    }
+}}
