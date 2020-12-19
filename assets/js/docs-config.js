@@ -1,4 +1,15 @@
 //========================================
+// SWITCH LANGUAGE
+//========================================
+$(`#nav-lang`).click(function() {
+    if (GetLANG() == enumLANG.ENGLISH) {
+        window.location = $(location).attr('pathname').replace("/ko/","/en/")
+    } else {
+        window.location = $(location).attr('pathname').replace("/en/","/ko/")
+    }
+})
+
+//========================================
 // >> MAIN: IMAGE WRAPPER FOR HTML
 //========================================
 $(`main [id*="-content"] img`).each(function() {
