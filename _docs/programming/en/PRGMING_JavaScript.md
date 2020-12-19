@@ -5,7 +5,7 @@ layout: docs
 author: GKO95
 category: Programming
 title: "Programming | JavaScript"
-logo: "/assets/images/logo/logo-js.png"
+logo: "/assets/images/res/logo-js.png"
 summary: "."
 order: 0x04
 ---
@@ -105,7 +105,7 @@ Add the following configuration to the JSON file: `"file": "${workspaceFolder}/i
 
 Eventually, a JavaScript environment on VS Code would look like this:
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/JavaScript/js_vs_workspace.png" style="display:block" width="100%"></div><center style="font-weight: bold;">Figure 1. JavaScript workspace environment on VS Code.</center>
+![Figure 1. JavaScript workspace environment on VS Code.](/assets/images/docs/programming/JavaScript/js_vs_workspace.png)
 
 There are two different methods when running JavaScript on VS Code: Run with debugging (`F5`) and run without debugging (`Ctrl+F5`). Use the debugging mode when the program encounters an error to identify the cause, but run without debugging when executing in general.
 
@@ -351,14 +351,9 @@ let text = `This is after ES${variable}!`
 ## Escape Character
 Escape character `\` is used to escape from a sequence of characters and execute certain operations within text-based data. In the introduction on string data type, `\n` is used to change to a new line.
 
-| SYNTAX | DESCRIPTION    |
-|--------|----------------|
-| `\n`   | New line       |
-| `\t`   | Horizontal tab |
-| `\\`   | Backslash      |
-| `\b`   | Backspace      |
-| `\'`   | Single quote   |
-| `\"`   | Double quote   |
+| New line | Horizontal tab | Backslash | Backspace | Single quote | Double quote |
+|:--------:|:--------------:|:---------:|:---------:|:------------:|:------------:|
+| `\n`     | `\t`           | `\\`      | `\b`      | `\'`         | `\"`         |
 
 # **JAVASCRIPT: CONDITIONAL AND LOOP**
 Conditional and iteration (or loop) statements are two of the most commonly used in programming. The "statement" in programming represents a code that executes or processes data. This chapter introduces a list of conditional and iteration statements in Python programming.
@@ -1017,7 +1012,7 @@ The object type also has methods for date and time calculation.
 # **JAVASCRIPT: DOM**
 JavaScript contributes to various dynamic features for webpages when used with HTML and CSS. HTML declarative language presents its document as a tree-structured Document Object Model (DOM). 
 
-<div style="background-color:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em;"><img class="-tv-ignore-access" src="./../../../assets/images/docs/programming/JavaScript\js_html_dom.png" style="display:block" width="100%"></div><center style="font-weight:bold">Figure 2. Document Object Model<sub><i>ref: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">Wikipedia.org</a></i></sub></center>
+![Figure 2. Document Object Model<sub><i>ref: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">Wikipedia.org</a></i></sub>](/assets/images/docs/programming/JavaScript\js_html_dom.png)
 
 JavaScript can present a dynamic and flexible website by adding, removing, and modifying an element via accessing the DOM of HTML. Each block in the tree-structure is called a *node* in the DOM and represents an HTML element.
 

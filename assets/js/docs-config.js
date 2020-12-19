@@ -11,58 +11,13 @@ const __mOPTION__  = document.getElementById("menu-option");
 //========================================
 // >> MAIN: IMAGE WRAPPER FOR HTML
 //========================================
-const ImageWrapper = () => {
+$(`#docs-content img`).each(function() {
+    $(this).css({
+        "max-width": `calc(${$(`#docs-content`).width()}px - ${$(`#docs-content img`).css("border-width")} * 2)`
+    }).parent().css({"text-align": "center", "width": "100%"})
+    $(`<center style="font-weight: bold;">${$(this).attr("alt")}</center>`).insertAfter(this)
+})
 
-    for (let img of __CONTENT__.getElementsByTagName("IMG"))
-    {
-        img.setAttribute("src", "./."+img.getAttribute("src"));
-    }
-
-}; ImageWrapper()
-
-//========================================
-// >> PLUGIN: SELECT CATEGORY
-//========================================
-const SelectCategory = () => {
-
-    let category;
-    switch(__CATEGORY__)
-    {
-        case "Programming":
-            category = "PRGMING";
-            break;
-        case "Library":
-            category = "LIBRARY";
-            break;
-    }
-
-    return category;
-}
-
-//========================================
-// >> PLUGIN: SWITCH LANGUAGE
-//========================================
-const SwitchLanguage = () => {
-
-    let category = SelectCategory();
-
-    // >> SWITCH LANGUAGE
-    let button = document.createElement("A");
-    button.style.backgroundImage = "url(/assets/images/logo/logo-language.png)";
-    if (__LANGUAGE__ == "en") 
-    {
-        SetLANG(enumLANG.ENGLISH)
-        path = "./../../ko/"+category+"_"+__PAGENAME__+"/";
-    }
-    else if (__LANGUAGE__ == "ko")
-    {
-        SetLANG(enumLANG.KOREAN)
-        path = "./../../en/"+category+"_"+__PAGENAME__+"/";
-    }
-    button.setAttribute("href", path); button.setAttribute("title", "Swtich language");
-    document.getElementById("navigation-logo").appendChild(button);
-
-}; SwitchLanguage();
 
 //========================================
 // >> MENU: CONFIGURATION
@@ -79,7 +34,7 @@ const MenuDesign = () => {
 
     // >> VIEW RAW DOCUMENT
     button = document.createElement("A");
-    button.style.backgroundImage = `url(/assets/images/logo/logo-code4${GetTHEME}.png)`;
+    button.style.backgroundImage = `url(/assets/images/res/logo-code4${GetTHEME}.png)`;
     path = "https://github.com/GKO95/GKO95.github.io/blob/master/_docs/"+__CATEGORY__.toLowerCase()+"/"+__LANGUAGE__.toLowerCase()+"/"+category+"_"+__PAGENAME__+".md";
     button.setAttribute("href", path); button.setAttribute("title", "View raw in GitHub");
     document.getElementById("menu-select").appendChild(button);
@@ -177,11 +132,4 @@ const MenuDesign = () => {
         document.getElementById("menu-content").getElementsByClassName(sector)[0].appendChild(anchor);
     }
 
-}; MenuDesign();
-
-//========================================
-// >> FUNCTION: RESIZE WINDOW
-//========================================
-window.addEventListener('resize', event => {
-
-});
+}; //MenuDesign();

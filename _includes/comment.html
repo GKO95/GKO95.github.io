@@ -35,13 +35,14 @@
 		if (comments == null || comments === "") {
 			if (visibleComments.length == 0 && $("#no-comments").length == 0) {
 				let newItem = $(`
-					<div id="no-comments" class="comment-info">
+					<div id="no-comments" class="comment-info" style="display: none;">
 						<p>{%- case page.lang -%}{%- when "ko" -%}해당 게시글에는 아직 댓글이 없습니다.
 							{%- else -%}There are currently no comments on this article.{%- endcase -%}
 						</p>
 					</div>
 				`)
 				$("#comment-section").append(newItem)
+				$(`#no-comments`).slideDown("slow")
 			}
 			return;
 		}
@@ -84,6 +85,7 @@
 				}));
 			});
 			$("#comment-section").append(newItem)
+			$(`#comment-view`).slideDown("slow")
 		}
 		
     	//iterate over each comment that came from Google Sheets

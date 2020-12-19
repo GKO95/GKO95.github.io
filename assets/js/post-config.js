@@ -9,6 +9,16 @@ const __mCONTENT__ = document.getElementById("menu-content");
 const __mOPTION__  = document.getElementById("menu-option");
 
 //========================================
+// >> MAIN: IMAGE WRAPPER FOR HTML
+//========================================
+$(`#post-content img`).each(function() {
+    $(this).css({
+        "max-width": `calc(${$(`#post-content`).width()}px - ${$(`#post-content img`).css("border-width")} * 2)`,
+    }).parent().css("text-align", "center")
+    $(`<center style="font-weight: bold;">${$(this).attr("alt")}</center>`).insertAfter(this)
+})
+
+//========================================
 // >> FUNCTION: RESIZE IMAGES
 //========================================
 const ImageResize = () => {
@@ -38,13 +48,6 @@ const ImageResize = () => {
 document.addEventListener("readystatechange", function() {
 if (document.readyState == "complete") {
 
-    ImageResize();
+    //ImageResize();
 
 }});
-
-//========================================
-// >> FUNCTION: RESIZE WINDOW
-//========================================
-window.addEventListener('resize', event => {
-
-});

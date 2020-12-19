@@ -6,13 +6,36 @@ layout: template
     {%- include header.html -%}
     <!-- MAIN -->
     <main id="home-main">
-        <!--ANNOUNCEMENT-->
-        <div id="home-announcement">
-            {{ content }}
+        <!--BLOG-->
+        <div id="home-blog" style="display: none;">
+            <div id="home-blog-notice">
+                {{ content }}
+            </div>
+            <!--
+            {%- assign blogs = site.blog | reverse -%}
+            {%- if blogs.size > 0 -%}
+            <div id="home-blog-posts">
+                <ul>
+                    {%- for blog in blogs limit:3 -%}
+                    <a class="home-blog-post" href="{{ blog.url }}">
+                        <li><span>{{ blog.title }}</span></li>
+                    </a>
+                    {% endfor %}
+                    {%- if blogs.size > 3 -%}
+                -->
+                    <a class="home-blog-post" href="archive.html">
+                        <li><span id="home-blog-post-more">Blog Archive</span></li>
+                    </a>
+                <!--
+                    {%- endif -%}
+                </ul>
+            </div>
+            {%- endif -%}
+            -->
         </div>
         <!--DOCS-->
         <div id="home-docs">
-            {% assign listDocs = "" %}
+            {%- assign listDocs = "" -%}
             {%- for document in site.docs -%}
                 {%- assign listDocs = listDocs | append: " " | append: document.category -%}
             {%- endfor -%}
@@ -29,28 +52,6 @@ layout: template
                     </ul>
                 </div>
             {%- endfor -%}
-        </div>
-        <!--BLOG-->
-        <div id="home-blog">
-            <!--<div id="home-blog-about">
-                <span id="home-blog-icon"></span>
-            </div>-->
-            <div id="home-blog-posts">
-                {%- assign blogs = site.blog | reverse -%}
-                {%- if blogs.size > 0 -%}
-                <ul>
-                    {%- for blog in blogs limit:6 -%}
-                    <a href="{{ blog.url }}">
-                        <li class="home-blog-post">
-                            <span>{{ blog.title }}</span>
-                        </li>
-                    </a>
-                    {% endfor %}
-                </ul>
-                {%- else -%}
-                <p id="home-blog-none">No post found!</p>
-                {%- endif -%}
-            </div>
         </div>
         <!--FOOTER-->
     {%- include footer.html -%}

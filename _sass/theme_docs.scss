@@ -1,0 +1,37 @@
+//==============================================================================================================
+//>> DEFAULT
+//==============================================================================================================
+html {
+    // LIGHT THEME
+
+
+&:not(.style-scope)[dark] {
+    // DARK THEME
+    #docs-content, #post-content {
+        img {
+            border-color: #808080;
+            background-color: #FFFFFF;
+        }
+
+        table {
+            border-color: #808080;
+        }
+        
+        th {
+            border-color: #808080;
+            border-bottom-color: #808080;
+            background-color: #303030;
+        }
+        
+        td {
+            border-color: #C0C0C0;
+        }
+
+        tr {
+            &:nth-child(odd) {
+                background-color: #181818;
+            }
+        }
+    }
+
+}}

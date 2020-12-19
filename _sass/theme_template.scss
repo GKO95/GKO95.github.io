@@ -59,6 +59,13 @@ html {
         background-color: rgb(48, 48, 48); 
     }
 
+    .highlighter-rouge {
+        code {
+            background-color: transparent;
+            color: white;
+        }
+    }
+
     a {
         color: rgb(192, 192, 192);
     }    

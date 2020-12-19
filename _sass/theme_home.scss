@@ -23,14 +23,15 @@ html {
         }
     }
 
-    #home-blog {
-
-        #home-blog-about {
-            background-color: $HFDBkgdColor;
+    #home-blog-notice {
+        ul, ol {
+            border-color: transparent;
         }
+    }
 
-        #home-blog-posts {
-            
-        }
+    .home-blog-post {
+        background-color: #101010;
+        border-color: #303030;
+        color: #FFFFFF;
     }
 }}
