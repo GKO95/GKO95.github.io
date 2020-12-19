@@ -978,7 +978,7 @@ int wmain(int argc, wchar_t **argv)
 ### `WinMain()` 함수
 > *참조: [Microsoft Docs Win32 설명서 - WinMain() 함수 (영문)](https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain)*
 
-`WinMain()` 함수는 Win32나 MFC와 같은 GUI 프레임워크를 사용하는 어플리케이션의 시작점이다.
+`WinMain()` 함수는 Win32나 [MFC](/docs/library/ko/LIBRARY_MFC/)와 같은 GUI 프레임워크를 사용하는 어플리케이션의 시작점이다.
 
 ```cpp
 int WinMain(HINSTANCE 	hInstance,
