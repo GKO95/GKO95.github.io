@@ -3,14 +3,14 @@
 //========================================
 if (GetLANG() == enumLANG.ENGLISH)
 {   // ENGLISH
-    $(`#home-blog-notice > ul`).remove()
-    $(`#home-blog-notice > ol li:not(:first-child)`).remove()
+    $(`#home-announce-notice > ul`).remove()
+    $(`#home-announce-notice > ol li:not(:first-child)`).remove()
     $(`#home-docs [href*="/ko/"]`).remove()
 }
 else
 {   // KOREAN
-    $(`#home-blog-notice > ol`).remove()
-    $(`#home-blog-notice > ul li:not(:first-child)`).remove()
+    $(`#home-announce-notice > ol`).remove()
+    $(`#home-announce-notice > ul li:not(:first-child)`).remove()
     $(`#home-docs [href*="/en/"]`).remove()
 
     $(`.home-docs-group`).each(function() {
@@ -22,18 +22,25 @@ else
 }
 
 //========================================
-// BLOG: SLIDE DOWN TRANSITION
+// ANNOUNCEMENT: SLIDE DOWN TRANSITION
 //========================================
-
 document.addEventListener("readystatechange", function () {
-    $(`#home-blog`).slideDown(600, "swing")
-    //$(`#home-blog`).slideDown(600, "swing", function() {
-    //    $(`.home-blog-post`).first().delay(200).slideDown(100, "linear", function nextPost() {
-    //        $(this).next(`.home-blog-post`).slideDown(100, "linear", nextPost)
-    //    })
-    //})
+    if (document.readyState == "complete") {
+        $(`#home-announce`).slideDown(600, "swing")
+        //$(`#home-blog`).slideDown(600, "swing", function() {
+        //    $(`.home-blog-post`).first().delay(200).slideDown(100, "linear", function nextPost() {
+        //        $(this).next(`.home-blog-post`).slideDown(100, "linear", nextPost)
+        //    })
+        //})
+    }
 })
 
+//========================================
+// ANNOUNCEMENT: SPACING ADJUSTMENT
+//========================================
+if ($(`#home-announce li`).length > 0) {
+    $(`#home-announce`).css("padding-bottom", "16px")
+}
 
 //========================================
 // DOCS: MINIMUM 3-COLUMN

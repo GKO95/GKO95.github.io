@@ -1,45 +1,30 @@
-#archive-content {
-    display: block;
+//================================
+// ARCHIVE
+//================================
+html {
+    // LIGHT THEME
+    #archive-tags {
+        
+    }
 
-    max-width: calc(1200px - (30px * 2));
-    margin-left: auto;
-    margin-right: auto;
+    #archive-list a {
+        color: #000000;
+    }
 
-    padding-left: 30px;
-    padding-right: 30px;
+&:not(.style-scope)[dark] {
+    // DARK THEME
+    #archive-tags {
+        border-color: #404040;
+        background-color: #101010;
 
-    background-color: inherit;
-}
+        code {
+            color: #FFFFFF;
+            background-color: #303030;
+        }
+    }
 
-#archive-tags {
-    padding: 0 1.6em 1.6em 1.6em;
-    /*border-style: inset;*/
-    border-width: 8px;
-    border-style: solid;
-    border-radius: 1.0em;
-}
+    #archive-list a {
+        color: #FFFFFF;
+    }
 
-#archive-tags code {
-    font-size: 1.6em;
-    font-style: normal;
-    font-weight: bold;
-}
-#archive .archive-tag {
-    margin: 0em 0.4em;
-    cursor: pointer;
-
-    /* Disable selection. */
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-
-    /* Disable hyperlink underline. */
-    text-decoration: none;
-}
-
-#archive #archive-list
-{
-    font-size: 1.2em;
-}
+}}

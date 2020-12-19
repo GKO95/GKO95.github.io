@@ -6,32 +6,17 @@ layout: template
     {%- include header.html -%}
     <!-- MAIN -->
     <main id="home-main">
-        <!--BLOG-->
-        <div id="home-blog" style="display: none;">
-            <div id="home-blog-notice">
+        <!--ANNOUNCEMENT-->
+        <div id="home-announce" style="display: none;">
+            <div id="home-announce-notice">
                 {{ content }}
             </div>
-            <!--
-            {%- assign blogs = site.blog | reverse -%}
-            {%- if blogs.size > 0 -%}
-            <div id="home-blog-posts">
-                <ul>
-                    {%- for blog in blogs limit:3 -%}
-                    <a class="home-blog-post" href="{{ blog.url }}">
-                        <li><span>{{ blog.title }}</span></li>
-                    </a>
-                    {% endfor %}
-                    {%- if blogs.size > 3 -%}
-                -->
-                    <a class="home-blog-post" href="archive.html">
-                        <li><span id="home-blog-post-more">Blog Archive</span></li>
-                    </a>
-                <!--
-                    {%- endif -%}
-                </ul>
-            </div>
-            {%- endif -%}
-            -->
+        </div>
+        <!--ANNOUNCE-->
+        <div id="home-blog">
+            <a class="home-blog-post" href="archive">
+                <span id="home-blog-post-more">Blog Archive</span>
+            </a>
         </div>
         <!--DOCS-->
         <div id="home-docs">

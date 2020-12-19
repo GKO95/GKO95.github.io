@@ -1,7 +1,7 @@
 //================================
 // HOME
 //================================
-#home-docs, #home-blog, #home-about {
+#home-announce, #home-docs, #home-blog, #home-about {
     @include HFBkgdStyle;
 }
 #home {
@@ -14,33 +14,19 @@
     }
 }
 
-#home-blog {
-    width: fit-content;
-    max-width: calc(100% - (48px * 2));
-    display: flex;
-    flex-direction: column;
-    padding: {
-        top: 8px;
-        bottom: 8px;
-    }
-
-    box-sizing: border-box;
-    border: {
-        style: none;
-        width: 0 8px;
-    }
-
-    #home-blog-notice {
+#home-announce {
+    #home-announce-notice {
         text-align: center;
         margin: 8px auto;
         padding: 0 1.6em;
+        width: fit-content;
     
         ul, ol {
             width: fit-content;
             margin: 0;
             border: {
                 style: double;
-                width: 0px 16px;
+                width: 0px 0px;
             }
             font: {
                 family: $TITLEFONT;
@@ -53,29 +39,26 @@
             padding: 12px 32px;
         }
     }
+}
 
-    #home-blog-posts {
-
-        ul{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin: 0;
-        }
-    }
+#home-blog {
+    @include HFBkgdStyle;
+    max-width: calc(100% - (48px * 2));
+    display: flex;
+    flex-direction: column;
 
     .home-blog-post {
         font: {
             family: $TITLEFONT;
             size: 24px;
+            weight: bold;
         }
         border: {
             radius: 16px;
             style: solid;
             width: 4px;
         }
-        width: 80%;
-        margin: 8px auto;
+        width: calc(100% - 28px * 2);
         padding: 8px 24px;
         text-align: center;
         cursor: pointer;

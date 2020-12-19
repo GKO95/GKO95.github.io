@@ -24,7 +24,9 @@ $MONOSPACE: 'JetBrains Mono';
 $TITLEFONT: Verdana, Geneva, Tahoma, sans-serif;
 
 body {
+    position: relative;
     visibility: hidden;
+    height:100%;
 
     margin: 0px;
     padding: 0px;
@@ -37,8 +39,10 @@ body {
         width: 800px;
     }
 
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: larger;
+    font: {
+        family: 'Noto Sans KR', sans-serif;
+        size: larger;
+    }
 }
 
 header, footer {
@@ -129,6 +133,10 @@ header {
     }
 }
 
+main {
+    margin-bottom: 34px;
+}
+
 footer {
     text-align: center;
     border-top: {
@@ -141,6 +149,9 @@ footer {
         family: $MONOSPACE;
     }
     margin-top: 16px;
+    position: absolute;
+    bottom: 0;
+    left: 16px;
 }
 
 h1, h2, h3, h4 {

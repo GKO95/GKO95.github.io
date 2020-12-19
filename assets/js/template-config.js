@@ -58,10 +58,8 @@ switch($(`body`).attr("id"))
         import("./home-config.js")
         break;
     case "docs":
-        import("./docs-config.js")
-        break;
     case "post":
-        import("./post-config.js")
+        import("./docs-config.js")
         break;
     case "archive":
         import("./archive-config.js")
@@ -95,55 +93,17 @@ $(`#nav-theme`).click(function() {
 })
 
 //========================================
+// >> AUTO-FIT MAIN
+//========================================
+if ( $(window).height() > $(`body`).height()) {
+    $(`html`).height("100%")
+}
+
+//========================================
 // >> SHOW CONTENT UPON RENDERED
 //========================================
 document.addEventListener("readystatechange", function () {
-    $(`body`).css("visibility", "visible")
-});
-
-/*
-//========================================
-// >> AUTO-FIT MAIN
-//========================================
-var __initSize__;
-document.addEventListener("readystatechange", function () {
     if (document.readyState == "complete") {
-
-        __initSize__ = document.body.getBoundingClientRect().height;
-        //alert(__initSize__ + " : " + window.innerHeight);
-        if (window.innerHeight < parseInt(getComputedStyle(document.body).minHeight)) {
-            if (__initSize__ <= parseInt(getComputedStyle(document.body).minHeight)) {
-                $(`main`).css("height", `${parseInt(getComputedStyle(document.body).minHeight) - $(`#footer`).get(0).offsetHeight - $(`#header`).get(0).getBoundingClientRect().height}px`)
-            }
-        }
-        else {
-            if (__initSize__ <= parseInt(getComputedStyle(document.body).minHeight) && __initSize__ < window.innerHeight) {
-                $(`main`).css("height", `${window.innerHeight - $(`#footer`).get(0).offsetHeight - $(`#header`).get(0).getBoundingClientRect().height}px`)
-            }
-        }
-
-        document.getElementsByTagName("MAIN")[0].style.visibility = "visible";
-        document.getElementsByTagName("FOOTER")[0].style.visibility = "visible";
-        //alert(__initSize__ + " : " +document.body.getBoundingClientRect().height);
+        $(`body`).css("visibility", "visible")
     }
-});
-
-//========================================
-// >> FUNCTION: RESIZE WINDOW
-//========================================
-window.addEventListener('resize', () => {
-    $(`main`).css("height", null)
-    __initSize__ = document.body.getBoundingClientRect().height;
-    if (window.innerHeight < parseInt(getComputedStyle(document.body).minHeight)) {
-        if (__initSize__ <= parseInt(getComputedStyle(document.body).minHeight)) {
-            $(`main`).css("height", `${parseInt(getComputedStyle(document.body).minHeight) - $(`#footer`).get(0).offsetHeight - $(`#header`).get(0).getBoundingClientRect().height}px`)
-        }
-    }
-    else {
-        if (__initSize__ <= parseInt(getComputedStyle(document.body).minHeight) && __initSize__ < window.innerHeight) {
-            $(`main`).css("height", `${window.innerHeight - $(`#footer`).get(0).offsetHeight - $(`#header`).get(0).getBoundingClientRect().height}px`)
-        }
-    }
-    __menuSizing__();
-});
-*/
+}); 
