@@ -4,12 +4,12 @@
 #docs-main, #post-main {
     display: block;
     width: calc(100% - (48px * 2));
-    max-width: calc(1200px - (32px * 2));
+    max-width: calc(1200px - (24px * 2));
     margin: {
         left: auto;
         right: auto;
     }
-    padding: 0 32px;
+    padding: 0 24px;
 
     background-color: inherit;
 
@@ -73,40 +73,29 @@
     }
 }
 
-#TOC {
-    width: 64px;
-    height: 64px;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    font: {
-        family: $MONOSPACE;
-        size: 56px;
-    }
-    color: #808080;
+//================================
+// DOCS: TOC
+//================================
+#docs #toc-content {
 
+    padding: 0px 16px;
     user-select: none;
     -ms-user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
 
-    margin: 0px;
-    border: {
-        style: solid;
-        radius: 25%;
-        color: #404040;
-        width: 2px;
+    h1 {
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
     }
-    float: auto;
-    background: {
-        color: #101010;
-        image: url(/assets/images/res/icon-menu.png);
-        repeat: no-repeat;
-        position: center;
-        size: 32px;
+
+    h2 {
+
     }
-    cursor: pointer;
+
+    h3 {
+        padding-left: 32px;
+    }
+
 }

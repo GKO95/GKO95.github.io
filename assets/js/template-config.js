@@ -100,6 +100,32 @@ if ( $(window).height() > $(`body`).height()) {
 }
 
 //========================================
+// >> MENU: CONFIGURATION
+//========================================
+$(`#toc-button`).show("slow").click(function() {
+    $(this).hide("fast")
+    $(`#toc-container`).fadeIn()
+    // $(`#toc-container`).on('scroll touchmove mousewheel', function(e){
+    //     e.preventDefault(); 
+    //     e.stopPropagation();
+    //     return false;
+    // })
+})
+
+const closeTOC = () => {
+    // $('#toc-container').one('scroll', false).one('mousewheel', false).one('touchmove',false)
+    $('#toc-container').fadeOut("fast")
+    $(`#toc-button`).show("fast")
+}
+
+$(`#toc-close`).click(closeTOC)
+$(document).keydown(function(e) {
+    if (e.keyCode == 27 && $(`#toc-container`).is(":visible")) {
+        closeTOC();
+    }
+})
+
+//========================================
 // >> SHOW CONTENT UPON RENDERED
 //========================================
 document.addEventListener("readystatechange", function () {
