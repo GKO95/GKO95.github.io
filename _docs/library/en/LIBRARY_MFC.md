@@ -6,6 +6,5 @@ author: GKO95
 category: Library
 title: "Library | MFC"
 logo: "/assets/images/res/logo-mfc.png"
-summary: "."
-order: 0x00
+order: 0x10
 ---

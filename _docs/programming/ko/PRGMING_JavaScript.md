@@ -6,7 +6,6 @@ author: GKO95
 category: Programming
 title: "프로그래밍 | 자바스크립트"
 logo: "/assets/images/res/logo-js.png"
-summary: "."
 order: 0x04
 ---
 # **자바스크립트: 소개**

@@ -6,7 +6,6 @@ author: GKO95
 category: Programming
 title: "Programming | JavaScript"
 logo: "/assets/images/res/logo-js.png"
-summary: "."
 order: 0x04
 ---
 # **JAVASCRIPT: INTRO**

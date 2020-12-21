@@ -6,7 +6,6 @@ author: GKO95
 category: Programming
 title: "Programming | C++"
 logo: "/assets/images/res/logo-cpp.png"
-summary: "."
 order: 0x02
 ---
 # **C++: INTRO**

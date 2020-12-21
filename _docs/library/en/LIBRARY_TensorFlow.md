@@ -1,12 +1,11 @@
 ---
-name: TensorFlow
+name: TensorFlow2
 lang: en
 layout: docs
 author: GKO95
 category: Library
 title: "Library | TensorFlow"
 logo: "/assets/images/res/logo-tf2.png"
-summary: "."
-order: 0x02
+order: 0x12
 ---
-# **TENSORFLOW: INTRO**
+

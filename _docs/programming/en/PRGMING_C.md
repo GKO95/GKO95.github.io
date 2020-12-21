@@ -6,7 +6,6 @@ author: GKO95
 category: Programming
 title: "Programming | C"
 logo: "/assets/images/res/logo-c.png"
-summary: "."
 order: 0x01
 ---
 # **C: INTRO**

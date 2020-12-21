@@ -6,7 +6,6 @@ author: GKO95
 category: Programming
 title: "프로그래밍 | C#"
 logo: "/assets/images/res/logo-csharp.png"
-summary: "."
 order: 0x03
 ---
 # **C#: 소개**
