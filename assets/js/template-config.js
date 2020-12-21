@@ -105,19 +105,17 @@ if ( $(window).height() > $(`body`).height()) {
 $(`#toc-button`).show("slow").click(function() {
     $(this).hide("fast")
     $(`#toc-container`).fadeIn()
-    // $(`#toc-container`).on('scroll touchmove mousewheel', function(e){
-    //     e.preventDefault(); 
-    //     e.stopPropagation();
-    //     return false;
-    // })
+
 })
 
+$(`#toc-main`).click(function(event) {event.stopPropagation();})
 const closeTOC = () => {
     // $('#toc-container').one('scroll', false).one('mousewheel', false).one('touchmove',false)
     $('#toc-container').fadeOut("fast")
     $(`#toc-button`).show("fast")
 }
 
+$(`#toc-container`).click(closeTOC)
 $(`#toc-close`).click(closeTOC)
 $(document).keydown(function(e) {
     if (e.keyCode == 27 && $(`#toc-container`).is(":visible")) {

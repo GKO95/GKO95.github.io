@@ -43,7 +43,7 @@ An integrated development environment (IDE) is a software development program th
 ## Visual Studio
 [Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C++ programming, select the "Desktop development with C++" workload.
 
-![/assets/images/docs/programming/Cpp/cpp_vs_component.png](Figure 1. Workload for C++ programming on Visual Studio.)
+![Figure 1. Workload for C++ programming on Visual Studio.](/assets/images/docs/programming/Cpp/cpp_vs_component.png)
 
 Visual Studio will start with the window shown below. To create a new project for C++ language, select the "Create a new project" button.
 

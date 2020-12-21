@@ -27,13 +27,18 @@ $(window).resize(imageSize)
 //========================================
 // >> TOC
 //========================================
-$(`#toc-options-region`).append(`
-    <a class="toc-option" id="toc-source" title="View source" style="background-image: url(/assets/images/res/icon-source.png)"></a>
-`).click(function() {
+$(`#toc-options-region`).append(`<a class="toc-option" id="toc-source" title="View source" style="background-image: url(/assets/images/res/icon-source.png)"></a>`)
+$(`#toc-source`).click(function() {
     window.open(`https://github.com/GKO95/GKO95.github.io/blob/master${location.pathname.replace("/","/_").slice(0,-1)}.md`)
 })
 
 $(`main [id*="-content"] > :header`).each(function() {
-    let headerTag =  $(this).prop("tagName")
-    $(`#toc-content`).append(`<${headerTag}><span style="cursor: pointer;">${$(this).html()}</span></${headerTag}>`)
+    let headerTag = $(this).prop("tagName")
+    let headerURL = $(this).attr("id")
+    let element = $(`<${headerTag}><span style="cursor: pointer;">${$(this).html()}</span></${headerTag}>`).click(function() {
+        location.href = `#${headerURL}`
+        $('#toc-container').fadeOut("fast")
+        $(`#toc-button`).show("fast")
+    })
+    $(`#toc-content`).append(element)
 })
