@@ -19,7 +19,7 @@ bundle info --path minima
 
 터미널에서는 minima 테마의 코드가 어디에 위치하는지 알려줍니다. 해당 경로로 이동하면 다음과 같이 폴더와 파일이 구성된 것을 확인할 수 있습니다.
 
-![20201206ko.cjs-01](/assets/images/blog/ko.designing-jekyll-site/20201206ko.cjs-01.png)
+![20201206ko.cjs-01](/assets/img/blog/ko.designing-jekyll-site/20201206ko.cjs-01.png)
 
 여기서 명시해야 할 점음 밑줄(`_`)로 시작하는 폴더 및 파일들은 HTML로 변환될 때 나타나지 않으며 오로지 Jekyll에서만 다루어집니다. 이와 마찬가지로 이전 게시글에서 소개한 `_config.yml` 파일과 `_site` 폴더도 Jekyll 관리용으로만 사용되어 HTML 사이트로 변환될 때에는 찾아볼 수 없습니다. 
 
@@ -66,11 +66,11 @@ HTML 테마 디자인에 사용되는 스타일들을 담는 폴더입니다. �
 ## Jekyll 테마 변경
 기존 테마에서 변경하고 싶은 내용이 있으면 해당 HTML을 가져와 Jekyll 폴더 안에 넣어 수정하면 됩니다. 예를 들어 HTML 페이지 하단부, 즉 `footer.html`을 변경하고 싶다고 합시다. 그러면 아래와 같이 `/_includes/footer.html`을 Jekyll 폴더에 추가하면 됩니다.
 
-![20201206ko.cjs-02](/assets/images/blog/ko.designing-jekyll-site/20201206ko.cjs-02.png)
+![20201206ko.cjs-02](/assets/img/blog/ko.designing-jekyll-site/20201206ko.cjs-02.png)
 
 현재 `footer.html`에는 아무런 코드가 작성되지 않은 빈 파일입니다. 만일 minima 테마의 코드가 아닌 Jekyll 폴더의 코드가 적용되었다면 HTML 페이지 하단부에는 빈 공간이 나타나야 합니다. 이를 확인하기 위해 `bundle exec jekyll serve` 명령어를 터미널에 입력하면 다음과 같이 나타납니다.
 
-![20201206ko.cjs-03](/assets/images/blog/ko.designing-jekyll-site/20201206ko.cjs-03.png)
+![20201206ko.cjs-03](/assets/img/blog/ko.designing-jekyll-site/20201206ko.cjs-03.png)
 
 이를 통해 Jekyll 폴더에서 동일한 이름의 코드를 작성하면 기존 테마의 내용을 오버라이트(overwrite), 즉 덮어쓸수 있다는 점을 확인할 수 있었습니다. 이를 기반으로 사용자는 원하는 테마를 가져와서 일부분만 개개인 취향에 맞게 간단히 수정할 수 있으며, 구성요소만이 아닌 레이아웃과 스타일시트, 그리고 리소스 또한 변경이 가능합니다.
 

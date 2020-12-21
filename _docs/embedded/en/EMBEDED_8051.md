@@ -5,6 +5,6 @@ layout: docs
 author: GKO95
 category: Embedded
 title: "Embedded | MCS-51"
-logo: "/assets/images/res/logo-8051.png"
+logo: "/assets/img/res/logo-8051.png"
 order: 0x20
 ---

@@ -11,7 +11,7 @@ tags: GitHub_Pages Jekyll
 ## Jekyll 폴더 구조
 이전 게시글에서 설명한 Jekyll 생성 방법을 그대로 따랐으면 아래와 같은 폴더와 파일로 이루어진 것을 볼 수 있습니다.
 
-![20201205ko.cjs-01](/assets/images/blog/ko.configuring-jekyll-site/20201205ko.cjs-01.png)
+![20201205ko.cjs-01](/assets/img/blog/ko.configuring-jekyll-site/20201205ko.cjs-01.png)
 
 위에 보이는 파일들은 다음과 같은 역할을 합니다:
 
@@ -30,7 +30,7 @@ tags: GitHub_Pages Jekyll
 ### `_posts` 폴더
 블로그 형식 게시글을 담는 폴더입니다. Jekyll 사이트를 생성하였으면 기본적으로 게시글 하나가 해당 폴더 안에 들어있으며, 이는 HTML에서는 아래와 같이 보여집니다.
 
-![20201205ko.cjs-02](/assets/images/blog/ko.configuring-jekyll-site/20201205ko.cjs-02.png)
+![20201205ko.cjs-02](/assets/img/blog/ko.configuring-jekyll-site/20201205ko.cjs-02.png)
 
 이를 바탕으로 Jekyll을 처음 접하는 사용자들은 `_posts` 폴더에 게시글을 올리려고 하지만 대부분 실패합니다. 왜냐하면 직접 작성한 마크다운이 보이지 않기 때문입니다. 이는 `_posts` 폴더가 가지는 고질적인 문제로 *마크다운 파일명을 날짜로 시작*해야만 나타납니다.
 

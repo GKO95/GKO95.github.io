@@ -27,7 +27,7 @@ $(window).resize(imageSize)
 //========================================
 // >> TOC
 //========================================
-$(`#toc-options-region`).append(`<a class="toc-option" id="toc-source" title="View source" style="background-image: url(/assets/images/res/icon-source.png)"></a>`)
+$(`#toc-options-region`).append(`<a class="toc-option" id="toc-source" title="View source" style="background-image: url(/assets/img/res/icon-source.png)"></a>`)
 $(`#toc-source`).click(function() {
     window.open(`https://github.com/GKO95/GKO95.github.io/blob/master${location.pathname.replace("/","/_").slice(0,-1)}.md`)
 })
