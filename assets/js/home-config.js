@@ -27,11 +27,6 @@ else
 document.addEventListener("readystatechange", function () {
     if (document.readyState == "complete") {
         $(`#home-announce`).slideDown(600, "swing")
-        //$(`#home-blog`).slideDown(600, "swing", function() {
-        //    $(`.home-blog-post`).first().delay(200).slideDown(100, "linear", function nextPost() {
-        //        $(this).next(`.home-blog-post`).slideDown(100, "linear", nextPost)
-        //    })
-        //})
     }
 })
 

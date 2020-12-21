@@ -188,9 +188,6 @@
 
 	<section id="comment-header">
 		<h4>{%- case page.lang -%}{%- when "ko" -%}댓글쓰기{%- else -%}Comments{%- endcase -%}</h4>
-		<span>{%- case page.lang -%}
-			{%- when "ko" -%}마지막 편집:&nbsp;{%- else -%}Last edited:&nbsp;{%- endcase -%}
-			{{ page.last_modified_at | date: '%Y-%m-%d %H:%M:%S' }}&nbsp;KST</span>
 	</section>
 
 	<div class="comments">
