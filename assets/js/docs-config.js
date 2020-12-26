@@ -35,10 +35,10 @@ $(`#toc-source`).click(function() {
 $(`main [id*="-content"] > :header`).each(function() {
     let headerTag = $(this).prop("tagName")
     let headerURL = $(this).attr("id")
-    let element = $(`<${headerTag}><span style="cursor: pointer;">${$(this).html()}</span></${headerTag}>`).click(function() {
+    let headerTxt = $(`<span style="cursor: pointer;">${$(this).html()}</span>`).click(function() {
         location.href = `#${headerURL}`
         $('#toc-container').fadeOut("fast")
         $(`#toc-button`).show("fast")
     })
-    $(`#toc-content`).append(element)
+    $(`#toc-content`).append($(`<${headerTag}></${headerTag}>`).append(headerTxt))
 })

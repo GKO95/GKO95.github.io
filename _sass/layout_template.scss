@@ -171,6 +171,7 @@ code {
     font-family: $MONOSPACE;
     border-radius: 0.2em;
     padding: 0 0.2em;
+    word-break: break-all;
 }
 
 blockquote {
@@ -204,6 +205,18 @@ blockquote {
     }
     code {
         padding: 0px;
+    }
+}
+
+//==============================================================================================================
+//>> MATHJAX
+//==============================================================================================================
+.mjx-chtml, .MathJax_CHTML {
+    .MJXc-TeX-unknown-R
+    {
+        font-family: 'GulimChe';
+        font-weight: bold;
+        text-rendering: optimizeLegibility;
     }
 }
 
