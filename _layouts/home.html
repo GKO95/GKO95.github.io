@@ -25,7 +25,7 @@ layout: template
                 {%- assign listDocs = listDocs | append: " " | append: document.category -%}
             {%- endfor -%}
                 {%- assign arrDocs = listDocs | split: " " -%}
-                {%- assign setDocs = arrDocs | uniq | sort | join: " " | split: " " -%}
+                {%- assign setDocs = arrDocs | uniq | sort | join: " " | split: " " | reverse -%}
             {%- for group in setDocs -%}
                 <div class="home-docs-group">
                     <section class="home-docs-header">{{group}}</section>

@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'JetBrains Mono';
-    src: url('../fonts/JetBrainsMonoNL-Regular.ttf') format('truetype');
+    src: url('../font/JetBrainsMonoNL-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-variant-ligatures: normal;
@@ -171,6 +171,7 @@ code {
     font-family: $MONOSPACE;
     border-radius: 0.2em;
     padding: 0 0.2em;
+    word-break: break-all;
 }
 
 blockquote {
@@ -208,6 +209,18 @@ blockquote {
 }
 
 //==============================================================================================================
+//>> MATHJAX
+//==============================================================================================================
+.mjx-chtml, .MathJax_CHTML {
+    .MJXc-TeX-unknown-R
+    {
+        font-family: 'GulimChe';
+        font-weight: bold;
+        text-rendering: optimizeLegibility;
+    }
+}
+
+//==============================================================================================================
 //>> TERMINAL
 //==============================================================================================================
 .terminal {
@@ -217,7 +230,7 @@ blockquote {
 }
 
 .terminal-border {
-    background-image: url(/assets/images/res/border-terminal.png);
+    background-image: url(/assets/img/res/border-terminal.png);
     background-repeat: no-repeat;
     background-color: #333333;
     height: 36px;
@@ -310,7 +323,7 @@ blockquote {
 
 #toc-close {
     background: {
-        image: url(/assets/images/res/icon-close.png);
+        image: url(/assets/img/res/icon-close.png);
         size: 40px;
     }
 }

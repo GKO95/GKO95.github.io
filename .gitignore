@@ -9,4 +9,4 @@ _site/
 vendor/
 
 # Ignore original images of the thumbnail
-assets/images/res/.xlogo
+assets/img/res/.xlogo

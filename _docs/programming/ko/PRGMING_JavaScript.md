@@ -5,8 +5,7 @@ layout: docs
 author: GKO95
 category: Programming
 title: "프로그래밍 | 자바스크립트"
-logo: "/assets/images/res/logo-js.png"
-summary: "."
+logo: "/assets/img/res/logo-js.png"
 order: 0x04
 ---
 # **자바스크립트: 소개**
@@ -105,7 +104,7 @@ VS Code에서 자바스크립트를 실행하기 위해서는 확장도구가 �
 
 종합적으로 아래와 같이 파일들이 준비되어야 한다.
 
-![그림 1. VS Code의 자바스크립트 작업 환경.](/assets/images/docs/programming/JavaScript/js_vs_workspace.png)
+![그림 1. VS Code의 자바스크립트 작업 환경.](/assets/img/docs/programming/JavaScript/js_vs_workspace.png)
 
 현 상태에서 `F5` 버튼을 누르면 자바스크립트를 디벙깅 모드로 실행, 그리고 `CTRL+F5` 버튼을 누르면 디버깅 없이 실행된다. 여기서 디버깅 모드란, 코드를 단계별로 실행하여 데이터가 어떻게 변하는지 확인할 수 있도록 한다.
 
@@ -1016,7 +1015,7 @@ var variable = new Date();
 # **자바스크립트: DOM**
 자바스크립트는 HTML 및 CSS와 함께 사용하여 다양한 기능을 제공하는 데 기여한다. 선언형 언어인 HTML은 아래와 같이 트리 구조(tree structure)의 문서 객체 모델(Document Object Model; DOM)로 문서를 표현한다.
 
-![그림 2. 문서 객체 모델 <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">위키백과</a></i></sub>](/assets/images/docs/programming/JavaScript\js_html_dom.png)
+![그림 2. 문서 객체 모델 <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">위키백과</a></i></sub>](/assets/img/docs/programming/JavaScript\js_html_dom.png)
 
 자바스크립트는 HTML의 DOM에 접근하여 요소를 추가, 제거, 그리고 변경할 수 있어 동적이고 유연한 웹사이트를 표현할 수 있도록 한다. 트리 구조의 각 블록은 HTML의 요소를 의미하며, 이는 DOM에서 노드(node)라고 부른다.
 

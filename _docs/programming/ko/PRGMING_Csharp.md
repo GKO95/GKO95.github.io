@@ -5,8 +5,7 @@ layout: docs
 author: GKO95
 category: Programming
 title: "프로그래밍 | C#"
-logo: "/assets/images/res/logo-csharp.png"
-summary: "."
+logo: "/assets/img/res/logo-csharp.png"
 order: 0x03
 ---
 # **C#: 소개**
@@ -24,7 +23,7 @@ C# (한국어:씨샵) 프로그래밍 언어는 자바(Java) 언어를 대응하
 | 프레임워크 클래스 라이브러리 (FCL) | .NET 프로그램을 개발하는데 필요한 표준 라이브러리를 제공한다. |
 | 공통 언어 런타임 (CLR) | JIT 컴파일러를 통해 .NET 프로그램을 컴파일 및 실행한다.      |
 
-![그림 1.NET 공통 언어 기반 (CLI) <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Overview_of_the_Common_Language_Infrastructure.svg">위키백과</a></i></sub>](/assets/images/docs/programming/Csharp/csharp_wiki_netframework.png)
+![그림 1.NET 공통 언어 기반 (CLI) <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Overview_of_the_Common_Language_Infrastructure.svg">위키백과</a></i></sub>](/assets/img/docs/programming/Csharp/csharp_wiki_netframework.png)
 
 .NET은 국제표준기구 ISO와 ECMA에서 표준으로 채택된 공통 언어 기반(Common Language Infrasturcture; CLI)이 적용되어 있다. 해당 표준에 의하면 CLI는 운영체제 및 아키텍쳐가 다르더라도 크로스 플랫폼(cross-platform)을 지원해야 하며 여러 고급 프로그래밍 언어을 사용할 수 있어야 한다고 명시되어 있다.
 
@@ -88,27 +87,27 @@ namespace PROJECT
 ## 비주얼 스튜디오
 [비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 윈도우 OS의 대표적인 IDE이며 .NET을 제공한다. 비주얼 스튜디오는 총 세 가지의 에디션이 존재하며, 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. 그 중에서 C# 프로그래밍 언어를 위해 ".NET desktop development"를 선택한다.
 
-![그림 2. 비주얼 스튜디오 C# 프로그래밍을 위한 구성요소.](/assets/images/docs/programming/Csharp/csharp_vs_component.png)
+![그림 2. 비주얼 스튜디오 C# 프로그래밍을 위한 구성요소.](/assets/img/docs/programming/Csharp/csharp_vs_component.png)
 
 만일 한국어 지원을 원한다면 "Language packs" 탭에서 한국어를 함께 선택하면 된다.
 
 비주얼 스튜디오를 실행하면 아래와 같은 시작화면이 나타난다. 새로운 프로젝트를 생성하려면 오른쪽 하단의 "Create a new project" 버튼을 클릭한다
 
-![그림 3. 비주얼 스튜디오 시작화면.](/assets/images/docs/programming/Csharp/csharp_vs_project1.png)
+![그림 3. 비주얼 스튜디오 시작화면.](/assets/img/docs/programming/Csharp/csharp_vs_project1.png)
 
 C#로 만들 수 있는 프로그램은 다양하여 비주얼 스튜디오에서 선택할 수 있는 프로젝트 종류도 여러 가지가 있다. C# 언어 프로젝트 생성을 위해서는 아래의 절차를 따른다:
 
 1. 프로그래밍 언어를 C#로 선택하여 "Console App (.NET Core)"을 클릭한다.
 
-![그림 4. 비주얼 스튜디오 C# 프로젝트 생성 (1단계).](/assets/images/docs/programming/Csharp/csharp_vs_project2.png)
+![그림 4. 비주얼 스튜디오 C# 프로젝트 생성 (1단계).](/assets/img/docs/programming/Csharp/csharp_vs_project2.png)
 
 2. 프로젝트 및 솔루션 이름을 선정한다. 여기서 프로젝트란, 소스 코드와 컴파일러 설정 등의 실질적인 코딩 내용을 관리하는 `.csproj` 확장자 파일이며, 솔루션은 여러 프로젝트 파일을 하나의 폴더처럼 담는 `.sln` 파일이다. 비주얼 스튜디오에서 프로젝트는 `.sln` 파일로 열기를 권장한다.
 
-![그림 5. 비주얼 스튜디오 C# 프로젝트 생성 (2단계).](/assets/images/docs/programming/Csharp/csharp_vs_project3.png)
+![그림 5. 비주얼 스튜디오 C# 프로젝트 생성 (2단계).](/assets/img/docs/programming/Csharp/csharp_vs_project3.png)
 
 3. 비주얼 스튜디오에서 알아서 준비한 프로젝트를 그대로 사용한다.
 
-![그림 6. 비주얼 스튜디오 C# 프로젝트 생성 (3단계).](/assets/images/docs/programming/Csharp/csharp_vs_project4.png)
+![그림 6. 비주얼 스튜디오 C# 프로젝트 생성 (3단계).](/assets/img/docs/programming/Csharp/csharp_vs_project4.png)
 
 위의 3단계 절차는 콘솔 어플리케이션 프로젝트를 생성하는 가장 간단한 방법이다. 만일 아무것도 없는 빈 프로젝트에서 생성하기를 원하면 *PRGMING_C* 문서의 설치 항목을 참조한다.
 
