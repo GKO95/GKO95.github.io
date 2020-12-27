@@ -5,10 +5,11 @@ layout: docs
 author: GKO95
 category: Embedded
 title: "임베디드 | MCS-51"
-logo: "/assets/img/res/logo-8051.png"
+logo: "/assets/img/res/logo-8051.png"    
 mathjax: true
 order: 0x20
 ---
+{% include expand.html %}
 # **MCS-51: 소개**
 > *참조: [http://www.8052mcu.com/](http://www.8052mcu.com/)*
 

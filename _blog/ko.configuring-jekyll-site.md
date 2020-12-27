@@ -5,10 +5,9 @@ title: "GitHub Pages를 위한 Jekyll 설정하기"
 date: 2020-12-05 00:00:00 + 0900
 tags: GitHub_Pages Jekyll
 ---
-# GitHub Pages를 위한 Jekyll 설정하기
 이전 *["GitHub Pages를 위한 Jekyll 생성하기"](/blog/ko.creating-jekyll-site/)* 게시글에서는 Jeykll을 사용하여 GitHub Pages를 생성하는 방법을 설명하였습니다. 하지만 Jekyll을 처음으로 접한 대다수의 사용자는 원하는 내용을 어디서 그리고 어떻게 추가하거나 수정해야 하는지 모릅니다. 결국 의욕이 떨어져 생성한 Jekyll을 방치하는 대학교 후배를 보기도 하였습니다. 이러한 문제점을 인식하고 이번 내용은 생성된 Jekyll 사이트의 이해와 활용도를 향상시키기 위한 구조 및 설정 방법에 대하여 설명합니다. 
 
-## Jekyll 폴더 구조
+# Jekyll 폴더 구조
 이전 게시글에서 설명한 Jekyll 생성 방법을 그대로 따랐으면 아래와 같은 폴더와 파일로 이루어진 것을 볼 수 있습니다.
 
 ![20201205ko.cjs-01](/assets/img/blog/ko.configuring-jekyll-site/20201205ko.cjs-01.png)
@@ -46,7 +45,7 @@ Jekyll로 생성된 구성요소들로부터 HTML 형식으로 변환한 사이�
 ### `.sass-cache` 폴더
 SCSS 파일을 더 빨리 처리할 수 있도록 컴파일하여 저장하는 임시 폴더입니다. SCSS 파일이란, HTML을 꾸며주는 CSS 파일과 동일한 역할을 하나 Ruby 언어가 지원되는 특징을 가집니다. 하지만 `.scssc` 확장자를 가지는 SCSS 컴파일 파일은 이진코드로 변환되어 작성된 내용은 확인이 불가능합니다.
 
-## Jekyll 설정법
+# Jekyll 설정법
 위의 장에서는 Jekyll 사이트 구조를 설명하면서 구성하는 파일 및 폴더에 대하여 알려드렸습니다. 특히 `_config.yml` 그리고 `Gemfile` 및 `Gemfile.lock`은 이번 게시글의 가장 핵심 내용이므로 자세하게 소개하려고 합니다.
 
 ### `Gemfile` 파일
@@ -124,7 +123,7 @@ github_username:  jekyll
 
 개발자 도구로 확인이 불가능한 이유는 HTML 사이트로 변환하면서 Liquid 템플릿 언어가 해당 위치를 `title` 데이터로 채워 넣기 때문입니다. 다시 말해, `_config.yml`에 입력한 내용들은 Liquid 언어를 통해 HTML에 지정된 위치에 반영되는 겁니다.
 
-## Jekyll 테마 변경
+# Jekyll 테마 변경
 Jekyll을 꾸미는 방법 중 가장 간단한 방법은 이미 존재하는 테마를 불러오는 겁니다. 테마 변경을 위해서는 `Gemfile`과 `_config.yml` 파일을 수정해야 하므로 이번 게시글을 마무리하기 딱 좋은 내용입니다. Jekyll에서 다른 테마를 불러오는 방법으로 `theme`과 `remote_theme` 옵션을 이용하는 게 있습니다.
  
 ### `theme` 옵션

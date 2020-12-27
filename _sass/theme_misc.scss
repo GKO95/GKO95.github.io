@@ -1,0 +1,56 @@
+//==============================================================================================================
+//>> TERMINAL
+//==============================================================================================================
+html {
+    // LIGHT THEME
+
+
+&:not(.style-scope)[dark] {
+    // DARK THEME
+    #notice-incomplete {
+        background-color: #B73B3B;
+        border-color: #840000;
+    }
+
+    #notice-redirected {
+        background-color: #4190b7;
+        border-color: #1e63b9;
+    }
+
+    #notice-expand {
+        background-color: #d8864b;
+        border-color: #9e5000;
+    }
+}}
+
+//==============================================================================================================
+//>> TOC
+//==============================================================================================================
+html {
+    // LIGHT THEME
+
+
+&:not(.style-scope)[dark] {
+    // DARK THEME
+    #toc-button {
+        background-color: #101010;  
+        border-color: #808080;
+    }
+
+    #toc-container {
+        background-color: rgba(16, 16, 16, 0.8);
+    }
+
+    #toc-main {
+        background-color: #202020;
+        border-color: #404040;
+    }
+
+    #toc-content {
+        background-color: transparent;
+    }
+
+    #toc-options {
+        background-color: #101010;
+    }
+}}

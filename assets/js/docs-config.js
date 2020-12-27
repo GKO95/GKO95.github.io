@@ -9,6 +9,51 @@ $(`#docs #nav-lang`).click(function() {
     } else {    }
 })
 
+if (GetLANG() == enumLANG.ENGLISH)
+{   // ENGLISH
+}
+else
+{   // KOREAN
+    $(`#comment-tags > span`).text("태그: ")
+    $(`#comment-header > h4`).text("댓글쓰기")
+    $(`.comment-info > p`).text("부적절하거나 문제를 야기할 수 있는 내용은 관리자의 판단하에 경고없이 삭제될 수 있습니다.")
+}
+
+//========================================
+// >> FOOTER: WIDTH RESIZE
+//========================================
+var headerMargin = parseInt($(`header`).css("margin").split(" ")[1])
+$(`footer`).width($(window).width() - (headerMargin * 2)).css(
+    "left", `-${parseInt($(`main`).css("padding-left")) + parseInt($(`main`).css("margin").split(" ")[1]) - headerMargin}px`
+)
+
+//========================================
+// >> MAIN: CHECK CONTENT
+//========================================
+if (window.sessionStorage.getItem("REDIR.FLAG") == "1")
+{
+    let redirTitle = window.sessionStorage.getItem("REDIR.HREF")
+    $(`main [id*="-content"]`).prepend($(`
+<section class="notice" id="notice-redirected">
+    <p>This document is redirected from "${redirTitle}".</p><hr><p>본 문서는 "${redirTitle}"로부터 넘어왔습니다.</p>
+</section>`))
+
+    window.sessionStorage.setItem("REDIR.FLAG", `0`)
+    window.sessionStorage.setItem("REDIR.HREF", ``)
+}
+else {
+    if ($(`main [id*="-content"] > :not(div,style,script,section)`).length == 0) {
+        window.sessionStorage.setItem("REDIR.FLAG", `1`)
+        window.sessionStorage.setItem("REDIR.HREF", `${$(`#nav-center > span`).text()}`)
+    
+        if ($(location).attr('pathname').indexOf("/ko/") >= 0) {
+            window.location = $(location).attr('pathname').replace("/ko/","/en/")
+        } else if ($(location).attr('pathname').indexOf("/en/") >= 0) {
+            window.location = $(location).attr('pathname').replace("/en/","/ko/")
+        } else {    }
+    }
+}
+
 //========================================
 // >> MAIN: IMAGE RESIZE
 //========================================
@@ -27,7 +72,8 @@ $(window).resize(imageSize)
 //========================================
 // >> TOC
 //========================================
-$(`#toc-options-region`).append(`<a class="toc-option" id="toc-source" title="View source" style="background-image: url(/assets/img/res/icon-source.png)"></a>`)
+$(`#toc-options-region`).prepend(`<a class="toc-option" id="toc-home" href="/" title="Return home" style="background-image: url(/assets/img/res/icon-home.png)"></a>`)
+$(`#toc-options-region`).prepend(`<a class="toc-option" id="toc-source" title="View source" style="background-image: url(/assets/img/res/icon-source.png)"></a>`)
 $(`#toc-source`).click(function() {
     window.open(`https://github.com/GKO95/GKO95.github.io/blob/master${location.pathname.replace("/","/_").slice(0,-1)}.md`)
 })

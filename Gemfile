@@ -18,7 +18,6 @@ gem "github-pages", "~> 207", group: :jekyll_plugins
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.6"
   gem "jekyll-seo-tag", "~> 2.6"
-  gem "jekyll-last-modified-at", "~>1.1.0"
 end
 
 gem "kramdown", ">= 2.3.0"

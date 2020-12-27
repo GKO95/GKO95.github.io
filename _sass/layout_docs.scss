@@ -9,7 +9,10 @@
         left: auto;
         right: auto;
     }
-    padding: 0 24px;
+    padding: {
+        left: 24px; 
+        right: 24px;
+    }
 
     background-color: inherit;
 
@@ -76,7 +79,7 @@
 //================================
 // DOCS: TOC
 //================================
-#docs #toc-content {
+#docs #toc-content, #post #toc-content {
 
     padding: 0px 16px;
     user-select: none;

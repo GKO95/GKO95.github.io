@@ -93,13 +93,6 @@ $(`#nav-theme`).click(function() {
 })
 
 //========================================
-// >> AUTO-FIT MAIN
-//========================================
-if ( $(window).height() > $(`body`).height()) {
-    $(`html`).height("100%")
-}
-
-//========================================
 // >> MENU: CONFIGURATION
 //========================================
 $(`#toc-button`).show("slow").click(function() {
@@ -129,5 +122,14 @@ $(document).keydown(function(e) {
 document.addEventListener("readystatechange", function () {
     if (document.readyState == "complete") {
         $(`body`).css("visibility", "visible")
+    }
+}); 
+
+//========================================
+// >> AUTO-FIT MAIN
+//========================================
+document.addEventListener("readystatechange", function () {
+    if (document.readyState == "complete") {
+        $(`main [id*="-content"]`).css("min-height", `${$(window).height() - $(`header`).outerHeight(true) - $(`footer`).outerHeight(true)}px`)
     }
 }); 

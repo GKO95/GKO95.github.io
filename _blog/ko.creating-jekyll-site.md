@@ -5,14 +5,13 @@ title: "GitHub Pages를 위한 Jekyll 생성하기"
 date: 2020-09-04 00:00:00 + 0900
 tags: GitHub_Pages Jekyll
 ---
-# GitHub Pages를 위한 Jekyll 생성하기
 GitHub Pages는 여러가지 용도로 사용됩니다. 개발팀 웹사이트로 사용되거나, 개인 블로그 혹은 포트폴리오로도 활용될 수 있습니다. GitHub Pages를 생성하기 위해서는 우선 리포지터리를 만들어야 하는데, 사용자 아이디 뒤에 `.github.io`만 붙이면 됩니다. 제 아이디는 GKO95이므로 리포지터리 이름을 `GKO95.github.io`로 지정했습니다.
 
 ![20200901ko.cjs-01](/assets/img/blog/ko.creating-jekyll-site/20200901ko.cjs-01.png)
 
 여러분은 방금 리포지터리가 바로 GitHub Pages가 되었습니다. 이제 리포지터리 안에 HTML 파일을 추가하여 원하는 디자인과 기능을 직접 꾸미시면 됩니다. 다만, 순수히 HTML만으로 장문의 글을 작성하거나 웹사이트를 관리한다는 것은 매우 불편합니다. 그래서 제가 소개하려는 소프트웨어가 바로 [Jekyll][jekyll-site]입니다.
 
-## Jekyll 설치법
+# Jekyll 설치법
 Jekyll은 간편하게 블로그 형식의 사이트를 생성하는데 사용되는데, GitHub Pages에도 활용할 수 있습니다. 게시글은 [마크다운][ko.wikipedia-markdown]으로 작성되기 때문에 HTML을 크게 신경쓰지 않으셔도 됩니다. 만일 HTML와 CSS, 그리고 자바스크립트를 전혀 몰라 어떻게 꾸며야 할지 모르시는 분들은 다른 개발자들이 이미 제작한 디자인을 그대로 사용할 수도 있습니다. 이미 머릿속에 어떻게 만들지 구상하신 분들은 저처럼 한 번 직접 디지인 해보시길 바랍니다.
 
 macOS와 리눅스에서는 Jekyll 설치가 매우 간단하지만, Ruby 언어가 공식적으로 지원되지 않은 윈도우 OS에서는 몇 가지 절차를 거쳐야 합니다. [RubyInstaller][ruby-installer] 웹페이지 내 `WITH DEVKIT` 중에서 `=>`와 함께 볼드체로 표시된 설치 파일을 다운로드 받고 실행합니다.
@@ -35,7 +34,7 @@ gem install 'jekyll:3.9.0' 'bundler'
 
 설치가 완료되었는지 확인하기 위해 `jekyll -v`를 입력합니다. 정상적으로 설치되었으면 Jekyll 버전이 나타날 것이고, 그러면 Jekyll을 사용할 준비는 모두 마무리 되었습니다.
 
-## Jekyll 사용법
+# Jekyll 사용법
 우선 매우 간단한 블로그 형식부터 생성해보도록 하겠습니다. Jekyll은 명령 프롬프트나 파웨셸을 통해서만 동작할 수 있으므로 터미널 창을 항상 준비하도록 합니다. 터미널이 아직 익숙하지 않으신 분들이 분명히 계실 겁니다. 그래서 Jekyll 사용법에서는 [비주얼 스튜디오 코드][vscode-download](VS Code)로 보여드리겠습니다.
 
 우선 VS Code에서 Jekyll 사이트를 생성할 빈 폴더를 엽니다. 제가 보여주는 예시에는 `D:\Workspace\Jekyll`로 되어 있습니다. 
