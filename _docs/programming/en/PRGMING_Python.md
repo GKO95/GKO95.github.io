@@ -73,6 +73,26 @@ Environment variable setting is not necessary when Python is the only software t
 
 Clicking the "Install Now" button will begin the installation, and can run Python when the process is over.
 
+### Custom Installation
+For developers who wish to install Python in a different directory or configure the installation for detail selection, click the "Customize installation" button.
+
+The first selection screen shows default options when installing Python, and below is how the author selects.
+
+![Figure 4. Python 3 installer optional features.](/assets/img/docs/programming/Python/python_interpreter_optional.png)
+
+| Options             | Description                                         |
+|---------------------|-----------------------------------------------------|
+| `Documentation`     | -                                                   |
+| [`pip`](#pip)       | Python package management software.                 |
+| `tcl/tk and IDLE`   | Application GUI toolkit and code editor for Python. |
+| `Python test suite` | Framework for testing Python application behavior.  |
+
+The next screen is selections for advanced options, and below is how the author selects.
+
+![Figure 5. Python 3 installer advanced options.](/assets/img/docs/programming/Python/python_interpreter_advanced.png)
+
+Here, the `Download debug binaries (requires VS 2015 or later)` checkbox is worth paying attention to, as this may become necessary when dealing with [OpenCV](/docs/library/ko/LIBRARY_OpenCV/). However, developers are required to install [Visual Studio 2015](https://visualstudio.microsoft.com/downloads/) or above for implementation, but people who only want to learn Python should ignore this.
+
 ## Integrated Development Environment
 An integrated development environment (IDE) is a software development program that provides at least a source code editor, program build tools, and debugger. Python interpreter is a software for running a Python-based program, but it is not a source code editor. Therefore, IDE is essential to edit a Python source code, run the program, and examine the execution when encountering problems.
 
