@@ -40,7 +40,7 @@ order: 0x00
 ## 인터프리터 다운로드
 다운로드 할 인터프리터를 결정하였으면 설치 방법을 선택해야 한다. 대체로 아래와 같은 설치 항목이 존재한다.
 
-![그림 1. 파이썬 3 공식 웹사이트 인터프리터 다운로드 목록.](/assets/img/docs/programming/Python/python_interpreter_download.png)
+![그림 1. 파이썬 3 공식 웹사이트 인터프리터 다운로드 목록](/assets/img/docs/programming/Python/python_interpreter_download.png)
 
 윈도우 OS(예. 윈도우 10, 윈도우 8.1, 윈도우 7 등)에서는 64비트와 32비트 인터프리터를 제공하며, 이는 각각 `x86-64` 및 `x86`으로 표시된다. 해당 컴퓨터의 운영체제 및 아키텍처는 아래의 파일 탐색기 주소를 통해 확인할 수 있다.
 
@@ -63,35 +63,34 @@ Control Panel\System and Security\System
 ## 인터프리터 설치
 다운로드가 완료된 설치 프로그램을 실행하면 아래와 같은 화면이 나타난다.
 
-![그림 2. 파이썬 3 설치 프로그램 실행 화면.](/assets/img/docs/programming/Python/python_interpreter_install.png)
+![그림 2. 파이썬 3 설치 프로그램 실행 화면](/assets/img/docs/programming/Python/python_interpreter_install.png)
 
 설치 화면에 있는 "Add Python 3.7 to PATH" 옵션은 환경 변수 설정 여부를 의미하며, 윈도우 명령 프롬프트에서 파이썬을 실행할 수 있도록 한다. 다음 그림은 윈도우 명령 프롬프트에서 파이썬을 실행하였을 시의 모습이다.
 
-![그림 3. 윈도우 명령 프롬프트에서 실행된 파이썬 3.](/assets/img/docs/programming/Python/python_interpreter_cmd.png)
+![그림 3. 윈도우 명령 프롬프트에서 실행된 파이썬 3](/assets/img/docs/programming/Python/python_interpreter_cmd.png)
 
 환경 변수 설정은 순수히 파이썬만 사용할 경우 필요가 없으나, 외부 소프트웨어 및 라이브러리와 연동할 경우에는 반드시 필요한 설정이다. 그러므로 본 문서는 환경 변수 설정을 적극 권장한다. 비록 설치 당시에 해당 옵션을 선택하지 않아도, 재설치 없이 설정이 가능하다.
 
 설치 화면의 "Install Now"를 누르면 인터프리터 설치가 진행되며, 설치 완료 시 파이썬을 실행할 수 있게 된다.
 
 ### 사용자 지정 설치
-만일 파이썬을 원하는 경로에 따로 설치하고 싶거나 더 폭넓은 활용도를 위해서는 아래의 "Customize installation", 즉 사용자 지정 설치 버튼을 클릭한다.
+파이썬을 다른 경로에 설치하거나 오로지 인터프리터만 설치하고 싶다면 "Customize installation", 즉 사용자 지정 설치 버튼을 클릭하여 설치 내용을 선택할 수 있다. 우선 "Optional Features"는 인터프리터 동작에 영향을 주지 않는 부가적 설치 사항이다.
 
-가장 먼저 나타나는 화면은 파이썬에 기본적인 추가 옵션들이며, 아래는 필자가 일반적으로 선택하는 옵션들이다.
-
-![그림 4. 파이썬 3 설치 프로그램 추가 옵션.](/assets/img/docs/programming/Python/python_interpreter_optional.png)
+![그림 4. 파이썬 3 설치 프로그램 추가 설치 사항](/assets/img/docs/programming/Python/python_interpreter_optional.png)
 
 | 옵션                  | 설명                                |
 |---------------------|-----------------------------------|
-| `Documentation`     | 파이썬 문서 파일이다.                      |
-| [`pip`](#pip)       | 파이썬 패키지 관리 소프트웨어이다. |
-| `tcl/tk and IDLE`   | 파이썬으로 프로그램 GUI 제작도구와 코드 편집기이다.    |
-| `Python test suite` | 파이썬 프로그램 동작을 시험하는 프레임워크이다.        |
+| `Documentation`     | 파이썬 문서 파일                      |
+| [`pip`](#pip)       | 파이썬 패키지 관리 소프트웨어 |
+| `tcl/tk and IDLE`   | 파이썬으로 프로그램 GUI 제작도구와 코드 편집기  |
+| `Python test suite` | 파이썬 프로그램 동작을 시험하는 프레임워크      |
+| `py launcher`       | 파이썬 인터프리터 관리 프로그램       |
 
-그 다음 화면은 파이썬의 고급 설정들이며, 아래는 필자가 일반적으로 선택하는 옵션들이다.
+그 다음에 나타나는 "Advanced Options" 선택 사항들은 실질적으로 인터프리터 동작에 영향을 미칠 수 있는 고급 옵션들이다.
 
-![그림 5. 파이썬 3 설치 프로그램 고급 설정.](/assets/img/docs/programming/Python/python_interpreter_advanced.png)
+![그림 5. 파이썬 3 설치 프로그램 고급 설정](/assets/img/docs/programming/Python/python_interpreter_advanced.png)
 
-여기서 `Download debug binaries (requires VS 2015 or later)`를 특히 주목할 필요가 있다. 해당 옵션을 번역하면 "디버깅 라이브러리 다운로드" 여부를 묻는데, 이를 필요로 할 때가 대표적으로 [OpenCV](/docs/library/ko/LIBRARY_OpenCV/) 라이브러리를 생성할 때에 있다. 하지만 괄호에서도 설명하였듯이 이를 활용하기 위해서는 [비주얼 스튜디오 2015](https://visualstudio.microsoft.com/downloads/) 이상의 프로그램을 반드시 필요로 한다.
+여기서 `Download debug binaries (requires VS 2015 or later)`를 특히 주목할 필요가 있다. 해당 옵션을 번역하면 "디버깅 라이브러리 다운로드" 여부를 묻는데, 이를 필요로 할 때가 대표적으로 [OpenCV](/docs/library/ko/LIBRARY_OpenCV/) 라이브러리를 생성할 때에 있다. 현재 파이썬을 프로그래밍 입문 언어로 배우는 것이라면 신경쓰지 않아도 된다.
 
 ## 통합 개발 환경
 통합 개발 환경(IDE)은 최소한 프로그래밍 언어의 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 소프트웨어 개발 프로그램이다. 인터프리터는 파이썬 언어를 읽는 소프트웨어이지만, 파이썬 코드 편집기가 아니다. 그러므로 파이썬 코드를 편집하고, 바로 프로그램으로 실행하여 문제가 발생하면 검토할 수 있는 IDE가 절대적으로 필요하다.
@@ -99,7 +98,7 @@ Control Panel\System and Security\System
 ### 비주얼 스튜디오 코드
 [비주얼 스튜디오 코드](https://code.visualstudio.com/download)(Visual Studio Code; VS Code)는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 기술적으로 IDE는 아니지만, 편집기 설정을 통해 IDE 역할을 수행할 수 있다. 파이썬 프로그래밍 언어의 경우에는 파이썬 확장도구 설치 및 인터프리터를 불러오기만 하면 된다.
 
-![그림 6. VS Code에서 파이썬 확장도구 설치.](/assets/img/docs/programming/Python/python_vscode_extension.png)
+![그림 6. VS Code에서 파이썬 확장도구 설치](/assets/img/docs/programming/Python/python_vscode_extension.png)
 
 파이썬 확장도구는 VS Code를 파이썬 IDE로 사용할 수 있도록 한다. 즉, 소스 코드 편집 이외에도 프로그램 실행 및 디버깅도 가능하다는 의미이다. 확장도구 설치 방법은 다음과 같다: `F1` 키를 눌러 `Extensions: Install Extensions`을 입력하고, 왼쪽에 나타난 검색창에 `Python`을 검색한다. 그러면 위의 그림과 같은 화면이 나타나며, 초록색 `Install` 버튼을 눌러 설치한다.
 

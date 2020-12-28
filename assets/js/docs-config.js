@@ -35,7 +35,7 @@ if (window.sessionStorage.getItem("REDIR.FLAG") == "1")
     let redirTitle = window.sessionStorage.getItem("REDIR.HREF")
     $(`main [id*="-content"]`).prepend($(`
 <section class="notice" id="notice-redirected">
-    <p>This document is redirected from "${redirTitle}".</p><hr><p>본 문서는 "${redirTitle}"로부터 넘어왔습니다.</p>
+    <p>Redirected from: <em>${redirTitle}</em></p><hr><p>넘어온 문서: <em>${redirTitle}</em></p>
 </section>`))
 
     window.sessionStorage.setItem("REDIR.FLAG", `0`)

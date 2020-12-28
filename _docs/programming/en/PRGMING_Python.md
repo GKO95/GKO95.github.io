@@ -63,35 +63,34 @@ In other words, the second and third option is the same, but whether to download
 ## Install Interpreter
 Executing the downloaded interpreter installer shows the following window:
 
-![Figure 2. Startup of Python 3 installer program.](/assets/img/docs/programming/Python/python_interpreter_install.png)
+![Figure 2. Startup of Python 3 installer program](/assets/img/docs/programming/Python/python_interpreter_install.png)
 
 "Add Python 3.7 to PATH" checkbox decides whether to setup environment variables, which allows Python execution on command prompt. The following figure is an execution of Python on the command prompt.
 
-![Figure 3. Python 3 execution on Windows command prompt.](/assets/img/docs/programming/Python/python_interpreter_cmd.png)
+![Figure 3. Python 3 execution on Windows command prompt](/assets/img/docs/programming/Python/python_interpreter_cmd.png)
 
 Environment variable setting is not necessary when Python is the only software to be used, but it is essential if to use it with external software or libraries. Therefore, this document strongly recommends enabling the checkbox. Even it the Python interpreter was installed without an environment variable setting, it can manually setup later.
 
 Clicking the "Install Now" button will begin the installation, and can run Python when the process is over.
 
 ### Custom Installation
-For developers who wish to install Python in a different directory or configure the installation for detail selection, click the "Customize installation" button.
+Developers who wish to install Python in a different directory or only want to install the interpreter alone should click the "Customize installation" button for more installation options. The "Optional Features" page selects whether to install additional software that doesn't affect the interpreter's behavior.
 
-The first selection screen shows default options when installing Python, and below is how the author selects.
-
-![Figure 4. Python 3 installer optional features.](/assets/img/docs/programming/Python/python_interpreter_optional.png)
+![Figure 4. Python 3 installer optional features](/assets/img/docs/programming/Python/python_interpreter_optional.png)
 
 | Options             | Description                                         |
 |---------------------|-----------------------------------------------------|
 | `Documentation`     | -                                                   |
-| [`pip`](#pip)       | Python package management software.                 |
-| `tcl/tk and IDLE`   | Application GUI toolkit and code editor for Python. |
-| `Python test suite` | Framework for testing Python application behavior.  |
+| [`pip`](#pip)       | Python package management software                  |
+| `tcl/tk and IDLE`   | Application GUI toolkit and code editor for Python  |
+| `Python test suite` | Framework for testing Python application behavior   |
+| `py launcher`       | Python interpreter management program               |
 
-The next screen is selections for advanced options, and below is how the author selects.
+The next selection page is the "Advanced Options," which can affect how the interpreter behaves.
 
-![Figure 5. Python 3 installer advanced options.](/assets/img/docs/programming/Python/python_interpreter_advanced.png)
+![Figure 5. Python 3 installer advanced options](/assets/img/docs/programming/Python/python_interpreter_advanced.png)
 
-Here, the `Download debug binaries (requires VS 2015 or later)` checkbox is worth paying attention to, as this may become necessary when dealing with [OpenCV](/docs/library/ko/LIBRARY_OpenCV/). However, developers are required to install [Visual Studio 2015](https://visualstudio.microsoft.com/downloads/) or above for implementation, but people who only want to learn Python should ignore this.
+It is worth paying attention to the `Download debug binaries (requires VS 2015 or later)` checkbox, as this option may require when creating the [OpenCV](/docs/library/en/LIBRARY_OpenCV/) library. However, people who are learning Python as their first programming language may ignore this option for now.
 
 ## Integrated Development Environment
 An integrated development environment (IDE) is a software development program that provides at least a source code editor, program build tools, and debugger. Python interpreter is a software for running a Python-based program, but it is not a source code editor. Therefore, IDE is essential to edit a Python source code, run the program, and examine the execution when encountering problems.
@@ -99,7 +98,7 @@ An integrated development environment (IDE) is a software development program th
 ### Visual Studio Code
 [Visual Studio Code](https://code.visualstudio.com/download) (VS Code) is a free source code editor developed by Microsoft. Although technically not an IDE, it can still play a role as an IDE. All that requires are an extension tool that can load the interpreter to VS Code.
 
-![Figure 4. Install Python extension on VS Code.](/assets/img/docs/programming/Python/python_vscode_extension.png)
+![Figure 6. Install Python extension on VS Code](/assets/img/docs/programming/Python/python_vscode_extension.png)
 
 The Python extension allows VS Code to use a Python interpreter; meaning, it can be used to build and debug like an IDE. To install the extension, press the `F1` key and select `Extensions: Install Extensions`. Search `Python` and install the extension by clicking the green `Install` button shown as above.
 
