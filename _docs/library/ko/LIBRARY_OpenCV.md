@@ -79,9 +79,9 @@ git checkout tags/4.5.1
 그리고 확인하고자 하는 태그를 선택해 체크아웃 버튼을 클릭하면 리포지터리가 해당 커밋 당시로 되돌아간다.
 
 ## CMake 컴파일
-> 아래 절차를 진행하기 전에 [CMake](https://cmake.org/) 소프트웨어 설치가 필요하다.
+> 아래 절차를 진행하기 전에 [CMake](https://cmake.org/) 소프트웨어 설치가 필요하며, 또한 파이썬 3 인터프리터 및 [디버깅 라이브러리](/docs/programming/ko/PRGMING_PYTHON/#사용자-지정-설치)가 미리 준비되어 있어야 한다.
 
-OpenCV가 크로스 플랫폼을 지원할 수 있는 이유는 바로 완성된 라이브러리를 제공하는 게 아니라 소스 코드로부터 직접 라이브러리를 컴파일하기 때문이다. 이렇게 해서 생성된 라이브러리는 이미 해당 시스템에 최적화된 상태이다. CMake를 Bash를 사용하여 라이브러리를 생성할 빌드할 수 있지만, 본 문서에서는 CMake GUI를 사용하여 설명한다.
+OpenCV가 크로스 플랫폼을 지원할 수 있는 이유는 바로 완성된 라이브러리를 제공하는 게 아니라 소스 코드로부터 직접 라이브러리를 컴파일하기 때문이다. 이렇게 해서 생성된 라이브러리는 이미 해당 시스템에 최적화된 상태이다. CMake를 Bash를 사용하여 라이브러리를 생성할 빌드할 수 있지만, 본 문서에서는 CMake GUI를 사용하여 C++ 및 파이썬 3을 위한 OpenCV 4.5.1 라이브러리 생성을 목표로 한다.
 
 먼저 CMake 상단의 두 입력란에 경로를 입력해야 한다. 
 
@@ -135,7 +135,7 @@ CMake 옵션 선택이 완료되었으면 `Generate` 버튼을 눌러 OpenCV 라
 
 ![그림 11. OpenCV 라이브러리 프로젝트 빌드 결과](/assets/img/docs/library/opencv/opencv_vs_output.png)
 
-특히 컴파일을 실패한 프로젝트가 없는지 확인해 주는게 중요하다.
+특히 컴파일을 실패한 프로젝트가 없는지 확인해 주는게 중요하다. 빌드 오류가 발생하였으면 다시 한 번 빌드를 해 본다.
 
 빌드가 완료되면 `./opencv/build/bin`와 `./opencv/biuld/lib` 경로에 DLL 동적 라이브러리 및 LIB 정적 라이브러리가 생성된 걸 확인할 수 있다. 그러나 라이브러리를 사용하기 위해 필요한 헤더 파일은 찾아볼 수가 없다. OpenCV 라이브러리 생성의 마지막 단계로 라이브러리 파일과 헤더 파일을 한 군데에 취합하기 위해 `INSTALL.vcxproj` 프로젝트를 빌드해야 한다.
 
@@ -143,13 +143,31 @@ CMake 옵션 선택이 완료되었으면 `Generate` 버튼을 눌러 OpenCV 라
 
 최종적으로 `./opencv/build/install` 경로가 생성되며, 안에는 다음 폴더들이 들어있다.
 
-* `./install/include`: 헤더 파일 (.HPP)
-* `./install/x64/vc16/lib`: 정적 라이브러리 (.LIB)
-* `./install/x64/vc16/bin`: 동적 라이브러리 (.DLL)
+* `./install/include`: 헤더 파일 (.hpp)
+* `./install/x64/vc16/lib`: 정적 라이브러리 (.lib)
+* `./install/x64/vc16/bin`: 동적 라이브러리 (.dll)
 
 프로젝트에 OpenCV 라이브러리를 불러올 때에는 오로지 `./opencv/build/install` 경로 안에 있는 파일들만 사용하도록 한다. 라이브러리는 동일한 이름을 가진게 두 개가 있을 것이다; 그 중에서 뒤에 알파벳 `d`가 있는 파일은 디버깅 라이브러리를 의미한다. 
 
-> 본 과정은 `Debug`에서만 빌드한 것이며, 반드시 `Release`에서도 위의 모든 빌드 과정을 진행해야 한다. 그러므로 동일한 이름의 라이브러리가 보이지 않으면  `Debug` 혹은 `Release` 중 하나를 빌드하지 않은 것으로 나머지도 반드시 빌드하도록 한다.
+> 본 과정은 `Debug`에서만 빌드하였으나 반드시 `Release`에서도 위의 모든 빌드 과정을 진행해야 한다. 라이브러리 폴더에 동일한 이름의 라이브러리가 보이지 않으면 `Debug` 혹은 `Release` 중 하나를 빌드하지 않았다는 의미로 나머지도 반드시 빌드하도록 한다.
 
 ### 리눅스 OS
 Debian 10 "Buster"를 기준으로 설명한다. 
+
+# **OpenCV: 프로젝트**
+
+## C++
+
+## 파이썬 3
+
+Recursion 오류 발생 시...
+경로: `./opencv/build/python_loader/`
+
+```powershell
+python -m setup.py build
+python -m setup.py install
+```
+
+```powershell
+python -m setup.py develop
+```
