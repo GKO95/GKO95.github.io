@@ -79,34 +79,39 @@ git checkout tags/4.5.1
 그리고 확인하고자 하는 태그를 선택해 체크아웃 버튼을 클릭하면 리포지터리가 해당 커밋 당시로 되돌아간다.
 
 ## CMake 컴파일
-> 아래 절차를 진행하기 전에 [CMake](https://cmake.org/) 소프트웨어 설치가 필요하며, 또한 파이썬 3 인터프리터 및 [디버깅 라이브러리](/docs/programming/ko/PRGMING_PYTHON/#사용자-지정-설치)가 미리 준비되어 있어야 한다.
-
 OpenCV가 크로스 플랫폼을 지원할 수 있는 이유는 바로 완성된 라이브러리를 제공하는 게 아니라 소스 코드로부터 직접 라이브러리를 컴파일하기 때문이다. 이렇게 해서 생성된 라이브러리는 이미 해당 시스템에 최적화된 상태이다. CMake를 Bash를 사용하여 라이브러리를 생성할 빌드할 수 있지만, 본 문서에서는 CMake GUI를 사용하여 C++ 및 파이썬 3을 위한 OpenCV 4.5.1 라이브러리 생성을 목표로 한다.
 
-먼저 CMake 상단의 두 입력란에 경로를 입력해야 한다. 
+## 윈도우 OS
+> 아래 절차는 파이썬 3을 위한 OpenCV 라이브러리 빌드를 함께 소개히며, 이를 위해서는 파이썬 3 인터프리터 및 [디버깅 라이브러리](/docs/programming/ko/PRGMING_PYTHON/#사용자-지정-설치)가 준비되어 있어야 한다.
+
+우선 [CMake](https://cmake.org/) 공식 홈페이지에서 프로그램을 다운로드 및 설치를 한다.
+
+![그림 5. CMake 프로그램 설치 (윈도우)](/assets/img/docs/library/opencv/opencv_win_cmake_install.png)
+
+CMake 설치가 완료되었으면 프로그램을 실행하여 상단의 두 입력란에 경로를 입력해야 한다. 
 
 * `Where is the source code`: OpenCV의 CMake 프로젝트 소스 코드 경로 (대체로 `CMakeLists.txt`가 위치한 곳)
 * `Where to build the binary`: OpenCV의 CMake 프로젝트 빌드 저장 경로 (혼잡을 방지하기 위해 새 폴더 생성 추천)
 
-![그림 5. OpenCV의 CMake 프로젝트 소스 및 빌드 경로 지정](/assets/img/docs/library/opencv/opencv_cmake_path.png)
+![그림 6. OpenCV의 CMake 프로젝트 소스 및 빌드 경로 지정](/assets/img/docs/library/opencv/opencv_win_cmake_path.png)
 
 각 입력란에 대한 설명에 보면 추론할 수 있듯이, CMake는 라이브러리를 생성하지 않는다; 해당 플랫폼에 가장 적합한 라이브러리 생성 프로젝트를 만드는 게 바로 CMake의 역할이다. 경로를 지정한 이후 `Configure` 버튼을 누르면 CMake 프로젝트에서 어떠한 플랫폼 및 컴파일러를 대상으로 한 OpenCV 라이브러리 프로젝트를 생성할 것인지 선택한다.
 
-![그림 6-1. OpenCV 빌드 플랫폼 및 컴파일러 지정 (윈도우 화면)](/assets/img/docs/library/opencv/opencv_cmake_msvc.png)
+![그림 7. OpenCV 빌드 플랫폼 및 컴파일러 지정 (윈도우)](/assets/img/docs/library/opencv/opencv_win_cmake_compiler.png)
 
 만일 64비트 윈도우 OS의 경우, 기본 플랫폼이 `x64`로 설정되어 있다. 이는 32비트 어플리케이션에 사용할 수 없어, 32비트 라이브러리를 생성하기 위해서는 `Win32`로 플랫폼을 변경해야 한다.
 
 플랫폼과 컴파일러를 선택하였으면 CMake에서 자동적으로 시스템 요소들을 탐색하여 OpenCV의 어떤 기능이 빌드가 가능한지 판별하여 일부 옵션들은 자동적으로 활성/비활성화 된다. 아래에 붉은색 옵션들은 오류나 경고를 뜻하는 게 아니라 `Configure` 버튼을 눌러 새로 업데이트 된 옵션들을 의미한다.
 
-![그림 7. OpenCV 빌드 옵션 목록](/assets/img/docs/library/opencv/opencv_cmake_configure.png)
+![그림 8. OpenCV 빌드 옵션 목록](/assets/img/docs/library/opencv/opencv_win_cmake_config.png)
 
 CMake의 OpenCV 빌드 옵션 중에서 `OPENCV_EXTRA_MODULES_PATH`가 있는데, 바로 여기가 OpenCV의 추가 모듈이 담겨있는 `opencv_contrib`의 모듈 폴더 경로를 입력하는 곳이다.
 
-![그림 8. OpenCV 빌드 <code>opencv_contrib</code> 추가](/assets/img/docs/library/opencv/opencv_cmake_extra.png)
+![그림 9. OpenCV 빌드 <code>opencv_contrib</code> 추가](/assets/img/docs/library/opencv/opencv_win_cmake_module.png)
 
 옵션의 내용은 실시간으로 바뀌지 않는다. CMake 옵션에 변경사항이 발생하면 반드시 `Configure` 버튼을 다시 클릭해 내역을 업데이트해야 한다. 그러면 CMake는 `opencv_contrib`의 모듈에 필요한 요소들을 포함하여 시스템을 재탐색하여 새로운 빌드 옵션을 활성화시키기도 한다.
 
-![그림 9. OpenCV의 CMake 옵션 업데이트](/assets/img/docs/library/opencv/opencv_cmake_update.png)
+![그림 10. OpenCV의 CMake 옵션 업데이트](/assets/img/docs/library/opencv/opencv_win_cmake_update.png)
 
 하지만 `opencv_contrib`를 추가할 시, 윈도우 OS를 사용하는 경우 십중팔구 CMake 터미널에서 다음과 같은 붉은 색 문장을 확인할 수 있다:
 
@@ -124,22 +129,33 @@ Call Stack (most recent call first):
 
 CMake 옵션 선택이 완료되었으면 `Generate` 버튼을 눌러 OpenCV 라이브러리 프로젝트를 생성한다.
 
-![그림 10. OpenCV 라이브러리 프로젝트 생성](/assets/img/docs/library/opencv/opencv_cmake_generate.png)
+![그림 11. OpenCV 라이브러리 프로젝트 생성](/assets/img/docs/library/opencv/opencv_win_cmake_generate.png)
 
-### 윈도우 OS
-윈도우 OS의 경우, `Open Project` 버튼을 누르면 `OpenCV.sln` 솔루션이 열린다 (Visual Studio 컴파일러 선택하였을 경우). 본 솔루션은 `./opencv/build/OpenCV.sln`에서 찾을 수 있다. 그리고 아래의 화면과 같이 솔루션 전체 빌드를 진행한다.
+아래의 `Open Project` 버튼을 누르면 `OpenCV.sln` 솔루션이 열린다 (Visual Studio 컴파일러 선택하였을 경우). 파일 탐색기에서 해당 솔루션은 `./opencv/build/OpenCV.sln`에서 찾을 수 있다. 그리고 아래의 화면과 같이 솔루션 전체를 `Debug`와 `Release` 모드에서 빌드를 진행한다.
 
-![그림 11. OpenCV 라이브러리 프로젝트 빌드](/assets/img/docs/library/opencv/opencv_vs_build.png)
+![그림 12. OpenCV 라이브러리 프로젝트 빌드 (<code>Debug</code> 모드)](/assets/img/docs/library/opencv/opencv_win_vs_build.png)
 
 본 과정은 상당한 시간이 소요가 되는 동시에 CPU 내에서도 많은 양의 자료를 처리해야 하기 때문에 기다림이 필요하다. 특히 CUDA가 활성화된 OpenCV 라이브러리의 경우에는 훨씬 1시간 이상을 기다릴 준비를 해야 한다. 그러나 일반적으로는 10~15분 이내에 마무리되며, 반드시 빌드 결과를 확인하기를 권장한다.
 
-![그림 11. OpenCV 라이브러리 프로젝트 빌드 결과](/assets/img/docs/library/opencv/opencv_vs_output.png)
+![그림 13. OpenCV 라이브러리 프로젝트 빌드 결과 (<code>Debug</code> 모드)](/assets/img/docs/library/opencv/opencv_win_vs_output.png)
 
-특히 컴파일을 실패한 프로젝트가 없는지 확인해 주는게 중요하다. 빌드 오류가 발생하였으면 다시 한 번 빌드를 해 본다.
+특히 컴파일을 실패한 프로젝트가 없는지 확인해 주는게 중요하다. 빌드 오류가 발생하였으면 다시 한 번 빌드를 시도한다. 빌드가 마무리되면 `./opencv/build/bin`와 `./opencv/biuld/lib` 경로에 DLL 동적 라이브러리 및 LIB 정적 라이브러리가 생성된 걸 확인할 수 있다. 그리고 추가적으로 파이썬 3 폴더가 생성된 것을 목격할 수 있는데 이들은 파이썬 3에서 사용할 수 있는 OpenCV 라이브러리이다.
 
-빌드가 완료되면 `./opencv/build/bin`와 `./opencv/biuld/lib` 경로에 DLL 동적 라이브러리 및 LIB 정적 라이브러리가 생성된 걸 확인할 수 있다. 그러나 라이브러리를 사용하기 위해 필요한 헤더 파일은 찾아볼 수가 없다. OpenCV 라이브러리 생성의 마지막 단계로 라이브러리 파일과 헤더 파일을 한 군데에 취합하기 위해 `INSTALL.vcxproj` 프로젝트를 빌드해야 한다.
+OpenCV 라이브러리를 파이썬 3에서 사용할 수 있도록 파이썬 바인딩(binding) 작업을 진행한다. `./opencv/build/python_loader` 경로로 이동하여 `setup.py` 파일을 `develop` 옵션을 추가하여 실행한다. 그러면 다음과 같은 화면을 볼 수 있다.
 
-![그림 11. OpenCV 라이브러리 프로젝트 빌드 결과](/assets/img/docs/library/opencv/opencv_vs_install.png)
+![그림 14. OpenCV 라이브러리 파이썬 바인딩](/assets/img/docs/library/opencv/opencv_win_python_binding.png)
+
+파이썬 바인딩이 완료되었으면 `import cv2` 문구로 OpenCV 모듈을 바로 즉시 불러올 수 있다. 해당 절차를 지금 진행하는 이유는 파이썬에서 모듈을 불러오는 데 발생할 수 있는 다음 오류를 방지하기 위해서이다.
+
+```
+ERROR: recursion is detected during loading of "cv2" binary extensions. Check OpenCV installation.
+```
+
+본래 설치의 마무리 단계에서 파이썬 바인딩이 모두 정상적으로 되어야 하나 OpenCV 개발은 현재진행형이다; 어디선가 버그가 발견될 수가 있으며, 확실치는 않지만 필자는 이것이 `setupvars`와 관련이 있는 것이 아닌가 조심스립게 주장합니다. 만일 해당 방법에서도 파이썬 모듈을 불러오는데 문제가 발생하면 다른 해결책을 탐색하여 업데이트 하겠습니다. 
+
+하지만 아직 C++에서의 OpenCV가 마무리되지 않았다. 솔루션 빌드를 통해 라이브러리가 생성되었으나 라이브러리를 사용하기 위해 필요한 헤더 파일은 찾아볼 수가 없다. OpenCV 라이브러리 생성의 마지막 단계로 라이브러리 파일과 헤더 파일을 한 군데에 취합하기 위해 `INSTALL.vcxproj` 프로젝트를 빌드해야 한다.
+
+![그림 15. OpenCV 라이브러리 프로젝트 빌드 결과](/assets/img/docs/library/opencv/opencv_win_vs_install.png)
 
 최종적으로 `./opencv/build/install` 경로가 생성되며, 안에는 다음 폴더들이 들어있다.
 
@@ -147,27 +163,13 @@ CMake 옵션 선택이 완료되었으면 `Generate` 버튼을 눌러 OpenCV 라
 * `./install/x64/vc16/lib`: 정적 라이브러리 (.lib)
 * `./install/x64/vc16/bin`: 동적 라이브러리 (.dll)
 
-프로젝트에 OpenCV 라이브러리를 불러올 때에는 오로지 `./opencv/build/install` 경로 안에 있는 파일들만 사용하도록 한다. 라이브러리는 동일한 이름을 가진게 두 개가 있을 것이다; 그 중에서 뒤에 알파벳 `d`가 있는 파일은 디버깅 라이브러리를 의미한다. 
-
-> 본 과정은 `Debug`에서만 빌드하였으나 반드시 `Release`에서도 위의 모든 빌드 과정을 진행해야 한다. 라이브러리 폴더에 동일한 이름의 라이브러리가 보이지 않으면 `Debug` 혹은 `Release` 중 하나를 빌드하지 않았다는 의미로 나머지도 반드시 빌드하도록 한다.
+프로젝트에 OpenCV 라이브러리를 불러올 때에는 오로지 `./opencv/build/install` 경로 안에 있는 파일들만 사용하도록 한다. 라이브러리는 동일한 이름을 가진게 두 개가 있을 것이다; 그 중에서 뒤에 알파벳 `d`가 있는 파일은 디버깅 라이브러리를 의미한다. 라이브러리 폴더에 동일한 이름의 라이브러리가 보이지 않으면 `Debug` 혹은 `Release` 중 하나를 빌드하지 않았다는 의미로 나머지도 반드시 빌드하도록 한다.
 
 ### 리눅스 OS
-Debian 10 "Buster"를 기준으로 설명한다. 
+> 아래 절차는 리눅스 운영체제 중에서 Debian 10 "Buster"를 기준으로 설명하였으며, 이는 Ubuntu에도 동일하게 적용이 된다.
+
+![그림 16. CMake 프로그램 설치 (데비안)](/assets/img/docs/library/opencv/opencv_deb_cmake_install.png)
+
+![그림 18. OpenCV 빌드 플랫폼 및 컴파일러 지정 (데비안)](/assets/img/docs/library/opencv/opencv_deb_cmake_compiler.png)
 
 # **OpenCV: 프로젝트**
-
-## C++
-
-## 파이썬 3
-
-Recursion 오류 발생 시...
-경로: `./opencv/build/python_loader/`
-
-```powershell
-python -m setup.py build
-python -m setup.py install
-```
-
-```powershell
-python -m setup.py develop
-```
