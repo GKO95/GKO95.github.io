@@ -33,7 +33,13 @@ OpenCV는 크로스 플랫폼, 즉 하나의 플랫폼에 국한되지 않고 �
 ## Git 리포지터리
 > 아래 절차를 진행하기 전에 우선 [Git](/docs/software/ko/SFTWARE_Git) 소프트웨어 설치 및 이해도가 필요하다. 본 장에서는 최대한 간단히 이해할 수 있도록 내용을 작성하였다.
 
-아래는 OpenCV의 핵심 소스 코드를 담고 있는 `opencv` 리포지터리(repository; 저장소) 및 추가 기능 모듈이 있는 `opencv_contrib` 리포지터리를 GitHub에서 컴퓨터로 불러오는 방법이다. 각 리포지터리를 불러오고자 하는 폴더 위치로 이동하여 아래의 명령어를 입력한다.
+아래는 OpenCV의 핵심 소스 코드를 담고 있는 `opencv` 리포지터리(repository; 저장소) 및 추가 기능 모듈이 있는 `opencv_contrib` 리포지터리를 GitHub에서 컴퓨터로 불러오는 방법이다. 해당 절차는 Git 소프트웨어 설치를 필요로 하며, 윈도우에서는 [공식 홈페이지](https://git-scm.com/)에서 설치 프로그램을 다운로드를 받고 데비안(혹은 우분투) 리눅스에서는 아래와 같이 입력하여 설치한다.
+
+```bash
+sudo apt install git
+```
+
+Git 소프트웨어 설치가 완료되었으면 리포지터리를 불러오고자 하는 폴더 위치로 이동하여 아래의 명령어를 입력한다.
 
 ```bash
 git clone https://github.com/opencv/opencv
@@ -166,9 +172,76 @@ ERROR: recursion is detected during loading of "cv2" binary extensions. Check Op
 프로젝트에 OpenCV 라이브러리를 불러올 때에는 오로지 `./opencv/build/install` 경로 안에 있는 파일들만 사용하도록 한다. 라이브러리는 동일한 이름을 가진게 두 개가 있을 것이다; 그 중에서 뒤에 알파벳 `d`가 있는 파일은 디버깅 라이브러리를 의미한다. 라이브러리 폴더에 동일한 이름의 라이브러리가 보이지 않으면 `Debug` 혹은 `Release` 중 하나를 빌드하지 않았다는 의미로 나머지도 반드시 빌드하도록 한다.
 
 ### 리눅스 OS
-> 아래 절차는 리눅스 운영체제 중에서 Debian 10 "Buster"를 기준으로 설명하였으며, 이는 Ubuntu에도 동일하게 적용이 된다.
+> 아래 절차는 리눅스 운영체제 중에서 데비안(Debian) 10 "Buster"를 기준으로 설명하였으며, 이는 우분투(Ubuntu)에도 동일하게 적용이 된다.
+
+우선 CMake에 필요한 라이브러리 및 패키지를 설치한다.
+
+```bash
+sudo apt install build-essential
+```
+
+컴파일에 필요한 `gcc` 및 `make` 설치하는 과정이다. Unix Makefiles 옵션을 위해 `make`가 사용
+
+OpenCV에서 창을 활성화하기 위해서는 아래의 패키지가 필요하다.
+
+```bash
+sudo apt install libgtk2.0-dev pkg-config
+```
+
+위의 패키지가 없으면 OpenCV 라이브러리를 생성하더라도 원하는 기능을 사용하지 못하여 CMake 작업을 처음부터 다시 헤야 할 수 있다.
+
+현재 필자의 데비안에는 파이썬 2.7.16과 3.7.3이 있다. 만일 `pip`가 없으면 다음 명령어로 설치한다. 전자는 파이썬2 pip이고 후자는 파이썬3 pip이다.
+
+```bash
+sudo apt install python-pip python3-pip
+```
+
+현재 시점(2020년 12월)에서 파이썬 3.8을 설치하려고 하였으나 아직 패키지가 정식 배포되지 않아 데비안에서는 3.7을 사용하였다. 하지만 만일 3.8을 설치하고 싶으면 아래 명령어를 사용한다.
+
+```bash
+sudo apt install python3.8
+```
+
+OpenCV는 파이썬의 넘파이 모듈 그리고 디버깅 라이브러리를 필요로 한다.
+
+```bash
+python2.7 -m pip install numpy
+python3.7 -m pip install numpy
+
+sudo apt install python-dev python3-dev python-dbg python3-dbg
+```
+
+리눅스에서 넘파이를 설치하는 다른 방법으로는 `sudo apt install python-numpy`가 있으나, 여기서는 윈도우와 비교하면서 설치를 진행하기 때문에 최대한 유사한 절차를 가는 방향으로 선택하였다. 그리고 그 밑의 명령어가 파이썬 개발 및 디버깅 패키지로 확장된 파이썬 기능들과 디버깅 라이브러리가 들어있다.
+
+`opencv_contrib`를 추가하면 일부 라이브러리 및 헤더 경로와 관련된 경고문을 볼 수 있다. 이를 미연에 방지하기 위해 아래의 패키지를 추가로 설치한다.
+
+```bash
+sudo apt install libjpeg-dev libpng-dev libtiff-dev libwebp-dev
+```
 
 ![그림 16. CMake 프로그램 설치 (데비안)](/assets/img/docs/library/opencv/opencv_deb_cmake_install.png)
+
+선택된 파이썬 버전이 2라고 하여도 이는 빌드에 사용되는 인터프리터로 파이썬 3에서 사용하지 못한다는 의미가 아니다.
+
+`make` 명령어를 입력하여 빌드를 시작한다. 필자의 총 8개의 코어가 있어 7개를 사용하여 처리 작업에 집중시키기 위해 `-j7`을 입력하였다.
+
+```bash
+make -j7
+```
+
+빌드를 완료하였으나 리눅스 시스템 전체에 사용할 수 있도록 시스템에 설치한다.
+
+```bash
+sudo make install
+```
+
+이는 `/usr/local`에 설치되며, 설치 위치는 CMake 옵션 설정에서 변경할 수 있다. C++ 라이브러리 및 파이썬 OpenCV 모듈을 이제부터 사용할 수 있다.
+
+설치한 라이브러리 및 헤더 파일을 삭제할 수도 있으며, make를 한 경로로 돌아가서 아래 명령어를 입력한다.
+
+```bash
+sudo make uninstall
+```
 
 ![그림 18. OpenCV 빌드 플랫폼 및 컴파일러 지정 (데비안)](/assets/img/docs/library/opencv/opencv_deb_cmake_compiler.png)
 
