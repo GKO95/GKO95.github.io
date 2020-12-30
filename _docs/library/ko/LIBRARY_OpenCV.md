@@ -90,7 +90,7 @@ git checkout tags/4.5.1
 ## CMake 컴파일
 OpenCV가 크로스 플랫폼을 지원할 수 있는 이유는 바로 완성된 라이브러리를 제공하는 게 아니라 소스 코드로부터 직접 라이브러리를 컴파일하기 때문이다. 이렇게 해서 생성된 라이브러리는 이미 해당 시스템에 최적화된 상태이다. CMake를 Bash를 사용하여 라이브러리를 생성할 빌드할 수 있으나, 본 문서에서는 CMake GUI를 사용하여 윈도우와 데비안(혹은 우분투)에서 각각 C++ 및 파이썬 3을 위한 OpenCV 4.5.1 라이브러리 생성 과정을 보여준다.
 
-## 윈도우 OS
+### 윈도우 OS
 > 아래 절차는 파이썬 3을 위한 OpenCV 라이브러리 빌드를 함께 소개히며, 이를 위해서는 파이썬 3 인터프리터 및 [디버깅 라이브러리](/docs/programming/ko/PRGMING_PYTHON/#사용자-지정-설치) 그리고 [넘파이](/docs/programming/ko/PRGMING_PYTHON/#파이썬-넘파이) 준비되어야 한다.
 
 우선 [CMake](https://cmake.org/) 공식 홈페이지에서 프로그램을 다운로드 및 설치를 한다.
@@ -136,33 +136,19 @@ Call Stack (most recent call first):
 
 결과적으로 다음은 필자가 기본 CMake 빌드 옵션에서 변경한 모든 사항들이다.
 
-* `BUILD_JAVA`: 비활성
+* `BUILD_JAVA` - OFF<br/>: *자바 OpenCV 라이브러리는 현재 대상이 아니다.*
 
-  *자바 OpenCV 라이브러리는 현재 대상이 아니다.*
+* `BUILD_PERF_TEST` - OFF<br/>: *OpenCV 성능 시험 프로그램 빌드는 필요하지 않다.*
 
-* `BUILD_PERF_TEST`: 비활성
+* `BUILD_TEST` - OFF<br/>: *OpenCV 정확도 시험 프로그램 빌드는 필요하지 않다.*
 
-  *OpenCV 성능 시험 프로그램 빌드는 필요하지 않다.*
+* `BUILD_opencv_world` - ON<br/>: *수많은 OpenCV 라이브러리를 하나의 슈퍼 모듈로 통합하여 간편하게 사용할 수 있다. 단, OpenCV 프로젝트 컴파일 시간이 길어지는 단점을 가진다. 개발 단계에서는 라이브러리를 개별적으로 호출, 그리고 프로그램 배포에서는 `opencv_world` 라이브러리 사용을 권장한다.*
 
-* `BUILD_TEST`: 비활성
+* `OPENCV_EXTRA_MODULES_PATH` - `${OpenCV}/opencv_contrib/modules`<br/>: *본 문서는 추가 모듈을 함께 사용할 수 있는 OpenCV 라이브러리 생성을 목표로 한다.*
 
-  *OpenCV 정확도 시험 프로그램 빌드는 필요하지 않다.*
+* `OPENCV_GENERATE_SETUPVARS` - OFF<br/>: *설명 참조*
 
-* `BUILD_opencv_world`: 활성
-
-  *수많은 OpenCV 라이브러리를 하나의 슈퍼 모듈로 통합하여 간편하게 사용할 수 있다. 단, OpenCV 프로젝트 컴파일 시간이 길어지는 단점을 가진다. 개발 단계에서는 라이브러리를 개별적으로 호출, 그리고 프로그램 배포에서는 `opencv_world` 라이브러리 사용을 권장한다.*
-
-* `OPENCV_EXTRA_MODULES_PATH`: `${OpenCV}/opencv_contrib/modules`
-
-  *본 문서는 추가 모듈을 함께 사용할 수 있는 OpenCV 라이브러리 생성을 목표로 한다.*
-
-* `OPENCV_GENERATE_SETUPVARS`: 비활성
-
-  *설명 참조*
-
-* `OPENCV_PYTHON3_VERSION`: 활성
-
-  *파이썬 3을 주로 사용하므로 버전 3에 적합한 OpenCV 모듈을 생성한다.*
+* `OPENCV_PYTHON3_VERSION` - ON<br/>: *파이썬 3을 주로 사용하므로 버전 3에 적합한 OpenCV 모듈을 생성한다.*
 
 CMake 옵션 선택이 완료되었으면 `Generate` 버튼을 눌러 OpenCV 라이브러리 프로젝트를 생성한다.
 
@@ -285,37 +271,21 @@ CMake의 OpenCV 빌드 옵션 중에서 `OPENCV_EXTRA_MODULES_PATH`가 있는데
 
 결과적으로 다음은 필자가 기본 CMake 빌드 옵션에서 변경한 모든 사항들이다.
 
-* `BUILD_JAVA`: 비활성
+* `BUILD_JAVA` - OFF<br/>: *자바 OpenCV 라이브러리는 현재 대상이 아니다.*
 
-  *자바 OpenCV 라이브러리는 현재 대상이 아니다.*
+* `BUILD_PERF_TEST` - OFF<br/>: *OpenCV 성능 시험 프로그램 빌드는 필요하지 않다.*
 
-* `BUILD_PERF_TEST`: 비활성
+* `BUILD_TEST` - OFF<br/>: *OpenCV 정확도 시험 프로그램 빌드는 필요하지 않다.*
 
-  *OpenCV 성능 시험 프로그램 빌드는 필요하지 않다.*
+* `BUILD_opencv_world` - ON<br/>: *수많은 OpenCV 라이브러리를 하나의 슈퍼 모듈로 통합하여 간편하게 사용할 수 있다. 단, OpenCV 프로젝트 컴파일 시간이 길어지는 단점을 가진다. 개발 단계에서는 라이브러리를 개별적으로 호출, 그리고 프로그램 배포에서는 `opencv_world` 라이브러리 사용을 권장한다.*
 
-* `BUILD_TEST`: 비활성
+* `OPENCV_EXTRA_MODULES_PATH` - `${OpenCV}/opencv_contrib/modules`<br/>: *본 문서는 추가 모듈을 함께 사용할 수 있는 OpenCV 라이브러리 생성을 목표로 한다.*
 
-  *OpenCV 정확도 시험 프로그램 빌드는 필요하지 않다.*
+* `OPENCV_PYTHON3_VERSION` - ON<br/>: *파이썬 3을 주로 사용하므로 버전 3에 적합한 OpenCV 모듈을 생성한다.*
 
-* `BUILD_opencv_world`: 활성
+* `PYTHON2_LIBRARY_DEBUG` - `/usr/lib/x86_64-linux-gnu/libpython2.7_d.so`<br/>: *파이썬 2 디버깅 라이브러리가 자동 입력되지 않으면 직접 입력해 준다.*
 
-  *수많은 OpenCV 라이브러리를 하나의 슈퍼 모듈로 통합하여 간편하게 사용할 수 있다. 단, OpenCV 프로젝트 컴파일 시간이 길어지는 단점을 가진다. 개발 단계에서는 라이브러리를 개별적으로 호출, 그리고 프로그램 배포에서는 `opencv_world` 라이브러리 사용을 권장한다.*
-
-* `OPENCV_EXTRA_MODULES_PATH`: `${OpenCV}/opencv_contrib/modules`
-
-  *본 문서는 추가 모듈을 함께 사용할 수 있는 OpenCV 라이브러리 생성을 목표로 한다.*
-
-* `OPENCV_PYTHON3_VERSION`: 활성
-
-  *파이썬 3을 주로 사용하므로 버전 3에 적합한 OpenCV 모듈을 생성한다.*
-
-* `PYTHON2_LIBRARY_DEBUG`: `/usr/lib/x86_64-linux-gnu/libpython2.7_d.so`
-
-  *파이썬 2 디버깅 라이브러리가 자동 입력되지 않으면 직접 입력해 준다.*
-
-* `PYTHON3_LIBRARY_DEBUG`: `/usr/lib/x86_64-linux-gnu/libpython3.7dm.so`
-
-  *파이썬 3 디버깅 라이브러리가 자동 입력되지 않으면 직접 입력해 준다.*
+* `PYTHON3_LIBRARY_DEBUG` - `/usr/lib/x86_64-linux-gnu/libpython3.7dm.so`<br/>: *파이썬 3 디버깅 라이브러리가 자동 입력되지 않으면 직접 입력해 준다.*
 
 CMake 옵션 선택이 완료되었으면 `Generate` 버튼을 눌러 OpenCV 라이브러리 프로젝트를 생성한다.
 
