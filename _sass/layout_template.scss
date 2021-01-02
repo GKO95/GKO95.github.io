@@ -166,7 +166,7 @@ code {
     font-family: $MONOSPACE;
     border-radius: 0.2em;
     padding: 0 0.2em;
-    word-break: break-all;
+    word-break: initial;
 }
 
 blockquote {

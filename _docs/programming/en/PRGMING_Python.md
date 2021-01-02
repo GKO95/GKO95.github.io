@@ -2025,7 +2025,7 @@ from package.module import function
 ```
 
 ## Python Package Index
-Python Package Index (abbrev. PyPI) is an external module storage website (*https://pypi.python.org/pypi*). To download and install the modules and packages, a software called pip is necessary.
+[Python Package Index](https://pypi.org/) (abbrev. PyPI) is an external package storage server. To download and install the modules and packages, a software called pip is necessary.
 
 ### PIP
 The pip software is a package management system required to install and manage the Python package. The software comes installed by default with the modern distribution of Python. Installation and management of packages are done using Command Prompt or Powershell.
@@ -2045,7 +2045,7 @@ python -m pip
 Entering `python` on a terminal opens Microsoft Store on Windows 10 OS. There ways to bypass and prevent this:
 
 1. Use a Python Launcher program; replace`python` with `py`.
-2. On `Setting > Apps > Apps & features > App execution aliases`, switch `python.exe` and `python3.exe` off.
+2. On `Setting` → `Apps` → `Apps & features` → `App execution aliases`, switch `python.exe` and `python3.exe` off.
 
 The command means accessing the pip under the python interpreter specified in the environment variable. It reduces confusion on managing packages between interpreters. When there is another version of Python installed, say 32 bits of Python 3.5
 
@@ -2091,7 +2091,7 @@ To exit from a virtual environment activated console, it needs to be "deactivate
 deactivate
 ```
 
-The above is the same as entering the command `PATH=D:\Workspace\Python\.venv\Scripts\deactivate.bat`. Because of this, relocating the virtual environment directory will cause the `deactivate` command unable to recognize its path.
+The above is the same as entering the command <code style="word-break: break-all;">D:\Workspace\Python\.venv\Scripts\deactivate.bat</code>. Because of this, relocating the virtual environment directory will cause the `deactivate` command unable to recognize its path.
 
 # **PYTHON: NUMPY**
 NumPy is a powerful and useful library used in Python that supports multi-dimensional matrix (aka. NumPy array). As one of the best known scientific libraries, other well-recognized libraries also implements NumPy such as Matplotlib, TensorFlow, and more.

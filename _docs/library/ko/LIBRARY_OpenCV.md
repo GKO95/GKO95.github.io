@@ -142,7 +142,7 @@ Call Stack (most recent call first):
 
 * `BUILD_TEST` - OFF<br/>: *OpenCV 정확도 시험 프로그램 빌드는 필요하지 않다.*
 
-* `BUILD_opencv_world` - ON<br/>: *수많은 OpenCV 라이브러리를 하나의 슈퍼 모듈로 통합하여 간편하게 사용할 수 있다. 단, OpenCV 프로젝트 컴파일 시간이 길어지는 단점을 가진다. 개발 단계에서는 라이브러리를 개별적으로 호출, 그리고 프로그램 배포에서는 `opencv_world` 라이브러리 사용을 권장한다.*
+* `BUILD_opencv_world` - ON<br/>: *수많은 OpenCV 라이브러리를 하나의 슈퍼 모듈로 통합하여 간편하게 사용할 수 있다. 단, OpenCV 라이브러리 빌드 시간이 상당히 길어진다.*
 
 * `OPENCV_EXTRA_MODULES_PATH` - `${OpenCV}/opencv_contrib/modules`<br/>: *본 문서는 추가 모듈을 함께 사용할 수 있는 OpenCV 라이브러리 생성을 목표로 한다.*
 
@@ -158,7 +158,7 @@ CMake 옵션 선택이 완료되었으면 `Generate` 버튼을 눌러 OpenCV 라
 
 ![그림 12-1. OpenCV 라이브러리 프로젝트 <code>Debug</code> 모드 빌드 (윈도우)](/assets/img/docs/library/OpenCV/opencv_win_vs_build.png)
 
-본 과정은 상당한 시간이 소요가 되는 동시에 CPU 내에서도 많은 양의 자료를 처리해야 하기 때문에 기다림이 필요하다. 특히 CUDA가 활성화된 OpenCV 라이브러리의 경우에는 1시간 이상을 기다릴 준비를 해야 한다. 그러나 일반적으로는 10~15분 이내에 마무리되며, 반드시 빌드 결과를 확인하기를 권장한다.
+본 과정은 상당한 시간이 소요가 되는 동시에 CPU 내에서도 많은 양의 자료를 처리해야 하기 때문에 기다림이 필요하다. 특히 CUDA가 활성화된 OpenCV 라이브러리의 경우에는 1시간 이상을 기다릴 준비를 해야 한다. 일반적으로는 10~15분 이내에 마무리되나, `BUILD_opencv_world`가 활성되어 있으면 시간이 배로 소요될 수 있다. 반드시 빌드 결과를 확인하기를 권장한다.
 
 ![그림 13-1. OpenCV 라이브러리 프로젝트 <code>Debug</code> 모드 빌드 결과 (윈도우)](/assets/img/docs/library/OpenCV/opencv_win_vs_output.png)
 
@@ -188,6 +188,8 @@ ERROR: recursion is detected during loading of "cv2" binary extensions. Check Op
 
 프로젝트에 OpenCV 라이브러리를 불러올 때에는 오로지 `${OpenCV}/opencv/build/install` 경로 안에 있는 파일들만 사용하도록 한다. 라이브러리는 동일한 이름을 가진게 두 개가 있을 것이며, 그 중에서 뒤에 알파벳 `d`가 있는 파일은 디버깅 라이브러리를 의미한다. 라이브러리 폴더에 동일한 이름의 라이브러리가 보이지 않으면 `Debug` 혹은 `Release` 중 하나를 빌드하지 않았다는 의미로 나머지도 반드시 빌드하도록 한다.
 
+만일 설치한 OpenCV 라이브러리를 제거하기 위해서는 `${OpenCV}/opencv/build/install` 폴더를 삭제하면 된다. 이름만 `install`일 뿐이지, 윈도우 제어판의 "프로그램 제거"에 설치된 프로그램 목록에는 OpenCV와 관련된 소프트웨어를 전혀 찾아볼 수 없다. 그러므로 파일 삭제만으로 안전하게 제거할 수 있다.
+
 ### 리눅스 OS
 > 아래 절차는 리눅스 운영체제 중에서 데비안(Debian) 10 "Buster"를 기준으로 설명하였으며, 이는 우분투(Ubuntu)에도 동일하게 적용이 된다.
 
@@ -199,7 +201,7 @@ OpenCV 라이브러리 빌드 과정은 윈도우와 비슷하나 리눅스가 �
     sudo apt install build-essential
     ```
   
-  해당 명령어는 GNU `gcc` 컴파일러 및 `make` 자동 빌드 도구 소프트웨어 등을 설치한다. 윈도우에서 비주얼 스튜디오의 MSVC 컴파일러로 라이브러리를 빌드하였으면 리눅스에서는 GNU `make`를 사용할 것이다.
+  해당 명령어는 GNU `gcc` 컴파일러 및 `make` 자동 빌드 도구 소프트웨어 등을 설치한다. 윈도우에서 [비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)의 MSVC 컴파일러로 라이브러리를 빌드하였으면 리눅스에서는 GNU `make`를 사용할 것이다.
 
 *  OpenCV 라이브러리는 이미지 및 영상 처리를 위한 것이므로 이러한 미디어를 다룰 수 있는 패키지들이 반드시 요구된다. 다음 명령어를 통해 OpenCV에 필수적인 패키지를 설치한다.
     
@@ -277,7 +279,7 @@ CMake의 OpenCV 빌드 옵션 중에서 `OPENCV_EXTRA_MODULES_PATH`가 있는데
 
 * `BUILD_TEST` - OFF<br/>: *OpenCV 정확도 시험 프로그램 빌드는 필요하지 않다.*
 
-* `BUILD_opencv_world` - ON<br/>: *수많은 OpenCV 라이브러리를 하나의 슈퍼 모듈로 통합하여 간편하게 사용할 수 있다. 단, OpenCV 프로젝트 컴파일 시간이 길어지는 단점을 가진다. 개발 단계에서는 라이브러리를 개별적으로 호출, 그리고 프로그램 배포에서는 `opencv_world` 라이브러리 사용을 권장한다.*
+* `BUILD_opencv_world` - ON<br/>: *수많은 OpenCV 라이브러리를 하나의 슈퍼 모듈로 통합하여 간편하게 사용할 수 있다. 단, OpenCV 라이브러리 빌드 시간이 상당히 길어진다.*
 
 * `OPENCV_EXTRA_MODULES_PATH` - `${OpenCV}/opencv_contrib/modules`<br/>: *본 문서는 추가 모듈을 함께 사용할 수 있는 OpenCV 라이브러리 생성을 목표로 한다.*
 
@@ -297,11 +299,11 @@ CMake 옵션 선택이 완료되었으면 `Generate` 버튼을 눌러 OpenCV 라
 make
 ```
 
-본 과정은 상당한 시간이 소요가 되는 동시에 CPU 내에서도 많은 양의 자료를 처리해야 하기 때문에 기다림이 필요하다. 특히 CUDA가 활성화된 OpenCV 라이브러리의 경우에는 1시간 이상을 기다릴 준비를 해야 한다. 그러나 일반적으로는 10~15분 이내에 마무리되며, 오류가 생기면 빌드를 중단한다.
+본 과정은 상당한 시간이 소요가 되는 동시에 CPU 내에서도 많은 양의 자료를 처리해야 하기 때문에 기다림이 필요하다. 특히 CUDA가 활성화된 OpenCV 라이브러리의 경우에는 1시간 이상을 기다릴 준비를 해야 한다. 일반적으로는 10~15분 이내에 마무리되나, `BUILD_opencv_world`가 활성되어 있으면 시간이 배로 소요될 수 있다. 오류가 생기면 빌드가 도중에 중단된다.
 
 ![그림 13-2. OpenCV 라이브러리 프로젝트 빌드 과정 (데비안)](/assets/img/docs/library/OpenCV/opencv_deb_make_build.png)
 
-빌드를 완료하였으면 아래의 명령어로 리눅스의 시스템 라이브러리로 설치를 진행한다; 정확히 말하자면 빌드한 라이브러리를 CMake 옵션이서 지정한 `/usr/local`로 옮기는 절차이다.
+빌드를 완료하였으면 아래의 명령어로 `/usr/local` 경로로 라이브러리를 설치를 진행한다. 이는 시스템 내에서 소프트웨어를 설치할 때 사용되는 경로이며, 안에는 로컬에서 사용할 수 있는 라이브러리와 헤더 파일, 바이너리 파일 및 소스 코드 등이 들어있다.
 
 ```bash
 sudo make install
@@ -309,8 +311,151 @@ sudo make install
 
 ![그림 14-2. OpenCV 라이브러리 설치 (데비안)](/assets/img/docs/library/OpenCV/opencv_deb_make_install.png)
 
-스크립트로 자동 설치된 라이브러리를 삭제하려면 Makefile이 있는 경로로 돌아가서 아래 명령어를 입력하면 된다.
+마지막으로 `/usr/local`에 새로 설치한 라이브러리를 시스템에서 인식할 수 있도록 다음 명령어를 입력한다.
+
+```bash
+sudo ldconfig
+```
+
+만일 설치한 OpenCV 라이브러리를 제거하기 위해서는 `make` 명령어를 사용했던 OpenCV 라이브러리의 Makefile이 있던 위치로 되돌아가야 한다. 아래의 명령어를 입력하면 `sudo make install` 과정에서 `/usr/local` 경로에 설치하였던 라이브러리 및 헤더 파일을 전부 삭제한다.
 
 ```bash
 sudo make uninstall
 ```
+
+# **OpenCV: 프로젝트**
+본 장은 OpenCV 라이브러리를 활용한 프로젝트를 설정하는 방법을 소개한다. 이 과정에서 매우 복잡하고 까다로운 OpenCV 라이브러리 설치가 정상적으로 되었는지 확인할 수 있으며, 만일 아래의 절차에 불구하고 오류가 발생하면 [*OpenCV: 설치*](#OpenCV-설치)로 돌아가 재설치가 필요할 수 있다.
+
+## 파이썬 3
+파이썬에서 OpenCV를 적용은 매우 간단한다: 파이썬 버전의 OpenCV 라이브러리인 `cv2`를 패키지를 불러오는 `import` 구문으로 가져온다. 이는 어떠한 운영체제를 사용하든 공통된 방식이다.
+
+```python
+import cv2
+```
+
+## C++
+C++에서 OpenCV를 적용하기 위해서는 라이브러리를 빌드 과정에서 직접 불러와야 한다. 윈도우 OS를 사용하는 경우 비주얼 스튜디오에서, 리눅스에서는 터미널 혹은 [비주얼 스튜디오 코드](https://code.visualstudio.com/download)에서 링크를 하는 방법을 소개한다.
+
+### 윈도우 OS
+> 본 절차를 비주얼 스튜디오에서 진행되었으며, 이해를 돕기 위해 C++ 문서의 [콘솔 어플리케이션 프로젝트 생성](/docs/programming/ko/PRGMING_Cpp/#비주얼-스튜디오)에 이어서 설명한다.
+
+OpenCV 라이브러리를 적용시키고 싶은 프로젝트의 속성에 들어간다. 프로젝트 속성을 들어가기 위해서는 솔루션이 아닌 프로젝트를 오른쪽 클릭한 다음 `Properties`를 누른다. 솔루션 속성과 프로젝트 속성은 아예 다른 내용을 다룬다.
+
+![그림 17. 비주얼 스튜디오 C++ 프로젝트 속성](/assets/img/docs/library/OpenCV/opencv_win_cpp_property.png)
+
+우선 프로젝트에서 라이브러리를 사용하기 위해 필요한 헤더 파일을 불러올 수 있도록 설정한다. 물론 `#include "..."`의 상대경로로 원하는 헤더 파일 위치까지 도달할 수 있겠으나, 경로가 매우 길고 복잡해질 수가 있어 절대로 권장하지 않는다. 혹은 OpenCV 헤더 파일을 직접 프로젝트로 가져오는 방법도 있으나, 새로운 헤더 파일을 추가할 때마다 프로젝트로 복사하는 번거로움이 발생한다. 하지만 아래의 절차는 헤더 파일을 탐색할 위치를 프로젝트에 미리 지정함으로써 언급되었던 불편함을 손쉽게 해결할 수 있다.
+
+헤더 파일 경로를 추가하기 위해서는 설정 페이지에서 `C/C++` → `General`로 이동한 다음 `Additional Include Directories`를 클릭한다.
+
+![그림 18. C++ 프로젝트 헤더 불러오기 (1단계)](/assets/img/docs/library/OpenCV/opencv_win_cpp_include1.png)
+
+그 다음 `${OpenCV}/opencv/build/install/include` 경로를 추가한다.
+
+![그림 19. C++ 프로젝트 헤더 불러오기 (2단계)](/assets/img/docs/library/OpenCV/opencv_win_cpp_include2.png)
+
+그러면 상대경로가 아닌 `#include <...>`를 사용하여도 프로젝트 및 컴파일러가 헤더 파일을 찾아낼 수 있다. 아래는 헤더 파일 경로를 설정한 이후, C++ 스크립트에서 OpenCV 라이브러리 헤더 파일을 알아채는 모습을 보여준다.
+
+![그림 20. C++ 프로젝트 헤더 불러오기 (3단계)](/assets/img/docs/library/OpenCV/opencv_win_cpp_include3.png)
+
+헤더 파일만 추가한다고 해서 OpenCV가 프로젝트에 적용되는 것이 아니다; LIB 정적 라이브러리를 프로젝트에 불러와야 OpenCV가 적용된 어플리케이션을 컴파일할 수 있다. 정적 라이브러리 경로를 추가하기 위해서는 설정 페이지에서 `Linker` → `General`로 이동한 다음 `Additional Library Directories`를 클릭한다.
+
+![그림 21. C++ 프로젝트 라이브러리 적용 (1단계)](/assets/img/docs/library/OpenCV/opencv_win_cpp_linker1.png)
+
+그 다음 `${OpenCV}/opencv/build/install/x64/vc16/lib` 경로를 추가한다. 여기서 `vc16`은 비주얼 스튜디오 2019를 의미하며, 2017과 2015의 경우에는 폴더명이 `vc15`와 `vc14`로 되어있다.
+
+![그림 22. C++ 프로젝트 라이브러리 적용 (2단계)](/assets/img/docs/library/OpenCV/opencv_win_cpp_linker2.png)
+
+라이브러리 경로를 지정하는 것만으로 필요한 라이브러리가 자동적으로 프로젝트에 적용되지 않는다. 경로 지정은 라이브러리를 간편하게 불러오기 위해서이며, 정적 라이브러리를 추가하기 위해서는 설정 페이지에서 `Linker` → `Input`으로 이동한 다음 `Additional Dependencies`를 클릭한다.
+
+![그림 23. C++ 프로젝트 라이브러리 적용 (3단계)](/assets/img/docs/library/OpenCV/opencv_win_cpp_linker3.png)
+
+CMake 단계에서 `BUILD_opencv_world`를 활성화하여 거의 모든 라이브러리는 `opencv_world451.lib` 그리고 `opencv_world451d.lib` 파일 하나로 통합되어 있다. 현재 프로젝트는 Deubg 모드로 설정되어 있기 때문에 후자를 입력하였다. 반대로 Release 모드에서는 전자를 입력한다.
+
+![그림 24. C++ 프로젝트 라이브러리 적용 (4단계)](/assets/img/docs/library/OpenCV/opencv_win_cpp_linker4.png)
+
+위의 프로젝트 속성 설정을 마쳤으면 아래와 같이 코드를 입력한다. 본 코드는 `opencv-logo.png` 파일을 불러와 이미지 창을 띄우는 기능을 수행한다.
+
+```cpp
+#include <iostream>
+#include <opencv2/highgui.hpp>
+using namespace cv;
+
+int main()
+{
+    std::string image_path 
+        = "D:\\Workspace\\GitHub\\OpenCV\\opencv\\doc\\opencv-logo.png";
+    Mat image = imread(image_path);
+
+    imshow("Sample", image);
+    if (waitKey(0) == 13) destroyAllWindows;
+
+    return 0;
+}
+```
+
+그러나 `F5` 혹은 `CTRL+F5`로 코드를 컴파일하여 실행하려고 하면 다음 오류가 발생한다.
+
+![그림 25. C++ 프로젝트 실행 에러](/assets/img/docs/library/OpenCV/opencv_win_cpp_dynamic1.png)
+
+이는 OpenCV 설치가 잘못된 것이 아니라 동적 라이브러리가 없어 실행할 수 없다는 오류를 나타낸다. 사실상 컴파일은 정상적으로 이루어졌으며 `CTRL+B` 단축키를 눌러서 성공적으로 빌드가 되었다는 알림 및 실행 파일이 생성된 점에서 확인할 수 있다. 비록 정적 라이브러리를 사용하여 성공적으로 컴파일 하였으나, 라이브러리 안에 있는 함수들이 컴파일된 어플리케이션에 내장되지 않는다. 어플리케이션가 제대로 동작하기 위해서는 여전히 라이브러리를 필요로 하며, 이때 필요한 것이 바로 DLL 동적 라이브러리이다.
+
+프로젝트가 Debug 모드에서 컴파일하였으므로 아래의 그림과 같이 `${OpenCV}/opencv/build/install/x64/vc16/bin`에 있는 `opencv_world451d.dll` 파일을 컴파일된 실행 파일이 위치한 경로로 복사한다. 반대로 Release 모드에서는 `opencv_world451.dll` 파일을 복사한다.
+
+![그림 26. C++ 프로젝트 DLL 파일 복사](/assets/img/docs/library/OpenCV/opencv_win_cpp_dynamic2.png)
+
+컴파일 필요없이 프로그램을 실행하면 다음 화면을 볼 수 있다.
+
+![그림 27. C++ 프로젝트 컴파일 및 실행](/assets/img/docs/library/OpenCV/opencv_win_cpp_exec.png)
+
+위와 같은 화면이 나왔으면 라이브러리가 프로젝트에 정상적으로 적용되었음을 뜻하며, 본격적으로 OpenCV 프로젝트를 진행하면 된다. 이러한 절차는 OpenCV에서만 해당되는 게 아니라 C++ 전체적으로 외부 라이브러리를 불러오기 위해 거쳐야 하는 과정으로 반드시 숙지하고 있어야 한다.
+
+### 리눅스 OS
+> 본 절차를 [비주얼 스튜디오 코드](https://code.visualstudio.com/download)를 사용하였으며, [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) 확장도구를 필요로 한다.
+
+리눅스에서 OpenCV 프로젝트를 생성하는데 어떠한 IDE 및 코드 편집기를 사용해도 무관한다. 그 중에서 비주얼 스튜디오 코드는 리눅스에서 설치할 수 있는 동시에 필자가 자주 사용하는 코드 편집기이므로, 이번 부문에서는 VS Code를 활요한 OpenCV 프로젝트 설정법을 소개한다.
+
+필자는 `/home/gko95/Workspace/Cpp/OpenCV` 폴더를 만들어 `main.cpp` 파일을 생성하여 다음과 같이 코드를 작성하였다. 본 코드는 `opencv-logo.png` 파일을 불러와 이미지 창을 띄우는 기능을 수행한다.
+
+![그림 28. 비주얼 스튜디오 코드 OpenCV C++ 스크립트](/assets/img/docs/library/OpenCV/opencv_deb_cpp_script.png)
+
+하지만 VS Code는 OpenCV 헤더 파일에 대한 정보가 없어 `#include <opencv2/highgui.hpp>`에 오류를 표시하였다. 그리고 발생한 문제를 해결하기 위해서는 `IncludePath` 목록을 업데이트하하는 문구를 하단부에 찾아볼 수 있다. 그러기 위해서 `F1`을 클릭한 다음 `C/C++: Edit Configuration`을 클릭한다.
+
+![그림 29. VS Code의 C/C++ 구성 설정 (1단계)](/assets/img/docs/library/OpenCV/opencv_deb_cpp_config1.png)
+
+생성된 `.vscode/c_cpp_properties.json` 파일 안에는 위에서 언급한 `IncludePath` 목록이 있으며, 안에 OpenCV 라이브러리 헤더 파일이 있는 `/usr/local/include/opencv4` 경로를 입력한다. 또한 OpenCV는 C++ 라이브러리인 점을 감안하여 컴파일러 경로 `compilerPath`를 `/usr/bin/g++`로 수정한다: `gcc`는 C 컴파일러이고 `g++`는 C++ 컴파일러이기 때문이다.
+
+![그림 30. VS Code의 C/C++ 구성 설정 (2단계)](/assets/img/docs/library/OpenCV/opencv_deb_cpp_config2.png)
+
+헤더 파일만 추가한다고 해서 OpenCV가 프로젝트에 적용되는 것이 아니다; OpenCV가 적용된 어플리케이션을 생성하기 위해서는 컴파일을 할 때 라이브러리를 불어와야 한다. 해당 설정을 위해서 임시로 `F5` 혹은 `CTRL+F5` 버튼을 눌러 어플리케이션 빌드 및 실행을 감행한다. 만일 어떠한 작업환경에서 진행할 것인지 묻는다면 GNU 디버거 `C++ (GDB/LLDB)`를 선택한다.
+
+![그림 31. VS Code의 C/C++ 작업 설정 (1단계)](/assets/img/docs/library/OpenCV/opencv_deb_cpp_task1.png)
+
+그 다음 컴파일러 선택에서는 `/usr/bin/g++`을 택한다. 이전 단계에서의 `c_cpp_properties.json`에서 지정한 컴파일러 경로와 동일하나, 해당 JSON 파일은 컴파일 작업이 아닌 VS Code 작업환경 구성 설정이라는 아예 다른 성질을 가진다. 목록에 나열된 g++ 컴파일러는 파일명과 위치만 다를 뿐, 사실상 동일한 컴파일러이다.
+
+![그림 32. VS Code의 C/C++ 작업 설정 (2단계)](/assets/img/docs/library/OpenCV/opencv_deb_cpp_task2.png)
+
+컴파일러까지 선택하였으면 아래와 같은 오류창이 나타난다. 
+
+![그림 33. VS Code의 C/C++ 작업 설정 (3단계)](/assets/img/docs/library/OpenCV/opencv_deb_cpp_task3.png)
+
+이는 예상된 결과이며 동시에 `.vscode/launch.json` 및 `.vscode/task.json`가 생성되었음을 확인할 수 있다. 두 개의 JSON 파일 중에서 컴파일러 옵션에 관여하는 설정 파일은 바로 `.vscode/task.json`이다. 해당 파일에서 수정해야 할 부분은 `"args"` 목록이다.
+
+![그림 34. VS Code의 C/C++ 작업 설정 (4단계)](/assets/img/docs/library/OpenCV/opencv_deb_cpp_task4.png)
+
+총 세 줄이 추가되었으며, 각 옵션은 다음과 같은 의미를 가진다.
+
+* `-I/usr/local/include/opencv4`<br/>: 컴파일에 추가할 라이브러리 헤더 파일의 경로.
+
+* `-L/usr/local/lib`<br/>: 컴파일에 추가할 라이브러리의 경로.
+
+* `-lopencv_world`<br/>: 컴파일에 추가할 라이브러리. 라이브러리 파일명이 `libopencv_world.so`이면 접두사 `lib`와 접미사 `.so`를 제외하여 입력한다.
+
+위의 `.vscode/task.json` 파일 설정은 사실상 아래와 같이 터미널에서 컴파일을 할 때 입력되는 옵션들을 가리킨다.
+
+![그림 35. C++ 프로젝트 컴파일 및 실행](/assets/img/docs/library/OpenCV/opencv_deb_cpp_terminal.png)
+
+VS Code와 같은 코드 편집기 혹은 IDE를 사용하여 프로젝트 설정을 하면 매번 컴파일을 할 때마다 긴 명령어를 입력할 필요가 없다. 위의 설정을 모두 마친 다음 프로그램을 다시 실행하면 다음 화면을 볼 수 있다.
+
+![그림 36. C++ 프로젝트 컴파일 및 실행](/assets/img/docs/library/OpenCV/opencv_deb_cpp_exec.png)
+
+위와 같은 화면이 나왔으면 라이브러리가 프로젝트에 정상적으로 적용되었음을 뜻하며, 본격적으로 OpenCV 프로젝트를 진행하면 된다. 이러한 절차는 OpenCV에서만 해당되는 게 아니라 C++ 전체적으로 외부 라이브러리를 불러오기 위해 거쳐야 하는 과정으로 반드시 숙지하고 있어야 한다.

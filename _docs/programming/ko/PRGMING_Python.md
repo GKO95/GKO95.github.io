@@ -2015,7 +2015,7 @@ from package.module import function
 ```
 
 ## PyPI
-PyPI(Python Package Index; 파이썬 패키지 목록)은 온라인 모듈 저장소이다(*https://pypi.python.org/pypi*). 모듈 및 패키지를 설치하기 위해서는 pip라는 소프트웨어가 반드시 필요하다.
+[PyPI](https://pypi.org/)(Python Package Index; 파이썬 패키지 목록)은 온라인 패키지 저장소이다. 모듈 및 패키지를 설치하기 위해서는 pip라는 소프트웨어가 반드시 필요하다.
 
 ### pip
 pip 소프트웨어는 파이썬 패키지 관리 시스템이다. 패키지 관리 소프트웨어는 기본적으로 파이썬 3 인터프리터와 함께 설치되지만, 온라인에서 개별적으로 설치할 수도 있다. 패키지의 설치 및 관리는 명령 프롬프트나 Powershell과 같은 터미널 유형 콘솔창에서 이루어진다. 
@@ -2035,7 +2035,7 @@ python -m pip
 특히 원도우 10 OS를 사용하는 경우 `python`을 입력하는 것만으로 마이크로소프트 스토어로 이동하게 되는데, 해결 방법은 두 가지가 있다.
 
 1. `python`을 `py`로 대체 (Python Launcher 프로그램 사용).
-2. 컴퓨터에서 `설정 > 앱 > 앱 및 기능 > 앱 실행 별칭 관리`에서 `python.exe` 및 `python3.exe`을 해제 (본질적 문제 해결).
+2. 컴퓨터에서 `설정` → `앱` → `앱 및 기능` → `앱 실행 별칭 관리`에서 `python.exe` 및 `python3.exe`을 해제 (본질적 문제 해결).
 
 위의 명령어는 컴퓨터 환경설정에서 지정된 파이썬 인터프리터의 pip를 접속한다는 것을 의미한다. 이를 통해 인터프리터 간의 패키지 관리에 혼돈을 줄일 수 있다. 만일 32비트 파이썬 3.5 인터프리터가 설치되었을 경우, 다음 명령어로 접근할 수 있다.  
 
@@ -2080,7 +2080,7 @@ python -m venv D:\Workspace\Python\project\.venv
 deactivate
 ```
 
-이는 `PATH=D:\Workspace\Python\.venv\Scripts\deactivate.bat` 명령어를 입력하는 것과 동일하다. 이러한 이유로, 가상환경 경로를 옮길 시 `deactivate` 명령어를 인식하지 못하여 직접 경로를 찾아서 `deactivate.bat` 파일을 실행해야 한다.
+이는 <code style="word-break: break-all;">D:\Workspace\Python\.venv\Scripts\deactivate.bat</code> 명령어를 입력하는 것과 동일하다. 이러한 이유로, 가상환경 경로를 옮길 시 `deactivate` 명령어를 인식하지 못하여 직접 경로를 찾아서 `deactivate.bat` 파일을 실행해야 한다.
 
 # **파이썬: 넘파이**
 넘파이는 다차원 행렬을 지원하는 매우 강력하고 유용한 파이썬 전용 라이브러리이다. 넘파이는 다른 라이브러리에 있어서도 독보적인 입지를 다지는데, Matplotlib 혹은 TensorFlow와 같은 라이브러리에서도 흔히 사용된다.
