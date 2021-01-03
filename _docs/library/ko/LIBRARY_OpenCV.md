@@ -91,7 +91,7 @@ git checkout tags/4.5.1
 OpenCV가 크로스 플랫폼을 지원할 수 있는 이유는 바로 완성된 라이브러리를 제공하는 게 아니라 소스 코드로부터 직접 라이브러리를 컴파일하기 때문이다. 이렇게 해서 생성된 라이브러리는 이미 해당 시스템에 최적화된 상태이다. CMake를 Bash를 사용하여 라이브러리를 생성할 빌드할 수 있으나, 본 문서에서는 CMake GUI를 사용하여 윈도우와 데비안(혹은 우분투)에서 각각 C++ 및 파이썬 3을 위한 OpenCV 4.5.1 라이브러리 생성 과정을 보여준다.
 
 ### 윈도우 OS
-> 아래 절차는 파이썬 3을 위한 OpenCV 라이브러리 빌드를 함께 소개히며, 이를 위해서는 파이썬 3 인터프리터 및 [디버깅 라이브러리](/docs/programming/ko/PRGMING_PYTHON/#사용자-지정-설치) 그리고 [넘파이](/docs/programming/ko/PRGMING_PYTHON/#파이썬-넘파이) 준비되어야 한다.
+> 아래 절차는 파이썬 3을 위한 OpenCV 라이브러리 빌드를 함께 소개히며, 이를 위해서는 파이썬 3 인터프리터 및 [디버깅 라이브러리](/docs/programming/ko/PRGMING_PYTHON/#사용자-지정-설치) 그리고 [넘파이](/docs/programming/ko/PRGMING_PYTHON/#파이썬-넘파이)가 준비되어야 한다.
 
 우선 [CMake](https://cmake.org/) 공식 홈페이지에서 프로그램을 다운로드 및 설치를 한다.
 
@@ -106,7 +106,7 @@ CMake 설치가 완료되었으면 프로그램을 실행하여 상단의 두 �
 
 각 입력란에 대한 설명에 보면 추론할 수 있듯이, CMake는 OpenCV 라이브러리를 생성하지 않는다; 해당 플랫폼에 가장 적합한 OpenCV 라이브러리 프로젝트를 생성하는 게 바로 CMake의 역할이다. 경로를 지정한 이후 `Configure` 버튼을 누르면 CMake 프로젝트에서 어떠한 플랫폼 및 컴파일러를 대상으로 한 OpenCV 라이브러리 프로젝트를 생성할 것인지 선택한다.
 
-![그림 7. OpenCV 빌드 플랫폼 및 컴파일러 지정 (윈도우)](/assets/img/docs/library/OpenCV/opencv_win_cmake_compiler.png)
+![그림 7-1. OpenCV 빌드 플랫폼 및 컴파일러 지정 (윈도우)](/assets/img/docs/library/OpenCV/opencv_win_cmake_compiler.png)
 
 만일 64비트 윈도우 OS의 경우, 기본 플랫폼이 `x64`로 설정되어 있다. 이는 32비트 어플리케이션에 사용할 수 없어, 32비트 라이브러리를 생성하기 위해서는 `Win32`로 플랫폼을 변경해야 한다.
 
