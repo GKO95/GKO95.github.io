@@ -20,23 +20,23 @@ else
 }
 
 //========================================
-// >> FOOTER: WIDTH RESIZE
+// FOOTER: WIDTH RESIZE
 //========================================
 var headerMargin = parseInt($(`header`).css("margin").split(" ")[1])
-$(`footer`).width($(window).width() - (headerMargin * 2)).css(
-    "left", `-${parseInt($(`main`).css("padding-left")) + parseInt($(`main`).css("margin").split(" ")[1]) - headerMargin}px`
-)
+const footerResize = () => {
+    $(`footer`).width($(window).width() - (headerMargin * 2)).css(
+        "left", `-${parseInt($(`main`).css("padding-left")) + parseInt($(`main`).css("margin").split(" ")[1]) - headerMargin}px`
+    )
+}; footerResize()
+$(window).resize(footerResize)
 
 //========================================
-// >> MAIN: CHECK CONTENT
+// MAIN: REDIRECT
 //========================================
 if (window.sessionStorage.getItem("REDIR.FLAG") == "1")
 {
-    let redirTitle = window.sessionStorage.getItem("REDIR.HREF")
-    $(`main [id*="-content"]`).prepend($(`
-<section class="notice" id="notice-redirected">
-    <p>Redirected from: <em>${redirTitle}</em></p><hr><p>넘어온 문서: <em>${redirTitle}</em></p>
-</section>`))
+    var _redirTitle = window.sessionStorage.getItem("REDIR.HREF")
+    $(`main [id*="-content"]`).prepend($(`<div class="notice" id="notice-redirected"></div>`))
 
     window.sessionStorage.setItem("REDIR.FLAG", `0`)
     window.sessionStorage.setItem("REDIR.HREF", ``)
@@ -55,7 +55,51 @@ else {
 }
 
 //========================================
-// >> MAIN: IMAGE RESIZE
+// MAIN: NOTICE
+//========================================
+$(`.notice`).each(function() {
+    let descriptionText, descriptionID
+    switch($(this).attr("id").split("-")[1])
+    {
+        case "expand":
+            descriptionID = "description-expand"
+            if (GetLANG() == enumLANG.ENGLISH) {
+                descriptionText = "This document will be expanded."
+            } else {
+                descriptionText = "본 내용은 곧 확장될 예정입니다."
+            }
+            break
+        case "redirected":
+            descriptionID = "description-redirected"
+            if (GetLANG() == enumLANG.ENGLISH) {
+                descriptionText = `Redirected from: ${_redirTitle}`
+            } else {
+                descriptionText = `넘어온 문서: ${_redirTitle}`
+            }
+            break
+        default:
+            descriptionID = "description-default"
+            if (GetLANG() == enumLANG.ENGLISH) {
+                descriptionText = ""
+            } else {
+                descriptionText = ""
+            }
+            break
+    }
+
+    $(`<section></section>`).attr({
+        "class": "notice-description",
+        "id": `${descriptionID}`
+    }).insertAfter(this).text(descriptionText)
+    $(this).mouseover(function() {
+        $(`#${descriptionID}`).show()
+    }).mouseout(function() {
+        $(`#${descriptionID}`).hide()
+    })
+})
+
+//========================================
+// MAIN: IMAGE RESIZE
 //========================================
 const imageSize = () => {
     $(`main [id*="-content"] img`).each(function() {
@@ -70,7 +114,7 @@ const imageSize = () => {
 $(window).resize(imageSize)
 
 //========================================
-// >> TOC
+// TOC
 //========================================
 $(`#toc-options-region`).prepend(`<a class="toc-option" id="toc-home" href="/" title="Return home" style="background-image: url(/assets/img/res/icon-home.png)"></a>`)
 $(`#toc-options-region`).prepend(`<a class="toc-option" id="toc-source" title="View source" style="background-image: url(/assets/img/res/icon-source.png)"></a>`)

@@ -1,5 +1,5 @@
 //==============================================================================================================
-//>> TERMINAL
+//>> NOTICE
 //==============================================================================================================
 html {
     // LIGHT THEME
@@ -7,19 +7,20 @@ html {
 
 &:not(.style-scope)[dark] {
     // DARK THEME
-    #notice-incomplete {
-        background-color: #B73B3B;
-        border-color: #840000;
-    }
-
     #notice-redirected {
-        background-color: #4190b7;
-        border-color: #1e63b9;
+        background-image: url(/assets/img/res/icon-redirect.png);
     }
 
     #notice-expand {
-        background-color: #d8864b;
-        border-color: #9e5000;
+        background-image: url(/assets/img/res/icon-alert.png);
+    }
+
+    #description-redirected {
+        background-color: #4190B7;
+    }
+
+    #description-expand {
+        background-color: #D8864B;
     }
 }}
 
