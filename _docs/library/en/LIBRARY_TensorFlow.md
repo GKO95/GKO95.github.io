@@ -1,5 +1,5 @@
 ---
-name: TensorFlow2
+name: TensorFlow
 lang: en
 layout: docs
 author: GKO95
