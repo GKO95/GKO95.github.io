@@ -1896,7 +1896,7 @@ with instance.method():
     statements
 ```
 
-One of the actual implementations of this syntax can be found in chapter *TENSORFLOW: BASIC § TensorBoard* in [*LIBRARY_TensorFlow.md*](./../../../library/en/LIBRARY_TensorFlow/) document.
+One of the actual implementations of this syntax can be found in the  [TensorBoard](/docs/library/en/LIBRARY_TensorFlow/#TensorBoard) chapter of TensorFlow document.
 
 ### Absolute & Relative Paths
 Python has two different types of paths: absolute and relative path. When designating a file path, use double backslash `\\` since using a single backslash will escape string object and can cause unwanted operation.
