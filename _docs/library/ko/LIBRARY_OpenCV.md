@@ -8,7 +8,6 @@ title: "라이브러리 | OpenCV"
 logo: "/assets/img/res/logo-opencv.png"
 order: 0x11
 ---
-{% include expand.html %}
 # **OpenCV: 소개**
 > *홈페이지: [https://opencv.org/](https://opencv.org/)*
 
