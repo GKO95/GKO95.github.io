@@ -66,8 +66,8 @@ array([[3, 4, 5],
 
 |   객체    | 설명                                      |
 | :---------: | :------------------------------------- |
-|  `Tensor`   | 텐서 형태의 데이터 객체이며, 텐서플로우 그래프의 "가지"로부터 크기를 확인할 수 있다. 공식 홈페이지에서는 `Tensor` 객체를 "`Operation` 객체 결과물의 심볼릭 핸들"이라고 정의한다. 프로그래밍 언어에 대조하면 [값](https://ko.wikipedia.org/wiki/값_(컴퓨터_과학))(value)과 같다.<br /><br />예시: "`tf.constant()`" 혹은 "`tensor = tf.add(A,B)` 문에서 `tensor` 변수" |
-| `Operation` | `Tensor` 객체의 연산자이며, 텐서플로우 그래프의 "노드"에 해당한다. 공식 홈페이지에는 `Operation` 객체를 "0개 이상의 `Tensor` 객체를 입력으로 받아 0개 이상의 `Tensor` 객체를 반환"한다고 정의한다. 프로그래밍 언어에 대조하면 [함수](https://ko.wikipedia.org/wiki/함수_(프로그래밍))(function)와 같다.<br /><br />예시: "`tf.Variable()`" 혹은 "`tensor = tf.add(A,B)` 문에서 `tf.add(A,B)` 함수" |
+|  `Tensor`<br/>(텐서)   | 텐서 형태의 데이터 객체이며, 텐서플로우 그래프의 "가지"로부터 크기를 확인할 수 있다. 공식 홈페이지에서는 `Tensor` 객체를 "`Operation` 객체 결과물의 심볼릭 핸들"이라고 정의한다. 프로그래밍 언어에 대조하면 [값](https://ko.wikipedia.org/wiki/값_(컴퓨터_과학))(value)과 같다.<br /><br />예시: "`tf.constant()`" 혹은 "`tensor = tf.add(A,B)` 문에서 `tensor` 변수" |
+| `Operation`<br/>(연산) | `Tensor` 객체의 연산자이며, 텐서플로우 그래프의 "노드"에 해당한다. 공식 홈페이지에는 `Operation` 객체를 "0개 이상의 `Tensor` 객체를 입력으로 받아 0개 이상의 `Tensor` 객체를 반환"한다고 정의한다. 프로그래밍 언어에 대조하면 [함수](https://ko.wikipedia.org/wiki/함수_(프로그래밍))(function)와 같다.<br /><br />예시: "`tf.Variable()`" 혹은 "`tensor = tf.add(A,B)` 문에서 `tf.add(A,B)` 함수" |
 
 # **텐서플로우: 설치**
 텐서플로우는 오픈소스 라이브러리로 [GitHub](https://github.com/tensorflow/tensorflow)에서 소스 코드를 확인할 수 있다. 그러나 본 GitHub Pages에서 소개한 또다른 라이브러리인 [OpenCV](/docs/library/ko/LIBRARY_OPENCV/)와 다르게, 이번에는 이미 빌드가 완료된 라이브러리 파일을 다운로드 및 설치할 것이다. 소스 코드로부터 빌드하는 과정이 매우 골치아프며 그러할 필요도 없기 때문이다.
@@ -137,14 +137,14 @@ ASCII 이외에도 UTF-8이나 UTF-16 등의 문자 인코딩 형식이 존재�
 그에 반해 ASCII는 단 하나의 바이트만을 사용하여 표현할 수 있는 문자가 총 256개로 제한적이지만 알파벳 및 숫자를 표현하기에는 충분하다. 특히 UTF와 달리 호환성이 보장되므로 컴퓨터 가독(machine-readable) 데이터로 가장 적합하다.
 
 ## 변수 텐서
-변수 텐서(variable tensor)는 값이 변하는 텐서를 가리키며 `tf.Variable()` API로 생성된다. 변수 텐서는 반드시 사용하기 전에 반드시 스칼라나 배열값, 혹은 `Operation` 객체로 초기화하여야 한다.
+변수 텐서(variable tensor)는 값이 변하는 텐서를 가리키며 `tf.Variable()` API로 생성된다. 변수 텐서는 반드시 사용하기 전에 반드시 스칼라나 배열값, 혹은 연산 객체로 초기화하여야 한다.
 
 ```python
 import tensorflow as tf
 
 tf.Variable(1.0)                      # 변수 텐서 초기화: 스칼라
 tf.Variable([[1,2,3],[4,5,6]])        # 변수 텐서 초기화: 배열값
-tf.Variable(tf.random.normal([1]))    # 변수 텐서 초기화: Operation 객체
+tf.Variable(tf.random.normal([1]))    # 변수 텐서 초기화: 연산 객체
 ```
 
 ## 텐서플로우 실행
@@ -222,3 +222,102 @@ print(C)
 ```python
 python -m pip install tensorboard
 ```
+
+## `tf.function` API
+`tf.function`는 오토그래프를 생성하는 매우 중요한 텐서플로우 API이며, 이는 텐서보드에서 그래프를 시각적으로 보여준다. 해당 API는 함수나 메소드와 같은 코드 블록을 전달인자로 받는 `func` 매개변수를 가지지만, 데코레이터 `@`를 사용하여 아래처럼 표현할 수 있다.
+
+```python
+@tf.function
+def function(arg1, arg2):
+    statements
+    return something
+
+''' 동일:
+def function(arg1, arg2):
+    statements
+    return something
+    
+function = tf.function(func = function)
+'''
+```
+
+본 API는 텐서플로우 스크립트의 모든 함수와 메소드에 적용될 필요가 없다. 오로지 학습에 사용되는 함수에만 적용해도 충분하며, 필요하다면 관측이 필요한 함수에도 활용 가능하다. 하나의 코드에 함수가 반복적으로 적용될 시, 해당 부분의 그래프는 단일의 `tf.PartitionedCall` 혹은 `tf.StatefulPartitionedCall` 노드로 대체된다.
+
+### 콘크리트 함수
+콘크리트 함수(concrete function)는 하나의 시그니처만을 지원하는 `tf.function` API의 그래프이다. 여기서 시그니처(signature)란, 연산자의 입력과 출력에 대한 설명을 의미한다. 아래의 코드와 같이 `input_signature` 인자를 `tf.function` API의 시그니처로 건네주므로써 지정된 텐서의 크기 및 자료형만 입력받을 수 있다.
+
+```python
+# 콘크리트 함수 (단일 시그니처 전용)
+@tf.function(input_signature=[
+    tf.TensorSpec(shape=[3,1], dtype=tf.float32), # -> 매개변수 arg1
+    tf.TensorSpec(shape=None,  dtype=tf.float32)  # -> 매개변수 arg2
+])
+def function(arg1, arg2):
+    statements
+    return something
+```
+
+콘크리트 함수와 반대로, 특정 시그니처가 정해지지 않은 그래프 함수를 다형성 함수(polymorphic function)이라고 한다.
+
+## 텐서보드 생성
+다음과 같은 텐서플로우 코드가 작성되었을 시, 이를 텐서보드에서 그래프로 확인하려면 아래의 명령어를 터미널에 입력한다.
+
+```python
+import tensorflow as tf
+
+A = tf.constant([[1,2,3],[4,5,6]], name="tensorA")
+B = tf.constant(value=1, shape=[2,3], name="tensorB")
+
+@tf.function
+def forward(x, y):
+    return tf.add(x, y, name="tensorAdd")
+
+# 요약 파일 작성자 "writer" 생성
+writer = tf.summary.create_file_writer("./tensorboard_logs")
+
+# 그래프 기록 및 프로파일링: 여기서부터 시작!
+tf.summary.trace_on(graph=True, profiler=False)
+C = forward(A, B)
+
+# 요약 파일 작성자 "writer" 활성화
+with writer.as_default():
+    # 그래프 기록 및 프로파일링: 활성화된 "writer"에 요약 작성 & 종료!
+    tf.summary.trace_export(name="tf_summary", step=0)
+```
+
+```bash
+tensorboard --logdir tensorboard_logs
+```
+
+![그림 2. 텐서보드 오토그래프 예시](/assets/img/docs/library/TensorFlow/tf_example_board.png)
+
+`tf.summary` API로부터 생성된 데이터는 `_SummaryState` 쓰레드 객체 덕분에 내부적으로 공유되어 텐서보드 자료관리에 사용되며, 대표적인 예시로 요약 작성자 선택, 자료 기록 시작 및 종료, 파일로 건네주기 등이 있다.
+
+| API                               | 설명                                                  |
+| --------------------------------- | ------------------------------------------------------------ |
+| `tf.summary.create_file_writer()` | 요약 파일 생성하며, `tf.summary.SummaryWriter` 객체를 반환한다. |
+| `tf.summary.trace_on()`           | 텐서플로우 그래프 기록 및 프로파일링을 위해 추적(trace)을 시작한다. |
+| `tf.summary.trace_export()`       | 추적을 중단하고 기록된 내역을 요약 및 프로파일 파일로 건네준다. |
+| `tf.summary.trace_off()`          | 추적을 중단하고 기록된 내역을 전부 삭제한다. |
+
+### 텐서보드 노드
+> *참조: [방언 'tf'정의](https://www.tensorflow.org/mlir/tf_ops)*
+
+비록 텐서보드에서 그래프를 시각화하여 보여주어도, 함수에 넣은 적도 없는 다소 생소한 노드 및 연산을 때때로 발견한다. 이들은 `tf.Graph`라는 객체가 내부적으로 생성한 것이므로, 이들이 가지는 의미를 이해하는 것은 그래프 독해 능력을 향상시키는데 도움을 줄 것이다.
+
+일반적으로 텐서플로우 그래프는 입력과 출력이 존재하며, 이는 각각 `_Arg` 및 `_RetVal` 연산 객체가 담당한다.
+
+| 연산 객체   | 설명                                                  |
+| ------------ | ------------------------------------------------------------ |
+| `tf._Arg`    | 그래프의 시작점을 의미하는 함수의 전달인자이다. |
+| `tf._RetVal` | 변수를 통해 가져올 수 있는 텐서; 그러나 이는 그래프의 종단점을 의미하는 게 절대 아니다. |
+
+위의 부문에 있는 텐서보드에서 `x`와 `y` 노드가 `_Arg`에, 그리고 `identity_RetVal` 노드가 `_RetVal`에 해당한다. 여기서 변수 `C`가 `_RetVal`이 아닌 이유는 그래프를 나타내는 함수 밖에 있기 때문이다. 추적되지 않았기에 그래프에 반영되지 않은 것이다.
+
+그 외에도 `Identity` 연산의 노드를 확인할 수 있는데, 다음은 텐서보드에서 텐서를 나타내는 연산 객체 혹은 노드에 대한 목록이다.
+
+| 연산 객체          | 설명                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| `tf.Const`          | 상수 텐서 (혹은 스칼라)이다. |
+| `tf.ReadVariableOp` | `tf.Variable`와 같은 텐서 변수의 값을 읽어낸다. |
+| `tf.Identity`       | 입력과 동일한 크기와 내용의 텐서를 그대로 반환한다. 다시 말해, 입력받은 텐서에 아무런 처리없이 출력하는 연산작업이다 (즉슨 단순히 *텐서*를 의미한다). |
