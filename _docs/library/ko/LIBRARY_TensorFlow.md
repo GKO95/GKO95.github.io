@@ -301,7 +301,7 @@ tensorboard --logdir tensorboard_logs
 | `tf.summary.trace_off()`          | 추적을 중단하고 기록된 내역을 전부 삭제한다. |
 
 ### 텐서보드 노드
-> *참조: [방언 'tf'정의](https://www.tensorflow.org/mlir/tf_ops)*
+> *참조: [`tf` 연산 정의](https://www.tensorflow.org/mlir/tf_ops)*
 
 비록 텐서보드에서 그래프를 시각화하여 보여주어도, 함수에 넣은 적도 없는 다소 생소한 노드 및 연산을 때때로 발견한다. 이들은 `tf.Graph`라는 객체가 내부적으로 생성한 것이므로, 이들이 가지는 의미를 이해하는 것은 그래프 독해 능력을 향상시키는데 도움을 줄 것이다.
 
@@ -321,3 +321,136 @@ tensorboard --logdir tensorboard_logs
 | `tf.Const`          | 상수 텐서 (혹은 스칼라)이다. |
 | `tf.ReadVariableOp` | `tf.Variable`와 같은 텐서 변수의 값을 읽어낸다. |
 | `tf.Identity`       | 입력과 동일한 크기와 내용의 텐서를 그대로 반환한다. 다시 말해, 입력받은 텐서에 아무런 처리없이 출력하는 연산작업이다 (즉슨 단순히 *텐서*를 의미한다). |
+
+# **텐서플로우: 모델**
+텐서플로우로부터 데이터 흐름을 처리한 이후, 취하고자 하는 목적에 따라 그래프 내부적으로 매개변수에 변화가 생겼을 것이다. 해당 그래프와 매개변수는 하나의 모델(model)로 저장하여 차후에 추론 및 추가 학습에 활용될 수 있다. 텐서플로우에서 모델을 저장한다고 하면 둘 중 하나를 의미한다:
+
+1. 체크포인트 지정
+2. (그래프) 모델 저장
+
+본 장에서는 체크포인트 및 모델을 저장하는 방법을 소개한다.
+
+## `tf.Module` API
+`tf.Module` API는 학습모델 신경망의 기반이 되는 [슈퍼클래스](/docs/programming/ko/PRGMING_Python/#상속)이다. 간단히 모듈(module)이라고 부르며, 이는 신경망의 매개변수 역할을 하는 `tf.Variable` 객체와 하위모듈(submodule)을 클래스 속성에 [시퀀스](/docs/programming/ko/PRGMING_Python/#파이썬-이터러블) 형태로 저장하여 변화 양상을 추적한다. 여기서 하위모듈이란, 해당 모듈의 속성으로 선언된 또다른 모듈들을 하위모듈이라 부른다.
+
+* `submodules` 속성: 내포된 모든 하위모듈의 시퀀스.
+* `variables` 속성: 내포된 모든 `tf.Variable` 객체의 시퀀스
+* `trainable_variabes` 속성: 내포된 모든 학습 가능한 `tf.Variable` 객체의 시퀀스
+
+아래는 텐서플로우 공식 홈페이지에 소개한 `submodules` 속성에 대한 예시 코드이다.
+
+```python
+# A, B, C에 tf.Module() 선언
+A = tf.Module()
+B = tf.Module()
+C = tf.Module()
+
+# A는 B를, 그리고 B는 C를 속성으로 가진다.
+A.attr = B
+B.attr = C
+
+# A, B, C의 하위모듈을 확인한다.
+print(list(A.submodules) == [B, C])
+print(list(B.submodules) == [C])
+print(list(C.submodules) == [])
+```
+```
+True
+True
+True
+```
+
+변화하는 요소들이 무엇인지 알고 이들을 따로 관리하고 있는 특성은 체크포인트 및 모델을 저장하는데 매우 중요하므로 `tf.Module` 슈퍼클래스로부터의 상속은 불가피하다.
+
+## 체크포인트
+> *참조: [체크포인트 학습하기](https://www.tensorflow.org/guide/checkpoint)*
+
+`tf.train.Checkpoint`는 체크포인트 저장 및 불러오는데 필요한 객체를 생성하는 핵심 API이다.
+
+해당 API는 정해진 매개변수가 없이 `**kwargs`를 사용하여 유연한 전달인자 수용이 가능하다. 하지만 이는 사용자에게 오히려 혼란을 줄 수 있으나, 한 가지 확실한 점은 체크포인트 객체화 단계에서 `tf.Variable`와 같이 추적할 수 있는 데이터를 필요로 하다. 그렇지 않을 시, 체크포인트 객체은 정상적으로 동작하지 않는다.
+
+다음은 `tf.train.Checkpoint` 체크포인트 API 객체화에 전달할 수 있는 인자들의 목록이다.
+
+* `tf.keras.optimizers.Optimizer`
+* `tf.keras.Layer`
+* `tf.keras.Model`
+* `tf.Module`
+
+```python
+import tensorflow as tf
+
+# tf.Module() 모델 생성
+class Model(tf.Module):
+    def __init__(self):
+        statements
+        
+model = Model()
+
+# 체크포인트 선언
+ckpt = tf.train.Checkpoint(model=model)
+```
+
+### 체크포인트 저장하기
+텐서플로우에는 체크포인트를 저장하는 두 가지의 저급 API가 존재하며, 이는 `save()`와 `write()` 메소드이다. 이 둘은 사실상 같은 기능을 수행하나 체크포인트 저장 시 파일명 차이만 존재할 뿐이다. 본 내용은 관습적인 `save()` 메소드를 사용하여 체크포인트를 저장하는 방법을 소개한다.
+
+체크포인트를 저장하기 위해서 체크포인트 경로(예시. `./checkpoints`)와 체크포인트 파일 접두사(예시. `ckpt`)를 지정해야 한다.
+
+```python
+import tensorflow as tf
+
+class Model:
+    def __init__(self):
+        statements
+       
+model = Model()
+
+ckpt = tf.train.Checkpoint(model=model)
+
+# 체크포인트 저장하기 (자동 형식)
+ckpt.save("./checkpoints/ckpt")
+""" 대안:
+import os
+
+ckpt_dir    = "./checkpoints"
+ckpt_prefix = os.path.join(ckpt_dir, "ckpt")
+
+ckpt.save(ckpt_prefix)
+"""
+```
+
+위의 텐서플로우를 실행시키면 아래와 같이 체크포인트 경로 및 파일이 생성된다.
+
+```
+./
++-- main.py
++-- checkpoints/
+|   +-- checkpoint
+|   +-- ckpt-1.data-00000-of-00001
+|   +-- ckpt-1.index
+```
+
+체크포인트를 저장할 때 세 종류의 파일이 생성된다: `checkpoint`. `data`, 그리고 `index` 확장자 파일이 있다.
+
+| 확장자   | 설명                                                  |
+| ------------ | ------------------------------------------------------------ |
+| `checkpoint` | 최신 체크포인트 경로를 명시한다 (예시. `ckpt-1`)     |
+| `data`       | 체크포인트 파편(shard)이라고 부르며, 매개변수의 값을 저장한다.<br/>여기서 `data-XXXXX-of-YYYYY`는 총 `YYYYY` 개의 체크포인트 파편 중에서 `XXXXX` 번째 파편을 가리킨다. |
+| `index`      | 매개변수의 값이 어느 파편에 저장되어 있는지 알려준다. |
+
+### 체크포인트 불러오기
+텐서플로우 체크포인트는 `restore()` 메소드가 있어 저장된 체크포인트를 불러올 수 있다. 이는 주어진 경로의 최신 체크포인트를 불러오는 `tf.train.latest_checkpoint()` 함수와 흔히 함께 사용된다.
+
+```python
+import tensorflow as tf
+
+class Model:
+    def __init__(self):
+        statements
+
+model = Model()
+
+ckpt = tf.train.Checkpoint(model=model)
+
+# 체크포인트 불러오기 (최신 체크포인트 기준)
+ckpt.restore(tf.train.latest_checkpoint("./checkpoints"))
+```
