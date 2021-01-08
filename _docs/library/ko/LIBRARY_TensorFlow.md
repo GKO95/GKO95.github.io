@@ -331,7 +331,11 @@ tensorboard --logdir tensorboard_logs
 본 장에서는 체크포인트 및 모델을 저장하는 방법을 소개한다.
 
 ## `tf.Module` API
-`tf.Module` API는 학습모델 신경망의 기반이 되는 [슈퍼클래스](/docs/programming/ko/PRGMING_Python/#상속)이다. 간단히 모듈(module)이라고 부르며, 이는 신경망의 매개변수 역할을 하는 `tf.Variable` 객체와 하위모듈(submodule)을 클래스 속성에 [시퀀스](/docs/programming/ko/PRGMING_Python/#파이썬-이터러블) 형태로 저장하여 변화 양상을 추적한다. 여기서 하위모듈이란, 해당 모듈의 속성으로 선언된 또다른 모듈들을 하위모듈이라 부른다.
+`tf.Module` API는 학습모델 신경망의 기반이 되는 [슈퍼클래스](/docs/programming/ko/PRGMING_Python/#상속)이며, 간단히 모듈(module)이라고 부른다.
+
+> 텐서플로우에서 주의해야 할 점은 모듈(module)과 모델(model)은 다른 존재이다! 모듈을 인공 신경망 층을 쌓아 모델을 생성하는 게 일반적이다. 그 외에도 모델을 생성하는 API들도 전부 `tf.Module` 모듈에 기반한다.
+
+이는 신경망의 매개변수 역할을 하는 `tf.Variable` 객체와 하위모듈(submodule)을 클래스 속성에 [시퀀스](/docs/programming/ko/PRGMING_Python/#파이썬-이터러블) 형태로 저장하여 변화 양상을 추적한다. 여기서 하위모듈이란, 해당 모듈의 속성으로 선언된 또다른 모듈들을 하위모듈이라 부른다.
 
 * `submodules` 속성: 내포된 모든 하위모듈의 시퀀스.
 * `variables` 속성: 내포된 모든 `tf.Variable` 객체의 시퀀스
@@ -365,9 +369,7 @@ True
 ## 체크포인트
 > *참조: [체크포인트 학습하기](https://www.tensorflow.org/guide/checkpoint)*
 
-`tf.train.Checkpoint`는 체크포인트 저장 및 불러오는데 필요한 객체를 생성하는 핵심 API이다.
-
-해당 API는 정해진 매개변수가 없이 `**kwargs`를 사용하여 유연한 전달인자 수용이 가능하다. 하지만 이는 사용자에게 오히려 혼란을 줄 수 있으나, 한 가지 확실한 점은 체크포인트 객체화 단계에서 `tf.Variable`와 같이 추적할 수 있는 데이터를 필요로 하다. 그렇지 않을 시, 체크포인트 객체은 정상적으로 동작하지 않는다.
+`tf.train.Checkpoint`는 체크포인트 저장 및 불러오는데 필요한 객체를 생성하는 핵심 API이다. 해당 API는 체크포인트를 생성하고자 하는 모델을 전달인자로 받으며, 정해진 매개변수가 없이 `**kwargs`를 사용하여 유연한 전달인자 수용이 가능하다. 하지만 이는 사용자에게 오히려 혼란을 줄 수 있으나, 한 가지 확실한 점은 체크포인트 객체화 단계에서 `tf.Variable`와 같이 추적할 수 있는 데이터를 필요로 하다. 그렇지 않을 시, 체크포인트 객체은 정상적으로 동작하지 않는다.
 
 다음은 `tf.train.Checkpoint` 체크포인트 API 객체화에 전달할 수 있는 인자들의 목록이다.
 
@@ -375,6 +377,12 @@ True
 * `tf.keras.Layer`
 * `tf.keras.Model`
 * `tf.Module`
+
+선택사항이지만 `step`이란 매개변수를 지정하여 `tf.Variable` 변수 텐서를 인자로 받을 수 있다. 여기서 스텝(step)은 하나의 데이터에 대한 학습 단계를 의미한다. 비록 `step` 카운터는 `assign_add()` 메소드를 활용하는 등 직접 수동으로 증가시켜야 하지만, 이를 통해 몇 번째 학습마다 체크포인트를 저장할 것인지를 설정할 수 있다.
+
+> 이와 유사한 용어로 에포크(epoch; 연대)가 있는데, 이는 수많은 데이트가 들어있는 하나의 데이터세트(dataset)에 대한 학습 단계를 일컫는다.
+
+아래는 체크포인트를 생성할 모델과 스텝 카운터를 0부터 시작하도록 설정한 코드이다.
 
 ```python
 import tensorflow as tf
@@ -387,13 +395,27 @@ class Model(tf.Module):
 model = Model()
 
 # 체크포인트 선언
-ckpt = tf.train.Checkpoint(model=model)
+ckpt = tf.train.Checkpoint(model=model, step=tf.Variable(0))
+
+""" 참고:
+체크포인트 스텝 활용하기
+"""
+for _ in range(10):
+    # 체크포인트 스텝 카운터 +1
+    ckpt.step.assign_add(1)
+
+    # 체크포인트 스텝이 짝수일 때...
+    if int(ckpt.step) % 2 == 0:
+        statement
 ```
 
 ### 체크포인트 저장하기
-텐서플로우에는 체크포인트를 저장하는 두 가지의 저급 API가 존재하며, 이는 `save()`와 `write()` 메소드이다. 이 둘은 사실상 같은 기능을 수행하나 체크포인트 저장 시 파일명 차이만 존재할 뿐이다. 본 내용은 관습적인 `save()` 메소드를 사용하여 체크포인트를 저장하는 방법을 소개한다.
+텐서플로우에는 체크포인트를 저장하는 두 가지의 저급 API가 존재하며, 이는 `write()`와 `save()` 메소드이다. 이 둘은 사실상 같은 기능을 수행하나 체크포인트 저장 시 파일명 차이만 존재할 뿐이다:
 
-체크포인트를 저장하기 위해서 체크포인트 경로(예시. `./checkpoints`)와 체크포인트 파일 접두사(예시. `ckpt`)를 지정해야 한다.
+* `write()`: 정해진 경로로 체크포인트를 저장한다.
+* `save()`: 체크포인트를 저장하는 `write()` 메소드에 `save_counter`가 추가되어 자동적으로 생성 번호를 부여한다.
+
+본 내용은 관습적인 `save()` 메소드를 사용하여 체크포인트를 저장하는 방법을 소개한다. 체크포인트를 저장하기 위해서 체크포인트 경로(예시. `./checkpoints`)와 체크포인트 파일 접두사(예시. `ckpt`)를 지정해야 한다.
 
 ```python
 import tensorflow as tf
@@ -404,7 +426,10 @@ class Model:
        
 model = Model()
 
+# 체크포인트 선언
 ckpt = tf.train.Checkpoint(model=model)
+
+...
 
 # 체크포인트 저장하기 (자동 형식)
 ckpt.save("./checkpoints/ckpt")
@@ -433,12 +458,17 @@ ckpt.save(ckpt_prefix)
 
 | 확장자   | 설명                                                  |
 | ------------ | ------------------------------------------------------------ |
-| `checkpoint` | 최신 체크포인트 경로를 명시한다 (예시. `ckpt-1`)     |
+| `checkpoint` | 최신 체크포인트 파일 경로를 가리킨다 (예시. `ckpt-1`)     |
 | `data`       | 체크포인트 파편(shard)이라고 부르며, 매개변수의 값을 저장한다.<br/>여기서 `data-XXXXX-of-YYYYY`는 총 `YYYYY` 개의 체크포인트 파편 중에서 `XXXXX` 번째 파편을 가리킨다. |
 | `index`      | 매개변수의 값이 어느 파편에 저장되어 있는지 알려준다. |
 
 ### 체크포인트 불러오기
-텐서플로우 체크포인트는 `restore()` 메소드가 있어 저장된 체크포인트를 불러올 수 있다. 이는 주어진 경로의 최신 체크포인트를 불러오는 `tf.train.latest_checkpoint()` 함수와 흔히 함께 사용된다.
+텐서플로우 체크포인트를 저장하는 방식이 두 가지가 있듯이, 체크포인트를 불러오는 API도 두 개가 존재한다:
+
+* `read()`: `write()` 메소드 전용으로 `save_counter`를 확인하지 않는다.
+* `restore()`: `save()` 메소드 전용으로 `save_counter`를 확인한다.
+
+위의 부문에서 `save()` 메소드로 저장하였기 때문에, 본 부문에서는 `restore()` 메소드를 사용하여 체크포인트를 불러와야 한다. 이는 주어진 경로의 최신 체크포인트를 불러오는 `tf.train.latest_checkpoint()` 함수와 흔히 함께 사용된다. 
 
 ```python
 import tensorflow as tf
@@ -449,8 +479,51 @@ class Model:
 
 model = Model()
 
+# 체크포인트 선언
 ckpt = tf.train.Checkpoint(model=model)
 
 # 체크포인트 불러오기 (최신 체크포인트 기준)
 ckpt.restore(tf.train.latest_checkpoint("./checkpoints"))
+
+...
+
+# 체크포인트 저장하기 (자동 형식)
+ckpt.save("./checkpoints/ckpt")
 ```
+
+`tf.train.latest_checkpoint()` 함수에서 체크포인트를 발견하지 못하면 `None`이 `restore()` 메소드로 전달되는데, 원래 경로를 찾지 못하면 발생하는 `NotFoundError` 예외처리 없이 실행할 수 있다.
+
+### 체크포인트 관리자
+체크포인트 관리자(checkpoint manager)는 체크포인트 파일을 더욱 효율적으로 관리할 수 있도록 하는 고급 API이다. 체크포인트 관리자는 `tf.train.CheckpointManger` API로 생성되며 오직 하나만 활성될 수 있다. 체크포인트 관리자로 체크포인트 저장 및 불러오기도 가능하며, 아래의 코드는 체크포인트 관리자를 활용한 예시이다.
+
+```python
+import tensorflow as tf
+
+class Model:
+    def __init__(self):
+        statements
+
+model = Model()
+
+# 체크포인트 선언
+ckpt = tf.train.Checkpoint(model=model)
+
+# 체크포인트 관리자: 체크포인트, 경로, 파일 개수
+manager = tf.train.CheckpointManager(ckpt, "./checkpoints", max_to_keep=3)
+
+# 체크포인트 불러오기 (최신 체크포인트 기준)
+manager.restore_or_initialize()
+""" 대안:
+ckpt.restore(tf.train.latest_checkpoint("./checkpoints"))
+"""
+
+...
+
+# 체크포인트 저장하기 (자동 형식)
+manager.save()
+""" 대안:
+ckpt.save("./checkpoints/ckpt")
+"""
+```
+
+여기서 `max_to_keep` 매개변수는 보관할 최대 체크포인트 파일 개수를 의미하며, 그 이상의 체크포인트가 생성되면 가장 오래된 체크포인트 파일을 삭제한다. 전달인자가 `None`일 경우, 생성된 모든 체크포인트를 보관한다.
