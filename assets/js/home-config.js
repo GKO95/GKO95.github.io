@@ -24,11 +24,13 @@ else
 //========================================
 // ANNOUNCEMENT: SLIDE DOWN TRANSITION
 //========================================
+/*
 document.addEventListener("readystatechange", function () {
     if (document.readyState == "complete") {
         $(`#home-announce`).slideDown(600, "swing")
     }
 })
+*/
 
 //========================================
 // ANNOUNCEMENT: SPACING ADJUSTMENT
