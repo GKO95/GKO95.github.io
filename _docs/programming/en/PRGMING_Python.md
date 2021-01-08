@@ -693,13 +693,14 @@ First...successful!
 ## `pass` Statement
 The `pass` statement is a null operation that does nothing when executed. It prevents an exception occurred when running an empty code.
 
-# **PYTHON: ITERABLE OBJECT**
-Not just its simplicity that makes Python language useful, its iterable object is powerful and flexible than any other programming language can provide. Python has four iterable objects that have slightly different properties.
+# **PYTHON: ITERABLE**
+Not just its simplicity that makes Python language useful, its iterable object is powerful and flexible than any other programming language can provide. This chapter introduces four iterable objects in Python that have slightly different properties.
 
 ## Iterable Object
 An iterable object is used to store the collection of data and is an object that has an `__iter__` method (Python3) that returns the iterator object. An iterator is an object which automatically calls the next element of data, thus iterating every data within the iterable object in order.
 
-Iterable objects can access and modify stored data using a bracket `[]`. The string object introduced in *PYTHON: BASIC § String Data Type* is also an iterable object.
+### Sequence Object
+A sequence object is an iterable object with additional features, such as slicing features that can extract only the desired portion. Sequence objects can access and modify stored data using a bracket `[]`. The string object introduced in *PYTHON: BASIC § String Data Type* is also a sequence object.
 
 ```python
 variable = "Hello World!" 
@@ -710,14 +711,14 @@ print(variable[1])
 e
 ```
 
-### Iterable Slicing
-Slicing is one of the powerful features Python has an advantage over other programming languages in handling a group of data such as iterable objects. Slicing iterable can only extract the desired portion of the original.
+### Slicing
+Slicing is one of the powerful features Python has an advantage over other programming languages in handling a sequence objects. Slicing sequence can only extract the desired portion of the original.
 
 | SYNTAX    | EXAMPLE                            |
 |:---------:|------------------------------------|
-| `[ : : ]` | `iterable[start : end : interval]` |
+| `[ : : ]` | `sequence[start : end : interval]` |
 
-Slicing starts from `start` (inclusive) until `end` (exclusive) with interval of `interval`. All these arguments are not mandatory when slicing an iterable.
+Slicing starts from `start` (inclusive) until `end` (exclusive) with interval of `interval`. All these arguments are not mandatory when slicing an sequence.
 
 ```python
 variable = "Hello World!"
@@ -736,7 +737,7 @@ print(variable[8:2:-1])   # >> OUTPUT: "roW ol"
 ```
 
 ## Range
-Range iterable object stores a number in a sequenced pattern by specifying the starting number (inclusive), ending number (exclusive), and sequencing interval. The range object is created by the `range()` function.
+Range sequence object stores a number in a sequenced pattern by specifying the starting number (inclusive), ending number (exclusive), and sequencing interval. The range object is created by the `range()` function.
 
 | FUNCTION  | EXAMPLE                     | DESCRIPTION                                                                                                      |
 |-----------|-----------------------------|------------------------------------------------------------------------------------------------------------------|
@@ -752,7 +753,7 @@ rng[3]        # >> OUTPUT: 9
 ```
 
 ## List
-List iterable object stores item in sequence with index, irrelevant to a data type. Assigning a value to a list object is done using a bracket `[]` with values separated by commas in order. This bracket can also call an element at index location.
+List sequence object stores item in sequence with index, irrelevant to a data type. Assigning a value to a list object is done using a bracket `[]` with values separated by commas in order. This bracket can also call an element at index location.
 
 ```python
 lst = [value1, value2, value3, value4, ... ]
@@ -774,9 +775,9 @@ lst[3] = value5    # IndexError: list assignment index out of range
 
 | SYNTAX          | EXAMPLE                                          |
 |-----------------|--------------------------------------------------|
-| `[ for in if ]` | `lst[element for index in iterable if condtion]` |
+| `[ for in if ]` | `lst[element for index in sequence if condtion]` |
 
-The syntax creates a list containing `element` data based on variable `index` from `iterable` object as long as `condition` holds; `if` statement in comprehension is optional.
+The syntax creates a list containing `element` data based on variable `index` from `sequence` object as long as `condition` holds; `if` statement in comprehension is optional.
 
 ```python
 lst = [i**2 for i in range(5)]
@@ -789,7 +790,7 @@ lst = [i**2 for i in range(5) if (i**2) % 2 == 0]
 ```
 
 ### List Operation
-Both addition and multiplication apply to a list object, as well as operations exclusive to the iterable object. Operations below are not restricted to a list alone but can be used on other iterable objects introduced later.
+Both addition and multiplication apply to a list object, as well as operations exclusive to the sequence object. Operations below are not restricted to a list alone but can be used on other sequence objects introduced later.
 
 | OPERATOR | NAME           | DESCRIPTION                                                         |
 |----------|----------------|---------------------------------------------------------------------|
@@ -811,7 +812,7 @@ print(value1 in lst)             # >> OUTPUT: True
 print(value2 not in lst)         # >> OUTPUT: False
 ```
 
-The following are functions that do certain features to and for a list (or more like iterable) object:
+The following are functions that do certain features to and for a list (or more like sequence) object:
 
 | FUNCTION      | EXAMPLE                             | DESCRIPTION                                                                                                         |
 |---------------|-------------------------------------|---------------------------------------------------------------------------------------------------------------------|
@@ -841,7 +842,7 @@ for var in enumerate(lst):
                                                 # >>         (4,6)
 ```
 
-Since a list is an (iterable) objects, it also has methods it can use to perform specific behavior:
+Since a list is an (sequence) objects, it also has methods it can use to perform specific behavior:
 
 | METHOD     | EXAMPLE                    | DESCRIPTION                                                |
 |------------|----------------------------|------------------------------------------------------------|
@@ -850,7 +851,7 @@ Since a list is an (iterable) objects, it also has methods it can use to perform
 | `index()`  | `lst.index(value)`         | Return the smallest index number of `value`.               |
 
 ## Tuple
-Tuple iterable object is used to store item in order just like a list, but cannot change the value after initialization. This property of an iterable object is called immutable (opp. mutable). Tuple uses parentheses `()` or even without any to distinguish itself from other iterable.
+Tuple sequence object is used to store item in order just like a list, but cannot change the value after initialization. This property of an sequence object is called immutable (opp. mutable). Tuple uses parentheses `()` or even without any to distinguish itself from other sequence.
 
 ```python
 tpl = (value1, value2, value3)
@@ -889,7 +890,7 @@ print(variable3)    # >> OUTPUT: value5
 ```
 
 ## Dictionary
-Dictionary is an iterable object that has indexing `key` data and `value` data paired as a single element. Dictionary does not call value by integer index but through `key`. Dictionary uses curly bracket `{}` to distinguish itself from other iterable.
+Dictionary is a "non-sequence" iterable object that has indexing `key` data and `value` data paired as a single element. Dictionary does not call value by integer index but through `key`. Dictionary uses curly bracket `{}` to distinguish itself from other iterable.
 
 ```python
 dictionary = {key1: value1, key2: value2, key3: value3}
@@ -921,7 +922,7 @@ dictionary[key5] = value5
 {key1: value1, key2: value2, key3: value3, key5: value5}
 ```
 
-Operations for a dictionary is the same as other iterable objects but have slight differences:
+Operations for a dictionary is the same as a sequence object but have slight differences:
 
 | OPERATOR | NAME                     | DESCRIPTION                                                       |
 |----------|--------------------------|-------------------------------------------------------------------|
@@ -952,7 +953,7 @@ print(dictionary.get(key3, "not in dictionary"))    # >> OUTPUT: not in dictiona
 ```
 
 ## Set
-Set is an iterable object that guarantees uniqueness, meaning it does not allow duplicate elements. Just like a dictionary object, set uses curly bracket `{}` to assign values but without `key: value` pair. Due to this reason, a set is much faster to check the elements than a list.
+Set is a "non-sequence" iterable object that guarantees uniqueness, meaning it does not allow duplicate elements. Just like a dictionary object, set uses curly bracket `{}` to assign values but without `key: value` pair. Due to this reason, a set is much faster to check the elements than a list.
 
 ```python
 st = {value1, value2, value3}
