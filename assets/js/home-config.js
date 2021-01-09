@@ -6,6 +6,11 @@ if (GetLANG() == enumLANG.ENGLISH)
     $(`#home-announce-notice > ul`).remove()
     $(`#home-announce-notice > ol li:not(:first-child)`).remove()
     $(`#home-docs [href*="/ko/"]`).remove()
+
+    $(`.home-docs-group`).each(function() {
+        let translate = $(this).find(`a:first-child`).attr("title")
+        $(this).find(`.home-docs-header`).text(translate.split(" | ")[0]);
+    })
 }
 else
 {   // KOREAN

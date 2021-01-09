@@ -3,8 +3,8 @@ name: MCS-51
 lang: ko
 layout: docs
 author: GKO95
-category: Embedded
-title: "임베디드 | MCS-51"
+category: Computer
+title: "컴퓨터 과학 | MCS-51"
 logo: "/assets/img/res/logo-8051.png"    
 mathjax: true
 order: 0x20
@@ -18,7 +18,7 @@ order: 0x20
 ## MCS-51 구조
 다음은 인텔 MCS-51 마이크로컨트롤러 아키텍처 구조를 개략적으로 보여준다. 자세한 내용은 다음 장에서부터 설명할 예정이므로 아래의 그림은 간단히 훑어보도록 한다.
 
-![그림 1. 인텔 MCS-51 마이크로컨트롤러 아키텍처](/assets/img/docs/embedded/8051/8051_architecture.png)
+![그림 1. 인텔 MCS-51 마이크로컨트롤러 아키텍처](/assets/img/docs/computer/8051/8051_architecture.png)
 
 위의 그림 중에서 일부 블록은 여덟 개의 화살표가 뻗어나가는 것을 볼 수 있다. 각 화살표마다 데이터는 비트 단위로 전송 및 수신되며, 여덟 개의 화살표가 모여 하나의 바이트를 이루는 것이다.
 
@@ -35,7 +35,7 @@ byte B = 0xE4;          // 십진수: 228
 # **MCS-51: CPU**
 중앙 처리 장치(central processing unit; CPU)는 시스템에게 주어진 명령어(instruction)를 입력받아 대응하는 동작을 수행하도록 하는 컴퓨터에서 가장 핵심되는 부품 중 하나이다. 아래는 단일 프로세서를 가지는 CPU의 대략적인 구성 및 신호 흐름도이다. 
 
-![그림 2. 단일 프로세서 중앙 처리 장치](/assets/img/docs/embedded/8051/8051_cpu.gif)
+![그림 2. 단일 프로세서 중앙 처리 장치](/assets/img/docs/computer/8051/8051_cpu.gif)
 
 여기서 "단일 프로세서"를 강조한 이유는 현재 사용되고 있는 대부분의 CPU는 한 개 이상의 프로세서 혹은 코어(core)를 가지기 때문이다. CPU 분류 중에서 콰드 코어나 헥사 코어 등이 바로 CPU 내에 몇 개의 프로세서가 들어있는지를 알려준다.
 
@@ -44,7 +44,7 @@ MCS-51 MCU는 내부에 8비트 연산 CPU를 가지지만, *그림1. 인텔 MCS
 ## 명령어
 명령어(instruction)는 비트, 숫자 혹은 문자로 구성된 일련의 패턴이며, 프로그램을 통해 장치를 구동할 수 있도록 하는 소프트웨어와 하드웨어 간의 약속된 데이터이다. 명령어는 일반적으로 어떠한 연산을 처리할 것인지를 나타내는 명령 코드(opcode)와 해당 명령 코드에 의해 연산될 피연산자(operand)로 구성되어 있다. 아래는 32비트 MIPS 명령어 중 하나인 "Add Imediate", 즉 덧셈에 대한 이진 패턴이다.
 
-![그림 3. MIPS "Add Immediate" 명령어](/assets/img/docs/embedded/8051/8051_cpu_instruction.svg)
+![그림 3. MIPS "Add Immediate" 명령어](/assets/img/docs/computer/8051/8051_cpu_instruction.svg)
 
 여기서 MIPS는 RISC 기반의 명령어 집합(instruction set) 중 하나이며, MCS-51의 경우에는 독자적인 CISC 기반의 명령어 집합를 가지며 [여기](https://www.win.tue.nl/~aeb/comp/8051/set8051.html)에서 확인할 수 있다. 그리고 명령어 집합이 바로 시스템의 아키텍처(architecture)를 나타낸다.
 
@@ -112,7 +112,7 @@ MCS-51 MCU는 내부에 8비트 연산 CPU를 가지지만, *그림1. 인텔 MCS
 ## 산술 논리 장치
 산술 논리 장치(arithmetic logic unit; `ALU`)는 CPU 및 GPU의 핵심으로 십진수 정수 산술 계산과 이진수 비트 논리 연산을 처리한다.
 
-![그림 4. 산술 논리 장치의 기호](/assets/img/docs/embedded/8051/8051_cpu_alu.gif)
+![그림 4. 산술 논리 장치의 기호](/assets/img/docs/computer/8051/8051_cpu_alu.gif)
 
 | 신호         | 설명                                                  |
 | --------------- | ------------------------------------------------------------ |
@@ -140,7 +140,7 @@ MCS-51 마이크로컨트롤러에는 256바이트의 RAM이 내장되어 있다
 
 > 여기서부터 비트와 바이트 단위가 복합적으로 사용되므로 주의하도록 한다.
 
-![그림 5. MCS-51의 내장 메모리](/assets/img/docs/embedded/8051/8051_memory_internal.gif)
+![그림 5. MCS-51의 내장 메모리](/assets/img/docs/computer/8051/8051_memory_internal.gif)
 
 IRAM은 128바이트 전체가 RAM으로 사용되지 않으며, 안에는 (1) 레지스터 뱅크("R" 레지스터 집합)와 (2) 비트 주소 메모리가 포함되어 있다. 기본적으로 `R0`~`R7`이 하나의 레지스터 뱅크를 구성하여 총 네 개의 뱅크가 `0x00`~`0x1F` 주소를 차지하고 있다. 원한다면 `0x00`~`0x07` 범위의 레지스터 뱅크 0 하나만을 사용할 수 있다. 비트 주소 메모리는 총 16바이트, 즉 128비트의 공간을 차지하여 각 비트가 IRAM의 128바이트 주소를 나타내는데 사용되나 선택사항이다. 만일 IRAM 내에 네 개의 레지스터 뱅크와 비트 주소 메모리가 포함되어 있다면 실질적으로 RAM으로 활용할 수 있는 공간은 `0x30`~`0x7F`이다.
 
@@ -155,7 +155,7 @@ MCS-51 마이크로컨트롤러는 외장 메모리(XRAM)를 연결하여 사용
 # **MCS-51: SFR**
 SFR에는 마이크로컨트롤러에 있는 중요한 기능 및 설정들이 포함되어 있다. 비록 *MCS-51: 메모리* 장에서 간략하게 설명하였으나, 이번 장에서는 더 구체적으로 SFR에 대하여 소개한다. 아래 그림은 SFR에 할당된 기능 및 설정들이 어디에 위치하는지 보여준다.
 
-![그림 6. MCS-51의 특수 목적 레지스터](/assets/img/docs/embedded/8051/8051_sfr_address.gif)
+![그림 6. MCS-51의 특수 목적 레지스터](/assets/img/docs/computer/8051/8051_sfr_address.gif)
 
 |                            색상                             | 설명                                                  |
 | :----------------------------------------------------------: | ------------------------------------------------------------ |
