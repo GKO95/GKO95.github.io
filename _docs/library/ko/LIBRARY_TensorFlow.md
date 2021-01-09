@@ -331,37 +331,81 @@ tensorboard --logdir tensorboard_logs
 본 장에서는 체크포인트 및 모델을 저장하는 방법을 소개한다.
 
 ## `tf.Module` API
-`tf.Module` API는 학습모델 신경망의 기반이 되는 [슈퍼클래스](/docs/programming/ko/PRGMING_Python/#상속)이며, 간단히 모듈(module)이라고 부른다.
+> *참조: [모듈, 레이어 및 모델 소개](https://www.tensorflow.org/guide/intro_to_modules)*
 
-> 텐서플로우에서 주의해야 할 점은 모듈(module)과 모델(model)은 다른 존재이다! 모듈을 인공 신경망 층을 쌓아 모델을 생성하는 게 일반적이다. 그 외에도 모델을 생성하는 API들도 전부 `tf.Module` 모듈에 기반한다.
+`tf.Module` API는 학습모델 신경망의 기반이 되는 [슈퍼클래스](/docs/programming/ko/PRGMING_Python/#상속)이며, 간단히 모듈(module)이라고 부른다. 모듈 자체는 모델이 아니지만, 신경망 층과 모델을 구성하는데 반드시 필요한 존재이다.
 
-이는 신경망의 매개변수 역할을 하는 `tf.Variable` 객체와 하위모듈(submodule)을 클래스 속성에 [시퀀스](/docs/programming/ko/PRGMING_Python/#파이썬-이터러블) 형태로 저장하여 변화 양상을 추적한다. 여기서 하위모듈이란, 해당 모듈의 속성으로 선언된 또다른 모듈들을 하위모듈이라 부른다.
+아래는 텐서플로우 공식 홈페이지에 `tf.Module`을 활용한 간단한 신경망 층을 정의한 예시 코드이다. 아래의 코드에 대한 설명은 차후에 자세히 설명할 예정이므로, 지금은 `tf.Module` API가 어떻게 사용되는지 확인만 한다.
+
+```python
+import tensorflow as tf
+
+# tf.Module 밀집층 (DENSE LAYER)
+class Dense(tf.Module):
+    def __init__(self, variable_num, outcome_num, name = None):
+        super().__init__(name=name)
+        self.w = tf.Variable(tf.random.normal([variable_num, outcome_num]), name = "weight")
+        self.b = tf.Variable(tf.zeros([outcome_num], name = "bias"))
+
+    def __call__(self, x):
+        y = tf.matmul(x, self.w) + self.b
+        return tf.nn.relu(y)
+
+# tf.Module 순차모델 (SEQUENTIAL MODEL)
+class SequentialModel(tf.Module):
+    def __init__(self, name = None):
+        super().__init__(name=name)
+
+        # 순차모델에 밀집층 적용
+        self.dense_1 = Dense(variable_num = 3, outcome_num = 3)
+        self.dense_2 = Dense(variable_num = 3, outcome_num = 2)
+
+    def __call__(self, x):
+        # 입력된 데이터는 밀집층을 dense_1 그리고 dense_2 순서로 이동
+        x = self.dense_1(x)
+        return self.dense_2(x)
+
+
+# tf.Module 모델 생성
+model = SequentialModel(name = "model")
+print(model([[2.,2.,2.],[-2.,0.,2.]]))
+""" 넘파이:
+[[ 2. 2. 2.]   <- 데이터 1
+ [-2. 0. 2.]]  <- 데이터 2
+"""
+```
+
+```
+tf.Tensor(
+[[0.         1.5895488 ]
+ [0.2083415  0.47999465]], shape=(2, 2), dtype=float32)
+```
+
+신경망의 매개변수 역할을 하는 `tf.Variable` 객체와 하위모듈(submodule)을 클래스 속성에 [시퀀스](/docs/programming/ko/PRGMING_Python/#파이썬-이터러블) 형태로 저장하여 변화 양상을 추적한다. 여기서 하위모듈이란, 해당 모듈의 속성으로 선언된 또다른 모듈들을 하위모듈이라 부른다.
 
 * `submodules` 속성: 내포된 모든 하위모듈의 시퀀스.
 * `variables` 속성: 내포된 모든 `tf.Variable` 객체의 시퀀스
 * `trainable_variabes` 속성: 내포된 모든 학습 가능한 `tf.Variable` 객체의 시퀀스
 
-아래는 텐서플로우 공식 홈페이지에 소개한 `submodules` 속성에 대한 예시 코드이다.
+위의 코드에서 `SequentialModel`은 두 개의 밀집층을 하위모듈로 가지며, 이는 `submodules` 속성을 통해 아래와 같이 확인할 수 있다.
 
 ```python
-# A, B, C에 tf.Module() 선언
-A = tf.Module()
-B = tf.Module()
-C = tf.Module()
-
-# A는 B를, 그리고 B는 C를 속성으로 가진다.
-A.attr = B
-B.attr = C
-
-# A, B, C의 하위모듈을 확인한다.
-print(list(A.submodules) == [B, C])
-print(list(B.submodules) == [C])
-print(list(C.submodules) == [])
+print("\nSubmodules:\n{0}".format(list(model.submodules)))
+print("\nVariables:\n{0}".format(list(model.variables)))
 ```
+
 ```
-True
-True
-True
+Submodules:
+[<__main__.Dense object at 0x00000275E08F51F0>, <__main__.Dense object at 0x00000275876DCCD0>]
+
+Variables:
+[<tf.Variable 'Variable:0' shape=(3,) dtype=float32, numpy=array([0., 0., 0.], dtype=float32)>, <tf.Variable 'weight:0' shape=(3, 3) dtype=float32, numpy=
+array([[ 0.32746065,  1.370195  , -0.55914354],
+       [ 0.17620184,  1.333335  , -0.03349701],
+       [ 1.3157411 ,  0.45712298, -0.94311625]], dtype=float32)>, <tf.Variable 'Variable:0' shape=(2,) dtype=float32, numpy=array([0., 0.], dtype=float32)>, <tf.Variable 'weight:0' shape=(3, 2) dtype=float32, numpy=
+array([[ 0.54036826,  2.2503784 ],
+       [-0.06424242, -1.1178447 ],
+       [ 0.22346036, -1.0360601 ]], dtype=float32)>]
 ```
 
 변화하는 요소들이 무엇인지 알고 이들을 따로 관리하고 있는 특성은 체크포인트 및 모델을 저장하는데 매우 중요하므로 `tf.Module` 슈퍼클래스로부터의 상속은 불가피하다.
@@ -369,13 +413,12 @@ True
 ## 체크포인트
 > *참조: [체크포인트 학습하기](https://www.tensorflow.org/guide/checkpoint)*
 
-`tf.train.Checkpoint`는 체크포인트 저장 및 불러오는데 필요한 객체를 생성하는 핵심 API이다. 해당 API는 체크포인트를 생성하고자 하는 모델을 전달인자로 받으며, 정해진 매개변수가 없이 `**kwargs`를 사용하여 유연한 전달인자 수용이 가능하다. 하지만 이는 사용자에게 오히려 혼란을 줄 수 있으나, 한 가지 확실한 점은 체크포인트 객체화 단계에서 `tf.Variable`와 같이 추적할 수 있는 데이터를 필요로 하다. 그렇지 않을 시, 체크포인트 객체은 정상적으로 동작하지 않는다.
-
-다음은 `tf.train.Checkpoint` 체크포인트 API 객체화에 전달할 수 있는 인자들의 목록이다.
+`tf.train.Checkpoint`는 체크포인트 저장 및 불러오는데 필요한 객체를 생성하는 핵심 API이다. 해당 API는 체크포인트를 `tf.Variable` 값을 저장하고자 하는 객체를 전달인자로 받으며, 정해진 매개변수가 없이 `**kwargs`를 사용하여 유연한 전달인자 수용이 가능하다. 다음은 `tf.train.Checkpoint` 체크포인트 API 객체화에 전달할 수 있는 인자들의 목록이다.
 
 * `tf.keras.optimizers.Optimizer`
 * `tf.keras.Layer`
 * `tf.keras.Model`
+* `tf.Variable`
 * `tf.Module`
 
 선택사항이지만 `step`이란 매개변수를 지정하여 `tf.Variable` 변수 텐서를 인자로 받을 수 있다. 여기서 스텝(step)은 하나의 데이터에 대한 학습 단계를 의미한다. 비록 `step` 카운터는 `assign_add()` 메소드를 활용하는 등 직접 수동으로 증가시켜야 하지만, 이를 통해 몇 번째 학습마다 체크포인트를 저장할 것인지를 설정할 수 있다.
@@ -385,15 +428,9 @@ True
 아래는 체크포인트를 생성할 모델과 스텝 카운터를 0부터 시작하도록 설정한 코드이다.
 
 ```python
-import tensorflow as tf
-
-# tf.Module() 모델 생성
-class Model(tf.Module):
-    def __init__(self):
-        statements
+# tf.Module 모델 생성
+model = SequentialModel(name = "model")
         
-model = Model()
-
 # 체크포인트 선언
 ckpt = tf.train.Checkpoint(model=model, step=tf.Variable(0))
 
@@ -418,18 +455,11 @@ for _ in range(10):
 본 내용은 관습적인 `save()` 메소드를 사용하여 체크포인트를 저장하는 방법을 소개한다. 체크포인트를 저장하기 위해서 체크포인트 경로(예시. `./checkpoints`)와 체크포인트 파일 접두사(예시. `ckpt`)를 지정해야 한다.
 
 ```python
-import tensorflow as tf
-
-class Model:
-    def __init__(self):
-        statements
-       
-model = Model()
-
-# 체크포인트 선언
+# tf.Module 모델 생성 및 체크포인트 생성
+model = SequentialModel(name = "model")
 ckpt = tf.train.Checkpoint(model=model)
 
-...
+print(model([[2.0,2.0,2.0]]))
 
 # 체크포인트 저장하기 (자동 형식)
 ckpt.save("./checkpoints/ckpt")
@@ -441,6 +471,9 @@ ckpt_prefix = os.path.join(ckpt_dir, "ckpt")
 
 ckpt.save(ckpt_prefix)
 """
+```
+```
+tf.Tensor([[0.8572469 1.8282735]], shape=(1, 2), dtype=float32)
 ```
 
 위의 텐서플로우를 실행시키면 아래와 같이 체크포인트 경로 및 파일이 생성된다.
@@ -471,24 +504,21 @@ ckpt.save(ckpt_prefix)
 위의 부문에서 `save()` 메소드로 저장하였기 때문에, 본 부문에서는 `restore()` 메소드를 사용하여 체크포인트를 불러와야 한다. 이는 주어진 경로의 최신 체크포인트를 불러오는 `tf.train.latest_checkpoint()` 함수와 흔히 함께 사용된다. 
 
 ```python
-import tensorflow as tf
-
-class Model:
-    def __init__(self):
-        statements
-
-model = Model()
-
-# 체크포인트 선언
+# tf.Module 모델 생성 및 체크포인트 생성
+model = SequentialModel(name = "model")
 ckpt = tf.train.Checkpoint(model=model)
 
 # 체크포인트 불러오기 (최신 체크포인트 기준)
 ckpt.restore(tf.train.latest_checkpoint("./checkpoints"))
 
-...
+print(model([[2.0,2.0,2.0]]))
 
 # 체크포인트 저장하기 (자동 형식)
 ckpt.save("./checkpoints/ckpt")
+```
+
+```
+tf.Tensor([[0.8572469 1.8282735]], shape=(1, 2), dtype=float32)
 ```
 
 `tf.train.latest_checkpoint()` 함수에서 체크포인트를 발견하지 못하면 `None`이 `restore()` 메소드로 전달되는데, 원래 경로를 찾지 못하면 발생하는 `NotFoundError` 예외처리 없이 실행할 수 있다.
@@ -497,15 +527,8 @@ ckpt.save("./checkpoints/ckpt")
 체크포인트 관리자(checkpoint manager)는 체크포인트 파일을 더욱 효율적으로 관리할 수 있도록 하는 고급 API이다. 체크포인트 관리자는 `tf.train.CheckpointManger` API로 생성되며 오직 하나만 활성될 수 있다. 체크포인트 관리자로 체크포인트 저장 및 불러오기도 가능하며, 아래의 코드는 체크포인트 관리자를 활용한 예시이다.
 
 ```python
-import tensorflow as tf
-
-class Model:
-    def __init__(self):
-        statements
-
-model = Model()
-
-# 체크포인트 선언
+# tf.Module 모델 생성 및 체크포인트 생성
+model = SequentialModel(name = "model")
 ckpt = tf.train.Checkpoint(model=model)
 
 # 체크포인트 관리자: 체크포인트, 경로, 파일 개수
@@ -516,14 +539,18 @@ manager.restore_or_initialize()
 """ 대안:
 ckpt.restore(tf.train.latest_checkpoint("./checkpoints"))
 """
-
-...
+    
+print(model([[2.0,2.0,2.0]]))
 
 # 체크포인트 저장하기 (자동 형식)
 manager.save()
 """ 대안:
 ckpt.save("./checkpoints/ckpt")
 """
+```
+
+```
+tf.Tensor([[0.8572469 1.8282735]], shape=(1, 2), dtype=float32)
 ```
 
 여기서 `max_to_keep` 매개변수는 보관할 최대 체크포인트 파일 개수를 의미하며, 그 이상의 체크포인트가 생성되면 가장 오래된 체크포인트 파일을 삭제한다. 전달인자가 `None`일 경우, 생성된 모든 체크포인트를 보관한다.
