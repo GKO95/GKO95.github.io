@@ -214,10 +214,10 @@ C = forward(A, B)
 print(C)
 ```
 
-그래프 모드에서의 함수는 최적화가 되었을 시, 즉시 실행 모드에서의 코드보다 훨씬 더 빠른 처리속도를 선보인다. 하지만 컨볼루션과 같은 일부 무거운 연산은 그만큼의 가속 효과를 기대할 수 없다. 오토그래프에 대한 자세한 설명은 다음 장인 *텐서플로우: 텐서보드*에서 이어진다.
+그래프 모드에서의 함수는 최적화가 되었을 시, 즉시 실행 모드에서의 코드보다 훨씬 더 빠른 처리속도를 선보인다. 하지만 컨볼루션과 같은 일부 무거운 연산은 그만큼의 가속 효과를 기대할 수 없다. 오토그래프에 대한 자세한 설명은 다음 장인 *텐서플로우: 그래프*에서 이어진다.
 
-# **텐서플로우: 텐서보드**
-텐서보드(TensorBoard)는 텐서플로우의 그래프/데이터 시각화 및 분석 도구이다. 텐서플로우의 모든 데이터 기록에서부터 그래프 및 프로파일러 저장은 `tf.summary` API에서 관리된다. 텐서플로우의 그래프를 읽을 수 있는 능력은 인공지능 모델이 어떻게 구축되었는지 이해하고 분석하는데 도움이 될 수 있다.
+# **텐서플로우: 그래프**
+텐서플로우에서 그래프는 단순히 데이터 흐름도가 아닌 신경망을 구성하는 메모리 구조를 의미한다. 그리고 그래프는 텐서보드(TensorBoard)라는 텐서플로우 전용 그래프/데이터 분석 도구를 통해 시각적으로 볼 수 있다. 텐서플로우의 그래프 및 프로파일러와 같은 요약(summary) 데이터 저장은 `tf.summary` API에서 관리된다. 텐서플로우의 그래프를 읽을 수 있는 능력은 인공지능 모델이 어떻게 구축되었는지 이해하고 분석하는데 도움이 될 수 있다.
 
 ```python
 python -m pip install tensorboard
@@ -228,14 +228,12 @@ python -m pip install tensorboard
 
 ```python
 @tf.function
-def function(arg1, arg2):
-    statements
-    return something
+def forward(x, y):
+    return tf.add(x, y, name="tensorAdd")
 
 ''' 동일:
-def function(arg1, arg2):
-    statements
-    return something
+def function(x, y):
+    return tf.add(x, y, name="tensorAdd")
     
 function = tf.function(func = function)
 '''
@@ -249,49 +247,19 @@ function = tf.function(func = function)
 ```python
 # 콘크리트 함수 (단일 시그니처 전용)
 @tf.function(input_signature=[
-    tf.TensorSpec(shape=[3,1], dtype=tf.float32), # -> 매개변수 arg1
-    tf.TensorSpec(shape=None,  dtype=tf.float32)  # -> 매개변수 arg2
+    tf.TensorSpec(shape=[3,1], dtype=tf.float32), # -> 매개변수 x
+    tf.TensorSpec(shape=None,  dtype=tf.float32)  # -> 매개변수 y
 ])
-def function(arg1, arg2):
-    statements
-    return something
+def forward(x, y):
+    return tf.add(x, y, name="tensorAdd")
 ```
 
 콘크리트 함수와 반대로, 특정 시그니처가 정해지지 않은 그래프 함수를 다형성 함수(polymorphic function)이라고 한다.
 
-## 텐서보드 생성
-다음과 같은 텐서플로우 코드가 작성되었을 시, 이를 텐서보드에서 그래프로 확인하려면 아래의 명령어를 터미널에 입력한다.
+## 텐서보드
+> *참조: [TensorBoard 시작하기](https://www.tensorflow.org/tensorboard/graphs#graphs_of_tffunctions)*
 
-```python
-import tensorflow as tf
-
-A = tf.constant([[1,2,3],[4,5,6]], name="tensorA")
-B = tf.constant(value=1, shape=[2,3], name="tensorB")
-
-@tf.function
-def forward(x, y):
-    return tf.add(x, y, name="tensorAdd")
-
-# 요약 파일 작성자 "writer" 생성
-writer = tf.summary.create_file_writer("./tensorboard_logs")
-
-# 그래프 기록 및 프로파일링: 여기서부터 시작!
-tf.summary.trace_on(graph=True, profiler=False)
-C = forward(A, B)
-
-# 요약 파일 작성자 "writer" 활성화
-with writer.as_default():
-    # 그래프 기록 및 프로파일링: 활성화된 "writer"에 요약 작성 & 종료!
-    tf.summary.trace_export(name="tf_summary", step=0)
-```
-
-```bash
-tensorboard --logdir tensorboard_logs
-```
-
-![그림 2. 텐서보드 오토그래프 예시](/assets/img/docs/library/TensorFlow/tf_example_board.png)
-
-`tf.summary` API로부터 생성된 데이터는 `_SummaryState` 쓰레드 객체 덕분에 내부적으로 공유되어 텐서보드 자료관리에 사용되며, 대표적인 예시로 요약 작성자 선택, 자료 기록 시작 및 종료, 파일로 건네주기 등이 있다.
+우선 텐서플로우 그래프 요약 데이터 수집에는 기본적으로 아래의 API들이 필요하다.
 
 | API                               | 설명                                                  |
 | --------------------------------- | ------------------------------------------------------------ |
@@ -299,6 +267,35 @@ tensorboard --logdir tensorboard_logs
 | `tf.summary.trace_on()`           | 텐서플로우 그래프 기록 및 프로파일링을 위해 추적(trace)을 시작한다. |
 | `tf.summary.trace_export()`       | 추적을 중단하고 기록된 내역을 요약 및 프로파일 파일로 건네준다. |
 | `tf.summary.trace_off()`          | 추적을 중단하고 기록된 내역을 전부 삭제한다. |
+
+`tf.summary` API로부터 생성된 데이터는 `_SummaryState` 쓰레드 객체 덕분에 내부적으로 공유되어 텐서보드 자료관리에 사용되기 때문에, 네 개의 별개의 API처럼 보이지만 전부 동일한 하나의 요약 데이터를 처리하고 있다.
+
+이전 장에서의 [오토그래프](#오토그래프) 예시 코드를 그대로 가져와서 그래프를 텐서보드에서 시각화 하는 방법을 소개한다.
+
+```python
+# 요약 파일을 지정된 경로에 생성 & 요약 작성자 객체화
+writer = tf.summary.create_file_writer("tmp/tensorboard_logs")
+
+# 그래프 및 프로파일 기록: 여기서부터 시작!
+tf.summary.trace_on(graph=True)
+
+C = forward(A,B)
+
+# 요약 작성자 활성화
+with writer.as_default():
+    # 그래프 및 프로파일 기록: 기록된 요약 데이터를 "writer"의 0번째 단계에 작성 및 중단!
+    tf.summary.trace_export(name="tf_summary", step=0)
+```
+
+여기서 `tf.summary.trace_on` API 이후에 최소한 한 번이라도 `tf.function` 함수를 실행해야 한다. 텐서플로우의 데이터 흐름을 "추적"한 내역을 기반으로 그래프를 시각화하기 때문이다. 만일 `forward(A,B)` 함수가 실행되지 않았거나 혹은 API 이전에 실행되었다면 텐서보드에 Graph visualization failed 오류문이 나타난다.
+
+생성된 텐서플로우 그래프를 텐서보드에서 확인하려면 아래의 명령어를 터미널에 입력한다.
+
+```bash
+tensorboard --logdir tensorboard_logs
+```
+
+![그림 2. 텐서보드 오토그래프 예시](/assets/img/docs/library/TensorFlow/tf_example_board.png)
 
 ### 텐서보드 노드
 > *참조: [`tf` 연산 정의](https://www.tensorflow.org/mlir/tf_ops)*
@@ -325,8 +322,8 @@ tensorboard --logdir tensorboard_logs
 # **텐서플로우: 모델**
 텐서플로우로부터 데이터 흐름을 처리한 이후, 취하고자 하는 목적에 따라 그래프 내부적으로 매개변수에 변화가 생겼을 것이다. 해당 그래프와 매개변수는 하나의 모델(model)로 저장하여 차후에 추론 및 추가 학습에 활용될 수 있다. 텐서플로우에서 모델을 저장한다고 하면 둘 중 하나를 의미한다:
 
-1. 체크포인트 지정
-2. (그래프) 모델 저장
+1. 체크포인트(checkpoint)
+2. 파일형 모델(SavedModel)
 
 본 장에서는 체크포인트 및 모델을 저장하는 방법을 소개한다.
 
@@ -360,6 +357,7 @@ class SequentialModel(tf.Module):
         self.dense_1 = Dense(variable_num = 3, outcome_num = 3)
         self.dense_2 = Dense(variable_num = 3, outcome_num = 2)
 
+    @tf.function
     def __call__(self, x):
         # 입력된 데이터는 밀집층을 dense_1 그리고 dense_2 순서로 이동
         x = self.dense_1(x)
@@ -452,7 +450,7 @@ for _ in range(10):
 * `write()`: 정해진 경로로 체크포인트를 저장한다.
 * `save()`: 체크포인트를 저장하는 `write()` 메소드에 `save_counter`가 추가되어 자동적으로 생성 번호를 부여한다.
 
-본 내용은 관습적인 `save()` 메소드를 사용하여 체크포인트를 저장하는 방법을 소개한다. 체크포인트를 저장하기 위해서 체크포인트 경로(예시. `./checkpoints`)와 체크포인트 파일 접두사(예시. `ckpt`)를 지정해야 한다.
+본 내용은 관습적인 `save()` 메소드를 사용하여 체크포인트를 저장하는 방법을 소개한다. 체크포인트를 저장하기 위해서 체크포인트 경로(예시. `tmp/checkpoints`)와 체크포인트 파일 접두사(예시. `ckpt`)를 지정해야 한다.
 
 ```python
 # tf.Module 모델 생성 및 체크포인트 생성
@@ -462,18 +460,18 @@ ckpt = tf.train.Checkpoint(model=model)
 print(model([[2.0,2.0,2.0]]))
 
 # 체크포인트 저장하기 (자동 형식)
-ckpt.save("./checkpoints/ckpt")
+ckpt.save("tmp/checkpoints/ckpt")
 """ 대안:
 import os
 
-ckpt_dir    = "./checkpoints"
+ckpt_dir    = "tmp/checkpoints"
 ckpt_prefix = os.path.join(ckpt_dir, "ckpt")
 
 ckpt.save(ckpt_prefix)
 """
 ```
 ```
-tf.Tensor([[0.8572469 1.8282735]], shape=(1, 2), dtype=float32)
+tf.Tensor([[0.6436929  0.53985757]], shape=(1, 2), dtype=float32)
 ```
 
 위의 텐서플로우를 실행시키면 아래와 같이 체크포인트 경로 및 파일이 생성된다.
@@ -481,10 +479,11 @@ tf.Tensor([[0.8572469 1.8282735]], shape=(1, 2), dtype=float32)
 ```
 ./
 +-- main.py
-+-- checkpoints/
-|   +-- checkpoint
-|   +-- ckpt-1.data-00000-of-00001
-|   +-- ckpt-1.index
++-- tmp/
+|   +-- checkpoints/
+|   |   +-- checkpoint
+|   |   +-- ckpt-1.data-00000-of-00001
+|   |   +-- ckpt-1.index
 ```
 
 체크포인트를 저장할 때 세 종류의 파일이 생성된다: `checkpoint`. `data`, 그리고 `index` 확장자 파일이 있다.
@@ -509,16 +508,16 @@ model = SequentialModel(name = "model")
 ckpt = tf.train.Checkpoint(model=model)
 
 # 체크포인트 불러오기 (최신 체크포인트 기준)
-ckpt.restore(tf.train.latest_checkpoint("./checkpoints"))
+ckpt.restore(tf.train.latest_checkpoint("tmp/checkpoints"))
 
 print(model([[2.0,2.0,2.0]]))
 
 # 체크포인트 저장하기 (자동 형식)
-ckpt.save("./checkpoints/ckpt")
+ckpt.save("tmp/checkpoints")
 ```
 
 ```
-tf.Tensor([[0.8572469 1.8282735]], shape=(1, 2), dtype=float32)
+tf.Tensor([[0.6436929  0.53985757]], shape=(1, 2), dtype=float32)
 ```
 
 `tf.train.latest_checkpoint()` 함수에서 체크포인트를 발견하지 못하면 `None`이 `restore()` 메소드로 전달되는데, 원래 경로를 찾지 못하면 발생하는 `NotFoundError` 예외처리 없이 실행할 수 있다.
@@ -532,12 +531,12 @@ model = SequentialModel(name = "model")
 ckpt = tf.train.Checkpoint(model=model)
 
 # 체크포인트 관리자: 체크포인트, 경로, 파일 개수
-manager = tf.train.CheckpointManager(ckpt, "./checkpoints", max_to_keep=3)
+manager = tf.train.CheckpointManager(ckpt, "tmp/checkpoints", max_to_keep=3)
 
 # 체크포인트 불러오기 (최신 체크포인트 기준)
 manager.restore_or_initialize()
 """ 대안:
-ckpt.restore(tf.train.latest_checkpoint("./checkpoints"))
+ckpt.restore(tf.train.latest_checkpoint("tmp/checkpoints"))
 """
     
 print(model([[2.0,2.0,2.0]]))
@@ -545,12 +544,95 @@ print(model([[2.0,2.0,2.0]]))
 # 체크포인트 저장하기 (자동 형식)
 manager.save()
 """ 대안:
-ckpt.save("./checkpoints/ckpt")
+ckpt.save("tmp/checkpoints")
 """
 ```
 
 ```
-tf.Tensor([[0.8572469 1.8282735]], shape=(1, 2), dtype=float32)
+tf.Tensor([[0.6436929  0.53985757]], shape=(1, 2), dtype=float32)
 ```
 
 여기서 `max_to_keep` 매개변수는 보관할 최대 체크포인트 파일 개수를 의미하며, 그 이상의 체크포인트가 생성되면 가장 오래된 체크포인트 파일을 삭제한다. 전달인자가 `None`일 경우, 생성된 모든 체크포인트를 보관한다.
+
+## SavedModel
+> *참조: [SavedModel 포맷 사용하기](https://www.tensorflow.org/guide/saved_model)*
+
+`tf.saved_model` API는 파일 형태의 모델 그래프, 일명 SavedModel을 저장 및 불러오는데 필요한 핵심 API이다. 이전 부문에서는 체크포인트에 저장된 `tf.Variable` 매개변수만을 불러오는 것만으로도 동일한 결과를 추론할 수 있었으나, 이는 해당 스크립트에 이미 모델 그래프 코드가 작성되어 있기 때문이다. 만일 다른 파이썬 스크립트에서 모델을 불러오기 위해서는 신경망 매개변수 이외에 신경망 모델 그래프가 함께 요구된다. 이러한 이유로 [*텐서플로우: 모델 § `tf.Module` API*](#tfmodule-api)의 예시 코드에 `@tf.function` 데코레이팅 되었다.
+
+### SavedModel 저장하기
+텐서플로우에는 SavedModel 파일형 모델을 `save()` 메소드로 저장한다. SavedModel 저장에는 체크포인트를 별개로 생성할 필요가 없다.
+
+```python
+# tf.Module 모델 생성
+model = SequentialModel(name = "model")
+
+print(model([[2.0,2.0,2.0]]))
+
+# SavedModel 저장하기
+tf.saved_model.save(model, "tmp/saved_model")
+```
+
+```
+tf.Tensor([[0.6436929  0.53985757]], shape=(1, 2), dtype=float32)
+```
+
+SavedModel을 저장하면 다음과 같이 한 개의 파일과 두 개의 폴더가 생성된다.
+
+```
+./
++-- main.py
++-- tmp/
+|   +-- saved_model/
+|   |   +-- saved_model.pb
+|   |   +-- variables/
+|   |   |   +-- variables.data-00000-of-00001
+|   |   |   +-- variables.index
+|   |   +-- assets/
+```
+
+SavedModel을 저장할 때 세 종류의 파일 및 폴더가 생성된다: `pb` 확장자. `variables` 폴더, 그리고 `assets` 폴더가 있다.
+
+| 경로   | 설명                                                  |
+| ------------ | ------------------------------------------------------------ |
+| `.pb` 확장자 | 신경망 모델 그래프 정보가 담겨있는 프로토콜 버퍼 파일이다.     |
+| `variables` | 체크포인트와 동일한 형태의 매개변수 관련 파일 `.data` 및 `.index`가 들어있다. |
+| `assets`    | `tf.saved_model.Asset` API로 저장할 수 있는 외부 파일을 담고 있다. |
+
+여기서 시그니처에 대하여 주의해야 할 점이 있다: 예시 코드의 모델은 SavedModel을 저장하기 전에 `shape=(1, 3)` 크기의 텐서를 입력을 받았다. 이론상으로 해당 그래프는 아무런 `shape=( , 3)` 크기의 텐서는 수용가능하나, SavedModel은 이전에 입력받은 `shape=(1, 3)` 텐서만 수용가능한 시그니처로 인식한다. 포괄적인 시그니처를 위해서 아래와 같이 `@tf.function` API에 입력 시그니처 형식을 지정한다.
+
+```python
+# tf.Module 순차모델 (SEQUENTIAL MODEL)
+class SequentialModel(tf.Module):
+
+    ...
+
+    # 시그니처 설정: 포괄적 입력 데이터 개수 허용
+    @tf.function(input_signature=[
+        tf.TensorSpec(shape=[None, 3], dtype=tf.float32)
+    ])
+    def __call__(self, x):
+        x = self.dense_1(x)
+        return self.dense_2(x)
+```
+
+위의 `SequentialModel` 모델은 이제 어떠한 `shape=( , 3)` 크기의 텐서를 입력으로 받을 수 있다.
+
+### SavedModel 불러오기
+텐서플로우 SavedModel 파일형 모델을 `load()` 메소드로 불러온다. 아래의 예시 코드는 모델이 정의된 `main.py`가 아닌 전혀 다른 스크립트이다.
+
+```python
+import tensorflow as tf
+
+# SavedModel 불러오기
+model = tf.saved_model.load("tmp/saved_model")
+
+print(model([[2.0,2.0,2.0],[-2.,0.,2.]]))
+```
+
+```
+tf.Tensor(
+[[0.6436929  0.53985757]
+ [1.0628603  0.        ]], shape=(2, 2), dtype=float32)
+```
+
+위의 결과는 모델 그래프를 저장할 떄와 동일한 결과이므로, SavedModel을 성공적으로 저장 및 불러온 것을 확인할 수 있다.
