@@ -1,6 +1,4 @@
 ---
-name: JavaScript
-lang: ko
 layout: docs
 author: GKO95
 category: Programming

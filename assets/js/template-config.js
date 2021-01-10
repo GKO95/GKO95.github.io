@@ -59,6 +59,7 @@ switch($(`body`).attr("id"))
         break;
     case "docs":
     case "post":
+    case "repo":
         import("./docs-config.js")
         break;
     case "archive":
@@ -124,6 +125,17 @@ document.addEventListener("readystatechange", function () {
         $(`body`).css("visibility", "visible")
     }
 }); 
+
+//========================================
+// >> FOOTER WIDTH RESIZE
+//========================================
+var headerMargin = parseInt($(`header`).css("margin").split(" ")[1])
+const footerResize = () => {
+    $(`footer`).width($(window).width() - (headerMargin * 2)).css(
+        "left", `-${parseInt($(`main`).css("padding-left")) + parseInt($(`main`).css("margin").split(" ")[1]) - headerMargin}px`
+    )
+}; footerResize()
+$(window).resize(footerResize)
 
 //========================================
 // >> AUTO-FIT MAIN

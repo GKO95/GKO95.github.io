@@ -1,6 +1,4 @@
 ---
-name: Neural Network
-lang: en
 layout: docs
 author: GKO95
 category: Computer

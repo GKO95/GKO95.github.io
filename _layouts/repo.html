@@ -1,0 +1,14 @@
+---
+layout: template
+---
+<body id="repo">
+    {%- include header.html -%}
+    {%- include toc.html -%}
+    <main id="repo-main">
+        <div id="repo-content">
+            {{ content }}
+            {%- include comment.html url=page.url -%}
+        </div>
+        {%- include footer.html -%}
+    </main>
+</body>

@@ -1,6 +1,4 @@
 ---
-name: Python
-lang: en
 layout: docs
 author: GKO95
 category: Programming

@@ -1,6 +1,4 @@
 ---
-name: OpenCV
-lang: ko
 layout: docs
 author: GKO95
 category: Library

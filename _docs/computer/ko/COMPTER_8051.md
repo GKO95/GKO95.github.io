@@ -1,6 +1,4 @@
 ---
-name: MCS-51
-lang: ko
 layout: docs
 author: GKO95
 category: Computer

@@ -1,6 +1,4 @@
 ---
-name: Csharp
-lang: ko
 layout: docs
 author: GKO95
 category: Programming
