@@ -1,5 +1,5 @@
 //========================================
-// SWITCH LANGUAGE
+// >> SWITCH LANGUAGE
 //========================================
 $(`#docs #nav-lang`).click(function() {
     if ($(location).attr('pathname').indexOf("/ko/") >= 0) {
@@ -20,7 +20,7 @@ else
 }
 
 //========================================
-// DOCS: REDIRECT
+// >> DOCS: REDIRECT
 //========================================
 if (window.sessionStorage.getItem("REDIR.FLAG") == "1")
 {
@@ -44,7 +44,7 @@ else {
 }
 
 //========================================
-// MAIN: NOTICE
+// >> MAIN: NOTICE
 //========================================
 $(`.notice`).each(function() {
     let descriptionText, descriptionID
@@ -88,7 +88,7 @@ $(`.notice`).each(function() {
 })
 
 //========================================
-// MAIN: WORD-BREAK
+// >> MAIN: WORD-BREAK
 //========================================
 const breakCode = () => {
     $(`code`).each(function() {
@@ -99,7 +99,7 @@ const breakCode = () => {
 $(window).resize(breakCode)
 
 //========================================
-// MAIN: IMAGE RESIZE
+// >> MAIN: IMAGE RESIZE
 //========================================
 const imageSize = () => {
     $(`main [id*="-content"] img`).each(function() {
@@ -114,7 +114,7 @@ const imageSize = () => {
 $(window).resize(imageSize)
 
 //========================================
-// TOC
+// >> TOC
 //========================================
 switch($(`body`).attr("id"))
 {

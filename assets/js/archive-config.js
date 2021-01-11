@@ -1,16 +1,44 @@
 //========================================
-// SWITCH LANGUAGE
+// >> SWITCH LANGUAGE
 //========================================
 if (GetLANG() == enumLANG.ENGLISH){
     // ENGLISH
 }
 else {
     // KOREAN
-    $(`#blog-caption`).text("태그:")
-    $(`#blog #nav-center > span`).text("블로그")
-    $(`#repo #nav-center > span`).text("리포지터리")
-}   
+    switch($(`main > div`).attr("id").split("-")[0])
+    {
+        case "blog":
+            $(`#nav-center > span`).text("블로그")
+            $(`#blog-caption`).text("태그:")
+            break;
+        case "repo":
+            $(`#nav-center > span`).text("리포지터리")
+            break;
+    }
+}
 
+//========================================
+// >> PARSER: RGB COLOR
+//========================================
+const parseColor = (str) => {
+
+    if (str[0] == "#") return str.toUpperCase()
+    else if (str.toLowerCase().substring(0,3) == "rgb")
+    {
+        let hex = "#"
+        $.each(str.substring(3).slice(1,-1).split(","), function(index, value) {
+            hex += value.toString(16)
+        })
+        return hex.toUpperCase()
+    }
+
+    return str;
+}
+
+//========================================
+// >> FILTER: TAGS
+//========================================
 const __colorYES__  = (GetTHEME == enumTHEME.LIGHT) ? "rgb(48, 200, 48)" : "rgb(0, 128, 0)";
 const __colorNO__   = (GetTHEME == enumTHEME.LIGHT) ? "red" : "red";
 

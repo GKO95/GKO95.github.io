@@ -1,5 +1,5 @@
 //========================================
-// SWITCH LANGUAGE
+// >> SWITCH LANGUAGE
 //========================================
 if (GetLANG() == enumLANG.ENGLISH)
 {   // ENGLISH
@@ -29,7 +29,7 @@ else
 }
 
 //========================================
-// ANNOUNCEMENT: SPACING ADJUSTMENT
+// >> SPACING ADJUSTMENT
 //========================================
 if ($(`#home-announce li`).length > 0) {
     $(`#home-announce`).css({"padding-bottom": "24px", "padding-top": "8px"})

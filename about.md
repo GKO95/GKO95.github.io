@@ -1,4 +1,4 @@
 ---
-layout: post
+layout: about
 title: About
 ---
