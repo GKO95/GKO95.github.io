@@ -1,13 +1,13 @@
 //================================
-// ARCHIVE
+// BLOG
 //================================
-#archive {
+#blog, #repo {
     ul, ol {
         list-style-type: square;   
     }
 }
 
-#archive-content {
+#blog-content, #repo-content {
     width: calc(100% - (48px * 2));
     max-width: calc(1200px - (32px * 2));
     margin: {
@@ -20,7 +20,7 @@
     }
 }
 
-#archive-caption {
+#blog-caption {
     letter-spacing: 0.1em;
     text-align: left;
     font: {
@@ -35,7 +35,7 @@
     -webkit-user-select: none;
 }
 
-#archive-tags {
+#blog-tags {
     padding: 0 1.6em 1.6em 1.6em;
     border: {
         width: 4px;
@@ -52,7 +52,7 @@
     }
 }
 
-.archive-tag {
+.blog-tag {
     margin: 0 8px;
     cursor: pointer;
 
@@ -67,7 +67,7 @@
     text-decoration: none;
 }
 
-#archive-list {
+#blog-list {
     font-size: 24px;
     font-weight: bold;
     li {

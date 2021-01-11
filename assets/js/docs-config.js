@@ -20,18 +20,18 @@ else
 }
 
 //========================================
-// MAIN: REDIRECT
+// DOCS: REDIRECT
 //========================================
 if (window.sessionStorage.getItem("REDIR.FLAG") == "1")
 {
     var _redirTitle = window.sessionStorage.getItem("REDIR.HREF")
-    $(`main [id*="-content"]`).prepend($(`<div class="notice" id="notice-redirected"></div>`))
+    $(`#docs-main [id*="-content"]`).prepend($(`<div class="notice" id="notice-redirected"></div>`))
 
     window.sessionStorage.setItem("REDIR.FLAG", `0`)
     window.sessionStorage.setItem("REDIR.HREF", ``)
 }
 else {
-    if ($(`main [id*="-content"] > :not(div,style,script,section)`).length == 0) {
+    if ($(`#docs-main [id*="-content"] > :not(div,style,script,section)`).length == 0) {
         window.sessionStorage.setItem("REDIR.FLAG", `1`)
         window.sessionStorage.setItem("REDIR.HREF", `${$(`#nav-center > span`).text()}`)
     

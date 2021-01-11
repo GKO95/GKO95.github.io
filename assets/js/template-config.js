@@ -11,7 +11,7 @@ const enumLANG = {
 const GetCONFIG = () => {
     return parseInt(window.localStorage.getItem("CODE"))
 }
-
+    
 const SetCONFIG = (code = 0) => {
     window.localStorage.setItem("CODE", `${code}`)
 }
@@ -59,11 +59,11 @@ switch($(`body`).attr("id"))
         break;
     case "docs":
     case "post":
-    case "repo":
         import("./docs-config.js")
         break;
-    case "archive":
-        import("./archive-config.js")
+    case "blog":
+    case "repo":
+        import("./blog-config.js")
         break;
     default:
         break;

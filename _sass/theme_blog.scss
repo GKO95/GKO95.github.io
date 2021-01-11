@@ -1,19 +1,19 @@
 //================================
-// ARCHIVE
+// BLOG
 //================================
 html {
     // LIGHT THEME
-    #archive-tags {
+    #blog-tags {
         
     }
 
-    #archive-list a {
+    #blog-list a {
         color: #000000;
     }
 
 &:not(.style-scope)[dark] {
     // DARK THEME
-    #archive-tags {
+    #blog-tags {
         border-color: #404040;
         background-color: #101010;
 
@@ -23,7 +23,7 @@ html {
         }
     }
 
-    #archive-list a {
+    #blog-list a {
         color: #FFFFFF;
     }
 

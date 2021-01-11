@@ -1,13 +1,13 @@
 ---
 layout: template
 ---
-<body id="archive">
+<body id="blog">
     {%- include header.html -%}
-    <main id="archive-main">
-        <div id="archive-content">
+    <main id="blog-main">
+        <div id="blog-content">
             <!--TAGS SELECTION-->
-            <section id="archive-tags">
-                <p id="archive-caption">TAGS:</p>
+            <section id="blog-tags">
+                <p id="blog-caption">TAGS:</p>
                 {% assign list = "" %}
                 {%- for blog in site.blog -%}{%- for tag in blog.tags -%}
                     {%- assign list = list | append: " " | append: tag -%}
@@ -15,12 +15,12 @@ layout: template
                 {%- assign arr = list | split: " " -%}
                 {%- assign set = arr | uniq | sort | join: " " | split: " " -%}
                 {%- for item in set -%}
-                    <a><code class="archive-tag">#{{item}}</code></a>
+                    <a><code class="blog-tag">#{{item}}</code></a>
                 {%- endfor -%}
             </section>
             <!--LIST OF POSTS-->
-            <div id="archive-posts">
-                <ul id="archive-list">
+            <div id="blog-posts">
+                <ul id="blog-list">
                     {%- assign blogs = site.blog | reverse -%}
                     {%- for blog in blogs -%}
                     {%- assign index = blog.tags.size -%}

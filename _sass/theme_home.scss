@@ -10,7 +10,6 @@ html {
         background-color: $HFDBkgdColor;
 
         .home-docs-group {
-
             border-color: #A0A0A0;
         }
 
@@ -23,13 +22,15 @@ html {
         }
     }
 
-    #home-blog-notice {
-        ul, ol {
-            border-color: transparent;
-        }
+    #home-announce-notice {
+        background-image: linear-gradient(#FFFFFF, #FFFFFF),
+        linear-gradient(#FFFFFF, #FFFFFF),
+        linear-gradient(#FFFFFF, #FFFFFF),
+        linear-gradient(#FFFFFF, #FFFFFF);
+        border-color: #FFFFFF;
     }
 
-    .home-blog-post {
+    .home-blog-button {
         background-color: #101010;
         border-color: #303030;
         color: #FFFFFF;

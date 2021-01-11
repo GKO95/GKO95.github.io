@@ -23,36 +23,17 @@ else
         $(this).find(`.home-docs-header`).text(translate.split(" | ")[0]);
     })
 
-    $(`#home-blog-post-more`).text("게시글 목록")
+    $(`#home-blog-about`).text("소개글")
+    $(`#home-blog-post`).text("블로그")
+    $(`#home-blog-repo`).text("리포지터리")
 }
-
-//========================================
-// ANNOUNCEMENT: SLIDE DOWN TRANSITION
-//========================================
-/*
-document.addEventListener("readystatechange", function () {
-    if (document.readyState == "complete") {
-        $(`#home-announce`).slideDown(600, "swing")
-    }
-})
-*/
 
 //========================================
 // ANNOUNCEMENT: SPACING ADJUSTMENT
 //========================================
 if ($(`#home-announce li`).length > 0) {
-    $(`#home-announce`).css("padding-bottom", "16px")
+    $(`#home-announce`).css({"padding-bottom": "24px", "padding-top": "8px"})
 }
 
-//========================================
-// DOCS: MINIMUM 3-COLUMN
-//========================================
-const widthDocs = Math.round($(`.home-docs-tile`).parent().outerWidth(true) * 3)  // 845px
-const marginDocs = $(`.home-docs-tile`).parent().outerWidth(true) - $(`.home-docs-tile`).width()
-function resizeDocs() {
-    if ($(`.home-docs-group ul`).width() < widthDocs) {
-        $(`.home-docs-tile`).width(($(`.home-docs-group ul`).width() - (marginDocs * 3))/3)
-        $(`.home-docs-tile`).height($(`.home-docs-tile`).width())
-    }
-}; resizeDocs()
-$(window).resize(resizeDocs)
+$(`.home-blog-button`).first().css("margin-left", "0px")
+$(`.home-blog-button`).last().css("margin-right", "0px")

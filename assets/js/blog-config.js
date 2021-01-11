@@ -6,8 +6,9 @@ if (GetLANG() == enumLANG.ENGLISH){
 }
 else {
     // KOREAN
-    $(`#archive-caption`).text("태그:")
-    $(`#nav-center > span`).text("게시글 목록")
+    $(`#blog-caption`).text("태그:")
+    $(`#blog #nav-center > span`).text("블로그")
+    $(`#repo #nav-center > span`).text("리포지터리")
 }   
 
 const __colorYES__  = (GetTHEME == enumTHEME.LIGHT) ? "rgb(48, 200, 48)" : "rgb(0, 128, 0)";
@@ -16,13 +17,13 @@ const __colorNO__   = (GetTHEME == enumTHEME.LIGHT) ? "red" : "red";
 const filterTags = () => {
     let __FILTERYES__ = []; let __FILTERNO__  = [];
 
-    for(let tag of document.getElementsByClassName("archive-tag"))
+    for(let tag of document.getElementsByClassName("blog-tag"))
     {
         if (tag.style.backgroundColor == __colorNO__) { __FILTERNO__.push(tag.innerHTML); }
         else if (tag.style.backgroundColor == __colorYES__) { __FILTERYES__.push(tag.innerHTML); }
     }
 
-    for(let post of document.getElementById("archive-list").children)
+    for(let post of document.getElementById("blog-list").children)
     {
         post.style.display = "";
 
@@ -40,7 +41,7 @@ const filterTags = () => {
     }
 }
 
-for(let item of document.getElementsByClassName("archive-tag"))
+for(let item of document.getElementsByClassName("blog-tag"))
 {   
     item.addEventListener("click", ()=>{
         switch(item.style.backgroundColor)
