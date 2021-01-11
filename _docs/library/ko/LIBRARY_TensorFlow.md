@@ -4,7 +4,7 @@ author: GKO95
 category: Library
 title: "라이브러리 | 텐서플로우"
 logo: "/assets/img/res/logo-tf2.png"
-order: 0x12
+order: 0x13
 ---
 {% include expand.html %}
 # **텐서플로우: 소개**
