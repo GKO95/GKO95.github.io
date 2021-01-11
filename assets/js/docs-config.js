@@ -88,6 +88,17 @@ $(`.notice`).each(function() {
 })
 
 //========================================
+// MAIN: WORD-BREAK
+//========================================
+const breakCode = () => {
+    $(`code`).each(function() {
+        if ($(this).width() > $(`main`).width()) $(this).css("word-break", "break-all")
+        else $(this).css("word-break", "initial")
+    })
+}; breakCode()
+$(window).resize(breakCode)
+
+//========================================
 // MAIN: IMAGE RESIZE
 //========================================
 const imageSize = () => {
