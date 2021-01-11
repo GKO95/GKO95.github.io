@@ -688,8 +688,8 @@ while index in range(10):
 First...successful!
 ```
 
-## `pass` Statement
-The `pass` statement is a null operation that does nothing when executed. It prevents an exception occurred when running an empty code.
+## `pass` Keyword
+The `pass` or `...` keyword is a null operation that does nothing when executed. It prevents an exception occurred when running an empty code.
 
 # **PYTHON: ITERABLE**
 Not just its simplicity that makes Python language useful, its iterable object is powerful and flexible than any other programming language can provide. This chapter introduces four iterable objects in Python that have slightly different properties.
