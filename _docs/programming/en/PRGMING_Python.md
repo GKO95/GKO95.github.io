@@ -709,7 +709,7 @@ print(variable[1])
 e
 ```
 
-### Slicing
+### Sequence Slicing
 Slicing is one of the powerful features Python has an advantage over other programming languages in handling a sequence objects. Slicing sequence can only extract the desired portion of the original.
 
 | SYNTAX    | EXAMPLE                            |
