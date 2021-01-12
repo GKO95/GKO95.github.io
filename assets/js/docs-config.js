@@ -92,7 +92,7 @@ $(`.notice`).each(function() {
 //========================================
 const breakCode = () => {
     $(`code`).each(function() {
-        if ($(this).width() > $(`main`).width()) $(this).css("word-break", "break-all")
+        if ($(this).width() > ($(this).parent().width() / 4)) $(this).css("word-break", "break-all")
         else $(this).css("word-break", "initial")
     })
 }; breakCode()
@@ -114,7 +114,7 @@ const imageSize = () => {
 $(window).resize(imageSize)
 
 //========================================
-// >> TOC
+// >> TOC: INITIALIZE
 //========================================
 switch($(`body`).attr("id"))
 {
@@ -146,3 +146,7 @@ switch($(`body`).attr("id"))
         })
         break;
 }
+
+//========================================
+// >> ABOUT: PROFILE
+//========================================

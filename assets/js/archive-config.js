@@ -28,61 +28,77 @@ const parseColor = (str) => {
     {
         let hex = "#"
         $.each(str.substring(3).slice(1,-1).split(","), function(index, value) {
-            hex += value.toString(16)
+            let temp = $.trim(parseInt(value).toString(16))
+            if (temp.length < 2) temp = "0" + temp
+            hex += temp
         })
         return hex.toUpperCase()
     }
-
     return str;
 }
 
 //========================================
 // >> FILTER: TAGS
 //========================================
-const __colorYES__  = (GetTHEME == enumTHEME.LIGHT) ? "rgb(48, 200, 48)" : "rgb(0, 128, 0)";
-const __colorNO__   = (GetTHEME == enumTHEME.LIGHT) ? "red" : "red";
+const __colorINCLUDE__  = (GetTHEME() == enumTHEME.LIGHT) ? "#30C830" : "#008000";
+const __colorEXCLUDE__   = (GetTHEME() == enumTHEME.LIGHT) ? "#FF0000" : "#FF0000";
 
 const filterTags = () => {
-    let __FILTERYES__ = []; let __FILTERNO__  = [];
+    let filterINCLUDE = []
+    let filterEXCLUDE  = []
 
-    for(let tag of document.getElementsByClassName("blog-tag"))
-    {
-        if (tag.style.backgroundColor == __colorNO__) { __FILTERNO__.push(tag.innerHTML); }
-        else if (tag.style.backgroundColor == __colorYES__) { __FILTERYES__.push(tag.innerHTML); }
-    }
-
-    for(let post of document.getElementById("blog-list").children)
-    {
-        post.style.display = "";
-
-        for(let tag of __FILTERYES__)
+    $(`.blog-tag`).each(function() {
+        switch(parseColor($(this).css("background-color")))
         {
-            if(!post.getAttribute("class").split(" ").includes(tag))
-            { post.style.display = "none"; break;}
+            case __colorEXCLUDE__:
+                filterEXCLUDE.push($(this).text())
+                break;
+            case __colorINCLUDE__:
+                filterINCLUDE.push($(this).text())
+                break;
+            default:
+                break;
         }
+    })
 
-        for(let tag of __FILTERNO__)
-        {
-            if(post.getAttribute("class").split(" ").includes(tag))
-            { post.style.display = "none"; break;}
-        }
-    }
+    $(`#blog-list > li`).each(function() {
+        let element = $(this)
+        $(this).show()
+        $.each(filterINCLUDE, function(index, value) {
+            if(!element.attr("class").split(" ").includes(value)) {
+                element.hide()
+                return
+            }
+        })
+        $.each(filterEXCLUDE, function(index, value) {
+            if(element.attr("class").split(" ").includes(value)) {
+                element.hide()
+                return
+            }
+        })
+    })
 }
 
-for(let item of document.getElementsByClassName("blog-tag"))
-{   
-    item.addEventListener("click", ()=>{
-        switch(item.style.backgroundColor)
+$(`.blog-tag`).each(function() {
+    $(this).click(function() {
+        switch(parseColor($(this).css("background-color")))
         {
-            case __colorNO__    : item.style.backgroundColor = ""; break;
-            case __colorYES__   : item.style.backgroundColor = __colorNO__; break;
-            default             : item.style.backgroundColor = __colorYES__; break;
-        } filterTags(item);
-    });
-    
-    if (item.innerHTML == window.location.hash)
+            case __colorINCLUDE__:
+                $(this).css("background-color", __colorEXCLUDE__)
+                break;
+            case __colorEXCLUDE__:
+                $(this).css("background-color", "")
+                break;
+            default:
+                $(this).css("background-color", __colorINCLUDE__)
+                break;
+        }
+        filterTags()
+    })
+
+    if ($(this).text() == window.location.hash)
     {
-        item.style.backgroundColor = __colorYES__;
-        filterTags(item);
+        $(this).css("background-color", __colorINCLUDE__)
+        filterTags()
     }
-}
+})
