@@ -4,18 +4,18 @@
 html {
     // LIGHT THEME
     body {
-        background-color: rgb(255, 255, 255);
+        background-color: #F2F2F2;
         color: rgb(0, 0, 0); 
     }
 
-    $HFLBkgdColor: #36AAF2 !global;
+    $HFLBkgdColor: #868686 !global;
     header, footer {
         background-color: $HFLBkgdColor;
         color: inherit;
     }
 
     blockquote {
-        background-color:rgb(240, 240, 240); 
+        background-color:#CCCCCC; 
         border-left-color: rgb(80, 80, 80); 
         color:rgb(64, 64, 64);
 
@@ -25,11 +25,18 @@ html {
     }
 
     code { 
-        background-color: rgb(224, 224, 224); 
+        background-color: #CDCDCD; 
+    }
+
+    .highlighter-rouge {
+        code {
+            background-color: transparent;
+            color: white;
+        }
     }
 
     a {
-        color: rgb(144, 144, 144);
+        color: #239BF1;
     }
 
 &:not(.style-scope)[dark] {

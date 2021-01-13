@@ -29,7 +29,27 @@ html {
 //==============================================================================================================
 html {
     // LIGHT THEME
+    #toc-button {
+        background-color: #CCCCCC;  
+        border-color: #808080;
+    }
 
+    #toc-container {
+        background-color: rgba(234, 234, 234, 0.8);
+    }
+
+    #toc-main {
+        background-color: #DDDDDD;
+        border-color: #404040;
+    }
+
+    #toc-content {
+        background-color: transparent;
+    }
+
+    #toc-options {
+        background-color: #BBBBBB;
+    }
 
 &:not(.style-scope)[dark] {
     // DARK THEME
