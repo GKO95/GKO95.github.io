@@ -61,9 +61,8 @@ switch($(`body`).attr("id"))
     case "post":
         import("./docs-config.js")
         break;
-    case "blog":
-    case "repo":
-        import("./blog-config.js")
+    case "archive":
+        import("./archive-config.js")
         break;
     default:
         break;
@@ -145,3 +144,5 @@ document.addEventListener("readystatechange", function () {
         $(`main [id*="-content"]`).css("min-height", `${$(window).height() - $(`header`).outerHeight(true) - $(`footer`).outerHeight(true)}px`)
     }
 }); 
+
+$(`main [id*="-content"]`).css("overflow-y", "hidden")

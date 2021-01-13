@@ -2,6 +2,32 @@ html {
     // LIGHT THEME
     #home-docs {
         background-color: $HFLBkgdColor;
+
+        .home-docs-group {
+            border-color: #404040;
+        }
+
+        .home-docs-header {
+            background-color: #D0D0D0;
+        }
+
+        .home-docs-tile {
+            background-color: #A1A1A1;
+        }
+    }
+
+    #home-announce-notice {
+        background-image: linear-gradient(#000000, #000000),
+        linear-gradient(#000000, #000000),
+        linear-gradient(#000000, #000000),
+        linear-gradient(#000000, #000000);
+        border-color: #000000;
+    }
+
+    .home-blog-button {
+        background-color: #868686;
+        border-color: #404040;
+        color: #000000;
     }
 
 &:not(.style-scope)[dark] {

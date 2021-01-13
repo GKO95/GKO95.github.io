@@ -1,13 +1,13 @@
 //================================
-// BLOG
+// ARCHIVE
 //================================
-#blog, #repo {
+#archive {
     ul, ol {
         list-style-type: square;   
     }
 }
 
-#blog-content, #repo-content {
+.archive-content {
     width: calc(100% - (48px * 2));
     max-width: calc(1200px - (32px * 2));
     margin: {

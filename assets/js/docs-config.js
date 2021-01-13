@@ -1,5 +1,5 @@
 //========================================
-// SWITCH LANGUAGE
+// >> SWITCH LANGUAGE
 //========================================
 $(`#docs #nav-lang`).click(function() {
     if ($(location).attr('pathname').indexOf("/ko/") >= 0) {
@@ -17,16 +17,20 @@ else
     $(`#comment-tags > span`).text("태그: ")
     $(`#comment-header > h4`).text("댓글쓰기")
     $(`.comment-info > p`).text("부적절하거나 문제를 야기할 수 있는 내용은 관리자의 판단하에 경고없이 삭제될 수 있습니다.")
+    if ($(`#nav-center > span`).text() == "About") $(`#nav-center > span`).text("소개글")
 }
 
 //========================================
-// DOCS: REDIRECT
+// >> DOCS: REDIRECT
 //========================================
 if (window.sessionStorage.getItem("REDIR.FLAG") == "1")
 {
     var _redirTitle = window.sessionStorage.getItem("REDIR.HREF")
-    $(`#docs-main [id*="-content"]`).prepend($(`<div class="notice" id="notice-redirected"></div>`))
-
+    if ($(`#docs-main [id*="-content"] > :not(div,style,script,section)`).length != 0)
+    {
+        $(`#docs-main [id*="-content"]`).prepend($(`<div class="notice" id="notice-redirected"></div>`))
+    }
+    
     window.sessionStorage.setItem("REDIR.FLAG", `0`)
     window.sessionStorage.setItem("REDIR.HREF", ``)
 }
@@ -44,7 +48,7 @@ else {
 }
 
 //========================================
-// MAIN: NOTICE
+// >> MAIN: NOTICE
 //========================================
 $(`.notice`).each(function() {
     let descriptionText, descriptionID
@@ -88,18 +92,18 @@ $(`.notice`).each(function() {
 })
 
 //========================================
-// MAIN: WORD-BREAK
+// >> MAIN: WORD-BREAK
 //========================================
 const breakCode = () => {
     $(`code`).each(function() {
-        if ($(this).width() > $(`main`).width()) $(this).css("word-break", "break-all")
+        if ($(this).width() > ($(this).parent().width() / 4)) $(this).css("word-break", "break-all")
         else $(this).css("word-break", "initial")
     })
 }; breakCode()
 $(window).resize(breakCode)
 
 //========================================
-// MAIN: IMAGE RESIZE
+// >> MAIN: IMAGE RESIZE
 //========================================
 const imageSize = () => {
     $(`main [id*="-content"] img`).each(function() {
@@ -114,7 +118,7 @@ const imageSize = () => {
 $(window).resize(imageSize)
 
 //========================================
-// TOC
+// >> TOC: INITIALIZE
 //========================================
 switch($(`body`).attr("id"))
 {

@@ -3,11 +3,15 @@ layout: template
 ---
 <body id="post">
     {%- include header.html -%}
+    {% if page.toc != false %}
     {%- include toc.html -%}
+    {% endif %}
     <main id="post-main">
         <div id="post-content">
             {{ content }}
+            {% if page.comment != false %}
             {%- include comment.html url=page.url -%}
+            {% endif %}
         </div>
         {%- include footer.html -%}
     </main>
