@@ -43,7 +43,7 @@ const parseColor = (str) => {
 const __colorINCLUDE__  = (GetTHEME() == enumTHEME.LIGHT) ? "#30C830" : "#008000";
 const __colorEXCLUDE__   = (GetTHEME() == enumTHEME.LIGHT) ? "#FF0000" : "#FF0000";
 
-const filterTags = () => {
+const filterTags = (color) => {
     let filterINCLUDE = []
     let filterEXCLUDE  = []
 
@@ -93,7 +93,7 @@ $(`.blog-tag`).each(function() {
                 $(this).css("background-color", __colorINCLUDE__)
                 break;
         }
-        filterTags()
+        filterTags(parseColor($(this).css("background-color")))
     })
 
     if ($(this).text() == window.location.hash)
