@@ -144,3 +144,5 @@ document.addEventListener("readystatechange", function () {
         $(`main [id*="-content"]`).css("min-height", `${$(window).height() - $(`header`).outerHeight(true) - $(`footer`).outerHeight(true)}px`)
     }
 }); 
+
+$(`main [id*="-content"]`).css("overflow-y", "hidden")

@@ -17,6 +17,7 @@ else
     $(`#comment-tags > span`).text("태그: ")
     $(`#comment-header > h4`).text("댓글쓰기")
     $(`.comment-info > p`).text("부적절하거나 문제를 야기할 수 있는 내용은 관리자의 판단하에 경고없이 삭제될 수 있습니다.")
+    if ($(`#nav-center > span`).text() == "About") $(`#nav-center > span`).text("소개글")
 }
 
 //========================================
@@ -25,8 +26,11 @@ else
 if (window.sessionStorage.getItem("REDIR.FLAG") == "1")
 {
     var _redirTitle = window.sessionStorage.getItem("REDIR.HREF")
-    $(`#docs-main [id*="-content"]`).prepend($(`<div class="notice" id="notice-redirected"></div>`))
-
+    if ($(`#docs-main [id*="-content"] > :not(div,style,script,section)`).length != 0)
+    {
+        $(`#docs-main [id*="-content"]`).prepend($(`<div class="notice" id="notice-redirected"></div>`))
+    }
+    
     window.sessionStorage.setItem("REDIR.FLAG", `0`)
     window.sessionStorage.setItem("REDIR.HREF", ``)
 }
@@ -146,7 +150,3 @@ switch($(`body`).attr("id"))
         })
         break;
 }
-
-//========================================
-// >> ABOUT: PROFILE
-//========================================
