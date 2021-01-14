@@ -1,6 +1,6 @@
 const enumTHEME = {
-    DARK: 0,
-    LIGHT: 1
+    LIGHT: 0,
+    DARK: 1
 }
 
 const enumLANG = {
