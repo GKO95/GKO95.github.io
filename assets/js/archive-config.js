@@ -40,7 +40,7 @@ const parseColor = (str) => {
 //========================================
 // >> FILTER: TAGS
 //========================================
-const __colorINCLUDE__  = (GetTHEME() == enumTHEME.LIGHT) ? "#30C830" : "#008000";
+const __colorINCLUDE__  = (GetTHEME() == enumTHEME.LIGHT) ? "#1CC11C" : "#008000";
 const __colorEXCLUDE__   = (GetTHEME() == enumTHEME.LIGHT) ? "#FF0000" : "#FF0000";
 
 const filterTags = (color) => {

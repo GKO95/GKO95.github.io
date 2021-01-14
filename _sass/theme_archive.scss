@@ -4,7 +4,9 @@
 html {
     // LIGHT THEME
     #blog-tags {
-        
+        border-color: #808080   ;
+        background-color: #E0E0E0;
+
         code {
             color: #000000;
             background-color: #CDCDCD;
@@ -13,6 +15,12 @@ html {
 
     #blog-list a {
         color: #000000;
+    }
+
+    #comment-form {
+        #comment-name, #comment-comment {
+            border: black solid 2px;
+        }
     }
 
 &:not(.style-scope)[dark] {
@@ -29,6 +37,12 @@ html {
 
     #blog-list a {
         color: #FFFFFF;
+    }
+
+    #comment-form {
+        #comment-name, #comment-comment {
+            border: initial;
+        }
     }
 
 }}

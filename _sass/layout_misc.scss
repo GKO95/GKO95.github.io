@@ -47,6 +47,14 @@
     }
 }
 
+#notice-redirected {
+    background-image: url(/assets/img/res/icon-redirect.png), url(/assets/img/res/icon-redirect2.png);
+}
+
+#notice-expand {
+    background-image: url(/assets/img/res/icon-alert.png), url(/assets/img/res/icon-alert2.png);
+}
+
 .notice-description {
     position: absolute;
     text-align: center;
@@ -142,7 +150,7 @@
 
 #toc-close {
     background: {
-        image: url(/assets/img/res/icon-close.png);
+        image: url(/assets/img/res/icon-close.png), url(/assets/img/res/icon-close2.png);
         size: 40px;
     }
 }

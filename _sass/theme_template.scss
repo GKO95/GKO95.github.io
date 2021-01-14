@@ -14,6 +14,14 @@ html {
         color: inherit;
     }
 
+    footer {
+        font-weight: bold;
+    }
+
+    .nav-logo {
+        background-blend-mode: multiply;
+    }
+
     blockquote {
         background-color:#CCCCCC; 
         border-left-color: rgb(80, 80, 80); 
@@ -50,6 +58,10 @@ html {
     header, footer{
         background-color: $HFDBkgdColor;
         color: inherit;
+    }
+
+    .nav-logo {
+        background-blend-mode: normal;
     }
 
     blockquote {

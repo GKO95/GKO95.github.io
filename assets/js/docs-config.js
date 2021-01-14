@@ -125,8 +125,8 @@ switch($(`body`).attr("id"))
     default:
     case "docs":
     case "post":
-        $(`#toc-options-region`).prepend(`<a class="toc-option" id="toc-home" href="/" title="Return home" style="background-image: url(/assets/img/res/icon-home.png)"></a>`)
-        $(`#toc-options-region`).prepend(`<a class="toc-option" id="toc-source" title="View source" style="background-image: url(/assets/img/res/icon-source.png)"></a>`)
+        $(`#toc-options-region`).prepend(`<a class="toc-option" id="toc-home" href="/" title="Return home" style="background-image: url(/assets/img/res/icon-home.png), url(/assets/img/res/icon-home2.png)"></a>`)
+        $(`#toc-options-region`).prepend(`<a class="toc-option" id="toc-source" title="View source" style="background-image: url(/assets/img/res/icon-source.png),url(/assets/img/res/icon-source2.png)"></a>`)
         $(`#toc-source`).click(function() {
             window.open(`https://github.com/GKO95/GKO95.github.io/blob/master${location.pathname.replace("/","/_").slice(0,-1)}.md`)
         })
@@ -140,13 +140,6 @@ switch($(`body`).attr("id"))
                 $(`#toc-button`).show("fast")
             })
             $(`#toc-content`).append($(`<${headerTag}></${headerTag}>`).append(headerTxt))
-        })
-        break;
-    case "repo":
-        $(`#toc-options-region`).prepend(`<a class="toc-option" id="toc-home" href="/" title="Return home" style="background-image: url(/assets/img/res/icon-home.png)"></a>`)
-        $(`#toc-options-region`).prepend(`<a class="toc-option" id="toc-source" title="View source" style="background-image: url(/assets/img/res/icon-source.png)"></a>`)
-        $(`#toc-source`).click(function() {
-            window.open(`https://gko95.github.io${location.pathname}`)
         })
         break;
 }

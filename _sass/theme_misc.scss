@@ -3,16 +3,22 @@
 //==============================================================================================================
 html {
     // LIGHT THEME
+    .notice {
+        background-blend-mode: multiply;
+    }
 
+    #description-redirected {
+        background-color: #4190B7;
+    }
+
+    #description-expand {
+        background-color: #D8864B;
+    }
 
 &:not(.style-scope)[dark] {
     // DARK THEME
-    #notice-redirected {
-        background-image: url(/assets/img/res/icon-redirect.png);
-    }
-
-    #notice-expand {
-        background-image: url(/assets/img/res/icon-alert.png);
+    .notice {
+        background-blend-mode: normal;
     }
 
     #description-redirected {
@@ -29,6 +35,10 @@ html {
 //==============================================================================================================
 html {
     // LIGHT THEME
+    .toc-option {
+        background-blend-mode: multiply;
+    }
+
     #toc-button {
         background-color: #CCCCCC;  
         border-color: #808080;
@@ -53,6 +63,10 @@ html {
 
 &:not(.style-scope)[dark] {
     // DARK THEME
+    .toc-option {
+        background-blend-mode: normal;
+    }
+    
     #toc-button {
         background-color: #101010;  
         border-color: #808080;

@@ -3,7 +3,30 @@
 //==============================================================================================================
 html {
     // LIGHT THEME
+    img {
+        border-color: #202020;
+        background-color: #FFFFFF;
+    }
 
+    table {
+        border-color: #404040;
+    }
+    
+    th {
+        border-color: #202020;
+        border-bottom-color: #202020;
+        background-color: #B0B0B0;
+    }
+    
+    td {
+        border-color: #606060;
+    }
+
+    tr {
+        &:nth-child(odd) {
+            background-color: #E0E0E0;
+        }
+    }
 
 &:not(.style-scope)[dark] {
     // DARK THEME

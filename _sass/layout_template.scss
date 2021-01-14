@@ -97,6 +97,22 @@ header {
             cursor: pointer;
         }
 
+        #nav-home {
+            background-image:url('/assets/img/res/icon-home.png'), url('/assets/img/res/icon-home2.png');
+        }
+
+        #nav-lang {
+            background-image:url('/assets/img/res/icon-language.png'), url('/assets/img/res/icon-language2.png');
+        }
+
+        #nav-theme {
+            background-image:url('/assets/img/res/icon-theme.png'),url('/assets/img/res/icon-theme2.png');
+        }
+
+        #nav-github {
+            background-image:url('/assets/img/res/icon-github.png'),url('/assets/img/res/icon-github2.png');
+        }
+
         #nav-center {
             text-align: center;
             padding: 0 0.4em;
