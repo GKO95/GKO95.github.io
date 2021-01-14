@@ -9,7 +9,7 @@ order: 0x01
 # **C: INTRO**
 > *Refernce: [Microsoft Docs C Language Documentation](https://docs.microsoft.com/en-us/cpp/c-language/)*
 
-C programming language is a predecessor of the *B* programming language for UNIX software development. Currently, C language is the most widely used programming language and had influenced C++, C#, Python, Java, and more. The C language has a faster processing speed and excellent compatibility, making it still great use for application and firmware development.
+C programming language is a predecessor of the [*B*](https://en.wikipedia.org/wiki/B_(programming_language)) programming language for UNIX software development. Currently, C language is the most widely used programming language and had influenced C++, C#, Python, Java, and more. The C language has a faster processing speed and excellent compatibility, making it still great use for application and firmware development.
 
 ## Compiled Language
 There are two different categories of program languages based on its execution: compiled language and interpreted language.
