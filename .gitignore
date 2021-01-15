@@ -13,3 +13,7 @@ vendor/
 
 # Ignore original images of the thumbnail
 assets/img/res/.xlogo
+
+node_modules/
+.cache/
+public
