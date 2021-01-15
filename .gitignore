@@ -2,3 +2,6 @@ node_modules/
 .vscode/
 .cache/
 public
+
+assets/img/res/.xlogo
+_site/
