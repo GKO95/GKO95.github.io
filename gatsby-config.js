@@ -1,7 +1,11 @@
 module.exports = {
+  // SHARED DATA
   siteMetadata: {
     title: "GKO95's GitHub Pages",
+    author: {name: "GKO95", email: "Gihwan.Ko@hotmail.com"},
+    description: "Personal GitHub Pages for archiving and blogging."
   },
+  // GATSBY PLUGINS
   plugins: [
     "gatsby-plugin-sass",
     "gatsby-transformer-remark",
@@ -11,7 +15,7 @@ module.exports = {
         name: "pages",
         path: "./src/pages/",
       },
-      __key: "pages",
-    },
+    }
   ],
+  // ADD OPTIONS HERE...
 };
