@@ -2,7 +2,7 @@ module.exports = {
   // SHARED DATA
   siteMetadata: {
     title: "GKO95's GitHub Pages",
-    author: {name: "GKO95", email: "Gihwan.Ko@hotmail.com"},
+    author: {name: "Gihwan Ko", user: "GKO95", email: "Gihwan.Ko@hotmail.com"},
     description: "Personal GitHub Pages for archiving and blogging."
   },
   // GATSBY PLUGINS
