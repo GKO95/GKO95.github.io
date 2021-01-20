@@ -15,5 +15,5 @@ export default class {
     GetLANG(lang = this.LANG.KOREAN)
     { return ((0b0010 & this.value) >> 1) === lang}
     SetLANG(lang = this.LANG.KOREAN)
-    { this.value = (this.value & 0b1101) | (0b0010 & (lang << 0)); window.localStorage.setItem("CODE", `${this.value}`) }
+    { this.value = (this.value & 0b1101) | (0b0010 & (lang << 1)); window.localStorage.setItem("CODE", `${this.value}`) }
 };

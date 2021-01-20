@@ -1,24 +1,31 @@
 import React from "react"
 
-const navStyle = {
+const Navigation = (props) => {
 
-}
+  document.styleSheets[0].insertRule(`.nav-button {filter: invert(${props.config.GetTHEME()?"0%":"100%"});}`);
 
-const buttonStyle = {
+  const switchLang = () => {
+    if (props.config.GetLANG()) props.config.SetLANG(props.config.LANG.ENGLISH)
+    else props.config.SetLANG(props.config.LANG.KOREAN)
+    document.location.reload();
+  }
 
-}
+  const switchTheme = () => {
+    if (props.config.GetTHEME()) props.config.SetTHEME(props.config.THEME.DARK)
+    else props.config.SetTHEME(props.config.THEME.LIGHT)
+    document.location.reload();
+  }
 
-const Navigation = () => {
   return (
-    <nav style={navStyle}>
+    <nav>
       <div className="nav-panel" id="nav-left">
-        <a style={buttonStyle} className="nav-button" id="nav-home" title="Home" href="/" />
-        <a style={buttonStyle} className="nav-button" id="nav-lang" title="Switch Language" />
+        <a className="nav-button" id="nav-home" title="Home" href="/" />
+        <span className="nav-button" id="nav-lang" title="Switch Language" onClick={switchLang}/>
       </div>
       <div className="nav-panel" id="nav-center" />
       <div className="nav-panel" id="nav-rigft">
-        <a style={buttonStyle} className="nav-button" id="nav-theme" title="Switch Theme" />
-        <a style={buttonStyle} className="nav-button" id="nav-github" title="GitHub" href="https://github.com/GKO95" />
+        <span className="nav-button" id="nav-theme" title="Switch Theme" onClick={switchTheme}/>
+        <a className="nav-button" id="nav-github" title="GitHub" href="https://github.com/GKO95" />
       </div>
     </nav>
   )
@@ -29,10 +36,7 @@ class Header extends React.Component {
   render() {
     return (
       <header style={this.props.style}>
-        <Navigation />
-        <div id="title">
-          <span>{this.props.user}</span>
-        </div>
+        <Navigation config={this.props.config}/>
       </header>
     )
   }
