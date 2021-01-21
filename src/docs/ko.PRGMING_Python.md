@@ -1,6 +1,6 @@
 ---
 slug: "/docs/ko.PRGMING_Python"
-category: Programming
+date: "2021-01-31"
 title: "프로그래밍 | 파이썬"
 ---
 # **파이썬: 소개**

@@ -1,6 +1,6 @@
 ---
 slug: "/docs/en.PRGMING_Python"
-category: Programming
+date: "2021-01-01"
 title: "Programming | Python"
 ---
 # **PYTHON: INTRO**

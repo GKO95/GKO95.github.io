@@ -8,6 +8,13 @@ module.exports = {
   // GATSBY PLUGINS
   plugins: [
     "gatsby-plugin-sass",
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `docs`,
+        path: `./src/docs/`,
+      },
+    },
     "gatsby-transformer-remark",
     {
       resolve: "gatsby-source-filesystem",

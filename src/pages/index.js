@@ -17,6 +17,8 @@ const IndexPage = () => {
   return (
     <Layout>
       <Docs groups={__category__}/>
+      <a href="/docs/en.PRGMING_Python">Python</a>
+      <a href="/docs/ko.PRGMING_Python">파이썬</a>
     </Layout>
   )
 }
