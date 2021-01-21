@@ -18,10 +18,12 @@
     -khtml-user-select: none;
     -webkit-user-select: none;
 }
-html, body { min-height: 100%; margin: 0; }
+html { min-height: 100%; margin: 0; }
+body { min-width: 800px; min-height: 600px; margin: 0px; }
 header {
     @include HFBkgdStyle;
     display: flex;
+    flex-direction: column;
     padding: 16px 0px;
     border-bottom: {
         left-radius: 32px;
@@ -67,15 +69,21 @@ header {
             padding: 0 0.4em;
             font: {
                 family: Verdana, Geneva, Tahoma, sans-serif;
-                size: $ICON_SIZE - 8px;
+                size: $ICON_SIZE - 12px;
                 weight: bold;
             }
         }
     }
-    #title {
-        display: block;
+    #idx-title {
+        display: flex;
+        width: fit-content;
+        height: 128px;
         text-align: center;
-        margin-bottom: 40px;
+        align-self: center;
+        padding: {
+            top: 8px;
+            bottom: 16px;
+        }
         font: {
             weight: bolder;
             family: 'JetBrains Mono';
@@ -100,9 +108,12 @@ footer {
     text-align: center;
     border-top: {
         left-radius: 32px;
-        right-radius: 32px;
+        right-radius: 32px; 
     }
-    padding: 4px 0;
+    padding: {
+        top: 4px;
+        bottom: 4px;
+    }
     font: {
         size: 16px;
         weight: bold;

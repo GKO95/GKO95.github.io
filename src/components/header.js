@@ -16,16 +16,22 @@ const Navigation = (props) => {
     document.location.reload();
   }
 
+  const enablePageTitle = () => {
+    if (document.location.pathname !== "/") return (
+      <span>{props.title}</span>
+    )
+  }
+
   return (
     <nav>
       <div className="nav-panel" id="nav-left">
-        <a className="nav-button" id="nav-home" title="Home" href="/" />
-        <span className="nav-button" id="nav-lang" title="Switch Language" onClick={switchLang}/>
+        <a title="Home" href="/"><span className="nav-button" id="nav-home" /></a>
+        <a title="Switch Language" onClick={switchLang}><span className="nav-button" id="nav-lang" /></a>
       </div>
-      <div className="nav-panel" id="nav-center" />
+      <div className="nav-panel" id="nav-center">{enablePageTitle()}</div>
       <div className="nav-panel" id="nav-rigft">
-        <span className="nav-button" id="nav-theme" title="Switch Theme" onClick={switchTheme}/>
-        <a className="nav-button" id="nav-github" title="GitHub" href="https://github.com/GKO95" />
+        <a title="Switch Theme" onClick={switchTheme}><span className="nav-button" id="nav-theme" /></a>
+        <a title="GitHub" href="https://github.com/GKO95"><span className="nav-button" id="nav-github" /></a>
       </div>
     </nav>
   )
@@ -33,10 +39,19 @@ const Navigation = (props) => {
 
 class Header extends React.Component {
 
+  isPageIndex() {
+    if (document.location.pathname === "/") return (
+      <div id="idx-title">
+        <span>{this.props.user}</span>
+      </div>
+    )
+  }
+
   render() {
     return (
       <header style={this.props.style}>
-        <Navigation config={this.props.config}/>
+        <Navigation title={this.props.title} config={this.props.config}/>
+        {this.isPageIndex()}
       </header>
     )
   }
