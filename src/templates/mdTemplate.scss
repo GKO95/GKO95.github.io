@@ -1,0 +1,48 @@
+#docs-main {
+    display: block;
+    width: calc(100% - (48px * 2));
+    max-width: calc(1200px - (24px * 2));
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
+    background-color: inherit;
+
+    h1 {
+        border-bottom-style: solid;
+        font-size: 2.4em;
+        margin-bottom: 0.6em;
+    }
+
+    h2 {
+        font-size: 1.6em;
+        margin-bottom: 0.5em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+        padding-left: 0.8em;
+        margin-bottom: 0.5em;
+    }
+
+    blockquote {
+        border-left: {
+            width: 4px;
+            style: solid;
+        }
+        padding: 2px 16px;
+    }
+
+    img {
+        border: {
+            radius: 8px;
+            style: solid;
+            width: 4px;
+        }
+    }
+
+    figcaption {
+        margin-top: 8px;
+        text-align: center;
+    }
+}

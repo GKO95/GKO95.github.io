@@ -2,7 +2,7 @@ import React from "react"
 
 const Navigation = (props) => {
 
-  document.styleSheets[0].insertRule(`.nav-button {filter: invert(${props.config.GetTHEME()?"0%":"100%"});}`);
+  document.styleSheets[2].insertRule(`.nav-button {filter: invert(${props.config.GetTHEME()?"0%":"100%"});}`);
 
   const switchLang = () => {
     if (props.config.GetLANG()) props.config.SetLANG(props.config.LANG.ENGLISH)

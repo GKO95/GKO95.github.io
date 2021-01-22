@@ -8,7 +8,7 @@ import "./layout.scss"
 const Layout = (props) => {
   let config = new Storage()
   config.value = config.GetCONFIG();
-  document.styleSheets[0].insertRule(`body {background-color:${config.GetTHEME()?"#F2F2F2":"#202020"};color:${config.GetTHEME()?"#000000":"#FFFFFF"};}`);
+  document.styleSheets[2].insertRule(`body {background-color:${config.GetTHEME()?"#F2F2F2":"#202020"};color:${config.GetTHEME()?"#000000":"#FFFFFF"};}`);
 
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);
@@ -33,7 +33,7 @@ const Layout = (props) => {
   return (
       <>
         <Header style={LayoutStyle} config={config} title={props.title} user={siteMetadata.author.user}/>
-        <main>{props.children}</main>
+        <main id={props.id}>{props.children}</main>
         <footer style={LayoutStyle}>
           <span id="copyright">Copyright (C) 2020-2021 {siteMetadata.author.name}</span>
         </footer>

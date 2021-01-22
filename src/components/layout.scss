@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900');
 @font-face {
     font-family: 'JetBrains Mono';
-    src: url('./../assets/fonts/JetBrainsMonoNL-Regular.ttf') format('truetype');
+    src: url('../assets/fonts/JetBrainsMonoNL-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-variant-ligatures: normal;
@@ -18,13 +19,14 @@
     -khtml-user-select: none;
     -webkit-user-select: none;
 }
-html { min-height: 100%; margin: 0; }
-body { min-width: 800px; min-height: 600px; margin: 0px; }
+html { min-height: 100%; margin: 0; font-size: larger; }
+body { min-width: 800px; min-height: 600px; margin: 0px; font-family: 'Noto Sans KR', sans-serif; }
+a { text-decoration: none; color: #239BF1; }
 header {
     @include HFBkgdStyle;
     display: flex;
     flex-direction: column;
-    padding: 16px 0px;
+    padding: 24px 0px;
     border-bottom: {
         left-radius: 32px;
         right-radius: 32px;
@@ -54,10 +56,10 @@ header {
                 size: $ICON_SIZE;
             }
         }
-        #nav-home   { background-image:url('../assets/images/icons/icon-home.png'); }
-        #nav-lang   { background-image:url('../assets/images/icons/icon-language.png'); }
-        #nav-theme  { background-image:url('../assets/images/icons/icon-theme.png'); }
-        #nav-github { background-image:url('../assets/images/icons/icon-github.png'); }
+        #nav-home   { background-image:url('../images/icons/icon-home.png'); }
+        #nav-lang   { background-image:url('../images/icons/icon-language.png'); }
+        #nav-theme  { background-image:url('../images/icons/icon-theme.png'); }
+        #nav-github { background-image:url('../images/icons/icon-github.png'); }
 
         #nav-left, #nav-right {
             display: inline-block;
@@ -69,7 +71,7 @@ header {
             padding: 0 0.4em;
             font: {
                 family: Verdana, Geneva, Tahoma, sans-serif;
-                size: $ICON_SIZE - 12px;
+                size: $ICON_SIZE - 8px;
                 weight: bold;
             }
         }
@@ -82,7 +84,7 @@ header {
         align-self: center;
         padding: {
             top: 8px;
-            bottom: 16px;
+            bottom: 8px;
         }
         font: {
             weight: bolder;
@@ -119,4 +121,15 @@ footer {
         weight: bold;
         family: 'JetBrains Mono';
     }
+}
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;  
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(128, 128, 128);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+    background: rgb(64, 64, 64);
 }
