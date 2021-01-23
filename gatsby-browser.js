@@ -1,0 +1,1 @@
+require("./src/assets/prism/prism-okaidia.css")

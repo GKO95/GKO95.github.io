@@ -31,10 +31,6 @@ module.exports = {
               // A suggested value for English speakers is the non-ascii
               // character '›'.
               inlineCodeMarker: null,
-              // This lets you set up language aliases.  For example,
-              // setting this to '{ sh: "bash" }' will let you use
-              // the language "sh" which will highlight using the
-              // bash highlighter.
               aliases: {},
               // This toggles the display of line numbers globally alongside the code.
               // To use it, add the following line in gatsby-browser.js
