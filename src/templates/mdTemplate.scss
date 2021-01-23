@@ -45,4 +45,99 @@
         margin-top: 8px;
         text-align: center;
     }
+
+    code {
+        font-family: "JetBrains Mono";
+        border-radius: 0.2em;
+        padding: 0 0.2em;
+        word-break: initial;
+    }
+
+    table {
+        width: fit-content;
+        max-width: 100%;
+        margin: auto;
+        border: {
+            style: solid;
+            width: 4px;
+            collapse: collapse;
+        }
+        font-size: large;
+    }
+    
+    th {
+        border: {
+            style: solid;
+            width: 1px;
+            bottom: {
+                style: double;
+                width: 4px;
+            }
+        }
+        padding: 0.2em;
+    }
+    
+    td {
+        border: {
+            style: solid;
+            width: 1px;
+        }
+        padding: 0.4em;
+    }
+
+    .gatsby-highlight code {
+        background-color: inherit;
+    }
 }
+
+html {
+    blockquote {
+        background-color:#E0E0E0; 
+        border-left-color: rgb(80, 80, 80); 
+        color:rgb(64, 64, 64);
+    }
+    img {
+        border-color: #202020;
+    }
+    table {
+        border-color: #404040;
+    }
+    th {
+        border-color: #202020;
+        border-bottom-color: #202020;
+        background-color: #B0B0B0;
+    }
+    td {
+        border-color: #606060;
+    }
+    tr {
+        &:nth-child(odd) {
+            background-color: #E0E0E0;
+        }
+    }
+&:not(.style-scope)[dark] {
+    blockquote {
+        background-color: rgb(24, 24, 24); 
+        border-left-color: rgb(224, 224, 224); 
+        color: rgb(200, 200, 200);  
+    }
+    img {
+        border-color: #808080;
+    }
+    table {
+        border-color: #808080;
+    }
+    th {
+        border-color: #808080;
+        border-bottom-color: #808080;
+        background-color: #303030;
+    }
+    td {
+        border-color: #C0C0C0;
+    }
+    tr {
+        &:nth-child(odd) {
+            background-color: #181818;
+        }
+    }
+}}

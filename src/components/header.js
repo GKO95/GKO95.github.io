@@ -2,8 +2,6 @@ import React from "react"
 
 const Navigation = (props) => {
 
-  document.styleSheets[2].insertRule(`.nav-button {filter: invert(${props.config.GetTHEME()?"0%":"100%"});}`);
-
   const switchLang = () => {
     if (props.config.GetLANG()) props.config.SetLANG(props.config.LANG.ENGLISH)
     else props.config.SetLANG(props.config.LANG.KOREAN)
@@ -11,8 +9,12 @@ const Navigation = (props) => {
   }
 
   const switchTheme = () => {
-    if (props.config.GetTHEME()) props.config.SetTHEME(props.config.THEME.DARK)
-    else props.config.SetTHEME(props.config.THEME.LIGHT)
+    if (props.config.GetTHEME()) {
+      props.config.SetTHEME(props.config.THEME.DARK)
+    }
+    else {
+      props.config.SetTHEME(props.config.THEME.LIGHT)
+    }
     document.location.reload();
   }
 

@@ -8,7 +8,8 @@ import "./layout.scss"
 const Layout = (props) => {
   let config = new Storage()
   config.value = config.GetCONFIG();
-  document.styleSheets[2].insertRule(`body {background-color:${config.GetTHEME()?"#F2F2F2":"#202020"};color:${config.GetTHEME()?"#000000":"#FFFFFF"};}`);
+  if (config.GetTHEME(config.THEME.DARK)) document.documentElement.setAttribute("dark", "true")
+  document.body.style.color = `${config.GetTHEME()?"#000000":"#FFFFFF"}`
 
   const [width, setWidth] = useState(window.innerWidth);
   const [height, setHeight] = useState(window.innerHeight);

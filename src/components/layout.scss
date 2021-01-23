@@ -127,9 +127,33 @@ footer {
     height: 12px;  
 }
 ::-webkit-scrollbar-thumb {
-    background: rgb(128, 128, 128);
+    background: #808080;
     border-radius: 4px;
 }
 ::-webkit-scrollbar-track {
-    background: rgb(64, 64, 64);
+    background: #404040;
 }
+
+html {
+    body {
+        background-color: #F2F2F2;
+        color: #000000;
+    }
+    code { 
+        background-color: #CDCDCD; 
+    }
+    .nav-button {
+        filter: invert(0%);
+    }
+&:not(.style-scope)[dark] {
+    body {
+        background-color: #202020;
+        color: #FFFFFF;
+    }
+    code { 
+        background-color: #303030; 
+    }
+    .nav-button {
+        filter: invert(100%);
+    }
+}}
