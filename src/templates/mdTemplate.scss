@@ -10,7 +10,10 @@
 
     h1 {
         border-bottom-style: solid;
-        font-size: 2.4em;
+        font: {
+            size: 2.4em;
+            weight: bold;
+        }
         margin-bottom: 0.6em;
     }
 
@@ -34,6 +37,7 @@
     }
 
     img {
+        background-color: #FFFFFF;
         border: {
             radius: 8px;
             style: solid;

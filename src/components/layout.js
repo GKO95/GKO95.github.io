@@ -6,7 +6,7 @@ import Header from "./header"
 import "./layout.scss"
 
 const Layout = (props) => {
-  let config = new Storage()
+  const config = props.config === undefined ? new Storage() : props.config
   config.value = config.GetCONFIG();
   if (config.GetTHEME(config.THEME.DARK)) document.documentElement.setAttribute("dark", "true")
   document.body.style.color = `${config.GetTHEME()?"#000000":"#FFFFFF"}`
@@ -25,21 +25,17 @@ const Layout = (props) => {
     if (window.innerHeight < 600) { }
     else setHeight(window.innerHeight)
   }
-
-  const LayoutStyle = {
-    backgroundColor: config.GetTHEME() ? "#868686" : "#101010",
-    fontColor: config.GetTHEME() ? "#000000" : "#FFFFFF"
-  }
   
   return (
       <>
-        <Header style={LayoutStyle} config={config} title={props.title} user={siteMetadata.author.user}/>
+        <Header config={config} title={props.title} user={siteMetadata.author.user}/>
         <main id={props.id}>{props.children}</main>
-        <footer style={LayoutStyle}>
+        <footer>
           <span id="copyright">Copyright (C) 2020-2021 {siteMetadata.author.name}</span>
         </footer>
       </>
   )
 }
 
+export { Storage }
 export default Layout

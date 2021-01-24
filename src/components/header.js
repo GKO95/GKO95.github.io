@@ -3,9 +3,18 @@ import React from "react"
 const Navigation = (props) => {
 
   const switchLang = () => {
-    if (props.config.GetLANG()) props.config.SetLANG(props.config.LANG.ENGLISH)
-    else props.config.SetLANG(props.config.LANG.KOREAN)
-    document.location.reload();
+    if (props.config.GetLANG()) {
+      props.config.SetLANG(props.config.LANG.ENGLISH)
+      if (document.location.pathname.includes("/docs/"))
+        window.location.href = document.location.pathname.replace("/docs/ko.","/docs/en.")
+      else document.location.reload();
+    }
+    else {
+      props.config.SetLANG(props.config.LANG.KOREAN)
+      if (document.location.pathname.includes("/docs/"))
+        window.location.href = document.location.pathname.replace("/docs/en.","/docs/ko.")
+      else document.location.reload();
+    }
   }
 
   const switchTheme = () => {
@@ -51,7 +60,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header style={this.props.style}>
+      <header>
         <Navigation title={this.props.title} config={this.props.config}/>
         {this.isPageIndex()}
       </header>

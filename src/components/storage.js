@@ -2,7 +2,7 @@ export default class {
     constructor()
     { if (isNaN(this.GetCONFIG())) { this.SetCONFIG(0); } if (window.localStorage.length !== 1) 
     { let config = this.GetCONFIG(); if (config > 0xFF) { config &= 0xFF; } else if (config == null || isNaN(config)) 
-    { config = 0; } window.localStorage.clear(); this.SetCONFIG(config); } } 
+    { config = 0; } window.localStorage.clear(); this.SetCONFIG(config); } this.value = this.GetCONFIG() } 
     value = 0; THEME = { LIGHT: 0, DARK: 1 }; LANG = { KOREAN: 0, ENGLISH: 1 };
     GetCONFIG(sess = true)
     { return (sess ? parseInt(window.localStorage.getItem("CODE")) : this.value) }

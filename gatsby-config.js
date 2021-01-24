@@ -24,14 +24,7 @@ module.exports = {
               // This is an uncommon use-case though;
               // If you're unsure, it's best to use the default value.
               classPrefix: "language-",
-              // This is used to allow setting a language for inline code
-              // (i.e. single backticks) by creating a separator.
-              // This separator is a string and will do no white-space
-              // stripping.
-              // A suggested value for English speakers is the non-ascii
-              // character '›'.
-              inlineCodeMarker: null,
-              aliases: {},
+              aliases: { armasm: "NASM" },
               // This toggles the display of line numbers globally alongside the code.
               // To use it, add the following line in gatsby-browser.js
               // right after importing the prism color scheme:
@@ -85,7 +78,7 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1144,
-              showCaptions: true
+              showCaptions: true,
             },
           },
         ],
