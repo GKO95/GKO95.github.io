@@ -17,4 +17,4 @@ public
 .vscode/
 
 # Ignore original images of the thumbnail
-assets/img/res/.xlogo
+.resource/
