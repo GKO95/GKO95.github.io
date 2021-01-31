@@ -25,14 +25,14 @@ $(window).resize(breakCode)
 // >> MAIN: IMAGE RESIZE
 //========================================
 const imageSize = () => {
-    let width = $(`body`).width() < (1200 - (24 * 2)) ? ($(`body`).width() - (48 * 2)) : (1200 - (24 * 2))
     $(`article img`).each(function() {
         $(this).css({
-            "max-width": `calc(${width}px - ${$(`article img`).css("border-width")} * 2)`
+            "max-width": `calc(${$(`article`).width()}px - ${$(`article img`).css("border-width")} * 2)`
         }).parent().css({"text-align": "center", "width": "100%"})
         if( $(this).next('center').length == 0 ) {
              $(`<center style="font-weight: bold;">${$(this).attr("alt")}</center>`).insertAfter(this)
         }
+        $(this).show()
     })
 }; imageSize();
 $(window).resize(imageSize)
@@ -40,7 +40,7 @@ $(window).resize(imageSize)
 //========================================
 // >> MENU: CONFIGURATION
 //========================================
-$(`#toc-button`).click(function() {
+$(`#toc-button`).show("slow").click(function() {
     $(this).hide("fast")
     $(`#toc-container`).fadeIn()
 
@@ -80,12 +80,3 @@ $(`article > :header`).each(function() {
     })
     $(`#toc-content`).append($(`<${headerTag}></${headerTag}>`).append(headerTxt))
 })
-
-//========================================
-// >> RENDERING
-//========================================
-document.addEventListener("readystatechange", function () {
-    if (document.readyState == "complete") {
-        $(`#toc-button`).delay(250).show("slow")
-    }
-}); 

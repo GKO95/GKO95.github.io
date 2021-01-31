@@ -53,8 +53,8 @@ switch(location.pathname.split('/')[1])
     case "blog":
         import("./docs.js")
         break;
-    case "repo":
-        import("./archive.js")
+    case "arch":
+        import("./arch.js")
         break;
     default:
         break;
@@ -70,6 +70,6 @@ $(`main`).css("min-height", `${window.innerHeight - ($(`footer`).outerHeight() +
 //========================================
 document.addEventListener("readystatechange", function () {
     if (document.readyState == "complete") {
-        $(`body`).show()
+        $(`main`).show()
     }
 }); 

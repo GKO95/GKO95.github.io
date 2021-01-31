@@ -1,12 +1,24 @@
 //========================================
 // >> SWITCH LANGUAGE
 //========================================
-if (GetLANG() == enumLANG.ENGLISH){
+if (config.GetLANG(config.LANG.ENGLISH))
+{
     // ENGLISH
+    switch(location.pathname.split('/')[2])
+    {
+        case "blog":
+            $(`#nav-center > span`).text("Blog")
+            $(`#blog-caption`).text("TAGS:")
+            break;
+        case "repo":
+            $(`#nav-center > span`).text("Repository")
+            break;
+    }
 }
-else {
+else
+{
     // KOREAN
-    switch($(`main > div`).attr("id").split("-")[0])
+    switch(location.pathname.split('/')[2])
     {
         case "blog":
             $(`#nav-center > span`).text("블로그")
@@ -40,8 +52,8 @@ const parseColor = (str) => {
 //========================================
 // >> FILTER: TAGS
 //========================================
-const __colorINCLUDE__  = (GetTHEME() == enumTHEME.LIGHT) ? "#1CC11C" : "#008000";
-const __colorEXCLUDE__   = (GetTHEME() == enumTHEME.LIGHT) ? "#FF0000" : "#FF0000";
+const __colorINCLUDE__  = (config.GetTHEME(config.THEME.LIGHT)) ? "#1CC11C" : "#008000";
+const __colorEXCLUDE__   = (config.GetTHEME(config.THEME.LIGHT)) ? "#FF0000" : "#FF0000";
 
 const filterTags = (color) => {
     let filterINCLUDE = []
