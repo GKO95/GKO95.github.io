@@ -1,0 +1,210 @@
+#home-announce {
+    margin: {
+        top: 24px;
+        bottom: 24px;
+    }
+
+    #home-announce-notice {
+        display: flex;
+        width: fit-content;
+        min-height: 128px;
+
+        margin: auto;
+        padding: 8px 1.6em;
+        text-align: center;
+
+        background: {
+            repeat: no-repeat;
+            size: 8px 6px;
+            position: top left, top right, bottom left, bottom right;
+        }
+        border: {
+            style: solid;
+            width: 0 6px;
+        }
+
+        ul, ol {
+            align-self: center;
+            width: fit-content;
+            margin: 0;
+            padding: 0;
+            border: {
+                style: double;
+                width: 0px 0px;
+            }
+            font: {
+                family: $TITLEFONT;
+                weight: bold;
+                size: 40px;
+            }
+        }
+    
+        li {
+            list-style-type: none;
+            padding: 12px 32px;
+        }
+    }
+
+}
+
+#home-blog {
+    @include HFBkgdStyle;
+    max-width: calc(100% - (48px * 2));
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: {
+        top: 16px;
+        bottom: 16px;
+    }
+
+    .home-blog-button {
+        font: {
+            family: $TITLEFONT;
+            size: 24px;
+            weight: bold;
+        }
+        border: {
+            radius: 16px;
+            style: solid;
+            width: 4px;
+        }
+        width: 30%;
+        margin: {
+            left: 8px;
+            right: 8px;
+        }
+        padding: 8px 24px;
+        text-align: center;
+        cursor: pointer;
+    }
+}
+
+#home-docs {
+    @include HFBkgdStyle;
+    border-radius: 32px;
+    margin: {
+        top: 16px;
+        bottom: 16px;
+    }
+    padding: {
+        top: 8px;
+        bottom: 8px;
+    }
+
+    .home-docs-group {
+        width: 96%;
+        margin: 1em auto;
+        border: {
+            radius: 16px;
+            style: solid;
+            width: 4px;
+        }
+    }
+
+    .home-docs-header {
+        font-family: $TITLEFONT;
+        border-radius: 24px;
+        text-align: center;
+
+        padding: 0.2em;
+        margin: 0.8em auto 0.4em auto;
+        width: 96%;
+        font: {
+            weight: bold;
+            size: 1.6em;
+        }
+    }
+
+    .home-docs-tile {
+        display: block;
+        background: {
+            size: 200px;
+            repeat: no-repeat;
+            position: center;
+        }
+        border-radius: 8px;
+        height: 216px;
+        width: 216px;
+        justify-content: center;
+
+    }
+    
+    a {
+        margin: 8px;
+    }
+
+    ul {
+        width: calc(96% - 4px * 2);
+        margin: 0.4em auto;
+        display: flex;
+        flex: {
+            wrap: wrap;
+            direction: row;
+        }
+        justify-content: center;
+    }
+}
+
+html {
+    #home-docs {
+        background-color: #868686;
+
+        .home-docs-group {
+            border-color: #404040;
+        }
+
+        .home-docs-header {
+            background-color: #D0D0D0;
+        }
+
+        .home-docs-tile {
+            background-color: #A1A1A1;
+        }
+    }
+
+    #home-announce-notice {
+        background-image: linear-gradient(#000000, #000000),
+        linear-gradient(#000000, #000000),
+        linear-gradient(#000000, #000000),
+        linear-gradient(#000000, #000000);
+        border-color: #000000;
+    }
+
+    .home-blog-button {
+        background-color: #868686;
+        border-color: #404040;
+        color: #000000;
+    }
+
+&:not(.style-scope)[dark] {
+    #home-docs {
+        background-color: #101010;
+
+        .home-docs-group {
+            border-color: #A0A0A0;
+        }
+
+        .home-docs-header {
+            background-color: #202020;
+        }
+
+        .home-docs-tile {
+            background-color: #404040;
+        }
+    }
+
+    #home-announce-notice {
+        background-image: linear-gradient(#FFFFFF, #FFFFFF),
+        linear-gradient(#FFFFFF, #FFFFFF),
+        linear-gradient(#FFFFFF, #FFFFFF),
+        linear-gradient(#FFFFFF, #FFFFFF);
+        border-color: #FFFFFF;
+    }
+
+    .home-blog-button {
+        background-color: #101010;
+        border-color: #303030;
+        color: #FFFFFF;
+    }
+}}

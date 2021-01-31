@@ -1,46 +1,45 @@
 ---
 layout: template
 ---
-<body id="home">
-    <!-- HEADER -->
-    {%- include header.html -%}
-    <!-- MAIN -->
-    <main id="home-main">
-        <div id="home-content">
-        <!--ANNOUNCEMENT-->
-        <div id="home-announce">
-            <div id="home-announce-notice">
-                {{ content }}
-            </div>
-        </div>
-        <!--ANNOUNCE-->
-        <div id="home-blog">
-            <a class="home-blog-button" id="home-blog-about" href="about">About</a>
-            <a class="home-blog-button" id="home-blog-post" href="blog">Blog</a>
-            <a class="home-blog-button" id="home-blog-repo" href="repo">Repository</a>
-        </div>
-        <!--DOCS-->
-        <div id="home-docs">
-            {%- assign listDocs = "" -%}
-            {%- for document in site.docs -%}
-                {%- assign listDocs = listDocs | append: " " | append: document.category -%}
-            {%- endfor -%}
-                {%- assign arrDocs = listDocs | split: " " -%}
-                {%- assign setDocs = arrDocs | uniq | sort | join: " " | split: " " | reverse -%}
-            {%- for group in setDocs -%}
-                <div class="home-docs-group">
-                    <section class="home-docs-header">{{group}}</section>
-                    {%- assign docs = site.docs | where: "category", group | sort: "order" -%}
-                    <ul>
-                    {%- for doc in docs -%}
-                        <a href="{{ doc.url }}" title="{{ doc.title }}"><li class="home-docs-tile" style="background-image:url('{{ doc.logo }}')"></li></a>
-                    {%- endfor -%}
-                    </ul>
-                </div>
-            {%- endfor -%}
-        </div>
-        </div>
-        <!--FOOTER-->
-        {%- include footer.html -%}
-    </main>
-</body>
+<main id="home-main">
+    <!--ANNOUNCEMENT-->
+    <div id="home-announce">
+      <div id="home-announce-notice">
+        {{ content }}
+      </div>
+    </div>
+    <!--ANNOUNCE-->
+    <div id="home-blog">
+      <a class="home-blog-button" id="home-blog-about" href="about"></a>
+      <a class="home-blog-button" id="home-blog-post" href="/arch/blog"></a>
+      <a class="home-blog-button" id="home-blog-repo" href="/arch/repo"></a>
+    </div>
+  <!--DOCS-->
+  <div id="home-docs">
+    {%- assign langMarkdown = "" -%}{%- assign nameMarkdown = "" -%}
+    {%- assign fullMarkdown = site.docs | sort: "language" | sort: "order"  -%}
+    {%- for Markdown in fullMarkdown -%}
+      {%- assign langMarkdown = langMarkdown | append: "_" | append: Markdown.language -%}
+      {%- assign nameMarkdown = nameMarkdown | append: "_" | append: Markdown.category -%}
+    {%- endfor -%}
+    {%- assign langMarkdown = langMarkdown | remove_first: "_" | split: '_' | uniq -%}
+    {%- assign nameMarkdown = nameMarkdown | remove_first: "_" | split: '_' | uniq -%}
+    {% for lang in langMarkdown %}
+      {%- for group in nameMarkdown -%}
+        {%- assign arrMarkdown = fullMarkdown | where: "category", group | where: "language", lang -%}{%- assign numMarkdown = arrMarkdown | size -%}
+        {%- unless numMarkdown == 0 -%}
+          <div class="home-docs-group" lang="{{ lang }}" category="{{ group }}">
+            <section class="home-docs-header">{{group}}</section>
+            <ul>
+              {%- for Markdown in arrMarkdown -%}
+              <a href="{{ Markdown.url }}" title="{{ Markdown.category }} | {{ Markdown.title }}">
+                <li class="home-docs-tile" style="background-image:url('/images/icons/{{ Markdown.icon }}')"></li>
+              </a>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endunless -%}
+      {%- endfor -%}
+    {% endfor %}
+  </div>
+</main> 

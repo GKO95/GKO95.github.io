@@ -1,11 +1,19 @@
 ---
 ---
 @charset "utf-8";
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/assets/fonts/JetBrainsMonoNL-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-variant-ligatures: normal;
+}
 $MONOSPACE: 'JetBrains Mono', 'Nanum Gothic Coding', monospace;
+$TITLEFONT: 'Verdana', Geneva, Tahoma, sans-serif;
 @import
-    "layout_template",
-    "layout_home",
-    "layout_docs",
-    "layout_archive",
-    "layout_misc"
+    "template",
+    "home",
+    "docs",
+    "arch",
+    "misc"
 ;

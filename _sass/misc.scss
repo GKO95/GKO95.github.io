@@ -1,0 +1,59 @@
+.terminal {
+    min-width: 320px;
+    font-family: $MONOSPACE;
+    color: #cccccc;
+}
+
+.terminal-border {
+    background-image: url(/images/icons/border-terminal.png);
+    background-repeat: no-repeat;
+    background-color: #333333;
+    height: 36px;
+}
+
+.terminal-content {
+    padding: 8px;
+    background-color: #0C0C0C;
+    height: fit-content;
+    border: {
+        bottom: solid #333333 1px;
+        inline: {
+            style: solid;
+            color: #333333;
+            width: 1px;
+        }
+    }
+    word-break: break-all;
+}
+
+#HTTP404-main {
+    display: flex;
+    width: calc(100% - (48px * 2));
+    max-width: calc(1200px - (24px * 2));
+    margin: {
+        left: auto;
+        right: auto;
+    }
+    padding: {
+        left: 24px; 
+        right: 24px;
+    }
+    background-color: inherit;
+
+    #HTTP404-content {
+        margin: 
+        {
+            top: 32px;
+            bottom: 32px;
+        }
+    }
+
+    section {
+        text-align: left;
+        height: 100%;
+    }
+    p {
+        font-family: "JetBrains Mono";
+        font-size: 24px;
+    }
+}

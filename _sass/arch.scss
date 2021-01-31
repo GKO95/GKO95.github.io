@@ -1,0 +1,128 @@
+#arch-main {
+    ul, ol {
+        list-style-type: square;   
+    }
+    #arch-content {
+        width: calc(100% - (48px * 2));
+        max-width: calc(1200px - (32px * 2));
+        margin: {
+            left: auto;
+            right: auto;
+        }
+        padding: {
+            left: 30px;
+            right: 30px;
+        }
+    }
+}
+
+#blog-tags {
+    margin: {
+        top: 16px;
+        bottom: 16px;
+    }
+    padding: 0 1.6em 1.6em 1.6em;
+    border: {
+        width: 4px;
+        style: solid;
+        radius: 24px;
+    }
+
+    code {
+        font: {
+            size: 32px;
+            style: normal;
+            weight: bold;
+        }
+    }
+    
+    #blog-caption {
+        letter-spacing: 0.1em;
+        text-align: left;
+        font: {
+            weight: bold;
+            size: 1.0em;
+        }
+    
+        user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .blog-tag {
+        margin: 0 8px;
+        cursor: pointer;
+    
+        /* Disable selection. */
+        user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+    
+        /* Disable hyperlink underline. */
+        text-decoration: none;
+    }
+}
+#blog-list {
+    font-size: 24px;
+    font-weight: bold;
+    li {
+        margin: {
+            top: 8px;
+            bottom: 24px;
+        }
+        section {
+            font-weight: normal;
+            border-top: {
+                style: solid;
+                width: 1px;
+            }
+        }
+    }
+}
+
+html {
+    #blog-tags {
+        border-color: #808080   ;
+        background-color: #E0E0E0;
+
+        code {
+            color: #000000;
+            background-color: #CDCDCD;
+        }
+    }
+
+    #blog-list a {
+        color: #000000;
+    }
+
+    #comment-form {
+        #comment-name, #comment-comment {
+            border: black solid 2px;
+        }
+    }
+
+&:not(.style-scope)[dark] {
+    #blog-tags {
+        border-color: #404040;
+        background-color: #101010;
+
+        code {
+            color: #FFFFFF;
+            background-color: #303030;
+        }
+    }
+
+    #blog-list a {
+        color: #FFFFFF;
+    }
+
+    #comment-form {
+        #comment-name, #comment-comment {
+            border: initial;
+        }
+    }
+}}
