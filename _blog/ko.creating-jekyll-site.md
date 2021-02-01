@@ -1,9 +1,10 @@
 ---
-layout: post
-lang: ko
+layout: docs
+language: ko
 title: "GitHub Pages를 위한 Jekyll 생성하기"
-date: 2020-09-04 00:00:00 + 0900
 tags: GitHub_Pages Jekyll
+order: 0x01
+toc: false
 ---
 GitHub Pages는 여러가지 용도로 사용됩니다. 개발팀 웹사이트로 사용되거나, 개인 블로그 혹은 포트폴리오로도 활용될 수 있습니다. GitHub Pages를 생성하기 위해서는 우선 리포지터리를 만들어야 하는데, 사용자 아이디 뒤에 `.github.io`만 붙이면 됩니다. 제 아이디는 GKO95이므로 리포지터리 이름을 `GKO95.github.io`로 지정했습니다.
 
