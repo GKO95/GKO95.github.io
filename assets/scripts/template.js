@@ -64,12 +64,16 @@ switch(location.pathname.split('/')[1])
 // >> AUTO-FIT MAIN
 //========================================
 $(`main`).css("min-height", `${window.innerHeight - ($(`footer`).outerHeight() + $(`header`).outerHeight())}px`)
+$(window).resize(function() {
+    if ($(window).height() < 600) $(`main`).css("min-height", `${600 - ($(`footer`).outerHeight() + $(`header`).outerHeight())}px`)
+    else $(`main`).css("min-height", `${window.innerHeight - ($(`footer`).outerHeight() + $(`header`).outerHeight())}px`)
+})
 
 //========================================
 // >> RENDERING
 //========================================
 document.addEventListener("readystatechange", function () {
     if (document.readyState == "complete") {
-        $(`main`).show()
+        $(`body`).css("visibility", "visible")
     }
 }); 

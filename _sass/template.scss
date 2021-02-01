@@ -13,8 +13,8 @@
 }
 
 html { min-height: 100%; margin: 0; font-size: larger; }
-body { min-width: 800px; min-height: 600px; margin: 0px; font-family: 'Noto Sans KR', sans-serif; }
-main { overflow-y: hidden; display: none; }
+body { min-width: 800px; min-height: 600px; margin: 0px; font-family: 'Noto Sans KR', sans-serif; visibility: hidden; }
+main { overflow-y: hidden; }
 a { text-decoration: none; color: #239BF1; }
 pre {
     font-family: $MONOSPACE;
