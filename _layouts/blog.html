@@ -9,9 +9,11 @@ layout: arch
   {%- endfor -%}{%- endfor -%}
   {%- assign arr = list | split: " " -%}
   {%- assign set = arr | uniq | sort | join: " " | split: " " -%}
-  {%- for item in set -%}
-  <a><code class="blog-tag">#{{item}}</code></a>
-  {%- endfor -%}
+  <ul>
+    {%- for item in set -%}
+    <li><code class="blog-tag">#{{item}}</code></li>
+    {%- endfor -%}
+  </ul>
 </section>
 {{ content }}
 <div id="blog-posts">

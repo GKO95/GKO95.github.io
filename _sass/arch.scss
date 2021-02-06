@@ -28,14 +28,22 @@
         radius: 24px;
     }
 
-    code {
-        font: {
-            size: 32px;
-            style: normal;
-            weight: bold;
+    ul, ol {
+        list-style-type: none;
+
+        li {
+            display: inline-flex;
+
+            code {
+                font: {
+                    size: 32px;
+                    style: normal;
+                    weight: bold;
+                }
+            }
         }
     }
-    
+
     #blog-caption {
         letter-spacing: 0.1em;
         text-align: left;

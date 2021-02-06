@@ -975,7 +975,7 @@ int wmain(int argc, wchar_t **argv)
 ### `WinMain()` 함수
 > *참조: [Microsoft Docs Win32 설명서 - WinMain() 함수 (영문)](https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain)*
 
-`WinMain()` 함수는 Win32나 [MFC](/docs/library/ko/LIBRARY_MFC/)와 같은 GUI 프레임워크를 사용하는 어플리케이션의 시작점이다.
+`WinMain()` 함수는 Win32나 MFC와 같은 GUI 프레임워크를 사용하는 어플리케이션의 시작점이다.
 
 ```cpp
 int WinMain(HINSTANCE 	hInstance,
@@ -991,7 +991,7 @@ int WinMain(HINSTANCE 	hInstance,
 }
 ```
 
-`WinMain()` 함수의 핵심 기능은 마우스 클릭이나 키보드 입력 등으로 발생된 메시지를 수신받아 해당 메시지를 처리할 수 있는 함수로 전달하는데, 이를 메시지 루프(Message Loop)라고 부른다. MFC 프레임워크를 활용한 프로그래밍은 [*LIBRARY_MFC*](/docs/library/ko/LIBRARY_MFC/) 문서에서 확인할 수 있다.
+`WinMain()` 함수의 핵심 기능은 마우스 클릭이나 키보드 입력 등으로 발생된 메시지를 수신받아 해당 메시지를 처리할 수 있는 함수로 전달하는데, 이를 메시지 루프(Message Loop)라고 부른다. MFC 프레임워크를 활용한 프로그래밍은 [*LIBRARY_MFC*](ko.LIBRARY_MFC/) 문서에서 확인할 수 있다.
 
 `WM_QUIT` 메시지를 수신하면 시작점의 메시지 루프를 탈출하고 `WM_QUIT`의 *wParam* 매개변수를 반환하며 어플리케이션을 종료한다. 만일 메시지 루프 진입에 실패하였을 시 `return 0;` 문장이 실행되어 프로그램을 즉시 종료한다.
 
