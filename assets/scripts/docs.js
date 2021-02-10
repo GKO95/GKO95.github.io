@@ -3,11 +3,11 @@
 //========================================
 if (config.GetLANG(config.LANG.ENGLISH))
 {   // ENGLISH
-    $(`#docs-related`).text("See Also")
+    $(`#docs-related-header`).text("See Also")
 }
 else
 {   // KOREAN
-    $(`#docs-related`).text("관련 게시글")
+    $(`#docs-related-header`).text("관련 게시글")
 }
 
 //========================================

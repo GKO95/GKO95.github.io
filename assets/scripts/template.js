@@ -50,12 +50,14 @@ switch(location.pathname.split('/')[1])
         import("./home.js")
         break;
     case "docs":
-    case "blog":
         import("./docs.js")
         break;
-    case "arch":
-        import("./arch.js")
+    case "blog":
+        import("./blog.js")
+        import("./docs.js")
         break;
+    case "forum":
+        import("./forum.js")
     default:
         break;
 }

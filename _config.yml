@@ -45,9 +45,6 @@ collections:
   blog:
     output: true
     permalink: /:collection/:path/
-  arch:
-    output: true
-    permalink: /:collection/:path/
 
 # Comment for Jekyll: https://jdvp.me/articles/Google-Forms-Jekyll-Comments
 comment-post: https://docs.google.com/forms/d/e/1FAIpQLSf00acq6akraC5QUruKRwG7SnS7SwZmgjXSoBRHCI95oTs1Yg

@@ -4,30 +4,16 @@
 if (config.GetLANG(config.LANG.ENGLISH))
 {
     // ENGLISH
-    switch(location.pathname.split('/')[2])
-    {
-        case "blog":
-            $(`#nav-center > span`).text("Blog")
-            $(`#blog-caption`).text("TAGS:")
-            break;
-        case "forum":
-            $(`#nav-center > span`).text("Forum")
-            break;
-    }
+    if (location.pathname.split('/')[2] == "") $(`#nav-center > span`).text("Blog")
+    $(`#blog-caption`).text("TAGS:")
+
 }
 else
 {
     // KOREAN
-    switch(location.pathname.split('/')[2])
-    {
-        case "blog":
-            $(`#nav-center > span`).text("블로그")
-            $(`#blog-caption`).text("태그:")
-            break;
-        case "forum":
-            $(`#nav-center > span`).text("포럼")
-            break;
-    }
+    if (location.pathname.split('/')[2] == "") $(`#nav-center > span`).text("블로그")
+    $(`#blog-caption`).text("태그:")
+
 }
 
 //========================================
