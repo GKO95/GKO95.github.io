@@ -33,7 +33,7 @@
                 width: 0px 0px;
             }
             font: {
-                family: $TITLEFONT;
+                family: system-ui;
                 weight: bold;
                 size: 40px;
             }
@@ -66,7 +66,7 @@
         }
         border: {
             radius: 16px;
-            style: solid;
+            style: none;
             width: 4px;
         }
         width: 30%;
@@ -94,7 +94,7 @@
 
     .home-docs-group {
         width: 96%;
-        margin: 1em auto;
+        margin: 24px auto;
         border: {
             radius: 16px;
             style: solid;
@@ -108,7 +108,7 @@
         text-align: center;
 
         padding: 0.2em;
-        margin: 0.8em auto 0.4em auto;
+        margin: 16px auto 8px auto;
         width: 96%;
         font: {
             weight: bold;
@@ -119,7 +119,7 @@
     .home-docs-tile {
         display: block;
         background: {
-            size: 200px;
+            size: 162px;
             repeat: no-repeat;
             position: center;
         }
@@ -152,6 +152,7 @@ html {
 
         .home-docs-group {
             border-color: #404040;
+            background-color: #787878FF;
         }
 
         .home-docs-header {
@@ -159,7 +160,7 @@ html {
         }
 
         .home-docs-tile {
-            background-color: #A1A1A1;
+            background-color: #A0A0A0;
         }
     }
 
@@ -183,6 +184,7 @@ html {
 
         .home-docs-group {
             border-color: #A0A0A0;
+            background-color: #08080880;
         }
 
         .home-docs-header {

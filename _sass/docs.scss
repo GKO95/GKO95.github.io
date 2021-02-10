@@ -73,6 +73,19 @@
         padding: 0.4em;
     }
 }
+
+#docs-related {
+    border-radius: 16px;
+    margin: 16px;
+    padding: 8px;
+
+    #docs-related-header {
+        border: none;
+        font-size: 32px;
+        padding-left: 16px;
+    }
+}
+
 #toc-button {
     overflow: hidden;
     position: fixed;
@@ -203,6 +216,11 @@ html {
             }
         }
     }
+
+    #docs-related {
+        background-color: #868686;
+    }
+
     .toc-option {
         filter: invert(0%);
     }
@@ -256,6 +274,11 @@ html {
             }
         }
     }
+
+    #docs-related {
+        background-color: #101010;
+    }
+
     .toc-option {
         filter: invert(100%);
     }
