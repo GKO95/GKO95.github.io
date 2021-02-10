@@ -4,6 +4,7 @@ language: en
 category: Programming
 title: C++
 icon: icon-cpp.png
+meta: Cpp
 order: 0x02
 ---
 # C++: INTRO

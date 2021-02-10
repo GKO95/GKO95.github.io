@@ -4,6 +4,7 @@ language: en
 category: Programming
 title: JavaScript
 icon: icon-javascript.png
+meta: JavaScript
 order: 0x04
 ---
 # JAVASCRIPT: INTRO

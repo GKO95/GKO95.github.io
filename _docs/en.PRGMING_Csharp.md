@@ -4,6 +4,7 @@ language: en
 category: Programming
 title: C#
 icon: icon-csharp.png
+meta: Csharp
 order: 0x03
 ---
 # C#: INTRO

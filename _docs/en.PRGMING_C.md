@@ -4,6 +4,7 @@ language: en
 category: Programming
 title: C
 icon: icon-c.png
+meta: C
 order: 0x01
 ---
 # C: INTRO

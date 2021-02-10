@@ -4,6 +4,7 @@ language: ko
 category: 라이브러리
 title: OpenCV
 icon: icon-opencv.png
+meta: OpenCV
 order: 0x12
 ---
 # **OpenCV: 소개**

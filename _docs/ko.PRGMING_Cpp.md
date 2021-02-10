@@ -4,6 +4,7 @@ language: ko
 category: 프로그래밍
 title: C++
 icon: icon-cpp.png
+meta: Cpp
 order: 0x02
 ---
 # C++: 소개

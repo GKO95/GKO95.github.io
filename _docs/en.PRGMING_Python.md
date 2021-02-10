@@ -4,6 +4,7 @@ language: en
 category: Programming
 title: Python
 icon: icon-python.png
+meta: Python
 order: 0x00
 ---
 # PYTHON: INTRO

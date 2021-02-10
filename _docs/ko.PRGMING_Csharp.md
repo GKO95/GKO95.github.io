@@ -4,6 +4,7 @@ language: ko
 category: 프로그래밍
 title: C#
 icon: icon-csharp.png
+meta: Csharp
 order: 0x03
 ---
 # C#: 소개

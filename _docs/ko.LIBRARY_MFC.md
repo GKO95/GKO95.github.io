@@ -4,6 +4,7 @@ language: ko
 category: 라이브러리
 title: MFC
 icon: icon-mfc.png
+meta: MFC
 order: 0x10
 ---
 # **MFC: 소개**

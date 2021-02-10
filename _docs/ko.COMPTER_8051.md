@@ -4,6 +4,7 @@ language: ko
 category: 컴퓨터 과학
 title: MCS-51
 icon: icon-8051.png
+meta: MCS-51
 order: 0x20
 ---
 # **MCS-51: 소개**

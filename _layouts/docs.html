@@ -8,4 +8,13 @@ layout: template
   <article id="docs-content">
     {{ content }}
   </article>
+  {%- assign listRelated = site.blog | where: "language", page.language | where: "tags", page.meta | sort: "order" | reverse -%}
+  {%- if page.meta != nil and listRelated.size > 0 -%}
+  <h1 id="docs-related"></h1>
+  <ul style="list-style-type: square">
+    {%- for related in listRelated -%}
+    <li><a href="{{ related.url }}"><span>{{ related.title }}</span></a></li>
+    {%- endfor -%}
+  </ul>
+  {%- endif -%}
 </main>

@@ -4,6 +4,7 @@ language: ko
 category: 프로그래밍
 title: C
 icon: icon-c.png
+meta: C
 order: 0x01
 ---
 # C: 소개

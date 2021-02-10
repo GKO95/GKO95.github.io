@@ -4,6 +4,7 @@ language: ko
 category: 프로그래밍
 title: 파이썬
 icon: icon-python.png
+meta: Python
 order: 0x00
 ---
 # 파이썬: 소개

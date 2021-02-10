@@ -4,6 +4,7 @@ language: ko
 category: 프로그래밍
 title: 자바스크립트
 icon: icon-javascript.png
+meta: JavaScript
 order: 0x04
 ---
 # 자바스크립트: 소개
