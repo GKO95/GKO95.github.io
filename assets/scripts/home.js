@@ -13,7 +13,7 @@ if (config.GetLANG())
 
     $(`#home-blog-about`).text("소개글")
     $(`#home-blog-post`).text("블로그")
-    $(`#home-blog-repo`).text("리포지터리")
+    $(`#home-blog-forum`).text("포럼")
 }
 else
 {   // ENGLISH
@@ -27,7 +27,7 @@ else
 
     $(`#home-blog-about`).text("About")
     $(`#home-blog-post`).text("Blog")
-    $(`#home-blog-repo`).text("Repository")
+    $(`#home-blog-forum`).text("Forum")
 }
 
 //========================================

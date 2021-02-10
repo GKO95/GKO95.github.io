@@ -10,8 +10,8 @@ if (config.GetLANG(config.LANG.ENGLISH))
             $(`#nav-center > span`).text("Blog")
             $(`#blog-caption`).text("TAGS:")
             break;
-        case "repo":
-            $(`#nav-center > span`).text("Repository")
+        case "forum":
+            $(`#nav-center > span`).text("Forum")
             break;
     }
 }
@@ -24,8 +24,8 @@ else
             $(`#nav-center > span`).text("블로그")
             $(`#blog-caption`).text("태그:")
             break;
-        case "repo":
-            $(`#nav-center > span`).text("리포지터리")
+        case "forum":
+            $(`#nav-center > span`).text("포럼")
             break;
     }
 }

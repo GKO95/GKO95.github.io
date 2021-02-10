@@ -1,4 +1,0 @@
----
-layout: repo
-title: Repository
----
