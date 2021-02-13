@@ -1,9 +1,9 @@
 ---
 layout: docs
 language: ko
-category: Website
+category: 웹사이트
 title: Jekyll
-tags: GitHub_Page Jekyll
+tags: GitHub_Pages Jekyll
 order: 0x01
 toc: false
 ---
