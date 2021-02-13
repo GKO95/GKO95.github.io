@@ -5,7 +5,6 @@ category: 웹사이트
 title: Jekyll
 tags: GitHub_Pages Jekyll
 order: 0x01
-toc: false
 ---
 # JEKYLL: 소개
 [Jekyll](https://jekyllrb.com/)은 정적 사이트 생성기로 GitHub Pages를 생성하는데 사용할 수 있다. Ruby 프로그래밍 언어로 작성되었으며, 블로그나 프로젝트 페이지, 심지어 간단한 홈페이지를 만드는데 활용된다. 본 문서는 Ruby 언어에 대한 심층적 지식을 요구하지 않으므로 프로그래밍 언어 설명은 포함되지 않으며, 오로지 Jekyll을 위해 필요한 구성요소 설치, 설정, 그리고 디자인을 중점으로 다룬다.
