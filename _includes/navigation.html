@@ -5,7 +5,7 @@
   </div>
   {% if page.title != nil %}
   <div class="nav-panel" id="nav-center">
-    <span>{%- if page.category -%}{{ page.category}} | {%- endif -%}{{ page.title }}</span>
+    <span>{% if page.category %}{{ page.category}} | {% endif %}{{ page.title }}</span>
   </div>
   {% endif %}
   <div class="nav-panel" id="nav-right">
