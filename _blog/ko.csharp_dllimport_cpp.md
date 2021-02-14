@@ -2,7 +2,7 @@
 layout: docs
 language: ko
 title: C#에서 C++ 동적 라이브러리 불러오기
-tags: Csharp Cpp C
+tags: Csharp
 order: 0x02
 toc: false
 ---
