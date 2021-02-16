@@ -1,15 +1,15 @@
 <nav>
   <div class="nav-panel" id="nav-left">
-    <a title="Home" href="{{ '/' | relative_url }}"><span class="nav-button" id="nav-home"></span></a>
-    <a title="Switch Language"><span class="nav-button" id="nav-lang"></span></a>
+    <a class="nav-button" id="nav-home" title="Home" href="{{ '/' | relative_url }}"></a>
+    <a class="nav-button" id="nav-lang" title="Switch Language"></a>
   </div>
   {% if page.title != nil %}
   <div class="nav-panel" id="nav-center">
-    <span>{% if page.category %}{{ page.category}} | {% endif %}{{ page.title }}</span>
+    {% if page.category %}{{ page.category}} | {% endif %}{{ page.title }}
   </div>
   {% endif %}
   <div class="nav-panel" id="nav-right">
-    <a title="Switch Theme"><span class="nav-button" id="nav-theme"></span></a>
-    <a title="GitHub" href="https://github.com/GKO95"><span class="nav-button" id="nav-github"></span></a>
+    <a class="nav-button" id="nav-theme" title="Switch Theme"></a>
+    <a class="nav-button" id="nav-github" title="GitHub" href="https://github.com/GKO95"></a>
   </div>
 </nav>

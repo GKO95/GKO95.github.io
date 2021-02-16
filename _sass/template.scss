@@ -60,7 +60,7 @@ header {
         flex-direction: row;
         justify-content: space-between;
         width: calc(100% - (16px * 2));
-        height: $ICON_SIZE;
+        height: fit-content;
         margin: auto;
         a {
             $MARGIN-SIZE: 8px;
@@ -87,7 +87,7 @@ header {
         #nav-github { background-image:url('/images/icons/icon-github.png'); }
 
         #nav-left, #nav-right {
-            display: inline-block;
+            display: inline-flex;
             white-space: nowrap;
             align-self: center;
         }
@@ -96,7 +96,7 @@ header {
             padding: 0 0.4em;
             font: {
                 family: Verdana, Geneva, Tahoma, sans-serif;
-                size: $ICON_SIZE - 8px;
+                size: $ICON_SIZE - 12px;
                 weight: bold;
             }
         }

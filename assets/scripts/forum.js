@@ -4,10 +4,10 @@
 if (config.GetLANG(config.LANG.ENGLISH))
 {
     // ENGLISH
-    $(`#nav-center > span`).text("Forum")
+    $(`#nav-center`).text("Forum")
 }
 else
 {
     // KOREAN
-    $(`#nav-center > span`).text("포럼")
+    $(`#nav-center`).text("포럼")
 }
