@@ -80,3 +80,14 @@ $(`article > :header`).each(function() {
     })
     $(`#toc-content`).append($(`<${headerTag}></${headerTag}>`).append(headerTxt))
 })
+
+if ($(`#docs-related`).length > 0)
+{
+    $(`#toc-content`).append($(`
+        <section id="toc-related" style="border-radius: 8px;padding: 8px; text-align: center; cursor: pointer"><span>${config.GetLANG() ? "관련 게시글" : "See Also"}</span></section>
+    `).click(function() {
+        $('html,body').animate({scrollTop: $(`#docs-related`).offset().top},'fast');
+        $('#toc-container').fadeOut("fast")
+        $(`#toc-button`).show("fast")
+    }))
+}
