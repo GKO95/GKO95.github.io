@@ -55,7 +55,7 @@ public static extern bool SetupDiClassGuidsFromNameW(string ClassName, ref Guid 
 
 반면 동일한 기능을 수행하지만 ANSI 인코딩을 사용하는 `SetupDiClassGuidsFromNameA()` 함수를 불러온다고 하면 `CharSet.Ansi`를 건네줍니다.
 
-### `SetLasError` 필드
+### `SetLastError` 필드
 C/C++ 프로그래밍에서 오류가 발생하면 `GetLastError()` 함수로 어떠한 오류가 발생하였는지 확인할 수가 있습니다. 이를 C#에서 사용하기 위해서는 `SetLastError`에 `true` 논리값을 전달인자로 건네줍니다 (기본값: `false`).
 
 ```csharp
