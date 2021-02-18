@@ -6,13 +6,13 @@ tags: Csharp
 order: 0x02
 toc: false
 ---
-제가 소프트웨어 및 펌웨어 엔지니어 직책으로 있으면서 [C++](/docs/ko.PRGMING_Cpp)과 [C#](/docs/ko.PRGMING_Csharp) 프로그래밍 언어를 빈번히 사용하는데, 두 프로그래밍 언어를 동시에 사용하는 경우도 흔히 있습니다. 대체로 C++ 언어를 DLL 동적 라이브러리로 컴파일하여 C#에서 해당 라이브러리를 불러와 사용하는 형식입니다. 이는 C#의 편리함을 보여주는 기능 중 하나로써 매우 유용하게 활용할 수 있어 이번 게시글에서 소개하려고 합니다.
+제가 소프트웨어 및 펌웨어 엔지니어 직책으로 있으면서 [C](/docs/ko.PRGMING_C)/[C++](/docs/ko.PRGMING_Cpp)과 [C#](/docs/ko.PRGMING_Csharp) 프로그래밍 언어를 빈번히 사용하는데, 두 프로그래밍 언어를 동시에 사용하는 경우도 흔히 있습니다. 대체로 C++ 언어를 DLL 동적 라이브러리로 컴파일하여 C#에서 해당 라이브러리를 불러와 사용하는 형식입니다. 이는 C#의 편리함을 보여주는 기능 중 하나로써 매우 유용하게 활용할 수 있어 이번 게시글에서 소개하려고 합니다.
 
 # `DllImportAttribute` 클래스
 C# 언어의 `System.Runtime.InteropServices` 네임스페이스에 [`DllImportAttribute`](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.dllimportattribute) 클래스는 동적 라이브러리를 가져와 C# 코드에서 직접 사용할 수 있도록 합니다. 다시 말해, 해당 클래스를 사용하기 위해서는 C#에 다음과 같은 네임스페이스 선언을 권장합니다.
 
 ```csharp
-using System.Runtime.InteropServices
+using System.Runtime.InteropServices;
 ```
 
 `DllImportAttribute`를 활용한 저의 C# 프로젝트 중 하나는 [Win32.EDID](https://github.com/GKO95/Win32.EDID) 리포지터리에서 확인할 수 있습니다. Win32는 C 언어로 작성된 라이브러리로 본 게시글에서는 윈도우 시스템에 기본적으로 들어있는 `setupapi.dll`이란 C/C++ 동적 라이브러리를 예시로 사용하겠습니다.
