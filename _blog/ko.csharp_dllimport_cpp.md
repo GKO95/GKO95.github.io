@@ -156,3 +156,37 @@ public struct SP_DEVINFO_DATA
     [FieldOffset(24)] public ulong Reserved;
 }
 ```
+
+### 구조체 (문자열 포함)
+
+일부 C/C++ 구조체는 크기가 제한된 문자 배열 형식의 문자열을 맴버로 가지는 경우가 종종 있습니다. 아래는 Win32 API 중에서 모니터 정보를 담는 `DISPLAY_DEVICEW` 구조체의 정의입니다.
+
+```cpp
+typedef struct _DISPLAY_DEVICEW {
+    DWORD cb;
+    WCHAR DeviceName[32];
+    WCHAR DeviceString[128];
+    DWORD StateFlags;
+    WCHAR DeviceID[128];
+    WCHAR DeviceKey[128];
+} DISPLAY_DEVICEW, *PDISPLAY_DEVICEW, *LPDISPLAY_DEVICEW;
+```
+
+여기서 주목할 점은 문자 배열의 자료형이 확장문자(wide-character)을 의미하는 `WCHAR`이란 점입니다. 문자 하나에 1 바이트를 차지하는 `CHAR` 자료형과 달리, `WCHAR`은 문자 하나에 2 바이트를 차지하는 16비트 유니코드(일명 UTF-16) 인코딩입니다. 반대로 흔히 알고있는 `CHAR`은 8비트를 사용하는 ANSI 인코딩을 사용합니다.
+
+구조체가 문자 배열을 가질 시, 명시적 레이아웃으로 크기와 위치를 지정하는 것으로 해결되지 않습니다. 이러한 경우에는 [`MarshalAsAttribute`](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.marshalasattribute) 클래스를 사용하여 C# 소스 코드와 C/C++ 라이브러리 간에 데이터를 주고받도록 합니다.
+
+```csharp
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+public struct DISPLAY_DEVICEW
+{
+    public uint cb;
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)] public string DeviceName;
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)] public string DeviceString;
+    public uint StateFlags;
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)] public string DeviceID;
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)] public string DeviceKey;
+}
+```
+
+C/C++에서 정의된 것과 달리 문자열 부분에만 크기가 두 배로 늘어난 것을 확인할 수 있으며, 이는 확장문자를 고려한 결과입니다. 만일 `CharSet.Ansi`로 하였으면 C/C++에서 정의된 배열 크기만큼 지정하면 됩니다.
