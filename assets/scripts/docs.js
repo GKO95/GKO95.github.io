@@ -70,7 +70,7 @@ $(`#toc-source`).click(function() {
     window.open(`https://github.com/GKO95/GKO95.github.io/blob/master${location.pathname.replace("/","/_").slice(0,-1)}.md`)
 })
 
-$(`#toc-content`).append($(`<div id="toc-sub" style="height: ${$(`#docs-related`).length > 0 ? "92" : "100"}%; overflow: auto;"></div>`))
+$(`#toc-content`).append($(`<div id="toc-sub" style="height: ${$(`#docs-related`).length > 0 ? "calc(100% - (64 + 16)px)" : "100%"}; overflow: auto;"></div>`))
 $(`article > :header`).each(function() {
     let headerTag = $(this).prop("tagName")
     let headerURL = $(this).attr("id")
@@ -85,7 +85,7 @@ $(`article > :header`).each(function() {
 if ($(`#docs-related`).length > 0)
 {
     $(`#toc-content`).append($(`
-        <section id="toc-related" style="display: flex; justify-content: center; border-radius: 8px; margin-top: 16px; font-size: 24px; text-align: center; cursor: pointer; height: calc(8% - 16px)">
+        <section id="toc-related" style="display: flex; justify-content: center; border-radius: 8px; margin-top: 16px; font-size: 24px; text-align: center; cursor: pointer; height: 64px">
             <span style="align-self: center;">${config.GetLANG() ? "관련 게시글" : "See Also"}</span>
         </section>
     `).click(function() {
