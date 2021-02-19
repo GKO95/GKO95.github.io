@@ -70,7 +70,7 @@ $(`#toc-source`).click(function() {
     window.open(`https://github.com/GKO95/GKO95.github.io/blob/master${location.pathname.replace("/","/_").slice(0,-1)}.md`)
 })
 
-$(`#toc-content`).append($(`<div id="toc-sub" style="height: ${$(`#docs-related`).length > 0 ? "calc(100% - (64 + 16)px)" : "100%"}; overflow: auto;"></div>`))
+$(`#toc-content`).append($(`<div id="toc-sub" style="height: ${$(`#docs-related`).length > 0 ? "calc(100% - (64px + 16px))" : "100%"}; overflow: auto;"></div>`))
 $(`article > :header`).each(function() {
     let headerTag = $(this).prop("tagName")
     let headerURL = $(this).attr("id")
