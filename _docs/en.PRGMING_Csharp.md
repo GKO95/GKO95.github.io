@@ -1584,7 +1584,7 @@ An interface is a variation of an abstract class, which declares every member wi
 
 ```csharp
 /* CREATING INTERFACE */
-class interface INTERFACE
+interface INTERFACE
 {
     int property {get; set;}
     void polymorph();

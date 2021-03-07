@@ -1577,7 +1577,7 @@ Error	CS0144	Cannot create an instance of the abstract class or interface 'CLASS
 
 ```csharp
 /* 인터페이스 생성 */
-class interface INTERFACE
+interface INTERFACE
 {
     int property {get; set;}
     void polymorph();
