@@ -2,9 +2,9 @@
 layout: docs
 language: en
 category: Computer Science 
-title: Neural Network
-icon: icon-nn.png
-meta: NeuralNetwork
+title: Machine Learning
+icon: icon-ml.png
+meta: MachineLearning
 mathjax: true
 order: 0x21
 ---
