@@ -1022,6 +1022,7 @@ printf("%d\n", *ptr2);        // >> 출력: 109                (값)
 int *ptr = NULL;
 printf("0x%p", ptr);
 ```
+
 ```
 0x0000000000000000
 ```
@@ -1035,7 +1036,7 @@ void *ptr;
 
 int variable = 356;
 ptr = &variable;
-printf("%d", *(int*)ptr);
+printf("%d\n", *(int*)ptr);
 ```
 ```
 365
@@ -1071,8 +1072,8 @@ int main() {
 
 ```c
 int variable = 123456789;
-printf("16진수: 0x%08x", variable);
-printf("포인터: 0x%p", &variable);
+printf("16진수: 0x%08x\n", variable);
+printf("포인터: 0x%p\n", &variable);
 ```
 
 ```
