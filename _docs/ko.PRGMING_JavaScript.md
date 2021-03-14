@@ -19,7 +19,7 @@ order: 0x04
 
 아래는 대표적인 컴파일 언어인 [C](../ko.PRGMING_C)/[C++](../ko.PRGMING_Cpp) 소스 코드(`.CPP`)와 그로부터 생성된 실행 프로그램(`.EXE`) 내부를 보여준다.
 
-![그림 1. 컴파일 언어의 소스 코드와 실행 파일](/images/docs/shared/programming_lang_compile.png)
+![컴파일 언어의 소스 코드와 실행 파일](/images/docs/shared/programming_lang_compile.png)
 
 왼쪽의 프로그램 소스 코드에는 인간이 사용하는 공용어인 영어를 사용한 것을 볼 수 있다. 하지만 오른쪽의 컴퓨터에서 동작하는 프로그램 실행 파일 내부는 전혀 이해할 수 없는 숫자와 알파벳의 조합으로 되어 있다. 이는 이진코드를 16진수로 표현하였을 뿐, 이진코드로 구성되었다는 점은 변함없다. 그리고 이렇게 영문 소스 코드에서 이진코드 실행 파일로 변환하는 작업을 컴파일(compile)이라고 부르며, 컴파일을 처리하는 프로그램을 컴파일러(compiler)라고 부른다.
 
@@ -27,7 +27,7 @@ order: 0x04
 
 그 다음은 대표적인 인터프리터 언어인 파이썬 파일(`.PY`)에 대한 예시를 보여준다.
 
-![그림 2. 인터프리터 언어의 소스 코드와 실행 파일](/images/docs/shared/programming_lang_interpret.png)
+![인터프리터 언어의 소스 코드와 실행 파일](/images/docs/shared/programming_lang_interpret.png)
 
 왼쪽의 파일 탐색기에는 파이썬 파일이 있는데, 이는 소스 코드인 동시에 실행 파일이다. 오른쪽의 상단은 파일을 코드 편집기로 열었을 때, 그리고 하단은 동일한 파일을 실행 파일로써 열었을 때이다. 이것이 가능한 이유는 바로 인터프리트 언어인 파이썬은 인터프리터(interpreter)라는 언어 통역가가 영문 소스 코드를 이진코드로 곧바로 통역(interpret)하여 컴퓨터에게 전달하기 때문이다.
 
@@ -117,7 +117,7 @@ VS Code에서 자바스크립트를 실행하기 위해서는 확장도구가 �
 
 종합적으로 아래와 같이 파일들이 준비되어야 한다.
 
-![그림 3. VS Code의 자바스크립트 작업 환경.](/images/docs/javascript/js_vs_workspace.png)
+![VS Code의 자바스크립트 작업 환경.](/images/docs/javascript/js_vs_workspace.png)
 
 현 상태에서 `F5` 버튼을 누르면 자바스크립트를 디벙깅 모드로 실행, 그리고 `CTRL+F5` 버튼을 누르면 디버깅 없이 실행된다. 여기서 디버깅 모드란, 코드를 단계별로 실행하여 데이터가 어떻게 변하는지 확인할 수 있도록 한다.
 
@@ -1161,7 +1161,7 @@ import defaultName, * as moduleName from "./module.js";
 # 자바스크립트: DOM
 자바스크립트는 HTML 및 CSS와 함께 사용하여 다양한 기능을 제공하는 데 기여한다. 선언형 언어인 HTML은 아래와 같이 트리 구조(tree structure)의 문서 객체 모델(Document Object Model; DOM)로 문서를 표현한다.
 
-![그림 4. 문서 객체 모델 <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">위키백과</a></i></sub>](/images/docs/javascript/js_html_dom.png)
+![문서 객체 모델 <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">위키백과</a></i></sub>](/images/docs/javascript/js_html_dom.png)
 
 자바스크립트는 HTML의 DOM에 접근하여 요소를 추가, 제거, 그리고 변경할 수 있어 동적이고 유연한 웹사이트를 표현할 수 있도록 한다. 트리 구조의 각 블록은 HTML의 요소를 의미하며, 이는 DOM에서 노드(node)라고 부른다.
 

@@ -19,7 +19,7 @@ C# (한국어:씨샵) 프로그래밍 언어는 자바(Java) 언어를 대응하
 
 아래는 대표적인 컴파일 언어인 [C](../ko.PRGMING_C)/[C++](../ko.PRGMING_Cpp) 소스 코드(`.CPP`)와 그로부터 생성된 실행 프로그램(`.EXE`) 내부를 보여준다.
 
-![그림 1. 컴파일 언어의 소스 코드와 실행 파일](/images/docs/shared/programming_lang_compile.png)
+![컴파일 언어의 소스 코드와 실행 파일](/images/docs/shared/programming_lang_compile.png)
 
 왼쪽의 프로그램 소스 코드에는 인간이 사용하는 공용어인 영어를 사용한 것을 볼 수 있다. 하지만 오른쪽의 컴퓨터에서 동작하는 프로그램 실행 파일 내부는 전혀 이해할 수 없는 숫자와 알파벳의 조합으로 되어 있다. 이는 이진코드를 16진수로 표현하였을 뿐, 이진코드로 구성되었다는 점은 변함없다. 그리고 이렇게 영문 소스 코드에서 이진코드 실행 파일로 변환하는 작업을 컴파일(compile)이라고 부르며, 컴파일을 처리하는 프로그램을 컴파일러(compiler)라고 부른다.
 
@@ -27,7 +27,7 @@ C# (한국어:씨샵) 프로그래밍 언어는 자바(Java) 언어를 대응하
 
 그 다음은 대표적인 인터프리터 언어인 [파이썬](../ko.PRGMING_Python) 파일(`.PY`)에 대한 예시를 보여준다.
 
-![그림 2. 인터프리터 언어의 소스 코드와 실행 파일](/images/docs/shared/programming_lang_interpret.png)
+![인터프리터 언어의 소스 코드와 실행 파일](/images/docs/shared/programming_lang_interpret.png)
 
 왼쪽의 파일 탐색기에는 파이썬 파일이 있는데, 이는 소스 코드인 동시에 실행 파일이다. 오른쪽의 상단은 파일을 코드 편집기로 열었을 때, 그리고 하단은 동일한 파일을 실행 파일로써 열었을 때이다. 이것이 가능한 이유는 바로 인터프리트 언어인 파이썬은 인터프리터(interpreter)라는 언어 통역가가 영문 소스 코드를 이진코드로 곧바로 통역(interpret)하여 컴퓨터에게 전달하기 때문이다.
 
@@ -107,27 +107,27 @@ namespace PROJECT
 ## 비주얼 스튜디오
 [비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 윈도우 OS의 대표적인 IDE이며 .NET을 제공한다. 비주얼 스튜디오는 총 세 가지의 에디션이 존재하며, 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. 그 중에서 C# 프로그래밍 언어를 위해 ".NET desktop development"를 선택한다.
 
-![그림 2. 비주얼 스튜디오 C# 프로그래밍을 위한 구성요소.](/images/docs/csharp/csharp_vs_component.png)
+![비주얼 스튜디오 C# 프로그래밍을 위한 구성요소.](/images/docs/csharp/csharp_vs_component.png)
 
 만일 한국어 지원을 원한다면 "Language packs" 탭에서 한국어를 함께 선택하면 된다.
 
 비주얼 스튜디오를 실행하면 아래와 같은 시작화면이 나타난다. 새로운 프로젝트를 생성하려면 오른쪽 하단의 "Create a new project" 버튼을 클릭한다
 
-![그림 3. 비주얼 스튜디오 시작화면.](/images/docs/csharp/csharp_vs_project1.png)
+![비주얼 스튜디오 시작화면.](/images/docs/csharp/csharp_vs_project1.png)
 
 C#로 만들 수 있는 프로그램은 다양하여 비주얼 스튜디오에서 선택할 수 있는 프로젝트 종류도 여러 가지가 있다. C# 언어 프로젝트 생성을 위해서는 아래의 절차를 따른다:
 
 1. 프로그래밍 언어를 C#로 선택하여 "Console App (.NET Core)"을 클릭한다.
 
-![그림 4. 비주얼 스튜디오 C# 프로젝트 생성 (1단계).](/images/docs/csharp/csharp_vs_project2.png)
+![비주얼 스튜디오 C# 프로젝트 생성 (1단계).](/images/docs/csharp/csharp_vs_project2.png)
 
 2. 프로젝트 및 솔루션 이름을 선정한다. 여기서 프로젝트란, 소스 코드와 컴파일러 설정 등의 실질적인 코딩 내용을 관리하는 `.csproj` 확장자 파일이며, 솔루션은 여러 프로젝트 파일을 하나의 폴더처럼 담는 `.sln` 파일이다. 비주얼 스튜디오에서 프로젝트는 `.sln` 파일로 열기를 권장한다.
 
-![그림 5. 비주얼 스튜디오 C# 프로젝트 생성 (2단계).](/images/docs/csharp/csharp_vs_project3.png)
+![비주얼 스튜디오 C# 프로젝트 생성 (2단계).](/images/docs/csharp/csharp_vs_project3.png)
 
 3. 비주얼 스튜디오에서 알아서 준비한 프로젝트를 그대로 사용한다.
 
-![그림 6. 비주얼 스튜디오 C# 프로젝트 생성 (3단계).](/images/docs/csharp/csharp_vs_project4.png)
+![비주얼 스튜디오 C# 프로젝트 생성 (3단계).](/images/docs/csharp/csharp_vs_project4.png)
 
 위의 3단계 절차는 콘솔 어플리케이션 프로젝트를 생성하는 가장 간단한 방법이다. 만일 아무것도 없는 빈 프로젝트에서 생성하기를 원하면 *PRGMING_C* 문서의 설치 항목을 참조한다.
 

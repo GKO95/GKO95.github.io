@@ -4,10 +4,12 @@
 if (config.GetLANG(config.LANG.ENGLISH))
 {   // ENGLISH
     $(`#docs-related-header`).text("See Also")
+    var txtFigure = "Figure"
 }
 else
 {   // KOREAN
     $(`#docs-related-header`).text("관련 게시글")
+    var txtFigure = "그림"
 }
 
 //========================================
@@ -25,12 +27,12 @@ $(window).resize(breakCode)
 // >> MAIN: IMAGE RESIZE
 //========================================
 const imageSize = () => {
-    $(`article img`).each(function() {
+    $(`article img`).each(function(index) {
         $(this).css({
             "max-width": `calc(${$(`article`).width()}px - ${$(`article img`).css("border-width")} * 2)`
         }).parent().css({"text-align": "center", "width": "100%"})
         if( $(this).next('center').length == 0 ) {
-             $(`<center style="font-weight: bold;">${$(this).attr("alt")}</center>`).insertAfter(this)
+             $(`<center style="font-weight: bold;">${txtFigure} ${index + 1}. ${$(this).attr("alt")}</center>`).insertAfter(this)
         }
         $(this).show()
     })

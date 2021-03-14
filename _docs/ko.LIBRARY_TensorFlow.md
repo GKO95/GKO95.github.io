@@ -52,7 +52,7 @@ array([[3, 4, 5],
 ## 텐서플로우
 텐서플로우의 어원은 두 단어의 조합이다: tensor + flow, 즉 "텐서 데이터의 흐름"이다. 이러한 데이터 흐름 알고리즘은 [트리 구조](https://ko.wikipedia.org/wiki/트리_구조) 그래프로 나타나며, 이는 또한 텐서플로우 결과물의 메모리 구조이기도 한다. 다음은 텐서플로우 그래프를 데이터 흐름도로 나타낸 것을 보여준다.
 
-![그림 1. 텐서플로우 그래프 예시](/images/docs/tensorflow/tf_example_graph.png)
+![텐서플로우 그래프 예시](/images/docs/tensorflow/tf_example_graph.png)
 
 | 구성요소     | 기호     | 설명           |
 |:--------:|:------:|--------------|
@@ -293,7 +293,7 @@ with writer.as_default():
 tensorboard --logdir tensorboard_logs
 ```
 
-![그림 2. 텐서보드 오토그래프 예시](/images/docs/tensorflow/tf_example_board.png)
+![텐서보드 오토그래프 예시](/images/docs/tensorflow/tf_example_board.png)
 
 ### 텐서보드 노드
 > *참조: [`tf` 연산 정의](https://www.tensorflow.org/mlir/tf_ops)*

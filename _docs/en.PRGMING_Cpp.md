@@ -41,25 +41,25 @@ An integrated development environment (IDE) is a software development program th
 ## Visual Studio
 [Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C++ programming, select the "Desktop development with C++" workload.
 
-![Figure 1. Workload for C++ programming on Visual Studio.](/images/docs/cpp/cpp_vs_component.png)
+![Workload for C++ programming on Visual Studio.](/images/docs/cpp/cpp_vs_component.png)
 
 Visual Studio will start with the window shown below. To create a new project for C++ language, select the "Create a new project" button.
 
-![Figure 2. Startup window of Visual Studio.](/images/docs/cpp/cpp_vs_project1.png)
+![Startup window of Visual Studio.](/images/docs/cpp/cpp_vs_project1.png)
 
 Since C++ can create various applications, there are many different kinds of projects available from Visual Studio as well. To create a C++ project, follow the procedure below:
 
 1. Select the language as C++ and choose the "Console App" option.
 
-![Figure 3. Creating a C++ project on Visual Studio (step 1).](/images/docs/cpp/cpp_vs_project2.png)
+![Creating a C++ project on Visual Studio (step 1).](/images/docs/cpp/cpp_vs_project2.png)
 
 2. Designate names for the project and solution. Here, the project is a `.vcxproj` extension file that manages its source codes and compilation options, and the solution is a `.sln` extension file that can contain multiple projects. It is recommended to open the solution file on Visual Studio unless you only want to open a single project.
 
-![Figure 4. Creating a C++ project on Visual Studio (step 2).](/images/docs/cpp/cpp_vs_project3.png)
+![Creating a C++ project on Visual Studio (step 2).](/images/docs/cpp/cpp_vs_project3.png)
 
 3. Use the project automatically prepared by Visual Studio.
 
-![Figure 5. Creating a C++ project on Visual Studio (step 3).](/images/docs/cpp/cpp_vs_project4.png)
+![Creating a C++ project on Visual Studio (step 3).](/images/docs/cpp/cpp_vs_project4.png)
 
 The three-step procedure above for creating a C++ console application is the simplest method. To create an empty C++ project, refer to the installation section on the *PRGMING_C* document.
 
@@ -70,17 +70,17 @@ Visual Studio can run a C++ language program in two different ways: debugging mo
 
 Start Xcode, then create a new project by selecting `File > New > Project...`.
 
-![Figure 7. Startup window of Xcode.](/images/docs/cpp/cpp_xcode_project1.png)
+![Startup window of Xcode.](/images/docs/cpp/cpp_xcode_project1.png)
 
 There are various projects available for developing an application for Apple's product. To create a C++ project, follow the procedure below:
 
 1. Since the computer is macOS, select the macOS tab, then the Command Line Tool to execute a terminal-based program.
 
-![Figure 8. Creating a C++ project on Xcode (step 1).](/images/docs/cpp/cpp_xcode_project2.png)
+![Creating a C++ project on Xcode (step 1).](/images/docs/cpp/cpp_xcode_project2.png)
 
 2. Name a project in the Product Name and select the Language as C++.
 
-![Figure 9. Creating a C++ project on Xcode (step 2).](/images/docs/cpp/cpp_xcode_project3.png)
+![Creating a C++ project on Xcode (step 2).](/images/docs/cpp/cpp_xcode_project3.png)
 
 3. Designate a path for the project.
 

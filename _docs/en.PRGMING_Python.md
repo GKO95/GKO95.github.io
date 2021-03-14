@@ -39,7 +39,7 @@ Developers should be cautious when selecting an interpreter as the version impac
 ## Download Interpreter
 Install the Python interpreter after selecting the version. There are several options for downloading interpreters.
 
-![Figure 1. Download list of interpreter installers in Python 3 official website.](/images/docs/python/python_interpreter_download.png)
+![Download list of interpreter installers in Python 3 official website.](/images/docs/python/python_interpreter_download.png)
 
 The website provides 64-bit and 32-bit interpreter for Windows OS (ex. Windows 10, Windows 8.1, Windows 7, etc.), namely `x86-64` and `x86`. To find out the operating system and architecture of the computer, go to the following path on File Explorer.
 
@@ -62,11 +62,11 @@ In other words, the second and third option is the same, but whether to download
 ## Install Interpreter
 Executing the downloaded interpreter installer shows the following window:
 
-![Figure 2. Startup of Python 3 installer program](/images/docs/python/python_interpreter_install.png)
+![Startup of Python 3 installer program](/images/docs/python/python_interpreter_install.png)
 
 "Add Python 3.7 to PATH" checkbox decides whether to setup environment variables, which allows Python execution on command prompt. The following figure is an execution of Python on the command prompt.
 
-![Figure 3. Python 3 execution on Windows command prompt](/images/docs/python/python_interpreter_cmd.png)
+![Python 3 execution on Windows command prompt](/images/docs/python/python_interpreter_cmd.png)
 
 Environment variable setting is not necessary when Python is the only software to be used, but it is essential if to use it with external software or libraries. Therefore, this document strongly recommends enabling the checkbox. Even it the Python interpreter was installed without an environment variable setting, it can manually setup later.
 
@@ -75,7 +75,7 @@ Clicking the "Install Now" button will begin the installation, and can run Pytho
 ### Custom Installation
 Developers who wish to install Python in a different directory or only want to install the interpreter alone should click the "Customize installation" button for more installation options. The "Optional Features" page selects whether to install additional software that doesn't affect the interpreter's behavior.
 
-![Figure 4. Python 3 installer optional features](/images/docs/python/python_interpreter_optional.png)
+![Python 3 installer optional features](/images/docs/python/python_interpreter_optional.png)
 
 | Options             | Description                                         |
 |---------------------|-----------------------------------------------------|
@@ -87,7 +87,7 @@ Developers who wish to install Python in a different directory or only want to i
 
 The next selection page is the "Advanced Options," which can affect how the interpreter behaves.
 
-![Figure 5. Python 3 installer advanced options](/images/docs/python/python_interpreter_advanced.png)
+![Python 3 installer advanced options](/images/docs/python/python_interpreter_advanced.png)
 
 It is worth paying attention to the `Download debug binaries (requires VS 2015 or later)` checkbox, as this option may require when creating the [OpenCV](../en.LIBRARY_OpenCV) library. However, people who are learning Python as their first programming language may ignore this option for now.
 
@@ -97,7 +97,7 @@ An integrated development environment (IDE) is a software development program th
 ### Visual Studio Code
 [Visual Studio Code](https://code.visualstudio.com/download) (VS Code) is a free source code editor developed by Microsoft. Although technically not an IDE, it can still play a role as an IDE. All that requires are an extension tool that can load the interpreter to VS Code.
 
-![Figure 6. Install Python extension on VS Code](/images/docs/python/python_vscode_extension.png)
+![Install Python extension on VS Code](/images/docs/python/python_vscode_extension.png)
 
 The Python extension allows VS Code to use a Python interpreter; meaning, it can be used to build and debug like an IDE. To install the extension, press the `F1` key and select `Extensions: Install Extensions`. Search `Python` and install the extension by clicking the green `Install` button shown as above.
 

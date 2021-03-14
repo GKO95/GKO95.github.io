@@ -103,7 +103,7 @@ Add the following configuration to the JSON file: `"file": "${workspaceFolder}/i
 
 Eventually, a JavaScript environment on VS Code would look like this:
 
-![Figure 1. JavaScript workspace environment on VS Code.](/images/docs/javascript/js_vs_workspace.png)
+![JavaScript workspace environment on VS Code.](/images/docs/javascript/js_vs_workspace.png)
 
 There are two different methods when running JavaScript on VS Code: Run with debugging (`F5`) and run without debugging (`Ctrl+F5`). Use the debugging mode when the program encounters an error to identify the cause, but run without debugging when executing in general.
 
@@ -1010,7 +1010,7 @@ The object type also has methods for date and time calculation.
 # JAVASCRIPT: DOM
 JavaScript contributes to various dynamic features for webpages when used with HTML and CSS. HTML declarative language presents its document as a tree-structured Document Object Model (DOM). 
 
-![Figure 2. Document Object Model<sub><i>ref: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">Wikipedia.org</a></i></sub>](/images/docs/javascript/js_html_dom.png)
+![Document Object Model<sub><i>ref: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">Wikipedia.org</a></i></sub>](/images/docs/javascript/js_html_dom.png)
 
 JavaScript can present a dynamic and flexible website by adding, removing, and modifying an element via accessing the DOM of HTML. Each block in the tree-structure is called a *node* in the DOM and represents an HTML element.
 

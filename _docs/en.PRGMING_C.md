@@ -41,31 +41,31 @@ An integrated development environment (IDE) is a software development program th
 ## Visual Studio
 [Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C programming, select the "Desktop development with C++" workload.
 
-![Figure 1. Workload for C programming on Visual Studio.](/images/docs/c/c_vs_component.png)
+![Workload for C programming on Visual Studio.](/images/docs/c/c_vs_component.png)
 
 The reason to select the C++ workload is that the MSVC compiler is mainly a C++ compiler that also compiles C language. Visual Studio does not have a workload for pure C language development.
 
 Visual Studio will start with the window shown below. To create a new project for C language, select the "Create a new project" button.
 
-![Figure 2. Startup window of Visual Studio.](/images/docs/c/c_vs_project1.png)
+![Startup window of Visual Studio.](/images/docs/c/c_vs_project1.png)
 
 However, Visual Studio does not have an option to create a project for C language since it is all integrated into C++ components. To create a C project, follow the procedure below:
 
 1. Select the language as C++ and choose the "Empty Project" option.
 
-![Figure 3. Creating a C project on Visual Studio (step 1).](/images/docs/c/c_vs_project2.png)
+![Creating a C project on Visual Studio (step 1).](/images/docs/c/c_vs_project2.png)
 
 2. Designate names for the project and solution. Here, the project is a `.vcxproj` extension file that manages its source codes and compilation options, and the solution is a `.sln` extension file that can contain multiple projects. It is recommended to open the solution file on Visual Studio unless you only want to open a single project.
 
-![Figure 4. Creating a C project on Visual Studio (step 2).](/images/docs/c/c_vs_project3.png)
+![Creating a C project on Visual Studio (step 2).](/images/docs/c/c_vs_project3.png)
 
 3. On the Solution Explorer, right-click the Source Files filter and select the `Add > New Items...` option.
 
-![Figure 5. Creating a C project on Visual Studio (step 3).](/images/docs/c/c_vs_project4.png)
+![Creating a C project on Visual Studio (step 3).](/images/docs/c/c_vs_project4.png)
 
 4. On the Add New Item window, change the extension from `.cpp` to `.c`, which is a source code extension for C language.
 
-![Figure 6. Creating a C project on Visual Studio (step 4).](/images/docs/c/c_vs_project5.png)
+![Creating a C project on Visual Studio (step 4).](/images/docs/c/c_vs_project5.png)
 
 Since this is an empty project, there won't be any code written on the source code. Paste the code below to make the source code at least compilable for the C project.
 
@@ -95,17 +95,17 @@ CRT warning commonly appears when programming with C language. However, this is 
 
 Start Xcode, then create a new project by selecting `File > New > Project...`.
 
-![Figure 7. Startup window of Xcode.](/images/docs/c/c_xcode_project1.png)
+![Startup window of Xcode.](/images/docs/c/c_xcode_project1.png)
 
 There are various projects available for developing an application for Apple's product. To create a C project, follow the procedure below:
 
 1. Since the computer is macOS, select the macOS tab, then the Command Line Tool to execute a terminal-based program.
 
-![Figure 8. Creating a C project on Xcode (step 1).](/images/docs/c/c_xcode_project2.png)
+![Creating a C project on Xcode (step 1).](/images/docs/c/c_xcode_project2.png)
 
 2. Name a project in the Product Name and select the Language as C.
 
-![Figure 9. Creating a C project on Xcode (step 2).](/images/docs/c/c_xcode_project3.png)
+![Creating a C project on Xcode (step 2).](/images/docs/c/c_xcode_project3.png)
 
 3. Designate a path for the project.
 

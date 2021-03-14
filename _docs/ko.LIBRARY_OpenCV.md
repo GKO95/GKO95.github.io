@@ -50,7 +50,7 @@ Git 소프트웨어 설치가 완료되었으면 아래의 `git clone` 명령어
   git clone https://github.com/opencv/opencv_contrib
   ```
 
-![그림 1. <code>opencv</code> 및 <code>opencv_contrib</code> 리포지터리 클론](/images/docs/opencv/opencv_git_clone.png)
+![<code>opencv</code> 및 <code>opencv_contrib</code> 리포지터리 클론](/images/docs/opencv/opencv_git_clone.png)
 
 클론(clone; 복제)한 리포지터리는 항상 최신 상태의 버전으로, 이전 버전 상태로 클론할 수는 없다. 이는 현재(2020년 12월) 기준으로 가장 최신 버전 4.5.1에서 조금 더 코드 수정이 커밋(commit; 기여)된 정식 출시 버전이 아닐 가능성이 매우 높다. 다행이 Git이 소스 코드 제어 소프트웨어이기 때문에 로컬에서 원하는 버전을 선택할 수 있다.
 
@@ -60,7 +60,7 @@ OpenCV와 같은 대부분의 오픈소스 라이브러리는 정식 출시 버�
 git tag
 ```
 
-![그림 2. OpenCV 리포지터리 태그 목록](/images/docs/opencv/opencv_git_tag.png)
+![OpenCV 리포지터리 태그 목록](/images/docs/opencv/opencv_git_tag.png)
 
 OpenCV 4.5.1 버전의 경우에는 `4.5.1`이란 태그를 가진다. 찾고자 하는 태그를 확인하였으면 키보드에 `q` 버튼을 눌러 태그 목록에서 나간다. 참고로 파란색의 `(master)`는 현재 사용자가 기본 master 브랜치에 있음을 뜻하며, Git에서 브랜치(branch; 가지)란 분리된 코딩 작업환경을 제공하여 효율적인 소스 코드 관리를 가능케 한다.
 
@@ -70,7 +70,7 @@ OpenCV 4.5.1 버전의 경우에는 `4.5.1`이란 태그를 가진다. 찾고자
 git checkout tags/4.5.1
 ```
     
-![그림 3. OpenCV 리포지터리 커밋 체크아웃](/images/docs/opencv/opencv_git_checkout.png)
+![OpenCV 리포지터리 커밋 체크아웃](/images/docs/opencv/opencv_git_checkout.png)
 
 > Git에서 `HEAD`란, 현재 사용자가 작업하고 있는 브랜치의 가장 최신 커밋을 가리키며, master 브랜치에서 작업하고 있으면 `HEAD`는 master가 된다. 브랜치를 변경하면 `HEAD`는 변경된 브랜치를 가리킨다.
 >
@@ -81,7 +81,7 @@ git checkout tags/4.5.1
 ### Git GUI
 위의 방법은 Bash라는 UNIX 셸을 통해 Git을 활용하는 방법을 설명하였다. 그러나 Git을 설치하면 GUI 프로그램이 함께 제공되는데, 이는 Git을 시각적으로 확인하므로써 더 편리하게 관리할 수 있다. Git GUI를 사용할 시 프로그램 툴바에서 `Branch > Checkout...`를 클릭하면 아래의 화면을 볼 수 있다.
 
-![그림 4. OpenCV 리포지터리를 Git GUI로 제어](/images/docs/opencv/opencv_git_gui.png)
+![OpenCV 리포지터리를 Git GUI로 제어](/images/docs/opencv/opencv_git_gui.png)
 
 그리고 확인하고자 하는 태그를 선택해 체크아웃 버튼을 클릭하면 리포지터리가 해당 커밋 당시로 되돌아간다.
 
