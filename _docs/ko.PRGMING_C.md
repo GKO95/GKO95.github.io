@@ -1525,7 +1525,7 @@ fclose(fptr);
 `#include` 포함 지시문(inclusive directive)은 전처리기 지시문 중 하나로 대표적으로 `stdio.h`와 같은 헤더 파일을 불러오는 데 매번 사용된다. 헤더 파일에 선언된 기능들을 불러오는 데 사용된 `#include` 지시문의 정확한 기능은 헤더 파일의 전체 코드를 지시문이 위치한 곳에 그대로 붙여넣는다.
 
 ### 헤더와 소스 파일 나누기
-문서 초반의 *C: 기초* 장에서 처음 언급된 소스(source) 파일과 헤더(header) 파일의 역할을 다시 정리하면 전자는 데이터나 함수의 정의, 그리고 후자는 데이터나 함수의 선언이 위주인 스크립트이다. 다만, 시작점인 `main()` 함수는 선언부가 없다는 점을 고려하면 메인 스크립트를 다음과 같이 구성할 수도 있다.
+문서 초반의 [*C: 기초*](#c-기초) 장에서 처음 언급된 소스(source) 파일과 헤더(header) 파일의 역할을 다시 정리하면 전자는 데이터나 함수의 정의, 그리고 후자는 데이터나 함수의 선언이 위주인 스크립트이다. 다만, 시작점인 `main()` 함수는 선언부가 없다는 점을 고려하면 메인 스크립트를 다음과 같이 구성할 수도 있다.
 
 ```c
 /* 헤더 파일: main.h */
@@ -1549,7 +1549,7 @@ int main(){
     return 0;
 }
 
-void function(int arg1, float arg2){
+void function(int arg1, float arg2) {
     printf("%.3d\n", arg1 + arg2);
 }
 ```
@@ -1578,7 +1578,7 @@ int main(){
     return 0;
 }
 
-void function(int arg1, float arg2){
+void function(int arg1, float arg2) {
     printf("%.3d\n", arg1 + arg2);
 }
 ```
@@ -1603,7 +1603,7 @@ void function(int, float);
 
 // 본격 변수 "variable" 정의
 char variable = 'A';
-void function(int arg1, float arg2){
+void function(int arg1, float arg2) {
     printf("%.3f\n", arg1 + arg2);
 }
 ```
