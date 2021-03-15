@@ -31,6 +31,18 @@ else
 }
 
 //========================================
+// >> MISSING ICON
+//========================================
+$(`.home-docs-tile`).each(function() {
+    if ($(this).css("background-image").indexOf('/images/icons/"') > 0)
+        $(this).css({
+            "background-image" : "url('/images/icons/icon-close.png')",
+            "background-size" : "96px",
+            "background-blend-mode" : "soft-light"
+        })
+})
+
+//========================================
 // >> SPACING ADJUSTMENT
 //========================================
 if ($(`#home-announce li`).length == 0) {
