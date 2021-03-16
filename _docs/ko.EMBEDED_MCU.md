@@ -1,10 +1,10 @@
 ---
 layout: docs
 language: ko
-category: 컴퓨터 과학
-title: MCS-51
-icon: icon-8051.png
-meta: MCS-51
+category: 임베디드
+title: MCU
+icon: icon-mcu.png
+meta: MCU
 mathjax: true
 order: 0x20
 ---

@@ -9,6 +9,13 @@ if (config.GetLANG())
 
     $(`.home-docs-group`).each(function() {
         if ($(this).attr("lang") == "en") $(this).remove()
+        if ($(this).attr("category") == "ETC") 
+        {
+            $(this).children("section").text("정리자료")
+            $(this).children("ul").children().each(function() {
+                if ($(this).attr("lang") == "en") $(this).remove()
+            })
+        }
     })
 
     $(`#home-blog-about`).text("소개글")
@@ -23,6 +30,13 @@ else
 
     $(`.home-docs-group`).each(function() {
         if ($(this).attr("lang") == "ko") $(this).remove()
+        if ($(this).attr("category") == "ETC") 
+        {
+            $(this).children("section").text("Documents")
+            $(this).children("ul").children().each(function() {
+                if ($(this).attr("lang") == "ko") $(this).remove()
+            })
+        }
     })
 
     $(`#home-blog-about`).text("About")
