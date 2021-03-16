@@ -1656,7 +1656,7 @@ Compilers have common standard and compiler-specific predefined macros available
 
 * MSVC: [Microsoft Docs - Predefined Macros](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
 * GCC: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
-* Others: https://sourceforge.net/p/predef/wiki/Compilers/
+* Others: [SourceForge Wiki](https://sourceforge.net/p/predef/wiki/Compilers/)
 
 ## Conditional Inclusion
 A conditional inclusion is a directive for conditional compilation; the compiler ignores the codes when the condition is false.

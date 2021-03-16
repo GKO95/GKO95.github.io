@@ -2519,7 +2519,7 @@ C 프로그래밍 언어 컴파일 작업은 두 단계를 거쳐 빌드가 진�
 
 * MSVC: [Microsoft Docs - 미리 정의된 매크로](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
 * GCC: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
-* 그 외: https://sourceforge.net/p/predef/wiki/Compilers/
+* 그 외: [SourceForge Wiki](https://sourceforge.net/p/predef/wiki/Compilers/)
 
 ## 조건 포함문
 조건 포함문(conditional inclusion)은 조건을 제시하여 부합 여부에 따라 특정 코드를 컴파일 작업 시 포함시킬 것인지 배제할 것인지 결정한다. 
