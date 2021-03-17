@@ -58,7 +58,7 @@ layout: template
           {%- assign arrMarkdown = fullMarkdown | where: "title", name | where: "language", lang -%}
             {%- for Markdown in arrMarkdown -%}
               <a href="{{ Markdown.url }}" lang="{{ lang }}" title="{{ Markdown.category }} | {{ Markdown.title }}">
-                <li class="home-docs-list">{{ Markdown.title }}</li>
+                <li class="home-docs-list">[{{ Markdown.category }}] {{ Markdown.title }}</li>
               </a>
             {%- endfor -%}
         {%- endfor -%}
