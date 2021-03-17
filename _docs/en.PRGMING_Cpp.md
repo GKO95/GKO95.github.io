@@ -758,7 +758,7 @@ int arr[][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 ```
 
 ## Array Class
-> *Reference: [http://www.cplusplus.com/reference/array/](http://www.cplusplus.com/reference/array/)*
+> *Reference: [cplusplus.com <array> class](http://www.cplusplus.com/reference/array/)*
 
 The array class is one of the C++ Standard Library that can also provide C-style array as introduced above, but with better accessibility and handling such as sequencing. Include the `<array>` header to use an array class.
 
@@ -772,7 +772,7 @@ std::array<int, 3> arr;
 Since there is no performance difference between the array declared by both C-style and C++ Standard Library, developers are free to choose whatever they are confident. However, the ranged-based `for` loop statement has to use an array class.
 
 ## Vector Class
-> *Reference: [http://www.cplusplus.com/reference/vector/](http://www.cplusplus.com/reference/vector/)*
+> *Reference: [cplusplus.com <vector> class](http://www.cplusplus.com/reference/vector/)*
 
 The vector class is a sequence container like an array but with a feature that can change its size dynamically; vector stores the data in a separate memory space that must allocate manually by developers. Thankfully, memory management is all done by the system, hence no need to worry about allocation.
 

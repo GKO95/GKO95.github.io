@@ -773,7 +773,7 @@ int arr[][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 ```
 
 ## 배열 클래스
-> *참고: [http://www.cplusplus.com/reference/array/](http://www.cplusplus.com/reference/array/)*
+> *참고: [cplusplus.com <array> 클래스](http://www.cplusplus.com/reference/array/)*
 
 배열 클래스(array class)는 C++ 표준 라이브러리 중 하나로 위에서 설명한 C 형식과 동일한 배열을 제공하지만, 접근성과 순차성이 훨씬 뛰어나다. 배열 클래스를 사용하기 위해서는 `<array>` 헤더를 추가해야 한다.
 
@@ -787,7 +787,7 @@ std::array<int, 3> arr;
 C 형식과 C++ 표준 라이브러리의 배열은 성능 차이가 없으므로 개발자는 둘 중 아무거나 사용하여도 된다. 다만, 범위형 `for` 반복문과 같이 순차성이 요구되는 코드에서는 후자를 택해야 한다.
 
 ## 벡터 클래스
-> *참고: [http://www.cplusplus.com/reference/vector/](http://www.cplusplus.com/reference/vector/)*
+> *참고: [cplusplus.com <vector> 클래스](http://www.cplusplus.com/reference/vector/)*
 
 벡터(vector)는 배열과 동일한 시퀀스 컨테이너이지만, 크기를 언제든지 변경할 수 있는 특징을 가진다. 이는 벡터에 저장되는 데이터가 개발자가 직접 할당해야 하는 별도의 메모리 공간에 저장되기 때문이다. 다행이 벡터 클래스의 메모리 할당은 시스템에서 자동적으로 처리되므로 아무런 염려없이 사용하면 된다.
 
