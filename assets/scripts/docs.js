@@ -45,7 +45,6 @@ $(window).resize(imageSize)
 $(`#toc-button`).show("slow").click(function() {
     $(this).hide("fast")
     $(`#toc-container`).fadeIn()
-
 })
 
 $(`#toc-main`).click(function(event) {event.stopPropagation();})
@@ -82,6 +81,10 @@ $(`article > :header`).each(function() {
         $(`#toc-button`).show("fast")
     })
     $(`#toc-content > #toc-sub`).append($(`<${headerTag}></${headerTag}>`).append(headerTxt))
+})
+
+$(`#toc-content > #toc-sub > h1`).each(function() {
+    if ($(this).next().is("h1") || $(this).is(":last-child")) $(this).after("<h3>...</h3>")
 })
 
 if ($(`#docs-related`).length > 0)
