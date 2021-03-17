@@ -45,15 +45,10 @@ else
 }
 
 //========================================
-// >> MISSING ICON
+// >> REMOVE EMPTY GROUP
 //========================================
-$(`.home-docs-tile`).each(function() {
-    if ($(this).css("background-image").indexOf('/images/icons/"') > 0)
-        $(this).css({
-            "background-image" : "url('/images/icons/icon-close.png')",
-            "background-size" : "96px",
-            "background-blend-mode" : "soft-light"
-        })
+$(`.home-docs-group`).each(function() {
+    if ($(this).children('ul').children().length == 0 && $(this).children('ol').children().length == 0) $(this).remove()
 })
 
 //========================================
