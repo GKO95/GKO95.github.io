@@ -36,14 +36,7 @@ code {
         padding: 0px;
     }
 }
-.mjx-chtml, .MathJax_CHTML {
-    .MJXc-TeX-unknown-R
-    {
-        font-family: 'GulimChe';
-        font-weight: bold;
-        text-rendering: optimizeLegibility;
-    }
-}
+
 h1, h2, h3, h4 { font-family: $TITLEFONT; }
 header {
     @include HFBkgdStyle;
