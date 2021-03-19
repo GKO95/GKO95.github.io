@@ -10,16 +10,134 @@ order: 0xE0
 # 미분방정식: 개요
 > 본 내용은 고등학교 교육과정 중 하나인 [미분](https://en.wikipedia.org/wiki/Derivative) 및 [적분](https://en.wikipedia.org/wiki/Integral), 그리고 [복소수](https://en.wikipedia.org/wiki/Complex_number)를 기반하므로 이에 대해 충분한 이해가 필요하다.
 
-[미분방정식](https://en.wikipedia.org/wiki/Differential_equation)은 하나 이상의 함수간 연관성을 나타낸 방정식이며, 미분이 함께 동원되기 때문에 "미분"방정식이라 부른다. 해당 연관성은 곧 시스템 내에서 일어나는 현상을 의미하기에 결과적으로 미분방정식은 이러한 *현상을 수식으로 표현한 것*이라고 해석할 수 있다. 일반적으로 미분방정식은 다음과 같은 형태를 가진다.
+[미분방정식](https://en.wikipedia.org/wiki/Differential_equation)은 하나 이상의 함수간 연관성을 나타낸 방정식이며, 미분이 함께 동원되기 때문에 "미분"방정식이라 부른다. 해당 연관성은 곧 시스템 내에서 일어나는 현상을 의미하기에 결과적으로 미분방정식은 이러한 *현상을 수식으로 표현한 것*이라고 해석할 수 있다. 
+
+## 미분방정식 종류
+미분방정식은 도함수에 따라 두 분류로 나뉘어진다.
+
+* *상미분방정식 (ordinary differential equation; ODE)*
+    : 하나의 독립변수($$x$$)에 의한 종속변수($$y$$)만을 가지는 미분방정식이다.
+      
+    $$
+    \frac{d^2y}{dx^2} + 2xy\frac{dy}{dx} + 3y = 0 \quad ...\mathrm{where} \ y = f(x)
+    $$
+
+* *편미분방정식 (partial differential equation; PDE)*
+    : 두 개 이상의 독립변수에 의한 도함수를 가지는 미분방정식이다.
+  
+    $$
+    \frac{du}{dx} + 4\frac{du}{dxdy} + 5x\frac{du}{dy} = 0 \quad ...\mathrm{where} \ u = f(x, y)
+    $$
+
+혹은, 독립변수 개수와 무관하게 선형성에 의해서도 두 분류로 나눌 수 있다.
+
+* *선형미분방정식 (linear differential equation)*
+    : 최고계(즉, 미분 횟수가 가장 많은 도함수)의 멱지수가 1차이며, 도함수의 계수가 상수 혹은 독립변수를 가지는 미분방정식이다.
+      
+    $$
+    \frac{d^2u}{dx^2} + 6\frac{du}{dxdy} + 8x\frac{du}{dy} = 0 \quad ...\mathrm{where} \ u = f(x, y)
+    $$
+
+* *비선형미분방정식 (non-linear differential equation; PDE)*
+    : 선형미분방정식이 아닌 나머지 미분방정식을 가리킨다. 아래는 최고계의 멱지수가 2차이므로 선형이 아니다.
+  
+    $$
+    \left( \frac{d^2u}{dx^2} \right)^2 + 6\frac{du}{dxdy} + 8x\frac{du}{dy} = 0 \quad ...\mathrm{where} \ u = f(x, y)
+    $$
+
+## 미분방정식 해
+미분방정식의 풀이 목적은 해당 현상이 왜 그리고 어떻게 발생되는 건지 설명할 수 있는 해(solution)를 구하는 것이다. 미분방정식 해는 어떠한 도함수를 갖지 않으며, 삼각함수 $$\sin$$ 및 $$\cos$$ 조합 혹은 [오일러 법칙](https://en.wikipedia.org/wiki/Euler%27s_formula)에 의하여 $$e^{j\omega t}$$로 구성되어 있다.
+
+미분방정식에는 두 가지 종류의 해가 존재한다.
+
+* *일반해 (general solution)*
+    : 미분방정식의 현상을 설명하는 가장 일반적이로 포괄적인 해이다.
+  
+    $$
+    y = ce^{\kappa t}
+    $$
+
+* *특수해 (particular solution)*
+    : 미분방정식의 현상 중에서 주어진 (초기)조건에서만 만족하는 해이다.
+
+    $$
+    y(0) = 2 \ \rightarrow y = 2e^{\kappa t} \quad (\because c=2)
+    $$
+
+# 미분방정식: 완전미분방정식
+완전미분방정식(exact differential equation)은 종속변수 $$u(x,y) = 0$$를 전미분(total derivative)한 미분방정식이다. 여기서 전미분이라고 명시한 점은 종속변수가 기본적으로 두 개 이상을 가진다는 설정이 기반된다.
 
 $$
-ay'' + by' + cy = d
+du = M(x,y)dx + N(x, y)dy = 0 \quad ... \mathrm{where} \ M(x,y) = \frac{\partial{u}}{\partial{x}} , \ N(x,y) = \frac{\partial{u}}{\partial{y}}
+$$    
+
+위와 같은 방정식 형태를 "완전(exact)"하다고 부르며 아래의 필요충분조건을 반드시 충족한다.
+
+$$
+\frac{\partial{M}}{\partial{y}} = \frac{\partial{N}}{\partial{x}} \ \left ( = \frac{\partial{u}}{\partial{x}\partial{y}} \right )
 $$
 
-고등학교 물리학 중에서 [고전역학](https://en.wikipedia.org/wiki/Classical_mechanics) 내용을 바탕으로 한 아래의 간단한 몇 가지 예시를 통해 미분방정식에 대하여 이해를 하자.
+이를 충족시키지 못할 시, 해당 미분방정식은 완전미분방정식이 아니다.
 
-# 미분방정식: 수립
-본 장에서는 가장 기초적인 고전역학을 기반으로 미분방정식을 수립하는 방법을 다룬다.
+### 예제 1
+다음과 같은 미분방정식이 주어졌다:
+
+$$
+(x^3 + xy^2)dx + (x^2y+y^3)dy = 0
+$$
+
+위의 방정식이 완전미분방정식인지 확인하기 위해 필요충분조건 충족 여부를 살펴본다.
+
+$$
+\begin{cases}
+\begin{align}
+
+\frac{\partial{M}}{\partial{y}} = \frac{\partial{(x^3+xy^2)}}{\partial{y}} = 2xy
+
+\\
+
+\frac{\partial{N}}{\partial{x}} = \frac{\partial{(x^2y+y^3)}}{\partial{x}} = 2xy
+
+\end{align}
+\end{cases}
+$$
+
+두 식의 결과가 동일하므로 필요충분조건으로 인해 본 미분방정식은 완전미분방정식임을 확인하였다. $$M(x,y)$$와 $$N(x,y)$$가 $$x$$ 그리고 $$y$$ 독립변수의 편미분이므로, 각각에 대하여 $$x$$와 $$y$$에 대한 적분을 치한다.
+
+$$
+\begin{cases}
+\begin{align}
+
+u = \int{M(x,y)dx} = \frac{1}{4}x^4 + \frac{1}{2}x^2y^2 + c_x
+
+\\
+
+u = \int{N(x,y)dy} = \frac{1}{2}x^2y^2 + \frac{1}{4}y^4 + c_y
+
+\end{align}
+\end{cases}
+$$
+
+여기서 $$c_x$$는 상수 및 순수 $$y$$에 수식, 그리고 $$c_y$$는 상수 및 순수 $$x$$에 대한 수식이다. 그러므로 두 방정식을 하나로 통합하면 다음과 같이 일반해를 구할 수 있다.
+
+$$
+u(x,y) = \frac{1}{4}x^4 + \frac{1}{2}x^2y^2 + \frac{1}{4}y^4 + c = 0
+$$
+
+$$
+\qquad \therefore x^4 + 2x^2y^2 + y^4 + c = 0
+$$
+
+단, 뒤에 있는 $$c$$는 적분으로 인해 알 수 없는 상수이다. 계수를 정수로 만들기 위해 양변에 4를 곱하여도 $$4c$$라고 표기하지 않은 이유는 상수의 값을 처음부터 모르고 있으므로 계수를 붙여도 별 의미가 없기 때문이다. 알 수 없는 상수의 값을 찾아내려면 초기조건이 필요로 하다; 즉, 이를 구하는 이후부터 특수해가 된다.
+
+## 적분인자
+만일 완전미분방정식이 아닐 경우, 알맞은 적분인자(integrating factor)를 곱하여 완전미분방정식으로 바꿀 수 있다.
+
+### 예제 2
+
+
+# 미분방정식: 선형미분방정식
+고등학교 물리학 중에서 [고전역학](https://en.wikipedia.org/wiki/Classical_mechanics) 내용을 바탕으로 한 아래의 간단한 몇 가지 예시를 통해 미분방정식 수립 방법을 다룬다.
 
 ### 예시 1. 평형상태 (1)
 아래의 그림은 천장에 달린 용수철에 물체가 매달려 가만히 있는 그림이다.
@@ -41,7 +159,7 @@ $$
     $$
     F_k = -ky_0
     $$
-    
+      
     여기서 음의 부호가 붙은 이유는 외부에서 물체를 밀어내거나 잡아당기면, 용수철은 항상 그 반대로 물체를 잡아당기거나 밀어내기 때문이다.
 
 현재 물체는 어떠한 움직이 없는 평형상태, 즉 물체에 가해진 힘들이 어느 한 쪽으로도 쏠리지 않고 평형을 이룬 상태이다. 그 말인 즉슨 물체에 가해진 $$F_g$$와 $$F_k$$는 서로를 상쇄하여 물체에는 결국 아무런 힘이 가해지지 않았음을 의미한다. 이를 수식으로 표현하면 다음과 같다:
@@ -59,7 +177,7 @@ F_g + F_k = (+mg) + (-ky_0) = 0
 $$
 
 $$
-\therefore mg - ky_0 = 0
+\qquad \therefore mg - ky_0 = 0
 $$
 
 > 그럼 만일 위로 향하는 방향을 양의 방향으로 잡으면 어떻게 계산이 되는가?
@@ -77,7 +195,7 @@ $$
 > $$
 > 
 > $$
-> \therefore mg - ky_0 = 0 \ \ \ (\mathrm{when} \ y_0 > 0)
+> \qquad \therefore mg - ky_0 = 0 \ \ \ (\mathrm{when} \ y_0 > 0)
 > $$
 >
 > 모든 힘의 부호들은 반대로 바뀌었으나, 전체적인 시스템에는 아무런 변화가 없다. 그러므로 부호 기준 설정은 편한대로 선정하되 도중에 바뀌어서는 절대 아니된다.
@@ -118,7 +236,7 @@ $$
 $$
 
 $$
-\therefore F_\mathrm{app} - ky = 0
+\qquad \therefore F_\mathrm{app} - ky = 0
 $$
 
 ### 예시 3. 자유진동
@@ -148,7 +266,7 @@ $$
 $$
 
 $$
-\therefore my'' + ky = 0
+\qquad \therefore my'' + ky = 0
 $$
 
 물체는 외부로부터 영향을 받지 않는 이상 이론적으로 영원히 자유진동(free oscillation) 운동을 한다.
@@ -171,7 +289,7 @@ F_g + F_k = (+mg) + (-ky_0) = 0
 $$
 
 $$
-\therefore mg - ky_0 = 0
+\qquad \therefore mg - ky_0 = 0
 $$
 
 그러나 아래의 그림과 같이 자유운동이 시작되면 감쇠기의 영향으로 인해 방정식이 달라진다.
@@ -205,7 +323,7 @@ F_g + F_c + F_k= mg - ky_0 - ky - cy' = my''
 $$
 
 $$
-\therefore my'' + cy' + ky = 0
+\qquad \therefore my'' + cy' + ky = 0
 $$
 
 ### 예제 5. 감쇠강제진동
@@ -220,7 +338,7 @@ F_g + F_c + F_k = mg - ky_0 - ky - cy' = my''
 $$
 
 $$
-\therefore my'' + cy' + ky = 0
+\qquad \therefore my'' + cy' + ky = 0
 $$
 
 그러나 이번에는 물체를 강제로 진동시키는 외력이 주기적으로 가해지는 경우를 다룬다. 이때 가해지는 외력은 $$F_0$$의 크기를 가지며 $$\cos{\omega t}$$ 주기로 물체에 힘이 가해진다.
@@ -264,15 +382,11 @@ F_g + F_c + F_k + r(t) = mg - ky_0 - ky - cy' + F_0\cos{\omega t} = my''
 $$
 
 $$
-\therefore my'' + cy' + ky = F_0\cos{\omega t}
+\qquad \therefore my'' + cy' + ky = F_0\cos{\omega t}
 $$
 
-# 미분방정식: 풀이
-이전 장에서는 미분방정식을 "수립"하는 방법에 대하여 설명하였다. 하지만 결과적으로 구해야 할 것은 미분방정식이 보여주는 현상이 왜 그리고 어떻게 발생되는 건지 설명할 수 있는 해(solution)를 구하는 것이다. 그리고 미분방정식의 해는 일반적으로 다음과 같은 형태를 가진다.
 
-$$
-y = A\cos{\omega_n t} + B\sin{\omega_n t}
-$$
+
 
 미분방정식이 아닌 *예시 1. 평형상태 (1)*를 제외한 나머지 예시에서 이들의 해를 이번 장에서 구해본다.
 
