@@ -131,12 +131,73 @@ $$
 단, 뒤에 있는 $$c$$는 적분으로 인해 알 수 없는 상수이다. 계수를 정수로 만들기 위해 양변에 4를 곱하여도 $$4c$$라고 표기하지 않은 이유는 상수의 값을 처음부터 모르고 있으므로 계수를 붙여도 별 의미가 없기 때문이다. 알 수 없는 상수의 값을 찾아내려면 초기조건이 필요로 하다; 즉, 이를 구하는 이후부터 특수해가 된다.
 
 ## 적분인자
-적분인자(integrating factor)는 완전하지 않은 미분방정식의 양변에 곱하여 완전미분방정식으로 만든다.
+적분인자(integrating factor)는 완전하지 않은 미분방정식의 양변에 곱하여 완전미분방정식으로 만든다. 만일 비완전미분방정식 $$P(x,y)dx + Q(x,y)dy = 0$$이 있다면, 적분인자 $$\mu (x,y)$$를 곱하여 다음과 같이 완전미분방정식으로 변경한다.
 
-### 예제 2
+$$
+\mu Pdx + \mu Qdy = 0
+$$
 
+위의 방정식이 완전미분방정식임을 증명해야 하므로 필요충분조건을 확인한다.
+
+$$
+\frac{\partial}{\partial{y}}\left ( \mu P \right ) = \frac{\partial}{\partial{x}}\left ( \mu Q \right ) 
+$$
+
+각 변에 대하여 편미분을 하면 다음 방정식이 도출된다.
+
+$$
+P\frac{\partial{\mu}}{\partial{y}} + \mu\frac{\partial{P}}{\partial{y}} = Q\frac{\partial{\mu}}{\partial{x}} + \mu\frac{\partial{Q}}{\partial{x}}
+$$
+
+$$
+\qquad \therefore P\frac{\partial{\mu}}{\partial{y}} - Q\frac{\partial{\mu}}{\partial{x}} + \mu \left ( \frac{\partial{P}}{\partial{y}} - \frac{\partial{Q}}{\partial{x}} \right ) = 0
+$$
+
+그러나 적분인자 $$\mu$$가 정말로 $$x$$와 $$y$$ 독립변수 모두에 의존하는지, 아니면 하나의 독립변수에만 의존하는지 정확하게 알 수가 없다. 그러므로 여기서부터 적분인자에 대한 가정이 필요하며, 본 내용에서는 (1) 독립변수 $$x$$만으로 구성된 경우와 (2) 독립변수 $$y$$만으로 구성된 경우를 다룬다.
+
+1. 만일 독립변수 $$x$$만으로 구성된 경우...
+
+    $$
+    -Q\frac{\partial{\mu}}{\partial{x}} + \mu \left ( \frac{\partial{P}}{\partial{y}} - \frac{\partial{Q}}{\partial{x}} \right ) = 0
+    $$
+
+    $$
+    \quad \Rightarrow \frac{1}{\mu} \partial{\mu} = \frac{1}{Q}\left ( \frac{\partial{P}}{\partial{y}} -\frac{\partial{Q}}{\partial{x}} \right ) \partial{x} = R(x)\partial{x} \quad ... \mathrm{where} \ R(x) = \frac{1}{Q}\left ( \frac{\partial{P}}{\partial{y}} -\frac{\partial{Q}}{\partial{x}} \right )
+    $$
+
+    $$
+    \quad \Rightarrow \ln{\mu} = \int{R(x)dx}
+    $$
+
+    $$
+    \qquad \therefore \mu (x) = e^{\int{R(x)dx}}
+    $$
+
+    적분인자가 $$x$$에만 종속된다고 가정한 경우, 이에 대한 수식 또한 독립변수 $$x$$만을 가지는 것을 확인할 수 있다.
+
+2. 만일 독립변수 $$y$$만으로 구성된 경우, 위와 동일한 풀이 절차에 의하여 다음과 같은 식이 나온다.
+
+    $$
+    \qquad \therefore \mu (y) = e^{\int{R(y)dy}} \quad ... \mathrm{where} \ R(y) = \frac{1}{P}\left ( \frac{\partial{Q}}{\partial{x}} -\frac{\partial{P}}{\partial{y}} \right )
+    $$
+
+    적분인자가 $$y$$에만 종속된다고 가정한 경우, 이에 대한 수식 또한 독립변수 $$y$$만을 가지는 것을 확인할 수 있다.  
+
+위의 두 적분인자 가정을 두어 풀이한 과정을 통해서 알 수 있듯이, 어떠한 가정을 사용하여도 결국 섡덩한 가정을 기반으로 적절한 수식이 도출되기 떄문에 하나만을 선택하여 풀이를 진행해도 된다. 
+
+> 단, 풀이 과정 및 적분인자의 수식에서 어떠한 가정을 기반하였는지 분명히 명시해야 한다! 그 이유는 타 가정에서는 풀이 과정과 수식이 전혀 달라지기 때문이다.
 
 # 미분방정식: 선형미분방정식
+선형미분방정식(linear differential equation)은 가장 흔한 형태의 미분방정식이며 아래의 형태를 가진다.
+
+$$
+y^{(n)} + p_{(n-1)}(x)y^{(n-1)} + \cdots + p_{1}(x)y' + p_{0}(x)y = r(x)
+$$
+
+
+
+
+
 고등학교 물리학 중에서 [고전역학](https://en.wikipedia.org/wiki/Classical_mechanics) 내용을 바탕으로 한 아래의 간단한 몇 가지 예시를 통해 미분방정식 수립 방법을 다룬다.
 
 ### 예시 1. 평형상태 (1)
