@@ -959,3 +959,18 @@ $$
 $$
 \qquad \therefore y_p = C(\omega)\cos{(\omega t + \eta)} \quad ... \mathrm{where} \ C(x) = \sqrt{a^2 + b^2}, \ \tan{\eta} = \frac{b}{a}
 $$
+
+### 예제 6. 비감쇠강제진동
+이번 예제는 순수히 수학적으로 접근한다. 감쇠기의 영향이 없는 경우, 즉 감쇠계수 $$c=0$$일 떄를 살펴보는 것이다. 이전 예제에서 보여준 $$a$$와 $$b$$는 다음과 같이 변한다.
+
+$$
+\begin{cases}
+a = \frac{F_0}{m\omega_0^2-\omega^2} = \frac{F_0}{k\left[ 1-(\omega/\omega_0)^2 \right]}
+\\
+b = 0
+\end{cases}
+$$
+
+$$
+\qquad \therefore y_p = \frac{F_0}{k\left[ 1-(\omega/\omega_0)^2 \right]} \cos{\omega t}
+$$
