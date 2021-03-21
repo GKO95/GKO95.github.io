@@ -106,7 +106,6 @@ $$
 
 $$
 \begin{cases}
-\begin{align}
 
 u = \int{M(x,y)dx} = \frac{1}{4}x^4 + \frac{1}{2}x^2y^2 + c_x
 
@@ -114,7 +113,6 @@ u = \int{M(x,y)dx} = \frac{1}{4}x^4 + \frac{1}{2}x^2y^2 + c_x
 
 u = \int{N(x,y)dy} = \frac{1}{2}x^2y^2 + \frac{1}{4}y^4 + c_y
 
-\end{align}
 \end{cases}
 $$
 
