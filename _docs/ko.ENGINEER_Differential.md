@@ -1,7 +1,7 @@
 ---
 layout: docs
 language: ko
-category: 공학수학
+category: 미적분학
 title: 미분방정식
 meta: Differential
 mathjax: true
@@ -79,7 +79,7 @@ $$
 
 이를 충족시키지 못할 시, 해당 미분방정식은 완전미분방정식이 아니다.
 
-### 예제 1
+### 예제. 완전미분방정식
 다음과 같은 미분방정식이 주어졌다:
 
 $$
@@ -162,7 +162,7 @@ $$
     $$
 
     $$
-    \quad \Rightarrow \frac{1}{\mu} \partial{\mu} = \frac{1}{Q}\left ( \frac{\partial{P}}{\partial{y}} -\frac{\partial{Q}}{\partial{x}} \right ) \partial{x} = R(x)\partial{x} \quad ... \mathrm{where} \ R(x) = \frac{1}{Q}\left ( \frac{\partial{P}}{\partial{y}} -\frac{\partial{Q}}{\partial{x}} \right )
+    \quad \Rightarrow \frac{1}{\mu} \partial{\mu} = \frac{1}{Q}\left ( \frac{\partial{P}}{\partial{y}} -\frac{\partial{Q}}{\partial{x}} \right ) \partial{x} = R(x)\partial{x}
     $$
 
     $$
@@ -170,7 +170,7 @@ $$
     $$
 
     $$
-    \qquad \therefore \mu (x) = e^{\int{R(x)dx}}
+    \qquad \therefore \mu (x) = e^{\int{R(x)dx}} \quad ... \mathrm{where} \ R(x) = \frac{1}{Q}\left ( \frac{\partial{P}}{\partial{y}} -\frac{\partial{Q}}{\partial{x}} \right )
     $$
 
     적분인자가 $$x$$에만 종속된다고 가정한 경우, 이에 대한 수식 또한 독립변수 $$x$$만을 가지는 것을 확인할 수 있다.
@@ -194,13 +194,395 @@ $$
 y^{(n)} + p_{(n-1)}(x)y^{(n-1)} + \cdots + p_{1}(x)y' + p_{0}(x)y = r(x)
 $$
 
+여기서 $$r(x)$$의 값에 따라 동차와 비동차미분방정식으로 구분된다.
 
+* *동차 (homgeneous)*
+    : $$r(x) = 0$$
 
+* *비동차 (nonhomogeneous)*
+    : $$r(x) \neq 0$$
 
+동차 및 비동차는 미분방정식이 설명하는 시스템 현상에 유입되는 외부 영향력의 여부를 가리킨다. 간단한 예시로 공을 떨어트렸을 때 튀는 현상은 동차미분방정식이, 공을 손으로 튕겨 드리블을 하는 현상은 비동차미분방정식이 결과적으로 수립된다. 이는 차후 예제에서 미분방정식을 세우는 풀이 과정에서 직접 살펴볼 수 있다.
 
-고등학교 물리학 중에서 [고전역학](https://en.wikipedia.org/wiki/Classical_mechanics) 내용을 바탕으로 한 아래의 간단한 몇 가지 예시를 통해 미분방정식 수립 방법을 다룬다.
+## 선형계
+[선형계](https://en.wikipedia.org/wiki/Linear_system)(linear system)는 사칙연산 및 미적분과 같은 [선형 연산자](https://en.wikipedia.org/wiki/Linear_map)를 기반으로 구축된 수학적 모델 체계이다. 선형계는 항상 중첩원리를 충족하며, 선형미분방정식 또한 중첩원리가 적용된다.
+
+### 중첩원리
+[중첩원리](https://en.wikipedia.org/wiki/Superposition_principle)(superposition principle)란, 두 개 이상의 입력으로 발생한 응답은 각 입력으로 발생한 응답의 합과 동일하다. 이는 간략히 아래의 두 가지 핵심 성질로 나뉘어진다.
+
+* *가법성 (additivity)*
+    
+    $$
+    F(x_1 + x_2) = F(x_1) + F(x_2)
+    $$
+
+* *동차성 (homogeneity)*
+    
+    $$
+    F(ax) = aF(x)
+    $$
+
+> 즉, 미분방정식이 가지는 두 해($$y_1$$와 $$y_2$$)의 합 또한 해당 미분방정식의 해가 되기 때문에 아래의 성질을 만족한다.
+> 
+> $$
+> y = c_1y_1(x) + c_2y_2(x)
+> $$
+
+## 일계선형미분방정식
+일계선형미분방정식(1st order of linear differential equation)은 1계도함수가 최고계인 가장 간단한 형태의 선형미분방정식이다.
+
+$$
+y' + p(x)y = q(x)
+$$
+
+### 동차미분방정식
+일계선형동차미분방정식은 변수분리 미분방정식(separable differential equation)의 풀이 접근법을 그대로 사용하여 해를 구할 수 있다.
+
+$$
+y' + p(x)y = 0
+$$
+
+$$
+\quad \Rightarrow 
+\frac{1}{y}dy = -p(x)dx
+$$
+
+$$
+\quad \Rightarrow 
+\ln{y} = -\int{p(x)dx} + c_1
+$$
+
+$$
+\quad \Rightarrow 
+y = e^{-\int{p(x)dx} + c_1} = e^{-\int{p(x)dx}} \times e^{c_1}
+$$
+
+그러므로 해당 미분방정식은 다음과 같은 일반해를 가진다.
+
+$$
+\qquad \therefore y(x) = ce^{-\int{p(x)dx}} \quad ... \mathrm{where} \ c = e^{c_1}
+$$
+
+### 비동차미분방정식
+일계선형비동차미분방정식은 완전미분방정식의 풀이 접근법을 그대로 사용하여 해를 구할 수 있다.
+
+$$
+y' + p(x)y = q(x)
+$$
+
+그 전에 해당 미분방정식이 완전한지 확인하기 위해 완전미분방정식의 필요충분조건을 충족하는지 우선 살펴본다. 결과적으로 
+
+$$
+P(x,y)dx + Q(x,y)dy 
+$$
+
+$$
+\quad = \left \{ p(x)y - q(x) \right \} dx + \left \{ 1 \right \} dy = 0
+$$
+
+$$
+\quad \Rightarrow \frac{\partial{\left \{ p(x)y - q(x) \right \}}}{\partial{y}} = \frac{\partial{1}}{\partial{x}}
+$$
+
+$$
+\qquad \therefore p(x) = 0
+$$
+
+이를 통해 어떠한 1계선형비동차미분방정식이든 적분인자 없이 완전미분방정식이 되려면 $$p(x)=0$$만이 유일하다는 것을 알아볼 수 있다. 그렇지 아니하면 적분인자를 구할 수 밖에 없다. 적분인자 $$\mu$$가 독립변수 $$x$$에만 의존한다고 가정한다.
+
+$$
+R(x) = \frac{1}{Q}\left ( \frac{\partial{P}}{\partial{y}} -\frac{\partial{Q}}{\partial{x}} \right )
+$$
+
+$$
+\quad = \frac{\partial}{\partial{y}} \biggl ( p(x)y - q(x) \biggr ) = p(x)
+$$
+
+$$
+\qquad \therefore \mu (x) = e^{h} = e^{\int{R(x)dx}} = e^{\int{p(x)dx}}
+$$
+
+해당 적분인자로 완전미분방정식을 만들어 구한 일반해는 다음과 같다.
+
+$$
+y(x) = e^{-h} \left \{ \int{e^h q(x)dx + c} \right \} \quad ... \mathrm{where} \ h = \int{p(x)dx}
+$$
+
+> 위의 공식 이외에도, 아래의 중첩원리로 비동차미분방정식의 일반해를 구할 수도 있다.
+> 
+> : *비동차미분방정식 일반해 ($$y$$) $$=$$ 동차미분방정식 일반해 ($$y_{\mathrm{c}}$$) $$+$$ 비동차미분방정식 특수해 ($$y_{\mathrm{p}}$$)*
+>
+> 아래는 해당 성질에 대한 증명이다:
+>
+> $$
+> y' + p(x)y = q(x) 
+> $$
+> 
+> $$
+> \quad \Rightarrow (y_{\mathrm{c}} + y_{\mathrm{p}})' + p(x)(y_{\mathrm{c}} + y_{\mathrm> {p}})
+> $$
+> 
+> $$
+> \qquad = \{y_{\mathrm{c}}' + p(x)y_{\mathrm{c}}\} + \{y_{\mathrm{p}}' + p(x)y_{\mathrm> {p}}\}
+> $$
+> 
+> $$
+> \qquad = \{\mathrm{Homogeneous}\} + \{\mathrm{Nonhomogeneous}\}
+> $$
+> 
+> $$
+> \qquad = \{0\} + \{q(x)\}
+> $$
+> 
+> $$
+> \qquad = q(x)
+> $$
+
+### 미정계수법
+미정계수법(method of undetermined coefficient)은 $$q(x)$$가 무엇이냐에 따라 비동차미분방정식 특수해를 가정한다. 미분방정식의 특수해가 대체적으로 이러한 패턴에 부합하기 때문에 가정법으로 풀이가 가능한 것이다. 그리고 비동차미분방정식의 특수해와 동차미분방정식의 일반해를 통해 최종적으로 비동차미분방정식의 일반해를 구한다.
+
+다음과 같은 1계선형비동차미분방정식을 예로 들어보자:
+
+$$
+y'+2y = e^{3x}
+$$
+
+1. 해당 미분방정식의 동차일반해는 $$q(x)$$가 위치한 우변을 $$0$$으로 설정하여 구할 수 있다.
+
+    $$
+    y_c'+2y_c = 0
+    $$
+    
+    $$
+    \quad \Rightarrow y_c = ce^{-2x}
+    $$
+
+2. 해당 미분방정식의 비동차특수해는 $$q(x)$$가 어떠한 형태를 띄는지에 따라 결정된다. 
+
+    $$
+    q(x) = e^{3x} \ \rightarrow \ y_p = \alpha e^{3x}
+    $$
+
+    비동차특수해를 미분방정식에 대입하여 $$\alpha$$ 값을 계산한다.
+
+    $$
+    y_p' + 2y_p = 3\alpha e^{3x} + 2\alpha e^{3x} = e^{3x}
+    $$
+
+    $$
+    \quad \Rightarrow y_p = \frac{1}{5}e^{3x} \quad ... \mathrm{as} \ \alpha = \frac{1}{5}
+    $$
+
+위에서 구한 동차일반해와 비동차특수해의 합으로 비동차일반해를 구한다.
+
+$$
+\qquad \therefore y = y_c + y_p = \frac{1}{5}e^{3x} + ce^{-2x}
+$$
+
+### 매개변수변환법
+매개변수변화법(variation of parameters)은 비동차미분방정식 특수해를 동차미분방정식의 일반해에 적분인자를 곱하여 구한다. 그리고 비동차미분방정식의 특수해와 동차미분방정식의 일반해를 통해 최종적으로 비동차미분방정식의 일반해를 구한다.
+
+다음과 같은 1계선형비동차미분방정식을 예로 들어보자:
+
+$$
+y'+2y = e^{3x}
+$$
+
+1. 해당 미분방정식의 동차일반해는 $$q(x)$$가 위치한 우변을 $$0$$으로 설정하여 구할 수 있다.
+
+    $$
+    y_c'+2y_c = 0
+    $$
+    
+    $$
+    \quad \Rightarrow y_c = ce^{-2x}
+    $$
+
+2. 해당 미분방정식의 비동차특수해는 동차일반해에 적분인자를 곱한 $$y_p = \mu (x) y_c$$라고 가정한다.
+
+    $$
+    y_p = \mu (x) \bigl ( ce^{-2x} \bigr )
+    $$
+    
+    $$
+    \quad = \mu (x) \bigl ( e^{-2x} \bigr )
+    $$
+
+    $$
+    \quad = \mu(x) y_1 \quad ... \mathrm{where} \ y_1 = e^{-2x}
+    $$
+
+    비동차특수해를 미분방정식에 대입하여 적분인자를 계산한다.
+
+    $$
+    y_p' + 2y_p = \mu'(x)y_1 + \mu(x)\bigl(y_1'+2y_1\bigr)
+    $$
+
+    $$
+    \quad = \mu'(x)y_1 + \mu(x)\bigl(0\bigr)
+    $$
+
+    $$
+    \quad = \mu'(x)y_1 = e^{3x}
+    $$
+
+    $$
+    \quad \Rightarrow d \mu(x) = \frac{e^{3x}}{y_1}dx = e^{5x}dx
+    $$
+
+    $$
+    \quad \Rightarrow \mu(x) = \int{e^{5x}dx} = \frac{1}{5}e^{5x}
+    $$
+
+    $$
+    \qquad \therefore y_p = \frac{1}{5}e^{3x}
+    $$
+
+위에서 구한 동차일반해와 비동차특수해의 합으로 비동차일반해를 구한다.
+
+$$
+\qquad \therefore y = y_c + y_p = \frac{1}{5}e^{3x} + ce^{-2x}
+$$
+
+## 고계선형미분방정식
+고계선형미분방정식(higher order of linear differential equation)은 $$n$$계도함수가 최고계인 선형미분방정식이다.
+
+일계선형미분방정식이 계수 1에 하나의 해를 가진 듯이, 고계선형미분방정식은 계수 $$n$$만큼의 해를 갖는다. 이는 $$n$$ 개의 초기조건 $$y(a) = \alpha$$, $$y'(b) = \beta$$, ..., $$y^{(n)}(c)=\gamma$$이 주어질 때 모두 충족할 수 있어야 하기 때문이다. 아래는 $$n$$계선형미분방정식의 일반해 형식이다.
+
+$$
+y = c_1y_1(x) + c_2y_2(x) + \cdots + c_ny_n(x)
+$$
+
+일반해를 구성하는 $$y_1$$, $$y_2$$, ..., $$y_n$$들은 기저해(fundamental solution)라고 하며, 이들은 서로 선형독립이어야 한다. 즉, 각 기저해는 서로 다른 기저해를 표현하지 못해야 한다. 만일 $$y_2 = ay_1$$로 나타낼 수 있다면 실로 $$n$$ 개보다 적은 해밖에 구할 수 없다.
+
+> 벡터공간과 비교하면 기저해를 좌표계의 $$x$$, $$y$$, 그리고 $$z$$ 축에 놓인 단위벡터(unit vector) $$\hat{\mathbf{i}}$$, $$\hat{\mathbf{j}}$$, $$\hat{\mathbf{k}}$$로 볼 수 있다. 이들은 수직 방향을 가리키기 때문에 서로를 절대 서로를 표현할 수 없는 선형독립이다. 
+
+### 론스키언
+[론스키언](https://en.wikipedia.org/wiki/Wronskian)(Wronskian), 일명 론스키 행렬식(Wronski determinant)은 미분방정식의 기저해들간의 선형독립이 이루어져 있는지를 판별하는 행렬식이다. 기저해들이 선형독립인 경우 론스키언은 다음을 만족한다.
+
+$$
+W(y_1, y_2) =
+\begin{vmatrix}
+y_1  & y_2  \\
+y_1' & y_2' \\
+\end{vmatrix}
+=y_1y_2' - y_2y_1' \neq 0
+$$
+
+### 계수축소법
+고계선형미분방정식은 계수축소법(reduction of order)을 사용하여 해를 찾을 수 있다. 해당 미분방정식의 한 해를 알고 있을 시, 그 해와 선형독립인 또다른 해를 구하는 방법이다.
+
+### 동차미분방정식
+만일 선형미분방정식이 상수계수만을 가질 경우, 해당 미분방정식의 특성을 나타내는 특성방정식(characteristic equation)을 다음과 같이 유도할 수 있다.
+
+$$
+a_ny^{(n)} + a_{n-1}y^{(n-1)} + \cdots + a_{1}y' + a_{0}y = 0
+$$
+
+$$
+\quad \Rightarrow a_n\lambda^{n} + a_{n-1}\lambda^{n-1} + \cdots + a_{1}\lambda + a_{0} = 0
+$$
+
+> 상수계수 일계선형미분방정식 $$y' + ky = 0$$은 아래의 일반해를 가진다.
+> 
+> $$
+> y = c_0e^{-kx}
+> $$
+>
+> 중첩원리로 인해 상수계수 고계선형미분방정식은 위와 같은 일계선형미분방정식 해를 기저해로 갖는 일반해를 갖는다. 이러한 점을 이용하여 $$y = e^{\lambda x}$$ 형태의 기저해를 갖는다고 할 수 있다. 이를 미분방정식에 대입하면 다음 식이 유도된다.
+>
+> $$
+> a_n(e^{\lambda x})^{(n)} + a_{n-1}(e^{\lambda x})^{(n-1)} + \cdots + a_{1}(e^{\lambda x})' + a_{0}(e^{\lambda x})
+> $$
+>
+> $$
+> \quad = e^{\lambda x} \bigl ( a_n\lambda^{n} + a_{n-1}\lambda^{n-1} + \cdots + a_1\lambda + a_0 \bigr ) = 0
+> $$
+>
+> 함수 $$y=e^{\lambda x}$$는 지수성질로 인해 절대 $$0$$이 될 수 없으므로, 위의 수식이 참이 되기 위해서는 아래의 식을 만족해야 한다.
+>
+> $$
+> \qquad \therefore a_n\lambda^{n} + a_{n-1}\lambda^{n-1} + \cdots + a_1\lambda + a_0 = 0
+> $$
+
+특성방정식은 일반 대수방정식의 형태를 띄고 있어 $$\lambda$$를 $$n$$차 방정식의 근을 구하는 접근법을 그대로 적용할 수 있다. 그러므로 (1) 서로 다른 실근, (2) 중근, 그리고 (3) 복소근을 가지는 경우에 대하여 논할 필요가 있다.
+
+1. 서로 다른 실근
+    
+    특성방정식이 서로 다른 실근인 $$\lambda_1$$, $$\lambda_2$$, ..., $$\lambda_n$$을 가질 시, 해당 미분방정식의 기저해는 다음과 같다.
+
+    $$
+    \qquad \therefore y_1 = e^{\lambda_1x}, \ y_2 = e^{\lambda_2x}, \ \cdots, \ y_n = e^{\lambda_nx}
+    $$
+
+2. 중근
+    
+    특성방정식이 중근을 가질 시, $$y_1 = y_2 = e^{\lambda_1x}$$와 같은 기저해로 인해 선형독립을 충족하지 않는다. 이러한 문제를 방지하기 위해 적분인자를 곱한 $$y_2 = \mu(x) y_1$$로 기저해를 구별한다. 이를 미분방정식에 대입하면 다음 수식이 나온다.
+
+    $$
+    a_ny_2^{(n)} + a_{n-1}y_2^{(n-1)} + \cdots + a_{1}y_2' + a_{0}y_2 = 0
+    $$
+
+    $$
+    \quad \Rightarrow \bigl ( a_ny_1 \bigr) \mu^{(n)}(x) = 0
+    $$
+
+    $$
+    \qquad \therefore \mu(x) = k_nx^n + k_{n-1}x^{n-1} + \cdots + k_1x+k_0
+    $$
+
+    여기에서 가장 간단하면서 선형독립을 만족시키는 수식은 $$k_1 = 1$$ 그리고 나머지 $$k_0 = k_2 = \cdots = k_n = 0$$일 때, 즉 $$\mu(x) = x$$로 $$y_2=xe^{\lambda_1x}$$가 된다. 만일 중근이 두 개가 아닌 세 개일 경우에는 차수만 하나 늘린 $$y_3 = \mu y_2 = \mu \bigl( \mu y_1 \bigr) = x^2e^{\lambda_1x}$$가 된다.
+
+3. 복소근
+    
+    특성방정식이 복소근 $$\lambda_1 = \alpha+\beta i$$와 $$\lambda_2 = \alpha-\beta i$$를 가질 시, 오일러 법칙에 의해 아래와 같이 표기될 수 있다.
+
+    $$
+    \qquad \therefore y = e^{(\alpha \pm \beta i)x} = e^\alpha(\cos{\beta x} \pm i\sin{\beta x})
+    $$
+
+여기서 특성방정식의 $$\lambda = \alpha \pm \beta + i$$를 $$s = \sigma \pm j\omega$$로 표기를 대체하여 계산하는 것이 바로 [라플라스 변환](../ko.ENGINEER_TransformL/)의 시작이다.
+
+### 비동차미분방정식
+다음은 고계선형비동차미분방정식이다.
+
+$$
+y^{(n)} + p_{n-1}y^{(n-1)} + \cdots + p_{1}y' + p_{0}y = r(x)
+$$
+
+고계선형비동차미분방정식에서고 일계선형미분방정식에서 사용한 중첩원리, 즉 선형미분동차방정식 일반해와 선형미분비동차방정식 특수해의 합으로 선형미분비동차방정식 일반해를 구할 수 있다.
+
+> 위의 공식 이외에도, 아래의 접근법으    로 비동차미분방정식의 일반해를 구할 수도 있다.
+> 
+> : *비동차미분방정식 일반해 ($$y$$) $$=$$ 비동차미분방정식 일반해 혹은 특수해 ($$y_{\mathrm{2}}$$) $$-$$ 비동차미분방정식 일반해 혹은 특수해 ($$y_{\mathrm{1}}$$)*
+>
+> 아래는 해당 성질에 대한 증명이다:
+>
+> $$
+> \begin{cases}
+> y_1''+py_1'+qy_1 = r \\
+> y_2''+py_2'+qy_2 = r
+> \end{cases}
+> $$
+> 
+> 여기서 $$y = y_2 - y_1$$를 미분방정식에 대입한다.
+>
+> $$
+> (y_2 - y_1)''+p(y_2 - y_1)'+q(y_2 - y_1)
+> $$
+> 
+> $$
+> \quad = (y_2''+py_2'+qy_2) - (y_1''+py_1'+qy_1) = r - r = 0
+> $$
+
+# 미분방정식: 응용
+
+## 고전역학
 
 ### 예시 1. 평형상태 (1)
+고등학교 물리학 중에서 [고전역학](https://en.wikipedia.org/wiki/Classical_mechanics) 내용을 바탕으로 한 아래의 간단한 몇 가지 예시를 통해 미분방정식 수립 방법을 다룬다.
+
+
 아래의 그림은 천장에 달린 용수철에 물체가 매달려 가만히 있는 그림이다.
 
 ![천장에 달린 용수철에 매달린 물체](/images/docs/engineering/differential_equilibrium1.png)
@@ -446,25 +828,5 @@ $$
 \qquad \therefore my'' + cy' + ky = F_0\cos{\omega t}
 $$
 
-
-
-
-미분방정식이 아닌 *예시 1. 평형상태 (1)*를 제외한 나머지 예시에서 이들의 해를 이번 장에서 구해본다.
-
-### 예시 2. 평형상태 (2)
-
-### 예시 3. 자유진동
-
-### 예제 4. 감쇠자유진동
-
-### 예제 5. 감쇠강제진동
-
-### 라플라스 변환
-> 라플라스 변환에 대한 문서는 [*여기*](../ko.ENGINEER_TransformL/)에서 참고한다.
-
-# 미분방정식: 응용
+## 전자기학
 이전까지 본 문서는 고전역학으로 미분방정식을 설명하였다. 그러나 미분방정식은 그 외의 많은 분야에도 활용되고 있으며, 전자공학과에서는 가장 대표적인 RLC 회로가 있다. 이번 장에서는 전기전자 분야에서 미분방정식이 어떻게 사용되는지 보여준다.
-
-## RLC 회로
-
-### 방정식 수립
