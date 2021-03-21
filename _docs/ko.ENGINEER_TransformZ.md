@@ -1,7 +1,7 @@
 ---
 layout: docs
 language: ko
-category: 공학수학
+category: 미적분학
 title: Z 변환
 meta: ZTransform
 mathjax: true
