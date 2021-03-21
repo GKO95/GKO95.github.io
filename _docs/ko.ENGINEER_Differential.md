@@ -23,7 +23,7 @@ order: 0xE0
     $$
 
 * *편미분방정식 (partial differential equation; PDE)*
-    : 두 개 이상의 독립변수에 의한 도함수를 가지는 미분방정식이다.
+    : 두 개 이상의 독립변수($$x$$, $$y$$)에 의한 종속변수($$u$$) 도함수를 가지는 미분방정식이다.
   
     $$
     \frac{du}{dx} + 4\frac{du}{dxdy} + 5x\frac{du}{dy} = 0 \quad ...\mathrm{where} \ u = f(x, y)
@@ -51,7 +51,7 @@ order: 0xE0
 미분방정식에는 두 가지 종류의 해가 존재한다.
 
 * *일반해 (general solution)*
-    : 미분방정식의 현상을 설명하는 가장 일반적이로 포괄적인 해이다.
+    : 미분방정식의 현상을 설명하는 가장 일반적이고 포괄적인 해이다.
   
     $$
     y = ce^{\kappa t}
@@ -203,7 +203,7 @@ $$
 동차 및 비동차는 미분방정식이 설명하는 시스템 현상에 유입되는 외부 영향력의 여부를 가리킨다. 간단한 예시로 공을 떨어트렸을 때 튀는 현상은 동차미분방정식이, 공을 손으로 튕겨 드리블을 하는 현상은 비동차미분방정식이 결과적으로 수립된다. 이는 차후 예제에서 미분방정식을 세우는 풀이 과정에서 직접 살펴볼 수 있다.
 
 ## 선형계
-[선형계](https://en.wikipedia.org/wiki/Linear_system)(linear system)는 사칙연산 및 미적분과 같은 [선형 연산자](https://en.wikipedia.org/wiki/Linear_map)를 기반으로 구축된 수학적 모델 체계이다. 선형계는 항상 중첩원리를 충족하며, 선형미분방정식 또한 중첩원리가 적용된다.
+[선형계](https://en.wikipedia.org/wiki/Linear_system)(linear system)는 사칙연산 및 미적분과 같은 [선형 연산자](https://en.wikipedia.org/wiki/Linear_map)를 기반으로 구축된 수학적 모델 체계이다. 선형계는 반드시 중첩원리를 충족하기 때문에 선형미분방정식 또한 중첩원리가 적용된다.
 
 ### 중첩원리
 [중첩원리](https://en.wikipedia.org/wiki/Superposition_principle)(superposition principle)란, 두 개 이상의 입력으로 발생한 응답은 각 입력으로 발생한 응답의 합과 동일하다. 이는 간략히 아래의 두 가지 핵심 성질로 나뉘어진다.
@@ -451,7 +451,7 @@ $$
 y = c_1y_1(x) + c_2y_2(x) + \cdots + c_ny_n(x)
 $$
 
-일반해를 구성하는 $$y_1$$, $$y_2$$, ..., $$y_n$$들은 기저해(fundamental solution)라고 하며, 이들은 서로 선형독립이어야 한다. 즉, 각 기저해는 서로 다른 기저해를 표현하지 못해야 한다. 만일 $$y_2 = ay_1$$로 나타낼 수 있다면 실로 $$n$$ 개보다 적은 해밖에 구할 수 없다.
+일반해를 구성하는 $$y_1$$, $$y_2$$, ..., $$y_n$$들은 기저해(fundamental solution)라고 하며, 이들은 서로 [선형독립](https://en.wikipedia.org/wiki/Linear_independence)이어야 한다. 즉, 각 기저해는 서로 다른 기저해를 표현하지 못해야 한다. 만일 $$y_2 = ay_1$$로 나타낼 수 있다면 실로 $$n$$ 개보다 적은 해밖에 구할 수 없다.
 
 > 벡터공간과 비교하면 기저해를 좌표계의 $$x$$, $$y$$, 그리고 $$z$$ 축에 놓인 단위벡터(unit vector) $$\hat{\mathbf{i}}$$, $$\hat{\mathbf{j}}$$, $$\hat{\mathbf{k}}$$로 볼 수 있다. 이들은 수직 방향을 가리키기 때문에 서로를 절대 서로를 표현할 수 없는 선형독립이다. 
 
@@ -465,51 +465,6 @@ y_1  & y_2  \\
 y_1' & y_2' \\
 \end{vmatrix}
 =y_1y_2' - y_2y_1' \neq 0
-$$
-
-### 계수축소법
-고계선형동차미분방정식은 계수축소법(reduction of order)을 사용하여 해를 찾을 수 있다. 해당 미분방정식의 한 해를 알고 있을 시, 그 해와 선형독립인 또다른 해를 구하는 방법이다.
-
-다음과 같은 선형동차미분방정식을 예로 들어보자:
-
-$$
-y''+p(x)y' q(x)y = 0
-$$
-
-그리고 해당 미분방정식을 만족하는 해 $$y_1$$을 알고 있다고 하면, 나머지 $$y_2 = \mu(x)y_1$$도 만족할 수 있도록 하는 적분인자를 구해야 한다. $$y_2$$를 미분방정식에 대입한다.
-
-$$
-y_2'' + p(x)y_2' + q(x)y_2
-$$
-
-$$
-\quad = \bigl\{ y_1'' + p(x)y_1' + q(x)y_1 \bigr\}\mu(x) + \bigl\{ 2y_1' + p(x)y_1 \bigr\}\mu'(x) + y_1 \mu''(x)
-$$
-
-$$
-\quad = \bigl\{ 2y_1' + p(x)y_1 \bigr\}\mu'(x) + y_1 \mu''(x) = 0 \quad ... \mathrm{where} \ y_1'' + p(x)y_1' + q(x)y_1 = 0
-$$
-
-여기서 $$U(x) = \mu'(x)$$로 계수를 한 단계 낮추어 치환하여 계산하기 때문에 "계수축소법"이라고 부른다.
-
-$$
-U'(x) + \left\{ 2\frac{y_1'}{y_1} + p(x) \right\}U(x) = 0
-$$
-
-이를 기반으로 미분방정식 풀이를 진행하면 결과적으로 다음 수식이 도출된다 ($$c$$와 $$k$$는 적분상수이다).
-
-$$
-\mu(x) = \int{c\left\{ (y^{-2}_1)e^{-\int{p(x)dx}}\right\}dx} + k
-$$
-
-$$
-\quad \Rightarrow y_2 = \mu(x)y_1 = cy_1\int{\left\{ (y^{-2}_1)e^{-\int{p(x)dx}} \right\}dx} + ky_1
-$$
-
-그러나 $$ky_1$$으로 인해 기저해 $$y_1$$와 선형독립이 이루어지지 않기 때문에 $$k=0$$으로 설정한다.
-
-$$
-\qquad \therefore \mu(x) = \int{c\left\{ (y^{-2}_1)e^{-\int{p(x)dx}}\right\}dx}
 $$
 
 ### 동차미분방정식
@@ -614,6 +569,51 @@ $$
 > $$
 > \quad = (y_2''+py_2'+qy_2) - (y_1''+py_1'+qy_1) = r - r = 0
 > $$
+
+### 계수축소법
+고계선형미분방정식은 계수축소법(reduction of order)을 사용하여 해를 찾을 수 있다. 해당 미분방정식의 한 해를 알고 있을 시, 그 해와 선형독립인 또다른 해를 구하는 방법이다.
+
+다음과 같은 선형동차미분방정식을 예로 들어보자:
+
+$$
+y''+p(x)y' q(x)y = 0
+$$
+
+그리고 해당 미분방정식을 만족하는 해 $$y_1$$을 알고 있다고 하면, 나머지 $$y_2 = \mu(x)y_1$$도 만족할 수 있도록 하는 적분인자를 구해야 한다. $$y_2$$를 미분방정식에 대입한다.
+
+$$
+y_2'' + p(x)y_2' + q(x)y_2
+$$
+
+$$
+\quad = \bigl\{ y_1'' + p(x)y_1' + q(x)y_1 \bigr\}\mu(x) + \bigl\{ 2y_1' + p(x)y_1 \bigr\}\mu'(x) + y_1 \mu''(x)
+$$
+
+$$
+\quad = \bigl\{ 2y_1' + p(x)y_1 \bigr\}\mu'(x) + y_1 \mu''(x) = 0 \quad ... \mathrm{where} \ y_1'' + p(x)y_1' + q(x)y_1 = 0
+$$
+
+여기서 $$U(x) = \mu'(x)$$로 계수를 한 단계 낮추어 치환하여 계산하기 때문에 "계수축소법"이라고 부른다.
+
+$$
+U'(x) + \left\{ 2\frac{y_1'}{y_1} + p(x) \right\}U(x) = 0
+$$
+
+이를 기반으로 미분방정식 풀이를 진행하면 결과적으로 다음 수식이 도출된다 ($$c$$와 $$k$$는 적분상수이다).
+
+$$
+\mu(x) = \int{c\left\{ (y^{-2}_1)e^{-\int{p(x)dx}}\right\}dx} + k
+$$
+
+$$
+\quad \Rightarrow y_2 = \mu(x)y_1 = cy_1\int{\left\{ (y^{-2}_1)e^{-\int{p(x)dx}} \right\}dx} + ky_1
+$$
+
+그러나 $$ky_1$$으로 인해 기저해 $$y_1$$와 선형독립이 이루어지지 않기 때문에 $$k=0$$으로 설정한다.
+
+$$
+\qquad \therefore \mu(x) = \int{c\left\{ (y^{-2}_1)e^{-\int{p(x)dx}}\right\}dx}
+$$
 
 # 미분방정식: 응용
 
@@ -752,7 +752,21 @@ $$
 \qquad \therefore my'' + ky = 0
 $$
 
-물체는 외부로부터 영향을 받지 않는 이상 이론적으로 영원히 자유진동(free oscillation) 운동을 한다.
+물체는 외부로부터 영향을 받지 않는 이상 이론적으로 영원히 자유진동(free oscillation) 운동을 한다. 본 미분방정식은 상수계수 이계선형동차미분방정식으로 특성방정식의 고유값 $$\lambda$$를 구한다.
+
+$$
+m\lambda^2 + k = 0
+$$
+
+$$
+\quad \Rightarrow \lambda = \pm \sqrt{\frac{k}{m}}i
+$$
+
+그러므로 자유진동이 가지는 일반해는 다음과 같다.
+
+$$
+\qquad \therefore y = c_1e^{+i\omega} + c_2e^{-i\omega} \quad ... \mathrm{where} \ \omega = \sqrt{\frac{k}{m}}
+$$
 
 ### 예제 4. 감쇠자유진동
 아래의 그림은 천장에 달린 용수철과 감쇠기에 물체가 매달려 가만히 있는 그림이다. 이번 예시에서도 아래로 향하는 방향을 양($$+$$)의 방향으로 잡았으며, 반대로 위로 향하는 방향을 음($$-$$)의 방향으로 설정하였다.
@@ -808,6 +822,39 @@ $$
 $$
 \qquad \therefore my'' + cy' + ky = 0
 $$
+
+본 미분방정식의 특성방정식으로부터 계산한 고유값 $$\lambda$$는 아래의 절차를 걸쳐 다음과 같이 계산된다.
+
+$$
+m\lambda^2 + c\lambda + k = 0
+$$
+
+$$
+\quad \Rightarrow \lambda = \frac{-c}{2m} \pm \frac{\sqrt{c^2-4km}}{2m}
+$$
+
+여기서 $$c^2-4km$$의 값에 따라 실근, 중근, 혹은 복수근인지 결정되는데, 이들이 갖는 의미를 하나씩 살펴볼 필요가 있다.
+
+* *과도감쇠 (overdamped)*:
+    : 진동없이 서서히 평형상태로 진입한다.
+
+    $$
+    c^2-4km > 0
+    $$
+
+* *임계감쇠 (critically damped)*:
+    : 진동상태와 비진동상태의 중간지점으로, 가장 빨리 평형상태로 되돌아간다.
+
+    $$
+    c^2-4km = 0
+    $$
+
+* *과소감쇠 (critically damped)*
+    : 진동을 하면서 서서히 평형상태로 진입한다.
+
+    $$
+    c^2-4km < 0
+    $$
 
 ### 예제 5. 감쇠강제진동
 아래의 그림은 천장에 달린 용수철과 감쇠기에 메달려 자유진동하는 물체에 주기적인 외력을 가하는 그림이다. 이번 예시에서도 아래로 향하는 방향을 양($$+$$)의 방향으로 잡았으며, 반대로 위로 향하는 방향을 음($$-$$)의 방향으로 설정하였다.
@@ -868,5 +915,47 @@ $$
 \qquad \therefore my'' + cy' + ky = F_0\cos{\omega t}
 $$
 
-## 전자기학
-이전까지 본 문서는 고전역학으로 미분방정식을 설명하였다. 그러나 미분방정식은 그 외의 많은 분야에도 활용되고 있으며, 전자공학과에서는 가장 대표적인 RLC 회로가 있다. 이번 장에서는 전기전자 분야에서 미분방정식이 어떻게 사용되는지 보여준다.
+본 미분방정식은 상수계수 이계선형비동차미분방정식으로, 일반해를 구하기 위해 우선 동차일반해와 비동차특수해를 알아본다. 동차일반해는 이전 *예제 4. 감쇠자유진동*을 참조한다. 비동차특수해를 구하는데 본 내용에서는 미정계수법을 사용한다.
+
+$$
+r(t) = F_0\cos{\omega t} \ \rightarrow \ y_p = a\cos{\omega t} + b\sin{\omega t}
+$$
+
+이를 미분방정식에 대입하고 론스키언의 선형독립 필요조건을 통해 특수해의 계수 $$a$$와 $$b$$를 알아낼 수 있다.
+
+$$
+\left[ (k-m\omega^2)a+\omega cb \right]\cos{\omega t} + \left[ -\omega ca + (k-m\omega^2)b \right] \sin{\omega t} = F_0\cos{\omega t}
+$$
+
+$$
+\quad \Rightarrow
+\begin{bmatrix}
+
+k-m\omega^2 & \omega c \\
+-\omega c & k-m\omega^2
+
+\end{bmatrix}
+\begin{bmatrix}
+a \\
+b
+\end{bmatrix}
+=
+\begin{bmatrix}
+F_0 \\
+0
+\end{bmatrix}
+$$
+
+여기서 고유진동수(natural frequency)가 $$\omega_0 = \sqrt{\frac{k}{m}}$$임을 고려하여, $$k=m\omega^2_0$$로 행렬식을 달리 표현할 수 있다. 결과적으로 론스키언을 통해 각 계수가 도출된다.
+
+$$
+\begin{cases}
+a = F_0\frac{m(\omega_0^2 - \omega^2)}{m^2(\omega^2_0-\omega)^2+\omega^2c^2}
+\\
+b = F_0\frac{\omega c}{m^2(\omega^2_0-\omega)^2+\omega^2c^2}
+\end{cases}
+$$
+
+$$
+\qquad \therefore y_p = C(\omega)\cos{(\omega t + \eta)} \quad ... \mathrm{where} \ C(x) = \sqrt{a^2 + b^2}, \ \tan{\eta} = \frac{b}{a}
+$$
