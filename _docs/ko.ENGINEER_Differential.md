@@ -536,8 +536,6 @@ $$
     \qquad \therefore y = e^{(\alpha \pm \beta i)x} = e^\alpha(\cos{\beta x} \pm i\sin{\beta x})
     $$
 
-여기서 특성방정식의 $$\lambda = \alpha \pm \beta + i$$를 $$s = \sigma \pm j\omega$$로 표기를 대체하여 계산하는 것이 바로 [라플라스 변환](../ko.ENGINEER_TransformL/)의 시작이다.
-
 ### 비동차미분방정식
 다음은 고계선형비동차미분방정식이다.
 
