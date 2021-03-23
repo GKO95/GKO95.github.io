@@ -29,16 +29,41 @@ $$
 
 라플라스 변환은 선형계 분석에 있어 매우 유용한 성질들을 가지고 있으며, 그 중에서도 시간에 대한 미분과 적분이 각각 라플라스 변수 $$s$$의 곱셈과 나눗셈으로 표현하여, 미분방정식을 대수방정식으로 변환시키는 강력한 장점을 지닌다. 그 외에도 라플라스 변환은 아래의 성질을 가지고 있다:
 
-| 함수 | 시간 영역 $$f(t)$$  | $$s$$-영역 $$F(s)$$  |
-|:--:|:----------:|:------------:|
-| [선형성](https://en.wikipedia.org/wiki/Linearity) | $$af(t) + bg(t)$$ | $$aF(s)+bG(s)$$ | 
-| [미분](https://en.wikipedia.org/wiki/Derivative) | $$\begin{align}f^{(n)}(t)\end{align}$$ | $$\begin{align} s^nF(s) - s^{n-1}f(0) - s^{n-2}f'(0) - \cdots - f^{(n-1)}(0) \end{align}$$ |
-| [적분](https://en.wikipedia.org/wiki/Derivative)  | $$\begin{align}\int^t_0{f(\tau)d\tau}\end{align}$$  | $$\begin{align}\frac{1}{s}F(s)\end{align}$$  |
+* *[선형성](https://en.wikipedia.org/wiki/Linearity) (Linearity)*
+    : 선형 연산자인 적분을 사용하는 라플라스 변환 또한 선형성을 지닌다.
+
+    $$
+    af(t) + bg(t) \quad \Longleftrightarrow \quad aF(s)+bG(s)
+    $$
+
+    > $$
+    > \mathcal{L}\left\{ af(t) + bg(t) \right\} = \int^{\infty}_{0^-}\left\{ af(t) + bg(t) \right\} e^{-st}dt
+    > $$
+
+
+* *[미분](https://en.wikipedia.org/wiki/Derivative) (Derivative)*
+    : ...
+
+    $$
+    f^{(n)}(t) \quad \Longleftrightarrow \quad s^nF(s) - \sum^n_{k=1}{s^{n-k}f^{(k-1)}(0^-)}
+    $$
+
+* *[적분](https://en.wikipedia.org/wiki/Integral) (Integral)*
+    : ...
+
+    $$
+    \int^t_0{f(\tau)d\tau} \quad \Longleftrightarrow \quad \frac{1}{s}F(s)
+    $$
+
+* 
+
+| 성질 | 시간 영역 $$f(t)$$  | $$s$$-영역 $$F(s)$$  | 설명 |
+|:--:|:----------:|:------------:|:---|
 | 시간 이동 | $$f(t-a)u(t-a)$$  | $$e^{-as}F(s)$$  |
 | 시간 척도 | $$f(at)$$ | $$\begin{align}\frac{1}{a}F\left(\frac{s}{a}\right)\end{align}$$  |
 | 주파수 이동 | $$e^{at}f(t)$$  | $$F(s-a)$$  |
-| [합성곱](https://en.wikipedia.org/wiki/Convolution) |  |  |
-| [켤레 복소수](https://en.wikipedia.org/wiki/Complex_conjugate) |  |  |
+| [합성곱](https://en.wikipedia.org/wiki/Convolution) | $$(f \ast g)$$ | $$F(s)G(s)$$ |
+| [켤레 복소수](https://en.wikipedia.org/wiki/Complex_conjugate) | $$f^*(t)$$ | $$F^*(s^*)$$ |
 
 ## 라플라스 변환표
 > *참조: [위키백과 - 라플라스 변환 목록](https://en.wikipedia.org/wiki/List_of_Laplace_transforms)*
