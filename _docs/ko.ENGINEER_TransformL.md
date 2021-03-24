@@ -36,34 +36,105 @@ $$
     af(t) + bg(t) \quad \Longleftrightarrow \quad aF(s)+bG(s)
     $$
 
+    > 증명:
+    >
     > $$
     > \mathcal{L}\left\{ af(t) + bg(t) \right\} = \int^{\infty}_{0^-}\left\{ af(t) + bg(t) \right\} e^{-st}dt
     > $$
-
+    >
+    > $$
+    > \quad = \int^{\infty}_{0^-}\left\{af(t)e^{-st} + bg(t)e^{-st}\right\}dt
+    > $$
+    >
+    > $$
+    > \quad = a\int^{\infty}_{0^-}f(t)e^{-st}dt + b\int^{\infty}_{0^-}g(t)e^{-st}dt
+    > $$
+    >
+    > $$
+    > \quad = a\mathcal{L}\left\{ f(t) \right\} + b\mathcal{L}\left\{ g(t) \right\}
+    > $$
+    >
+    > $$
+    > \quad = aF(s) + bG(s)
+    > $$
 
 * *[미분](https://en.wikipedia.org/wiki/Derivative) (Derivative)*
-    : ...
+    : 함수 $$f(t)$$가 미분가능한 함수이며 지수 형태의 도함수를 가진다고 가정할 시, $$s$$-영역의 방정식은 부분 적분을 통해 도출된다.
 
     $$
     f^{(n)}(t) \quad \Longleftrightarrow \quad s^nF(s) - \sum^n_{k=1}{s^{n-k}f^{(k-1)}(0^-)}
     $$
 
+    > 예시 (3계도함수):
+    >
+    > $$
+    > \mathcal{L}\left\{ f'''(t) \right\} = s^3F(s) - s^2f(0) - sf'(0) - f''(0)
+    > $$
+    >
+
 * *[적분](https://en.wikipedia.org/wiki/Integral) (Integral)*
+    : 아래의 라플라스 합성곱 성질을 참고한다; 합성곱의 $$g(t)$$ 함수가 적분에서는 단위 계단 함수 $$u(t)$$로 대체되었다.
+
+    $$
+    \int^t_0{f(\tau)d\tau} = \bigl( u \ast f \bigr)(t) \quad \Longleftrightarrow \quad \frac{1}{s}F(s)
+    $$
+
+* *[합성곱](https://en.wikipedia.org/wiki/Convolution) (Convolution)*
+    : 시간축 $$\tau$$에 놓여있는 두 함수 $$f(\tau)$$, $$g(\tau)$$간 서로 겹치는 총 면적이 발생한다. 여기서 함수 $$g(\tau)$$를 시간축에서 $$t$$만큼 이동시켰을 때 겹치는 면적이 변하는데, 주어진 $$t$$ 범위에 대하여 겹치는 면적을 적분하는 것이 두 함수의 합성곱이다.
+
+    $$
+    \bigl( f \ast g \bigr) (t) = \int^t_0{f(\tau)g(t-\tau)d\tau} \quad \Longleftrightarrow \quad F(s)G(s)
+    $$
+
+    > 증명:
+    >
+    > $$
+    > \mathcal{L}\left\{ f \ast g \right\} = \int^{\infty}_{0^-} \bigl( f \ast g \bigr) (t) e^{-st}dt
+    > $$
+    >
+    > $$
+    > \quad = \int^{\infty}_{0^-}{ \int^{t}_{0^-}{f(\tau)g(t-\tau) e^{-st} d\tau} dt}
+    > $$
+    >
+    > 현재 $$d\tau dt$$ 순서로 되어 있는 적분을 $$dtd\tau$$로 바꾸어도 적분되는 면적은 동일해야 한다. 순서가 바뀌기 전에는 변수 $$\tau$$가 $$0$$에서부터 $$t$$까지 적분되었으나, 그 다음 적분에서 $$t$$가 무한으로 적분하면서 $$\tau$$ 또한 변수 $$t$$를 따라 함께 무한으로 뻗어나간다. 그러므로 적분 순서를 바꾸면 범위는 아래와 같이 바뀐다.
+    >
+    > $$
+    > \quad \Rightarrow \int^{\infty}_{0^-}{ \int^{\infty}_{0^-}{f(\tau)g(t-\tau) e^{-st} dt} d\tau}
+    > $$
+    >
+    > 위에서 설명한 $$\tau$$가 무한으로 적분되는 것이 수식에 반영된 것을 볼 수 있다.
+    >
+    > 만일 $$u=t-\tau$$로 치환하면 도함수 $$du=dt$$가 나오는데, 적분 우선순위에 의해 $$\tau$$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
+    >
+    > $$
+    > \quad \Rightarrow \int^{\infty}_{0^-}{ \int^{\infty}_{0^-}{f(\tau)g(u) e^{-s(\tau + u)} du} d\tau}
+    > $$
+    >
+    > $$
+    > \quad = \int^{\infty}_{0^-}{ f(\tau)e^{-s\tau} d\tau} \cdot \int^{\infty}_{0^-}{g(u) e^{-su} du}
+    > $$
+    >
+    > $$
+    > \quad = \mathcal{L}\left\{ f(t) \right\} \cdot \mathcal{L}\left\{ g(t) \right\}
+    > $$
+    >
+    > $$
+    > \quad = F(s)G(s)
+    > $$
+
+* *[켤레 복소수](https://en.wikipedia.org/wiki/Complex_conjugate) (Complex conjugate)*
     : ...
 
     $$
-    \int^t_0{f(\tau)d\tau} \quad \Longleftrightarrow \quad \frac{1}{s}F(s)
+    f^*(t) \quad \Longleftrightarrow \quad F^*(s^*)
     $$
 
-* 
 
 | 성질 | 시간 영역 $$f(t)$$  | $$s$$-영역 $$F(s)$$  | 설명 |
 |:--:|:----------:|:------------:|:---|
 | 시간 이동 | $$f(t-a)u(t-a)$$  | $$e^{-as}F(s)$$  |
 | 시간 척도 | $$f(at)$$ | $$\begin{align}\frac{1}{a}F\left(\frac{s}{a}\right)\end{align}$$  |
 | 주파수 이동 | $$e^{at}f(t)$$  | $$F(s-a)$$  |
-| [합성곱](https://en.wikipedia.org/wiki/Convolution) | $$(f \ast g)$$ | $$F(s)G(s)$$ |
-| [켤레 복소수](https://en.wikipedia.org/wiki/Complex_conjugate) | $$f^*(t)$$ | $$F^*(s^*)$$ |
 
 ## 라플라스 변환표
 > *참조: [위키백과 - 라플라스 변환 목록](https://en.wikipedia.org/wiki/List_of_Laplace_transforms)*
