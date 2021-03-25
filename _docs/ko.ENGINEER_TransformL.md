@@ -291,7 +291,7 @@ $$
 
 아래는 라플라스 변환에서 흔히 사용되는 단일변수 함수의 시간 영역과 복소주파수 영역간의 변화표를 제공한다. 또한 해당 변환표로 복소주파수 영역에서 시간 영역으로 되돌아가는 라플라스 역변환에서도 사용된다.
 
-| 함수 | 시간 영역 $$f(t)$$  | $$s$$-영역 $$F(s)$$  |
+| 함수 | 시간 $$t$$-영역: $$f(t)$$  | 복소주파수 $$s$$-영역: $$F(s)$$  |
 |:--:|:----------:|:------------:|
 | [단위 임펄스](https://en.wikipedia.org/wiki/Dirac_delta_function) | $$\begin{align}\delta(t)\end{align}$$ | $$1$$ |
 | [단위 계단 함수](https://en.wikipedia.org/wiki/Heaviside_step_function) | $$u(t)$$ | $$\begin{align}\frac{1}{s}\end{align}$$ |
