@@ -36,7 +36,7 @@ $$
     af(t) + bg(t) \quad \Longleftrightarrow \quad aF(s)+bG(s)
     $$
 
-    > 증명:
+    > 본 성질에 대한 증명은 아래를 참고한다:
     >
     > $$
     > \mathcal{L}\left\{ af(t) + bg(t) \right\} = \int^{\infty}_{0^-}\left\{ af(t) + bg(t) \right\} e^{-st}dt
@@ -86,7 +86,7 @@ $$
     \bigl( f \ast g \bigr) (t) = \int^t_0{f(\tau)g(t-\tau)d\tau} \quad \Longleftrightarrow \quad F(s)G(s)
     $$
 
-    > 증명:
+    > 본 성질에 대한 증명은 아래를 참고한다:
     >
     > $$
     > \mathcal{L}\left\{ f \ast g \right\} = \int^{\infty}_{0^-} \bigl( f \ast g \bigr) (t) e^{-st}dt
@@ -115,7 +115,7 @@ $$
     > $$
     >
     > $$
-    > \quad = \mathcal{L}\left\{ f(t) \right\} \cdot \mathcal{L}\left\{ g(t) \right\}
+    > \quad = \mathcal{L}\left\{ f(\tau) \right\} \cdot \mathcal{L}\left\{ g(u) \right\}
     > $$
     >
     > $$
@@ -123,34 +123,184 @@ $$
     > $$
 
 * *[켤레 복소수](https://en.wikipedia.org/wiki/Complex_conjugate) (Complex conjugate)*
-    : ...
+    : 허수가 반대의 부호를 가지는 복소수이다; 비록 증명은 간단하지만, 켤레 복소수의 성질의 이해를 필요로 한다.
 
     $$
     f^*(t) \quad \Longleftrightarrow \quad F^*(s^*)
     $$
 
+    > 본 성질에 대한 증명은 아래를 참고한다:
+    >
+    > $$
+    > \mathcal{L}\left\{ f^*(t) \right\} = \int^{\infty}_{0^-}  f^*(t) e^{-st}dt
+    > $$
+    >
+    > $$
+    > \quad = \left[ \int^{\infty}_{0^-}  f(t) e^{-s^*t}dt \right]^* \quad \left( \ \because \left\{ A^* \right\}^* = A \quad \mathrm{and} \quad \left\{ B\cdot C\right\}^* = B^*\cdot C^* \ \right)
+    > $$
+    >
+    > $$
+    > \quad = F^*(s^*)
+    > $$
 
-| 성질 | 시간 영역 $$f(t)$$  | $$s$$-영역 $$F(s)$$  | 설명 |
-|:--:|:----------:|:------------:|:---|
-| 시간 이동 | $$f(t-a)u(t-a)$$  | $$e^{-as}F(s)$$  |
-| 시간 척도 | $$f(at)$$ | $$\begin{align}\frac{1}{a}F\left(\frac{s}{a}\right)\end{align}$$  |
-| 주파수 이동 | $$e^{at}f(t)$$  | $$F(s-a)$$  |
+* *시간 이동 (Time shifting)*
+    : 시간축으로 $$a$$만큼 이동하였을 시, 단위 계단 함수 $$u(t-a)$$를 함께 사용하여 $$t=a$$에서 함수가 활성화하도록 한다.
+    
+    $$
+    f(t-a)u(t-a) \quad \Longleftrightarrow \quad e^{-as}F(s)
+    $$
+
+    > 본 성질에 대한 증명은 아래를 참고한다:
+    >
+    > $$
+    > \mathcal{L}\left\{ f(t-a)u(t-a) \right\} = \int^{\infty}_{0^-}{f(t-a)u(t-a) e^{-st}dt}
+    > $$
+    >
+    > $$
+    > \quad = \int^{\infty}_{a}{f(t-a) e^{-st}dt}
+    > $$
+    >
+    > $$
+    > \quad = \int^{\infty}_{0}{f(\tau) e^{-s(\tau+a)}d\tau} \quad ... \mathrm{where} \ \tau = t-a
+    > $$
+    >
+    > $$
+    > \quad = e^{-sa}\int^{\infty}_{0}{f(\tau) e^{-s\tau}d\tau}
+    > $$
+    >
+    > $$
+    > \quad = e^{-as}\mathcal{L}\left\{ f(\tau) \right\}
+    > $$
+    >
+    > $$
+    > \quad = e^{-as}F(s)
+    > $$
+
+* *시간 척도 (Time scaling)*
+    : 시간 척도로 인한 라플라스 변환은 다음과 같이 나타난다.
+
+    $$
+    f(at) \quad \Longleftrightarrow \quad \frac{1}{a}F\left(\frac{s}{a}\right)
+    $$
+
+    > 본 성질에 대한 증명은 아래를 참고한다:
+    >
+    > $$
+    > \mathcal{L}\left\{ f(at) \right\} = \int^{\infty}_{0^-}{f(at)e^{-st}dt}
+    > $$
+    >
+    > $$
+    > \quad = \frac{1}{a}\int^{\infty}_{0^-}{f(\tau) e^{-\frac{s}{a}\tau}d\tau} \quad ... \mathrm{where} \ \tau = at
+    > $$
+    >
+    > $$
+    > \quad = \frac{1}{a}F\left(\frac{s}{a}\right)
+    > $$
+
+* *주파수 이동 (Frequency shifting)*
+    : 시간 이동과 반대로, 본 성질은 주파수축에서의 $$a$$만큼 이동을 다룬다.
+    
+    $$
+    e^{at}f(t) \quad \Longleftrightarrow \quad F(s-a)
+    $$
+
+    > 본 성질에 대한 증명은 아래를 참고한다:
+    >
+    > $$
+    > \mathcal{L}\left\{ e^{at}f(t) \right\} = \int^{\infty}_{0^-}{e^{at}f(t)e^{-st}dt}
+    > $$
+    >
+    > $$
+    > \quad = \int^{\infty}_{0^-}{f(t)e^{-(s-a)t}dt}
+    > $$
+    >
+    > $$
+    > \quad = F(s-a)
+    > $$
+
+* *[초기값 정리](https://en.wikipedia.org/wiki/Initial_value_theorem) (Initial value theorem)*
+    : 시간 영역에서의 함수가 $$0$$으로 수렴할 시, 복소주파수 영역에서는 다음 수식과 동일한 값을 가진다.
+
+    $$
+    f(0^+) = \lim_{s\rightarrow\infty}{sF(s)}
+    $$
+
+    > 만일 $$f(0^+) = \alpha$$라고 가정하고 $$s$$-영역에서부터 증명을 시작한다:
+    >
+    > $$
+    > sF(s) = s\int^{\infty}_{0^-}{f(\tau)e^{-s\tau}d\tau}
+    > $$
+    >
+    > $$
+    > \quad = \int^{\infty}_{0^-}{f\left(\frac{t}{s}\right)e^{-t}dt} \quad ... \mathrm{assuming} \ \tau = \frac{t}{s} , \ \mathrm{thus} \ sd\tau = dt
+    > $$
+    >
+    > 여기서 복소주파수 영역의 $$s$$ 변수를 무한으로 발산시키면 아래의 방정식이 표현된다.
+    >
+    > $$ 
+    > \lim_{s\rightarrow\infty}{sF(s)} = \lim_{s\rightarrow\infty}{\int^{\infty}_{0^-}{f\left(\frac{t}{s}\right)e^{-t}dt}}
+    > $$
+    >
+    > $$
+    > \quad = \int^{\infty}_{0^-}{f(0)e^{-t}dt}
+    > $$
+    >
+    > $$
+    > \quad = \alpha\int^{\infty}_{0^-}{e^{-t}dt}
+    > $$
+    >
+    > $$
+    > \quad = \alpha \left[ 1-0 \right]
+    > $$
+    >
+    > $$
+    > \quad = f(0^+)
+    > $$
+
+* *[최종값 정리](https://en.wikipedia.org/wiki/Final_value_theorem) (Final value theorem)*
+    : 시간 영역에서의 함수가 무한으로 발산할 시, 복소주파수 영역에서는 다음 수식과 동일한 값을 가진다.
+
+    $$
+    f(\infty) = \lim_{s\rightarrow 0}{sF(s)}
+    $$
+    
+    단, 위의 정리가 만족하기 위해서는 복소주파수 영역에서 $$sF(s)$$ 함수의 [극점](https://en.wikipedia.org/wiki/Zeros_and_poles)(poles)이 모두 $$s$$ 좌표계의 왼쪽에 위치하여야 한다. 정리하자면, 시간 영역의 함수가 반드시 수렴해야 한다는 의미이다.
+
+    > 1계도함수에 대한 라플라스 변환은 다음과 같다
+    >
+    > $$
+    > \int^{\infty}_{0^-}{f'(t)e^{-st}dt} = sF(s) - f(0)
+    > $$
+    >
+    > 여기서 복소주파수 영역의 $$s$$ 변수를 $$0$$으로 수렴시키면 아래의 방정식이 표현된다.
+    >
+    > $$
+    > \lim_{s\rightarrow 0}{\int^{\infty}_{0^-}{f'(t)e^{-st}dt}} = \int^{\infty}_{0^-}{f'(t)dt}
+    > $$
+    >
+    > $$ 
+    > \quad = f(\infty) - f(0) = \lim_{s\rightarrow 0}{\left[ sF(s) - f(0) \right]}
+    > $$
+    >
+    > $$
+    > \qquad \therefore f(\infty) = \lim_{s\rightarrow 0}{sF(s)}
+    > $$
 
 ## 라플라스 변환표
 > *참조: [위키백과 - 라플라스 변환 목록](https://en.wikipedia.org/wiki/List_of_Laplace_transforms)*
+
+아래는 라플라스 변환에서 흔히 사용되는 단일변수 함수의 시간 영역과 복소주파수 영역간의 변화표를 제공한다. 또한 해당 변환표로 복소주파수 영역에서 시간 영역으로 되돌아가는 라플라스 역변환에서도 사용된다.
 
 | 함수 | 시간 영역 $$f(t)$$  | $$s$$-영역 $$F(s)$$  |
 |:--:|:----------:|:------------:|
 | [단위 임펄스](https://en.wikipedia.org/wiki/Dirac_delta_function) | $$\begin{align}\delta(t)\end{align}$$ | $$1$$ |
 | [단위 계단 함수](https://en.wikipedia.org/wiki/Heaviside_step_function) | $$u(t)$$ | $$\begin{align}\frac{1}{s}\end{align}$$ |
+| 지수 함수 | $$t^n \cdot u(t)$$ | $$\begin{align}\frac{n!}{s^{n+1}}\end{align}$$ |
+| [지수적 감쇠](https://en.wikipedia.org/wiki/Exponential_decay) | $$e^{-at} \cdot u(t)$$ | $$\begin{align}\frac{1}{s+a}\end{align}$$ |
+| [사인 함수](https://en.wikipedia.org/wiki/Sine) | $$\sin{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{\omega}{s^2+\omega^2}\end{align}$$ |
+| [코사인 함수](https://en.wikipedia.org/wiki/Cosine) | $$\cos{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{s}{s^2+\omega^2}\end{align}$$ |
+| 사인 함수<br/>+ 지수적 감쇠 | $$e^{-at}\sin{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{\omega}{(s+a)^2+\omega^2}\end{align}$$ |
+| 코사인 함수<br/>+ 지수적 감쇠 | $$e^{-at}\cos{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{s+a}{(s+a)^2+\omega^2}\end{align}$$ |
 
-
-
-
-| $$\begin{align}e^{at}\end{align}$$ | $$\begin{align}\frac{1}{s-a}\end{align}$$ |
-| $$1$$ | $$\begin{align}\frac{1}{s}\end{align}$$ |
-| $$\begin{align}t^{n}\end{align}$$ | $$\begin{align}\frac{n!}{s^{n+1}}\end{align}$$ |
-| $$\begin{align}\sin{\omega t}\end{align}$$ | $$\begin{align}\frac{\omega}{s^2+\omega^2}\end{align}$$ |
-| $$\begin{align}\cos{\omega t}\end{align}$$ | $$\begin{align}\frac{s}{s^2+\omega^2}\end{align}$$ |
-| $$\begin{align}e^{at}\sin{\omega t}\end{align}$$ | $$\begin{align}\frac{\omega}{(s-a)^2+\omega^2}\end{align}$$ |
-| $$\begin{align}e^{at}\cos{\omega t}\end{align}$$ | $$\begin{align}\frac{s}{(s-a)^2+\omega^2}\end{align}$$ |
+### 부분분수전개
+[부분분수전개](https://en.wikipedia.org/wiki/Partial_fraction_decomposition)(partial fraction expansion)는 복합적인 분수를 여러 간단한 분수들의 합으로 풀어쓰는 기법이다.
