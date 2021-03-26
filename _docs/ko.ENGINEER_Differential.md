@@ -614,13 +614,9 @@ $$
 $$
 
 # 미분방정식: 응용
-
-## 고전역학
+본 장은 미분방정식이 활용되는 대표적인 일부 예시 중에서도, 고등학교 물리학에서 배우는 [고전역학](https://en.wikipedia.org/wiki/Classical_mechanics) 내용을 바탕으로 한 아래의 간단한 몇 가지 예시를 통해 미분방정식 수립 방법을 다룬다.
 
 ### 예제 1. 평형상태 (1)
-고등학교 물리학 중에서 [고전역학](https://en.wikipedia.org/wiki/Classical_mechanics) 내용을 바탕으로 한 아래의 간단한 몇 가지 예시를 통해 미분방정식 수립 방법을 다룬다.
-
-
 아래의 그림은 천장에 달린 용수철에 물체가 매달려 가만히 있는 그림이다.
 
 ![천장에 달린 용수철에 매달린 물체](/images/docs/engineering/differential_equilibrium1.png)
