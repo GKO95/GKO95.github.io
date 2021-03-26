@@ -332,3 +332,35 @@ $$
     $$
     A_{n-k} = \frac{1}{(n-k-1)!}\frac{d^k}{ds^k} \left[ (s-\alpha)^nF(s) \right]_{s=\alpha} \quad ... \mathrm{where} \ k = 0, \ 1, \ 2, \ \cdots, \ n-1
     $$
+
+# 라플라스 변환: 응용
+본 장은 [미분방정식 예시](../ko.ENGINEER_Differential/#미분방정식-응용)를 라플라스 변환으로 풀이하는 절차를 살펴본다. 또한 고전역학을 벗어나 전기회로라는 전혀 다른 분야에서는 어떻게 적용되는지 보여준다. 단, 미분방정식이 아닌 *예제 1. 평형상태 (1)*과 *예제 2. 평형상태 (2)*는 다루지 않으며 미분방정식 수립 과정은 동일하다.
+
+### 예제 3. 자유진동
+미분방정식 문서에 의해 자유진동에 대한 미분방정식은 다음과 같다:
+
+$$
+my''(t) + ky(t) = 0
+$$
+
+$$
+\quad \Rightarrow \mathcal{L}\left\{ my''(t) + ky(t) \right\} = m\bigl( s^2Y(s) - sy(0) - y'(0) \bigr) + kY(s) = 0 \quad ... \mathrm{since} \ \mathcal{L}\left\{ 0 \right\} = 0
+$$
+
+방정식의 좌변과 우변을 각각 $$Y(s)$$에 대한 식과 그렇지 아니한 식으로 나눈다.
+
+$$
+Y(s) \left(s^2 + \frac{k}{m}\right)= y(0)s + y'(0)
+$$
+
+$$
+\quad \Rightarrow Y(s) = \frac{y(0)s + y'(0)}{s^2 + \frac{k}{m}} = \frac{c_1}{s+j\sqrt{\frac{k}{m}}} + \frac{c_2}{s-j\sqrt{\frac{k}{m}}}
+$$
+
+이를 다시 역변환시키면 시간 영역에서는 다음 방정식이 도출된다.
+
+$$
+\qquad \therefore \mathcal{L}^{-1}\left\{ Y(s) \right\} = y(t) = c_1e^{+j\omega} + c_2e^{-j\omega} \quad ...\mathrm{where} \ \omega = \sqrt{\frac{k}{m}}
+$$
+
+이는 미분방정식의 일반해와 동일한 결과이며, 만일 초기값 $$y(0)$$ 및 $$y'(0)$$가 주어지면 특수해를 구할 수 있게 된다.
