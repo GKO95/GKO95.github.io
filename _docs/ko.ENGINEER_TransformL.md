@@ -303,4 +303,32 @@ $$
 | 코사인 함수<br/>+ 지수적 감쇠 | $$e^{-at}\cos{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{s+a}{(s+a)^2+\omega^2}\end{align}$$ |
 
 ### 부분분수전개
-[부분분수전개](https://en.wikipedia.org/wiki/Partial_fraction_decomposition)(partial fraction expansion)는 복합적인 분수를 여러 간단한 분수들의 합으로 풀어쓰는 기법이다.
+[부분분수전개](https://en.wikipedia.org/wiki/Partial_fraction_decomposition)(partial fraction expansion)는 복합적인 분수를 여러 간단한 분수들의 합으로 풀어쓰는 기법이다. 라플라스 변환표를 보면 알 수 있듯이 수많은 $$s$$-영역 함수들은 분수 형태를 띄고 있다. 이를 다시 $$t$$-영역으로 역변환시키기 위해서는 최소한 라플라스 성질 및 변환표를 활용할 수 있는 형태로 되돌려야 한다.
+
+1. 서로 다른 극점
+    
+    $$
+    F(s) = \frac{N(s)}{(s-\alpha)(s-\beta)} = \frac{A}{s-\alpha} + \frac{B}{s-\beta}
+    $$
+
+    함수 $$F(s)$$가 위의 형태를 가질 시, 해당 방정식에서 분자 $$A$$와 $$B$$는 아래 계산식으로 구한다.
+
+    $$
+    \begin{cases}
+    A = \left.(s-\alpha)F(s) \right|_{s=\alpha}
+    \\
+    B = \left.(s-\beta)F(s) \right|_{s=\beta}
+    \end{cases}
+    $$
+
+1. 중극 (multiple poles)
+    
+    $$
+    F(s) = \frac{N(s)}{(s-\alpha)^n} = \frac{A_n}{(s-\alpha)^n} + \frac{A_{n-1}}{(s-\alpha)^{n-1}} + \cdots + \frac{A_1}{(s-\alpha)}
+    $$
+
+    함수 $$F(s)$$가 위의 형태를 가질 시, 해당 방정식에서 분자 $$A_n$$ ~ $$A_1$$은 아래 계산식으로 구한다. 
+
+    $$
+    A_{n-k} = \frac{1}{(n-k-1)!}\frac{d^k}{ds^k} \left[ (s-\alpha)^nF(s) \right]_{s=\alpha} \quad ... \mathrm{where} \ k = 0, \ 1, \ 2, \ \cdots, \ n-1
+    $$
