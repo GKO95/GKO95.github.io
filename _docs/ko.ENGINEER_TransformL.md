@@ -336,6 +336,8 @@ $$
 # 라플라스 변환: 응용
 본 장은 [미분방정식 예시](../ko.ENGINEER_Differential/#미분방정식-응용)를 라플라스 변환으로 풀이하는 절차를 살펴본다. 또한 고전역학을 벗어나 전기회로라는 전혀 다른 분야에서는 어떻게 적용되는지 보여준다. 단, 미분방정식이 아닌 *예제 1. 평형상태 (1)*과 *예제 2. 평형상태 (2)*는 다루지 않으며 미분방정식 수립 과정은 동일하다.
 
+## 고전역학
+
 ### 예제 3. 자유진동
 미분방정식 문서에 의해 자유진동에 대한 미분방정식은 다음과 같다:
 
@@ -354,13 +356,63 @@ Y(s) \left(s^2 + \frac{k}{m}\right)= y(0)s + y'(0)
 $$
 
 $$
-\quad \Rightarrow Y(s) = \frac{y(0)s + y'(0)}{s^2 + \frac{k}{m}} = \frac{c_1}{s+j\sqrt{\frac{k}{m}}} + \frac{c_2}{s-j\sqrt{\frac{k}{m}}}
+\quad \Rightarrow Y(s) = \frac{y(0)s + y'(0)}{s^2 + \frac{k}{m}} = \frac{c_1}{s-j\sqrt{\frac{k}{m}}} + \frac{c_2}{s+j\sqrt{\frac{k}{m}}}
 $$
 
 이를 다시 역변환시키면 시간 영역에서는 다음 방정식이 도출된다.
 
 $$
-\qquad \therefore \mathcal{L}^{-1}\left\{ Y(s) \right\} = y(t) = c_1e^{+j\omega} + c_2e^{-j\omega} \quad ...\mathrm{where} \ \omega = \sqrt{\frac{k}{m}}
+\qquad \therefore \mathcal{L}^{-1}\left\{ Y(s) \right\} = y(t) = c_1e^{+j\omega t} + c_2e^{-j\omega t} \quad ...\mathrm{where} \ \omega = \sqrt{\frac{k}{m}}
 $$
 
 이는 미분방정식의 일반해와 동일한 결과이며, 만일 초기값 $$y(0)$$ 및 $$y'(0)$$가 주어지면 특수해를 구할 수 있게 된다.
+
+### 예제 4. 감쇠자유진동
+미분방정식 문서에 의해 감쇠자유진동에 대한 미분방정식은 다음과 같다:
+
+$$
+my''(t) + cy'(t) + ky(t) = 0
+$$
+
+$$
+\quad \Rightarrow \mathcal{L}\left\{ my''(t) + cy'(t) + ky(t) \right\} = m\bigl( s^2Y(s) - sy(0) - y'(0) \bigr) + c\bigl( sY(s) - y(0) \bigr) + kY(s) = 0
+$$
+
+방정식의 좌변과 우변을 각각 $$Y(s)$$에 대한 식과 그렇지 아니한 식으로 나눈다.
+
+$$
+Y(s) \left(s^2 + \frac{c}{m}s + \frac{k}{m}\right)= y(0)s + y'(0) + \frac{c}{m}y(0)
+$$
+
+$$
+\quad \Rightarrow Y(s) = \frac{y(0)s + y'(0) + \frac{c}{m}y(0)}{s^2 + \frac{c}{m}s + \frac{k}{m}} = \frac{c_1}{s - \left( \frac{-c}{2m} + j\sqrt{\frac{4km-c^2}{4m^2}} \right)} + \frac{c_2}{s - \left( \frac{-c}{2m} - j\sqrt{\frac{4km-c^2}{4m^2}} \right)}
+$$
+
+이를 다시 역변환시키면 시간 영역에서는 다음 방정식이 도출된다.
+
+$$
+\qquad \therefore \mathcal{L}^{-1}\left\{ Y(s) \right\} = y(t) = c_1e^{\left( \sigma+j\omega \right) t} + c_2e^{\left( \sigma-j\omega \right) t} \quad ...\mathrm{where} \ \sigma = \frac{-c}{2m}, \ \omega = \sqrt{\frac{4km-c^2}{4m^2}}
+$$
+
+이는 미분방정식의 일반해와 동일한 결과이며, 만일 초기값 $$y(0)$$ 및 $$y'(0)$$가 주어지면 특수해를 구할 수 있게 된다.
+
+### 예제 5. 감쇠강제진동
+미분방정식 문서에 의해 감쇠강제진동에 대한 미분방정식은 다음과 같다:
+
+$$
+my''(t) + cy'(t) + ky(t) = F_0\cos{\omega t}
+$$
+
+$$
+\quad \Rightarrow \mathcal{L}\left\{ my''(t) + cy'(t) + ky(t) \right\} = m\bigl( s^2Y(s) - sy(0) - y'(0) \bigr) + c\bigl( sY(s) - y(0) \bigr) + kY(s) = F_0\frac{s}{s^2+\omega^2}
+$$
+
+방정식의 좌변과 우변을 각각 $$Y(s)$$에 대한 식과 그렇지 아니한 식으로 나눈다.
+
+$$
+Y(s) \left(s^2 + \frac{c}{m}s + \frac{k}{m}\right)= y(0)s + y'(0) + \frac{c}{m}y(0) + F_0\frac{s}{s^2+\omega^2}
+$$
+
+$$
+\quad \Rightarrow Y(s) = \frac{ \left(y(0)s + y'(0) + \frac{c}{m}y(0)\right)\left(s^2 + \omega^2\right) + F_0s}{\left(s^2 + \frac{c}{m}s + \frac{k}{m}\right)\left( s^2 + \omega^2 \right)}
+$$
