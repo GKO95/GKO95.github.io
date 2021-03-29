@@ -416,3 +416,56 @@ $$
 $$
 \quad \Rightarrow Y(s) = \frac{ \left(y(0)s + y'(0) + \frac{c}{m}y(0)\right)\left(s^2 + \omega^2\right) + F_0s}{\left(s^2 + \frac{c}{m}s + \frac{k}{m}\right)\left( s^2 + \omega^2 \right)}
 $$
+
+## 전기회로
+
+### 예제 7. RLC 회로
+아래의 그림은 [저항](https://en.wikipedia.org/wiki/Resistor)(resistor; $$R$$)과 [인덕터](https://en.wikipedia.org/wiki/Inductor)(inductor; $$L$$) 그리고 [커패시터](https://en.wikipedia.org/wiki/Capacitor)(capacitor; $$C$$) 소자로 이루어진 회로이다.
+
+![RLC 회로](/images/docs/engineering/laplace_circuit_rlc.png)
+
+[키르히호프의 전기회로 법칙](https://en.wikipedia.org/wiki/Kirchhoff%27s_circuit_laws)에 의하면 전원으로부터 생성된 전압(voltage)은 각 소자에로부터 소모된 전압들의 합과 동일하다. 여기서 각 소자들의 소모전압은 다음과 같이 계산된다.
+
+1. 저항: 전기의 흐름, 일명 전류(current)를 방해하는 소자
+
+    $$
+    V_R = Ri(t)
+    $$
+
+2. 인덕터: 전류의 변화를 방해하는 소자
+
+    $$
+    V_L = L\frac{di}{dt}
+    $$
+
+3. 커패시터: 전기를 충전하는 소자
+
+    $$
+    V_C = \frac{1}{C}\int{idt}
+    $$
+
+4. 독립전압원: 전압으로 전기를 생성하는 소자
+
+    $$
+    V_{\mathrm{in}}(t) = E\cos{\omega t} \cong \mathrm{Re} \left\{ E\cos{\omega t} + jE\sin{\omega t} \right\} = Ee^{j\omega t}
+    $$
+
+이를 모두 종합하면 다음 키르히호프 방정식이 세워진다.
+
+$$
+V_{\mathrm{in}}(t) = Ri(t) + L\frac{di(t)}{dt} + \frac{1}{C}\int{i(t)dt}
+$$
+
+$$
+\quad \Rightarrow Li''(t) + Ri'(t) + \frac{1}{C}i(t) = j\omega Ee^{j\omega t}
+$$
+
+$$
+\quad \Rightarrow \mathcal{L}\left\{ Li''(t) + Ri'(t) + \frac{1}{C}i(t) \right\} = L\bigl( s^2I(s) - si(0) - i'(0) \bigr) + R\bigl( sI(s) - i(0) \bigr) + \frac{1}{C}I(s) = \frac{j\omega E}{s-j\omega}
+$$
+
+방정식의 좌변과 우변을 각각 $$I(s)$$에 대한 식과 그렇지 아니한 식으로 나눈다.
+
+$$
+I(s) \left(s^2 + \frac{R}{L}s + \frac{1}{LC}\right)= i(0)s + i'(0) + \frac{R}{L}i(0) + \frac{j\omega E}{s-j\omega}
+$$
