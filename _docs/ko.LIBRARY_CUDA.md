@@ -58,3 +58,24 @@ CUDA Toolkit 설치 방법에는 권장 설정으로 빠르게 설치하는 *Exp
 ![비주얼 스튜디오 CUDA 11.2 Runtime 프로젝트](/images/docs/cuda/cuda_project2.png)
 
 비주얼 스튜디오에서 프로젝트를 설정하는 방법은 [여기](../ko.PRGMING_Cpp/#비주얼-스튜디오)를 참고한다.
+
+# CUDA: 기초
+> *본 내용부터 실질적인 CUDA 프로그래밍을 소개하므로, 반드시 C/C++ 내용을 숙지하도록 한다.*
+
+CUDA 프로그램을 진행하기 전에 유의사항이 하나 있다: 바로 `<<<>>>`이다. 해당 심볼은 C/C++에 존재하지 않으나 CUDA Runtime 프로젝트가 C/C++ 기반하기 때문에 비주얼 스튜디오에서는 이를 잘못된 구문으로 인식한다. 밑에는 붉은 밑줄이 표시되어 오류 메시지가 나타나지만, 컴파일에는 전혀 문제가 없는 불편한 상황이 자주 발생한다. 이는 NVIDIA 개발진의 잘못된 설계 탓이지만 개선하려는 의도가 전혀 보이지 않는다.
+
+아래는 현재 CUDA 사용자 커뮤니티에서 사용하는 오류 메시지 우회 방법으로 매크로를 활용하고 있다.
+
+```cpp
+#ifdef __CUDACC__
+    #define KERNEL_ARGS2(grid, block) <<< grid, block >>>
+    #define KERNEL_ARGS3(grid, block, sh_mem) <<< grid, block, sh_mem >>>
+    #define KERNEL_ARGS4(grid, block, sh_mem, stream) <<< grid, block, sh_mem, stream >>>
+#else
+    #define KERNEL_ARGS2(grid, block)
+    #define KERNEL_ARGS3(grid, block, sh_mem)
+    #define KERNEL_ARGS4(grid, block, sh_mem, stream)
+#endif
+```
+
+그러나 본 문서에서는 혼잡을 방지하기 위해 매크로를 사용하지 않는 구문으로 설명한다.
