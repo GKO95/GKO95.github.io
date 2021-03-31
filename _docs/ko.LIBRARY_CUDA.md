@@ -8,8 +8,6 @@ meta: CUDA
 order: 0x14
 ---
 # CUDA: 소개
-> CUDA는 NVIDIA 그래픽 카드 전용 플랫폼이므로 타사 그래픽 카드로는 절대 구동할 수 없다. 반드시 자신이 가지고 있는 NVIDIA GPU가 CUDA를 지원하는 모델인지 [목록](https://developer.nvidia.com/cuda-gpus)에서 확인하도록 한다.
-
 [CUDA](https://ko.wikipedia.org/wiki/CUDA)(Compute Unified Device Architecture)는 게이밍 그래픽 카드로 매우 잘 알려진 [NVIDIA](https://www.nvidia.com/ko-kr/)에서 제공하는 병렬 컴퓨팅 플랫폼 및 API 모델이다. 해당 플랫폼은 [C](../ko.PRGMING_C)/[C++](../ko.PRGMING_Cpp) 그리고 [포트란](https://ko.wikipedia.org/wiki/포트란) 프로그래밍 언어와 함께 사용할 수 있도록 제작되어 접근성이 다른 그래픽 관련 API와 달리 용이하다.
 
 컴퓨터의 중앙 처리 장치(CPU)에는 실질적인 연산을 담당하는 프로세서가 한 개 이상이 들어으며, 개수에 따라 듀얼 코어(프로세서 2개), 쿼드 코어(프로세서 4개), 헥사 코어(프로세서 6개) 등으로 불린다. 그래픽 카드의 그래픽 처리 장치(GPU)에도 이러한 코어가 존재하는데 이들을 바로 CUDA 코어라고 부르며, 게이밍에 사용되는 그래픽 카드에는 적어도 천 개 이상의 CUDA 코어가 들어있다. 단일 GPU 코어는 CPU 코어에 비해 비약적인 처리능력을 가졌으나, 방대한 양의 GPU 코어로 한꺼번에 컴퓨팅을 진행하면 CPU보다 더 빠르고 높은 효율로 작업을 처리할 수 있다.
@@ -25,7 +23,7 @@ CUDA 플랫폼에는 확실히 짚어야 할 두 가지 용어가 존재한다.
 | 디바이스 | Device | 그래픽 카드의 GPU 및 메모리 |
 
 # CUDA: 설치
-> 설치를 진행하기 전, NVIDIA 개발자 웹사이트에 회원가입 및 로그인이 반드시 필요하다.
+> CUDA는 NVIDIA 그래픽 카드 전용 플랫폼이므로 타사 그래픽 카드로는 절대 구동할 수 없다. 반드시 자신이 가지고 있는 NVIDIA GPU가 CUDA를 지원하는 모델인지 [목록](https://developer.nvidia.com/cuda-gpus)에서 확인하도록 한다.
 
 NVIDIA 개발자 웹사이트에서 CUDA Toolkit [다운로드](https://developer.nvidia.com/cuda-downloads) 페이지에서 아래의 그림과 같이 운영체제 및 아키텍처를 선택하여 설치 파일을 다운로드한다. 2021년 3월 31일 기준으로 가장 최신 버전은 11.2 업데이트이다.
 
