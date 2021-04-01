@@ -336,7 +336,7 @@ World!
 
 ```csharp
 sizeof(int);        // 크기: 4 바이트
-sizeof(char);       // 크기: 1 바이트
+sizeof(char);       // 크기: 2 바이트
 ```
 
 ## 변수
