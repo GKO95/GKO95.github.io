@@ -26,8 +26,8 @@ title: HTTP 404
 <span>PS https://gko95.github.io&gt; <span style="color: #F9F1A5;">cd</span> ${$(location).attr('pathname').substring(1)}</span><br/>
 <span style="color: #E74856;">cd : Cannot find path 'https://gko95.github.io${$(location).attr('pathname')}' because it does not exist.
 <br/>At line:1 char:1
-<br/>+ cd sd
-<br/>+ ~~~~~
+<br/>+ cd ${$(location).attr('pathname').substring(1)}
+<br/>+ ~~~${'~'.repeat($(location).attr('pathname').substring(1).length)}
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;+ CategoryInfo          : ObjectNotFound: (https://gko95.github.io${$(location).attr('pathname')}:String) [Set-Location], ItemNotFoundException
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;+ FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand</span>
 <br/>
