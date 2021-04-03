@@ -36,7 +36,7 @@ PySide는 파이썬 버전의 Qt이다.
 2020년 3월 31일 기준, 가장 최신 버전의 Qt 6.0을 기반으로 설명한다. 위에서도 설명하였듯이, Qt 프레임워크는 C++과 파이썬 버전으로 나뉘어져 있다. 이들을 설치하는 방법은 각자 다르며, PySide를 중점으로 설명한다 하여도 C++를 선호하는 사용자를 위하여 함께 설명한다.
 
 ## C++
-Qt 오픈소스 라이선스는 설치 파일은 여기에서 [다운로드](https://www.qt.io/download-qt-installer) 할 수 있다. 설치 파일에는 C++ 전용 Qt 라이브러리 외에도 파이썬 버전의 PySide 및 Qt 플랫폼에 최적화된 Qt Creator IDE도 함께 포함된다.
+Qt 오픈소스 라이선스는 설치 파일은 여기에서 [다운로드](https://www.qt.io/download-qt-installer) 할 수 있다. 설치 파일에는 C++ 전용 Qt 라이브러리 외에도 파이썬 버전의 PySide 및 Qt 플랫폼에 최적화된 Qt Creator IDE도 함께 포함된다. 그러나 방대한 양의 파일들이 설치되므로 용량을 충분히 확보할 필요가 있다.
 
 ## 파이썬 3
 파이썬 버전의 Qt 6.0인 PySide6는 [pip](https://pypi.org/project/PySide6/)를 통해 간단히 설치할 수 있다.
