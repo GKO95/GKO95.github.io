@@ -14,13 +14,31 @@ order: 0x14
 
 2021년 3월 31일 기준, 본 문서는 총 1920 개의 CUDA 코어가 탑재되어 있는 NVIDIA GeForce GTX 1070 8GB GDDR5로 예시를 든다.
 
-## 용어
-CUDA 플랫폼에는 확실히 짚어야 할 두 가지 용어가 존재한다.
+## 용어 정의
+비록 CUDA는 C/C++ 언어를 기반하지만 CPU만이 아닌 GPU에서도 코드를 실행해야 하므로 CUDA 플랫폼에서만 사용되는 용어가 존재한다. 이들은 CUDA 프로젝트를 다룰 때 반드시 알아야 하는 용어이기에 숙지할 필요가 있다.
+
+### 메모리 영역
 
 | 용어 | 영문 | 설명 |
 |:---:|:---:|-----|
 | 호스트 | Host | 컴퓨터의 CPU 및 메모리 |
 | 디바이스 | Device | 그래픽 카드의 GPU 및 메모리 |
+
+그러므로 CPU에서 동작하는 코드를 *호스트 코드*라고 부르며, 반면에 GPU에서 동작하는 코드를 *디바이스 코드*라고 부른다.
+
+### API
+
+| 용어 | 영문 | 설명 |
+|:---:|:---:|-----|
+| 런타임 | Runtime | 고급 API: 사용하기 간편하지만 주어진 틀에서만 사용할 수 있다. |
+| 드라이버 | Driver | 저급 API: 어렵고 복잡하지만 더 많은 기능을 수행할 수 있다. |
+
+CUDA 플랫폼을 처음으로 접하기 때문에 본문에서는 CUDA 런타임 API를 중점으로 소개한다.
+
+## NVCC
+NVIDIA CUDA Compiler, 일명 NVCC는 CUDA 플랫폼의 핵심이 되는 컴파일러이다. NVCC는 `.cu` CUDA 소스 파일 및 `.cuh` CUDA 헤더 파일 컴파일에 있어 호스트 코드와 디바이스 코드를 구분한다. 그 중에서 호스트 코드는 일반 C/C++ 컴파일러에서 처리하고, 디바이스 코드는 NVCC에서 처리한다.
+
+> 즉, NVCC는 독립적으로 사용할 수 없으며 반드시 MSVC(윈도우 OS)나 clang(macOS) 혹은 GNU 컴파일러(리눅스 OS)와 같은 일반 C/C++ 컴파일러가 필요하다.
 
 # CUDA: 설치
 > CUDA는 NVIDIA 그래픽 카드 전용 플랫폼이므로 타사 그래픽 카드로는 절대 구동할 수 없다. 반드시 자신이 가지고 있는 NVIDIA GPU가 CUDA를 지원하는 모델인지 [목록](https://developer.nvidia.com/cuda-gpus)에서 확인하도록 한다.
@@ -71,11 +89,6 @@ CUDA Toolkit 설치 절차가 모두 완료되었으면 CUDA 프로젝트를 생
 
 CUDA 프로그램을 진행하기 전에 유의사항이 하나 있다: 바로 `<<<>>>` 커널 실행(kernel launch) 연산자이다. 해당 심볼은 C/C++에 존재하지 않으나 CUDA Runtime 프로젝트가 C/C++ 기반하기 때문에 비주얼 스튜디오에서는 이를 잘못된 구문으로 인식한다. 밑에는 붉은 밑줄이 표시되어 오류 메시지가 나타나지만, 컴파일에는 전혀 문제가 없는 불편한 상황이 항상 동반된다. 이는 NVIDIA 개발진의 잘못된 설계 탓이지만 개선하려는 의도가 전혀 보이지 않는다.
 
-## NVCC
-NVIDIA CUDA Compiler, 일명 NVCC는 CUDA 플랫폼의 핵심이 되는 컴파일러이다. NVCC는 `.cu` CUDA 소스 파일 및 `.cuh` CUDA 헤더 파일 컴파일에 있어 호스트 코드와 디바이스 코드를 구분한다. 그 중에서 호스트 코드는 일반 C/C++ 컴파일러에서 처리하고, 디바이스 코드는 NVCC에서 처리한다.
-
-> 즉, NVCC는 독립적으로 사용할 수 없으며 반드시 MSVC(윈도우 OS)나 clang(macOS) 혹은 GNU 컴파일러(리눅스 OS)와 같은 일반 C/C++ 컴파일러가 필요하다.
-
 ## 동작 원리
 CUDA 프로젝트의 핵심 목적은 그래픽 카드의 GPU를 활용한 병렬 컴퓨팅을 수행하는 것이다. 이를 위한 절차는 세 단계로 나뉘어진다.
 
@@ -88,14 +101,21 @@ CUDA 프로젝트의 핵심 목적은 그래픽 카드의 GPU를 활용한 병�
 3. *출력: 디바이스 → 호스트*
     : 디바이스 메모리에서 호스트 메모리로 출력 데이터를 복사한다.
 
-## 메모리 관리
-호스트 메모리와 디바이스 메모리는 독립된 존재이므로 별도로 관리해야 한다. 아래는 호스트와 디바이스가 갖는 메모리 관련 함수를 비교한다.
+## CUDA 헤더
+CUDA를 소개하는 첫 장에서 두 종류의 API가 있다고 언급하였다: 바로 드라이버(driver)와 런타임(runtime) API이다. 다음은 두 API를 불러오기 위해 필요한 헤더 파일이다.
 
-| 메모리 함수 | 호스트 | 디바이스 |
-|-----------|:------:|:------:|
-| 메모리 할당 | `malloc()` | `cudaMalloc()` |
-| 메모리 해제 | `free()` | `cudaFree()` |
-| 메모리 복제 | `memcpy()` | `cudaMemcpy()` |
+* *드라이버 API*
+    * `cuda.h`
+    : C 형식 드라이버 API를 제공한다.
+
+* *런타임 API*
+    * `cuda_runtime_api.h`
+    : C 형식 런타임 API를 제공하며, NVCC 컴파일러가 필요없다.
+
+    * `cuda_runtime.h`
+    : C 형식의 `cuda_runtime_api.h` API를 내포하며 오버로딩, 참조 등을 활용한 C++ 형식 런타임 API이다. 또한 CUDA 전용 형식도 제공하기 때문에 NVCC 컴파일러가 필요하다.
+
+만일 CUDA 프로젝트에 NVCC 컴파일러가 사용되면 필요한 CUDA 관련 헤더 파일이 자동적으로 추가된다.
 
 ## CUDA 함수
 CUDA 함수는 일반 C/C++ 함수와 동일한 구문을 가지나 호출 및 실행 위치에 따른 한정자(qualifier)를 지정해야 한다. 아래는 호스트에서 호출하여 디바이스에서 실행시키는 `__global__` 한정자를 가지는 함수의 프로토타입, 호출, 그리고 정의 예시이다.
@@ -131,3 +151,100 @@ __host__ __device__ void function() {
     ...
 }
 ```
+
+### 메모리 함수
+호스트 메모리와 디바이스 메모리는 독립된 존재이며 서로 직접적으로 관여할 수 없다. 다시 말해, 일반 C/C++ 언어에서 다룬 [메모리 함수](../ko.PRGMING_C/#메모리-함수)로는 디바이스에서 처리할 메모리 공간을 확보 및 관리가 불가하다. CUDA 프로젝트에서는 디바이스 메모리만을 위한 함수가 있으며, 아래는 일부 호스트와 디바이스의 메모리 함수를 비교한다.
+
+* 메모리 할당
+
+| 비교    | 구문                                       |
+|:-----:|:----------------------------------------:|
+| C/C++ | `malloc(size_t size)`                    |
+| CUDA  | `cudaMalloc(void **devPtr, size_t size)` |
+
+CUDA 메모리 할당 함수는 `void**`를 추가 인자로 가진다. CUDA 함수가 C/C++의 `malloc()` 함수와 달리 포인터 아닌 `cudaError_t`를 반환하기 때문이다. 그러므로 [참조에 의한 호출](../ko.PRGMING_Cpp/#포인터)(call by reference)을 활용하여 반환되어야 할 메모리 주소를 인자로 통해 건네주는 방식을 채택하였는데, 포인터를 반환해야 하므로 결과적으로 포인터가 할당된 메모리 주소를 가리키는 `void**` 자료형을 가지게 된다.
+
+할당된 디바이스 메모리는 호스트와 동일한 포인터 체계를 사용하나 메모리 주소 값이 꾀나 크다는 점을 확인할 수 있다. 이는 아마 호스트 메모리에서 접근하지 못하는 메모리 주소로 보인다. 이러한 이유로 디바이스 메모리 주소를 `printf()`와 같은 출력 함수로 값을 읽으려 시도하면 메모리 접근 오류가 발생한다.
+
+* 메모리 해제
+
+| 비교    | 구문                       |
+|:-----:|:------------------------:|
+| C/C++ | `free(void *_Block)`     |
+| CUDA  | `cudaFree(void *devPtr)` |
+
+일반 C/C++ 호스트 메모리 해제 함수와 동일하게, CUDA 메모리 함수 `cudaMalloc()`을 통해 할당된 디바이스 메모리를 비할당시킨다.
+
+* 메모리 복사
+
+| 비교    | 구문                                                                 |
+|:-----:|:---------------------------------------------------------------------:|
+| C/C++ | `memcpy(void *_Dst, const void *_Src, size_t _Size)`                  |
+| CUDA  | `cudaMemcpy(void *dst, void *src, size_t count, cudaMemcpyKind kind)` |
+
+CUDA 메모리 복사 함수는 `cudaMemcpyKind`를 추가 인자로 가진다. CUDA 프로젝트에서는 호스트 메모리와 디바이스 메모리 영역이 존재하는데 어느 영역으로 복사할 것인지를 명시해야 하기 때문이다. 이를 통해 호스트에서 디바이스로 데이터를 전달하고 받을 수가 있다.
+
+* 메모리 도배
+
+| 비교    | 구문                                                  |
+|:-----:|:---------------------------------------------------:|
+| C/C++ | `memcpy(void *_Dst, int _Val, size_t _Size)`        |
+| CUDA  | `cudaMemcpy(void *devPtr, int value, size_t count)` |
+
+일반 C/C++ 호스트 메모리 해제 함수와 동일하게, CUDA 메모리 함수 `cudaMemcpy()`을 통해 디바이스 메모리에 값을 대포한다.
+
+## *예시: 기초*
+본 장에서 설명한 내용들을 모두 적용한 CUDA 프로젝트 예시 코드를 보여준다.
+
+```cpp
+#include <stdio.h>
+#include "cuda_runtime.h"
+
+/* 커널 프로토타입 */
+__global__ void kernel(int* arg1, int* arg2, int* arg3);
+
+int main() {
+    
+    // 호스트에 A, B, C 정수형 정의
+    int A = 1, B = 3, C;
+
+    // 디바이스 메모리 주소를 가리킬 dptrA, dptrB, dptrC 포인터
+    //  * 비초기화 상태: 포인터에 메모리 주소 값이 없음
+    int * dptrA, * dptrB, * dptrC;
+
+    // 디바이스 메모리 할당 주소를 dptrA, dptrB, dptrC 포인터에 저장
+    //  * 초기화 상태: 포인터에 메모리 주소 값이 있음
+    cudaMalloc((void**)&dptrA, sizeof(int));
+    cudaMalloc((void**)&dptrB, sizeof(int));
+    cudaMalloc((void**)&dptrC, sizeof(int));
+
+    // 호스트 메모리의 입력값을 디바이스 메모리에 복사
+    cudaMemcpy(dptrA, &A, sizeof(int), cudaMemcpyHostToDevice);
+    cudaMemcpy(dptrB, &B, sizeof(int), cudaMemcpyHostToDevice);
+
+    /* 커널 호출 */
+    kernel<<<1,1>>>(dA, dB, dC);
+
+    // 디바이스 메모리의 출력값을 호스트 메모리에 복사
+    cudaMemcpy(&C, dptrC, sizeof(int), cudaMemcpyDeviceToHost)
+    printf("입력값: %d, %d\n출력값: %d", A, B, C);
+
+    // 디바이스 메모리 해제
+    cudaFree(dptrA); cudaFree(dptrB); cudaFree(dptrC);
+
+    return 0;
+}
+
+/* 커널 정의 */
+__global__ void kernel(int *arg1, int *arg2, int *arg3) {
+    *arg3 = *arg2 + *arg1;
+}
+```
+
+```
+입력값: 1, 3
+출력값: 4
+```
+
+# CUDA: 병렬 컴퓨팅
+이전 장에서는 CUDA 프로젝트에서 호스트 영역과 디바이스 영역을 넘나들어 간단한 사칙연산을 하는 예시를 보여주었다. 그러나 CUDA의 장점인 병렬 컴퓨팅이 활용되지 않았으며, 호스트 코드만으로도 충분히 구현할 수 있다. 본 장에서는 본격적인 CUDA 플랫폼을 활용한 병렬 컴퓨팅의 기본을 소개한다.
