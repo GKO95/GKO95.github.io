@@ -188,10 +188,10 @@ CUDA 메모리 복사 함수는 `cudaMemcpyKind`를 추가 인자로 가진다. 
 
 | 비교    | 구문                                                  |
 |:-----:|:---------------------------------------------------:|
-| C/C++ | `memcpy(void *_Dst, int _Val, size_t _Size)`        |
-| CUDA  | `cudaMemcpy(void *devPtr, int value, size_t count)` |
+| C/C++ | `memset(void *_Dst, int _Val, size_t _Size)`        |
+| CUDA  | `cudaMemset(void *devPtr, int value, size_t count)` |
 
-일반 C/C++ 호스트 메모리 해제 함수와 동일하게, CUDA 메모리 함수 `cudaMemcpy()`을 통해 디바이스 메모리에 값을 대포한다.
+일반 C/C++ 호스트 메모리 해제 함수와 동일하게, CUDA 메모리 함수 `cudaMemset()`을 통해 디바이스 메모리에 값을 도배한다.
 
 ## *예시: 기초*
 본 장에서 설명한 내용들을 모두 적용한 CUDA 프로젝트 예시 코드를 보여준다.
