@@ -247,7 +247,9 @@ __global__ void kernel(int *arg1, int *arg2, int *arg3) {
 ```
 
 # CUDA: 병렬 컴퓨팅
-이전 장에서는 CUDA 프로젝트에서 호스트 영역과 디바이스 영역을 넘나들어 간단한 사칙연산을 하는 예시를 보여주었다. 그러나 CUDA의 장점인 병렬 컴퓨팅이 활용되지 않았으며, 호스트 코드만으로도 충분히 구현할 수 있다. 본 장에서는 본격적인 CUDA 플랫폼을 활용한 병렬 컴퓨팅의 기본을 소개한다.
+이전 장에서는 CUDA 프로젝트에서 호스트 영역과 디바이스 영역을 넘나들어 간단한 사칙연산을 하는 예시를 보여주었다. 그러나 CUDA의 장점인 병렬 컴퓨팅이 활용되지 않았으며, 호스트 코드만으로도 충분히 구현할 수 있다. 본 장에서는 본격적인 CUDA 플랫폼을 활용한 병렬 컴퓨팅의 기본을 소개하는 동시, 이해를 돕기 위한 일부 GPU 아키텍처에 대하여 함께 설명한다.
+
+> 본 장에서는 [CUDA 계산 성능 6.1](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capability-6-x)을 지닌 [*NVIDIA GeForce GTX 1070* 8GB GDDR5](https://www.nvidia.com/ko-kr/geforce/10-series/)로 예시를 든다.
 
 아래는 CUDA의 병렬 컴퓨팅에 이해를 돕기 위한 NVIDIA의 한 블로그 [게시물](https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/)에 올라온 커널 및 쓰레드 계층 이미지이다.
 
@@ -256,7 +258,12 @@ __global__ void kernel(int *arg1, int *arg2, int *arg3) {
 ## 쓰레드
 쓰레드(thread)는 하나의 작업을 처리하는데 필요한 명령어 집합체이다. 여기서 명령어(instruction)란, 컴퓨터가 가지는 가장 기초적인 동작으로 데이터의 산술 및 비트 연산, 그리고 메모리 이동 등이 해당된다. 이런 명령어들의 집합에 의해 쓰레드라는 실질적인 프로그램 작업이 결국 커널을 실행시킨다.
 
-> 하드웨어에서 각 쓰레드는 하나의 스트리밍 프로세서, 일명 CUDA 코어에서 처리된다.
+> 하드웨어에서 각 쓰레드는 하나의 스트리밍 프로세서, 일명 CUDA 코어에서 처리된다. *NVIDIA GeForce GTX 1070*에는 총 1920개의 스트리밍 프로세서를 갖는다.
+> 
+> 스트리밍 프로세서 안에는 다음 구성장치를 가진다:
+> 
+> * 32비트 정수형 [ALU](../ko.EMBEDDED_MCU/#산술-논리-장치) (1개)
+> * 단정밀도 부동소수점 [FPU](https://ko.wikipedia.org/wiki/부동_소수점_장치) (1개)
 
 ```cpp
 kernel<<<1,N>>>(dptrA, dptrB, dptrC);
@@ -269,9 +276,11 @@ __global__ void kernel(int *arg1, int *arg2, int *arg3) {
 ```
 
 ## 블록
-블록(block)은 동일한 커널을 실행하는 쓰레드의 집합체이다. 다시 말해, 하나의 블록에 들어있는 모든 쓰레드는 (처리할 데이터만 다를 뿐) 전부 동일한 명령어들이 동작한다. 이전에는 블록 하나가 가질 수 있는 쓰레드의 개수가 512개로 제한되었으나, 2019년 6월 이후의 GPU 모델에는 최대 1024개의 쓰레드까지 수용할 수 있다.
+블록(block)은 동일한 커널을 실행하는 쓰레드의 집합체이다. 다시 말해, 하나의 블록에 들어있는 모든 쓰레드는 (처리할 데이터만 다를 뿐) 전부 동일한 명령어들이 동작한다. 그러므로 블록 내의 쓰레드는 순차적(직렬)만이 아닌 동시(병렬)에 처리될 수 있다.
 
 > 하드웨어에서 블록은 한 개의 스트리밍 멀티프로세서(streaming multiprocessor; SM)에서 처리하며, 안에는 여러 개의 스트리밍 프로세서가 탑재되어 있다.
+
+이전에는 블록 하나가 가질 수 있는 쓰레드의 개수가 512개로 제한되었으나, 2019년 6월 이후의 GPU 모델에는 최대 1024개의 쓰레드까지 수용할 수 있다. 
 
 ```cpp
 kernel<<<N,1>>>();
@@ -282,3 +291,8 @@ __global__ void kernel(int *arg1, int *arg2, int *arg3) {
     arg3[blockIdx.x] = arg1[blockIdx.x] + arg2[blockIdx.x];
 }
 ```
+
+### 워프
+워프(warp)는 하드웨어 면에서 보았을 때 블록을 구성하는 요소이며, 하나의 워프에는 블록을 구성하는 쓰레드 중에서 32개의 쓰레드만 들어있다. 즉, 블록과 마찬가지로 워프를 구성하는 쓰레드는 전부 동일한 쓰레드이다.
+
+> 비록 수많은 시간이 지나며 GPU의 성능도 향상되었으나, 워프의 쓰레드 개수는 32개로 고정되어 있다 ([참고자료](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#features-and-technical-specifications__technical-specifications-per-compute-capability)).
