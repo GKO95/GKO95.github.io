@@ -10,9 +10,7 @@ order: 0x14
 # CUDA: 소개
 [CUDA](https://ko.wikipedia.org/wiki/CUDA)(Compute Unified Device Architecture)는 게이밍 그래픽 카드로 매우 잘 알려진 [NVIDIA](https://www.nvidia.com/ko-kr/)에서 제공하는 병렬 컴퓨팅 플랫폼 및 API 모델이다. 해당 플랫폼은 [C](../ko.PRGMING_C)/[C++](../ko.PRGMING_Cpp) 그리고 [포트란](https://ko.wikipedia.org/wiki/포트란) 프로그래밍 언어와 함께 사용할 수 있도록 제작되어 접근성이 다른 그래픽 관련 API와 달리 용이하다.
 
-컴퓨터의 중앙 처리 장치(CPU)에는 실질적인 연산을 담당하는 프로세서가 한 개 이상이 들어으며, 개수에 따라 듀얼 코어(프로세서 2개), 쿼드 코어(프로세서 4개), 헥사 코어(프로세서 6개) 등으로 불린다. 그래픽 카드의 그래픽 처리 장치(GPU)에도 이러한 코어가 존재하는데 이들을 바로 CUDA 코어라고 부르며, 게이밍에 사용되는 그래픽 카드에는 적어도 천 개 이상의 CUDA 코어가 들어있다. 단일 GPU 코어는 CPU 코어에 비해 비약적인 처리능력을 가졌으나, 방대한 양의 GPU 코어로 한꺼번에 컴퓨팅을 진행하면 CPU보다 더 빠르고 높은 효율로 작업을 처리할 수 있다.
-
-2021년 3월 31일 기준, 본 문서는 총 1920 개의 CUDA 코어가 탑재되어 있는 NVIDIA GeForce GTX 1070 8GB GDDR5로 예시를 든다.
+컴퓨터의 중앙 처리 장치(CPU)에는 실질적인 연산을 담당하는 프로세서가 한 개 이상이 들어있다: 2개면 듀얼 코어, 4개면 쿼드 코어, 그리고 6개면 헥사 코어라 부른다. 그래픽 카드의 그래픽 처리 장치(GPU)에도 이러한 프로세서가 존재하는데 이들을 바로 스트리밍 프로세서(streaming processor; SP) 혹은 간단히 CUDA 코어라고 부르며, 흔히 규격상에는 [셰이더](https://ko.wikipedia.org/wiki/셰이더)(shader)로 알려져 있다. 단일 GPU 코어는 CPU 코어에 비해 비약적인 처리능력을 가졌으나, 게이밍에 사용되는 그래픽 카드에는 적어도 천 개 이상의 프로세서가 들어있어 한꺼번에 컴퓨팅을 진행하면 CPU보다 더 빠르고 높은 효율로 작업을 처리할 수 있다.
 
 ## 용어 정의
 비록 CUDA는 C/C++ 언어를 기반하지만 CPU만이 아닌 GPU에서도 코드를 실행해야 하므로 CUDA 플랫폼에서만 사용되는 용어가 존재한다. 이들은 CUDA 프로젝트를 다룰 때 반드시 알아야 하는 용어이기에 숙지할 필요가 있다.
@@ -122,13 +120,13 @@ CUDA 함수는 일반 C/C++ 함수와 동일한 구문을 가지나 호출 및 �
 
 ```cpp
 /* 함수 (혹은 커널) 프로토타입 */
-__global__ void kernel(int* arg1, int* arg2, int* arg3);
+__global__ void function(int* arg1, int* arg2, int* arg3);
 
 /* 함수 (혹은 커널) 호출 */
-kernel<<<1,1>>>(ptr1, ptr2, ptr3);
+function<<<1,1>>>(dptr1, dptr2, dptr3);
 
 /* 함수 (혹은 커널) 정의 */
-__global__ void kernel(int* arg1, int* arg2, int* arg3) {
+__global__ void function(int* arg1, int* arg2, int* arg3) {
     *arg3 = *arg1 + *arg2;
 }
 ```
@@ -153,6 +151,8 @@ __host__ __device__ void function() {
 ```
 
 ### 메모리 함수
+> *참조: [NVIDIA Docs CUDA 런타임 메모리 (영문)](https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__MEMORY.html)*
+
 호스트 메모리와 디바이스 메모리는 독립된 존재이며 서로 직접적으로 관여할 수 없다. 다시 말해, 일반 C/C++ 언어에서 다룬 [메모리 함수](../ko.PRGMING_C/#메모리-함수)로는 디바이스에서 처리할 메모리 공간을 확보 및 관리가 불가하다. CUDA 프로젝트에서는 디바이스 메모리만을 위한 함수가 있으며, 아래는 일부 호스트와 디바이스의 메모리 함수를 비교한다.
 
 * 메모리 할당
@@ -248,3 +248,101 @@ __global__ void kernel(int *arg1, int *arg2, int *arg3) {
 
 # CUDA: 병렬 컴퓨팅
 이전 장에서는 CUDA 프로젝트에서 호스트 영역과 디바이스 영역을 넘나들어 간단한 사칙연산을 하는 예시를 보여주었다. 그러나 CUDA의 장점인 병렬 컴퓨팅이 활용되지 않았으며, 호스트 코드만으로도 충분히 구현할 수 있다. 본 장에서는 본격적인 CUDA 플랫폼을 활용한 병렬 컴퓨팅의 기본을 소개한다.
+
+아래는 CUDA의 병렬 컴퓨팅에 이해를 돕기 위한 NVIDIA의 한 블로그 [게시물](https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/)에 올라온 커널 및 쓰레드 계층 이미지이다.
+
+![CUDA의 쓰레드, 블록, 그리고 그리드](/images/docs/cuda/cuda_kernel_execution.png)
+
+## 쓰레드
+쓰레드(thread)는 하나의 작업을 처리하는데 필요한 명령어 집합체이다. 여기서 명령어(instruction)란, 컴퓨터가 가지는 가장 기초적인 동작으로 데이터의 산술 및 비트 연산, 그리고 메모리 이동 등이 해당된다. 이런 명령어들의 집합에 의해 쓰레드라는 실질적인 프로그램 작업이 결국 커널을 실행시킨다.
+
+> 하드웨어에서 각 쓰레드는 하나의 스트리밍 프로세서, 일명 CUDA 코어에서 처리된다.
+
+```cpp
+kernel<<<1,N>>>(dptrA, dptrB, dptrC);
+```
+
+```cpp
+__global__ void kernel(int *arg1, int *arg2, int *arg3) {
+    arg3[threadIdx.x] = arg1[threadIdx.x] + arg2[threadIdx.x];
+}
+```
+
+## 블록
+블록(block)은 동일한 커널을 실행하는 쓰레드의 집합체이다. 다시 말해, 하나의 블록에 들어있는 모든 쓰레드는 (처리할 데이터만 다를 뿐) 전부 동일한 명령어들이 동작한다. 이전에는 블록 하나가 가질 수 있는 쓰레드의 개수가 512개로 제한되었으나, 2019년 6월 이후의 GPU 모델에는 최대 1024개의 쓰레드까지 수용할 수 있다.
+
+> 하드웨어에서 블록은 한 개의 스트리밍 멀티프로세서(streaming multiprocessor; SM)에서 처리하며, 안에는 여러 개의 스트리밍 프로세서가 탑재되어 있다.
+
+```cpp
+kernel<<<N,1>>>();
+```
+
+```cpp
+__global__ void kernel(int *arg1, int *arg2, int *arg3) {
+    arg3[blockIdx.x] = arg1[blockIdx.x] + arg2[blockIdx.x];
+}
+```
+
+## 워프
+워프(warp)는 블록을 구성하는 하드웨어적 요소로
+
+A warp is a set of 32 threads within a thread block such that all the threads in a warp execute the same instruction. These threads are selected serially by the SM.[13]
+
+Once a thread block is launched on a multiprocessor (SM), all of its warps are resident until their execution finishes.
+
+
+SM은 쓰레드를 워프(warp)라는 32개 쓰레드의 묶음으로 동시에 처리한다. CUDA 성능 6.1에는 이러한 워프를 처리하는 워프 스케줄러가 4개가 있다.
+
+> 비록 수많은 시간이 지나며 GPU의 성능도 향상되었으나, 워프의 쓰레드 개수는 32개로 고정되어 있다 ([참고자료](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#features-and-technical-specifications__technical-specifications-per-compute-capability)).
+
+워프에 들어있는 
+
+SM이 실행해야 할 워프를 인수받을 시, 해당 워프를 스케줄러 하나에 분배한다. 그리고
+
+When an SM is given warps to execute, it first distributes them among its schedulers. Then, at every instruction issue time, each scheduler issues one instruction for one of its assigned warps that is ready to execute, if any.
+
+
+
+
+## 그리드
+그리도(grid), 한국어로 좌표로 넘파이의 넘파이 행렬이나 텐서플로우의 텐서와 마찬가지로 배열을 칭하는 용어이다. 그리고 하나의 그리드는 GPU를 의미하기도 한다.
+
+## *예시: 병렬 컴퓨팅*
+
+
+
+
+# CUDA: 아키텍처
+> *참조: [위키백과 - Fermi 마이크로아키텍처 (영문)](https://en.wikipedia.org/wiki/Fermi_(microarchitecture))*
+
+본 내용은 GPU 구조에 대한 이해가 다소 요구되므로 [NVIDIA GeForce GTX 1070 8GB GDDR5](https://www.nvidia.com/ko-kr/geforce/10-series/)로 예시를 든다. 이는 [CUDA 계산 성능 6.1](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capability-6-x)을 가진다.
+
+## 스트리밍 프로세서
+> NVIDIA GeForce GTX 1070에는 총 1920개의 스트리밍 프로세서, 일명 CUDA 코어를 갖는다.
+
+일명 CUDA 코어라고 불리며, 하나의 32비트 정수형 [ALU](../ko.EMBEDDED_MCU/#산술-논리-장치) 및 단정밀도 부동소수점 [FPU](https://ko.wikipedia.org/wiki/부동_소수점_장치)를 가진다.
+
+## 스트리밍 멀티프로세서
+> NVIDIA GeForce GTX 1070에는 15개의 스트리밍 멀티프로세서를 갖는다.
+
+![CUDA 스트리밍 멀티프로세서 구조<sub><i>출처: <a href="http://users.umiacs.umd.edu/~ramani/cmsc828e_gpusci/lecture9.pdf">University of Mayland</a></i></sub>](/images/docs/cuda/cuda_streaming_multiprocessor.png)
+
+* *L1 [캐시 메모리](https://ko.wikipedia.org/wiki/CPU_캐시) (cache memory)*
+    : 처리장치(예. CPU, GPU 등)에서 매우 흔히 사용되는 데이터를 별도로 저장하는 가장 빠른 저용량 임시 휘발성 메모리이다. 위의 그림에는 L1 메모리가 명령어 및 데이터 전용으로 나뉘어져 있으나, Kepler 마이크로아키텍처부터 성능이 대폭 향상되어 통합 L1 캐시 메모리로 변경되었다.
+
+* *스트리밍 프로세서 (streaming processor; SP)*
+    : 일명 CUDA 코어라 부르며, 정수 및 부동소수점 산술 계산을 담당한다. CUDA 성능 6.1은 각 SM마다 128개의 SP가 들어있으므로 GTX 1070이 가지는 15개의 SM으로 총 1920개의 프로세서가 산출된다.
+
+* *특수 함수 장치 (special function unit; SPU)*
+    : 일반 다항식으로 접근할 수 없는 [초월함수](https://ko.wikipedia.org/wiki/초월함수)(예. 삼각함수, 지수함수 등)의 산술을 위한 장치이다. CUDA 성능 6.1의 GTX 1070에는 각 SM마다 32개의 SFU가 들어있다.
+
+* *워프 스케줄러 (warp scheduler)*
+    : CUDA 성능 6.1의 GTX 1070에는 총 4개의 워프 스케줄러를 가진다.
+
+* *공용 메모리 (shared memory)*
+    : 
+
+### 워프 스케쥴러
+> CUDA 성능 6.1에는 하나의 SM에 4개의 워프 스케줄러를 갖으며, 이는 워프 하나에 32개의 쓰레드가 있으므로 총 128개의 프로세서와 일치한다.
+
+
