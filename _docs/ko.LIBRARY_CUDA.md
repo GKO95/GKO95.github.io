@@ -350,3 +350,37 @@ CUDA 프로젝트에서 각 블록에 접근하려면 두 가지를 변경해야
 
 # CUDA: 병렬 컴퓨팅
 NVIDIA CUDA의 마이크로아키텍처를 설명하면서 쓰레드(thread)와 블록(block)에 대하여 간단히 소개하였다. 이 두 요소의 조합이 바로 병렬 컴퓨팅의 기초가 된다. 본 장에서는 CUDA 프로젝트에서 쓰레드와 블록을 활용한 병렬 컴퓨팅을 본격적으로 구현하는 방법을 설명한다.
+
+## 배열 인덱싱
+CUDA 프로젝트에서 커널이 블록 혹은 쓰레드를 가질 때, 디바이스 메모리는 1차원 배열처럼 데이터를 호출하였다. 만일 커널이 여러 개의 블록과 쓰레드를 갖는다면 디바이스 메모리에는 어떠한 배열 형태로 나타날 것인지 살펴본다. 다음 그림은 네 개의 블록과 여덟 개의 쓰레드, 즉 `<<<4,8>>>` 커널 실행 연산자를 가진 경우의 디바이스 메모리 배열을 보여준다.
+
+![CUDA 블록과 쓰레드 조합 배열<sub><i>출처: <a href="https://www.micc.unifi.it/bertini/download/parallel/2016-2017/11_gpu_cuda_2.pdf">University of Florence</a></i></sub>](/images/docs/cuda/cuda_blockidx_threadidx.png)
+
+그러므로 디바이스 메모리는 1차원 배열의 21번째 요소는 2번 블록의 5번 쓰레드로부터 처리되는 데이터이다.
+
+![디바이스 메모리 배열 인덱싱<sub><i>출처: <a href="https://www.micc.unifi.it/bertini/download/parallel/2016-2017/11_gpu_cuda_2.pdf">University of Florence</a></i></sub>](/images/docs/cuda/cuda_array_indexing.png)
+
+이를 디바이스 코드에서 구현한다면 다음과 같이 나타낼 수 있다.
+
+```cpp
+__global__ void kernel(int *arg1, int *arg2, int *arg3) {
+    int index = blockIdx.x * blockDim.x + threadIdx.x;
+    arg3[index] = arg1[index] + arg2[index];
+}
+```
+
+여기서 `blockDim`은 블록의 차원 하나가 갖는 크기, 즉 블록 개수를 의미한다.
+
+### 추상적 배열 인덱싱
+인덱스는 배열 크기를 초과해서는 안된다. 이를 방지하기 위해 조건문을 안전장치로 사용하여 배열 크기 내에서만 처리 가능하도록 설정할 수 있다.
+
+```cpp
+/* 최대 디바이스 메모리 배열 크기를 전달하는 "N" 정수형 매개변수 추가 */
+__global__ void kernel(int *arg1, int *arg2, int *arg3, int N) {
+    int index = blockIdx.x * blockDim.x + threadIdx.x;
+
+    // 배열 인덱싱이 최대 크기 이내이면 연산을 진행한다.    
+    if (index < N)
+        arg3[index] = arg1[index] + arg2[index];
+}
+```
