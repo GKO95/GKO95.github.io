@@ -246,10 +246,10 @@ __global__ void kernel(int *arg1, int *arg2, int *arg3) {
 출력값: 4
 ```
 
-# CUDA: 병렬 컴퓨팅
-이전 장에서는 CUDA 프로젝트에서 호스트 영역과 디바이스 영역을 넘나들어 간단한 사칙연산을 하는 예시를 보여주었다. 그러나 CUDA의 장점인 병렬 컴퓨팅이 활용되지 않았으며, 호스트 코드만으로도 충분히 구현할 수 있다. 본 장에서는 본격적인 CUDA 플랫폼을 활용한 병렬 컴퓨팅의 기본을 소개하는 동시, 이해를 돕기 위한 일부 GPU 아키텍처에 대하여 함께 설명한다.
+# CUDA: 마이크로아키텍처
+이전 장에서는 CUDA 프로젝트에서 호스트 영역과 디바이스 영역을 넘나들어 간단한 사칙연산을 하는 예시를 보여주었다. 그러나 CUDA의 장점인 병렬 컴퓨팅이 활용되지 않았으며, 호스트 코드만으로도 충분히 구현할 수 있다. 그 전에 본 장에서는 NVIDIA GPU가 가지는 [마이크로아키텍처](https://ko.wikipedia.org/wiki/마이크로아키텍처)(microarchitecture)를 간략하게 소개한다.
 
-> 본 장에서는 [CUDA 계산 성능 6.1](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capability-6-x)을 지닌 [*NVIDIA GeForce GTX 1070* 8GB GDDR5](https://www.nvidia.com/ko-kr/geforce/10-series/)로 예시를 든다.
+> 본 문서는 이해를 돕기 위해 [CUDA 계산 성능 6.1](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capability-6-x)을 지닌 [*NVIDIA GeForce GTX 1070* 8GB GDDR5](https://www.nvidia.com/ko-kr/geforce/10-series/)로 규격 예시를 든다.
 
 아래는 CUDA의 병렬 컴퓨팅에 이해를 돕기 위한 NVIDIA의 한 블로그 [게시물](https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/)에 올라온 커널 및 쓰레드 계층 이미지이다.
 
@@ -347,3 +347,6 @@ CUDA 프로젝트에서 각 블록에 접근하려면 두 가지를 변경해야
 > CUDA 성능 6.1의 *NVIDIA GeForce GTX 1070*에는 각 SM마다 4개의 워프 스케줄러를 갖으며, 워프 하나에 32개의 쓰레드가 있으므로 총 128개의 프로세서와 일치한다.
 
 워프 스케줄러는 [문맥 교환](https://ko.wikipedia.org/wiki/문맥_교환)(context switch)이란 작업으로 워프를 처리한다: *워프 A* 내의 쓰레드에서 피연산자가 준비되지 않아 명령어를 수행할 수 없을 시, 워프 스케줄러는 동일한 블록에서 준비된 다른 *워프 B*를 처리한다. 워프 스케줄러에서 *워프 B*에 명령어를 하달하는 동안, *워프 A*에서는 독립적으로 다음 명령어 처리 진행을 위해 쓰레드 레지스터에 피연산자를 인출한다. 그렇게 *워프 A*에서 준비를 마쳤으면 워프 스케줄러는 *워프 A*가 처리해야 할 다음 명령어를 하달한다.
+
+# CUDA: 병렬 컴퓨팅
+NVIDIA CUDA의 마이크로아키텍처를 설명하면서 쓰레드(thread)와 블록(block)에 대하여 간단히 소개하였다. 이 두 요소의 조합이 바로 병렬 컴퓨팅의 기초가 된다. 본 장에서는 CUDA 프로젝트에서 쓰레드와 블록을 활용한 병렬 컴퓨팅을 본격적으로 구현하는 방법을 설명한다.
