@@ -265,32 +265,42 @@ __global__ void kernel(int *arg1, int *arg2, int *arg3) {
 > * 32비트 정수형 [ALU](../ko.EMBEDDED_MCU/#산술-논리-장치) (1개)
 > * 단정밀도 부동소수점 [FPU](https://ko.wikipedia.org/wiki/부동_소수점_장치) (1개)
 
-```cpp
-kernel<<<1,N>>>(dptrA, dptrB, dptrC);
-```
+CUDA 프로젝트에서 각 쓰레드에 접근하려면 두 가지를 변경해야 한다.
 
-```cpp
-__global__ void kernel(int *arg1, int *arg2, int *arg3) {
-    arg3[threadIdx.x] = arg1[threadIdx.x] + arg2[threadIdx.x];
-}
-```
+1. 호스트: 쓰레드 개수를 커널 실행 연산자(`<<<>>>`)에 명시한다.
+
+    ```cpp
+    kernel<<<1,N>>>(dptrA, dptrB, dptrC);
+    ```
+
+2. 디바이스: 디바이스 메모리를 배열처럼 간주하여 `threadIdx`로 각 쓰레드에 접근한다.
+
+    ```cpp
+    __global__ void kernel(int *arg1, int *arg2, int *arg3) {
+        arg3[threadIdx.x] = arg1[threadIdx.x] + arg2[threadIdx.x];
+    }
+    ```
 
 ## 블록
-블록(block)은 동일한 커널을 실행하는 쓰레드의 집합체이다. 다시 말해, 하나의 블록에 들어있는 모든 쓰레드는 (처리할 데이터만 다를 뿐) 전부 동일한 명령어들이 동작한다. 그러므로 블록 내의 쓰레드는 순차적(직렬)만이 아닌 동시(병렬)에 처리될 수 있다.
+블록(block)은 동일한 커널을 실행하는 쓰레드의 집합체로 최대 1024개까지 수용할 수 있다. 다시 말해, 하나의 블록에 들어있는 모든 쓰레드는 (처리할 데이터만 다를 뿐) 전부 동일한 명령어들이 동작한다. 그러므로 블록 내의 쓰레드는 순차적(직렬)만이 아닌 동시(병렬)에 처리될 수 있다.
 
 > 하드웨어에서 블록은 한 개의 스트리밍 멀티프로세서(streaming multiprocessor; SM)에서 처리하며, 자세한 내용은 [하위부분](#스트리밍-멀티프로세서)에서 설명한다.
 
-이전에는 블록 하나가 가질 수 있는 쓰레드의 개수가 512개로 제한되었으나, 2019년 6월 이후의 GPU 모델에는 최대 1024개의 쓰레드까지 수용할 수 있다. 
+CUDA 프로젝트에서 각 블록에 접근하려면 두 가지를 변경해야 한다.
 
-```cpp
-kernel<<<N,1>>>();
-```
+1. 호스트: 블록 개수를 커널 실행 연산자(`<<<>>>`)에 명시한다.
 
-```cpp
-__global__ void kernel(int *arg1, int *arg2, int *arg3) {
-    arg3[blockIdx.x] = arg1[blockIdx.x] + arg2[blockIdx.x];
-}
-```
+    ```cpp
+    kernel<<<N,1>>>(dptrA, dptrB, dptrC);
+    ```
+
+2. 디바이스: 디바이스 메모리를 배열처럼 간주하여 `blockIdx`로 각 블록에 접근한다.
+
+    ```cpp
+    __global__ void kernel(int *arg1, int *arg2, int *arg3) {
+        arg3[blockIdx.x] = arg1[blockIdx.x] + arg2[blockIdx.x];
+    }
+    ```
 
 ### 스트리밍 멀티프로세서
 스트리밍 멀티프로세서(streaming multiprocessor; SM)는 블록을 처리하는 장치로 안에는 여러 개의 스트리밍 프로세서가 들어있어 블록의 쓰레드를 동시에 처리한다.
