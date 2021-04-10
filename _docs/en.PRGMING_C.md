@@ -20,7 +20,7 @@ An interpreter allows a computer to reads the source code written in English and
 C language is a compiled language that doesn't support cross-platform, but it processes faster than interpreted language due to its optimization to the current system.
 
 ### Compiler
-C language categorizes its compiler version by the year of standard released by the International Organization for Standardization(ISO); ANSI C (aka. C89) and C99 is the most commonly used version. This document introduces C language based on the ANSI C compiler at minimum.
+C language categorizes its compiler version by the year of standard released by the International Organization for Standardization(ISO); ANSI C (aka. C89) and C99 is the most commonly used version. This document introduces C language based on the ANSI C compiler.
 
 ### Preprocessor
 A preprocessor is responsible for optimizing the source code before the compiler translates to binary code. A command for a preprocessor is called *preprocessor directive* and has octothorpe `#` at its prefix.
@@ -313,6 +313,8 @@ A data type is one of the crucial factors which determines the type and byte siz
 | `double`   | Double-precision float | Float with a doubled precision and memory.<br />Size: 8 bytes  |
 | `char`     | Character: `''`        | A single character, such as `'A'` or `'?'`.<br />Size: 1 byte  |
 | `void`     | Void                   | Non-specific data type.<br />Size: 1 byte                    |
+
+> *NOTICE:* <span style="color:red">ANSI C</span>*, the standard compiler for this document, does not support `bool` Boolean data type!*
 
 ### `sizeof()` Function
 The `sizeof()` function returns allocated memory size of the type or data in bytes.
@@ -804,9 +806,7 @@ Following is a difference between parameter and argument mentioned when discussi
 
 Although parameters and arguments are a different existence, two terms are used interchangeably as both stores the same data.
 
-| OPERATOR |   SYNTAX    | DESCRIPTION                                                  |
-| :------: | :---------: | ------------------------------------------------------------ |
-|   `=`    | `arg=value` | A parameter that has default value when no argument is passed. Must locate after normal parameter. |
+> *NOTICE:* <span style="color:red">ANSI C</span>*, the standard compiler for this document, does not support `arg=value` default argument value!*
 
 Examples below show how parameter and argument work in function:
 
@@ -815,11 +815,10 @@ Examples below show how parameter and argument work in function:
 int function(int arg1, float arg2);
 
 /* CALLING A FUNCTION */
-function(1);             // >> OUTPUT: 3.0
 function(1, 3.0);        // >> OUTPUT: 4.0 (extract an integer from 1 + 3.14)
 
 /* FUNCTION DEFINITION */
-int function(int arg1, float arg2 = 2.0)
+int function(int arg1, float arg2)
 {
 	return arg1 + arg2;
 }
