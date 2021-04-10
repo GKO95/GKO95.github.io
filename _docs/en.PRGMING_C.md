@@ -312,7 +312,6 @@ A data type is one of the crucial factors which determines the type and byte siz
 | `float`    | Floating point number  | Real number with a decimal point.<br />Size: 4 bytes          |
 | `double`   | Double-precision float | Float with a doubled precision and memory.<br />Size: 8 bytes  |
 | `char`     | Character: `''`        | A single character, such as `'A'` or `'?'`.<br />Size: 1 byte  |
-| `bool`     | Boolean                | Non-zero represents `true` while zero is `false`.<br />Size: 1 byte |
 | `void`     | Void                   | Non-specific data type.<br />Size: 1 byte                    |
 
 ### `sizeof()` Function
