@@ -50,4 +50,64 @@ py -m pip install pyside6
 # QT: 기초
 Qt는 마이크로소프트의 [MFC](../ko.LIBRARY_MFC/) 라이브러리와 동일하게 OOP, 즉 객체지향 프로그래밍을 사용한다. 각 클래스는 어플리케이션을 구성하는 요소를 나타내며, 이들을 주어진 레이아웃에 삽입하므로써 GUI를 나타내는 방식을 채택한다. 본 장에서는 Qt 프레임워크에서 어플리케이션을 디자인하는 방법을 소개한다.
 
+## 어플리케이션
+어플리케이션(application)이란 프로그램 자체를 가리키는 용어이다. 그리고 Qt 기반의 프로그램을 실행시키기 위해서는 `QApplication` 클래스가 필요하다. 아래는 Qt 어플리케이션을 실행하는 간단한 PySide 코드이다.
+
+```python
+from PySide6.QtWidgets import QApplication
+
+# QApplication 클래스로부터 Qt 어플리케이션을 나타내는 app 객체 생성
+app = QApplication()
+
+# Qt 어플리케이션 실행
+app.exec_()
+```
+
+위의 Qt 코드는 GUI가 없는 상태에서 어플리케이션을 실행한다. 때문에 아무런 창이 나타나지 않더라도 Qt 프로그램이 파이썬 프로세서로 계속 실행되고 있음을 작업 관리자에서 확인할 수 있다.
+
+## 위젯
+위젯(widget)은 Qt 어플리케이션 GUI를 구성하는 가장 기본적인 상호작용 요소이다. 텍스트를 표시하는 `QLabel`, 버튼을 제공하는 `QPushButton`, 입력창을 제공하는 `QLineEdit` 클래스 등이 있다. 위젯들은 모두 `QWidget`이란 위젯 클래스로부터 파생된다.
+
+### 윈도우
+위젯 중에서 임베디드 되지 않은, 즉 부모가 없는 위젯은 윈도우(window)라 부른다. 윈도우는 말 그대로 프로그램 GUI 창을 가리킨다. 아래는 텍스트를 표시하는 `QLabel` 위젯이 윈도우 창으로 나타나는 것을 확인할 수 있는 코드이다.
+
+```python
+from PySide6.QtWidgets import QApplication
+
+app = QApplication()
+
+# 어플리케이션이 실행되는 도중, QLabel의 모습을 드러내어 프로그램 GUI 역할을 한다.
+widget = QLabel("Hello World!")
+widget.show()
+
+app.exec_()
+```
+
+![윈도우로 나타난 QLabel 위젯](/images/docs/qt/qt_widget_window.png)
+
+> Qt 프레임워크 중에서 창을 나타내는 `QWindow` 윈도우 클래스가 별도로 존재하지만, 윈도우 클래스보다 `QWidget` 위젯 클래스로 GUI 창을 나타내는 게 일반적이다.
+
+### 메인 윈도우
+메인 윈도우(main window)는 프로그램 창으로 최적화된 위젯으로 `QMainWindow` 클래스가 필요하다. 즉, 일반 위젯과 달리 `QMenuBar` 메뉴바, `QToolBar` 툴바, `QDockWidget` 도크, 그리고 `QStatusBar` 상태바를 지원하는 윈도우 창을 제공한다.
+
 ![Qt 어플리케이션의 기반 구조](/images/docs/qt/qt_mainwindowlayout.png)
+
+```python
+from PySide6.QtWidgets import QApplication
+
+""" 설명:
+QMainWindow를 슈퍼클래스로 갖는 MainWindow 클래스를 정의한다.
+생성자의 show() 메소드로 인해 객체화에서 자동으로 모습을 나타낸다.
+"""
+class MainWindow(QMainWindow):
+    def __init__():
+        super().__init__()
+        self.show()
+
+app = QApplication()
+
+# MainWindow 객체화
+window = MainWindow()
+
+app.exec_()
+```
