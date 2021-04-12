@@ -71,6 +71,8 @@ app.exec_()
 ### 윈도우
 위젯 중에서 임베디드 되지 않은, 즉 부모가 없는 위젯은 윈도우(window)라 부른다. 윈도우는 말 그대로 프로그램 GUI 창을 가리킨다. 아래는 텍스트를 표시하는 `QLabel` 위젯이 윈도우 창으로 나타나는 것을 확인할 수 있는 코드이다.
 
+![윈도우로 나타난 QLabel 위젯](/images/docs/qt/qt_widget_window.png)
+
 ```python
 from PySide6.QtWidgets import QApplication
 
@@ -83,31 +85,41 @@ widget.show()
 app.exec_()
 ```
 
-![윈도우로 나타난 QLabel 위젯](/images/docs/qt/qt_widget_window.png)
-
 > Qt 프레임워크 중에서 창을 나타내는 `QWindow` 윈도우 클래스가 별도로 존재하지만, 윈도우 클래스보다 `QWidget` 위젯 클래스로 GUI 창을 나타내는 게 일반적이다.
 
 ### 메인 윈도우
+> *참조: [Qt for Python - QMainWindow](https://doc.qt.io/qtforpython/PySide6/QtWidgets/QMainWindow.html)*
+
 메인 윈도우(main window)는 프로그램 창으로 최적화된 위젯으로 `QMainWindow` 클래스가 필요하다. 즉, 일반 위젯과 달리 `QMenuBar` 메뉴바, `QToolBar` 툴바, `QDockWidget` 도크, 그리고 `QStatusBar` 상태바를 지원하는 윈도우 창을 제공한다.
 
 ![Qt 어플리케이션의 기반 구조](/images/docs/qt/qt_mainwindowlayout.png)
+
+`QMainWindow`은 아무것도 없는 텅 빈 위젯이다. 직접 사용하기보다 원하는대로 디자인할 수 있도록 서브클래스를 파생시키는데 활용된다. 아래 코드는 `MainWindow` 서브클래스를 파생하여 QLabel 텍스트 위젯을 삽입하여 Qt 프로그램 GUI 창으로 사용한다.
+
+![QMainWindow 위젯으로 생성된 메인 윈도우](/images/docs/qt/qt_widget_mainwindow.png)
 
 ```python
 from PySide6.QtWidgets import QApplication
 
 """ 설명:
 QMainWindow를 슈퍼클래스로 갖는 MainWindow 클래스를 정의한다.
-생성자의 show() 메소드로 인해 객체화에서 자동으로 모습을 나타낸다.
+생성자의 show() 메소드로 인해 객체화에서 자동으로 모습을 보여준다.
 """
 class MainWindow(QMainWindow):
-    def __init__():
+    def __init__(self):
         super().__init__()
+        self.setCentralWidget(QLabel("Hello World!"))
         self.show()
 
 app = QApplication()
-
+    
 # MainWindow 객체화
 window = MainWindow()
 
 app.exec_()
 ```
+
+> 중앙위젯(central widget)은 메인 윈도우의 콘텐츠가 담기는 곳이다.
+
+## 레이아웃
+레이아웃(layout)은 위젯을 위치시키는데 필요한 틀이다. 특히 하나의 부모 위젯(parent widget) 안에 여러 자식 위젯(child widget)을 배치시킬 때 유용하게 사용된다.
