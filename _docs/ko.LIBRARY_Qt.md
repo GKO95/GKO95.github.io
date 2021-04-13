@@ -74,7 +74,7 @@ app.exec_()
 ![윈도우로 나타난 QLabel 위젯](/images/docs/qt/qt_widget_window.png)
 
 ```python
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication. QLabel
 
 app = QApplication()
 
@@ -99,7 +99,7 @@ app.exec_()
 ![QMainWindow 위젯으로 생성된 메인 윈도우](/images/docs/qt/qt_widget_mainwindow.png)
 
 ```python
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication, QMainWindow, QLabel
 
 """ 설명:
 QMainWindow를 슈퍼클래스로 갖는 MainWindow 클래스를 정의한다.
@@ -122,4 +122,30 @@ app.exec_()
 > 중앙위젯(central widget)은 메인 윈도우의 콘텐츠가 담기는 곳이다.
 
 ## 레이아웃
-레이아웃(layout)은 위젯을 위치시키는데 필요한 틀이다. 특히 하나의 부모 위젯(parent widget) 안에 여러 자식 위젯(child widget)을 배치시킬 때 유용하게 사용된다.
+레이아웃(layout)은 위젯을 배치시키는데 사용되는 틀이다. 흔히 하나의 부모 위젯(parent widget) 안에 여러 자식 위젯(child widget)을 놓기 위해 활용된다. 레이아웃에는 여러 종류가 있으며, 대표적으로 수평배치 레이아웃 `QHBoxLayout`과 수직배치 레이아웃 `QVBoxLayout`이 있다.
+
+![QVBoxLayout 수직배치 레이아웃에 삽입된 두 위젯](/images/docs/qt/qt_widget_layout.png)
+
+```python
+from PySide6.QtWidgets import *
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        # QWidget으로 빈 위젯을 만들어 수직배치 QVBoxLayout 레이아웃을 입힌다.
+        widget = QWidget(self)
+        layout = QVBoxLayout(widget)
+
+        # 레이아웃에 QLabel 위젯을 차례대로 삽입한다.
+        layout.addWidget(QLabel("Hello World!"))
+        layout.addWidget(QPushButton("PySide6"))
+
+        self.setCentralWidget(widget)
+        self.show()
+
+app = QApplication()
+window = MainWindow()
+app.exec_()
+```
+
+> 본 부문을 통해 알 수 있듯이, Qt 플랫폼은 MFC와 달리 각 위젯에 좌표를 설정하여 위치시키지 않는다.
