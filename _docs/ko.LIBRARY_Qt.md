@@ -94,7 +94,7 @@ app.exec_()
 
 ![Qt 어플리케이션 메인 윈도우 구조](/images/docs/qt/qt_mainwindowlayout.png)
 
-`QMainWindow`은 아무것도 없는 텅 빈 위젯이다. 직접 사용하기보다 원하는대로 디자인할 수 있도록 서브클래스를 파생시키는데 활용된다. 아래 코드는 `MainWindow` 서브클래스를 파생하여 QLabel 텍스트 위젯을 삽입하여 Qt 프로그램 GUI 창으로 사용한다.
+`QMainWindow`은 아무것도 없는 텅 빈 위젯이다. 직접 사용하기보다 원하는대로 디자인할 수 있도록 서브클래스를 파생시키는데 활용된다. 아래 코드는 `MainWindow` 서브클래스를 파생하여 `QLabel` 텍스트 위젯을 삽입하여 Qt 프로그램 GUI 창으로 사용한다.
 
 ![QMainWindow 위젯으로 생성된 메인 윈도우](/images/docs/qt/qt_widget_mainwindow.png)
 
