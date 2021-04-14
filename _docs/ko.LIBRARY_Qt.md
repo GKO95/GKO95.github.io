@@ -92,7 +92,7 @@ app.exec_()
 
 메인 윈도우(main window)는 프로그램 창으로 최적화된 위젯으로 `QMainWindow` 클래스가 필요하다. 즉, 일반 위젯과 달리 `QMenuBar` 메뉴바, `QToolBar` 툴바, `QDockWidget` 도크, 그리고 `QStatusBar` 상태바를 지원하는 윈도우 창을 제공한다.
 
-![Qt 어플리케이션의 기반 구조](/images/docs/qt/qt_mainwindowlayout.png)
+![Qt 어플리케이션 메인 윈도우 구조](/images/docs/qt/qt_mainwindowlayout.png)
 
 `QMainWindow`은 아무것도 없는 텅 빈 위젯이다. 직접 사용하기보다 원하는대로 디자인할 수 있도록 서브클래스를 파생시키는데 활용된다. 아래 코드는 `MainWindow` 서브클래스를 파생하여 QLabel 텍스트 위젯을 삽입하여 Qt 프로그램 GUI 창으로 사용한다.
 
