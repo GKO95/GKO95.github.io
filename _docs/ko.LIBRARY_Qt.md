@@ -28,7 +28,7 @@ PySide는 파이썬 버전의 Qt이다.
 | [PyQt](https://riverbankcomputing.com/software/pyqt/) | 파이썬 3 | Riverbank Computing | GPLv3  |
 | [PySide](https://www.qt.io/qt-for-python)             | 파이썬 3 | The Qt Company      | LPGLv3 |
 
-이 두 제품은 거의 동일한 API를 가지고 있으나 라이선스에 큰 차이점이 있다. PyQt는 모든 소프트웨어가 자동으로 GPLv3 라이선스가 할당되어 소스 코드 공개 의무가 발생하지만, PySide는 라이브러리에만 적용되므로 정적으로 링크되지 않는 한 소스 코드 공개 의무를 지니지 않는다. 그리고 이는 Qt를 개발한 The Qt Company와 파이썬 바이딩을 최초로 제공한 Riverbank Computing 회사 간의 입장 차이로 생긴 결과이다.
+이 두 제품은 거의 동일한 API를 가지고 있으나 라이선스에 큰 차이점이 있다. PyQt는 모든 소프트웨어가 자동으로 GPLv3 라이선스가 할당되어 소스 코드 공개 의무가 발생하지만, PySide는 라이브러리에만 적용되므로 정적으로 링크되지 않는 한 소스 코드 공개 의무를 지니지 않는다. 그리고 이는 Qt를 개발한 The Qt Company와 파이썬 바이딩을 최초로 제공한 Riverbank Computing 회사 간의 라이선스에 대한 입장 차이로 생긴 결과이다.
 
 비록 본 문서는 Qt라는 제목을 가졌으나, 이미 C++ 어플리케이션 프레임워크인 [MFC](../ko.LIBRARY_MFC/)를 다룬 적이 있다. 그러므로 이번에는 어플리케이션 프레임워크를 파이썬으로 다루는 PySide를 중점으로 소개한다.
 
