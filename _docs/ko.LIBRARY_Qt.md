@@ -111,6 +111,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(QLabel("Hello World!"))
         self.show()
 
+
 app = QApplication()
     
 # MainWindow 객체화
@@ -143,9 +144,52 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(widget)
         self.show()
 
+
 app = QApplication()
 window = MainWindow()
 app.exec_()
 ```
 
 > 본 부문을 통해 알 수 있듯이, Qt 플랫폼은 MFC와 달리 각 위젯에 좌표를 설정하여 위치시키지 않는다.
+
+## 시그널 및 슬롯
+시그널(signal)은 함수 호출이나 상호작용과 같은 이벤트에 의해 발생되는 신호이다. 그리고 슬롯(slot)은 연동된 시그널이 발생하였을 시 동작하는 함수이다. 간단히 설명하자면, 위젯으로부터 이벤트가 발생하면 함수가 실행되도록 한다.
+
+아래는 버튼을 클릭할 때마다 `QLabel` 위젯의 텍스트가 0부터 시작해 하나씩 증가한다.
+
+![시그널과 슬롯이 적용된 Qt 어플리케이션](/images/docs/qt/qt_signal_slot.png)
+
+```python
+from PySide6.QtWidgets import *
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        widget = QWidget(self)
+        layout = QVBoxLayout(widget)
+
+        self.label = QLabel("Hello World!")
+        self.button = QPushButton("PySide6")
+
+        layout.addWidget(self.label)
+        layout.addWidget(self.button)
+
+        self.setCentralWidget(widget)
+        self.show()
+
+        # QPushButton 내장 시그널 clicked() 발생 시 self.btnClick 메소드 실행
+        self.button.clicked.connect(self.btnClick)
+        self.counter = 0
+
+    # QPushButton의 clicked() 시그널에 연동된 self.btnClick 슬롯 정의
+    def btnClick(self):
+        self.label.setText(str(self.counter))
+        self.counter += 1
+
+
+app = QApplication()
+window = MainWindow()
+app.exec_()
+```
+
+> 비록 Qt 문서가 잘 정리되었다고 하지만 파이썬 버전에서는 뭔가 부족하거나 C++ 내용이 들어있는 경우가 대다수 보인다. 해당 위젯이 지원하는 시그널 목록은 C++ 문서에서 확인하는 것을 권장한다.
