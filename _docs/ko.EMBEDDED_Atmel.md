@@ -37,6 +37,31 @@ order: 0x21
 본 문서는 임베디드 입문자를 위해 제작되었기에 가능한 많은 내용들을 상세하게 설명할 예정이다. 또한 마이크로컨트롤러 제어를 다루기 때문에 [관련 문서](../ko.EMBEDDED_MCU/)를 우선 읽을 것을 권장한다.
 
 ## Microchip Studio
+Atmel이 Microchip Technology로 인수된 이후부터 AVR 계열의 펌웨어 코딩은 [Microchip Studio](https://www.microchip.com/en-us/development-tools-tools-and-software/microchip-studio-for-avr-and-sam-devices)에서 이루어진다. 아래는 통합개발환경 설치 과정을 차례대로 보여준다.
+
+![Microchip Studio 설치 (1단계)](/images/docs/atmel/atmel_ide_install1.png)
+
+프로그램 설치 경로를 지정한 다음에는 세 가지의 아키텍처 선택사항이 나타난다.
+
+![Microchip Studio 설치 (2단계)](/images/docs/atmel/atmel_ide_install2.png)
+
+AVR은 위에서 설명하여서 알겠으나, 나머지 둘은 전혀 언급된 적이 없다. 그러나 사실 UC3은 2세대 AVR32(32비트 AVR)를 가리키며, SAM은 ARM 기반의 AVR 마이크로컨트롤러 계열을 지칭한다. 본 문서에서 다루고 있는 ATmega328P는 일반 AVR에 해당하므로 맨 위의 옵션만 체크하면 된다.
+
+그 다음 설치에 지장을 주는 소프트웨어 및 시스템 환경을 확인한다.
+
+![Microchip Studio 설치 (3단계)](/images/docs/atmel/atmel_ide_install3.png)
+
+위와 같이 모든 사항에 이상이 없으면 다운로드 및 설치를 진행한다.
+
+![Microchip Studio 설치 (4단계)](/images/docs/atmel/atmel_ide_install4.png)
+
+도중에 새로운 설치창이 나타나는데, Microchip Studio에서 사용하는 XC8 컴파일러 설치를 위한 것이다. 해당 컴파일러는 Microchip Technology에서 생산하는 마이크로컨트롤러는 물론 AVR 계열 마이크로컨트롤러 펌웨어 빌드에도 활용된다.
+
+![Microchip Studio 설치 (5단계)](/images/docs/atmel/atmel_ide_install5.png)
+
+![Microchip Studio 설치 (6단계)](/images/docs/atmel/atmel_ide_install6.png)
+
+이는 마이크로소프트의 Visual Studio를 설치하면 MSVC 컴파일러가 함께 설치되는 것과 동일한 이치이다. 컴파일러 외에도 여러 드라이버들이 함께 설치된다. 설치가 완료된 후, Microchip Studio을 실행하면 환경설정 및 사용자 인터페이스가 매우 친숙하게 느껴질 것인데 이는 Visual Studio를 기반하기 때문이다.
 
 # ATMEL: 기초
 
