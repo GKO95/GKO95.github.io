@@ -28,10 +28,10 @@ order: 0x21
 
 실물 이외에도 임베디드를 시작하기 위해 아래의 문서들이 *반드시* 필요로 하다.
 
-* [Arduino UNO R3 회로도](https://content.arduino.cc/assets/UNO-TH_Rev3e_sch.pdf)
+* *[Arduino UNO R3 회로도](https://content.arduino.cc/assets/UNO-TH_Rev3e_sch.pdf)*
     : 아두이노 우노 R3 PCB가 다른 구성요소들과 어떻게 연결되어 있는지 보여준다. 비록 수많은 선들이 얽혀있고 알 수 없는 기호들로 가득해 어렵겠지만 회로를 읽을 수 있는 능력이야말로 임베디드에서 요구되는 필수 항목이다.
 
-* [ATmega328P 데이터시트](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+* *[ATmega328P 데이터시트](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)*
     : 아두이도 우노 R3의 핵심 마이크로컨트롤러 사용 설명서이다. 이러한 문서들은 기본 수백 페이지로 구성되었으며 전부 영문이다. 한글 번역본은 절대 찾을 수 없으므로 공학도로써 영어 실력이 절실히 필요하게 된다.
 
 본 문서는 임베디드 입문자를 위해 제작되었기에 가능한 많은 내용들을 상세하게 설명할 예정이다. 또한 마이크로컨트롤러 제어를 다루기 때문에 [관련 문서](../ko.EMBEDDED_MCU/)를 우선 읽을 것을 권장한다.
@@ -47,21 +47,29 @@ Atmel이 Microchip Technology로 인수된 이후부터 AVR 계열의 펌웨어 
 
 AVR은 위에서 설명하여서 알겠으나, 나머지 둘은 전혀 언급된 적이 없다. 그러나 사실 UC3은 2세대 AVR32(32비트 AVR)를 가리키며, SAM은 ARM 기반의 AVR 마이크로컨트롤러 계열을 지칭한다. 본 문서에서 다루고 있는 ATmega328P는 일반 AVR에 해당하므로 맨 위의 옵션만 체크하면 된다.
 
-그 다음 설치에 지장을 주는 소프트웨어 및 시스템 환경을 확인한다.
+그 다음에는 확장도구 설치여부 선택지가 있다. 고급 소프트웨어 프레임워크 및 예시 프로젝트를 제공하는 ASF 확장도구이지만, Atmel과 관련된 도구를 제공하기에 설정을 유지하기를 권장한다.
 
 ![Microchip Studio 설치 (3단계)](/images/docs/atmel/atmel_ide_install3.png)
 
-위와 같이 모든 사항에 이상이 없으면 다운로드 및 설치를 진행한다.
+설정 완료를 마쳤으면 설치에 지장을 주는 소프트웨어 및 시스템 환경을 확인한다.
 
 ![Microchip Studio 설치 (4단계)](/images/docs/atmel/atmel_ide_install4.png)
 
-도중에 새로운 설치창이 나타나는데, Microchip Studio에서 사용하는 XC8 컴파일러 설치를 위한 것이다. 해당 컴파일러는 Microchip Technology에서 생산하는 마이크로컨트롤러는 물론 AVR 계열 마이크로컨트롤러 펌웨어 빌드에도 활용된다.
+위와 같이 모든 사항에 이상이 없으면 다운로드 및 설치를 진행한다.
 
 ![Microchip Studio 설치 (5단계)](/images/docs/atmel/atmel_ide_install5.png)
 
+도중에 새로운 설치창이 나타나는데, Microchip Studio에서 사용하는 XC8 컴파일러 설치를 위한 것이다. 해당 컴파일러는 Microchip Technology에서 생산하는 마이크로컨트롤러는 물론 AVR 계열 마이크로컨트롤러 펌웨어 빌드에도 활용된다.
+
 ![Microchip Studio 설치 (6단계)](/images/docs/atmel/atmel_ide_install6.png)
 
-이는 마이크로소프트의 Visual Studio를 설치하면 MSVC 컴파일러가 함께 설치되는 것과 동일한 이치이다. 컴파일러 외에도 여러 드라이버들이 함께 설치된다. 설치가 완료된 후, Microchip Studio을 실행하면 환경설정 및 사용자 인터페이스가 매우 친숙하게 느껴질 것인데 이는 Visual Studio를 기반하기 때문이다.
+![Microchip Studio 설치 (7단계)](/images/docs/atmel/atmel_ide_install7.png)
+
+이는 마이크로소프트의 Visual Studio를 설치하면 MSVC 컴파일러가 함께 설치되는 것과 동일한 이치이다. 컴파일러 외에도 펌웨어 빌드에 필요한 여러 드라이버들이 함께 설치한다.
+
+![Microchip Studio 시작화면 (다크모드)](/images/docs/atmel/atmel_microchip_studio.png)
+
+Microchip Studio을 실행하면 환경설정 및 사용자 인터페이스가 매우 친숙하게 느껴질 것인데 이는 Visual Studio를 기반하기 때문이다.
 
 # ATMEL: 기초
 
