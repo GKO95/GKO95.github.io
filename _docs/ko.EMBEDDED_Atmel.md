@@ -59,7 +59,7 @@ AVR은 위에서 설명하여서 알겠으나, 나머지 둘은 전혀 언급된
 
 ![Microchip Studio 설치 (5단계)](/images/docs/atmel/atmel_ide_install5.png)
 
-도중에 새로운 설치창이 나타나는데, Microchip Studio에서 사용하는 XC8 컴파일러 설치를 위한 것이다. 해당 컴파일러는 Microchip Technology에서 생산하는 마이크로컨트롤러는 물론 AVR 계열 마이크로컨트롤러 펌웨어 빌드에도 활용된다.
+도중에 새로운 설치창이 나타나는데, Microchip Studio에서 사용하는 XC8 컴파일러 설치를 위한 것이다. 해당 컴파일러는 Microchip Technology의 PIC 마이크로컨트롤러는 물론 Atmel의 AVR 계열 마이크로컨트롤러 펌웨어 빌드에도 활용된다.
 
 ![Microchip Studio 설치 (6단계)](/images/docs/atmel/atmel_ide_install6.png)
 
