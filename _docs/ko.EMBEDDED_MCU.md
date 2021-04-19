@@ -145,13 +145,8 @@ MCS-51 마이크로컨트롤러에는 256바이트의 RAM이 내장되어 있다
 
 IRAM은 128바이트 전체가 RAM으로 사용되지 않으며, 안에는 (1) 레지스터 뱅크("R" 레지스터 집합)와 (2) 비트 주소 메모리가 포함되어 있다. 기본적으로 `R0`~`R7`이 하나의 레지스터 뱅크를 구성하여 총 네 개의 뱅크가 `0x00`~`0x1F` 주소를 차지하고 있다. 원한다면 `0x00`~`0x07` 범위의 레지스터 뱅크 0 하나만을 사용할 수 있다. 비트 주소 메모리는 총 16바이트, 즉 128비트의 공간을 차지하여 각 비트가 IRAM의 128바이트 주소를 나타내는데 사용되나 선택사항이다. 만일 IRAM 내에 네 개의 레지스터 뱅크와 비트 주소 메모리가 포함되어 있다면 실질적으로 RAM으로 활용할 수 있는 공간은 `0x30`~`0x7F`이다.
 
-SFR(Special Function Register; 특수 목적 레지스터)은 MCU의 특정 기능들을 제어하기 위해 사용된다. 대표적인 예로 직렬 포트 제어, 전송 속도 설정, 타이머 제어 및 접근 등이 있다. SFR 안에는 다른 레지스터들을 포함하고 있다: 스택 포인터(`0x81`), 데이터 포인터(`0x82`~`0x83`), PSW(`0xD0`), 누산기(`0xE0`), 그리고 B 레지스터(`0xF0`)가 이에 해당한다. 비록 SFR은 내장 메모리의 반을 차지하지만 오직 21바이트만 사용하고 있다. 나머지 주소는 IRAM과 같이 RAM처럼 사용된다.
-
-## 프로그램 메모리
-프로그램 메모리(PMEM), 일명 코드 메모리는 최소 16비트 플래시 메모리 혹은 EEPROM 보조기억장치로 임베디드 시스템의 프로그램 코드를 저장한다. 일반적으로 프로그램 메모리는 MCU 칩에 내장된 동시에 ISP를 지원하여 손쉽게 프로그램을 설치할 수 있다.
-
-# MCU: SFR
-[SFR](https://en.wikipedia.org/wiki/Special_function_register)(Special Function Register). 일명 특수 목적 레지스터에는 마이크로컨트롤러에 있는 중요한 기능 및 설정들이 포함되어 있다. 비록 *MCS-51: 메모리* 장에서 간략하게 설명하였으나, 이번 장에서는 더 구체적으로 SFR에 대하여 소개한다. 아래 그림은 SFR에 할당된 기능 및 설정들이 어디에 위치하는지 보여준다.
+### 특수 목적 레지스터
+[특수 목적 레지스터](https://en.wikipedia.org/wiki/Special_function_register), 일명 SFR(Special Function Register)은 MCU의 특정 기능들을 제어하기 위해 사용된다. 대표적인 예로 직렬 포트 제어, 전송 속도 설정, 타이머 제어 및 접근 등이 있다. SFR 안에는 다른 레지스터들을 포함하고 있다: 스택 포인터(`0x81`), 데이터 포인터(`0x82`~`0x83`), PSW(`0xD0`), 누산기(`0xE0`), 그리고 B 레지스터(`0xF0`)가 이에 해당한다. 비록 SFR은 내장 메모리의 반을 차지하지만 오직 21바이트만 사용하고 있다. 나머지 주소는 IRAM과 같이 RAM처럼 사용된다.
 
 ![MCS-51의 특수 목적 레지스터](/images/docs/mcu/8051_sfr_address.gif)
 
@@ -160,6 +155,122 @@ SFR(Special Function Register; 특수 목적 레지스터)은 MCU의 특정 기�
 | **<span style="background-color:skyblue; color: black;">파란색</span>** | 양방향 입출력 포트.          |
 | **<span style="background-color: yellow; color:black">노란색</span>** | 제어 SFR: 마이크로컨트롤러가 어떻게 동작하는지 설정. |
 | **<span style="background-color:lightgreen; color:black;">초록색</span>** | 보조 SFR: 마이크로컨트롤러 설정에 기여하지 않지만 동작에 있어서 필요. |
+
+## 프로그램 메모리
+프로그램 메모리(PMEM), 일명 코드 메모리는 최소 16비트 플래시 메모리 혹은 EEPROM 보조기억장치로 임베디드 시스템의 프로그램 코드를 저장한다. 일반적으로 프로그램 메모리는 MCU 칩에 내장된 동시에 ISP를 지원하여 손쉽게 프로그램을 설치할 수 있다.
+
+# MCU: 직렬 통신
+[직렬 통신](https://ko.wikipedia.org/wiki/직렬_통신)(serial communication)은 송신 데이터를 하나의 통신 채널에서 한 비트마다 순서대로 전송하는 통신 방법이다.
+
+> 이와 반대되는 개념인 [병렬 통신](https://ko.wikipedia.org/wiki/병렬_통신)(parallel communication)은 여러 통신 채널을 통해 송신 데이터를 구성하는 비트들을 한꺼번에 전송하는 통신 방법이다. 
+
+![병렬 통신(상)과 직렬 통신(하)](/images/docs/mcu/comm_serial_parallel.gif)
+
+케이블 비용과 동기화 문제로 인해 병렬 통신을 활용하기 어려운 장거리 통신 및 컴퓨터 네트워크에서 직렬 통신이 주로 사용된다. 그러나 기술적 발전으로 현재는 단거리 통신에서도 직렬 통신이 병렬 통신보다 훨씬 큰 이점을 가진다. 컴퓨터 시스템과 장치 간에 [PCI](https://ko.wikipedia.org/wiki/PCI_버스) 병렬 통신에서 [PCIe](https://ko.wikipedia.org/wiki/PCI_익스프레스) 직렬 통신으로 변경된 점도 이러한 특성이 반영된 것이다. 본 문서는 MCU에서 흔히 접하게 될 직렬 통신에 대하여 소개한다.
+
+## 직렬 주변기기 인터페이스
+직렬 주변기기 인터페이스(serial peripheral interface; SPI)은 단일마스터 다중슬레이브(single-master, multiple-slave) 구조를 가진 가장 간단한 직렬 통신 프로토콜이다. Here, the master is the controlling device and slave is a controlled device by the master.
+
+![SPI Single Master, Multiple Slave structure](/images/docs/mcu/comm_serial_spi.png)
+
+Following is the description of the ports presented in SPI:
+
+| 포트                                | 설명                                                  |
+| ----------------------------------- | ------------------------------------------------------------ |
+| **MOSI**: Master Output/Slave Input | Communication port responsible for sending data from a master to slaves; MSB is transmitted first to the slave. |
+| **MISO**: Master Input/Slave Output | Communication port responsible for sending data from a slave to a master; LSB is transmitted first to the master. |
+| **SCLK**: Synchronizing Clock       | Provides the clock signal for synchronous communication between master and slaves. |
+| **SS/CS**: Slave Select/Chip Select | Selects which slaves to receive the data from the master; SS/CS set to LOW activates the slave to receive. |
+
+The advantage of SPI is it has no interruption; the interruption here refers to the additional bits such as start bit, stop bit, et cetera, which is presented in UART and $$\mathsf{I^2C}$$. This is because the data is transmitted and received corresponding to the clock signal. This method where master and slave communicate by sharing the same clock signal (running at the same rate and time interval) is called **synchronous serial communication**.
+
+To summarize, SPI has the following advantages:
+
+* No start/stop bit, thus possible for continuous streaming without any interruption.
+* No complicating slave addressing system.
+* High transmission rate.
+* Able to transmit and receive at the same time.
+
+However, SPI has the following disadvantages:
+
+* Too many communication wires.
+* Cannot verify for successful transmission.
+* Cannot check for error (such as by using parity bit).
+* Only a single master.
+
+## 범용 비동기화 송수신기
+범용 비동기화 송수신기(universal asynchronous receiver-transmitter; UART) is not a serial communication protocol but rather a circuit or stand-alone IC for serial communication purpose. Its serial communication is done using connecting transmitter (Tx) to receiver (Rx) and vice versa, thus uses single-master, single-slave structure.
+
+![UART Single Master, Single Slave structure](/images/docs/mcu/comm_serial_uart.png)
+
+UART first acquires the data from the bus in parallel and restructure them in series for serial communication, sending LSB first. The receiving UART then change it back to parallel and return the data to the bus.
+
+Unlike the SPI, UART does not share the clock signal with its communicating device, thus the term "asynchronous" derived. Instead, UART transfer a packet which separates data by placing start and stop bit at each end: start bit maintains HIGH when inactive but changes to LOW as soon as the transmission occurs. On the other hand, stop bit is set to HIGH so to return to its inactive state. This is how the receiver reads the transmitted data.
+
+Upon receiving the packet, the UART reads a bit in a frequency of specified baud rate. This means the transmission UART also needs to send the bits of packet according to the same baud rate. Failed to equalize the baud rate by exceeding its tolerance will cause transmission error.
+
+The error can be verified (but not fixed) using parity bit at the end of the data but just before the stop bit. Again, parity bit will count the number of HIGH bits for even and odd. Presumably, UART would ignore the packet containing error.
+
+To summarize, UART has the following advantages:
+
+* Only two transmission lines.
+* Clock signal unnecessary.
+* Parity bit available for error verification.
+* Modifiable transmission packet structure (should be equal between Tx and Rx).
+* Most widely used serial communication.
+
+However, UART has the following disadvantages:
+
+* Restricted literal data size (9 bits maximum).
+* Single Master, Single Slave.
+* Unify the baud rat (tolerance less than 10%).
+
+## 직접회로간
+직접회로간(Inter-Integrated Circuit; $$\mathsf{I^2C}$$) (pronounced I-squared-C) is a serial communication protocol with multiple-master, multiple-slave structure available. It has combined the advantages from SPI and UART.
+
+![I2C Multiple Master, Multiple Slave structure](/images/docs/mcu/comm_serial_i2c.png)
+
+$$\mathsf{I^2C}$$ only requires two port for a communication like UART; SDA and SCL.
+
+| PORT                  | DESCRIPTION                                                  |
+| --------------------- | ------------------------------------------------------------ |
+| **SDA**: Serial Data  | Bidirectional data transmission line between master and slave. |
+| **SCL**: Serial Clock | Clock signal; hence, synchronous serial communication.       |
+
+While UART sent data as a packet, $$\mathsf{I^2C}$$ uses the term called "message" which contains the number of data *frames*, start/stop bit, and more. It also sends MSB firsthand.
+
+![Structure of I2C Message](/images/docs/mcu/comm_serial_structure.png)
+
+Just like UART, the message includes start and stop bit at each end. Receiver also pick up reading the data when the start bit changes from HIGH to LOW, and stops reading when stop bit is HIGH from LOW.
+
+Next to the address is Read/Write bit which includes a purpose of the message: whether it was sent to (1) transmit data from master to slave (LOW), or (2) request response from slave to master (HIGH). 
+
+One of the unique features $$\mathsf{I^2C}$$ has is an existence of the address frame to specify which slave the message should go to. This address is long as 7~10 bits (generally, seven). The slave compares whether the address matches its own address: if same, the slave returns LOW back to the master as acknowledged (ACK) through SDA. The rest with non-matching address returns HIGH as no-acknowledged (NACK) as it never had received any message.
+
+The process of $$\mathsf{I^2C}$$ communication is as follows:
+
+1. Convert SDA start bit from HIGH to LOW before SCL's falling edge triggers.
+2. The start of the message is distributed to all the slave connected for matching address.
+3. Slave with the address returns SDA LOW to master, while the rest maintain HIGH.
+4. Master transmit data frame to the particular slave, and the slave returns 1-bit of ACK LOW every time the data frame is successfully received.
+5. Upon cutoff, convert SDA stop bit from LOW to HIGH after SCL's rising edge is triggered.
+
+To summarize, $$\mathsf{I^2C}$$ has the following advantages:
+
+* Only two transmission lines.
+* Multiple Master, Multiple Slave support.
+* Receive confirmation with ACK/NACK bit.
+* Less complicated than hardware with UART.
+* Most widely used protocol.
+
+However, $$\mathsf{I^2C}$$ has the following disadvantages:
+
+* Slower transmission rate than SPI.
+* Restricted data frame size (8 bits maximum).
+* More complicated than hardware with SPI.
+
+# MCU: SFR
+[SFR](https://en.wikipedia.org/wiki/Special_function_register)(Special Function Register). 일명 특수 목적 레지스터에는 마이크로컨트롤러에 있는 중요한 기능 및 설정들이 포함되어 있다. 비록 *MCS-51: 메모리* 장에서 간략하게 설명하였으나, 이번 장에서는 더 구체적으로 SFR에 대하여 소개한다. 아래 그림은 SFR에 할당된 기능 및 설정들이 어디에 위치하는지 보여준다.
 
 ## 양방향성 입출력 포트
 MCS-51은 네 개의 양방향 입출력 포트(P0: `0x80`, P1: `0x90`, P2: `0xA0`, P3: `0xB0`)를 가지며, 이는 8051 아키텍처 구조에서 각각 `Port 0`~`Port 3 Driver`에 해당한다. 레지스터의 각 비트는 마이크로컨트롤러의 핀과 일대일 대응한다. 예를 들어 `P0.0`~`P0.7` 핀은 `P0`의 0~7번째 비트를 의미하며, 0과 1은 LOW 및 HIGH 신호를 나타낸다. 그러나 외장 메모리를 연결할 시 `P0`와 `P2`는 사용하지 않도록 한다. 이는 `P0`와 `P2`가 데이터 포인터가 가리킨 외장 메모리 주소를 전송하는데 활용되기 때문이다.
@@ -200,15 +311,15 @@ MSC-51 마이크로컨트롤러는 개별적으로 설정할 수 있는 두 개�
 위에서 언급한 클럭 주파수와 명령 주기를 통해 다음과 같은 초당 실행 명령어 수치를 계산할 수 있다.
 
 $$
-\frac{\text{clock frequency}}{\text{instruction cycle}}
-= \frac{11,059,000 \ \text{cycles}/\text{second}} {12 \ \text{cycles}/\text{instruction}}
-= 921,583 \ \text{instructions}/\text{second}
+\frac{\mathsf{clock \ frequency}}{\mathsf{instruction \ cycle}}
+= \frac{11,059,000 \ \mathsf{cycles}/\mathsf{second}} {12 \ \mathsf{cycles}/\mathsf{instruction}}
+= 921,583 \ \mathsf{instructions}/\mathsf{second}
 $$
 
 즉, 타이머가 921,583 명령 주기를 카운트하였으면 이는 1초가 지났음을 알 수 있다. 그러나 921,583을 카운트하기 위해서는 최소한 20비트가 필요하므로 16비트가 한계인 타이머 카운터로는 절대 표현할 수 없는 수치이다. 하지만 0.05초에 대하여 계산하면
 
 $$
-0.05 \ \text{second} \times 921,583 \ \text{instructions}/\text{second} = 46,079.15 \ \text{instructions}
+0.05 \ \mathsf{second} \times 921,583 \ \mathsf{instructions}/\mathsf{second} = 46,079.15 \ \mathsf{instructions}
 $$
 
 46,079 번의 명령 주기를 카운트, 혹은 타이머가 `0xB3FF` 값을 저장하면 0.049999873 초가 지났음을 의미이다. 그러나 0.001%도 안되는 오차를 가지며, 이는 2개월마다 단 1초 차이만 생기므로 0.05로 반올림하여도 타이머 역할로써는 큰 문제를 가지지 않는다.
@@ -226,7 +337,7 @@ SFR의 `TMOD.2`와 `TMOD.6` 비트는 `C/T` 이름을 가지는 것을 확인할
 직렬 포트의 보 레이트는 타이머 1을 8비트 자동 재호출 모드로 설정한 다음 오버플로우가 발생하도록 `TH1` 값을 아래의 계산식을 통해 입력하면 된다.
 
 $$
-\text{TH1}=256-\left( \frac{ \text{clock frequency} / 384}{\text{baud rate}} \right)
+\mathsf{TH1}=256-\left( \frac{ \mathsf{clock \ frequency} / 384}{\mathsf{baud \ rate}} \right)
 $$
 
 여기서 "클럭 주파수"는 수정 발진기에서 발생하는 일정한 주파수(11.059 MHz)이며, "보 레이트"는 사용자가 원하는 직렬 포트의 보 레이트를 말한다. 이 두 개의 변수가 결정되면 `TH1`에 어떠한 값을 설정되어야 하는지 구할 수 있다.
@@ -234,7 +345,7 @@ $$
 추가적으로 SFR에 `PCON`이란 전력 설정에서 일곱 번째 비트는 보 레이트를 배속으로 올릴 수 있도록 한다. 만일 `PCON.7`에 의해 보 레이트가 배속으로 되면 계산식은 아래와 같이 변환다.
 
 $$
-\mathrm{TH1_{\text{double}}}=256-\left( \frac{ \text{clock frequency} / 192}{\text{baud rate}} \right)
+\mathsf{TH1_{\mathsf{double}}}=256-\left( \frac{ \mathsf{clock \ frequency} / 192}{\mathsf{baud \ rate}} \right)
 $$
 
 ## 직렬 포트
