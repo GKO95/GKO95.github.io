@@ -5,7 +5,7 @@ Welcome to GKO95's GitHub Pages, my personal GitHub Pages for blogging and archi
 Here are some of the featured you can find on this GitHub Pages:
 * Theme selection - Light & Dark mode
 * Language selection - English & Korean
-* Comment using Google Forms and jQuery
+* ~~Comment using Google Forms and jQuery~~
 
 For those who are interested in my GitHub-Pages theme, sorry but I didn't designed this for the distribution purpose. But you are free to use the code I made.
 
