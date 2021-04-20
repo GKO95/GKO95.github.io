@@ -169,37 +169,33 @@ IRAM은 128바이트 전체가 RAM으로 사용되지 않으며, 안에는 (1) �
 케이블 비용과 동기화 문제로 인해 병렬 통신을 활용하기 어려운 장거리 통신 및 컴퓨터 네트워크에서 직렬 통신이 주로 사용된다. 그러나 기술적 발전으로 현재는 단거리 통신에서도 직렬 통신이 병렬 통신보다 훨씬 큰 이점을 가진다. 컴퓨터 시스템과 장치 간에 [PCI](https://ko.wikipedia.org/wiki/PCI_버스) 병렬 통신에서 [PCIe](https://ko.wikipedia.org/wiki/PCI_익스프레스) 직렬 통신으로 변경된 점도 이러한 특성이 반영된 것이다. 본 문서는 MCU에서 흔히 접하게 될 직렬 통신에 대하여 소개한다.
 
 ## SPI
-직렬 주변기기 인터페이스(serial peripheral interface; SPI)은 단일마스터 다중슬레이브(single-master, multiple-slave) 구조를 가진 가장 간단한 직렬 통신 프로토콜이다. 여기서 마스터란, is the controlling device and slave is a controlled device by the master.
+직렬 주변기기 인터페이스(serial peripheral interface; SPI)은 단일마스터 다중슬레이브(single-master, multiple-slave) 구조를 가진 가장 간단한 직렬 통신 프로토콜이다. 여기서 마스터(master)는 제어 장치이며, 슬레이브(slave)란 마스터로부터 제어되는 장치이다.
 
 ![단일마스터 다중슬레이브 구조의 SPI](/images/docs/mcu/comm_serial_spi.png)
 
-Following is the description of the ports presented in SPI:
+| 포트      | 의미             | 설명                                                          |
+|:-------:|----------------|-------------------------------------------------------------|
+| `MOSI`  | 마스터 출력/슬레이브 입력 | 마스터에서 슬레이브로 데이터를 전송하는 통신 포트이다. 전송 데이터의 MSB가 슬레이브로 먼저 전송된다.  |
+| `MISO`  | 마스터 입력/슬레이브 출력 | 슬레이브에서 마스터로 데이터를 전송하는 통신 포트이다. 전송 데이터의 LSB가 마스터로 먼저 전송된다.   |
+| `SCLK`  | 동기화 클럭         | 통신 동기화를 위해 마스터에서 슬레이브로 일정 주기를 가진 클럭 신호를 제공한다.               |
+| `SS/CS` | 슬레이브 혹은 칩 선택   | 마스터로부터 데이터를 수신할 슬레이브를 선택한다. `SS/CS`를 LOW로 설정하여 슬레이브를 활성화한다. |
 
-| 포트                                | 설명                                                  |
-| ----------------------------------- | ------------------------------------------------------------ |
-| **MOSI**: Master Output/Slave Input | Communication port responsible for sending data from a master to slaves; MSB is transmitted first to the slave. |
-| **MISO**: Master Input/Slave Output | Communication port responsible for sending data from a slave to a master; LSB is transmitted first to the master. |
-| **SCLK**: Synchronizing Clock       | Provides the clock signal for synchronous communication between master and slaves. |
-| **SS/CS**: Slave Select/Chip Select | Selects which slaves to receive the data from the master; SS/CS set to LOW activates the slave to receive. |
+SPI 직렬 통신은 데이터를 클럭 신호에 따라 송수신하므로 데이터의 시작점과 종단점을 알리는 전송 프로토콜을 필요하지 않다. 다시 말해, 하나의 클럭 신호를 통해 마스터와 슬레이브가 동일한 시간 주기로 동시에 동작한다. 이러한 이유로 클럭 신호를 공유하는 직렬 통신을 동기식 직렬 통신(synchronous serial communication)이라고 부른다.
 
-The advantage of SPI is it has no interruption; the interruption here refers to the additional bits such as start bit, stop bit, et cetera, which is presented in UART and $$\mathsf{I^2C}$$. This is because the data is transmitted and received corresponding to the clock signal. This method where master and slave communicate by sharing the same clock signal (running at the same rate and time interval) is called **synchronous serial communication**.
+### 장점
 
-To summarize, SPI has the following advantages:
+* 전송 프로토콜을 필요로 하지 않아 간섭(interruption)없이 데이터를 연속으로 빠르게 전송할 수 있다.
+* `SS/CS` 포트로 슬레이브를 간단히 선택할 수 있다.
+* 송신과 수신을 동시에 할 수 있다.
 
-* No start/stop bit, thus possible for continuous streaming without any interruption.
-* No complicating slave addressing system.
-* High transmission rate.
-* Able to transmit and receive at the same time.
+### 단점
 
-However, SPI has the following disadvantages:
-
-* Too many communication wires.
-* Cannot verify for successful transmission.
-* Cannot check for error (such as by using parity bit).
-* Only a single master.
+* 네 개의 통신 채널이 필요하다.
+* 전송 오류를 확인할 수 없다.
+* 하나의 마스터만 허용된다.
 
 ## UART
-범용 비동기화 송수신기(universal asynchronous receiver-transmitter; UART)는 직렬 통신 프로토콜이 아니며 but rather a circuit or stand-alone IC for serial communication purpose. Its serial communication is done using connecting transmitter (Tx) to receiver (Rx) and vice versa, thus uses single-master, single-slave structure.
+범용 비동기화 송수신기(universal asynchronous receiver-transmitter; UART)는 직렬 통신 프로토콜이 아니라 통신 회로나 IC의 분류에 해당한다. UART는 마스터와 슬레이브 간의 송신부 `Tx`와 수신부 `Rx`를 연결하므로써 직렬 통신을 하여 단일마스터 단일슬레이브 구조를 가진다.
 
 ![단일마스터 단일슬레이브 구조의 UART](/images/docs/mcu/comm_serial_uart.png)
 
@@ -211,31 +207,29 @@ Upon receiving the packet, the UART reads a bit in a frequency of specified baud
 
 The error can be verified (but not fixed) using parity bit at the end of the data but just before the stop bit. Again, parity bit will count the number of HIGH bits for even and odd. Presumably, UART would ignore the packet containing error.
 
-To summarize, UART has the following advantages:
+### 장점
 
-* Only two transmission lines.
-* Clock signal unnecessary.
+* 오로지 두 종류의 통신 채널이면 충분하다.
+* 클럭 신호가 필요하지 않다.
 * Parity bit available for error verification.
 * Modifiable transmission packet structure (should be equal between Tx and Rx).
 * Most widely used serial communication.
 
-However, UART has the following disadvantages:
+### 단점
 
 * Restricted literal data size (9 bits maximum).
-* Single Master, Single Slave.
-* Unify the baud rat (tolerance less than 10%).
+* 단일마스터 단일슬레이브 구조로 한정된다.
+* (10% 오차율 이내로) 보 레이트를 통일시켜야 한다.
 
 ## I2C
-직접회로간(Inter-Integrated Circuit; $$\mathsf{I^2C}$$ 혹은 IIC), 흔히 "아이스퀘어드씨"라고 부르며 다중마스터 다중슬레이브(multiple-master, multiple-slave) 구조를 구현할 수 있는 직렬 통신 프로토콜이다. It has combined the advantages from SPI and UART.
+직접회로간(Inter-Integrated Circuit; $$\mathsf{I^2C}$$ 혹은 IIC), 흔히 "아이스퀘어드씨"라고 부르며 다중마스터 다중슬레이브(multiple-master, multiple-slave) 구조를 구현할 수 있는 직렬 통신 프로토콜이다. 본 직렬 통신 프로토콜은 SPI와 UART의 장점들을 가진다.
 
 ![다중마스터 다중슬레이브 구조의 I2C](/images/docs/mcu/comm_serial_i2c.png)
 
-$$\mathsf{I^2C}$$ only requires two port for a communication like UART; SDA and SCL.
-
-| PORT                  | DESCRIPTION                                                  |
-| --------------------- | ------------------------------------------------------------ |
-| **SDA**: Serial Data  | Bidirectional data transmission line between master and slave. |
-| **SCL**: Serial Clock | Clock signal; hence, synchronous serial communication.       |
+| 포트                  | 의미 | 설명                                                  |
+|:---------------------:|---|------------------------------------------------------------ |
+| `SDA` | 직렬 전송 데이터 | 마스터와 슬레이브 간을 연결하는 양방향성 데이터 전송 채널이다. |
+| `SCL` | 직렬 클럭 신호 | 클럭 신호, 즉 통신 동기화 신호가 입/출력되는 포트이다. |
 
 While UART sent data as a packet, $$\mathsf{I^2C}$$ uses the term called "message" which contains the number of data *frames*, start/stop bit, and more. It also sends MSB firsthand.
 
@@ -255,19 +249,19 @@ The process of $$\mathsf{I^2C}$$ communication is as follows:
 4. Master transmit data frame to the particular slave, and the slave returns 1-bit of ACK LOW every time the data frame is successfully received.
 5. Upon cutoff, convert SDA stop bit from LOW to HIGH after SCL's rising edge is triggered.
 
-To summarize, $$\mathsf{I^2C}$$ has the following advantages:
+### 장점
 
-* Only two transmission lines.
-* Multiple Master, Multiple Slave support.
+* 오로지 두 종류의 통신 채널이면 충분하다.
+* 여러 개의 마스터와 슬레이브 구조를 지원한다.
 * Receive confirmation with ACK/NACK bit.
-* Less complicated than hardware with UART.
-* Most widely used protocol.
+* 하드웨어적인 면에서 UART보다 간단하다.
+* 가장 널리 사용되는 직렬 통신 프로토콜이다.
 
-However, $$\mathsf{I^2C}$$ has the following disadvantages:
+### 단점
 
-* Slower transmission rate than SPI.
+* SPI보다 느린 전송률을 갖는다.
+* 하드웨어적인 면에서 SPI보다 복잡하다.
 * Restricted data frame size (8 bits maximum).
-* More complicated than hardware with SPI.
 
 # MCU: SFR
 [SFR](https://en.wikipedia.org/wiki/Special_function_register)(Special Function Register). 일명 특수 목적 레지스터에는 마이크로컨트롤러에 있는 중요한 기능 및 설정들이 포함되어 있다. 비록 *MCS-51: 메모리* 장에서 간략하게 설명하였으나, 이번 장에서는 더 구체적으로 SFR에 대하여 소개한다. 아래 그림은 SFR에 할당된 기능 및 설정들이 어디에 위치하는지 보여준다.
