@@ -168,10 +168,10 @@ IRAM은 128바이트 전체가 RAM으로 사용되지 않으며, 안에는 (1) �
 
 케이블 비용과 동기화 문제로 인해 병렬 통신을 활용하기 어려운 장거리 통신 및 컴퓨터 네트워크에서 직렬 통신이 주로 사용된다. 그러나 기술적 발전으로 현재는 단거리 통신에서도 직렬 통신이 병렬 통신보다 훨씬 큰 이점을 가진다. 컴퓨터 시스템과 장치 간에 [PCI](https://ko.wikipedia.org/wiki/PCI_버스) 병렬 통신에서 [PCIe](https://ko.wikipedia.org/wiki/PCI_익스프레스) 직렬 통신으로 변경된 점도 이러한 특성이 반영된 것이다. 본 문서는 MCU에서 흔히 접하게 될 직렬 통신에 대하여 소개한다.
 
-## 직렬 주변기기 인터페이스
-직렬 주변기기 인터페이스(serial peripheral interface; SPI)은 단일마스터 다중슬레이브(single-master, multiple-slave) 구조를 가진 가장 간단한 직렬 통신 프로토콜이다. Here, the master is the controlling device and slave is a controlled device by the master.
+## SPI
+직렬 주변기기 인터페이스(serial peripheral interface; SPI)은 단일마스터 다중슬레이브(single-master, multiple-slave) 구조를 가진 가장 간단한 직렬 통신 프로토콜이다. 여기서 마스터란, is the controlling device and slave is a controlled device by the master.
 
-![SPI Single Master, Multiple Slave structure](/images/docs/mcu/comm_serial_spi.png)
+![단일마스터 다중슬레이브 구조의 SPI](/images/docs/mcu/comm_serial_spi.png)
 
 Following is the description of the ports presented in SPI:
 
@@ -198,10 +198,10 @@ However, SPI has the following disadvantages:
 * Cannot check for error (such as by using parity bit).
 * Only a single master.
 
-## 범용 비동기화 송수신기
-범용 비동기화 송수신기(universal asynchronous receiver-transmitter; UART) is not a serial communication protocol but rather a circuit or stand-alone IC for serial communication purpose. Its serial communication is done using connecting transmitter (Tx) to receiver (Rx) and vice versa, thus uses single-master, single-slave structure.
+## UART
+범용 비동기화 송수신기(universal asynchronous receiver-transmitter; UART)는 직렬 통신 프로토콜이 아니며 but rather a circuit or stand-alone IC for serial communication purpose. Its serial communication is done using connecting transmitter (Tx) to receiver (Rx) and vice versa, thus uses single-master, single-slave structure.
 
-![UART Single Master, Single Slave structure](/images/docs/mcu/comm_serial_uart.png)
+![단일마스터 단일슬레이브 구조의 UART](/images/docs/mcu/comm_serial_uart.png)
 
 UART first acquires the data from the bus in parallel and restructure them in series for serial communication, sending LSB first. The receiving UART then change it back to parallel and return the data to the bus.
 
@@ -225,10 +225,10 @@ However, UART has the following disadvantages:
 * Single Master, Single Slave.
 * Unify the baud rat (tolerance less than 10%).
 
-## 직접회로간
-직접회로간(Inter-Integrated Circuit; $$\mathsf{I^2C}$$) (pronounced I-squared-C) is a serial communication protocol with multiple-master, multiple-slave structure available. It has combined the advantages from SPI and UART.
+## I2C
+직접회로간(Inter-Integrated Circuit; $$\mathsf{I^2C}$$ 혹은 IIC), 흔히 "아이스퀘어드씨"라고 부르며 다중마스터 다중슬레이브(multiple-master, multiple-slave) 구조를 구현할 수 있는 직렬 통신 프로토콜이다. It has combined the advantages from SPI and UART.
 
-![I2C Multiple Master, Multiple Slave structure](/images/docs/mcu/comm_serial_i2c.png)
+![다중마스터 다중슬레이브 구조의 I2C](/images/docs/mcu/comm_serial_i2c.png)
 
 $$\mathsf{I^2C}$$ only requires two port for a communication like UART; SDA and SCL.
 
