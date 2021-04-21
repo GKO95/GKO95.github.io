@@ -159,6 +159,9 @@ IRAM은 128바이트 전체가 RAM으로 사용되지 않으며, 안에는 (1) �
 ## 프로그램 메모리
 프로그램 메모리(PMEM), 일명 코드 메모리는 최소 16비트 플래시 메모리 혹은 EEPROM 보조기억장치로 임베디드 시스템의 프로그램 코드를 저장한다. 일반적으로 프로그램 메모리는 MCU 칩에 내장된 동시에 ISP를 지원하여 손쉽게 프로그램을 설치할 수 있다.
 
+### ISP
+[ISP](https://ko.wikipedia.org/wiki/인_시스템_프로그래밍)(in-system programming), 혹은 ICSP(in-circuit serial programming)은 마이크로컨트롤러 및 임베디드 시스템 장치를 별도로 분리할 필요없이 탑재된 상태에서 바로 프로그램을 EEPROM 혹은 플래시 메모리에 설치하도록 한다. 명칭으로부터 알 수 있듯이 ISP는 직렬 통신으로 프로그램을 설치하는데 (1) [JTAG](https://ko.wikipedia.org/wiki/JTAG) 혹은 유사한 구조의 (2) [데이지 체인](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface#Daisy_chain_configuration) SPI가 사용된다. 또한 ISP로 프로그램을 설치하는데 각 MCU 계열마다 ISP 전용 프로토콜이 있으며, 일부는 서로 호환되지 않을 수 있다.
+
 # MCU: 직렬 통신
 [직렬 통신](https://ko.wikipedia.org/wiki/직렬_통신)(serial communication)은 송신 데이터를 하나의 통신 채널에서 한 비트마다 순서대로 전송하는 통신 방법이다.
 
@@ -262,9 +265,9 @@ $$\mathsf{I^2C}$$ 직렬 통신의 장단점을 요약하면 다음과 같다:
 * *장점*
     * 두 개의 통신 채널만 사용한다.
     * 여러 개의 마스터와 슬레이브 구조를 지원한다.
-    * Receive confirmation with ACK/NACK bit.
+    * `ACK`/`NACK` 비트로 수신 이상 유무를 확인할 수 있다.
     * 하드웨어적인 면에서 UART보다 간단하다.
-    * 가장 널리 사용되는 직렬 통신 프로토콜이다.
+    * 가장 흔히 사용되고 있는 직렬 통신 중 하나이다.
 
 * *단점*
     * SPI보다 느린 전송률을 갖는다.
