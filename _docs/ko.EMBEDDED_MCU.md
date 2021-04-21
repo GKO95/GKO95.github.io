@@ -190,6 +190,7 @@ SPI 직렬 통신의 장단점을 요약하면 다음과 같다:
     * 전송 프로토콜을 필요로 하지 않아 간섭(interruption)없이 데이터를 연속으로 빠르게 전송할 수 있다.
     * `SS/CS` 포트로 슬레이브를 간단히 선택할 수 있다.
     * 송신과 수신을 동시에 할 수 있다.
+
 * *단점*
     * 네 개의 통신 채널이 필요하다.
     * 전송 오류를 확인할 수 없다.
@@ -208,44 +209,28 @@ UART의 송신부 `Tx`는 데이터 버스로부터 송신할 데이터를 병�
 
 패킷은 데이터의 시작과 종단을 알리는 비트가 있어 어디까지가 실제 전송 데이터인지 클럭 신호 없이도 알아낼 수 있다. 그래서 UART는 클럭 신호를 사용하지 않으며 통신의 동기화가 필요없기 때문에 "비동기화"란 용어가 이름에 붙는다.
 
-UART의 통신부는 상시 5V 전압의 HIGH로 유지한다. 데이터를 전송하면 패킷은 0V 전압의 LOW 상태를 갖는 시작 비트는 앞장세우는데, 수신부는 HIGH에서 LOW로의 전이를 감지하여 데이터를 수신받기 시작한다. 수신부가 데이터를 읽어내는 속도는 보 레이트(baud rate)로 결정되며, 송신부도 마찬가지로 이와 동일한 보 레이트로 데이터를 송신해야 한다. 그러나 송신부와 수신부의 보 레이트를 동일화시키지 못하여 10% 허용 범위를 초과하면 전송 오류가 발생한다. 오류 발생 여부는 [패리티 비트](https://ko.wikipedia.org/wiki/패리티_비트)로 검사하는데, 패리티 비트가 각각 LOW와 HIGH를 갖으면 데이터 비트의 HIGH 개수가 홀수와 짝수를 갖는다는 의미이다. 만일 데이터 비트의 HIGH 개수가 패리티 비트에 부합하지 않으면 UART는 해당 데이터를 무시한다.
+UART의 통신부는 상시 5V 전압의 HIGH로 유지한다. 데이터를 전송하면 패킷은 0V 전압의 LOW 상태를 갖는 시작 비트는 앞장세우는데, 수신부는 HIGH에서 LOW로의 전이를 감지하여 데이터를 수신받기 시작한다. 수신부가 데이터를 읽어내는 속도는 보 레이트(baud rate)로 결정되며, 송신부도 마찬가지로 이와 동일한 보 레이트로 데이터를 송신해야 한다. 그러나 송신부와 수신부의 보 레이트를 동일화시키지 못하여 10% 허용 범위를 초과하면 전송 오류가 발생한다. 오류 발생 여부는 [패리티 비트](https://ko.wikipedia.org/wiki/패리티_비트)로 검사하는데, 패리티 비트가 각각 LOW와 HIGH를 갖으면 데이터 비트의 HIGH 개수가 홀수와 짝수를 갖는다는 의미이다. 만일 실질적인 내용을 담는 데이터 프레임(data frame) 내의 HIGH 비트 개수가 패리티 비트에 부합하지 않으면 UART는 해당 데이터를 무시한다.
 
 UART 통신의 장단점을 요약하면 다음과 같다:
 
 * *장점*
-    * 오로지 두 종류의 통신 채널이면 충분하다.
-    * 클럭 신호가 필요하지 않다.
-    * 전송 오류를 확인할 수 있는 패리티 비트를 가진다.
-    * Modifiable transmission packet structure (should be equal between Tx and Rx).
-    * Most widely used serial communication.
+    * 두 개의 통신 채널만 사용한다.
+    * 클럭 신호가 전혀 필요하지 않다.
+    * 전송 오류를 검사하는 패리티 비트를 갖는다.
+    * 가장 흔히 사용되고 있는 직렬 통신 중 하나이다.
+
 * *단점*
-    * Restricted literal data size (9 bits maximum).
     * 단일마스터 단일슬레이브 구조로 한정된다.
     * (10% 오차율 이내로) 보 레이트를 통일시켜야 한다.
+    * 한 번에 전송할 수 있는 데이터 비트가 제한되어 있다.
 
 ### 보 레이트
-> 해당 부분은 [*MCS-51: SFR § 직렬 포트*](#직렬-포트)와 직접적인 연관을 가지므로 해당 내용을 먼저 확인하는 것을 권장한다.
-
 [보 레이트](https://en.wikipedia.org/wiki/Symbol_rate)(baud rate), 혹은 심볼율(symbol rate)란 데이터 통신에서 초당 심볼 변화(혹은 심볼 전송 개수)를 의미하며 보(baud; Bd)라는 단위를 사용한다. 여기서 심볼(symbol)은 디지털 통신 분야에서 인코딩된 신호가 가질 수 있는 값을 말한다. 즉, 8비트 데이터를 주고받는 MCS-51 마이크로프로세서는 0과 1의 이진수로 인코딩된 여덟 비트 길이의 바이트가 하나의 심볼이 된다. 예를 들어, 9600 Bd는 초당 9600 심볼 속도로 데이터를 전송한다.
-
-직렬 포트의 보 레이트는 타이머 1을 8비트 자동 재호출 모드로 설정한 다음 오버플로우가 발생하도록 `TH1` 값을 아래의 계산식을 통해 입력하면 된다.
-
-$$
-\mathsf{TH1}=256-\left( \frac{ \mathsf{clock \ frequency} / 384}{\mathsf{baud \ rate}} \right)
-$$
-
-여기서 "클럭 주파수"는 수정 발진기에서 발생하는 일정한 주파수(11.059 MHz)이며, "보 레이트"는 사용자가 원하는 직렬 포트의 보 레이트를 말한다. 이 두 개의 변수가 결정되면 `TH1`에 어떠한 값을 설정되어야 하는지 구할 수 있다.
-
-추가적으로 SFR에 `PCON`이란 전력 설정에서 일곱 번째 비트는 보 레이트를 배속으로 올릴 수 있도록 한다. 만일 `PCON.7`에 의해 보 레이트가 배속으로 되면 계산식은 아래와 같이 변환다.
-
-$$
-\mathsf{TH1_{\mathsf{double}}}=256-\left( \frac{ \mathsf{clock \ frequency} / 192}{\mathsf{baud \ rate}} \right)
-$$
 
 ## I2C
 > *출처: [Basics of the I2C Communication Protocol (영문)](https://www.circuitbasics.com/basics-of-the-i2c-communication-protocol/)*
 
-직접회로간(Inter-Integrated Circuit; $$\mathsf{I^2C}$$ 혹은 IIC), 흔히 "아이스퀘어드씨"라고 부르며 다중마스터 다중슬레이브(multiple-master, multiple-slave) 구조를 구현할 수 있는 직렬 통신 프로토콜이다. 본 직렬 통신 프로토콜은 SPI와 UART의 장점들을 가진다.
+직접회로간(Inter-Integrated Circuit; $$\mathsf{I^2C}$$ 혹은 IIC), 흔히 "아이스퀘어드씨"라고 부르며 다중마스터 다중슬레이브(multiple-master, multiple-slave) 구조를 구현할 수 있는 직렬 통신 프로토콜이다. 본 직렬 통신 프로토콜은 SPI와 UART의 장점들을 골고루 가진다.
 
 ![다중마스터 다중슬레이브 구조의 I2C](/images/docs/mcu/comm_serial_i2c.png)
 
@@ -254,36 +239,37 @@ $$
 | `SDA` | 직렬 전송 데이터 | 마스터와 슬레이브 간을 연결하는 양방향성 데이터 전송 채널이다. |
 | `SCL` | 직렬 클럭 신호 | 클럭 신호, 즉 통신 동기화 신호가 입/출력되는 포트이다. |
 
-While UART sent data as a packet, $$\mathsf{I^2C}$$ uses the term called "message" which contains the number of data *frames*, start/stop bit, and more. It also sends MSB firsthand.
+$$\mathsf{I^2C}$$ 프로토콜이 비록 두 개의 채널만을 가지지만 SPI처럼 여러 개의 슬레이브와 통신할 수 있는 이유는 바로 메시지(message) 데이터 묶음에 있다. 메시지 안에는 슬레이브를 선택하는 주소 프레임(address frame)과 실질적인 내용을 담는 데이터 프레임(data frame) 그리고 시작 및 종단 비트 등을 가진다.
 
 ![I2C 통신 프로토콜의 메시지 구조](/images/docs/mcu/comm_serial_message.png)
 
-Just like UART, the message includes start and stop bit at each end. Receiver also pick up reading the data when the start bit changes from HIGH to LOW, and stops reading when stop bit is HIGH from LOW.
+UART와 유사한 방식으로 슬레이브는 시작 비트가 HIGH에서 LOW로 전이된 것을 감지하면 메시지를 읽기 시작한다. 단, $$\mathsf{I^2C}$$에서는 추가 조건이 있으며 시작 비트의 전이가 `SCL` 클럭 신호가 HIGH에서 LOW로 전이되기 전에 발생해야 한다. 반대로 메시지가 끝났음을 알리기 위해서는 `SCL` 클럭 신호가 LOW에서 HIGH로의 전이 이후에 종단 비트에서 LOW로부터 HIGH 전이가 발생해야 한다. 
 
-Next to the address is Read/Write bit which includes a purpose of the message: whether it was sent to (1) transmit data from master to slave (LOW), or (2) request response from slave to master (HIGH). 
+메시지 안에는 주소 프레임이 있어 어느 슬레이브 장치와 통신할 것인지 선택할 수 있다. 슬레이브 장치는 일반적으로 7~10 비트 크기의 주소를 갖으며, 슬레이브는 자신의 주소와 일치한 메시지만을 수신한다. 그리고 이에 대한 응답으로 마스터에게 `ACK` 확인 신호를 의미하는 LOW를 전송한다. 주소가 일치하지 않는 나머지 장치는 `NACK` 신호로 HIGH를 유지하여 마치 아무런 메시지를 받지 않은 것처럼 행동한다. 허나 하나의 마스터는 동일한 주소를 갖는 두 개 이상의 슬레이브와 통신할 수 없다는 것을 의미하기도 한다.
 
-One of the unique features $$\mathsf{I^2C}$$ has is an existence of the address frame to specify which slave the message should go to. This address is long as 7~10 bits (generally, seven). The slave compares whether the address matches its own address: if same, the slave returns LOW back to the master as acknowledged (ACK) through SDA. The rest with non-matching address returns HIGH as no-acknowledged (NACK) as it never had received any message.
+또한 ISP에서 MISO 및 MOSI 포트도 메시지의 `READ`/`WRITE` 비트 하나로 해결한다: (1) 마스터에서 슬레이브에게 요청하는 목적의 `READ` (LOW 비트), 그리고 (2) 마스터에서 슬레이브에게 일방적으로 전달하는 `WRITE` (HIGH 비트)로 분류된다.
 
-The process of $$\mathsf{I^2C}$$ communication is as follows:
+$$\mathsf{I^2C}$$ 통신 프로토콜은 다음 절차를 통해 데이터를 송수신한다:
 
-1. Convert SDA start bit from HIGH to LOW before SCL's falling edge triggers.
-2. The start of the message is distributed to all the slave connected for matching address.
-3. Slave with the address returns SDA LOW to master, while the rest maintain HIGH.
-4. Master transmit data frame to the particular slave, and the slave returns 1-bit of ACK LOW every time the data frame is successfully received.
-5. Upon cutoff, convert SDA stop bit from LOW to HIGH after SCL's rising edge is triggered.
+1. `SDA`의 시작 비트를 `SCL`가 하강 에지(falling edge)에 진입하기 전에 HIGH에서 LOW로 전이시킨다.
+2. 메시지는 마스터에 연결된 모든 슬레이브 장치에 전달하여 주소 프레임과 일치하는 슬레이브를 찾는다.
+3. 일치하는 주소를 갖는 슬레이브 장치는 `ACK` 신호를 응답하며, 나머지는 `NACK`를 유지한다.
+4. 마스터는 해당 슬레이브에게 데이터 프레임을 전송하고, 이상 없이 수신하면 `ACK`로 매번 응답한다.
+5. 메시지 종료 시, `SDA`의 종단 비트를 `SCL`가 상승 에지(rising edge)에 진입한 이후에 LOW에서 HIGH로 전이시킨다.
 
 $$\mathsf{I^2C}$$ 직렬 통신의 장단점을 요약하면 다음과 같다:
 
 * *장점*
-    * 오로지 두 종류의 통신 채널이면 충분하다.
+    * 두 개의 통신 채널만 사용한다.
     * 여러 개의 마스터와 슬레이브 구조를 지원한다.
     * Receive confirmation with ACK/NACK bit.
     * 하드웨어적인 면에서 UART보다 간단하다.
     * 가장 널리 사용되는 직렬 통신 프로토콜이다.
+
 * *단점*
     * SPI보다 느린 전송률을 갖는다.
     * 하드웨어적인 면에서 SPI보다 복잡하다.
-    * Restricted data frame size (8 bits maximum).
+    * 한 번에 전송할 수 있는 데이터 비트가 제한되어 있다.
 
 # MCU: SFR
 [SFR](https://en.wikipedia.org/wiki/Special_function_register)(Special Function Register). 일명 특수 목적 레지스터에는 마이크로컨트롤러에 있는 중요한 기능 및 설정들이 포함되어 있다. 비록 *MCS-51: 메모리* 장에서 간략하게 설명하였으나, 이번 장에서는 더 구체적으로 SFR에 대하여 소개한다. 아래 그림은 SFR에 할당된 기능 및 설정들이 어디에 위치하는지 보여준다.
