@@ -169,6 +169,8 @@ IRAM은 128바이트 전체가 RAM으로 사용되지 않으며, 안에는 (1) �
 케이블 비용과 동기화 문제로 인해 병렬 통신을 활용하기 어려운 장거리 통신 및 컴퓨터 네트워크에서 직렬 통신이 주로 사용된다. 그러나 기술적 발전으로 현재는 단거리 통신에서도 직렬 통신이 병렬 통신보다 훨씬 큰 이점을 가진다. 컴퓨터 시스템과 장치 간에 [PCI](https://ko.wikipedia.org/wiki/PCI_버스) 병렬 통신에서 [PCIe](https://ko.wikipedia.org/wiki/PCI_익스프레스) 직렬 통신으로 변경된 점도 이러한 특성이 반영된 것이다. 본 문서는 MCU에서 흔히 접하게 될 직렬 통신에 대하여 소개한다.
 
 ## SPI
+> *출처: [Basics of SPI Communication Protocol (영문)](https://www.circuitbasics.com/basics-of-the-spi-communication-protocol/)*
+
 직렬 주변기기 인터페이스(serial peripheral interface; SPI)은 단일마스터 다중슬레이브(single-master, multiple-slave) 구조를 가진 가장 간단한 직렬 통신 프로토콜이다. 여기서 마스터(master)는 제어 장치이며, 슬레이브(slave)란 마스터로부터 제어되는 장치이다.
 
 ![단일마스터 다중슬레이브 구조의 SPI](/images/docs/mcu/comm_serial_spi.png)
@@ -180,48 +182,69 @@ IRAM은 128바이트 전체가 RAM으로 사용되지 않으며, 안에는 (1) �
 | `SCLK`  | 동기화 클럭         | 통신 동기화를 위해 마스터에서 슬레이브로 일정 주기를 가진 클럭 신호를 제공한다.               |
 | `SS/CS` | 슬레이브 혹은 칩 선택   | 마스터로부터 데이터를 수신할 슬레이브를 선택한다. `SS/CS`를 LOW로 설정하여 슬레이브를 활성화한다. |
 
-SPI 직렬 통신은 데이터를 클럭 신호에 따라 송수신하므로 데이터의 시작점과 종단점을 알리는 전송 프로토콜을 필요하지 않다. 다시 말해, 하나의 클럭 신호를 통해 마스터와 슬레이브가 동일한 시간 주기로 동시에 동작한다. 이러한 이유로 클럭 신호를 공유하는 직렬 통신을 동기식 직렬 통신(synchronous serial communication)이라고 부른다.
+SPI 직렬 통신은 데이터를 클럭 신호에 따라 송수신하므로 데이터의 시작점과 종단점을 알리는 전송 프로토콜을 필요하지 않다. 다시 말해, 하나의 클럭 신호를 통해 마스터와 슬레이브가 동일한 시간 주기로 동시에 동작한다. 이러한 이유로 클럭 신호를 공유하는 직렬 통신을 동기화 직렬 통신(synchronous serial communication)이라고 부른다.
 
-### 장점
+SPI 직렬 통신의 장단점을 요약하면 다음과 같다:
 
-* 전송 프로토콜을 필요로 하지 않아 간섭(interruption)없이 데이터를 연속으로 빠르게 전송할 수 있다.
-* `SS/CS` 포트로 슬레이브를 간단히 선택할 수 있다.
-* 송신과 수신을 동시에 할 수 있다.
-
-### 단점
-
-* 네 개의 통신 채널이 필요하다.
-* 전송 오류를 확인할 수 없다.
-* 하나의 마스터만 허용된다.
+* *장점*
+    * 전송 프로토콜을 필요로 하지 않아 간섭(interruption)없이 데이터를 연속으로 빠르게 전송할 수 있다.
+    * `SS/CS` 포트로 슬레이브를 간단히 선택할 수 있다.
+    * 송신과 수신을 동시에 할 수 있다.
+* *단점*
+    * 네 개의 통신 채널이 필요하다.
+    * 전송 오류를 확인할 수 없다.
+    * 하나의 마스터만 허용된다.
 
 ## UART
+> *출처: [Basics of UART Communication (영문)](https://www.circuitbasics.com/basics-uart-communication/)*
+
 범용 비동기화 송수신기(universal asynchronous receiver-transmitter; UART)는 직렬 통신 프로토콜이 아니라 통신 회로나 IC의 분류에 해당한다. UART는 마스터와 슬레이브 간의 송신부 `Tx`와 수신부 `Rx`를 연결하므로써 직렬 통신을 하여 단일마스터 단일슬레이브 구조를 가진다.
 
 ![단일마스터 단일슬레이브 구조의 UART](/images/docs/mcu/comm_serial_uart.png)
 
-UART first acquires the data from the bus in parallel and restructure them in series for serial communication, sending LSB first. The receiving UART then change it back to parallel and return the data to the bus.
+UART의 송신부 `Tx`는 데이터 버스로부터 송신할 데이터를 병렬로 받아 일련의 직렬 데이터로 재구성한다. 직렬 데이터는 LSB부터 차례대로 수신부 `Rx`로 전송되는데, 수신이 완료되면 병렬 데이터로 되돌려 버스로 반환한다. 이때 SPI와 달리, UART는 패킷(packet)이란 데이터 묶음으로 전송한다.
 
-Unlike the SPI, UART does not share the clock signal with its communicating device, thus the term "asynchronous" derived. Instead, UART transfer a packet which separates data by placing start and stop bit at each end: start bit maintains HIGH when inactive but changes to LOW as soon as the transmission occurs. On the other hand, stop bit is set to HIGH so to return to its inactive state. This is how the receiver reads the transmitted data.
+![UART 통신의 패킷 구조](/images/docs/mcu/comm_serial_packet.png)
 
-Upon receiving the packet, the UART reads a bit in a frequency of specified baud rate. This means the transmission UART also needs to send the bits of packet according to the same baud rate. Failed to equalize the baud rate by exceeding its tolerance will cause transmission error.
+패킷은 데이터의 시작과 종단을 알리는 비트가 있어 어디까지가 실제 전송 데이터인지 클럭 신호 없이도 알아낼 수 있다. 그래서 UART는 클럭 신호를 사용하지 않으며 통신의 동기화가 필요없기 때문에 "비동기화"란 용어가 이름에 붙는다.
 
-The error can be verified (but not fixed) using parity bit at the end of the data but just before the stop bit. Again, parity bit will count the number of HIGH bits for even and odd. Presumably, UART would ignore the packet containing error.
+UART의 통신부는 상시 5V 전압의 HIGH로 유지한다. 데이터를 전송하면 패킷은 0V 전압의 LOW 상태를 갖는 시작 비트는 앞장세우는데, 수신부는 HIGH에서 LOW로의 전이를 감지하여 데이터를 수신받기 시작한다. 수신부가 데이터를 읽어내는 속도는 보 레이트(baud rate)로 결정되며, 송신부도 마찬가지로 이와 동일한 보 레이트로 데이터를 송신해야 한다. 그러나 송신부와 수신부의 보 레이트를 동일화시키지 못하여 10% 허용 범위를 초과하면 전송 오류가 발생한다. 오류 발생 여부는 [패리티 비트](https://ko.wikipedia.org/wiki/패리티_비트)로 검사하는데, 패리티 비트가 각각 LOW와 HIGH를 갖으면 데이터 비트의 HIGH 개수가 홀수와 짝수를 갖는다는 의미이다. 만일 데이터 비트의 HIGH 개수가 패리티 비트에 부합하지 않으면 UART는 해당 데이터를 무시한다.
 
-### 장점
+UART 통신의 장단점을 요약하면 다음과 같다:
 
-* 오로지 두 종류의 통신 채널이면 충분하다.
-* 클럭 신호가 필요하지 않다.
-* Parity bit available for error verification.
-* Modifiable transmission packet structure (should be equal between Tx and Rx).
-* Most widely used serial communication.
+* *장점*
+    * 오로지 두 종류의 통신 채널이면 충분하다.
+    * 클럭 신호가 필요하지 않다.
+    * 전송 오류를 확인할 수 있는 패리티 비트를 가진다.
+    * Modifiable transmission packet structure (should be equal between Tx and Rx).
+    * Most widely used serial communication.
+* *단점*
+    * Restricted literal data size (9 bits maximum).
+    * 단일마스터 단일슬레이브 구조로 한정된다.
+    * (10% 오차율 이내로) 보 레이트를 통일시켜야 한다.
 
-### 단점
+### 보 레이트
+> 해당 부분은 [*MCS-51: SFR § 직렬 포트*](#직렬-포트)와 직접적인 연관을 가지므로 해당 내용을 먼저 확인하는 것을 권장한다.
 
-* Restricted literal data size (9 bits maximum).
-* 단일마스터 단일슬레이브 구조로 한정된다.
-* (10% 오차율 이내로) 보 레이트를 통일시켜야 한다.
+[보 레이트](https://en.wikipedia.org/wiki/Symbol_rate)(baud rate), 혹은 심볼율(symbol rate)란 데이터 통신에서 초당 심볼 변화(혹은 심볼 전송 개수)를 의미하며 보(baud; Bd)라는 단위를 사용한다. 여기서 심볼(symbol)은 디지털 통신 분야에서 인코딩된 신호가 가질 수 있는 값을 말한다. 즉, 8비트 데이터를 주고받는 MCS-51 마이크로프로세서는 0과 1의 이진수로 인코딩된 여덟 비트 길이의 바이트가 하나의 심볼이 된다. 예를 들어, 9600 Bd는 초당 9600 심볼 속도로 데이터를 전송한다.
+
+직렬 포트의 보 레이트는 타이머 1을 8비트 자동 재호출 모드로 설정한 다음 오버플로우가 발생하도록 `TH1` 값을 아래의 계산식을 통해 입력하면 된다.
+
+$$
+\mathsf{TH1}=256-\left( \frac{ \mathsf{clock \ frequency} / 384}{\mathsf{baud \ rate}} \right)
+$$
+
+여기서 "클럭 주파수"는 수정 발진기에서 발생하는 일정한 주파수(11.059 MHz)이며, "보 레이트"는 사용자가 원하는 직렬 포트의 보 레이트를 말한다. 이 두 개의 변수가 결정되면 `TH1`에 어떠한 값을 설정되어야 하는지 구할 수 있다.
+
+추가적으로 SFR에 `PCON`이란 전력 설정에서 일곱 번째 비트는 보 레이트를 배속으로 올릴 수 있도록 한다. 만일 `PCON.7`에 의해 보 레이트가 배속으로 되면 계산식은 아래와 같이 변환다.
+
+$$
+\mathsf{TH1_{\mathsf{double}}}=256-\left( \frac{ \mathsf{clock \ frequency} / 192}{\mathsf{baud \ rate}} \right)
+$$
 
 ## I2C
+> *출처: [Basics of the I2C Communication Protocol (영문)](https://www.circuitbasics.com/basics-of-the-i2c-communication-protocol/)*
+
 직접회로간(Inter-Integrated Circuit; $$\mathsf{I^2C}$$ 혹은 IIC), 흔히 "아이스퀘어드씨"라고 부르며 다중마스터 다중슬레이브(multiple-master, multiple-slave) 구조를 구현할 수 있는 직렬 통신 프로토콜이다. 본 직렬 통신 프로토콜은 SPI와 UART의 장점들을 가진다.
 
 ![다중마스터 다중슬레이브 구조의 I2C](/images/docs/mcu/comm_serial_i2c.png)
@@ -233,7 +256,7 @@ The error can be verified (but not fixed) using parity bit at the end of the dat
 
 While UART sent data as a packet, $$\mathsf{I^2C}$$ uses the term called "message" which contains the number of data *frames*, start/stop bit, and more. It also sends MSB firsthand.
 
-![Structure of I2C Message](/images/docs/mcu/comm_serial_structure.png)
+![I2C 통신 프로토콜의 메시지 구조](/images/docs/mcu/comm_serial_message.png)
 
 Just like UART, the message includes start and stop bit at each end. Receiver also pick up reading the data when the start bit changes from HIGH to LOW, and stops reading when stop bit is HIGH from LOW.
 
@@ -249,19 +272,18 @@ The process of $$\mathsf{I^2C}$$ communication is as follows:
 4. Master transmit data frame to the particular slave, and the slave returns 1-bit of ACK LOW every time the data frame is successfully received.
 5. Upon cutoff, convert SDA stop bit from LOW to HIGH after SCL's rising edge is triggered.
 
-### 장점
+$$\mathsf{I^2C}$$ 직렬 통신의 장단점을 요약하면 다음과 같다:
 
-* 오로지 두 종류의 통신 채널이면 충분하다.
-* 여러 개의 마스터와 슬레이브 구조를 지원한다.
-* Receive confirmation with ACK/NACK bit.
-* 하드웨어적인 면에서 UART보다 간단하다.
-* 가장 널리 사용되는 직렬 통신 프로토콜이다.
-
-### 단점
-
-* SPI보다 느린 전송률을 갖는다.
-* 하드웨어적인 면에서 SPI보다 복잡하다.
-* Restricted data frame size (8 bits maximum).
+* *장점*
+    * 오로지 두 종류의 통신 채널이면 충분하다.
+    * 여러 개의 마스터와 슬레이브 구조를 지원한다.
+    * Receive confirmation with ACK/NACK bit.
+    * 하드웨어적인 면에서 UART보다 간단하다.
+    * 가장 널리 사용되는 직렬 통신 프로토콜이다.
+* *단점*
+    * SPI보다 느린 전송률을 갖는다.
+    * 하드웨어적인 면에서 SPI보다 복잡하다.
+    * Restricted data frame size (8 bits maximum).
 
 # MCU: SFR
 [SFR](https://en.wikipedia.org/wiki/Special_function_register)(Special Function Register). 일명 특수 목적 레지스터에는 마이크로컨트롤러에 있는 중요한 기능 및 설정들이 포함되어 있다. 비록 *MCS-51: 메모리* 장에서 간략하게 설명하였으나, 이번 장에서는 더 구체적으로 SFR에 대하여 소개한다. 아래 그림은 SFR에 할당된 기능 및 설정들이 어디에 위치하는지 보여준다.
@@ -322,25 +344,6 @@ $$
 이벤트(event)란, 어떠한 상호작용으로 발생하는 사건을 가리키며 마이크로 오퍼레이션이나 명령어를 지칭하는 게 아니다. 컴퓨터 과학에서도 동일한 의미의 이벤트가 존재하는데, 바로 마우스 및 키보드 버튼 클릭 등이 있다. 마찬가지로 임베디드 시스템에 대한 예시로는 외부 센서의 물체 감지가 있다. 그리고 이벤트 카운터 역할을 바로 타이머가 수행할 수 있다.
 
 SFR의 `TMOD.2`와 `TMOD.6` 비트는 `C/T` 이름을 가지는 것을 확인할 수 있다. 해당 비트가 0이면 명령 주기를 카운트하는 타이머로 동작하지만, 1의 값을 가지면 이벤트 카운터 역할을 한다. 이벤트 카운터는 HIGH 펄스를 감지할 때마다 +1 증가하는데, 어느 신호의 펄스를 감지할 것인지는 소프트웨어 측에서 지정해야 한다.
-
-### 보 레이트
-> 해당 부분은 [*MCS-51: SFR § 직렬 포트*](#직렬-포트)와 직접적인 연관을 가지므로 해당 내용을 먼저 확인하는 것을 권장한다.
-
-[보 레이트](https://en.wikipedia.org/wiki/Symbol_rate)(baud rate), 혹은 심볼율(symbol rate)란 데이터 통신에서 초당 심볼 변화(혹은 심볼 전송 개수)를 의미하며 보(baud; Bd)라는 단위를 사용한다. 여기서 심볼(symbol)은 디지털 통신 분야에서 인코딩된 신호가 가질 수 있는 값을 말한다. 즉, 8비트 데이터를 주고받는 MCS-51 마이크로프로세서는 0과 1의 이진수로 인코딩된 여덟 비트 길이의 바이트가 하나의 심볼이 된다. 예를 들어, 9600 Bd는 초당 9600 심볼 속도로 데이터를 전송한다.
-
-직렬 포트의 보 레이트는 타이머 1을 8비트 자동 재호출 모드로 설정한 다음 오버플로우가 발생하도록 `TH1` 값을 아래의 계산식을 통해 입력하면 된다.
-
-$$
-\mathsf{TH1}=256-\left( \frac{ \mathsf{clock \ frequency} / 384}{\mathsf{baud \ rate}} \right)
-$$
-
-여기서 "클럭 주파수"는 수정 발진기에서 발생하는 일정한 주파수(11.059 MHz)이며, "보 레이트"는 사용자가 원하는 직렬 포트의 보 레이트를 말한다. 이 두 개의 변수가 결정되면 `TH1`에 어떠한 값을 설정되어야 하는지 구할 수 있다.
-
-추가적으로 SFR에 `PCON`이란 전력 설정에서 일곱 번째 비트는 보 레이트를 배속으로 올릴 수 있도록 한다. 만일 `PCON.7`에 의해 보 레이트가 배속으로 되면 계산식은 아래와 같이 변환다.
-
-$$
-\mathsf{TH1_{\mathsf{double}}}=256-\left( \frac{ \mathsf{clock \ frequency} / 192}{\mathsf{baud \ rate}} \right)
-$$
 
 ## 직렬 포트
 MCS-51은 하나의 UART(universal asynchronous receiver/transmitter; 범용 비동기화 송수신기) 직렬 포트를 가진다. SFR에서 UART는 `SCON`에서 직렬 포트를 제어(control)하며, `SBUF`를 통해 데이터를 수신받거나 전송하는 버퍼(buffer)이다. 다음은 `SCON`의 각 비트가 가지는 역할을 설명한다.
