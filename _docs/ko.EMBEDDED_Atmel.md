@@ -73,5 +73,13 @@ Microchip Studio을 실행하면 환경설정 및 사용자 인터페이스가 �
 
 # ATMEL: 기초
 
+## ISP
+아두이노 우노 R3에는 두 개의 [ICSP](../ko.EMBEDDED_MCU/#isp)를 확인할 수 있으며, 이들이 각각 프로그래밍하는 MCU는 다음과 같다.
+
+| ISP   | MCU         | 목적 |
+|:-----:|:-----------:|-----|
+| ICSP1 | ATmega16IU2 | 포트와 메인 메인 MCU 연결 통로 |
+| ICSP2 | ATmega328P  | 아두이노 우노 R3의 메인 MCU |
+
 # ATMEL: 핀 설정
 포트(PORT)는 MCU에서 나가는 출력 버퍼, 그리고 핀(PIN)은 MCU로 들어오는 입력 버퍼이다.
