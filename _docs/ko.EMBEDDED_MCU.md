@@ -152,9 +152,9 @@ IRAM은 128바이트 전체가 RAM으로 사용되지 않으며, 안에는 (1) �
 
 |                            색상                             | 설명                                                  |
 | :----------------------------------------------------------: | ------------------------------------------------------------ |
-| **<span style="background-color:skyblue; color: black;">파란색</span>** | 양방향 입출력 포트.          |
-| **<span style="background-color: yellow; color:black">노란색</span>** | 제어 SFR: 마이크로컨트롤러가 어떻게 동작하는지 설정. |
-| **<span style="background-color:lightgreen; color:black;">초록색</span>** | 보조 SFR: 마이크로컨트롤러 설정에 기여하지 않지만 동작에 있어서 필요. |
+| <span style="background-color:skyblue; color: black; font-weight: bold;">파란색</span> | 양방향 입출력 포트.          |
+| <span style="background-color: yellow; color:black; font-weight: bold;">노란색</span> | 제어 SFR: 마이크로컨트롤러가 어떻게 동작하는지 설정. |
+| <span style="background-color:lightgreen; color:black; font-weight: bold;">초록색</span> | 보조 SFR: 마이크로컨트롤러 설정에 기여하지 않지만 동작에 있어서 필요. |
 
 ## 프로그램 메모리
 프로그램 메모리(PMEM), 일명 코드 메모리는 최소 16비트 플래시 메모리 혹은 EEPROM 보조기억장치로 임베디드 시스템의 프로그램 코드를 저장한다. 일반적으로 프로그램 메모리는 MCU 칩에 내장된 동시에 ISP를 지원하여 손쉽게 프로그램을 설치할 수 있다.
