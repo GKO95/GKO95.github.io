@@ -2334,9 +2334,9 @@ np.append(A, B, axis = 0)
 ### 자료형 변환
 넘파이 배열의 자료형을 `numpy.ndarray.dtype` 속성에서 확인할 수 있다. 그러나 해당 속성을 직접 수정하는 것은 매우 위험한 행위이다.
 
-> C++로 설명하자면 `static_cast` 연산이 아닌 `reinterpret_cast`로 변환한 것이라고 볼 수 있다.
+> C++로 설명하자면 `static_cast` 연산자가 아닌 `reinterpret_cast` 연산자로 변환한 것과 동일하다. 예를 들어 정수 1234567890에 `reinterpret_cast<float*>`을 사용하면 전혀 다른 값인 1228890.25이 나온다.
 
-`numpy.ndarray.astype()`
+넘파이 배열의 자료형을 안전하게 변환하려면 `numpy.ndarray.astype()`을 사용한다.
 
 # MATPLOTLIB: 기초
 Matplotlib 라이브러리를 설치하기 위해, 아래의 명령어를 입력한다.
