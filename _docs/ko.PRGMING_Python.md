@@ -2089,7 +2089,7 @@ deactivate
 
 이는 `D:\Workspace\Python\.venv\Scripts\deactivate.bat` 명령어를 입력하는 것과 동일하다. 이러한 이유로, 가상환경 경로를 옮길 시 `deactivate` 명령어를 인식하지 못하여 직접 경로를 찾아서 `deactivate.bat` 파일을 실행해야 한다.
 
-# 넘파이: 기초
+# 파이썬: 넘파이
 [넘파이](https://numpy.org/)(NumPy)는 다차원 배열을 지원하는 강력한 파이썬 전용 라이브러리이다. 메모리 효율이 [리스트 객체](#리스트-객체)보다 우월하여 큰 규모의 배열을 다룰 때에는 매우 유용하다. 이러한 특징으로 인해 matplotlib 및 Tensorflow와 같은 라이브러리에서도 넘파이 배열이 흔히 사용된다.
 
 넘파이 라이브러리를 설치하기 위해, 아래의 명령어를 입력한다.
@@ -2400,19 +2400,19 @@ print(var)
 ```
 
 ## 넘파이 연산
-다음은 넘파이 배열을 처리할 수 있는 일부 연산자 및 함수들을 소개한다.
+다음은 넘파이 배열에 사용되는 연산자의 목록이다.
 
-| 연산 | 이름 | 설명 |
-|:---:|---|---|
-| `numpy.add`(`+`)  | 덧셈 | `+A`와 같이 단항 연산자로 사용되면 `A`의 부호가 유지된다. |
-| `numpy.subtract`(`-`)  | 뺄셈 | `-A`와 같이 단항 연산자로 사용되면 `A`의 부호가 반전된다. |
-| `numpy.numltiply`(`*`) | [아다마르 곱셈](https://ko.wikipedia.org/wiki/아다마르_곱) | 동일한 크기를 갖는 두 배열의 각 요소를 곱한다. |
-| `numpy.matmul`(`@`)  | [행렬 곱셈](https://ko.wikipedia.org/wiki/행렬_곱셈) | 두 배열을 곱하는 이항연산이며, 첫 번째의 열과 두 번째의 행의 크기가 동일해야 한다. |
-| `numpy.divide`(`/`) | 아마다르 나눗셈 | 동일한 크기를 갖는 두 배열의 각 요소를 나눈다. |
-| `numpy.power`(`**`) | 아마다르 제곱 | 동일한 크기를 갖는 두 배열의 각 요소로 제곱을 구한다. |
-| `numpy.linalg.matrix_power` | 행렬 제곱 | 행렬의 제곱을 구한다; `matrix_power(A,2)`는 `A*A`와 동일하다. |
-| `numpy.linalg.inv`  | 역행렬 | 행렬 곱셈으로 단위정방행렬이 나오는 배열을 구한다. |
-| `numpy.transpose` | [전치](https://ko.wikipedia.org/wiki/전치행렬) | 행과 열을 교환한다. |
+| 연산                          | 이름                                              | 설명                                               |
+|:---------------------------:|-------------------------------------------------|--------------------------------------------------|
+| `numpy.add`(`+`)            | 덧셈                                              | `+A`와 같이 단항 연산자로 사용되면 `A`의 부호가 유지된다.             |
+| `numpy.subtract`(`-`)       | 뺄셈                                              | `-A`와 같이 단항 연산자로 사용되면 `A`의 부호가 반전된다.             |
+| `numpy.numltiply`(`*`)      | [아다마르 곱셈](https://ko.wikipedia.org/wiki/아다마르_곱) | 동일한 크기를 갖는 두 배열의 각 요소를 곱한다.                      |
+| `numpy.matmul`(`@`)         | [행렬 곱셈](https://ko.wikipedia.org/wiki/행렬_곱셈)    | 두 배열을 곱하는 이항연산이며, 첫 번째의 열과 두 번째의 행의 크기가 동일해야 한다. |
+| `numpy.divide`(`/`)         | 아마다르 나눗셈                                        | 동일한 크기를 갖는 두 배열의 각 요소를 나눈다.                      |
+| `numpy.power`(`**`)         | 아마다르 제곱                                         | 동일한 크기를 갖는 두 배열의 각 요소로 제곱을 구한다.                  |
+| `numpy.linalg.matrix_power` | 행렬 제곱                                           | 행렬의 제곱을 구한다; `matrix_power(A,2)`는 `A*A`와 동일하다.   |
+| `numpy.linalg.inv`          | 역행렬                                             | 행렬 곱셈으로 단위정방행렬이 나오는 배열을 구한다.                     |
+| `numpy.transpose`           | [전치](https://ko.wikipedia.org/wiki/전치행렬)        | 행과 열을 교환한다.                                      |
 
 > `numpy.linalg`는 선형대수학(**LIN**ear **ALG**ebra)을 처리하는 함수들과 데이터를 갖는다.
 
@@ -2440,7 +2440,7 @@ print(var + [0, 1, 2, 3, 4])
 '''
 ```
 
-# MATPLOTLIB: 기초
+# 파이썬: MATPLOTLIB
 [Matplotlib](https://matplotlib.org/)는 그래프를 그리는데 활용되는 파이썬 프로그래밍 언어의 라이브러리이다. [넘파이](#넘파이-기초)와 함께 사용될 수 있으며, 인터페이스는 [MATLAB](../ko.PRGMING_MATLAB/)과 유사하도록 디자인되었다. 2020년부터 matplotlib는 파이썬의 공식 선언에 따라 파이썬 3에서만 지원한다.
 
 Matplotlib 라이브러리를 설치하기 위해, 아래의 명령어를 입력한다.
@@ -2448,3 +2448,36 @@ Matplotlib 라이브러리를 설치하기 위해, 아래의 명령어를 입력
 ```
 python -m pip install matplotlib
 ```
+
+## `pyplot` 모듈
+`matplotlib.pyplot` 모듈은 matplotlib 라이브러리가 [MATLAB](../ko.PRGMING_MATLAB/#matlab-그래프)과 유사하게 동작하도록 하는 API들의 묶음이다. 즉, MATLAB과 동일하게 간단한 프로그래밍으로 원하는 그래프를 그릴 수 있도록 하는 목적을 갖는다. 아래의 코드로 `pyplot` 모듈을 불러온다.
+
+```python
+import matplotlib.pyplot as plt
+```
+
+그 외에도 matplotlib는 다양한 모듈을 갖지만, 그래프 생성에서는 `pyplot` 모듈이 가장 대표적이다.
+
+## 도면
+도면(figure)은 그래프를 그릴 수 있는 창이며, `pyplot.figure` 함수로 생성된다.
+
+> Matplotlib에서는 용어 "figure"에 대한 공식 한국어 번역이 없다. "도면"은 본 문서에서 임시로 정한 번역 용어이다.
+
+![Matplotlib 도면 창](/images/docs/python/matplotlib_figure_window.png)
+
+Matplotlib 도면 설정은 다음과 같이 변경할 수 있다.
+
+```python
+import matplotlib.pyploy as plt
+
+# MATPLOTLIB 도면 제목을 "Hello World!" 그리고 크기는 너비 4인치, 높이 3인치
+plt.figure("Hello World!", (4, 3))
+
+# MATPLOTLIB 도면을 활성화
+plt.show()
+```
+
+## 도표
+도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역이다.
+
+> Matplotlib에서는 용어 "axes"에 대한 공식 한국어 번역이 없다. "도표"은 본 문서에서 임시로 정한 번역 용어이다.
