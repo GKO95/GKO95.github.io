@@ -677,11 +677,46 @@ y2 = cosh(x);
 
 figure;
 
+% 도면 전체를 채우는 도표를 생성
 ax1 = axes;
-ax2 = axes("Position", [0.45, 0.25, 0.4, 0.3]);
-
 plot(ax1, x, y1);
+
+% 도면에서 좌향 0.45, 상향 0.25, 너비 0.4, 그리고 높이 0.3 비율에 위치
+ax2 = axes("Position", [0.45, 0.25, 0.4, 0.3]);
 plot(ax2, x, y2);
 ```
 
-![MATLAB 도면 창](/images/docs/matlab/matlab_figure_axes.png)
+![MATLAB 도면](/images/docs/matlab/matlab_figure_axes.png)
+
+### 타일 레이아웃
+도표는 `axes` 명령어 외에 생성할 수 있는 방법이 다양하다. 그 중에서는 `tiledlayout` 타일형 레이아웃을 도면에 적용하여 `nexttile`으로 원하는 위치와 크기로 레이아웃에 맞게 도표를 삽입하는 방법이 있다.
+
+```matlab
+x  = -10 : 0.1 : 10;
+y1 = sin(x);
+y2 = cosh(x);
+y3 = tanh(x);
+y4 = -2 * x.^3;
+
+% 도면에 3x3 타일형 레이아웃 layout을 적용
+fig = figure;
+layout = tiledlayout(fig, 3, 3);
+
+% 타일형 레이아웃 layout의 1번 격자에 1x1 도표 생성
+ax1 = nexttile(layout, 1);
+plot(ax1, x, y1);
+
+% 타일형 레이아웃 layout의 4번 격자에 2x2 도표 생성
+ax2 = nexttile(layout, 4, [2, 2]);
+plot(ax2, x, y2);
+
+% 타일형 레이아웃 layout의 2번 격자에 1x2 도표 생성
+ax3 = nexttile(layout, 2, [1, 2]);
+plot(ax3, x, y3);
+
+% 타일형 레이아웃 layout의 6번 격자에 2x1 도표 생성
+ax4 = nexttile(layout, 6, [2, 1]);
+plot(ax4, x, y4);
+```
+
+![MATLAB 타일형 레이아웃](/images/docs/matlab/matlab_figure_tiledlayout.png)

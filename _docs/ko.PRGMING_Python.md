@@ -2478,7 +2478,7 @@ plt.show()
 ```
 
 ## 도표
-도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역이며, `axes` 함수로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다. 
+도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역이며, `pyplot.axes` 함수로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다. 
 
 > Matplotlib에서는 용어 "axes"에 대한 공식 한국어 번역이 없다. "도표"은 본 문서에서 임시로 정한 번역 용어이다.
 
@@ -2492,14 +2492,53 @@ y2 = np.cosh(x)
 
 plt.figure()
 
+# 도면 전체를 채우는 도표를 생성
 ax1 = plt.axes()
-ax2 = plt.axes((0.45, 0.25, 0.4, 0.3))
-
 ax1.plot(x, y1)
+
+# 도면에서 좌향 0.45, 상향 0.25, 너비 0.4, 그리고 높이 0.3 비율에 위치
+ax2 = plt.axes((0.45, 0.25, 0.4, 0.3))
 ax2.plot(x, y2)
 
 plt.show()
 ```
 
-![Matplotlib 도면 창](/images/docs/python/matplotlib_figure_axes.png)
+![Matplotlib 도면](/images/docs/python/matplotlib_figure_axes.png)
 
+## 격자 레이아웃
+도표는 `pyplot.axes` 함수 외에 생성할 수 있는 방법이 다양하다. 그 중에서는 `gridspec.GridSpec` 격자형 레이아웃을 도면에 적용하여 `pyplot.subplot`으로 원하는 위치와 크기로 레이아웃에 맞게 도표를 삽입하는 방법이 있다.
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x  = np.arange(-10, 10, 0.1)
+y1 = np.sin(x)
+y2 = np.cosh(x)
+y3 = np.tanh(x)
+y4 = -2 * x**3
+
+# 도면에 3x3 격자형 레이아웃 gs을 적용
+fig = plt.figure()
+gs = fig.add_gridspec(3, 3)
+
+# 격자형 레이아웃의 0번 열 & 0번 행에 도표 생성 
+ax1 = fig.add_subplot(gs[0, 0])
+ax1.plot(x, y1)
+
+# 격자형 레이아웃의 1~마지막 열 & 첫~2번 행에 도표 생성 
+ax2 = fig.add_subplot(gs[1:,:2])
+ax2.plot(x, y2)
+
+# 격자형 레이아웃의 0번 열 & 1~마지막 행에 도표 생성 
+ax3 = fig.add_subplot(gs[0, 1:])
+ax3.plot(x, y3)
+
+# 격자형 레이아웃의 1~마지막 열 & 2번 행에 도표 생성 
+ax4 = fig.add_subplot(gs[1:, 2])
+ax4.plot(x, y4)
+
+plt.show()
+```
+
+![Matplotlib 격자형 레이아웃](/images/docs/python/matplotlib_figure_gridspec.png)
