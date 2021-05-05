@@ -2505,7 +2505,7 @@ ax2.plot(x, y2)
 plt.show()
 ```
 
-## 격자 레이아웃
+### 격자 레이아웃
 도표는 `pyplot.axes` 함수 외에 생성할 수 있는 방법이 다양하다. 그 중에서는 `gridspec.GridSpec` 격자형 레이아웃을 도면에 적용하여 `pyplot.subplot`으로 원하는 위치와 크기로 레이아웃에 맞게 도표를 삽입하는 방법이 있다.
 
 ![Matplotlib 격자형 레이아웃](/images/docs/python/matplotlib_figure_gridspec.png)
