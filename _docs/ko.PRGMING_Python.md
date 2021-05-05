@@ -2478,6 +2478,28 @@ plt.show()
 ```
 
 ## 도표
-도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역이다.
+도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역이며, `axes` 함수로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다. 
 
 > Matplotlib에서는 용어 "axes"에 대한 공식 한국어 번역이 없다. "도표"은 본 문서에서 임시로 정한 번역 용어이다.
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x  = np.arange(-10, 10, 0.1)
+y1 = np.sin(x)
+y2 = np.cosh(x)
+
+plt.figure()
+
+ax1 = plt.axes()
+ax2 = plt.axes((0.45, 0.25, 0.4, 0.3))
+
+ax1.plot(x, y1)
+ax2.plot(x, y2)
+
+plt.show()
+```
+
+![Matplotlib 도면 창](/images/docs/python/matplotlib_figure_axes.png)
+

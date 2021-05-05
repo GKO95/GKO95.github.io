@@ -666,6 +666,22 @@ figure("Name", "Hello World!", "NumberTitle", "off")
 ```
 
 ## 도표
-도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역이다.
+도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역으며, `axes` 명령어로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다. 
 
 > MATLAB에서는 용어 "axes"에 대한 공식 한국어 번역이 없다. "도표"은 본 문서에서 임시로 정한 번역 용어이다.
+
+```matlab
+x  = -10 : 0.1 : 10;
+y1 = sin(x);
+y2 = cosh(x);
+
+figure;
+
+ax1 = axes;
+ax2 = axes("Position", [0.45, 0.25, 0.4, 0.3]);
+
+plot(ax1, x, y1);
+plot(ax2, x, y2);
+```
+
+![MATLAB 도면 창](/images/docs/matlab/matlab_figure_axes.png)
