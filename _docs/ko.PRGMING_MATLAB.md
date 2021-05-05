@@ -670,6 +670,9 @@ figure("Name", "Hello World!", "NumberTitle", "off")
 
 > MATLAB에서는 용어 "axes"에 대한 공식 한국어 번역이 없다. "도표"은 본 문서에서 임시로 정한 번역 용어이다.
 
+![MATLAB 도면](/images/docs/matlab/matlab_figure_axes.png)
+
+
 ```matlab
 x  = -10 : 0.1 : 10;
 y1 = sin(x);
@@ -686,10 +689,10 @@ ax2 = axes("Position", [0.45, 0.25, 0.4, 0.3]);
 plot(ax2, x, y2);
 ```
 
-![MATLAB 도면](/images/docs/matlab/matlab_figure_axes.png)
-
 ### 타일 레이아웃
 도표는 `axes` 명령어 외에 생성할 수 있는 방법이 다양하다. 그 중에서는 `tiledlayout` 타일형 레이아웃을 도면에 적용하여 `nexttile`으로 원하는 위치와 크기로 레이아웃에 맞게 도표를 삽입하는 방법이 있다.
+
+![MATLAB 타일형 레이아웃](/images/docs/matlab/matlab_figure_tiledlayout.png)
 
 ```matlab
 x  = -10 : 0.1 : 10;
@@ -718,5 +721,3 @@ plot(ax3, x, y3);
 ax4 = nexttile(layout, 6, [2, 1]);
 plot(ax4, x, y4);
 ```
-
-![MATLAB 타일형 레이아웃](/images/docs/matlab/matlab_figure_tiledlayout.png)
