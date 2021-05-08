@@ -5,7 +5,7 @@ category: 라이브러리
 title: CUDA
 icon: icon-cuda.png
 meta: CUDA
-order: 0x14
+order: 0x15
 ---
 # CUDA: 소개
 [CUDA](https://ko.wikipedia.org/wiki/CUDA)(Compute Unified Device Architecture)는 게이밍 그래픽 카드로 매우 잘 알려진 [NVIDIA](https://www.nvidia.com/ko-kr/)에서 제공하는 병렬 컴퓨팅 플랫폼 및 API 모델이다. 해당 플랫폼은 [C](../ko.PRGMING_C)/[C++](../ko.PRGMING_Cpp) 그리고 [포트란](https://ko.wikipedia.org/wiki/포트란) 프로그래밍 언어와 함께 사용할 수 있도록 제작되어 접근성이 다른 그래픽 관련 API와 달리 용이하다.

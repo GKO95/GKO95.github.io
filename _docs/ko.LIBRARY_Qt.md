@@ -5,7 +5,7 @@ category: 라이브러리
 title: Qt
 icon: icon-qt.png
 meta: Qt
-order: 0x11
+order: 0x13
 ---
 # QT: 소개
 [Qt](https://www.qt.io/) (한국어: 큐트)는 The Qt Company에서 개발한 대표적인 어플리케이션 프레임워크 중 하나이며 크로스 플랫폼(cross platform)을 통해 윈도우 OS, macOS, 리눅스 이외에도 안드로이드 및 iOS에서도 안정적인 어플리케이션 동작을 보장한다. 이러한 이유로 프로그램 개발 부문에서는 Qt 개발자의 수요가 상당히 있다. 또한 폭넓은 커뮤니티와 잘 정리된 API 문서는 GUI 입문자들에게도 쉽게 접근할 수 있다.

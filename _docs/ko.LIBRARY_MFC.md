@@ -5,7 +5,7 @@ category: 라이브러리
 title: MFC
 icon: icon-mfc.png
 meta: MFC
-order: 0x10
+order: 0x14
 ---
 # **MFC: 소개**
 > *참조: [Microsoft Docs MFC 데스크톱 애플리케이션 (한국어)](https://docs.microsoft.com/ko-kr/cpp/mfc/)*

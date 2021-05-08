@@ -5,7 +5,7 @@ category: 라이브러리
 title: 텐서플로우
 icon: icon-tf2.png
 meta: TensorFlow
-order: 0x13
+order: 0x11
 ---
 # **텐서플로우: 소개**
 > *홈페이지: [https://www.tensorflow.org/](https://www.tensorflow.org/)*

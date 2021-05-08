@@ -672,7 +672,6 @@ figure("Name", "Hello World!", "NumberTitle", "off")
 
 ![MATLAB 도면](/images/docs/matlab/matlab_figure_axes.png)
 
-
 ```matlab
 x  = -10 : 0.1 : 10;
 y1 = sin(x);
