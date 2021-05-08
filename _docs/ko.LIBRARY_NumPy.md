@@ -512,3 +512,26 @@ plt.show()
 ```
 
 이는 `gridspec.GridSpec`을 사용한 예시와 동일한 결과를 보여준다.
+
+### 그래프 결합 & 스타일
+Matplotlib에서는 하나의 도표에 여러 그래프를 그리는 방법은 매우 간단하다. 단순히 해당 도표에서 `plot` 함수를 사용하면 기존 그래프 플롯을 유지한 채 덧붙여 그린다. 만일 그래프 곡선의 색상, 선 종류 및 너비와 같은 스타일을 변경하려면 `plot` 함수에 옵션을 추가해야 한다.
+
+![Matplotlib 그래프 결합 & 스타일](/images/docs/python/matplotlib_figure_combined.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x  = np.arange(-10, 10, 0.1)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+plt.figure()
+ax1 = plt.axes()
+
+# ax1 도표에 (x, y1) & (x, y2) 그래프 플롯
+ax1.plot(x, y1, 'red')
+ax1.plot(x, y2, ls = '--', lw = 4, c = '#22BB22')
+
+plt.show()
+```

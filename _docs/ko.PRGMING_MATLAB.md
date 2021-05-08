@@ -720,3 +720,28 @@ plot(ax3, x, y3);
 ax4 = nexttile(layout, 6, [2, 1]);
 plot(ax4, x, y4);
 ```
+
+### 그래프 결합 & 스타일
+하나의 도표에 여러 그래프를 그리기 위해서는 `hold` 명령어를 사용한다. 해당 명령어는 `plot` 명령어로 그래프를 그릴 때마다 도표가 초기화되는 것을 방지한다. 만일 그래프 곡선의 색상, 선 종류 및 너비와 같은 스타일을 변경하려면 `plot` 명령어에 옵션을 추가해야 한다.
+
+![MATLAB 그래프 결합 & 스타일](/images/docs/matlab/matlab_figure_combined.png)
+
+```matlab
+x  = -10 : 0.1 : 10;
+y1 = sin(x);
+y2 = cos(x);
+
+figure;
+ax1 = axes;
+
+plot(ax1, x, y1);
+
+% ax1 도표에 hold 활성화:
+% ...(x, y1) 그래프를 유지 & (x, y2) 그래프 플롯
+hold(ax1, 'ON');
+plot(x, y2, "linestyle", '--', "linewidth", 4, "color", "#22BB22");
+
+% ax1 도표에 hold 비활성화:
+% ...ax1 도표에 새로 그래프를 그리면 플롯이 초기화
+hold(ax1, 'OFF');
+```
