@@ -456,21 +456,59 @@ y4 = -2 * x**3
 fig = plt.figure()
 gs = fig.add_gridspec(3, 3)
 
-# 격자형 레이아웃의 0번 열 & 0번 행에 도표 생성 
+# 격자형 레이아웃의 0번 열 & 0번 행에 도표 생성
 ax1 = fig.add_subplot(gs[0, 0])
 ax1.plot(x, y1)
 
-# 격자형 레이아웃의 1~마지막 열 & 첫~2번 행에 도표 생성 
+# 격자형 레이아웃의 1~마지막 열 & 첫~2번 행에 도표 생성
 ax2 = fig.add_subplot(gs[1:,:2])
 ax2.plot(x, y2)
 
-# 격자형 레이아웃의 0번 열 & 1~마지막 행에 도표 생성 
+# 격자형 레이아웃의 0번 열 & 1~마지막 행에 도표 생성
 ax3 = fig.add_subplot(gs[0, 1:])
 ax3.plot(x, y3)
 
-# 격자형 레이아웃의 1~마지막 열 & 2번 행에 도표 생성 
+# 격자형 레이아웃의 1~마지막 열 & 2번 행에 도표 생성
 ax4 = fig.add_subplot(gs[1:, 2])
 ax4.plot(x, y4)
 
 plt.show()
 ```
+
+Matplotlib는 아래와 같이 `gridspec.GridSpec`을 사용하지 않고 `pyplot.subplot`만으로도 격자 레이아웃으로 도표를 배치시킬 수 있다. 이는 도면들이 반드시 직사각형 형태이어야 한다는 전재가 바탕이 되기에 가능하다.
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x  = np.arange(-10, 10, 0.1)
+y1 = np.sin(x)
+y2 = np.cosh(x)
+y3 = np.tanh(x)
+y4 = -2 * x**3
+
+# 도면 생성
+fig = plt.figure()
+
+# 3x3 레이아웃의 1번 위치에 도표 생성
+ax1 = fig.add_subplot(3, 3, 1)
+ax1.plot(x, y1)
+
+# 3x3 레이아웃의 2~3번 위치에 도표 생성
+ax2 = fig.add_subplot(3, 3, (2, 3))
+ax2.plot(x, y2)
+
+# 3x3 레이아웃의 4~8번 위치에 도표 생성
+# ...그러나 직사각형을 유지해야 하기에 6번에는 도표가 생성되지 않는다.
+ax3 = fig.add_subplot(3, 3, (4, 8))
+ax3.plot(x, y3)
+
+# 3x3 레이아웃의 6~9번 위치에 도표 생성
+# ...그러나 직사각형을 유지해야 하기에 7번 및 8번에는 도표가 생성되지 않는다.
+ax4 = fig.add_subplot(3, 3, (6, 9))
+ax4.plot(x, y4)
+
+plt.show()
+```
+
+이는 `gridspec.GridSpec`을 사용한 예시와 동일한 결과를 보여준다.
