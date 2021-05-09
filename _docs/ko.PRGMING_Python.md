@@ -559,18 +559,18 @@ if condition:
 
 ```python
 if condition:
-    True_statement
+    statement
 else:
-    False_statement
+    statement
 ```
 
 `if` 조건문과 `else` 조건문을 다음과 같이 조건의 연속을 연쇄적으로 사용할 수 있다:
 
 ```python
-if condition1: 
+if condition: 
     statements
 else:
-    if condition2:
+    if condition:
         statements
     else:
         statements
@@ -580,9 +580,9 @@ else:
 `elif` 조건문은 `else`와 `if` 조건문의 조합으로 이전 조건이 거짓이면 새로운 조건을 제시한다.
 
 ```python
-if condition1: 
+if condition:
     statements
-elif condition2:
+elif condition:
     statements
 else:
     statements
