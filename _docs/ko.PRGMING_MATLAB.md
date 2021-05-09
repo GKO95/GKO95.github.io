@@ -94,6 +94,8 @@ A + B
 | `clc`   | 명령창 초기화 |
 | `clear` | 작업공간 초기화 |
 | `home`  | 커서를 명령창 상단으로 이동 |
+| `disp`  | 명령창에 텍스트 출력 |
+| `warning` | 명령창에 경고문 출력 |
 | `...`   | 다음 명령어로 계속 |
 
 ## 식별자
@@ -819,3 +821,94 @@ title(ax2, "Scatter Command")
 ```
 
 산점도는 $$x$$ 축에 따른 함수의 변화를 관측하는 목적으로 사용되지 않는다. 오히려 변수 $$x$$와 변수 $$y$$의 분포를 통해 관계성을 확인 및 분석하기 위한 목적을 갖는다.
+
+# MATLAB: 조건 및 루프
+조건문 및 반복문(혹은 루프문)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 조건문(conditional statement)과 반복적으로 실행하는 반복문(loop statement)을 소개한다.
+
+> MATLAB에서 조건문, 반복문, 그리고 예외처리문은 공통적으로 `end` 키워드로 중단해야 한다. 이는 C 기반 언어의 중괄호(`{}`)나 파이썬의 들여쓰기와 같이 코드 블록을 구분할 수 있는 것이 없기 때문이다.
+
+## `if` 조건문
+`if` 조건문은 조건이 참(`true`)일 경우 코드를 실행한다. 반대로 거짓일 경우에는 코드를 수행하지 않는다.
+
+```matlab
+if condition
+    statements;
+end
+```
+
+### `else` 조건문
+`else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 실행문에는 조건부가 `false`로 평가되었을 경우 호출되는 코드를 포함한다.
+
+```matlab
+if condition
+    statements;
+else
+    statements; 
+end
+```
+
+### `elseif` 조건문
+`elseif` 조건문은 `else`와 `if` 조건문의 조합으로 이전 조건이 거짓이면 새로운 조건을 제시한다.
+
+```matlab
+if condition
+    statements
+elseif condition
+    statements
+else
+    statements
+end
+```
+
+하지만 우선 소개된 `else`-`if` 연쇄 조건문은 두 조건부가 함께 사용되는 점과 비교해 `elseif` 조건문은 여전히 하나의 조건부에서 처리되므로, 이 둘은 구체적으로 서로 다른 조건문임을 명시해야 한다.
+
+## `switch` 조건문
+`switch` 조건문은 인자를 `case` 키워드에서 제공하는 값과 일치하는지 비교하며, 참일 경우 코드를 실행한다. 어떠한 경우에도 부합하지 않으면 `otherwise` 키워드에 연동된 문장이 실행되며, 반드시 필요하지 않지만 만일을 대비해 사용하기를 권장한다.
+
+```matlab
+switch argument
+    case value1
+        statements;
+    case value2
+        statements;
+    otherwise
+        statements;
+end
+```
+
+`switch` 조건문은 복수의 경우가 하나의 실행문을 공유할 수 있다.
+
+```matlab
+switch argument
+    case {value1, value2}
+        statements;
+    otherwise
+        statements;
+end
+```
+
+## `while` 반복문
+`while` 반복문은 조건이 유지되는 한 내부 코드를 반복적으로 실행한다. 조건이 `false`임이 판정되면 반복문을 종료한다.
+
+```matlab
+while condition
+    statements;
+end
+```
+
+### `break` 문
+`break` 문(일명 탈출문)은 루프를 조기 종료하는데 사용된다. 루프 내부에서 탈출문을 마주치는 즉시 현재 루프에서 탈출하지만 그 바깥 루프로부터는 탈출하지 않는다.
+
+### `continue` 문
+`continue` 문은 반복문 내에서 나머지 실행문을 전부 건너뛰고 다시 조건 판정부분으로 돌아간다. 이는 반복문을 종료하는 `break` 문과 달리 반복문의 루프를 유지한다.
+
+## `for` 반복문
+`for` 반복문은 유효한 범위 내에서 코드를 반복적으로 실행한다. 범위 내의 모든 값이 반복되면 반복문을 종료한다.
+
+```matlab
+for index = array
+    statements;
+end
+```
+
+여기서 변수 `index`는 `array` 배열이 행벡터일 경우에는 스칼라를, 행렬일 경우에는 열벡터를 순서대로 불러와 반복문을 돌린다. 즉, 열벡터를 `for` 반복문에 사용하려면 행벡터로 전치시켜야 한다. 내부의 실행문은 더 이상 불러올 배열이 없을 때까지 하니씩 반복한다.
