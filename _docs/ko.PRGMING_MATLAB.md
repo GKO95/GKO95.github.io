@@ -22,9 +22,9 @@ MATLAB의 불편하고 비싼 가격 정책은 많은 사용자들로 하여금 
 [GNU 옥타브](https://www.gnu.org/software/octave/index)(GNU Octave)는 매우 유명한 MATLAB 대안 소프트웨어로 심지어 (완벽하지 않지만) 훌륭한 호환성을 자랑한다. 옥타브는 GCC 컴파일러와 마찬가지로 [GNU 프로젝트](https://ko.wikipedia.org/wiki/GNU_프로젝트)이기 때문에 오픈 소스 프로그램이다. MATLAB보다 메모리 소모량이 적다는 장점이 있으나, 대기업의 자본이 투입된 MATLAB에 비하여 인터페이스 및 처리속도 그리고 커뮤니티가 비약하다.
 
 ### 파이썬
-> *출처: [MathWorks - MATLAB vs. Python: Top Reasons to Choose MATLAB](https://www.mathworks.com/products/matlab/matlab-vs-python.html)*
+> 본 내용은 파이썬의 [NumPy](../ko.LIBRARY_NumPy/) 문서와 깊은 연관성이 있어, 관심이 있을 경우 한 번 확인하여 비교해 보는 것을 권장한다.
 
-MATLAB은 유난히 [파이썬](../ko.PRGMING_Python/)을 경계하는 것으로 보인다. 위의 출처에서 알 수 있듯이, MATLAB 제품 사이트에서 파이썬을 콕 집어 설명한다. 그도 그럴 것이 파이썬은 무료 소프트웨어이며 MATLAB 못지 않게 폭넓은 커뮤니티와 방대한 양의 라이브러리가 오픈 소스로 공유되고 있기 때문이다. 그 중에서 대표적인 네 개의 공학용 라이브러리인 [NumPy](https://numpy.org/), [SciPy](https://scipy.org/scipylib/), [matplotlib](https://matplotlib.org/), 그리고 [pandas](https://pandas.pydata.org/)가 있으면 MATLAB만큼 혹은 그 이상의 작업을 기대할 수 있다.
+MATLAB 제품 사이트의 한 [게시글](https://www.mathworks.com/products/matlab/matlab-vs-python.html)을 보면 유난히 [파이썬](../ko.PRGMING_Python/)을 경계하는 것으로 보인다. 그도 그럴 것이 파이썬은 무료 소프트웨어이며 MATLAB 못지 않게 폭넓은 커뮤니티와 방대한 양의 라이브러리가 오픈 소스로 공유되고 있기 때문이다. 그 중에서 대표적인 네 개의 공학용 라이브러리인 [NumPy](https://numpy.org/), [SciPy](https://scipy.org/scipylib/), [matplotlib](https://matplotlib.org/), 그리고 [pandas](https://pandas.pydata.org/)가 있으면 MATLAB만큼 혹은 그 이상의 작업을 기대할 수 있다.
 
 # MATLAB: 인터페이스
 
@@ -250,6 +250,7 @@ ans =
 | `eye`   | 단위 정방행렬 생성          |
 | `rand`  | 균일분포 의사난수 배열 생성 |
 | `magic` | [마방진](https://ko.wikipedia.org/wiki/마방진) 정방행렬 생성 |
+| `linspace` | 균일한 간격의 기본 100개 요소로 구성된 행벡터 생성 |
 
 ### 배열 인덱싱
 인덱싱(indexing)은 배열의 일부를 호출하는 과정으로, 소괄호(`()`)를 사용한다. 인덱싱 자체는 배열에 어떠한 영향을 주지 않으며, 단순히 해당 위치의 데이터만 보여준다.
@@ -666,14 +667,14 @@ figure("Name", "Hello World!", "NumberTitle", "off")
 ```
 
 ## 도표
-도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역으며, `axes` 명령어로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다. 
+도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역으며, `axes` 명령어로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다. 여기서 플롯(plot; 전개)이란, 함수를 전개하므로써 "그래프를 그린다"는 의미를 갖는다.
 
 > MATLAB에서는 용어 "axes"에 대한 공식 한국어 번역이 없다. "도표"은 본 문서에서 임시로 정한 번역 용어이다.
 
 ![MATLAB 도면](/images/docs/matlab/matlab_figure_axes.png)
 
 ```matlab
-x  = -10 : 0.1 : 10;
+x  = linspace(-10, 10);
 y1 = sin(x);
 y2 = cosh(x);
 
@@ -688,13 +689,31 @@ ax2 = axes("Position", [0.45, 0.25, 0.4, 0.3]);
 plot(ax2, x, y2);
 ```
 
+### 축 범위 설정
+도표의 축 범위 설정은 `axis` 명령어를 사용한다. 도표의 축 범위를 지정할 때에는 가로 축의 최소치 및 최대치, 그리고 세로 축의 최소치 및 최대치 순서로 기입한다.
+
+![MATLAB 도표 축 범위 설정](/images/docs/matlab/matlab_axes_axis.png)
+
+```matlab
+x  = linspace(-10, 10);
+y1 = sin(x);
+
+figure;
+ax1 = axes;
+
+plot(ax1, x, y1);
+
+% ax1 도표의 x축 [0, 20] 그리고 y축 [-1.5, 1.5] 범위 설정
+axis(ax1, [0, 20, -1.5, 1.5]);
+```
+
 ### 타일 레이아웃
 도표는 `axes` 명령어 외에 생성할 수 있는 방법이 다양하다. 그 중에서는 `tiledlayout` 타일형 레이아웃을 도면에 적용하여 `nexttile`으로 원하는 위치와 크기로 레이아웃에 맞게 도표를 삽입하는 방법이 있다.
 
 ![MATLAB 타일형 레이아웃](/images/docs/matlab/matlab_figure_tiledlayout.png)
 
 ```matlab
-x  = -10 : 0.1 : 10;
+x  = linspace(-10, 10);
 y1 = sin(x);
 y2 = cosh(x);
 y3 = tanh(x);
@@ -721,27 +740,45 @@ ax4 = nexttile(layout, 6, [2, 1]);
 plot(ax4, x, y4);
 ```
 
-### 그래프 결합 & 스타일
-하나의 도표에 여러 그래프를 그리기 위해서는 `hold` 명령어를 사용한다. 해당 명령어는 `plot` 명령어로 그래프를 그릴 때마다 도표가 초기화되는 것을 방지한다. 만일 그래프 곡선의 색상, 선 종류 및 너비와 같은 스타일을 변경하려면 `plot` 명령어에 옵션을 추가해야 한다.
+## 그래프 결합
+MATLAB에서 하나의 도표에 여러 그래프를 그리기 위해서는 `hold` 명령어를 사용한다. 해당 명령어는 `plot` 명령어로 그래프를 그릴 때마다 도표가 초기화되는 것을 방지한다.
 
-![MATLAB 그래프 결합 & 스타일](/images/docs/matlab/matlab_figure_combined.png)
+![MATLAB 그래프 결합](/images/docs/matlab/matlab_plot_combined.png)
 
 ```matlab
-x  = -10 : 0.1 : 10;
+x  = linspace(-10, 10);
 y1 = sin(x);
 y2 = cos(x);
 
 figure;
 ax1 = axes;
 
-plot(ax1, x, y1);
+plot(ax1, x, y1); hold(ax1, 'ON');     % y1(x) 그래프 유지
+plot(ax1, x, y2); hold(ax1, 'OFF');    % y2(x) 그래프 플롯
+% 동일:
+% plot(ax1, x, y1, x, y2);
+```
 
-% ax1 도표에 hold 활성화:
-% ...(x, y1) 그래프를 유지 & (x, y2) 그래프 플롯
+## 그래프 스타일
+그래프 곡선의 색상, 선 종류 및 너비와 같은 스타일은 `plot` 명령어에서 추가 인자를 건네주어 설정할 수 있다.
+
+![MATLAB 그래프 스타일](/images/docs/matlab/matlab_plot_style.png)
+
+```matlab
+x  = linspace(-10, 10);
+y1 = sin(x);
+y2 = cos(x);
+
+figure;
+ax1 = axes;
+
+% y1(x): 적색 파선 & 'X'자 표시
+plot(ax1, x, y1, "r--x");
 hold(ax1, 'ON');
-plot(x, y2, "linestyle", '--', "linewidth", 4, "color", "#22BB22");
 
-% ax1 도표에 hold 비활성화:
-% ...ax1 도표에 새로 그래프를 그리면 플롯이 초기화
+% y2(x): RGB(34,187,34) 4.0 너비의 실선 & 8.0 크기의 원형 표시
+plot(ax1, x, y2, "color", "#22BB22",...
+    "linestyle", "-", "linewidth", 4, ...
+    "marker", "o", "markersize", 8);
 hold(ax1, 'OFF');
 ```

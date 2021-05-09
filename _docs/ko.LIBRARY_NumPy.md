@@ -86,6 +86,7 @@ print(var)
 | `numpy.zeros` | 0으로 채워진 넘파이 배열 생성  |
 | `numpy.ones`  | 1로 채워진 넘파이 배열 생성  |
 | `numpy.eye`   | 단위 정방행렬 생성          |
+| `numpy.linspace` | 균일한 간격의 기본 50개 요소로 구성된 행벡터 생성 |
 | `numpy.random.rand` | 균일분포 의사난수 배열 생성 |
 
 ## 넘파이 인덱싱
@@ -382,7 +383,7 @@ python -m pip install matplotlib
 ```
 
 ## `pyplot` 모듈
-`matplotlib.pyplot` 모듈은 matplotlib 라이브러리가 [MATLAB](../ko.PRGMING_MATLAB/#matlab-그래프)과 유사하게 동작하도록 하는 API들의 묶음이다. 즉, MATLAB과 동일하게 간단한 프로그래밍으로 원하는 그래프를 그릴 수 있도록 하는 목적을 갖는다. 아래의 코드로 `pyplot` 모듈을 불러온다.
+`matplotlib.pyplot` 모듈은 matplotlib 라이브러리가 [MATLAB](../ko.PRGMING_MATLAB/#matlab-그래프)과 유사하게 동작하도록 하는 API들의 묶음이다. 즉, MATLAB과 동일하게 간단한 프로그래밍으로 원하는 그래프를 그릴 수 있도록 하는 목적을 갖는다. 아래의 코드로 `pyplot` 모듈을 불러온다. 여기서 플롯(plot; 전개)이란, 함수를 전개하므로써 "그래프를 그린다"는 의미를 갖는다.
 
 ```python
 import matplotlib.pyplot as plt
@@ -395,7 +396,7 @@ import matplotlib.pyplot as plt
 
 > Matplotlib에서는 용어 "figure"에 대한 공식 한국어 번역이 없다. "도면"은 본 문서에서 임시로 정한 번역 용어이다.
 
-![Matplotlib 도면 창](/images/docs/python/matplotlib_figure_window.png)
+![Matplotlib 도면 창](/images/docs/numpy/matplotlib_figure_window.png)
 
 Matplotlib 도면 설정은 다음과 같이 변경할 수 있다.
 
@@ -410,17 +411,17 @@ plt.show()
 ```
 
 ## 도표
-도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역이며, `pyplot.axes` 함수로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다. 
+도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역이며, `pyplot.axes` 함수로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다.
 
 > Matplotlib에서는 용어 "axes"에 대한 공식 한국어 번역이 없다. "도표"은 본 문서에서 임시로 정한 번역 용어이다.
 
-![Matplotlib 도면](/images/docs/python/matplotlib_figure_axes.png)
+![Matplotlib 도면](/images/docs/numpy/matplotlib_figure_axes.png)
 
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
 
-x  = np.arange(-10, 10, 0.1)
+x  = np.linspace(-10, 10, 100)
 y1 = np.sin(x)
 y2 = np.cosh(x)
 
@@ -437,16 +438,38 @@ ax2.plot(x, y2)
 plt.show()
 ```
 
-### 격자 레이아웃
-도표는 `pyplot.axes` 함수 외에 생성할 수 있는 방법이 다양하다. 그 중에서는 `gridspec.GridSpec` 격자형 레이아웃을 도면에 적용하여 `pyplot.subplot`으로 원하는 위치와 크기로 레이아웃에 맞게 도표를 삽입하는 방법이 있다.
+### 축 범위 설정
+도표의 축 범위 설정은 `axes.set_xlim` 및 `axes.set_ylim` 함수를 사용한다. 도표의 축 범위를 지정할 때에는 축의 최소치 및 최대치 순서로 기입한다.
 
-![Matplotlib 격자형 레이아웃](/images/docs/python/matplotlib_figure_gridspec.png)
+![Matplotlib 도표 축 범위 설정](/images/docs/numpy/matplotlib_axes_axis.png)
 
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
 
-x  = np.arange(-10, 10, 0.1)
+x  = np.linspace(-10, 10, 100)
+y1 = np.sin(x)
+
+plt.figure()
+
+ax1 = plt.axes()
+ax1.plot(x, y1)
+
+# ax1 도표의 x축 [0, 20] 그리고 y축 [-1.5, 1.5] 범위 설정
+ax1.set_xlim([0, 20])
+ax1.set_ylim([-1.5, 1.5])
+```
+
+### 격자 레이아웃
+도표는 `pyplot.axes` 함수 외에 생성할 수 있는 방법이 다양하다. 그 중에서는 `gridspec.GridSpec` 격자형 레이아웃을 도면에 적용하여 `pyplot.subplot`으로 원하는 위치와 크기로 레이아웃에 맞게 도표를 삽입하는 방법이 있다.
+
+![Matplotlib 격자형 레이아웃](/images/docs/numpy/matplotlib_figure_gridspec.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x  = np.linspace(-10, 10, 100)
 y1 = np.sin(x)
 y2 = np.cosh(x)
 y3 = np.tanh(x)
@@ -481,7 +504,7 @@ Matplotlib는 아래와 같이 `gridspec.GridSpec`을 사용하지 않고 `pyplo
 import matplotlib.pyplot as plt
 import numpy as np
 
-x  = np.arange(-10, 10, 0.1)
+x  = np.linspace(-10, 10, 100)
 y1 = np.sin(x)
 y2 = np.cosh(x)
 y3 = np.tanh(x)
@@ -513,25 +536,55 @@ plt.show()
 
 이는 `gridspec.GridSpec`을 사용한 예시와 동일한 결과를 보여준다.
 
-### 그래프 결합 & 스타일
-Matplotlib에서는 하나의 도표에 여러 그래프를 그리는 방법은 매우 간단하다. 단순히 해당 도표에서 `plot` 함수를 사용하면 기존 그래프 플롯을 유지한 채 덧붙여 그린다. 만일 그래프 곡선의 색상, 선 종류 및 너비와 같은 스타일을 변경하려면 `plot` 함수에 옵션을 추가해야 한다.
+## 그래프 결합
+Matplotlib에서는 하나의 도표에 여러 그래프를 그릴 수 있도록 지원한다. 단순히 해당 도표에서 `plot` 함수를 사용하면 기존 그래프 플롯을 유지한 채 덧붙여 그린다.
 
-![Matplotlib 그래프 결합 & 스타일](/images/docs/python/matplotlib_figure_combined.png)
+![Matplotlib 그래프 결합](/images/docs/numpy/matplotlib_plot_combined.png)
 
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
 
-x  = np.arange(-10, 10, 0.1)
+x  = np.linspace(-10, 10, 100)
 y1 = np.sin(x)
 y2 = np.cos(x)
 
 plt.figure()
 ax1 = plt.axes()
 
-# ax1 도표에 (x, y1) & (x, y2) 그래프 플롯
-ax1.plot(x, y1, 'red')
-ax1.plot(x, y2, ls = '--', lw = 4, c = '#22BB22')
+# y1(x) 및 y2(x) 그래프를 하나의 ax1 도표에 플롯
+ax1.plot(x, y1)
+ax1.plot(x, y2)
+''' 동일:
+ax1.plot(x, y1, x, y2)
+'''
+
+plt.show()
+```
+
+## 그래프 스타일
+그래프 곡선의 색상, 선 종류 및 너비와 같은 스타일은 `plot` 함수에서 추가 인자를 건네주어 설정할 수 있다.
+
+![Matplotlib 그래프 스타일](/images/docs/numpy/matplotlib_plot_style.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x  = np.linspace(-10, 10, 100)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+plt.figure()
+ax1 = plt.axes()
+
+# y1(x): 적색 파선 & 'X'자 표시
+ax1.plot(x, y1, 'r--x')
+
+# y2(x): RGB(34,187,34) 4.0 너비의 실선 & 8.0 크기의 원형 표시
+ax1.plot(x, y2, c = '#22BB22',
+    linestyle = '-', linewidth = 4,
+    marker = 'o', markersize = 8)
 
 plt.show()
 ```
