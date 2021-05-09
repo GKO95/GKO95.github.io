@@ -6,6 +6,7 @@ title: NumPy
 icon: icon-numpy.png
 meta: NumPy
 order: 0x10
+mathjax: true
 ---
 # 넘파이: 소개
 [넘파이](https://numpy.org/)(NumPy)는 다차원 배열을 지원하는 강력한 [파이썬](../ko.PRGMING_Python/) 전용 라이브러리이다. 본래 [SciPy](https://www.scipy.org/)라는 수학, 과학, 그리고 공학을 위한 파이썬 전용 오픈소스 프로젝트의 일부였으나, SciPy 없이도 사용할 수 있도록 독립된 패키지로 출시되었다. 덕분에 넘파이는 SciPy 이외에 [matplotlib](#넘파이-matplotlib) 및 [텐서플로우](../ko.LIBRARY_TensorFlow/)와 같은 라이브러리에서도 흔히 사용된다.
