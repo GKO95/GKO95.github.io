@@ -281,8 +281,8 @@ np.append(A, B, axis = 0)
 | `int`     | `numpy.dtype('i8')`  | 64비트 정수        |
 | `float`   | `numpy.dtype('f8')`  | 배정밀도 부동소수점 실수  |
 | `complex` | `numpy.dtype('c16')` | 배정밀도 부동소수점 복소수 |
-| `str`     | `numpy.dtype('a')`   | 유니코드 문자열       |
-| `bytes`   | `numpy.dtype('U')`   | 바이트 문자열        |
+| `str`     | `numpy.dtype('U')`   | 유니코드 문자열       |
+| `bytes`   | `numpy.dtype('a')`   | 바이트 문자열        |
 
 ```python
 import numpy as np
