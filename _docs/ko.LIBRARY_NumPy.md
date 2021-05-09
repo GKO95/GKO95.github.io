@@ -411,7 +411,7 @@ plt.show()
 ```
 
 ## 도표
-도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역이며, `pyplot.axes` 함수로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다.
+도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역이며, `pyplot.axes` 함수로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다. 도표마다 제목을 붙여주려면 `Axes.set_title` 함수를 사용한다.
 
 > Matplotlib에서는 용어 "axes"에 대한 공식 한국어 번역이 없다. "도표"은 본 문서에서 임시로 정한 번역 용어이다.
 
@@ -430,16 +430,18 @@ plt.figure()
 # 도면 전체를 채우는 도표를 생성
 ax1 = plt.axes()
 ax1.plot(x, y1)
+ax1.set_title("Axes 1")
 
 # 도면에서 좌향 0.45, 상향 0.25, 너비 0.4, 그리고 높이 0.3 비율에 위치
 ax2 = plt.axes((0.45, 0.25, 0.4, 0.3))
 ax2.plot(x, y2)
+ax2.set_title("Axes 2")
 
 plt.show()
 ```
 
 ### 축 범위 설정
-도표의 축 범위 설정은 `axes.set_xlim` 및 `axes.set_ylim` 함수를 사용한다. 도표의 축 범위를 지정할 때에는 축의 최소치 및 최대치 순서로 기입한다.
+도표의 축 범위 설정은 `Axes.set_xlim` 및 `Axes.set_ylim` 함수를 사용한다. 도표의 축 범위를 지정할 때에는 축의 최소치 및 최대치 순서로 기입한다. 그리고 `Axes.set_xlable` 및 `Axes.set_ylabel` 함수로 $$x$$ 축과 $$y$$ 축에 레이블을 넣을 수 있다.
 
 ![Matplotlib 도표 축 범위 설정](/images/docs/numpy/matplotlib_axes_axis.png)
 
@@ -458,6 +460,12 @@ ax1.plot(x, y1)
 # ax1 도표의 x축 [0, 20] 그리고 y축 [-1.5, 1.5] 범위 설정
 ax1.set_xlim([0, 20])
 ax1.set_ylim([-1.5, 1.5])
+
+# x축 및 y축에 레이블 기입
+ax1.set_xlabel("Horizontal")
+ax1.set_ylabel("Vertical")
+
+plt.show()
 ```
 
 ### 격자 레이아웃
@@ -537,7 +545,7 @@ plt.show()
 이는 `gridspec.GridSpec`을 사용한 예시와 동일한 결과를 보여준다.
 
 ## 그래프 결합
-Matplotlib에서는 하나의 도표에 여러 그래프를 그릴 수 있도록 지원한다. 단순히 해당 도표에서 `plot` 함수를 사용하면 기존 그래프 플롯을 유지한 채 덧붙여 그린다.
+Matplotlib에서는 하나의 도표에 여러 그래프를 그릴 수 있도록 지원한다. 단순히 해당 도표에서 `Axes.plot` 함수를 사용하면 기존 그래프 플롯을 유지한 채 덧붙여 그린다. `Axes.legend` 함수를 통해 도표가 갖는 플롯의 범례를 표시할 수 있다.
 
 ![Matplotlib 그래프 결합](/images/docs/numpy/matplotlib_plot_combined.png)
 
@@ -553,17 +561,21 @@ plt.figure()
 ax1 = plt.axes()
 
 # y1(x) 및 y2(x) 그래프를 하나의 ax1 도표에 플롯
-ax1.plot(x, y1)
-ax1.plot(x, y2)
+p1, = ax1.plot(x, y1)
+p2, = ax1.plot(x, y2)
 ''' 동일:
 ax1.plot(x, y1, x, y2)
 '''
+
+# 2열 범례의 테두리 하단부 중앙이 도표의 (0.5, 1.0)에 위치하도록 추가
+ax1.legend([p2, p1], ["cos(x)", "sin(x)"], 
+    loc='lower center', bbox_to_anchor=(0.5, 1), ncol = 2)
 
 plt.show()
 ```
 
 ## 그래프 스타일
-그래프 곡선의 색상, 선 종류 및 너비와 같은 스타일은 `plot` 함수에서 추가 인자를 건네주어 설정할 수 있다.
+그래프 곡선의 색상, 선 종류 및 너비와 같은 스타일은 `Axes.plot` 함수에서 추가 인자를 건네주어 설정할 수 있다.
 
 ![Matplotlib 그래프 스타일](/images/docs/numpy/matplotlib_plot_style.png)
 
@@ -588,3 +600,34 @@ ax1.plot(x, y2, c = '#22BB22',
 
 plt.show()
 ```
+
+## 산점도
+Matplotlib는 `Axes.scatter` 함수로도 도표에 데이터를 플롯할 수 있다. 이는 각 포인트마다 직선으로 연결되는 `Axes.plot` 함수와 달리, 산점도 플롯은 원형 표시만으로 대체된다.
+
+![Matplotlib 산점도 플롯](/images/docs/numpy/matplotlib_plot_scatter.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x  = np.linspace(-10, 10, 100)
+y1 = np.sin(x)
+
+fig = plt.figure()
+
+# plot 함수로 사인 함수 플롯
+ax1 = fig.add_subplot(2, 1, 1)
+ax1.plot(x, y1)
+ax1.set_title("Plot Function")
+
+# scatter 함수로 사인 함수 플롯
+ax2 = fig.add_subplot(2, 1, 2)
+ax2.scatter(x, y1)
+ax2.set_title("Scatter Function")
+
+# 1번 도표의 x축 레이블과 2번 도표의 제목 겹침 현상 방지
+fig.set_tight_layout(True)
+plt.show()
+```
+
+산점도는 $$x$$ 축에 따른 함수의 변화를 관측하는 목적으로 사용되지 않는다. 오히려 변수 $$x$$와 변수 $$y$$의 분포를 통해 관계성을 확인 및 분석하기 위한 목적을 갖는다.

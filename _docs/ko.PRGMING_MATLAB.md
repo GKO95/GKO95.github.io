@@ -667,9 +667,11 @@ figure("Name", "Hello World!", "NumberTitle", "off")
 ```
 
 ## 도표
-도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역으며, `axes` 명령어로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다. 여기서 플롯(plot; 전개)이란, 함수를 전개하므로써 "그래프를 그린다"는 의미를 갖는다.
+도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역으며, `axes` 명령어로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다. 도표마다 제목을 붙여주려면 `title` 명령어를 사용한다.
 
 > MATLAB에서는 용어 "axes"에 대한 공식 한국어 번역이 없다. "도표"은 본 문서에서 임시로 정한 번역 용어이다.
+
+여기서 플롯(plot; 전개)이란, 함수를 전개하므로써 "그래프를 그린다"는 의미를 갖는다.
 
 ![MATLAB 도면](/images/docs/matlab/matlab_figure_axes.png)
 
@@ -683,14 +685,16 @@ figure;
 % 도면 전체를 채우는 도표를 생성
 ax1 = axes;
 plot(ax1, x, y1);
+title(ax1, "Axes 1");
 
 % 도면에서 좌향 0.45, 상향 0.25, 너비 0.4, 그리고 높이 0.3 비율에 위치
 ax2 = axes("Position", [0.45, 0.25, 0.4, 0.3]);
 plot(ax2, x, y2);
+title(ax2, "Axes 2");
 ```
 
 ### 축 범위 설정
-도표의 축 범위 설정은 `axis` 명령어를 사용한다. 도표의 축 범위를 지정할 때에는 가로 축의 최소치 및 최대치, 그리고 세로 축의 최소치 및 최대치 순서로 기입한다.
+도표의 축 범위 설정은 `axis` 명령어를 사용한다. 도표의 축 범위를 지정할 때에는 가로 축의 최소치 및 최대치, 그리고 세로 축의 최소치 및 최대치 순서로 기입한다. 그리고 `xlable` 및 `ylabel` 명령어로 $$x$$ 축과 $$y$$ 축에 레이블을 넣을 수 있다.
 
 ![MATLAB 도표 축 범위 설정](/images/docs/matlab/matlab_axes_axis.png)
 
@@ -705,6 +709,10 @@ plot(ax1, x, y1);
 
 % ax1 도표의 x축 [0, 20] 그리고 y축 [-1.5, 1.5] 범위 설정
 axis(ax1, [0, 20, -1.5, 1.5]);
+
+% x축 및 y축에 레이블 기입
+xlabel(ax1, "Horizontal");
+ylabel(ax1, "Vertical");
 ```
 
 ### 타일 레이아웃
@@ -741,7 +749,7 @@ plot(ax4, x, y4);
 ```
 
 ## 그래프 결합
-MATLAB에서 하나의 도표에 여러 그래프를 그리기 위해서는 `hold` 명령어를 사용한다. 해당 명령어는 `plot` 명령어로 그래프를 그릴 때마다 도표가 초기화되는 것을 방지한다.
+MATLAB에서 하나의 도표에 여러 그래프를 그리기 위해서는 `hold` 명령어를 사용한다. 해당 명령어는 `plot` 명령어로 그래프를 그릴 때마다 도표가 초기화되는 것을 방지한다. `legend` 명령어를 통해 도표가 갖는 플롯의 범례를 표시할 수 있다.
 
 ![MATLAB 그래프 결합](/images/docs/matlab/matlab_plot_combined.png)
 
@@ -753,10 +761,14 @@ y2 = cos(x);
 figure;
 ax1 = axes;
 
-plot(ax1, x, y1); hold(ax1, 'ON');     % y1(x) 그래프 유지
-plot(ax1, x, y2); hold(ax1, 'OFF');    % y2(x) 그래프 플롯
+p1 = plot(ax1, x, y1); hold(ax1, 'ON');     % y1(x) 그래프 유지
+p2 = plot(ax1, x, y2); hold(ax1, 'OFF');    % y2(x) 그래프 플롯
 % 동일:
 % plot(ax1, x, y1, x, y2);
+
+% 도표 북측 외부에 2열의 범례 추가
+legend(ax1, [p2, p1], ["cos(x)", "sin(x)"], ...
+    "Location", "northoutside", "NumColumns", 2);
 ```
 
 ## 그래프 스타일
@@ -782,3 +794,28 @@ plot(ax1, x, y2, "color", "#22BB22",...
     "marker", "o", "markersize", 8);
 hold(ax1, 'OFF');
 ```
+
+## 산점도
+MATLAB은 `scatter` 명령어로도 도표에 데이터를 플롯할 수 있다. 이는 각 포인트마다 직선으로 연결되는 `plot` 명령어와 달리, 산점도 플롯은 원형 표시만으로 대체된다.
+
+![MATLAB 산점도 플롯](/images/docs/matlab/matlab_plot_scatter.png)
+
+```matlab
+x  = linspace(-10, 10);
+y1 = sin(x);
+
+fig = figure;
+layout = tiledlayout(fig, 2, 1);
+
+% plot 명령어로 사인 함수 플롯
+ax1 = nexttile(layout, 1);
+plot(ax1, x, y1);
+title(ax1, "Plot Command")
+
+% scatter 명령어로 사인 함수 플롯
+ax2 = nexttile(layout, 2);
+scatter(ax2, x, y1);
+title(ax2, "Scatter Command")
+```
+
+산점도는 $$x$$ 축에 따른 함수의 변화를 관측하는 목적으로 사용되지 않는다. 오히려 변수 $$x$$와 변수 $$y$$의 분포를 통해 관계성을 확인 및 분석하기 위한 목적을 갖는다.
