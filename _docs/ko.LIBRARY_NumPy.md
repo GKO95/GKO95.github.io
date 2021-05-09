@@ -86,6 +86,7 @@ print(var)
 | `numpy.zeros` | 0으로 채워진 넘파이 배열 생성  |
 | `numpy.ones`  | 1로 채워진 넘파이 배열 생성  |
 | `numpy.eye`   | 단위 정방행렬 생성          |
+| `numpy.linspace` | 균일한 간격의 기본 50개 요소로 구성된 행벡터 생성 |
 | `numpy.random.rand` | 균일분포 의사난수 배열 생성 |
 
 ## 넘파이 인덱싱
@@ -382,7 +383,7 @@ python -m pip install matplotlib
 ```
 
 ## `pyplot` 모듈
-`matplotlib.pyplot` 모듈은 matplotlib 라이브러리가 [MATLAB](../ko.PRGMING_MATLAB/#matlab-그래프)과 유사하게 동작하도록 하는 API들의 묶음이다. 즉, MATLAB과 동일하게 간단한 프로그래밍으로 원하는 그래프를 그릴 수 있도록 하는 목적을 갖는다. 아래의 코드로 `pyplot` 모듈을 불러온다.
+`matplotlib.pyplot` 모듈은 matplotlib 라이브러리가 [MATLAB](../ko.PRGMING_MATLAB/#matlab-그래프)과 유사하게 동작하도록 하는 API들의 묶음이다. 즉, MATLAB과 동일하게 간단한 프로그래밍으로 원하는 그래프를 그릴 수 있도록 하는 목적을 갖는다. 아래의 코드로 `pyplot` 모듈을 불러온다. 여기서 플롯(plot; 전개)이란, 함수를 전개하므로써 "그래프를 그린다"는 의미를 갖는다.
 
 ```python
 import matplotlib.pyplot as plt
@@ -395,7 +396,7 @@ import matplotlib.pyplot as plt
 
 > Matplotlib에서는 용어 "figure"에 대한 공식 한국어 번역이 없다. "도면"은 본 문서에서 임시로 정한 번역 용어이다.
 
-![Matplotlib 도면 창](/images/docs/python/matplotlib_figure_window.png)
+![Matplotlib 도면 창](/images/docs/numpy/matplotlib_figure_window.png)
 
 Matplotlib 도면 설정은 다음과 같이 변경할 수 있다.
 
@@ -410,17 +411,17 @@ plt.show()
 ```
 
 ## 도표
-도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역이며, `pyplot.axes` 함수로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다. 
+도표(axes)는 도면 위에서 실제로 그래프를 그리게 되는 영역이며, `pyplot.axes` 함수로 생성된다. 한 도면에은 여러 도표를 위치시킬 수 있다. 도표마다 제목을 붙여주려면 `Axes.set_title` 함수를 사용한다.
 
 > Matplotlib에서는 용어 "axes"에 대한 공식 한국어 번역이 없다. "도표"은 본 문서에서 임시로 정한 번역 용어이다.
 
-![Matplotlib 도면](/images/docs/python/matplotlib_figure_axes.png)
+![Matplotlib 도면](/images/docs/numpy/matplotlib_figure_axes.png)
 
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
 
-x  = np.arange(-10, 10, 0.1)
+x  = np.linspace(-10, 10, 100)
 y1 = np.sin(x)
 y2 = np.cosh(x)
 
@@ -429,10 +430,40 @@ plt.figure()
 # 도면 전체를 채우는 도표를 생성
 ax1 = plt.axes()
 ax1.plot(x, y1)
+ax1.set_title("Axes 1")
 
 # 도면에서 좌향 0.45, 상향 0.25, 너비 0.4, 그리고 높이 0.3 비율에 위치
 ax2 = plt.axes((0.45, 0.25, 0.4, 0.3))
 ax2.plot(x, y2)
+ax2.set_title("Axes 2")
+
+plt.show()
+```
+
+### 축 범위 설정
+도표의 축 범위 설정은 `Axes.set_xlim` 및 `Axes.set_ylim` 함수를 사용한다. 도표의 축 범위를 지정할 때에는 축의 최소치 및 최대치 순서로 기입한다. 그리고 `Axes.set_xlable` 및 `Axes.set_ylabel` 함수로 $$x$$ 축과 $$y$$ 축에 레이블을 넣을 수 있다.
+
+![Matplotlib 도표 축 범위 설정](/images/docs/numpy/matplotlib_axes_axis.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x  = np.linspace(-10, 10, 100)
+y1 = np.sin(x)
+
+plt.figure()
+
+ax1 = plt.axes()
+ax1.plot(x, y1)
+
+# ax1 도표의 x축 [0, 20] 그리고 y축 [-1.5, 1.5] 범위 설정
+ax1.set_xlim([0, 20])
+ax1.set_ylim([-1.5, 1.5])
+
+# x축 및 y축에 레이블 기입
+ax1.set_xlabel("Horizontal")
+ax1.set_ylabel("Vertical")
 
 plt.show()
 ```
@@ -440,13 +471,13 @@ plt.show()
 ### 격자 레이아웃
 도표는 `pyplot.axes` 함수 외에 생성할 수 있는 방법이 다양하다. 그 중에서는 `gridspec.GridSpec` 격자형 레이아웃을 도면에 적용하여 `pyplot.subplot`으로 원하는 위치와 크기로 레이아웃에 맞게 도표를 삽입하는 방법이 있다.
 
-![Matplotlib 격자형 레이아웃](/images/docs/python/matplotlib_figure_gridspec.png)
+![Matplotlib 격자형 레이아웃](/images/docs/numpy/matplotlib_figure_gridspec.png)
 
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
 
-x  = np.arange(-10, 10, 0.1)
+x  = np.linspace(-10, 10, 100)
 y1 = np.sin(x)
 y2 = np.cosh(x)
 y3 = np.tanh(x)
@@ -456,21 +487,147 @@ y4 = -2 * x**3
 fig = plt.figure()
 gs = fig.add_gridspec(3, 3)
 
-# 격자형 레이아웃의 0번 열 & 0번 행에 도표 생성 
+# 격자형 레이아웃의 0번 열 & 0번 행에 도표 생성
 ax1 = fig.add_subplot(gs[0, 0])
 ax1.plot(x, y1)
 
-# 격자형 레이아웃의 1~마지막 열 & 첫~2번 행에 도표 생성 
+# 격자형 레이아웃의 1~마지막 열 & 첫~2번 행에 도표 생성
 ax2 = fig.add_subplot(gs[1:,:2])
 ax2.plot(x, y2)
 
-# 격자형 레이아웃의 0번 열 & 1~마지막 행에 도표 생성 
+# 격자형 레이아웃의 0번 열 & 1~마지막 행에 도표 생성
 ax3 = fig.add_subplot(gs[0, 1:])
 ax3.plot(x, y3)
 
-# 격자형 레이아웃의 1~마지막 열 & 2번 행에 도표 생성 
+# 격자형 레이아웃의 1~마지막 열 & 2번 행에 도표 생성
 ax4 = fig.add_subplot(gs[1:, 2])
 ax4.plot(x, y4)
 
 plt.show()
 ```
+
+Matplotlib는 아래와 같이 `gridspec.GridSpec`을 사용하지 않고 `pyplot.subplot`만으로도 격자 레이아웃으로 도표를 배치시킬 수 있다. 이는 도면들이 반드시 직사각형 형태이어야 한다는 전재가 바탕이 되기에 가능하다.
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x  = np.linspace(-10, 10, 100)
+y1 = np.sin(x)
+y2 = np.cosh(x)
+y3 = np.tanh(x)
+y4 = -2 * x**3
+
+# 도면 생성
+fig = plt.figure()
+
+# 3x3 레이아웃의 1번 위치에 도표 생성
+ax1 = fig.add_subplot(3, 3, 1)
+ax1.plot(x, y1)
+
+# 3x3 레이아웃의 2~3번 위치에 도표 생성
+ax2 = fig.add_subplot(3, 3, (2, 3))
+ax2.plot(x, y2)
+
+# 3x3 레이아웃의 4~8번 위치에 도표 생성
+# ...그러나 직사각형을 유지해야 하기에 6번에는 도표가 생성되지 않는다.
+ax3 = fig.add_subplot(3, 3, (4, 8))
+ax3.plot(x, y3)
+
+# 3x3 레이아웃의 6~9번 위치에 도표 생성
+# ...그러나 직사각형을 유지해야 하기에 7번 및 8번에는 도표가 생성되지 않는다.
+ax4 = fig.add_subplot(3, 3, (6, 9))
+ax4.plot(x, y4)
+
+plt.show()
+```
+
+이는 `gridspec.GridSpec`을 사용한 예시와 동일한 결과를 보여준다.
+
+## 그래프 결합
+Matplotlib에서는 하나의 도표에 여러 그래프를 그릴 수 있도록 지원한다. 단순히 해당 도표에서 `Axes.plot` 함수를 사용하면 기존 그래프 플롯을 유지한 채 덧붙여 그린다. `Axes.legend` 함수를 통해 도표가 갖는 플롯의 범례를 표시할 수 있다.
+
+![Matplotlib 그래프 결합](/images/docs/numpy/matplotlib_plot_combined.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x  = np.linspace(-10, 10, 100)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+plt.figure()
+ax1 = plt.axes()
+
+# y1(x) 및 y2(x) 그래프를 하나의 ax1 도표에 플롯
+p1, = ax1.plot(x, y1)
+p2, = ax1.plot(x, y2)
+''' 동일:
+ax1.plot(x, y1, x, y2)
+'''
+
+# 2열 범례의 테두리 하단부 중앙이 도표의 (0.5, 1.0)에 위치하도록 추가
+ax1.legend([p2, p1], ["cos(x)", "sin(x)"], 
+    loc='lower center', bbox_to_anchor=(0.5, 1), ncol = 2)
+
+plt.show()
+```
+
+## 그래프 스타일
+그래프 곡선의 색상, 선 종류 및 너비와 같은 스타일은 `Axes.plot` 함수에서 추가 인자를 건네주어 설정할 수 있다.
+
+![Matplotlib 그래프 스타일](/images/docs/numpy/matplotlib_plot_style.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x  = np.linspace(-10, 10, 100)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+plt.figure()
+ax1 = plt.axes()
+
+# y1(x): 적색 파선 & 'X'자 표시
+ax1.plot(x, y1, 'r--x')
+
+# y2(x): RGB(34,187,34) 4.0 너비의 실선 & 8.0 크기의 원형 표시
+ax1.plot(x, y2, c = '#22BB22',
+    linestyle = '-', linewidth = 4,
+    marker = 'o', markersize = 8)
+
+plt.show()
+```
+
+## 산점도
+Matplotlib는 `Axes.scatter` 함수로도 도표에 데이터를 플롯할 수 있다. 이는 각 포인트마다 직선으로 연결되는 `Axes.plot` 함수와 달리, 산점도 플롯은 원형 표시만으로 대체된다.
+
+![Matplotlib 산점도 플롯](/images/docs/numpy/matplotlib_plot_scatter.png)
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x  = np.linspace(-10, 10, 100)
+y1 = np.sin(x)
+
+fig = plt.figure()
+
+# plot 함수로 사인 함수 플롯
+ax1 = fig.add_subplot(2, 1, 1)
+ax1.plot(x, y1)
+ax1.set_title("Plot Function")
+
+# scatter 함수로 사인 함수 플롯
+ax2 = fig.add_subplot(2, 1, 2)
+ax2.scatter(x, y1)
+ax2.set_title("Scatter Function")
+
+# 1번 도표의 x축 레이블과 2번 도표의 제목 겹침 현상 방지
+fig.set_tight_layout(True)
+plt.show()
+```
+
+산점도는 $$x$$ 축에 따른 함수의 변화를 관측하는 목적으로 사용되지 않는다. 오히려 변수 $$x$$와 변수 $$y$$의 분포를 통해 관계성을 확인 및 분석하기 위한 목적을 갖는다.
