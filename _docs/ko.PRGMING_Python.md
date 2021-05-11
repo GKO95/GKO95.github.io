@@ -943,9 +943,9 @@ print(key3 not in dictionary)        # >> 출력: True
 ```python
 dictionary = {key1: value1, key2: value2}
 
-print(dictionary.get(key0))                            # >> 출력: 데이터1
-print(dictionary.get(key2))                            # >> 출력: None
-print(dictionary.get(key3, "딕셔너리 내에 없음"))       # >> 출력: 딕셔너리 내에 없음
+print(dictionary.get(key1))                            # >> 출력: value1
+print(dictionary.get(key3))                            # >> 출력: None
+print(dictionary.get(key3, "딕셔너리 내에 없음"))         # >> 출력: 딕셔너리 내에 없음
 ```
 
 ## 집합 객체
