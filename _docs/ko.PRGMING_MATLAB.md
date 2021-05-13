@@ -1263,7 +1263,7 @@ end
 % 객체화
 instance = CLASS;
 
-instance.property1 = [1, 2, 3; 4, 5, 6; 7, 8, 9]
+instance.property1 = [1, 2, 3; 4, 5, 6]
 instance.property2
 
 instance.method1(8)
