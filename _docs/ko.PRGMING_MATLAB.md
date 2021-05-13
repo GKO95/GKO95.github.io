@@ -1126,12 +1126,12 @@ A =
 ### `arguments` 키워드
 `arguments` 키워드는 함수 입력에 허용되는 인자를 규정한다. 해당 키워드로 인자를 받는 지역변수가 받을 수 있는 (1) 배열 크기, (2) 자료형, (3) 유효성 검사함수, 그리고 (4) 기본값을 지정할 수 있다. `arguments`의 코드 블록 내에는 다음 구문과 같이 입력 지역변수를 설정한다. 
 
-|                             구문                             |
+|                            함수 인자 유효성                           |
 | :----------------------------------------------------------: |
 |               `arg (size) dtype {validation} = default`               |
 | 입력 지역변수 `arg`은 `validation`을 만족하는 `size` 크기의 `dtype` 자료형 배열을 인자로 받으며, 전달인자가 없으면 `default` 값을 갖는다. |
 
-> 유효성 검사함수(validation function) 목록은 *[Mathworks.com](https://www.mathworks.com/help/matlab/matlab_prog/argument-validation-functions.html)*에서 살펴볼 수 있다.
+> 인자 유효성 검사함수(argument validation function) 목록은 *[Mathworks.com](https://www.mathworks.com/help/matlab/matlab_prog/argument-validation-functions.html)*에서 살펴볼 수 있다.
 
 ```matlab
 func([1, 2, 3; 4, 5, 6])
@@ -1157,7 +1157,7 @@ ans =
    16   25   36
 ```
 
-## 외부 함수
+## 함수 스크립트
 MATLAB의 함수는 일반적으로 별도의 스크립트 파일에 정의되어 필요할 때마다 호출하여 사용하는 형식을 택한다. 이는 MATLAB이 사실상 명령창 위주로 동작하는 수치해석 소프트웨어이며, 명령창에서는 함수를 정의할 수 없기 때문이다. 함수 전용 스크립트 파일을 생성하고 함수를 정의할 때 몇 가지 유의사항이 있다.
 
 1. 함수를 호출하려면 스크립트 파일명을 호출한다.
@@ -1165,6 +1165,8 @@ MATLAB의 함수는 일반적으로 별도의 스크립트 파일에 정의되�
 3. 그 외의 함수들은 스크립트 내에서만 동작하는 지역함수로 호출이 불가하다.
 
 다음은 `FUNCTION.m` 스크립트 파일에 함수들이 정의된 예시 코드를 보여준다.
+
+> 여기서 외부 함수를 호출하여 실행하기 위해서는 해당 함수 스크립트 파일이 현재 MATLAB 작업 경로에 위치해야 한다.
 
 ```matlab
 % 함수 스크립트 "FUNCTION.m"
@@ -1200,23 +1202,25 @@ B =
      8
 ```
 
-여기서 외부 함수를 호출하여 실행하기 위해서는 해당 스크립트 파일이 현재 MATLAB 작업 경로에 있어야 한다.
-
 ### 경로 추가
-만일 함수 스크립트가 현재 MATLAB 작업 경로가 아닌 다른 폴더에 위치하였으면 외부 함수를 실행할 수 없다. 작업 경로를 변경하거나 스크립트 파일을 이동하지 않은 채 외부 함수를 불러오려면 `addpath` 명령어를 사용하도록 한다.
+함수 스크립트가 현재 MATLAB 작업 경로가 아닌 다른 폴더에 위치하였으면 외부 함수를 불러올 수 없다. 만일 작업 경로를 변경하지 않고, 그리고 스크립트 파일을 이동하지 않으면서 외부 함수를 불러오기 위해서는 `addpath` 명령어로 경로를 추가하도록 한다.
 
-만일 불러오려는 외부 함수 스크립트가 `path/to/FUNCTION.m`에 있다고 가정한다.
+아래는 불러오고자 하는 함수 스크립트 파일이 `path/to/FUNCTION.m` 상대경로에 위치한다고 가정한다. 여기서 `FUNCTION.m` 함수 스크립트를 불러오려면 `addpath` 명령어로 `path/to` 경로를 추가한다.
 
 ```matlab
 addpath path/to
 [A, B] = FUNCTION(2,4)
 ```
 
-반대로 추가된 경로를 제거하기 위해서는 `rmpath` 명령어를 입력한다.
+추가된 경로는 *HOME 탭 > Set Path*에서 확인할 수 있다.
+
+반면에 추가된 경로를 제거하려면 `rmpath` 명령어를 사용한다.
 
 ```matlab
 rmpath path/to
 ```
+
+경로가 제거된 이후에는 `path/to/FUNCTION.m`은 경로를 다시 추가하지 않는 이상 불러올 수 없다.
 
 # MATLAB: 객체 및 클래스
 MATLAB은 다중 패러다임 프로그래밍 언어(multi-paradigm programming language)로 함수뿐만 아니라 객체 및 클래스를 기반하는 객체지향 프로그래밍(object-oriented programming; OOP)도 지원한다. 본 장은 MATLAB에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 객체의 생성 및 사용 방법을 소개한다.
@@ -1231,10 +1235,154 @@ MATLAB은 다중 패러다임 프로그래밍 언어(multi-paradigm programming 
 
 사용자 정의 객체 중심으로 한 프로그래밍을 *객체지향 프로그래밍*이라고 한다.
 
-### 속성 & 메소드
-속성(property)과 메소드(method)는 객체에 캡슐화된 변수와 함수를 의미하며 아래와 같은 방법으로 접근한다.
+## 클래스
+클래스(class)는 객체를 생성하는데 사용된다. 클래스는 `classdef` 키워드를 사용하여 정의되며, 클래스 내부에는 객체의 속성과 메소드가 되는 변수와 함수를 정의한다. 아래는 `classdef` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이며, 변수 및 함수와의 유사성을 확인할 수 있다.
 
-| 객체 구성요소 | 구문                                        |
-|:-------:|-------------------------------------------|
-| 속성      | `instance.property`                       |
-| 메소드     | `instance.method()` 혹은 `method(instance)` |
+> MATLAB의 클래스는 *반드시* 별도의 클래스 스크립트 파일에 정의되어야 한다. 하나의 스크립트에서 정의와 호출을 함께 할 수 없다.
+
+```matlab
+classdef
+    % 속성 (변수와 유사함)
+    properties
+        property1 (2,3) int64;
+        property2 (1,1) double {mustBePositive, mustBeFinite} = 2;
+    end
+
+    % 메소드 (함수와 유사함)
+    methods
+        function out = method1(obj, in)
+            out = in .^ obj.property2;
+        end
+    end
+end
+```
+
+클래스를 통해 객체를 생성, 즉 객체화(instantiation)하려면 단순히 클래스를 변수에 할당하면 된다.
+
+```matlab
+% 객체화
+instance = CLASS;
+
+instance.property1 = [1, 2, 3; 4, 5, 6; 7, 8, 9]
+instance.property2
+
+instance.method1(8)
+% 동일: method1(instance, 8)
+```
+```
+ans =
+
+  2×3 int64 matrix
+
+    1    2    3
+    4    5    6
+
+
+ans =
+
+     2
+
+
+ans =
+
+    18
+```
+
+### 속성
+> *참고: [속성 유효성 검사함수](https://www.mathworks.com/help/matlab/matlab_oop/property-validator-functions.html)(property validation function) 및 [속성 특성](https://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html)(property attributes)*
+
+속성(property)는 객체에 캡슐화된 변수를 의미하며, `instance.property` 구문으로 접근한다. 속성은 클래스 안에서 `properties` 키워드 내에 정의되어야 한다. 비록 변수와 유사하다고 하였으나, 속성은 일반 MATLAB 변수가 할 수 없는 유효성 설정이 가능하여, 이러한 이유로 오히려 함수 인자에 더 가깝다고 볼 수 있다.
+
+|                            속성 유효성                            |
+| :----------------------------------------------------------: |
+|               `property (size) dtype {validation} = default`               |
+| 객체 속성 `property`은 `validation`을 만족하는 `size` 크기의 `dtype` 자료형 배열만 가질 수 있으며, 기본적으로 `default` 값을 갖는다. |
+
+속성 특성(property attributes)을 통해 접근성이나 성질 등을 설정할 수 있다. 속성의 접근성을 제어할 수 있는 점은 캡슐화의 역할이 확연히 드러나는 객체의 특성을 보여준다.
+
+```matlab
+classdef CLASS
+    % 객체 외부에서 접근할 수 없는 private 속성
+    properties(Access = private)
+        property1 (2,3) int64;
+    end
+
+    % 객체 외부에서 접근할 수 있는 public 상수 속성
+    properties(Access = public, Constant)
+        property2 (1,1) double {mustBePositive, mustBeFinite} = 2;
+    end
+end
+```
+
+### 메소드
+> *참고: [메소드 특성](https://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html)(method attributes)*
+
+메소드(method)는 객체에 캡슐화된 함수를 의미하며, `instance.method()` 혹은 `method(instance)` 구문으로 접근한다. MATLAB의 메소드의 첫 번째 인자는 통상적으로 `obj`라는 이름의 인자가 들어가는데, 흥미롭게도 이는 파이썬 메소드의 [`self` 변수](../ko.PRGMING_Python/#self-변수)와 동일하다.
+
+메소드 특성(method attributes)을 통해 접근성이나 성질 등을 설정할 수 있다. 속성의 접근성을 제어할 수 있는 점은 캡슐화의 역할이 확연히 드러나는 객체의 특성을 보여준다. 그 중에서 `Static` 특성은 정적 메소드(static method)를 정의하는데 사용된다. 이는 객체화 없이 클래스에서 곧바로 사용할 수 있어 `obj` 변수와 같이 객체 스스로를 가리키는 변수가 필요 없으나, 이는 다른 의미로 객체만이 갖는 속성에는 절대로 접근할 수 없다.
+
+```matlab
+classdef CLASS
+    properties
+        property1 = 7;
+    end
+
+    % 메소드: 객체화 필수!
+    methods(Access = publiic)
+        function out = method1(obj, in)
+            out = obj.property1 + in;
+        end
+    end
+
+    % 정적 메소드: 객체화가 필요없으나 속성 접근 불가!
+    methods(Static)
+        function out = method2(in)
+            out = in ^ 2;
+        end
+    end
+end
+```
+    
+### 생성자
+생성자(constructor)는 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 메소드이며, 객체로 전달할 인자의 자료형과 개수를 결정한다. 생성자 메소드의 이름은 클래스 식별자와 동일해야 하며, 클래스로부터 생성된 객체를 반환하기 위해 최소한 하나의 출력이 존재해야 한다.
+
+```matlab
+classdef CLASS
+    properties
+        property1 (2,3) int64;
+        property2 (1,1) double {mustBePositive, mustBeFinite} = 2;
+    end    
+
+    methods
+        % CLASS 생성자
+        function [obj, out] = CLASS(in1, in2)
+            obj.property1 = reshape(linspace(in1, in2, 6), 2, 3);
+            out = obj.property1 * 2;
+        end
+
+        function out = method1(obj, in)
+            out = obj.property1 + in;
+        end
+    end
+end
+```
+----
+```matlab
+[instance, out] = CLASS(-1, 3)
+```
+```
+instance = 
+
+  CLASS with properties:
+
+    property1: [2×3 int64]
+    property2: 2
+
+
+out =
+
+  2×3 int64 matrix
+
+   -2    2    4
+    0    2    6
+```
