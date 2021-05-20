@@ -33,4 +33,4 @@ end
 gem "wdm", "~> 0.1.0", :install_if => Gem.win_platform?
 
 # GitHub Dependencies
-gem "nokogiri", ">= 1.11.0.rc4"
+gem "nokogiri", ">= 1.11.4"
