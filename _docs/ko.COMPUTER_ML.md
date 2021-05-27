@@ -197,20 +197,22 @@ $$
 > 가설의 매개변수 $$W$$ 및 $$b$$를 조정하는 절차를 기계학습에서는 바로 "학습(training)"이라 부른다.
 
 ### 간략화된 가설
-Simplified hypothesis is a hypothesis without a bias parameter $b$ and only depends on weight parameter $$W$$.
+간략화된 가설(simplified hypothesis)는 편향 매개변수 $$b$$가 생략되어 오로지 가중치 $$W$$에만 의존하는 가설이다.
 
 $$
 h(x)\cong Wx
 $$
 
-The formula is simple, hence, less technical then with bias considered. Simplified hypothesis, however, is useful in explaining mathematical approach in ML as the function only depends on a single parameter $$W$$.
+비록 편향 매개변수 $$b$$가 고려되지 않은 가설이지만, 모델의 추론은 거의 가중치 $$W$$에 결정된다. 편향 $$b$$는 가중치로 결정된 추론값에 섬세 조정을 하는 역할을 갖기 때문에 간략화된 가설은 모델을 수학적으로 설명하는데 충분히 유요하다.
 
 ### 다중변수 가설
-Linear regression may be expressed far more complex by having multiple independent data of $$x$$. The more independent data there are, the more weight parameters are needed as a coefficient. The number of the independent data in a single instance is denoted with subscripted number. For linear regression with three independent variable $$x_1$$, $$x_2$$, and $$x_3$$
+다중변수 가설(multi-variable hypothesis)는 두 개 이상의 독립변수를 갖는 가설이다. 아래는 입력 $$x_1$$, $$x_2$$, 그리고 $$x_3$$를 갖는 선형회귀모델의 가설을 보여준다.
 
 $$
 h(x_1,x_2,x_3)=w_1x_1+w_2x_2+w_3x_3+b
 $$
+
+Linear regression may be expressed far more complex by having multiple independent data of $$x$$. The more independent data there are, the more weight parameters are needed as a coefficient. The number of the independent data in a single instance is denoted with subscripted number.
 
 This is because of the linearity property of linear regression system where superposition principle and proportionality both satisfies. Matrix can simplify the expression and shorten the length of the equation despite the number of variables.
 
