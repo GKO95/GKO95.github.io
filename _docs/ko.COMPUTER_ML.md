@@ -212,18 +212,240 @@ $$
 h(x_1,x_2,x_3)=w_1x_1+w_2x_2+w_3x_3+b
 $$
 
-Linear regression may be expressed far more complex by having multiple independent data of $$x$$. The more independent data there are, the more weight parameters are needed as a coefficient. The number of the independent data in a single instance is denoted with subscripted number.
+선형회귀모델은 선형성을 가지므로 중첩의 원리(superposition principle)를 적용하여 위와 같은 가설을 설립할 수 있는 것이다.
 
-This is because of the linearity property of linear regression system where superposition principle and proportionality both satisfies. Matrix can simplify the expression and shorten the length of the equation despite the number of variables.
+> [중첩의 원리](https://ko.wikipedia.org/wiki/중첩_원리)(superposition principle)는 [가산성](https://ko.wikipedia.org/wiki/가법성)(additivity)과 [동차성](https://ko.wikipedia.org/wiki/동차함수)(homogeneity)을 가지며, 중첩의 원리를 만족하는 함수는 선형성을 지닌 선형함수(linear function)이다.
+
+가설은 행렬을 사용하여 다음과 같이 방정식을 더욱 간략하게 표현할 수 있다.
 
 $$
 h(\mathbf{X})=\mathbf{X}\cdot\mathbf{W}+b=\begin {bmatrix} x_1^{[1]}&x_2^{[1]}&x_3^{[1]} \end{bmatrix}\begin {bmatrix} w_1\\w_2\\w_3 \end{bmatrix}+b
 $$
 
-...where the row vector of the data is called instance, and the superscripted number represent it is a 1^st^ instance of the training data that has data of $$x_1, \ x_2, \ x_3$$. In case the input has more than one instance in the training data (three, for example)
+여기서 입력 행렬 $$\mathbf{X}$$의 각 열벡터(row vector)는 각 인스턴스를 의미한다. 위의 수식의 경우에 입력 행렬 $$\mathbf{X}$$은 세 개의 자료 $$x_1$$, $$x_2$$, 그리고 $$x_3$$로 구성된 하나의 인스턴스를 갖는다. 인스턴스가 두 개 이상의 경우에는 아래와 같이 나타난다 (예를 들어 세 개의 인스턴스의 경우).
 
 $$
 \mathbf{H}(\mathbf{X})=\mathbf{X}\cdot\mathbf{W}+b=\begin {bmatrix} x_1^{[1]}&x_2^{[1]}&x_3^{[1]}\\x_1^{[2]}&x_2^{[2]}&x_3^{[2]}\\x_1^{[3]}&x_2^{[3]}&x_3^{[3]} \end{bmatrix}\begin {bmatrix} w_1\\w_2\\w_3 \end{bmatrix}+b
 $$
 
-It is possible to switch back the location of matrix to $$\mathbf{W}\cdot\mathbf{X}$$ to make it look more familiar. However, it is advised not to since weight parameter $$W$$ is deemed as a independent variable and is the one developers are trying to find out using backpropagation.
+이전 가설 방정식과 유사하게 만들기 위해 행렬의 위치를 $$\mathbf{W}\cdot\mathbf{X}$$로 바꾸려고 할 수 있으나, 이는 통상적이지 않은 방식이다. 가설의 독립변수는 입력 $$\mathbf{X}$$가 아닌 가중치 $$\mathbf{W}$$이기 때문이다: 입력 자료는 변하지 않는 상수이며, 연전파 과정에서 조정되는 것은 바로 매개변수인 가중치와 편향인 점을 명시하도록 한다.
+
+# 기계학습: 역전파
+기계학습에서 매개변수를 조정하는 역전파 과정에서 가설로 세워진 추론값이 실제 참값으로부터 허용 가능한 오차범위 이내의 최소한의 차이를 갖도록 해야 한다. 해당 차이값, 일명 손실(loss; cost)은 모델의 학습이 얼마나 잘 학습되었는지 측정하는 척도가 된다. 본 장은 역전파의 기본적인 원리를 수학적으로 설명한다.
+
+## 오차
+
+오차(error) $$E$$는 가설로 세워진 추론값 $$h(x)$$와 참값 $$y$$가 갖는 차이값을 가리키며, 최적의 모델은 최소의 오차를 가져야 한다. 오류의 종류는 다양하지만, 본 내용에서는 두 가지의 이산자료 오류에 대하여 살펴본다. 다음은 단일 인스턴스에 대한 오류를 수식으로 나타낸 것이다.
+
+1. 통계적 오류 (statistical error)
+
+$$
+E_1 = h(x)-y
+$$
+
+2. MSE (평균 제곱 오차; mean square error) 혹은 MSD (평균 제곱 편차; mean square deviation)
+
+$$
+E_2 = \left( h(x)-y \right)^2
+$$
+
+기계학습 영역에서 오차라고 하면 일반적으로 *MSE*, 즉 *평균 제곱 오차*를 가리킨다. 단, 해당 오류는 본 장의 소개글에 언급한 손실(loss)과는 전혀 다르다.
+
+## 손실함수
+손실함수(loss ufnction) 혹은 비용함수(cost function)는
+
+Cost function is a measurement in continuous function on how well the model fits with multiple number of data $$x$$ (or dataset $$X$$) upon training. If there are total $N$ number of instance in the training data
+
+$$
+\mathrm{L}_1(W,b)=\frac{1}{N}\sum_{n=1}^N E_1^{[n]} =\frac{1}{N}\sum_{n=1}^N\left [ h( x^{[n]})-y^{[n]} \right ]
+$$
+
+L~1~ is a measurement of a normalized distance-sum between every instance of $$y$$ and $$h(x)$$. Greater the label difference has become, the lower the criterion accuracy is. Aka. LAD (least absolute deviation).
+
+L~2~ is similar to L~1~ but measures using squared difference. Because it uses squared difference, it only returns positive number and emphasizes greater difference significantly than the smaller difference. This property makes greater difference less forgiving while smaller difference more forgiving. Aka LSD (least square error).
+
+$$
+\mathrm{L}_2(W,b)=\frac{1}{N}\sum_{n=1}^N E_2^{[n]}=\frac{1}{N}\sum_{n=1}^N\left [ h( x^{[n]})-y^{[n]} \right ]^2
+$$
+
+L~2~ cost function is more widely implemented than L~1~ cost function when it comes to machine learning, possibly relevant to usage of MSE for the error term, thus will be dealing mainly on L~2~ cost function.
+
+### Application of Cost Function
+
+Understanding how the cost function calculates the loss will be explained in detail on this section of the article. This will help the beginner able to grasp its mathematical mechanism. Before proceeding, make sure to be fully aware what meaning an input training variables has.
+
+$$
+x_m^{[n]}=\begin{cases} n\mathrm{ \ : \ n^{th} \ instance \ of \ the \ training \ data} \\ m\mathrm{ \ \ : \  m^{th} \ \ data \ of \ the \ instance } \end{cases}
+$$
+
+This means it is possible to use both term "data" and "instance" when instance only has a single variable ($m\in R^1$). Suppose the input training data and its labels for a single-variable instance for simplified linear regression are as follows:
+
+$$
+\begin{cases} \mathbb{x}=\left [ x^{[1]} , x^{[2]} , x^{[3]}\right ] \\ \mathbb{y}=\left [ y^ {[1]} , y^{[2]} ,  y^{[3]} \right ] \end{cases}
+$$
+
+Using simplified hypothesis
+
+$$
+\mathrm{L}_2(W,b)=\frac{1}{N}\sum_{n=1}^{N=3}\left [ h( x^{[n]})-y^{[n]} \right ]^2\\
+
+=\frac{\left [ h( x^{[1]})-y^{[1]} \right ]^2}{3}+\frac{\left [ h( x^{[2]})-y^{[2]} \right ]^2}{3}+\frac{\left [ h( x^{[3]})-y^{[3]} \right ]^2}{3}\\
+
+=\frac{\left [ \left ( W x^{[1]}+b \right )-y^{[1]} \right ]^2}{3}+\frac{\left [ \left ( W x^{[2]}+b \right )-y^{[2]} \right ]^2}{3}+\frac{\left [ \left ( W x^{[3]}+b \right )-y^{[3]} \right ]^2}{3}
+$$
+
+Each term on the RHS of the equation represents the cost calculated only from the n^th^ data, and its overall loss average across the training data is L~2~ loss below:
+
+$$
+\therefore\mathrm{L}_2(W,b)=\frac{1}{3}\left [ E^{[1]}+E^{[2]}+E^{[3]} \right ]\\
+
+=\mathrm{L}_2^{[1]}(W,b)+\mathrm{L}_2^{[2]}(W,b)+\mathrm{L}_2^{[3]}(W,b)
+$$
+
+Same method can be applied to the linear regression with multiple-variables. Suppose the training data and their labels are as follows:
+
+$$
+\begin{cases} \mathbb{x}_1=\left [ x_1^{[1]} , x_2^{[1]} , x_2^{[1]}\right ] \\ \mathbb{x}_2=\left [ x_1^{[2]} , x_2^{[2]} , x_3^{[2]}\right ]\\ \mathbb{x}_3=\left [ x_1^{[3]} , x_2^{[3]} , x_3^{[3]}\right ] \\ \mathbb{y} \ \  = \left [ y^{[1]} , y^{[2]} , y^{[3]}\right ] \end{cases}
+$$
+
+Applying the training data to the multi-variable hypothesis
+
+$$
+\mathrm{L}_2(\mathbf{W},b)=\frac{1}{N}\sum_{n=1}^{N=3}\left [ h( x_1^{[n]},x_2^{[n]},x_3^{[n]})-y^{[n]} \right ]^2\\
+
+=\frac{\left [ h( x_1^{[1]},x_2^{[1]},x_3^{[1]})-y^{[1]} \right ]^2}{N}+\frac{\left [ h( x_1^{[2]},x_2^{[2]},x_3^{[2]})-y^{[2]} \right ]^2}{N}+\frac{\left [ h( x_1^{[3]},x_2^{[3]},x_3^{[3]})-y^{[3]} \right ]^2}{N}\\
+
+=\frac{\left [ \left ( w_1 x_1^{[1]}+w_2 x_2^{[1]}+w_3 x_3^{[1]}+b \right )-y^{[1]} \right ]^2}{3}+\frac{\left [ \left ( w_1 x_1^{[2]}+w_2 x_2^{[2]}+w_3 x_3^{[2]}+b \right )-y^{[2]} \right ]^2}{3}\\+\frac{\left [ \left ( w_1 x_1^{[3]}+w_2 x_2^{[3]}+w_3 x_3^{[3]}+b \right )-y^{[3]} \right ]^2}{3}
+$$
+
+Again, the loss is calculated separately according to the n^th^ instance and its overall average loss across the dataset results L~2~ loss below:
+
+$$
+\therefore\mathrm{L}_2(\mathbf{W},b)=\frac{1}{3}\left [ E^{[1]}+E^{[2]}+E^{[3]} \right ]\\
+
+=\mathrm{L}_2^{[1]}(\mathbf{W},b)+\mathrm{L}_2^{[2]}(\mathbf{W},b)+\mathrm{L}_2^{[3]}(\mathbf{W},b)
+$$
+
+### Visualization of Cost Function
+
+Cost function is a function, and is not a constant value, of the parameter $W$ and $b$ (since $x$ and $y$ is already given by a training data). Because it is a function, the cost function can be plotted under 3D plotting.
+
+Following example is a cost function based on the training feature of $x=\{x^{[1]},x^{[2]},x^{[3]}\}=\{1,2,3\}$ and label of $y=\{1,2,3 \}$:
+
+$$
+\mathrm{L}_2(W,b)=\frac{1}{n}\sum_{n=1}^{N=3}\left [ h( x^{[n]})-y^{[n]} \right ]^2\\
+
+=\frac{\left [ \left ( W x^{[1]}+b \right )-y^{[1]} \right ]^2}{3}+\frac{\left [ \left ( W x^{[2]}+b \right )-y^{[2]} \right ]^2}{3}+ \frac{\left [ \left ( W x^{[3]}+b \right )-y^{[3]} \right ]^2}{3}\\
+
+=\frac{\left [ \left ( W (1)+b \right )-(1) \right ]^2+\left [ \left ( W (2)+b \right )-(2) \right ]^2+\left [ \left ( W (3)+b \right )-(3) \right ]^2}{3}\\
+$$
+
+<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\ai\3D plot.gif" width=50%><img src=".\.images\ai\Contour plot.gif" width=50%></div><center style="font-weight:bold">Figure #. 3D graph of the loss function generated by WolframAlpha.com</center>
+
+The deepest curve indicates the lowest loss in the cost function, and the consecutive path of the deepest curve would be the optimal path to the lowest cost for the hypothesis $h (x)=W x+b$ which makes the best training model. Although clearly not shown, the 3D plot indicates the lowest cost is $W,b=(1,0)$.
+
+## Gradient Descent Algorithm
+
+Gradient descent algorithm is a mathematical algorithm used to find the lowest point or minimum value. The algorithm converts scalar to vector which its magnitude being and direction pointing to the steepest downslope, calculated from differentiation.
+
+Supervised learning often uses the following two gradient descent algorithm terms to describe and explain the machine learning.
+
+* Stochastic Gradient Descent (SGD): perform gradient descent in a single instance.
+* Batch Gradient Descent (BGD): perform gradient descent in a group (batch) of instance.
+
+In ML, gradient descent algorithm is used to minimize these errors from the cost function. This algorithm is important that it finds the lowest loss for the hypothesis close to the actual true model. This computation process is called "training" in ML, and the result of this training is called a "model" which will be used to make prediction afterward. The following figure is a gradient descent of the figure from above sub-section *Visualization of Cost Function*.
+
+The figure on the right shows more vivid linear line and from this would be possible to find a mathematical relationship between weight parameter $W$ and bias parameter $b$.
+
+<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\ai\Plot.gif" width=50%><img src=".\.images\ai\Integral curves.gif" width=50%></div><center style="font-weight:bold">Figure #. Gradient descent of the example from Figure # of <i>Visualization of the Loss Function</i></center>
+
+Suppose we have the simplified hypothesis for easier calculation and understanding on how the gradient descent algorithm works in mathematical concept:
+
+$$
+h(x)\cong Wx
+$$
+
+Cost function based on the simplified hypothesis has parameter $W$ only as its variable.
+
+$$
+\mathrm{cost}(W)=\frac{1}{2}\frac{1}{N}\sum_{n=1}^N \left [ h( x^{[n]})-y^{[n]} \right ]^2=\frac{1}{2}\frac{1}{N}\sum_{n=1}^N \left [ Wx^{[n]}-y^{[n]} \right ]^2
+$$
+
+Although the cost function above has $$\frac{1}{2}$$ as a coefficient doesn't mean anything special: whether dividing the average in half or not, both still represent average in mathematical perspective. Coefficient $$\frac{1}{2}$$ is to make the further equation simple as possible.
+
+Meanwhile, the definition of the gradient descent is as follows:
+
+$$
+W:=W-\alpha\frac{\partial}{\partial W}\mathrm{cost}(W)
+$$
+
+...where the equal sign $:=$ means a [definition](https://en.wikipedia.org/wiki/Definition#In_logic_and_mathematics) and $\alpha$ a learning rate. For a programmer, this equation is similar to the assignment syntax such as `x = x - 1`. The equation also holds similarity (but not identical) to the root-finding algorithm, e.g., [Newton-Raphson method](https://en.wikipedia.org/wiki/Newton%27s_method), [Secant method](https://en.wikipedia.org/wiki/Secant_method), et cetera.
+
+The term $\frac{\partial}{\partial W}\mathrm{cost}(W)$ tells how steep the slope is on current weight parameter $W$. Closer the cost reaches its minimum, the slope gets flatter and eventually be $\frac{\partial}{\partial W}\mathrm{cost}(W)=0$ when there is no loss. Negative sign describes gradient vector pointing toward downslope. The formula automatically adjust $W$ by shifting the parameter closer to the minimum cost. Learning rate hyperparameter $\alpha$ determines a factor how much to shift in a course of minimizing the cost (similar to a sampling interval on Digital Signal Processing); greater the learning rate is, much faster it will reach the minimum, but should take a risk on accuracy due to calculating wide area.
+
+From the definition of the gradient descent, substituting $\mathrm{cost}(W)$ to its definition,
+
+$$
+W:=W-\alpha\frac{\partial}{\partial W}\frac{1}{2N}\sum_{n=1}^N \left [ Wx^{[n]}-y^{[n]} \right ]^2
+=W-\alpha\frac{1}{2N}\sum_{n=1}^N 2\left [ Wx^{[n]}-y^{[n]} \right ] x^{[n]}
+$$
+
+$$
+\therefore W:=W-\alpha\frac{1}{N}\sum_{n=1}^N \left [ Wx^{[n]}-y^{[n]} \right ] x^{[n]}
+$$
+
+While the equation above is based on simplified hypothesis, the same concept can be applied to the general hypothesis with both weight and bias parameter presented. The following are the definition of gradient descent algorithm on weight and bias parameter: 
+
+$$
+W:=W-\alpha\frac{\partial}{\partial W}\frac{1}{2N}\sum_{n=1}^N \left [Wx^{[n]}+b-y^{[n]} \right ]^2
+
+=W-\alpha\frac{1}{N}\sum_{n=1}^N \left [ Wx^{[n]} + b -y^{[n]} \right ] x^{[n]}
+\\
+b:=b-\alpha\frac{\partial}{\partial b}\frac{1}{2N}\sum_{n=1}^N \left [Wx^{[n]}+b-y^{[n]} \right ]^2
+
+=b-\alpha\frac{1}{N}\sum_{n=1}^N \left [ Wx^{[n]} + b -y^{[n]} \right ]
+$$
+
+### Batch Gradient Descent
+
+Batch is a group of subject (in this case, instances of training dataset) to be processed altogether. The batch in machine learning is also used to train the model in efficient way, considering both computation memory and prediction accuracy of the model.
+
+Suppose there is a simplified hypothesis as follows:
+
+$$
+W:=W-\alpha\frac{1}{N}\sum_{n=1}^N \left [ Wx^{[n]}-y^{[n]} \right ] x^{[n]}
+$$
+
+The equation trains the whole instances altogether but would require huge memory capacity. On the other hand, if the training is done instance by instance (aka. Stochastic Gradient Descent; SGD), the equation should look like this:
+
+$$
+W:=W-\alpha\frac{1}{1}\sum_{n=1}^1 \left [ Wx^{[n]}-y^{[n]} \right ] x^{[n]}=W-\alpha \left [ Wx^{[n]}-y^{[n]} \right ] x^{[n]}
+$$
+
+However, since the parameter is adjusted by an instance, the loss calculation that is crucial on finding minimum cost looses its meaning as a whole data because it fails to capture the relevance between data upon training. This leads to trained model become inaccurate.
+
+Hence, it is important to find the mid-point between training with too many and too few instances. This group of instances that is trained together for machine learning is called batch, and the Batch Gradient Descent (abbrv. BGD) below has a batch size of $$M$$.
+
+$$
+\therefore W:=W-\alpha\frac{1}{M}\sum_{n=1}^M \left [ Wx^{[n]}-y^{[n]} \right ] x^{[n]}
+$$
+
+### Learning Rate
+
+Learning rate hyperparameter defines a distance of the step the gradient descent algorithm takes for every process of computation. This rate is crucial in machine learning to minimize the cost but also does not have a correct answer on choosing the number of rate. Following reasons describe the effect of determining the learning rate:
+
+<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\ai\1_hGhRddOUV8h0pdQek8T35A.png" width=100%></div><center style="font-weight:bold">Figure #. Learning rate of extreme cases.</center>
+
+On choosing learning rate of too big value would make the algorithm difficult, or maybe impossible to minimize the cost. In worst case, the cost can overshoot (similar definition of the term "overshoot" in signal processing) getting farther away from cost minimization, meaning the cost increases instead.
+
+Meanwhile, learning rate of too small value would take too long time to train even the simplest model. If unlucky, the gradient descent algorithm would reach the unexpected local minimum only reachable by extremely small learning rate.
+
+Thus, developer should decide the learning rate by first observing the cost function (possibly by plotting the function) and checking the rate the cost goes down. General recommendation is to start by setting the learning rate to 0.01.
+
+### Convex Function
+
+Some cost functions may have two or more different and/or separated minimum cost, where gradient descent algorithm could reach the minimum cost differently based on the initial point and learning rate. Although both reach may minimum cost, the path they took is different and thus grants two different model which is not appropriate.
+
+To prevent this from happening, one must verify the cost function is in a form of a [convex function](https://en.wikipedia.org/wiki/Convex_function). Convex function has a single maximum/minimum point and its gradient descent will reach the same minimum point wherever and however. If the cost function is indeed verified to be a convex function, the training will always results a path that reaches a single and only minimum cost which is an appropriate behavior.
+
+Thankfully, the linear regression will almost always have a cost function as a convex function with cost being quadratic equation of a parameter $W$ and $b$.
