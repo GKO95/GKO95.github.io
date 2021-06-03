@@ -5,7 +5,7 @@ category: 미적분학
 title: 라플라스 변환
 meta: Laplace
 mathjax: true
-order: 0xE1
+order: 0xE2
 ---
 # 라플라스 변환: 개요
 > 본 내용은 [미분방정식](../ko.ENGINEER_Differential/)을 기반하므로 이에 대해 충분한 이해가 필요하다.
@@ -16,7 +16,7 @@ order: 0xE1
     : 변수 $$t$$, 일명 시간이 중심이 되는 공간이다. 
 
 * *$$s$$-영역 (일명 복소주파수 영역)*
-    : 변수 $$s = \sigma + j\omega$$가 중심이 되는 공간이다. 여기서 $$\omega = 2\pi f$$는 각주파수(angular frequency)이며 허수가 붙기 때문에 "복소"주파수라고 부른다. 또한 이는 상수계수 선형미분방정식의 특성방정식 고유값 $$\lambda$$와 유사한 형태를 지니고 있다.
+    : 변수 $$s = \sigma + j\omega$$가 중심이 되는 공간이며, 허수가 붙기 때문에 "복소"주파수라고 부른다. 여기서 $$\omega = 2\pi f$$는 [각주파수](https://ko.wikipedia.org/wiki/각진동수)(angular frequency)이다. 
 
 라플라스 변환은 $$t$$-영역을 $$s$$-영역으로 공간을 전환하며 다음과 같은 방정식을 가진다.
 
