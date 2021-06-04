@@ -27,7 +27,17 @@ $$
 
 여기서 $$\omega_k$$는 고조 주파수(harmonic frequency)로 이들의 [최대공약수](https://ko.wikipedia.org/wiki/최대공약수)로 계산되는 기본 주파수(fundamental frequency) $$\omega_0$$는 본 푸리에 급수가 갖는 가장 작은 단위 주파수이다.
 
-삼각함수에서 $$\sin$$과 $$\cos$$ 함수간에 $$\frac{\pi}{2}$$ 위상차가 있다.
+동일한 주파수를 갖는 $$\sin$$과 $$\cos$$는 아래의 [선형 결합](https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Linear_combinations)을 통해 하나의 삼각함수로 표현될 수 있다. 특히 $$\sin$$과 $$\cos$$ 함수간에 $$\frac{\pi}{2}$$ 위상차가 있음을 반드시 숙지하도록 한다.
+
+$$
+a_k\cos{\left( \omega_k t \right)} + b_k\sin{\left( \omega_k t \right)}
+$$
+
+$$
+\quad = c_k\cos{\left( \omega_k t + \phi_k \right)} ...\mathrm{where} \ c_k = \sgn{a_k}\sqrt{a_k^2 + b_k^2} , \ \phi_k = \tan^{-1}{\left( -\frac{b_k}{a_k} \right)} 
+$$
+
+위의 선형 결합으로 푸리에 급수는 다음과 같이 간략화된다.
 
 $$
 x(t) = c_0 + \sum_{k=1}^\infty{c_k\cos{\left( \omega_kt + \phi_k \right)}}
@@ -36,3 +46,5 @@ $$
 $$
 \quad = \sum_{k=0}^\infty{c_k\cos{\left( \omega_kt + \phi_k \right)}}
 $$
+
+여기서 $$k=0$$일 때의 고조 주파수는 $$\omega_{k=0} = k\omega_0 = 0$$으로 절대 기본 주파수를 의미하는게 아니다.
