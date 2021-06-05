@@ -33,7 +33,7 @@ $$
 \quad = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} \quad \left( \because \ a_0\cos{0\omega_0 t} = a_0 \right)
 $$
 
-여기서 우주기함수의 푸리에 계수 $$a_k$$는 유도될 수 있으며, 우선 합성 방정식의 양변에 $$n$$ 배수의 고조 주파수를 갖는 $$\cos{(n\omega_0 t)}$$ 삼각함수를 곱하면서 시작한다.
+여기서 우주기함수의 푸리에 계수 $$a_k$$는 해당 주기함수(혹은 신호)를 구성하고 있는 고조 주파수 $$k\omega_0$$ 성분이 얼만큼인지 결정하는 매우 중요한 인자이며, 푸리에 해석의 핵심이다. 푸리에 계수 $$a_k$$를 구하기 위해 우선 합성 방정식의 양변에 $$n$$ 배수의 고조 주파수를 갖는 $$\cos{(n\omega_0 t)}$$ 삼각함수를 곱한다.
 
 $$
 x_{T_e}(t)\cos{(n\omega_0 t)} = \sum_{k=0}^{\infty}{a_k\cos{(k\omega_0 t)} \cos{(n\omega_0 t)}}
@@ -62,15 +62,17 @@ $$
 단, $$k=n$$일 경우에는 전혀 다른 적분 결과가 나타난다.
 
 $$
-\begin{cases}
+\left\{
+\begin{array}{ll}
 
-\displaystyle \int_{T}{\cos{\left\{ (n-n)\omega_0 t \right\} }dt} = \int_{T}{\cos{\left\{ 0\omega_0 t \right\} }dt} = \int_{T}{1 \cdot dt} = T
+\displaystyle \int_{T}{\cos{\left\{ (n-n)\omega_0 t \right\} }dt} & \displaystyle = \int_{T}{\cos{\left\{ 0\omega_0 t \right\} }dt} & \displaystyle = \int_{T}{1 \cdot dt} & = T
 
 \\
 
-\displaystyle \int_{T}{\cos{\left\{ (n+n)\omega_0 t \right \} }dt} = \int_{T}{\cos{\left\{ 2n\omega_0 t \right \} }dt} = \int_{T}{\cos{\left\{ 2n\omega_0 t \right \} }dt} = 0
+\displaystyle \int_{T}{\cos{\left\{ (n+n)\omega_0 t \right \} }dt} & \displaystyle = \int_{T}{\cos{\left\{ 2n\omega_0 t \right \} }dt} & \displaystyle = \int_{T}{\cos{\left\{ 2n\omega_0 t \right \} }dt} & = 0
 
-\end{cases}
+\end{array}
+\right.
 $$
 
 사실상 첫 번째 적분식에서만 0이 아닌 다른 결과가 나왔으며, 두 번째 적분식은 다른 경우와 마찬가지로 $$0$$이 계산되었다. 후자는 어떠한 경우에서도 $$0$$이 나오기 때문에 생략하여 다음과 같이 방정식을 간략하게 변경할 수 있다.
@@ -128,7 +130,7 @@ $$
 \quad = \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}} \quad \left( \because \ b_0\cos{0\omega_0 t} = 0 \right)
 $$
 
-여기서 기주기함수의 푸리에 계수 $$b_k$$는 유도될 수 있으며, 우선 합성 방정식의 양변에 $$n$$ 배수의 고조 주파수를 갖는 $$\sin{(n\omega_0 t)}$$ 삼각함수를 곱하면서 시작한다.
+여기서 기주기함수의 푸리에 계수 $$b_k$$는 해당 주기함수(혹은 신호)를 구성하고 있는 고조 주파수 $$k\omega_0$$ 성분이 얼만큼인지 결정하는 매우 중요한 인자이며, 푸리에 해석의 핵심이다. 푸리에 계수 $$b_k$$를 구하기 위해 우선 합성 방정식의 양변에 $$n$$ 배수의 고조 주파수를 갖는 $$\sin{(n\omega_0 t)}$$ 삼각함수를 곱한다.
 
 $$
 x_{T_o}(t)\sin{(n\omega_0 t)} = \sum_{k=0}^{\infty}{b_k\sin{(k\omega_0 t)} \sin{(n\omega_0 t)}}
@@ -157,15 +159,17 @@ $$
 단, $$k=n$$일 경우에는 전혀 다른 적분 결과가 나타난다.
 
 $$
-\begin{cases}
+\left\{
+\begin{array}{ll}
 
-\displaystyle \int_{T}{\cos{\left\{ (n-n)\omega_0 t \right\} }dt} = \int_{T}{\cos{\left\{ 0\omega_0 t \right\} }dt} = \int_{T}{1 \cdot dt} = T
+\displaystyle \int_{T}{\cos{\left\{ (n-n)\omega_0 t \right\} }dt} & \displaystyle = \int_{T}{\cos{\left\{ 0\omega_0 t \right\} }dt} & \displaystyle = \int_{T}{1 \cdot dt} & = T
 
 \\
 
-\displaystyle \int_{T}{\cos{\left\{ (n+n)\omega_0 t \right \} }dt} = \int_{T}{\cos{\left\{ 2n\omega_0 t \right \} }dt} = \int_{T}{\cos{\left\{ 2n\omega_0 t \right \} }dt} = 0
+\displaystyle \int_{T}{\cos{\left\{ (n+n)\omega_0 t \right \} }dt} & \displaystyle = \int_{T}{\cos{\left\{ 2n\omega_0 t \right \} }dt} & \displaystyle = \int_{T}{\cos{\left\{ 2n\omega_0 t \right \} }dt} & = 0
 
-\end{cases}
+\end{array}
+\right.
 $$
 
 사실상 첫 번째 적분식에서만 0이 아닌 다른 결과가 나왔으며, 두 번째 적분식은 다른 경우와 마찬가지로 $$0$$이 계산되었다. 후자는 어떠한 경우에서도 $$0$$이 나오기 때문에 생략하여 다음과 같이 방정식을 간략하게 변경할 수 있다.
@@ -203,23 +207,27 @@ $$
 
 $$
 \qquad \quad
-\begin{cases}
+\left\{
+\begin{array}{lll}
 
-\displaystyle a_0 = \frac{1}{T}\int_{T}{x_{T}(t)dt}
-
-\\
-
-\displaystyle a_k = \frac{2}{T}\int_{T}{x_{T}(t)\cos{(k\omega_0 t)}dt}
+a_0 & \displaystyle = \frac{1}{T}\int_{T}{x_{T}(t)dt}
 
 \\
 
-\displaystyle b_k = \frac{2}{T}\int_{T}{x_{T}(t)\sin{(k\omega_0 t)}dt}
+a_k & \displaystyle = \frac{2}{T}\int_{T}{x_{T}(t)\cos{(k\omega_0 t)}dt}
 
-\end{cases}
+\\
+
+b_k & \displaystyle = \frac{2}{T}\int_{T}{x_{T}(t)\sin{(k\omega_0 t)}dt}
+
+\end{array}
+\right.
 $$
 
 ## 지수함수 형태
-지수함수 형태의 푸리에 급수는 삼각함수 형태로부터 [오일러 공식](https://ko.wikipedia.org/wiki/오일러_공식)을 통해 유도된다.
+지수함수 형태의 푸리에 급수는 삼각함수 형태로부터 지수함수와 삼각함수의 상관관계를 설명하는 [오일러 공식](https://ko.wikipedia.org/wiki/오일러_공식)을 통해 유도된다.
+
+> 오일러 공식: $$e^{jx} = \cos{x} + j\sin{x}$$
 
 $$
 x_T(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}}
@@ -233,7 +241,7 @@ $$
 \quad = a_0 + \sum_{k=1}^{\infty}{ \left(\frac{a_k-jb_k}{2}\right) e^{jk\omega_0t} } + \sum_{k=1}^{\infty}{ \left(\frac{a_k+jb_k}{2}\right) e^{-jk\omega_0t} }
 $$
 
-삼각함수 형태의 푸리에 계수를 위의 식에 대입한다.
+삼각함수 형태에서 도출한 푸리에 계수 $$a_k$$ 및 $$b_k$$ 계산식을 대입한다.
 
 $$
 x_T(t) = \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)\left[ \cos{k\omega_0 t} - j\sin{k\omega_0 t} \right] dt} \right) e^{jk\omega_0t} }
@@ -244,20 +252,87 @@ $$
 \quad = \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} }
 $$
 
-본 방정식의 두 시그마 $$\Sigma$$는 사실상 $$k$$의 부호만 반대일 뿐이며 나머지는 모두 일치한다. 하나의 시그마 범위를 조정하여 아래와 같이 동일한 수식으로 표현할 수 있다.
+위의 방정식은 $$k$$를 자세히 관찰하면 사실상 $$(-\infty, \infty)$$ 범위를 갖는 하나의 수식으로 정리할 수 있음을 알 수 있다.
 
 $$
-\quad \Rightarrow \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=-\infty}^{-1}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=1}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} }
+x_T(t) = \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} }
 $$
 
-그리고 $$k=0$$일 때의 적분값은 $$a_0$$와 동일한 수식이 나오는 것을 확인할 수 있다.
-
 $$
-\quad \Rightarrow \sum_{k=-\infty}^{-1}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=-0}^{+0}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=1}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} }
+\quad = \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-j0\omega_0 t} dt} \right) e^{-j0\omega_0t} + \sum_{k=-\infty}^{-1}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} } + \sum_{k=1}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} }
 $$
 
-그러므로 주기함수 $$x_T(t)$$$의 지수함수 형태 푸리에 급수는 다음과 같다.
+$$
+\quad = \sum_{k=-\infty}^{-1}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} } + \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-j0\omega_0 t} dt} \right) e^{-j0\omega_0t} + \sum_{k=1}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} }
+$$
+
+$$
+\quad = \sum_{k=-\infty}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} }
+$$
+
+그러므로 주기함수 $$x_T(t)$$의 지수함수 형태 푸리에 급수는 다음과 같다.
 
 $$
 \qquad \therefore x_T(t) = \sum_{k=-\infty}^{+\infty}{ c_k e^{jk\omega_0t} } \quad ...\mathrm{where} \ c_k = \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt}
+$$
+
+### vs. 삼각함수 형태
+삼각함수와 지수함수 형태가 서로 달리 생겨도 하나의 주기함수에 대한 푸리에 급수를 표현하는 동일한 방정식이다.
+
+$$
+x_T(t) = 
+
+\left\{ 
+\begin{array}{ll}
+
+\displaystyle a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}} & \quad \mathsf{Trigonometric}
+
+\\
+
+\displaystyle \sum_{k=-\infty}^{+\infty}{ c_k e^{jk\omega_0t} } & \quad \mathsf{Exponential}
+
+\end{array}
+\right.
+$$
+
+동일한 방정식이지만 형태만 다른 푸리에 급수로써, 본 부분은 두 형태간 상호비교를 목표로 한다.
+
+삼각함수에서 지수함수 형태로 변환하는 과정에서 $$k=0$$일 경우, 삼각함수의 $$a_0$$와 지수함수의 $$c_0$$ 계수는 어떠한 차이도 없이 동일하다는 것을 확인하였다.
+
+$$
+\quad [1] \qquad a_0 = c_0 = \frac{1}{T}\int_{T}{x_{T}(t)dt}
+$$
+
+영이 아닌 $$k$$ 배수의 고조 주파수에서 삼각함수와 지수함수 형태를 일대일 비교하면 아래의 식을 만족한다.
+
+$$
+a_k\cos{k\omega_0t} + b_k\sin{k\omega_0t} = c_{-k}e^{-jk\omega_0t} + c_{+k}e^{+jk\omega_0t} \quad ...\mathrm{where} \ c_{-k} = c_{+k}^*
+$$
+
+$$
+\quad = \left[ c_{-k} \left( \cos{k\omega_0t} - j\sin{k\omega_0t} \right) \right] + \left[ c_{+k} \left( \cos{k\omega_0t} + j\sin{k\omega_0t} \right) \right]
+$$
+
+$$
+\quad = \left[ \left( \mathrm{Re}\left\{c_{k} \right\} - j\mathrm{Im}\left\{c_{k} \right\} \right) \left( \cos{k\omega_0t} - j\sin{k\omega_0t} \right) \right] + \left[ \left( \mathrm{Re}\left\{c_{k} \right\} + j\mathrm{Im}\left\{c_{k} \right\} \right)  \left( \cos{k\omega_0t} + j\sin{k\omega_0t} \right) \right]
+$$
+
+$$
+\quad = 2 \mathrm{Re}\left\{c_{k} \right\} \cos{k\omega_0t} - 2 \mathrm{Im}\left\{c_{k} \right\} \sin{k\omega_0t}
+$$
+
+그러므로 지수함수의 계수로부터 삼각함수 계수를 구하는 일반적인 관계식은 다음과 같다.
+
+$$
+\quad [2] \qquad a_k = 2 \mathrm{Re}\left\{c_{k} \right\} \quad ...\mathrm{when} \ k \neq 0
+$$
+
+$$
+\quad [3] \qquad b_k = - 2 \mathrm{Im}\left\{c_{k} \right\} \quad ...\mathrm{when} \ k \neq 0
+$$
+
+반대로 삼각함수 계수로부터 지수함수 계수를 구하는 방법도 역으로 계산될 수 있다.
+
+$$
+\quad [4] \qquad c_k = \frac{a_k}{2} - j\frac{b_k}{2} \quad ...\mathrm{when} \ k \neq 0
 $$
