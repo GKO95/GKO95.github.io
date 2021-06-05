@@ -944,9 +944,9 @@ $$
 
 $$
 \begin{cases}
-a = F_0\frac{m(\omega_0^2 - \omega^2)}{m^2(\omega^2_0-\omega)^2+\omega^2c^2}
+\displaystyle a = F_0\frac{m(\omega_0^2 - \omega^2)}{m^2(\omega^2_0-\omega)^2+\omega^2c^2}
 \\
-b = F_0\frac{\omega c}{m^2(\omega^2_0-\omega)^2+\omega^2c^2}
+\displaystyle b = F_0\frac{\omega c}{m^2(\omega^2_0-\omega)^2+\omega^2c^2}
 \end{cases}
 $$
 
@@ -959,9 +959,9 @@ $$
 
 $$
 \begin{cases}
-a = \frac{F_0}{m\omega_0^2-\omega^2} = \frac{F_0}{k\left[ 1-(\omega/\omega_0)^2 \right]}
+\displaystyle a = \frac{F_0}{m\omega_0^2-\omega^2} = \frac{F_0}{k\left[ 1-(\omega/\omega_0)^2 \right]}
 \\
-b = 0
+\displaystyle b = 0
 \end{cases}
 $$
 
