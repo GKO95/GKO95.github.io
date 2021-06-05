@@ -8,43 +8,256 @@ mathjax: true
 order: 0xE1
 ---
 # 푸리에 변환: 개요
-[푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 시간 $$t$$ 영역의 함수를 주파수 $$f$$ 영역의 함수로 분해하는 수학적 변환식이다. 탐구하고자 하는 함수를 다른 시점에서 관측하도록 하며, 대표적인 예시로 신호해석에서 시간에 따라 흐르는 신호가 어떠한 주파수로 구성되어 있는지 알 수 있다. 영역을 넘나드는 추상적인 개념으로 처음에는 다소 이해하기 어려운 내용으로, 본 장은 푸리에 변환에 대한 근본적인 원리를 소개한다.
+> 본 내용은 고등학교 교육과정 중 하나인 [삼각함수](https://ko.wikipedia.org/wiki/삼각함수), [미분](https://ko.wikipedia.org/wiki/미분) 및 [적분](https://ko.wikipedia.org/wiki/적분), 그리고 [복소수](https://ko.wikipedia.org/wiki/복소수)를 기반하므로 이에 대해 충분한 이해가 필요하다.
 
-## 푸리에 급수
-[푸리에 급수](https://ko.wikipedia.org/wiki/푸리에_급수)(Fourier series)는 푸리에 변환의 시작점으로, *일반적인 함수(혹은 신호)들은 사인 $$\sin$$과 코사인 $$\cos$$과 같은 간단한 [삼각함수](https://ko.wikipedia.org/wiki/삼각함수)들의 합으로 표현될 수 있다*는 푸리에 해석(Fourier analysis)으로부터 탄생하였다.
+[푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 시간 $$t$$ 영역의 함수를 주파수 $$f$$ 영역의 함수로 분해하는 수학적 변환식이다. *일반적인 함수(혹은 신호)들은 다른 주파수를 갖는 사인 $$\sin$$ 및 코사인 $$\cos$$ 삼각함수들의 합으로 표현될 수 있다*는 [푸리에 해석](https://en.wikipedia.org/wiki/Fourier_analysis)(Fourier analysis)을 기반으로 수립되었다. 대표적인 예시로 신호해석에서 시간에 따라 흐르는 신호가 어떠한 주파수로 구성되어 있는지 알 수 있다.
 
-> 푸리에 해석은 삼각함수간 합과 뺄셈에 의한 증폭과 상쇄로 어떠한 함수라도 표현할 수 있다는 가설에서 비롯된다. 저주파는 대략적은 함수의 큰 틀을 잡아주면, 고주파는 미세한 조정을 해주는 역할로 치부할 수 있다.
+# 푸리에 변환: 급수
+[푸리에 급수](https://ko.wikipedia.org/wiki/푸리에_급수)(Fourier series)는 푸리에 변환의 시작이자 푸리에 해석을 가장 쉽게 설명한다. 단, 푸리에 급수는 일반함수가 아닌 주기함수의 푸리에 해석에 초점을 두고 있다는 제약이 있다. 주기 $$T$$ 간격으로 반복하는, 혹은 기본 주파수(fundamental frequency) $$\omega_0 = 2\pi f = \frac{2\pi}{T}$$를 갖는 주기함수 $$x_T(t)$$가 주어질 떄 푸리에 급수가 어떻게 유도되는지 삼각함수와 지수함수 형태에 대하여 각각 살펴본다.
 
-시간에 대한 함수 $$x(t)$$가 있다면 푸리에 급수는 다음과 같다.
+## 삼각함수 형태
+삼각함수 형태의 푸리에 급수를 설명하기 위해서는 우함수와 기함수의 경우를 나누어서 서술한다.
 
-$$
-x(t) = c_0 + \sum_{k=1}^\infty{a_k}\cos{\omega_k t} + \sum_{k=1}^\infty{b_k}\sin{\omega_k t}  \quad ...\mathrm{where} \ \omega_k = k\omega_0
-$$
+### 우주기함수
+먼저 주기함수 $$x_T(t)$$가 우함수인 주기함수, 일명 우주기함수(even periodic function) 가정하자.
 
-$$
-\quad = c_0 + \left( a_1\cos{\omega_0t} + b_1\sin{\omega_0t} \right) + \left( a_2\cos{2\omega_0t} + b_2\sin{2\omega_0t} \right) + \left( a_3\cos{3\omega_0t} + b_3\sin{3\omega_0t} \right) + \cdots
-$$
+> 우함수(even function)은 $$y$$축을 기준으로 대칭을 이루는 함수이다.
 
-여기서 $$\omega_k$$는 고조 주파수(harmonic frequency)로 이들의 [최대공약수](https://ko.wikipedia.org/wiki/최대공약수)로 계산되는 기본 주파수(fundamental frequency) $$\omega_0$$는 본 푸리에 급수가 갖는 가장 작은 단위 주파수이다.
-
-동일한 주파수를 갖는 $$\sin$$과 $$\cos$$는 아래의 [선형 결합](https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Linear_combinations)을 통해 하나의 삼각함수로 표현될 수 있다. 특히 $$\sin$$과 $$\cos$$ 함수간에 $$\frac{\pi}{2}$$ 위상차가 있음을 반드시 숙지하도록 한다.
+코사인 $$\cos$$ 삼각함수는 대표적인 우함수로, 우주기함수 $$x_{T_e}(t)$$ 합성 방정식은 기본 주파수의 배수인 고조 주파수(harmonic frequency) $$k\omega_0$$를 갖는 코사인 함수들의 합으로 나타낼 수 있다.
 
 $$
-a_k\cos{\left( \omega_k t \right)} + b_k\sin{\left( \omega_k t \right)}
+x_{T_e}(t) = \sum_{k=0}^{\infty}{a_k\cos{k\omega_0 t}} 
 $$
 
 $$
-\quad = c_k\cos{\left( \omega_k t + \phi_k \right)} ...\mathrm{where} \ c_k = \sgn{a_k}\sqrt{a_k^2 + b_k^2} , \ \phi_k = \tan^{-1}{\left( -\frac{b_k}{a_k} \right)} 
+\quad = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} \quad \left( \because \ a_0\cos{0\omega_0 t} = a_0 \right)
 $$
 
-위의 선형 결합으로 푸리에 급수는 다음과 같이 간략화된다.
+여기서 우주기함수의 푸리에 계수 $$a_k$$는 유도될 수 있으며, 우선 합성 방정식의 양변에 $$n$$ 배수의 고조 주파수를 갖는 $$\cos{(n\omega_0 t)}$$ 삼각함수를 곱하면서 시작한다.
 
 $$
-x(t) = c_0 + \sum_{k=1}^\infty{c_k\cos{\left( \omega_kt + \phi_k \right)}}
+x_{T_e}(t)\cos{(n\omega_0 t)} = \sum_{k=0}^{\infty}{a_k\cos{(k\omega_0 t)} \cos{(n\omega_0 t)}}
+$$
+
+위의 방정식 방정식 양변에 $$T$$ 주기만큼 적분한다.
+
+$$
+\int_{T}{x_{T_e}(t)\cos{(n\omega_0 t)}dt} = \int_{T}{\sum_{k=0}^{\infty}{a_k\cos{(k\omega_0 t)} \cos{(n\omega_0 t)}}dt}
 $$
 
 $$
-\quad = \sum_{k=0}^\infty{c_k\cos{\left( \omega_kt + \phi_k \right)}}
+\quad = \sum_{k=0}^{\infty}{a_k \int_{T}{\cos{(k\omega_0 t)} \cos{(n\omega_0 t)}dt}  }
 $$
 
-여기서 $$k=0$$일 때의 고조 주파수는 $$\omega_{k=0} = k\omega_0 = 0$$으로 절대 기본 주파수를 의미하는게 아니다.
+$$
+\quad = \sum_{k=0}^{\infty}{\frac{a_k}{2} \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} } + \cos{\left\{ (k+n)\omega_0 t \right \} }dt}}
+$$
+
+$$
+\quad = \sum_{k=0}^{\infty}{\frac{a_k}{2} \left[ \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} }dt} + \int_{T}{\cos{\left\{ (k+n)\omega_0 t \right \} }dt} \right] }
+$$
+
+코사인 삼각함수는 한 주기동안 적분하면 동일한 너비를 같는 양($$+$$)과 음($$-$$)의 면적이 서로를 상쇄시켜 $$0$$이 되는 성질을 갖는다. 그리고 고조 주파수가 기본 주파수의 정수배가 아닌 이상 무조건 적분구간 $$T$$ 내에서는 $$\lvert k-n \rvert$$ 혹은 $$\lvert k+n \rvert$$번 반복한다.
+
+단, $$k=n$$일 경우에는 전혀 다른 적분 결과가 나타난다.
+
+$$
+\begin{cases}
+
+\displaystyle \int_{T}{\cos{\left\{ (n-n)\omega_0 t \right\} }dt} = \int_{T}{\cos{\left\{ 0\omega_0 t \right\} }dt} = \int_{T}{1 \cdot dt} = T
+
+\\
+
+\displaystyle \int_{T}{\cos{\left\{ (n+n)\omega_0 t \right \} }dt} = \int_{T}{\cos{\left\{ 2n\omega_0 t \right \} }dt} = \int_{T}{\cos{\left\{ 2n\omega_0 t \right \} }dt} = 0
+
+\end{cases}
+$$
+
+사실상 첫 번째 적분식에서만 0이 아닌 다른 결과가 나왔으며, 두 번째 적분식은 다른 경우와 마찬가지로 $$0$$이 계산되었다. 후자는 어떠한 경우에서도 $$0$$이 나오기 때문에 생략하여 다음과 같이 방정식을 간략하게 변경할 수 있다.
+
+$$
+\int_{T}{x_{T_e}(t)\cos{(n\omega_0 t)}dt} = \sum_{k=0}^{\infty}{\frac{a_k}{2} \left[ \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} }dt} + \int_{T}{\cos{\left\{ (k+n)\omega_0 t \right \} }dt} \right] }
+$$
+
+$$
+\quad = \sum_{k=0}^{\infty}{\frac{a_k}{2} \left[ \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} }dt} \right]}
+$$
+
+$$
+\quad = \frac{a_0}{2}\left( 0 \right) + \frac{a_1}{2}\left( 0 \right) + \cdots + \frac{a_n}{2}\left( T \right) + \cdots
+$$
+
+$$
+\quad = a_n\frac{T}{2}
+$$
+
+그러므로 푸리에 계수 $$a_n$$에 대한 방정식으로 표현하면 다음과 같이 나타난다.
+
+$$
+\qquad \therefore a_n = \frac{2}{T}\int_{T}{x_{T_e}(t)\cos{(n\omega_0 t)}dt} \quad ...\mathrm{where} \ n \in k = \{1, 2, \cdots \}
+$$
+
+그러나 해당 푸리에 계수는 $$n=0$$인 경우에는 성립하지 않으며, 이는 "$$n$$ 배수의 고조 주파수를 갖는" 조건이 전재하였기 때문이다. $$a_0$$에 대해서는 다시 합성 방정식에서 시작하되, 주파수가 $$0$$인 관계로 훨씬 더 간단하게 유도된다.
+
+$$
+\int_{T}{x_{T_e}(t)\cos{(0\omega_0 t)}dt} = \sum_{k=0}^{\infty}{a_k \int_{T}{\cos{(k\omega_0 t)} \cos{(0\omega_0 t)}dt} }
+$$
+
+$$
+\quad \Rightarrow \int_{T}{x_{T_e}(t)dt} = \sum_{k=0}^{\infty}{a_k \int_{T}{\cos{(k\omega_0 t)} dt} }
+$$
+
+$$
+\qquad \therefore a_0 = \frac{1}{T}\int_{T}{x_{T_e}(t)dt}
+$$
+
+그리고 $$a_0$$ 계수는 주파수가 없는 수식에서 유도되었기 때문에 주기함수 $$x_{T_e}(t)$$의 평균값 혹은 전자기에서는 DC 성분과 동일하다.
+
+### 기주기함수
+이번에는 주기함수 $$x_T(t)$$가 기함수인 주기함수, 일명 기주기함수(odd periodic function) 가정하자.
+
+> 기함수(odd function)은 원점을 기준으로 대칭을 이루는 함수이다.
+
+사인 $$\sin$$ 삼각함수는 대표적인 기함수로, 기주기함수 $$x_{T_o}(t)$$ 합성 방정식은 마찬가지로 기본 주파수의 배수인 고조 주파수 $$k\omega_0$$를 갖는 사인 함수들의 합으로 나타낼 수 있다.
+
+$$
+x_{T_o}(t) = \sum_{k=0}^{\infty}{b_k\sin{k\omega_0 t}} 
+$$
+
+$$
+\quad = \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}} \quad \left( \because \ b_0\cos{0\omega_0 t} = 0 \right)
+$$
+
+여기서 기주기함수의 푸리에 계수 $$b_k$$는 유도될 수 있으며, 우선 합성 방정식의 양변에 $$n$$ 배수의 고조 주파수를 갖는 $$\sin{(n\omega_0 t)}$$ 삼각함수를 곱하면서 시작한다.
+
+$$
+x_{T_o}(t)\sin{(n\omega_0 t)} = \sum_{k=0}^{\infty}{b_k\sin{(k\omega_0 t)} \sin{(n\omega_0 t)}}
+$$
+
+위의 방정식 방정식 양변에 $$T$$ 주기만큼 적분한다.
+
+$$
+\int_{T}{x_{T_o}(t)\sin{(n\omega_0 t)}dt} = \int_{T}{\sum_{k=0}^{\infty}{b_k\sin{(k\omega_0 t)} \sin{(n\omega_0 t)}}dt}
+$$
+
+$$
+\quad = \sum_{k=0}^{\infty}{b_k \int_{T}{\sin{(k\omega_0 t)} \sin{(n\omega_0 t)}dt}  }
+$$
+
+$$
+\quad = \sum_{k=0}^{\infty}{\frac{b_k}{2} \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} } - \cos{\left\{ (k+n)\omega_0 t \right \} }dt}}
+$$
+
+$$
+\quad = \sum_{k=0}^{\infty}{\frac{b_k}{2} \left[ \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} }dt} - \int_{T}{\cos{\left\{ (k+n)\omega_0 t \right \} }dt} \right] }
+$$
+
+사인 삼각함수는 한 주기동안 적분하면 동일한 너비를 같는 양($$+$$)과 음($$-$$)의 면적이 서로를 상쇄시켜 $$0$$이 되는 성질을 갖는다. 그리고 고조 주파수가 기본 주파수의 정수배가 아닌 이상 무조건 적분구간 $$T$$ 내에서는 $$\lvert k-n \rvert$$ 혹은 $$\lvert k+n \rvert$$번 반복한다.
+
+단, $$k=n$$일 경우에는 전혀 다른 적분 결과가 나타난다.
+
+$$
+\begin{cases}
+
+\displaystyle \int_{T}{\cos{\left\{ (n-n)\omega_0 t \right\} }dt} = \int_{T}{\cos{\left\{ 0\omega_0 t \right\} }dt} = \int_{T}{1 \cdot dt} = T
+
+\\
+
+\displaystyle \int_{T}{\cos{\left\{ (n+n)\omega_0 t \right \} }dt} = \int_{T}{\cos{\left\{ 2n\omega_0 t \right \} }dt} = \int_{T}{\cos{\left\{ 2n\omega_0 t \right \} }dt} = 0
+
+\end{cases}
+$$
+
+사실상 첫 번째 적분식에서만 0이 아닌 다른 결과가 나왔으며, 두 번째 적분식은 다른 경우와 마찬가지로 $$0$$이 계산되었다. 후자는 어떠한 경우에서도 $$0$$이 나오기 때문에 생략하여 다음과 같이 방정식을 간략하게 변경할 수 있다.
+
+$$
+\int_{T}{x_{T_o}(t)\sin{(n\omega_0 t)}dt} = \sum_{k=0}^{\infty}{\frac{b_k}{2} \left[ \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} }dt} - \int_{T}{\cos{\left\{ (k+n)\omega_0 t \right \} }dt} \right] }
+$$
+
+$$
+\quad = \sum_{k=0}^{\infty}{\frac{b_k}{2} \left[ \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} }dt} \right]}
+$$
+
+$$
+\quad = \frac{b_0}{2}\left( 0 \right) + \frac{b_1}{2}\left( 0 \right) + \cdots + \frac{b_n}{2}\left( T \right) + \cdots
+$$
+
+$$
+\quad = b_n\frac{T}{2}
+$$
+
+그러므로 푸리에 계수 $$b_n$$에 대한 방정식으로 표현하면 다음과 같이 나타난다.
+
+$$
+\qquad \therefore b_n = \frac{2}{T}\int_{T}{x_{T_o}(t)\sin{(n\omega_0 t)}dt} \quad ...\mathrm{where} \ n \in k = \{1, 2, \cdots \}
+$$
+
+그러나 해당 푸리에 계수는 $$n=0$$인 경우에는 성립하지 않으며, 이는 "$$n$$ 배수의 고조 주파수를 갖는" 조건이 전재하였기 때문이다. 하지만 기주기함수에서는 $$\sin(0) = 0$$로 인해 $$b_0$$ 계수가 방정식에서 아예 사라진다. 이는 $$b_0 = 0$$임을 시사하는 게 절대 아니므로 주의하도록 한다.
+
+### 주기함수
+종합적으로 우주기함수 $$x_{T_e}(t)$$와 기주기함수 $$x_{T_o}(t)$$의 합은 일반 주기함수 $$x_T(t)$$에 대한 합성 방정식으로 도출된다.
+
+$$
+\qquad \therefore x_T(t) = x_{T_e}(t) + x_{T_o}(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}}
+$$
+
+$$
+\qquad \quad
+\begin{cases}
+
+\displaystyle a_0 = \frac{1}{T}\int_{T}{x_{T}(t)dt}
+
+\\
+
+\displaystyle a_k = \frac{2}{T}\int_{T}{x_{T}(t)\cos{(k\omega_0 t)}dt}
+
+\\
+
+\displaystyle b_k = \frac{2}{T}\int_{T}{x_{T}(t)\sin{(k\omega_0 t)}dt}
+
+\end{cases}
+$$
+
+## 지수함수 형태
+지수함수 형태의 푸리에 급수는 삼각함수 형태로부터 [오일러 공식](https://ko.wikipedia.org/wiki/오일러_공식)을 통해 유도된다.
+
+$$
+x_T(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}}
+$$
+
+$$
+\quad = a_0 + \sum_{k=1}^{\infty}{a_k \left( \frac{e^{jk\omega_0} + e^{-jk\omega_0}}{2} \right)} + \sum_{k=1}^{\infty}{-jb_k \left( \frac{e^{jk\omega_0} - e^{-jk\omega_0}}{2} \right)}
+$$
+
+$$
+\quad = a_0 + \sum_{k=1}^{\infty}{ \left(\frac{a_k-jb_k}{2}\right) e^{jk\omega_0t} } + \sum_{k=1}^{\infty}{ \left(\frac{a_k+jb_k}{2}\right) e^{-jk\omega_0t} }
+$$
+
+삼각함수 형태의 푸리에 계수를 위의 식에 대입한다.
+
+$$
+x_T(t) = \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)\left[ \cos{k\omega_0 t} - j\sin{k\omega_0 t} \right] dt} \right) e^{jk\omega_0t} }
+\\ \qquad \qquad + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)\left[ \cos{k\omega_0 t} + j\sin{k\omega_0 t} \right] dt} \right) e^{-jk\omega_0t} }
+$$
+
+$$
+\quad = \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} }
+$$
+
+본 방정식의 두 시그마 $$\Sigma$$는 사실상 $$k$$의 부호만 반대일 뿐이며 나머지는 모두 일치한다. 하나의 시그마 범위를 조정하여 아래와 같이 동일한 수식으로 표현할 수 있다.
+
+$$
+\quad \Rightarrow \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=-\infty}^{-1}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=1}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} }
+$$
+
+그리고 $$k=0$$일 때의 적분값은 $$a_0$$와 동일한 수식이 나오는 것을 확인할 수 있다.
+
+$$
+\quad \Rightarrow \sum_{k=-\infty}^{-1}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=-0}^{+0}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=1}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} }
+$$
+
+그러므로 주기함수 $$x_T(t)$$$의 지수함수 형태 푸리에 급수는 다음과 같다.
+
+$$
+\qquad \therefore x_T(t) = \sum_{k=-\infty}^{+\infty}{ c_k e^{jk\omega_0t} } \quad ...\mathrm{where} \ c_k = \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt}
+$$
