@@ -351,12 +351,18 @@ $$
 \quad = \sum_{k=-\infty}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } \quad ...\mathrm{where} \ c_k = \frac{1}{T}\int_{T}{x(t) e^{-jk\omega_0 t} dt}
 $$
 
-비주기함수에 대한 식으로 주기 $$T$$를 무한대로 확장하면 비주가함수가 되지만,
+주기함수가 무한한 주기 $$T \rightarrow \infty$$를 갖으면 절대로 반복하지 않는 비주기함수가 된다. 그러나 고조 주파수가 갖는 $$k$$에 따라 결정되는 푸리에 급수의 계수 $$c_k$$는 $$\lim_{T\rightarrow\infty}\frac{1}{T}$$으로 인해 $$0$$으로 수렴하게 된다. 그러므로 비주기함수의 푸리에 변환에서는 $$\frac{1}{T}$$ 주기 성분이 없는 새로운 푸리에 계수 $$X(k\omega_0)$$를 정의한다.
 
 $$
-Tc_k = \int_{T}{x(t) e^{-jk\omega_0 t} dt}
+x(t) = \sum_{k=-\infty}^{+\infty}{ \frac{1}{T} \left( \int_{-\infty}^{+\infty}{x(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} }
 $$
 
 $$
-\quad \Rightarrow X(k\omega_0) = \lim_{T\rightarrow\infty}{Tc_k} = \int_{-\infty}^{+\infty}{x(t) e^{-jk\omega_0 t} dt}
+\quad = \sum_{k=-\infty}^{+\infty}{ \frac{1}{T} X(k\omega_0) e^{jk\omega_0t} } \quad ...\mathrm{where} \ X(k\omega_0) = \int_{-\infty}^{+\infty}{x(t) e^{-jk\omega_0 t} dt}
+$$
+
+고조 주파수 $$k\omega_0 = \frac{2\pi}{T}$$가 무한한 주기를 가질 시 $$\lim_{T\rightarrow\infty}{\frac{2\pi}{T}} = dk\omega_0$$로 고조 주파수가 표현된다. 여기서 $$dk$$는 매우 작은 무한소의 $$k$$를 의미한다. 이를 기반으로 방정식은 다음과 같이 대입하되, 이번부터 고조 주파수는 간단히 $$\omega$$로 표시한다.
+
+$$
+x(t) = \sum_{k=-\infty}^{+\infty}{ \frac{dk\omega_0}{2\pi} X(k\omega_0) e^{jk\omega_0t} }
 $$
