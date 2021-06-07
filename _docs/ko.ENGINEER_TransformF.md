@@ -337,6 +337,23 @@ $$
 \quad [4] \qquad c_k = \frac{a_k}{2} - j\frac{b_k}{2} \quad ...\mathrm{when} \ k \neq 0
 $$
 
+$$
+\qquad \qquad \quad = \lvert c_k \rvert e^{j\angle{c_k}} \quad
+\left\{ 
+\begin{array}{ll}
+
+\displaystyle \lvert c_k \rvert & \displaystyle = \sqrt{\left( \lvert c_k \rvert e^{j\angle{c_k}} \right)^2 + \left( \mathrm{Im}\left\{c_{k} \right\} \right)^2} & \displaystyle = \frac{1}{2}\sqrt{a_k^2 + b_k^2}
+
+\\
+
+\displaystyle \angle{c_k} & \displaystyle = \arctan{\left( \frac{\mathrm{Im}\left\{c_{k} \right\}}{\mathrm{Re}\left\{c_{k} \right\}} \right)} & \displaystyle = -\arctan{\left( \frac{b_k}{a_k} \right)} 
+
+\end{array}
+\right.
+$$
+
+> 푸리에 계수 $$c_k$$의 크기(amplitude)와 위상(phase)은 [복소평면](https://ko.wikipedia.org/wiki/복소평면)(complex plane)에서 비롯되었다. 가로축과 세로축은 각각 복소수의 실수 $$\mathrm{Re}\left\{c_{k} \right\}$$와 허수 $$\mathrm{Im}\left\{c_{k} \right\}$$를 의미하므로, [직각좌표계](https://ko.wikipedia.org/wiki/데카르트_좌표계)로부터 [극좌표계](https://ko.wikipedia.org/wiki/극좌표계) 변환식이 그대로 적용된다.
+
 # 푸리에 변환: 변환
 [푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 주기함수에 극한된 푸리에 급수와 달리 비주기함수(aperiodic function)에서도 적용할 수 있는 적분 변환식이다. 비주기함수의 주기는 $$T\rightarrow\infty$$로 간주할 수 있으며, 덕분에 매우 작아진 기본 주파수 $$\omega_0 = \frac{2\pi}{T}$$는 더욱 미세한 고조 주파수 $$\omega = k\omega_0$$까지 표현할 수 있다.
 
