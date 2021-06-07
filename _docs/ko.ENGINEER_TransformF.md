@@ -23,7 +23,7 @@ order: 0xE1
 
 > 우함수(even function)은 $$y$$축을 기준으로 대칭을 이루는 함수이다.
 
-코사인 $$\cos$$ 삼각함수는 대표적인 우함수로, 우주기함수 $$x_{T_e}(t)$$ 합성 방정식은 기본 주파수의 배수인 고조 주파수(harmonic frequency) $$k\omega_0$$를 갖는 코사인 함수들의 합으로 나타낼 수 있다.
+코사인 $$\cos$$ 삼각함수는 대표적인 우함수로, 우주기함수 $$x_{T_e}(t)$$의 합성 방정식(synthesis equation)은 기본 주파수의 배수인 고조 주파수(harmonic frequency) $$k\omega_0$$를 갖는 코사인 함수들의 합으로 나타낼 수 있다.
 
 $$
 x_{T_e}(t) = \sum_{k=0}^{\infty}{a_k\cos{k\omega_0 t}} 
@@ -93,7 +93,7 @@ $$
 \quad = a_n\frac{T}{2}
 $$
 
-그러므로 푸리에 계수 $$a_n$$에 대한 방정식으로 표현하면 다음과 같이 나타난다.
+그러므로 푸리에 계수 $$a_n$$에 대한 해석 방정식(analysis equation)으로 표현하면 다음과 같이 나타난다.
 
 $$
 \qquad \therefore a_n = \frac{2}{T}\int_{T}{x_{T_e}(t)\cos{(n\omega_0 t)}dt} \quad ...\mathrm{where} \ n \in k = \{1, 2, \cdots \}
@@ -120,7 +120,7 @@ $$
 
 > 기함수(odd function)은 원점을 기준으로 대칭을 이루는 함수이다.
 
-사인 $$\sin$$ 삼각함수는 대표적인 기함수로, 기주기함수 $$x_{T_o}(t)$$ 합성 방정식은 마찬가지로 기본 주파수의 배수인 고조 주파수 $$k\omega_0$$를 갖는 사인 함수들의 합으로 나타낼 수 있다.
+사인 $$\sin$$ 삼각함수는 대표적인 기함수로, 기주기함수 $$x_{T_o}(t)$$의 합성 방정식(synthesis equation)은 마찬가지로 기본 주파수의 배수인 고조 주파수 $$k\omega_0$$를 갖는 사인 함수들의 합으로 나타낼 수 있다.
 
 $$
 x_{T_o}(t) = \sum_{k=0}^{\infty}{b_k\sin{k\omega_0 t}} 
@@ -190,7 +190,7 @@ $$
 \quad = b_n\frac{T}{2}
 $$
 
-그러므로 푸리에 계수 $$b_n$$에 대한 방정식으로 표현하면 다음과 같이 나타난다.
+그러므로 푸리에 계수 $$b_n$$에 대한 해석 방정식(analysis equation)으로 표현하면 다음과 같이 나타난다.
 
 $$
 \qquad \therefore b_n = \frac{2}{T}\int_{T}{x_{T_o}(t)\sin{(n\omega_0 t)}dt} \quad ...\mathrm{where} \ n \in k = \{1, 2, \cdots \}
@@ -270,7 +270,7 @@ $$
 \quad = \sum_{k=-\infty}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} }
 $$
 
-그러므로 주기함수 $$x_T(t)$$의 지수함수 형태 푸리에 급수는 다음과 같다.
+그러므로 주기함수 $$x_T(t)$$의 지수함수 형태 푸리에 급수는 다음 합성 및 해석 방정식을 갖는다.
 
 $$
 \qquad \therefore x_T(t) = \sum_{k=-\infty}^{+\infty}{ c_k e^{jk\omega_0t} } \quad ...\mathrm{where} \ c_k = \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt}
@@ -295,9 +295,9 @@ x_T(t) =
 \right.
 $$
 
-동일한 방정식이지만 형태만 다른 푸리에 급수로써, 본 부분은 두 형태간 상호비교를 목표로 한다.
+동일한 합성 방정식이지만 형태만 다른 푸리에 급수로써, 본 부분은 두 형태간 상호비교를 목표로 한다.
 
-삼각함수에서 지수함수 형태로 변환하는 과정에서 $$k=0$$일 경우, 삼각함수의 $$a_0$$와 지수함수의 $$c_0$$ 계수는 어떠한 차이도 없이 동일하다는 것을 확인하였다.
+삼각함수에서 지수함수 형태로 변환하는 과정에서 $$k=0$$일 경우, 삼각함수의 $$a_0$$와 지수함수의 $$c_0$$ 해석 방정식은 어떠한 차이도 없이 동일하다는 것을 확인하였다.
 
 $$
 \quad [1] \qquad a_0 = c_0 = \frac{1}{T}\int_{T}{x_{T}(t)dt}
@@ -365,4 +365,30 @@ $$
 
 $$
 x(t) = \sum_{k=-\infty}^{+\infty}{ \frac{d\omega}{2\pi} X(\omega) e^{j\omega t} } \quad ...\mathrm{where} \ \omega = k\omega_0
+$$
+
+$$
+\quad = \frac{1}{2\pi} \sum_{k=-\infty}^{+\infty}{ X(\omega) e^{j\omega t} d\omega}
+$$
+
+무한소 $$d\omega$$에 대한 유한합 $$\Sigma$$은 적분으로 대체될 수 있으며, 일반함수의 $$x(t)$$ 합성 방정식과 $$X(\omega)$$ 해석 방정식은 다음과 같다.
+
+$$
+x(t) = \frac{1}{2\pi} \int_{-\infty}^{+\infty}{ X(\omega) e^{j\omega t} d\omega} \quad ...\mathrm{where} \ X(\omega) = \int_{-\infty}^{+\infty}{x(t) e^{-j\omega t} dt}
+$$
+
+결과적으로 해석 방정식은 시간 $$t$$ 영역에서 주파수 $$\omega$$ 영역으로 변환하여 해당 주파수가 함수에서 차지하는 비중을 계산하는 푸리에 변환(Fourier transform) $$\mathcal{F}$$을 의미한다. 반대로 합성 방정식은 주파수 영역 $$\omega$$에서 시간 $$t$$ 영역으로 변환하여 해당 시간에 함수가 각 주파수들의 합성을 통해 어떠한 값을 가지는지 구하는 푸리에 역변환(inverse Fourier transform) $$\mathcal{F}^{-1}$$이다.
+
+$$
+\left\{ 
+\begin{array}{ll}
+
+\displaystyle \mathcal{F}\left\{ x(t) \right\} & = X(\omega) & = \displaystyle \int_{-\infty}^{+\infty}{x(t) e^{-j\omega t} dt} & \quad \mathsf{Fourier \ transform \ (analysis \ equation)}
+
+\\
+
+\displaystyle \mathcal{F}^{-1}\left\{ X(\omega) \right\} & = x(t) & = \displaystyle \frac{1}{2\pi} \int_{-\infty}^{+\infty}{ X(\omega) e^{j\omega t} d\omega} & \quad \mathsf{Inverse \ Fourier \ transform \ (synthesis \ equation)}
+
+\end{array}
+\right.
 $$
