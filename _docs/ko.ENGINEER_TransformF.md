@@ -361,8 +361,8 @@ $$
 \quad = \sum_{k=-\infty}^{+\infty}{ \frac{1}{T} X(k\omega_0) e^{jk\omega_0t} } \quad ...\mathrm{where} \ X(k\omega_0) = \int_{-\infty}^{+\infty}{x(t) e^{-jk\omega_0 t} dt}
 $$
 
-고조 주파수 $$k\omega_0 = \frac{2\pi}{T}$$가 무한한 주기를 가질 시 $$\lim_{T\rightarrow\infty}{\frac{2\pi}{T}} = dk\omega_0$$로 고조 주파수가 표현된다. 여기서 $$dk$$는 매우 작은 무한소의 $$k$$를 의미한다. 이를 기반으로 방정식은 다음과 같이 대입하되, 이번부터 고조 주파수는 간단히 $$\omega$$로 표시한다.
+주기가 증가하면 주파수는 감소하는 $$\omega = k\omega_0 \propto \frac{1}{T}$$ 반비례 관계를 갖는다. 즉, 주기가 무한대로 증가하면 주파수는 [무한소](https://ko.wikipedia.org/wiki/무한소)로 감소하여 $$d\omega$$ (혹은 $$dk\omega_0$$)가 된다. 이를 기반으로 방정식의 주기 $$T$$를 주파수 $$\omega$$에 대한 식으로 치환한다.
 
 $$
-x(t) = \sum_{k=-\infty}^{+\infty}{ \frac{dk\omega_0}{2\pi} X(k\omega_0) e^{jk\omega_0t} }
+x(t) = \sum_{k=-\infty}^{+\infty}{ \frac{d\omega}{2\pi} X(\omega) e^{j\omega t} } \quad ...\mathrm{where} \ \omega = k\omega_0
 $$
