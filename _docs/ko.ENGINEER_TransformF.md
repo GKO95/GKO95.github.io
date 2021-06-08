@@ -352,12 +352,12 @@ $$
 \right.
 $$
 
-> 푸리에 계수 $$c_k$$의 크기(amplitude)와 위상(phase)은 [복소평면](https://ko.wikipedia.org/wiki/복소평면)(complex plane)에서 비롯되었다. 가로축과 세로축은 각각 복소수의 실수 $$\mathrm{Re}\left\{c_{k} \right\}$$와 허수 $$\mathrm{Im}\left\{c_{k} \right\}$$를 의미하므로, [직각좌표계](https://ko.wikipedia.org/wiki/데카르트_좌표계)로부터 [극좌표계](https://ko.wikipedia.org/wiki/극좌표계) 변환식이 그대로 적용된다.
+> 푸리에 계수 $$c_k$$의 크기(amplitude; $$\lvert c_k \rvert$$)와 위상(phase; $$\angle{c_k}$$)은 [복소평면](https://ko.wikipedia.org/wiki/복소평면)(complex plane)에서 비롯된다. 가로축과 세로축은 각각 복소수의 실수 $$\mathrm{Re}\left\{c_{k} \right\}$$와 허수 $$\mathrm{Im}\left\{c_{k} \right\}$$를 의미하며, [직각좌표계](https://ko.wikipedia.org/wiki/데카르트_좌표계)로부터 [극좌표계](https://ko.wikipedia.org/wiki/극좌표계) 변환식이 그대로 적용된다.
 
 # 푸리에 변환: 변환
 [푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 주기함수에 극한된 푸리에 급수와 달리 비주기함수(aperiodic function)에서도 적용할 수 있는 적분 변환식이다. 비주기함수의 주기는 $$T\rightarrow\infty$$로 간주할 수 있으며, 덕분에 매우 작아진 기본 주파수 $$\omega_0 = \frac{2\pi}{T}$$는 더욱 미세한 고조 주파수 $$\omega = k\omega_0$$까지 표현할 수 있다.
 
-## 변환식 유도
+## 푸리에 변환
 푸리에 변환은 주기함수에 대한 푸리에 급수로부터 유도된다.
 
 $$
@@ -409,3 +409,85 @@ $$
 \end{array}
 \right.
 $$
+
+### 푸리에 변환 성질
+> *참조: [위키백과 - 푸리에 변환 성질](https://en.wikipedia.org/wiki/Fourier_transform#Properties_of_the_Fourier_transform)*
+
+푸리에 변환은 위에서 유도된 방정식을 토대로 반드시 아래의 성질들을 만족한다. 다음은 푸리에 변환에서 매우 핵심되는 성질들로 반드시 숙지하도록 한다.
+
+* *[선형성](https://en.wikipedia.org/wiki/Linearity) (Linearity)*
+    : 선형 연산자인 적분을 사용하는 푸리에 변환 또한 선형성을 지닌다.
+
+    $$
+    Ax_1(t) + Bx_2(t) \quad \longleftrightarrow \quad AX_1(\omega) + BX_2(\omega)
+    $$
+
+    > 본 성질에 대한 증명은 아래를 참고한다:
+    >
+    > $$
+    > \mathcal{F}\left\{ Ax_1(t) + Bx_2(t) \right\} = \int^{+\infty}_{-\infty}\left\{ Ax_1(t) + Bx_2(t) \right\} e^{-j\omega t}dt
+    > $$
+    >
+    > $$
+    > \quad = \int^{\infty}_{-\infty}\left\{Ax_1(t)e^{-j\omega t} + Bx_2(t)e^{-j\omega t}\right\}dt
+    > $$
+    >
+    > $$
+    > \quad = A\int^{\infty}_{-\infty}x_1(t)e^{-j\omega t}dt + B\int^{\infty}_{-\infty}x_2(t)e^{-j\omega t}dt
+    > $$
+    >
+    > $$
+    > \quad = A\mathcal{F}\left\{ x_1(t) \right\} + B\mathcal{F}\left\{ x_2(t) \right\}
+    > $$
+    >
+    > $$
+    > \quad = AX_1(\omega) + BX_2(\omega)
+    > $$
+
+* *대칭성 (Symmetricity)*
+    : 
+    
+    $$
+    x^*(t) \quad \longleftrightarrow \quad X^*(-\omega)
+    $$
+
+    > 푸리에 급수에서도 언급하였듯이, 일반함수는 우함수와 기함수의 합으로 표현된다.
+    > 
+    > $$
+    > x(t) = x_e(t) + x_o(t)
+    > $$
+
+* *[쌍대성](https://ko.wikipedia.org/wiki/쌍대성) (Duality)*
+    : 시간 영역에서 함수 $$x(t)$$가 주파수 영역에서 $$X(\omega)$$로 변환되면, 시간 영역에서 함수 $$X(t)$$는 주파수 영역에서 $$2\pi x(-\omega)$$로 변환된다.
+
+    $$
+    x(t) \leftrightarrow X(\omega) \quad \Longrightarrow \quad X(t) \leftrightarrow 2\pi x(-\omega)
+    $$
+
+    > 본 성질에 대한 증명은 푸리에 역변환인 합성 방정식으로부터 출발한다.
+    >
+    > $$
+    > x(t) = \frac{1}{2\pi}\int^{+\infty}_{-\infty}{X(\omega)e^{j\omega t}d\omega}
+    > $$
+    >
+    > $$
+    > \quad \Rightarrow 2\pi x(t) = \int^{+\infty}_{-\infty}{X(\omega)e^{j\omega t}d\omega}
+    > $$
+    >
+    > 만일 $$t=-\mathcal{T}$$라고 가정하면 방정식은 다음과 같이 나타난다.
+    >
+    > $$
+    > 2\pi x(-\mathcal{T}) = \int^{+\infty}_{-\infty}{X(\omega)e^{-j\omega\mathcal{T}}d\omega}
+    > $$
+    >
+    > 여기서 $$\mathcal{T} \leftrightarrow \omega$$ 기호를 서로 바꾼다. 비록 각 기호가 시간과 주파수를 의미하지만, 사실 이는 통상적인 해석일 뿐이다. 단순히 수학적인 관점에서 바라보면 이들은 단지 하나의 변수에 불과하며 기호를 바꾼다고 해서 변수의 본질이 바뀌는 게 아니다.
+    >
+    > $$
+    > 2\pi x(-\omega) = \int^{+\infty}_{-\infty}{X(\mathcal{T})e^{-j\omega\mathcal{T}}d\mathcal{T}}
+    > $$
+    >
+    > 마무리로 $$\mathcal{T}$$를 다시 익숙한 $$t$$로 돌려놓으면 다음 방정식이 완성된다.
+    >
+    > $$
+    > 2\pi x(-\omega) = \int^{+\infty}_{-\infty}{X(t)e^{-j\omega t}dt} = \mathcal{F}\left\{ X(t) \right\}
+    > $$
