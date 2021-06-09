@@ -410,6 +410,22 @@ $$
 \right.
 $$
 
+각주파수는 $$\omega = 2\pi f$$이므로, 이를 주파수 $$f$$에 대한 식으로 치환하면 다음 푸리에 방정식이 완성된다.
+
+$$
+\left\{ 
+\begin{array}{ll}
+
+\displaystyle \mathcal{F}\left\{ x(t) \right\} & = X(f) & = \displaystyle \int_{-\infty}^{+\infty}{x(t) e^{-j2\pi ft} dt} & \quad \mathsf{Fourier \ transform \ (analysis \ equation)}
+
+\\
+
+\displaystyle \mathcal{F}^{-1}\left\{ X(f) \right\} & = x(t) & = \displaystyle \int_{-\infty}^{+\infty}{ X(f) e^{j2\pi ft} df} & \quad \mathsf{Inverse \ Fourier \ transform \ (synthesis \ equation)}
+
+\end{array}
+\right.
+$$
+
 ### 푸리에 변환 성질
 > *참조: [위키백과 - 푸리에 변환 성질](https://en.wikipedia.org/wiki/Fourier_transform#Properties_of_the_Fourier_transform)*
 
@@ -419,21 +435,21 @@ $$
     : 선형 연산자인 적분을 사용하는 푸리에 변환 또한 선형성을 지닌다.
 
     $$
-    Ax_1(t) + Bx_2(t) \quad \longleftrightarrow \quad AX_1(\omega) + BX_2(\omega)
+    Ax_1(t) + Bx_2(t) \quad \longleftrightarrow \quad AX_1(f) + BX_2(f)
     $$
 
     > 본 성질에 대한 증명은 아래를 참고한다:
     >
     > $$
-    > \mathcal{F}\left\{ Ax_1(t) + Bx_2(t) \right\} = \int^{+\infty}_{-\infty}\left\{ Ax_1(t) + Bx_2(t) \right\} e^{-j\omega t}dt
+    > \mathcal{F}\left\{ Ax_1(t) + Bx_2(t) \right\} = \int^{+\infty}_{-\infty}\left\{ Ax_1(t) + Bx_2(t) \right\} e^{-j2\pi ft}dt
     > $$
     >
     > $$
-    > \quad = \int^{\infty}_{-\infty}\left\{Ax_1(t)e^{-j\omega t} + Bx_2(t)e^{-j\omega t}\right\}dt
+    > \quad = \int^{\infty}_{-\infty}\left\{Ax_1(t)e^{-j2\pi ft} + Bx_2(t)e^{-j2\pi ft}\right\}dt
     > $$
     >
     > $$
-    > \quad = A\int^{\infty}_{-\infty}x_1(t)e^{-j\omega t}dt + B\int^{\infty}_{-\infty}x_2(t)e^{-j\omega t}dt
+    > \quad = A\int^{\infty}_{-\infty}x_1(t)e^{-j2\pi ft}dt + B\int^{\infty}_{-\infty}x_2(t)e^{-j2\pi ft}dt
     > $$
     >
     > $$
@@ -441,14 +457,14 @@ $$
     > $$
     >
     > $$
-    > \quad = AX_1(\omega) + BX_2(\omega)
+    > \quad = AX_1(f) + BX_2(f)
     > $$
 
 * *대칭성 (Symmetricity)*
     : 시간 영역에서 $$x(t)$$가 순실수 혹은 순허수 함수이면, 시간 영역에서의 우함수/기함수 대칭성은 주파수 영역에서도 그대로 유지된다.
     
     $$
-    x^*(t) \quad \longleftrightarrow \quad X^*(-\omega)
+    x^*(t) \quad \longleftrightarrow \quad X^*(-f)
     $$
 
     > 푸리에 급수에서도 언급하였듯이, 일반함수는 우함수와 기함수의 합으로 표현된다.
@@ -460,44 +476,44 @@ $$
     > 시간 영역의 $$x(t)$$ 함수에 대한 푸리에 변환 $$X(\omega)$$는 다음과 같이 전개된다.
     >
     > $$
-    > X(\omega) = \int_{-\infty}^{\infty}{x_e(t)\cos{\omega t}dt} - j\int_{-\infty}^{\infty}{x_e(t)\sin{\omega t}dt}
+    > X(\omega) = \int_{-\infty}^{\infty}{x_e(t)\cos{(2\pi ft)}dt} - j\int_{-\infty}^{\infty}{x_e(t)\sin{(2\pi ft)}dt}
     > $$
     >
     > $$
-    > \qquad \qquad + \int_{-\infty}^{\infty}{x_o(t)\cos{\omega t}dt} - j\int_{-\infty}^{\infty}{x_o(t)\sin{\omega t}dt}
+    > \qquad \qquad + \int_{-\infty}^{\infty}{x_o(t)\cos{(2\pi ft)}dt} - j\int_{-\infty}^{\infty}{x_o(t)\sin{(2\pi ft)}dt}
     > $$
     >
     > 우함수와 기함수를 곱하면 우함수가 되는데, 우함수의 적분은 $$0$$이므로 전개식은 아래와 같이 간략화될 수 있다.
     >
     > $$
-    > X(\omega) = \int_{-\infty}^{\infty}{x_e(t)\cos{\omega t}dt} - j\int_{-\infty}^{\infty}{x_o(t)\sin{\omega t}dt}
+    > X(\omega) = \int_{-\infty}^{\infty}{x_e(t)\cos{(2\pi ft)}dt} - j\int_{-\infty}^{\infty}{x_o(t)\sin{(2\pi ft)}dt}
     > $$
     >
     > 그리고 $$x(t)$$ 함수를 복소수 $$\mathrm{Re}\left\{ x(t) \right\} + j\mathrm{Im}\left\{ x(t) \right\}$$로 대입한다.
     >
     > $$
-    > X(\omega) = \int_{-\infty}^{\infty}{\mathrm{Re}\left\{ x_e(t) \right\}\cos{\omega t}dt} - j\int_{-\infty}^{\infty}{\mathrm{Re}\left\{ x_o(t) \right\}\sin{\omega t}dt}
+    > X(\omega) = \int_{-\infty}^{\infty}{\mathrm{Re}\left\{ x_e(t) \right\}\cos{(2\pi ft)}dt} - j\int_{-\infty}^{\infty}{\mathrm{Re}\left\{ x_o(t) \right\}\sin{(2\pi ft)}dt}
     > $$
     >
     > $$
-    > \qquad \qquad + j\int_{-\infty}^{\infty}{\mathrm{Im}\left\{ x_e(t) \right\}\cos{\omega t}dt} + \int_{-\infty}^{\infty}{\mathrm{Im}\left\{ x_o(t) \right\}\sin{\omega t}dt}
+    > \qquad \qquad + j\int_{-\infty}^{\infty}{\mathrm{Im}\left\{ x_e(t) \right\}\cos{(2\pi ft)}dt} + \int_{-\infty}^{\infty}{\mathrm{Im}\left\{ x_o(t) \right\}\sin{(2\pi ft)}dt}
     > $$
     >
     > 위의 전개식에서 $$x(t)$$ 함수로부터 네 가지 경우의 수를 찾아볼 수 있다.
     >
-    > * $$x(t)$$가 실수 & 우함수 $$\longrightarrow$$ $$X(\omega)$$는 실수 & 우함수
+    > * $$x(t)$$가 실수 & 우함수 $$\longrightarrow$$ $$X(f)$$는 실수 & 우함수
     >
-    > * $$x(t)$$가 실수 & 기함수 $$\longrightarrow$$ $$X(\omega)$$는 허수 & 기함수
+    > * $$x(t)$$가 실수 & 기함수 $$\longrightarrow$$ $$X(f)$$는 허수 & 기함수
     >
-    > * $$x(t)$$가 허수 & 우함수 $$\longrightarrow$$ $$X(\omega)$$는 허수 & 우함수
+    > * $$x(t)$$가 허수 & 우함수 $$\longrightarrow$$ $$X(f)$$는 허수 & 우함수
     >
-    > * $$x(t)$$가 허수 & 기함수 $$\longrightarrow$$ $$X(\omega)$$는 실수 & 기함수
+    > * $$x(t)$$가 허수 & 기함수 $$\longrightarrow$$ $$X(f)$$는 실수 & 기함수
 
 * *[쌍대성](https://ko.wikipedia.org/wiki/쌍대성) (Duality)*
-    : 시간 영역에서 함수 $$x(t)$$가 주파수 영역에서 $$X(\omega)$$로 변환되면, 시간 영역에서 함수 $$X(t)$$는 주파수 영역에서 $$2\pi x(-\omega)$$로 변환된다.
+    : 시간 영역에서 함수 $$x(t)$$가 주파수 영역에서 $$X_f(f)$$ 혹은 $$X_\omega(\omega)$$로 변환되면, 시간 영역에서 함수 $$X_f(t)$$ 및 $$X_\omega(t)$$는 주파수 영역에서 각각 $$x(-f)$$ 혹은 $$2\pi x(-\omega)$$로 변환된다.
 
     $$
-    x(t) \leftrightarrow X(\omega) \quad \Longrightarrow \quad X(t) \leftrightarrow 2\pi x(-\omega)
+    x(t) \leftrightarrow X_f(f) = X_\omega(\omega) \quad \Longrightarrow \quad \left\{\begin{array}{ll} X_f(t) & \leftrightarrow & x(-f) \\ X_\omega(t) & \leftrightarrow & 2\pi x(-\omega) \end{array}\right.
     $$
 
     > 본 성질에 대한 증명은 푸리에 역변환인 합성 방정식으로부터 출발한다.
@@ -509,6 +525,8 @@ $$
     > $$
     > \quad \Rightarrow 2\pi x(t) = \int^{+\infty}_{-\infty}{X(\omega)e^{j\omega t}d\omega}
     > $$
+    >
+    > 한편, 주파수 $$f$$에 대한 푸리에 변환은 분수가 없으므로 쌍대성에서도 $$2\pi$$가 존재하지 않는다.
     >
     > 만일 $$t=-\mathcal{T}$$라고 가정하면 방정식은 다음과 같이 나타난다.
     >
@@ -529,47 +547,65 @@ $$
     > $$
 
 * *시간 도치 (Time inversion)*
-    : 시간 영역에서 시간 $$t$$가 반대로 도치되었을 시, 주파수 영역에서의 주파수 $$\omega$$가 도치 혹은 푸리에 변환 $$X(\omega)$$가 켤레 복소수를 갖는다.
+    : 시간 영역에서 시간 $$t$$가 반대로 도치되었을 시, 주파수 영역에서의 주파수 $$f$$가 도치 혹은 푸리에 변환 $$X(f)$$가 켤레 복소수를 갖는다.
 
     $$
-    x(-t) \quad \longleftrightarrow \quad X(-\omega) = X^*(\omega)
+    x(-t) \quad \longleftrightarrow \quad X(-f) = X^*(f)
     $$
 
     > 본 성질에 대한 증명을 위해 $$\mathcal{T} = -t$$라고 가정한다.
     >
     > $$
-    > \mathcal{F}\left\{ x(\mathcal{T}) \right\} = -\int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\omega\left(-\mathcal{T}\right)}d\mathcal{T}}
+    > \mathcal{F}\left\{ x(\mathcal{T}) \right\} = -\int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\left(-\mathcal{T}\right)}d\mathcal{T}}
     > $$
     >
     > $$
-    > \quad = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\omega\left(-\mathcal{T}\right)}d\mathcal{T}}
+    > \quad = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\left(-\mathcal{T}\right)}d\mathcal{T}}
     > $$
     >
     > 여기서 푸리에 변환의 두 가지 해석 방정식 표현을 유도할 수 있다.
     >
     > $$
-    > \quad \Rightarrow \left\{ \begin{array}{ll} \displaystyle \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\left(-\omega\right)\mathcal{T}}dt} & = X(-\omega) \\ \displaystyle \int_{-\infty}^{\infty}{x(\mathcal{T})e^{j\omega\mathcal{T}}dt} & = X^*(\omega) \end{array}\right.
+    > \quad \Rightarrow \left\{ \begin{array}{ll} \displaystyle \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\left(-2\pi f\right)\mathcal{T}}d\mathcal{T}} & = X(-f) \\ \displaystyle \int_{-\infty}^{\infty}{x(\mathcal{T})e^{j2\pi f\mathcal{T}}d\mathcal{T}} & = X^*(f) \end{array}\right.
     > $$
 
 * *시간 척도 (Time scaling)*
-    : 시간 영역에서 시간 $$t$$에 대한 척도는 주파수 영역에서 다음과 같은 푸리에 변환을 일으킨다.
+    : 시간 영역에서 시간 $$t$$에 대한 척도는 주파수 영역에서 다음과 같은 푸리에 변환이 일어난다.
 
     $$
-    x(at) \quad \longleftrightarrow \quad \frac{1}{\lvert a \rvert}X\left(\frac{\omega}{a}\right)
+    x(at) \quad \longleftrightarrow \quad \frac{1}{\lvert a \rvert}X\left(\frac{f}{a}\right)
     $$
     
     > 본 성질에 대한 증명을 위해 $$\mathcal{T} = at$$라고 가정한다.
     >
     > $$
-    > \mathcal{F}\left\{ x(\mathcal{T}) \right\} = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\omega\frac{\mathcal{T}}{a}}d\frac{\mathcal{T}}{a}}
+    > \mathcal{F}\left\{ x(\mathcal{T}) \right\} = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\frac{\mathcal{T}}{a}}d\frac{\mathcal{T}}{a}}
     > $$
     >
     > $$
-    > \quad = \frac{1}{\lvert a \rvert} \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\omega\frac{\mathcal{T}}{a}}d\mathcal{T}}
+    > \quad = \frac{1}{\lvert a \rvert} \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\frac{\mathcal{T}}{a}}d\mathcal{T}}
     > $$
     >
     > 여기서 분모 $$a$$에 절댓값이 씌워진 이유는 *시간 도치*에서 확인할 수 있듯이 무한한 범위의 적분에서 범위를 반대로 뒤집는 부호가 사실상 의미없기 때문이다. *시간 도치*의 증명과 유사한 방법으로 해석 방정식을 마무리짓는다.
     >
     > $$
-    > \quad \Rightarrow \frac{1}{\lvert a \rvert} \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\frac{\omega}{a}\mathcal{T}}dt} = \frac{1}{\lvert a \rvert} X\left(\frac{\omega}{a}\right)
+    > \quad \Rightarrow \frac{1}{\lvert a \rvert} \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi\frac{f}{a}\mathcal{T}}d\mathcal{T}} = \frac{1}{\lvert a \rvert} X\left(\frac{f}{a}\right)
     > $$
+
+* *시간 이동 (Time shifting)*
+    : 시간 영역에서 시간 $$t$$에 대한 이동은 주파수 영역에서 다음과 같은 푸리에 변환이 일어난다.
+
+    $$
+    x(t - t_0) \quad \longleftrightarrow \quad X(f)e^{-j2\pi ft_0}
+    $$
+
+    > 
+
+* *주파수 이동 (Frequency shifting)*
+    : 주파수 영역에서 시간 $$\omega$$에 대한 이동은 시간 영역에서 다음과 같은 푸리에 역변환이 일어난다.
+
+    $$
+    x(t)e^{j2\pi f_0t} \quad \longleftrightarrow \quad X(f - f_0)
+    $$
+
+    > 
