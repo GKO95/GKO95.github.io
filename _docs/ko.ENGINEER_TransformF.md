@@ -513,10 +513,42 @@ $$
     : 시간 영역에서 함수 $$x(t)$$가 주파수 영역에서 $$X_f(f)$$ 혹은 $$X_\omega(\omega)$$로 변환되면, 시간 영역에서 함수 $$X_f(t)$$ 및 $$X_\omega(t)$$는 주파수 영역에서 각각 $$x(-f)$$ 혹은 $$2\pi x(-\omega)$$로 변환된다.
 
     $$
-    x(t) \leftrightarrow X_f(f) = X_\omega(\omega) \quad \Longrightarrow \quad \left\{\begin{array}{ll} X_f(t) & \leftrightarrow & x(-f) \\ X_\omega(t) & \leftrightarrow & 2\pi x(-\omega) \end{array}\right.
+    x(t) \leftrightarrow X_f(f) = X_\omega(\omega) \quad \Longrightarrow \quad \left\{\begin{array}{ll} X_f(t) & \leftrightarrow & x(-f) \\ \\ X_\omega(t) & \leftrightarrow & 2\pi x(-\omega) \end{array}\right.
     $$
 
     > 본 성질에 대한 증명은 푸리에 역변환인 합성 방정식으로부터 출발한다.
+    >
+    > 다음은 주파수 $$f$$에 대한 푸리에 변환의 쌍대성을 보여준다.
+    >
+    > $$
+    > x(t) = \int^{+\infty}_{-\infty}{X(f)e^{j2\pi ft}df}
+    > $$
+    >
+    > $$
+    > \quad \Rightarrow x(t) = \int^{+\infty}_{-\infty}{X(f)e^{j2pi ft}df}
+    > $$
+    >
+    > 만일 $$t=-\mathcal{T}$$라고 가정하면 방정식은 다음과 같이 나타난다.
+    >
+    > $$
+    > x(-\mathcal{T}) = \int^{+\infty}_{-\infty}{X(f)e^{-j2\pi f\mathcal{T}}df}
+    > $$
+    >
+    > 여기서 $$\mathcal{T} \leftrightarrow f$$ 기호를 서로 바꾼다. 비록 각 기호가 시간과 주파수를 의미하지만, 사실 이는 통상적인 해석일 뿐이다. 단순히 수학적인 관점에서 바라보면 이들은 단지 하나의 변수에 불과하며 기호를 바꾼다고 해서 변수의 본질이 바뀌는 게 아니다.
+    >
+    > $$
+    > x(-f) = \int^{+\infty}_{-\infty}{X(\mathcal{T})e^{-j2\pi f\mathcal{T}}d\mathcal{T}}
+    > $$
+    >
+    > 마무리로 $$\mathcal{T}$$를 다시 익숙한 $$t$$로 돌려놓으면 다음 방정식이 완성된다.
+    >
+    > $$
+    > 2\pi x(-f) = \int^{+\infty}_{-\infty}{X(t)e^{-j2\pi ft}dt} = \mathcal{F}\left\{ X(t) \right\}
+    > $$
+    >
+    > ----
+    >
+    > 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 쌍대성을 보여준다.
     >
     > $$
     > x(t) = \frac{1}{2\pi}\int^{+\infty}_{-\infty}{X(\omega)e^{j\omega t}d\omega}
@@ -525,8 +557,6 @@ $$
     > $$
     > \quad \Rightarrow 2\pi x(t) = \int^{+\infty}_{-\infty}{X(\omega)e^{j\omega t}d\omega}
     > $$
-    >
-    > 한편, 주파수 $$f$$에 대한 푸리에 변환은 분수가 없으므로 쌍대성에서도 $$2\pi$$가 존재하지 않는다.
     >
     > 만일 $$t=-\mathcal{T}$$라고 가정하면 방정식은 다음과 같이 나타난다.
     >
@@ -570,7 +600,7 @@ $$
     > $$
 
 * *시간 척도 (Time scaling)*
-    : 시간 영역에서 시간 $$t$$에 대한 척도는 주파수 영역에서 다음과 같은 푸리에 변환이 일어난다.
+    : 시간 영역에서 시간 $$t$$에 대한 척도는 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     $$
     x(at) \quad \longleftrightarrow \quad \frac{1}{\lvert a \rvert}X\left(\frac{f}{a}\right)
@@ -593,19 +623,87 @@ $$
     > $$
 
 * *시간 이동 (Time shifting)*
-    : 시간 영역에서 시간 $$t$$에 대한 이동은 주파수 영역에서 다음과 같은 푸리에 변환이 일어난다.
+    : 시간 영역에서 시간 $$t$$에 대한 이동은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     $$
-    x(t - t_0) \quad \longleftrightarrow \quad X(f)e^{-j2\pi ft_0}
+    x(t - t_0) \quad \longleftrightarrow \quad \left\{\begin{array}{ll} X_f(f)e^{-j2\pi ft_0} \\ \\ X_\omega(\omega)e^{-j\omega t_0} \end{array}\right.
     $$
 
+    > 본 성질에 대한 증명을 위해 $$\mathcal{T} = t-t_0$$라고 가정한다.
+    >
+    > 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 이동을 보여준다.
+    >
+    > $$
+    > \mathcal{F}\left\{ x(\mathcal{T}) \right\} = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\left(\mathcal{T}+t_0\right)}d\mathcal{T}}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\mathcal{T}}e^{-j2\pi ft_0}d\mathcal{T}}
+    > $$
+    >
+    > 여기서 $$t_0$$는 상수이므로 이를 갖는 지수는 적분 밖으로 나올 수가 있다.
+    >
+    > $$
+    > \quad \Rightarrow e^{-j2\pi ft_0}\int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\mathcal{T}}d\mathcal{T}} = X(f)e^{-j2\pi ft_0}
+    > $$
+    >
+    > ----
     > 
+    > 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 시간 이동을 보여준다.
+    >
+    > $$
+    > \mathcal{F}\left\{ x(\mathcal{T}) \right\} = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\omega\left(\mathcal{T}+t_0\right)}d\mathcal{T}}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\omega\mathcal{T}}e^{-j\omega t_0}d\mathcal{T}}
+    > $$
+    >
+    > 여기서 $$t_0$$는 상수이므로 이를 갖는 지수는 적분 밖으로 나올 수가 있다.
+    >
+    > $$
+    > \quad \Rightarrow e^{-j\omega t_0}\int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\omega\mathcal{T}}d\mathcal{T}} = X(f)e^{-j\omega t_0}
+    > $$
 
 * *주파수 이동 (Frequency shifting)*
-    : 주파수 영역에서 시간 $$\omega$$에 대한 이동은 시간 영역에서 다음과 같은 푸리에 역변환이 일어난다.
+    : 주파수 영역에서 주파수 $$f$$ 혹은 각주파수 $$\omega$$에 대한 이동은 시간 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     $$
-    x(t)e^{j2\pi f_0t} \quad \longleftrightarrow \quad X(f - f_0)
+    \left\{\begin{array}{ll} \displaystyle x(t)e^{j2\pi f_0t} & \longleftrightarrow & X(f - f_0) \\ \\ \displaystyle x(t)e^{j\omega_0t} & \longleftrightarrow & X(\omega - \omega_0) \end{array}\right.
     $$
 
+    > 본 성질에 대한 증명을 위해 푸리에 변환 절차를 반대로 짚어본다.
+    >
+    > 다음은 주파수 $$f$$에 대한 푸리에 변환의 주파수 이동을 보여준다.
+    >
+    > $$
+    > X(f - f_0) = \int_{-\infty}^{\infty}{x(t)e^{-j2\pi \left(f - f_0\right)t}dt}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{x(t)e^{-j2\pi ft}e^{j2\pi f_0t}dt}
+    > $$
+    >
+    > 푸리에 변환의 해석 방정식과 동일한 형태로 변형한 다음에 시간 영역만을 추출한다.
+    >
+    > $$
+    > \quad \Rightarrow \int_{-\infty}^{\infty}{\left[ x(t) e^{j2\pi f_0t}\right] e^{-j2\pi ft}dt} = \mathcal{F}\left\{ x(t) e^{j2\pi f_0t} \right\}
+    > $$
+    >
+    > ----
     > 
+    > 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 주파수 이동을 보여준다.
+    >
+    > $$
+    > X(\omega - \omega_0) = \int_{-\infty}^{\infty}{x(t)e^{-j\left(\omega - \omega_0\right)t}dt}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{x(t)e^{-j\omega t}e^{j\omega_0t}dt}
+    > $$
+    >
+    > 푸리에 변환의 해석 방정식과 동일한 형태로 변형한 다음에 시간 영역만을 추출한다.
+    >
+    > $$
+    > \quad \Rightarrow \int_{-\infty}^{\infty}{\left[ x(t) e^{j\omega_0t}\right] e^{-j\omega t}dt} = \mathcal{F}\left\{ x(t) e^{j\omega_0t} \right\}
+    > $$
