@@ -13,7 +13,7 @@ order: 0xE1
 [푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 시간 $$t$$ 영역의 함수를 주파수 $$f$$ 영역의 함수로 분해하는 수학적 변환식이다. *일반적인 함수(혹은 신호)들은 다른 주파수를 갖는 사인 $$\sin$$ 및 코사인 $$\cos$$ 삼각함수들의 합으로 표현될 수 있다*는 [푸리에 해석](https://en.wikipedia.org/wiki/Fourier_analysis)(Fourier analysis)을 기반으로 수립되었다. 대표적인 예시로 신호해석에서 시간에 따라 흐르는 신호가 어떠한 주파수로 구성되어 있는지 알 수 있다.
 
 # 푸리에 변환: 급수
-[푸리에 급수](https://ko.wikipedia.org/wiki/푸리에_급수)(Fourier series)는 푸리에 변환의 시작이자 푸리에 해석을 가장 쉽게 설명한다. 단, 푸리에 급수는 일반함수가 아닌 주기함수의 푸리에 해석에 초점을 두고 있다는 제약이 있다. 주기 $$T$$ 간격으로 반복하는, 혹은 기본 주파수(fundamental frequency) $$\omega_0 = 2\pi f = \frac{2\pi}{T}$$를 갖는 주기함수 $$x_T(t)$$가 주어질 떄 푸리에 급수가 어떻게 유도되는지 삼각함수와 지수함수 형태에 대하여 각각 살펴본다.
+[푸리에 급수](https://ko.wikipedia.org/wiki/푸리에_급수)(Fourier series)는 푸리에 변환의 시작이자 푸리에 해석을 가장 쉽게 설명한다. 단, 푸리에 급수는 일반함수가 아닌 주기함수의 푸리에 해석에 초점을 두고 있다는 제약이 있다. 주기 $$T$$ 간격으로 반복하는, 혹은 기본 주파수(fundamental frequency) $$\omega_0 = 2\pi f_0 = \frac{2\pi}{T}$$를 갖는 주기함수 $$x_T(t)$$가 주어질 떄 푸리에 급수가 어떻게 유도되는지 삼각함수와 지수함수 형태에 대하여 각각 살펴본다.
 
 ## 삼각함수 형태
 삼각함수 형태의 푸리에 급수를 설명하기 위해서는 우함수와 기함수의 경우를 나누어서 서술한다.
@@ -57,7 +57,7 @@ $$
 \quad = \sum_{k=0}^{\infty}{\frac{a_k}{2} \left[ \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} }dt} + \int_{T}{\cos{\left\{ (k+n)\omega_0 t \right \} }dt} \right] }
 $$
 
-코사인 삼각함수는 한 주기동안 적분하면 동일한 너비를 같는 양($$+$$)과 음($$-$$)의 면적이 서로를 상쇄시켜 $$0$$이 되는 성질을 갖는다. 그리고 고조 주파수가 기본 주파수의 정수배가 아닌 이상 무조건 적분구간 $$T$$ 내에서는 $$\lvert k-n \rvert$$ 혹은 $$\lvert k+n \rvert$$번 반복한다.
+코사인 삼각함수는 한 주기동안 적분하면 동일한 너비를 같는 양($$+$$)과 음($$-$$)의 면적이 서로를 상쇄시켜 0이 되는 성질을 갖는다. 그리고 고조 주파수가 기본 주파수의 정수배가 아닌 이상 무조건 적분구간 $$T$$ 내에서는 $$\lvert k-n \rvert$$ 혹은 $$\lvert k+n \rvert$$번 반복한다.
 
 단, $$k=n$$일 경우에는 전혀 다른 적분 결과가 나타난다.
 
@@ -75,7 +75,7 @@ $$
 \right.
 $$
 
-사실상 첫 번째 적분식에서만 0이 아닌 다른 결과가 나왔으며, 두 번째 적분식은 다른 경우와 마찬가지로 $$0$$이 계산되었다. 후자는 어떠한 경우에서도 $$0$$이 나오기 때문에 생략하여 다음과 같이 방정식을 간략하게 변경할 수 있다.
+사실상 첫 번째 적분식에서만 0이 아닌 다른 결과가 나왔으며, 두 번째 적분식은 다른 경우와 마찬가지로 0이 계산되었다. 후자는 어떠한 경우에서도 0이 나오기 때문에 생략하여 다음과 같이 방정식을 간략하게 변경할 수 있다.
 
 $$
 \int_{T}{x_{T_e}(t)\cos{(n\omega_0 t)}dt} = \sum_{k=0}^{\infty}{\frac{a_k}{2} \left[ \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} }dt} + \int_{T}{\cos{\left\{ (k+n)\omega_0 t \right \} }dt} \right] }
@@ -99,7 +99,7 @@ $$
 \qquad \therefore a_n = \frac{2}{T}\int_{T}{x_{T_e}(t)\cos{(n\omega_0 t)}dt} \quad ...\mathrm{where} \ n \in k = \{1, 2, \cdots \}
 $$
 
-그러나 해당 푸리에 계수는 $$n=0$$인 경우에는 성립하지 않으며, 이는 "$$n$$ 배수의 고조 주파수를 갖는" 조건이 전재하였기 때문이다. $$a_0$$에 대해서는 다시 합성 방정식에서 시작하되, 주파수가 $$0$$인 관계로 훨씬 더 간단하게 유도된다.
+그러나 해당 푸리에 계수는 $$n=0$$인 경우에는 성립하지 않으며, 이는 "$$n$$ 배수의 고조 주파수를 갖는" 조건이 전재하였기 때문이다. $$a_0$$에 대해서는 다시 합성 방정식에서 시작하되, 주파수가 0인 관계로 훨씬 더 간단하게 유도된다.
 
 $$
 \int_{T}{x_{T_e}(t)\cos{(0\omega_0 t)}dt} = \sum_{k=0}^{\infty}{a_k \int_{T}{\cos{(k\omega_0 t)} \cos{(0\omega_0 t)}dt} }
@@ -154,7 +154,7 @@ $$
 \quad = \sum_{k=0}^{\infty}{\frac{b_k}{2} \left[ \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} }dt} - \int_{T}{\cos{\left\{ (k+n)\omega_0 t \right \} }dt} \right] }
 $$
 
-사인 삼각함수는 한 주기동안 적분하면 동일한 너비를 같는 양($$+$$)과 음($$-$$)의 면적이 서로를 상쇄시켜 $$0$$이 되는 성질을 갖는다. 그리고 고조 주파수가 기본 주파수의 정수배가 아닌 이상 무조건 적분구간 $$T$$ 내에서는 $$\lvert k-n \rvert$$ 혹은 $$\lvert k+n \rvert$$번 반복한다.
+사인 삼각함수는 한 주기동안 적분하면 동일한 너비를 같는 양($$+$$)과 음($$-$$)의 면적이 서로를 상쇄시켜 0이 되는 성질을 갖는다. 그리고 고조 주파수가 기본 주파수의 정수배가 아닌 이상 무조건 적분구간 $$T$$ 내에서는 $$\lvert k-n \rvert$$ 혹은 $$\lvert k+n \rvert$$번 반복한다.
 
 단, $$k=n$$일 경우에는 전혀 다른 적분 결과가 나타난다.
 
@@ -172,7 +172,7 @@ $$
 \right.
 $$
 
-사실상 첫 번째 적분식에서만 0이 아닌 다른 결과가 나왔으며, 두 번째 적분식은 다른 경우와 마찬가지로 $$0$$이 계산되었다. 후자는 어떠한 경우에서도 $$0$$이 나오기 때문에 생략하여 다음과 같이 방정식을 간략하게 변경할 수 있다.
+사실상 첫 번째 적분식에서만 0이 아닌 다른 결과가 나왔으며, 두 번째 적분식은 다른 경우와 마찬가지로 0이 계산되었다. 후자는 어떠한 경우에서도 0이 나오기 때문에 생략하여 다음과 같이 방정식을 간략하게 변경할 수 있다.
 
 $$
 \int_{T}{x_{T_o}(t)\sin{(n\omega_0 t)}dt} = \sum_{k=0}^{\infty}{\frac{b_k}{2} \left[ \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} }dt} - \int_{T}{\cos{\left\{ (k+n)\omega_0 t \right \} }dt} \right] }
@@ -368,7 +368,7 @@ $$
 \quad = \sum_{k=-\infty}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } \quad ...\mathrm{where} \ c_k = \frac{1}{T}\int_{T}{x(t) e^{-jk\omega_0 t} dt}
 $$
 
-주기함수가 무한한 주기 $$T \rightarrow \infty$$를 갖으면 절대로 반복하지 않는 비주기함수가 된다. 그러나 고조 주파수가 갖는 $$k$$에 따라 결정되는 푸리에 급수의 계수 $$c_k$$는 $$\lim_{T\rightarrow\infty}\frac{1}{T}$$으로 인해 $$0$$으로 수렴하게 된다. 그러므로 비주기함수의 푸리에 변환에서는 $$\frac{1}{T}$$ 주기 성분이 없는 새로운 푸리에 계수 $$X(k\omega_0)$$를 정의한다.
+주기함수가 무한한 주기 $$T \rightarrow \infty$$를 갖으면 절대로 반복하지 않는 비주기함수가 된다. 그러나 고조 주파수가 갖는 $$k$$에 따라 결정되는 푸리에 급수의 계수 $$c_k$$는 $$\lim_{T\rightarrow\infty}\frac{1}{T}$$으로 인해 0으로 수렴하게 된다. 그러므로 비주기함수의 푸리에 변환에서는 $$\frac{1}{T}$$ 주기 성분이 없는 새로운 푸리에 계수 $$X(k\omega_0)$$를 정의한다.
 
 $$
 x(t) = \sum_{k=-\infty}^{+\infty}{ \frac{1}{T} \left( \int_{-\infty}^{+\infty}{x(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} }
@@ -483,7 +483,7 @@ $$
     > \qquad \qquad + \int_{-\infty}^{\infty}{x_o(t)\cos{(2\pi ft)}dt} - j\int_{-\infty}^{\infty}{x_o(t)\sin{(2\pi ft)}dt}
     > $$
     >
-    > 우함수와 기함수를 곱하면 우함수가 되는데, 우함수의 적분은 $$0$$이므로 전개식은 아래와 같이 간략화될 수 있다.
+    > 우함수와 기함수를 곱하면 우함수가 되는데, 우함수의 적분은 0이므로 전개식은 아래와 같이 간략화될 수 있다.
     >
     > $$
     > X(\omega) = \int_{-\infty}^{\infty}{x_e(t)\cos{(2\pi ft)}dt} - j\int_{-\infty}^{\infty}{x_o(t)\sin{(2\pi ft)}dt}
@@ -528,19 +528,19 @@ $$
     > \quad \Rightarrow x(t) = \int^{+\infty}_{-\infty}{X(f)e^{j2pi ft}df}
     > $$
     >
-    > 만일 $$t=-\mathcal{T}$$라고 가정하면 방정식은 다음과 같이 나타난다.
+    > 만일 $$t=-\tau$$라고 가정하면 방정식은 다음과 같이 나타난다.
     >
     > $$
-    > x(-\mathcal{T}) = \int^{+\infty}_{-\infty}{X(f)e^{-j2\pi f\mathcal{T}}df}
+    > x(-\tau) = \int^{+\infty}_{-\infty}{X(f)e^{-j2\pi f\tau}df}
     > $$
     >
-    > 여기서 $$\mathcal{T} \leftrightarrow f$$ 기호를 서로 바꾼다. 비록 각 기호가 시간과 주파수를 의미하지만, 사실 이는 통상적인 해석일 뿐이다. 단순히 수학적인 관점에서 바라보면 이들은 단지 하나의 변수에 불과하며 기호를 바꾼다고 해서 변수의 본질이 바뀌는 게 아니다.
+    > 여기서 $$\tau \leftrightarrow f$$ 기호를 서로 바꾼다. 비록 각 기호가 시간과 주파수를 의미하지만, 사실 이는 통상적인 해석일 뿐이다. 단순히 수학적인 관점에서 바라보면 이들은 단지 하나의 변수에 불과하며 기호를 바꾼다고 해서 변수의 본질이 바뀌는 게 아니다.
     >
     > $$
-    > x(-f) = \int^{+\infty}_{-\infty}{X(\mathcal{T})e^{-j2\pi f\mathcal{T}}d\mathcal{T}}
+    > x(-f) = \int^{+\infty}_{-\infty}{X(\tau)e^{-j2\pi f\tau}d\tau}
     > $$
     >
-    > 마무리로 $$\mathcal{T}$$를 다시 익숙한 $$t$$로 돌려놓으면 다음 방정식이 완성된다.
+    > 마무리로 $$\tau$$를 다시 익숙한 $$t$$로 돌려놓으면 다음 방정식이 완성된다.
     >
     > $$
     > 2\pi x(-f) = \int^{+\infty}_{-\infty}{X(t)e^{-j2\pi ft}dt} = \mathcal{F}\left\{ X(t) \right\}
@@ -558,19 +558,19 @@ $$
     > \quad \Rightarrow 2\pi x(t) = \int^{+\infty}_{-\infty}{X(\omega)e^{j\omega t}d\omega}
     > $$
     >
-    > 만일 $$t=-\mathcal{T}$$라고 가정하면 방정식은 다음과 같이 나타난다.
+    > 만일 $$t=-\tau$$라고 가정하면 방정식은 다음과 같이 나타난다.
     >
     > $$
-    > 2\pi x(-\mathcal{T}) = \int^{+\infty}_{-\infty}{X(\omega)e^{-j\omega\mathcal{T}}d\omega}
+    > 2\pi x(-\tau) = \int^{+\infty}_{-\infty}{X(\omega)e^{-j\omega\tau}d\omega}
     > $$
     >
-    > 여기서 $$\mathcal{T} \leftrightarrow \omega$$ 기호를 서로 바꾼다. 비록 각 기호가 시간과 주파수를 의미하지만, 사실 이는 통상적인 해석일 뿐이다. 단순히 수학적인 관점에서 바라보면 이들은 단지 하나의 변수에 불과하며 기호를 바꾼다고 해서 변수의 본질이 바뀌는 게 아니다.
+    > 여기서 $$\tau \leftrightarrow \omega$$ 기호를 서로 바꾼다. 비록 각 기호가 시간과 주파수를 의미하지만, 사실 이는 통상적인 해석일 뿐이다. 단순히 수학적인 관점에서 바라보면 이들은 단지 하나의 변수에 불과하며 기호를 바꾼다고 해서 변수의 본질이 바뀌는 게 아니다.
     >
     > $$
-    > 2\pi x(-\omega) = \int^{+\infty}_{-\infty}{X(\mathcal{T})e^{-j\omega\mathcal{T}}d\mathcal{T}}
+    > 2\pi x(-\omega) = \int^{+\infty}_{-\infty}{X(\tau)e^{-j\omega\tau}d\tau}
     > $$
     >
-    > 마무리로 $$\mathcal{T}$$를 다시 익숙한 $$t$$로 돌려놓으면 다음 방정식이 완성된다.
+    > 마무리로 $$\tau$$를 다시 익숙한 $$t$$로 돌려놓으면 다음 방정식이 완성된다.
     >
     > $$
     > 2\pi x(-\omega) = \int^{+\infty}_{-\infty}{X(t)e^{-j\omega t}dt} = \mathcal{F}\left\{ X(t) \right\}
@@ -583,20 +583,20 @@ $$
     x(-t) \quad \longleftrightarrow \quad X(-f) = X^*(f)
     $$
 
-    > 본 성질에 대한 증명을 위해 $$\mathcal{T} = -t$$라고 가정한다.
+    > 본 성질에 대한 증명을 위해 $$\tau = -t$$라고 가정한다.
     >
     > $$
-    > \mathcal{F}\left\{ x(\mathcal{T}) \right\} = -\int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\left(-\mathcal{T}\right)}d\mathcal{T}}
+    > \mathcal{F}\left\{ x(\tau) \right\} = -\int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\left(-\tau\right)}d\tau}
     > $$
     >
     > $$
-    > \quad = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\left(-\mathcal{T}\right)}d\mathcal{T}}
+    > \quad = \int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\left(-\tau\right)}d\tau}
     > $$
     >
     > 여기서 푸리에 변환의 두 가지 해석 방정식 표현을 유도할 수 있다.
     >
     > $$
-    > \quad \Rightarrow \left\{ \begin{array}{ll} \displaystyle \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\left(-2\pi f\right)\mathcal{T}}d\mathcal{T}} & = X(-f) \\ \displaystyle \int_{-\infty}^{\infty}{x(\mathcal{T})e^{j2\pi f\mathcal{T}}d\mathcal{T}} & = X^*(f) \end{array}\right.
+    > \quad \Rightarrow \left\{ \begin{array}{ll} \displaystyle \int_{-\infty}^{\infty}{x(\tau)e^{-j\left(-2\pi f\right)\tau}d\tau} & = X(-f) \\ \displaystyle \int_{-\infty}^{\infty}{x(\tau)e^{j2\pi f\tau}d\tau} & = X^*(f) \end{array}\right.
     > $$
 
 * *시간 척도 (Time scaling)*
@@ -606,20 +606,20 @@ $$
     x(at) \quad \longleftrightarrow \quad \frac{1}{\lvert a \rvert}X\left(\frac{f}{a}\right)
     $$
     
-    > 본 성질에 대한 증명을 위해 $$\mathcal{T} = at$$라고 가정한다.
+    > 본 성질에 대한 증명을 위해 $$\tau = at$$라고 가정한다.
     >
     > $$
-    > \mathcal{F}\left\{ x(\mathcal{T}) \right\} = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\frac{\mathcal{T}}{a}}d\frac{\mathcal{T}}{a}}
+    > \mathcal{F}\left\{ x(\tau) \right\} = \int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\frac{\tau}{a}}d\frac{\tau}{a}}
     > $$
     >
     > $$
-    > \quad = \frac{1}{\lvert a \rvert} \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\frac{\mathcal{T}}{a}}d\mathcal{T}}
+    > \quad = \frac{1}{\lvert a \rvert} \int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\frac{\tau}{a}}d\tau}
     > $$
     >
     > 여기서 분모 $$a$$에 절댓값이 씌워진 이유는 *시간 도치*에서 확인할 수 있듯이 무한한 범위의 적분에서 범위를 반대로 뒤집는 부호가 사실상 의미없기 때문이다. *시간 도치*의 증명과 유사한 방법으로 해석 방정식을 마무리짓는다.
     >
     > $$
-    > \quad \Rightarrow \frac{1}{\lvert a \rvert} \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi\frac{f}{a}\mathcal{T}}d\mathcal{T}} = \frac{1}{\lvert a \rvert} X\left(\frac{f}{a}\right)
+    > \quad \Rightarrow \frac{1}{\lvert a \rvert} \int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi\frac{f}{a}\tau}d\tau} = \frac{1}{\lvert a \rvert} X\left(\frac{f}{a}\right)
     > $$
 
 * *시간 이동 (Time shifting)*
@@ -629,22 +629,22 @@ $$
     x(t - t_0) \quad \longleftrightarrow \quad \left\{\begin{array}{ll} X_f(f)e^{-j2\pi ft_0} \\ \\ X_\omega(\omega)e^{-j\omega t_0} \end{array}\right.
     $$
 
-    > 본 성질에 대한 증명을 위해 $$\mathcal{T} = t-t_0$$라고 가정한다.
+    > 본 성질에 대한 증명을 위해 $$\tau = t-t_0$$라고 가정한다.
     >
     > 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 이동을 보여준다.
     >
     > $$
-    > \mathcal{F}\left\{ x(\mathcal{T}) \right\} = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\left(\mathcal{T}+t_0\right)}d\mathcal{T}}
+    > \mathcal{F}\left\{ x(\tau) \right\} = \int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\left(\tau+t_0\right)}d\tau}
     > $$
     >
     > $$
-    > \quad = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\mathcal{T}}e^{-j2\pi ft_0}d\mathcal{T}}
+    > \quad = \int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\tau}e^{-j2\pi ft_0}d\tau}
     > $$
     >
     > 여기서 $$t_0$$는 상수이므로 이를 갖는 지수는 적분 밖으로 나올 수가 있다.
     >
     > $$
-    > \quad \Rightarrow e^{-j2\pi ft_0}\int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j2\pi f\mathcal{T}}d\mathcal{T}} = X(f)e^{-j2\pi ft_0}
+    > \quad \Rightarrow e^{-j2\pi ft_0}\int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\tau}d\tau} = X(f)e^{-j2\pi ft_0}
     > $$
     >
     > ----
@@ -652,17 +652,17 @@ $$
     > 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 시간 이동을 보여준다.
     >
     > $$
-    > \mathcal{F}\left\{ x(\mathcal{T}) \right\} = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\omega\left(\mathcal{T}+t_0\right)}d\mathcal{T}}
+    > \mathcal{F}\left\{ x(\tau) \right\} = \int_{-\infty}^{\infty}{x(\tau)e^{-j\omega\left(\tau+t_0\right)}d\tau}
     > $$
     >
     > $$
-    > \quad = \int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\omega\mathcal{T}}e^{-j\omega t_0}d\mathcal{T}}
+    > \quad = \int_{-\infty}^{\infty}{x(\tau)e^{-j\omega\tau}e^{-j\omega t_0}d\tau}
     > $$
     >
     > 여기서 $$t_0$$는 상수이므로 이를 갖는 지수는 적분 밖으로 나올 수가 있다.
     >
     > $$
-    > \quad \Rightarrow e^{-j\omega t_0}\int_{-\infty}^{\infty}{x(\mathcal{T})e^{-j\omega\mathcal{T}}d\mathcal{T}} = X(f)e^{-j\omega t_0}
+    > \quad \Rightarrow e^{-j\omega t_0}\int_{-\infty}^{\infty}{x(\tau)e^{-j\omega\tau}d\tau} = X(f)e^{-j\omega t_0}
     > $$
 
 * *주파수 이동 (Frequency shifting)*
@@ -707,3 +707,294 @@ $$
     > $$
     > \quad \Rightarrow \int_{-\infty}^{\infty}{\left[ x(t) e^{j\omega_0t}\right] e^{-j\omega t}dt} = \mathcal{F}\left\{ x(t) e^{j\omega_0t} \right\}
     > $$
+
+* *시간 [합성곱](https://ko.wikipedia.org/wiki/합성곱) (Time convolution)*
+    : 시간 영역에서 시간 $$t$$에 대한 합성곱은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
+
+    $$
+    x(t) \ast y(t) \quad \longleftrightarrow \quad X(f) Y(f)
+    $$
+
+    > 본 성질에 대한 증명을 위해 우선 합성곱에 대한 이해가 필요하다. 합성곱(convolution)이란, 두 함수 $$x(t)$$와 $$y(t)$$로부터 새로운 함수 $$x\ast y(t)$$를 합성하는 수학 연산이다.
+    >
+    > $$
+    > x(t) \ast y(t) = \int_{-\infty}^{\infty}{x(\tau)y(t-\tau)d\tau}
+    > $$
+    >
+    > 함수 $$x(\tau)$$와 $$y(\tau)$$는 단순히 함수 $$x(t)$$와 $$y(t)$$의 통상적인 시간 기호를 $$t \rightarrow \tau$$로 변경한 것에 불과하다. 여기서 함수 $$y(\tau)$$의 시간 $$\tau$$가 음의 부호를 갖는 이유는 함수 $$x(\tau)$$와 함께 시간 순차적으로 합성된다는 것을 수학적으로 표현하기 위해서이다. 그리고 시간 $$t$$는 함수 $$y(\tau)$$가 얼마나 이동하였는지 의미한다. 그러므로 합성곱의 적분식은 *두 함수간 겹치는 총 면적은 시간 $$t$$만큼 신호가 진행되었을 때 얼마인가*를 나타낸다.
+    >
+    > 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
+    >
+    > $$
+    > \mathcal{F}\left\{ x \ast y (t) \right\} = \int_{-\infty}^{\infty}{x \ast y (t) e^{-j2\pi ft}dt}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{ x(\tau) y(t-\tau) e^{-j2\pi ft}d\tau} dt}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{ x(\tau) y(t-\tau)} e^{-j2\pi ft}dt d\tau}
+    > $$
+    >
+    > 만일 $$u = t - \tau$$로 치환하면 도함수 $$du - dt$$가 나오는데, 적분 우선 순위에 의해 첫 번째 적분에서 $$\tau$$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
+    >
+    > $$
+    > \quad \Rightarrow \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{x(\tau)y(u) e^{-j2\pi f(\tau+u)} du} d\tau}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{x(\tau) e^{-j2\pi f\tau} d\tau} \cdot \int_{-\infty}^{\infty}{y(u) e^{-j2\pi fu} du}
+    > $$
+    >
+    > $$
+    > \quad = \mathcal{F}\left\{ x(\tau) \right\} \cdot \mathcal{F}\left\{ y(u) \right\}
+    > $$
+    >
+    > $$
+    > \quad = X(f)Y(f)
+    > $$
+    >
+    > ----
+    > 
+    > 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
+    >
+    > $$
+    > \mathcal{F}\left\{ x \ast y (t) \right\} = \int_{-\infty}^{\infty}{x \ast y (t) e^{-j\omega t}dt}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{ x(\tau) y(t-\tau) e^{-j\omega t}d\tau} dt}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{ x(\tau) y(t-\tau)} e^{-j\omega t}dt d\tau}
+    > $$
+    >
+    > 만일 $$u = t - \tau$$로 치환하면 도함수 $$du - dt$$가 나오는데, 적분 우선 순위에 의해 첫 번째 적분에서 $$\tau$$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
+    >
+    > $$
+    > \quad \Rightarrow \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{x(\tau)y(u) e^{-j\omega(\tau+u)} du} d\tau}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{x(\tau) e^{-j\omega \tau} d\tau} \cdot \int_{-\infty}^{\infty}{y(u) e^{-j\omega u} du}
+    > $$
+    >
+    > $$
+    > \quad = \mathcal{F}\left\{ x(\tau) \right\} \cdot \mathcal{F}\left\{ y(u) \right\}
+    > $$
+    >
+    > $$
+    > \quad = X(\omega)Y(\omega)
+    > $$
+
+* *주파수 [합성곱](https://ko.wikipedia.org/wiki/합성곱) (Frequency convolution)*
+    : 주파수 영역에서 주파수 $$f$$ 혹은 각주파수 $$\omega$$에 대한 합성곱은 시간 영역에서 다음과 같은 푸리에 변환이 구해진다.
+
+    $$
+    x(t) y(t) \quad \longleftrightarrow \quad X(f) \ast Y(f)
+    $$
+
+    > 본 성질에 대한 증명을 위해 우선 합성곱에 대한 이해가 필요하다. 합성곱(convolution)이란, 두 함수 $$x(t)$$와 $$y(t)$$로부터 새로운 함수 $$x\ast y(t)$$를 합성하는 수학 연산이다.
+    >
+    > $$
+    > x(t) \ast y(t) = \int_{-\infty}^{\infty}{x(\tau)y(t-\tau)d\tau}
+    > $$
+    >
+    > 함수 $$x(\tau)$$와 $$y(\tau)$$는 단순히 함수 $$x(t)$$와 $$y(t)$$의 통상적인 시간 기호를 $$t \rightarrow \tau$$로 변경한 것에 불과하다. 여기서 함수 $$y(\tau)$$의 시간 $$\tau$$가 음의 부호를 갖는 이유는 함수 $$x(\tau)$$와 함께 시간 순차적으로 합성된다는 것을 수학적으로 표현하기 위해서이다. 그리고 시간 $$t$$는 함수 $$y(\tau)$$가 얼마나 이동하였는지 의미한다. 그러므로 합성곱의 적분식은 *두 함수간 겹치는 총 면적은 시간 $$t$$만큼 신호가 진행되었을 때 얼마인가*를 나타낸다.
+    >
+    > 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
+    >
+    > $$
+    > \mathcal{F}\left\{ x \ast y (t) \right\} = \int_{-\infty}^{\infty}{x \ast y (t) e^{-j2\pi ft}dt}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{ x(\tau) y(t-\tau) e^{-j2\pi ft}d\tau} dt}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{ x(\tau) y(t-\tau)} e^{-j2\pi ft}dt d\tau}
+    > $$
+    >
+    > 만일 $$u = t - \tau$$로 치환하면 도함수 $$du - dt$$가 나오는데, 적분 우선 순위에 의해 첫 번째 적분에서 $$\tau$$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
+    >
+    > $$
+    > \quad \Rightarrow \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{x(\tau)y(u) e^{-j2\pi f(\tau+u)} du} d\tau}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{x(\tau) e^{-j2\pi f\tau} d\tau} \cdot \int_{-\infty}^{\infty}{y(u) e^{-j2\pi fu} du}
+    > $$
+    >
+    > $$
+    > \quad = \mathcal{F}\left\{ x(\tau) \right\} \cdot \mathcal{F}\left\{ y(u) \right\}
+    > $$
+    >
+    > $$
+    > \quad = X(f)Y(f)
+    > $$
+    >
+    > ----
+    > 
+    > 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
+    >
+    > $$
+    > \mathcal{F}\left\{ x \ast y (t) \right\} = \int_{-\infty}^{\infty}{x \ast y (t) e^{-j\omega t}dt}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{ x(\tau) y(t-\tau) e^{-j\omega t}d\tau} dt}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{ x(\tau) y(t-\tau)} e^{-j\omega t}dt d\tau}
+    > $$
+    >
+    > 만일 $$u = t - \tau$$로 치환하면 도함수 $$du - dt$$가 나오는데, 적분 우선 순위에 의해 첫 번째 적분에서 $$\tau$$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
+    >
+    > $$
+    > \quad \Rightarrow \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{x(\tau)y(u) e^{-j\omega(\tau+u)} du} d\tau}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{x(\tau) e^{-j\omega \tau} d\tau} \cdot \int_{-\infty}^{\infty}{y(u) e^{-j\omega u} du}
+    > $$
+    >
+    > $$
+    > \quad = \mathcal{F}\left\{ x(\tau) \right\} \cdot \mathcal{F}\left\{ y(u) \right\}
+    > $$
+    >
+    > $$
+    > \quad = X(\omega)Y(\omega)
+    > $$
+
+* *시간 미분 (Time differentiation)*
+    : 시간 영역에서 시간 $$t$$에 대한 미분은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
+
+    $$
+    \frac{d^nx(t)}{dt^n} \quad \leftrightarrow \quad \left\{\begin{array}{ll} \left(j2\pi f\right)^nX_f(f) \\ \\ \left(j\omega\right)^n X_\omega(\omega) \end{array}\right.
+    $$
+
+    > 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 미분을 보여주며, 증명을 위해 푸리에 역변환을 사용한다.
+    >
+    > $$
+    > x(t) = \int_{-\infty}^{\infty}{X(f)e^{j2\pi ft}df}
+    > $$
+    >
+    > 합성 방정식의 양변에 시간 $$t$$에 대한 미분을 한다.
+    >
+    > $$
+    > x'(t) = \frac{d}{dt} \left( \int_{-\infty}^{\infty}{X(f)e^{j2\pi ft}df} \right)
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{X(f)\cdot j2\pi fe^{j2\pi ft}df}
+    > $$
+    >
+    > 위의 합성 방정식을 정리하면 다음과 같다.
+    >
+    > $$
+    > \frac{dx(t)}{dt} = \int_{-\infty}^{\infty}{\left( j2\pi fX(f) \right) e^{j2\pi ft}df}
+    > $$
+    >
+    > $$
+    > \quad = \mathcal{F}^{-1}\left\{ j2\pi fX(f) \right\}
+    > $$
+    >
+    > ----
+    > 
+    > 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 시간 미분을 보여주며, 증명을 위해 푸리에 역변환을 사용한다.
+    >
+    > $$
+    > x(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty}{X(\omega)e^{j\omega t}d\omega}
+    > $$
+    >
+    > 합성 방정식의 양변에 시간 $$t$$에 대한 미분을 한다.
+    >
+    > $$
+    > x'(t) = \frac{1}{2\pi} \frac{d}{dt} \left( \int_{-\infty}^{\infty}{X(\omega)e^{j\omega t}d\omega} \right)
+    > $$
+    >
+    > $$
+    > \quad = \frac{1}{2\pi} \int_{-\infty}^{\infty}{X(\omega)\cdot j\omega e^{j\omega t}d\omega}
+    > $$
+    >
+    > 위의 합성 방정식을 정리하면 다음과 같다.
+    >
+    > $$
+    > \frac{dx(t)}{dt} = \frac{1}{2\pi} \int_{-\infty}^{\infty}{\left( j\omega X(\omega) \right) e^{j\omega t}d\omega}
+    > $$
+    >
+    > $$
+    > \quad = \mathcal{F}^{-1}\left\{ j\omegaX(\omega) \right\}
+    > $$
+
+* *주파수 미분 (Frequency differentiation)*
+    : 주파수 영역에서 주파수 $$f$$ 혹은 각주파수 $$\omega$$에 대한 미분은 시간 영역에서 다음과 같은 푸리에 변환이 구해진다.
+
+    $$
+    \left\{\begin{array}{ll} \displaystyle 2\pi t x(t)e & \longleftrightarrow & jX(f) \\ \\ \displaystyle t x(t) & \longleftrightarrow & jX(\omega) \end{array}\right.
+    $$
+
+    > 다음은 주파수 $$f$$에 대한 푸리에 변환의 주파수 미분을 보여주며, 증명을 위해 푸리에 변환을 사용한다.
+    >
+    > $$
+    > X(f) = \int_{-\infty}^{\infty}{x(t)e^{-j2\pi ft}dt}
+    > $$
+    >
+    > 해석 방정식의 양변에 시간 $$t$$에 대한 미분을 한다.
+    >
+    > $$
+    > X'(f) = \frac{d}{df} \left( \int_{-\infty}^{\infty}{x(t)e^{-j2\pi ft}dt} \right)
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{x(t)\cdot \left(-j2\pi t\right)e^{j2\pi ft}dt}
+    > $$
+    >
+    > 위의 해석 방정식을 정리하면 다음과 같다.
+    >
+    > $$
+    > \frac{dX(f)}{df} = \int_{-\infty}^{\infty}{\left( j2\pi tx(t) \right) e^{j2\pi ft}dt}
+    > $$
+    >
+    > $$
+    > \quad = \mathcal{F}\left\{ j2\pi tx(t) \right\}
+    > $$
+    >
+    > ----
+    > 
+    > 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 주파수 미분을 보여주며, 증명을 위해 푸리에 변환을 사용한다.
+    >
+    > $$
+    > X(\omega) = \int_{-\infty}^{\infty}{x(t)e^{-j\omega t}dt}
+    > $$
+    >
+    > 해석 방정식의 양변에 시간 $$t$$에 대한 미분을 한다.
+    >
+    > $$
+    > X'(\omega) = \frac{d}{df} \left( \int_{-\infty}^{\infty}{x(t)e^{-j\omega t}dt} \right)
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{x(t)\cdot \left(-jt\right)e^{j\omega t}dt}
+    > $$
+    >
+    > 위의 해석 방정식을 정리하면 다음과 같다.
+    >
+    > $$
+    > \frac{dX(\omega)}{d\omega} = \int_{-\infty}^{\infty}{\left( jtx(t) \right) e^{j\omega t}dt}
+    > $$
+    >
+    > $$
+    > \quad = \mathcal{F}\left\{ j tx(t) \right\}
+    > $$
+
+* *시간 적분 (Time integration)*
+    : 시간 영역에서 시간 $$t$$에 대한 적분은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
+
+    $$
+    \int_{-\infty}^{t}{x(t)dt} \quad \longleftrightarrow \quad 
+    $$
