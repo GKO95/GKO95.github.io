@@ -721,7 +721,7 @@ $$
     > x(t) \ast y(t) = \int_{-\infty}^{\infty}{x(\tau)y(t-\tau)d\tau}
     > $$
     >
-    > 함수 $$x(\tau)$$와 $$y(\tau)$$는 단순히 함수 $$x(t)$$와 $$y(t)$$의 통상적인 시간 기호를 $$t \rightarrow \tau$$로 변경한 것에 불과하다. 여기서 함수 $$y(\tau)$$의 시간 $$\tau$$가 음의 부호를 갖는 이유는 함수 $$x(\tau)$$와 함께 시간 순차적으로 합성된다는 것을 수학적으로 표현하기 위해서이다. 그리고 시간 $$t$$는 함수 $$y(\tau)$$가 얼마나 이동하였는지 의미한다. 그러므로 합성곱의 적분식은 *두 함수간 겹치는 총 면적은 시간 $$t$$만큼 신호가 진행되었을 때 얼마인가*를 나타낸다.
+    > 이에 대한 내용은 차후 문서에 다룰 예정이다.
     >
     > 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
     >
@@ -802,7 +802,7 @@ $$
     > x(t) \ast y(t) = \int_{-\infty}^{\infty}{x(\tau)y(t-\tau)d\tau}
     > $$
     >
-    > 함수 $$x(\tau)$$와 $$y(\tau)$$는 단순히 함수 $$x(t)$$와 $$y(t)$$의 통상적인 시간 기호를 $$t \rightarrow \tau$$로 변경한 것에 불과하다. 여기서 함수 $$y(\tau)$$의 시간 $$\tau$$가 음의 부호를 갖는 이유는 함수 $$x(\tau)$$와 함께 시간 순차적으로 합성된다는 것을 수학적으로 표현하기 위해서이다. 그리고 시간 $$t$$는 함수 $$y(\tau)$$가 얼마나 이동하였는지 의미한다. 그러므로 합성곱의 적분식은 *두 함수간 겹치는 총 면적은 시간 $$t$$만큼 신호가 진행되었을 때 얼마인가*를 나타낸다.
+    > 이에 대한 내용은 차후 문서에 다룰 예정이다.
     >
     > 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
     >
@@ -874,7 +874,7 @@ $$
     : 시간 영역에서 시간 $$t$$에 대한 미분은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     $$
-    \frac{d^nx(t)}{dt^n} \quad \leftrightarrow \quad \left\{\begin{array}{ll} \left(j2\pi f\right)^nX_f(f) \\ \\ \left(j\omega\right)^n X_\omega(\omega) \end{array}\right.
+    \frac{d^nx(t)}{dt^n} \quad \longleftrightarrow \quad \left\{\begin{array}{ll} \left(j2\pi f\right)^nX_f(f) \\ \\ \left(j\omega\right)^n X_\omega(\omega) \end{array}\right.
     $$
 
     > 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 미분을 보여주며, 증명을 위해 푸리에 역변환을 사용한다.
@@ -928,14 +928,14 @@ $$
     > $$
     >
     > $$
-    > \quad = \mathcal{F}^{-1}\left\{ j\omegaX(\omega) \right\}
+    > \quad = \mathcal{F}^{-1}\left\{ j\omega X(\omega) \right\}
     > $$
 
 * *주파수 미분 (Frequency differentiation)*
     : 주파수 영역에서 주파수 $$f$$ 혹은 각주파수 $$\omega$$에 대한 미분은 시간 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     $$
-    \left\{\begin{array}{ll} \displaystyle 2\pi t x(t)e & \longleftrightarrow & jX(f) \\ \\ \displaystyle t x(t) & \longleftrightarrow & jX(\omega) \end{array}\right.
+    \left\{\begin{array}{ll} \displaystyle 2\pi t x(t)e & \longleftrightarrow & jX_f(f) \\ \\ \displaystyle t x(t) & \longleftrightarrow & jX_\omega(\omega) \end{array}\right.
     $$
 
     > 다음은 주파수 $$f$$에 대한 푸리에 변환의 주파수 미분을 보여주며, 증명을 위해 푸리에 변환을 사용한다.
@@ -992,9 +992,86 @@ $$
     > \quad = \mathcal{F}\left\{ j tx(t) \right\}
     > $$
 
+* *시간 부정적분 (Time indefinite-integration)*
+    : 시간 영역에서 시간 $$t$$에 대한 무한한 범위 $$(-\infty, \infty)$$에서의 부정적분, 즉 시간 영역의 총 면적은 주파수 영역에서 다음과 같은 계산된다.
+
+    $$
+    \int_{-\infty}^{\infty}{x(t)dt} \quad = \quad X(0)
+    $$
+    
+    > 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 영역 함수의 총 면적을 보여주며, 각주파수 $$\omega$$에 대한 푸리에 변환도 동일한 방법으로 증명할 수 있다. 아래는 푸리에 변환을 나타내는 해석 방정식이다.
+    >
+    > $$
+    > X(f) = \int_{-\infty}^{\infty}{x(t)e^{-j2\pi ft}dt}
+    > $$
+    >
+    > 여기에서 $$f=0$$이면 아래의 식이 완성된다.
+    >
+    > $$
+    > X(0) = \int_{-\infty}^{\infty}{x(t)e^{-j2\pi 0 t}dt}
+    > $$
+    > 
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{x(t)dt}
+    > $$
+
+* *주파수 부정적분 (Frequency indefinite-integration)*
+    : 주파수 영역에서 주파수 $$f$$ 혹은 각주파수 $$\omega$$에 대한 무한한 범위 $$(-\infty, \infty)$$에서의 부정적분, 즉 주파수 영역의 총 면적은 시간 영역에서 다음과 같이 계산된다.
+
+    $$
+    x(0) \quad = \quad \left\{\begin{array}{ll} \displaystyle \int_{-\infty}^{\infty}{X_f(f)df} \\ \\ \displaystyle \int_{-\infty}^{\infty}{X_\omega(\omega)d\omega} \end{array}\right.
+    $$
+
+    > 다음은 주파수 $$f$$에 대한 푸리에 변환의 주파수 영역 함수의 총 면적을 보여주며, 각주파수 $$\omega$$에 대한 푸리에 변환도 동일한 방법으로 증명할 수 있다. 아래는 푸리에 역변환을 나타내는 해석 방정식이다.
+    >
+    > $$
+    > x(t) = \int_{-\infty}^{\infty}{X(f)e^{j2\pi ft}df}
+    > $$
+    >
+    > 여기에서 $$t=0$$이면 아래의 식이 완성된다.
+    >
+    > $$
+    > x(0) = \int_{-\infty}^{\infty}{X(f)e^{-j2\pi f 0}df}
+    > $$
+    > 
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{X(f)df}
+    > $$
+
 * *시간 적분 (Time integration)*
     : 시간 영역에서 시간 $$t$$에 대한 적분은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     $$
-    \int_{-\infty}^{t}{x(t)dt} \quad \longleftrightarrow \quad 
+    \int_{-\infty}^{t}{x(\tau)d\tau} \quad \longleftrightarrow \quad \left\{\begin{array}{ll} \displaystyle \frac{1}{j2\pi f}X_f(f) + \frac{1}{2}X_f(0)\delta(f) \\ \\ \displaystyle \frac{1}{j\omega}X_\omega(\omega) + \frac{1}{2}X_\omega(0)\delta(\omega) \end{array}\right.
     $$
+
+    > 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 적분을 보여주며, 각주파수 $$\omega$$에 대한 푸리에 변환도 동일한 방법으로 증명할 수 있다. 위의 적분은 아래와 같은 합성곱으로 표현이 가능하다.
+    >
+    > $$
+    > \int_{-\infty}^{t}{x(\tau)d\tau} = \int_{-\infty}^{\infty}{x(\tau)u(t-\tau)d\tau}
+    > $$
+    >
+    > 여기서 $$u(t-\tau)$$는 [단위 계단 함수](https://ko.wikipedia.org/wiki/단위_계단_함수)(unit step function)로 아래와 같은 성질을 갖는다.
+    >
+    > $$
+    > u(t-\tau) = \left\{\begin{array}{rrr} 1, & \quad \tau < t \\ \frac{1}{2}, & \quad \tau = t \\ 0, & \quad \tau > t \end{array}\right.
+    > $$
+    >
+    > 그러므로 합성곱에 대한 푸리에 변환에 의해 시간 적분은 다음과 같이 표현될 수 있다.
+    >
+    > $$
+    > \mathcal{F}\left\{ \int_{-\infty}^{t}{x(\tau)d\tau} \right\} = \mathcal{F}\left\{ x \ast u(t) \right\}
+    > $$
+    >
+    > $$
+    > \quad = X(f) \left[ \frac{1}{j2\pi f} + \frac{1}{2}\delta(f) \right]
+    > $$
+    >
+    > $$
+    > \quad = \frac{1}{j2\pi f}X(f) + \frac{1}{2}X(0)\delta(f)
+    > $$
+    >
+    > 이는 단위 계단 함수 $$u(t-\tau)$$와 [델타 함수](https://ko.wikipedia.org/wiki/디랙_델타_함수) $$\delta(f)$$의 푸리에 변환에 의한 것으로, 해당 두 함수의 푸리에 변환은 차후에 설명할 예정이다.
+
+* *[파스발 정리](https://en.wikipedia.org/wiki/Parseval%27s_theorem) (Parseval's theorem)*
+    : 일명 레일레이의 에너지 정리(Rayleigh's energy theorem)라고도 부르며, 
