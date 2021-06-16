@@ -1074,4 +1074,46 @@ $$
     > 이는 단위 계단 함수 $$u(t-\tau)$$와 [델타 함수](https://ko.wikipedia.org/wiki/디랙_델타_함수) $$\delta(f)$$의 푸리에 변환에 의한 것으로, 해당 두 함수의 푸리에 변환은 차후에 설명할 예정이다.
 
 * *[파스발 정리](https://en.wikipedia.org/wiki/Parseval%27s_theorem) (Parseval's theorem)*
-    : 일명 레일레이의 에너지 정리(Rayleigh's energy theorem)라고도 부르며, 
+    : 일명 레일레이의 에너지 정리(Rayleigh's energy theorem)라고도 부르며, 이는 시간 영역에서의 에너지는 주파수 영역에서의 에너지와 동일함을 보여준다.
+
+    $$
+    E = \int_{-\infty}^{\infty}{\lvert x(t) \rvert^2dt} = \left\{\begin{array}{ll} \displaystyle \int_{-\infty}^{\infty}{\lvert X_f(f) \rvert^2df} \\ \\ \displaystyle \frac{1}{2\pi}\int_{-\infty}^{\infty}{\lvert X_\omega(\omega) \rvert^2d\omega} \end{array}\right.
+    $$
+
+    > 파스발 정리에 앞서, 시간 영역에서 신호 $$x(t)$$의 에너지는 다음과 같이 계산된다.
+    >
+    > $$
+    > E = \lim_{T\rightarrow\infty}\int_{T}{\lvert x(t) \rvert^2dt}
+    > $$
+    >
+    > 여기서 $$\lvert x(t) \rvert^2$$, 즉 복소함수 $$x(t)$$의 절댓값은 켤레복소함수 $$x^*(t)$$와의 곱으로 계산된다.
+    >
+    > $$
+    > \quad \Rightarrow \int_{-\infty}^{\infty}{\lvert x(t) \rvert^2dt} = \int_{-\infty}^{\infty}{x(t)x^*(t)dt}
+    > $$
+    >
+    > 여기서 켤레복소함수 $$x(t)$$에 대해서만 푸리에 역변환을 대입시킨다.
+    >
+    > $$
+    > \quad \Rightarrow \int_{-\infty}^{\infty}{x(t) \cdot \mathcal{F}^{-1}\left\{X^*(-f)\right\}dt} = \int_{-\infty}^{\infty}{x(t) \left[ \int_{-\infty}^{\infty}{X^*(-f)e^{j2\pi ft}df} \right] dt}
+    > $$
+    > 
+    > 주파수에 대해 $$-f=\lambda$$로 치환한다. 그러면 $$df=-d\lambda$$로 변하고 범위에도 영향을 미친다.
+    >
+    > $$
+    > \quad \Rightarrow \int_{-\infty}^{\infty}{x(t) \left[ -\int_{\infty}^{-\infty}{X^*(\lambda)e^{-j2\pi\lambda t}d\lambda} \right] dt} = \int_{-\infty}^{\infty}{x(t) \left[ \int_{-\infty}^{\infty}{X^*(\lambda)e^{-j2\pi\lambda t}d\lambda} \right] dt}
+    > $$
+    >
+    > 함수 $$X^*(\lambda)$$와 $$x(t)$$는 순수히 각각 주파수 $$\lambda$$ 및 시간 $$t$$에만 의존하기 때문에 적분 순서를 쉽게 바꿀 수 있다.
+    >
+    > $$
+    > \quad \Rightarrow \int_{-\infty}^{\infty}{X^*(\lambda) \left[ \int_{-\infty}^{\infty}{x(t)e^{-j2\pi\lambda t}dt} \right] d\lambda} = \int_{-\infty}^{\infty}{X^*(\lambda) \cdot \mathcal{F}\left\{ x(t) \right\} d\lambda}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\infty}^{\infty}{X^*(\lambda) X(\lambda) d\lambda}
+    > $$
+    >
+    > $$
+    > \qquad \therefore E = \int_{-\infty}^{\infty}{ \lvert X(\lambda) \rvert^2 d\lambda}
+    > $$
