@@ -426,7 +426,28 @@ $$
 \right.
 $$
 
-### 푸리에 변환 성질
+### 신호의 변환
+다음은 시간 영역의 특정 신호들에 대한 주파수 영역으로의 푸리에 변환쌍이다. 이들은 신호해석 및 분석에서 흔히 사용되므로 숙지하기를 권장한다.
+
+* *[단위 임펄스](https://ko.wikipedia.org/wiki/디랙_델타_함수) (Unit impulse function)*
+
+* *[상수](https://ko.wikipedia.org/wiki/수학_상수) (Constant)*
+
+* *[지수함수](https://ko.wikipedia.org/wiki/지수_함수) (Exponential)*
+
+* *[정현파](https://ko.wikipedia.org/wiki/삼각함수) (Sinusoidal)*
+
+* *[부호 함수](https://ko.wikipedia.org/wiki/부호함수) (Signum function)*
+
+* *[단위 계단 함수](https://ko.wikipedia.org/wiki/단위_계단_함수) (Unit step function)*
+
+* *[구형 펄스](https://ko.wikipedia.org/wiki/구형함수) (Rectangular pulse)*
+
+* *[삼각 펄스](https://ko.wikipedia.org/wiki/삼각형함수) (Triangular pulse)*
+
+* *[가우스 함수](https://ko.wikipedia.org/wiki/가우스_함수) (Gaussian function)*
+
+### 변환의 성질
 > *참조: [위키백과 - 푸리에 변환 성질](https://en.wikipedia.org/wiki/Fourier_transform#Properties_of_the_Fourier_transform)*
 
 푸리에 변환은 위에서 유도된 방정식을 토대로 반드시 아래의 성질들을 만족한다. 다음은 푸리에 변환에서 매우 핵심되는 성질들로 반드시 숙지하도록 한다.
