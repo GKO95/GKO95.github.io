@@ -1315,16 +1315,94 @@ $$
     > $$
 
 * *[단위 계단 함수](https://ko.wikipedia.org/wiki/단위_계단_함수) (Unit step function)*
-    : 
+    : 헤비사이드 계단 함수(Heaviside step function) $$u(t-a)$$는 $$t > a$$이면 1, 그리고 $$t < a$$이면 0인 함수이다.
 
     $$
-    
+    u(t) \quad \longleftrightarrow \quad \frac{1}{2}\delta(t) + \frac{1}{j2\pi f}
     $$
     
+    > 시그넘 함수의 진폭을 $$\frac{1}{2}$$ 줄인 다음에 $$y$$ 축으로 $$\frac{1}{2}$$만큼 이동시키면 단위 계단 함수가 된다.
     >
+    > $$
+    > u(t) = \frac{1}{2}\mathrm{sgn}(t) + \frac{1}{2}
+    > $$
+    >
+    > 위의 식에 푸리에 변환을 적용한다.
+    >
+    > $$
+    > \mathcal{F}\left\{ u(t) \right\} = \mathcal{F}\left\{ \frac{1}{2}\mathrm{sgn}(t) \right\} + \mathcal{F}\left\{ \frac{1}{2} \right\}
+    > $$
+    >
+    > $$
+    > \quad = \frac{1}{2}\left[ \frac{1}{j\pi f} \right] + \frac{1}{2}\delta(f)
+    > $$
+    >
+    > $$
+    > \quad = \frac{1}{2}\delta(f) + \frac{1}{j2\pi f}
+    > $$
 
 * *[구형 펄스](https://ko.wikipedia.org/wiki/구형함수) (Rectangular pulse)*
+    : 구형 함수 $$\operatorname{rect}(\frac{t}{a})$$ 혹은 $$\Pi(\frac{t}{a})$$는 높이 1에 너비 $$a$$의 사각형을 그리는 함수이다.
+
+    $$
+    \Pi\left(\textstyle \frac{t}{a}\right) \quad \longleftrightarrow \quad a \operatorname{sinc}{af}
+    $$
+    
+    > 구형 펄스은 범위 $$(-\frac{a}{2},+\frac{a}{2})$$ 이외에는 모두 0을 갖기 떄문에 푸리에 변환의 해석 방정식을 다음과 같이 나타낼 수 있다.
+    >
+    > $$
+    > \mathcal{F}\left\{ \Pi\left(\textstyle\frac{t}{a}\right)\right\} = \int_{-\infty}^{\infty}{\Pi\left(\textstyle\frac{t}{a}\right)e^{-j2\pi ft}dt}
+    > $$
+    >
+    > $$
+    > \quad = \int_{-\frac{a}{2}}^{\frac{a}{2}}{e^{-j2\pi ft}dt}
+    > $$
+    >
+    > 정적분을 계산하면 다음과 같은 수식이 구해진다.
+    >
+    > $$
+    > \quad \Rightarrow \frac{1}{-j2\pi f}\left( e^{-j\pi fa} - e^{ja\pi f} \right)
+    > $$
+    >
+    > $$
+    > \quad = \frac{1}{-j2\pi f}\left( -j2\sin{a\pi f} \right)
+    > $$
+    >
+    > $$
+    > \quad = a \frac{\sin{a\pi f}}{a\pi f}
+    > $$
+    >
+    > 여기서 분수는 간략히 [싱크 함수](https://ko.wikipedia.org/wiki/싱크함수)(sinc function) $$\operatorname{sinc}$$로 표현된다.
+    >
+    > $$
+    > \qquad \therefore \mathcal{F}\left\{ \Pi\left(\textstyle\frac{t}{a}\right)\right\} = a \operatorname{sinc}{af}
+    > $$
 
 * *[삼각 펄스](https://ko.wikipedia.org/wiki/삼각형함수) (Triangular pulse)*
+    : 삼각형 함수 $$\operatorname{tri}(\frac{t}{a})$$ 혹은 $$\Lambda(\frac{t}{a})$$는 높이 1에 너비 $$2a$$의 삼각형을 그리는 함수이다.
+
+    $$
+    \Lambda\left(\textstyle \frac{t}{a}\right) \quad \longleftrightarrow \quad a^2 \operatorname{sinc}^2{af}
+    $$
+    
+    > 삼각형 펄스는 구형 펄스의 합성곱으로 표현된다.
+    >
+    > $$
+    > \Lambda\left(\textstyle \frac{t}{a}\right) = \Pi\left(\textstyle \frac{t}{a}\right) \ast \Pi\left(\textstyle \frac{t}{a}\right)
+    > $$
+    >
+    > 푸리에 변환 성질에 의하면 시간 영역에서의 합성곱은 주파수 영역에서 곱셈으로 나타난다. 그러므로 주파수 영역에서의 삼각형 펄스는 다음과 같이 간단히 구해진다.
+    >
+    > $$
+    > \mathcal{F}\left\{ \Lambda\left( \textstyle \frac{t}{a}\right)\right\} = \mathcal{F}\left\{ \Pi\left(\textstyle \frac{t}{a}\right) \ast \Pi\left(\textstyle \frac{t}{a}\right) \right\}
+    > $$
+    >
+    > $$
+    > \quad = a \operatorname{sinc}{af} \times a \operatorname{sinc}{af}
+    > $$
+    >
+    > $$
+    > \quad = a^2 \operatorname{sinc}^2{af}
+    > $$
 
 * *[가우스 함수](https://ko.wikipedia.org/wiki/가우스_함수) (Gaussian function)*
