@@ -74,13 +74,16 @@ $(`#toc-source`).click(function() {
 $(`#toc-content`).append($(`<div id="toc-sub" style="height: ${$(`#docs-related`).length > 0 ? "calc(100% - (64px + 16px))" : "100%"}; overflow: auto;"></div>`))
 $(`article > :header`).each(function() {
     let headerTag = $(this).prop("tagName")
-    let headerURL = $(this).attr("id")
-    let headerTxt = $(`<span style="cursor: pointer;">${$(this).html()}</span>`).click(function() {
-        location.href = `#${headerURL}`
-        $('#toc-container').fadeOut("fast")
-        $(`#toc-button`).show("fast")
-    })
-    $(`#toc-content > #toc-sub`).append($(`<${headerTag}></${headerTag}>`).append(headerTxt))
+    if ((headerTag == 'H1') || (headerTag == 'H2') || (headerTag == 'H3'))
+    {
+        let headerURL = $(this).attr("id")
+        let headerTxt = $(`<span style="cursor: pointer;">${$(this).html()}</span>`).click(function() {
+            location.href = `#${headerURL}`
+            $('#toc-container').fadeOut("fast")
+            $(`#toc-button`).show("fast")
+        })
+        $(`#toc-content > #toc-sub`).append($(`<${headerTag}></${headerTag}>`).append(headerTxt))
+    }
 })
 
 $(`#toc-content > #toc-sub > h1`).each(function() {
