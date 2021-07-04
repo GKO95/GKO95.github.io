@@ -573,285 +573,79 @@ $$
 * *[단위 임펄스](https://ko.wikipedia.org/wiki/디랙_델타_함수) (Unit impulse)*
     : 일명 디렉 델타 함수(Dirac delta function) $$\delta(t-a)$$는 총 면적이 1인 함수이나, $$t=a$$에서만 면적을 가지므로 $$\delta(0) = \infty$$이고 나머지는 0을 갖는 함수이다.
 
-    $$
-    \delta(t) \quad \longleftrightarrow \quad 1
-    $$
-
-    > 우선 단위 임펄스 신호에 대한 푸리에 변환은 다음과 같다.
+    > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-단위-임펄스">[증명]</a></sub></div>
     >
     > $$
-    > \mathcal{F}\left\{ \delta(t) \right\} = \int_{-\infty}^{\infty}{\delta(t)e^{-j2\pi ft}dt}
-    > $$
-    >
-    > 디렉 델타 함수 $$\delta(t-a)$$는 $$t=a$$ 이외에는 모두 0인 함수이다. 그러므로 푸리에 해석 방정식에서 실질적으로 의미있는 적분 범위는 아래와 같다.
-    >
-    > $$
-    > \quad \Rightarrow \int_{-0}^{+0}{\delta(t)e^{-j2\pi ft}dt}
-    > $$
-    >
-    > 그리고 디렉 델타 함수 $$\delta(t-a)$$는 $$t=a$$일 때 항상 적분값이 1이므로 해석 방정식은 다음과 같이 간략화된다.
-    >
-    > $$
-    > \quad \Rightarrow \int_{-0}^{+0}{e^{-j2\pi ft}dt} = \left. e^{-j2\pi ft} \right|_{t=0} = 1
+    > \delta(t) \quad \longleftrightarrow \quad 1
     > $$
 
 * *[직류신호](https://ko.wikipedia.org/wiki/수학_상수) (DC signal)*
     : 일정한 값을 유지하면서 주파수가 없는 상수 신호를 가리킨다.
 
-    $$
-    1 \quad \longleftrightarrow \quad \left\{\begin{array}{ll} \displaystyle \delta(f) \\ \\ \displaystyle 2\pi \delta(\omega) \end{array}\right.
-    $$
-
-    > 우선 단위 임펄스 신호에 대한 푸리에 역변환은 다음과 같다.
+    > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-직류신호">[증명]</a></sub></div>
     >
     > $$
-    > \mathcal{F}^{-1}\left\{ \delta(f) \right\} = \int_{-\infty}^{\infty}{\delta(f)e^{j2\pi ft}df}
-    > $$
-    >
-    > 디렉 델타 함수 $$\delta(f-a)$$는 $$f=a$$ 이외에는 모두 0인 함수이다. 그러므로 푸리에 해석 방정식에서 실질적으로 의미있는 적분 범위는 아래와 같다.
-    >
-    > $$
-    > \quad \Rightarrow \int_{-0}^{+0}{\delta(f)e^{j2\pi ft}df}
-    > $$
-    >
-    > 그리고 디렉 델타 함수 $$\delta(t-a)$$는 $$t=a$$일 때 항상 적분값이 1이므로 해석 방정식은 다음과 같이 간략화된다.
-    >
-    > $$
-    > \quad \Rightarrow \int_{-0}^{+0}{e^{j2\pi ft}df} = \left. e^{-j2\pi ft} \right|_{f=0} = 1
+    > 1 \quad \longleftrightarrow \quad \left\{\begin{array}{ll} \displaystyle \delta(f) \\ \\ \displaystyle 2\pi \delta(\omega) \end{array}\right.
     > $$
 
 * *[복소 지수함수](https://ko.wikipedia.org/wiki/지수_함수) (Complex exponential)*
-    : 오일러 공식에 비롯된 $$e^{\pm jt} = \cos{t} \pm j\sin{t}$$ 형태를 복소 지수함수라고 부른다. 이와 유사한 내용으로 푸리에 변환의 주파수 이동 성질을 참고한다.
+    : 오일러 공식에 비롯된 $$e^{\pm jt} = \cos{t} \pm j\sin{t}$$ 형태를 복소 지수함수라고 부른다. 이와 유사한 내용으로 푸리에 변환의 주파수 이동 성질을 참고한다. 
 
-    $$
-    \left\{\begin{array}{ll} \displaystyle e^{j2\pi f_0t} & \longleftrightarrow & \delta(f-f_0) \\ \\ \displaystyle e^{j\omega_0t} & \longleftrightarrow & \delta(\omega-\omega_0) \end{array}\right.
-    $$
-    
-    > 복소 지수함수의 푸리에 변환은 다음과 같이 서술된다.
-    >
+    > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-복소-지수함수">[증명]</a></sub></div>
+    > 
     > $$
-    > \mathcal{F}\left\{ e^{j2\pi f_0t} \right\} = \int_{-\infty}^{\infty}{e^{j2\pi f_0t} \cdot e^{-j2\pi ft}dt}
-    > $$
-    >
-    > $$
-    > \quad = \int_{-\infty}^{\infty}{1 \cdot e^{-j2\pi (f-f_0)t}dt}
-    > $$
-    >
-    > 시간 영역에서의 직류신호에 대한 푸리에 변환과 동일하나, 주파수만 $$f-f_0$$으로 이동되었을 뿐이다.
-    >
-    > $$
-    > \quad \Rightarrow \delta(f-f_0)
+    > \left\{\begin{array}{ll} \displaystyle e^{j2\pi f_0t} & \longleftrightarrow & \delta(f-f_0) \\ \\ \displaystyle e^{j\omega_0t} & \longleftrightarrow & \delta(\omega-\omega_0) \end{array}\right.
     > $$
 
 * *[정현파](https://ko.wikipedia.org/wiki/삼각함수) (Sinusoidal)*
     : 복소 지수함수가 실수 및 허수 정현파로 구성된 것을 이용하여, 정현파에 대한 푸리에 변환 또한 복소 지수함수로 나타낸다.
 
-    $$
-    \left\{\begin{array}{ll} \displaystyle \cos{2\pi f_0t} & \longleftrightarrow & \displaystyle \frac{1}{2}\left[ \delta(f-f_0) + \delta(f+f_0) \right] \\ \\ \displaystyle \cos{2\omega_0t} & \longleftrightarrow & \displaystyle \frac{1}{2}\left[ \delta(\omega-\omega_0) + \delta(\omega+\omega_0) \right] \end{array}\right.
-    $$
-
-    > 오일러 공식을 통해 정현파를 지수함수로 표현하여 증명한다.
+    > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-정현파">[증명]</a></sub></div>
     >
     > $$
-    > \mathcal{F}\left\{ \cos{2\pi f_0t} \right\} = \int_{-\infty}^{\infty}{\cos{(2\pi f_0t)} e^{-j2\pi ft}dt}
+    > \left\{\begin{array}{ll} \displaystyle \cos{2\pi f_0t} & \longleftrightarrow & \displaystyle \frac{1}{2}\left[ \delta(f-f_0) + \delta(f+f_0) \right] \\ \\ \displaystyle \cos{2\omega_0t} & \longleftrightarrow & \displaystyle \frac{1}{2}\left[ \delta(\omega-\omega_0) + \delta(\omega+\omega_0) \right] \end{array}\right.
     > $$
     >
-    > $$
-    > \quad = \int_{-\infty}^{\infty}{\frac{1}{2}\left[ e^{j2\pi f_0t} + e^{-j2\pi f_0t} \right] e^{-j2\pi ft}dt}
-    > $$
+    > ----
     >
     > $$
-    > \quad = \frac{1}{2}\int_{-\infty}^{\infty}{e^{j2\pi f_0t} e^{-j2\pi ft}dt} + \frac{1}{2}\int_{-\infty}^{\infty}{e^{-j2\pi f_0t} e^{-j2\pi ft}dt}
-    > $$
-    >
-    > 여기서 복소 지수함수의 푸리에 변환을 사용하여 주파수 영역에 대하여 구한다.
-    >
-    > $$
-    > \quad \Rightarrow \frac{1}{2}\delta(f-f_0) + \frac{1}{2}\delta(f+f_0)
-    > $$
-    >
-    > $$
-    > \quad = \frac{1}{2}\left[ \delta(f-f_0) + \delta(f+f_0) \right]
-    > $$
-
-    $$
-    \left\{\begin{array}{ll} \displaystyle \sin{2\pi f_0t} & \longleftrightarrow & \displaystyle \frac{1}{2j}\left[ \delta(f-f_0) - \delta(f+f_0) \right] \\ \\ \displaystyle \sin{2\omega_0t} & \longleftrightarrow & \displaystyle \frac{1}{2j}\left[ \delta(\omega-\omega_0) - \delta(\omega+\omega_0) \right] \end{array}\right.
-    $$
-
-    > 오일러 공식을 통해 정현파를 지수함수로 표현하여 증명한다.
-    >
-    > $$
-    > \mathcal{F}\left\{ \sin{2\pi f_0t} \right\} = \int_{-\infty}^{\infty}{\sin{(2\pi f_0t)} e^{-j2\pi ft}dt}
-    > $$
-    >
-    > $$
-    > \quad = \int_{-\infty}^{\infty}{\frac{1}{2j}\left[ e^{j2\pi f_0t} - e^{-j2\pi f_0t} \right] e^{-j2\pi ft}dt}
-    > $$
-    >
-    > $$
-    > \quad = \frac{1}{2j}\int_{-\infty}^{\infty}{e^{j2\pi f_0t} e^{-j2\pi ft}dt} - \frac{1}{2j}\int_{-\infty}^{\infty}{e^{-j2\pi f_0t} e^{-j2\pi ft}dt}
-    > $$
-    >
-    > 여기서 복소 지수함수의 푸리에 변환을 사용하여 주파수 영역에 대하여 구한다.
-    >
-    > $$
-    > \quad \Rightarrow \frac{1}{2j}\delta(f-f_0) - \frac{1}{2j}\delta(f+f_0)
-    > $$
-    >
-    > $$
-    > \quad = \frac{1}{2j}\left[ \delta(f-f_0) - \delta(f+f_0) \right]
+    > \left\{\begin{array}{ll} \displaystyle \sin{2\pi f_0t} & \longleftrightarrow & \displaystyle \frac{1}{2j}\left[ \delta(f-f_0) - \delta(f+f_0) \right] \\ \\ \displaystyle \sin{2\omega_0t} & \longleftrightarrow & \displaystyle \frac{1}{2j}\left[ \delta(\omega-\omega_0) - \delta(\omega+\omega_0) \right] \end{array}\right.
     > $$
 
 * *[시그넘 함수](https://ko.wikipedia.org/wiki/부호함수) (Signum function)*
     : 일명 부호 함수(sign function) $$\mathrm{sgn}(t)$$는 양의 시간에는 $$+1$$, 음의 시간에는 $$-1$$, 그리고 $$\mathrm{sgn}(0)$$일 때 0인 함수이다. 
 
-    $$
-    \mathrm{sgn}(t) \quad \longleftrightarrow \quad \left\{\begin{array}{ll} \displaystyle \frac{1}{j\pi f} \\ \\ \displaystyle \frac{2}{j\omega} \end{array}\right.
-    $$ 
-
-    > 시그넘 함수를 다음과 같이 수식으로 나타낼 수 있다.
-    >
+    > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-시그넘-함수">[증명]</a></sub></div>
+    > 
     > $$
-    > \mathrm{sgn}(t) = \left\{\begin{array}{rrr} +1, & t > 0 \\ 0, & t = 0 \\ -1, & t < 0 \end{array}\right.
-    > $$
-    >
-    > 하지만 위의 식은 푸리에 변환을 위해 만족되어야 할 디리클레(Dirichlet) 조건을 충족하지 못한다. 그러므로 디리클레 조건을 만족하여 푸리에 변환이 가능하도록 지수함수로 시그넘 함수를 표현한다.
-    >
-    > $$
-    > \mathrm{sgn}(t) = \lim_{a\rightarrow0} \left\{\begin{array}{rrr} \displaystyle e^{-at}, & t > 0 \\ \displaystyle 0, & t = 0 \\ \displaystyle -e^{at}, & t < 0 \end{array}\right.
-    > $$
-    >
-    > 양과 음의 시간대 지수함수를 푸리에 변환하고 합하므로써 시그마 함수의 주파수 영역 수식을 구할 수 있다. 먼저 양의 시간대 $$t>0$$의 경우를 본다:
-    >
-    > $$
-    > \int_{+0}^{\infty}{e^{-at} \cdot e^{-j2\pi ft}dt} = \left. \frac{1}{-\left( a + j2\pi f \right)}e^{-\left(a + j2\pi f\right)t} \right|^{\infty}_{t=0}
-    > $$
-    >
-    > $$
-    > \quad = 0 - \left[ \frac{1}{-\left(a + j2\pi f\right)} \right]
-    > $$
-    >
-    > $$
-    > \quad = \frac{1}{a + j2\pi f}
-    > $$
-    >
-    > 그 다음 음의 시간대 $$t<0$$의 경우를 본다:
-    >
-    > $$
-    > \int^{-0}_{-\infty}{-e^{at} \cdot e^{-j2\pi ft}dt} = -\left\{ \left. \frac{1}{\left(a - j2\pi f \right)}e^{\left(a - j2\pi f\right)t} \right|^{0}_{t=-\infty} \right\}
-    > $$
-    >
-    > $$
-    > \quad = - \left\{ \left[ \frac{1}{a - j2\pi f} \right] - 0 \right\}
-    > $$
-    >
-    > $$
-    > \quad = \frac{-1}{a - j2\pi f}
-    > $$
-    >
-    > 위의 두 시간대 영역을 합치면 시그마 함수의 주파수 영역 수식이 된다. 물론 $$t=0$$의 경우도 포함해야 하지만, 어차피 0이기 때문에 과정을 생략한다. 
-    >
-    > $$
-    > \mathcal{F}\left\{ \mathrm{sgn}(t) \right\} = \lim_{a\rightarrow 0} \left[ \frac{1}{a + j2\pi f} + \frac{-1}{a - j2\pi f} \right]
-    > $$
-    >
-    > $$
-    > \quad = \lim_{a \rightarrow 0}{\frac{-j4\pi f}{a^2 + \left( 2\pi f\right)^2}}
-    > $$
-    >
-    > $$
-    > \quad = \frac{1}{j\pi f}
-    > $$
+    > \mathrm{sgn}(t) \quad \longleftrightarrow \quad \left\{\begin{array}{ll} \displaystyle \frac{1}{j\pi f} \\ \\ \displaystyle \frac{2}{j\omega} \end{array}\right.
+    > $$ 
 
 * *[단위 계단 함수](https://ko.wikipedia.org/wiki/단위_계단_함수) (Unit step function)*
     : 헤비사이드 계단 함수(Heaviside step function) $$u(t-a)$$는 $$t > a$$이면 1, 그리고 $$t < a$$이면 0인 함수이다.
-
-    $$
-    u(t) \quad \longleftrightarrow \quad \frac{1}{2}\delta(t) + \frac{1}{j2\pi f}
-    $$
     
-    > 시그넘 함수의 진폭을 $$\frac{1}{2}$$ 줄인 다음에 $$y$$ 축으로 $$\frac{1}{2}$$만큼 이동시키면 단위 계단 함수가 된다.
-    >
+    > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-단위-계단-함수">[증명]</a></sub></div>
+    > 
     > $$
-    > u(t) = \frac{1}{2}\mathrm{sgn}(t) + \frac{1}{2}
-    > $$
-    >
-    > 위의 식에 푸리에 변환을 적용한다.
-    >
-    > $$
-    > \mathcal{F}\left\{ u(t) \right\} = \mathcal{F}\left\{ \frac{1}{2}\mathrm{sgn}(t) \right\} + \mathcal{F}\left\{ \frac{1}{2} \right\}
-    > $$
-    >
-    > $$
-    > \quad = \frac{1}{2}\left[ \frac{1}{j\pi f} \right] + \frac{1}{2}\delta(f)
-    > $$
-    >
-    > $$
-    > \quad = \frac{1}{2}\delta(f) + \frac{1}{j2\pi f}
+    > u(t) \quad \longleftrightarrow \quad \frac{1}{2}\delta(t) + \frac{1}{j2\pi f}
     > $$
 
 * *[구형 펄스](https://ko.wikipedia.org/wiki/구형함수) (Rectangular pulse)*
     : 구형 함수 $$\operatorname{rect}(\frac{t}{a})$$ 혹은 $$\Pi(\frac{t}{a})$$는 높이 1에 너비 $$a$$의 사각형을 그리는 함수이다.
 
-    $$
-    \Pi\left(\textstyle \frac{t}{a}\right) \quad \longleftrightarrow \quad a \operatorname{sinc}{af}
-    $$
-    
-    > 구형 펄스은 범위 $$(-\frac{a}{2},+\frac{a}{2})$$ 이외에는 모두 0을 갖기 떄문에 푸리에 변환의 해석 방정식을 다음과 같이 나타낼 수 있다.
-    >
+    > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-구형-펄스">[증명]</a></sub></div>
+    > 
     > $$
-    > \mathcal{F}\left\{ \Pi\left(\textstyle\frac{t}{a}\right)\right\} = \int_{-\infty}^{\infty}{\Pi\left(\textstyle\frac{t}{a}\right)e^{-j2\pi ft}dt}
-    > $$
-    >
-    > $$
-    > \quad = \int_{-\frac{a}{2}}^{\frac{a}{2}}{e^{-j2\pi ft}dt}
-    > $$
-    >
-    > 정적분을 계산하면 다음과 같은 수식이 구해진다.
-    >
-    > $$
-    > \quad \Rightarrow \frac{1}{-j2\pi f}\left( e^{-j\pi fa} - e^{ja\pi f} \right)
-    > $$
-    >
-    > $$
-    > \quad = \frac{1}{-j2\pi f}\left( -j2\sin{a\pi f} \right)
-    > $$
-    >
-    > $$
-    > \quad = a \frac{\sin{a\pi f}}{a\pi f}
-    > $$
-    >
-    > 여기서 분수는 간략히 [싱크 함수](https://ko.wikipedia.org/wiki/싱크함수)(sinc function) $$\operatorname{sinc}$$로 표현된다.
-    >
-    > $$
-    > \qquad \therefore \mathcal{F}\left\{ \Pi\left(\textstyle\frac{t}{a}\right)\right\} = a \operatorname{sinc}{af}
+    > \Pi\left(\textstyle \frac{t}{a}\right) \quad \longleftrightarrow \quad a \operatorname{sinc}{af}
     > $$
 
 * *[삼각 펄스](https://ko.wikipedia.org/wiki/삼각형함수) (Triangular pulse)*
     : 삼각형 함수 $$\operatorname{tri}(\frac{t}{a})$$ 혹은 $$\Lambda(\frac{t}{a})$$는 높이 1에 너비 $$2a$$의 삼각형을 그리는 함수이다.
 
-    $$
-    \Lambda\left(\textstyle \frac{t}{a}\right) \quad \longleftrightarrow \quad a^2 \operatorname{sinc}^2{af}
-    $$
-    
-    > 삼각형 펄스는 구형 펄스의 합성곱으로 표현된다.
-    >
+    > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-삼각-펄스">[증명]</a></sub></div>
+    > 
     > $$
-    > \Lambda\left(\textstyle \frac{t}{a}\right) = \Pi\left(\textstyle \frac{t}{a}\right) \ast \Pi\left(\textstyle \frac{t}{a}\right)
-    > $$
-    >
-    > 푸리에 변환 성질에 의하면 시간 영역에서의 합성곱은 주파수 영역에서 곱셈으로 나타난다. 그러므로 주파수 영역에서의 삼각형 펄스는 다음과 같이 간단히 구해진다.
-    >
-    > $$
-    > \mathcal{F}\left\{ \Lambda\left( \textstyle \frac{t}{a}\right)\right\} = \mathcal{F}\left\{ \Pi\left(\textstyle \frac{t}{a}\right) \ast \Pi\left(\textstyle \frac{t}{a}\right) \right\}
-    > $$
-    >
-    > $$
-    > \quad = a \operatorname{sinc}{af} \times a \operatorname{sinc}{af}
-    > $$
-    >
-    > $$
-    > \quad = a^2 \operatorname{sinc}^2{af}
+    > \Lambda\left(\textstyle \frac{t}{a}\right) \quad \longleftrightarrow \quad a^2 \operatorname{sinc}^2{af}
     > $$
 
 # 푸리에: 증명
@@ -1465,4 +1259,246 @@ $$
 >
 > $$
 > \qquad \therefore E = \int_{-\infty}^{\infty}{ \lvert X(\lambda) \rvert^2 d\lambda}
+> $$
+
+### [신호] 단위 임펄스
+
+> 우선 단위 임펄스 신호에 대한 푸리에 변환은 다음과 같다.
+>
+> $$
+> \mathcal{F}\left\{ \delta(t) \right\} = \int_{-\infty}^{\infty}{\delta(t)e^{-j2\pi ft}dt}
+> $$
+>
+> 디렉 델타 함수 $$\delta(t-a)$$는 $$t=a$$ 이외에는 모두 0인 함수이다. 그러므로 푸리에 해석 방정식에서 실질적으로 의미있는 적분 범위는 아래와 같다.
+>
+> $$
+> \quad \Rightarrow \int_{-0}^{+0}{\delta(t)e^{-j2\pi ft}dt}
+> $$
+>
+> 그리고 디렉 델타 함수 $$\delta(t-a)$$는 $$t=a$$일 때 항상 적분값이 1이므로 해석 방정식은 다음과 같이 간략화된다.
+>
+> $$
+> \quad \Rightarrow \int_{-0}^{+0}{e^{-j2\pi ft}dt} = \left. e^{-j2\pi ft} \right|_{t=0} = 1
+> $$
+
+### [신호] 직류신호
+
+> 우선 단위 임펄스 신호에 대한 푸리에 역변환은 다음과 같다.
+>
+> $$
+> \mathcal{F}^{-1}\left\{ \delta(f) \right\} = \int_{-\infty}^{\infty}{\delta(f)e^{j2\pi ft}df}
+> $$
+>
+> 디렉 델타 함수 $$\delta(f-a)$$는 $$f=a$$ 이외에는 모두 0인 함수이다. 그러므로 푸리에 해석 방정식에서 실질적으로 의미있는 적분 범위는 아래와 같다.
+>
+> $$
+> \quad \Rightarrow \int_{-0}^{+0}{\delta(f)e^{j2\pi ft}df}
+> $$
+>
+> 그리고 디렉 델타 함수 $$\delta(t-a)$$는 $$t=a$$일 때 항상 적분값이 1이므로 해석 방정식은 다음과 같이 간략화된다.
+>
+> $$
+> \quad \Rightarrow \int_{-0}^{+0}{e^{j2\pi ft}df} = \left. e^{-j2\pi ft} \right|_{f=0} = 1
+> $$
+
+### [신호] 복소 지수함수
+
+> 복소 지수함수의 푸리에 변환은 다음과 같이 서술된다.
+>
+> $$
+> \mathcal{F}\left\{ e^{j2\pi f_0t} \right\} = \int_{-\infty}^{\infty}{e^{j2\pi f_0t} \cdot e^{-j2\pi ft}dt}
+> $$
+>
+> $$
+> \quad = \int_{-\infty}^{\infty}{1 \cdot e^{-j2\pi (f-f_0)t}dt}
+> $$
+>
+> 시간 영역에서의 직류신호에 대한 푸리에 변환과 동일하나, 주파수만 $$f-f_0$$으로 이동되었을 뿐이다.
+>
+> $$
+> \quad \Rightarrow \delta(f-f_0)
+> $$
+
+### [신호] 정현파
+
+> 오일러 공식을 통해 정현파를 지수함수로 표현하여 증명한다.
+>
+> $$
+> \mathcal{F}\left\{ \cos{2\pi f_0t} \right\} = \int_{-\infty}^{\infty}{\cos{(2\pi f_0t)} e^{-j2\pi ft}dt}
+> $$
+>
+> $$
+> \quad = \int_{-\infty}^{\infty}{\frac{1}{2}\left[ e^{j2\pi f_0t} + e^{-j2\pi f_0t} \right] e^{-j2\pi ft}dt}
+> $$
+>
+> $$
+> \quad = \frac{1}{2}\int_{-\infty}^{\infty}{e^{j2\pi f_0t} e^{-j2\pi ft}dt} + \frac{1}{2}\int_{-\infty}^{\infty}{e^{-j2\pi f_0t} e^{-j2\pi ft}dt}
+> $$
+>
+> 여기서 복소 지수함수의 푸리에 변환을 사용하여 주파수 영역에 대하여 구한다.
+>
+> $$
+> \quad \Rightarrow \frac{1}{2}\delta(f-f_0) + \frac{1}{2}\delta(f+f_0)
+> $$
+>
+> $$
+> \quad = \frac{1}{2}\left[ \delta(f-f_0) + \delta(f+f_0) \right]
+> $$
+>
+> ----
+>
+> 오일러 공식을 통해 정현파를 지수함수로 표현하여 증명한다.
+>
+> $$
+> \mathcal{F}\left\{ \sin{2\pi f_0t} \right\} = \int_{-\infty}^{\infty}{\sin{(2\pi f_0t)} e^{-j2\pi ft}dt}
+> $$
+>
+> $$
+> \quad = \int_{-\infty}^{\infty}{\frac{1}{2j}\left[ e^{j2\pi f_0t} - e^{-j2\pi f_0t} \right] e^{-j2\pi ft}dt}
+> $$
+>
+> $$
+> \quad = \frac{1}{2j}\int_{-\infty}^{\infty}{e^{j2\pi f_0t} e^{-j2\pi ft}dt} - \frac{1}{2j}\int_{-\infty}^{\infty}{e^{-j2\pi f_0t} e^{-j2\pi ft}dt}
+> $$
+>
+> 여기서 복소 지수함수의 푸리에 변환을 사용하여 주파수 영역에 대하여 구한다.
+>
+> $$
+> \quad \Rightarrow \frac{1}{2j}\delta(f-f_0) - \frac{1}{2j}\delta(f+f_0)
+> $$
+>
+> $$
+> \quad = \frac{1}{2j}\left[ \delta(f-f_0) - \delta(f+f_0) \right]
+> $$
+
+### [신호] 시그넘 함수
+
+> 시그넘 함수를 다음과 같이 수식으로 나타낼 수 있다.
+>
+> $$
+> \mathrm{sgn}(t) = \left\{\begin{array}{rrr} +1, & t > 0 \\ 0, & t = 0 \\ -1, & t < 0 \end{array}\right.
+> $$
+>
+> 하지만 위의 식은 푸리에 변환을 위해 만족되어야 할 디리클레(Dirichlet) 조건을 충족하지 못한다. 그러므로 디리클레 조건을 만족하여 푸리에 변환이 가능하도록 지수함수로 시그넘 함수를 표현한다.
+>
+> $$
+> \mathrm{sgn}(t) = \lim_{a\rightarrow0} \left\{\begin{array}{rrr} \displaystyle e^{-at}, & t > 0 \\ \displaystyle 0, & t = 0 \\ \displaystyle -e^{at}, & t < 0 \end{array}\right.
+> $$
+>
+> 양과 음의 시간대 지수함수를 푸리에 변환하고 합하므로써 시그마 함수의 주파수 영역 수식을 구할 수 있다. 먼저 양의 시간대 $$t>0$$의 경우를 본다:
+>
+> $$
+> \int_{+0}^{\infty}{e^{-at} \cdot e^{-j2\pi ft}dt} = \left. \frac{1}{-\left( a + j2\pi f \right)}e^{-\left(a + j2\pi f\right)t} \right|^{\infty}_{t=0}
+> $$
+>
+> $$
+> \quad = 0 - \left[ \frac{1}{-\left(a + j2\pi f\right)} \right]
+> $$
+>
+> $$
+> \quad = \frac{1}{a + j2\pi f}
+> $$
+>
+> 그 다음 음의 시간대 $$t<0$$의 경우를 본다:
+>
+> $$
+> \int^{-0}_{-\infty}{-e^{at} \cdot e^{-j2\pi ft}dt} = -\left\{ \left. \frac{1}{\left(a - j2\pi f \right)}e^{\left(a - j2\pi f\right)t} \right|^{0}_{t=-\infty} \right\}
+> $$
+>
+> $$
+> \quad = - \left\{ \left[ \frac{1}{a - j2\pi f} \right] - 0 \right\}
+> $$
+>
+> $$
+> \quad = \frac{-1}{a - j2\pi f}
+> $$
+>
+> 위의 두 시간대 영역을 합치면 시그마 함수의 주파수 영역 수식이 된다. 물론 $$t=0$$의 경우도 포함해야 하지만, 어차피 0이기 때문에 과정을 생략한다. 
+>
+> $$
+> \mathcal{F}\left\{ \mathrm{sgn}(t) \right\} = \lim_{a\rightarrow 0} \left[ \frac{1}{a + j2\pi f} + \frac{-1}{a - j2\pi f} \right]
+> $$
+>
+> $$
+> \quad = \lim_{a \rightarrow 0}{\frac{-j4\pi f}{a^2 + \left( 2\pi f\right)^2}}
+> $$
+>
+> $$
+> \quad = \frac{1}{j\pi f}
+> $$
+
+### [신호] 단위 계단 함수
+
+> 시그넘 함수의 진폭을 $$\frac{1}{2}$$ 줄인 다음에 $$y$$ 축으로 $$\frac{1}{2}$$만큼 이동시키면 단위 계단 함수가 된다.
+>
+> $$
+> u(t) = \frac{1}{2}\mathrm{sgn}(t) + \frac{1}{2}
+> $$
+>
+> 위의 식에 푸리에 변환을 적용한다.
+>
+> $$
+> \mathcal{F}\left\{ u(t) \right\} = \mathcal{F}\left\{ \frac{1}{2}\mathrm{sgn}(t) \right\} + \mathcal{F}\left\{ \frac{1}{2} \right\}
+> $$
+>
+> $$
+> \quad = \frac{1}{2}\left[ \frac{1}{j\pi f} \right] + \frac{1}{2}\delta(f)
+> $$
+>
+> $$
+> \quad = \frac{1}{2}\delta(f) + \frac{1}{j2\pi f}
+> $$
+
+### [신호] 구형 펄스
+
+> 구형 펄스은 범위 $$(-\frac{a}{2},+\frac{a}{2})$$ 이외에는 모두 0을 갖기 떄문에 푸리에 변환의 해석 방정식을 다음과 같이 나타낼 수 있다.
+>
+> $$
+> \mathcal{F}\left\{ \Pi\left(\textstyle\frac{t}{a}\right)\right\} = \int_{-\infty}^{\infty}{\Pi\left(\textstyle\frac{t}{a}\right)e^{-j2\pi ft}dt}
+> $$
+>
+> $$
+> \quad = \int_{-\frac{a}{2}}^{\frac{a}{2}}{e^{-j2\pi ft}dt}
+> $$
+>
+> 정적분을 계산하면 다음과 같은 수식이 구해진다.
+>
+> $$
+> \quad \Rightarrow \frac{1}{-j2\pi f}\left( e^{-j\pi fa} - e^{ja\pi f} \right)
+> $$
+>
+> $$
+> \quad = \frac{1}{-j2\pi f}\left( -j2\sin{a\pi f} \right)
+> $$
+>
+> $$
+> \quad = a \frac{\sin{a\pi f}}{a\pi f}
+> $$
+>
+> 여기서 분수는 간략히 [싱크 함수](https://ko.wikipedia.org/wiki/싱크함수)(sinc function) $$\operatorname{sinc}$$로 표현된다.
+>
+> $$
+> \qquad \therefore \mathcal{F}\left\{ \Pi\left(\textstyle\frac{t}{a}\right)\right\} = a \operatorname{sinc}{af}
+> $$
+
+### [신호] 삼각 펄스
+
+> 삼각형 펄스는 구형 펄스의 합성곱으로 표현된다.
+>
+> $$
+> \Lambda\left(\textstyle \frac{t}{a}\right) = \Pi\left(\textstyle \frac{t}{a}\right) \ast \Pi\left(\textstyle \frac{t}{a}\right)
+> $$
+>
+> 푸리에 변환 성질에 의하면 시간 영역에서의 합성곱은 주파수 영역에서 곱셈으로 나타난다. 그러므로 주파수 영역에서의 삼각형 펄스는 다음과 같이 간단히 구해진다.
+>
+> $$
+> \mathcal{F}\left\{ \Lambda\left( \textstyle \frac{t}{a}\right)\right\} = \mathcal{F}\left\{ \Pi\left(\textstyle \frac{t}{a}\right) \ast \Pi\left(\textstyle \frac{t}{a}\right) \right\}
+> $$
+>
+> $$
+> \quad = a \operatorname{sinc}{af} \times a \operatorname{sinc}{af}
+> $$
+>
+> $$
+> \quad = a^2 \operatorname{sinc}^2{af}
 > $$
