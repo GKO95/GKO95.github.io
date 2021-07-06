@@ -13,11 +13,11 @@ order: 0xE1
 [푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 시간 $$t$$ 영역의 함수를 주파수 $$f$$ 영역의 함수로 분해하는 수학적 변환식이다. *일반적인 함수(혹은 신호)들은 다른 주파수를 갖는 사인 $$\sin$$ 및 코사인 $$\cos$$ 삼각함수들의 합으로 표현될 수 있다*는 [푸리에 해석](https://en.wikipedia.org/wiki/Fourier_analysis)(Fourier analysis)을 기반으로 수립되었다. 대표적인 예시로 신호해석에서 시간에 따라 흐르는 신호가 어떠한 주파수로 구성되어 있는지 알 수 있다.
 
 # 푸리에: 급수
-[푸리에 급수](https://ko.wikipedia.org/wiki/푸리에_급수)(Fourier series)는 푸리에 변환의 시작이자 푸리에 해석을 가장 쉽게 설명한다. 단, 푸리에 급수는 주기함수의 푸리에 해석에 초점을 두고 있다는 제약이 있다. 주기 $$T$$ 간격으로 반복하는, 혹은 기본 주파수(fundamental frequency) $$\omega_0 = 2\pi f_0 = \frac{2\pi}{T}$$를 갖는 주기함수 $$x_T(t)$$가 주어질 떄 푸리에 급수가 어떻게 유도되는지 삼각함수와 지수함수 형태에 대하여 각각 살펴본다.
+[푸리에 급수](https://ko.wikipedia.org/wiki/푸리에_급수)(Fourier series)는 연속시간의 주기함수에 대한 주파수 영역으로의 변환을 다룬다. 비록 푸리에 급수는 주기함수에 한정된 변환이란 제약이 있으나, 푸리에 변환의 시발점이기도 하므로 개념적인 면에서 큰 의의를 갖기 때문에 비중있게 다루는 내용 중 하나이다. 연속시간 $$t$$ 주기함수의 변환은 푸리에 급수가 갖는 방정식에 의해 주파수 영역은 항상 이산주파수 $$kf_0$$ 비주기함수가 도출된다.
 
 | 시간 영역 $$x_{T}(t)$$ | 주파수 영역 $$X(k)$$ |
 |:--------------:|:---------------:|
-| 연속시간 주기함수      | 이산시간 비주기함수      |
+| 연속시간 주기함수      | 이산주파수 비주기함수      |
 
 ## 삼각함수 형태
 삼각함수 형태의 푸리에 급수를 설명하기 위해서는 우주기함수 $$x_{T_e}(t)$$에 해당하는 삼각함수의 $$\cos$$와 기주기함수 $$x_{T_o}(t)$$에 해당하는 삼각함수의 $$\sin$$ 경우를 나누어서 서술한다. 종합적으로 두 경우의 주기함수를 합하면 일반 주기함수 $$x_T(t)$$에 대한 합성 방정식으로 도출된다.
@@ -44,6 +44,8 @@ b_k & \displaystyle = \frac{2}{T}\int_{T}{x_{T}(t)\sin{(k\omega_0 t)}dt}
 \end{array}
 \right.
 $$
+
+여기서 $$\omega_0 = 2\pi f_0 = \frac{2\pi}{T}$$는 기본 각주파수(fundamental angular frequency)로, 이는 푸리에 급수가 갖는 모든 이산 각주파수들의 최소공배수이다. 기본 주파수 $$f_0$$로도 푸리에 급수를 표현할 수 있으나, 수식의 간략화를 위해 본 부문에서는 각주파수를 택하였다.
 
 ### 우주기함수
 먼저 주기함수 $$x_T(t)$$가 우함수인 주기함수, 일명 우주기함수(even periodic function) 가정하자.
@@ -356,25 +358,24 @@ $$
 > 푸리에 계수 $$X(k)$$의 크기(amplitude; $$\lvert X(k) \rvert$$)와 위상(phase; $$\angle{X(k)}$$)은 [복소평면](https://ko.wikipedia.org/wiki/복소평면)(complex plane)에서 비롯된다. 가로축과 세로축은 각각 복소수의 실수 $$\mathrm{Re}\left\{X(k) \right\}$$와 허수 $$\mathrm{Im}\left\{X(k) \right\}$$를 의미하며, [직각좌표계](https://ko.wikipedia.org/wiki/데카르트_좌표계)로부터 [극좌표계](https://ko.wikipedia.org/wiki/극좌표계) 변환식이 그대로 적용된다.
 
 # 푸리에: 변환
-
-[푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 주기함수에 극한된 푸리에 급수와 달리 비주기함수(aperiodic function)에서도 적용할 수 있는 적분 변환식이다. 비주기함수의 주기는 $$T\rightarrow\infty$$로 간주할 수 있으며, 덕분에 매우 작아진 기본 주파수 $$\omega_0 = \frac{2\pi}{T}$$는 더욱 미세한 고조 주파수 $$\omega = k\omega_0$$까지 표현할 수 있다.
+[푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 주기함수에 극한된 푸리에 급수와 달리 비주기함수(aperiodic function)에서도 적용할 수 있는 일반화된 시간과 주파수 영역간의 적분 변환식이다. 비주기함수의 주기는 $$T\rightarrow\infty$$로 간주할 수 있으며, 덕분에 매우 작아진 기본 주파수 $$f_0 = \frac{1}{T}$$ 및 기본 각주파수 $$\omega_0 = \frac{2\pi}{T}$$는 더욱 미세한 고조 주파수 $$f = kf_0$$ 혹은 고조 각주파수 $$\omega = k\omega_0$$까지 표현할 수 있다.
 
 | 시간 영역 $$x(t)$$ | 주파수 영역 $$X(f)$$ |
 |:--------------:|:---------------:|
-| 연속시간 비주기함수     | 연속시간 비주기함수      |
+| 연속시간 비주기함수     | 연속주파수 비주기함수      |
 
 ## 푸리에 변환
 푸리에 변환은 주기함수에 대한 푸리에 급수로부터 유도된다.
 
 $$
-x(t) = \sum_{k=-\infty}^{+\infty}{ c_k e^{jk\omega_0t} }
+x(t) = \sum_{k=-\infty}^{+\infty}{X(k) e^{jk\omega_0t} }
 $$
 
 $$
-\quad = \sum_{k=-\infty}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } \quad ...\mathrm{where} \ c_k = \frac{1}{T}\int_{T}{x(t) e^{-jk\omega_0 t} dt}
+\quad = \sum_{k=-\infty}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } \quad ...\mathrm{where} \ X(k) = \frac{1}{T}\int_{T}{x(t) e^{-jk\omega_0 t} dt}
 $$
 
-주기함수가 무한한 주기 $$T \rightarrow \infty$$를 갖으면 절대로 반복하지 않는 비주기함수가 된다. 그러나 고조 주파수가 갖는 $$k$$에 따라 결정되는 푸리에 급수의 계수 $$c_k$$는 $$\lim_{T\rightarrow\infty}\frac{1}{T}$$으로 인해 0으로 수렴하게 된다. 그러므로 비주기함수의 푸리에 변환에서는 $$\frac{1}{T}$$ 주기 성분이 없는 새로운 푸리에 계수 $$X(k\omega_0)$$를 정의한다.
+주기함수가 무한한 주기 $$T \rightarrow \infty$$를 갖으면 절대로 반복하지 않는 비주기함수가 된다. 그러나 고조 주파수가 갖는 $$k$$에 따라 결정되는 푸리에 급수의 계수 $$X(k)$$는 $$\lim_{T\rightarrow\infty}\frac{1}{T}$$으로 인해 0으로 수렴하게 된다. 그러므로 비주기함수의 푸리에 변환에서는 $$\frac{1}{T}$$ 주기 성분이 없는 새로운 푸리에 계수 $$X(k\omega_0)$$를 정의한다.
 
 $$
 x(t) = \sum_{k=-\infty}^{+\infty}{ \frac{1}{T} \left( \int_{-\infty}^{+\infty}{x(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} }
@@ -394,7 +395,7 @@ $$
 \quad = \frac{1}{2\pi} \sum_{k=-\infty}^{+\infty}{ X(\omega) e^{j\omega t} d\omega}
 $$
 
-무한소 $$d\omega$$에 대한 유한합 $$\Sigma$$은 적분으로 대체될 수 있으며, 일반함수의 $$x(t)$$ 합성 방정식과 $$X(\omega)$$ 분석 방정식은 다음과 같다.
+무한소 $$d\omega$$에 대한 유한합 $$\sum$$은 적분으로 대체될 수 있으며, 일반함수의 $$x(t)$$ 합성 방정식과 $$X(\omega)$$ 분석 방정식은 다음과 같다.
 
 $$
 x(t) = \frac{1}{2\pi} \int_{-\infty}^{+\infty}{ X(\omega) e^{j\omega t} d\omega} \quad ...\mathrm{where} \ X(\omega) = \int_{-\infty}^{+\infty}{x(t) e^{-j\omega t} dt}
@@ -653,7 +654,10 @@ $$
     > \Lambda\left(\textstyle \frac{t}{a}\right) \quad \longleftrightarrow \quad a^2 \operatorname{sinc}^2{af}
     > $$
 
-# 푸리에: 이산시간 변환
+# 푸리에: 이산
+
+## 이산시간 푸리에 변환
+
 이산시간 푸리에 변환(discrete-time Fourier transform)은 연속시간이 아닌 이산시간의 함수에 대한 푸리에 변환을 다룬다. 푸리에 변환이 갖는 무한한 무한소들을 합하는 적분 $$\int{dt}$$를 유한합 $$\sum$$으로 대체하고, 연속시간 $$t$$를 정수배의 이산시간 $$n$$으로 치환하면 다음과 같이 나타난다.
 
 $$
@@ -664,19 +668,19 @@ $$
 
 | 시간 영역 $$x(n)$$ | 주파수 영역 $$X(e^{j2\pi f})$$ |
 |:--------------:|:-------------------------:|
-| 이산시간 비주기함수     | 연속시간 주기함수                 |
+| 이산시간 비주기함수     | 연속주파수 주기함수                 |
 
-# 푸리에: 이산 급수
+## 이산 푸리에 급수
 
 | 시간 영역 $$\tilde{x}(n)$$ | 주파수 영역 $$\tilde{X}(k)$$ |
 |:--------------:|:-------------------------:|
-| 이산시간 주기함수      | 이산시간 주기함수                 |
+| 이산시간 주기함수      | 이산주파수 주기함수                 |
 
-# 푸리에: 이산 변환
+## 이산 푸리에 변환
 
 | 시간 영역 $$x[n]$$ | 주파수 영역 $$X[k]$$ |
 |:--------------:|:-------------------------:|
-| 이산시간 주기함수      | 이산시간 주기함수                 |
+| 이산시간 주기함수      | 이산주파수 주기함수                 |
 
 # 푸리에: 증명
 본 장은 푸리에 변환의 성질 증명과 신호의 변환 과정을 설명하는 내용을 포함한다. 
