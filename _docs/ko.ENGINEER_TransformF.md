@@ -22,28 +22,28 @@ order: 0xE1
 ## 삼각함수 형태
 삼각함수 형태의 푸리에 급수를 설명하기 위해서는 우주기함수 $$x_{T_e}(t)$$에 해당하는 삼각함수의 $$\cos$$와 기주기함수 $$x_{T_o}(t)$$에 해당하는 삼각함수의 $$\sin$$ 경우를 나누어서 서술한다. 종합적으로 두 경우의 주기함수를 합하면 일반 주기함수 $$x_T(t)$$에 대한 합성 방정식으로 도출된다.
 
-$$
-\qquad \therefore x_T(t) = x_{T_e}(t) + x_{T_o}(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}}
-$$
-
-$$
-\qquad \quad
-\left\{
-\begin{array}{lll}
-
-a_0 & \displaystyle = \frac{1}{T}\int_{T}{x_{T}(t)dt}
-
-\\
-
-a_k & \displaystyle = \frac{2}{T}\int_{T}{x_{T}(t)\cos{(k\omega_0 t)}dt}
-
-\\
-
-b_k & \displaystyle = \frac{2}{T}\int_{T}{x_{T}(t)\sin{(k\omega_0 t)}dt}
-
-\end{array}
-\right.
-$$
+> $$
+> x_T(t) = x_{T_e}(t) + x_{T_o}(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}}
+> $$
+>
+> $$
+> \qquad \mathrm{...where} \ 
+> \left\{
+> \begin{array}{lll}
+> 
+> a_0 & \displaystyle = \frac{1}{T}\int_{T}{x_{T}(t)dt}
+> 
+> \\
+> 
+> a_k & \displaystyle = \frac{2}{T}\int_{T}{x_{T}(t)\cos{(k\omega_0 t)}dt}
+> 
+> \\
+> 
+> b_k & \displaystyle = \frac{2}{T}\int_{T}{x_{T}(t)\sin{(k\omega_0 t)}dt}
+> 
+> \end{array}
+> \right.
+> $$
 
 여기서 $$\omega_0 = 2\pi f_0 = \frac{2\pi}{T}$$는 기본 각주파수(fundamental angular frequency)로, 이는 푸리에 급수가 갖는 모든 이산 각주파수들의 최소공배수이다. 기본 주파수 $$f_0$$로도 푸리에 급수를 표현할 수 있으나, 수식의 간략화를 위해 본 부문에서는 각주파수를 택하였다.
 
@@ -228,9 +228,13 @@ $$
 그러나 해당 푸리에 계수는 $$n=0$$인 경우에는 성립하지 않으며, 이는 "$$n$$ 배수의 고조 주파수를 갖는" 조건이 전재하였기 때문이다. 하지만 기주기함수에서는 $$\sin(0) = 0$$로 인해 $$b_0$$ 계수가 방정식에서 아예 사라진다. 이는 $$b_0 = 0$$임을 시사하는 게 절대 아니므로 주의하도록 한다.
 
 ## 지수함수 형태
-지수함수 형태의 푸리에 급수는 삼각함수 형태로부터 지수함수와 삼각함수의 상관관계를 설명하는 [오일러 공식](https://ko.wikipedia.org/wiki/오일러_공식)을 통해 유도된다.
+지수함수 형태의 푸리에 급수는 삼각함수 형태로부터 지수함수와 삼각함수의 상관관계를 설명하는 [오일러 공식](https://ko.wikipedia.org/wiki/오일러_공식)을 통해 유도되며, 결론적으로 아래의 수식이 도출된다.
 
-> 오일러 공식: $$e^{jx} = \cos{x} + j\sin{x}$$
+> $$
+> x_T(t) = \sum_{k=-\infty}^{+\infty}{ X(k) e^{jk\omega_0t} } \quad ...\mathrm{where} \ X(k) = \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt}
+> $$
+
+삼각함수 형태의 푸리에 급수를 오일러 공식 $$e^{jx} = \cos{x} + j\sin{x}$$을 적용하면 다음과 같이 표현된다.
 
 $$
 x_T(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}}
@@ -356,6 +360,23 @@ $$
 $$
 
 > 푸리에 계수 $$X(k)$$의 크기(amplitude; $$\lvert X(k) \rvert$$)와 위상(phase; $$\angle{X(k)}$$)은 [복소평면](https://ko.wikipedia.org/wiki/복소평면)(complex plane)에서 비롯된다. 가로축과 세로축은 각각 복소수의 실수 $$\mathrm{Re}\left\{X(k) \right\}$$와 허수 $$\mathrm{Im}\left\{X(k) \right\}$$를 의미하며, [직각좌표계](https://ko.wikipedia.org/wiki/데카르트_좌표계)로부터 [극좌표계](https://ko.wikipedia.org/wiki/극좌표계) 변환식이 그대로 적용된다.
+
+## 디리클레 조건
+디리클레 조건(Dirichlet condition)은 주기함수 $$x_T(t)$$가 모든 시간 $$t$$에 대하여 푸리에 급수의 합과 일치하기 위한 충분조건이다. 간단히 말해, 아래의 합성 방정식을 위해서는 디리클레 조건을 반드시 만족해야 하며 이는 한편 푸리에 변환의 가능여부를 의미하기도 한다.
+
+$$
+x_T(t) = \sum_{k=-\infty}^{+\infty}{ X(k) e^{jk\omega_0t} }
+$$
+
+1. 한 주기 $$T$$ 동안에 완전적분, 즉 적분값이 유한해야 한다.
+
+    $$
+    \int_{T}\lvert {x_T(t)\rvert dt} < \infty
+    $$
+
+2. 범위 내의 최댓값과 최솟값의 개수가 유한해야 한다.
+
+3. 범위 내의 불연속점 개수가 유한해야 한다.
 
 # 푸리에: 변환
 [푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 주기함수에 극한된 푸리에 급수와 달리 비주기함수(aperiodic function)에서도 적용할 수 있는 일반화된 시간과 주파수 영역간의 적분 변환식이다. 비주기함수의 주기는 $$T\rightarrow\infty$$로 간주할 수 있으며, 덕분에 매우 작아진 기본 주파수 $$f_0 = \frac{1}{T}$$ 및 기본 각주파수 $$\omega_0 = \frac{2\pi}{T}$$는 더욱 미세한 고조 주파수 $$f = kf_0$$ 혹은 고조 각주파수 $$\omega = k\omega_0$$까지 표현할 수 있다.
