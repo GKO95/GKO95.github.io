@@ -6,7 +6,6 @@ title: NumPy
 icon: icon-numpy.png
 meta: NumPy
 order: 0x10
-mathjax: true
 ---
 # NUMPY: 소개
 [넘파이](https://numpy.org/)(NumPy)는 다차원 배열을 지원하는 강력한 [파이썬](../ko.PRGMING_Python/) 전용 라이브러리이다. 본래 [SciPy](https://www.scipy.org/)라는 수학, 과학, 그리고 공학을 위한 파이썬 전용 오픈소스 프로젝트의 일부였으나, SciPy 없이도 사용할 수 있도록 독립된 패키지로 출시되었다. 덕분에 넘파이는 SciPy 이외에 [matplotlib](#넘파이-matplotlib) 및 [텐서플로우](../ko.LIBRARY_TensorFlow/)와 같은 라이브러리에서도 흔히 사용된다.
@@ -465,7 +464,7 @@ plt.show()
 ```
 
 ### 축 범위 설정
-도표의 축 범위 설정은 `Axes.set_xlim` 및 `Axes.set_ylim` 함수를 사용한다. 도표의 축 범위를 지정할 때에는 축의 최소치 및 최대치 순서로 기입한다. 그리고 `Axes.set_xlable` 및 `Axes.set_ylabel` 함수로 $$x$$ 축과 $$y$$ 축에 레이블을 넣을 수 있다.
+도표의 축 범위 설정은 `Axes.set_xlim` 및 `Axes.set_ylim` 함수를 사용한다. 도표의 축 범위를 지정할 때에는 축의 최소치 및 최대치 순서로 기입한다. 그리고 `Axes.set_xlable` 및 `Axes.set_ylabel` 함수로 $x$ 축과 $y$ 축에 레이블을 넣을 수 있다.
 
 ![Matplotlib 도표 축 범위 설정](/images/docs/numpy/matplotlib_axes_axis.png)
 
@@ -654,4 +653,4 @@ fig.set_tight_layout(True)
 plt.show()
 ```
 
-산점도는 $$x$$ 축에 따른 함수의 변화를 관측하는 목적으로 사용되지 않는다. 오히려 변수 $$x$$와 변수 $$y$$의 분포를 통해 관계성을 확인 및 분석하기 위한 목적을 갖는다.
+산점도는 $x$ 축에 따른 함수의 변화를 관측하는 목적으로 사용되지 않는다. 오히려 변수 $x$와 변수 $y$의 분포를 통해 관계성을 확인 및 분석하기 위한 목적을 갖는다.
