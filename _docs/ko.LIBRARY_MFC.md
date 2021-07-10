@@ -77,7 +77,7 @@ Welcome to GKO95's GitHub Pages.
 ### 어플리케이션
 `CWinApp` 클래스 객체인 어플리케이션(application)은 본격적으로 프로그램을 초기화하고 실행하는 역할을 담당한다. 그래픽 사용자 인터페이스를 마련하여도 어플리케이션이 해당 창을 호출하여 실행하지 않으면 GUI가 없는 프로그램이 되거나, 일반적으로 프로그램이 즉시 종료된다. 위의 메모장 예시에서 어플리케이션은 아래에 해당한다.
 
-![메모장의 어플리케이션(frame window) 구조물.](/images/docs/mfc/mfc_architecture_application.png)
+![메모장의 어플리케이션(application) 구조물.](/images/docs/mfc/mfc_architecture_application.png)
 
 ### 쓰레드
 `CWinThread` 클래스 객체인 쓰레드(thread) 여러 작업을 동시에 진행할 수 있도록 한다. 비록 GUI 요소가 아니지만 어플리케이션 객체를 생성하는 `CWinApp` 클래스의 기반 클래스로 상당한 중요성을 가진다. 다시 말해, 어플리케이션은 쓰레드 중 하나이지만 가장 핵심이 되는 쓰레드이다.
