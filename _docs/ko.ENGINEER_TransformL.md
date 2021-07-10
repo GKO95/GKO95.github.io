@@ -4,21 +4,20 @@ language: ko
 category: 미적분학
 title: 라플라스 변환
 meta: Laplace
-mathjax: true
 order: 0xE2
 ---
 # 라플라스 변환: 개요
 > 본 내용은 [미분방정식](../ko.ENGINEER_Differential/)과 [푸리에 변환](../ko.ENGINEER_TransformF/)을 기반하므로 이에 대해 충분한 이해가 필요하다.
 
-[라플라스 변환](https://en.wikipedia.org/wiki/Laplace_transform)(Laplace transform)은 복잡한 미분방정식을 극히 익숙한 [대수방정식](https://en.wikipedia.org/wiki/Algebraic_equation)으로 풀 수 있는 매우 강력한 미적분학 기법이다. 이러한 변환이 가능한 이유는 바로 영역(또는 공간; domain)을 넘나드는 풀이 방식을 사용하기 때문이다. 그리고 이 두 영역을 $$t$$-영역과 $$s$$-영역이라고 부른다.
+[라플라스 변환](https://en.wikipedia.org/wiki/Laplace_transform)(Laplace transform)은 복잡한 미분방정식을 극히 익숙한 [대수방정식](https://en.wikipedia.org/wiki/Algebraic_equation)으로 풀 수 있는 매우 강력한 미적분학 기법이다. 이러한 변환이 가능한 이유는 바로 영역(또는 공간; domain)을 넘나드는 풀이 방식을 사용하기 때문이다. 그리고 이 두 영역을 $t$-영역과 $s$-영역이라고 부른다.
 
-* *$$t$$-영역 (일명 시간 영역)*
-    : 변수 $$t$$, 일명 시간이 중심이 되는 공간이다. 
+* *$t$-영역 (일명 시간 영역)*
+    : 변수 $t$, 일명 시간이 중심이 되는 공간이다. 
 
-* *$$s$$-영역 (일명 복소주파수 영역)*
-    : 변수 $$s = \sigma + j\omega$$가 중심이 되는 공간이며, 허수가 붙기 때문에 "복소"주파수라고 부른다. 여기서 $$\omega = 2\pi f$$는 [각주파수](https://ko.wikipedia.org/wiki/각진동수)(angular frequency)이다. 
+* *$s$-영역 (일명 복소주파수 영역)*
+    : 변수 $s = \sigma + j\omega$가 중심이 되는 공간이며, 허수가 붙기 때문에 "복소"주파수라고 부른다. 여기서 $\omega = 2\pi f$는 [각주파수](https://ko.wikipedia.org/wiki/각진동수)(angular frequency)이다. 
 
-라플라스 변환은 $$t$$-영역을 $$s$$-영역으로 공간을 전환하며 다음과 같은 방정식을 가진다.
+라플라스 변환은 $t$-영역을 $s$-영역으로 공간을 전환하며 다음과 같은 방정식을 가진다.
 
 $$
 F(s) = \mathcal{L} \{ f(t) \} = \int^{\infty}_{0^-}f(t)e^{-st}dt
@@ -27,7 +26,7 @@ $$
 ## 라플라스 성질
 > *참조: [위키백과 - 라플라스 성질 및 이론](https://en.wikipedia.org/wiki/Laplace_transform#Properties_and_theorems)*
 
-라플라스 변환은 선형계 분석에 있어 매우 유용한 성질들을 가지고 있으며, 그 중에서도 시간에 대한 미분과 적분이 각각 라플라스 변수 $$s$$의 곱셈과 나눗셈으로 표현하여, 미분방정식을 대수방정식으로 변환시키는 강력한 장점을 지닌다. 그 외에도 라플라스 변환은 아래의 성질을 가지고 있다:
+라플라스 변환은 선형계 분석에 있어 매우 유용한 성질들을 가지고 있으며, 그 중에서도 시간에 대한 미분과 적분이 각각 라플라스 변수 $s$의 곱셈과 나눗셈으로 표현하여, 미분방정식을 대수방정식으로 변환시키는 강력한 장점을 지닌다. 그 외에도 라플라스 변환은 아래의 성질을 가지고 있다:
 
 * *[선형성](https://en.wikipedia.org/wiki/Linearity) (Linearity)*
     : 선형 연산자인 적분을 사용하는 라플라스 변환 또한 선형성을 지닌다.
@@ -59,7 +58,7 @@ $$
     > $$
 
 * *[미분](https://en.wikipedia.org/wiki/Derivative) (Derivative)*
-    : 함수 $$f(t)$$가 미분가능한 함수이며 지수 형태의 도함수를 가진다고 가정할 시, $$s$$-영역의 방정식은 부분 적분을 통해 도출된다.
+    : 함수 $f(t)$가 미분가능한 함수이며 지수 형태의 도함수를 가진다고 가정할 시, $s$-영역의 방정식은 부분 적분을 통해 도출된다.
 
     $$
     f^{(n)}(t) \quad \Longleftrightarrow \quad s^nF(s) - \sum^n_{k=1}{s^{n-k}f^{(k-1)}(0^-)}
@@ -73,14 +72,14 @@ $$
     >
 
 * *[적분](https://en.wikipedia.org/wiki/Integral) (Integral)*
-    : 아래의 라플라스 합성곱 성질을 참고한다; 합성곱의 $$g(t)$$ 함수가 적분에서는 단위 계단 함수 $$u(t)$$로 대체되었다.
+    : 아래의 라플라스 합성곱 성질을 참고한다; 합성곱의 $g(t)$ 함수가 적분에서는 단위 계단 함수 $u(t)$로 대체되었다.
 
     $$
     \int^t_0{f(\tau)d\tau} = \bigl( u \ast f \bigr)(t) \quad \Longleftrightarrow \quad \frac{1}{s}F(s)
     $$
 
 * *[합성곱](https://en.wikipedia.org/wiki/Convolution) (Convolution)*
-    : 시간축 $$\tau$$에 놓여있는 두 함수 $$f(\tau)$$, $$g(\tau)$$간 서로 겹치는 총 면적이 발생한다. 여기서 함수 $$g(\tau)$$를 시간축에서 $$t$$만큼 이동시켰을 때 겹치는 면적이 변하는데, 주어진 $$t$$ 범위에 대하여 겹치는 면적을 적분하는 것이 두 함수의 합성곱이다.
+    : 시간축 $\tau$에 놓여있는 두 함수 $f(\tau)$, $g(\tau)$간 서로 겹치는 총 면적이 발생한다. 여기서 함수 $g(\tau)$를 시간축에서 $t$만큼 이동시켰을 때 겹치는 면적이 변하는데, 주어진 $t$ 범위에 대하여 겹치는 면적을 적분하는 것이 두 함수의 합성곱이다.
 
     $$
     \bigl( f \ast g \bigr) (t) = \int^t_0{f(\tau)g(t-\tau)d\tau} \quad \Longleftrightarrow \quad F(s)G(s)
@@ -96,15 +95,15 @@ $$
     > \quad = \int^{\infty}_{0^-}{ \int^{t}_{0^-}{f(\tau)g(t-\tau) e^{-st} d\tau} dt}
     > $$
     >
-    > 현재 $$d\tau dt$$ 순서로 되어 있는 적분을 $$dtd\tau$$로 바꾸어도 적분되는 면적은 동일해야 한다. 순서가 바뀌기 전에는 변수 $$\tau$$가 $$0$$에서부터 $$t$$까지 적분되었으나, 그 다음 적분에서 $$t$$가 무한으로 적분하면서 $$\tau$$ 또한 변수 $$t$$를 따라 함께 무한으로 뻗어나간다. 그러므로 적분 순서를 바꾸면 범위는 아래와 같이 바뀐다.
+    > 현재 $d\tau dt$ 순서로 되어 있는 적분을 $dtd\tau$로 바꾸어도 적분되는 면적은 동일해야 한다. 순서가 바뀌기 전에는 변수 $\tau$가 $0$에서부터 $t$까지 적분되었으나, 그 다음 적분에서 $t$가 무한으로 적분하면서 $\tau$ 또한 변수 $t$를 따라 함께 무한으로 뻗어나간다. 그러므로 적분 순서를 바꾸면 범위는 아래와 같이 바뀐다.
     >
     > $$
     > \quad \Rightarrow \int^{\infty}_{0^-}{ \int^{\infty}_{0^-}{f(\tau)g(t-\tau) e^{-st} dt} d\tau}
     > $$
     >
-    > 위에서 설명한 $$\tau$$가 무한으로 적분되는 것이 수식에 반영된 것을 볼 수 있다.
+    > 위에서 설명한 $\tau$가 무한으로 적분되는 것이 수식에 반영된 것을 볼 수 있다.
     >
-    > 만일 $$u=t-\tau$$로 치환하면 도함수 $$du=dt$$가 나오는데, 적분 우선순위에 의해 $$\tau$$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
+    > 만일 $u=t-\tau$로 치환하면 도함수 $du=dt$가 나오는데, 적분 우선순위에 의해 $\tau$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
     >
     > $$
     > \quad \Rightarrow \int^{\infty}_{0^-}{ \int^{\infty}_{0^-}{f(\tau)g(u) e^{-s(\tau + u)} du} d\tau}
@@ -144,7 +143,7 @@ $$
     > $$
 
 * *시간 이동 (Time shifting)*
-    : 시간축으로 $$a$$만큼 이동하였을 시, 단위 계단 함수 $$u(t-a)$$를 함께 사용하여 $$t=a$$에서 함수가 활성화하도록 한다.
+    : 시간축으로 $a$만큼 이동하였을 시, 단위 계단 함수 $u(t-a)$를 함께 사용하여 $t=a$에서 함수가 활성화하도록 한다.
     
     $$
     f(t-a)u(t-a) \quad \Longleftrightarrow \quad e^{-as}F(s)
@@ -198,7 +197,7 @@ $$
     > $$
 
 * *주파수 이동 (Frequency shifting)*
-    : 시간 이동과 반대로, 본 성질은 주파수축에서의 $$a$$만큼 이동을 다룬다.
+    : 시간 이동과 반대로, 본 성질은 주파수축에서의 $a$만큼 이동을 다룬다.
     
     $$
     e^{at}f(t) \quad \Longleftrightarrow \quad F(s-a)
@@ -219,13 +218,13 @@ $$
     > $$
 
 * *[초기값 정리](https://en.wikipedia.org/wiki/Initial_value_theorem) (Initial value theorem)*
-    : 시간 영역에서의 함수가 $$0$$으로 수렴할 시, 복소주파수 영역에서는 다음 수식과 동일한 값을 가진다.
+    : 시간 영역에서의 함수가 $0$으로 수렴할 시, 복소주파수 영역에서는 다음 수식과 동일한 값을 가진다.
 
     $$
     f(0^+) = \lim_{s\rightarrow\infty}{sF(s)}
     $$
 
-    > 만일 $$f(0^+) = \alpha$$라고 가정하고 $$s$$-영역에서부터 증명을 시작한다:
+    > 만일 $f(0^+) = \alpha$라고 가정하고 $s$-영역에서부터 증명을 시작한다:
     >
     > $$
     > sF(s) = s\int^{\infty}_{0^-}{f(\tau)e^{-s\tau}d\tau}
@@ -235,7 +234,7 @@ $$
     > \quad = \int^{\infty}_{0^-}{f\left(\frac{t}{s}\right)e^{-t}dt} \quad ... \mathrm{assuming} \ \tau = \frac{t}{s} , \ \mathrm{thus} \ sd\tau = dt
     > $$
     >
-    > 여기서 복소주파수 영역의 $$s$$ 변수를 무한으로 발산시키면 아래의 방정식이 표현된다.
+    > 여기서 복소주파수 영역의 $s$ 변수를 무한으로 발산시키면 아래의 방정식이 표현된다.
     >
     > $$ 
     > \lim_{s\rightarrow\infty}{sF(s)} = \lim_{s\rightarrow\infty}{\int^{\infty}_{0^-}{f\left(\frac{t}{s}\right)e^{-t}dt}}
@@ -264,7 +263,7 @@ $$
     f(\infty) = \lim_{s\rightarrow 0}{sF(s)}
     $$
     
-    단, 위의 정리가 만족하기 위해서는 복소주파수 영역에서 $$sF(s)$$ 함수의 [극점](https://en.wikipedia.org/wiki/Zeros_and_poles)(poles)이 모두 $$s$$ 좌표계의 왼쪽에 위치하여야 한다. 정리하자면, 시간 영역의 함수가 반드시 수렴해야 한다는 의미이다.
+    단, 위의 정리가 만족하기 위해서는 복소주파수 영역에서 $sF(s)$ 함수의 [극점](https://en.wikipedia.org/wiki/Zeros_and_poles)(poles)이 모두 $s$ 좌표계의 왼쪽에 위치하여야 한다. 정리하자면, 시간 영역의 함수가 반드시 수렴해야 한다는 의미이다.
 
     > 1계도함수에 대한 라플라스 변환은 다음과 같다
     >
@@ -272,7 +271,7 @@ $$
     > \int^{\infty}_{0^-}{f'(t)e^{-st}dt} = sF(s) - f(0)
     > $$
     >
-    > 여기서 복소주파수 영역의 $$s$$ 변수를 $$0$$으로 수렴시키면 아래의 방정식이 표현된다.
+    > 여기서 복소주파수 영역의 $s$ 변수를 $0$으로 수렴시키면 아래의 방정식이 표현된다.
     >
     > $$
     > \lim_{s\rightarrow 0}{\int^{\infty}_{0^-}{f'(t)e^{-st}dt}} = \int^{\infty}_{0^-}{f'(t)dt}
@@ -291,7 +290,7 @@ $$
 
 아래는 라플라스 변환에서 흔히 사용되는 단일변수 함수의 시간 영역과 복소주파수 영역간의 변화표를 제공한다. 또한 해당 변환표로 복소주파수 영역에서 시간 영역으로 되돌아가는 라플라스 역변환에서도 사용된다.
 
-| 함수 | 시간 $$t$$-영역: $$f(t)$$  | 복소주파수 $$s$$-영역: $$F(s)$$  |
+| 함수 | 시간 $t$-영역: $f(t)$  | 복소주파수 $s$-영역: $F(s)$  |
 |:--:|:----------:|:------------:|
 | [단위 임펄스](https://en.wikipedia.org/wiki/Dirac_delta_function) | $$\begin{align}\delta(t)\end{align}$$ | $$1$$ |
 | [단위 계단 함수](https://en.wikipedia.org/wiki/Heaviside_step_function) | $$u(t)$$ | $$\begin{align}\frac{1}{s}\end{align}$$ |
@@ -303,7 +302,7 @@ $$
 | 코사인 함수<br/>+ 지수적 감쇠 | $$e^{-at}\cos{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{s+a}{(s+a)^2+\omega^2}\end{align}$$ |
 
 ### 부분분수전개
-[부분분수전개](https://en.wikipedia.org/wiki/Partial_fraction_decomposition)(partial fraction expansion)는 복합적인 분수를 여러 간단한 분수들의 합으로 풀어쓰는 기법이다. 라플라스 변환표를 보면 알 수 있듯이 수많은 $$s$$-영역 함수들은 분수 형태를 띄고 있다. 이를 다시 $$t$$-영역으로 역변환시키기 위해서는 최소한 라플라스 성질 및 변환표를 활용할 수 있는 형태로 되돌려야 한다.
+[부분분수전개](https://en.wikipedia.org/wiki/Partial_fraction_decomposition)(partial fraction expansion)는 복합적인 분수를 여러 간단한 분수들의 합으로 풀어쓰는 기법이다. 라플라스 변환표를 보면 알 수 있듯이 수많은 $s$-영역 함수들은 분수 형태를 띄고 있다. 이를 다시 $t$-영역으로 역변환시키기 위해서는 최소한 라플라스 성질 및 변환표를 활용할 수 있는 형태로 되돌려야 한다.
 
 1. 서로 다른 극점
     
@@ -311,7 +310,7 @@ $$
     F(s) = \frac{N(s)}{(s-\alpha)(s-\beta)} = \frac{A}{s-\alpha} + \frac{B}{s-\beta}
     $$
 
-    함수 $$F(s)$$가 위의 형태를 가질 시, 해당 방정식에서 분자 $$A$$와 $$B$$는 아래 계산식으로 구한다.
+    함수 $F(s)$가 위의 형태를 가질 시, 해당 방정식에서 분자 $A$와 $B$는 아래 계산식으로 구한다.
 
     $$
     \begin{cases}
@@ -327,7 +326,7 @@ $$
     F(s) = \frac{N(s)}{(s-\alpha)^n} = \frac{A_n}{(s-\alpha)^n} + \frac{A_{n-1}}{(s-\alpha)^{n-1}} + \cdots + \frac{A_1}{(s-\alpha)}
     $$
 
-    함수 $$F(s)$$가 위의 형태를 가질 시, 해당 방정식에서 분자 $$A_n$$ ~ $$A_1$$은 아래 계산식으로 구한다. 
+    함수 $F(s)$가 위의 형태를 가질 시, 해당 방정식에서 분자 $A_n$ ~ $A_1$은 아래 계산식으로 구한다. 
 
     $$
     A_{n-k} = \frac{1}{(n-k-1)!}\frac{d^k}{ds^k} \left[ (s-\alpha)^nF(s) \right]_{s=\alpha} \quad ... \mathrm{where} \ k = 0, \ 1, \ 2, \ \cdots, \ n-1
@@ -349,7 +348,7 @@ $$
 \quad \Rightarrow \mathcal{L}\left\{ my''(t) + ky(t) \right\} = m\bigl( s^2Y(s) - sy(0) - y'(0) \bigr) + kY(s) = 0 \quad ... \mathrm{since} \ \mathcal{L}\left\{ 0 \right\} = 0
 $$
 
-방정식의 좌변과 우변을 각각 $$Y(s)$$에 대한 식과 그렇지 아니한 식으로 나눈다.
+방정식의 좌변과 우변을 각각 $Y(s)$에 대한 식과 그렇지 아니한 식으로 나눈다.
 
 $$
 Y(s) \left(s^2 + \frac{k}{m}\right)= y(0)s + y'(0)
@@ -365,7 +364,7 @@ $$
 \qquad \therefore \mathcal{L}^{-1}\left\{ Y(s) \right\} = y(t) = c_1e^{+j\omega t} + c_2e^{-j\omega t} \quad ...\mathrm{where} \ \omega = \sqrt{\frac{k}{m}}
 $$
 
-이는 미분방정식의 일반해와 동일한 결과이며, 만일 초기값 $$y(0)$$ 및 $$y'(0)$$가 주어지면 특수해를 구할 수 있게 된다.
+이는 미분방정식의 일반해와 동일한 결과이며, 만일 초기값 $y(0)$ 및 $y'(0)$가 주어지면 특수해를 구할 수 있게 된다.
 
 ### 예제 4. 감쇠자유진동
 미분방정식 문서에 의해 감쇠자유진동에 대한 미분방정식은 다음과 같다:
@@ -378,7 +377,7 @@ $$
 \quad \Rightarrow \mathcal{L}\left\{ my''(t) + cy'(t) + ky(t) \right\} = m\bigl( s^2Y(s) - sy(0) - y'(0) \bigr) + c\bigl( sY(s) - y(0) \bigr) + kY(s) = 0
 $$
 
-방정식의 좌변과 우변을 각각 $$Y(s)$$에 대한 식과 그렇지 아니한 식으로 나눈다.
+방정식의 좌변과 우변을 각각 $Y(s)$에 대한 식과 그렇지 아니한 식으로 나눈다.
 
 $$
 Y(s) \left(s^2 + \frac{c}{m}s + \frac{k}{m}\right)= y(0)s + y'(0) + \frac{c}{m}y(0)
@@ -394,7 +393,7 @@ $$
 \qquad \therefore \mathcal{L}^{-1}\left\{ Y(s) \right\} = y(t) = c_1e^{\left( \sigma+j\omega \right) t} + c_2e^{\left( \sigma-j\omega \right) t} \quad ...\mathrm{where} \ \sigma = \frac{-c}{2m}, \ \omega = \sqrt{\frac{4km-c^2}{4m^2}}
 $$
 
-이는 미분방정식의 일반해와 동일한 결과이며, 만일 초기값 $$y(0)$$ 및 $$y'(0)$$가 주어지면 특수해를 구할 수 있게 된다.
+이는 미분방정식의 일반해와 동일한 결과이며, 만일 초기값 $y(0)$ 및 $y'(0)$가 주어지면 특수해를 구할 수 있게 된다.
 
 ### 예제 5. 감쇠강제진동
 미분방정식 문서에 의해 감쇠강제진동에 대한 미분방정식은 다음과 같다:
@@ -407,7 +406,7 @@ $$
 \quad \Rightarrow \mathcal{L}\left\{ my''(t) + cy'(t) + ky(t) \right\} = m\bigl( s^2Y(s) - sy(0) - y'(0) \bigr) + c\bigl( sY(s) - y(0) \bigr) + kY(s) = F_0\frac{s}{s^2+\omega^2}
 $$
 
-방정식의 좌변과 우변을 각각 $$Y(s)$$에 대한 식과 그렇지 아니한 식으로 나눈다.
+방정식의 좌변과 우변을 각각 $Y(s)$에 대한 식과 그렇지 아니한 식으로 나눈다.
 
 $$
 Y(s) \left(s^2 + \frac{c}{m}s + \frac{k}{m}\right)= y(0)s + y'(0) + \frac{c}{m}y(0) + F_0\frac{s}{s^2+\omega^2}
@@ -420,7 +419,7 @@ $$
 ## 전기회로
 
 ### 예제 7. RLC 회로
-아래의 그림은 [저항](https://en.wikipedia.org/wiki/Resistor)(resistor; $$R$$)과 [인덕터](https://en.wikipedia.org/wiki/Inductor)(inductor; $$L$$) 그리고 [커패시터](https://en.wikipedia.org/wiki/Capacitor)(capacitor; $$C$$) 소자로 이루어진 회로이다.
+아래의 그림은 [저항](https://en.wikipedia.org/wiki/Resistor)(resistor; $R$)과 [인덕터](https://en.wikipedia.org/wiki/Inductor)(inductor; $L$) 그리고 [커패시터](https://en.wikipedia.org/wiki/Capacitor)(capacitor; $C$) 소자로 이루어진 회로이다.
 
 ![RLC 회로](/images/docs/engineering/laplace_circuit_rlc.png)
 
@@ -464,7 +463,7 @@ $$
 \quad \Rightarrow \mathcal{L}\left\{ Li''(t) + Ri'(t) + \frac{1}{C}i(t) \right\} = L\bigl( s^2I(s) - si(0) - i'(0) \bigr) + R\bigl( sI(s) - i(0) \bigr) + \frac{1}{C}I(s) = \frac{j\omega E}{s-j\omega}
 $$
 
-방정식의 좌변과 우변을 각각 $$I(s)$$에 대한 식과 그렇지 아니한 식으로 나눈다.
+방정식의 좌변과 우변을 각각 $I(s)$에 대한 식과 그렇지 아니한 식으로 나눈다.
 
 $$
 I(s) \left(s^2 + \frac{R}{L}s + \frac{1}{LC}\right)= i(0)s + i'(0) + \frac{R}{L}i(0) + \frac{j\omega E}{s-j\omega}

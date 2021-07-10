@@ -4,26 +4,54 @@ language: ko
 category: 미적분학
 title: 푸리에 변환
 meta: Fourier
-mathjax: true
 order: 0xE1
 ---
 # 푸리에: 개요
 > 본 내용은 고등학교 교육과정 중 하나인 [삼각함수](https://ko.wikipedia.org/wiki/삼각함수), [미분](https://ko.wikipedia.org/wiki/미분) 및 [적분](https://ko.wikipedia.org/wiki/적분), 그리고 [복소수](https://ko.wikipedia.org/wiki/복소수)를 기반하므로 이에 대해 충분한 이해가 필요하다.
 
-[푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 시간 $$t$$ 영역의 함수를 주파수 $$f$$ 영역의 함수로 분해하는 수학적 변환식이다. *일반적인 함수(혹은 신호)들은 다른 주파수를 갖는 사인 $$\sin$$ 및 코사인 $$\cos$$ 삼각함수들의 합으로 표현될 수 있다*는 [푸리에 해석](https://en.wikipedia.org/wiki/Fourier_analysis)(Fourier analysis)을 기반으로 수립되었다. 대표적인 예시로 신호해석에서 시간에 따라 흐르는 신호가 어떠한 주파수로 구성되어 있는지 알 수 있다.
+[푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 시간 $t$ 영역의 함수를 주파수 $f$ 영역의 함수로 분해하는 수학적 변환식이다. *일반적인 함수(혹은 신호)들은 다른 주파수를 갖는 사인 $\sin$ 및 코사인 $\cos$ 삼각함수들의 합으로 표현될 수 있다*는 [푸리에 해석](https://en.wikipedia.org/wiki/Fourier_analysis)(Fourier analysis)을 기반으로 수립되었다. 대표적인 예시로 신호해석에서 시간에 따라 흐르는 신호가 어떠한 주파수로 구성되어 있는지 알 수 있다.
 
 # 푸리에: 급수
-[푸리에 급수](https://ko.wikipedia.org/wiki/푸리에_급수)(Fourier series)는 푸리에 변환의 시작이자 푸리에 해석을 가장 쉽게 설명한다. 단, 푸리에 급수는 일반함수가 아닌 주기함수의 푸리에 해석에 초점을 두고 있다는 제약이 있다. 주기 $$T$$ 간격으로 반복하는, 혹은 기본 주파수(fundamental frequency) $$\omega_0 = 2\pi f_0 = \frac{2\pi}{T}$$를 갖는 주기함수 $$x_T(t)$$가 주어질 떄 푸리에 급수가 어떻게 유도되는지 삼각함수와 지수함수 형태에 대하여 각각 살펴본다.
+[푸리에 급수](https://ko.wikipedia.org/wiki/푸리에_급수)(Fourier series)는 연속시간의 주기함수에 대한 주파수 영역으로의 변환을 다룬다. 비록 푸리에 급수는 주기함수에 한정된 변환이란 제약이 있으나, 푸리에 변환의 시발점이기도 하므로 개념적인 면에서 큰 의의를 갖기 때문에 비중있게 다루는 내용 중 하나이다. 연속시간 $t$ 주기함수의 변환은 푸리에 급수가 갖는 방정식에 의해 주파수 영역은 항상 이산주파수 $kf_0$ 비주기함수가 도출된다.
+
+| 시간 영역 $x_{T}(t)$ | 주파수 영역 $X(k)$ |
+|:--------------:|:---------------:|
+| 연속시간 주기함수      | 이산주파수 비주기함수      |
 
 ## 삼각함수 형태
-삼각함수 형태의 푸리에 급수를 설명하기 위해서는 우함수와 기함수의 경우를 나누어서 서술한다.
+삼각함수 형태의 푸리에 급수를 설명하기 위해서는 우주기함수 $x_{T_e}(t)$에 해당하는 삼각함수의 $\cos$와 기주기함수 $x_{T_o}(t)$에 해당하는 삼각함수의 $\sin$ 경우를 나누어서 서술한다. 종합적으로 두 경우의 주기함수를 합하면 일반 주기함수 $x_T(t)$에 대한 합성 방정식으로 도출된다.
+
+> $$
+> x_T(t) = x_{T_e}(t) + x_{T_o}(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}}
+> $$
+>
+> $$
+> \qquad \mathrm{...where} \ 
+> \left\{
+> \begin{array}{lll}
+> 
+> a_0 & \displaystyle = \frac{1}{T}\int_{T}{x_{T}(t)dt}
+> 
+> \\
+> 
+> a_k & \displaystyle = \frac{2}{T}\int_{T}{x_{T}(t)\cos{(k\omega_0 t)}dt}
+> 
+> \\
+> 
+> b_k & \displaystyle = \frac{2}{T}\int_{T}{x_{T}(t)\sin{(k\omega_0 t)}dt}
+> 
+> \end{array}
+> \right.
+> $$
+
+여기서 $\omega_0 = 2\pi f_0 = \frac{2\pi}{T}$는 기본 각주파수(fundamental angular frequency)로, 이는 푸리에 급수가 갖는 모든 이산 각주파수들의 최소공배수이다. 기본 주파수 $f_0$로도 푸리에 급수를 표현할 수 있으나, 수식의 간략화를 위해 본 부문에서는 각주파수를 택하였다.
 
 ### 우주기함수
-먼저 주기함수 $$x_T(t)$$가 우함수인 주기함수, 일명 우주기함수(even periodic function) 가정하자.
+먼저 주기함수 $x_T(t)$가 우함수인 주기함수, 일명 우주기함수(even periodic function) 가정하자.
 
-> 우함수(even function)은 $$y$$축을 기준으로 대칭을 이루는 함수이다.
+> 우함수(even function)은 $y$축을 기준으로 대칭을 이루는 함수이다.
 
-코사인 $$\cos$$ 삼각함수는 대표적인 우함수로, 우주기함수 $$x_{T_e}(t)$$의 합성 방정식(synthesis equation)은 기본 주파수의 배수인 고조 주파수(harmonic frequency) $$k\omega_0$$를 갖는 코사인 함수들의 합으로 나타낼 수 있다.
+코사인 $\cos$ 삼각함수는 대표적인 우함수로, 우주기함수 $x_{T_e}(t)$의 합성 방정식(synthesis equation)은 기본 주파수의 배수인 고조 주파수(harmonic frequency) $k\omega_0$를 갖는 코사인 함수들의 합으로 나타낼 수 있다.
 
 $$
 x_{T_e}(t) = \sum_{k=0}^{\infty}{a_k\cos{k\omega_0 t}} 
@@ -33,13 +61,13 @@ $$
 \quad = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} \quad \left( \because \ a_0\cos{0\omega_0 t} = a_0 \right)
 $$
 
-여기서 우주기함수의 푸리에 계수 $$a_k$$는 해당 주기함수(혹은 신호)를 구성하고 있는 고조 주파수 $$k\omega_0$$ 성분이 얼만큼인지 결정하는 매우 중요한 인자이며, 푸리에 해석의 핵심이다. 푸리에 계수 $$a_k$$를 구하기 위해 우선 합성 방정식의 양변에 $$n$$ 배수의 고조 주파수를 갖는 $$\cos{(n\omega_0 t)}$$ 삼각함수를 곱한다.
+여기서 우주기함수의 푸리에 계수 $a_k$는 해당 주기함수(혹은 신호)를 구성하고 있는 고조 주파수 $k\omega_0$ 성분이 얼만큼인지 결정하는 매우 중요한 인자이며, 푸리에 해석의 핵심이다. 푸리에 계수 $a_k$를 구하기 위해 우선 합성 방정식의 양변에 $n$ 배수의 고조 주파수를 갖는 $\cos{(n\omega_0 t)}$ 삼각함수를 곱한다.
 
 $$
 x_{T_e}(t)\cos{(n\omega_0 t)} = \sum_{k=0}^{\infty}{a_k\cos{(k\omega_0 t)} \cos{(n\omega_0 t)}}
 $$
 
-위의 방정식 방정식 양변에 $$T$$ 주기만큼 적분한다.
+위의 방정식 방정식 양변에 $T$ 주기만큼 적분한다.
 
 $$
 \int_{T}{x_{T_e}(t)\cos{(n\omega_0 t)}dt} = \int_{T}{\sum_{k=0}^{\infty}{a_k\cos{(k\omega_0 t)} \cos{(n\omega_0 t)}}dt}
@@ -57,9 +85,9 @@ $$
 \quad = \sum_{k=0}^{\infty}{\frac{a_k}{2} \left[ \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} }dt} + \int_{T}{\cos{\left\{ (k+n)\omega_0 t \right \} }dt} \right] }
 $$
 
-코사인 삼각함수는 한 주기동안 적분하면 동일한 너비를 같는 양($$+$$)과 음($$-$$)의 면적이 서로를 상쇄시켜 0이 되는 성질을 갖는다. 그리고 고조 주파수가 기본 주파수의 정수배가 아닌 이상 무조건 적분구간 $$T$$ 내에서는 $$\lvert k-n \rvert$$ 혹은 $$\lvert k+n \rvert$$번 반복한다.
+코사인 삼각함수는 한 주기동안 적분하면 동일한 너비를 같는 양($+$)과 음($-$)의 면적이 서로를 상쇄시켜 0이 되는 성질을 갖는다. 그리고 고조 주파수가 기본 주파수의 정수배가 아닌 이상 무조건 적분구간 $T$ 내에서는 $\lvert k-n \rvert$ 혹은 $\lvert k+n \rvert$번 반복한다.
 
-단, $$k=n$$일 경우에는 전혀 다른 적분 결과가 나타난다.
+단, $k=n$일 경우에는 전혀 다른 적분 결과가 나타난다.
 
 $$
 \left\{
@@ -93,13 +121,13 @@ $$
 \quad = a_n\frac{T}{2}
 $$
 
-그러므로 푸리에 계수 $$a_n$$에 대한 해석 방정식(analysis equation)으로 표현하면 다음과 같이 나타난다.
+그러므로 푸리에 계수 $a_n$에 대한 분석 방정식(analysis equation)으로 표현하면 다음과 같이 나타난다.
 
 $$
 \qquad \therefore a_n = \frac{2}{T}\int_{T}{x_{T_e}(t)\cos{(n\omega_0 t)}dt} \quad ...\mathrm{where} \ n \in k = \{1, 2, \cdots \}
 $$
 
-그러나 해당 푸리에 계수는 $$n=0$$인 경우에는 성립하지 않으며, 이는 "$$n$$ 배수의 고조 주파수를 갖는" 조건이 전재하였기 때문이다. $$a_0$$에 대해서는 다시 합성 방정식에서 시작하되, 주파수가 0인 관계로 훨씬 더 간단하게 유도된다.
+그러나 해당 푸리에 계수는 $n=0$인 경우에는 성립하지 않으며, 이는 "$n$ 배수의 고조 주파수를 갖는" 조건이 전재하였기 때문이다. $a_0$에 대해서는 다시 합성 방정식에서 시작하되, 주파수가 0인 관계로 훨씬 더 간단하게 유도된다.
 
 $$
 \int_{T}{x_{T_e}(t)\cos{(0\omega_0 t)}dt} = \sum_{k=0}^{\infty}{a_k \int_{T}{\cos{(k\omega_0 t)} \cos{(0\omega_0 t)}dt} }
@@ -113,14 +141,14 @@ $$
 \qquad \therefore a_0 = \frac{1}{T}\int_{T}{x_{T_e}(t)dt}
 $$
 
-그리고 $$a_0$$ 계수는 주파수가 없는 수식에서 유도되었기 때문에 주기함수 $$x_{T_e}(t)$$의 평균값 혹은 전자기에서는 DC 성분과 동일하다.
+그리고 $a_0$ 계수는 주파수가 없는 수식에서 유도되었기 때문에 주기함수 $x_{T_e}(t)$의 평균값 혹은 전자기에서는 DC 성분과 동일하다.
 
 ### 기주기함수
-이번에는 주기함수 $$x_T(t)$$가 기함수인 주기함수, 일명 기주기함수(odd periodic function) 가정하자.
+이번에는 주기함수 $x_T(t)$가 기함수인 주기함수, 일명 기주기함수(odd periodic function) 가정하자.
 
 > 기함수(odd function)은 원점을 기준으로 대칭을 이루는 함수이다.
 
-사인 $$\sin$$ 삼각함수는 대표적인 기함수로, 기주기함수 $$x_{T_o}(t)$$의 합성 방정식(synthesis equation)은 마찬가지로 기본 주파수의 배수인 고조 주파수 $$k\omega_0$$를 갖는 사인 함수들의 합으로 나타낼 수 있다.
+사인 $\sin$ 삼각함수는 대표적인 기함수로, 기주기함수 $x_{T_o}(t)$의 합성 방정식(synthesis equation)은 마찬가지로 기본 주파수의 배수인 고조 주파수 $k\omega_0$를 갖는 사인 함수들의 합으로 나타낼 수 있다.
 
 $$
 x_{T_o}(t) = \sum_{k=0}^{\infty}{b_k\sin{k\omega_0 t}} 
@@ -130,13 +158,13 @@ $$
 \quad = \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}} \quad \left( \because \ b_0\cos{0\omega_0 t} = 0 \right)
 $$
 
-여기서 기주기함수의 푸리에 계수 $$b_k$$는 해당 주기함수(혹은 신호)를 구성하고 있는 고조 주파수 $$k\omega_0$$ 성분이 얼만큼인지 결정하는 매우 중요한 인자이며, 푸리에 해석의 핵심이다. 푸리에 계수 $$b_k$$를 구하기 위해 우선 합성 방정식의 양변에 $$n$$ 배수의 고조 주파수를 갖는 $$\sin{(n\omega_0 t)}$$ 삼각함수를 곱한다.
+여기서 기주기함수의 푸리에 계수 $b_k$는 해당 주기함수(혹은 신호)를 구성하고 있는 고조 주파수 $k\omega_0$ 성분이 얼만큼인지 결정하는 매우 중요한 인자이며, 푸리에 해석의 핵심이다. 푸리에 계수 $b_k$를 구하기 위해 우선 합성 방정식의 양변에 $n$ 배수의 고조 주파수를 갖는 $\sin{(n\omega_0 t)}$ 삼각함수를 곱한다.
 
 $$
 x_{T_o}(t)\sin{(n\omega_0 t)} = \sum_{k=0}^{\infty}{b_k\sin{(k\omega_0 t)} \sin{(n\omega_0 t)}}
 $$
 
-위의 방정식 방정식 양변에 $$T$$ 주기만큼 적분한다.
+위의 방정식 방정식 양변에 $T$ 주기만큼 적분한다.
 
 $$
 \int_{T}{x_{T_o}(t)\sin{(n\omega_0 t)}dt} = \int_{T}{\sum_{k=0}^{\infty}{b_k\sin{(k\omega_0 t)} \sin{(n\omega_0 t)}}dt}
@@ -154,9 +182,9 @@ $$
 \quad = \sum_{k=0}^{\infty}{\frac{b_k}{2} \left[ \int_{T}{\cos{\left\{ (k-n)\omega_0 t \right\} }dt} - \int_{T}{\cos{\left\{ (k+n)\omega_0 t \right \} }dt} \right] }
 $$
 
-사인 삼각함수는 한 주기동안 적분하면 동일한 너비를 같는 양($$+$$)과 음($$-$$)의 면적이 서로를 상쇄시켜 0이 되는 성질을 갖는다. 그리고 고조 주파수가 기본 주파수의 정수배가 아닌 이상 무조건 적분구간 $$T$$ 내에서는 $$\lvert k-n \rvert$$ 혹은 $$\lvert k+n \rvert$$번 반복한다.
+사인 삼각함수는 한 주기동안 적분하면 동일한 너비를 같는 양($+$)과 음($-$)의 면적이 서로를 상쇄시켜 0이 되는 성질을 갖는다. 그리고 고조 주파수가 기본 주파수의 정수배가 아닌 이상 무조건 적분구간 $T$ 내에서는 $\lvert k-n \rvert$ 혹은 $\lvert k+n \rvert$번 반복한다.
 
-단, $$k=n$$일 경우에는 전혀 다른 적분 결과가 나타난다.
+단, $k=n$일 경우에는 전혀 다른 적분 결과가 나타난다.
 
 $$
 \left\{
@@ -190,44 +218,22 @@ $$
 \quad = b_n\frac{T}{2}
 $$
 
-그러므로 푸리에 계수 $$b_n$$에 대한 해석 방정식(analysis equation)으로 표현하면 다음과 같이 나타난다.
+그러므로 푸리에 계수 $b_n$에 대한 분석 방정식(analysis equation)으로 표현하면 다음과 같이 나타난다.
 
 $$
 \qquad \therefore b_n = \frac{2}{T}\int_{T}{x_{T_o}(t)\sin{(n\omega_0 t)}dt} \quad ...\mathrm{where} \ n \in k = \{1, 2, \cdots \}
 $$
 
-그러나 해당 푸리에 계수는 $$n=0$$인 경우에는 성립하지 않으며, 이는 "$$n$$ 배수의 고조 주파수를 갖는" 조건이 전재하였기 때문이다. 하지만 기주기함수에서는 $$\sin(0) = 0$$로 인해 $$b_0$$ 계수가 방정식에서 아예 사라진다. 이는 $$b_0 = 0$$임을 시사하는 게 절대 아니므로 주의하도록 한다.
-
-### 주기함수
-종합적으로 우주기함수 $$x_{T_e}(t)$$와 기주기함수 $$x_{T_o}(t)$$의 합은 일반 주기함수 $$x_T(t)$$에 대한 합성 방정식으로 도출된다.
-
-$$
-\qquad \therefore x_T(t) = x_{T_e}(t) + x_{T_o}(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}}
-$$
-
-$$
-\qquad \quad
-\left\{
-\begin{array}{lll}
-
-a_0 & \displaystyle = \frac{1}{T}\int_{T}{x_{T}(t)dt}
-
-\\
-
-a_k & \displaystyle = \frac{2}{T}\int_{T}{x_{T}(t)\cos{(k\omega_0 t)}dt}
-
-\\
-
-b_k & \displaystyle = \frac{2}{T}\int_{T}{x_{T}(t)\sin{(k\omega_0 t)}dt}
-
-\end{array}
-\right.
-$$
+그러나 해당 푸리에 계수는 $n=0$인 경우에는 성립하지 않으며, 이는 "$n$ 배수의 고조 주파수를 갖는" 조건이 전재하였기 때문이다. 하지만 기주기함수에서는 $\sin(0) = 0$로 인해 $b_0$ 계수가 방정식에서 아예 사라진다. 이는 $b_0 = 0$임을 시사하는 게 절대 아니므로 주의하도록 한다.
 
 ## 지수함수 형태
-지수함수 형태의 푸리에 급수는 삼각함수 형태로부터 지수함수와 삼각함수의 상관관계를 설명하는 [오일러 공식](https://ko.wikipedia.org/wiki/오일러_공식)을 통해 유도된다.
+지수함수 형태의 푸리에 급수는 삼각함수 형태로부터 지수함수와 삼각함수의 상관관계를 설명하는 [오일러 공식](https://ko.wikipedia.org/wiki/오일러_공식)을 통해 유도되며, 결론적으로 아래의 수식이 도출된다.
 
-> 오일러 공식: $$e^{jx} = \cos{x} + j\sin{x}$$
+> $$
+> x_T(t) = \sum_{k=-\infty}^{+\infty}{ X(k) e^{jk\omega_0t} } \quad ...\mathrm{where} \ X(k) = \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt}
+> $$
+
+삼각함수 형태의 푸리에 급수를 오일러 공식 $$e^{jx} = \cos{x} + j\sin{x}$$을 적용하면 다음과 같이 표현된다.
 
 $$
 x_T(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}}
@@ -241,7 +247,7 @@ $$
 \quad = a_0 + \sum_{k=1}^{\infty}{ \left(\frac{a_k-jb_k}{2}\right) e^{jk\omega_0t} } + \sum_{k=1}^{\infty}{ \left(\frac{a_k+jb_k}{2}\right) e^{-jk\omega_0t} }
 $$
 
-삼각함수 형태에서 도출한 푸리에 계수 $$a_k$$ 및 $$b_k$$ 계산식을 대입한다.
+삼각함수 형태에서 도출한 푸리에 계수 $a_k$ 및 $b_k$ 계산식을 대입한다.
 
 $$
 x_T(t) = \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)\left[ \cos{k\omega_0 t} - j\sin{k\omega_0 t} \right] dt} \right) e^{jk\omega_0t} }
@@ -252,7 +258,7 @@ $$
 \quad = \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} }
 $$
 
-위의 방정식은 $$k$$를 자세히 관찰하면 사실상 $$(-\infty, \infty)$$ 범위를 갖는 하나의 수식으로 정리할 수 있음을 알 수 있다.
+위의 방정식은 $k$를 자세히 관찰하면 사실상 $(-\infty, \infty)$ 범위를 갖는 하나의 수식으로 정리할 수 있음을 알 수 있다.
 
 $$
 x_T(t) = \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} }
@@ -270,13 +276,13 @@ $$
 \quad = \sum_{k=-\infty}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} }
 $$
 
-그러므로 주기함수 $$x_T(t)$$의 지수함수 형태 푸리에 급수는 다음 합성 및 해석 방정식을 갖는다.
+그러므로 주기함수 $x_T(t)$의 지수함수 형태 푸리에 급수는 다음 합성 및 분석 방정식을 갖는다.
 
 $$
-\qquad \therefore x_T(t) = \sum_{k=-\infty}^{+\infty}{ c_k e^{jk\omega_0t} } \quad ...\mathrm{where} \ c_k = \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt}
+\qquad \therefore x_T(t) = \sum_{k=-\infty}^{+\infty}{ X(k) e^{jk\omega_0t} } \quad ...\mathrm{where} \ X(k) = \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt}
 $$
 
-### vs. 삼각함수 형태
+### 삼각함수 비교
 삼각함수와 지수함수 형태가 서로 달리 생겨도 하나의 주기함수에 대한 푸리에 급수를 표현하는 동일한 방정식이다.
 
 $$
@@ -289,7 +295,7 @@ x_T(t) =
 
 \\
 
-\displaystyle \sum_{k=-\infty}^{+\infty}{ c_k e^{jk\omega_0t} } & \quad \mathsf{Exponential}
+\displaystyle \sum_{k=-\infty}^{+\infty}{ X(k) e^{jk\omega_0t} } & \quad \mathsf{Exponential}
 
 \end{array}
 \right.
@@ -297,79 +303,105 @@ $$
 
 동일한 합성 방정식이지만 형태만 다른 푸리에 급수로써, 본 부분은 두 형태간 상호비교를 목표로 한다.
 
-삼각함수에서 지수함수 형태로 변환하는 과정에서 $$k=0$$일 경우, 삼각함수의 $$a_0$$와 지수함수의 $$c_0$$ 해석 방정식은 어떠한 차이도 없이 동일하다는 것을 확인하였다.
+삼각함수에서 지수함수 형태로 변환하는 과정에서 $k=0$일 경우, 삼각함수의 $a_0$와 지수함수의 $X(0)$ 분석 방정식은 어떠한 차이도 없이 동일하다는 것을 확인하였다.
 
 $$
-\quad [1] \qquad a_0 = c_0 = \frac{1}{T}\int_{T}{x_{T}(t)dt}
+\quad [1] \qquad X(0) = a_0 = \frac{1}{T}\int_{T}{x_{T}(t)dt}
 $$
 
-영이 아닌 $$k$$ 배수의 고조 주파수에서 삼각함수와 지수함수 형태를 일대일 비교하면 아래의 식을 만족한다.
+영이 아닌 $k$ 배수의 고조 주파수에서 삼각함수와 지수함수 형태를 일대일 비교하면 아래의 식을 만족한다.
 
 $$
-a_k\cos{k\omega_0t} + b_k\sin{k\omega_0t} = c_{-k}e^{-jk\omega_0t} + c_{+k}e^{+jk\omega_0t} \quad ...\mathrm{where} \ c_{-k} = c_{+k}^*
-$$
-
-$$
-\quad = \left[ c_{-k} \left( \cos{k\omega_0t} - j\sin{k\omega_0t} \right) \right] + \left[ c_{+k} \left( \cos{k\omega_0t} + j\sin{k\omega_0t} \right) \right]
+a_k\cos{k\omega_0t} + b_k\sin{k\omega_0t} = X(-k)e^{-jk\omega_0t} + X(+k)e^{+jk\omega_0t} \quad ...\mathrm{where} \ X(-k) = X^*(+k)
 $$
 
 $$
-\quad = \left[ \left( \mathrm{Re}\left\{c_{k} \right\} - j\mathrm{Im}\left\{c_{k} \right\} \right) \left( \cos{k\omega_0t} - j\sin{k\omega_0t} \right) \right] + \left[ \left( \mathrm{Re}\left\{c_{k} \right\} + j\mathrm{Im}\left\{c_{k} \right\} \right)  \left( \cos{k\omega_0t} + j\sin{k\omega_0t} \right) \right]
+\quad = \left[ X(-k) \left( \cos{k\omega_0t} - j\sin{k\omega_0t} \right) \right] + \left[ X(+k) \left( \cos{k\omega_0t} + j\sin{k\omega_0t} \right) \right]
 $$
 
 $$
-\quad = 2 \mathrm{Re}\left\{c_{k} \right\} \cos{k\omega_0t} - 2 \mathrm{Im}\left\{c_{k} \right\} \sin{k\omega_0t}
+\quad = \left[ \left( \mathfrak{R}\left\{X(k) \right\} - j\mathfrak{I}\left\{X(k) \right\} \right) \left( \cos{k\omega_0t} - j\sin{k\omega_0t} \right) \right] + \left[ \left( \mathfrak{R}\left\{X(k) \right\} + j\mathfrak{I}\left\{X(k) \right\} \right)  \left( \cos{k\omega_0t} + j\sin{k\omega_0t} \right) \right]
+$$
+
+$$
+\quad = 2 \mathfrak{R}\left\{X(k) \right\} \cos{k\omega_0t} - 2 \mathfrak{I}\left\{X(k) \right\} \sin{k\omega_0t}
 $$
 
 그러므로 지수함수의 계수로부터 삼각함수 계수를 구하는 일반적인 관계식은 다음과 같다.
 
 $$
-\quad [2] \qquad a_k = 2 \mathrm{Re}\left\{c_{k} \right\} \quad ...\mathrm{when} \ k \neq 0
+\quad [2] \qquad a_k = 2 \mathfrak{R}\left\{X(k) \right\} \quad ...\mathrm{when} \ k \neq 0
 $$
 
 $$
-\quad [3] \qquad b_k = - 2 \mathrm{Im}\left\{c_{k} \right\} \quad ...\mathrm{when} \ k \neq 0
+\quad [3] \qquad b_k = - 2 \mathfrak{I}\left\{X(k) \right\} \quad ...\mathrm{when} \ k \neq 0
 $$
 
 반대로 삼각함수 계수로부터 지수함수 계수를 구하는 방법도 역으로 계산될 수 있다.
 
 $$
-\quad [4] \qquad c_k = \frac{a_k}{2} - j\frac{b_k}{2} \quad ...\mathrm{when} \ k \neq 0
+\quad [4] \qquad X(k) = \frac{a_k}{2} - j\frac{b_k}{2} \quad ...\mathrm{when} \ k \neq 0
 $$
 
 $$
-\qquad \qquad \quad = \lvert c_k \rvert e^{j\angle{c_k}} \quad
+\qquad \qquad \quad = \lvert X(k) \rvert e^{j\angle{X(k)}} \quad
 \left\{ 
 \begin{array}{ll}
 
-\displaystyle \lvert c_k \rvert & \displaystyle = \sqrt{\left( \lvert c_k \rvert e^{j\angle{c_k}} \right)^2 + \left( \mathrm{Im}\left\{c_{k} \right\} \right)^2} & \displaystyle = \frac{1}{2}\sqrt{a_k^2 + b_k^2}
+\displaystyle \lvert X(k) \rvert & \displaystyle = \sqrt{ \mathfrak{R} \left\{ X(k) \right\}^2 + \mathfrak{I}\left\{X(k) \right\}^2} & \displaystyle = \frac{1}{2}\sqrt{a_k^2 + b_k^2}
 
 \\
 
-\displaystyle \angle{c_k} & \displaystyle = \arctan{\left( \frac{\mathrm{Im}\left\{c_{k} \right\}}{\mathrm{Re}\left\{c_{k} \right\}} \right)} & \displaystyle = -\arctan{\left( \frac{b_k}{a_k} \right)} 
+\displaystyle \angle{X(k)} & \displaystyle = \arctan{\left( \frac{\mathfrak{I}\left\{X(k) \right\}}{\mathfrak{R}\left\{X(k) \right\}} \right)} & \displaystyle = -\arctan{\left( \frac{b_k}{a_k} \right)} 
 
 \end{array}
 \right.
 $$
 
-> 푸리에 계수 $$c_k$$의 크기(amplitude; $$\lvert c_k \rvert$$)와 위상(phase; $$\angle{c_k}$$)은 [복소평면](https://ko.wikipedia.org/wiki/복소평면)(complex plane)에서 비롯된다. 가로축과 세로축은 각각 복소수의 실수 $$\mathrm{Re}\left\{c_{k} \right\}$$와 허수 $$\mathrm{Im}\left\{c_{k} \right\}$$를 의미하며, [직각좌표계](https://ko.wikipedia.org/wiki/데카르트_좌표계)로부터 [극좌표계](https://ko.wikipedia.org/wiki/극좌표계) 변환식이 그대로 적용된다.
+> 푸리에 계수 $X(k)$의 크기(amplitude; $\lvert X(k) \rvert$)와 위상(phase; $\angle{X(k)}$)은 [복소평면](https://ko.wikipedia.org/wiki/복소평면)(complex plane)에서 비롯된다. 가로축과 세로축은 각각 복소수의 실수 $\mathfrak{R}\lbrace X(k) \rbrace$와 허수 $\mathfrak{I}\lbrace X(k) \rbrace$를 의미하며, [직각좌표계](https://ko.wikipedia.org/wiki/데카르트_좌표계)로부터 [극좌표계](https://ko.wikipedia.org/wiki/극좌표계) 변환식이 그대로 적용된다.
+
+## 디리클레 조건
+디리클레 조건(Dirichlet condition)은 주기함수 $x_T(t)$가 모든 시간 $t$에 대하여 푸리에 급수의 합과 일치하기 위한 충분조건이다. 간단히 말해, 아래의 합성 방정식을 위해서는 디리클레 조건을 반드시 만족해야 하며 이는 한편 푸리에 변환의 가능여부를 의미하기도 한다.
+
+$$
+x_T(t) = \sum_{k=-\infty}^{+\infty}{ X(k) e^{jk\omega_0t} }
+$$
+
+1. 한 주기 $T$ 동안에 완전적분, 즉 적분값이 유한해야 한다.
+
+    $$
+    \int_{T}\lvert {x_T(t)\rvert dt} < \infty
+    $$
+
+2. 범위 내의 최댓값과 최솟값의 개수가 유한해야 한다.
+
+3. 범위 내의 불연속점 개수가 유한해야 한다.
 
 # 푸리에: 변환
+[푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 주기함수에 극한된 푸리에 급수와 달리 비주기함수(aperiodic function)에서도 적용할 수 있는 일반화된 시간과 주파수 영역간의 적분 변환식이다. 비주기함수의 주기는 $T\rightarrow\infty$로 간주할 수 있으며, 덕분에 매우 작아진 기본 주파수 $f_0 = \frac{1}{T}$ 및 기본 각주파수 $\omega_0 = \frac{2\pi}{T}$는 더욱 미세한 고조 주파수 $f = kf_0$ 혹은 고조 각주파수 $\omega = k\omega_0$까지 표현할 수 있다.
 
-[푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 주기함수에 극한된 푸리에 급수와 달리 비주기함수(aperiodic function)에서도 적용할 수 있는 적분 변환식이다. 비주기함수의 주기는 $$T\rightarrow\infty$$로 간주할 수 있으며, 덕분에 매우 작아진 기본 주파수 $$\omega_0 = \frac{2\pi}{T}$$는 더욱 미세한 고조 주파수 $$\omega = k\omega_0$$까지 표현할 수 있다.
+| 시간 영역 $x(t)$ | 주파수 영역 $X(f)$ |
+|:--------------:|:---------------:|
+| 연속시간 비주기함수     | 연속주파수 비주기함수      |
+
+푸리에 변환은 주기가 무한으로 확장된 푸리에 급수이기 때문에 아래의 디리클레 조건을 만족해야 한다. 그리고 비주기함수 $x(t)$가 유한한 개수의 최댓값과 최솟값, 그리고 불연속점을 가져야 한다.
+
+$$
+\int_{-\infty}^{\infty}{\lvert {x(t)\rvert dt}} < \infty
+$$
 
 ## 푸리에 변환
 푸리에 변환은 주기함수에 대한 푸리에 급수로부터 유도된다.
 
 $$
-x(t) = \sum_{k=-\infty}^{+\infty}{ c_k e^{jk\omega_0t} }
+x(t) = \sum_{k=-\infty}^{+\infty}{X(k) e^{jk\omega_0t} }
 $$
 
 $$
-\quad = \sum_{k=-\infty}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } \quad ...\mathrm{where} \ c_k = \frac{1}{T}\int_{T}{x(t) e^{-jk\omega_0 t} dt}
+\quad = \sum_{k=-\infty}^{+\infty}{ \left( \frac{1}{T}\int_{T}{x(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } \quad ...\mathrm{where} \ X(k) = \frac{1}{T}\int_{T}{x(t) e^{-jk\omega_0 t} dt}
 $$
 
-주기함수가 무한한 주기 $$T \rightarrow \infty$$를 갖으면 절대로 반복하지 않는 비주기함수가 된다. 그러나 고조 주파수가 갖는 $$k$$에 따라 결정되는 푸리에 급수의 계수 $$c_k$$는 $$\lim_{T\rightarrow\infty}\frac{1}{T}$$으로 인해 0으로 수렴하게 된다. 그러므로 비주기함수의 푸리에 변환에서는 $$\frac{1}{T}$$ 주기 성분이 없는 새로운 푸리에 계수 $$X(k\omega_0)$$를 정의한다.
+주기함수가 무한한 주기 $T \rightarrow \infty$를 갖으면 절대로 반복하지 않는 비주기함수가 된다. 그러나 고조 주파수가 갖는 $k$에 따라 결정되는 푸리에 급수의 계수 $X(k)$는 $\lim_{T\rightarrow\infty}\frac{1}{T}$으로 인해 0으로 수렴하게 된다. 그러므로 비주기함수의 푸리에 변환에서는 $\frac{1}{T}$ 주기 성분이 없는 새로운 푸리에 계수 $X(k\omega_0)$를 정의한다.
 
 $$
 x(t) = \sum_{k=-\infty}^{+\infty}{ \frac{1}{T} \left( \int_{-\infty}^{+\infty}{x(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} }
@@ -379,7 +411,7 @@ $$
 \quad = \sum_{k=-\infty}^{+\infty}{ \frac{1}{T} X(k\omega_0) e^{jk\omega_0t} } \quad ...\mathrm{where} \ X(k\omega_0) = \int_{-\infty}^{+\infty}{x(t) e^{-jk\omega_0 t} dt}
 $$
 
-주기가 증가하면 주파수는 감소하는 $$\omega = k\omega_0 \propto \frac{1}{T}$$ 반비례 관계를 갖는다. 즉, 주기가 무한대로 증가하면 주파수는 [무한소](https://ko.wikipedia.org/wiki/무한소)로 감소하여 $$d\omega$$ (혹은 $$dk\omega_0$$)가 된다. 이를 기반으로 방정식의 주기 $$T$$를 주파수 $$\omega$$에 대한 식으로 치환한다.
+주기가 증가하면 주파수는 감소하는 $\omega = k\omega_0 \propto \frac{1}{T}$ 반비례 관계를 갖는다. 즉, 주기가 무한대로 증가하면 주파수는 [무한소](https://ko.wikipedia.org/wiki/무한소)로 감소하여 $d\omega$ (혹은 $dk\omega_0$)가 된다. 이를 기반으로 방정식의 주기 $T$를 주파수 $\omega$에 대한 식으로 치환한다.
 
 $$
 x(t) = \sum_{k=-\infty}^{+\infty}{ \frac{d\omega}{2\pi} X(\omega) e^{j\omega t} } \quad ...\mathrm{where} \ \omega = k\omega_0
@@ -389,13 +421,13 @@ $$
 \quad = \frac{1}{2\pi} \sum_{k=-\infty}^{+\infty}{ X(\omega) e^{j\omega t} d\omega}
 $$
 
-무한소 $$d\omega$$에 대한 유한합 $$\Sigma$$은 적분으로 대체될 수 있으며, 일반함수의 $$x(t)$$ 합성 방정식과 $$X(\omega)$$ 해석 방정식은 다음과 같다.
+무한소 $d\omega$에 대한 유한합 $\sum$은 적분으로 대체될 수 있으며, 일반함수의 $x(t)$ 합성 방정식과 $X(\omega)$ 분석 방정식은 다음과 같다.
 
 $$
 x(t) = \frac{1}{2\pi} \int_{-\infty}^{+\infty}{ X(\omega) e^{j\omega t} d\omega} \quad ...\mathrm{where} \ X(\omega) = \int_{-\infty}^{+\infty}{x(t) e^{-j\omega t} dt}
 $$
 
-결과적으로 해석 방정식은 시간 $$t$$ 영역에서 주파수 $$\omega$$ 영역으로 변환하여 해당 주파수가 함수에서 차지하는 비중을 계산하는 푸리에 변환(Fourier transform) $$\mathcal{F}$$을 의미한다. 반대로 합성 방정식은 주파수 영역 $$\omega$$에서 시간 $$t$$ 영역으로 변환하여 해당 시간에 함수가 각 주파수들의 합성을 통해 어떠한 값을 가지는지 구하는 푸리에 역변환(inverse Fourier transform) $$\mathcal{F}^{-1}$$이다.
+결과적으로 분석 방정식은 시간 $t$ 영역에서 주파수 $\omega$ 영역으로 변환하여 해당 주파수가 함수에서 차지하는 비중을 계산하는 푸리에 변환(Fourier transform) $\mathcal{F}$을 의미한다. 반대로 합성 방정식은 주파수 영역 $\omega$에서 시간 $t$ 영역으로 변환하여 해당 시간에 함수가 각 주파수들의 합성을 통해 어떠한 값을 가지는지 구하는 푸리에 역변환(inverse Fourier transform) $\mathcal{F}^{-1}$이다.
 
 $$
 \left\{ 
@@ -411,7 +443,7 @@ $$
 \right.
 $$
 
-각주파수는 $$\omega = 2\pi f$$이므로, 이를 주파수 $$f$$에 대한 식으로 치환하면 다음 푸리에 방정식이 완성된다.
+각주파수는 $\omega = 2\pi f$이므로, 이를 주파수 $f$에 대한 식으로 치환하면 다음 푸리에 방정식이 완성된다.
 
 $$
 \left\{ 
@@ -442,7 +474,7 @@ $$
     > $$
 
 * *대칭성 (Symmetricity)*
-    : 시간 영역에서 $$x(t)$$가 순실수 혹은 순허수 함수이면, 시간 영역에서의 우함수/기함수 대칭성은 주파수 영역에서도 그대로 유지된다.
+    : 시간 영역에서 $x(t)$가 순실수 혹은 순허수 함수이면, 시간 영역에서의 우함수/기함수 대칭성은 주파수 영역에서도 그대로 유지된다.
     
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-대칭성">[증명]</a></sub></div>
     >
@@ -451,7 +483,7 @@ $$
     > $$
 
 * *[쌍대성](https://ko.wikipedia.org/wiki/쌍대성) (Duality)*
-    : 시간 영역에서 함수 $$x(t)$$가 주파수 영역에서 $$X_f(f)$$ 혹은 $$X_\omega(\omega)$$로 변환되면, 시간 영역에서 함수 $$X_f(t)$$ 및 $$X_\omega(t)$$는 주파수 영역에서 각각 $$x(-f)$$ 혹은 $$2\pi x(-\omega)$$로 변환된다.
+    : 시간 영역에서 함수 $x(t)$가 주파수 영역에서 $X_f(f)$ 혹은 $X_\omega(\omega)$로 변환되면, 시간 영역에서 함수 $X_f(t)$ 및 $X_\omega(t)$는 주파수 영역에서 각각 $x(-f)$ 혹은 $2\pi x(-\omega)$로 변환된다.
     
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-쌍대성">[증명]</a></sub></div>
     >
@@ -460,7 +492,7 @@ $$
     > $$
 
 * *시간 도치 (Time inversion)*
-    : 시간 영역에서 시간 $$t$$가 반대로 도치되었을 시, 주파수 영역에서의 주파수 $$f$$가 도치 혹은 푸리에 변환 $$X(f)$$가 켤레 복소수를 갖는다.
+    : 시간 영역에서 시간 $t$가 반대로 도치되었을 시, 주파수 영역에서의 주파수 $f$가 도치 혹은 푸리에 변환 $X(f)$가 켤레 복소수를 갖는다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-시간-도치">[증명]</a></sub></div>
     >
@@ -469,7 +501,7 @@ $$
     > $$
 
 * *시간 척도 (Time scaling)*
-    : 시간 영역에서 시간 $$t$$에 대한 척도는 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
+    : 시간 영역에서 시간 $t$에 대한 척도는 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-시간-척도">[증명]</a></sub></div>
     >
@@ -478,7 +510,7 @@ $$
     > $$
 
 * *시간 이동 (Time shifting)*
-    : 시간 영역에서 시간 $$t$$에 대한 이동은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
+    : 시간 영역에서 시간 $t$에 대한 이동은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-시간-이동">[증명]</a></sub></div>
     > 
@@ -487,7 +519,7 @@ $$
     > $$
 
 * *주파수 이동 (Frequency shifting)*
-    : 주파수 영역에서 주파수 $$f$$ 혹은 각주파수 $$\omega$$에 대한 이동은 시간 영역에서 다음과 같은 푸리에 변환이 구해진다.
+    : 주파수 영역에서 주파수 $f$ 혹은 각주파수 $\omega$에 대한 이동은 시간 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-주파수-이동">[증명]</a></sub></div>
     >
@@ -496,7 +528,7 @@ $$
     > $$
 
 * *시간 [합성곱](https://ko.wikipedia.org/wiki/합성곱) (Time convolution)*
-    : 시간 영역에서 시간 $$t$$에 대한 합성곱은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
+    : 시간 영역에서 시간 $t$에 대한 합성곱은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-시간-합성곱">[증명]</a></sub></div>
     >
@@ -505,7 +537,7 @@ $$
     > $$
 
 * *주파수 [합성곱](https://ko.wikipedia.org/wiki/합성곱) (Frequency convolution)*
-    : 주파수 영역에서 주파수 $$f$$ 혹은 각주파수 $$\omega$$에 대한 합성곱은 시간 영역에서 다음과 같은 푸리에 변환이 구해진다.
+    : 주파수 영역에서 주파수 $f$ 혹은 각주파수 $\omega$에 대한 합성곱은 시간 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-주파수-합성곱">[증명]</a></sub></div>
     >
@@ -514,7 +546,7 @@ $$
     > $$
 
 * *시간 미분 (Time differentiation)*
-    : 시간 영역에서 시간 $$t$$에 대한 미분은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
+    : 시간 영역에서 시간 $t$에 대한 미분은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-시간-미분">[증명]</a></sub></div>
     >
@@ -523,7 +555,7 @@ $$
     > $$
 
 * *주파수 미분 (Frequency differentiation)*
-    : 주파수 영역에서 주파수 $$f$$ 혹은 각주파수 $$\omega$$에 대한 미분은 시간 영역에서 다음과 같은 푸리에 변환이 구해진다.
+    : 주파수 영역에서 주파수 $f$ 혹은 각주파수 $\omega$에 대한 미분은 시간 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-주파수-미분">[증명]</a></sub></div>
     > 
@@ -532,7 +564,7 @@ $$
     > $$
 
 * *시간 부정적분 (Time indefinite-integration)*
-    : 시간 영역에서 시간 $$t$$에 대한 무한한 범위 $$(-\infty, \infty)$$에서의 부정적분, 즉 시간 영역의 총 면적은 주파수 영역에서 다음과 같은 계산된다.
+    : 시간 영역에서 시간 $t$에 대한 무한한 범위 $(-\infty, \infty)$에서의 부정적분, 즉 시간 영역의 총 면적은 주파수 영역에서 다음과 같은 계산된다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-시간-부정적분">[증명]</a></sub></div>
     >
@@ -541,7 +573,7 @@ $$
     > $$
 
 * *주파수 부정적분 (Frequency indefinite-integration)*
-    : 주파수 영역에서 주파수 $$f$$ 혹은 각주파수 $$\omega$$에 대한 무한한 범위 $$(-\infty, \infty)$$에서의 부정적분, 즉 주파수 영역의 총 면적은 시간 영역에서 다음과 같이 계산된다.
+    : 주파수 영역에서 주파수 $f$ 혹은 각주파수 $\omega$에 대한 무한한 범위 $(-\infty, \infty)$에서의 부정적분, 즉 주파수 영역의 총 면적은 시간 영역에서 다음과 같이 계산된다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-주파수-부정적분">[증명]</a></sub></div>
     > 
@@ -550,7 +582,7 @@ $$
     > $$
 
 * *시간 적분 (Time integration)*
-    : 시간 영역에서 시간 $$t$$에 대한 적분은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
+    : 시간 영역에서 시간 $t$에 대한 적분은 주파수 영역에서 다음과 같은 푸리에 변환이 구해진다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#성질-시간-적분">[증명]</a></sub></div>
     >
@@ -571,7 +603,7 @@ $$
 다음은 시간 영역에서의 특정 신호들에 대한 푸리에 변환쌍이다. 신호해석 및 분석에서 자주 응용되는 신호 및 함수들이므로 미리 알아두면 차후에 유용하게 사용된다.
 
 * *[단위 임펄스](https://ko.wikipedia.org/wiki/디랙_델타_함수) (Unit impulse)*
-    : 일명 디렉 델타 함수(Dirac delta function) $$\delta(t-a)$$는 총 면적이 1인 함수이나, $$t=a$$에서만 면적을 가지므로 $$\delta(0) = \infty$$이고 나머지는 0을 갖는 함수이다.
+    : 일명 디렉 델타 함수(Dirac delta function) $\delta(t-a)$는 총 면적이 1인 함수이나, $t=a$에서만 면적을 가지므로 $\delta(0) = \infty$이고 나머지는 0을 갖는 함수이다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-단위-임펄스">[증명]</a></sub></div>
     >
@@ -589,7 +621,7 @@ $$
     > $$
 
 * *[복소 지수함수](https://ko.wikipedia.org/wiki/지수_함수) (Complex exponential)*
-    : 오일러 공식에 비롯된 $$e^{\pm jt} = \cos{t} \pm j\sin{t}$$ 형태를 복소 지수함수라고 부른다. 이와 유사한 내용으로 푸리에 변환의 주파수 이동 성질을 참고한다. 
+    : 오일러 공식에 비롯된 $e^{\pm jt} = \cos{t} \pm j\sin{t}$ 형태를 복소 지수함수라고 부른다. 이와 유사한 내용으로 푸리에 변환의 주파수 이동 성질을 참고한다. 
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-복소-지수함수">[증명]</a></sub></div>
     > 
@@ -613,7 +645,7 @@ $$
     > $$
 
 * *[시그넘 함수](https://ko.wikipedia.org/wiki/부호함수) (Signum function)*
-    : 일명 부호 함수(sign function) $$\mathrm{sgn}(t)$$는 양의 시간에는 $$+1$$, 음의 시간에는 $$-1$$, 그리고 $$\mathrm{sgn}(0)$$일 때 0인 함수이다. 
+    : 일명 부호 함수(sign function) $\mathrm{sgn}(t)$는 양의 시간에는 $+1$, 음의 시간에는 $-1$, 그리고 $\mathrm{sgn}(0)$일 때 0인 함수이다. 
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-시그넘-함수">[증명]</a></sub></div>
     > 
@@ -622,7 +654,7 @@ $$
     > $$ 
 
 * *[단위 계단 함수](https://ko.wikipedia.org/wiki/단위_계단_함수) (Unit step function)*
-    : 헤비사이드 계단 함수(Heaviside step function) $$u(t-a)$$는 $$t > a$$이면 1, 그리고 $$t < a$$이면 0인 함수이다.
+    : 헤비사이드 계단 함수(Heaviside step function) $u(t-a)$는 $t > a$이면 1, 그리고 $t < a$이면 0인 함수이다.
     
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-단위-계단-함수">[증명]</a></sub></div>
     > 
@@ -631,7 +663,7 @@ $$
     > $$
 
 * *[구형 펄스](https://ko.wikipedia.org/wiki/구형함수) (Rectangular pulse)*
-    : 구형 함수 $$\operatorname{rect}(\frac{t}{a})$$ 혹은 $$\Pi(\frac{t}{a})$$는 높이 1에 너비 $$a$$의 사각형을 그리는 함수이다.
+    : 구형 함수 $\operatorname{rect}(\frac{t}{a})$ 혹은 $\Pi(\frac{t}{a})$는 높이 1에 너비 $a$의 사각형을 그리는 함수이다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-구형-펄스">[증명]</a></sub></div>
     > 
@@ -640,13 +672,41 @@ $$
     > $$
 
 * *[삼각 펄스](https://ko.wikipedia.org/wiki/삼각형함수) (Triangular pulse)*
-    : 삼각형 함수 $$\operatorname{tri}(\frac{t}{a})$$ 혹은 $$\Lambda(\frac{t}{a})$$는 높이 1에 너비 $$2a$$의 삼각형을 그리는 함수이다.
+    : 삼각형 함수 $\operatorname{tri}(\frac{t}{a})$ 혹은 $\Lambda(\frac{t}{a})$는 높이 1에 너비 $2a$의 삼각형을 그리는 함수이다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-삼각-펄스">[증명]</a></sub></div>
     > 
     > $$
     > \Lambda\left(\textstyle \frac{t}{a}\right) \quad \longleftrightarrow \quad a^2 \operatorname{sinc}^2{af}
     > $$
+
+# 푸리에: 이산
+이전 장에서의 시간영역은 오로지 연속시간 함수에 대한 푸리에 변환을 다루었다. 푸리에 변환은 이산시간에 대해서도 적용할 수 있으며, 본 장에서는 총 세 가지의 이산형태의 푸리에 변환을 소개한다.
+
+## 이산시간 푸리에 변환
+이산시간 푸리에 변환(discrete-time Fourier transform)은 연속시간이 아닌 이산시간의 함수에 대한 푸리에 변환을 다룬다. 푸리에 변환이 갖는 무한한 무한소들을 합하는 적분 $\int{dt}$를 유한합 $\sum$으로 대체하고, 연속시간 $t$를 정수배의 이산시간 $n$으로 치환하면 다음과 같이 나타난다.
+
+$$
+X(e^{j2\pi f}) = \sum_{n=-\infty}^{\infty}{x(n)e^{-j2\pi fn}}
+$$
+
+여기서 이산시간 푸리에 변환의 $X(e^{j2\pi f})$는 사실상 푸리에 변환의 $X(f)$와 동일하나, 분석 방정식이 연속시간과 이산시간 중에서 어느 것에서 비롯되었지 구분짓기 위해 달리 표기하였다.
+
+| 시간 영역 $x(n)$ | 주파수 영역 $X(e^{j2\pi f})$ |
+|:--------------:|:-------------------------:|
+| 이산시간 비주기함수     | 연속주파수 주기함수                 |
+
+## 이산 푸리에 급수
+
+| 시간 영역 $\tilde{x}(n)$ | 주파수 영역 $\tilde{X}(k)$ |
+|:--------------:|:-------------------------:|
+| 이산시간 주기함수      | 이산주파수 주기함수                 |
+
+## 이산 푸리에 변환
+
+| 시간 영역 $x[n]$ | 주파수 영역 $X[k]$ |
+|:--------------:|:-------------------------:|
+| 이산시간 주기함수      | 이산주파수 주기함수                 |
 
 # 푸리에: 증명
 본 장은 푸리에 변환의 성질 증명과 신호의 변환 과정을 설명하는 내용을 포함한다. 
@@ -681,7 +741,7 @@ $$
 > x(t) = x_e(t) + x_o(t)
 > $$
 >
-> 시간 영역의 $$x(t)$$ 함수에 대한 푸리에 변환 $$X(\omega)$$는 다음과 같이 전개된다.
+> 시간 영역의 $x(t)$ 함수에 대한 푸리에 변환 $X(\omega)$는 다음과 같이 전개된다.
 >
 > $$
 > X(\omega) = \int_{-\infty}^{\infty}{x_e(t)\cos{(2\pi ft)}dt} - j\int_{-\infty}^{\infty}{x_e(t)\sin{(2\pi ft)}dt}
@@ -697,31 +757,31 @@ $$
 > X(\omega) = \int_{-\infty}^{\infty}{x_e(t)\cos{(2\pi ft)}dt} - j\int_{-\infty}^{\infty}{x_o(t)\sin{(2\pi ft)}dt}
 > $$
 >
-> 그리고 $$x(t)$$ 함수를 복소수 $$\mathrm{Re}\left\{ x(t) \right\} + j\mathrm{Im}\left\{ x(t) \right\}$$로 대입한다.
+> 그리고 $x(t)$ 함수를 복소수 $\mathfrak{R}\lbrace x(t) \rbrace+j\mathfrak{I}\lbrace x(t) \rbrace$로 대입한다.
 >
 > $$
-> X(\omega) = \int_{-\infty}^{\infty}{\mathrm{Re}\left\{ x_e(t) \right\}\cos{(2\pi ft)}dt} - j\int_{-\infty}^{\infty}{\mathrm{Re}\left\{ x_o(t) \right\}\sin{(2\pi ft)}dt}
+> X(\omega) = \int_{-\infty}^{\infty}{\mathfrak{R}\left\{ x_e(t) \right\}\cos{(2\pi ft)}dt} - j\int_{-\infty}^{\infty}{\mathfrak{R}\left\{ x_o(t) \right\}\sin{(2\pi ft)}dt}
 > $$
 >
 > $$
-> \qquad \qquad + j\int_{-\infty}^{\infty}{\mathrm{Im}\left\{ x_e(t) \right\}\cos{(2\pi ft)}dt} + \int_{-\infty}^{\infty}{\mathrm{Im}\left\{ x_o(t) \right\}\sin{(2\pi ft)}dt}
+> \qquad \qquad + j\int_{-\infty}^{\infty}{\mathfrak{I}\left\{ x_e(t) \right\}\cos{(2\pi ft)}dt} + \int_{-\infty}^{\infty}{\mathfrak{I}\left\{ x_o(t) \right\}\sin{(2\pi ft)}dt}
 > $$
 >
-> 위의 전개식에서 $$x(t)$$ 함수로부터 네 가지 경우의 수를 찾아볼 수 있다.
+> 위의 전개식에서 $x(t)$ 함수로부터 네 가지 경우의 수를 찾아볼 수 있다.
 >
-> * $$x(t)$$가 실수 & 우함수 $$\longrightarrow$$ $$X(f)$$는 실수 & 우함수
+> * $x(t)$가 실수 & 우함수 $\longrightarrow$ $X(f)$는 실수 & 우함수
 >
-> * $$x(t)$$가 실수 & 기함수 $$\longrightarrow$$ $$X(f)$$는 허수 & 기함수
+> * $x(t)$가 실수 & 기함수 $\longrightarrow$ $X(f)$는 허수 & 기함수
 >
-> * $$x(t)$$가 허수 & 우함수 $$\longrightarrow$$ $$X(f)$$는 허수 & 우함수
+> * $x(t)$가 허수 & 우함수 $\longrightarrow$ $X(f)$는 허수 & 우함수
 >
-> * $$x(t)$$가 허수 & 기함수 $$\longrightarrow$$ $$X(f)$$는 실수 & 기함수
+> * $x(t)$가 허수 & 기함수 $\longrightarrow$ $X(f)$는 실수 & 기함수
 
 #### [성질] 쌍대성
 
 > 본 성질에 대한 증명은 푸리에 역변환인 합성 방정식으로부터 출발한다.
 >
-> 다음은 주파수 $$f$$에 대한 푸리에 변환의 쌍대성을 보여준다.
+> 다음은 주파수 $f$에 대한 푸리에 변환의 쌍대성을 보여준다.
 >
 > $$
 > x(t) = \int^{+\infty}_{-\infty}{X(f)e^{j2\pi ft}df}
@@ -731,19 +791,19 @@ $$
 > \quad \Rightarrow x(t) = \int^{+\infty}_{-\infty}{X(f)e^{j2pi ft}df}
 > $$
 >
-> 만일 $$t=-\tau$$라고 가정하면 방정식은 다음과 같이 나타난다.
+> 만일 $t=-\tau$라고 가정하면 방정식은 다음과 같이 나타난다.
 >
 > $$
 > x(-\tau) = \int^{+\infty}_{-\infty}{X(f)e^{-j2\pi f\tau}df}
 > $$
 >
-> 여기서 $$\tau \leftrightarrow f$$ 기호를 서로 바꾼다. 비록 각 기호가 시간과 주파수를 의미하지만, 사실 이는 통상적인 해석일 뿐이다. 단순히 수학적인 관점에서 바라보면 이들은 단지 하나의 변수에 불과하며 기호를 바꾼다고 해서 변수의 본질이 바뀌는 게 아니다.
+> 여기서 $\tau \leftrightarrow f$ 기호를 서로 바꾼다. 비록 각 기호가 시간과 주파수를 의미하지만, 사실 이는 통상적인 해석일 뿐이다. 단순히 수학적인 관점에서 바라보면 이들은 단지 하나의 변수에 불과하며 기호를 바꾼다고 해서 변수의 본질이 바뀌는 게 아니다.
 >
 > $$
 > x(-f) = \int^{+\infty}_{-\infty}{X(\tau)e^{-j2\pi f\tau}d\tau}
 > $$
 >
-> 마무리로 $$\tau$$를 다시 익숙한 $$t$$로 돌려놓으면 다음 방정식이 완성된다.
+> 마무리로 $\tau$를 다시 익숙한 $t$로 돌려놓으면 다음 방정식이 완성된다.
 >
 > $$
 > 2\pi x(-f) = \int^{+\infty}_{-\infty}{X(t)e^{-j2\pi ft}dt} = \mathcal{F}\left\{ X(t) \right\}
@@ -751,7 +811,7 @@ $$
 >
 > ----
 >
-> 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 쌍대성을 보여준다.
+> 다음은 각주파수 $\omega$에 대한 푸리에 변환의 쌍대성을 보여준다.
 >
 > $$
 > x(t) = \frac{1}{2\pi}\int^{+\infty}_{-\infty}{X(\omega)e^{j\omega t}d\omega}
@@ -761,19 +821,19 @@ $$
 > \quad \Rightarrow 2\pi x(t) = \int^{+\infty}_{-\infty}{X(\omega)e^{j\omega t}d\omega}
 > $$
 >
-> 만일 $$t=-\tau$$라고 가정하면 방정식은 다음과 같이 나타난다.
+> 만일 $t=-\tau$라고 가정하면 방정식은 다음과 같이 나타난다.
 >
 > $$
 > 2\pi x(-\tau) = \int^{+\infty}_{-\infty}{X(\omega)e^{-j\omega\tau}d\omega}
 > $$
 >
-> 여기서 $$\tau \leftrightarrow \omega$$ 기호를 서로 바꾼다. 비록 각 기호가 시간과 주파수를 의미하지만, 사실 이는 통상적인 해석일 뿐이다. 단순히 수학적인 관점에서 바라보면 이들은 단지 하나의 변수에 불과하며 기호를 바꾼다고 해서 변수의 본질이 바뀌는 게 아니다.
+> 여기서 $\tau \leftrightarrow \omega$ 기호를 서로 바꾼다. 비록 각 기호가 시간과 주파수를 의미하지만, 사실 이는 통상적인 해석일 뿐이다. 단순히 수학적인 관점에서 바라보면 이들은 단지 하나의 변수에 불과하며 기호를 바꾼다고 해서 변수의 본질이 바뀌는 게 아니다.
 >
 > $$
 > 2\pi x(-\omega) = \int^{+\infty}_{-\infty}{X(\tau)e^{-j\omega\tau}d\tau}
 > $$
 >
-> 마무리로 $$\tau$$를 다시 익숙한 $$t$$로 돌려놓으면 다음 방정식이 완성된다.
+> 마무리로 $\tau$를 다시 익숙한 $t$로 돌려놓으면 다음 방정식이 완성된다.
 >
 > $$
 > 2\pi x(-\omega) = \int^{+\infty}_{-\infty}{X(t)e^{-j\omega t}dt} = \mathcal{F}\left\{ X(t) \right\}
@@ -781,7 +841,7 @@ $$
 
 #### [성질] 시간 도치
 
-> 본 성질에 대한 증명을 위해 $$\tau = -t$$라고 가정한다.
+> 본 성질에 대한 증명을 위해 $\tau = -t$라고 가정한다.
 >
 > $$
 > \mathcal{F}\left\{ x(\tau) \right\} = -\int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\left(-\tau\right)}d\tau}
@@ -791,7 +851,7 @@ $$
 > \quad = \int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\left(-\tau\right)}d\tau}
 > $$
 >
-> 여기서 푸리에 변환의 두 가지 해석 방정식 표현을 유도할 수 있다.
+> 여기서 푸리에 변환의 두 가지 분석 방정식 표현을 유도할 수 있다.
 >
 > $$
 > \quad \Rightarrow \left\{ \begin{array}{ll} \displaystyle \int_{-\infty}^{\infty}{x(\tau)e^{-j\left(-2\pi f\right)\tau}d\tau} & = X(-f) \\ \displaystyle \int_{-\infty}^{\infty}{x(\tau)e^{j2\pi f\tau}d\tau} & = X^*(f) \end{array}\right.
@@ -799,7 +859,7 @@ $$
 
 #### [성질] 시간 척도
 
-> 본 성질에 대한 증명을 위해 $$\tau = at$$라고 가정한다.
+> 본 성질에 대한 증명을 위해 $\tau = at$라고 가정한다.
 >
 > $$
 > \mathcal{F}\left\{ x(\tau) \right\} = \int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\frac{\tau}{a}}d\frac{\tau}{a}}
@@ -809,7 +869,7 @@ $$
 > \quad = \frac{1}{\lvert a \rvert} \int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\frac{\tau}{a}}d\tau}
 > $$
 >
-> 여기서 분모 $$a$$에 절댓값이 씌워진 이유는 *시간 도치*에서 확인할 수 있듯이 무한한 범위의 적분에서 범위를 반대로 뒤집는 부호가 사실상 의미없기 때문이다. *시간 도치*의 증명과 유사한 방법으로 해석 방정식을 마무리짓는다.
+> 여기서 분모 $a$에 절댓값이 씌워진 이유는 *시간 도치*에서 확인할 수 있듯이 무한한 범위의 적분에서 범위를 반대로 뒤집는 부호가 사실상 의미없기 때문이다. *시간 도치*의 증명과 유사한 방법으로 분석 방정식을 마무리짓는다.
 >
 > $$
 > \quad \Rightarrow \frac{1}{\lvert a \rvert} \int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi\frac{f}{a}\tau}d\tau} = \frac{1}{\lvert a \rvert} X\left(\frac{f}{a}\right)
@@ -817,9 +877,9 @@ $$
 
 #### [성질] 시간 이동
 
-> 본 성질에 대한 증명을 위해 $$\tau = t-t_0$$라고 가정한다.
+> 본 성질에 대한 증명을 위해 $\tau = t-t_0$라고 가정한다.
 >
-> 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 이동을 보여준다.
+> 다음은 주파수 $f$에 대한 푸리에 변환의 시간 이동을 보여준다.
 >
 > $$
 > \mathcal{F}\left\{ x(\tau) \right\} = \int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\left(\tau+t_0\right)}d\tau}
@@ -829,7 +889,7 @@ $$
 > \quad = \int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\tau}e^{-j2\pi ft_0}d\tau}
 > $$
 >
-> 여기서 $$t_0$$는 상수이므로 이를 갖는 지수는 적분 밖으로 나올 수가 있다.
+> 여기서 $t_0$는 상수이므로 이를 갖는 지수는 적분 밖으로 나올 수가 있다.
 >
 > $$
 > \quad \Rightarrow e^{-j2\pi ft_0}\int_{-\infty}^{\infty}{x(\tau)e^{-j2\pi f\tau}d\tau} = X(f)e^{-j2\pi ft_0}
@@ -837,7 +897,7 @@ $$
 >
 > ----
 > 
-> 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 시간 이동을 보여준다.
+> 다음은 각주파수 $\omega$에 대한 푸리에 변환의 시간 이동을 보여준다.
 >
 > $$
 > \mathcal{F}\left\{ x(\tau) \right\} = \int_{-\infty}^{\infty}{x(\tau)e^{-j\omega\left(\tau+t_0\right)}d\tau}
@@ -847,7 +907,7 @@ $$
 > \quad = \int_{-\infty}^{\infty}{x(\tau)e^{-j\omega\tau}e^{-j\omega t_0}d\tau}
 > $$
 >
-> 여기서 $$t_0$$는 상수이므로 이를 갖는 지수는 적분 밖으로 나올 수가 있다.
+> 여기서 $t_0$는 상수이므로 이를 갖는 지수는 적분 밖으로 나올 수가 있다.
 >
 > $$
 > \quad \Rightarrow e^{-j\omega t_0}\int_{-\infty}^{\infty}{x(\tau)e^{-j\omega\tau}d\tau} = X(f)e^{-j\omega t_0}
@@ -857,7 +917,7 @@ $$
 
 > 본 성질에 대한 증명을 위해 푸리에 변환 절차를 반대로 짚어본다.
 >
-> 다음은 주파수 $$f$$에 대한 푸리에 변환의 주파수 이동을 보여준다.
+> 다음은 주파수 $f$에 대한 푸리에 변환의 주파수 이동을 보여준다.
 >
 > $$
 > X(f - f_0) = \int_{-\infty}^{\infty}{x(t)e^{-j2\pi \left(f - f_0\right)t}dt}
@@ -867,7 +927,7 @@ $$
 > \quad = \int_{-\infty}^{\infty}{x(t)e^{-j2\pi ft}e^{j2\pi f_0t}dt}
 > $$
 >
-> 푸리에 변환의 해석 방정식과 동일한 형태로 변형한 다음에 시간 영역만을 추출한다.
+> 푸리에 변환의 분석 방정식과 동일한 형태로 변형한 다음에 시간 영역만을 추출한다.
 >
 > $$
 > \quad \Rightarrow \int_{-\infty}^{\infty}{\left[ x(t) e^{j2\pi f_0t}\right] e^{-j2\pi ft}dt} = \mathcal{F}\left\{ x(t) e^{j2\pi f_0t} \right\}
@@ -875,7 +935,7 @@ $$
 >
 > ----
 > 
-> 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 주파수 이동을 보여준다.
+> 다음은 각주파수 $\omega$에 대한 푸리에 변환의 주파수 이동을 보여준다.
 >
 > $$
 > X(\omega - \omega_0) = \int_{-\infty}^{\infty}{x(t)e^{-j\left(\omega - \omega_0\right)t}dt}
@@ -885,7 +945,7 @@ $$
 > \quad = \int_{-\infty}^{\infty}{x(t)e^{-j\omega t}e^{j\omega_0t}dt}
 > $$
 >
-> 푸리에 변환의 해석 방정식과 동일한 형태로 변형한 다음에 시간 영역만을 추출한다.
+> 푸리에 변환의 분석 방정식과 동일한 형태로 변형한 다음에 시간 영역만을 추출한다.
 >
 > $$
 > \quad \Rightarrow \int_{-\infty}^{\infty}{\left[ x(t) e^{j\omega_0t}\right] e^{-j\omega t}dt} = \mathcal{F}\left\{ x(t) e^{j\omega_0t} \right\}
@@ -893,7 +953,7 @@ $$
 
 #### [성질] 시간 합성곱
 
-> 본 성질에 대한 증명을 위해 우선 합성곱에 대한 이해가 필요하다. 합성곱(convolution)이란, 두 함수 $$x(t)$$와 $$y(t)$$로부터 새로운 함수 $$x\ast y(t)$$를 합성하는 수학 연산이다.
+> 본 성질에 대한 증명을 위해 우선 합성곱에 대한 이해가 필요하다. 합성곱(convolution)이란, 두 함수 $x(t)$와 $y(t)$로부터 새로운 함수 $x\ast y(t)$를 합성하는 수학 연산이다.
 >
 > $$
 > x(t) \ast y(t) = \int_{-\infty}^{\infty}{x(\tau)y(t-\tau)d\tau}
@@ -901,7 +961,7 @@ $$
 >
 > 이에 대한 내용은 차후 문서에 다룰 예정이다.
 >
-> 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
+> 다음은 주파수 $f$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
 >
 > $$
 > \mathcal{F}\left\{ x \ast y (t) \right\} = \int_{-\infty}^{\infty}{x \ast y (t) e^{-j2\pi ft}dt}
@@ -915,7 +975,7 @@ $$
 > \quad = \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{ x(\tau) y(t-\tau)} e^{-j2\pi ft}dt d\tau}
 > $$
 >
-> 만일 $$u = t - \tau$$로 치환하면 도함수 $$du - dt$$가 나오는데, 적분 우선 순위에 의해 첫 번째 적분에서 $$\tau$$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
+> 만일 $u = t - \tau$로 치환하면 도함수 $du - dt$가 나오는데, 적분 우선 순위에 의해 첫 번째 적분에서 $\tau$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
 >
 > $$
 > \quad \Rightarrow \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{x(\tau)y(u) e^{-j2\pi f(\tau+u)} du} d\tau}
@@ -935,7 +995,7 @@ $$
 >
 > ----
 > 
-> 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
+> 다음은 각주파수 $\omega$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
 >
 > $$
 > \mathcal{F}\left\{ x \ast y (t) \right\} = \int_{-\infty}^{\infty}{x \ast y (t) e^{-j\omega t}dt}
@@ -949,7 +1009,7 @@ $$
 > \quad = \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{ x(\tau) y(t-\tau)} e^{-j\omega t}dt d\tau}
 > $$
 >
-> 만일 $$u = t - \tau$$로 치환하면 도함수 $$du - dt$$가 나오는데, 적분 우선 순위에 의해 첫 번째 적분에서 $$\tau$$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
+> 만일 $u = t - \tau$로 치환하면 도함수 $du - dt$가 나오는데, 적분 우선 순위에 의해 첫 번째 적분에서 $\tau$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
 >
 > $$
 > \quad \Rightarrow \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{x(\tau)y(u) e^{-j\omega(\tau+u)} du} d\tau}
@@ -969,7 +1029,7 @@ $$
 
 #### [성질] 주파수 합성곱
 
-> 본 성질에 대한 증명을 위해 우선 합성곱에 대한 이해가 필요하다. 합성곱(convolution)이란, 두 함수 $$x(t)$$와 $$y(t)$$로부터 새로운 함수 $$x\ast y(t)$$를 합성하는 수학 연산이다.
+> 본 성질에 대한 증명을 위해 우선 합성곱에 대한 이해가 필요하다. 합성곱(convolution)이란, 두 함수 $x(t)$와 $y(t)$로부터 새로운 함수 $x\ast y(t)$를 합성하는 수학 연산이다.
 >
 > $$
 > x(t) \ast y(t) = \int_{-\infty}^{\infty}{x(\tau)y(t-\tau)d\tau}
@@ -977,7 +1037,7 @@ $$
 >
 > 이에 대한 내용은 차후 문서에 다룰 예정이다.
 >
-> 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
+> 다음은 주파수 $f$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
 >
 > $$
 > \mathcal{F}\left\{ x \ast y (t) \right\} = \int_{-\infty}^{\infty}{x \ast y (t) e^{-j2\pi ft}dt}
@@ -991,7 +1051,7 @@ $$
 > \quad = \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{ x(\tau) y(t-\tau)} e^{-j2\pi ft}dt d\tau}
 > $$
 >
-> 만일 $$u = t - \tau$$로 치환하면 도함수 $$du - dt$$가 나오는데, 적분 우선 순위에 의해 첫 번째 적분에서 $$\tau$$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
+> 만일 $u = t - \tau$로 치환하면 도함수 $du - dt$가 나오는데, 적분 우선 순위에 의해 첫 번째 적분에서 $\tau$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
 >
 > $$
 > \quad \Rightarrow \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{x(\tau)y(u) e^{-j2\pi f(\tau+u)} du} d\tau}
@@ -1011,7 +1071,7 @@ $$
 >
 > ----
 > 
-> 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
+> 다음은 각주파수 $\omega$에 대한 푸리에 변환의 시간 합성곱을 보여준다.
 >
 > $$
 > \mathcal{F}\left\{ x \ast y (t) \right\} = \int_{-\infty}^{\infty}{x \ast y (t) e^{-j\omega t}dt}
@@ -1025,7 +1085,7 @@ $$
 > \quad = \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{ x(\tau) y(t-\tau)} e^{-j\omega t}dt d\tau}
 > $$
 >
-> 만일 $$u = t - \tau$$로 치환하면 도함수 $$du - dt$$가 나오는데, 적분 우선 순위에 의해 첫 번째 적분에서 $$\tau$$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
+> 만일 $u = t - \tau$로 치환하면 도함수 $du - dt$가 나오는데, 적분 우선 순위에 의해 첫 번째 적분에서 $\tau$는 상수로 취급되었기 때문이다. 이들을 적분식에 대입하면 다음과 같이 표현된다.
 >
 > $$
 > \quad \Rightarrow \int_{-\infty}^{\infty}{\int_{-\infty}^{\infty}{x(\tau)y(u) e^{-j\omega(\tau+u)} du} d\tau}
@@ -1045,13 +1105,13 @@ $$
 
 #### [성질] 시간 미분
 
-> 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 미분을 보여주며, 증명을 위해 푸리에 역변환을 사용한다.
+> 다음은 주파수 $f$에 대한 푸리에 변환의 시간 미분을 보여주며, 증명을 위해 푸리에 역변환을 사용한다.
 >
 > $$
 > x(t) = \int_{-\infty}^{\infty}{X(f)e^{j2\pi ft}df}
 > $$
 >
-> 합성 방정식의 양변에 시간 $$t$$에 대한 미분을 한다.
+> 합성 방정식의 양변에 시간 $t$에 대한 미분을 한다.
 >
 > $$
 > x'(t) = \frac{d}{dt} \left( \int_{-\infty}^{\infty}{X(f)e^{j2\pi ft}df} \right)
@@ -1073,13 +1133,13 @@ $$
 >
 > ----
 > 
-> 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 시간 미분을 보여주며, 증명을 위해 푸리에 역변환을 사용한다.
+> 다음은 각주파수 $\omega$에 대한 푸리에 변환의 시간 미분을 보여주며, 증명을 위해 푸리에 역변환을 사용한다.
 >
 > $$
 > x(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty}{X(\omega)e^{j\omega t}d\omega}
 > $$
 >
-> 합성 방정식의 양변에 시간 $$t$$에 대한 미분을 한다.
+> 합성 방정식의 양변에 시간 $t$에 대한 미분을 한다.
 >
 > $$
 > x'(t) = \frac{1}{2\pi} \frac{d}{dt} \left( \int_{-\infty}^{\infty}{X(\omega)e^{j\omega t}d\omega} \right)
@@ -1101,13 +1161,13 @@ $$
 
 #### [성질] 주파수 미분
 
-> 다음은 주파수 $$f$$에 대한 푸리에 변환의 주파수 미분을 보여주며, 증명을 위해 푸리에 변환을 사용한다.
+> 다음은 주파수 $f$에 대한 푸리에 변환의 주파수 미분을 보여주며, 증명을 위해 푸리에 변환을 사용한다.
 >
 > $$
 > X(f) = \int_{-\infty}^{\infty}{x(t)e^{-j2\pi ft}dt}
 > $$
 >
-> 해석 방정식의 양변에 시간 $$t$$에 대한 미분을 한다.
+> 분석 방정식의 양변에 시간 $t$에 대한 미분을 한다.
 >
 > $$
 > X'(f) = \frac{d}{df} \left( \int_{-\infty}^{\infty}{x(t)e^{-j2\pi ft}dt} \right)
@@ -1117,7 +1177,7 @@ $$
 > \quad = \int_{-\infty}^{\infty}{x(t)\cdot \left(-j2\pi t\right)e^{j2\pi ft}dt}
 > $$
 >
-> 위의 해석 방정식을 정리하면 다음과 같다.
+> 위의 분석 방정식을 정리하면 다음과 같다.
 >
 > $$
 > \frac{dX(f)}{df} = \int_{-\infty}^{\infty}{\left( j2\pi tx(t) \right) e^{j2\pi ft}dt}
@@ -1129,13 +1189,13 @@ $$
 >
 > ----
 > 
-> 다음은 각주파수 $$\omega$$에 대한 푸리에 변환의 주파수 미분을 보여주며, 증명을 위해 푸리에 변환을 사용한다.
+> 다음은 각주파수 $\omega$에 대한 푸리에 변환의 주파수 미분을 보여주며, 증명을 위해 푸리에 변환을 사용한다.
 >
 > $$
 > X(\omega) = \int_{-\infty}^{\infty}{x(t)e^{-j\omega t}dt}
 > $$
 >
-> 해석 방정식의 양변에 시간 $$t$$에 대한 미분을 한다.
+> 분석 방정식의 양변에 시간 $t$에 대한 미분을 한다.
 >
 > $$
 > X'(\omega) = \frac{d}{df} \left( \int_{-\infty}^{\infty}{x(t)e^{-j\omega t}dt} \right)
@@ -1145,7 +1205,7 @@ $$
 > \quad = \int_{-\infty}^{\infty}{x(t)\cdot \left(-jt\right)e^{j\omega t}dt}
 > $$
 >
-> 위의 해석 방정식을 정리하면 다음과 같다.
+> 위의 분석 방정식을 정리하면 다음과 같다.
 >
 > $$
 > \frac{dX(\omega)}{d\omega} = \int_{-\infty}^{\infty}{\left( jtx(t) \right) e^{j\omega t}dt}
@@ -1157,13 +1217,13 @@ $$
 
 #### [성질] 시간 부정적분
 
-> 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 영역 함수의 총 면적을 보여주며, 각주파수 $$\omega$$에 대한 푸리에 변환도 동일한 방법으로 증명할 수 있다. 아래는 푸리에 변환을 나타내는 해석 방정식이다.
+> 다음은 주파수 $f$에 대한 푸리에 변환의 시간 영역 함수의 총 면적을 보여주며, 각주파수 $$\omega$$에 대한 푸리에 변환도 동일한 방법으로 증명할 수 있다. 아래는 푸리에 변환을 나타내는 분석 방정식이다.
 >
 > $$
 > X(f) = \int_{-\infty}^{\infty}{x(t)e^{-j2\pi ft}dt}
 > $$
 >
-> 여기에서 $$f=0$$이면 아래의 식이 완성된다.
+> 여기에서 $f=0$이면 아래의 식이 완성된다.
 >
 > $$
 > X(0) = \int_{-\infty}^{\infty}{x(t)e^{-j2\pi 0 t}dt}
@@ -1175,13 +1235,13 @@ $$
 
 #### [성질] 주파수 부정적분
 
-> 다음은 주파수 $$f$$에 대한 푸리에 변환의 주파수 영역 함수의 총 면적을 보여주며, 각주파수 $$\omega$$에 대한 푸리에 변환도 동일한 방법으로 증명할 수 있다. 아래는 푸리에 역변환을 나타내는 해석 방정식이다.
+> 다음은 주파수 $f$에 대한 푸리에 변환의 주파수 영역 함수의 총 면적을 보여주며, 각주파수 $\omega$에 대한 푸리에 변환도 동일한 방법으로 증명할 수 있다. 아래는 푸리에 역변환을 나타내는 분석 방정식이다.
 >
 > $$
 > x(t) = \int_{-\infty}^{\infty}{X(f)e^{j2\pi ft}df}
 > $$
 >
-> 여기에서 $$t=0$$이면 아래의 식이 완성된다.
+> 여기에서 $t=0$이면 아래의 식이 완성된다.
 >
 > $$
 > x(0) = \int_{-\infty}^{\infty}{X(f)e^{-j2\pi f 0}df}
@@ -1193,13 +1253,13 @@ $$
 
 #### [성질] 시간 적분
 
-> 다음은 주파수 $$f$$에 대한 푸리에 변환의 시간 적분을 보여주며, 각주파수 $$\omega$$에 대한 푸리에 변환도 동일한 방법으로 증명할 수 있다. 위의 적분은 아래와 같은 합성곱으로 표현이 가능하다.
+> 다음은 주파수 $f$에 대한 푸리에 변환의 시간 적분을 보여주며, 각주파수 $\omega$에 대한 푸리에 변환도 동일한 방법으로 증명할 수 있다. 위의 적분은 아래와 같은 합성곱으로 표현이 가능하다.
 >
 > $$
 > \int_{-\infty}^{t}{x(\tau)d\tau} = \int_{-\infty}^{\infty}{x(\tau)u(t-\tau)d\tau}
 > $$
 >
-> 여기서 $$u(t-\tau)$$는 [단위 계단 함수](https://ko.wikipedia.org/wiki/단위_계단_함수)(unit step function)로 아래와 같은 성질을 갖는다.
+> 여기서 $u(t-\tau)$는 [단위 계단 함수](https://ko.wikipedia.org/wiki/단위_계단_함수)(unit step function)로 아래와 같은 성질을 갖는다.
 >
 > $$
 > u(t-\tau) = \left\{\begin{array}{rrr} 1, & \quad \tau < t \\ \frac{1}{2}, & \quad \tau = t \\ 0, & \quad \tau > t \end{array}\right.
@@ -1219,35 +1279,35 @@ $$
 > \quad = \frac{1}{j2\pi f}X(f) + \frac{1}{2}X(0)\delta(f)
 > $$
 >
-> 이는 단위 계단 함수 $$u(t-\tau)$$와 [델타 함수](https://ko.wikipedia.org/wiki/디랙_델타_함수) $$\delta(f)$$의 푸리에 변환에 의한 것으로, 해당 두 함수의 푸리에 변환은 차후에 설명할 예정이다.
+> 이는 단위 계단 함수 $u(t-\tau)$와 [델타 함수](https://ko.wikipedia.org/wiki/디랙_델타_함수) $\delta(f)$의 푸리에 변환에 의한 것으로, 해당 두 함수의 푸리에 변환은 차후에 설명할 예정이다.
 
 #### [성질] 파스발 정리
 
-> 파스발 정리에 앞서, 시간 영역에서 신호 $$x(t)$$의 에너지는 다음과 같이 계산된다.
+> 파스발 정리에 앞서, 시간 영역에서 신호 $x(t)$의 에너지는 다음과 같이 계산된다.
 >
 > $$
 > E = \lim_{T\rightarrow\infty}\int_{T}{\lvert x(t) \rvert^2dt}
 > $$
 >
-> 여기서 $$\lvert x(t) \rvert^2$$, 즉 복소함수 $$x(t)$$의 절댓값은 켤레복소함수 $$x^*(t)$$와의 곱으로 계산된다.
+> 여기서 $\lvert x(t) \rvert^2$, 즉 복소함수 $x(t)$의 절댓값은 켤레복소함수 $x^*(t)$와의 곱으로 계산된다.
 >
 > $$
 > \quad \Rightarrow \int_{-\infty}^{\infty}{\lvert x(t) \rvert^2dt} = \int_{-\infty}^{\infty}{x(t)x^*(t)dt}
 > $$
 >
-> 여기서 켤레복소함수 $$x(t)$$에 대해서만 푸리에 역변환을 대입시킨다.
+> 여기서 켤레복소함수 $x(t)$$에 대해서만 푸리에 역변환을 대입시킨다.
 >
 > $$
 > \quad \Rightarrow \int_{-\infty}^{\infty}{x(t) \cdot \mathcal{F}^{-1}\left\{X^*(-f)\right\}dt} = \int_{-\infty}^{\infty}{x(t) \left[ \int_{-\infty}^{\infty}{X^*(-f)e^{j2\pi ft}df} \right] dt}
 > $$
 > 
-> 주파수에 대해 $$-f=\lambda$$로 치환한다. 그러면 $$df=-d\lambda$$로 변하고 범위에도 영향을 미친다.
+> 주파수에 대해 $-f=\lambda$로 치환한다. 그러면 $df=-d\lambda$로 변하고 범위에도 영향을 미친다.
 >
 > $$
 > \quad \Rightarrow \int_{-\infty}^{\infty}{x(t) \left[ -\int_{\infty}^{-\infty}{X^*(\lambda)e^{-j2\pi\lambda t}d\lambda} \right] dt} = \int_{-\infty}^{\infty}{x(t) \left[ \int_{-\infty}^{\infty}{X^*(\lambda)e^{-j2\pi\lambda t}d\lambda} \right] dt}
 > $$
 >
-> 함수 $$X^*(\lambda)$$와 $$x(t)$$는 순수히 각각 주파수 $$\lambda$$ 및 시간 $$t$$에만 의존하기 때문에 적분 순서를 쉽게 바꿀 수 있다.
+> 함수 $X^*(\lambda)$와 $x(t)$는 순수히 각각 주파수 $\lambda$ 및 시간 $t$에만 의존하기 때문에 적분 순서를 쉽게 바꿀 수 있다.
 >
 > $$
 > \quad \Rightarrow \int_{-\infty}^{\infty}{X^*(\lambda) \left[ \int_{-\infty}^{\infty}{x(t)e^{-j2\pi\lambda t}dt} \right] d\lambda} = \int_{-\infty}^{\infty}{X^*(\lambda) \cdot \mathcal{F}\left\{ x(t) \right\} d\lambda}
@@ -1269,13 +1329,13 @@ $$
 > \mathcal{F}\left\{ \delta(t) \right\} = \int_{-\infty}^{\infty}{\delta(t)e^{-j2\pi ft}dt}
 > $$
 >
-> 디렉 델타 함수 $$\delta(t-a)$$는 $$t=a$$ 이외에는 모두 0인 함수이다. 그러므로 푸리에 해석 방정식에서 실질적으로 의미있는 적분 범위는 아래와 같다.
+> 디렉 델타 함수 $\delta(t-a)$는 $t=a$ 이외에는 모두 0인 함수이다. 그러므로 푸리에 분석 방정식에서 실질적으로 의미있는 적분 범위는 아래와 같다.
 >
 > $$
 > \quad \Rightarrow \int_{-0}^{+0}{\delta(t)e^{-j2\pi ft}dt}
 > $$
 >
-> 그리고 디렉 델타 함수 $$\delta(t-a)$$는 $$t=a$$일 때 항상 적분값이 1이므로 해석 방정식은 다음과 같이 간략화된다.
+> 그리고 디렉 델타 함수 $\delta(t-a)$는 $t=a$일 때 항상 적분값이 1이므로 분석 방정식은 다음과 같이 간략화된다.
 >
 > $$
 > \quad \Rightarrow \int_{-0}^{+0}{e^{-j2\pi ft}dt} = \left. e^{-j2\pi ft} \right|_{t=0} = 1
@@ -1289,13 +1349,13 @@ $$
 > \mathcal{F}^{-1}\left\{ \delta(f) \right\} = \int_{-\infty}^{\infty}{\delta(f)e^{j2\pi ft}df}
 > $$
 >
-> 디렉 델타 함수 $$\delta(f-a)$$는 $$f=a$$ 이외에는 모두 0인 함수이다. 그러므로 푸리에 해석 방정식에서 실질적으로 의미있는 적분 범위는 아래와 같다.
+> 디렉 델타 함수 $\delta(f-a)$는 $f=a$ 이외에는 모두 0인 함수이다. 그러므로 푸리에 분석 방정식에서 실질적으로 의미있는 적분 범위는 아래와 같다.
 >
 > $$
 > \quad \Rightarrow \int_{-0}^{+0}{\delta(f)e^{j2\pi ft}df}
 > $$
 >
-> 그리고 디렉 델타 함수 $$\delta(t-a)$$는 $$t=a$$일 때 항상 적분값이 1이므로 해석 방정식은 다음과 같이 간략화된다.
+> 그리고 디렉 델타 함수 $\delta(t-a)$는 $t=a$일 때 항상 적분값이 1이므로 분석 방정식은 다음과 같이 간략화된다.
 >
 > $$
 > \quad \Rightarrow \int_{-0}^{+0}{e^{j2\pi ft}df} = \left. e^{-j2\pi ft} \right|_{f=0} = 1
@@ -1313,7 +1373,7 @@ $$
 > \quad = \int_{-\infty}^{\infty}{1 \cdot e^{-j2\pi (f-f_0)t}dt}
 > $$
 >
-> 시간 영역에서의 직류신호에 대한 푸리에 변환과 동일하나, 주파수만 $$f-f_0$$으로 이동되었을 뿐이다.
+> 시간 영역에서의 직류신호에 대한 푸리에 변환과 동일하나, 주파수만 $f-f_0$으로 이동되었을 뿐이다.
 >
 > $$
 > \quad \Rightarrow \delta(f-f_0)
@@ -1399,7 +1459,7 @@ $$
 > \quad = \frac{1}{a + j2\pi f}
 > $$
 >
-> 그 다음 음의 시간대 $$t<0$$의 경우를 본다:
+> 그 다음 음의 시간대 $t<0$의 경우를 본다:
 >
 > $$
 > \int^{-0}_{-\infty}{-e^{at} \cdot e^{-j2\pi ft}dt} = -\left\{ \left. \frac{1}{\left(a - j2\pi f \right)}e^{\left(a - j2\pi f\right)t} \right|^{0}_{t=-\infty} \right\}
@@ -1429,7 +1489,7 @@ $$
 
 #### [신호] 단위 계단 함수
 
-> 시그넘 함수의 진폭을 $$\frac{1}{2}$$ 줄인 다음에 $$y$$ 축으로 $$\frac{1}{2}$$만큼 이동시키면 단위 계단 함수가 된다.
+> 시그넘 함수의 진폭을 $\frac{1}{2}$ 줄인 다음에 $y$ 축으로 $\frac{1}{2}$만큼 이동시키면 단위 계단 함수가 된다.
 >
 > $$
 > u(t) = \frac{1}{2}\mathrm{sgn}(t) + \frac{1}{2}
@@ -1451,7 +1511,7 @@ $$
 
 #### [신호] 구형 펄스
 
-> 구형 펄스은 범위 $$(-\frac{a}{2},+\frac{a}{2})$$ 이외에는 모두 0을 갖기 떄문에 푸리에 변환의 해석 방정식을 다음과 같이 나타낼 수 있다.
+> 구형 펄스은 범위 $(-\frac{a}{2},+\frac{a}{2})$ 이외에는 모두 0을 갖기 떄문에 푸리에 변환의 분석 방정식을 다음과 같이 나타낼 수 있다.
 >
 > $$
 > \mathcal{F}\left\{ \Pi\left(\textstyle\frac{t}{a}\right)\right\} = \int_{-\infty}^{\infty}{\Pi\left(\textstyle\frac{t}{a}\right)e^{-j2\pi ft}dt}
