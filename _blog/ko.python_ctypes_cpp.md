@@ -82,9 +82,9 @@ C 언어에서 [배열](/docs/ko.PRGMING_C/#배열)을 호출하면 메모리 �
 |:-----------:|:---------:|:------------:|:-----------:|
 | `int []`    | `int*`    | `POINTER(c_int)`    | `PINT`  |
 | `double []` | `double*` | `POINTER(c_double)` | -  |
-| `PBYTE`     | `BYTE*`   | `POINTER(c_byte)`   | `PBYTE`  |
-| `PWORD`     | `WORD*`   | `POINTER(c_ushort)` | `PWORD`  |
-| `PDWORD`    | `DWORD*`  | `POINTER(c_uint)`   | `PDWORD`  |
+| `BYTE []`     | `BYTE*`   | `POINTER(c_byte)`   | `PBYTE`  |
+| `WORD []`     | `WORD*`   | `POINTER(c_ushort)` | `PWORD`  |
+| `DWORD []`    | `DWORD*`  | `POINTER(c_uint)`   | `PDWORD`  |
 
 단, C/C++에서 배열 자체를 호출하면 배열 첫 요소의 메모리 주소가 반환되는 점을 감안하여 배열 변수를 인자로 건네줄 때 첫 번째 요소를 전달하는 것을 권장합니다. 아래는 `ptrGUID`라는 배열을 동적 라이브러리의 함수에 전달인자로 건네주는 코드입니다.
 
@@ -93,3 +93,21 @@ ptrGUID = GUID() * dwSize.value
 
 bResult = SetupAPI.SetupDiClassGuidsFromNameW("Monitor", pointer(ptrGUID[0]), dwSize, pointer(dwSize))
 ```
+### 문자열
+C/C++ 프로그래밍 언어에서 문자열을 문자 포인터 혹은 문자 배열로 나타내는 경우가 많습니다. 그러나 결국 이들이 표현하려는 것은 문자열이기 때문에 오히려 간단합니다.
+
+| C/C++       | 동일 자료형    | `ctypes`  | `wintypes` |
+|:-----------:|:---------:|:------------:|:-----------:|
+| `CHAR*`    | `CHAR []`    | `c_char_p`    | `LPSTR` 혹은 `LPCSTR`  |
+| `WCHAR*` | `WCHAR []` | `c_wchar_p` | `LPWSTR` 혹은 `LPCWSTR`  |
+
+Win32 API에서는 더욱 다양한 종류의 문자열을 표현하는 자료형들이 있으나, 이들도 결국 문자 포인터이므로 `string`을 사용하여 맞춰줍니다. 아래는 Win32이 갖는 문자 포인터 자료형 일부입니다.
+
+| C/C++       | 의미 (영문)    | 의미 (한글)           |
+|:-----------:|-----------|--------------|
+| `PCSTR`     | Pointer to a Constant character, thus STRing | 상수 문자 포인터 형식의 문자열 |
+| `LPCSTR`    | Long Pointer to a Constant character, thus STRing | 상수 문자 롱포인터 형식의 문자열 |
+| `PCWSTR`    | Pointer to a Constant Wide-character, thus STRing | 상수 확장문자 포인터 형식의 문자열 |
+| `LPCWSTR` | Long Pointer to a Constant Wide-character, thus STRing | 상수 확장문자 롱포인터 형식의 문자열 |
+
+여기서 포인터(pointer)와 롱포인터(long pointer)가 따로 구별된 이유는 예전의 16비트 시스템에서 2 바이트와 4 바이트 메모리 주소를 구분짓기 위해서였습니다. 그러나 32비트 시스템 이상에서는 이 둘은 사실상 동일한 포인터가 되었습니다.
