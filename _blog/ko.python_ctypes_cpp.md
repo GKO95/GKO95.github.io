@@ -64,7 +64,32 @@ from ctypes.wintypes import *
 | `WORD`  | `unsinged short` | `c_ushort` | `WORD`     |
 | `DWORD` | `unsigned long`  | `c_ulong`  | `DWORD`    |
 
-여기서 주의할 점은 파이썬의 기본 자료형 `int`와 `ctypes`의 `c_int`는 엄연히 다른 존재입니다.
-
 ### 포인터
-[포인터](/docs/ko.PRGMING_Cpp/#포인터)는 데이터가 저장되는 메모리 주소입니다.
+[포인터](/docs/ko.PRGMING_C/#포인터)는 데이터가 저장된 메모리 주소를 담는 변수입니다. 비록 파이썬 메모리 주소를 표면적으로 드러내어 처리하지 않으나,  `ctypes` 모듈은 자료형의 포인터를 지정하는 `POINTER()` 함수가 있습니다. 아래는 간단히 4 바이트 정수형과 8 바이트 부동소수점형의 메모리 주소를 건네받을 포인터, 그리고 [핸들](/docs/ko.LIBRARY_MFC/#핸들) 매개변수를 지정합니다.
+
+| C/C++     | 동일 자료형  | `ctypes`            | `wintypes` |
+|:---------:|:-------:|:-------------------:|:----------:|
+| `int*`    | -       | `POINTER(c_int)`    | `PINT`     |
+| `double*` | -       | `POINTER(c_double)` | -          |
+| `HANDLE*` | `void*` | `c_void_p`          | `HANDLE`   |
+
+여기서 포인터 지정 함수 `POINTER()`는 전부 대문자로 표기되어야 합니다. `ctypes`는 소문자로 된 `pointer()` 함수도 가지고 있지만 변수의 메모리 주소를 호출하는 용도로 사용됩니다. 이에 대한 예시는 다음 부분에서 확인할 수 있습니다.
+
+### 배열
+C 언어에서 [배열](/docs/ko.PRGMING_C/#배열)을 호출하면 메모리 주소가 반환되므로 흔히 포인터와 함께 사용됩니다. C#의 경우에는 [`unsafe`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/unsafe) 키워드로 코드의 안정성을 감안하지 않는 이상 변수의 메모리 주소를 알아낼 수 없었습니다. 그러나 파이썬은 `ctypes` 모듈로부터 자료형이 반영된 변수의 메모리 주소를 호출할 수 있습니다. 즉, 위의 포인터 매개변수 지정과 동일한 구문으로도 참조에 의한 호출이 가능합니다.
+
+| C/C++       | 동일 자료형    | `ctypes`  | `wintypes` |
+|:-----------:|:---------:|:------------:|:-----------:|
+| `int []`    | `int*`    | `POINTER(c_int)`    | `PINT`  |
+| `double []` | `double*` | `POINTER(c_double)` | -  |
+| `PBYTE`     | `BYTE*`   | `POINTER(c_byte)`   | `PBYTE`  |
+| `PWORD`     | `WORD*`   | `POINTER(c_ushort)` | `PWORD`  |
+| `PDWORD`    | `DWORD*`  | `POINTER(c_uint)`   | `PDWORD`  |
+
+단, C/C++에서 배열 자체를 호출하면 배열 첫 요소의 메모리 주소가 반환되는 점을 감안하여 배열 변수를 인자로 건네줄 때 첫 번째 요소를 전달하는 것을 권장합니다. 아래는 `ptrGUID`라는 배열을 동적 라이브러리의 함수에 전달인자로 건네주는 코드입니다.
+
+```python
+ptrGUID = GUID() * dwSize.value
+
+bResult = SetupAPI.SetupDiClassGuidsFromNameW("Monitor", pointer(ptrGUID[0]), dwSize, pointer(dwSize))
+```
