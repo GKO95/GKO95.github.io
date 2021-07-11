@@ -117,10 +117,10 @@ Win32 API 함수 일부는 기본 자료형이 아닌 구조체를 전달인자�
 
 ```python
 class SP_DEVINFO_DATA(Structure):
-	_fields_ = [
-		("cbSize", DWORD),
-		("ClassGuid", GUID),
-		("DevInst", DWORD),
-		("Reserved", POINTER(ULONG))
-	]
+    _fields_ = [
+        ("cbSize", DWORD),
+        ("ClassGuid", GUID),
+        ("DevInst", DWORD),
+        ("Reserved", POINTER(ULONG))
+    ]
 ```
