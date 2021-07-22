@@ -1482,6 +1482,29 @@ static class CLASS
     abstract void method();
     ```
 
+7. `partial` 한정자
+    : 클래스 또는 메소드를 분할하여 정의하는데 사용되는 한정자이다.
+
+    ```csharp
+    // 분할 클래스
+    partial class CLASS
+    {
+        void method1();
+    }
+
+    partial class CLASS
+    {
+        void method2();
+    }
+
+    /* 동일:
+    class CLASS
+    {
+        void method1();
+        void method2();
+    } */
+    ```
+
 ### 접근 한정자
 접근 한정자(access modifier)는 외부에서 클래스 맴버의 접근성을 지정한다. C# 언어에는 세 가지의 접근 지정자가 존재하며, 이는 각각 `public`, `private`, `protected`, 그리고 `internal`이 있다.
 
