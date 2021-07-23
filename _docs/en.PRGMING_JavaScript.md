@@ -103,7 +103,7 @@ Add the following configuration to the JSON file: `"file": "${workspaceFolder}/i
 
 Eventually, a JavaScript environment on VS Code would look like this:
 
-![JavaScript workspace environment on VS Code.](/images/docs/javascript/js_vs_workspace.png)
+![JavaScript workspace environment on VS Code](/images/docs/javascript/js_vs_workspace.png)
 
 There are two different methods when running JavaScript on VS Code: Run with debugging (`F5`) and run without debugging (`Ctrl+F5`). Use the debugging mode when the program encounters an error to identify the cause, but run without debugging when executing in general.
 

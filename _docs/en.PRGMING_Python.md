@@ -39,7 +39,7 @@ Developers should be cautious when selecting an interpreter as the version impac
 ## Download Interpreter
 Install the Python interpreter after selecting the version. There are several options for downloading interpreters.
 
-![Download list of interpreter installers in Python 3 official website.](/images/docs/python/python_interpreter_download.png)
+![Download list of interpreter installers in Python 3 official website](/images/docs/python/python_interpreter_download.png)
 
 The website provides 64-bit and 32-bit interpreter for Windows OS (ex. Windows 10, Windows 8.1, Windows 7, etc.), namely `x86-64` and `x86`. To find out the operating system and architecture of the computer, go to the following path on File Explorer.
 
