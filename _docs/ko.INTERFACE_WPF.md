@@ -188,7 +188,17 @@ XML 요소들은 하나의 네임스페이스에만 속할 수 있다는 원칙�
 > 유사한 역할을 수행하는 [XML DTD](https://ko.wikipedia.org/wiki/문서_형식_정의)가 있으나, 스키마는 XML로 작성되었으면 네임스페이스를 지원하는 차이점이 있다.
 
 ## XAML 네임스페이스
-XAML 네임스페이스(XAML namespace)는 기존 XML 네임스페이스처럼 단순히 데이터 분류를 위해 URI로 유일성을 제공할 뿐만 아니라, 입력된 URI에 따라 XAML 문서에 특정 [CLR](../ko.PRGMING_Csharp/#net) 네임스페이스 혹은 참조 어셈블리로부터 지원받는 XAML 스키마 개념을 내포한다.
+XAML 네임스페이스(XAML namespace)는 기존 XML 네임스페이스처럼 단순히 데이터 분류를 위해 URI로 유일성을 제공할 뿐만 아니라, 입력된 URI에 따라 XAML 문서에 특정 CLR 네임스페이스 혹은 참조 어셈블리로부터 지원받는 XAML 스키마 개념을 내포한다. 여기서 CLR은 [.NET](../ko.PRGMING_Csharp/#net) 공통 언어 런타임(Common Language Runtime)으로 XAML 마크업이 아닌 C# 언어 코드를 가리킨다.
+
+WPF 프로젝트에는 크게 기본 네임스페이스와 접두사 `x:`를 갖으며, 이들의 목적과 용도는 다음과 같다.
+
+* `xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"`
+    : XAML 언어로부터 구현된 WPF 전용 클라이언트 및 프레임워크 XAML의 종합 네임스페이스이다.
+
+* `xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"`
+    : XAML 언어 정의에 내포된 내장형(intrinsics)을 지원하는 별개의 XAML 네임스페이스이다.
+
+여기서 WPF 용어를 기본 네임스페이스로 사용한 이유는 XAML 내장형보다 더 흔히 사용되기 때문이다.
 
 # WPF: 컨트롤
 
