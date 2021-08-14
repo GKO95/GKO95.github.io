@@ -463,13 +463,27 @@ double dvalue = System.Convert.ToDouble(Console.ReadLine());
 ```
 
 ### `is` 연산자
-`is` 키워드는 주어진 데이터가 비교하고자 하는 자료형과 호환되는지 확인하는 C# 언어의 연산자이다.
+`is` 연산자는 주어진 데이터가 비교하고자 하는 자료형과 호환되는지 확인하는 C# 언어의 연산자이다.
 
 ```csharp
 variable is Type;
 ```
 
 만일 `variable`이 자료형 `Type`와 호환되면 논리값 `true`이 반환되며, 그렇지 않을 시 `false` 논리값이 반환된다.
+
+### `typeof` 연산자
+`typeof` 연산자는 자료형이 .NET에서 해당하는 `System.Type` 객체가 무엇인지 반환한다.
+
+```csharp
+typeof(Type);        // 예시. int -> System.Int32
+```
+
+그러나 `typeof` 연산자는 변수나 객체에 대한 시스템 자료형을 구할 수 없으며, 이러한 경우 `GetType()` 메소드를 사용해야 한다.
+
+```csharp
+int variable;
+variable.GetType();  // >> 출력: System.Int32
+```
 
 ## 연산자
 연산자(operator)는 피연산자의 데이터를 조작할 수 있는 가장 간단한 데이터 처리요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다.
@@ -593,14 +607,14 @@ condition ? true_return : false_return;
 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에는 유용하다.
 
 ### `as` 연산자
-`as` 키워드는 자료형 변환에 사용되는 C# 언어의 연산자이며, 만일 해당 자료형이 호환성의 문제로 변환이 불가하면 `null`이 반환된다.
+`as` 연산자는 자료형 변환에 사용되는 C# 언어의 연산자이며, 만일 해당 자료형이 호환성의 문제로 변환이 불가하면 `null`이 반환된다.
 
 ```csharp
 /* "as" 연산자 */
 variable as Type;
 ```
 
-위의 예시 코드는 `variable`을 `Type` 자료형으로 캐스팅을 시도한다. 이는 아래의 문장과 동일하게 동작한다.
+위의 예시 코드는 `variable`을 `Type` 자료형으로 캐스팅을 시도한다. `as` 연산자의 호환성 판별식은 아래의 문장과 동일하게 동작한다.
 
 ```csharp
 /* "as" 연산자의 동일 표현식 */
