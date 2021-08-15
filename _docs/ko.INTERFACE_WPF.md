@@ -303,15 +303,38 @@ StaticResource와 DynamicResource는 공통적으로 다음과 같은 절차에 
         <Object x:Key="Resource2" />
     </Window.Resource>
 
-    <Grid>
+    <StackPanel>
         <Control Resource="{StaticResource Resource1}" />
         <Control Resource="{StaticResource Resource2}" />
-    </Grid>
+    </StackPanel>
 </Window>
 ```
 
 ## 스타일
+`System.Windows.Style` 스타일(Style)은 컨트롤의 외관을 변경하는데 사용되며, 흔히 리소스로 사용되어 컨트롤에 공통된 혹은 `x:Key`에 해당하는 스타일을 적용한다. 그 중에서 `TargetType` 속성은 해당 스타일이 적용될 컨트롤이 어느 것인지 명시한다; `System.Windows.Setter`을 통해 컨트롤의 속성을 설정하기 위해서 반드시 필요하다.
 
+```xml
+<Window>
+    <Window.Resource>
+        <Style x:Key="Resource1" TargetType="Button">
+            <Setter Property="BorderBrush" Value="Red"/>
+            <Setter Property="BorderThickness" Value="5" />
+            <Setter Property="Height" Value="50" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Blue"/>
+            <Setter Property="Height" Value="100" />
+        </Style>
+    </Window.Resource>
+
+    <StackPanel>
+        <Button Style="{StaticResource Resource1}" />
+        <Button />
+    </StackPanel>
+</Window>
+```
+
+`System.Windows.Style` 스타일 중에서 `x:Key` 마크업 확장자가 없는 경우, `TargetType` 속성에 명시된 컨트롤에 일관적으로 스타일이 적용되는데 이를 암묵적 스타일(implicit style)이라 부른다. 반면 명시적 스타일(explicit style)의 경우, 리소스 딕셔너리에서 `x:Key`와 일치하는 지정된 스타일이 있으면 일관된 스타일이 아닌 별도의 스타일이 반영된다.
 
 # WPF: 바인딩
 데이터 바인딩(Data binding)은 WPF 컨트롤을 데이터와 연동시킨다. 데이터 변동이나 컨트롤 상호작용은 서로에게 영향을 주어 자동적으로 업데이트된다. WPF에는 두 가지의 데이터 바인딩이 존재한다:
