@@ -63,40 +63,40 @@ XML은 정해진 태그나 구조가 없다: 개발자가 원하는 태그 이�
 
 ```xml
 <!--METHOD 1-->
-<ghpages>
+<GHPages>
 
-    <document category="Programming">
-        <title lang="en">Python</title>
-        <order>0</order>
-        <icon>icon-python.png</icon>
-    </document>
+    <Document Category="Programming">
+        <Title Language="en">Python</Title>
+        <Order>0</Order>
+        <Icon>icon-python.png</Icon>
+    </Document>
 
-    <document category="Library">
-        <title lang="ko">NumPy</title>
-        <order>16</order>
-        <icon>icon-numpy.png</icon>
-    </document>
+    <Document Category="Library">
+        <Title Language="ko">NumPy</Title>
+        <Order>16</Order>
+        <Icon>icon-numpy.png</Icon>
+    </Document>
 
-</ghpages>
+</GHPages>
 ```
 ----
 ```xml
 <!--METHOD 2-->
-<ghpages>
+<GHPages>
 
-    <document category="Programming" order="0">
-        <title lang="en">Python</title>
-        <icon source="icon-python.png" />
-    </document>
+    <Document Category="Programming" Order="0">
+        <Title Language="en">Python</Title>
+        <Icon Source="icon-python.png" />
+    </Document>
 
-    <document category="Library" order="16">
-        <title lang="ko">NumPy</title>
-        <icon source="icon-numpy.png" />
-    </document>
+    <Document Category="Library" Order="16">
+        <Title Language="ko">NumPy</Title>
+        <Icon Source="icon-numpy.png" />
+    </Document>
 
-</ghpages>
+</GHPages>
 ```
-여기서 `<ghpages>` 태그와 같이 XML의 가장 최외각에 있는 루트 요소(root element)는 XML 파일마다 오로지 하나만 선언될 수 있다.
+여기서 `<GHPages>` 태그와 같이 XML의 가장 최외각에 있는 루트 요소(root element)는 XML 파일마다 오로지 하나만 선언될 수 있다.
 
 ## XML 네임스페이스
 [XML 네임스페이스](https://en.wikipedia.org/wiki/XML_namespace)(namespace)는 개발자가 직접 부여한 태그 이름이 동일한 이름의 태그를 갖는 다른 XML 파일과 함께 사용될 때 충돌이 발생하는 것을 방지하기 위한 데이터 분류 공간이다. 이는 [C# 네임스페이스](../ko.PRGMING_Csharp/#네임스페이스)와 동일한 역할을 하면서도 유사점이 매우 많다. 그러므로 본 XML 네임스페이스 설명에서는 C# 네임스페이스가 자주 언급될 예정이다.
@@ -120,19 +120,19 @@ URI에는 어떠한 텍스트가 사용되어도 무관하지만, 서로 다른 
 아래는 URI `https://gko95.github.io/`의 기본 네임스페이스가 선언된 예시 코드이다.
 
 ```xml
-<ghpages xlmns="https://gko95.github.io/">
+<GHPages xlmns="https://gko95.github.io/">
 
-    <document category="Programming" order="0">
-        <title lang="en">Python</title>
-        <icon source="icon-python.png" />
-    </document>
+    <Document Category="Programming" Order="0">
+        <Title Language="en">Python</Title>
+        <Icon Source="icon-python.png" />
+    </Document>
 
-    <document category="Library" order="16">
-        <title lang="ko">NumPy</title>
-        <icon source="icon-numpy.png" />
-    </document>
+    <Document Category="Library" Order="16">
+        <Title Language="ko">NumPy</Title>
+        <icon Source="icon-numpy.png" />
+    </Document>
 
-</ghpages>
+</GHPages>
 ```
 XML 요소들은 하나의 네임스페이스에만 속할 수 있다는 원칙에 의해, 각 요소는 오로지 하나의 기본 네임스페이스만 선언할 수 있다. 또한, 부모와 자식이 서로 다른 기본 네임스페이스를 선언하였으면 부모에 선언된 기본 네임스페이스가 자식에 선언된 기본 네임스페이스보다 우선시된다.
 
@@ -144,42 +144,42 @@ XML 요소들은 하나의 네임스페이스에만 속할 수 있다는 원칙�
 아래는 URI `https://gko95.github.io/PRGMING`와 `https://gko95.github.io/LIBRARY`의 네임스페이스를 각각 접두사 `prefix1`와 `prefix2` 로 선언하여 사용한 예시 코드이다.
 
 ```xml
-<ghpages xmlns="https://gko95.github.io/">
+<GHPages xmlns="https://gko95.github.io/">
 
-    <prefix1:document xmlns:prefix1="https://gko95.github.io/PRGMING" 
-                      category="Programming" order="0">
-        <prefix1:title lang="en">Python</prefix1:title>
-        <prefix1:icon source="icon-python.png" />
-    </prefix1:document>
+    <prefix1:Dcoument xmlns:prefix1="https://gko95.github.io/PRGMING" 
+                      Category="Programming" Order="0">
+        <prefix1:Title Language="en">Python</prefix1:Title>
+        <prefix1:Icon Source="icon-python.png" />
+    </prefix1:Document>
 
-    <prefix2:document xmlns:prefix2="https://gko95.github.io/LIBRARY"
-                      category="Library" order="16">
-        <prefix2:title lang="ko">NumPy</prefix2:title>
-        <prefix2:icon source="icon-numpy.png" />
-    </prefix2:document>
+    <prefix2:Document xmlns:prefix2="https://gko95.github.io/LIBRARY"
+                      Category="Library" Order="16">
+        <prefix2:Title Language="ko">NumPy</prefix2:Title>
+        <prefix2:Icon Source="icon-numpy.png" />
+    </prefix2:Document>
 
-</ghpages>
+</GHPages>
 ```
 비록 위의 예시 코드에는 기본 네임스페이스가 루트 요소에 선언되었으나, 네임스페이스 접두사가 기본 네임스페이스보다 우선시된다. 단, 접두사가 없는 XML 요소들은 기본 네임스페이스에 연결된다.
 
 위의 예시 코드의 네임스페이스 선언들을 루트 요소로 모두 옮겨 다음과 같이 나타내는 방법도 고려할 수 있다.
 
 ```xml
-<ghpages xmlns="https://gko95.github.io/"
+<GHPages xmlns="https://gko95.github.io/"
          xmlns:prefix1="https://gko95.github.io/PRGMING"
          xmlns:prefix2="https://gko95.github.io/LIBRARY">
 
-    <prefix1:document category="Programming" order="0">
-        <prefix1:title lang="en">Python</prefix1:title>
-        <prefix1:icon source="icon-python.png" />
-    </prefix1:document>
+    <prefix1:Document Category="Programming" Order="0">
+        <prefix1:Title Language="en">Python</prefix1:Title>
+        <prefix1:Icon Source="icon-python.png" />
+    </prefix1:Document>
 
-    <prefix2:document category="Library" order="16">
-        <prefix2:title lang="ko">NumPy</prefix2:title>
-        <prefix2:icon source="icon-numpy.png" />
-    </prefix2:document>
+    <prefix2:Document Category="Library" Order="16">
+        <prefix2:Title Language="ko">NumPy</prefix2:Title>
+        <prefix2:Icon Source="icon-numpy.png" />
+    </prefix2:Document>
 
-</ghpages>
+</GHPages>
 ```
 
 ## XML 스키마
@@ -210,7 +210,125 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     : XAML 마크업 문서를 C# 코드의 [분할](../ko.PRGMING_Csharp/#한정자) 클래스에 연동시킨다. 본 지시문은 XAML 루트 요소에서만 기입할 수 있으며, 그 이외의 요소에서는 컴파일 오류가 발생한다.
 
 * `x:Name` 지시문
+    : XAML 요소에 [식별자](../ko.PRGMING_Csharp/#식별자)를 지정한다. 해당 식별자는 C# 코드에서 객체명으로 간단히 호출 및 접근하는데 유용하게 사용될 수 있으나, 식별자는 XAML 네임스페이스에서 요소마다 유일해야 한다.
+
+* `x:Key` 지시문
+    : XAML로 정의된 딕셔너리에서 데이터를 불러올 호출자를 지정한다. 이는 C# 코드에서의 [딕셔너리](../ko.PRGMING_Csharp/#dictionary-컬렉션) 컬렉션과 같이 `{key, value}`의 `key`와 동일한 역할을 하며, 대표적은 [리소스 딕셔너리](#wpf-리소스)에서 사용된다.
+
+* `x:Type` 마크업 확장문
+    : XAML 요소의 자료형을 반환한다. 이는 C# 코드의 [`typeof`](../ko.PRGMING_Csharp/#typeof-연산자) 연산자의 XAML 버전으로 간주할 수 있다.
+
+## WPF XAML 트리
+WPF 사용자 인터페이스를 제작하는데 XAML 요소들은 .NET 객체들의 [트리 구조](https://ko.wikipedia.org/wiki/트리_구조)로 구성된다. WPF에서는 두 가지 개념의 트리 구조가 존재한다.
+
+### 논리 트리 구조
+논리 트리 구조(logical tree structure)는 XAML 인터페이스 요소들에 의해 구성된 트리 구조이다. 본 문서에서 여태 보여준 XAML 코드가 전부 논리 트리 구조이며, 종속성 및 리소스 그리고 바인딩 등을 확인할 수 있다.
+
+### 시각 트리 구조
+시각 트리 구조(visual tree structure)는 렌더링되어 화면에 출력되는 인터페이스 요소 위주로 구성된 트리 구조이다. 해당 트리 구조를 확인하려면 디버깅 모드로 실행하여 `Debug → Windows → Live Visual Tree`에서 확인할 수 있다. 논리 트리 구조의 상위호환으로 간주되며, 성능 최적화에 사용되기도 한다.
 
 # WPF: 컨트롤
+WPF 컨트롤(control)은 사용자 인터페이스를 제공하는 구성요소로 C# 혹은 XAML을 통해 불러올 수 있다. C#에서 WPF 컨트롤을 사용하려면 아래의 CLR 네임스페이스를 선언해야 한다.
+
+```csharp
+using System.Windows.Controls;
+```
+
+WPF 프로젝트를 생성하였을 때 기본으로 생성된 `Window` 컨트롤은 흔히 어플리케이션의 루트 요소로 사용된다. 크기 최소화 및 최대화, 어플리케이션 제목과 테두리 그리고 시스템 메뉴 등이 포함된 어플리케이션 창 컨트롤이다.
+
+![WPF 컨트롤 도구상자](/images/docs/wpf/wpf_xaml_toolbox.png)
+
+WPF 컨트롤은 메뉴에서 `View → Toolbox` 혹은 `Ctrl + Alt + X` 단축키로 도구상자를 통해 찾아볼 수 있다. 도구상자에서 컨트롤을 선택하고 편집기에 원하는 위치에 클릭하거나 드래그한 만큼의 크기로 삽입한다. XAML 편집기와 코드는 동기화되어 있으므로, XAML 문서를 통해 컨트롤을 삽입하여도 편집기에 그대로 반영된다.
+
+### 사용자 컨트롤
+사용자 컨트롤(User Control)은 WPF 내장 컨트롤들을 활용하거나 조합하여 만든 자체 제작 XAML 컨트롤이다.
+
+### 커스텀 컨트롤
+커스텀 컨트롤(Custom Control)은 찾고자 하는 컨트롤이 WPF 내에 없거나, WPF 내장 컨트롤에서 기능을 추가해야 할 경우, 혹은 자체 테마를 적용해야 할 시에 제작하여 사용한다. 커스텀 컨트롤의 스타일 및 테마는 일반적으로 `generic.xaml` 파일에 정의된다.
+
+## 패널
+비록 WPF 컨트롤은 원하는 위치에 삽입할 수 있으나, 어플리케이션 창 크기에 따라 컨트롤의 크기 및 배치가 유연한지 여부는 안정성에 있어 매우 중요하다. 도구상자는 컨트롤 이외에도 컨트롤 간의 레이아웃을 지정할 수 있는 패널(panel)을 제공한다.
+
+| 패널     | 영문           | 설명                                                                       |
+|--------|--------------|--------------------------------------------------------------------------|
+| 스택 패널  | Stack Panel  | 자식을 수직 혹은 수평 방향으로 한 줄로 나열한다: 나열할 공간이 부족하여도 계속 이어나간다.                     |
+| 줄바꿈 패널 | Wrap Panel   | 자식을 수직 혹은 수평 방향으로 한 줄로 나열한다: 나열할 공간이 부족하다면 다음 줄로 이동한다.                   |
+| 도크 패널  | Dock Panel   | 자식을 상하좌우 중 한 곳으로 도킹한다: `LastChildFill` 속성으로 마지막 자식을 나머지 공간에 채울지 여부를 정한다. |
+| 캔버스 패널 | Canvas Panel | 자식을 상대좌표로 배치한다: 2D 그래픽 요소 (타원, 직사각형 등) 전용이다.                             |
+| 그리드 패널 | Grid Panel   | 자식을 도표처럼 행과 열을 설정하여 배치한다: `*`로 비율을 조절할 수 있다.                             |
+
+# WPF: 리소스
+> *참조: [Microsoft Docs XAML 리소스 개요 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/systems/xaml-resources-overview)*    
+
+XAML 리소스(resource)는 브러시와 스타일과 같이 어플리케이션의 다른 곳에서도 재사용할 수 있는 객체를 가리킨다. 단, 이는 외부 파일이나 데이터와 같은 어플리케이션 리소스와 별개이다. 저장된 XAML 리소스는 컨트롤이나 창 이외에도 전역적으로 어플리케이션 전체에서 사용할 수 있다. XAML 리소스는 루트의 `FrameworkElement.Resource` 하에 정의되어야 하며, 어떠한 객체라도 리소스로 정의되어 공유될 수 있다. 
+
+XAML 리소스는 리소스 딕셔너리(resource dictionary)에 정의하며, 별도로 선언하지 않아도 리소스를 정의하면 암묵적으로 선언된다.
+
+```xml
+<Window>
+
+    <Window.Resource>
+        <Object x:Key="Resource1" />
+        <Object x:Key="Resource2" />
+    </Window.Resource>
+
+    <!-- EQUIVALENT:
+    <Window.Resource>
+        <ResourceDictionary>
+            <Object x:Key="Resource1" />
+            <Object x:Key="Resource2" />
+        </ResourceDictionary>
+    </Window.Resource>
+    -->
+
+</Window>
+```
+
+위에는 임의의 두 `Object` 객체를 리소스로 사용하였다. 리소스 딕셔너리인 만큼 C# [딕셔너리](../ko.PRGMING_Csharp/#dictionary-컬렉션) 컬렉션과 마찬가지로 `{key, value}` 형식에서 `value`에 해당하는 리소스를 불러오기 위해 필요한 `key`를 `x:Key`로 지정한다.
+
+WPF 어플리케이션은 리소스를 정적(static) 혹은 동적(dynamic)으로 참조할 수 있다:
+
+* [StaticResource](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/staticresource-markup-extension)
+    : 이미 정의된 리소스를 어플리케이션 준비 과정에서 참조하며, 한 번 참조된 리소스는 더이상 변경이 불가하다.
+
+* [DynamicResource](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/dynamicresource-markup-extension)
+    : 어플리케이션 실행 도중에 객체를 생성하는데 정의된 리소스가 필요할 때 참조한다. 리소스가 참조된 이후에도 차후에 변경할 수 있다.
+
+StaticResource와 DynamicResource는 공통적으로 다음과 같은 절차에 따라 리소스를 탐색한다: (1) 우선 XAML 요소가 참조하는 리소스가 해당 요소의 리소스 딕셔너리로부터 탐색한다. 그 다음 (2) 논리 트리 구조를 거슬러 올라가 루트 요소의 리소스 딕셔너리로 이동하며, 이후에는 (3) `Application` 객체에 정의된 어플리케이션 리소스 딕셔너리를 확인한다.
+
+```xml
+<Window>
+    <Window.Resource>
+        <Object x:Key="Resource1" />
+        <Object x:Key="Resource2" />
+    </Window.Resource>
+
+    <Grid>
+        <Control Resource="{StaticResource Resource1}" />
+        <Control Resource="{StaticResource Resource2}" />
+    </Grid>
+</Window>
+```
+
+## 스타일
+
 
 # WPF: 바인딩
+데이터 바인딩(Data binding)은 WPF 컨트롤을 데이터와 연동시킨다. 데이터 변동이나 컨트롤 상호작용은 서로에게 영향을 주어 자동적으로 업데이트된다. WPF에는 두 가지의 데이터 바인딩이 존재한다:
+
+### 단방향 데이터 바인딩
+단방향 데이터 바인딩(One-way Data Binding)
+
+### 양방향 데이터 바인딩
+양방향 데이터 바인딩(Two-way Data Binding)
+
+## 바인딩 소스
+> *참조: [Microsoft Docs 방법: 바인딩 소스 지정 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-specify-the-binding-source)*
+
+바인딩 소스(source)는 데이터를 가져올 객체를 가리킨다. 그리고 경로(path)는 소스 객체로부터 접근할 속성을 의미한다.
+
+`FrameworkElement.DataContext`
+
+데이터 컨텍스트(data context)는 요소가 부모로부터 데이터 소스 및  정보를 상속받도록 하는 개념이다.
+
+# WPF: 이벤트
