@@ -1,4 +1,0 @@
----
-layout: forum
-title: Forum
----
