@@ -11,6 +11,7 @@ SetLANG(lang = this.LANG.KOREAN) { this.value = (this.value & 0b1101) | (0b0010 
 // >> SELECT THEME
 //========================================
 if (config.GetTHEME(config.THEME.DARK)) document.documentElement.setAttribute("dark", "true")
+else document.documentElement.setAttribute("dark", "false")
 
 //========================================
 // >> SWITCH THEME
@@ -23,6 +24,12 @@ $(`#nav-theme`).click(function() {
     }
     location.reload();
 })
+
+//========================================
+// >> SELECT LANGUAGE
+//========================================
+if (config.GetLANG(config.LANG.ENGLISH)) document.documentElement.setAttribute("lang", "en")
+else document.documentElement.setAttribute("lang", "ko")
 
 //========================================
 // >> SWITCH LANGUAGE
@@ -49,27 +56,18 @@ switch(location.pathname.split('/')[1])
     case "":
         import("./home.js")
         break;
+
     case "docs":
         import("./docs.js")
         break;
+
     case "blog":
         import("./blog.js")
-        import("./docs.js")
         break;
-    case "forum":
-        import("./forum.js")
+
     default:
         break;
 }
-
-//========================================
-// >> AUTO-FIT MAIN
-//========================================
-$(`main`).css("min-height", `${window.innerHeight - ($(`footer`).outerHeight() + $(`header`).outerHeight())}px`)
-$(window).resize(function() {
-    if ($(window).height() < 600) $(`main`).css("min-height", `${600 - ($(`footer`).outerHeight() + $(`header`).outerHeight())}px`)
-    else $(`main`).css("min-height", `${window.innerHeight - ($(`footer`).outerHeight() + $(`header`).outerHeight())}px`)
-})
 
 //========================================
 // >> RENDERING

@@ -1,46 +1,26 @@
 ---
 layout: template
 ---
-<main id="home-main">
-    <!--ANNOUNCEMENT-->
-    <div id="home-announce">
-      <div id="home-announce-notice">
-        {{ content }}
-      </div>
-    </div>
-    <!--ANNOUNCE-->
-    <div id="home-blog">
-      <a class="home-blog-button" id="home-blog-about" href="about"></a>
-      <a class="home-blog-button" id="home-blog-post" href="blog"></a>
-    </div>
-  <!--DOCS-->
-  <div id="home-docs">
+<div id="home-content">
+  <div id="home-border">
     {%- assign langMarkdown1 = "" -%}{%- assign langMarkdown1 = "" -%}
-    {%- assign langMarkdown2 = "" -%}{%- assign langMarkdown2 = "" -%}
     {%- assign fullMarkdown = site.docs | sort: "language" | sort: "order" -%}
     {%- for Markdown in fullMarkdown -%}
-      {%- unless Markdown.icon == nil -%}
-        {%- assign langMarkdown1 = langMarkdown1 | append: "\" | append: Markdown.language -%}
-        {%- assign nameMarkdown1 = nameMarkdown1 | append: "\" | append: Markdown.category -%}
-      {%- else -%}
-        {%- assign langMarkdown2 = langMarkdown2 | append: "\" | append: Markdown.language -%}
-        {%- assign nameMarkdown2 = nameMarkdown2 | append: "\" | append: Markdown.title -%}
-      {%- endunless -%}
+      {%- assign langMarkdown1 = langMarkdown1 | append: "\" | append: Markdown.language -%}
+      {%- assign nameMarkdown1 = nameMarkdown1 | append: "\" | append: Markdown.category -%}
     {%- endfor -%}
     {%- assign langMarkdown1 = langMarkdown1 | remove_first: "\" | split: '\' | uniq -%}
     {%- assign nameMarkdown1 = nameMarkdown1 | remove_first: "\" | split: '\' | uniq -%}
-    {%- assign langMarkdown2 = langMarkdown2 | remove_first: "\" | split: '\' | uniq -%}
-    {%- assign nameMarkdown2 = nameMarkdown2 | remove_first: "\" | split: '\' | uniq -%}
     {% for lang in langMarkdown1 %}
       {%- for group in nameMarkdown1 -%}
         {%- assign arrMarkdown = fullMarkdown | where: "category", group | where: "language", lang -%}{%- assign numMarkdown = arrMarkdown | size -%}
         {%- unless numMarkdown == 0 -%}
-          <div class="home-docs-group" lang="{{ lang }}" category="{{ group }}">
-            <section class="home-docs-header">{{group}}</section>
+          <div class="home-category" lang="{{ lang }}" category="{{ group }}">
+            <section class="home-category-header">{{group}}</section>
             <ol>
               {%- for Markdown in arrMarkdown -%}
               <a href="{{ Markdown.url }}" title="{{ Markdown.category }} | {{ Markdown.title }}">
-                <li class="home-docs-tile" style="background-image:url('/images/icons/{{ Markdown.icon }}')"></li>
+                <li class="home-category-list">{{Markdown.title}}</li>
               </a>
               {%- endfor -%}
             </ol>
@@ -48,22 +28,5 @@ layout: template
         {%- endunless -%}
       {%- endfor -%}
     {% endfor %}
-    {%- if langMarkdown2.size > 0 -%}
-    <div class="home-docs-group" category="ETC">
-      <section class="home-docs-header"></section>
-      <ul>
-      {% for lang in langMarkdown2 %}
-        {%- for name in nameMarkdown2 -%}
-          {%- assign arrMarkdown = fullMarkdown | where: "title", name | where: "language", lang -%}
-            {%- for Markdown in arrMarkdown -%}
-              <a href="{{ Markdown.url }}" lang="{{ lang }}" title="{{ Markdown.category }} | {{ Markdown.title }}">
-                <li class="home-docs-list">[{{ Markdown.category }}] {{ Markdown.title }}</li>
-              </a>
-            {%- endfor -%}
-        {%- endfor -%}
-      {% endfor %}
-      </ul>
-    </div>
-    {%- endif -%}
   </div>
-</main> 
+</div>

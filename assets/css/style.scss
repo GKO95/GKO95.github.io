@@ -2,18 +2,25 @@
 ---
 @charset "utf-8";
 @font-face {
-    font-family: 'JetBrains Mono';
+    font-family: 'JetBrains Mono NL';
     src: url('/assets/fonts/JetBrainsMonoNL-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-variant-ligatures: normal;
 }
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/assets/fonts/JetBrainsMono-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-variant-ligatures: common-ligatures;
+}
 $MONOSPACE: 'JetBrains Mono', 'Nanum Gothic Coding', monospace;
+$CODESPACE: 'JetBrains Mono NL', 'Nanum Gothic Coding', monospace;
 $TITLEFONT: 'Verdana', Geneva, Tahoma, sans-serif;
 @import
     "template",
     "home",
     "docs",
-    "arch",
     "misc"
 ;
