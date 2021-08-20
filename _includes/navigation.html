@@ -3,10 +3,10 @@
     <a class="nav-button" id="nav-home" title="Home" tabindex="-1" href="{{ '/' | relative_url }}"></a>
     <a class="nav-button" id="nav-menu" title="Menu" tabindex="-1"></a>
   </div>
-  {% if page.title != nil %}
-  <div class="nav-panel" id="nav-center">
-    {% if page.category %}{{ page.category}} | {% endif %}{{ page.title }}
-  </div>
+  {% if page.icon != nil %}
+  <section class="nav-panel" id="nav-center">
+    <a class="nav-icon" title="{{ page.title }}" tabindex="-1" style="background-image:url('/images/icons/{{ page.icon }}');"></a>
+  </section>
   {% endif %}
   <div class="nav-panel" id="nav-right">
     <a class="nav-button" id="nav-theme" title="Switch Theme" tabindex="-1"></a>

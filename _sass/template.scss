@@ -125,6 +125,19 @@ nav {
             right: 12px;
         }
     }
+    .nav-icon {
+        display: inline-flex;    
+        align-content: center;
+
+        background: {
+            position: center;
+            repeat: no-repeat;
+            size: $ICON_SIZE;
+        }
+
+        height: inherit;
+        width: inherit;
+    }
 
     #nav-left, #nav-right {
         display: inline-flex;
@@ -133,12 +146,10 @@ nav {
     }
     #nav-center {
         text-align: center;
-        padding: 0 0.4em;
-        font: {
-            family: Verdana, Geneva, Tahoma, sans-serif;
-            size: $ICON_SIZE - 12px;
-            weight: bold;
-        }
+        padding: 0px 8px;
+
+        height: $ICON_SIZE;
+        width: $ICON_SIZE;
     }
 
     #nav-home   { background-image:url('/images/icons/icon-home.png'); }
@@ -158,12 +169,6 @@ main {
         max-width: 1600px;
         margin: auto;
         padding: 8px 16px;
-    
-        user-select: none;
-        -ms-user-select: none;
-        -moz-user-select: none;
-        -khtml-user-select: none;
-        -webkit-user-select: none;
     
         ul, ol {
             margin: 0;
@@ -247,7 +252,7 @@ html {
         background-color: white;
     }
     code { 
-        background-color: #F0F0F0; 
+        background-color: #E4E4E4; 
     }
     .highlighter-rouge {
         code {

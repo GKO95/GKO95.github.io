@@ -2,6 +2,12 @@
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(400px, 1fr));
     padding: 8px;
+
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
 }
 
 .home-category {

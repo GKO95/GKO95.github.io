@@ -6,11 +6,12 @@ layout: template
 {%- include toc.html -%}
 {% endif %}
 -->
-<section id="page">
+<div id="page">
   <article id="content" class="docs-content">
     {{ content }}
   </article>
-</section>
+</div>
+<!--
 {%- assign listRelated = site.blog | where: "language", page.language | where: "tags", page.meta | sort: "order" | reverse -%}
 {%- if page.meta != nil and listRelated.size > 0 -%}
 <div id="docs-related">
@@ -22,3 +23,4 @@ layout: template
   </ul>
 </div>
 {%- endif -%}
+-->
