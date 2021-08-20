@@ -1,97 +1,131 @@
-#docs-content {
-    max-width: 1600px;
-    margin: auto;
+.docs-content {
+    padding: 8px 32px;
+
+    h1 {
+        border-bottom-style: solid;
+        font-size: 40px;
+        margin: {
+            top: 48px;
+            bottom: 24px;
+        }
+    }
+    h2 {
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+    h3 {
+        font-size: 20px;
+        padding-left: 16px;
+        margin-bottom: 10px;
+    }
+    img {
+        display: none;
+        border: {
+            radius: 8px;
+            style: solid;
+            width: 4px;
+        }
+    }
+    blockquote {
+        border-left: {
+            width: 4px;
+            style: solid;
+        }
+        padding: 2px 16px;
+    }
+
+    table {
+        width: fit-content;
+        max-width: 100%;
+        margin: auto;
+        border: {
+            style: solid;
+            width: 4px;
+            collapse: collapse;
+        }
+        font-size: large;
+    }
+    th {
+        border: {
+            style: solid;
+            width: 1px;
+            bottom: {
+                style: double;
+                width: 4px;
+            }
+        }
+        padding: 0.2em;
+    }
+    td {
+        border: {
+            style: solid;
+            width: 1px;
+        }
+        padding: 0.4em;
+    }
 }
 
 html {
 
-    #docs-content {
-        background-color: white;
+    .docs-content {
+        img {
+            border-color: #202020;
+            background-color: #FFFFFF;
+        }
+        blockquote {
+            background-color:#E8E8E8; 
+            border-left-color: rgb(80, 80, 80); 
+            color:rgb(64, 64, 64);
+        }
+        table {
+            border-color: #404040;
+        }
+        th {
+            border-color: #202020;
+            border-bottom-color: #202020;
+            background-color: #B0B0B0;
+        }
+        td {
+            border-color: #606060;
+        }
+        tr {
+            &:nth-child(odd) {
+                background-color: #E0E0E0;
+            }
+        }
     }
 
 &:not(.style-scope)[dark=true] {
-    
-    #docs-content {
-        background-color: #202020;
+
+    .docs-content {
+        img {
+            border-color: #808080;
+            background-color: #FFFFFF;
+        }
+        blockquote {
+            background-color: rgb(24, 24, 24); 
+            border-left-color: rgb(224, 224, 224); 
+            color: rgb(200, 200, 200);
+        }
+        table {
+            border-color: #808080;
+        }
+        th {
+            border-color: #808080;
+            border-bottom-color: #808080;
+            background-color: #303030;
+        }
+        td {
+            border-color: #C0C0C0;
+        }
+        tr {
+            &:nth-child(odd) {
+                background-color: #181818;
+            }
+        }
     }
-
+    
 }}
-
-// #docs-main {
-//     display: block;
-//     width: calc(100% - (48px * 2));
-//     max-width: calc(1200px - (24px * 2));
-//     margin: {
-//         left: auto;
-//         right: auto;
-//     }
-//     padding: {
-//         left: 24px; 
-//         right: 24px;
-//     }
-//     background-color: inherit;
-
-//     h1 {
-//         border-bottom-style: solid;
-//         font-size: 2.4em;
-//         margin-bottom: 0.6em;
-//     }
-//     h2 {
-//         font-size: 1.6em;
-//         margin-bottom: 0.5em;
-//     }
-//     h3 {
-//         font-size: 1.2em;
-//         padding-left: 0.8em;
-//         margin-bottom: 0.5em;
-//     }
-// }
-// #docs-content {
-//     img {
-//         display: none;
-//         border: {
-//             radius: 8px;
-//             style: solid;
-//             width: 4px;
-//         }
-//     }
-//     blockquote {
-//         border-left: {
-//             width: 4px;
-//             style: solid;
-//         }
-//         padding: 2px 16px;
-//     }
-//     table {
-//         width: fit-content;
-//         max-width: 100%;
-//         margin: auto;
-//         border: {
-//             style: solid;
-//             width: 4px;
-//             collapse: collapse;
-//         }
-//         font-size: large;
-//     }
-//     th {
-//         border: {
-//             style: solid;
-//             width: 1px;
-//             bottom: {
-//                 style: double;
-//                 width: 4px;
-//             }
-//         }
-//         padding: 0.2em;
-//     }
-//     td {
-//         border: {
-//             style: solid;
-//             width: 1px;
-//         }
-//         padding: 0.4em;
-//     }
-// }
 
 // #docs-related {
 //     border-radius: 16px;
@@ -208,33 +242,6 @@ html {
 // }
 
 // html {
-//     #docs-content {
-//         img {
-//             border-color: #202020;
-//             background-color: #FFFFFF;
-//         }
-//         blockquote {
-//             background-color:#CCCCCC; 
-//             border-left-color: rgb(80, 80, 80); 
-//             color:rgb(64, 64, 64);
-//         }
-//         table {
-//             border-color: #404040;
-//         }
-//         th {
-//             border-color: #202020;
-//             border-bottom-color: #202020;
-//             background-color: #B0B0B0;
-//         }
-//         td {
-//             border-color: #606060;
-//         }
-//         tr {
-//             &:nth-child(odd) {
-//                 background-color: #E0E0E0;
-//             }
-//         }
-//     }
 
 //     #docs-related, #toc-related {
 //         background-color: #868686;
@@ -266,33 +273,6 @@ html {
 //         background-color: #BBBBBB;
 //     }
 // &:not(.style-scope)[dark] {
-//     #docs-content {
-//         img {
-//             border-color: #808080;
-//             background-color: #FFFFFF;
-//         }
-//         blockquote {
-//             background-color: rgb(24, 24, 24); 
-//             border-left-color: rgb(224, 224, 224); 
-//             color: rgb(200, 200, 200);
-//         }
-//         table {
-//             border-color: #808080;
-//         }
-//         th {
-//             border-color: #808080;
-//             border-bottom-color: #808080;
-//             background-color: #303030;
-//         }
-//         td {
-//             border-color: #C0C0C0;
-//         }
-//         tr {
-//             &:nth-child(odd) {
-//                 background-color: #181818;
-//             }
-//         }
-//     }
 
 //     #docs-related, #toc-related {
 //         background-color: #101010;

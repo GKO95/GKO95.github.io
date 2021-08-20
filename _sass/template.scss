@@ -1,6 +1,30 @@
 body { margin: 0px; font-family: 'Noto Sans KR', sans-serif; visibility: hidden; }
 h1, h2, h3, h4 { font-family: $TITLEFONT; }
 a { text-decoration: none; }
+pre {
+    font-family: $CODESPACE;
+    text-rendering: geometricPrecision;
+    
+    code {
+        font-family: inherit;
+    }
+}
+code {
+    font-family: $MONOSPACE;
+    border-radius: 0.2em;
+    padding: 0 4px;
+    word-break: initial;
+}
+.highlighter-rouge {
+    pre {
+        border-radius: 8px;
+        padding: 0.5em 1em;
+        overflow-x: auto;
+    }
+    code {
+        padding: 0px;
+    }
+}
 header {
     user-select: none;
     -ms-user-select: none;
@@ -129,6 +153,33 @@ main {
         top: 16px;
         bottom: 16px;
     }
+    
+    #page {
+        max-width: 1600px;
+        margin: auto;
+        padding: 8px 16px;
+    
+        user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+    
+        ul, ol {
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            list-style-type: none;
+        }
+    }
+
+    #content {
+        border: {
+            width: 2px;
+            style: solid; 
+        }
+    }
 }
 footer {
     $ICON_SIZE: 48px;
@@ -195,6 +246,15 @@ html {
     body {
         background-color: white;
     }
+    code { 
+        background-color: #F0F0F0; 
+    }
+    .highlighter-rouge {
+        code {
+            background-color: transparent;
+            color: black;
+        }
+    }
     header {
         .header-button {
             color: black;
@@ -207,6 +267,12 @@ html {
     }
     main {
         background-color: #E0E0E0;
+        #page {
+            background-color: white;
+        }
+        #content {
+            border-color: rgb(128, 128, 128);
+        }
     }
     footer {
         color: black;
@@ -228,6 +294,15 @@ html {
     a {
         color: #239BF1;
     }
+    code { 
+        background-color: #303030; 
+    }
+    .highlighter-rouge {
+        code {
+            background-color: transparent;
+            color: white;
+        }
+    }
     body {
         background-color: black;
     }
@@ -243,6 +318,12 @@ html {
     }
     main {
         background-color: #101010;
+        #page {
+            background-color: #202020;
+        }
+        #content {
+            border-color: rgb(128, 128, 128);
+        }
     }
     footer {
         color: white;
@@ -258,24 +339,3 @@ html {
         background: #101010;
     }
 }}
-
-// pre {
-//     font-family: $MONOSPACE;
-//     text-rendering: geometricPrecision;
-// }   
-// code {
-//     font-family: $MONOSPACE;
-//     border-radius: 0.2em;
-//     padding: 0 0.2em;
-//     word-break: initial;
-// }
-// .highlighter-rouge {
-//     pre {
-//         border-radius: 8px;
-//         padding: 0.5em 1em;
-//         overflow-x: auto;
-//     }
-//     code {
-//         padding: 0px;
-//     }
-// }

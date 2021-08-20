@@ -1,8 +1,8 @@
 ---
 layout: template
 ---
-<div id="home-content">
-  <div id="home-border">
+<section id="page">
+  <article id="content" class="home-content">
     {%- assign langMarkdown1 = "" -%}{%- assign langMarkdown1 = "" -%}
     {%- assign fullMarkdown = site.docs | sort: "language" | sort: "order" -%}
     {%- for Markdown in fullMarkdown -%}

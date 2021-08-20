@@ -4,9 +4,11 @@ layout: template
 {% if page.toc != false %}
 {%- include toc.html -%}
 {% endif %}
-<article id="docs-content">
-  {{ content }}
-</article>
+<section id="page">
+  <article id="content" class="docs-content">
+    {{ content }}
+  </article>
+</section>
 {%- assign listRelated = site.blog | where: "language", page.language | where: "tags", page.meta | sort: "order" | reverse -%}
 {%- if page.meta != nil and listRelated.size > 0 -%}
 <div id="docs-related">

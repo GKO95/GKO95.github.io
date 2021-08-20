@@ -1,30 +1,6 @@
-#home-content {
-    max-width: 1600px;
-    margin: auto;
-    padding: 8px 16px;
-
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-
-    ul, ol {
-        margin: 0;
-        padding: 0;
-    }
-    li {
-        list-style-type: none;
-    }
-}
-
-#home-border {
+.home-content {
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(400px, 1fr));
-    border: {
-       width: 2px;
-       style: solid; 
-    }
     padding: 8px;
 }
 
@@ -83,12 +59,6 @@
 
 html {
 
-    #home-content {
-        background-color: white;
-    }
-    #home-border {
-        border-color: rgb(128, 128, 128);
-    }
     .home-category-list {
         border-color: rgba(0, 0, 0, 0.1);
         background: #FAFAFA;
@@ -100,12 +70,6 @@ html {
     
 &:not(.style-scope)[dark=true] {
     
-    #home-content {
-        background-color: #202020;
-    }
-    #home-border {
-        border-color: rgb(128, 128, 128);
-    }
     .home-category-list {
         border-color: rgba(0, 0, 0, 0.2);
         background: #1C1C1C;
