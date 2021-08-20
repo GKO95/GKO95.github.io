@@ -10,8 +10,22 @@ SetLANG(lang = this.LANG.KOREAN) { this.value = (this.value & 0b1101) | (0b0010 
 //========================================
 // >> SELECT THEME
 //========================================
-if (config.GetTHEME(config.THEME.DARK)) document.documentElement.setAttribute("dark", "true")
-else document.documentElement.setAttribute("dark", "false")
+if (config.GetTHEME(config.THEME.DARK)) {
+    document.documentElement.setAttribute("dark", "true")
+    $("<link/>", {
+        rel: "stylesheet",
+        type: "text/css",
+        href: "/assets/css/monokai.css"
+     }).appendTo("head");
+}
+else {
+    document.documentElement.setAttribute("dark", "false")
+    $("<link/>", {
+        rel: "stylesheet",
+        type: "text/css",
+        href: "/assets/css/default.css"
+     }).appendTo("head");
+}
 
 //========================================
 // >> SWITCH THEME
