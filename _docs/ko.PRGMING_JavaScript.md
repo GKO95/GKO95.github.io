@@ -117,7 +117,7 @@ VS Code에서 자바스크립트를 실행하기 위해서는 확장도구가 �
 
 종합적으로 아래와 같이 파일들이 준비되어야 한다.
 
-![VS Code의 자바스크립트 작업 환경.](/images/docs/javascript/js_vs_workspace.png)
+![VS Code의 자바스크립트 작업 환경](/images/docs/javascript/js_vs_workspace.png)
 
 현 상태에서 `F5` 버튼을 누르면 자바스크립트를 디벙깅 모드로 실행, 그리고 `CTRL+F5` 버튼을 누르면 디버깅 없이 실행된다. 여기서 [디버깅](https://ko.wikipedia.org/wiki/디버그)(debugging) 모드란, 코드를 단계별로 실행하여 데이터가 어떻게 변하는지 확인할 수 있도록 한다.
 

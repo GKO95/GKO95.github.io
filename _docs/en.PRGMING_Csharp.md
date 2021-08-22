@@ -86,25 +86,25 @@ An integrated development environment (IDE) is a software development program th
 ## Visual Studio
 [Visual Studio](https://visualstudio.microsoft.com/downloads/) is the most renowned IDE for Windows OS developed by Microsoft, which uses the MSVC compiler. There are three editions for Visual Studio, and the free community edition is enough for development. The IDE provides various components to support different languages as well; for C++ programming, select the ".NET desktop development" workload.
 
-![Workload for C# programming on Visual Studio.](/images/docs/csharp/csharp_vs_component.png)
+![Workload for C# programming on Visual Studio](/images/docs/csharp/csharp_vs_component.png)
 
 Visual Studio will start with the window shown below. To create a new project for C# language, select the "Create a new project" button.
 
-![Startup window of Visual Studio.](/images/docs/csharp/csharp_vs_project1.png)
+![Startup window of Visual Studio](/images/docs/csharp/csharp_vs_project1.png)
 
 Since C# can create various applications, there are many different kinds of projects available from Visual Studio as well. To create a C# project, follow the procedure below:
 
 1. Select the language as C# and choose the "Console App (.NET Core)" option.
 
-![Creating a C# project on Visual Studio (step 1).](/images/docs/csharp/csharp_vs_project2.png)
+![Creating a C# project on Visual Studio (step 1)](/images/docs/csharp/csharp_vs_project2.png)
 
 2. Designate names for the project and solution. Here, the project is a `.vcxproj` extension file that manages its source codes and compilation options, and the solution is a `.sln` extension file that can contain multiple projects. It is recommended to open the solution file on Visual Studio unless you only want to open a single project.
 
-![Creating a C# project on Visual Studio (step 2).](/images/docs/csharp/csharp_vs_project3.png)
+![Creating a C# project on Visual Studio (step 2)](/images/docs/csharp/csharp_vs_project3.png)
 
 3. Use the project automatically prepared by Visual Studio.
 
-![Creating a C# project on Visual Studio (step 3).](/images/docs/csharp/csharp_vs_project4.png)
+![Creating a C# project on Visual Studio (step 3)](/images/docs/csharp/csharp_vs_project4.png)
 
 The three-step procedure above for creating a C++ console application is the simplest method. To create an empty C++ project, refer to the installation section on the *PRGMING_C* document.
 

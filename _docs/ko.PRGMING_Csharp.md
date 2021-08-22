@@ -107,27 +107,27 @@ namespace PROJECT
 ## 비주얼 스튜디오
 [비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 윈도우 OS의 대표적인 IDE이며 .NET을 제공한다. 비주얼 스튜디오는 총 세 가지의 에디션이 존재하며, 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. 그 중에서 C# 프로그래밍 언어를 위해 ".NET desktop development"를 선택한다.
 
-![비주얼 스튜디오 C# 프로그래밍을 위한 구성요소.](/images/docs/csharp/csharp_vs_component.png)
+![비주얼 스튜디오 C# 프로그래밍을 위한 구성요소](/images/docs/csharp/csharp_vs_component.png)
 
 만일 한국어 지원을 원한다면 "Language packs" 탭에서 한국어를 함께 선택하면 된다.
 
 비주얼 스튜디오를 실행하면 아래와 같은 시작화면이 나타난다. 새로운 프로젝트를 생성하려면 오른쪽 하단의 "Create a new project" 버튼을 클릭한다
 
-![비주얼 스튜디오 시작화면.](/images/docs/csharp/csharp_vs_project1.png)
+![비주얼 스튜디오 시작화면](/images/docs/csharp/csharp_vs_project1.png)
 
 C#로 만들 수 있는 프로그램은 다양하여 비주얼 스튜디오에서 선택할 수 있는 프로젝트 종류도 여러 가지가 있다. C# 언어 프로젝트 생성을 위해서는 아래의 절차를 따른다:
 
 1. 프로그래밍 언어를 C#로 선택하여 "Console App (.NET Core)"을 클릭한다.
 
-![비주얼 스튜디오 C# 프로젝트 생성 (1단계).](/images/docs/csharp/csharp_vs_project2.png)
+![비주얼 스튜디오 C# 프로젝트 생성 (1단계)](/images/docs/csharp/csharp_vs_project2.png)
 
 2. 프로젝트 및 솔루션 이름을 선정한다. 여기서 프로젝트란, 소스 코드와 컴파일러 설정 등의 실질적인 코딩 내용을 관리하는 `.csproj` 확장자 파일이며, 솔루션은 여러 프로젝트 파일을 하나의 폴더처럼 담는 `.sln` 파일이다. 비주얼 스튜디오에서 프로젝트는 `.sln` 파일로 열기를 권장한다.
 
-![비주얼 스튜디오 C# 프로젝트 생성 (2단계).](/images/docs/csharp/csharp_vs_project3.png)
+![비주얼 스튜디오 C# 프로젝트 생성 (2단계)](/images/docs/csharp/csharp_vs_project3.png)
 
 3. 비주얼 스튜디오에서 알아서 준비한 프로젝트를 그대로 사용한다.
 
-![비주얼 스튜디오 C# 프로젝트 생성 (3단계).](/images/docs/csharp/csharp_vs_project4.png)
+![비주얼 스튜디오 C# 프로젝트 생성 (3단계)](/images/docs/csharp/csharp_vs_project4.png)
 
 위의 3단계 절차는 콘솔 어플리케이션 프로젝트를 생성하는 가장 간단한 방법이다. 만일 아무것도 없는 빈 프로젝트에서 생성하기를 원하면 *PRGMING_C* 문서의 설치 항목을 참조한다.
 
@@ -463,13 +463,27 @@ double dvalue = System.Convert.ToDouble(Console.ReadLine());
 ```
 
 ### `is` 연산자
-`is` 키워드는 주어진 데이터가 비교하고자 하는 자료형과 호환되는지 확인하는 C# 언어의 연산자이다.
+`is` 연산자는 주어진 데이터가 비교하고자 하는 자료형과 호환되는지 확인하는 C# 언어의 연산자이다.
 
 ```csharp
 variable is Type;
 ```
 
 만일 `variable`이 자료형 `Type`와 호환되면 논리값 `true`이 반환되며, 그렇지 않을 시 `false` 논리값이 반환된다.
+
+### `typeof` 연산자
+`typeof` 연산자는 자료형이 .NET에서 해당하는 `System.Type` 객체가 무엇인지 반환한다.
+
+```csharp
+typeof(Type);        // 예시. int -> System.Int32
+```
+
+그러나 `typeof` 연산자는 변수나 객체에 대한 시스템 자료형을 구할 수 없으며, 이러한 경우 `GetType()` 메소드를 사용해야 한다.
+
+```csharp
+int variable;
+variable.GetType();  // >> 출력: System.Int32
+```
 
 ## 연산자
 연산자(operator)는 피연산자의 데이터를 조작할 수 있는 가장 간단한 데이터 처리요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다.
@@ -593,14 +607,14 @@ condition ? true_return : false_return;
 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에는 유용하다.
 
 ### `as` 연산자
-`as` 키워드는 자료형 변환에 사용되는 C# 언어의 연산자이며, 만일 해당 자료형이 호환성의 문제로 변환이 불가하면 `null`이 반환된다.
+`as` 연산자는 자료형 변환에 사용되는 C# 언어의 연산자이며, 만일 해당 자료형이 호환성의 문제로 변환이 불가하면 `null`이 반환된다.
 
 ```csharp
 /* "as" 연산자 */
 variable as Type;
 ```
 
-위의 예시 코드는 `variable`을 `Type` 자료형으로 캐스팅을 시도한다. 이는 아래의 문장과 동일하게 동작한다.
+위의 예시 코드는 `variable`을 `Type` 자료형으로 캐스팅을 시도한다. `as` 연산자의 호환성 판별식은 아래의 문장과 동일하게 동작한다.
 
 ```csharp
 /* "as" 연산자의 동일 표현식 */
@@ -1480,6 +1494,29 @@ static class CLASS
     ```csharp
     // 추상 메소드
     abstract void method();
+    ```
+
+7. `partial` 한정자
+    : 클래스 또는 메소드를 분할하여 정의하는데 사용되는 한정자이다.
+
+    ```csharp
+    // 분할 클래스
+    partial class CLASS
+    {
+        void method1();
+    }
+
+    partial class CLASS
+    {
+        void method2();
+    }
+
+    /* 동일:
+    class CLASS
+    {
+        void method1();
+        void method2();
+    } */
     ```
 
 ### 접근 한정자

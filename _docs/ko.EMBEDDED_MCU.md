@@ -5,7 +5,7 @@ category: 임베디드
 title: MCU
 icon: icon-mcu.png
 meta: MCU
-order: 0x20
+order: 0x30
 ---
 # MCU: 소개
 > 본 문서는 [8051](http://www.8052mcu.com/) 계열 마이크로프로세서를 기준으로 설명한다.
