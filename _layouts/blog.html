@@ -18,7 +18,7 @@ layout: template
 {{ content }}
 <div id="blog-posts">
   <ul id="blog-list">
-  {%- assign blogs = site.blog | sort: "order" | reverse -%}
+  {%- assign blogs = site.blog | sort: "date" | reverse -%}
   {%- for blog in blogs -%}
   {%- assign index = blog.tags.size -%}
   <li class='{%- if blog.tags.size > 0 -%}{%- for tag in blog.tags -%}
