@@ -1,4 +1,4 @@
-.docs-content {
+#docs-content {
     font-size: large;
     padding: 8px 32px;
 
@@ -153,7 +153,7 @@
 
 html {
 
-    .docs-content {
+    #docs-content {
         img {
             border-color: #202020;
             background-color: #FFFFFF;
@@ -195,7 +195,7 @@ html {
 
 &:not(.style-scope)[dark=true] {
 
-    .docs-content {
+    #docs-content {
         img {
             border-color: #808080;
             background-color: #FFFFFF;

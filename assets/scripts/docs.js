@@ -34,8 +34,8 @@ $(window).resize(imageSize)
 //========================================
 // >> DOCUMENT PROCESSING
 //========================================
-if ($(`.docs-content > :first-child`).is('H1')) {
-    $(`.docs-content > :first-child`).css("margin-top", "24px")
+if ($(`#docs-content > :first-child`).is('H1')) {
+    $(`#docs-content > :first-child`).css("margin-top", "24px")
 }
 
 const breakCode = () => {
@@ -90,7 +90,7 @@ $(`#sub-related`).click(function() {
 })
 
 //$(`#docs-toc`).append($(`<div id="toc-sub" style="height: ${$(`#docs-related`).length > 0 ? "calc(100% - (64px + 16px))" : "100%"}; overflow: auto;"></div>`))
-$(`article.docs-content > :header`).each(function() {
+$(`article#docs-content > :header`).each(function() {
     let headerTag = $(this).prop("tagName")
     if ((headerTag == 'H1') || (headerTag == 'H2') || (headerTag == 'H3'))
     {
