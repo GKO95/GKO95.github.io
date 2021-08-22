@@ -18,6 +18,7 @@
         font-family: $MONOSPACE;
         position: relative;
         float: right;
+        height: 12px;
         width: 100%;
         text-align: end;
         display: block;
@@ -27,8 +28,9 @@
         }
     }
     a {
+        display: inline-block;
         position: relative;
-        float: inline-start;
+        padding-bottom: 12px;
         font: {
             size: 18px;
             weight: bold;
