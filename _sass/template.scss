@@ -1,29 +1,18 @@
-@mixin HFBkgdStyle {
-    margin: {
-        left: auto;
-        right: auto;
-    }
-    width: calc(100% - (16px * 2));
-
-    user-select: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-}
-
-html { min-height: 100%; margin: 0; font-size: larger; }
-body { min-width: 800px; min-height: 600px; margin: 0px; font-family: 'Noto Sans KR', sans-serif; visibility: hidden; }
-main { overflow-y: hidden; }
-a { text-decoration: none; color: #239BF1; }
+body { margin: 0px; font-family: 'Noto Sans KR', sans-serif; visibility: hidden; }
+h1, h2, h3, h4 { font-family: $TITLEFONT; }
+a { text-decoration: none; }
 pre {
-    font-family: $MONOSPACE;
+    font-family: $CODESPACE;
     text-rendering: geometricPrecision;
-}   
+    
+    code {
+        font-family: inherit;
+    }
+}
 code {
     font-family: $MONOSPACE;
     border-radius: 0.2em;
-    padding: 0 0.2em;
+    padding: 0 4px;
     word-break: initial;
 }
 .highlighter-rouge {
@@ -36,151 +25,272 @@ code {
         padding: 0px;
     }
 }
-
-h1, h2, h3, h4 { font-family: $TITLEFONT; }
 header {
-    @include HFBkgdStyle;
-    display: flex;
-    flex-direction: column;
-    padding: 24px 0px;
-    border-bottom: {
-        left-radius: 32px;
-        right-radius: 32px;
-    }
-    nav {
-        $ICON_SIZE: 48px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: calc(100% - (16px * 2));
-        height: fit-content;
-        margin: auto;
-        a {
-            $MARGIN-SIZE: 8px;
-            margin: {
-                left: $MARGIN-SIZE;
-                right: $MARGIN-SIZE;
-            }
-        }
-        .nav-button {
-            display: inline-flex;    
-            align-content: center;
-            cursor: pointer;
-            height: $ICON_SIZE;
-            width: $ICON_SIZE;
-            background: {
-                position: center;
-                repeat: no-repeat;
-                size: $ICON_SIZE;
-            }
-        }
-        #nav-home   { background-image:url('/images/icons/icon-home.png'); }
-        #nav-lang   { background-image:url('/images/icons/icon-language.png'); }
-        #nav-theme  { background-image:url('/images/icons/icon-theme.png'); }
-        #nav-github { background-image:url('/images/icons/icon-github.png'); }
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
 
-        #nav-left, #nav-right {
-            display: inline-flex;
-            white-space: nowrap;
-            align-self: center;
-        }
-        #nav-center {
-            text-align: center;
-            padding: 0 0.4em;
-            font: {
-                family: Verdana, Geneva, Tahoma, sans-serif;
-                size: $ICON_SIZE - 12px;
-                weight: bold;
-            }
-        }
+    background-color: inherit;
+    position: sticky;
+    top: 0;
+    padding: {
+        top: 16px;
+        bottom: 8px;
     }
-    #idx-title {
+    box-shadow: 0px 0px 4px black;
+
+    #header-title {
         display: flex;
         width: fit-content;
-        height: 128px;
         text-align: center;
         align-self: center;
+        margin: {
+            left: auto;
+            right: auto;
+        }
         padding: {
-            top: 8px;
+            top: 16px;
             bottom: 8px;
         }
-        font: {
-            weight: bolder;
-            family: 'JetBrains Mono';
-            size: 96px;
-        }
         span {
+            line-height: 114%;
+            letter-spacing: 10px;
+            padding: {
+                left: 10px;
+                right: 0px;
+                top: 0px;
+                bottom: 0px;
+            }
+            font: {
+                weight: bolder;
+                family: 'JetBrains Mono';
+                size: 96px;
+            }
             border: {
                 style: solid;
                 width: 8px;
             }
+        }
+    }
+    #header-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content:space-around;
+        padding: {
+            top: 8px;
+            bottom: 0px;
+        }
+
+        .header-button {
+            text-align: center;
+            width: 100%;
+            font: {
+                weight: bold;
+                size: 24px;
+            }
+        }
+
+    }
+}
+nav {
+    $ICON_SIZE: 36px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: calc(100% - (16px * 2));
+    height: fit-content;
+    margin: {
+        left: auto;
+        right: auto;
+    }
+    padding: {
+        bottom: 8px;
+    }
+    z-index: 10;
+
+    .nav-button {
+        display: inline-flex;    
+        align-content: center;
+        cursor: pointer;
+        height: $ICON_SIZE;
+        width: $ICON_SIZE;
+        background: {
+            position: center;
+            repeat: no-repeat;
+            size: $ICON_SIZE;
+        }
+        margin: {
+            left: 12px;
+            right: 12px;
+        }
+    }
+    .nav-icon {
+        display: inline-flex;    
+        align-content: center;
+
+        background: {
+            position: center;
+            repeat: no-repeat;
+            size: $ICON_SIZE;
+        }
+
+        height: inherit;
+        width: inherit;
+    }
+
+    #nav-left, #nav-right {
+        display: inline-flex;
+        white-space: nowrap;
+        align-self: center;
+    }
+    #nav-center {
+        text-align: center;
+        padding: 0px 8px;
+
+        height: $ICON_SIZE;
+        width: $ICON_SIZE;
+    }
+
+    #nav-home   { background-image:url('/images/icons/icon-home.png'); }
+    #nav-lang   { background-image:url('/images/icons/icon-language.png'); }
+    #nav-theme  { background-image:url('/images/icons/icon-theme.png'); }
+    #nav-menu   { background-image:url('/images/icons/icon-redirect.png'); }
+}
+main {
+    padding: {
+        left: 16px;
+        right: 16px;
+        top: 16px;
+        bottom: 16px;
+    }
     
-            // Letter affects right padding.
-            letter-spacing: 8px;
-            padding: 0px 0px 0px 10px;
+    #page {
+        max-width: 1600px;
+        margin: auto;
+        padding: 8px 16px;
+    }
+
+    #content {
+        border: {
+            width: 2px;
+            style: solid; 
         }
     }
 }
 footer {
-    @include HFBkgdStyle;
-    height: 20px;
-    position: relative;
-    text-align: center;
-    border-top: {
-        left-radius: 32px;
-        right-radius: 32px; 
+    $ICON_SIZE: 48px;
+    margin: {
+        left: auto;
+        right: auto;
     }
     padding: {
-        top: 4px;
-        bottom: 4px;
+        top: 16px;
+        bottom: 16px;
     }
-    font: {
-        size: 16px;
-        weight: bold;
-        family: 'JetBrains Mono';
+
+    .footer-button {
+        display: inline-flex;    
+        align-content: center;
+        cursor: pointer;
+        height: $ICON_SIZE;
+        width: $ICON_SIZE;
+        background: {
+            position: center;
+            repeat: no-repeat;
+            size: $ICON_SIZE;
+        }
+        margin: {
+            left: 12px;
+            right: 12px;
+        }
     }
+
+    #footer-copyright {
+        text-align: center;
+        font: {
+            size: 12px;
+            weight: bold;
+            family: 'JetBrains Mono';
+        }
+        user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+    }
+    #footer-center {
+        text-align: center;
+        margin: 8px 0.4em;
+    }
+
+    #footer-github { background-image:url('/images/icons/icon-github.png'); }
 }
 ::-webkit-scrollbar {
     width: 12px;
     height: 12px;  
 }
 ::-webkit-scrollbar-thumb {
-    background: #808080;
     border-radius: 4px;
-}
-::-webkit-scrollbar-track {
-    background: #404040;
 }
 
 html {
-    body {
-        background-color: #F2F2F2;
-        color: #000000;
+
+    color: black;
+    a {
+        color: #118ee7;
     }
-    header, footer {
-        background-color: #868686;
-        color: #000000;
+    body {
+        background-color: white;
     }
     code { 
-        background-color: #CDCDCD; 
+        background-color: #E4E4E4; 
     }
     .highlighter-rouge {
         code {
             background-color: transparent;
-            color: white;
+            color: black;
         }
     }
-    .nav-button {
-        filter: invert(0%);
+    header {
+        .header-button {
+            color: black;
+        }
     }
-&:not(.style-scope)[dark] {
-    body {
-        background-color: #202020;
-        color: #FFFFFF;
+    nav {
+        .nav-button {
+            filter: invert(0%);
+        }
     }
-    header, footer {
-        background-color: #101010;
-        color: #FFFFFF;
+    main {
+        background-color: #E0E0E0;
+        #page {
+            background-color: white;
+        }
+        #content {
+            border-color: rgb(128, 128, 128);
+        }
+    }
+    footer {
+        color: black;
+        background-color: transparent;
+        .footer-button {
+            filter: invert(0%);
+        }
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #A0A0A0;
+    }
+    ::-webkit-scrollbar-track {
+        background: #E0E0E0;
+    }
+
+&:not(.style-scope)[dark=true] {
+    
+    color: white;
+    a {
+        color: #239BF1;
     }
     code { 
         background-color: #303030; 
@@ -191,7 +301,39 @@ html {
             color: white;
         }
     }
-    .nav-button {
-        filter: invert(100%);
+    body {
+        background-color: black;
+    }
+    header {
+        .header-button {
+            color: white;
+        }
+    }
+    nav {
+        .nav-button {
+            filter: invert(100%);
+        }
+    }
+    main {
+        background-color: #101010;
+        #page {
+            background-color: #202020;
+        }
+        #content {
+            border-color: rgb(128, 128, 128);
+        }
+    }
+    footer {
+        color: white;
+        background-color: transparent;
+        .footer-button {
+            filter: invert(100%);
+        }
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #303030;
+    }
+    ::-webkit-scrollbar-track {
+        background: #101010;
     }
 }}

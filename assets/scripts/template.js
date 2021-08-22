@@ -10,7 +10,22 @@ SetLANG(lang = this.LANG.KOREAN) { this.value = (this.value & 0b1101) | (0b0010 
 //========================================
 // >> SELECT THEME
 //========================================
-if (config.GetTHEME(config.THEME.DARK)) document.documentElement.setAttribute("dark", "true")
+if (config.GetTHEME(config.THEME.DARK)) {
+    document.documentElement.setAttribute("dark", "true")
+    $("<link/>", {
+        rel: "stylesheet",
+        type: "text/css",
+        href: "/assets/css/monokai.css"
+     }).appendTo("head");
+}
+else {
+    document.documentElement.setAttribute("dark", "false")
+    $("<link/>", {
+        rel: "stylesheet",
+        type: "text/css",
+        href: "/assets/css/default.css"
+     }).appendTo("head");
+}
 
 //========================================
 // >> SWITCH THEME
@@ -23,6 +38,12 @@ $(`#nav-theme`).click(function() {
     }
     location.reload();
 })
+
+//========================================
+// >> SELECT LANGUAGE
+//========================================
+if (config.GetLANG(config.LANG.ENGLISH)) document.documentElement.setAttribute("lang", "en")
+else document.documentElement.setAttribute("lang", "ko")
 
 //========================================
 // >> SWITCH LANGUAGE
@@ -42,6 +63,19 @@ $(`#nav-lang`).click(function() {
 })
 
 //========================================
+// >> BROWSER
+//========================================
+if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+    // SAFARI, iOS SAFARI
+    $('HEADER').css("position", "-webkit-sticky")
+}
+else if (typeof window.InstallTrigger !== 'undefined') {
+    // FIREFOX, Android FIREFOX
+    $('#header-title').css("width", "-moz-fit-content")
+    $('nva').css("height", "-moz-fit-content")
+}
+
+//========================================
 // >> IMPORT SCRIPT
 //========================================
 switch(location.pathname.split('/')[1])
@@ -49,27 +83,11 @@ switch(location.pathname.split('/')[1])
     case "":
         import("./home.js")
         break;
-    case "docs":
-        import("./docs.js")
-        break;
-    case "blog":
-        import("./blog.js")
-        import("./docs.js")
-        break;
-    case "forum":
-        import("./forum.js")
+        
     default:
+        import("./docs.js")
         break;
 }
-
-//========================================
-// >> AUTO-FIT MAIN
-//========================================
-$(`main`).css("min-height", `${window.innerHeight - ($(`footer`).outerHeight() + $(`header`).outerHeight())}px`)
-$(window).resize(function() {
-    if ($(window).height() < 600) $(`main`).css("min-height", `${600 - ($(`footer`).outerHeight() + $(`header`).outerHeight())}px`)
-    else $(`main`).css("min-height", `${window.innerHeight - ($(`footer`).outerHeight() + $(`header`).outerHeight())}px`)
-})
 
 //========================================
 // >> RENDERING

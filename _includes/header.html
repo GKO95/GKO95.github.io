@@ -1,8 +1,12 @@
 <header>
     {%- include navigation.html -%}
     {% if page.title == nil %}
-    <div id="idx-title">
+    <div id="header-title">
         <span>{{ site.author.name | escape }}</span>
+    </div>
+    <div id="header-buttons">
+        <a class="header-button" id="header-about" href="about"></a>
+        <a class="header-button" id="header-post" href="blog"></a>
     </div>
     {% endif %}
 </header>
