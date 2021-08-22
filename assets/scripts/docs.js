@@ -18,26 +18,26 @@ else
 const imageSize = () => {
     $(`article img`).each(function(index) {
         $(this).css({
-            "max-width": `calc(${$(`article`).width()}px - ${$(`article img`).css("border-width")} * 2)`
+            "max-width": `calc(${$(`article`).width()}px - ${$(`article img`).css("border-width")} * 2)`,
+            "cursor": "pointer",
         }).parent().css({"text-align": "center", "width": "100%"})
         if( $(this).next('center').length == 0 ) {
              $(`<center style="font-weight: bold;">${txtFigure} ${index + 1}. ${$(this).attr("alt")}</center>`).insertAfter(this)
         }
-        $(this).show()
+        $(this).dblclick(function() { 
+            window.open(`https://raw.githubusercontent.com/GKO95/GKO95.github.io/master${$(this).attr("src")}`)
+        }).show()
     })
 }; imageSize();
 $(window).resize(imageSize)
 
 //========================================
-// >> REDUCE MARGIN IF FIRST CHILD IS H1
+// >> DOCUMENT PROCESSING
 //========================================
 if ($(`.docs-content > :first-child`).is('H1')) {
     $(`.docs-content > :first-child`).css("margin-top", "24px")
 }
 
-//========================================
-// >> WORD-BREAK
-//========================================
 const breakCode = () => {
     $(`code`).each(function() {
         if ($(this).width() > ($(this).parent().width() / 4)) $(this).css("word-break", "break-all")
@@ -47,55 +47,68 @@ const breakCode = () => {
 $(window).resize(breakCode)
 
 //========================================
-// >> MENU: CONFIGURATION
+// >> MENU CONFIGURATION
 //========================================
-// $(`#toc-button`).show("slow").click(function() {
-//     $(this).hide("fast")
-//     $(`#toc-container`).fadeIn()
-// })
-
-// $(`#toc-main`).click(function(event) {event.stopPropagation();})
-// const closeTOC = () => {
-//     // $('#toc-container').one('scroll', false).one('mousewheel', false).one('touchmove',false)
-//     $('#toc-container').fadeOut("fast")
-//     $(`#toc-button`).show("fast")
-// }
-
-// $(`#toc-container`).click(closeTOC)
-// $(`#toc-close`).click(closeTOC)
-// $(document).keydown(function(e) {
-//     if (e.keyCode == 27 && $(`#toc-container`).is(":visible")) {
-//         closeTOC();
-//     }
-// })
+$(`#docs-menu`).click((event) => event.stopPropagation())
+const docsMenuOpen  = () => {
+    $(`#docs-mask`).fadeIn(400, () => {
+        $(`#docs-menu`).slideDown()
+    })
+    // $('body').css({height: '100%', overflow: 'hidden'});
+}
+const docsMenuClose = () => {
+    $(`#docs-mask`).fadeOut(400, () => {
+        $(`#docs-menu`).slideUp()
+    })
+    // $('body').css({height: 'auto', overflow: 'auto'});
+}
+$(`#nav-menu`).click(() => {
+    if($(`#docs-mask`).length == 0) {
+        $(`#nav-menu`).effect("shake", { direction: "right", times: 3, distance: 4});
+    }
+    else {
+        if ($(`#docs-mask`).first().is(":hidden")) docsMenuOpen()
+        else docsMenuClose()
+    }
+})
+$(`#docs-mask`).click(() => docsMenuClose())
+$(document).keydown((e) => {
+    if (e.keyCode == 27 && $(`#docs-mask`).is(":visible")) {
+        $(`#docs-mask`).fadeOut(400, () => docsMenuClose())
+    }
+})
 
 //========================================
-// >> TOC: INITIALIZE
+// >> MENU INSTANTIATION
 //========================================
-// $(`#toc-options-region`).prepend(`<a class="toc-option" id="toc-home" href="/" title="Return home" style="background-image: url(/images/icons/icon-home.png)"></a>`)
-// $(`#toc-options-region`).prepend(`<a class="toc-option" id="toc-source" title="View source" style="background-image: url(/images/icons/icon-source.png)"></a>`)
-// $(`#toc-source`).click(function() {
-//     window.open(`https://github.com/GKO95/GKO95.github.io/blob/master${location.pathname.replace("/","/_").slice(0,-1)}.md`)
-// })
+$(`#sub-source`).click(function() {
+    window.open(`https://github.com/GKO95/GKO95.github.io/blob/master${location.pathname.replace("/","/_").slice(0,-1)}.md`)
+    docsMenuClose()
+})
+$(`#sub-related`).click(function() {
+    $(this).effect("shake", { direction: "right", times: 3, distance: 4});
+})
 
-// $(`#toc-content`).append($(`<div id="toc-sub" style="height: ${$(`#docs-related`).length > 0 ? "calc(100% - (64px + 16px))" : "100%"}; overflow: auto;"></div>`))
-// $(`article > :header`).each(function() {
-//     let headerTag = $(this).prop("tagName")
-//     if ((headerTag == 'H1') || (headerTag == 'H2') || (headerTag == 'H3'))
-//     {
-//         let headerURL = $(this).attr("id")
-//         let headerTxt = $(`<span style="cursor: pointer;">${$(this).html()}</span>`).click(function() {
-//             location.href = `#${headerURL}`
-//             $('#toc-container').fadeOut("fast")
-//             $(`#toc-button`).show("fast")
-//         })
-//         $(`#toc-content > #toc-sub`).append($(`<${headerTag}></${headerTag}>`).append(headerTxt))
-//     }
-// })
+//$(`#docs-toc`).append($(`<div id="toc-sub" style="height: ${$(`#docs-related`).length > 0 ? "calc(100% - (64px + 16px))" : "100%"}; overflow: auto;"></div>`))
+$(`article.docs-content > :header`).each(function() {
+    let headerTag = $(this).prop("tagName")
+    if ((headerTag == 'H1') || (headerTag == 'H2') || (headerTag == 'H3'))
+    {
+        let headerURL = $(this).attr("id")
+        let headerTxt = $(`<span style="cursor: pointer;">${$(this).html()}</span>`).click(function() {
+            location.href = `#${headerURL}`
+            docsMenuClose()
+        })
+        $(`#docs-toc`).append($(`<${headerTag}></${headerTag}>`).append(headerTxt))
+    }
+})
+$(`#docs-toc > h1`).each(function() {
+    if ($(this).next().is("h1") || $(this).is(":last-child")) $(this).after("<h3>...</h3>")
+})
 
-// $(`#toc-content > #toc-sub > h1`).each(function() {
-//     if ($(this).next().is("h1") || $(this).is(":last-child")) $(this).after("<h3>...</h3>")
-// })
+if ($(`#docs-toc > :first-child`).is('H1')) {
+    $(`#docs-toc > :first-child`).css("margin-top", "24px")
+}
 
 // if ($(`#docs-related`).length > 0)
 // {

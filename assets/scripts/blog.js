@@ -6,14 +6,12 @@ if (config.GetLANG(config.LANG.ENGLISH))
     // ENGLISH
     if (location.pathname.split('/')[2] == "") $(`#nav-center`).text("Blog")
     $(`#blog-caption`).text("TAGS:")
-
 }
 else
 {
     // KOREAN
     if (location.pathname.split('/')[2] == "") $(`#nav-center`).text("블로그")
     $(`#blog-caption`).text("태그:")
-
 }
 
 //========================================

@@ -1,11 +1,18 @@
 ---
 layout: template
 ---
-<!--
 {% if page.toc != false %}
-{%- include toc.html -%}
+<aside id="docs-mask">
+  <div id="docs-menu">
+    <section id="docs-toc">
+    </section>
+    <section id="docs-sub">
+      <a class="sub-button" id="sub-related" title="See Also" tabindex="-1"></a>
+      <a class="sub-button" id="sub-source" title="View Source" tabindex="-1"></a>
+    </section>
+  </div>
+</aside>
 {% endif %}
--->
 <div id="page">
   <article id="content" class="docs-content">
     {{ content }}

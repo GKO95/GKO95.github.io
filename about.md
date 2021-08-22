@@ -2,7 +2,6 @@
 layout: docs
 title: About
 toc: false
-comment: false
 ---
 소프트웨어 & 펌웨어 개발자 고기환 (Gihwan Ko) 입니다.
 

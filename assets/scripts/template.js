@@ -63,6 +63,19 @@ $(`#nav-lang`).click(function() {
 })
 
 //========================================
+// >> BROWSER
+//========================================
+if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+    // SAFARI, iOS SAFARI
+    $('HEADER').css("position", "-webkit-sticky")
+}
+else if (typeof window.InstallTrigger !== 'undefined') {
+    // FIREFOX, Android FIREFOX
+    $('#header-title').css("width", "-moz-fit-content")
+    $('nva').css("height", "-moz-fit-content")
+}
+
+//========================================
 // >> IMPORT SCRIPT
 //========================================
 switch(location.pathname.split('/')[1])
@@ -70,16 +83,9 @@ switch(location.pathname.split('/')[1])
     case "":
         import("./home.js")
         break;
-
-    case "docs":
-        import("./docs.js")
-        break;
-
-    case "blog":
-        import("./blog.js")
-        break;
-
+        
     default:
+        import("./docs.js")
         break;
 }
 
