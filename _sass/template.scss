@@ -25,6 +25,9 @@ code {
         padding: 0px;
     }
 }
+.katex {
+    z-index: 1;
+}
 header {
     user-select: none;
     -ms-user-select: none;
@@ -32,6 +35,7 @@ header {
     -khtml-user-select: none;
     -webkit-user-select: none;
 
+    z-index: 4;
     background-color: inherit;
     position: sticky;
     top: 0;
