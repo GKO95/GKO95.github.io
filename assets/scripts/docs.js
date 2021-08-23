@@ -86,7 +86,7 @@ $(`#sub-source`).click(function() {
     docsMenuClose()
 })
 $(`#sub-related`).click(function() {
-    $(this).effect("shake", { direction: "right", times: 3, distance: 4});
+    if ($("#sub-related").attr("href") === undefined) $(this).effect("shake", { direction: "right", times: 3, distance: 4});
 })
 
 //$(`#docs-toc`).append($(`<div id="toc-sub" style="height: ${$(`#docs-related`).length > 0 ? "calc(100% - (64px + 16px))" : "100%"}; overflow: auto;"></div>`))
@@ -109,16 +109,3 @@ $(`#docs-toc > h1`).each(function() {
 if ($(`#docs-toc > :first-child`).is('H1')) {
     $(`#docs-toc > :first-child`).css("margin-top", "24px")
 }
-
-// if ($(`#docs-related`).length > 0)
-// {
-//     $(`#toc-content`).append($(`
-//         <section id="toc-related" style="display: flex; justify-content: center; border-radius: 8px; margin-top: 16px; font-size: 24px; text-align: center; cursor: pointer; height: 64px">
-//             <span style="align-self: center;">${config.GetLANG() ? "관련 게시글" : "See Also"}</span>
-//         </section>
-//     `).click(function() {
-//         $('html, body').scrollTop( $(`#docs-related`).offset().top );
-//         $('#toc-container').fadeOut("fast")
-//         $(`#toc-button`).show("fast")
-//     }))
-// }
