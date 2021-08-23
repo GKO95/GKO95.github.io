@@ -3,7 +3,7 @@ layout: docs
 language: ko
 title: 파이썬에서 C/C++ 동적 라이브러리 불러오기
 tags: Python
-date: 2021-02-14 13:15:00
+date: 2021-07-04 18:00:00
 notice: false
 toc: false
 ---
