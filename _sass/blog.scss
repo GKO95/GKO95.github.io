@@ -74,8 +74,13 @@
             bottom: 8px;
         }
 
-        a.blog-post {
+        .blog-post {
+            display:inline-block;
             font-size: 21px;
+            margin: {
+                top: 4px;
+                bottom: 4px;
+            }
         }
     }
 }
@@ -85,7 +90,7 @@ html {
     #blog-posts {
 
         li {
-            background-color: #F8F8F8;
+            background-color: #FCFCFC;
             border-color: black;
         }
     }
@@ -95,7 +100,7 @@ html {
     #blog-posts {
 
         li {
-            background-color: #1A1A1A;
+            background-color: #1C1C1C;
             border-color: white;
         }
     }

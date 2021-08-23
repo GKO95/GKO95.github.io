@@ -24,7 +24,7 @@ layout: template
     {%- assign index = blog.tags.size -%}
     <li class='{%- if blog.tags.size > 0 -%}{%- for tag in blog.tags -%}
       {%- if tag == blog.tags.first -%}{{ tag | prepend: "#" }}{%- else -%}{{ tag | prepend: " #" }}{%- endif -%}
-      {%- endfor -%}{%- endif -%}'><a class="blog-post" href="{{ blog.url }}"><span>{{ blog.title }}</span></a>
+      {%- endfor -%}{%- endif -%}'><a class="blog-post" href="{{ blog.url }}">{{ blog.title }}</a>
       {% if blog.tags.size > 0 %}
       <br/><section style="font-size:medium; padding-left: 1em;">
       {% for tag in blog.tags %}
