@@ -1,36 +1,23 @@
 ---
 layout: template
-title: HTTP 404
 ---
-
 <style type="text/css" media="screen">
-  .terminal {
-    height: 100%;
+  .container {
+    margin: 10px auto;
+    max-width: 600px;
+    text-align: center;
   }
-  .terminal-content {
-    height: calc(100% - 36px - 16px);
+  h1 {
+    margin: 30px 0;
+    font-size: 4em;
+    line-height: 1;
+    letter-spacing: -1px;
   }
 </style>
 
-<main id="HTTP404-main">
-  <article id="HTTP404-content">
-      <section>{%- include terminal.html -%}</section>    
-  </article>
-</main>
-  
-<script>
-  $(`.terminal-content`).append(`
-<span>Windows PowerShell</span><br/>
-<span>Copyright (C) Microsoft Corporation. All rights reserved.<span><br/>
-<br/>
-<span>PS https://gko95.github.io&gt; <span style="color: #F9F1A5;">cd</span> ${$(location).attr('pathname').substring(1)}</span><br/>
-<span style="color: #E74856;">cd : Cannot find path 'https://gko95.github.io${$(location).attr('pathname')}' because it does not exist.
-<br/>At line:1 char:1
-<br/>+ cd ${$(location).attr('pathname').substring(1)}
-<br/>+ ~~~${'~'.repeat($(location).attr('pathname').substring(1).length)}
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;+ CategoryInfo          : ObjectNotFound: (https://gko95.github.io${$(location).attr('pathname')}:String) [Set-Location], ItemNotFoundException
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;+ FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand</span>
-<br/>
-<br/><span>PS https://gko95.github.io&gt;<span>`
-  )
-</script>
+<div class="container">
+  <h1>404</h1>
+
+  <p><strong>Page not found :(</strong></p>
+  <p>The requested page could not be found.</p>
+</div>

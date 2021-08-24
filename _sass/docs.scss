@@ -1,8 +1,11 @@
-.docs-content {
+#docs-content {
     font-size: large;
     padding: 8px 32px;
 
-    h1, h2, h3, h4 { scroll-margin-top: 78px; }
+    h1, h2, h3, h4 { 
+        scroll-margin-top: 78px;
+        scroll-snap-margin-top: 78px;
+    }
     h1 {
         border-bottom-style: solid;
         font-size: 40px;
@@ -153,7 +156,7 @@
 
 html {
 
-    .docs-content {
+    #docs-content {
         img {
             border-color: #202020;
             background-color: #FFFFFF;
@@ -195,7 +198,7 @@ html {
 
 &:not(.style-scope)[dark=true] {
 
-    .docs-content {
+    #docs-content {
         img {
             border-color: #808080;
             background-color: #FFFFFF;

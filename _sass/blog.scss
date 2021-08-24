@@ -1,0 +1,122 @@
+#blog-sub {
+    max-width: 1600px;
+    margin: {
+        left: auto;
+        right: auto;
+    }
+    padding: 8px 16px;
+
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}
+
+#blog-tags {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    padding: {
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+    }
+
+    li {
+        display: block;
+        font: {
+            size: 28px;
+            weight: bold;
+        }
+        margin: {
+            left: 8px;
+            right: 8px;
+        }
+        width: fit-content;
+        
+        code.blog-tag {
+            cursor: pointer;
+        }
+    }   
+}
+
+#blog-content {
+    max-width: 1600px;
+    margin: {
+        left: auto;
+        right: auto;
+    }
+    padding: 8px 16px;
+}
+
+#blog-posts {
+    padding-left: 0px;
+
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    li {
+        list-style: none;
+        border: {
+            width: 1px 1px 1px 8px;
+            style: solid;
+        }
+        margin: {
+            top: 12px;
+            bottom: 12px;
+        }
+        padding: {
+            left: 16px;
+            right: 16px;
+            top: 6px;
+            bottom: 10px;
+        }
+
+        .blog-date {
+            display: block;
+            height: 12px;
+            text-align: end;
+            font: {
+                family: $MONOSPACE;
+                style: italic;
+                size: 9px;
+            }
+        }
+
+        .blog-post {
+            display:inline-block;
+            font-size: 21px;
+            margin: {
+                top: 4px;
+                bottom: 4px;
+            }
+        }
+    }
+}
+
+html {
+
+    #blog-posts {
+
+        li {
+            background-color: #FCFCFC;
+            border-color: black;
+        }
+    }
+
+&:not(.style-scope)[dark=true] {
+
+    #blog-posts {
+
+        li {
+            background-color: #1A1A1A;
+            border-color: #303030;
+        }
+    }
+    
+}}

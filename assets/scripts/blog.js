@@ -4,14 +4,12 @@
 if (config.GetLANG(config.LANG.ENGLISH))
 {
     // ENGLISH
-    if (location.pathname.split('/')[2] == "") $(`#nav-center`).text("Blog")
-    $(`#blog-caption`).text("TAGS:")
+    //if (location.pathname.split('/')[2] == "") $(`#nav-center`).text("Blog")
 }
 else
 {
     // KOREAN
-    if (location.pathname.split('/')[2] == "") $(`#nav-center`).text("블로그")
-    $(`#blog-caption`).text("태그:")
+    //if (location.pathname.split('/')[2] == "") $(`#nav-center`).text("블로그")
 }
 
 //========================================
@@ -36,8 +34,8 @@ const parseColor = (str) => {
 //========================================
 // >> FILTER: TAGS
 //========================================
-const __colorINCLUDE__  = (config.GetTHEME(config.THEME.LIGHT)) ? "#1CC11C" : "#008000";
-const __colorEXCLUDE__   = (config.GetTHEME(config.THEME.LIGHT)) ? "#FF0000" : "#FF0000";
+const __colorINCLUDE__  = (config.GetTHEME(config.THEME.LIGHT)) ? "#57DA57" : "#008000";
+const __colorEXCLUDE__   = (config.GetTHEME(config.THEME.LIGHT)) ? "#FF5050" : "#FF0000";
 
 const filterTags = (color) => {
     let filterINCLUDE = []
@@ -57,7 +55,7 @@ const filterTags = (color) => {
         }
     })
 
-    $(`#blog-list > li`).each(function() {
+    $(`#blog-posts > li`).each(function() {
         let element = $(this)
         $(this).show()
         $.each(filterINCLUDE, function(index, value) {
