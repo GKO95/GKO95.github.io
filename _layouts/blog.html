@@ -24,12 +24,14 @@ layout: template
     {%- assign index = blog.tags.size -%}
     <li class='{%- if blog.tags.size > 0 -%}{%- for tag in blog.tags -%}
       {%- if tag == blog.tags.first -%}{{ tag | prepend: "#" }}{%- else -%}{{ tag | prepend: " #" }}{%- endif -%}
-      {%- endfor -%}{%- endif -%}'><a class="blog-post" href="{{ blog.url }}">{{ blog.title }}</a>
+      {%- endfor -%}{%- endif -%}'>
+      <span class="blog-date"> {{ blog.date | date: "%Y.%m.%d" }} </span>
+      <a class="blog-post" href="{{ blog.url }}">{{ blog.title }}</a>
       {% if blog.tags.size > 0 %}
-      <br/><section style="font-size:medium; padding-left: 1em;">
-      {% for tag in blog.tags %}
-      <code>#{{ tag }}</code>&nbsp;
-      {% endfor %}
+      <section style="font-size:medium; padding: 0px 8px;">
+        {% for tag in blog.tags %}
+        <code style="margin: 0px 4px">#{{ tag }}</code>
+        {% endfor %}
       </section>
       {% endif %}
     </li>

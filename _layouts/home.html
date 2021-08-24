@@ -5,7 +5,7 @@ layout: template
 {% if listNotice.size > 0 %}
 <section id="home-notice">
   <span>{{ listNotice[0].date | date: "%Y.%m.%d" }}</span>
-  <a href="{{ listNotice[0].url }}">{{ listNotice[0].title }}</a>
+  <a title="{{ listNotice[0].title }}" href="{{ listNotice[0].url }}">{{ listNotice[0].title }}</a>
 </section>
 {% endif %}
 <section id="page">
@@ -26,9 +26,9 @@ layout: template
             <section class="home-category-header">{{group}}</section>
             <ol>
               {%- for Markdown in arrMarkdown -%}
-              <a href="{{ Markdown.url }}" title="{{ Markdown.category }} | {{ Markdown.title }}">
-                <li class="home-category-list">{{Markdown.title}}</li>
-              </a>
+              <li class="home-category-list">
+                <a href="{{ Markdown.url }}" title="{{ Markdown.category }} | {{ Markdown.title }}">{{Markdown.title}}</a>
+              </li>
               {%- endfor -%}
             </ol>
           </div>

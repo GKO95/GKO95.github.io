@@ -73,8 +73,19 @@
         padding: {
             left: 16px;
             right: 16px;
-            top: 8px;
-            bottom: 8px;
+            top: 6px;
+            bottom: 10px;
+        }
+
+        .blog-date {
+            display: block;
+            height: 12px;
+            text-align: end;
+            font: {
+                family: $MONOSPACE;
+                style: italic;
+                size: 9px;
+            }
         }
 
         .blog-post {

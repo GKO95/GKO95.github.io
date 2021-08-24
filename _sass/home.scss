@@ -109,6 +109,10 @@
         left: 2px;
         right: 2px;
     }
+
+    a {
+        display: block;
+    }
 }
 
 html {
@@ -141,117 +145,3 @@ html {
         border-bottom-color: rgb(96, 96, 96);
     }
 }}
-
-// #home-blog {
-//     @include HFBkgdStyle;
-//     max-width: calc(100% - (48px * 2));
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: space-around;
-//     margin: {
-//         top: 16px;
-//         bottom: 16px;
-//     }
-
-//     .home-blog-button {
-//         font: {
-//             family: $TITLEFONT;
-//             size: 24px;
-//             weight: bold;
-//         }
-//         border: {
-//             radius: 16px;
-//             style: none;
-//             width: 4px;
-//         }
-//         width: 30%;
-//         margin: {
-//             left: 8px;
-//             right: 8px;
-//         }
-//         padding: 8px 24px;
-//         text-align: center;
-//         cursor: pointer;
-//     }
-// }
-
-// #home-docs {
-//     @include HFBkgdStyle;
-//     border-radius: 32px;
-//     margin: {
-//         top: 16px;
-//         bottom: 16px;
-//     }
-//     padding: {
-//         top: 8px;
-//         bottom: 8px;
-//     }
-
-//     .home-docs-group {
-//         width: 96%;
-//         margin: 24px auto;
-//         border: {
-//             radius: 16px;
-//             style: solid;
-//             width: 4px;
-//         }
-        
-//         a {
-//             margin: 8px;
-//         }   
-//     }
-
-//     .home-docs-header {
-//         font-family: $TITLEFONT;
-//         border-radius: 24px;
-//         text-align: center;
-
-//         padding: 0.2em;
-//         margin: 16px auto 8px auto;
-//         width: 96%;
-//         font: {
-//             weight: bold;
-//             size: 1.6em;
-//         }
-//     }
-
-//     .home-docs-list {
-//         display: block;
-//         border-radius: 8px;
-//         width: calc(100% - 8px * 2);
-//         padding: {
-//             top: 8px;
-//             bottom: 8px;
-//             left: 8px;
-//             right: 8px;
-//         }
-//         //filter: opacity(80%);
-//     }
-
-//     ol {
-//         width: calc(96% - 4px * 2);
-//         margin: 0.4em auto;
-//         padding: 0;
-//         display: flex;
-//         flex: {
-//             wrap: wrap;
-//             direction: row;
-//         }
-//         justify-content: center;
-//     }
-
-//     ul {
-//         width: calc(96% - 4px * 2);
-//         padding: 0;
-//         margin: 0.4em auto;
-//         display: flex;
-//         flex: {
-//             wrap: wrap;
-//             direction: row;
-//         }
-
-//         a {
-//             width: calc(50% - 8px * 2);
-//         }
-//     }
-// }
