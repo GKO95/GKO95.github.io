@@ -2,7 +2,6 @@
 layout: docs
 language: ko
 category: 프로그래밍
-date: 2021-08-27 23:48:00
 title: C
 meta: C
 icon: icon-c.png
