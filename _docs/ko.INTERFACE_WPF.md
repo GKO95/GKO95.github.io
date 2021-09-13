@@ -3,7 +3,6 @@ layout: docs
 language: ko
 category: 인터페이스
 title: WPF
-icon: .png
 meta: WPF
 order: 0x21
 ---
@@ -190,6 +189,13 @@ XML 요소들은 하나의 네임스페이스에만 속할 수 있다는 원칙�
 ## WPF XAML 네임스페이스
 WPF 프로젝트의 XAML 네임스페이스는 기존 XML 네임스페이스처럼 단순히 데이터 분류를 위해 URI로 유일성을 제공할 뿐만 아니라, 입력된 URI에 따라 XAML 문서에 특정 CLR 네임스페이스 혹은 참조 어셈블리로부터 지원받는 스키마 개념을 내포한다. 여기서 CLR은 [.NET](../ko.PRGMING_Csharp/#net) 공통 언어 런타임(Common Language Runtime)으로 XAML 마크업이 아닌 C# 언어 코드를 가리킨다.
 
+```xml
+<Window x:Class="WPFApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+</Window>
+```
+
 WPF 프로젝트에는 크게 기본 네임스페이스와 접두사 `x:`를 갖는다.
 
 ### WPF 네임스페이스
@@ -265,7 +271,9 @@ XAML 리소스(resource)는 브러시와 스타일과 같이 어플리케이션�
 XAML 리소스는 리소스 딕셔너리(resource dictionary)에 정의하며, 별도로 선언하지 않아도 리소스를 정의하면 암묵적으로 선언된다.
 
 ```xml
-<Window>
+<Window x:Class="WPFApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Window.Resource>
         <Object x:Key="Resource1" />
@@ -297,16 +305,22 @@ WPF 어플리케이션은 리소스를 정적(static) 혹은 동적(dynamic)으�
 StaticResource와 DynamicResource는 공통적으로 다음과 같은 절차에 따라 리소스를 탐색한다: (1) 우선 XAML 요소가 참조하는 리소스가 해당 요소의 리소스 딕셔너리로부터 탐색한다. 그 다음 (2) 논리 트리 구조를 거슬러 올라가 루트 요소의 리소스 딕셔너리로 이동하며, 이후에는 (3) `Application` 객체에 정의된 어플리케이션 리소스 딕셔너리를 확인한다.
 
 ```xml
-<Window>
+<Window x:Class="WPFApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--RESOURCE-->
     <Window.Resource>
         <Object x:Key="Resource1" />
         <Object x:Key="Resource2" />
     </Window.Resource>
 
+    <!--INTERFACE-->
     <StackPanel>
         <Control Resource="{StaticResource Resource1}" />
         <Control Resource="{StaticResource Resource2}" />
     </StackPanel>
+
 </Window>
 ```
 
@@ -314,7 +328,11 @@ StaticResource와 DynamicResource는 공통적으로 다음과 같은 절차에 
 `System.Windows.Style` 스타일(Style)은 컨트롤의 외관을 변경하는데 사용되며, 흔히 리소스로 사용되어 컨트롤에 공통된 혹은 `x:Key`에 해당하는 스타일을 적용한다. 그 중에서 `TargetType` 속성은 해당 스타일이 적용될 컨트롤이 어느 것인지 명시한다; `System.Windows.Setter`을 통해 컨트롤의 속성을 설정하기 위해서 반드시 필요하다.
 
 ```xml
-<Window>
+<Window x:Class="WPFApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--RESOURCE-->
     <Window.Resource>
         <Style x:Key="Resource1" TargetType="Button">
             <Setter Property="BorderBrush" Value="Red"/>
@@ -327,10 +345,12 @@ StaticResource와 DynamicResource는 공통적으로 다음과 같은 절차에 
         </Style>
     </Window.Resource>
 
+    <!--INTERFACE-->
     <StackPanel>
         <Button x:Name="btnControl1" Style="{StaticResource Resource1}" />
         <Button x:Name="btnControl2"/>
     </StackPanel>
+
 </Window>
 ```
 
@@ -346,7 +366,11 @@ btnControl1.Style = (Style)Resources["Resource1"];
 기존의 스타일로부터 정의를 확장하려면, 파생 스타일의 `BaseOn` 속성에 StaticResource 혹은 DynamicResource과 함께 기반 스타일을 기입한다. 그러나 `x:Key`가 없는 암묵적 스타일로부터 파생하려면 `x:Type`를 활용해 컨트롤의 자료형을 반환하므로써 기반 스타일을 명시한다.
 
 ```xml
-<Window>
+<Window x:Class="WPFApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--RESOURCE-->
     <Window.Resource>
         <Style x:Key="Resource1" TargetType="Button" 
                BaseOn="{StaticResource {x:Type Button}}">
@@ -360,29 +384,79 @@ btnControl1.Style = (Style)Resources["Resource1"];
         </Style>
     </Window.Resource>
 
+    <!--INTERFACE-->
     <StackPanel>
         <Button x:Name="btnControl1" Style="{StaticResource Resource1}" />
         <Button x:Name="btnControl2"/>
     </StackPanel>
+
 </Window>
 ```
 
+위의 XAML에서 `Resource1` 스타일은 기본 `Button` 스타일을 기반하여 추가 및 변경된 스타일이 적용된다.
+
 # WPF: 바인딩
-데이터 바인딩(Data binding)은 WPF 컨트롤을 데이터와 연동시킨다. 데이터 변동이나 컨트롤 상호작용은 서로에게 영향을 주어 자동적으로 업데이트된다. WPF에는 두 가지의 데이터 바인딩이 존재한다:
+데이터 바인딩(Data binding)이란 피(被)바인딩 객체를 아무런 바인딩 소스(binding source)에 연동하는 것이다. 흔히 WPF 프로젝트에서는 컨트롤을 데이터베이스 혹은 XML 파일 등에 바인딩하여 사용되는데, 컨트롤의 상호작용 및 바인딩 소스의 데이터 변동은 서로에게 영향을 주어 실시간으로 업데이트된다.
 
-### 단방향 데이터 바인딩
-단방향 데이터 바인딩(One-way Data Binding)
+> 바인딩에서 [소스](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.source)(source)란, 바인딩 데이터로 가져올 객체를 가리킨다. 그리고 바인딩 [경로](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.path)(path)는 바인딩 소스로부터 접근하려는 속성을 의미한다.
 
-### 양방향 데이터 바인딩
-양방향 데이터 바인딩(Two-way Data Binding)
+## `Binding` 클래스
+[`Binding`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding) 클래스는 기본적인 바인딩 기능을 제공하는 고급 API이다. 비록 C# 클래스이지만 흔히 아래와 같이 WPF 프레임워크 XAML에서 `{Binding}`을 통해 바인딩이 이루어진다.
 
-## 바인딩 소스
+```xml
+<Window x:Class="WPFApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel>
+        <TextBox x:Name="txtValue" />
+        <TextBlock x:Name="txtString" Text="{Binding Path=Text, ElementName=txtValue}"/>
+    </StackPanel>
+
+</Window>
+```
+
+위의 XAML에서는 `txtValue` 식별자를 갖는 바인딩 소스의 `Text` 속성 데이터를 `txtString` 피바인딩 객체의 `Text` 속성에 연동시킨다. 여기서 바인딩 소스를 지정하는 방법은 차후에 상세히 설명할 예정이다.
+
+아래는 XAML에서 보여준 것과 동일한 바인딩을 C# 언어로 구현한 코드이다:
+
+```xml
+<Window x:Class="WPFApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <StackPanel>
+        <TextBox x:Name="txtValue" />
+        <TextBlock x:Name="txtString" />
+    </StackPanel>
+
+</Window>
+```
+
+```csharp
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+
+namespace WPFApplication
+{
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+
+            Binding binding = new Binding("Text")
+            { 
+                ElementName = "txtValue",
+            };
+            txtString.SetBinding(TextBlock.TextProperty, binding);
+        }
+    }
+}
+```
+
+### 바인딩 소스
 > *참조: [Microsoft Docs 방법: 바인딩 소스 지정 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-specify-the-binding-source)*
-
-바인딩 소스(source)는 데이터를 가져올 객체를 가리킨다. 그리고 경로(path)는 소스 객체로부터 접근할 속성을 의미한다.
-
-`FrameworkElement.DataContext`
-
-데이터 컨텍스트(data context)는 요소가 부모로부터 데이터 소스 및  정보를 상속받도록 하는 개념이다.
 
 # WPF: 이벤트
