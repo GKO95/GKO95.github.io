@@ -216,7 +216,7 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     : XAML 마크업 문서를 C# 코드의 [분할](../ko.PRGMING_Csharp/#한정자) 클래스에 연동시킨다. 본 지시문은 XAML 루트 요소에서만 기입할 수 있으며, 그 이외의 요소에서는 컴파일 오류가 발생한다.
 
 * `x:Name` 지시문
-    : XAML 요소에 [식별자](../ko.PRGMING_Csharp/#식별자)를 지정한다. 해당 식별자는 C# 코드에서 객체명으로 간단히 호출 및 접근하는데 유용하게 사용될 수 있으나, 식별자는 XAML 네임스페이스에서 요소마다 유일해야 한다.
+    : XAML 요소에 [식별자](../ko.PRGMING_Csharp/#식별자)를 지정한다. 해당 식별자는 C# 코드에서 객체명으로 간단히 호출 및 접근하는데 유용하게 사용될 수 있으나, 식별자는 XAML 네임스페이스에서 요소마다 유일해야 한다. 이와 본질적으로 동일한 WPF 프레임워크 속성으로 [`Name`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.name)이 있다.
 
 * `x:Key` 지시문
     : XAML로 정의된 딕셔너리에서 데이터를 불러올 호출자를 지정한다. 이는 C# 코드에서의 [딕셔너리](../ko.PRGMING_Csharp/#dictionary-컬렉션) 컬렉션과 같이 `{key, value}`의 `key`와 동일한 역할을 하며, 대표적은 [리소스 딕셔너리](#wpf-리소스)에서 사용된다.
@@ -446,6 +446,7 @@ namespace WPFApplication
         {
             InitializeComponent();
 
+            // DATA BINDING
             Binding binding = new Binding("Text")
             { 
                 ElementName = "txtValue",
@@ -458,5 +459,26 @@ namespace WPFApplication
 
 ### 바인딩 소스
 > *참조: [Microsoft Docs 방법: 바인딩 소스 지정 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-specify-the-binding-source)*
+
+* `Binding.Source`
+
+* `Binding.RelativeSource`
+
+* `Binding.ElementName`
+    : `Name` 속성 혹은 [`x:Name`](https://docs.microsoft.com/en-us/dotnet/desktop/xaml-services/xname-directive) 지시문으로 할당된 식별자의 XAML 요소를 바인딩 소스로 지정한다.
+
+
+### `DataContext`
+
+
+바인딩 소스를 지정하는 대표적인 방법으로 [`FrameworkElement.DataContext`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.datacontext), 일명 데이터 컨텍스트(data context)가 있다.
+
+데이터 컨텍스트(data context)는 요소가 부모로부터 데이터 소스 및  정보를 상속받도록 하는 개념이다.
+
+### 단방향 데이터 바인딩
+단방향 데이터 바인딩(One-way Data Binding)
+
+### 양방향 데이터 바인딩
+양방향 데이터 바인딩(Two-way Data Binding)
 
 # WPF: 이벤트
