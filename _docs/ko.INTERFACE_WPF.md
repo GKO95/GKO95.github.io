@@ -226,7 +226,7 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     : XAML 요소의 자료형을 반환한다. 이는 C# 코드의 [`typeof`](../ko.PRGMING_Csharp/#typeof-연산자) 연산자의 XAML 버전으로 간주할 수 있다.
 
 ### CLR 네임스페이스
-CLR 네임스페이스는 간단히 말해 C# 코드에서 정의된 [네임스페이스](../ko.PRGMING_Csharp/#네임스페이스)이다; CLR 네임스페이스를 가져오기 위해서는 `clr-namespace:`를 반드시 기입해야 한다. 아래는 C# 코드에서 `WPFApplication` 네임스페이스를 불러온다.
+CLR 네임스페이스는 간단히 말해 C# 프로그래밍 언어에서 선언된 [네임스페이스](../ko.PRGMING_Csharp/#네임스페이스)이다; 접두사 `clr-namespace:`가 반드시 필요하며, 흔히 데이터 바인딩 등에 활용된다. 아래는 WPF 프로젝트 중에서 C# 프로그래밍 소스 코드 중 `WPFApplication` 네임스페이스를 불러온다.
 
 ```xml
 xmlns:local="clr-namespace:WPFApplication"
@@ -376,6 +376,8 @@ btnControl1.Style = (Style)Resources["Resource1"];
 ### 스타일 확장
 기존의 스타일로부터 정의를 확장하려면, 파생 스타일의 `BaseOn` 속성에 StaticResource 혹은 DynamicResource과 함께 기반 스타일을 기입한다. 그러나 `x:Key`가 없는 암묵적 스타일로부터 파생하려면 `x:Type`를 활용해 컨트롤의 자료형을 반환하므로써 기반 스타일을 명시한다.
 
+아래 XAML 코드에서 `Resource1` 스타일은 기본 `Button` 스타일을 기반하여 추가 및 변경된 스타일을 적용한다.
+
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -404,8 +406,6 @@ btnControl1.Style = (Style)Resources["Resource1"];
 
 </Window>
 ```
-
-위의 XAML에서 `Resource1` 스타일은 기본 `Button` 스타일을 기반하여 추가 및 변경된 스타일이 적용된다.
 
 # WPF: 바인딩
 데이터 바인딩(Data binding)이란 피(被)바인딩 객체를 아무런 바인딩 소스(binding source)에 연동하는 것이다. 흔히 WPF 프로젝트에서는 컨트롤을 데이터베이스 혹은 XML 파일 등에 바인딩하여 사용되는데, 컨트롤의 상호작용 및 바인딩 소스의 데이터 변동은 서로에게 영향을 주어 실시간으로 업데이트된다.
@@ -475,6 +475,38 @@ namespace WPFApplication
 > *참조: [Microsoft Docs 방법: 바인딩 소스 지정 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-specify-the-binding-source)*
 
 * `Binding.Source`
+
+```csharp
+namespace WPFApplication
+{
+    public class DataBinding
+    {
+        public string DataProperty { get; set; } = "";
+    }
+}
+```
+
+```xml
+<Window x:Class="WPFApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFApplication">
+
+    <!--RESOURCE: BINDING SOURCE-->
+    <Window.Resource>
+        <local:DataBinding x:Key="srcDataBinding" DataProperty="Hello World!" />
+    </Window.Resource>
+
+    <!--BINDING: SOURCE PROPERTY-->
+    <StackPanel>
+        <TextBox x:Name="txtValue" />
+        <TextBlock x:Name="txtString" Text="{Binding Path=DataProperty, Source={StaticResource srcDataBinding}}" />
+    </StackPanel>
+
+</Window>
+```
+
+XAML의 `<local:DataBinding />` 요소는 `WPFApplication` 네임스페이스의 `DataBinding` 클래스로부터 객체화하는데, XAML 컴파일러 특성에 의해 객체화 과정에서 [생성자](../ko.PRGMING_Csharp/#생성자)는 전달인자를 받을 수 없다. 전달인자를 받아야 한다면 CLR, 즉 C# 프로그래밍으로 객체를 생성하여 리소스에 추가하는 방법을 택할 수 있다.
 
 * `Binding.RelativeSource`
 
