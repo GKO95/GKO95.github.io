@@ -192,7 +192,8 @@ WPF 프로젝트의 XAML 네임스페이스는 기존 XML 네임스페이스처�
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFApplication">
 </Window>
 ```
 
@@ -223,6 +224,13 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
 * `x:Type` 마크업 확장문
     : XAML 요소의 자료형을 반환한다. 이는 C# 코드의 [`typeof`](../ko.PRGMING_Csharp/#typeof-연산자) 연산자의 XAML 버전으로 간주할 수 있다.
+
+### CLR 네임스페이스
+CLR 네임스페이스는 간단히 말해 C# 코드에서 정의된 [네임스페이스](../ko.PRGMING_Csharp/#네임스페이스)이다; CLR 네임스페이스를 가져오기 위해서는 `clr-namespace:`를 반드시 기입해야 한다. 아래는 C# 코드에서 `WPFApplication` 네임스페이스를 불러온다.
+
+```xml
+xmlns:local="clr-namespace:WPFApplication"
+```
 
 ## WPF XAML 트리
 WPF 사용자 인터페이스를 제작하는데 XAML 요소들은 .NET 객체들의 [트리 구조](https://ko.wikipedia.org/wiki/트리_구조)로 구성된다. WPF에서는 두 가지 개념의 트리 구조가 존재한다.
@@ -273,7 +281,8 @@ XAML 리소스는 리소스 딕셔너리(resource dictionary)에 정의하며, �
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFApplication">
 
     <Window.Resource>
         <Object x:Key="Resource1" />
@@ -307,7 +316,8 @@ StaticResource와 DynamicResource는 공통적으로 다음과 같은 절차에 
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFApplication">
 
     <!--RESOURCE-->
     <Window.Resource>
@@ -330,7 +340,8 @@ StaticResource와 DynamicResource는 공통적으로 다음과 같은 절차에 
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFApplication">
 
     <!--RESOURCE-->
     <Window.Resource>
@@ -368,7 +379,8 @@ btnControl1.Style = (Style)Resources["Resource1"];
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFApplication">
 
     <!--RESOURCE-->
     <Window.Resource>
@@ -406,7 +418,8 @@ btnControl1.Style = (Style)Resources["Resource1"];
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFApplication">
 
     <StackPanel>
         <TextBox x:Name="txtValue" />
@@ -423,7 +436,8 @@ btnControl1.Style = (Style)Resources["Resource1"];
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFApplication">
 
     <StackPanel>
         <TextBox x:Name="txtValue" />
