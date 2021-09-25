@@ -207,7 +207,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 ```
 
 ### XAML 네임스페이스
-XAML 언어 정의에 내포된 내장형(intrinsics)을 지원하는 별도의 XAML 네임스페이스이다; 간단한 WPF 어플이케이션에도 필연적으로 흔히 사용되는 다수의 언어 기능들을 정의한다. 대표적인 예시로 `x:Class`, `x:Name` 등이 있다.
+XAML 언어 정의에 내포된 내장형(intrinsics)을 지원하는 별도의 XAML 네임스페이스이다; 간단한 WPF 어플이케이션에도 필연적으로 흔히 사용되는 다수의 언어 기능들을 정의한다. 대표적인 예시로 `x:Class`, `x:Name` 지시문 등이 있다.
 
 ```xml
 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -226,11 +226,32 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     : XAML 요소의 자료형을 반환한다. 이는 C# 코드의 [`typeof`](../ko.PRGMING_Csharp/#typeof-연산자) 연산자의 XAML 버전으로 간주할 수 있다.
 
 ### CLR 네임스페이스
-CLR 네임스페이스는 간단히 말해 C# 프로그래밍 언어에서 선언된 [네임스페이스](../ko.PRGMING_Csharp/#네임스페이스)이다; 접두사 `clr-namespace:`가 반드시 필요하며, 흔히 데이터 바인딩 등에 활용된다. 아래는 WPF 프로젝트 중에서 C# 프로그래밍 소스 코드 중 `WPFApplication` 네임스페이스를 불러온다.
+CLR 네임스페이스는 간단히 말해 C# 프로그래밍 소스 코드에서 선언된 [네임스페이스](../ko.PRGMING_Csharp/#네임스페이스)이다; 접두사 `clr-namespace:`로부터 C# 네임스페이스 내의 클래스를 객체화하여 XAML에서 활용할 수 있다. 다음은 C# 소스 코드의 `WPFApplication` 네임스페이스를 불러온다.
 
 ```xml
 xmlns:local="clr-namespace:WPFApplication"
 ```
+
+단, XAML 컴파일 작업 성질에 의해 객체화 과정에서 호출되는 생성자는 어떠한 전달인자도 받을 수 없다. 그리고 XAML에서 객체의 데이터를 접근하기 위해서는 [속성](../ko.PRGMING_Csharp/#객체)(property) 맴버를 사용해야 한다.
+
+```csharp
+using System.Windows;
+
+namespace WPFApplication
+{
+    public class CLASS
+    {
+        public CLASS() { }
+        public string Property { get; set; } = "";
+    }
+}
+```
+
+```xml
+<local:CLASS Property="Hello World!" />
+```
+
+전달인자를 받아야 한다면 CLR, 즉 C# 프로그래밍으로 객체를 생성하여 코드로부터 XAML에 추가하는 방법을 택할 수 있다.
 
 ## WPF XAML 트리
 WPF 사용자 인터페이스를 제작하는데 XAML 요소들은 .NET 객체들의 [트리 구조](https://ko.wikipedia.org/wiki/트리_구조)로 구성된다. WPF에서는 두 가지 개념의 트리 구조가 존재한다.
@@ -474,14 +495,20 @@ namespace WPFApplication
 ### 바인딩 소스
 > *참조: [Microsoft Docs 방법: 바인딩 소스 지정 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-specify-the-binding-source)*
 
-* `Binding.Source`
+다음은 WPF 프로젝트에서 바인딩 소스를 지정하는 몇 가지 방법들을 소개한다.
+
+#### `Binding.Source`
+[`Source`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.source) 속성은 원하는 객체를 바인딩 소스로 지정하는데 사용된다. WPF 프레임워크나 XAML 요소가 아닌 단순 CLR 클래스로부터 
 
 ```csharp
+using System.Windows;
+
 namespace WPFApplication
 {
-    public class DataBinding
+    public class CLASS
     {
-        public string DataProperty { get; set; } = "";
+        public CLASS() { }
+        public string Property { get; set; } = "";
     }
 }
 ```
@@ -494,24 +521,26 @@ namespace WPFApplication
 
     <!--RESOURCE: BINDING SOURCE-->
     <Window.Resource>
-        <local:DataBinding x:Key="srcDataBinding" DataProperty="Hello World!" />
+        <local:CLASS x:Key="srcDataBinding" Property="Hello World!" />
     </Window.Resource>
 
     <!--BINDING: SOURCE PROPERTY-->
     <StackPanel>
         <TextBox x:Name="txtValue" />
-        <TextBlock x:Name="txtString" Text="{Binding Path=DataProperty, Source={StaticResource srcDataBinding}}" />
+        <TextBlock x:Name="txtString" Text="{Binding Path=Property, Source={StaticResource srcDataBinding}}" />
     </StackPanel>
 
 </Window>
 ```
 
-XAML의 `<local:DataBinding />` 요소는 `WPFApplication` 네임스페이스의 `DataBinding` 클래스로부터 객체화하는데, XAML 컴파일러 특성에 의해 객체화 과정에서 [생성자](../ko.PRGMING_Csharp/#생성자)는 전달인자를 받을 수 없다. 전달인자를 받아야 한다면 CLR, 즉 C# 프로그래밍으로 객체를 생성하여 리소스에 추가하는 방법을 택할 수 있다.
+#### `Binding.RelativeSource`
+[`RelativeSource`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.relativesource) 속성
 
-* `Binding.RelativeSource`
 
-* `Binding.ElementName`
-    : `Name` 속성 혹은 [`x:Name`](https://docs.microsoft.com/en-us/dotnet/desktop/xaml-services/xname-directive) 지시문으로 할당된 식별자의 XAML 요소를 바인딩 소스로 지정한다.
+#### `Binding.ElementName`
+[`ElementName`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.elementname) 속성
+
+`Name` 속성 혹은 [`x:Name`](https://docs.microsoft.com/en-us/dotnet/desktop/xaml-services/xname-directive) 지시문으로 할당된 식별자의 XAML 요소를 바인딩 소스로 지정한다.
 
 
 ### `DataContext`
