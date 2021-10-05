@@ -286,11 +286,11 @@ WPF 컨트롤은 메뉴에서 `View → Toolbox` 혹은 `Ctrl + Alt + X` 단축�
 
 | 패널     | 영문           | 설명                                                                       |
 |--------|--------------|--------------------------------------------------------------------------|
-| 스택 패널  | Stack Panel  | 자식을 수직 혹은 수평 방향으로 한 줄로 나열한다: 나열할 공간이 부족하여도 계속 이어나간다.                     |
-| 줄바꿈 패널 | Wrap Panel   | 자식을 수직 혹은 수평 방향으로 한 줄로 나열한다: 나열할 공간이 부족하다면 다음 줄로 이동한다.                   |
-| 도크 패널  | Dock Panel   | 자식을 상하좌우 중 한 곳으로 도킹한다: `LastChildFill` 속성으로 마지막 자식을 나머지 공간에 채울지 여부를 정한다. |
-| 캔버스 패널 | Canvas Panel | 자식을 상대좌표로 배치한다: 2D 그래픽 요소 (타원, 직사각형 등) 전용이다.                             |
-| 그리드 패널 | Grid Panel   | 자식을 도표처럼 행과 열을 설정하여 배치한다: `*`로 비율을 조절할 수 있다.                             |
+| [스택 패널](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.stackpanel)  | Stack Panel  | 자식을 수직 혹은 수평 방향으로 한 줄로 나열한다: 나열할 공간이 부족하여도 계속 이어나간다.                     |
+| [줄바꿈 패널](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.wrappanel) | Wrap Panel   | 자식을 수직 혹은 수평 방향으로 한 줄로 나열한다: 나열할 공간이 부족하다면 다음 줄로 이동한다.                   |
+| [도크 패널](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.dockpanel)  | Dock Panel   | 자식을 상하좌우 중 한 곳으로 도킹한다: `LastChildFill` 속성으로 마지막 자식을 나머지 공간에 채울지 여부를 정한다. |
+| [캔버스](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.canvas) | Canvas | 자식을 상대좌표로 배치한다: 2D 그래픽 요소 (타원, 직사각형 등) 전용이다.                             |
+| [그리드](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.grid) | Grid   | 자식을 도표처럼 행과 열을 설정하여 배치한다: `*`로 비율을 조절할 수 있다.                             |
 
 # WPF: 리소스
 > *참조: [Microsoft Docs XAML 리소스 개요 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/systems/xaml-resources-overview)*    
@@ -356,7 +356,7 @@ StaticResource와 DynamicResource는 공통적으로 다음과 같은 절차에 
 ```
 
 ## 스타일
-`System.Windows.Style` 스타일(Style)은 컨트롤의 외관을 변경하는데 사용되며, 흔히 리소스로 사용되어 컨트롤에 공통된 혹은 `x:Key`에 해당하는 스타일을 적용한다. 그 중에서 `TargetType` 속성은 해당 스타일이 적용될 컨트롤이 어느 것인지 명시한다; `System.Windows.Setter`을 통해 컨트롤의 속성을 설정하기 위해서 반드시 필요하다.
+[스타일](https://docs.microsoft.com/en-us/dotnet/api/system.windows.style)(Style)은 컨트롤의 외관을 변경하는데 사용되며, 흔히 리소스로 사용되어 컨트롤에 공통된 혹은 `x:Key`에 해당하는 스타일을 적용한다. 그 중에서 `TargetType` 속성은 해당 스타일이 적용될 컨트롤이 어느 것인지 명시한다; `System.Windows.Setter`을 통해 컨트롤의 속성을 설정하기 위해서 반드시 필요하다.
 
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
@@ -428,6 +428,38 @@ btnControl1.Style = (Style)Resources["Resource1"];
 </Window>
 ```
 
+# WPF: 컨트롤
+> *참조: [Microsoft Docs WPF 컨트롤 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/controls)*
+
+[컨트롤](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.control)(Control)은 WPF 어플리케이션 구성에 사용되는 사용자 인터페이스이다. 흔히 사용되는 [레이블](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.label), [버튼](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.button), [텍스트 상자](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.textbox) 등의 UI는 모두 WPF 컨트롤이다. 컨트롤 내부에는 두 개의 정의로 구성되어 있다: UI의 상태와 이벤트 및 속성을 정의하는 논리(logic), 그리고 UI의 그래픽을 정의하는 템플릿(template)으로 이루어진다.
+
+## 컨트롤 템플릿
+[컨트롤 템플릿](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.controltemplate)(Control Template)은 컨트롤의 외형을 가리킨다. WPF 프레임워크에서 제공하는 컨트롤들은 기본적으로 템플릿이 미리 정의되어 있다. 리소스에서 [`<ControlTemplate>`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.controltemplate)을 통해 템플릿을 직접 디자인할 수 있으며, 컨트롤의 [`Template`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworktemplate.template) 속성으로 적용한다.
+
+```xml
+<!--DEFINITION-->
+<Window.Resource>
+    <ControlTemplate x:Key="Template1" TargetType="Control">
+        ...
+    </ControlTemplate>
+</Window.Resource>
+
+<!--IMPLEMENTATION-->
+<Control x:Name="btnControl1" Template="{StaticResource Template1}" />
+```
+
+`<ControlTemplate>` 요소 내에 템플릿을 정의할 때에는 외형만을 제작하기 때문에 템플릿 루트 요소로는 흔히 [`<Rectangle>`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.shapes.rectangle), [`<Ellipse>`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.shapes.ellipse) 등의 단순 모양이나 `<Grid>`와 같은 레이아웃을 사용하여 복합적인 디자인이 가능하다.
+
+```xml
+<Window.Resource>
+    <ControlTemplate x:Key="Template1" TargetType="Control">
+        <Grid>
+            
+        </Grid>
+    </ControlTemplate>
+</Window.Resource>
+```
+
 # WPF: 바인딩
 데이터 바인딩(Data binding)이란 피(被)바인딩 객체를 아무런 바인딩 소스(binding source)에 연동하는 것이다. 흔히 WPF 프로젝트에서는 컨트롤을 데이터베이스 혹은 XML 파일 등에 바인딩하여 사용되는데, 컨트롤의 상호작용 및 바인딩 소스의 데이터 변동은 서로에게 영향을 주어 실시간으로 업데이트된다.
 
@@ -437,59 +469,21 @@ btnControl1.Style = (Style)Resources["Resource1"];
 [`Binding`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding) 클래스는 기본적인 바인딩 기능을 제공하는 고급 API이다. 비록 C# 클래스이지만 흔히 아래와 같이 WPF 프레임워크 XAML에서 `{Binding}`을 통해 바인딩이 이루어진다.
 
 ```xml
-<Window x:Class="WPFApplication.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:WPFApplication">
-
-    <StackPanel>
-        <TextBox x:Name="txtValue" />
-        <TextBlock x:Name="txtString" Text="{Binding Path=Text, ElementName=txtValue}"/>
-    </StackPanel>
-
-</Window>
+<!--XAML DATA BINDING-->
+<TextBlock x:Name="txtBlock" Text="{Binding Path=Text, ElementName=txtValue}" />
 ```
 
-위의 XAML에서는 `txtValue` 식별자를 갖는 바인딩 소스의 `Text` 속성 데이터를 `txtString` 피바인딩 객체의 `Text` 속성에 연동시킨다. 여기서 바인딩 소스를 지정하는 방법은 차후에 상세히 설명할 예정이다.
+위의 XAML에서는 `txtValue` 식별자를 갖는 바인딩 소스의 `Text` 속성 데이터를 `txtBlock` 피바인딩 객체의 `Text` 속성에 연동시킨다. 여기서 바인딩 소스를 지정하는 방법은 여러 가지가 있으며 차후에 상세히 설명할 예정이다.
 
 아래는 XAML에서 보여준 것과 동일한 바인딩을 C# 언어로 구현한 코드이다:
 
-```xml
-<Window x:Class="WPFApplication.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:WPFApplication">
-
-    <StackPanel>
-        <TextBox x:Name="txtValue" />
-        <TextBlock x:Name="txtString" />
-    </StackPanel>
-
-</Window>
-```
-
 ```csharp
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-
-namespace WPFApplication
-{
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-
-            // DATA BINDING
-            Binding binding = new Binding("Text")
-            { 
-                ElementName = "txtValue",
-            };
-            txtString.SetBinding(TextBlock.TextProperty, binding);
-        }
-    }
-}
+// CLR DATA BINDING
+Binding binding = new Binding("Text")
+{ 
+    ElementName = "txtValue",
+};
+txtBlock.SetBinding(TextBlock.TextProperty, binding);
 ```
 
 ### 바인딩 소스
@@ -498,13 +492,14 @@ namespace WPFApplication
 다음은 WPF 프로젝트에서 바인딩 소스를 지정하는 몇 가지 방법들을 소개한다.
 
 #### `Binding.Source`
-[`Source`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.source) 속성은 원하는 객체를 바인딩 소스로 지정하는데 사용된다. WPF 프레임워크나 XAML 요소가 아닌 단순 CLR 클래스로부터 
+[`Source`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.source) 속성은 원하는 객체를 바인딩 소스로 지정하는데 사용된다. WPF 프레임워크나 XAML 요소가 아닌 단순 CLR 클래스로부터 객체화하여 바인딩시키는데, 아래는 C# 소스 코드에 정의된 `CLASS` 클래스로부터 생성된 객체를 `Source` 속성으로 연동시키는 작업이며 [CLR 네임스페이스](#clr-네임스페이스) 내용을 참조할 것을 권장한다.
 
 ```csharp
 using System.Windows;
 
 namespace WPFApplication
 {
+    /* CLASS FOR THE BINDING SOURCE */
     public class CLASS
     {
         public CLASS() { }
@@ -512,7 +507,6 @@ namespace WPFApplication
     }
 }
 ```
-
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -520,28 +514,86 @@ namespace WPFApplication
         xmlns:local="clr-namespace:WPFApplication">
 
     <!--RESOURCE: BINDING SOURCE-->
-    <Window.Resource>
-        <local:CLASS x:Key="srcDataBinding" Property="Hello World!" />
-    </Window.Resource>
-
+    <Window.Resources>
+        <local:CLASS x:Key="resCLASS" Property="Hello World!" />
+    </Window.Resources>
+    
     <!--BINDING: SOURCE PROPERTY-->
     <StackPanel>
-        <TextBox x:Name="txtValue" />
-        <TextBlock x:Name="txtString" Text="{Binding Path=Property, Source={StaticResource srcDataBinding}}" />
+        <TextBox x:Name="txtValue"
+                 Text="{Binding Path=Property, Source={StaticResource resCLASS}, UpdateSourceTrigger=PropertyChanged}" />
+        <WrapPanel>
+            <TextBlock x:Name="txtLabel" Text="Value: " FontWeight="Bold" />
+            <TextBlock x:Name="txtBlock"
+                       Text="{Binding Path=Property, Source={StaticResource resCLASS}}" />
+        </WrapPanel>
     </StackPanel>
 
 </Window>
 ```
 
-#### `Binding.RelativeSource`
-[`RelativeSource`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.relativesource) 속성
+CLR 네임스페이스의 `CLASS`는 XAML 요소가 아니기 때문에 리소스 하에 선언되어 `x:Key` 지시문을 함께 기입하였다. 그러므로 바인딩 소스로 지정하기 위해서는 [`{StaticResource}`](#wpf-리소스)를 통해 리소스의 객체를 가져온다. 그리고 [`Binding.UpdateSourceTrigger`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.updatesourcetrigger) 속성이 `PropertyChanged`로 설정되어 있는데, 이는 피바인딩 객체의 `Text` 속성에 변화가 발생하면 바인딩 소스를 즉시 업데이트한다.
 
+#### `Binding.RelativeSource`
+[`RelativeSource`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.relativesource) 속성은 피바인딩 객체의 부모 요소를 바인딩 소스로 지정하는데 사용된다. 그러나 자식과 형제 요소는 접근할 수 없으며, 다음은 [`{RelativeSource}`](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/relativesource-markupextension) 확장문을 통해 선택할 수 있는 네 가지의 모드에 대하여 소개한다.
+
+* [`Self`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.relativesourcemode#System_Windows_Data_RelativeSourceMode_Self): 피바인딩 객체 스스로를 가리킨다.
+
+  ```xml
+  <Button Content="Square" Width="100" Height="{Binding Path=Width, RelativeSource={RelativeSource Self}}" />
+  ```
+
+* [`FindAncestor`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.relativesourcemode#System_Windows_Data_RelativeSourceMode_FindAncestor): 피바인딩 객체로부터 `AncestorType` 종류의 `AncestorLevel` 번째의 부모 요소를 가리킨다.
+
+  ```xml
+  <StackPanel Name="Column" Orientation="Vertical">
+      <StackPanel Name="Row1" Orientation="Horizontal">
+          <Button Content="{Binding Path=Name,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}, AncestorLevel=1}}" />
+          <Button />
+      </StackPanel>
+      <StackPanel Name="Row2" Orientation="Horizontal">
+          <Button />
+          <Button Content="{Binding Path=Name,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type StackPanel}, AncestorLevel=2}}" />
+      </StackPanel>
+  </StackPanel>
+  ```
+
+* [`TemplatedParent`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.relativesourcemode#System_Windows_Data_RelativeSourceMode_TemplatedParent)
+
+  ```xml
+  
+  ```
+
+* [`PreviousData`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.relativesourcemode#System_Windows_Data_RelativeSourceMode_PreviousData)
+
+  ```xml
+  
+  ```
 
 #### `Binding.ElementName`
-[`ElementName`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.elementname) 속성
+[`ElementName`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.elementname) 속성은 원하는 XAML 요소의 `Name` 속성 혹은 `x:Name` 지시문으로 할당된 식별자를 통해 바인딩 소스로 지정하는데 사용된다. 바인딩 소스를 XAML 요소의 식별자로 찾아내 편리하지만, 리소스 하에 선언된 CLR 객체나 WPF 컨트롤을 대상으로는 사용 불가하다. 아래는 XAML 요소 간을 바인딩한 간단한 예시 코드이다.
 
-`Name` 속성 혹은 [`x:Name`](https://docs.microsoft.com/en-us/dotnet/desktop/xaml-services/xname-directive) 지시문으로 할당된 식별자의 XAML 요소를 바인딩 소스로 지정한다.
+```xml
+<Window x:Class="WPFApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WPFApplication">
 
+    <!--BINDING: ELEMENTNAME PROPERTY-->
+    <StackPanel>
+        <TextBox x:Name="txtValue" Text="Hello World!" />
+        <WrapPanel>
+            <TextBlock x:Name="txtLabel" Text="Value: " FontWeight="Bold" />
+            <TextBlock x:Name="txtBlock" Text="{Binding Path=Text, ElementName=txtValue}" />
+        </WrapPanel>
+    </StackPanel>
+
+</Window>
+```
+
+## `MultiBinding` 클래스
 
 ### `DataContext`
 
