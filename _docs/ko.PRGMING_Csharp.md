@@ -337,6 +337,7 @@ World!
 | `string`  | 문자열: `""` | 일련의 문자들: `"Hello World!"`<br />크기: 알수 없음 (문자 개수에 따라 다름)       |
 | `bool`    | 논리형       | 논리의 참과 거짓을 `true`(0이 아닌 정수)와 `false`(정수 0)로 표시.<br />크기: 1바이트 |
 | `var`     | 자동        | 적절한 자료형으로 자동 선택.<br />복잡한 자료형을 간략히 선언하는데 매우 유용하다.             |
+| `object`  | 객체         | 아무런 자료형.<br />모든 자료형의 기반으로 어떠한 자료형도 수용할 수 있다.                  |
 | `void`    | 보이드       | 불특정 자료형.<br />크기: 1바이트                                        |
 
 논리 자료형은 정수 자료형으로도 표현이 가능하며, 정수 0과 그 이외의 정수들은 각각 논리형 `false`와 `true`로 대체된다.
@@ -763,7 +764,17 @@ value1
 ```
 
 ### `new` 키워드
-`new` 키워드는 해당 자료형의 객체를 생성, 즉 객체화를 위해 사용되는 연산자이다.
+`new` 키워드는 해당 자료형의 객체를 생성, 즉 객체화를 위해 사용되는 연산자이다. `new` 키워드 뒤에는 객체화하고자 하는 자료형을 기입한다.
+
+```csharp
+object instance = new object();
+```
+
+만일 객체를 할당받을 변수 자료형과 객체를 생성하려는 자료형이 동일할 경우, 아래와 같이 구문을 간략하게 작성할 수 있다.
+
+```csharp
+object instance = new();
+```
 
 > C++ 언어에서는 `new` 키워드가 동적 할당에 사용되지만, C# 언어에서는 객체화 역할을 한다. C# 프로그래밍 언어눈 개발자가 직접 동적 할당을 하는 기능이 없기 때문이다.
 
@@ -807,7 +818,7 @@ int[][] arr = new int[3][] {
 using System.Collections.Generic;
 
 /* 제네릭 컬렉션<정수형>의 객체화 */
-Collection<int> collectionName = new Collection<int>();
+Collection<int> collectionName = new();
 ```
 
 ### `List` 컬렉션
@@ -817,14 +828,14 @@ Collection<int> collectionName = new Collection<int>();
 using System.Collections.Generic;
 
 /* List<T> 컬렉션<정수형>의 객체화 */
-List<int> LIST = new List<int>();
+List<int> LIST = new();
 ```
 ----
 ```csharp
 using System.Collections.Generic;
 
 /* List<T> 컬렉션<정수형>의 초기화 */
-List<int> LIST = new List<int>() {3, 1, 4, 1, 5};
+List<int> LIST = new() {3, 1, 4, 1, 5};
 
 System.Console.WriteLine(LIST[0]);
 ```
@@ -839,14 +850,14 @@ System.Console.WriteLine(LIST[0]);
 using System.Collections.Generic;
 
 /* SortedList<TKey,TValue> 컬렉션<문자열,정수형>의 객체화 */
-SortedList<string, int> SLIST = new SortedList<string, int>();
+SortedList<string, int> SLIST = new();
 ```
 ----
 ```csharp
 using System.Collections.Generic;
 
 /* SortedList<TKey,TValue> 컬렉션<문자열,정수형>의 초기화 */
-SortedList<string, int> SLIST = new SortedList<string, int>() { {"B", 3}, {"A", 1} };
+SortedList<string, int> SLIST = new() { {"B", 3}, {"A", 1} };
 
 System.Console.WriteLine(SLIST["B"]);
 ```
@@ -861,14 +872,14 @@ System.Console.WriteLine(SLIST["B"]);
 using System.Collections.Generic;
 
 /* Dictionary<TKey,TValue> 컬렉션<문자열,정수형>의 객체화 */
-Dictionary<string, int> DICT = new Dictionary<string, int>();
+Dictionary<string, int> DICT = new();
 ```
 ----
 ```csharp
 using System.Collections.Generic;
 
 /* Dictionary<TKey,TValue> 컬렉션<문자열,정수형>의 초기화 */
-Dictionary<string, int> DICT = new Dictionary<string, int>() { {"B", 3}, {"A", 1} };
+Dictionary<string, int> DICT = new() { {"B", 3}, {"A", 1} };
 
 System.Console.WriteLine(DICT["B"]);
 ```
@@ -883,7 +894,7 @@ System.Console.WriteLine(DICT["B"]);
 using System.Collections;
 
 /* BitArray 컬렉션의 객체화 */
-BitArray BITARR = new BitArray(4);
+BitArray BITARR = new(4);
 ```
 ----
 ```csharp
@@ -891,7 +902,7 @@ using System.Collections;
 
 /* BitArray 컬렉션의 초기화 */
 bool[] arr = new bool[4] {false, true, false, true};
-BitArray BITARR = new BitArray(arr);
+BitArray BITARR = new(arr);
 
 System.Console.WriteLine(BITARR[0]);
 ```
@@ -906,7 +917,7 @@ False
 using System.Collections.Generic;
 
 /* Stack<T> 컬렉션<정수형>의 객체화 */
-Stack<int> STACK = new Stack<int>();
+Stack<int> STACK = new();
 ```
 ----
 ```csharp
@@ -914,7 +925,7 @@ using System.Collections.Generic;
 
 /* Stack<T> 컬렉션<정수형>의 초기화 */
 int[] arr = new bool[4] {1, 2, 3, 4};
-Stack<int> STACK = new Stack<int>(arr);
+Stack<int> STACK = new(arr);
 
 System.Console.WriteLine(STACK.Pop());
 System.Console.WriteLine(STACK.Pop());
@@ -931,7 +942,7 @@ System.Console.WriteLine(STACK.Pop());
 using System.Collections.Generic;
 
 /* Queue<T> 컬렉션<정수형>의 객체화 */
-Queue<int> QUEUE = new Queue<int>();
+Queue<int> QUEUE = new();
 ```
 ----
 ```csharp
@@ -939,7 +950,7 @@ using System.Collections.Generic;
 
 /* Queue<T> 컬렉션<정수형>의 초기화 */
 int[] arr = new bool[4] {1, 2, 3, 4};
-Queue<int> QUEUE = new Queue<int>(arr);
+Queue<int> QUEUE = new(arr);
 
 System.Console.WriteLine(STACK.Dequeue());
 System.Console.WriteLine(STACK.Dequeue());
@@ -956,7 +967,7 @@ System.Console.WriteLine(STACK.Dequeue());
 using System.Collections.Generic;
 
 /* HashSet<T> 컬렉션<정수형>의 객체화 */
-HashSet<int> HSET = new HashSet<int>();
+HashSet<int> HSET = new();
 ```
 ----
 ```csharp
@@ -964,7 +975,7 @@ using System.Collections.Generic;
 
 /* HashSet<T> 컬렉션<정수형>의 초기화 */
 int[] arr = new bool[6] {1, 2, 3, 4, 1, 3};
-HashSet<int> HSET = new HashSet<int>(arr);
+HashSet<int> HSET = new(arr);
 
 System.Console.WriteLine(HSET.Count);
 ```
@@ -994,6 +1005,16 @@ int function()
 {
     return 1 + 2;
 }
+
+/* 함수 호출 */
+function();    // >> 출력: 3
+```
+
+위와 같이 한 줄로 표현될 수 있는 매우 간단한 메소드는 다음처럼 간략화가 가능하다.
+
+```csharp
+/* 함수 정의: 간략화 */
+int function() => 1 + 2;
 
 /* 함수 호출 */
 function();    // >> 출력: 3
@@ -1036,10 +1057,7 @@ class Program
     }
     
     /* 메소드 선언 */
-    static double method(int arg1, double arg2 = 7.0)
-    {
-        return arg1 + arg2;
-    }
+    static double method(int arg1, double arg2 = 7.0) => arg1 + arg2;
 }
 ```
 
@@ -1164,16 +1182,10 @@ class Program
     }
     
     // 오버로딩된 메소드의 정의 1
-    static double method(int arg1, int arg2)
-    {
-        return arg1 + arg2;
-    }
+    static double method(int arg1, int arg2) => arg1 + arg2;
     
     // 오버로딩된 메소드의 정의 2
-    static double method(double arg1, double arg2)
-    {
-        return arg1 - arg2;
-    }
+    static double method(double arg1, double arg2) => arg1 - arg2;
 }
 ```
 
@@ -1201,6 +1213,54 @@ class Program
 | --------- | --------- |
 | `args[0]` | `option1` |
 | `args[1]` | `option2` |
+
+## `delegate` 형식
+`delegate` 형식은 특정 매개변수 및 반환 자료형을 갖는 메소드를 캡슐화하는 객체를 생성하는 자료형이다. C/C++ 프로그래밍 언어에 비교하면 [함수 포인터](../ko.PRGMING_Cpp/#함수-포인터)와 동일한 역할을 한다. 아래는 하나의 문자열 매개변수와 보이드를 반환하는 메소드를 위임(delegate)받을 수 있는 `delegate` 대리자를 객체화하는 코드이다.
+
+```csharp
+/* delegate 선언 */
+delegate void Del(string arg);
+```
+
+`delegate` 객체는 언제든지 다른 메소드를 할당받아 캡슐화할 수 있다.
+
+```csharp
+static void Main(string[] args)
+{
+    // method1 캡슐화
+    Del handle = method1;
+    handle("Hello World!");
+
+    // method2 캡슐화
+    handle = method2;
+    handle("Hello World!");
+}
+
+static void method1(string arg)
+{
+    Console.WriteLine(arg.ToUpper());
+}
+
+static void method2(string arg)
+{
+    Console.WriteLine(arg.ToLower());
+}
+```
+```
+HELLO WORLD!
+hello world!
+```
+
+본 예시 코드에서는 `static` 한정자가 있는 정적 메소드만을 보여주고 있지만, 그 외에 일반 메소드도 `delegate` 객체에서 캡슐화할 수 있다.
+
+[콜백 함수](../ko.PRGMING_Cpp/#콜백-함수)는 인자로 전달된 함수 혹은 메소드를 가리키는데, 이러한 경우에서도 `delegate` 형식의 매개변수를 활용하여 구현할 수 있다.
+
+```csharp
+void method(string arg, Del callback)
+{
+    callback(arg);
+}
+```
 
 # C#: 객체 및 클래스
 프로그래밍 방법 중 하나인 객체지향 프로그래밍(object-oriennted programming; OOP)은 클래스와 객체 사용을 기반으로 한다. 본 장은 C#에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
@@ -1241,10 +1301,7 @@ class CLASS
     public int field1 = 1;
     public double field2 = 3.0;
     
-    public double method(int arg)
-    {
-        return field1 + field2 - arg;
-    }
+    public double method(int arg) => field1 + field2 - arg;
 }
 
 class Program
@@ -1283,10 +1340,7 @@ class CLASS
     public int field1 = 1;
     public double field2 = 3.0;
     
-    public double method(int arg)
-    {
-        return field1 + field2 - arg;
-    }
+    public double method(int arg) => field1 + field2 - arg;
 }
 
 class Program
@@ -1317,10 +1371,7 @@ class CLASS
     public int field1 = 1;
     public double field2 = 3.0;
     
-    public double method(int arg)
-    {
-        return field1 + field2 - arg;
-    }
+    public double method(int arg) => field1 + field2 - arg;
 }
 
 class Program
@@ -1343,9 +1394,7 @@ class Program
 class CLASS{
     private int field;
     
-    public int method(){
-    	return this.field;
-    }
+    public int method() => this.field;
 }
 ```
 
@@ -1359,10 +1408,7 @@ static class CLASS
     public static int field1 = 1;
     public static double field2 = 3.0;
     
-    public static double method(int arg)
-    {
-        return field1 + field2 - arg;
-    }
+    public static double method(int arg) => field1 + field2 - arg;
 }
 
 class Program
@@ -1402,10 +1448,7 @@ static class CLASS
     public static int field1 = 1;
     public static double field2 = 3.0;
     
-    public static double method(int arg)
-    {
-        return field1 + field2 - arg;
-    }
+    public static double method(int arg) => field1 + field2 - arg;
 }
 ```
 
@@ -1519,8 +1562,8 @@ using System;
 /* 기반 클래스 생성 */
 class BASECLASS
 {
-    public BASECLASS() { Console.WriteLine("기반 클래스: 생성자"); }
-    ~BASECLASS() { Console.WriteLine("기반 클래스: 종료자"); }
+    public BASECLASS() { Console.WriteLine("기반 클래스 생성자"); }
+    ~BASECLASS() { Console.WriteLine("기반 클래스 종료자"); }
     
     public int field1 = 1;
     public double field2 = 3.0;
@@ -1530,8 +1573,8 @@ class BASECLASS
 class DERIVEDCLASS
     : BASECLASS
 {
-    public DERIVEDCLASS() { Console.WriteLine("파생 클래스: 생성자"); }
-    ~DERIVEDCLASS() { Console.WriteLine("파생 클래스: 종료자"); }
+    public DERIVEDCLASS() { Console.WriteLine("파생 클래스 생성자"); }
+    ~DERIVEDCLASS() { Console.WriteLine("파생 클래스 종료자"); }
     
     public double field2 = 7.0;
     public char field3 = 'A';
@@ -1542,23 +1585,117 @@ class Program
     static void Main(string[] args)
     {
         // 객체화
-        DERIVEDCLASS instance = new DERIVEDCLASS();
+        DERIVEDCLASS instance = new();
         Console.WriteLine("{0}, {1}, {2}",
             instance.field1, instance.field2, instance.field3);
     }
 }
 ```
 ```
-"기반 클래스: 생성자"
-"파생 클래스: 생성자"
+"기반 클래스 생성자"
+"파생 클래스 생성자"
 
 1, 7.0, A
 
-"파생 클래스: 소멸자"
-"기반 클래스: 소멸자"
+"파생 클래스 소멸자"
+"기반 클래스 소멸자"
 ```
 
 C# 프로그래밍 언어에서 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 없다. 오로지 한 기반 클래스로부터만 파생될 수 있다. 여러 기반 클래스로부터 동시에 상속받기 위해서는 *인터페이스*를 참고한다.
+
+### `base` 키워드
+`base` 키워드는 상속과 관련하여 다음 용도를 갖는다:
+
+* 파생 클래스로부터 기반 클래스 맴버에 접근한다.
+* 객체화에서 호출할 기반 클래스 생성자를 선택할 수 있다.
+
+단, `base` 키워드는 정적 메소드에서 사용하면 오류가 발생한다.
+
+```csharp
+using System;
+
+/* 기반 클래스 생성 */
+class BASECLASS
+{
+    public method()
+    {
+        Console.WriteLine("기반 클래스 메소드");
+    }
+}
+
+/* 파생 클래스 생성 */
+class DERIVEDCLASS
+    : BASECLASS
+{
+    public method()
+    {
+        // 기반 클래스 메소드 호출
+        base.method();
+        Console.WriteLine("파생 클래스 메소드");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        DERIVEDCLASS instance = new();
+        instance.method();
+    }
+}
+```
+```
+"기반 클래스 메소드"
+"파생 클래스 메소드"
+```
+----
+```csharp
+using System;
+
+/* 기반 클래스 생성 */
+class BASECLASS
+{
+    protected int value;    
+
+    public BASECLASS()
+    {
+        value = 1;
+    }
+
+    public BASECLASS(int arg)
+    {
+        value = arg;
+    }
+}
+
+/* 파생 클래스 생성 */
+class DERIVEDCLASS
+    : BASECLASS
+{
+    public DERIVEDCLASS() : base()
+    {
+        Console.WriteLine($"클래스 생성자 {value}!");
+    }
+
+    public DERIVEDCLASS(int arg) : base(arg)
+    {
+        Console.WriteLine($"클래스 생성자 {value}?");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        DERIVEDCLASS instance1 = new();
+        DERIVEDCLASS instance2 = new(3)
+    }
+}
+```
+```
+클래스 생성자 1!
+클래스 생성자 3?
+```
 
 ## 다형성
 다형성(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, C#에서는 상황과 용도에 따라 달리 동작하는 것을 의미한다. 객체지향 프로그래밍에서 다형성은 매우 중요한 특징이며 두 가지로 분류할 수 있다:
@@ -1583,10 +1720,7 @@ class CLASS
     public int field;
 
     // 연산자 오버로딩
-    public static int operator + (CLASS arg1, CLASS arg2)
-    {
-        return arg1.field + arg2.field;
-    }
+    public static int operator + (CLASS arg1, CLASS arg2) => arg1.field + arg2.field;
 }
 ```
 
@@ -1646,7 +1780,7 @@ class Program
     static void Main(string[] args)
     {
         // 객체화: 오류!
-        CLASS instance = new CLASS();
+        CLASS instance = new();
     }
 }
 ```
@@ -1654,16 +1788,16 @@ class Program
 Error	CS0144	Cannot create an instance of the abstract class or interface 'CLASS'
 ```
 
-추상 클래스는 서로 다른 접근 한정자를 가진 여러 맴버를 가질 수 있다. 하지만 추상 클래스에서 파생된 클래스는 *반드시* 추상 메소드들을 오버라이딩을 해야 한다.
+추상 클래스는 다른 접근 한정자를 갖는 맴버들을 가질 수 있다. 하지만 추상 클래스에서 파생된 클래스는 추상 메소드들을 *반드시* 오버라이딩을 해야 한다. 이러한 특징으로 인해 동일한 맴버 구조를 갖는 파생 클래스들을 생성해야 할 때 추상 클래스를 사용하여 효율을 높일 수 있다.
 
 ### 인터페이스
-인터페이스(interface)는 추상 클래스의 변이로, 모든 맴버가 기본적으로 `abstract` 및 `public`으로 선언된다. 그러므로 인터페이스 내에는 한정자를 명시할 필요가 없다. 단, 인터페이스는 필드를 맴버로 가질 수 없다.
+인터페이스(interface)는 추상 클래스의 변이로, 모든 맴버가 기본적으로 `abstract` 및 `public`으로 선언되기 때문에 별도로 한정자를 명시할 필요가 없다. 다시 말해, 인터페이스의 모든 메소드는 아무런 코드가 정의되지 않고 선언만 된 추상 메소드이다. 때문에 인터페이스의 파생 클래스는 메소드 오버라이딩이 아닌 *메소드를 정의하는* 개념으로 바라보므로 `override` 한정자를 사용하지 않는다.
 
 ```csharp
 /* 인터페이스 생성 */
 interface INTERFACE
 {
-    int property {get; set;}
+    int property { get; set; }
     void polymorph();
 }
 
@@ -1679,7 +1813,9 @@ class DERIVEDCLASS
 }
 ```
 
-인터페이스의 파생 클래스는 메소드 오버라이딩을 하는데 `override` 한정자가 사용되지 않으며, 한정자를 필요로 하지 않는다. 또한 파생 클래스는 아래의 구문을 통해 여러 인터페이스를 동시에 상속받을 수 있다.
+인터페이스의 기본 한정자 `abstract`으로 인해 메소드와 속성을 맴버로 가질 수 있으나, 필드는 맴버로 가질 수 없다. 그리고 파생 클래스에 동일한 메소드 및 코드가 적용되어야 한다면 매번 정의를 해야하는 인터페이스보다 필요할 때에만 오버라이딩하면 되는 추상 클래스를 사용하는 것을 권장한다.
+
+파생 클래스는 한 개 이상의 인터페이스로부터 동시에 상속받을 수 있다.
 
 ```csharp
 /* 파생 클래스 생성: 두 인터페이스로부터 상속 */
@@ -1689,6 +1825,8 @@ class DERIVEDCLASS
     // ...
 }
 ```
+
+이러한 인터페이스의 특징은 오히려 기존 클래스에 메소드 및 속성을 추가하는 기능 확장에 더욱 적합하다.
 
 ## 속성
 속성(property)은 하나의 필드를 두 개의 영역인 `get`와 `set`로 나누어 데이터 숨기기를 지원한다. 속성은 메소드와 유사하게 생겼지만 소괄호(`()`)가 없어 필드처럼 사용된다.
@@ -1714,7 +1852,7 @@ class CLASS
         
         /* 동일:
         get { return field; }
-        set {field = value; }
+        set { field = value; }
         */
     }
 }
@@ -1724,7 +1862,7 @@ class Program
     static void Main(string[] args)
     {
         // 객체화
-        CLASS instance = new CLASS();
+        CLASS instance = new();
         
         instance.method = 1;
         instance.method;        // >> OUTPUT: 1
@@ -1777,7 +1915,7 @@ class Program
     static void Main(string[] args)
     {
         // 객체화
-        CLASS instance = new CLASS();
+        CLASS instance = new();
         
         instance[0] = 1;        // >> 출력: 1
         instance[1] = 3;        // >> 출력: 3
@@ -1798,10 +1936,7 @@ public struct STRUCTURE
     public int    field1;
     public double field2;
     
-    public double method(int arg)
-    {
-        return field1 + field2 - arg;
-    }
+    public double method(int arg) => field1 + field2 - arg;
 }
 
 class Program
@@ -1828,10 +1963,7 @@ public struct STRUCTURE
     public int    field1;
     public double field2;
     
-    public double method(int arg)
-    {
-        return field1 + field2 - arg;
-    }
+    public double method(int arg) => field1 + field2 - arg;
 }
 
 class Program
@@ -1839,7 +1971,7 @@ class Program
     static void Main(string[] args)
     {
         /* 구조체 변수 초기화 */
-        STRUCTURE variable = new STRUCTURE(1, 3.0);
+        STRUCTURE variable = new(1, 3.0);
         
         System.Console.WriteLine(variable.method(2));    // >> 출력: 2.0 (= 1 + 3.0 - 2)
     }
@@ -1928,10 +2060,7 @@ class CLASS<T, U>
     T field1;
     U field2;
     
-    U method(T arg)
-    {
-        return field1 + field2 - arg;
-    }
+    U method(T arg) => field1 + field2 - arg;
 }
 ```
 
@@ -1939,7 +2068,7 @@ class CLASS<T, U>
 
 ```csharp
 /* 제네릭 클래스 객체화 */
-CLASS<int, double> instance = new CLASS(1, 3.0);
+CLASS<int, double> instance = new(1, 3.0);
 ```
 
 # C#: 예외 처리
