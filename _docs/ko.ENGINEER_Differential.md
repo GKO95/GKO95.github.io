@@ -9,7 +9,7 @@ order: 0xE0
 # 미분방정식: 개요
 > 본 내용은 고등학교 교육과정 중 하나인 [미분](https://en.wikipedia.org/wiki/Derivative) 및 [적분](https://en.wikipedia.org/wiki/Integral), 그리고 [복소수](https://en.wikipedia.org/wiki/Complex_number)를 기반하므로 이에 대해 충분한 이해가 필요하다.
 
-[미분방정식](https://en.wikipedia.org/wiki/Differential_equation)은 하나 이상의 함수간 연관성을 나타낸 방정식이다. 연관성을 설명하기 위해서는 하나의 변화가 나머지에 어떠한 영향을 주는지 관측이 필요, 즉 미분이 함께 동원되기 때문에 "미분"방정식이라 부른다. 해당 연관성은 곧 시스템 내에서 일어나는 인과현상을 의미하기에 결과적으로 미분방정식은 시스템에서의 *현상을 수식으로 표현한 것*이라고 해석할 수 있다. 
+[미분방정식](https://en.wikipedia.org/wiki/Differential_equation)(differential equation)은 하나 이상의 함수간 연관성을 나타낸 방정식이다. 연관성을 설명하기 위해서는 하나의 변화가 나머지에 어떠한 영향을 주는지 관측이 필요, 즉 미분이 함께 동원되기 때문에 "미분"방정식이라 부른다. 해당 연관성은 곧 시스템 내에서 일어나는 인과현상을 의미하기에 결과적으로 미분방정식은 시스템에서의 *현상을 수식으로 표현한 것*이라고 해석할 수 있다. 
 
 ## 미분방정식 종류
 미분방정식은 도함수에 따라 두 분류로 나뉘어진다.
