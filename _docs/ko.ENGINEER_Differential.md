@@ -9,45 +9,45 @@ order: 0xE0
 # 미분방정식: 개요
 > 본 내용은 고등학교 교육과정 중 하나인 [미분](https://en.wikipedia.org/wiki/Derivative) 및 [적분](https://en.wikipedia.org/wiki/Integral), 그리고 [복소수](https://en.wikipedia.org/wiki/Complex_number)를 기반하므로 이에 대해 충분한 이해가 필요하다.
 
-[미분방정식](https://en.wikipedia.org/wiki/Differential_equation)(differential equation)은 하나 이상의 함수간 연관성을 나타낸 방정식이다. 연관성을 설명하기 위해서는 하나의 변화가 나머지에 어떠한 영향을 주는지 관측이 필요, 즉 미분이 함께 동원되기 때문에 "미분"방정식이라 부른다. 해당 연관성은 곧 시스템 내에서 일어나는 인과현상을 의미하기에 결과적으로 미분방정식은 시스템에서의 *현상을 수식으로 표현한 것*이라고 해석할 수 있다. 
+[미분방정식](https://en.wikipedia.org/wiki/Differential_equation)(differential equation)은 한 개 이상의 함수들 간 연관성을 나타내는 방정식이다. 하나의 함수가 나머지에 어떠한 영향을 주는지 연관성을 관측하는데, 이러한 변화는 수학적으로 미분이 동원되기 때문에 "미분"방정식이라 부른다. 연관성은 곧 시스템 내에서 발생하는 인과현상을 설명하기 때문에, 결과적으로 미분방정식은 시스템에서의 *현상을 수식으로 표현한 것*이라고 해석할 수 있다.
 
 ## 미분방정식 종류
 미분방정식은 도함수에 따라 두 분류로 나뉘어진다.
 
-* *상미분방정식 (ordinary differential equation; ODE)*
-    : 하나의 독립변수($x$)에만 의한 종속변수($y$)를 가지는 미분방정식이다.
+* *[상미분방정식](https://ko.wikipedia.org/wiki/상미분방정식) (ordinary differential equation; ODE)*
+    : 하나의 독립변수($x$)에만 의존하는 종속변수($y$)를 갖는 미분방정식이다.
       
     $$
     \frac{d^2y}{dx^2} + 2xy\frac{dy}{dx} + 3y = 0 \quad ...\mathrm{where} \ y = f(x)
     $$
 
-* *편미분방정식 (partial differential equation; PDE)*
-    : 두 개 이상의 독립변수($x$, $y$)에 의한 종속변수($u$) 도함수를 가지는 미분방정식이다.
+* *[편미분방정식](https://ko.wikipedia.org/wiki/편미분방정식) (partial differential equation; PDE)*
+    : 두 개 이상의 독립변수($x$, $y$)에 의존하는 종속변수($u$)로부터 하나의 독립변수에 대해서만 미분한 "[편미분](https://ko.wikipedia.org/wiki/편미분)(partial derivative)"이 관여된 미분방정식이다.
   
     $$
-    \frac{du}{dx} + 4\frac{du}{dxdy} + 5x\frac{du}{dy} = 0 \quad ...\mathrm{where} \ u = f(x, y)
+    \frac{du}{dx} + 4\frac{d^2u}{dxdy} + 5x\frac{du}{dy} = 0 \quad ...\mathrm{where} \ u = f(x, y)
     $$
 
-혹은, 독립변수 개수와 무관하게 선형성에 의해서도 두 분류로 나눌 수 있다.
+혹은, 독립변수 개수와 무관하게 선형성에 의해서도 두 분류로 나뉘어진다.
 
 * *선형미분방정식 (linear differential equation)*
     : 최고계(즉, 미분 횟수가 가장 많은 도함수)의 멱지수가 1차이며, 도함수의 계수가 상수 혹은 독립변수를 가지는 미분방정식이다.
       
     $$
-    \frac{d^2u}{dx^2} + 6\frac{du}{dxdy} + 8x\frac{du}{dy} = 0 \quad ...\mathrm{where} \ u = f(x, y)
+    \frac{d^2u}{dx^2} + 6\frac{d^2u}{dxdy} + 8x\frac{du}{dy} = 0 \quad ...\mathrm{where} \ u = f(x, y)
     $$
 
 * *비선형미분방정식 (non-linear differential equation; PDE)*
     : 선형미분방정식이 아닌 나머지 미분방정식을 가리킨다. 아래는 최고계의 멱지수가 2차이므로 선형이 아니다.
   
     $$
-    \left( \frac{d^2u}{dx^2} \right)^2 + 6\frac{du}{dxdy} + 8x\frac{du}{dy} = 0 \quad ...\mathrm{where} \ u = f(x, y)
+    \left( \frac{d^2u}{dx^2} \right)^2 + 6\frac{d^2u}{dxdy} + 8x\frac{du}{dy} = 0 \quad ...\mathrm{where} \ u = f(x, y)
     $$
 
 ## 미분방정식 해
-미분방정식의 풀이 목적은 해당 현상이 왜 그리고 어떻게 발생되는 건지 설명할 수 있는 해(solution)를 구하는 것이다. 미분방정식의 해는 도함수를 갖지 않으며, 삼각함수 $\sin$와 $\cos$의 조합 혹은 [오일러 법칙](https://en.wikipedia.org/wiki/Euler%27s_formula)에 의하여 $e^{j\omega t}$ 형식을 갖는다.
+미분방정식의 풀이 목적은 관측 현상이 어떻게 발생되는지 설명하는 해(solution)를 구하는 것이다. 미분방정식의 해는 도함수가 없으며, 삼각함수 $\sin$와 $\cos$의 조합이나 [오일러 법칙](https://en.wikipedia.org/wiki/Euler%27s_formula)에 의해 지수함수 $e^{j\alpha}$ 형태를 지닌다.
 
-미분방정식에는 두 가지 종류의 해가 존재한다.
+미분방정식에는 두 종류의 해가 존재한다.
 
 * *일반해 (general solution)*
     : 미분방정식의 현상을 설명하는 가장 일반적이고 포괄적인 해이다.
@@ -64,19 +64,19 @@ order: 0xE0
     $$
 
 # 미분방정식: 완전미분방정식
-완전미분방정식(exact differential equation)은 $u(x,y) = 0$와 같이 두 독립변수에 의한 종속변수를 [전미분](https://ko.wikipedia.org/wiki/전미분)(total derivative)할 때 완전한 형태를 갖는 미분방정식이다.
+[완전미분방정식](https://ko.wikipedia.org/wiki/완전_미분_방정식)(exact differential equation)은 종속변수($u=f(x,y)$)가 의존하는 모든 독립변수의 편미분을 합한 [전미분](https://ko.wikipedia.org/wiki/전미분)(total derivative)이 완전한 형태를 갖는 미분방정식이다. 
 
 $$
 du = M(x,y)dx + N(x, y)dy = 0 \quad ... \mathrm{where} \ M(x,y) = \frac{\partial{u}}{\partial{x}} , \ N(x,y) = \frac{\partial{u}}{\partial{y}}
 $$    
 
-여기서 "완전(exact)"한 미분방정식이란, 아래의 필요충분조건을 반드시 충족해야 한다.
+여기서 "[완전](https://en.wikipedia.org/wiki/Exact_differential)(exact)"한 미분방정식은 다음 필요충분조건을 반드시 만족해야 한다.
 
 $$
 \frac{\partial{M}}{\partial{y}} = \frac{\partial{N}}{\partial{x}} \ \left ( = \frac{\partial{u}}{\partial{x}\partial{y}} \right )
 $$
 
-이를 충족시키지 못하면 해당 미분방정식은 완전미분방정식이 아니다.
+이를 충족시키지 못하면 완전미분방정식이 아니다.
 
 ### 예제. 완전미분방정식
 다음과 같은 미분방정식이 주어졌다:
@@ -128,7 +128,7 @@ $$
 단, 뒤에 있는 $c$는 적분으로 인해 알 수 없는 상수이다. 계수를 정수로 만들기 위해 양변에 4를 곱하여도 $4c$라고 표기하지 않은 이유는 상수의 값을 처음부터 모르고 있으므로 계수를 붙여도 별 의미가 없기 때문이다. 알 수 없는 상수의 값을 찾아내려면 초기조건이 필요로 하다; 즉, 이를 구하는 이후부터 특수해가 된다.
 
 ## 적분인자
-적분인자(integrating factor)는 완전하지 않은 미분방정식의 양변에 곱하여 완전미분방정식으로 만든다. 만일 비완전미분방정식 $P(x,y)dx + Q(x,y)dy = 0$이 있다면, 적분인자 $\mu (x,y)$를 곱하여 다음과 같이 완전미분방정식으로 표현한다.
+적분인자(integrating factor)는 완전하지 않은 미분방정식을 완전미분방정식으로 만들어 준다. 만일 비완전미분방정식 $P(x,y)dx + Q(x,y)dy = 0$이 있다면, 적분인자 $\mu (x,y)$를 양변에 곱하여 다음과 같이 완전미분방정식으로 표현한다.
 
 $$
 \mu Pdx + \mu Qdy = 0
@@ -140,7 +140,7 @@ $$
 \frac{\partial}{\partial{y}}\left ( \mu P \right ) = \frac{\partial}{\partial{x}}\left ( \mu Q \right ) 
 $$
 
-각 변에 대하여 편미분을 하면 다음 방정식이 도출된다.
+양변에 편미분을 취하면 다음 방정식이 도출된다.
 
 $$
 P\frac{\partial{\mu}}{\partial{y}} + \mu\frac{\partial{P}}{\partial{y}} = Q\frac{\partial{\mu}}{\partial{x}} + \mu\frac{\partial{Q}}{\partial{x}}
@@ -180,9 +180,9 @@ $$
 
     적분인자가 $y$에만 종속된다고 가정한 경우, 이에 대한 수식 또한 독립변수 $y$만을 가지는 것을 확인할 수 있다.  
 
-위의 두 적분인자 가정을 두어 풀이한 과정을 통해서 알 수 있듯이, 어떠한 가정을 사용하여도 결국 섡덩한 가정을 기반으로 적절한 수식이 도출되기 떄문에 하나만을 선택하여 풀이를 진행해도 된다. 
+위의 두 적분인자 가정을 두어 풀이한 과정을 통해서 알 수 있듯이, 어떠한 가정을 사용하여도 결국 선정한 가정을 기반으로 적절한 수식이 도출되기 떄문에 하나만을 선택하여 풀이를 진행해도 된다. 
 
-> 단, 풀이 과정 및 적분인자의 수식에서 어떠한 가정을 기반하였는지 분명히 명시해야 한다! 그 이유는 타 가정에서는 풀이 과정과 수식이 전혀 달라지기 때문이다.
+> 단, 풀이 과정 및 적분인자의 수식에서 어떠한 가정을 기반하였는지 분명히 명시해야 한다; 타 가정에서는 풀이 과정과 수식이 전혀 달라지기 때문이다!
 
 # 미분방정식: 선형미분방정식
 선형미분방정식(linear differential equation)은 가장 흔한 형태의 미분방정식으로 다음과 같이 표현된다.
@@ -199,13 +199,13 @@ $$
 * *비동차 (nonhomogeneous)*
     : $r(x) \neq 0$
 
-동차 및 비동차는 미분방정식이 설명하는 시스템 현상에 외부 영향력의 유입 여부를 가린다. 간단한 예시로 공을 떨어트렸을 때 튀는 현상은 동차미분방정식, 그리고 튀어오른 공을 손으로 튕겨 드리블을 하는 현상은 비동차미분방정식이 결과적으로 수립된다. 이는 차후 예제에서 미분방정식을 세우는 풀이 과정에서 직접 살펴볼 수 있다.
+동차 및 비동차는 미분방정식이 설명하는 시스템 현상에 외부 영향력의 유입 여부를 가리킨다. 간단한 예시로 공을 떨어트렸을 때 튀는 현상은 동차미분방정식, 그리고 튀어오른 공을 손으로 튕겨 드리블을 하는 현상은 비동차미분방정식으로 표현된다. 이는 차후 예제에서 미분방정식을 세우는 풀이 과정에서 직접 살펴볼 수 있다.
 
 ## 선형계
 [선형계](https://en.wikipedia.org/wiki/Linear_system)(linear system)는 사칙연산 및 미적분과 같은 [선형 연산자](https://en.wikipedia.org/wiki/Linear_map)를 기반으로 구축된 수학적 모델 체계이다. 선형계는 반드시 중첩 원리를 충족하기 때문에 선형미분방정식 또한 중첩 원리가 적용된다.
 
 ### 중첩 원리
-[중첩 원리](https://en.wikipedia.org/wiki/Superposition_principle)(superposition principle)란, 두 개 이상의 입력으로 발생한 응답은 각 입력으로 발생한 응답의 합과 동일하다. 중첩 원리를 충족하는 함수를 선형함수(linear function)라 부르며, 이는 반대로 모든 선형함수는 중첩 원리가 성립된다는 결론에 도달한다. 중첩 원리는 다음 두 가지 핵심 성질로부터 정의된다.
+[중첩 원리](https://en.wikipedia.org/wiki/Superposition_principle)(superposition principle)란, 두 개 이상의 입력으로 발생한 응답이 각 입력으로 발생한 응답의 합과 동일하다. 중첩 원리를 충족하는 함수를 선형함수(linear function)라 부르며, 이는 반대로 모든 선형함수는 중첩 원리가 성립됨을 의미한다. 중첩 원리는 다음 두 가지 핵심 성질로부터 정의된다.
 
 * *[가법성](https://ko.wikipedia.org/wiki/가법성) (additivity)*
     
@@ -219,7 +219,7 @@ $$
     F(ax) = aF(x)
     $$
 
-> 즉, 미분방정식이 가지는 두 해($y_1$와 $y_2$)의 합 또한 해당 미분방정식의 해가 되기 때문에 아래의 성질을 만족한다.
+> 즉, 미분방정식이 가지는 두 해($y_1$, $y_2$)의 합 또한 해당 미분방정식의 해가 되기 때문에 아래의 성질을 만족한다.
 > 
 > $$
 > y = c_1y_1(x) + c_2y_2(x)
@@ -444,18 +444,18 @@ $$
 ## 고계선형미분방정식
 고계선형미분방정식(higher order of linear differential equation)은 $n$계도함수가 최고계인 선형미분방정식이다.
 
-일계선형미분방정식이 계수 1에 하나의 해를 가진 듯이, 고계선형미분방정식은 계수 $n$만큼의 해를 갖는다. 이는 $n$ 개의 초기조건 $y(a) = \alpha$, $y'(b) = \beta$, ..., $y^{(n)}(c)=\gamma$이 주어질 때 모두 충족할 수 있어야 하기 때문이다. 아래는 $n$계선형미분방정식의 일반해 형식이다.
+일계선형미분방정식이 계수 1로 하나의 해를 가지며, 마찬가지로 고계선형미분방정식은 계수 $n$만큼의 해를 갖는다. 그 이유는 $n$ 개의 초기조건 $y(a) = A$, $y'(b) = B$, ..., $y^{(n)}(c)=C$가 주어질 때 모두 충족할 수 있어야 하기 때문이다. 아래는 $n$계선형미분방정식의 일반해 형태이다.
 
 $$
 y = c_1y_1(x) + c_2y_2(x) + \cdots + c_ny_n(x)
 $$
 
-일반해를 구성하는 $y_1$, $y_2$, ..., $y_n$들은 기저해(fundamental solution)라고 하며, 이들은 서로 [선형독립](https://en.wikipedia.org/wiki/Linear_independence)이어야 한다. 다시 말해, 각 기저해는 서로 다른 기저해를 표현하지 못해야 한다. 만일 $y_2 = ay_1$로 나타낼 수 있다면 실로 $n$ 개보다 적은 해밖에 구할 수 없다.
+일반해를 구성하는 $y_1$, $y_2$, ..., $y_n$들은 기저해(fundamental solution)라고 부르며 서로 [선형독립](https://en.wikipedia.org/wiki/Linear_independence)이어야 한다. 간단히 말하자면, 각 기저해는 서로 다른 기저해를 표현하지 못해야 한다. 만일 $y_2 = ay_1$로 나타낼 수 있다면 $n$ 개보다 적은 해밖에 구할 수 없게 된다.
 
 > 선형계의 기저해를 좌표계의 표준기저(standard basis)에 비교하면 쉽게 이해할 수 있다: [데카르트 좌표계](https://ko.wikipedia.org/wiki/데카르트_좌표계)의 $x$, $y$, 그리고 $z$ 축에 놓인 [단위벡터](https://ko.wikipedia.org/wiki/단위벡터) $\hat{\mathbf{i}}=(1,0,0)$, $\hat{\mathbf{j}}=(0,1,0)$, 그리고 $\hat{\mathbf{k}}=(0,0,1)$는 서로 수직 방향을 가리키기 때문에 절대 서로를 표현할 수 없는 선형독립이다. 그러나 반대로 표준기저들만 있으면 어떠한 좌표든 모두 표현이 가능하다.
 
 ### 론스키언
-[론스키언](https://en.wikipedia.org/wiki/Wronskian)(Wronskian), 일명 론스키 행렬식(Wronski determinant)은 미분방정식의 기저해들간의 선형독립이 이루어져 있는지를 판별하는 행렬식이다. 기저해들이 선형독립인 경우 론스키언은 다음을 만족한다.
+[론스키언](https://en.wikipedia.org/wiki/Wronskian)(Wronskian), 일명 론스키 행렬식(Wronski determinant)은 미분방정식의 기저해들 간의 선형독립이 이루어져 있는지를 판별하는 행렬식이다. 기저해들이 선형독립인 경우 론스키언은 다음을 만족한다.
 
 $$
 W(y_1, y_2) =
@@ -467,7 +467,7 @@ y_1' & y_2' \\
 $$
 
 ### 동차미분방정식
-고계선형미분방정식 중에서 상수계수에 한하여, 해당 미분방정식의 특성을 나타내는 특성방정식(characteristic equation)을 다음과 같이 유도할 수 있다.
+고계선형미분방정식 중에서 상수계수에 한하여, 미분방정식의 특성을 나타내는 특성방정식(characteristic equation)은 다음과 같이 유도된다.
 
 $$
 a_ny^{(n)} + a_{n-1}y^{(n-1)} + \cdots + a_{1}y' + a_{0}y = 0
