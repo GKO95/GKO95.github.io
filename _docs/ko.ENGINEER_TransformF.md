@@ -24,7 +24,7 @@ order: 0xE1
 푸리에 급수는 삼각함수 형태로 나타낼 수 있다. 이를 설명하기 위해서는 우주기함수 $x_{T_e}(t)$에 해당하는 $\cos$ 삼각함수와 기주기함수 $x_{T_o}(t)$에 해당하는 $\sin$ 삼각함수의 경우를 나누어서 서술한다. 종합적으로 두 경우의 주기함수를 합하면 일반 주기함수 $x_T(t)$로 나타나는 합성 방정식(synthesis equation)이 도출된다.
 
 > $$
-> x_T(t) = x_{T_e}(t) + x_{T_o}(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}}
+> x_T(t) = x_{T_e}(t) + x_{T_o}(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\sin{k\omega_0 t}}
 > $$
 >
 > $$
@@ -205,7 +205,7 @@ x_{T_o}(t) = \sum_{k=0}^{\infty}{b_k\sin{k\omega_0 t}}
 $$
 
 $$
-\quad = \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}} \quad \left( \because \ b_0\cos{0\omega_0 t} = 0 \right)
+\quad = \sum_{k=1}^{\infty}{b_k\sin{k\omega_0 t}} \quad \left( \because \ b_0\sin{0\omega_0 t} = 0 \right)
 $$
 
 여기서 기주기함수의 푸리에 계수 $b_k$는 해당 주기함수(혹은 신호)를 구성하는 고조 주파수 $k\omega_0$ 성분이 얼만큼인지 알려주는 매우 중요한 인자로써 푸리에 해석의 핵심이다. 푸리에 계수 $b_k$를 구하기 위해 우선 합성 방정식의 양변에 $n$ 배수의 고조 주파수를 갖는 $\sin{(n\omega_0 t)}$ 삼각함수를 곱한다.
@@ -335,38 +335,37 @@ $$
 $b_0$ 계수를 구하기 위한 방정식에서 양변이 모두 $0$이 된다. 다시 말해, $b_0$ 계수는 푸리에 급수에서 제외된다. 하지만 이는 절대로 $b_0 = 0$임을 시사하는 것이 아니며 단순히 계산이 불가할 뿐이다.
 
 ## 지수함수 형태
-지수함수 형태의 푸리에 급수는 삼각함수 형태로부터 지수함수와 삼각함수의 상관관계를 설명하는 [오일러 공식](https://ko.wikipedia.org/wiki/오일러_공식)을 통해 유도되며, 결론적으로 아래의 수식이 도출된다.
+푸리에 급수는 지수함수 형태로 나타낼 수 있다. 삼각함수와 지수함수의 상관관계를 설명하는 [오일러 공식](https://ko.wikipedia.org/wiki/오일러_공식)(Euler's formula)을 통해 삼각함수 형태의 푸리에 급수로부터 유도한다. 결과적으로 다음과 같은 지수함수 형태의 합성 방정식(synthesis equation)이 도출된다.
 
 > $$
 > x_T(t) = \sum_{k=-\infty}^{+\infty}{ X(k) e^{jk\omega_0t} } \quad ...\mathrm{where} \ X(k) = \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt}
 > $$
 
-삼각함수 형태의 푸리에 급수를 오일러 공식 $$e^{jx} = \cos{x} + j\sin{x}$$을 적용하면 다음과 같이 표현된다.
+삼각함수 형태의 푸리에 급수를 오일러 공식 $$e^{jx} = \cos{x} + j\sin{x}$$을 대입하면 아래와 같이 표현된다.
 
 $$
-x_T(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}}
+x_T(t) = a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\sin{k\omega_0 t}}
 $$
 
 $$
-\quad = a_0 + \sum_{k=1}^{\infty}{a_k \left( \frac{e^{jk\omega_0} + e^{-jk\omega_0}}{2} \right)} + \sum_{k=1}^{\infty}{-jb_k \left( \frac{e^{jk\omega_0} - e^{-jk\omega_0}}{2} \right)}
+\quad = a_0 + \sum_{k=1}^{\infty}{a_k \left( \frac{e^{jk\omega_0} + e^{-jk\omega_0}}{2} \right)} + \sum_{k=1}^{\infty}{b_k \left( \frac{e^{jk\omega_0} - e^{-jk\omega_0}}{2j} \right)}
 $$
 
 $$
 \quad = a_0 + \sum_{k=1}^{\infty}{ \left(\frac{a_k-jb_k}{2}\right) e^{jk\omega_0t} } + \sum_{k=1}^{\infty}{ \left(\frac{a_k+jb_k}{2}\right) e^{-jk\omega_0t} }
 $$
 
-삼각함수 형태에서 도출한 푸리에 계수 $a_k$ 및 $b_k$ 계산식을 대입한다.
+삼각함수 형태에서 도출한 푸리에 계수 $a_k$ 및 $b_k$의 분석 방정식을 대입한다.
 
 $$
-x_T(t) = \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)\left[ \cos{k\omega_0 t} - j\sin{k\omega_0 t} \right] dt} \right) e^{jk\omega_0t} }
-\\ \qquad \qquad + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)\left[ \cos{k\omega_0 t} + j\sin{k\omega_0 t} \right] dt} \right) e^{-jk\omega_0t} }
+x_T(t) = \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)\left[ \cos{k\omega_0 t} - j\sin{k\omega_0 t} \right] dt} \right) e^{jk\omega_0t} } + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)\left[ \cos{k\omega_0 t} + j\sin{k\omega_0 t} \right] dt} \right) e^{-jk\omega_0t} }
 $$
 
 $$
 \quad = \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} }
 $$
 
-위의 방정식은 $k$를 자세히 관찰하면 사실상 $(-\infty, \infty)$ 범위를 갖는 하나의 수식으로 정리할 수 있음을 알 수 있다.
+위의 방정식의 $k$를 자세히 관찰하면 사실상 $(-\infty, \infty)$ 범위를 갖는 하나의 수식으로 정리할 수 있다.
 
 $$
 x_T(t) = \frac{1}{T}\int_{T}{x_{T}(t)dt} + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t) e^{-jk\omega_0 t} dt} \right) e^{jk\omega_0t} } + \sum_{k=1}^{\infty}{ \left( \frac{1}{T}\int_{T}{x_{T}(t)e^{jk\omega_0 t} dt} \right) e^{-jk\omega_0t} }
@@ -391,7 +390,7 @@ $$
 $$
 
 ### 삼각함수 비교
-삼각함수와 지수함수 형태가 서로 달리 생겨도 하나의 주기함수에 대한 푸리에 급수를 표현하는 동일한 방정식이다.
+삼각함수와 지수함수 형태가 서로 달리 생겨도 하나의 주기함수에 대한 푸리에 급수를 표현하는 방법만 다른 동일한 방정식이다.
 
 $$
 x_T(t) = 
@@ -399,7 +398,7 @@ x_T(t) =
 \left\{ 
 \begin{array}{ll}
 
-\displaystyle a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\cos{k\omega_0 t}} & \quad \mathsf{Trigonometric}
+\displaystyle a_0 + \sum_{k=1}^{\infty}{a_k\cos{k\omega_0 t}} + \sum_{k=1}^{\infty}{b_k\sin{k\omega_0 t}} & \quad \mathsf{Trigonometric}
 
 \\
 
@@ -409,12 +408,12 @@ x_T(t) =
 \right.
 $$
 
-동일한 합성 방정식이지만 형태만 다른 푸리에 급수로써, 본 부분은 두 형태간 상호비교를 목표로 한다.
+본 내용은 삼각함수 형태의 푸리에 계수 $a_k$, $b_k$와 지수함수 형태의 푸리에 계수 $X(k)$를 서로 비교하는 것을 보여준다.
 
 삼각함수에서 지수함수 형태로 변환하는 과정에서 $k=0$일 경우, 삼각함수의 $a_0$와 지수함수의 $X(0)$ 분석 방정식은 어떠한 차이도 없이 동일하다는 것을 확인하였다.
 
 $$
-\quad [1] \qquad X(0) = a_0 = \frac{1}{T}\int_{T}{x_{T}(t)dt}
+\quad [1] \qquad a_0 = X(0) = \frac{1}{T}\int_{T}{x_{T}(t)dt}
 $$
 
 영이 아닌 $k$ 배수의 고조 주파수에서 삼각함수와 지수함수 형태를 일대일 비교하면 아래의 식을 만족한다.
@@ -466,10 +465,10 @@ $$
 \right.
 $$
 
-> 푸리에 계수 $X(k)$의 크기(amplitude; $\lvert X(k) \rvert$)와 위상(phase; $\angle{X(k)}$)은 [복소평면](https://ko.wikipedia.org/wiki/복소평면)(complex plane)에서 비롯된다. 가로축과 세로축은 각각 복소수의 실수 $\mathfrak{R}\lbrace X(k) \rbrace$와 허수 $\mathfrak{I}\lbrace X(k) \rbrace$를 의미하며, [직각좌표계](https://ko.wikipedia.org/wiki/데카르트_좌표계)로부터 [극좌표계](https://ko.wikipedia.org/wiki/극좌표계) 변환식이 그대로 적용된다.
+> 푸리에 계수 $X(k)$의 크기(amplitude) $\lvert X(k) \rvert$와 위상(phase) $\angle{X(k)}$은 [복소평면](https://ko.wikipedia.org/wiki/복소평면)(complex plane)에서 비롯된다: 복소평면의 가로축과 세로축은 각각 복소수의 실수 $\mathfrak{R}\lbrace X(k) \rbrace$와 허수 $\mathfrak{I}\lbrace X(k) \rbrace$를 의미하며, [직각좌표계](https://ko.wikipedia.org/wiki/데카르트_좌표계)로부터 [극좌표계](https://ko.wikipedia.org/wiki/극좌표계) 변환식이 그대로 적용된다.
 
 ## 디리클레 조건
-디리클레 조건(Dirichlet condition)은 주기함수 $x_T(t)$가 모든 시간 $t$에 대하여 푸리에 급수의 합과 일치하기 위한 충분조건이다. 간단히 말해, 아래의 합성 방정식을 위해서는 디리클레 조건을 반드시 만족해야 하며 이는 한편 푸리에 변환의 가능여부를 의미하기도 한다.
+디리클레 조건(Dirichlet condition)은 주기함수 $x_T(t)$가 모든 시간 $t$에 대하여 푸리에 급수의 합과 일치하기 위한 충분조건이다. 간단히 말해, 아래의 합성 방정식을 위해서는 디리클레 조건을 반드시 만족해야 하며 푸리에 변환의 가능여부를 의미하기도 한다.
 
 $$
 x_T(t) = \sum_{k=-\infty}^{+\infty}{ X(k) e^{jk\omega_0t} }
