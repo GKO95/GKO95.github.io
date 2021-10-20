@@ -485,20 +485,16 @@ $$
 3. 범위 내의 불연속점 개수가 유한해야 한다.
 
 # 푸리에: 변환
-[푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 주기함수에 극한된 푸리에 급수와 달리 비주기함수(aperiodic function)에서도 적용할 수 있는 일반화된 시간과 주파수 영역간의 적분 변환식이다. 비주기함수의 주기는 $T\rightarrow\infty$로 간주할 수 있으며, 덕분에 매우 작아진 기본 주파수 $f_0 = \frac{1}{T}$ 및 기본 각주파수 $\omega_0 = \frac{2\pi}{T}$는 더욱 미세한 고조 주파수 $f = kf_0$ 혹은 고조 각주파수 $\omega = k\omega_0$까지 표현할 수 있다.
+[푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 주기함수에 극한된 푸리에 급수와 달리 비주기함수(aperiodic function)에서도 적용할 수 있는 일반화된 시간과 주파수 영역간의 적분 변환식이다. 비주기함수의 주기는 $T\rightarrow\infty$로 간주할 수 있으며, 덕분에 매우 작아진 기본 주파수 $f_0 = \frac{1}{T}$ (혹은 기본 각주파수 $\omega_0 = \frac{2\pi}{T}$)는 더욱 미세한 고조 주파수 $f = kf_0$ (혹은 고조 각주파수 $\omega = k\omega_0$)까지 표현할 수 있다.
+
+푸리에 변환은 주기가 무한으로 확장된 푸리에 급수이기 때문에 디리클레 조건을 반드시 만족해야 한다.
 
 | 시간 영역 $x(t)$ | 주파수 영역 $X(f)$ |
 |:--------------:|:---------------:|
 | 연속시간 비주기함수     | 연속주파수 비주기함수      |
 
-푸리에 변환은 주기가 무한으로 확장된 푸리에 급수이기 때문에 아래의 디리클레 조건을 만족해야 한다. 그리고 비주기함수 $x(t)$가 유한한 개수의 최댓값과 최솟값, 그리고 불연속점을 가져야 한다.
-
-$$
-\int_{-\infty}^{\infty}{\lvert {x(t)\rvert dt}} < \infty
-$$
-
 ## 푸리에 변환
-푸리에 변환은 주기함수에 대한 푸리에 급수로부터 유도된다.
+푸리에 변환은 주기함수의 푸리에 급수로부터 유도된다.
 
 $$
 x(t) = \sum_{k=-\infty}^{+\infty}{X(k) e^{jk\omega_0t} }
@@ -518,7 +514,7 @@ $$
 \quad = \sum_{k=-\infty}^{+\infty}{ \frac{1}{T} X(k\omega_0) e^{jk\omega_0t} } \quad ...\mathrm{where} \ X(k\omega_0) = \int_{-\infty}^{+\infty}{x(t) e^{-jk\omega_0 t} dt}
 $$
 
-주기가 증가하면 주파수는 감소하는 $\omega = k\omega_0 \propto \frac{1}{T}$ 반비례 관계를 갖는다. 즉, 주기가 무한대로 증가하면 주파수는 [무한소](https://ko.wikipedia.org/wiki/무한소)로 감소하여 $d\omega$ (혹은 $dk\omega_0$)가 된다. 이를 기반으로 방정식의 주기 $T$를 주파수 $\omega$에 대한 식으로 치환한다.
+주기 $T$가 증가하면 각주파수 $\omega = k\omega_0$는 감소하는 반비례 관계를 갖는다. 즉, 주기가 무한대로 증가하면 각주파수는 [무한소](https://ko.wikipedia.org/wiki/무한소)로 감소하여 $d\omega$ (혹은 $dk\omega_0$)가 된다. 이를 기반으로 방정식의 주기 $T$를 각주파수 $\omega$에 대한 수식으로 치환한다.
 
 $$
 x(t) = \sum_{k=-\infty}^{+\infty}{ \frac{d\omega}{2\pi} X(\omega) e^{j\omega t} } \quad ...\mathrm{where} \ \omega = k\omega_0
@@ -528,7 +524,7 @@ $$
 \quad = \frac{1}{2\pi} \sum_{k=-\infty}^{+\infty}{ X(\omega) e^{j\omega t} d\omega}
 $$
 
-무한소 $d\omega$에 대한 유한합 $\sum$은 적분으로 대체될 수 있으며, 일반함수의 $x(t)$ 합성 방정식과 $X(\omega)$ 분석 방정식은 다음과 같다.
+무한소 $d\omega$에 대한 급수 $\sum$는 적분으로 대체될 수 있으며, 일반함수의 $x(t)$ 합성 방정식과 $X(\omega)$ 분석 방정식은 다음과 같다.
 
 $$
 x(t) = \frac{1}{2\pi} \int_{-\infty}^{+\infty}{ X(\omega) e^{j\omega t} d\omega} \quad ...\mathrm{where} \ X(\omega) = \int_{-\infty}^{+\infty}{x(t) e^{-j\omega t} dt}
