@@ -7,9 +7,9 @@ meta: Laplace
 order: 0xE2
 ---
 # 라플라스 변환: 개요
-> 본 내용은 [미분방정식](../ko.ENGINEER_Differential/)과 [푸리에 변환](../ko.ENGINEER_TransformF/)을 기반하므로 이에 대해 충분한 이해가 필요하다.
+> 본 내용은 이공계열대학 교육과정 중 하나인 [푸리에 변환](../ko.ENGINEER_TransformF/)을 기반하므로 이에 대해 충분한 이해가 필요하다.
 
-[라플라스 변환](https://en.wikipedia.org/wiki/Laplace_transform)(Laplace transform)은 복잡한 미분방정식을 극히 익숙한 [대수방정식](https://en.wikipedia.org/wiki/Algebraic_equation)으로 풀 수 있는 매우 강력한 미적분학 기법이다. 이러한 변환이 가능한 이유는 바로 영역(또는 공간; domain)을 넘나드는 풀이 방식을 사용하기 때문이다. 그리고 이 두 영역을 $t$-영역과 $s$-영역이라고 부른다.
+[라플라스 변환](https://en.wikipedia.org/wiki/Laplace_transform)(Laplace transform)은 복잡한 미분방정식을 극히 익숙한 [대수방정식](https://en.wikipedia.org/wiki/Algebraic_equation)으로 풀 수 있는 매우 유용한 미적분학 기법이다. 이러한 변환이 가능한 이유는 바로 $t$-영역(또는 공간; domain)과 $s$-영역을 넘나드는 풀이 방식을 사용하기 때문이다.
 
 * *$t$-영역 (일명 시간 영역)*
     : 변수 $t$, 일명 시간이 중심이 되는 공간이다. 
@@ -17,7 +17,7 @@ order: 0xE2
 * *$s$-영역 (일명 복소주파수 영역)*
     : 변수 $s = \sigma + j\omega$가 중심이 되는 공간이며, 허수가 붙기 때문에 "복소"주파수라고 부른다. 여기서 $\omega = 2\pi f$는 [각주파수](https://ko.wikipedia.org/wiki/각진동수)(angular frequency)이다. 
 
-라플라스 변환은 $t$-영역을 $s$-영역으로 공간을 전환하며 다음과 같은 방정식을 가진다.
+라플라스 변환은 $t$-영역을 $s$-영역으로 공간을 전환하며 다음과 같은 방정식을 갖는다.
 
 $$
 F(s) = \mathcal{L} \{ f(t) \} = \int^{\infty}_{0^-}f(t)e^{-st}dt
@@ -292,14 +292,14 @@ $$
 
 | 함수 | 시간 $t$-영역: $f(t)$  | 복소주파수 $s$-영역: $F(s)$  |
 |:--:|:----------:|:------------:|
-| [단위 임펄스](https://en.wikipedia.org/wiki/Dirac_delta_function) | $$\begin{align}\delta(t)\end{align}$$ | $$1$$ |
-| [단위 계단 함수](https://en.wikipedia.org/wiki/Heaviside_step_function) | $$u(t)$$ | $$\begin{align}\frac{1}{s}\end{align}$$ |
-| 지수 함수 | $$t^n \cdot u(t)$$ | $$\begin{align}\frac{n!}{s^{n+1}}\end{align}$$ |
-| [지수적 감쇠](https://en.wikipedia.org/wiki/Exponential_decay) | $$e^{-at} \cdot u(t)$$ | $$\begin{align}\frac{1}{s+a}\end{align}$$ |
-| [사인 함수](https://en.wikipedia.org/wiki/Sine) | $$\sin{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{\omega}{s^2+\omega^2}\end{align}$$ |
-| [코사인 함수](https://en.wikipedia.org/wiki/Cosine) | $$\cos{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{s}{s^2+\omega^2}\end{align}$$ |
-| 사인 함수<br/>+ 지수적 감쇠 | $$e^{-at}\sin{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{\omega}{(s+a)^2+\omega^2}\end{align}$$ |
-| 코사인 함수<br/>+ 지수적 감쇠 | $$e^{-at}\cos{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{s+a}{(s+a)^2+\omega^2}\end{align}$$ |
+| [단위 임펄스](https://en.wikipedia.org/wiki/Dirac_delta_function) | $\delta(t)$ | $1$ |
+| [단위 계단 함수](https://en.wikipedia.org/wiki/Heaviside_step_function) | $u(t)$ | $\displaystyle \frac{1}{s}$ |
+| 지수 함수 | $t^n \cdot u(t)$ | $\displaystyle \frac{n!}{s^{n+1}}$ |
+| [지수적 감쇠](https://en.wikipedia.org/wiki/Exponential_decay) | $e^{-at} \cdot u(t)$ | $\displaystyle \frac{1}{s+a}$ |
+| [사인 함수](https://en.wikipedia.org/wiki/Sine) | $\sin{(\omega t)}\cdot u(t)$ | $\displaystyle \frac{\omega}{s^2+\omega^2}$ |
+| [코사인 함수](https://en.wikipedia.org/wiki/Cosine) | $\cos{(\omega t)}\cdot u(t)$ | $\displaystyle \frac{s}{s^2+\omega^2}$ |
+| 사인 함수<br/>+ 지수적 감쇠 | $e^{-at}\sin{(\omega t)}\cdot u(t)$ | $\displaystyle \frac{\omega}{(s+a)^2+\omega^2}$ |
+| 코사인 함수<br/>+ 지수적 감쇠 | $e^{-at}\cos{(\omega t)}\cdot u(t)$ | $\displaystyle \frac{s+a}{(s+a)^2+\omega^2}$ |
 
 ### 부분분수전개
 [부분분수전개](https://en.wikipedia.org/wiki/Partial_fraction_decomposition)(partial fraction expansion)는 복합적인 분수를 여러 간단한 분수들의 합으로 풀어쓰는 기법이다. 라플라스 변환표를 보면 알 수 있듯이 수많은 $s$-영역 함수들은 분수 형태를 띄고 있다. 이를 다시 $t$-영역으로 역변환시키기 위해서는 최소한 라플라스 성질 및 변환표를 활용할 수 있는 형태로 되돌려야 한다.
