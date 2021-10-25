@@ -29,7 +29,18 @@ $$
 > *일반적으로 라플라스 변환을 언급하면 단방향을 의미한다.* 이러한 이유는 실제 물리적 시스템은 전부 인과 시스템을 따르기 때문이다.
 
 ## 라플라스 변환
-라플라스 변환은 [푸리에 변환](../ko.ENGINEER_TransformF/#푸리에-변환)과 거의 유사하지만 전혀 다른 변환식이다.
+> *참조: [MIT 온라인 공개수업 - 강의 19: 라플라스 변환의 소개](https://ocw.mit.edu/courses/mathematics/18-03-differential-equations-spring-2010/video-lectures/lecture-19-introduction-to-the-laplace-transform/)*
+
+라플라스 변환은 확률 이론(probability theory)으로부터 유도된 변환식이다.
+
+### 푸리에 변환
+라플라스 변환은 아래의 [푸리에 변환](../ko.ENGINEER_TransformF/#푸리에-변환)과 매우 유사한 형태를 띈다.
+
+$$
+X(\omega) = \mathcal{F} \{ x(t) \} = \int^{\infty}_{-\infty}x(t)e^{-j\omega t}dt
+$$
+
+만일 푸리에 변환의 유도 과정을 접하였다면 $j\omega$를 $\sigma + j\omega$로 확장하여 라플라스 변환의 유도를 설명하려고 시도할 수 있으나, 이는 매우 잘못된 접근법이다. 라플라스 변환의 유도 과정은 [푸리에 급수](../ko.ENGINEER_TransformF/#푸리에-급수)가 아닌 확률 이론(probability theory)에서 비롯되었기 때문이다. 그렇지만 라플라스와 푸리에 변환이 서로 연관성이 없다는 것은 전혀 아니며, 푸리에 변환은 복소변수 $s=\sigma + j\omega$에서 감쇠 $\sigma = 0$인 특수한 경우의 라플라스 변환이다.
 
 ### 변환의 성질
 > *참조: [위키백과 - 라플라스 성질 및 이론](https://en.wikipedia.org/wiki/Laplace_transform#Properties_and_theorems)*
