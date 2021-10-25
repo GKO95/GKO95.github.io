@@ -1,10 +1,10 @@
 ---
 layout: docs
 language: ko
-category: 미적분학
+category: 공업수학
 title: 라플라스 변환
 meta: Laplace
-order: 0xE2
+order: 0xE3
 ---
 # 라플라스: 개요
 > 본 내용은 고등학교 교육과정 중 하나인 [삼각함수](https://ko.wikipedia.org/wiki/삼각함수), [미분](https://ko.wikipedia.org/wiki/미분) 및 [적분](https://ko.wikipedia.org/wiki/적분), 그리고 [복소수](https://ko.wikipedia.org/wiki/복소수)를 기반하므로 이에 대해 충분한 이해가 필요하다.
