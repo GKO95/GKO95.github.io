@@ -68,8 +68,42 @@ $$
 >     : *시행 간 발생하는 사건들의 관계를 설명한다.*
 
 ## 조건부 확률
-[조건부 확률](https://ko.wikipedia.org/wiki/조건부_확률)(conditional probability)
+[조건부 확률](https://ko.wikipedia.org/wiki/조건부_확률)(conditional probability)은 사건 $B$가 우선 발생하였을 때, 사건 $A$가 다음으로 발생할 확률을 의미한다.
 
 $$
 P(A|B) = \frac{P(A \cap B)}{P(B)}
+$$
+
+조건부 확률은 매우 유용한 정보를 제공하나 제한적이기도 하다. 이러한 경우에는 베이즈 정리로부터 조건부 확률을 역으로 유도하는 것도 하나의 방법이다.
+
+만일 독립 사건일 경우, $P(A \vert B) = P(A)$가 되므로 이전 사건 $B$의 확률로부터 의존하지 않는 것을 재차 확인할 수 있다.
+
+### 베이즈 정리
+[베이즈 정리](https://ko.wikipedia.org/wiki/베이즈_정리)(Bayes' theorem)는 사건과 관련된 조건에 대한 사전 지식을 기반으로 확률을 설명한다.
+
+$$
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+$$
+
+> 베이즈 정리의 증명은 조건부 확률로부터 비롯된다.
+> 
+> $$
+> P(A|B) = \frac{P(A \cap B)}{P(B)} \mathrm{, \ if \ } P(B) \neq 0
+> $$
+>
+> $$
+> P(B|A) = \frac{P(A \cap B)}{P(A)} \mathrm{, \ if \ } P(A) \neq 0 
+> $$
+>
+> 여기서 두 번째 방정식으로부터 $P(B \vert A)P(A) = P(A \cap B)$로 수식을 정리한 다음, 이를 첫 번째 방정식에 치환한다.
+>
+> $$
+> \quad \therefore P(A|B) = \frac{P(B|A)P(A)}{P(B)} \mathrm{, \ if \ } P(B) \neq 0
+> $$
+
+## 분할
+[분할](https://ko.wikipedia.org/wiki/집합의_분할)(partition)은 표본공간 $\Omega$을 상호 배타적 사건들로 나눈 집합을 가리킨다.
+
+$$
+\Omega = \bigcup^{n}_{k=0}A_k \mathrm{, \ while \ } A_k \cap A_{\neg k} = \empty 
 $$
