@@ -1,32 +1,54 @@
 ---
 layout: docs
 language: ko
-category: 미적분학
+category: 공업수학
 title: 라플라스 변환
 meta: Laplace
-order: 0xE2
+order: 0xE3
 ---
-# 라플라스 변환: 개요
-> 본 내용은 [미분방정식](../ko.ENGINEER_Differential/)과 [푸리에 변환](../ko.ENGINEER_TransformF/)을 기반하므로 이에 대해 충분한 이해가 필요하다.
+# 라플라스: 개요
+> 본 내용은 고등학교 교육과정 중 하나인 [삼각함수](https://ko.wikipedia.org/wiki/삼각함수), [미분](https://ko.wikipedia.org/wiki/미분) 및 [적분](https://ko.wikipedia.org/wiki/적분), 그리고 [복소수](https://ko.wikipedia.org/wiki/복소수)를 기반하므로 이에 대해 충분한 이해가 필요하다.
 
-[라플라스 변환](https://en.wikipedia.org/wiki/Laplace_transform)(Laplace transform)은 복잡한 미분방정식을 극히 익숙한 [대수방정식](https://en.wikipedia.org/wiki/Algebraic_equation)으로 풀 수 있는 매우 강력한 미적분학 기법이다. 이러한 변환이 가능한 이유는 바로 영역(또는 공간; domain)을 넘나드는 풀이 방식을 사용하기 때문이다. 그리고 이 두 영역을 $t$-영역과 $s$-영역이라고 부른다.
+[라플라스 변환](https://en.wikipedia.org/wiki/Laplace_transform)(Laplace transform)은 복잡한 [미분방정식](../ko.ENGINEER_Differential)을 극히 익숙한 [대수방정식](https://en.wikipedia.org/wiki/Algebraic_equation)으로 풀 수 있는 매우 유용한 미적분학 기법이다. 이러한 변환이 가능한 이유는 바로 $t$-영역(또는 공간; domain)과 $s$-영역을 넘나드는 풀이 방식을 사용하기 때문이다.
 
 * *$t$-영역 (일명 시간 영역)*
     : 변수 $t$, 일명 시간이 중심이 되는 공간이다. 
 
 * *$s$-영역 (일명 복소주파수 영역)*
-    : 변수 $s = \sigma + j\omega$가 중심이 되는 공간이며, 허수가 붙기 때문에 "복소"주파수라고 부른다. 여기서 $\omega = 2\pi f$는 [각주파수](https://ko.wikipedia.org/wiki/각진동수)(angular frequency)이다. 
+    : 변수 $s = \sigma + j\omega$가 중심이 되는 공간이며, 허수가 붙기 때문에 "복소"주파수라고 부른다. 여기서 $\omega$는 [각주파수](https://ko.wikipedia.org/wiki/각진동수)(angular frequency)로 $2\pi f$와 같다. 
 
-라플라스 변환은 $t$-영역을 $s$-영역으로 공간을 전환하며 다음과 같은 방정식을 가진다.
+# 라플라스: 변환
+라플라스 변환은 $t$-영역을 $s$-영역으로 공간을 전환하며 다음과 같은 방정식을 갖는다.
 
 $$
-F(s) = \mathcal{L} \{ f(t) \} = \int^{\infty}_{0^-}f(t)e^{-st}dt
+F(s) = \mathcal{L} \{ f(t) \} = \int^{\infty}_{0}f(t)e^{-st}dt
 $$
 
-## 라플라스 성질
+위의 방정식은 적분되는 시간 범위가 $t \in \left[ 0, \infty \right)$인 단방향(uniliteral) 변환으로, 오로지 현재와 과거의 입력에만 의존하는 [인과 시스템](https://en.wikipedia.org/wiki/Causal_system)(causal system)을 설명한다. 반면, 적분 범위가 $t \in \left( -\infty , \infty \right)$인 [양방향 라플라스 변환](https://en.wikipedia.org/wiki/Two-sided_Laplace_transform)(bilteral Laplace transform)은 현재 및 과거 그리고 미래의 입력에 의존하는 [비인과 시스템](https://en.wikipedia.org/wiki/Anticausal_system)(non-causal system)을 설명한다.
+
+> *일반적으로 라플라스 변환을 언급하면 단방향을 의미한다.* 이러한 이유는 실제 물리적 시스템은 전부 인과 시스템을 따르기 때문이다.
+
+## 라플라스 변환
+> *참조: [MIT 온라인 공개수업 - 강의 19: 라플라스 변환의 소개](https://ocw.mit.edu/courses/mathematics/18-03-differential-equations-spring-2010/video-lectures/lecture-19-introduction-to-the-laplace-transform/)*
+
+라플라스 변환은 확률 이론(probability theory)으로부터 유도된 변환식이다.
+
+### 푸리에 변환
+라플라스 변환은 아래의 [푸리에 변환](../ko.ENGINEER_TransformF/#푸리에-변환)과 매우 유사한 형태를 띈다.
+
+$$
+X(\omega) = \mathcal{F} \{ x(t) \} = \int^{\infty}_{-\infty}x(t)e^{-j\omega t}dt
+$$
+
+만일 푸리에 변환의 유도 과정을 접하였다면 $j\omega$를 $\sigma + j\omega$로 확장하여 라플라스 변환의 유도를 설명하려고 시도할 수 있으나, 이는 매우 잘못된 접근법이다. 라플라스 변환의 유도 과정은 [푸리에 급수](../ko.ENGINEER_TransformF/#푸리에-급수)가 아닌 확률 이론(probability theory)에서 비롯되었기 때문이다. 그렇지만 라플라스와 푸리에 변환이 서로 연관성이 없다는 것은 전혀 아니며, 푸리에 변환은 복소변수 $s=\sigma + j\omega$에서 감쇠 $\sigma = 0$인 특수한 경우의 라플라스 변환이다.
+
+### 변환의 성질
 > *참조: [위키백과 - 라플라스 성질 및 이론](https://en.wikipedia.org/wiki/Laplace_transform#Properties_and_theorems)*
 
-라플라스 변환은 선형계 분석에 있어 매우 유용한 성질들을 가지고 있으며, 그 중에서도 시간에 대한 미분과 적분이 각각 라플라스 변수 $s$의 곱셈과 나눗셈으로 표현하여, 미분방정식을 대수방정식으로 변환시키는 강력한 장점을 지닌다. 그 외에도 라플라스 변환은 아래의 성질을 가지고 있다:
+라플라스 변환은 선형계 분석에 있어 매우 유용한 성질들을 가지고 있다. 시간 영역의 미분과 적분이 
+
+
+시간 영역의 미분과 적분이 복소수 영역에서는 라플라스 변수 $s$의 곱셈과 나눗셈으로 표현하여 미분방정식을 대수방정식으로 변환시키는 강력한 장점을 지닌다. 그 외에도 라플라스 변환은 아래의 성질을 가지고 있다:
 
 * *[선형성](https://en.wikipedia.org/wiki/Linearity) (Linearity)*
     : 선형 연산자인 적분을 사용하는 라플라스 변환 또한 선형성을 지닌다.
@@ -38,15 +60,15 @@ $$
     > 본 성질에 대한 증명은 아래를 참고한다:
     >
     > $$
-    > \mathcal{L}\left\{ af(t) + bg(t) \right\} = \int^{\infty}_{0^-}\left\{ af(t) + bg(t) \right\} e^{-st}dt
+    > \mathcal{L}\left\{ af(t) + bg(t) \right\} = \int^{\infty}_{0}\left\{ af(t) + bg(t) \right\} e^{-st}dt
     > $$
     >
     > $$
-    > \quad = \int^{\infty}_{0^-}\left\{af(t)e^{-st} + bg(t)e^{-st}\right\}dt
+    > \quad = \int^{\infty}_{0}\left\{af(t)e^{-st} + bg(t)e^{-st}\right\}dt
     > $$
     >
     > $$
-    > \quad = a\int^{\infty}_{0^-}f(t)e^{-st}dt + b\int^{\infty}_{0^-}g(t)e^{-st}dt
+    > \quad = a\int^{\infty}_{0}f(t)e^{-st}dt + b\int^{\infty}_{0}g(t)e^{-st}dt
     > $$
     >
     > $$
@@ -292,14 +314,14 @@ $$
 
 | 함수 | 시간 $t$-영역: $f(t)$  | 복소주파수 $s$-영역: $F(s)$  |
 |:--:|:----------:|:------------:|
-| [단위 임펄스](https://en.wikipedia.org/wiki/Dirac_delta_function) | $$\begin{align}\delta(t)\end{align}$$ | $$1$$ |
-| [단위 계단 함수](https://en.wikipedia.org/wiki/Heaviside_step_function) | $$u(t)$$ | $$\begin{align}\frac{1}{s}\end{align}$$ |
-| 지수 함수 | $$t^n \cdot u(t)$$ | $$\begin{align}\frac{n!}{s^{n+1}}\end{align}$$ |
-| [지수적 감쇠](https://en.wikipedia.org/wiki/Exponential_decay) | $$e^{-at} \cdot u(t)$$ | $$\begin{align}\frac{1}{s+a}\end{align}$$ |
-| [사인 함수](https://en.wikipedia.org/wiki/Sine) | $$\sin{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{\omega}{s^2+\omega^2}\end{align}$$ |
-| [코사인 함수](https://en.wikipedia.org/wiki/Cosine) | $$\cos{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{s}{s^2+\omega^2}\end{align}$$ |
-| 사인 함수<br/>+ 지수적 감쇠 | $$e^{-at}\sin{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{\omega}{(s+a)^2+\omega^2}\end{align}$$ |
-| 코사인 함수<br/>+ 지수적 감쇠 | $$e^{-at}\cos{(\omega t)}\cdot u(t)$$ | $$\begin{align}\frac{s+a}{(s+a)^2+\omega^2}\end{align}$$ |
+| [단위 임펄스](https://en.wikipedia.org/wiki/Dirac_delta_function) | $\delta(t)$ | $1$ |
+| [단위 계단 함수](https://en.wikipedia.org/wiki/Heaviside_step_function) | $u(t)$ | $\displaystyle \frac{1}{s}$ |
+| 지수 함수 | $t^n \cdot u(t)$ | $\displaystyle \frac{n!}{s^{n+1}}$ |
+| [지수적 감쇠](https://en.wikipedia.org/wiki/Exponential_decay) | $e^{-at} \cdot u(t)$ | $\displaystyle \frac{1}{s+a}$ |
+| [사인 함수](https://en.wikipedia.org/wiki/Sine) | $\sin{(\omega t)}\cdot u(t)$ | $\displaystyle \frac{\omega}{s^2+\omega^2}$ |
+| [코사인 함수](https://en.wikipedia.org/wiki/Cosine) | $\cos{(\omega t)}\cdot u(t)$ | $\displaystyle \frac{s}{s^2+\omega^2}$ |
+| 사인 함수<br/>+ 지수적 감쇠 | $e^{-at}\sin{(\omega t)}\cdot u(t)$ | $\displaystyle \frac{\omega}{(s+a)^2+\omega^2}$ |
+| 코사인 함수<br/>+ 지수적 감쇠 | $e^{-at}\cos{(\omega t)}\cdot u(t)$ | $\displaystyle \frac{s+a}{(s+a)^2+\omega^2}$ |
 
 ### 부분분수전개
 [부분분수전개](https://en.wikipedia.org/wiki/Partial_fraction_decomposition)(partial fraction expansion)는 복합적인 분수를 여러 간단한 분수들의 합으로 풀어쓰는 기법이다. 라플라스 변환표를 보면 알 수 있듯이 수많은 $s$-영역 함수들은 분수 형태를 띄고 있다. 이를 다시 $t$-영역으로 역변환시키기 위해서는 최소한 라플라스 성질 및 변환표를 활용할 수 있는 형태로 되돌려야 한다.
@@ -332,7 +354,7 @@ $$
     A_{n-k} = \frac{1}{(n-k-1)!}\frac{d^k}{ds^k} \left[ (s-\alpha)^nF(s) \right]_{s=\alpha} \quad ... \mathrm{where} \ k = 0, \ 1, \ 2, \ \cdots, \ n-1
     $$
 
-# 라플라스 변환: 응용
+# 라플라스: 응용
 본 장은 [미분방정식 예시](../ko.ENGINEER_Differential/#미분방정식-응용)를 라플라스 변환으로 풀이하는 절차를 살펴본다. 또한 고전역학을 벗어나 전기회로라는 전혀 다른 분야에서는 어떻게 적용되는지 보여준다. 단, 미분방정식이 아닌 *예제 1. 평형상태 (1)*과 *예제 2. 평형상태 (2)*는 다루지 않으며 미분방정식 수립 과정은 동일하다.
 
 ## 고전역학
