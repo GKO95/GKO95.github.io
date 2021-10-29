@@ -15,7 +15,7 @@ order: 0xE0
 
 > 주사위를 던지는 행위로부터 눈이 1, 2, 3, 4, 5, 혹은 6이 나오는 여섯 가지의 명확한 결과가 도출될 수 있으며 무한히 반복하여 수행할 수 있다.
 
-위에서 설명한 "주사위 던지기"처럼, 도출 가능한 결과들을 알고 있으나 어떠한 결과가 나올지 예측할 수 없는 실험을 *무작위 실험(random experiment)*이라 부른다. 그리고 무작위 실험을 수행하는 것을 시행(trial)이라고 한다.
+위에서 설명한 "주사위 던지기"처럼, 도출 가능한 결과들을 알고 있으나 어떠한 결과가 나올지 예측할 수 없는 실험을 *확률 실험(random experiment)*이라 부른다. 그리고 확률 실험을 수행하는 것을 시행(trial)이라고 한다.
 
 #### [결과](https://en.wikipedia.org/wiki/Outcome_(probability)) (outcome)
 실험 혹은 시행을 통해 나온 결과이다.
@@ -74,7 +74,7 @@ $$
 P(A|B) = \frac{P(A \cap B)}{P(B)}
 $$
 
-조건부 확률은 매우 유용한 정보를 제공하나 제한적이기도 하다. 이러한 경우에는 베이즈 정리로부터 조건부 확률을 역으로 유도하는 것도 하나의 방법이다.
+$P(A \cap B)$는 [결합 확률](https://ko.wikipedia.org/wiki/결합분포)(joint probability)로 사건 $A$와 사건 $B$가 동시에 발생할 확률을 의미한다. 조건부 확률은 매우 유용한 정보를 제공하나 제한적이기도 하다. 이러한 경우에는 베이즈 정리로부터 조건부 확률을 역으로 유도하는 것도 하나의 방법이다.
 
 만일 독립 사건일 경우, $P(A \vert B) = P(A)$가 되므로 이전 사건 $B$의 확률로부터 의존하지 않는 것을 재차 확인할 수 있다.
 
@@ -102,8 +102,175 @@ $$
 > $$
 
 ## 분할
-[분할](https://ko.wikipedia.org/wiki/집합의_분할)(partition)은 표본공간 $\Omega$을 상호 배타적 사건들로 나눈 집합을 가리킨다.
+[분할](https://ko.wikipedia.org/wiki/집합의_분할)(partition)은 표본공간 $\Omega$을 상호 배타적 사건들로 나눈 집합을 가리킨다. 단, 결과가 없는 사건 $\empty$은 분할에서 제외된다. 상호 배타적 사건들을 모두 합하면 표본공간이 되므로 다음 방정식이 세워진다.
 
 $$
-\Omega = \bigcup^{n}_{k=0}A_k \mathrm{, \ while \ } A_k \cap A_{\neg k} = \empty 
+\Omega = \bigcup^{n}_{k=1}A_k \mathrm{, \ while \ } A_k \cap A_{\neg k} = \empty 
 $$
+
+여기서 $A_{\neg k}$란, $A_{k}$가 아닌 사건을 가리킨다.
+
+> 표본공간 $\Omega = \lbrace 1, 2, 3 \rbrace$은 총 다섯 가지의 분할을 갖는다.
+>
+> 1. $\lbrace \lbrace 1 \rbrace , \lbrace 2 \rbrace , \lbrace 3 \rbrace \rbrace$
+>
+> 2. $\lbrace \lbrace 1 , 2 \rbrace , \lbrace 3 \rbrace \rbrace$
+>
+> 3. $\lbrace \lbrace 1 , 3 \rbrace , \lbrace 2 \rbrace \rbrace$
+>
+> 4. $\lbrace \lbrace 2 , 3 \rbrace , \lbrace 1 \rbrace \rbrace$
+>
+> 5. $\lbrace \lbrace 1, 2 , 3 \rbrace \rbrace$
+
+### 전체 확률의 법칙
+[전체 확률의 법칙](https://ko.wikipedia.org/wiki/전체_확률의_법칙)(law of total probability) 혹은 전활률 정리는 표본공간 $\Omega$ 분할의 각 사건 $\lbrace B_k : k = 1, 2, 3, ... , n \rbrace$으로부터 사건 $A$가 발생할 확률을 모두 합하면, 동일한 표본공간에서 순전히 사건 $A$가 발생할 확률과 같다. 이는 사실상 당연한 게 분할을 전부 합하면 표본공간이 되기 때문이다.
+
+$$
+P(A) = \sum_{k=0}^{n}P(A \cap B_k) = \sum_{k=0}^{n}P(A \vert B_k)P(B_k)
+$$
+
+$$
+\quad \because \bigcup_{k = 0}^{n}A \cap B_k = A \cap \left[ \bigcup_{k = 0}^{n} B_k \right] = A \cap \Omega = A
+$$
+
+## 마르코프 연쇄
+사건 $A_1$이 발생한 다음에 사건 $A_2$가 연속으로 발생할 확률은 조건부 확률을 통해 다음과 같이 구해진다.
+
+$$
+P(A_2 \vert A_1)P(A_1) 
+$$
+
+$$
+\quad = P(A_2 \cap A_1)
+$$
+
+조건부 확률 $P(A_2 \vert A_1)$은 $A_1$ 사건이 일어났다는 가정 하에 $A_2$ 사건의 발생 확률만을 의미한다. 조건부 확률에서 $A_1$ 사건이 발생한 확률이 고려되지 않았기에 $P(A_1)$를 추가로 곱하였다. 마찬가지 방법으로 $A_3$ 사건이 연속으로 발생할 확률은 다음과 같이 구해진다.
+
+$$
+P(A_3 \vert A_2 \cap A_1)P(A_2 \cap A_1) = P(A_3 \vert A_2 \cap A_1)P(A_2 \vert A_1)P(A_1)
+$$
+
+$$
+\quad = P(A_3 \cap A_2 \cap A_1)
+$$
+
+그러므로 $A_n$까지 일련의 사건이 연속적으로 발생할 확률은 다음과 같다.
+
+$$
+P\left( \bigcap_{k=1}^{n}A_k \right) = P(A_n \cap A_{n-1} \cap ... \cap A_3 \cap A_2 \cap A_1)
+$$
+
+$$
+\quad = P(A_n \vert \cap_{k=1}^{n-1}A_k) P(A_{n-1} \vert \cap_{k=1}^{n-2}A_k) \cdots  P(A_3 \vert A_2 \cap A_1)P(A_2 \vert A_1)P(A_1)
+$$
+
+여기서 [마르코프 연쇄](https://ko.wikipedia.org/wiki/마르코프_연쇄)(Markov chain)는 $A_k$가 오로지 $A_{k-1}$에만 영향을 받으므로, 그 외의 나머지 사건들은 독립이기 때문에 정리하면 아래의 방정식이 구해진다.
+
+$$
+\quad \therefore P\left( \bigcap_{k=1}^{n}A_k \right) = P(A_n \vert A_{n-1}) P(A_{n-1} \vert A_{n-2}) \cdots  P(A_3 \vert A_2)P(A_2 \vert A_1)P(A_1)
+$$
+
+> 다음은 사건 $A$가 발생하는 조건부 확률을 나열한다.
+>
+> $$
+> \left\{\begin{array}{ll}
+>
+> \displaystyle P(A_{\mathrm{curr}} \vert A_{\mathrm{prev}}) = 0.5
+>
+> \\ \\
+>
+> \displaystyle P(\bar{A}_{\mathrm{curr}} \vert A_{\mathrm{prev}}) = 0.5
+>
+> \end{array}\right.
+> $$
+>
+> $$
+> \left\{\begin{array}{ll}
+>
+> \displaystyle P(A_{\mathrm{curr}} \vert \bar{A}_{\mathrm{prev}}) = 0.3
+>
+> \\ \\
+>
+> \displaystyle P(\bar{A}_{\mathrm{curr}} \vert \bar{A}_{\mathrm{prev}}) = 0.7
+>
+> \end{array}\right.
+> $$
+>
+> 그러면 사건 $A_{\mathrm{curr}}$가 발생할 확률은 아래와 같다.
+>
+> $$
+> P(A_{\mathrm{curr}}) = P(A_{\mathrm{curr}} \vert A_{\mathrm{prev}})P(A_{\mathrm{prev}}) + P(A_{\mathrm{curr}} \vert \bar{A}_{\mathrm{prev}})P(\bar{A}_{\mathrm{prev}})
+> $$
+>
+> $$
+> \quad = 0.5P(A_{\mathrm{prev}}) + 0.3P(\bar{A}_{\mathrm{prev}})
+> $$
+>
+> 시스템이 정상 상태(steady state), 즉 $\textstyle \lim_{t \rightarrow \infty}$로 인해 초기값의 영향이 미미해지므로 $A_{\mathrm{curr}}$ 및 $A_{\mathrm{prev}}$은 동일한 사건으로 간주할 수 있다.
+>
+> $$
+> P(A) = 0.5P(A) + 0.3P(\bar A)
+> $$ 
+>
+> $$
+> \quad \therefore P(A) = 0.375 \ , \quad P(\bar A) = 1 - P(A) = 0.625
+> $$
+
+## 베르누이 시행
+[베르누이 시행](https://ko.wikipedia.org/wiki/베르누이_시행)(Bernoulli trial), 일명 이항 시행(binomial trial)은 오로지 두 개의 결과, "성공" 및 "실패"만을 갖는 독립적 확률 실험이다. 각 시행마다 결과가 발생하는 확률은 동일하며, 결과는 {참, 거짓} 또는 {예, 아니오} 형식이여도 상관없다.
+
+$$
+\left\{\begin{array}{ll}
+
+\displaystyle P(A) = p
+
+\\ \\
+
+\displaystyle P(\bar A) = 1 - p = q
+
+\end{array}\right.
+$$
+
+$n$ 번의 확률 실험에서 결과 $A$가 $k$ 번 발생하였으면 다음 수식이 설립된다.
+
+$$
+P(k) = {n \choose k}p^kq^{n-k}
+$$
+
+너무나 당연한 게 결과 $A$가 발생한 실험 개수만큼 확률 $p$를 곱하고, 발생하지 않은 실험만큼 확률 $q$를 곱해주는 행위이다.
+
+### 순열
+[순열](https://ko.wikipedia.org/wiki/순열)(permutation)은 $n$ 개의 원소를 갖는 집합에서 $k$ 개를 순서대로 선택하는 경우의 수이다.
+
+$$
+P(n,k) = \frac{n!}{(n-k)!}
+$$
+
+> 집합 $\lbrace 1, 2, 3\rbrace$은 총 세 개의 원소를 갖고 있으며, 두 원소에 대한 순열은 다음과 같다.
+>
+> $$
+> P(3,2) = \frac{3!}{(3-2)!} = \frac{3 \times 2 \times 1}{1} = 6
+> $$
+>
+> $$
+> \quad \because \mathsf{Number \ of \ permutation: \ } \lbrace 1, 2 \rbrace , \lbrace 2, 1 \rbrace , \lbrace 1, 3 \rbrace , \lbrace 3, 1 \rbrace , \lbrace 2, 3 \rbrace , \lbrace 3, 2 \rbrace
+> $$
+
+### 조합
+[조합](https://ko.wikipedia.org/wiki/조합)(combination)은 $n$ 개의 원소를 갖는 집합에서 $k$ 개를 순서와 무관하게 선택하는 경우의 수이다.
+
+$$
+{n \choose k} = \frac{P(n,k)}{k!} = \frac{n!}{(n-k)!k!}
+$$
+
+흔히 한 줄만 차지하는 $C(n,k)$ 표시를 사용하기도 한다.
+
+> 집합 $\lbrace 1, 2, 3\rbrace$은 총 세 개의 원소를 갖고 있으며, 두 원소에 대한 조합은 다음과 같다.
+>
+> $$
+> {3 \choose 2} = \frac{3!}{(3-2)!2!} = \frac{3 \times 2 \times 1}{(1) (2 \times 1)} = 3
+> $$
+>
+> $$
+> \quad \because \mathsf{Number \ of \ combination: \ } \lbrace 1, 2 \rbrace , \lbrace 1, 3 \rbrace , \lbrace 2, 3 \rbrace
+> $$
