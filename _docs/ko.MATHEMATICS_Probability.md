@@ -273,4 +273,69 @@ $$
 >
 > $$
 > \quad \because \mathsf{Number \ of \ combination: \ } \lbrace 1, 2 \rbrace , \lbrace 1, 3 \rbrace , \lbrace 2, 3 \rbrace
-> $$
+> $$    
+
+# 확률론: 변수
+[확률 변수](https://ko.wikipedia.org/wiki/확률_변수)(random variable, stochastic variable)는 확률 실험에서 발생한 사건을 수치적 값으로 표현하는 함수이다. 확률 분포를 이해하기 위해서 반드시 알아야 하는 중요한 개념이지만, 처음으로 접하면 확률 변수의 정의 및 의의에 대한 의문점이 생기기 마련이다. 이러한 궁금증을 해소하기 위해 간단한 예시를 들어본다:
+
+동전 던지기를 시행하면 결과가 앞면(Head; $H$) 혹은 뒷면(Tail; $T$)이 나온다. 이러한 시행을 두 번 하는 확률 실험에서는 총 네 가지의 결과가 나오는 다음과 같은 표본공간이 도출된다.
+
+$$
+\Omega = \lbrace HH, HT, TH, TT \rbrace
+$$
+
+이번 확률 실험의 목적이 앞면 $H$가 나온 횟수를 측정하는 것이라면 위의 표본공간은 아래와 같이 [분할](#분할)된다.
+
+$$
+\mathsf{Partition:} \ \lbrace A , B , C \rbrace
+$$
+
+$$
+\quad ...\mathrm{where} \
+\left\{\begin{array}{ll}
+
+A = \lbrace TT \rbrace && \mathsf{Heads:} \ 0
+
+\\ \\
+
+B = \lbrace TH, HT \rbrace && \mathsf{Heads:} \ 1
+
+\\ \\
+
+C = \lbrace HH \rbrace && \mathsf{Heads:} \ 2
+
+\end{array}\right.
+$$
+
+확률 변수 $X$는 분할된 상호 배타적 사건 $A$, $B$, $C$ 대신에 각 사건에서 앞면이 나오는 횟수로 대체한다.
+
+$$
+\quad \Rightarrow X \in \lbrace 0, 1, 2 \rbrace
+$$
+
+여기서 사건을 입력받아 그에 대응하는 수치적 값을 반환하는 것이 마치 함수 $y=f(x)$와 같아 확률 변수 $X$는 사실상 함수이다. 그렇지만 현 예제의 경우에는 $\lbrace 0, 1, 2 \rbrace$ 중에서 확률적으로 값을 갖는 게 일반적인 변수 $x$와 같은 형태를 지니기 떄문에 "확률 변수"라고 칭한다. 이러한 이유로 확률 변수 $X$를 흔히 변수로 취급하여 $x$로 표기한다.
+
+$$
+\qquad \therefore X = x \in \lbrace 0, 1, 2 \rbrace
+$$
+
+단, 확률 변수 $x$는 사건의 확률을 의미하는게 아니며 $x$에 대한 확률은 다음과 같다.
+
+$$
+\left\{\begin{array}{ll}
+
+\displaystyle P(x=0) && = \displaystyle \frac{1}{4}
+
+\\ \\
+
+\displaystyle P(x=1) && = \displaystyle \frac{1}{2}
+
+\\ \\
+
+\displaystyle P(x=2) && = \displaystyle \frac{1}{4}
+
+\end{array}\right.
+$$
+
+## 확률밀도함수
+[확률밀도함수](https://ko.wikipedia.org/wiki/확률_밀도_함수)(probability density function; PDF)
