@@ -1,10 +1,11 @@
 ---
 layout: docs
 language: ko
-category: 웹사이트
-title: Jekyll
-meta: Jekyll
-order: 0xF1
+title: "Jekyll 정적 웹사이트"
+tags: Jekyll
+date: 2021-03-17 00:00:00
+notice: false
+toc: true
 ---
 # JEKYLL: 소개
 [Jekyll](https://jekyllrb.com/)은 정적 사이트 생성기로 GitHub Pages를 생성하는데 사용할 수 있다. Ruby 프로그래밍 언어로 작성되었으며, 블로그나 프로젝트 페이지, 심지어 간단한 홈페이지를 만드는데 활용된다. 본 문서는 Ruby 언어에 대한 심층적 지식을 요구하지 않으므로 프로그래밍 언어 설명은 포함되지 않으며, 오로지 Jekyll을 위해 필요한 구성요소 설치, 설정, 그리고 디자인을 중점으로 다룬다.
@@ -12,18 +13,18 @@ order: 0xF1
 ## GitHub Pages 생성
 우선 개인 GitHub Pages 웹사이트를 생성하기 위해서는 리포지터리를 만들어야 하는데, 사용자 아이디 뒤에 `.github.io`만 붙이면 된다. 필자의 아이디는 GKO95이므로 GitHub Pages로 사용할 리포지터리 명칭을 `GKO95.github.io`로 지정한다.
 
-![그림 1. GitHub Pages 리포지터리](/images/blog/DOCS_Jekyll/jekyll_github_io.png)
+![그림 1. GitHub Pages 리포지터리](/images/blog/instruction_jekyll/jekyll_github_io.png)
 
 그리고 리포지터리의 GitHub Pages를 활성화하기 위해서는 `Settings` → `Options` → `GitHub Pages`에서 Source에서 branch 및 folder을 선택하여 저장한다. 설정을 저장하면 GitHub Pages 주소가 나타나지만, 활성화 및 적용에는 다소 시간이 소모되므로 최대 5분 정도 기다려본다. 리포지터리 안에 HTML 파일을 추가하여 원하는 디자인과 기능을 직접 꾸미면 해당 주소에 반영되는 것을 볼 수 있다.
 
 # JEKYLL: 설치
 Jekyll은 Ruby 언어로 개발되었으므로 프로그래밍 언어 설치가 필요로 하다. macOS나 리눅스와 같은 UNIX 시스템에서는 Ruby 설치가 매우 간단하지만, 윈도우 OS에서 설치하려면 몇 가지의 절차가 존재한다. [RubyInstaller](https://rubyinstaller.org/downloads/)에서 `WITH DEVKIT` 중에 `=>`와 함께 볼드체로 표시된 설치 파일을 다운로드 받고 실행한다.
 
-![그림 2. 윈도우 OS에서 Ruby 프로그래밍 언어 설치 (1단계)](/images/blog/DOCS_Jekyll/jekyll_ruby_install1.png)
+![그림 2. 윈도우 OS에서 Ruby 프로그래밍 언어 설치 (1단계)](/images/blog/instruction_jekyll/jekyll_ruby_install1.png)
 
 RubyInstaller 설치 중 맨 마지막에 `ridk install` 실행 여부를 체크하는 박스가 있는데 *절대로* 체크를 해제하면 안된다! Ruby 프로그래밍 언어를 윈도우 OS에 구동하는데 필요한 작업을 처리하기 위해서이다. Finish 버튼을 클릭하면 아래의 명령창이 나타난다.
 
-![그림 3. 윈도우 OS에서 Ruby 프로그래밍 언어 설치 (2단계)](/images/blog/DOCS_Jekyll/jekyll_ruby_install2.png)
+![그림 3. 윈도우 OS에서 Ruby 프로그래밍 언어 설치 (2단계)](/images/blog/instruction_jekyll/jekyll_ruby_install2.png)
 
 숫자 1~3을 입력해서 원하는 옵션을 선택하라고 적혀있지만, 그냥 Enter 키를 누르시면 알아서 필요한 작업을 처리한다. 명령창에서 몇 가지 프로그램을 설치 및 설정 작업이 진행되고 마무리가 되었을 시, 다시 한 번 Enter 키를 눌러서 명령창을 종료한다.
 
@@ -42,7 +43,7 @@ Jekyll 설치가 완료되었으면 GitHub Pages 리포지터리 안에 Jekyll�
 
 우선 VS Code에서 로컬 시스템으로 클론한 GitHub Pages 리포지터리를 연다. 폴더 이름은 `GKO95.github.io`와 같이 되어야 하나, 본 문서에서는 임시로 생성한 폴더로 예시를 보여주기 때문에 `D:\Workspace\Jekyll`로 되어 있는 점에 양해 부탁드립니다.
 
-![그림 4. VS Code에서 GitHub Pages 리포지터리 열기](/images/blog/DOCS_Jekyll/jekyll_create_vscode.png)
+![그림 4. VS Code에서 GitHub Pages 리포지터리 열기](/images/blog/instruction_jekyll/jekyll_create_vscode.png)
 
 VS Code 내에서 <code>CTRL + `</code> 단축키를 눌러 파워셸 터미널을 켠다. 여기서 <code>`</code>는 따옴표가 아닌 억음 부호(punctuation mark)로 물결표(`~`) 버튼과 함께 위치한다. 이때 나타난 터미널 창의 경로는 자동으로 현재 VS Code에서 열고 있는 폴더로 이동되어 있다. 그리고 터미널 창에 아래 명령어를 입력한다.
 
@@ -50,7 +51,7 @@ VS Code 내에서 <code>CTRL + `</code> 단축키를 눌러 파워셸 터미널�
 jekyll new .
 ```
 
-![그림 5. Jekyll 사이트 생성](/images/blog/DOCS_Jekyll/jekyll_create_new.png)
+![그림 5. Jekyll 사이트 생성](/images/blog/instruction_jekyll/jekyll_create_new.png)
 
 Bundler가 Jekyll 사이트를 생성에 필요한 구성요소를 설치하는데 시간이 다소 걸린다. 결과적으로 GitHub Pages 리포지터리 폴더 안에는 HTML과 마크다운 등 여러 종류의 파일을 확인할 수 있다. 생성된 사이트를 실행하려면 아래의 명령어를 터미널에 입력한다.
 
@@ -58,11 +59,11 @@ Bundler가 Jekyll 사이트를 생성에 필요한 구성요소를 설치하는�
 bundle exec jekyll serve 
 ```
 
-![그림 6. Jekyll 사이트 실행](/images/blog/DOCS_Jekyll/jekyll_bundle_exec.png)
+![그림 6. Jekyll 사이트 실행](/images/blog/instruction_jekyll/jekyll_bundle_exec.png)
 
 위의 명령어를 대략적으로 설명하자면 Bundler를 통해 Jekyll 사이트를 실행시키는 것이다. 실행한 Jekyll 사이트는 터미널의 `Server address:`라고 적힌 주소에서 볼 수 있으며, 해당 주소를 인터넷 브라우저로 열면 아래 화면처럼 나타난다.
 
-![그림 7. 브라우저에서의 실행된 Jekyll 사이트](/images/blog/DOCS_Jekyll/jekyll_bundle_run.png)
+![그림 7. 브라우저에서의 실행된 Jekyll 사이트](/images/blog/instruction_jekyll/jekyll_bundle_run.png)
 
 방금 명령어까지 입력한 것으로 Jekyll 사이트를 생성하여 실행하는 절차를 모두 진행하였다. 현재 보이는 디자인은 Jekyll에서 기본적으로 제공하는 디자인으로, 원하면 그대로 사용할 수 있다. 실행 중인 Jekyll 사이트는 인터넷 브라우저를 종료해도 터미널이 열려있는 한 계속 활성화되어 있다. Jekyll 사이트를 종료하려면 터미널을 종료하거나, 아니면 `CTRL+C`를 누른 다음에 `Y` 버튼을 누른다.
 
@@ -76,7 +77,7 @@ bundle exec jekyll serve
 
 주석에 달린 설명에 의하면 GitHub Pages에 사용하기 위해서는 위의 `gem "jekyll"` 문장을 삭제하고 아래의 `gem "github-pages", group: :jekyll_plugins` 문장의 주석을 해제한다.
 
-![그림 8. GitHub Pages를 위한 Gemfile 변경 내용](/images/blog/DOCS_Jekyll/jekyll_gemfile_ghpages.png)
+![그림 8. GitHub Pages를 위한 Gemfile 변경 내용](/images/blog/instruction_jekyll/jekyll_gemfile_ghpages.png)
 
 # JEKYLL: 설정
 이전 장으로부터 매우 기본적인 Jekyll 사이트를 생성하여 실행까지 되는 것을 확인하였다. 그러나 사용자가 원하는대로 사이트 구조를 변경하거나 새로운 콘텐츠를 추가하기 위해서는 무엇을 편집해야 할 지 모르는 경우가 대다수이다. 본 장에서는 생성된 Jekyll 사이트의 이해와 활용도를 향상시키기 위한 구조 및 설정 방법에 대하여 설명한다.
@@ -84,7 +85,7 @@ bundle exec jekyll serve
 ## Jekyll 폴더 구조
 Jekyll 사이트를 생성하면 아래와 같은 폴더와 파일들로 이루어진 것을 볼 수 있으며, 이들은 다음과 같은 역할을 한다:
 
-![그림 9. Jekyll 사이트 구성 파일 및 폴더](/images/blog/DOCS_Jekyll/jekyll_config_files.png)
+![그림 9. Jekyll 사이트 구성 파일 및 폴더](/images/blog/instruction_jekyll/jekyll_config_files.png)
 
 | 파일             | 설명                                      |
 |:--------------:|-----------------------------------------|
@@ -101,7 +102,7 @@ Jekyll 사이트를 생성하면 아래와 같은 폴더와 파일들로 이루�
 ### `_posts` 폴더
 블로그 형식 게시글을 담는 폴더이다. Jekyll 사이트를 생성하면 기본적으로 게시글 하나가 해당 폴더 안에 들어있으며, 브라우저에서는 아래와 같이 보여진다.
 
-![그림 10. Jekyll의 "post" 형식 게시글 예시](/images/blog/DOCS_Jekyll/jekyll_config_post.png)
+![그림 10. Jekyll의 "post" 형식 게시글 예시](/images/blog/instruction_jekyll/jekyll_config_post.png)
 
 이를 바탕으로 Jekyll을 처음 접하는 사용자들은 `_posts` 폴더에 게시글을 올리려고 시도하지만 대부분 실패한다. 왜냐하면 직접 작성한 마크다운이 보이지 않기 때문이다. 그러나 이는 `_posts` 폴더가 가지는 고질적인 문제로 *마크다운 파일명을 날짜로 시작*해야만 게시글이 반영된다.
 
@@ -267,7 +268,7 @@ bundle info --path minima
 
 터미널에서는 minima 테마의 코드가 어디에 위치하는지 알려준다. 해당 경로로 이동하면 다음과 같이 폴더와 파일이 구성된 것을 확인할 수 있다.
 
-![그림 11. Jekyll의 minima 테마 소스코드](/images/blog/DOCS_Jekyll/jekyll_minima_source.png)
+![그림 11. Jekyll의 minima 테마 소스코드](/images/blog/instruction_jekyll/jekyll_minima_source.png)
 
 여기서 명시해야 할 점음 밑줄(`_`)로 시작하는 폴더 및 파일들은 HTML로 변환될 때 나타나지 않으며 오로지 Jekyll에서만 다루어진다. 이와 마찬가지로 이전 게시글에서 소개한 `_config.yml` 파일과 `_site` 폴더도 Jekyll 관리용으로만 사용되어 HTML 사이트로 변환될 때에는 찾아볼 수 없다. 
 
@@ -314,11 +315,11 @@ HTML 테마 디자인에 사용되는 스타일들을 담는 폴더이다. 여�
 ## Jekyll 테마 수정하기
 위 부문에서 설명한 Jekyll 테마 디자인 구조를 알고 있으면 수정하고 싶은 HTML 파일 경로를 그대로 가져와 손쉽게 변경할 수 있다. HTML 페이지 하단부, 즉 `footer.html`을 변경하고 싶다고 예시를 든다: 그러면 아래와 같이 `/_includes/footer.html`을 Jekyll 폴더에 추가하면 됩니다.
 
-![그림 12. Jekyll의 minima 테마 디자인의 하단부 수정](/images/blog/DOCS_Jekyll/jekyll_minima_edit.png)
+![그림 12. Jekyll의 minima 테마 디자인의 하단부 수정](/images/blog/instruction_jekyll/jekyll_minima_edit.png)
 
 현재 `footer.html`에는 아무런 코드가 작성되지 않은 빈 파일이다. 만일 minima 테마의 코드가 아닌 Jekyll 폴더의 코드가 적용되었다면 HTML 페이지 하단부에는 빈 공간이 나타나야 한다. 이를 확인하기 위해 `bundle exec jekyll serve` 명령어를 터미널에 입력하면 다음과 같이 나타난다.
 
-![그림 13. Jekyll의 minima 테마 디자인의 하단부 수정 모습](/images/blog/DOCS_Jekyll/jekyll_minima_change.png)
+![그림 13. Jekyll의 minima 테마 디자인의 하단부 수정 모습](/images/blog/instruction_jekyll/jekyll_minima_change.png)
 
 이를 통해 Jekyll 폴더에서 동일한 HTML 이름의 코드를 작성하면 기존 테마 디자인 코드가 오버라이트(overwrite), 즉 덮어쓰여진다는 점을 확인할 수 있다. 이를 기반으로 사용자는 원하는 테마를 가져와서 일부분만 개개인 취향에 맞게 간단히 수정할 수 있으며, 구성요소만이 아닌 레이아웃과 스타일시트, 그리고 리소스 또한 변경이 가능하다.
 
