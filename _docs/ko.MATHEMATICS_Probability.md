@@ -276,7 +276,7 @@ $$
 > $$    
 
 # 확률론: 변수
-[확률 변수](https://ko.wikipedia.org/wiki/확률_변수)(random variable, stochastic variable)는 확률 실험에서 발생한 사건을 수치적 값으로 표현하는 함수이다. 확률 분포를 이해하기 위해서 반드시 알아야 하는 중요한 개념이지만, 처음으로 접하면 확률 변수의 정의 및 의의에 대한 의문점이 생기기 마련이다. 이러한 궁금증을 해소하기 위해 간단한 예시를 들어본다:
+[확률변수](https://ko.wikipedia.org/wiki/확률_변수)(random variable, stochastic variable; RV)는 확률 실험에서 발생한 사건을 수치적 값으로 표현하는 함수이다. 확률 분포를 이해하기 위해서 반드시 알아야 하는 중요한 개념이지만, 처음으로 접하면 확률변수의 정의 및 의의에 대한 의문점이 생기기 마련이다. 이러한 궁금증을 해소하기 위해 간단한 예시를 들어본다:
 
 동전 던지기를 시행하면 결과가 앞면(Head; $H$) 혹은 뒷면(Tail; $T$)이 나온다. 이러한 시행을 두 번 하는 확률 실험에서는 총 네 가지의 결과가 나오는 다음과 같은 표본공간이 도출된다.
 
@@ -307,35 +307,131 @@ C = \lbrace HH \rbrace && \mathsf{Heads:} \ 2
 \end{array}\right.
 $$
 
-확률 변수 $X$는 분할된 상호 배타적 사건 $A$, $B$, $C$ 대신에 각 사건에서 앞면이 나오는 횟수로 대체한다.
+확률변수 $X$는 분할된 상호 배타적 사건 $A$, $B$, $C$ 대신에 각 사건에서 앞면이 나오는 횟수로 대체한다.
 
 $$
 \quad \Rightarrow X \in \lbrace 0, 1, 2 \rbrace
 $$
 
-여기서 사건을 입력받아 그에 대응하는 수치적 값을 반환하는 것이 마치 함수 $y=f(x)$와 같아 확률 변수 $X$는 사실상 함수이다. 그렇지만 현 예제의 경우에는 $\lbrace 0, 1, 2 \rbrace$ 중에서 확률적으로 값을 갖는 게 일반적인 변수 $x$와 같은 형태를 지니기 떄문에 "확률 변수"라고 칭한다. 이러한 이유로 확률 변수 $X$를 흔히 변수로 취급하여 $x$로 표기한다.
+여기서 사건을 입력받아 그에 대응하는 수치적 값을 반환하는 것이 마치 함수 $y=f(x)$와 같아 확률변수 $X$는 사실상 함수이다. 그렇지만 현 예제의 경우에는 $\lbrace 0, 1, 2 \rbrace$ 중에서 확률적으로 값을 갖는 게 일반적인 변수 $x$와 같은 형태를 지니기 떄문에 "확률변수"라고 칭한다. 이러한 이유로 확률변수 $X$를 흔히 변수로 취급하여 $x$로 표기한다.
 
 $$
 \qquad \therefore X = x \in \lbrace 0, 1, 2 \rbrace
 $$
 
-단, 확률 변수 $x$는 사건의 확률을 의미하는게 아니며 $x$에 대한 확률은 다음과 같다.
+본 장에서는 확률변수에 대한 설명을 중점으로 다루므로 혼란을 줄이기 위해, 확률변수를 $X$라 하고 확률변수가 갖는 값을 $x$라 표기한다. 
+
+## 확률밀도함수
+[확률밀도함수](https://ko.wikipedia.org/wiki/확률_밀도_함수)(probability density function; PDF) $f_X(x)$는 확률변수 $X$의 수치 값 혹은 범위에서 사건이 발생할 확률을 가리킨다. 본 장에서 소개한 동전 던지기를 두 번 시행하여 앞면이 나오는 횟수를 세는 확률 실험에서는 다음과 같은 PDF가 나온다.
 
 $$
 \left\{\begin{array}{ll}
 
-\displaystyle P(x=0) && = \displaystyle \frac{1}{4}
+\displaystyle f_X(x=0) && = \displaystyle \frac{1}{4}
 
 \\ \\
 
-\displaystyle P(x=1) && = \displaystyle \frac{1}{2}
+\displaystyle f_X(x=1) && = \displaystyle \frac{1}{2}
 
 \\ \\
 
-\displaystyle P(x=2) && = \displaystyle \frac{1}{4}
+\displaystyle f_X(x=2) && = \displaystyle \frac{1}{4}
 
 \end{array}\right.
 $$
 
-## 확률밀도함수
-[확률밀도함수](https://ko.wikipedia.org/wiki/확률_밀도_함수)(probability density function; PDF)
+확률변수 $X$로부터 나올 수 있는 모든 값들의 확률들을 전부 더하면 1, 즉 100% 확률이 된다.
+
+$$
+\quad \therefore \int_{-\infty}^{\infty}f_X(x)dx = 1
+$$
+
+## 누적분포함수
+[누적분포함수](https://ko.wikipedia.org/wiki/누적_분포_함수)(cumulative distribution function; CDF) $F_X(x)$는 확률변수 $X$가 수치 $x$까지 도달하는데 누적된 확률이 얼마인지 의미한다.
+
+$$
+F_X(x) = P(X \leq x)
+$$
+
+만일 $a$에서부터 $b$까지의 범위에서 누적된 확률을 구하려면 다음 수식이 완성된다. 여기서 $a < b$이면 CDF는 반드시 0 이상의 값이 나온다. 음의 확률이란 것은 존재하지 않으므로 CDF는 절대 감소하지 않는 함수이기 때문이다.
+
+$$
+P(a < X \leq b) = F_X(b) - F_X(a) > 0 \quad ... \mathrm{if} \ a < b
+$$
+
+본 장에서 소개한 동전 던지기를 두 번 시행하여 앞면이 나오는 횟수를 세는 확률 실험에서는 다음과 같은 CDF가 나온다.
+
+$$
+\left\{\begin{array}{lllll}
+
+\displaystyle F_X(x=0) && = \displaystyle \frac{1}{4} && = P(0)
+
+\\ \\
+
+\displaystyle F_X(x=1) && = \displaystyle \frac{3}{4} && = P(0) + P(1)
+
+\\ \\
+
+\displaystyle F_X(x=2) && = \displaystyle 1 && = P(0) + P(1) + P(2)
+
+\end{array}\right.
+$$
+
+### PDF & CDF 관계식
+아래는 PDF에서 CDF, 혹은 CDF에서 PDF를 구하는 방법이다:
+* PDF → CDF
+
+    $$
+    F_X(a) = \int_{-\infty}^{a}f_X(x)dx
+    $$
+
+* CDF → PDF
+
+    $$
+    f_X(a) = \left. \frac{d}{dx}F_X(x)\right|_{x=a}
+    $$
+
+## 확률변수 유형
+확률변수 $X$의 값 $x$가 어떻게 분포되어 있는지에 따라 세 가지 유형으로 나뉘어진다.
+
+1. 연속확률변수 (continuous RV)
+    
+    확률변수의 분포가 연속적이어서 값 $x$의 개수가 무한하다. 여기서 "연속"은 절대 확률변수$X$의 값 $x$가 갖는 확률분포 $f_X(x)$가 연속적인 그래프를 그려서가 아니다. 연속확률분포의 가장 대표적인 특징으로 한 점에 대한 확률을 표기할 수가 없다. 
+
+    $$
+    P(X = b) = P(b^{-} < X \leq b^{+}) = F_X(b^+) - F_X(b^-)
+    $$
+
+    $$
+    \quad \therefore P(X = b) = 0 \quad ... \mathrm{if} \ F_X(x) \ \mathrm{is \ continuous \ at} \ b
+    $$
+
+2. 이산확률변수 (discrete RV)
+    
+    일명 [확률질량함수](https://ko.wikipedia.org/wiki/확률_질량_함수)(probability mass function; PMF)라고도 부르며 확률변수의 분포가 $x_k \in \lbrace 1, 2, 3, ... \rbrace$처럼 이산적이어서 값 $x$의 개수가 유한하다. 연속확률변수와 달리 한 점에 대한 확률을 표기할 수 있다.
+
+    $$
+    P(X = b) = P(a < X \leq b) = F_X(b) - F_X(a)
+    $$
+
+    $$
+    \quad \therefore P(X = b) = P(b) \quad ... \mathrm{if} \ F_X(x_k) \ \mathrm{is \ discrete \ at} \ b \ \mathrm{and} \ x_k \in \lbrace a, b, ... \rbrace
+    $$
+    
+    이산확률변수의 PDF 및 CDF는 각각 [디랙 델타 함수](https://ko.wikipedia.org/wiki/디랙_델타_함수)와 [계단 함수](https://ko.wikipedia.org/wiki/계단_함수)로 구성된다.
+
+    $$
+    \left\{\begin{array}{llll}
+
+    \mathsf{PDF:} && f_X(x_k) = \displaystyle \sum_{n}P(x_k)u(x-x_k)
+
+    \\ \\
+
+    \mathsf{CDF:} && F_X(x_k) = \displaystyle \sum_{n}P(x_k)\delta(x-x_k)
+
+    \end{array}\right.
+    $$
+
+3. 혼합확률변수 (mixed RV)
+
+    연속과 이산이 혼합된 확률변수이다.
