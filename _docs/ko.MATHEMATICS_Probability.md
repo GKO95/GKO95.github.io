@@ -394,6 +394,8 @@ $$
 ## 확률변수 유형
 확률변수 $X$의 값 $x$가 어떻게 분포되어 있는지에 따라 세 가지 유형으로 나뉘어진다.
 
+![연속확률변수(左) 및 이산확률변수(右)<sub><i>출처: <a href="https://abaqus-docs.mit.edu/2017/English/SIMACAEMODRefMap/simamod-c-probdensityfunc.htm">Abaqus documentation - MIT</a></i></sub>](/images/docs/probability/probability_continuous_discrete.png)
+
 1. 연속확률변수 (continuous RV)
     
     확률변수의 분포가 연속적이어서 값 $x$의 개수가 무한하다. 여기서 "연속"은 절대 확률변수$X$의 값 $x$가 갖는 확률분포 $f_X(x)$가 연속적인 그래프를 그려서가 아니다. 연속확률분포의 가장 대표적인 특징으로 한 점에 대한 확률을 표기할 수가 없다. 
