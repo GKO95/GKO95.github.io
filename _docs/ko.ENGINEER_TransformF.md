@@ -706,7 +706,7 @@ $$
 다음은 시간 영역에서의 특정 신호들에 대한 푸리에 변환쌍이다. 신호해석 및 분석에서 자주 응용되는 신호 및 함수들이므로 미리 알아두면 차후에 유용하게 사용된다.
 
 * *[단위 임펄스](https://ko.wikipedia.org/wiki/디랙_델타_함수) (Unit impulse)*
-    : 일명 디렉 델타 함수(Dirac delta function) $\delta(t-a)$는 총 면적이 1인 함수이나, $t=a$에서만 면적을 가지므로 $\delta(0) = \infty$이고 나머지는 0을 갖는 함수이다.
+    : 일명 디랙 델타 함수(Dirac delta function) $\delta(t-a)$는 총 면적이 1인 함수이나, $t=a$에서만 면적을 가지므로 $\delta(0) = \infty$이고 나머지는 0을 갖는 함수이다.
 
     > <div style="float: right; text-align: right; margin-top: 0px;"><sub><a href="#신호-단위-임펄스">[증명]</a></sub></div>
     >
@@ -1432,13 +1432,13 @@ $$
 > \mathcal{F}\left\{ \delta(t) \right\} = \int_{-\infty}^{\infty}{\delta(t)e^{-j2\pi ft}dt}
 > $$
 >
-> 디렉 델타 함수 $\delta(t-a)$는 $t=a$ 이외에는 모두 0인 함수이다. 그러므로 푸리에 분석 방정식에서 실질적으로 의미있는 적분 범위는 아래와 같다.
+> 디랙 델타 함수 $\delta(t-a)$는 $t=a$ 이외에는 모두 0인 함수이다. 그러므로 푸리에 분석 방정식에서 실질적으로 의미있는 적분 범위는 아래와 같다.
 >
 > $$
 > \quad \Rightarrow \int_{-0}^{+0}{\delta(t)e^{-j2\pi ft}dt}
 > $$
 >
-> 그리고 디렉 델타 함수 $\delta(t-a)$는 $t=a$일 때 항상 적분값이 1이므로 분석 방정식은 다음과 같이 간략화된다.
+> 그리고 디랙 델타 함수 $\delta(t-a)$는 $t=a$일 때 항상 적분값이 1이므로 분석 방정식은 다음과 같이 간략화된다.
 >
 > $$
 > \quad \Rightarrow \int_{-0}^{+0}{e^{-j2\pi ft}dt} = \left. e^{-j2\pi ft} \right|_{t=0} = 1
@@ -1452,13 +1452,13 @@ $$
 > \mathcal{F}^{-1}\left\{ \delta(f) \right\} = \int_{-\infty}^{\infty}{\delta(f)e^{j2\pi ft}df}
 > $$
 >
-> 디렉 델타 함수 $\delta(f-a)$는 $f=a$ 이외에는 모두 0인 함수이다. 그러므로 푸리에 분석 방정식에서 실질적으로 의미있는 적분 범위는 아래와 같다.
+> 디랙 델타 함수 $\delta(f-a)$는 $f=a$ 이외에는 모두 0인 함수이다. 그러므로 푸리에 분석 방정식에서 실질적으로 의미있는 적분 범위는 아래와 같다.
 >
 > $$
 > \quad \Rightarrow \int_{-0}^{+0}{\delta(f)e^{j2\pi ft}df}
 > $$
 >
-> 그리고 디렉 델타 함수 $\delta(t-a)$는 $t=a$일 때 항상 적분값이 1이므로 분석 방정식은 다음과 같이 간략화된다.
+> 그리고 디랙 델타 함수 $\delta(t-a)$는 $t=a$일 때 항상 적분값이 1이므로 분석 방정식은 다음과 같이 간략화된다.
 >
 > $$
 > \quad \Rightarrow \int_{-0}^{+0}{e^{j2\pi ft}df} = \left. e^{-j2\pi ft} \right|_{f=0} = 1
