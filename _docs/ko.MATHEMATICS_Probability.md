@@ -322,28 +322,36 @@ $$
 본 장에서는 확률변수에 대한 설명을 중점으로 다루므로 혼란을 줄이기 위해, 확률변수를 $X$라 하고 확률변수가 갖는 값을 $x$라 표기한다. 
 
 ## 확률밀도함수
-[확률밀도함수](https://ko.wikipedia.org/wiki/확률_밀도_함수)(probability density function; PDF) $f_X(x)$는 확률변수 $X$의 수치 값 혹은 범위에서 사건이 발생할 확률을 가리킨다. 본 장에서 소개한 동전 던지기를 두 번 시행하여 앞면이 나오는 횟수를 세는 확률 실험에서는 다음과 같은 PDF가 나온다.
+[확률밀도함수](https://ko.wikipedia.org/wiki/확률_밀도_함수)(probability density function; PDF) $f_X(x)$는 확률변수 $X$에서 사건이 발생할 상대적 가능성(relative likelihood)을 가리킨다. 여기서 가능성이란, 절대로 확률(probability) $P(x)$를 언급하는 것이 아니며 단순히 특정 결과가 나머지에 비해 얼마나 빈번히 발생할지 상대적 수치로 표현한 것이다. 그러므로 확률밀도함수는 $f_X(x) > 1$인 경우가 존재할 수 있으며, 이는 확률 $P(x)$에서는 절대로 나타날 수가 없다. 
+
+확률변수 $X$의 PDF에서 확률은 적분 면적으로부터 구해지며, 무한범위에서 적분을 취하면 100% 확률이 된다.
 
 $$
-\left\{\begin{array}{ll}
+\Pr [a \le X \le b] = \int_a^b f_X(x) \, dx
+$$
 
-\displaystyle f_X(x=0) && = \displaystyle \frac{1}{4}
+$$
+\quad \therefore \int_{-\infty}^{\infty}f_X(x) \, dx = 1
+$$
+
+위의 식에 의하면 $a = b$인 경우에는 $0$으로 계산되는데, 이는 하나의 결과에 대한 확률을 구할 수 없음을 의미한다. 단, 이산확률변수(discrete random variable)에서는 각 결과에 대한 PDF가 [디랙 델타 함수](https://ko.wikipedia.org/wiki/디랙_델타_함수)(Dirac delta function) $\delta(x)$로 나타나기 때문에 한 결과에 대한 확률이 $P(x)$로 계산되는 특수한 경우이다. 자세한 내용은 [확률변수 유형](#확률변수-유형)을 참고하도록 한다.
+
+본 장에서 소개한 동전 던지기를 두 번 시행하여 앞면이 나오는 횟수를 세는 확률 실험은 *이산확률변수*이므로 다음과 같은 PDF가 나온다.
+
+$$
+\left\{\begin{array}{lll}
+
+\displaystyle \int_{-0.5}^{0.5} f_X(x=0) \, dx && = P(x=0) && = \displaystyle \frac{1}{4}
 
 \\ \\
 
-\displaystyle f_X(x=1) && = \displaystyle \frac{1}{2}
+\displaystyle \int_{0.5}^{1.5} f_X(x=1) \, dx && = P(x=1) && = \displaystyle \frac{1}{2}
 
 \\ \\
 
-\displaystyle f_X(x=2) && = \displaystyle \frac{1}{4}
+\displaystyle \int_{1.5}^{2.5} f_X(x=2) \, dx && = P(x=2) && = \displaystyle \frac{1}{4}
 
 \end{array}\right.
-$$
-
-확률변수 $X$로부터 나올 수 있는 모든 값들의 확률들을 전부 더하면 1, 즉 100% 확률이 된다.
-
-$$
-\quad \therefore \int_{-\infty}^{\infty}f_X(x)dx = 1
 $$
 
 ## 누적분포함수
@@ -382,7 +390,7 @@ $$
 * PDF → CDF
 
     $$
-    F_X(a) = \int_{-\infty}^{a}f_X(x)dx
+    F_X(a) = \int_{-\infty}^{a}f_X(x) \, dx
     $$
 
 * CDF → PDF
