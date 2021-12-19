@@ -445,3 +445,90 @@ $$
 3. 혼합확률변수 (mixed RV)
 
     연속과 이산이 혼합된 확률변수이다.
+
+# 확률론: 기대
+[기댓값](https://ko.wikipedia.org/wiki/기댓값)(expected value) $\mu_X$, 일명 기대치(expectation)는 하나의 확률 실험으로부터 발생할 것으로 기대(혹은 예측)되는 결과로써 확률변수 $X$의 [가중평균](https://ko.wikipedia.org/wiki/가중_산술_평균)(weighted average)으로 계산된다. 비록 가장 일반적인 [산술평균](https://ko.wikipedia.org/wiki/산술_평균)이 아니지만 확률변수에서는 기댓값을 평균(mean; average)이라고도 칭한다. 
+
+동전 던지기를 시행하면 결과가 앞면(Head; $H$) 혹은 뒷면(Tail; $T$)이 나온다. 이러한 시행을 두 번 하는 확률 실험에서 앞면 $H$가 나올 확률변수 $X$는 다음과 같은 결과를 갖는다:
+
+$$
+X = x \in \lbrace 0, 1, 2 \rbrace
+$$
+
+$$
+\quad ...\mathrm{where} \
+\left\{\begin{array}{ll}
+
+\displaystyle P(x=0) && = \displaystyle \frac{1}{4}
+
+\\ \\
+
+\displaystyle P(x=1) && = \displaystyle \frac{1}{2}
+
+\\ \\
+
+\displaystyle P(x=2) && = \displaystyle \frac{1}{4}
+
+\end{array}\right.
+$$
+
+기댓값은 일반적으로 [선형성](https://ko.wikipedia.org/wiki/선형성)을 지닌 기대연산자(expectation operator) $\operatorname{E}$를 사용하여 구하며 아래의 수식을 갖는다.
+
+$$
+\mu_X = \operatorname{E}[X] =
+
+\left\{ 
+\begin{array}{ll}
+
+\displaystyle \int_{-\infty}^{\infty}xf_X(x)\,dx & \quad \mathsf{Continuous \ RV}
+
+\\
+
+\\
+
+\displaystyle \sum_k x_kP(x_k) & \quad \mathsf{Discrete \ RV}
+
+\end{array}
+\right.
+$$
+
+그러므로 이산확률변수인 $X$의 기댓값은 다음과 같이 계산된다.
+
+$$
+\quad \therefore \mu_X = 0 \left( \frac{1}{4} \right) + 1 \left( \frac{1}{2} \right) + 2 \left( \frac{1}{4} \right) = 1
+$$
+
+## 분산
+[분산](https://ko.wikipedia.org/wiki/분산)(variance) $\sigma_X^2$은 확률변수 $X$가 기댓값 $\mu_X$로부터 얼마나 넓게 퍼져있는지를 나타내는 수치이다. 이는 확률변수 $X$의 값들이 기댓값 $\mu_X$로부터 얼마나 멀리 떨어져있는지를 제곱시켜 평균화시킨 것으로부터 얻어진다.
+
+> 분산에서 제곱은 두 가지의 목적을 갖는다:
+>
+> 1. 분산을 $\sigma_X^2 \ge 0$으로 만든다. 만일 확률변수 $X$에서 $x < \mu_X$의 경우가 발생할 시, 확률변수의 값과 평균 간의 거리는 음의 값을 갖게 된다. 물론 [절댓값](https://ko.wikipedia.org/wiki/절댓값)(absolute value)을 사용할 수도 있겠지만 두 번째 이유를 살펴보아야 한다.
+>
+> 2. 확률변수의 퍼짐 정도를 절댓값보다 더 정확하게 나타낸다. 만일 동일한 $P(x) = 1/4$ 확률을 갖는 실험 결과들이 평균으로부터의 거리가 $\lbrace 4, 4, 4, 4 \rbrace$인 경우와 더 넓게 퍼진 $\lbrace 7, 1, 2, 6 \rbrace$인 경우가 있다고 가정한다: 절댓값만을 활용하면 모두 $4$로 계산되어 퍼짐 정도가 동일하다가 도출하지만, 제곱으로 계산하면 각각 $16$과 $22.5$로 계산되어 확실히 후자가 더 넓게 퍼져있다는 것을 알 수 있다. 제곱을 취하므로써 멀리있는 데이터를 수치적으로 더 멀게, 그리고 가까운 데이터를 수치적으로 더 가깝게 만들기에 구별이 가능한 것이다.
+
+아래와 같은 수식으로 표현된다.
+
+$$
+\textstyle \operatorname{Var}[X] =  \operatorname{E}[(X-\mu_X)^2] = \operatorname{E}\left[ X^2 - 2 \mu_X X + \mu_X^2 \right]
+$$
+
+$$
+\textstyle \quad = \operatorname{E}[ X^2 ] + \operatorname{E}[-2\mu_X X] + \mu_X^2 \quad \left( \because \mathrm{Linearity} \right)
+$$
+
+$$
+\textstyle \quad = \operatorname{E}[ X^2 ] - 2\mu_X\operatorname{E}[X] + \mu_X^2
+$$
+
+기댓값 $\mu_X$는 상수이기 때문에 선형연산자 $\operatorname{E}$ 밖으로 나올 수 있으며, 또한 $\operatorname{E}[X] = \mu_X$이므로 아래의 식으로 정리된다.
+
+$$
+\textstyle \qquad \therefore \sigma_X^2 = \operatorname{E}[X^2] - \mu_X^2
+$$
+
+### 표준편차
+[표준편차](https://ko.wikipedia.org/wiki/표준_편차)(standard deviation) $\sigma_X$는 분산의 제곱근이지만, 의미하는 바는 동일하다: 평균으로부터 얼마나 넓게 퍼져있는지 정도를 나타내는 수치이다. 그러므로 확률변수 퍼짐은 분산이나 표준편차로도 확인할 수 있다. 분산은 수학적 계산에서 유용하며, 표준편차는 기댓값과 동일한 차원을 갖으므로 데이터 분포 분석에 흔히 사용된다.
+
+### 정규화
+[정규화](https://en.wikipedia.org/wiki/Normalization_(statistics))(normalization)란 확률변수의 분포를 평균 $\mu_X = 0$, 표준편차 $\sigma_X = 1$, 그리고 최댓값 ${f_X(x)}_{\mathrm{Max}} = 1$로 조정하는 작업이다. 정규화를 하므로써 확률변수의 분포를 무차원(dimensionless)으로 만들고 공통된 평면 위에서 표현될 수 있도록 한다.
