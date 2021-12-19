@@ -495,7 +495,7 @@ $$
 그러므로 이산확률변수인 $X$의 기댓값은 다음과 같이 계산된다.
 
 $$
-\quad \therefore \mu_X = 0 \left( \frac{1}{4} \right) + 1 \left( \frac{1}{2} \right) + 2 \left( \frac{1}{4} \right) = 1
+\quad \Rightarrow \mu_X = 0 \left( \frac{1}{4} \right) + 1 \left( \frac{1}{2} \right) + 2 \left( \frac{1}{4} \right) = 1
 $$
 
 ## 분산
@@ -525,6 +525,12 @@ $$
 
 $$
 \textstyle \qquad \therefore \sigma_X^2 = \operatorname{E}[X^2] - \mu_X^2
+$$
+
+그러므로 이산확률변수인 $X$의 분산은 다음과 같이 계산된다.
+
+$$
+\quad \Rightarrow \sigma_X^2 = \left[ 0^2 \left( \frac{1}{4} \right) + 1^2 \left( \frac{1}{2} \right) + 2^2 \left( \frac{1}{4} \right) \right] - 1^2 = 0.5
 $$
 
 ### 표준편차
