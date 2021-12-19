@@ -31,7 +31,7 @@ $$
 ## 라플라스 변환
 > *참조: [MIT 온라인 공개수업 - 강의 19: 라플라스 변환의 소개](https://ocw.mit.edu/courses/mathematics/18-03-differential-equations-spring-2010/video-lectures/lecture-19-introduction-to-the-laplace-transform/)*
 
-라플라스 변환은 확률 이론(probability theory)으로부터 유도된 변환식이다.
+라플라스 변환은 [확률 이론](../ko.MATHEMATICS_Probability)(probability theory)으로부터 유도된 변환식이다.
 
 ### 푸리에 변환
 라플라스 변환은 아래의 [푸리에 변환](../ko.ENGINEER_TransformF/#푸리에-변환)과 매우 유사한 형태를 띈다.

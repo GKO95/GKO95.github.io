@@ -273,4 +273,268 @@ $$
 >
 > $$
 > \quad \because \mathsf{Number \ of \ combination: \ } \lbrace 1, 2 \rbrace , \lbrace 1, 3 \rbrace , \lbrace 2, 3 \rbrace
-> $$
+> $$    
+
+# 확률론: 변수
+[확률변수](https://ko.wikipedia.org/wiki/확률_변수)(random variable, stochastic variable; RV)는 확률 실험에서 발생한 사건을 수치적 값으로 표현하는 함수이다. 확률 분포를 이해하기 위해서 반드시 알아야 하는 중요한 개념이지만, 처음으로 접하면 확률변수의 정의 및 의의에 대한 의문점이 생기기 마련이다. 이러한 궁금증을 해소하기 위해 간단한 예시를 들어본다:
+
+동전 던지기를 시행하면 결과가 앞면(Head; $H$) 혹은 뒷면(Tail; $T$)이 나온다. 이러한 시행을 두 번 하는 확률 실험에서는 총 네 가지의 결과가 나오는 다음과 같은 표본공간이 도출된다.
+
+$$
+\Omega = \lbrace HH, HT, TH, TT \rbrace
+$$
+
+이번 확률 실험의 목적이 앞면 $H$가 나온 횟수를 측정하는 것이라면 위의 표본공간은 아래와 같이 [분할](#분할)된다.
+
+$$
+\mathsf{Partition:} \ \lbrace A , B , C \rbrace
+$$
+
+$$
+\quad ...\mathrm{where} \
+\left\{\begin{array}{ll}
+
+A = \lbrace TT \rbrace && \mathsf{Heads:} \ 0
+
+\\ \\
+
+B = \lbrace TH, HT \rbrace && \mathsf{Heads:} \ 1
+
+\\ \\
+
+C = \lbrace HH \rbrace && \mathsf{Heads:} \ 2
+
+\end{array}\right.
+$$
+
+확률변수 $X$는 분할된 상호 배타적 사건 $A$, $B$, $C$ 대신에 각 사건에서 앞면이 나오는 횟수로 대체한다.
+
+$$
+\quad \Rightarrow X \in \lbrace 0, 1, 2 \rbrace
+$$
+
+여기서 사건을 입력받아 그에 대응하는 수치적 값을 반환하는 것이 마치 함수 $y=f(x)$와 같아 확률변수 $X$는 사실상 함수이다. 그렇지만 현 예제의 경우에는 $\lbrace 0, 1, 2 \rbrace$ 중에서 확률적으로 값을 갖는 게 일반적인 변수 $x$와 같은 형태를 지니기 떄문에 "확률변수"라고 칭한다. 이러한 이유로 확률변수 $X$를 흔히 변수로 취급하여 $x$로 표기한다.
+
+$$
+\qquad \therefore X = x \in \lbrace 0, 1, 2 \rbrace
+$$
+
+본 장에서는 확률변수에 대한 설명을 중점으로 다루므로 혼란을 줄이기 위해, 확률변수를 $X$라 하고 확률변수가 갖는 값을 $x$라 표기한다. 
+
+## 확률밀도함수
+[확률밀도함수](https://ko.wikipedia.org/wiki/확률_밀도_함수)(probability density function; PDF) $f_X(x)$는 확률변수 $X$에서 사건이 발생할 상대적 가능성(relative likelihood)을 가리킨다. 여기서 가능성이란, 절대로 확률(probability) $P(x)$를 언급하는 것이 아니며 단순히 특정 결과가 나머지에 비해 얼마나 빈번히 발생할지 상대적 수치로 표현한 것이다. 그러므로 확률밀도함수는 $f_X(x) > 1$인 경우가 존재할 수 있으며, 이는 확률 $P(x)$에서는 절대로 나타날 수가 없다. 
+
+확률변수 $X$의 PDF에서 확률은 적분 면적으로부터 구해지며, 무한범위에서 적분을 취하면 100% 확률이 된다.
+
+$$
+\Pr [a \le X \le b] = \int_a^b f_X(x) \, dx
+$$
+
+$$
+\quad \therefore \int_{-\infty}^{\infty}f_X(x) \, dx = 1
+$$
+
+위의 식에 의하면 $a = b$인 경우에는 $0$으로 계산되는데, 이는 하나의 결과에 대한 확률을 구할 수 없음을 의미한다. 단, 이산확률변수(discrete random variable)에서는 각 결과에 대한 PDF가 [디랙 델타 함수](https://ko.wikipedia.org/wiki/디랙_델타_함수)(Dirac delta function) $\delta(x)$로 나타나기 때문에 한 결과에 대한 확률이 $P(x)$로 계산되는 특수한 경우이다. 자세한 내용은 [확률변수 유형](#확률변수-유형)을 참고하도록 한다.
+
+본 장에서 소개한 동전 던지기를 두 번 시행하여 앞면이 나오는 횟수를 세는 확률 실험은 *이산확률변수*이므로 다음과 같은 PDF가 나온다.
+
+$$
+\left\{\begin{array}{lll}
+
+\displaystyle \int_{-0.5}^{0.5} f_X(x=0) \, dx && = P(x=0) && = \displaystyle \frac{1}{4}
+
+\\ \\
+
+\displaystyle \int_{0.5}^{1.5} f_X(x=1) \, dx && = P(x=1) && = \displaystyle \frac{1}{2}
+
+\\ \\
+
+\displaystyle \int_{1.5}^{2.5} f_X(x=2) \, dx && = P(x=2) && = \displaystyle \frac{1}{4}
+
+\end{array}\right.
+$$
+
+## 누적분포함수
+[누적분포함수](https://ko.wikipedia.org/wiki/누적_분포_함수)(cumulative distribution function; CDF) $F_X(x)$는 확률변수 $X$가 수치 $x$까지 도달하는데 누적된 확률이 얼마인지 의미한다.
+
+$$
+F_X(x) = P(X \leq x)
+$$
+
+만일 $a$에서부터 $b$까지의 범위에서 누적된 확률을 구하려면 다음 수식이 완성된다. 여기서 $a < b$이면 CDF는 반드시 0 이상의 값이 나온다. 음의 확률이란 것은 존재하지 않으므로 CDF는 절대 감소하지 않는 함수이기 때문이다.
+
+$$
+P(a < X \leq b) = F_X(b) - F_X(a) > 0 \quad ... \mathrm{if} \ a < b
+$$
+
+본 장에서 소개한 동전 던지기를 두 번 시행하여 앞면이 나오는 횟수를 세는 확률 실험에서는 다음과 같은 CDF가 나온다.
+
+$$
+\left\{\begin{array}{lllll}
+
+\displaystyle F_X(x=0) && = \displaystyle \frac{1}{4} && = P(0)
+
+\\ \\
+
+\displaystyle F_X(x=1) && = \displaystyle \frac{3}{4} && = P(0) + P(1)
+
+\\ \\
+
+\displaystyle F_X(x=2) && = \displaystyle 1 && = P(0) + P(1) + P(2)
+
+\end{array}\right.
+$$
+
+### PDF & CDF 관계식
+아래는 PDF에서 CDF, 혹은 CDF에서 PDF를 구하는 방법이다:
+* PDF → CDF
+
+    $$
+    F_X(a) = \int_{-\infty}^{a}f_X(x) \, dx
+    $$
+
+* CDF → PDF
+
+    $$
+    f_X(a) = \left. \frac{d}{dx}F_X(x)\right|_{x=a}
+    $$
+
+## 확률변수 유형
+확률변수 $X$의 값 $x$가 어떻게 분포되어 있는지에 따라 세 가지 유형으로 나뉘어진다.
+
+![연속확률변수(左) 및 이산확률변수(右)<sub><i>출처: <a href="https://abaqus-docs.mit.edu/2017/English/SIMACAEMODRefMap/simamod-c-probdensityfunc.htm">Abaqus documentation - MIT</a></i></sub>](/images/docs/probability/probability_continuous_discrete.png)
+
+1. 연속확률변수 (continuous RV)
+    
+    확률변수의 분포가 연속적이어서 값 $x$의 개수가 무한하다. 여기서 "연속"은 절대 확률변수$X$의 값 $x$가 갖는 확률분포 $f_X(x)$가 연속적인 그래프를 그려서가 아니다. 연속확률분포의 가장 대표적인 특징으로 한 점에 대한 확률을 표기할 수가 없다. 
+
+    $$
+    P(X = b) = P(b^{-} < X \leq b^{+}) = F_X(b^+) - F_X(b^-)
+    $$
+
+    $$
+    \quad \therefore P(X = b) = 0 \quad ... \mathrm{if} \ F_X(x) \ \mathrm{is \ continuous \ at} \ b
+    $$
+
+2. 이산확률변수 (discrete RV)
+    
+    일명 [확률질량함수](https://ko.wikipedia.org/wiki/확률_질량_함수)(probability mass function; PMF)라고도 부르며 확률변수의 분포가 $x_k \in \lbrace 1, 2, 3, ... \rbrace$처럼 이산적이어서 값 $x$의 개수가 유한하다. 연속확률변수와 달리 한 점에 대한 확률을 표기할 수 있다.
+
+    $$
+    P(X = b) = P(a < X \leq b) = F_X(b) - F_X(a)
+    $$
+
+    $$
+    \quad \therefore P(X = b) = P(b) \quad ... \mathrm{if} \ F_X(x_k) \ \mathrm{is \ discrete \ at} \ b \ \mathrm{and} \ x_k \in \lbrace a, b, ... \rbrace
+    $$
+    
+    이산확률변수의 PDF 및 CDF는 각각 [디랙 델타 함수](https://ko.wikipedia.org/wiki/디랙_델타_함수)와 [계단 함수](https://ko.wikipedia.org/wiki/계단_함수)로 구성된다.
+
+    $$
+    \left\{\begin{array}{llll}
+
+    \mathsf{PDF:} && f_X(x_k) = \displaystyle \sum_{n}P(x_k)u(x-x_k)
+
+    \\ \\
+
+    \mathsf{CDF:} && F_X(x_k) = \displaystyle \sum_{n}P(x_k)\delta(x-x_k)
+
+    \end{array}\right.
+    $$
+
+3. 혼합확률변수 (mixed RV)
+
+    연속과 이산이 혼합된 확률변수이다.
+
+# 확률론: 기대
+[기댓값](https://ko.wikipedia.org/wiki/기댓값)(expected value) $\mu_X$, 일명 기대치(expectation)는 하나의 확률 실험으로부터 발생할 것으로 기대(혹은 예측)되는 결과로써 확률변수 $X$의 [가중평균](https://ko.wikipedia.org/wiki/가중_산술_평균)(weighted average)으로 계산된다. 비록 가장 일반적인 [산술평균](https://ko.wikipedia.org/wiki/산술_평균)이 아니지만 확률변수에서는 기댓값을 평균(mean; average)이라고도 칭한다. 
+
+동전 던지기를 시행하면 결과가 앞면(Head; $H$) 혹은 뒷면(Tail; $T$)이 나온다. 이러한 시행을 두 번 하는 확률 실험에서 앞면 $H$가 나올 확률변수 $X$는 다음과 같은 결과를 갖는다:
+
+$$
+X = x \in \lbrace 0, 1, 2 \rbrace
+$$
+
+$$
+\quad ...\mathrm{where} \
+\left\{\begin{array}{ll}
+
+\displaystyle P(x=0) && = \displaystyle \frac{1}{4}
+
+\\ \\
+
+\displaystyle P(x=1) && = \displaystyle \frac{1}{2}
+
+\\ \\
+
+\displaystyle P(x=2) && = \displaystyle \frac{1}{4}
+
+\end{array}\right.
+$$
+
+기댓값은 일반적으로 [선형성](https://ko.wikipedia.org/wiki/선형성)을 지닌 기대연산자(expectation operator) $\operatorname{E}$를 사용하여 구하며 아래의 수식을 갖는다.
+
+$$
+\mu_X = \operatorname{E}[X] =
+
+\left\{ 
+\begin{array}{ll}
+
+\displaystyle \int_{-\infty}^{\infty}xf_X(x)\,dx & \quad \mathsf{Continuous \ RV}
+
+\\
+
+\\
+
+\displaystyle \sum_k x_kP(x_k) & \quad \mathsf{Discrete \ RV}
+
+\end{array}
+\right.
+$$
+
+그러므로 이산확률변수인 $X$의 기댓값은 다음과 같이 계산된다.
+
+$$
+\quad \Rightarrow \mu_X = 0 \left( \frac{1}{4} \right) + 1 \left( \frac{1}{2} \right) + 2 \left( \frac{1}{4} \right) = 1
+$$
+
+## 분산
+[분산](https://ko.wikipedia.org/wiki/분산)(variance) $\sigma_X^2$은 확률변수 $X$가 기댓값 $\mu_X$로부터 얼마나 넓게 퍼져있는지를 나타내는 수치이다. 이는 확률변수 $X$의 값들이 기댓값 $\mu_X$로부터 얼마나 멀리 떨어져있는지를 제곱시켜 평균화시킨 것으로부터 얻어진다.
+
+> 분산에서 제곱은 두 가지의 목적을 갖는다:
+>
+> 1. 분산을 $\sigma_X^2 \ge 0$으로 만든다. 만일 확률변수 $X$에서 $x < \mu_X$의 경우가 발생할 시, 확률변수의 값과 평균 간의 거리는 음의 값을 갖게 된다. 물론 [절댓값](https://ko.wikipedia.org/wiki/절댓값)(absolute value)을 사용할 수도 있겠지만 두 번째 이유를 살펴보아야 한다.
+>
+> 2. 확률변수의 퍼짐 정도를 절댓값보다 더 정확하게 나타낸다. 만일 동일한 $P(x) = 1/4$ 확률을 갖는 실험 결과들이 평균으로부터의 거리가 $\lbrace 4, 4, 4, 4 \rbrace$인 경우와 더 넓게 퍼진 $\lbrace 7, 1, 2, 6 \rbrace$인 경우가 있다고 가정한다: 절댓값만을 활용하면 모두 $4$로 계산되어 퍼짐 정도가 동일하다가 도출하지만, 제곱으로 계산하면 각각 $16$과 $22.5$로 계산되어 확실히 후자가 더 넓게 퍼져있다는 것을 알 수 있다. 제곱을 취하므로써 멀리있는 데이터를 수치적으로 더 멀게, 그리고 가까운 데이터를 수치적으로 더 가깝게 만들기에 구별이 가능한 것이다.
+
+아래와 같은 수식으로 표현된다.
+
+$$
+\textstyle \operatorname{Var}[X] =  \operatorname{E}[(X-\mu_X)^2] = \operatorname{E}\left[ X^2 - 2 \mu_X X + \mu_X^2 \right]
+$$
+
+$$
+\textstyle \quad = \operatorname{E}[ X^2 ] + \operatorname{E}[-2\mu_X X] + \mu_X^2 \quad \left( \because \mathrm{Linearity} \right)
+$$
+
+$$
+\textstyle \quad = \operatorname{E}[ X^2 ] - 2\mu_X\operatorname{E}[X] + \mu_X^2
+$$
+
+기댓값 $\mu_X$는 상수이기 때문에 선형연산자 $\operatorname{E}$ 밖으로 나올 수 있으며, 또한 $\operatorname{E}[X] = \mu_X$이므로 아래의 식으로 정리된다.
+
+$$
+\textstyle \qquad \therefore \sigma_X^2 = \operatorname{E}[X^2] - \mu_X^2
+$$
+
+그러므로 이산확률변수인 $X$의 분산은 다음과 같이 계산된다.
+
+$$
+\quad \Rightarrow \sigma_X^2 = \left[ 0^2 \left( \frac{1}{4} \right) + 1^2 \left( \frac{1}{2} \right) + 2^2 \left( \frac{1}{4} \right) \right] - 1^2 = 0.5
+$$
+
+### 표준편차
+[표준편차](https://ko.wikipedia.org/wiki/표준_편차)(standard deviation) $\sigma_X$는 분산의 제곱근이지만, 의미하는 바는 동일하다: 평균으로부터 얼마나 넓게 퍼져있는지 정도를 나타내는 수치이다. 그러므로 확률변수 퍼짐은 분산이나 표준편차로도 확인할 수 있다. 분산은 수학적 계산에서 유용하며, 표준편차는 기댓값과 동일한 차원을 갖으므로 데이터 분포 분석에 흔히 사용된다.
+
+### 정규화
+[정규화](https://en.wikipedia.org/wiki/Normalization_(statistics))(normalization)란 확률변수의 분포를 평균 $\mu_X = 0$, 표준편차 $\sigma_X = 1$, 그리고 최댓값 ${f_X(x)}_{\mathrm{Max}} = 1$로 조정하는 작업이다. 정규화를 하므로써 확률변수의 분포를 무차원(dimensionless)으로 만들고 공통된 평면 위에서 표현될 수 있도록 한다.
