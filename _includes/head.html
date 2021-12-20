@@ -1,5 +1,5 @@
 <head>
-    <title>{{site.author.name}} | GitHub-Pages</title>
+    <title>{{site.author.name}} | {% unless page.title == nil %}{{page.title}}{% else %}GitHub-Pages{% endunless %}</title>
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
     <!-- Google Font -->
