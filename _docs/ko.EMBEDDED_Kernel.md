@@ -27,3 +27,6 @@ order: 0x32
 > *참조: [라즈베리 파이 문서 - 리눅스 커널](https://www.raspberrypi.com/documentation/computers/linux_kernel.html)*
 
 본 문서는 커널 실습을 위한 임베디드 리눅스를 [라즈베리 파이 4 모델 B](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) 4GB에서 구현한다.
+
+# 커널: 드라이버
+[디바이스 드라이버](https://ko.wikipedia.org/wiki/장치_드라이버)(device driver; 일명 장치 드라이버)는 커널 중에서 특정 하드웨어와 상호작용하기 위해 짜여진 프로그래밍 인터페이스이다. 운영체제나 응용 프로그램이 하드웨어가 구체적으로 어떻게 동작하는지 몰라도 인터페이스를 통해 간편하게 사용할 수 있도록 한다. 드라이버는 다른 커널들과 별도로 빌드되어 런타임 도중에 필요할 때 투입되는데, 이러한 모듈성(modularity) 덕분에 드라이버는 비교적 쉽게 만들 수 있다.
