@@ -1,7 +1,7 @@
 ---
 layout: docs
 language: ko
-category: 인터페이스
+category: 어플리케이션
 title: WPF
 meta: WPF
 order: 0x21
