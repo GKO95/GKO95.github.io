@@ -1,7 +1,7 @@
 ---
 layout: docs
 language: ko
-category: 인공지능
+category: 
 title: 기계학습
 meta: ML
 mathjax: true
