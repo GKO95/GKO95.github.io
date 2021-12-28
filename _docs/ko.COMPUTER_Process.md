@@ -155,6 +155,7 @@ NUMA 컴퓨터의 각 프로세서는 메모리의 일부분을 더 빨리 접�
 SMP 컴퓨터는 두 개 이상의 동등한 프로세서 혹은 코어가 하나의 공용 메모리에 연결된다. SMP 모델 하에서, any 쓰레드는 any 프로세서에 할당될 수 있다. 즉, SMP 컴퓨터에서 쓰레드 스케쥴링은 단일 프로세서에서 스케쥴링하는 것과 유사하다. 다만 스케쥴러는 프로세서 목록이 있으므로, 쓰레드를 동시간에 실행시킬 수 있다는 차이가 있다. 스케쥴링은 여전히 쓰레드 우선권에 의해 결정되지만 thread affinity와 thread ideal processor 설정의 영향을 받을 수 있다.
 
 ### Thread Affinity
+쓰레드 유연(affinity; a similiarity of characteristics)
 (later...)
 
 ### Thread Ideal Processor
@@ -369,3 +370,85 @@ GUI 프로세스의 경우에는 `CreateWindow`와 `ShowWindow` 함수로 생성
 마이크로소프트 윈도우 OS는 프로세스 객체로의 접속 제어를 활성화할 수 있다.
 
 사용자가 로그인 하였을 때, 시스템은 사용자 인증 과정에서 사용자를 식별할 수 있는 고유 데이터 묶음을 가져와 access token에 저장한다. 이 access token은 해당 사용자에 관한 모든 프로세스의 보안 context를 설명한다. 프로세스의 보안 context란, 프로세스 혹은 프로세스를 생성한 유저에게 주어지는 자격들을 의미한다.
+
+# Thread Pools
+쓰레드 풀은 어플리케이션을 대신하여 비동기식 콜백을 실행하는 worker 쓰레드(background에서 논리나 프로그램 작업 수행)의 묶음이다. 쓰레드 풀은 어플리케이션 전체 쓰레드 개수를 줄이되 worker 쓰레드를 관리하여 효율성을 추구하는 목적으로 주로 사용한다. 이를 통해 어플리케이션은 쓰레드를 작업할 work item을 큐에 대기시키고, work를 waitable 핸들에 연관시키고, 타이머를 통해 자동으로 큐에 대기시키고, 입출력 바인딩이 가능하다.
+
+## 쓰레드 풀 아키텍처
+어플리케이션은 쓰레드 풀로 다음 이점을 볼 수 있다:
+
+* 많은 양의 쓰레드를 생성하고 파괴해야 할 때, 쓰레드 풀은 이로 인해 발생할 수있는 복잡함을 줄이고 쓰레드 생성과 파괴로 발생하는 overhead를 줄일 수 있다.
+
+쓰레드 풀 아키텍처는 다음과 같이 구성되어 있다:
+
+* worker 쓰레드 : 콜백 함수를 실행
+* waiter 쓰레드 : 여러 wait 핸들로부터 대기
+* work 큐 : worker 쓰레드 대기 메모리
+* 각 프로세스마다 기본 쓰레드 풀
+* worker factory : worker 쓰레드를 관리
+
+## 쓰레드 pooling
+많은 어플리케이션은 쓰레드를 생성하지만 이벤트가 발생할 때까지 sleep 상태에 있는 것들이 많다. 또다른 쓰레드는 sleep에 있다가 오로지 정보 상태 업데이트만을 위해 주기적으로 깨어나는 경우가 있다. 쓰레드 풀링은 이러한 쓰레드를 시스템에서 관리하는 worker 쓰레드 무리를 어플리케이션에 제공하므로써 더 효율적으로 사용할 수 있도록 한다. 최소한 하나의 쓰레드가 쓰레드 풀 큐에 대기되고 있는 모든 wait 동작 상태를 모너터링한다. 만일 wait 동작이 마무리되면 쓰레드 풀로부터 worker 쓰레드가 해당하는 콜백 함수를 실행한다.
+
+# Job 객체
+Job 객체는 프로세스 무리가 하나의 단위로 관리될 수 있도록 한다. Job 객체는 이름을 지정할 수 있고, 안전하고, 공유할 수 있는 객체로 연관 프로세스들의 특성을 제어할 수 있다. Job 객체에 수행된 동작은 연관된 모든 프로세스에 영향을 미친다. working set 크기 조정이나 프로세스 우선권 또는 job에 연동된 프로세스들의 termination 등이 해당한다.
+
+### Job 생성
+`CreateJobObject` 함수로 job 객체를 생성하나, 생성 당시에는 아무런 프로세스가 없다.
+
+프로세스를 엮으려면 `AssignProcessToJobObject` 함수를 사용한다. 한 번 엮인 프로세스는 해제될 수 없다. 프로세스는 네스티드 Job 계층구조로 하나 이상의 Job 객체에 연동될 수 있다.
+
+### Job으로 프로세스 관리
+프로세스가 Job에 연동되었을 시, 해당 프로세스로부터 `CreateProcess` 함수로 생성된 자식도 기본적으로 Job에 엮인다 (단, `Win32_Process.Create`는 그렇지 않다). 이는 Job에 제약을 `JOB_OBJECT_LIMIT_BREAKAWAY_OK` 또는 `JOB_OBJECT_LIMIT_SILENT_BREAKAWAY_OK`으로 확장하여 변경될 수 있다.
+
+만일 Job가 네스티드인 경우, 부모 job의 breakaway 설정은 계층에 있는 자식 프로세스가 계층에 있는 또다른 job에 연동될지 말지 영향을 준다.
+
+만일 프로세스가 Job에서 실행되고 있는지 확인하려면 `IsProcessJob` 함수로 확인하다.
+
+Job 내 모든 프로세스를 한꺼번에 terminate 하려면 `TerminateJobObject` 함수를 사용한다.
+
+### Job의 제약 및 알림
+Job 객체는 자신에게 연관된 각 프로세스에 working set이나 프로세스 우선권 등의 제약을 걸 수 있다. 만일 연관 프로세스가 개별적으로 이러한 제약을 초과하여 변경하려고 하면 함수는 성공적으로 수행하였다고 하나 조용히 무시된다. Job은 이러한 상황에 대하여 알림을 보내게 하나 계속 진행하도록 제약을 설정할 수 있다.
+
+### Job 객체 관리
+Job 객체의 모든 프로세스가 terminate 되었을 때, end-of-job 시간 제약을 초과하였으므로 Job 객체는 signaled 된다.
+
+존재하는 job 객체의 핸들을 얻으려면 `OpenJobObject` 함수를 사용하여 생성되었을 때 붙인 이름을 인자로 건네주어야 한다. 그러므로 이름이 있는 Job에만 가능하다.
+
+Job 객체 핸들을 닫으려면 `CloseHandle` 함수를 사용한다 (`JOB_OBJECT_TERMINATE` 권한 필요). 객체는 핸들이 닫히고 안에 있는 모든 프로세스가 terminate 되면 파괴된다. 허나 `JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE` 플래그가 있으면 핸들을 닫는 것만으로 프로세스를 모두 terminate 시키고 객체를 파괴시킨다. 만일 네스티드 job에 해당 플래그가 설정되어 있으면 부모의 마지막 job 핸들을 닫는 것은 프로세스와 계층에 있는 자식 job을 모두 terminate 시킨다.
+
+## 네스티드 Job
+어플리케이션은 네스티드 job을 사용하여 나머지 프로세스들을 관리할 수 있다. 또한 네스티드 job은 job을 사용하는 어플리케이션이 job을 사용하는 또다른 어플리케이션의 호스트가 될 수 있다.
+
+### 네스티드 job 계층
+네스티드 job 부모-자식 관계를 유지하며 부모 job이 갖는 프로세스 중에서 일부분을 갖는다. 만일 job에 이미 연동된 프로세스를 다른 job에 연동하려면, 시스템에서 유효하다가 판단하면 연동하려는 job은 기본적으로 기존 job의 자식이 된다.
+
+* immediate parent/child: 1촌 job
+* ancestor: 상위 job
+* job chain: 직계연쇄 form
+    * immediate job: 프로세스와 가장 연관이 가까운 job
+
+### 네스티드 job 계층 생성
+네스티드 job 계층은`CreateJobObject`와 `AssignProcessToJobObject`을 여러번 하면서 계층을 만든다. 순서도 매우 중요한데, 만일 동일한 부모로부터 있지 않은 프로세스를 엮으려고 하면 네스팅이 되지 않고 함수는 fail한다.
+
+### 네스티드 Job의 제약 및 알림
+네스티드 Job은 부모보다 더 엄격한 제약을 걸 수 있으나 덜하지는 못한다.
+
+### 네스티드 Job Terminate
+만일 계층에 있는 Job가 terminate 되면 시스템은 해당하는 프로세스와 자식 job을 terminate 시킨다. 그 중에서 시스템은 맨 아래의 자식 Job부터 시작하여 terminate을 진행한다.
+
+# CPU 세트
+(later...)
+
+# Fiber
+fiber는 어플리케이션에서 수동으로 스케쥴되어야 하는 실행 단위이다. 즉, 쓰레드로 스케쥴된다고 볼 수 있다. 각 쓰레드는 여러 fiber을 스케쥴할 수 있다. 일반적으로 fiber는 잘 짜여진 멀티쓰레드 어플리케이션보다 우위에 있을 수 없다. 하지만 fiber는 자체적으로 쓰레드를 스케쥴링하기 위해 설계된 어플리케이션을 port 하는데 쉽게 한다.
+
+시스템 관점에서 fiber는 자신을 실행시키는 쓰레드의 정체를 알고 있다고 본다(assumes). 예를 들어 fiber가 TLS를 접속하면, 그것은 fiber를 실행시키는 쓰레드의 TLS이다. 그리고 fiber가 `ExitThread` 함수를 호출하면 해당 쓰레드가 종료된다. 그러나 fiber의 상태 정보는 연관 쓰레드와 모두 동일한 상태 정보를 갖지 않는다. 쓰레드로부터 유지된 상태 정보가 있다면 그것은 스택, 레지스터 서브셋, 그리고 fiber 생성을 위해 제공된 fiber 데이터이다.
+
+Fiber는 쓰레드와 달리 preemptively 스케쥴링되지 않는다: 너가 직접 fiber 스위칭을 해야하기 때문이다. 그래도 시스템이 쓰레드를 스케쥴하여 실행시키기 때문에, 쓰레드가 실행되면서 그 상태로써는 비록 선택적으로 fiber를 선정하였으나 preempted이게 된다.
+
+첫 번째 fiber를 스케쥴링하기 전에 `ConvertThreadToFiber` 함수로 fiber 상태 정보를 저장할 공간을 생성한다. 호출된 쓰레드가 이제 fiber를 실행하면 저장된 fiber 상태 정보는 이제 `ConvertThreadToFiber` 인자로 넘겨진 fiber 데이터를 포함한다.
+
+`CreateFiber` 함수는 기존의 fiber로부터 새로운 fiber을 생성하기 위해 사용된다. 함수는 스택 크기, (함수) 시작 주소, 그리고 fiber 데이터를 인자로 요구한다. 시작 주소는 일반적으로 사용자가 제공하는 fiber 함수로 fiber 데이터 하나의 인자를 받고 반환값이 없다. 만일 return 되면 fiber를 실행하는 쓰레드가 종료된다. `CreateFiber` 함수로 생성된 아무런 fiber을 실행하려면 `SwitchToFiber` 함수를 호출한다. `SwitchToFiber` 함수를 다른 쓰레드로부터 생성된 fiber 주소와 함께 호출할 수 있다. 그러기 위해서는 fiber 생성 시 `CreateFiber`로 반환된 주소를 알고 있어야 하며 적절한 동기화가 필요하다.
+
+fiber는 fiber 데이터를 `GetFiberData` 매크로로 불러올 수 있다. 그리고 fiber 주소는 `GetCurrentFiber` 매크로로 언제든지 불러올 수 있다.
