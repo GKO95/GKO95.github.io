@@ -328,7 +328,7 @@ CUDA 프로젝트에서 각 블록에 접근하려면 두 가지를 변경해야
 * *공유 메모리 (shared memory)*
     : 블록 내의 쓰레드 사이에 공유되는 메모리로 쓰레드간 협업을 가능케 한다. 또한 CUDA 코어와 동일한 함께 스트리밍 멀티프로세서에 탑재되어 데이터를 매우 빠른 속도로 저장 및 호출한다.
 
-* *특수 함수 장치 (special function unit; SPU)*
+* *특수 함수 장치 (special function unit; SFU)*
     : 일반 다항식으로 접근할 수 없는 [초월함수](https://ko.wikipedia.org/wiki/초월함수)(예. 삼각함수, 지수함수 등)의 산술을 위한 장치이다.
     
     > CUDA 성능 6.1의 *NVIDIA GeForce GTX 1070*에는 각 SM마다 32개의 SFU가 들어있다.
