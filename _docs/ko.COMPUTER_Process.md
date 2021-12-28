@@ -155,11 +155,12 @@ NUMA 컴퓨터의 각 프로세서는 메모리의 일부분을 더 빨리 접�
 SMP 컴퓨터는 두 개 이상의 동등한 프로세서 혹은 코어가 하나의 공용 메모리에 연결된다. SMP 모델 하에서, any 쓰레드는 any 프로세서에 할당될 수 있다. 즉, SMP 컴퓨터에서 쓰레드 스케쥴링은 단일 프로세서에서 스케쥴링하는 것과 유사하다. 다만 스케쥴러는 프로세서 목록이 있으므로, 쓰레드를 동시간에 실행시킬 수 있다는 차이가 있다. 스케쥴링은 여전히 쓰레드 우선권에 의해 결정되지만 thread affinity와 thread ideal processor 설정의 영향을 받을 수 있다.
 
 ### Thread Affinity
-쓰레드 유연(affinity; a similiarity of characteristics)
-(later...)
+쓰레드 유연(affinity; a similiarity of characteristics)는 쓰레드를 특정 프로세서의 subset에서 실행되도록 강제시킨다. 이는 최대한 기피되어야 하는데 스케쥴러가 효율적으로 프로세서를 거쳐 쓰레드를 스케쥴링하는 데 방해가 될 수 있기 때문이다. 결국 병렬 프로세싱에서의 성능 저하를 불러 일으킨다. thread affinity는 각 프로세서를 테스트하는 용도로 사용하는게 적합하다.
+
+시스템은 affinity를 비트마스크로 표현하는데 이를 프로세서 affinity 마스크라고 부른다. affinity  마스크의 크기는 시스템 내 프로세서의 최대 개수이며, 비트의 set로부터 프로세서의 subset을 식별한다. 시스템은 초기에 프로세서의 subset을 마스크로 결정한다.
 
 ### Thread Ideal Processor
-(later...)
+쓰레드 이상(ideal) 프로세서를 지정하면 스케쥴러는 가능하면 쓰레드를 지정한 프로세서에 실행시키도록 한다. `SetThreadIdealProcessor`는 이상적인 프로세서로 실행될거라는 보장은 아니지만 스케쥴러에게 힌트를 준다.
 
 ## NUMA 지원
 (later...)
@@ -452,3 +453,62 @@ Fiber는 쓰레드와 달리 preemptively 스케쥴링되지 않는다: 너가 �
 `CreateFiber` 함수는 기존의 fiber로부터 새로운 fiber을 생성하기 위해 사용된다. 함수는 스택 크기, (함수) 시작 주소, 그리고 fiber 데이터를 인자로 요구한다. 시작 주소는 일반적으로 사용자가 제공하는 fiber 함수로 fiber 데이터 하나의 인자를 받고 반환값이 없다. 만일 return 되면 fiber를 실행하는 쓰레드가 종료된다. `CreateFiber` 함수로 생성된 아무런 fiber을 실행하려면 `SwitchToFiber` 함수를 호출한다. `SwitchToFiber` 함수를 다른 쓰레드로부터 생성된 fiber 주소와 함께 호출할 수 있다. 그러기 위해서는 fiber 생성 시 `CreateFiber`로 반환된 주소를 알고 있어야 하며 적절한 동기화가 필요하다.
 
 fiber는 fiber 데이터를 `GetFiberData` 매크로로 불러올 수 있다. 그리고 fiber 주소는 `GetCurrentFiber` 매크로로 언제든지 불러올 수 있다.
+
+### Fiber Local Storage
+쓰레드에 fiber local storage(FLS)를 할당하면 각 fiber마다의 데이터를 저장할 고유 변수를 생성한다. fiber 스위칭이 없으면 일반 TLS와 같이 동작하며 FLS 함수로 해당 fiber에 대한 데이터를 get, set, alloc, free 등을 사용할 수 있다 (다시 한 번 말하지만 FLS는 fiber에 할당되는게 아니라 fiber를 담당하는 쓰레드에 있다). 만일 fiber 스위칭이 되면 쓰레드에 있는 FLS도 전환된 fiber의 것으로 바뀐다.
+
+`DeleteFiber` 함수를 사용하여 fiber의 스택, 레지스터 서브셋, 그리고 fiber 데이터를 cleanup 하는데, 이를 현재 실행되는 fiber에서 호출하면 쓰레드는 `ExitThread`를 호출하고 terminate 된다. 하지만 타 쓰레드로부터 cleanup 되면 fiber 스택이 free되어 fiber가 삭제된 쓰레드는 비정상적으로 terminate 될 것이다.
+
+# 사용자 모드 스케쥴링
+사용자 모드 스케쥴링(UMS)은 어플리케이션이 자체적으로 쓰레드를 스케쥴링하는 lightweight 매커니즘이다. 어플리케이션은 사용자 모드에서 시스템 스케쥴러 없이 UMS 쓰레드를 사용하거나 UMS 쓰레드가 커널에서 막힐 경우 프로세서의 제어로 스위칭할 수 있다. UMS는 각 UMS 쓰레드가 각자 자신만의 thread context를 갖고 있다는 점이 하나의 쓰레드에서 thread context를 공유하는 fiber와 차이가 있다. 쓰레드를 사용자 모드에서 스위칭할 수 있다는 점은 다수의 시스템 호출이 적은 단기간 work item을 다루는데 있어서 UMS가 쓰레드 풀보다 더 효율적이다.
+
+UMS는 다중프로세서 혹은 다중코어 시스템에서 여러 쓰레드를 효율적으로 동시에 실행해야 하는 고성능 어플리케이션에 추천된다. UMS의 이점을 취하기 위해, 어플리케이션은 어플리케이션의 UMS 쓰레드를 관리하고 실행되어야 하는지 결정하는 스케쥴러 구성요소를 적용해야 한다. 이러한 결정은 개발자가 어플리케이션 성능 요구사항에 대하여 신중히 고려해야 하며, 만일 고성능 미만의 어플리케이션의 경우에는 오히려 시스템 스케쥴러가 훨씬 더 효율적이다.
+
+UMS는 윈도우 7 64비트 및 윈도우 서버 2008 R2 64비트 혹은 이후 버전에서 지원한다. 32비트는 지원하지 않는다.
+
+## UMS 스케쥴러
+UMS 스케쥴러는 UMS 쓰레드를 생성, 관리, 그리고 제거를 담당하며 어떤 UMS 쓰레드를 실행할지 결정한다.
+
+* UMS 스케쥴러를 어플리케이션이 UMS 쓰레드를 돌릴 프로세서마다 생성한다.
+* UMS worker 쓰레드 생성
+* 자체적 ready-thread 큐에서 실행하기 위해 대기하고 있는 worker thread를 관리하고, 어플리케이션 스케쥴링 정책에 따라 ready thread를 실행한다.
+* 시스템으로부터 커널에서 프로세싱을 마쳐 큐에 대기시키는 completion 목록을 하나 이상 생성하여 모니터링한다. 새로 생성된 worker 쓰레드 및 막혔지만 지금은 뚤린 쓰레드를 포함한다.
+* 시스템으로부터의 notification을 핸들링하기 위한 스케쥴러 entry point를 제공한다. 시스템은 스케쥴러 쓰레드가 생성되거나 시스템 호출로 worker 쓰레드가 막히거나 혹은 worker 쓰레드가 explicitly yields control 할 때 entry point를 호출한다.
+* 실행을 마친 쓰레드에 대하여 cleanup 을 실행한다.
+* 어플리케이션에서 요청할 때 스케쥴러의 순차적 shutdown을 진행한다.
+
+## UMS 스케쥴러 쓰레드
+UMS 스케쥴러 쓰레드는 일반 쓰레드를 `EnterUmsSchedulingMode`로 변환시켜 사용하는 것이다. 시스템 스케쥴러는 UMS 스케쥴러 쓰레드가 실행할지 타 쓰레드에 비해 우선권이 얼마나 되는지에 따라 결정한다. 스케쥴러 쓰레드가 실행하는 프로세서는 비UMS 쓰레드와 마찬가지로 쓰레드 affinity에 영향을 받는다.
+
+`EnterUmsSchedulingMode` 호출자는 UMS 스케쥴러 쓰레드에 연동할 completion 목록과 `UmsSchedularProc` entry point 함수를 지정한다. 시스템은 이 entry point 함수를 쓰레드를 UMS 쓰레드로 변경을 완료할 때 호출한다. 스케쥴러 entry poin 함수는 특정 쓰레드에 대하여 다음 적절한 행동을 결정한다.
+
+어플리케이션은 UMS 쓰레드를 실행할 프로세서마다 UMS 스케쥴러 쓰레드를 생성할 수 있다. 어플리케이션은 또한 각 UMS 스케쥴러 쓰레드에 affinity를 설정하여 특정 논리 프로세서가 관련없는 쓰레드를 배제시키므로써 스케쥴러 쓰레드의 효율을 높일 수 있다. 하지마 affinity는 프로세서에 편중된 쓰레드 배분을 일으킬 수 있어 시스템 성능 저하를 일으킬 수 있다.
+
+## UMS worker 쓰레드
+`CreateRemoteThreaEx`로 `PROC_THREAD_ATTRIBUTE_UMS_THREAD` 플래그 및 UMS 쓰레드 context와 completion 목록을 지정하여 UMS worker 쓰레드를 생성한다.
+
+UMS 쓰레드 context는 UMS worker 쓰레드의 쓰레드 상태를 반영하며 UMS 함수 호출로부터 worker 쓰레드를 구분짓기 위해 사용된다. UMS 쓰레드 Context는 `CreateUmsThreadContext`로 생성된다.
+
+Completion list는 `CreateUmsCompletionList` 함수로 생성된다. Completion list는 커널에서 실행을 마무리하여 사용자 모드에서 실행될 준비가 마친 UMS worker 쓰레드를 전달받는다. 오로지 시스템만이 worker 쓰레드를 completion list 큐에 대기시킬 수 있다. 새로운 UMS worker 쓰레드는 자동적으로 쓰레드가 생성할 떄 지정된 completion list에 queue된다. 이전에 막혔었던 worker 쓰레드도 뚤렸으면 completion list로 queue된다.
+
+각 UMS 스케쥴러 쓰레드는 할당된 하나의 completion list가 있다. 그러나 하나의 completion list에는 개수 제한 없이 UMS 스케쥴러가 할당될 수 있으며, 스케쥴러 쓰레드는 completion list의 포인터가 있는 한 아무런 completion list로부터 UMS context를 받을 수 있다.
+
+각 completion list는 큐가 비어있는 상태에서 worker 쓰레드가 queue되면 시스템으로부터 signal되는 이벤트가 연동되어 있다. `GetUmsCompletionListEvent` 함수는 특정 completion list에 연동된 이벤트에 대한 핸들을 불러온다. 어플리케이션은 원한다면 두 개 이상의 completion list 이벤트나 다른 이벤트와 함께 signal 되기를 기다리도록 설계될 수도 있다.
+
+## UMS 스케쥴러 entry point 함수
+어플리케이션 스케쥴러 entry point 함수는 `UmsSchedulerProc` 함수로서 실행된다. 시스템은 어플리케이션의 스케쥴러 entry point 함수를 다음 지점 떄에 호출한다:
+
+* `EnterUmsSchedulingMode`로 비UMS 쓰레드가 UMS 스케쥴러 쓰레드로 전환되었을 떄
+* UMS worker 쓰레드가 `UmsThreadYield`를 호출할 때
+* UMS worker 쓰레드가 시스템 호출 또는 page fault 등의 시스템 서비스로 인해 막혔을 때
+
+`UmsSchedulerProc`의 Reason 파라미터는 entry point 함수가 호출된 이유가 담겨있다. UMS 스케쥴러 쓰레드 전환은 `EnterUmsSchedulingMode` 호출자로부터 지정된 데이터, `UmsThreaYield`의 경우에는 `UmsThreaYield` 호출자로부터 지정된 데이터, 그리고 막힌 경우에는 NULL 값이 전달된다.
+
+스케쥴러 entry point 함수는 특정 thread에 대하여 어떠한 적절한 행동을 취할지 결정하기 위한 역할을 담당한다. 쓰레드가 막힌거라면 entry point 함수는 다음 ready 쓰레드를 실행하는 등처럼 말이다.
+
+스케쥴러 entry point 함수가 호출되면 어플리케이션 스케쥴러는 해당 UMS 스케쥴러 쓰레드에 연동된 completion list의 아이템들을 `DequeueUmsCompletionListItmes` 함수로 불러오도록 한다. 어플리케이션의 스케쥴러는 예측불가한 어플리케이션 동작을 방지하기 위해 이렇게 불러온 아이템 목록으로부터 곧바로 UMS 쓰레드를 실행하지 말아야 한다. 그 대신, `GetNextUmsListItem`을 통해 context를 하나씩 가져오는 방식으로 UMS thread context를 모두 가져온다. 그리고 이 UMS 쓰레드 context를 스케쥴러  ready thread queue에 삽입시키는 방법으로만으로써 UMS 쓰레드를 ready thread queue로부터 실행해야 한다.
+
+## UMS 쓰레드 실행
+새로이 생성된 UMS worker 쓰레드는 지정된 completion list에 queue되어 어플리케이션 스케쥴러가 실행할 때까지 기다린다. 이는 비UMS 쓰레드랑 다른게 시스템 스케쥴러는 새로 생성된 비UMS 쓰레드를 preempt, 즉 바로 자동적으로 스케쥴링시킨다 (사용자로부터 suspend되지 않은 이상).
+
+스케쥴러는 `ExecutreUmsThread` 호출하여 worker 쓰레드를 실행한다. UMS worker 쓰레드는 `UmsThreaYield` 함수로 yield하거나 막히거나 terminate될 때까지 실행한다.
