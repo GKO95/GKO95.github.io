@@ -277,3 +277,18 @@ file view는 파일 매핑 객체의 전체 혹은 일부분일 수 있다. 프�
 View가 unmap되어도 잔여하는 데이터가 파일에 write 될 수 있으므로, 전력 부족 및 시스템 충돌로 인해 발생할 수 있는 데이터 손실을 방지하기 위해 `FlushViewOfFile`로 혹시나 하는 데이터들을 곧바로 파일로 flush하여 전송하도록 한다.
 
 각 프로세스가 view를 unmap 하였으면 파일 매핑 객체의 핸들을 닫아준다. 그러나 view가 아직 매핑되어 살아있는 경우에서도 객체의 핸들은 닫힐 수 있는데, 이러한 경우 메모리 누수로 이어진다.
+
+# 전역 및 지역 함수
+16-비트 코드 포티 또는 16-비트 윈도우와 호환되는 소스 코드 관리를 위한 것! 32-비트부터는 Heap 함수의 wrapper에 불과하다.
+
+# C 라이브러리 함수
+어플리케이션은 C/C++ 메모리 관리 기능을 안전하게 사용할 수 있다. C 언어는 16비트 윈도우에서 겪었던 잠재적 위험이 존재하지 않는다. 그리고 시스템은 가상주소에 영향을 주지 않으면서 물리 메모리의 페이지를 이동시킬 수 있어 메모리 관리는 더 이상 문제가 되지 않는다. 하지만 가상메모리 함수는 C 런타임 라이브러리가 제공하지 않는 기능들을 제공한다.
+
+# 메모리 할당 함수 비교
+`HeapAlloc`, `GlobalAlloc`, 그리고 `LocalAlloc`은 사실상 같은 heap에 메모리를 할당하지만, 약간의 기능적 차이가 있다. `HeapAlloc`은 할당이 불가하면 exception이 발생하지만, `GlobalAlloc` 및 `LocalAlloc`은 exception이 발생하지 않는다. 그리고 `GlobalAlloc` 및 `LocalAlloc`은 핸들 변경 없이 재할당이 가능한, 메모리 이동이 불가한 `HeapAlloc`이 불가능한다. 그리고 `GlobalAlloc`, 그리고 `LocalAlloc`는 `HeapAlloc`의 wrapper이므로 overhead가 더 크다.
+
+비록 같은 Heap 메모리에 할당하지만 할당 매커니즘에 차이가 있으므로 `HeapAlloc` -> `HeapFree`, `GlobalAlloc` -> `GlobalFree`, `LocalAlloc` -> `LocalFree`로 free 되어야 한다.
+
+`VirtualAlloc` 함수는 메모리 할당에 더 많은 옵션이 주어진다. 하지만 할당이 페이지 granularity를 사용하기 때문에 더 많은 메모리를 소모한다.
+
+`malloc` 함수는 런타임에 의존하고, `new` 연산자는 컴파일러 및 언어에 의존한다.
