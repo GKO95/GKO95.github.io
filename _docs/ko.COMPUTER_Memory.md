@@ -321,5 +321,118 @@ View가 unmap되어도 잔여하는 데이터가 파일에 write 될 수 있으�
 가끔 카운터에서 보여주는 수치는 어플리케이션이 데이터 caching을 하여 거짓양성을 보여줄 수 있다.
 
 ## 커널 모드 메모리 누수
+다음은 커널 모드 메모리 누수를 진단 및 요인을 찾아내는 방법이다.
+
+### PoolMon
+> 어느 드라이버 및 부품이 커널 모드 메모리 누수의 요인인지 판별하는 방법이다.
+
+[PoolMon](https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/poolmon), 일명 메모리 풀 모니터(Memroy Pool Monitor)는 시스템 paged 및 nonpaged 풀로부터의 할당에 대하여 운영체제가 수집한 데이터, 그리고 현재 터미널 서비스 세션에서 사용하고 있는 메모리 풀을 보여준다. 할당을 담당하는 paged 및 nonpaged 풀들마다 네 바이트 문자로 구성된 풀 태그(pool tag)를 부여하는데, PoolMon은 각 풀 태그에서 처리된 할당 작업을 표시한다. 이를 통해 어느 메모리 누수가 발생한 메모리 풀이 어디인지 확인할 수 있다. 해당 프로그램은 Windows Driver Kit(WDK)에 포함되어 있으며, 별도의 설치가 필요하다 (위치: `C:\Program Files (x86)\Windows Kits\10\Tools\x64` for 64비트 원도우; Command Prompt 권장).
+
+> For Windows 2000 & XP, `C:\Program Files (x86)\Windows Kits\10\Debuggers\x64` (for 64-bit OS)에 위치한 `GFlags.exe`를 실행해야만 풀 태그가 활성.
+>
+> 그 이후 버전의 OS 버전에는 기본적으로 활성화!
+
+PoolMon 헤더는 총 paged 및 nonpgaed 풀 바이트를 보여준다.
+
+```
+Memory:16719772K Avail:10985668K    PageFlts: 36323    InRam Krnl:65264K P:528024K
+Commit:8644868K Limit:19210140K Peak:8739228K          Pool N:339332K P:765760K
+```
+
+* `Memory`: 총 물리 메모리 용량
+* `Avail`: 사용 가능한 물리 메모리 잔여 용량
+
+* `Commit`: commit된 메모리 용량
+* `Limit`: 메모리 commit 한계치
+* `Peak`: 메모리 commit 최대치
+
+다음은 시스템 풀 정보 테이블의 헤더가 각각 무엇을 나타내는지 설명한다.
+
+* `Tag`: 풀 태그
+* `Type`: paged 혹은 nonpaged
+* `Allocs`: 누적 할당 횟수 - ()는 변화량 
+* `Frees`: 누적 Free 횟수 - ()는 변화량
+* `Diff`: `Allocs` - `Frees`
+* `Bytes`: 할당 바이트 크기 - ()는 변화량
+* `Per Alloc`: `Bytes` / `Diff`, 즉 바이트 per 할당
+
+메모리 누수 요인 진단은 다음과 같다:
+
+1. 메모리 누수가 의심되는 곳이 nonpaged인지 paged인지 알면 `P` 버튼으로 필터링; 아니면 전체적으로 다 볼 것
+2. `B`를 눌러 할당된 바이트 크기 위주로 정렬
+3. 어플리케이션 시작하고 Screenshot 기록 (진단 시작; 텍스트 전체를 가져오는 것은 불러오는 시간에 비해 reload되는 시간이 더 빨라서 안되는 듯)
+4. 30분마다 새로 찍어서 비교; 어느 태그에서 바이트 증가가 발생하는지 확인
+5. 어플리케이션 종료하고 1~2시간 기다린 후 Free된 메모리 용량 확인
+
+이로부터 어느 태그에서 발생하였는지 판단 가능.
+
+### Kernel Debugger
+> 커널 모드 메모리 누수의 요인이 되는 드라이버 및 부품을 알고 있으며 자세한 진단을 위한 방법이다.
+Kernel debugger (위치: `C:\Program Files (x86)\Windows Kits\10\Debuggers\x64`에서 `KD.exe`) 프로그램은 커널 모드 메모리 누수가 정확히 어디에서 일어나고 있는지 판단할 수 있는 정보를 제공한다. `KD.exe` 말고 아마 통합으로 사용되는 `WinDbg.exe`가 더 좋을 듯.
+
+풀 태그가 활성화되어 있지 않으면 `GFlags.exe`를 우선 활성화한다.
+
+그러나 프로그램에서도 Debug와 Release 빌드가 있듯이, 일반 사용자들에게 배포된 Release에는 디버깅 요소가 없다. KD를 사용하기 위해서는 target 컴퓨터를 커널 모드 디버깅이 가능하도록 별도의 설정이 필요하다. (참조: https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-kernel-mode-debugging-in-windbg--cdb--or-ntsd)
+
+
+#### 로컬 커널 디버깅
+즉, 디버깅하려는 host와 디버깅되는 target이 동일한 하나의 컴퓨터인 경우.
+컴퓨터의 상태를 파악할 수 있으나, OS 동작을 멈추는 커널 모드 프로세스 확인을 불가하다.
+
+설정 방법은 다음과 같다:
+>  그 전에 target PC의 BitLocker 및 Secure Boot와 같은 보안 기능을 임시적으로 suspend 시켜야 한다. 디버깅이 끝나고 커널 디버깅을 해제하면 다시 활성화시킬 수 있다.
+
+1. Cmd (Admin)에서 `bcdedit /debug on` 입력하여 커널 디버깅 활성화 (BCD란, boot configuration data)
+2. 만일 설정되어 있지 않았으면 `bcdedit /dbgsettings local`로 target 컴퓨터 디버거 설정 (디버거는 호스트에 설정하는게 아니라 디버깅되는 target에서 설정되어야 함; 호스트는 그냥 제어하는 거고, 이를 실제로 디버깅하는 요소는 target에 있기 때문에...디버깅 모드도 target에 활성화했잖아!)
+3. target 컴퓨터 reboot
+
+재시작 이후 `WinDbg (Admin)`에서 Kernel Debug를 Local에 설정하고 진행.
+혹은 KD에서 `kd -kl` 명령어 입력.
+
+로컬 디버깅에 대한 자세한 내용은 여기서 확인 (https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/performing-local-kernel-debugging)
+
+#### KDNET 네트워크 자동설정
+> https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-a-network-debugging-connection-automatically
+
+>  그 전에 target PC의 BitLocker 및 Secure Boot와 같은 보안 기능을 임시적으로 suspend 시켜야 한다. 디버깅이 끝나고 커널 디버깅을 해제하면 다시 활성화시킬 수 있다.
+
+1. host와 target이 동일한 네트워크 허브에 "물리적 LAN"으로 연결
+2. host cmd에서 `ipconfig`로 ipv4 주소 확인
+
+3. host에 윈도우 디버깅 툴 설치 (WDK에 선택옵션 있음)
+4. target이 64비트이면 `C:\Program Files (x86)\Windows Kits\10\Debuggers\x64`에서 (아니면 `x86`)에서 `kdnet.exe`와 `VerifiedNICList.xml` 파일 확인
+5. host에서 두 파일 복사해서 target 컴퓨터로 전달 (usb 메모리 스틱으로 해도 상관 없음)
+6. target에 `C:\KDNET` 디렉토리 만들고 두 파일 붙여넣기
+7. target에서 `cmd (admin)`으로 해당 디렉토리로 이동해 `kdnet.exe` 실행하여 네트워크 어댑터 지원 여부 확인; 지원되면 계속 진행!
+8. target에서 아래 입력; 여기서 디버거 포트는 host/target 쌍을 연결해줄 고유포트를 선택하는 것이며, 50000~50039 범위에서 권장
+
+```
+C:\KDNET> kdnet.exe <HostComputerIPAddress> <YourDebugPort> 
+```
+
+9. target에서 나타난 `Key` 값을 메모장 `.txt` 파일에 저장
+
+이렇게 네트워크 설정을 마무리하면 host는 target 디버거에 `WinDbg` -> `Kernel Debug` -> `Net`을 통해 접속한다. 만일 방화벽이 나타나면 **세 네트워크 모두**에 대하여 권한을 부여한다. 이 시점에서 디버거는 target이 다시 연결되는 것을 기다리는데, 이때 target 재부팅한다.
+
+```
+shutdown -r -t 0
+```
+재시작되면 디버거는 자동으로 연결된다.
+
+#### KDNET 네트워크 수동설정
+> https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-a-network-debugging-connection
+
+#### KDNET으로 ARM 장치에서 USB EEM을 통한 커널 모드 디버깅
+> https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-kernel-mode-debugging-over-usb-eem-arm-kdnet
+
+마이크로소프트 서피스 프로 X 지원(하단 USB-C)
+
+
+### Driver Verifier
+> 커널 모드 메모리 누수의 요인이 되는 드라이버 및 부품을 알고 있으며 자세한 진단을 위한 방법이다.
 
 ## 사용자 모드 메모리 누수
+
+### Performance Monitor
+
+### UMDH
