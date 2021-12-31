@@ -88,14 +88,82 @@ order: 0x45
 ## Sysprep
 Sysprep(System Preparation) 도구는 운영체제 이미지를 일반화(generalized) 상태에서 특수화(specialized) 상태로 변경, 그리고 다시 일반화 상태로 되돌리는 데 사용된다.
 
-* 일반화(generalized)된 이미지: 어느 컴퓨터에도 배포될 수 있는 운영체제 이미지
+* 일반화(generalized)된 이미지: 어느 컴퓨터에도 배포를 적용시킬 수 있는 운영체제 이미지
 * 특수화(specialized)된 이미지: 대상이 특정 컴퓨터로 지정된 운영체제 이미지 (즉, 배포된 이미지)
 
-윈도우 운영체제도 결국 소프트웨어이며 실제로 컴퓨터에 배포시켜 개발 및 커스터마이징이 이루어져야 하기 때문에 이미지는 특수화 상태에 있다. 그리고 원도우 이미지를 배포하기 전, "특수화 상태"의 이미지에 저장된 컴퓨터의 정보를 전부 제거해야 한다. 이를 `sysprep /generalize`으로 진행되며, 일반화된 이미지로 배포된 컴퓨터는 OOBE(Out-Of-Box Experience; "상자에서 바로 꺼낸" 신제품 경험)로부터 사용자 설정 및 Microsoft Software License Terms을 거친다.
+![이미지의 커스터마이징 및 일반화](/images/docs/windows/windows_sysprep_audit.png)
 
-> 즉, `/generalize`은 사용 중인 이미지를 다른 컴퓨터에서 사용할 수 있도록 한다.
+윈도우 운영체제도 결국 소프트웨어이며 실제로 컴퓨터에 배포를 적용하여 개발 및 커스터마이징이 이루어져야 하기 때문에 이미지는 참조 장치(reference device; 개발 및 커스터마이징에 사용된 컴퓨터)에 특수화되어 있다. 그리고 개발 및 커스터마이징이 완료된 이후 참조 장치로부터 캡처하여 새로운 이미지를 만들기 전, 참조 장치에 대한 정보(운영체제 설치 정보 및 하드웨어 정보, Security ID 등)를 전부 제거해야 한다.
+
+```
+sysprep /generalize
+```
+
+위의 명령으로 이미지는 일반화되는데, 아직 참조 장치에 남아있으므로 이미지 특수화를 방지하기 위해 WinPE(Windows Preinstallation Environment)에서 부팅된다. 이 상태에서 참조 장치를 캡처하여 개발 및 커스터마이징된 새로운 일반화 이미지를 추출한다. 해당 일반화 이미지는 타 컴퓨터에 배포되면 일반적으로 우리가 알고 있는 OOBE(Out-Of-Box Experience; "상자에서 바로 꺼낸" 신제품 경험)로부터 사용자 설정 및 Microsoft Software License Terms을 거친다.
+
+> 요약하자면 `/generalize` 옵션은 사용 중인 이미지를 다른 컴퓨터에서 사용할 수 있도록 한다.
+
+하나의 윈도우 이미지로부터 `Sysprep` 명령어는 최대 1001번까지만 실행할 수 있다 (윈도우 8.1 및 서버 2012 이상; 이전 버전들은 최대 3회).
 
 ### 하드웨어 구성
-컴퓨터가 정확히 동일한 하드웨어 구성을 갖고 있다고 하더라도 운영체제 설치에 대한 고유 정보가 있으므로 `/generalize` 옵션으로 일반화를 해야 한다.
+컴퓨터가 정확히 동일한 하드웨어 구성을 갖고 있다고 하더라도 `/generalize` 옵션으로 일반화를 해야 한다.
 
-그래도 Sysprep는 커스터마이징된 일반화 이미지를 배포할 수 있다: 기존 일반화 이미지에 없던 장치 드라이버를 미리 설치시켜 제공할 수 있다는 의미이다. 장치 드라이버 설치 과정에는 이미지가 컴퓨터에 배포되어야 하므로 특수화 상태로 전환되는데, 드라이브 설치 마무리 후에는
+그래도 Sysprep는 커스터마이징된 일반화 이미지를 배포할 수 있다고 설명하였다. 원래 일반화 과정에서 장치 드라이버는 제외되지만, `Microsoft-Windows-PnPSysprep\PersistAllDeviceInstalls`을 `true`로 설정하면 PnP 장치들이 유지된 채 일반화가 진행된다. 그러면 동일한 하드웨어 구성을 갖는 컴퓨터에 배포되면 별도로 장치 드라이버를 설치하지 않아도 된다. 하드웨어는 정확히 동일한 제조사 장치가 아니어도 되지만, 이들과 상호작용이 가능한 드라이버이어야 한다.
+
+### 부팅 모드
+윈도우가 부팅될 때 두 가지의 모드가 있다:
+
+* OOBE(Out-Of-Box Environment) 모드
+    : OOBE는 윈도우 설치 과정에서 가장 처음으로 사용자에게 커스터마이징 경험을 제공해주는 부팅 모드이다 (키보드 레이아웃, 인터넷 연결, MS 계정 연동, 위치정보 제공 등). 기본적으로 윈도우가 처음으로 부팅될 때 OOBE 모드로 부팅된다. OOBE가 시작되기 전에 oobeSystem configuration pass가 즉시 실행된다.
+
+    윈도우 제품키 활성화가 자동으로 적용되지 않았을 시, OOBE는 사용자에게 제품키를 입력해 달라고 요청한다. 만일 사용자가 해당 단계를 건너뛰면 윈도우는 나중에 사용자에게 유효한 제품키를 입력해 달라고 상기시킨다. 윈도우 제품키 자동 활성화를 하려면 특수화 configuration pass에서 `Microsoft-Windows-Shell-Setup\ProductKey`에 제품키를 입력한다.
+
+* 검사(audit) 모드
+    : 검사 모드는 윈도우 이미지에 추가로 커스터마이징 할 수 있도록 한다. 검사 모드 부팅은 OOBE 설정을 건너뛰어 곧바로 컴퓨터에 접근하도록 한다. 그리고 디바이스 드라이버 및 어플리케이션 설치, 또는 설치 유효성 검사를 진행할 수도 있다.
+
+    Answer 파일에 있는 `Microsoft-Windows-Deployment-Reseal-Mode` 설정을 통해 검사 모드로 부팅하도록 할 수 있다. 검사 모드에서 컴퓨터는 auditSystem 및 auditUser configuration pass에서 unattended answer 파일에 명시된 설정들을 처리한다.
+
+    만일 검사 모드에서 컴퓨터가 실행되고 있는 중에서 OOBE로 부팅되도록 설정하고 싶다면, `Sysprep /oobe` 명령을 입력한다. 사용자들을 위해 준비하기 위해, 사용자가 처음으로 컴퓨터를 사용할 때 OOBE로 부팅되도록 설정해야 한다. 기본 윈도우 설치는 OOBE가 가장 먼저 시작되지만, 커스터마이징된 이미지로 OOBE를 건너뛰고 곧바로 검사 모드로 부팅할 수 있다.
+
+> Answer 파일(unattend.xml)은 운영체제 셋업(`Setup.exe`) 과정에서 이미지에 들어있는 윈도우 설정을 변경하는 데 사용된다. 심지어 OOBE가 마무리된 이후 이미지에 들어있는 스크립트를 트리거시키는 설정을 넣을 수 있다. 윈도우 셋업은 자동적으로 특정 위치에 있는 answer 파일을 찾도록 되어있지만, `/unattend:` 옵션으로 사용할 answer 파일을 별도로 지정할 수 있다.
+
+### 로그 파일
+Sysprep 도구는 configuration pass에 따라 윈도우 셋업에 대한 로그를 별도의 디렉토리에 저장한다. 그 이유는 일반화 configuration pass가 일부 윈도우 셋업 로그 파일을 삭제하기에, Sysprep 도구는 일반화 절차 로그를 기본 윈도우 셋업 로그 파일 외에 저장한다. 아래는 Sysprep가 사용하는 로그 파일의 위치이다.
+
+* 일반화: `%WINDIR%\System32\Sysprep\Panther`
+* 특수화: `%WINDIR%\Panther`
+* OOBE: `%WINDIR%\Panther\Unattendgc`
+
+주 로그 파일명은 `setupact.log`이다.
+
+### Sysprep Provider
+독립 소프트웨어 공급업체(Independent Software Vender; ISV) 혹은 독립 하드웨어 공급업체(Independent Hardware Vendoer; IHD)는 자신들의 어플리케이션이 이미징 및 배포 시나리오를 지원할 수 있도록 Sysprep Provider를 개발할 수 있다. 만일 그들의 어플리케이션이 현재 Sysprep 도구를 통해 일반화 작업이 지원되지 않는다면, 오히려 특정 소프트웨어 및 하드웨어 정보를 어플리케이션에서 제외시키는 Sysprep Provider를 만들어 적용할 수 있다.
+
+Sysprep Provider를 만들기 위해 다음을 진행한다:
+
+1. Sysprep Provider가 참조할 configuration pass(cleanup, 일반화, 혹은 특수화)를 결정한다.
+2. 결정한 configuration pass로부터 Sysprep Provider로의 적절한 entry point를 생성한다.
+3. Sysprep Provider를 Sysprep 도구에서 사용하도록 등록한다.
+4. Sysprep Provider가 올바르게 동작하는지 유효성 검사를 한다. 로그에 기록된 경고 및 오류를 반드시 확인하도록 한다.
+
+## 이미지 Generalization
+이미지 일반화를 위해서는 검사 모드로 부팅되어야 한다. 검사 모드 부팅은 unattended answer 파일 혹은 OOBE 화면에서 진입할 수 있다.
+
+1. PC를 검사 모드로 부팅한다. 운영체제가 검사 모드로 부팅되면 System Preparation Tool이 화면에 나타난다. 해당 창을 닫거나 열거나는 원하는 대로 한다.
+2. 드라이버 추가, 설정 변경, 프로그램 설치 등으로 윈도우를 커스터마이징 한다. 그러나 절대로 마이크로소프트 스토어 앱을 설치하거나 업데이트 하지 않는다.
+
+> 마이크로소프트 스토어에서 앱을 새로 설치하거나 기존 앱을 업데이트하면 일반화 작업에 오류가 발생한다. 바로 `Sysprep /generalize` 작업은 모든 앱들은 사용자 전부에게 공급되어야 하기 때문이다. 그러나 위에서 상술한 행동은 특정 사용자에게만 적용되므로 오류가 발생하는 것이다. 업데이트는 최종 사용자 측에서 진행하게 하던가, 전 사용자들을 위한 비즈니스 전용 오프라인-licensed 마이크로소프트 스토어를 공급하는 등의 방안이 있다.
+
+3. `Sysprep`을 실행한다. 만일 System Preparation Tool이 아직 살아있다면 `Generalize` 및 `Shutdown`을 클릭해서 이미지 일반화 후에 자동으로 종료하게 한다. 혹은 cmd로 `Sysprep /generalize /shutdown /oobe` 옵션들을 활성화한다.
+4. 컴퓨터가 종료되었으면 DISM으로 이미지를 캡처한다.
+5. 캡처한 이미지를 배포하면 OOBE 화면이 나타난다.
+
+> 컴퓨터 배포 중에 여러 unattended 파일을 사용한다면, 각 unattended 파일에 아래의 설정을 추가하여 윈도우 셋업이 unattended 파일을 처리한 다음 일반화를 진행하게 한다.
+>
+> * 자동적으로 이미지를 일반화하고 컴퓨터를 종료하게 만들려면 `Microsoft-Windows-Deployment\Generalize` 설정을 사용한다. `Mode`는 OOBE 혹은 Audit으로 설정하고, `ForceShutdownNow`는 `true`로 설정한다.
+>
+> ...혹은...
+>
+> * 시스템을 일반화하기 위해, 우선 검사 모드로 부팅하고 `Microsoft-Windows-Deployment | Reseal`을 oobeSystem configuration pass로 설정한다. `Mode`는 Audit으로 설정한다.
+
+## Answer Files
