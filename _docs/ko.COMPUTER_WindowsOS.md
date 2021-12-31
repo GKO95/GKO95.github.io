@@ -84,6 +84,62 @@ order: 0x45
 [하드웨어 추상화](https://ko.wikipedia.org/wiki/하드웨어_추상화) 계층(harware abstraction layer; HAL)은 물리적 하드웨어와 상호작용하는 윈도우 NT 운영체제의 소프트웨어이다.
 
 # 윈도우: 배포
+Windows Assessment and Deployment Kit (ADK) 필요
+
+## MDT 배포 준비
+MDT(Microsoft Deloyment Tookit)는 데스크탑 및 서버 배포를 자동화하는 통합 프로그램이다.
+
+Windows System Image Manager (Windows SIM)
+
+#### 네트워크 및 서버
+모든 서버는 Windows 2019을 실행한다.
+
+* DC01 (도메인 컨트롤러)
+    : 이해를 돕기 위해 가상의 `contoso.com` 도메인 이름을 갖는 DNS 및 DHCP 서버의 도메인 컨트롤러이다.
+
+> 도메인 컨트롤러(domain controller; DC)는 원도우 도메인 네트워크 중에서 Active Directory가 활성화된 서버를 가리킨다.
+>
+> Active Directory(AD)란, 마이크로소프트에서 개발한 윈도우 디렉토리 서비스로, 윈도우 도메인에 접속하는 모든 사용자와 컴퓨터(e.g. 서버)에게 인증 및 권한을 부여한다. 그 외에도 매우 민감한 사용자 정보를 저장하거나 보안 정책을 집행 및 소프트웨어 업데이트 등 핵심적인 서비스를 수행한다.
+>
+> 그러므로 윈도우 도메인 네트워크는 DC 중앙집권 체계라고 볼 수 있다.
+
+* MDT01 (맴버 서버)
+    : 가상의 `contoso.com` 도메인의 맴버 서버로 최소 200GB 용량을 갖는 `D:` 드라이브를 갖는다. MDT01은 네트워크 전역에 윈도우 운영체제를 배포하는 WDS(Windows Deployment Service; 윈도우 배포 서비스)를 실행하여 deployment share를 호스트하여 배포에 필요한 운영체제 이미지, 언어팩, 장치 드라이버 등의 리포지토리를 제공할 것이다. *[선택사항: MDT01는 회사망에 있는 서버 OS 업데이트 제공에도 사용된다.]*
+
+> 맴버 서버(member server)는 윈도우 도메인 네트워크에서 도메인 컨트롤러에 관리되는 그 외의 서버들이다. 데이터베이스, 파일 서버, 이메일 서버 등이 모두 맴버 서버에 해당한다.
+
+* HV01 (Hyper-V 호스트 컴퓨터)
+    : 윈도우 10 reference 이미지를 빌드하는데 사용된다.
+
+#### 클라이언트
+
+> 클라이언트 컴퓨터(client computer)는 컴퓨터 네트워크에서 서버에서 제공하는 서비스 및 리소스를 접속할 수 있는 컴퓨터 장치이다.
+
+* PC0001 (IP 주소: DHCP)
+    : 최신 보안 업데이트까지 마무리한 윈도우 10 엔터프라이즈 x64가 실행되는 컴퓨터이다.
+
+* PC0002 (IP 주소: DHCP)
+    : 최신 보안 업데이트까지 마무리한 윈도우 7 SP1 엔터프라지으 x64가 실행되는 컴퓨터이다.
+
+* PC0003 - PC0007
+    : PC0001 및 PC0002와 유사한 환경의 클라이언트 컴퓨터이다. 이들은 각 시나리오에 대한 각종 가이드를 제공하기 위한 컴퓨터이다.
+
+----
+
+도메인 관리자로 접속하여 Windows Deployment Service를 실행할 MDT01에 윈도우 ADK 및 윈도우 PE add-on을 설치한다. 그러면 배포에 필요한 Deployment Tool과 USMT, 그리고 WinPE가 설치된다.
+
+가장 중요한 Microsoft Deployment Toolkit도 MDT01에 별도의 다운로드 및 설치가 필요하다. 그러면 Deployment Workbench 프로그램을 사용할 수 있는데, 권장한다는 PowerShell 5.1는 이미 기본적으로 설치되어 있다. 그러나 만일 프로그램을 열었을 때 PowerShell 관련 오류가 나타나면 보안 문제로 외부 스크립트를 함부로 실행하는 것을 방지하는 Execution Policy에 의한 가능성이 매우 높다.
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+### Hyper-V
+Hyper-V는 x86-64 시스템에서 윈도우 가상머신(일명, VM; virtual machine)을 생성하는 native hypervisor이다. 여기서 native hypervisor란, 호스트 하드웨어에서 바로 실행되기 때문에 하드웨어 제어가 가능하고 게스트 운영체제를 관리할 수 있다.
+
+> 이와 대조되는 host hypervisor은 일반 프로그램처럼 동작한다; 운영체제에서 실행되며 각 운영체제는 하나의 프로세스이다. 대표적인 host hypervisor로 VMWare Workstation 및 VirtualBox 등이 있다.
+
+Hyper-V를 실행하는 서버 컴퓨터는 호스트로써 개별 가상머신을 하나 이상의 네트워크에 노출시켜 외부에서 접근할 수 있도록 한다.
 
 ## Sysprep
 Sysprep(System Preparation) 도구는 운영체제 이미지를 일반화(generalized) 상태에서 특수화(specialized) 상태로 변경, 그리고 다시 일반화 상태로 되돌리는 데 사용된다.
@@ -148,7 +204,7 @@ Sysprep Provider를 만들기 위해 다음을 진행한다:
 3. Sysprep Provider를 Sysprep 도구에서 사용하도록 등록한다.
 4. Sysprep Provider가 올바르게 동작하는지 유효성 검사를 한다. 로그에 기록된 경고 및 오류를 반드시 확인하도록 한다.
 
-## 이미지 Generalization
+### 이미지 Generalization
 이미지 일반화를 위해서는 검사 모드로 부팅되어야 한다. 검사 모드 부팅은 unattended answer 파일 혹은 OOBE 화면에서 진입할 수 있다.
 
 1. PC를 검사 모드로 부팅한다. 운영체제가 검사 모드로 부팅되면 System Preparation Tool이 화면에 나타난다. 해당 창을 닫거나 열거나는 원하는 대로 한다.
