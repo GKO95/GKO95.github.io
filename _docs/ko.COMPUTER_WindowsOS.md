@@ -123,7 +123,9 @@ sysprep /generalize
 
     Answer 파일에 있는 `Microsoft-Windows-Deployment-Reseal-Mode` 설정을 통해 검사 모드로 부팅하도록 할 수 있다. 검사 모드에서 컴퓨터는 auditSystem 및 auditUser configuration pass에서 unattended answer 파일에 명시된 설정들을 처리한다.
 
-    만일 검사 모드에서 컴퓨터가 실행되고 있는 중에서 OOBE로 부팅되도록 설정하고 싶다면, `Sysprep /oobe` 명령을 입력한다. 사용자들을 위해 준비하기 위해, 사용자가 처음으로 컴퓨터를 사용할 때 OOBE로 부팅되도록 설정해야 한다. 기본 윈도우 설치는 OOBE가 가장 먼저 시작되지만, 커스터마이징된 이미지로 OOBE를 건너뛰고 곧바로 검사 모드로 부팅할 수 있다.
+    만일 검사 모드에서 컴퓨터가 실행되고 있는 중에서 OOBE로 재부팅하려면, `Sysprep /oobe` 명령을 입력한다. 사용자들을 위해 준비하기 위해, 사용자가 처음으로 컴퓨터를 사용할 때 OOBE로 부팅되도록 설정해야 한다. 기본 윈도우 설치는 OOBE가 가장 먼저 시작되지만, 커스터마이징된 이미지로 OOBE를 건너뛰고 곧바로 검사 모드로 부팅할 수 있다.
+
+    검사 모드는 시스템 built-in 관리자 계정으로 부팅을 하며, `auditUser` configuration pass 과정에서 해당 계정은 비활성화된다. 즉, 화면보호 등으로 인해 자동 로그아웃 되었거나 재부팅을 하면 검사 모드로 진입하지 않는다는 점을 주의하도록 한다.
 
 > Answer 파일(unattend.xml)은 운영체제 셋업(`Setup.exe`) 과정에서 이미지에 들어있는 윈도우 설정을 변경하는 데 사용된다. 심지어 OOBE가 마무리된 이후 이미지에 들어있는 스크립트를 트리거시키는 설정을 넣을 수 있다. 윈도우 셋업은 자동적으로 특정 위치에 있는 answer 파일을 찾도록 되어있지만, `/unattend:` 옵션으로 사용할 answer 파일을 별도로 지정할 수 있다.
 
@@ -167,3 +169,51 @@ Sysprep Provider를 만들기 위해 다음을 진행한다:
 > * 시스템을 일반화하기 위해, 우선 검사 모드로 부팅하고 `Microsoft-Windows-Deployment | Reseal`을 oobeSystem configuration pass로 설정한다. `Mode`는 Audit으로 설정한다.
 
 ## Answer Files
+Answer 파일을 Sysprep 도구와 함께 사용하여 윈도우 셋업에 나타나지 않은 설정을 지정할 수 있다. 다음은 answer 파일로 할 수 있는 작업들이다:
+
+* 제품키를 Answer 파일에 미리 제시하면 자동적으로 제품키가 활성화된다.
+* PnP 장치 드라이버를 이미지 일반화 이후에도 유지시킬 수 있다.
+
+모든 configuration pass가 윈도우 셋업 과정에서 실행되지 않는다; Generalize, AuditSystem, 그리고 AuditUser은 오로지 Sysprep에서만 동작하는데, 이들의 역할은 다음과 같다.
+
+* AuditSystem 및 AuditUser는 `Sysprep /audit` 명령으로 검사 모드로 재부팅하였을 때 처리되는 configuration pass이다.
+* Generalize는 `Sysprep /generalize` 명령으로 이미지를 일반화할 때 처리되는 configuration pass이다. 이 절차에서 시스템 특정 설정을 제거하여 동일한 이미지를 여러 컴퓨터에 배포될 수 있도록 한다.
+
+만일 Answer 파일을 사용하여 윈도우를 설치하였다면, 해당 answer 파일은 시스템에 cache 된다. 다음 configuration pass가 동작할 때, 컴퓨터는 cache된 answer 파일로부터 설정을 적용한다. 다른 answer 파일의 설정이 적용되기를 원하면 별도의 `unattend.xml` 파일을 Sysprep에 제시해야 한다.
+
+```
+Sysprep /unattend:<file_name>
+```
+
+### RunSynchronous
+검사 모드에서 auditUser configuration pass에서 동작하는 `Microsoft-Windows-Deployment\RunSynchronous` 명령의 상태를 볼 수 있다. AuditUI 창은 명령에 대한 상태 및 아래의 정보를 제공한다:
+
+* 설치가 계속 진행 중이라는 것을 보여주는 시각적 진행도
+* Fail이 발생한 시점과 부분을 시각적 표시
+
+만일 answer 파일이 auditUser configuratio pass에 `Microsoft-Windows-Deployment\RunSynchronous` 명령을 포함하고 있으면, 명령 목록들은 AuditUI 창에 나타난다. 해당 명령들은 `Windows-Deployment-RunSynchronous-RunSynchronousCommand\Order`에서 명시한 순서대로 나열된다. 사용자 인터페이스에 나열된 각 항목들은 다음 중 하나의 문자열이다:
+
+* (존재할 시) Microsoft-Windows-Deployment-RunSynchronous-RunSynchronousCommand Description
+* Microsoft-Windows-Deployment-RunSynchronous-RunSynchronousCommand Path
+
+Sysprep는 모든 `RunSynchronous` 명령을 순서대로 처리한다. 만일 명령이 성공하면 해당하는 나열 항목에는 녹색 체크 표시가 나타난다. 반대로 실패하였으면 적색 X 표시가 나타난다. 명령이 재부팅을 요청하면 AuditUI 창은 재부팅 후에 나타나지만 처리되지 않은 명령들만 나열된다. 이전에 처리된 명령들은 목록에서 제외된다. 나열된 명령어 목록이 디스플레이 높이를 초과할 시, 스크롤은 제공되지 않으며 디스플레이 크기에 맞게 내용이 잘려서 표시되어 일부 명령을 볼 수가 없을 것이다.
+
+윈도우 셋업은 AuditUI 창에서 반환된 코드를 해당하는 상태값으로 해석한다. 0은 성공이며, 0이 아닌 숫자는 실패이다. 명령어의 반환값은 `Microsoft-Windows-Deployment-RunSynchronous-RunSynchronousCommand\WillReboot` 설정값에 따라 윈도우 셋업 절차에 영향을 줄 수 있다.
+
+* `Always`일 경우...
+    * 명령 반환값이 0이면 성공 표시가 나타난다. 그리고 곧바로 재부팅된다.
+    * 명령 반환값이 0이 아닌 숫자이면, 실패 표시가 나타난다. 그리고 곧바로 재부팅된다.
+
+    > `Always` ghrdms `Never`은 0이 아닌 반환값을 치명적 오류로 취급하지 않는다.
+
+* `Never`일 경우...
+    * 명령 반환값이 0이면 성공 표시가 나타난다.
+    * 명령 반환값이 0이 아닌 숫자이면, 실패 표시가 나타난다.
+
+    > `Always` ghrdms `Never`은 0이 아닌 반환값을 치명적 오류로 취급하지 않는다.
+
+* `OnRequest`일 경우...
+    * 명령 반환값이 0이면 성공 표시가 나타난다.
+    * 명령 반환값이 1이면 성공 표시가 나타난다. 그리고 곧바로 재부팅된다.
+    * 명령 반환값이 2이면 임시적으로 성공 표시가 나타난다. 그리고 곧바로 재부팅된다. 재부팅 이후 AuditUI에 아무런 표시가 없이 다시 나타나 처리된다.
+    * 명령 반환값이 그 이외의 숫자이면 치명적 오류로 치부하여 blocking 다이얼로그 상자가 나타난다. 만일 Errorhandler.cmd 파일이 켜져 있으면 다이얼로그 상자는 나타나지 않는다.
