@@ -84,18 +84,15 @@ order: 0x45
 [하드웨어 추상화](https://ko.wikipedia.org/wiki/하드웨어_추상화) 계층(harware abstraction layer; HAL)은 물리적 하드웨어와 상호작용하는 윈도우 NT 운영체제의 소프트웨어이다.
 
 # 윈도우: 배포
-Windows Assessment and Deployment Kit (ADK) 필요
+> 윈도우 서버 OS 및 윈도우 도메인 네트워크를 활용한 운영체제 배포를 위주로 다루고 있어, 필자는 서버가 없는 관계로 일부 내용은 제한적이거나 생략되었다.
+
+본 장은 Microsoft Deployment Toolkit(MDT)를 사용한 운영체제 커스터마이징 및 배포 방법을 다룬다. 여기서 커스터마이징이란, 리눅스처럼 커널 코드를 수정하는 것이 아니라 기존에 접근할 수 없던 운영체제 설정 그리고 드라이버 및 어플리케이션 등을 배포 전에 미리 설치하는 것을 말한다. 추가적으로, 몇 가지의 시나리오를 제공하여 상황에 따라 배포를 하는 방법에 대해서도 설명한다.
 
 ## MDT 배포 준비
-MDT(Microsoft Deloyment Tookit)는 데스크탑 및 서버 배포를 자동화하는 통합 프로그램이다.
-
-Windows System Image Manager (Windows SIM)
-
-#### 네트워크 및 서버
-모든 서버는 Windows 2019을 실행한다.
+본 부문은 가상의 기업 "Contoso"의 윈도우 도메인 네트워크에 연결된 회사 (클라이언트) 컴퓨터에 윈도우 10 운영체제를 배포하는 게 목적이다. 네트워크 서버들은 모두 윈도우 서버 2019 운영체제이다:
 
 * DC01 (도메인 컨트롤러)
-    : 이해를 돕기 위해 가상의 `contoso.com` 도메인 이름을 갖는 DNS 및 DHCP 서버의 도메인 컨트롤러이다.
+    : 기업의 `contoso.com` 도메인 이름을 갖는 DNS 및 DHCP 서버의 도메인 컨트롤러이다.
 
 > 도메인 컨트롤러(domain controller; DC)는 원도우 도메인 네트워크 중에서 Active Directory가 활성화된 서버를 가리킨다.
 >
@@ -104,42 +101,161 @@ Windows System Image Manager (Windows SIM)
 > 그러므로 윈도우 도메인 네트워크는 DC 중앙집권 체계라고 볼 수 있다.
 
 * MDT01 (맴버 서버)
-    : 가상의 `contoso.com` 도메인의 맴버 서버로 최소 200GB 용량을 갖는 `D:` 드라이브를 갖는다. MDT01은 네트워크 전역에 윈도우 운영체제를 배포하는 WDS(Windows Deployment Service; 윈도우 배포 서비스)를 실행하여 deployment share를 호스트하여 배포에 필요한 운영체제 이미지, 언어팩, 장치 드라이버 등의 리포지토리를 제공할 것이다. *[선택사항: MDT01는 회사망에 있는 서버 OS 업데이트 제공에도 사용된다.]*
+    : 최소 200GB 용량을 갖는 `D:` 드라이브를 갖으며, 클라이언트 컴퓨터에 배포에 필요한 운영체제 이미지, 드라이버 및 어플리케이션 설치 파일 등을 제공하는 deployment share 리포지터리 서버이다. 해당 서버는 [MDT](https://www.microsoft.com/en-us/download/details.aspx?id=54259) 및 [Windows ADK](https://docs.microsoft.com/en-us/windows-hardware/get-started/adk-install)가 설치되어 있다.
 
 > 맴버 서버(member server)는 윈도우 도메인 네트워크에서 도메인 컨트롤러에 관리되는 그 외의 서버들이다. 데이터베이스, 파일 서버, 이메일 서버 등이 모두 맴버 서버에 해당한다.
 
-* HV01 (Hyper-V 호스트 컴퓨터)
-    : 윈도우 10 reference 이미지를 빌드하는데 사용된다.
+* HV01 (하이퍼-V 서버)
+    : 클라이언트 컴퓨터에 배포될 운영체제의 기반이 될 윈도우 10 참조 이미지(reference image)를 캡처하기 위한 VM을 제공하는 서버이다.
 
-#### 클라이언트
+### Hyper-V
+[Hyper-V](https://ko.wikipedia.org/wiki/하이퍼-V)는 x86-64 시스템에서 윈도우 가상머신(일명, VM; virtual machine)을 생성하는 native hypervisor이다. 여기서 native hypervisor란, 호스트 하드웨어에서 바로 실행되기 때문에 하드웨어 제어가 가능하고 게스트 운영체제를 관리할 수 있다.
 
-> 클라이언트 컴퓨터(client computer)는 컴퓨터 네트워크에서 서버에서 제공하는 서비스 및 리소스를 접속할 수 있는 컴퓨터 장치이다.
+> 이와 대조되는 host hypervisor은 일반 프로그램처럼 동작한다; 운영체제에서 실행되며 각 운영체제는 하나의 프로세스이다. 대표적인 host hypervisor로 VMWare Workstation 및 VirtualBox 등이 있다.
 
-* PC0001 (IP 주소: DHCP)
-    : 최신 보안 업데이트까지 마무리한 윈도우 10 엔터프라이즈 x64가 실행되는 컴퓨터이다.
+## MDT 참조 이미지 생성
+참조 이미지(reference image)는 일반 사용자가 사용하는 배포 이미지에서 조직이나 기업이 요구하는 필수 환경들이 설정된 운영체제 이미지이다. 그리고 참조 이미지를 기반으로 언제든지 변경될 수 있는 추가 커스터마이징 및 업데이트가 되어 클라이언트에게 배포되는 것이다. 클라이언트 장치에 따라 달라지는 드라이버 커스터마이징은 제외되므로 참조 이미지에 문제가 발생하여도 순전히 소프트웨어에서 발생하는 것으로 판단이 가능하다. 이러한 면에서 참조 이미지는 빠른 시간 내에 여러가지 구성으로 커스터마이징을 시험해 볼 수 있는 장점을 갖는다.
 
-* PC0002 (IP 주소: DHCP)
-    : 최신 보안 업데이트까지 마무리한 윈도우 7 SP1 엔터프라지으 x64가 실행되는 컴퓨터이다.
-
-* PC0003 - PC0007
-    : PC0001 및 PC0002와 유사한 환경의 클라이언트 컴퓨터이다. 이들은 각 시나리오에 대한 각종 가이드를 제공하기 위한 컴퓨터이다.
-
-----
-
-도메인 관리자로 접속하여 Windows Deployment Service를 실행할 MDT01에 윈도우 ADK 및 윈도우 PE add-on을 설치한다. 그러면 배포에 필요한 Deployment Tool과 USMT, 그리고 WinPE가 설치된다.
-
-가장 중요한 Microsoft Deployment Toolkit도 MDT01에 별도의 다운로드 및 설치가 필요하다. 그러면 Deployment Workbench 프로그램을 사용할 수 있는데, 권장한다는 PowerShell 5.1는 이미 기본적으로 설치되어 있다. 그러나 만일 프로그램을 열었을 때 PowerShell 관련 오류가 나타나면 보안 문제로 외부 스크립트를 함부로 실행하는 것을 방지하는 Execution Policy에 의한 가능성이 매우 높다.
+MDT에 사용되는 프로그램은 Deployment Workbench이며 PowerShell 및 .NET Framework 반드시 필요하다. 그러나 만일 Deployment Workbench 프로그램을 실행할 때 PowerShell 관련 오류가 나타나면 보안 문제로 외부 스크립트를 함부로 실행하는 것을 방지하는 Execution Policy에 의한 가능성이 매우 높다.
 
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-### Hyper-V
-Hyper-V는 x86-64 시스템에서 윈도우 가상머신(일명, VM; virtual machine)을 생성하는 native hypervisor이다. 여기서 native hypervisor란, 호스트 하드웨어에서 바로 실행되기 때문에 하드웨어 제어가 가능하고 게스트 운영체제를 관리할 수 있다.
+![Deployment Workbench 프로그램](/images/docs/windows/windows_mdt_deploymentworkbench.png)
 
-> 이와 대조되는 host hypervisor은 일반 프로그램처럼 동작한다; 운영체제에서 실행되며 각 운영체제는 하나의 프로세스이다. 대표적인 host hypervisor로 VMWare Workstation 및 VirtualBox 등이 있다.
+### Deployment share 생성
+Deployment Workbench에서 이미지 빌드를 위해 사용되는 프로젝트를 deployment share라고 부른다. 그리고 본 부문은 참조 이미지를 빌드하기 위한 deployment share 이름을 MDT Build Lab이라고 부른다. `Deployment Share > New Deployment Share`에서 다음 내용들을 입력한다.
 
-Hyper-V를 실행하는 서버 컴퓨터는 호스트로써 개별 가상머신을 하나 이상의 네트워크에 노출시켜 외부에서 접근할 수 있도록 한다.
+![Deployment Workbench에서 deployment share 생성](/images/docs/windows/windows_mdt_deploymentshare.png)
+
+* Deployment share 경로: `D:\Windows\MDTBuildLab`
+    : Deployment share가 저장될 디렉토리를 지정한다.
+
+* 공유명: `MDTBuildLab$`
+    : 네트워크 상에서 해당 deployment share를 접근하기 위해 디렉토리에게 주어지는 명칭이다.
+
+* Deployment share 설명: `MDT Build Lab`
+    : Deployment Workbench에서 표시될 deployment share 이름이다.
+
+그리고 나머지는 기본 설정을 그대로 유지한다. 위에서 지정한 Deployment share 경로로 가면 여러 개의 폴더들이 이미지 빌드를 위해 준비된 것을 볼 수 있다. 그리고 실제로 네트워크 상에서 공유명으로 deployment share 경로를 접속할 수 있는지도 확인한다. 참고로 deployment share의 속성에는 서버로부터 배포 작업의 진행도를 모니터링 할 수 있는 기능이 있으며, 아래의 **Monitoring** 탭에서 체크박스를 활성화하면 된다.
+
+![Deployment share의 모니터링 활성화](/images/docs/windows/windows_mdt_deploymentsharemonitoring.png)
+
+### 운영체제 추가
+현재 Deployment share는 커스터마이징할 이미지, 즉 운영체제 리소스가 아무것도 없다. Deployment share에 운영체제를 불러오는데 소스 코드를 요구하지 않으며, ISO 파일에 들어있는 운영체제 소스 파일이면 충분하다. Microsoft에서 다운로드 한 것이나 CD/DVD 또는 USB에 구워진 ISO 파일이든 상관없다. 
+
+본 예시에서는 `Operating Systems` 하에 `Windows 11` 폴더를 생성하였으며, 해당 폴더에 윈도우 11 운영체제를 deployment share로 불러온다.
+
+![Deployment share로 운영체제 불러오기](/images/docs/windows/windows_mdt_operatingsystemimport.png)
+
+* `Full set of source file` 선택
+    : 완전한 소스 파일 구성으로 이루어진 ISO 형식의 운영체제
+
+* 소스 경로: `E:\`이나 `F:\` 등 시스템에서 인식한 CD/DVD, USB 혹은 ISO 미디어 장치 드라이브 
+    : Deployment share는 지정된 경로에 있는 모든 소스 파일들을 통째로 복사하여 가져온다. 그러므로 운영체제 추가 이후에는 미디어 장치를 제거해도 된다.
+
+* 목적지 디렉토리 이름: `WIN11EX64`
+    : 운영체제 소스 파일을 복사할 디렉토리 이름이다. 해당 폴더는 `D:\Windows\MDTBuildLab\Operating Systems\`에 찾아볼 수 있으며, 이름을 이렇게 바꾼 이유는 PATH 경로 길이 제한을 염두한 것이다.
+
+본 절차를 마무리하면 해당 운영체제 ISO에 들어있는 운영체제들이 나열된다.
+
+![Deployment share로 불러온 운영체제 목록](/images/docs/windows/windows_mdt_operatingsystems.png)
+
+### 셋업 파일 추가
+Deployment share에 운영체제가 추가되었으나, 이후에 별도의 작업을 하지 않으면 일반 배포 이미지랑 다를 바가 없다. 조직이나 기업이 참조 이미지로써 운영체제에 미리 설치되길 원하는 어플리케이션이나 소프트웨어가 있을 것이다. 이들도 운영체제를 deployment share에 추가한 것과 동일한 절차로 셋업 파일을 불러온다.
+
+본 예시에서는 `Applications` 하에 `Microsoft` 폴더를 생성하였으며, 해당 폴더에 Office 365 Pro Plus 그리고 Visual C++ Redistributed 2019 x86 및 x64를 deployment share로 불러온다.
+
+![Deployment share로 어플리케이션 불러오기](/images/docs/windows/windows_mdt_applicationimport.png)
+
+* `Application with source files` 선택
+    : 어플리케이션을 설치하는 소스 파일
+
+* 어플리케이션 이름: `Install - Office365 ProPlus - x64`
+    : Deployment share에서 인식할 어플리케이션 이름이며, 네이밍 규칙은 다음을 준수하기를 권장한다.
+    * `Install -` 접두사: 설치 프로그램을 구동하는 어플리케이션
+    * `Configure -` 접두사: 운영체제의 설정을 변경하는 어플리케이션
+    * `- x86`, `- x64`, 혹은 `- x86-x64` 접미사: 어플리케이션의 아키텍처를 명시
+
+* 소스 경로: `C:\Downloads\Office365`와 같이 현재 `setup.exe` 파일이 위치한 폴더
+
+* 목적지 디렉토리 이름: `Install - Office365 ProPlus - x64`
+    : 운영체제 소스 파일을 복사할 디렉토리 이름이다. 해당 폴더는 `D:\Windows\MDTBuildLab\Applications\`에 찾아볼 수 있으며, 일반적으로 그대로 놔두는 편이다.
+
+* 명령어: `setup.exe /configure configuration.xml`
+    : 어플리케이션은 PowerShell로 실행할 때 설정될 옵션들을 명시한다. 위의 경우는 Office 365 설치 파일 `setup.exe`이 실행될 때 `configuration.xml` 설정 파일을 가져오도록 한다.
+
+Deployment Workbench로는 불러오는 것 외에도 PowerShell 지원을 활용하여 스크립트로 불러올 수도 있다. PowerShell 연동을 위해서는 아래의 스크립트를 관리자 권한에서 실행시킨다.
+
+```powershell
+Import-Module "C:\Program Files\Microsoft Deployment Toolkit\bin\MicrosoftDeploymentToolkit.psd1"
+New-PSDrive -Name "DS001" -PSProvider MDTProvider -Root "D:\Windows\MDTBuildLab"
+```
+
+그리고 다음 스크립트는 위에서 GUI로 한 것과 동일한 불러오기 작업을 수행한다.
+
+```powershell
+$ApplicationName = "Install - Office365 ProPlus - x64"
+$CommandLine = "setup.exe /configure configuration.xml"
+$ApplicationSourcePath = "D:\Downloads\Office365"
+Import-MDTApplication -Path "DS001:\Applications\Microsoft" -Enable "True" -Name $ApplicationName -ShortName $ApplicationName -CommandLine $CommandLine -WorkingDirectory ".\Applications\$ApplicationName" -ApplicationSourcePath $ApplicationSourcePath -DestinationFolder $ApplicationName -Verbose
+```
+
+나머지 어플리케이션을 불러오면 다음과 같이 어플리케이션들이 나열된다.
+
+![Deployment share로 불러온 어플리케이션 목록](/images/docs/windows/windows_mdt_applications.png)
+
+### Task sequence 추가
+Deployment share에 운영체제와 어플리케이션이 추가되었지만, 어플리케이션을 어느 시점에 운영체제에 설치할지 정해진 바가 없다. 이러한 작업 절차를 지정하는 게 task sequence이다. Task sequence도 목적에 따라 다르지만, 본 부문에서는 사용자들을 위한 일반적인 배포 작업인 `Standard Client Task Sequence`를 중점으로 다룬다.
+
+`Task Sequences`를 우클릭하여 운영체제 설치에 `New Task Sequence`를 선택한다.
+
+![Deployment share로 task sequence 생성하기](/images/docs/windows/windows_mdt_tasksequencecreate.png)
+
+* Task sequence ID: `REFW11X64-001`
+    : Task sequence 식별자
+
+* Task sequence 이름: `Windows 11 Home x64 Default Image`
+    : Deployment share에서 표시될 Task sequence 명칭
+
+* Task sequence 템플릿: `Standard Client Task Sequence`
+    : 클라이언트를 위한 표준 배포 작업 절차
+
+* 운영체제 선택: `Windows 10 Home in WIN11EX64 install.wim`
+    : 해당 task sequence가 적용될 운영체제 선택
+
+본 절차를 마무리하면 해당 task sequence는 아래와 같이 나타난다.
+
+![Deployment share로 생성된 task sequence 목록](/images/docs/windows/windows_mdt_tasksequences.png)
+
+생성된 task sequence는 단지 템플릿에 블과하므로, 운영체제에서 어플리케이션 설치 등이 배포 과정에서 자동적으로 수행되도록 하려면 절차 일부에 수정이 필요하다. 생성된 task sequence의 더블클릭 혹은 속성을 클릭하여 Task Sequence 탭으로 이동한다. 아래의 절차 사항을 수정한다.
+
+* `State Restore > Windows Update (Pre-Application Installation)` 활성화
+
+* `State Restore > Windows Update (Post-Application Installation)` 활성화
+
+* `State Restore > Tattoo` 다음에 `Custom Task (Pre-Windows Update)` 폴더 생성
+
+    * `Add > Roles > Install Roles and Features` 추가
+        * 이름: `Install - Microsoft .NET Framework 3.5.1`
+        * `.NET Framework 3.5 (includes .NET 2.0 and 3.0)` 활성화
+
+    * `Add > General > Install Application` 추가
+        * 이름: `Microsoft Visual C++ Redistributable 2019 - x86`
+        * 단일 어플리케이션 설치: Applications에 등록된 `Install - MSVC 2019 - x86`
+
+    * `Add > General > Install Application` 추가
+        * 이름: `Microsoft Visual C++ Redistributable 2019 - x64`
+        * 단일 어플리케이션 설치: Applications에 등록된 `Install - MSVC 2019 - x64`
+
+    * `Add > General > Install Application` 추가
+        * 이름: `Office365 ProPlus - x64`
+        * 단일 어플리케이션 설치: Applications에 등록된 `Install - Office365 ProPlus - x64`
+
+위의 절차 수정사항들을 보면 알 수 있듯이 Applications에 추가된 셋업 파일들이다. 이들은 각 어플리케이션마다 입력해준 명령어를 통해 옵션이 적용된 설치를 실행하게 된다. 수정이 완료된 task sequence는 다음과 같이 된다.
+
+![Deployment share로 생성된 task sequence 목록](/images/docs/windows/windows_mdt_tasksequenceedit.png)
 
 ## Sysprep
 Sysprep(System Preparation) 도구는 운영체제 이미지를 일반화(generalized) 상태에서 특수화(specialized) 상태로 변경, 그리고 다시 일반화 상태로 되돌리는 데 사용된다.
