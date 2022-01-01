@@ -257,6 +257,85 @@ Deployment share에 운영체제와 어플리케이션이 추가되었지만, �
 
 ![Deployment share로 생성된 task sequence 목록](/images/docs/windows/windows_mdt_tasksequenceedit.png)
 
+### Answer 파일 수정
+`Unattend.xml` answer 파일은 윈도우 셋업 과정에서 나타나지 않는 설정들을 편집하는데 사용되지만, 대부분은 MDT에서 해결하기 때문에 거의 필요로 하지 않는다. 다만, IE 브라우저 설정 등을 위해서 사용할 수 있다. Answer 파일을 접근하려면 task sequence 속성에서 OS Info 탭에 `Unattend.xml` 편집 버튼이 있다.
+
+![Task sequence의 <code>unattend.xml</code> answer 파일](/images/docs/windows/windows_mdt_tasksequenceunattend.png)
+
+### Deployment share 규칙
+Deployment share 규칙은 위에서 설명한 커스터마이징된 운영체제를 어떻게 배포할 것인지 설정한다 (Task sequence는 배포 과정 때 무슨 작업을 어느 시점에서 할 것인지 지정하는 것이므로 다른 개념이다). 여기서 "어떻게"란, 운영체제의 사용자 정보는 어디서 불러올 것이며, BitLocker 파티션 생성을 할 것인지, 배포 작업을 마치면 어떠한 동작을 취할 것인지 등을 말한다. 즉, 배포 과정보다는 배포 자체의 설정을 취급한다.
+
+Deployment share 규칙은 총 두 가지가 있다: (1) `CustomSettings.ini` 파일과 (2) `Bootstrap.ini` 파일이 있다. 두 파일의 역할을 동일하나, 후자는 부트 이미지(boot image)에 컴파일되므로 수정될 때마다 이미지를 업데이트 해야 한다. 그렇기 때문에 `Bootstrap.ini`는 deployment share 위치 등의 필요한 최소한의 규칙만을 적용하도록 한다. 대신 `CustomSettings.ini`는 OK 버튼을 누를 때마다 곧바로 적용된다.
+
+> 부트 이미지(boot image)란, 운영체제 배포, 설치, 수리를 위해 사용되는 초소형 운영체제 [Window PE](https://ko.wikipedia.org/wiki/윈도우_사전_설치_환경)(Preinstallation Environment)를 실행하는 이미지 파일이다.
+
+![Deployment share의 <code>CustomSettings.ini</code> 규칙](/images/docs/windows/windows_mdt_deploymentsharerule.png)
+
+`DoCapture=YES`는 주목할 규칙 중 하나로 task sequence가 Sysprep 도구를 실행하여 운영체제가 설치되면 캡처하여 이미지 파일을 생성하게 한다. 만일 해당 규칙이 설정되지 않았으면 아래의 참조 이미지 빌드 과정이 무의미해진다.
+
+### 부트 이미지 생성
+Deployment share 규칙에 따라 운영체제를 배포하는 부트 이미지 생성은 deployment share 속성의 Windows PE에서 진행한다. x86 및 x64 아키텍처에 대하여 각각 부트 이미지가 나뉘어져 있다.
+
+> MDT에서 x86 부트 이미지는 x86 및 x64 운영체제 둘 다 배포할 수 있다 (UEFI 기반 컴퓨터 제외). 그러므로 흔히 x86 부트 이미지를 사용한다.
+
+![Deployment share의 Windows PE 설정](/images/docs/windows/windows_mdt_deploymentsharewindowspe.png)
+
+부트 이미지 설정도 마무리되었으면 deployment share를 업데이트(혹은 생성)한다.
+
+![Deployment share의 Windows PE 부트 이미지 업데이트](/images/docs/windows/windows_mdt_deploymentshareupdate.png)
+
+해당 부트 이미지는 `D:\Windows\MTDBuildLab\Boot`에서 ISO 파일을 찾을 수 있다.
+
+### 참조 이미지 빌드
+Hyper-V 서버인 HV01에 x86 부트 이미지를 가져와 운영체제를 설치한다 (그 전에 VM 체크포인트를 만들어 잘못되었을 경우, 다시 처음부터 재개할 수 있도록 대비한다). 부트 이미지로부터 Windows PE가 실행되면 어떠한 task sequence를 진행할지 묻는다.
+
+* Select a task sequence to execute on this computer: `Windows 11 Home x64 Default Image`
+
+그 이후 해당 참조 이미지의 이름과 어디에 저장할지 묻는다.
+
+* Location: `\\GKO-DESKTOP\MDTBuildLab$\Captures`
+* File Name: `REFW11X64-001.wim`
+
+그 이후 Windows PE의 배포 마법사는 커스터마이징된 윈도우 11 참조 이미지를 빌드하고 캡처한다. 캡처된 참조 이미지는 `REFW11X64-001.wim` 파일명으로 `D:\Windows\MTDBuildLab\Captures`에 나타난다.
+
+## MDT 윈도우 이미지 배포
+조직이나 기업에서 사용할 운영체제의 기반이 될 참조 이미지가 완성되었으면, 이를 바탕으로 본격 커스터마이징된 운영체제를 만든다. 즉, 이번에는 클라이언트 장치에 배포하는 것이 목적이다.
+
+하지만 전체적인 과정은 MDT 참조 이미지 생성과 다를 바가 없다. 몇 가지 추가되거나 변경된 사항만이 있으며, 전체적 흐름은 동일하다.
+
+실제 배포 목적을 갖고 커스터마이징하기 때문에 새로운 deployment share `MDTProduction`을 생성한다.
+
+* Deployment share 경로: `D:\Windows\MDTProduction`
+    : Deployment share가 저장될 디렉토리를 지정한다.
+
+* 공유명: `MDTProduction$`
+    : 네트워크 상에서 해당 deployment share를 접근하기 위해 디렉토리에게 주어지는 명칭이다.
+
+* Deployment share 설명: `MDT Production`
+    : Deployment Workbench에서 표시될 deployment share 이름이다.
+
+![Deployment Workbench에서 MDT Production deployment share 생성](/images/docs/windows/windows_mdt_deploymentshareproduction.png)
+
+`Operating Systems` 하에 `Windows 11` 폴더를 생성하는데, 여기서 기존과 달라진 점은 윈도우 11 참조 이미지를 불러온다는 것이다.
+
+* `Custom image file` 선택
+    : `.wim` 확장자의 커스터마이징된 운영체제 캡처 이미지
+
+* 소스 경로: `D:\Windows\MDTBuildLab\Captures\` 
+    : Hyper-V 서버에서 캡처한 이미지가 있는 MTD Build Lab의 Captures 폴더
+
+* *Copy Windows 7, Windows Server 2008 R2, or later setup files from the specified path* 활성화; 그리고 Setup source directory를 기존 운영체제 소스파일이 있는 `D:\Windows\MDTBuildLab\Operating Systems\WIN11EX64`로 지정한다.
+
+* 목적지 디렉토리 이름: `WIN11EX64`
+    : 운영체제 소스 파일을 복사할 디렉토리 이름이다. 해당 폴더는 `D:\Windows\MDTProduction\Operating Systems\`에 찾아볼 수 있으며, 이름을 이렇게 바꾼 이유는 PATH 경로 길이 제한을 염두한 것이다.
+
+### Select 프로필
+
+### 드라이버 추가
+Out-of-Box Drivers에 저장
+
+Task sequence에서 Preinstall 하에 Enable BitLocker (Offline) 밑에 Set Task Sequence Variable 추가
+
 ## Sysprep
 Sysprep(System Preparation) 도구는 운영체제 이미지를 일반화(generalized) 상태에서 특수화(specialized) 상태로 변경, 그리고 다시 일반화 상태로 되돌리는 데 사용된다.
 
