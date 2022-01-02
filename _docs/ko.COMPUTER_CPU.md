@@ -75,6 +75,36 @@ idle 상태는 C0(active; idle하지 않음)으로부터 시작해 점차적으�
 ### 상태
 Block 상태에 있는 스레드는 필연적으로 성능 문제를 가리키지 않는다. 대부분 스레드는 상당한 시간을 Block 상태에 놓여있어, 이는 프로세서가 idle 상태에 들어가 에너지를 절약하도록 한다. 오로지 사용자가 스레드가 작업을 마치는데 기다릴 때에만 스레드 상태는 성능에 있어 매우 중요한 요인으로 작용한다.
 
+* Running
+    : 현재 실행되고 있는 스레드 상태
+
+    * 그 중에서 Waiting -> Ready로 만들어주는 Running 스레드를 "Readying 스레드"라고 부른다.
+
+* Ready
+    : 실행될 준비는 되었지만 실행되고 있지 않는 스레드 상태
+    > 시스템 절차적 자연적으로 실행되지 않는 것이다.
+
+* Waiting
+    : 특정 이벤트가 발생할 때까지 실행될 수 없어 기다리는 스레드 상태
+    > 외부에서 강제적으로 실행하지 못하는 것이다.
+
+스레드 상태 전환은 다음과 같다:
+
+1. Running -> Waiting
+    : `WaitingForSingleObject` 또는 `Sleep(> 0)` 함수
+
+    3. 실행 준비가 된 스레드는 스케줄러를 통해 Ready -> Running
+
+2. Waiting -> (Ready) -> Running
+    : waiting으로부터 전환되려면 외부 running 스레드(일명 Readying 스레드; from `WaitingForSingleObject`) 혹은 kernel 동작(from `Sleep(>0)`) 도움 필요; idle한 프로세서가 있거나 Ready 되려는 스레드가 더 높은 우선권을 갖고 있으면 바로 Running
+
+    * 그렇지 않으면 Ready
+
+4. Running -> Ready
+    : time slice 종료, `Sleep(0)`, 혹은 더 높은 우선권의 스레드가 선점
+
+> Ready -> Waiting 전환은 없다!
+
 ### DPC 및 ISR
 스레드를 처리하는 것 외에도, 프로세서는 네트워크 카드나 타이머 등의 하드웨어 장치로부터의 알림에 대하여 반응한다. 이들 하드웨어가 장치가 프로세서의 관심을 받기 위한 방법으로 인터럽트를 생성한다. 운영체제는 하드웨어 인터럽트에 대응하기 위해 현재 실행되고 있는 스레드를 유예시키고 해당 인터럽트에 대응하는 ISR(Interrupt Service Routines; 인터럽트 서비스 루틴)을 실행한다.
 
@@ -123,3 +153,196 @@ Windows Assessment Console에서 진행된 assessment를 WPA에 열어 추가적
 ## 윈도우 ADK Assessment Results Files
 윈도우는 오로지 symmetric multiprocessing 시스템만을 지원하기 때문에, 본문에 있는 모든 정보는 설치된 모든 CPU 및 코어에 일관된다. 
 
+### CPU Usage (Sampled)
+일정 시간 간격(보통 1ms; 일명 weight)을 갖는 샘플들로 취합한 CPU 사용량 데이터이다. Analysis 테이블의 각 행을 반영하는 샘플 개수는 `Count`에 나타난다 (Utilization of CPU라면 각 CPU 프로세서에서 샘플된 개수, Utilization of Process라면 각 프로세스에서 샘플된 개수).
+
+> 일반적으로 Weight는 각 행마다의 관여된 샘플들의 weight 합으로 나타나는데, 샘플들의 weight를 모두 average로 평균하면 1ms 근방임을 확인할 수 있다.
+
+샘플 외의 CPU 활동을 기록되지 않으므로 DPC 및 ISR과 같은 짧은 순간들의 활동들은 CPU Sampling 그래프로부터 잘 반영되지 않는다.
+
+* Utilization by CPU
+    : (샘플 데이터 기준) CPU 프로세서마다 CPU 활용도 수치를 보여준다.
+
+* Utilization by Priority
+    : (샘플 데이터 기준) 스레드 우선권마다 CPU 활용도 수치를 보여준다.
+
+* Utilization by Process
+    : (샘플 데이터 기준) 프로세스마다 CPU 활용도 수치를 보여준다.
+
+* Utilization by Process and Thread
+    : (샘플 데이터 기준) 각 프로세스의 스레드마다 CPU 활용도 수치를 보여준다.
+
+### CPU Usage (Precise)
+Context switching과 연관된 데이터이다.
+다음 절차에 따라 데이터가 수집된다:
+
+1. Running -> Waiting: New Thread(`NewPrev`)가 switch out된다.
+2. Waiting -> Ready: Readying 스레드(`Ready`)가 New Thread(`New`)를 ready 상태로 전환
+3. Ready -> Running: 실행되고 있는 Old Thread(`Old`)를 switch out 시킨다.
+4. Running -> Waiting: New Thread(`New`)가 switch out된다.
+
+* Timeline by CPU
+    : (Context Switch 기준) CPU 프로세서마다 CPU 활용 타임라인을 보여준다.
+
+* Timeline of Process and Thread
+    : (Context Switch 기준) 각 프로세스의 스레드마다 CPU 활용 타임라인을 보여준다.
+
+* Usage by Priority at Context Switch Begin
+    : (Context Switch 되었을 때) 각 New Thread의 순위도마다 폭발적 활동 수치를 보여준다.
+
+* Utilization by CPU
+    : (Context Switch 기준) CPU 프로세서마다 CPU 활용도 수치를 보여준다.
+
+### DPC/ISR
+테이블의 각 행은 uninterrupted된 DPC 혹은 ISR 파편을 의미한다. 파편의 시작부터 끝까지 데이터가 수집된다. 하나의 인터럽트가 uninterrupted된 상태로 처리되었다면 하나의 파편이 ISR 자체이다. interrupted 났으면 하나의 ISR가 두 개 이상의 DPC 파편들로 나뉘어여 있을거다.
+
+여기서 세 종류의 시간간격이 있다:
+
+* Duration (Fragmented): DPC/ISR 처리 시간 간격
+* Exclusive Duration: 해당 ISR의 DPC 파편들의 Duration들의 합
+* Inclusive Duration: 해당 ISR이 완료되기 위해 총 소요된 Duration: 해당 DPC/ISR 및 사이에 끼어있는 다른 DPC/ISR duration들의 합
+
+* Duration by CPU
+    : CPU 프로세서마다 실행된 DPC/ISR Duration을 수치로 보여준다.
+
+* Duration by Module, Function
+    : 각 module 혹은 function마다 처리된 DPC/ISR 루틴 Duration을 수치로 보여준다.
+
+* Timeline by Module, Function
+    : 각 module 혹은 function마다 처리된 DPC/ISR 루틴 Duration을 타임라인으로 보여준다.
+
+### 스택 트리
+> Load Symbol 필요
+
+CPU Usage(Sampled), CPU Usage(Precise) 그리고 DPC/ISR 테이블에서 찾을 수 있으며, assessment report에서도 보고된 이슈에서도 나타난다. 구간동안 여러 이벤트와 관여된 call stack을 보여준다. 스택 트리의 각 노드는 이벤트들간 공유되는 스택 조각이다.
+
+## 기법
+
+1. Windows Performance Analysis로부터 문제 파악
+    : 사용하는데 느껴지는 불편함이나 문제, 혹은 analysis 진단 도중에 뭔가 이상하다 혹은 이러면 안되는데 하는 점들
+1. 문제를 일으키는 요소 발견
+1. 비교 모델 생성
+1. 모델을 통해 문제 근본원인 식별
+
+대체적으로 CPU 동작처리 시간 관련 문제는 다음 세 근본원인은...
+
+* Direct CPU Usage: 스레드가 CPU 리소스를 받았지만 어플리케이션 프로그램이 빠른 시간 내에 제때 처리되지 못하였다. 프로그램 결함 혹은 느린 하드웨어 성능이 원인
+
+* Thread interference: 다른 스레드가 실행되고 있어 스레드가 충분한 실행 시간을 갖지 못하였다. 이러한 경우 스레드는 starvation 혹은 preempted 되었다.
+
+* DPC/ISR interference: CPU가 DPC 혹은 ISR을 처리한다고 스레드를 충분히 실행하지 못하였다.
+
+위의 근본원인들로 인한 스레드 영향을 알아보기 힘들며 오랜 기간동안 waiting state에 있다. 어떤 thread가 waiting하는지 판별해야 한다. 해당 문제 진단을 wait analysis라고 하며 critical path를 식별하는 것으로 시작한다.
+
+### Waiting Analysis
+Activity는 시작 이벤트으로부터 끝 이벤트으로 흐르는 작업의 네트워크이다 (순차적일수도 있고 병렬일 수도 있고). 시작부터 끝 이벤트까지를 하나의 activity로 간주 가능하다.
+
+> activity의 시작부터 끝으로 가는 거리가 가장 먼 경로를 critical path라고 한다.
+
+activity를 아는 것은 critical path에 놓여져 있을 수 있는 특정 작업, 프로세스, 스레드를 식별하는데 도움된다.
+
+#### 간편
+시나리오 모델을 검토한 다음, assessment가 activity에 대한 어떠한 이슈를 내놓았는지 확인한다. 그 안에는 critical path가 포함된다.
+
+#### 수동
+하지만 직접 찾으려고 한다면, activity 완료 시점으로부터 back tracking하는 것을 권장한다. 이는 WPA의 Activities 그래프에서 확인 가능하다. assessment result XML 파일로부터 불러오며 시작 프로세스와 스레드, 그리고 끝 프로세스와 스레드가 명시되어 있다.
+
+activity를 마무리한 스레드가 대부분의 시간을 running, ready, waiting에 있는지 확인하는 것부터 시작한다.
+
+* running: Direct CPU Usage
+* ready: Direct CPU Usage or Thread interference
+* waiting: DPC/ISR interference
+
+끝 스레드를 ready 시킨 스레드는 또다른 critical path의 링크일 가능성이 있다. 이는 해당 critical path를 분석을 마무리하면서 분석할 수 있다.
+
+----
+
+본 절차는 Activities 그래프로부터 확인하고자 하는 activity를 식별하였을 때 critical path를 찾으려고 한다:
+
+1. CPU Usage (Precision) 선택: Ready, Waiting, 그리고 Running (CPU Usage) 항목이 있으므로
+2. ReadyThreadStack 및 CPU Usage (in view) 보이기
+3. [선택사항] Ready (max), Waits (max) 숨기기
+4. Running, Ready, Waiting 시간이 가장 긴 것들에 주목
+    
+> Running 및 Ready 시간은 Direct CPU Usage와 연관이 깊다: Activity의 끝까지 가는데 Running이 길면 실행을 너무 오래 끄는 것이라서 당연하고, Ready는 프로세서의 능력이 충분치 않아 주어진 시간에 모두 수행하지 못하고 Ready하는 게 많아져 생긴 문제라고 개인적으로 생각.
+
+5. 이를 토대로 ReadyThreadStack 스택 트리 확인
+6. ReadyThreadStack에서 ReadyingProcess를 찾으면, 그때부터는 프로세스의 스레드 중에서 Running을 확인한다. Ready 스레드로 만들 때까지 실행이 오래걸려 발생한 것이기 때문이다.
+
+Ready (μs), Wait (μs), CPU Usage (in view)에서 sum은 다른 프로세스들과 무관하게, 해당 프로세스를 처리하는 스레드 및 이벤트들에서 소모한 시간 및 수치의 합이다.
+
+### Direct CPU Usage
+CPU 사용과 관련된 직접적 문제. 비정상적으로 높은 CPU 사용량(Running)이 특징 (즉, Ready 및 Waits 관련이 적으므로 Sampled 된 그래프로도 충분하다)
+
+#### 문제 식별
+> CPU use by process *P* delays the impacted activity *A* for *x* second
+> (프로세스 *P*가 사용하는 CPU가 activity *A*를 *x*초만큼 지연합니다.)
+
+* CPU Usage (Sample)에서 개별 프로세서가 100% CPU 활용 관측 (비정상적으로 높은 CPU 구동)
+
+#### 탐색
+Assessment Report를 참조
+
+혹은...
+
+CPU Usage (Sampled) - Utilization by Process and Thread에서 CPU의 % Weight 순으로 나열하여 가장 사용이 높은 것을 위주로 본다.
+
+#### 해결 방안
+* 하드웨어 측면: 더 강력한 프로세싱 부품으로 교체.
+* 프로그램 측면: CPU 효율적 알고리즘으로 수정; critical path에 CPU 사용이 과한 코드 제거; cache 사용
+
+### Thread Interference
+Critical path에 있지 않는 스레드의 CPU 사용도 critical path의 스레드 지연에 원인이 될 수 있다. 비정상적으로 높은 Ready 상태가 특징.
+
+#### 문제 식별
+> Process *P* is starved. The starvation causes a delay to the impacted activity *A* of *x* ms.
+(프로세스 *P*는 starved 되어있습니다. Starvation은 activity *A*를 *x* ms만큼 지연합니다.)
+
+이는 동일한 우선권의 스레드로부터 발생.
+
+> Process *P* is preempted. The preemption causes a delay to the impacted activity *A* of *x* ms.
+(프로세스 *P*는 starved 선점당했습니다. 선점은 activity *A*를 *x* ms만큼 지연합니다.)
+
+이는 critical path 외의 스레드가 우선권이 더 높아서 발생.
+
+* Utilization by CPU에서 CPU 사용량이 100% 가까운지 확인 (프로세서가 부족하다는 의미임)
+* Utilization by Process, Thread에서 Ready 시간순으로 나열하여 critical path의 스레드 Ready 시간을 본다. 이를 해결하면 최대 Ready 시간만큼 지연을 줄일 수 있다.
+
+#### 탐색
+여기서 판별해야할 점은, 과연 프로세스가 특정 프로세서로 한정되었는지 확인하는 것이다.
+: CPU 열을 Unique Count로 설정하고, CPU 100% 사용률에서 사용가능한 프로세서 개수에 비해 사용되는 CPU 개수가 얼마나 되는지 확인한다. 만일 그보다 적으면 스레드 Affinity 등이 설정될 가능성이 높다.
+
+그 이후 무엇이 스레드를 Preempted 혹은 Starved 하게 만들었는지 확인한다.
+: `View Editor > Advanced > Graph Configuration`에서 `Start Time: ReadyTime` 및 `Duration: Ready`로 변경하여 그래프의 시작을 ReadyTime 기점으로 Ready가 얼만큼인지로 설정한다. 관심있는 스레드만을 필터링하고, `NewInPri` 스레드 우선권도 평균화시켜 함께 관측한다.
+
+이제 새로운 CPU Usage(Precise) - Utilization by CPU로 설정하고 CPU 관점에서 알아낸 스레드 우선권보다 높거나 같은 것 중에서 관심대상 스레드를 제외하여 확인한다. 이를 통해 CPU 사용률과 ReadyTime과 거의 유사한 형태를 띄고 있는 스레드를 찾을 수 있을 것이다. 그리고 `NewInPri`를 Key 열로 옮겨서 각 CPU마다 처리되는 우선도에서 사용되는 CPU 사용량을 알아볼 수 있다.
+
+이제 이를 일으키는 스레드를 찾아야 한다. `New Process`를 통해 해당 CPU의 우선도에서 동작하는 프로세스를 찾아볼 수 있다.
+
+#### 해결 방안
+* 시스템에서 문제가 되는 프로세스를 제거한다.
+* 문제가 되는 프로세스의 Base priority 조정
+* 문제가 되는 프로세스 실행 타임을 변경
+
+### DPC/ISR Interference
+프로세서 시간이 과하게 DPC/ISR에 소모되고 있을 때 스레드를 처리할 충분한 CPU 시간을 받지 못하게 된다.
+
+#### 문제 식별
+> DPC *D* exceeds the threshold of *m* milliseconds *x* times during *P*. The *n* instances of this DPC run for a combined total of *t* milliseconds.
+(프로세스 *P* 도중에 DPC *D*가 *x* 번째 *m* ms 한계치를 넘겼습니다. 해당 DPC의 객체 *n*이 총 통합 *t* ms 동안 실행되었습니다.)
+
+하지만 직접 해당 문제의 원인을 찾아보려면 DPC/ISR Duration by CPU 그래프를 추가한다. 만일 최대치가 평탄하다면 DPC/ISR 요인이 문제를 일으키고 있다고 판단할 수 있다.
+
+추가적인 데이터를 수집하려면 문제 발생 이전 100ms 영역을 확인한다. 하나 이상의 프로세서에서 상당한 DPC/ISR 활동이 나타나면 DPC/ISR 문제가 확실하다고 판정지을 수 있다. 그리고 CPU Usage에서 스레드 활동이 없는 것으로부터 스레드가 지연되고 있음을 알 수 있다.
+
+#### 탐색
+Assessment Report를 참조
+
+혹은...
+
+DPC/ISR 관심 영역을 확대해서 Duration by Module, Function으로 선택. Symbol이 불러와졌으면 duration은 module과 function으로 쪼개진다. 가장 위에 있는 행이 문제의 원인일 것이다.
+
+CPU Usage (Sample)에서 Utilization by Process로 선택하고 `View Editor > Advanced > Filter` 탭에서 Keep rows that match the filter로 변경하면  DPC/ISR 활동을 나타나게 한다. Process 열을 숨기고 Stack을 보이게 하여 DPC/ISR을 스택에 따라 나열시킨다. 그리고 문제의 원인으로 판단되는 module 혹은 function을 stack 열에서 찾는다. 그 중에서 Weight가 inclusion duration의 대략적으로 상응한다고 볼 수 있다.
+
+#### 해결 방안
+DPC/ISR 활동은 흔히 하드웨어나 component 수준에서 수정되어야 하는 하드웨어 또는 소프트웨어 문제를 반영한다. configuration 수준에서는 하드웨어 교체 및 올바른 버전의 드라이버로 교체가 있다.
