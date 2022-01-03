@@ -2,7 +2,7 @@
 layout: docs
 language: ko
 title: "KGU 졸업작품 내용정리: 소프트웨어"
-tags: OpenCV4 YOLOv3 CUDA Dlib
+tags: OpenCV YOLOv3 CUDA Dlib
 date: 2019-11-14 00:00:00
 notice: false
 toc: true
