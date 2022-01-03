@@ -255,6 +255,11 @@ TLS 인덱스에 해당하는 TLS 슬롯에 데이터를 입력(`TlsSetValue()` 
 > * 다른 스레드가 해당 스레드의 핸들과 함께 `TerminateThread` 함수 호출
 > * 다른 스레드가 해당 스레드가 위치한 프로세스의 핸들과 함께 `TerminateProcess` 함수 호출
 
+## 스레드 풀
+> [풀](https://en.wikipedia.org/wiki/Pool_(computer_science))(pool)이란, 리소스 관리 목적에 있어서 데이터나 객체를 미리 한군데에 모아둔 것이다.
+
+스레드 풀(Thread pools)은 스레드를 작업할 객체들을 미리 한군데 모아둔 것을 가리킨다. 어플리케이션에서 생성하여 사용될 전체 스레드 개수를 줄이되 스레드 작업자들을 관리하므로써 효율성을 추구하는 목적으로 사용된다. 스레드 생성 및 파괴 과정에서 발생하는 overhead도 줄일 수 있는 장점을 갖는다.
+
 # 프로세스: 자식 프로세스
 기존의 프로세스로부터 새로이 생성된 프로세스를 "자식 프로세스(child process)"라고 부르며, 이를 생성한 프로세스를 "부모 프로세스(parent process)"라고 부른다.
 
@@ -340,27 +345,8 @@ TLS 인덱스에 해당하는 TLS 슬롯에 데이터를 입력(`TlsSetValue()` 
 
 주의: 현 스레드 상태를 확실히 알지 않는 이상 프로세스를 직접 종료하는 것은 위험하다. 특히 대기 상태의 스레드가 잔여하게 된다면 이를 종료할 때까지 프로세스 자체가 종료되지 않는데, 결국 어플리케이션 "응답 없음"을 야기한다. 이러한 문제를 방지하기 위해 primary 스레드에서 타 스레드의 종료름 먼저 확인하고 `ExitProcess` 혹은 `ExitThread`로 프로세스를 종료하는 게 안전하다.
 
-# Thread Pools
-스레드 풀은 어플리케이션을 대신하여 비동기식 콜백을 실행하는 worker 스레드(background에서 논리나 프로그램 작업 수행)의 묶음이다. 스레드 풀은 어플리케이션 전체 스레드 개수를 줄이되 worker 스레드를 관리하여 효율성을 추구하는 목적으로 주로 사용한다. 이를 통해 어플리케이션은 스레드를 작업할 work item을 큐에 대기시키고, work를 waitable 핸들에 연관시키고, 타이머를 통해 자동으로 큐에 대기시키고, 입출력 바인딩이 가능하다.
-
-## 스레드 풀 아키텍처
-어플리케이션은 스레드 풀로 다음 이점을 볼 수 있다:
-
-* 많은 양의 스레드를 생성하고 파괴해야 할 때, 스레드 풀은 이로 인해 발생할 수있는 복잡함을 줄이고 스레드 생성과 파괴로 발생하는 overhead를 줄일 수 있다.
-
-스레드 풀 아키텍처는 다음과 같이 구성되어 있다:
-
-* worker 스레드 : 콜백 함수를 실행
-* waiter 스레드 : 여러 wait 핸들로부터 대기
-* work 큐 : worker 스레드 대기 메모리
-* 각 프로세스마다 기본 스레드 풀
-* worker factory : worker 스레드를 관리
-
-## 스레드 pooling
-많은 어플리케이션은 스레드를 생성하지만 이벤트가 발생할 때까지 sleep 상태에 있는 것들이 많다. 또다른 스레드는 sleep에 있다가 오로지 정보 상태 업데이트만을 위해 주기적으로 깨어나는 경우가 있다. 스레드 풀링은 이러한 스레드를 시스템에서 관리하는 worker 스레드 무리를 어플리케이션에 제공하므로써 더 효율적으로 사용할 수 있도록 한다. 최소한 하나의 스레드가 스레드 풀 큐에 대기되고 있는 모든 wait 동작 상태를 모너터링한다. 만일 wait 동작이 마무리되면 스레드 풀로부터 worker 스레드가 해당하는 콜백 함수를 실행한다.
-
-# Job 객체
-Job 객체는 프로세스 무리가 하나의 단위로 관리될 수 있도록 한다. Job 객체는 이름을 지정할 수 있고, 안전하고, 공유할 수 있는 객체로 연관 프로세스들의 특성을 제어할 수 있다. Job 객체에 수행된 동작은 연관된 모든 프로세스에 영향을 미친다. working set 크기 조정이나 프로세스 우선순위 또는 job에 연동된 프로세스들의 termination 등이 해당한다.
+# 프로세스: Job 객체
+Job 객체는 여러 프로세스들을 하나의 단위로 관리될 수 있도록 한다. Job 객체는 이름을 지정할 수 있고, 안전하고, 공유할 수 있는 객체로 연관 프로세스들의 특성을 제어할 수 있다. Job 객체에 수행된 동작은 연관된 모든 프로세스에 영향을 미친다. working set 크기 조정이나 프로세스 우선순위 또는 job에 연동된 프로세스들의 termination 등이 해당한다.
 
 ### Job 생성
 `CreateJobObject` 함수로 job 객체를 생성하나, 생성 당시에는 아무런 프로세스가 없다.
@@ -406,74 +392,74 @@ Job 객체 핸들을 닫으려면 `CloseHandle` 함수를 사용한다 (`JOB_OBJ
 ### 네스티드 Job Terminate
 만일 계층에 있는 Job가 terminate 되면 시스템은 해당하는 프로세스와 자식 job을 terminate 시킨다. 그 중에서 시스템은 맨 아래의 자식 Job부터 시작하여 terminate을 진행한다.
 
-# Fiber
-fiber는 어플리케이션에서 수동으로 스케줄되어야 하는 실행 단위이다. 즉, 스레드로 스케줄된다고 볼 수 있다. 각 스레드는 여러 fiber을 스케줄할 수 있다. 일반적으로 fiber는 잘 짜여진 멀티스레드 어플리케이션보다 우위에 있을 수 없다. 하지만 fiber는 자체적으로 스레드를 스케줄링하기 위해 설계된 어플리케이션을 port 하는데 쉽게 한다.
+# 프로세스: 파이버
+[파이버](https://ko.wikipedia.org/wiki/파이버_(컴퓨터_과학))(fiber)는 어플리케이션에서 수동으로 스케줄링되는 실행 단위이다. 오로지 파이버만이 타 파이버를 실행히시킬 수 있으므로, 반드시 스레드 하나를 `ConverThreadToFiber()` 함수를 통해 파이버로 만들어야 한다. 그 이후로는 `CreateFiber()` 함수로 기존의 파이버가 새로운 파이버를 생성한다.
 
-시스템 관점에서 fiber는 자신을 실행시키는 스레드의 정체를 알고 있다고 본다(assumes). 예를 들어 fiber가 TLS를 접속하면, 그것은 fiber를 실행시키는 스레드의 TLS이다. 그리고 fiber가 `ExitThread` 함수를 호출하면 해당 스레드가 종료된다. 그러나 fiber의 상태 정보는 연관 스레드와 모두 동일한 상태 정보를 갖지 않는다. 스레드로부터 유지된 상태 정보가 있다면 그것은 스택, 레지스터 서브셋, 그리고 fiber 생성을 위해 제공된 fiber 데이터이다.
+파이버의 문맥 교환은 사용자가 직접 해주기 때문에 선점형 스케줄링이 아니다. 시스템 스케줄링으로 스레드가 실행되기 때문에 파이버가 해당하는 스레드가 선점하면 파이버 역시 선점한다고 볼 수 있으나, 스레드가 실행하는 특정 파이버만이 실행되므로 "선택적"으로 선점한 것이 정확한 표현이다.
 
-Fiber는 스레드와 달리 preemptively 스케줄링되지 않는다: 너가 직접 fiber 스위칭을 해야하기 때문이다. 그래도 시스템이 스레드를 스케줄하여 실행시키기 때문에, 스레드가 실행되면서 그 상태로써는 비록 선택적으로 fiber를 선정하였으나 preempted이게 된다.
+다음은 파이버 관련 함수 및 간랸한 설명을 제공한다:
 
-첫 번째 fiber를 스케줄링하기 전에 `ConvertThreadToFiber` 함수로 fiber 상태 정보를 저장할 공간을 생성한다. 호출된 스레드가 이제 fiber를 실행하면 저장된 fiber 상태 정보는 이제 `ConvertThreadToFiber` 인자로 넘겨진 fiber 데이터를 포함한다.
+* `ConvertThreadToFiber()`
+    : 오로지 파이버만이 타 파이버를 생성 및 실행할 수 있으므로, 스레드를 파이버로 변환시킨다.
 
-`CreateFiber` 함수는 기존의 fiber로부터 새로운 fiber을 생성하기 위해 사용된다. 함수는 스택 크기, (함수) 시작 주소, 그리고 fiber 데이터를 인자로 요구한다. 시작 주소는 일반적으로 사용자가 제공하는 fiber 함수로 fiber 데이터 하나의 인자를 받고 반환값이 없다. 만일 return 되면 fiber를 실행하는 스레드가 종료된다. `CreateFiber` 함수로 생성된 아무런 fiber을 실행하려면 `SwitchToFiber` 함수를 호출한다. `SwitchToFiber` 함수를 다른 스레드로부터 생성된 fiber 주소와 함께 호출할 수 있다. 그러기 위해서는 fiber 생성 시 `CreateFiber`로 반환된 주소를 알고 있어야 하며 적절한 동기화가 필요하다.
+* `CreateFiber()`
+    : 기존의 파이버로 새로운 파이버를 생성한다.
 
-fiber는 fiber 데이터를 `GetFiberData` 매크로로 불러올 수 있다. 그리고 fiber 주소는 `GetCurrentFiber` 매크로로 언제든지 불러올 수 있다.
+* `SwitchFiber()`
+    : 다른 파이버(타 스레드의 파이버도 해당)로 문맥 교환하여 실행한다.
 
-### Fiber Local Storage
-스레드에 fiber local storage(FLS)를 할당하면 각 fiber마다의 데이터를 저장할 고유 변수를 생성한다. fiber 스위칭이 없으면 일반 TLS와 같이 동작하며 FLS 함수로 해당 fiber에 대한 데이터를 get, set, alloc, free 등을 사용할 수 있다 (다시 한 번 말하지만 FLS는 fiber에 할당되는게 아니라 fiber를 담당하는 스레드에 있다). 만일 fiber 스위칭이 되면 스레드에 있는 FLS도 전환된 fiber의 것으로 바뀐다.
+* `DeleteFiber()`
+    : 해당 파이버 삭제 및 리소스 cleanup을 하며, 최종적으로 스레드도 `ExitThread()`로 종료한다.
 
-`DeleteFiber` 함수를 사용하여 fiber의 스택, 레지스터 서브셋, 그리고 fiber 데이터를 cleanup 하는데, 이를 현재 실행되는 fiber에서 호출하면 스레드는 `ExitThread`를 호출하고 terminate 된다. 하지만 타 스레드로부터 cleanup 되면 fiber 스택이 free되어 fiber가 삭제된 스레드는 비정상적으로 terminate 될 것이다.
+여기서 주의할 점은 실행 중인 파이버가 타 파이버로부터 제거되면 되면 파이버 리소스가 cleanup 되어 비정상적으로 종료될 것이다.
 
-# 사용자 모드 스케줄링
-사용자 모드 스케줄링(UMS)은 어플리케이션이 자체적으로 스레드를 스케줄링하는 lightweight 매커니즘이다. 어플리케이션은 사용자 모드에서 시스템 스케줄러 없이 UMS 스레드를 사용하거나 UMS 스레드가 커널에서 막힐 경우 프로세서의 제어로 스위칭할 수 있다. UMS는 각 UMS 스레드가 각자 자신만의 thread context를 갖고 있다는 점이 하나의 스레드에서 thread context를 공유하는 fiber와 차이가 있다. 스레드를 사용자 모드에서 스위칭할 수 있다는 점은 다수의 시스템 호출이 적은 단기간 work item을 다루는데 있어서 UMS가 스레드 풀보다 더 효율적이다.
+## 파이버 로컬 저장공간
+스레드에 파이버 로컬 저장공간(Fiber Local Storage; FLS)을 할당하면 각 파이버마다 데이터를 저장할 고유 변수를 생성한다. 파이버 문맥 스위칭이 잆으면 일반 TLS와 같이 동작하며, FLS 함수로 해당 파이버에 대하여 설정, 호출, 할당, 해제 등을 사용할 수 있다. 파이버 스위칭이 되면 스레드에 있는 FLS는 문맥 교환될 파이버의 것으로 바뀐다.
 
-UMS는 다중프로세서 혹은 다중코어 시스템에서 여러 스레드를 효율적으로 동시에 실행해야 하는 고성능 어플리케이션에 추천된다. UMS의 이점을 취하기 위해, 어플리케이션은 어플리케이션의 UMS 스레드를 관리하고 실행되어야 하는지 결정하는 스케줄러 구성요소를 적용해야 한다. 이러한 결정은 개발자가 어플리케이션 성능 요구사항에 대하여 신중히 고려해야 하며, 만일 고성능 미만의 어플리케이션의 경우에는 오히려 시스템 스케줄러가 훨씬 더 효율적이다.
+# 프로세스: UMS
+사용자 모드 스케줄링(User-Mode Scheduling; UMS)은 어플리케이션이 자체적으로 스레드를 스케줄링하는 lightweight 매커니즘이다. 어플리케이션은 사용자 모드에서 시스템 스케줄러 관여 없이 UMS 스레드 간 문맥 교환이 가능하다.
 
-UMS는 윈도우 7 64비트 및 윈도우 서버 2008 R2 64비트 혹은 이후 버전에서 지원한다. 32비트는 지원하지 않는다.
+> UMS와 [파이버](#프로세스-파이버)와 유사해 보이지만 확실한 차이점이 있다: UMS는 각 스레드마다 자신만의 스레드 문맥이 있는 반면, 파이버는 하나의 스레드에서 문맥을 공유한다.
+
+UMS는 다중프로세서 혹은 다중코어 시스템에서 멀티스레드를 동시에 효율적으로 실행해야 하는 고성능 어플리케이션에 추천된다. UMS의 장점을 활용하기 위해 어플리케이션은 반드시 UMS 스레드를 관리 및 실행시키는 스케줄러 구성요소가 필요하다. 개발자는 어플리케이션 성능 요구사항에 따라 UMS 스케줄러 도입에 대하여 신중히 고려해야 한다. 만일 고성능 미만의 어플리케이션의 경우에는 오히려 시스템 스케줄러가 훨씬 더 효율적이다.
 
 ## UMS 스케줄러
-UMS 스케줄러는 UMS 스레드를 생성, 관리, 그리고 제거를 담당하며 어떤 UMS 스레드를 실행할지 결정한다.
+UMS 스케줄러(UMS Scheduler)는 스케줄링 이외에도 UMS 스레드 생성, 관리, 그리고 제거까지 담당한다. 다음은 UMS 스케줄러가 수행하는 작업들을 나열한다.
 
-* UMS 스케줄러를 어플리케이션이 UMS 스레드를 돌릴 프로세서마다 생성한다.
-* UMS worker 스레드 생성
-* 자체적 ready-thread 큐에서 실행하기 위해 대기하고 있는 worker thread를 관리하고, 어플리케이션 스케줄링 정책에 따라 ready thread를 실행한다.
-* 시스템으로부터 커널에서 프로세싱을 마쳐 큐에 대기시키는 completion 목록을 하나 이상 생성하여 모니터링한다. 새로 생성된 worker 스레드 및 막혔지만 지금은 뚤린 스레드를 포함한다.
-* 시스템으로부터의 notification을 핸들링하기 위한 스케줄러 entry point를 제공한다. 시스템은 스케줄러 스레드가 생성되거나 시스템 호출로 worker 스레드가 막히거나 혹은 worker 스레드가 explicitly yields control 할 때 entry point를 호출한다.
-* 실행을 마친 스레드에 대하여 cleanup 을 실행한다.
-* 어플리케이션에서 요청할 때 스케줄러의 순차적 shutdown을 진행한다.
+* UMS 스레드를 실행할 프로세서마다 UMS 스케줄러 스레드를 생성한다.
+* 어플리케이션 작업을 수행할 UMS worker 스레드를 생성한다.
+* UMS worker 스레드를 대기시킬 자체 준비 대기열을 관리하고, 어플리케이션 스케줄링 정책에 따라 실행시킬 스레드를 선택한다.
+* 하나 이상의 completion list를 생성 및 모니터링한다.
+> 여기서 시스템 스케줄링과 차이점이 드러난다: 선점형 스케줄링은 새로 생성된 스레드가 대기열에 기다리지 않고 프로세서를 선점한다.
+* 시스템으로부터 발생한 notificaiton을 처리할 스케줄러 entry point 함수를 제공한다.
+* 실행을 마친 UMS worker 스레드를 cleanup 한다.
+* 어플리케이션 요청 시, UMS 스케줄러의 순차적 종료를 진행한다.
 
-## UMS 스케줄러 스레드
-UMS 스케줄러 스레드는 일반 스레드를 `EnterUmsSchedulingMode`로 변환시켜 사용하는 것이다. 시스템 스케줄러는 UMS 스케줄러 스레드가 실행할지 타 스레드에 비해 우선순위이 얼마나 되는지에 따라 결정한다. 스케줄러 스레드가 실행하는 프로세서는 비UMS 스레드와 마찬가지로 스레드 affinity에 영향을 받는다.
+### UMS 스케줄러 스레드
+UMS 스케줄링 스레드(UMS Scheduling Thread)는 UMS 스케줄링에 가담할 프로세서에 UMS worker 스레드를 배분하는 역할을 수행한다. 일반 스레드로부터 `EnterUmsSchedulingMode()` 함수로 UMS 스케줄링 스레드로 변환한다. 이때 UMS 스케줄링에 연동될 completion list 및 entry point 함수를 지정한다.
 
-`EnterUmsSchedulingMode` 호출자는 UMS 스케줄러 스레드에 연동할 completion 목록과 `UmsSchedularProc` entry point 함수를 지정한다. 시스템은 이 entry point 함수를 스레드를 UMS 스레드로 변경을 완료할 때 호출한다. 스케줄러 entry poin 함수는 특정 스레드에 대하여 다음 적절한 행동을 결정한다.
+UMS 스케줄러 스레드도 시스템 스케줄링에 의해 타 스레드와 우선순위가 비교되어 실행된다. UMS 스케줄러 스레드가 실행될 프로세서는 non-UMS 스레드와 마찬가지로 스레드 affinity의 영향을 받는다. 어플리케이션은 UMS 스케줄러 스레드의 affinity를 설정하여 특정 논리 프로세서가 관련없는 스레드를 배제시키므로써 
 
-어플리케이션은 UMS 스레드를 실행할 프로세서마다 UMS 스케줄러 스레드를 생성할 수 있다. 어플리케이션은 또한 각 UMS 스케줄러 스레드에 affinity를 설정하여 특정 논리 프로세서가 관련없는 스레드를 배제시키므로써 스케줄러 스레드의 효율을 높일 수 있다. 하지마 affinity는 프로세서에 편중된 스레드 배분을 일으킬 수 있어 시스템 성능 저하를 일으킬 수 있다.
+어플리케이션은 UMS 스레드를 실행할 프로세서마다 UMS 스케줄러 스레드를 생성할 수 있다. 어플리케이션은 또한 각 UMS 스케줄러 스레드에 affinity를 설정하여 그 외의 스레드가 특정 프로세서에 실행되는 것을 배제시키므로써 UMS 스케줄러 스레드의 효율을 높일 수 있다. 그러나 affinity는 스레드의 편중된 분배를 야기할 수 있어 시스템 성능 저하의 원인이 된다.
 
-## UMS worker 스레드
-`CreateRemoteThreaEx`로 `PROC_THREAD_ATTRIBUTE_UMS_THREAD` 플래그 및 UMS 스레드 context와 completion 목록을 지정하여 UMS worker 스레드를 생성한다.
+### UMS Worker 스레드
+UMS worker 스레드는 UMS 스케줄링에서 작업을 실행하는 스레드이다. `CreateRemoteThreaEx()` 함수에서 `PROC_THREAD_ATTRIBUTE_UMS_THREAD` 플래그와 UMS 스레드 문맥, 그리고 completion list를 지정하여 생성한다. UMS worker 스레드를 실행려면 `ExecutreUmsThread()` 함수를 호출한다. 
 
-UMS 스레드 context는 UMS worker 스레드의 스레드 상태를 반영하며 UMS 함수 호출로부터 worker 스레드를 구분짓기 위해 사용된다. UMS 스레드 Context는 `CreateUmsThreadContext`로 생성된다.
+### Completion List
+Completion list는 커널에서 실행을 마친 UMS Worker 스레드를 시스템을 통해 전달받는 대기열이며, `CreateUmsCompletionList()` 함수로 생성된다. 새로운 UMS worker 스레드가 생성되면 무조건 completion list로 향한다. 대기 상태가 해제된 UMS worker 스레드도 completion list로 보내진다.
 
-Completion list는 `CreateUmsCompletionList` 함수로 생성된다. Completion list는 커널에서 실행을 마무리하여 사용자 모드에서 실행될 준비가 마친 UMS worker 스레드를 전달받는다. 오로지 시스템만이 worker 스레드를 completion list 큐에 대기시킬 수 있다. 새로운 UMS worker 스레드는 자동적으로 스레드가 생성할 떄 지정된 completion list에 queue된다. 이전에 막혔었던 worker 스레드도 뚤렸으면 completion list로 queue된다.
+각 UMS 스케줄러 스레드는 하나의 completion list에 연동된다. 그러나 하나의 completion list는 여러 UMS 스케줄러 스레드에 연동될 수 있다. 심지어 UMS 스케줄러 스레드는 completion list의 포인터만 있으면 UMS 문맥을 가져올 수 있다.
 
-각 UMS 스케줄러 스레드는 할당된 하나의 completion list가 있다. 그러나 하나의 completion list에는 개수 제한 없이 UMS 스케줄러가 할당될 수 있으며, 스케줄러 스레드는 completion list의 포인터가 있는 한 아무런 completion list로부터 UMS context를 받을 수 있다.
+Completion list는 비어있던 대기열에 UMS worker 스레드가 진입하면 시스템을 통해 signaled 된다. `GetUmsCompletionListEvent` 함수는 특정 completion list에 연동된 이벤트에 대한 핸들을 불러온다.
 
-각 completion list는 큐가 비어있는 상태에서 worker 스레드가 queue되면 시스템으로부터 signal되는 이벤트가 연동되어 있다. `GetUmsCompletionListEvent` 함수는 특정 completion list에 연동된 이벤트에 대한 핸들을 불러온다. 어플리케이션은 원한다면 두 개 이상의 completion list 이벤트나 다른 이벤트와 함께 signal 되기를 기다리도록 설계될 수도 있다.
+## UMS Entry point 함수
+UMS 스케줄러 entry point 함수는 특정 UMS 스레드에 대하여 어떤 적절한 행동을 취할지 결정하는 역할을 담당한다. UMS 스케줄러 entry point 함수는 다음 상황이 발생할 때 callback 된다:
 
-## UMS 스케줄러 entry point 함수
-어플리케이션 스케줄러 entry point 함수는 `UmsSchedulerProc` 함수로서 실행된다. 시스템은 어플리케이션의 스케줄러 entry point 함수를 다음 지점 떄에 호출한다:
-
-* `EnterUmsSchedulingMode`로 비UMS 스레드가 UMS 스케줄러 스레드로 전환되었을 떄
+* `EnterUmsSchedulingMode`로 UMS 스케줄러 스레드가 생성되었을 때
+    : *Entry point 호출 원인 → `EnterUmsSchedulingMode` 호출자로부터 지정된 데이터 참조*
 * UMS worker 스레드가 `UmsThreadYield`를 호출할 때
-* UMS worker 스레드가 시스템 호출 또는 page fault 등의 시스템 서비스로 인해 막혔을 때
+    : *Entry point 호출 원인 → `UmsThreaYield` 호출자로부터 지정된 데이터 참조*
+* UMS worker 스레드가 대기 상태로 전환할 때
+    : *Entry point 호출 원인 → `NULL`*
 
-`UmsSchedulerProc`의 Reason 파라미터는 entry point 함수가 호출된 이유가 담겨있다. UMS 스케줄러 스레드 전환은 `EnterUmsSchedulingMode` 호출자로부터 지정된 데이터, `UmsThreaYield`의 경우에는 `UmsThreaYield` 호출자로부터 지정된 데이터, 그리고 막힌 경우에는 NULL 값이 전달된다.
-
-스케줄러 entry point 함수는 특정 thread에 대하여 어떠한 적절한 행동을 취할지 결정하기 위한 역할을 담당한다. 스레드가 막힌거라면 entry point 함수는 다음 ready 스레드를 실행하는 등처럼 말이다.
-
-스케줄러 entry point 함수가 호출되면 어플리케이션 스케줄러는 해당 UMS 스케줄러 스레드에 연동된 completion list의 아이템들을 `DequeueUmsCompletionListItmes` 함수로 불러오도록 한다. 어플리케이션의 스케줄러는 예측불가한 어플리케이션 동작을 방지하기 위해 이렇게 불러온 아이템 목록으로부터 곧바로 UMS 스레드를 실행하지 말아야 한다. 그 대신, `GetNextUmsListItem`을 통해 context를 하나씩 가져오는 방식으로 UMS thread context를 모두 가져온다. 그리고 이 UMS 스레드 context를 스케줄러  ready thread queue에 삽입시키는 방법으로만으로써 UMS 스레드를 ready thread queue로부터 실행해야 한다.
-
-## UMS 스레드 실행
-새로이 생성된 UMS worker 스레드는 지정된 completion list에 queue되어 어플리케이션 스케줄러가 실행할 때까지 기다린다. 이는 비UMS 스레드랑 다른게 시스템 스케줄러는 새로 생성된 비UMS 스레드를 preempt, 즉 바로 자동적으로 스케줄링시킨다 (사용자로부터 suspend되지 않은 이상).
-
-스케줄러는 `ExecutreUmsThread` 호출하여 worker 스레드를 실행한다. UMS worker 스레드는 `UmsThreaYield` 함수로 yield하거나 막히거나 terminate될 때까지 실행한다.
+스케줄러 entry point 함수가 호출되었다는 것은 UMS worker 스레드를 직접 관리할 필요하다는 의미이다. UMS worker 스레드를 Completion list에서 불러오는 `DequeueUmsCompletionListItmes()` 함수로 불러와 목록을 확인할 수 있다. 허나, 불러온 목록으로부터 곧바로 UMS worker 스레드를 실행하면 예측불가한 어플리케이션 동작이 발생할 수 있다. `GetNextUmsListItem()` 함수로 UMS worker 스레드 문맥을 하나씩 가져와 UMS 스케줄러 자체 대기열에 진입시켜 실행하도록 한다.
