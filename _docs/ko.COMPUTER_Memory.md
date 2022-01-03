@@ -6,79 +6,80 @@ title: 메모리
 meta: Memory
 order: 0x41
 ---
-# 메모리 관리
-> https://docs.microsoft.com/en-us/windows/win32/memory/memory-management
-
-32비트 윈도우 OS에서의 각 프로세스는 최대 4GB 메모리까지 도달할 수 있는 가상 주소 공간을 갖는다.
-
-64비트 윈도우 OS에서의 각 프로세스는 최대 8TB 메모리까지 도달할 수 있는 가상 주소 공간을 갖는다.
+# 메모리: 기초
+> *참조: [Microsoft Docs - Memory Management](https://docs.microsoft.com/en-us/windows/win32/memory/memory-management)*
 
 모든 프로세스의 스레드는 이 가상 주소 공간에 접근할 수 있으나 다른 프로세스의 가상 주소 공간에는 접근할 수 없다. 이를 통해 한 프로세스가 다른 프로세스에 영향을 주는 것을 방지한다.
 
 ## 가상 주소 공간
-프로세스를 위한 가상 주소 공간은 프로세스가 사용할 수 있는 가상 메모리 주소의 집합이다. 각 프로세스의 주소공간은 private으로 공유하지 않는 이상 다른 프로세스가 접속할 수 없다.
+[가상 주소 공간](https://ko.wikipedia.org/wiki/가상_주소_공간)(virtual address space; VAS)는 각 프로세스마다 주어지는 private 가상 메모리 주소의 집합이다. 가상 주소는 메모리에 소재하는 프로세스의 실제 물리적 위치를 반영하지 않는다; 가상 주소를 대응하는 물리 메모리 주소에 매핑하는 페이지 테이블(page table)로부터 구축된 주소 공간이다.
 
-가상주소는 메모리에 소재하는 객체의 실제 물리적 위치를 반영하지 않는다. 시스템이 각 프로세스에 대한 페이지 테이블을 관리한다.
+![가상 주소 공간과 물리 메모리의 관계<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Virtual_address_space_and_physical_address_space_relationship.svg">위키미디어</a></i></sub>](/images/docs/memory/memory_virtual_addressspace.png)
 
-> 페이지 테이블은 가상주소를 대응하는 물리적 주소로 변환시켜주는 내부 데이터 구조이다.
+> [페이지](https://ko.wikipedia.org/wiki/프레임_(컴퓨터_과학))(page)란, 일정한 크기로 나뉘어진 운영체제에서 관리하는 가장 작은 단위의 가상 메모리이다. 크기는 호스트 시스템마다 다르며 x86 컴퓨터의 경우에는 4kB이다.
 
-매번 스레드가 주소를 참조할 때, 시스템은 가상주소를 물리적 주소로 변환한다.
+가상 주소 공간은 별도로 공유하지 않는 이상, 타 프로세스에서 접근할 수 없으므로 고립(isolated)되었다고 표현한다.
 
-32비트 윈도우에서의 가상 주소 공간은 4GB 크기로 두 파티션으로 나뉘어 사용된다: 하나는 프로세스를 위한 것이며, 다른 하나는 시스템을 위한 reserved된 공간이다.
+가상 주소 공간은 크게 두 파티션으로 나뉘어진다: 프로세스가 사용할 영역(aka. paged)과 시스템을 위해 확보된 영역(aka. nonpaged)이다. 이는 차후 [메모리 풀](#메모리-메모리-풀)에서 다시 한 번 소개한다.
 
-### 가상 주소 공간과 물리적 저장장치
-운영체제 버전에 따라 마이크로소프트 윈도우가 지원하는 최대 물리 메모리(e.g. RAM)은 2GB ~ 24TB이다. 각 프로세스의 가상 주소 공간은 컴퓨터에서 사용할 수 있는 총 물리 메모리 용량보다 작거나 클 수 있다. 프로세스의 가상 주소 공간 일부 중 물리 메모리에 위치한 것은 working set이라고 칭한다. 프로세스의 스레드가 현재 물리 메모리에서 제공할 수 있는 용량 이상을 요구하면 시스템은 일부 메모리 내용을 저장장치로 page한다. 즉, 프로세스가 사용할 수 있는 총 가상 주소 공간 용량은 물리 메모리 + 저장장치의 빈 공간(일명 pagefile)이다.
+### 페이징
+페이징(paginig)은 일부 메모리 페이지와 저장장치(예. HDD 혹은 SSD)의 페이지파일의 상호변환을 가리키며, 메모리 관리의 유연성을 최대화하는 방법 중 하나이다.
 
-> 페이지(page)란, 일정한 크기로 나뉘어진 운영체제에서 관리하는 가장 작은 단위의 가상 메모리이다. 크기는 호스트 시스템마다 다르며 x86 컴퓨터의 경우에는 4kB이다.
+> 페이지파일(pagefile) 명칭은 가상 메모리의 페이지가 피일을 저장하는 저장장치에서 처리하기 때문에 이 두 용어를 통합한 것으로 보인다; 일명 페이지를 나타내는 파일.
 
-> pagefile 명칭은 가상 메모리의 page가 file을 저장하는 저장장치에서 처리하기 때문에 이 두 용어를 통합한 것으로 보인다; page를 가리키는 file.
+* Page out
+    : 프로세스에서 사용하는 가상 주소 공간이 컴퓨터에서 사용할 수 있는 총 물리 메모리 용량보다 커서 가장 오랫동안 사용되지 않은 메모리의 페이지가 저장장치의 페이지파일로 이동하는 현상
+* Page in
+    : 실행 혹은 참조되어야 할 데이터가 현재 저장장치의 페이지파일 형태로 있어 프로세서가 처리할 수 있도록 저장장치의 페이지파일이 메모리의 페이지로 이동하는 현상
 
-메모리 관리의 유연성을 최대화하기 위해, 시스템은 물리 메모리의 페이지에서 저장장치의 페이지파일로(page out) 혹은 그 반대로(page in)도 이동시킬 수 있다. 물리 메모리의 페이지로 옮겨지면 시스템은 이로부터 영향을 받은 프로세스의 페이지 맵을 업데이트 시킨다. 만일 시스템이 물리 메모리를 필요로 한다면 가장 오랫동안 사용되지 않은 물리 메모리 페이지를 페이지파일로 옮긴다. 이러한 시스템에 의한 물리 메모리의 변동은 가상 주소 공간에서만 동작하는 어플리케이션 관점에서는 알아챌 수 없다.
+여기에서 확인할 수 있는 내용은 가상 주소 공간은 실질적으로 두 하드웨어로 구성되어 있다: (1) 물리 메모리와 (2) 저장장치이다. 그리고 가상 주소 공간 중에서 물리 메모리에 할당된 페이지들이 프로세스 실행에 직접 가담하므로 working set이라고 부른다.
 
 ### Working Set
-Working set는 프로세스 가상 주소 공간 중에서 물리 메모리에 머물고 있는 페이지 집합이다. Working set는 페이지될 수 있는 메모리 할당만을 포함하며, (Address Windowing Extension이나 large page allocation 등의) 페이지 될 수 없는 메모리 할당은 working set에서 제외된다.
+Working set은 프로세스 가상 주소 공간 중에서 물리 메모리에 머물고 있는 페이지될 수 있는 메모리(pageable memory) 집합이다. AWE 혹은 커널 관련 등의 페이지될 수 없는 메모리(nonpageable memory)는 항상 물리 메모리에 머물기 때문에 working set 분류가 필요없어 제외된다.
 
-프로세스가 working set가 아닌 페이지될 수 있는 메모리를 참조하면 page fault(페이지 부재)가 발생한다. 시스템의 page fault 처리자는 page fault를 해결하려 하며, 성공할 시 해당 페이지는 working set에 추가된다 (AWE 또는 large page allocation 접근은 페이지될 수 있는 메모리가 아니기 때문에 항상 물리 메모리에 있어 page fault 문제가 발생하지 않는다).
+프로세스 working set의 일부 페이지는 타 프로세스와 공유될 수 있는데, 만일 하나의 프로세스가 공유된 페이지를 제거한다 하더라도 타 프로세스에는 영향을 주지 않는다([Copy-on-write 보호](#copy-on-write-보호) 참조). 단, 공유된 페이지가 모든 프로세스로부터 제거되면 페이지는 transition 된다.
 
-Hard page fault(참조하려는 페이지가 저장장치에 있는 경우)는 페이지의 backing store로부터 페이지 내용(페이지파일 혹은 프로세스로 생성된 메모리 맵 파일)을 읽어서만 문제를 해결할 수 있다. Soft page fault(참조하려는 페이지가 메모리 어딘가에 있는 경우)는 backing store를 접근하지 않고서도 해결될 수 있다.
+> 여기서 *transition*은 [페이지 캐싱]((https://en.wikipedia.org/wiki/Page_cache))을 의미하며, 사용되지 않는 페이지를 빠른 접근과 성능 향상을 꾀하여 저장장치의 페이지파일이 아닌 사용되지 않는 메인 메모리에 cached 된 것을 가리킨다. 그러면 메모리가 추가로 필요한 쓰레드를 위해 재빨리 repurpose되어 활용될 수 있다.
 
-> Backing store("backing" as "back-up"; store = memory)이란, 저장장치 중에서 페이징 혹은 스와핑 시스템이 정보를 저장하는데 사용되는 공간이다.
+만일 transition 페이지가 마지막으로 저장장치에 write 되었을 때와 내용이 다르면 (즉, 페이지가 "dirty" 할 때), 해당 transition 페이지는 repurpose 되기 전에 먼저 backing store에 write 되어야 한다. 시스템은 dirty transition 페이지를 발견한 즉시 backing store에 write 하도록 한다.
 
-Soft page fault는 다음과 같은 이유로 발생한다.
+### 페이지 부재
+Page fault는 프로세스가 working set가 아닌 pageable 메모리를 참조하면 발생하는 문제이다. 시스템의 page fault 처리자가 이를 해결하면 해당 페이지는 working set에 추가된다. Page fault는 크게 두 분류로 나뉘어진다:
 
-* 프로세스에서 참조하려는 페이지가 물리 메모리에 있으나 다른 프로세스의 working set인 경우
-* (1) 해당 페이지를 사용하는 모든 프로세스의 working set로부터 제거되었으나 repurpose되지 않아거나 혹은 (2) 메모리 관리자의 prefetch 동작 등으로 페이지가 in transition인 경우
-* 프로세스가 할당된 가상 메모리 페이지를 처음으로 참조하는 경우 (aka. demand-zero fault)
+* Hard page fault: 참조하려는 페이지가 저장장치에 있는 경우
+    : *페이지의 backing store로부터 페이지 내용(페이지파일 혹은 프로세스로부터 생성된 메모리 맵 파일)을 읽어서만 문제를 해결할 수 있다.*
+    
+> Backing store("backing" as "back-up"; store = memory)이란, 저장장치 중에서 페이징 시스템이 정보를 저장하는데 사용되는 공간이다.
 
-페이지는 다음으로 인하여 프로세스의 working set으로부터 제거될 수 있다:
+* Soft page fault: 참조하려는 페이지가 메모리 어딘가에 있는 경우
+    : *backing store를 접근하지 않고서도 해결될 수 있으며, 다음 세 가지가 주요 원인이다.*
 
-* 프로세스가 `SetProcessWorkingSetSize`, `SetProcessWorkingSetSizeEx` 혹은 `EmptyWorkingSet` 함수 호출로 자신의 working set 페이지를 제거 혹은 비울 수 있다.
-* 프로세스가 `VirtualUnlock` 함수 호출로 특정 메모리 범위의 page들을 저장장치 페이지파일로 swap
-* 프로세스가 `UnmapViewOfFile` 함수로 파일의 mapped view를 unmap
+    * 참조하려는 페이지가 다른 프로세스의 working set인 경우
+    * 페이지가 in transition인 경우 (예. 페이지 repurpose 미수행, 메모리 관리자의 prefetch 등)
+    * 프로세스가 할당된 가상 메모리 페이지를 처음으로 참조하는 경우 (aka. demand-zero fault)
+
+다음은 프로세스의 working set로부터 페이지가 제거될 수 있는 경우이다:
+
+* `SetProcessWorkingSetSize()`, `SetProcessWorkingSetSizeEx()`, 혹은 `EmptyWorkingSet()` 함수 등으로 working set 축소 혹은 비운 경우
+* `VirtualUnlock()` 함수로 특정 범위의 page들을 저장장치 페이지파일로 page out
+* `UnmapViewOfFile()` 함수로 파일 매핑의 view를 unmap
 * 메모리 관리자가 더 많은 메모리를 사용할 수 있도록 working set 크기를 줄일 경우
 * 메모리 관리자가 새로운 페이지를 위하여 어쩔 수 없이 페이지를 제거해야 할 경우 (working set가 최대치에 달하던가 하면)
-
-만일 몇몇 프로세스가 페이지를 공유하고 있을 시, 하나의 프로세스의 working set에서 해당 페이지를 제거한다 하더라도 다른 프로세스에는 영향을 미치지 않는다 (아마 제거를 한 프로세스가 참조를 하지 않을 뿐). 허나 모든 프로세스의 working set로부터 제거되면 페이지는 transition page가 된다.
-
-> transition page는 다른 프로세스로부터 참조되거나 메모리 관리자로부터 repurpose(예를 들어 0으로 채운 다음 다른 프로세스에게 전달되는 등)될 때까지 RAM 캐시안에 잔여한다.
-
-만일 transition page가 마지막으로 저장장치에 write된 이후 변경사항이 발생하였을 때 (즉, 페이지가 "dirty" 할 때), 해당 transition page는 repurpose 되기 전에 먼저 backing store에 write되어야 한다. 시스템은 dirty transition page를 발견한 즉시 backing store에 write하도록 한다.
-
-각 프로세스는 프로세스의 가상 메모리 페이징 동작에 영향을 주는 working set의 최소 및 최대 크기가 있다. 특정 프로세스의 현재 working set 크기를 확인하기 위해서는 `GetProcessMemoryInfo` 함수를 호출한다. 최소 및 최대 working set 크기에 대한 함수로는 `GetProcessWorkingSetSizeEx`와 `SetProcessWorkingSetSizeEx`가 있다.
-
-프로세스 상태 어플리케이션 프로그래밍 인터페이스(PSAPI)는 프로세스의 working set와 관련된 자세한 정보를 반환하는 여러 함수들을 제공한다.
 
 ## 페이지 상태
 프로세스의 가상 주소 공간에 있는 페이지는 다음 상태 중 하나에 속한다.
 
 * Free
-    페이지가 reserved 또는 committed 되지 않은 상태이다. 프로세스는 해당 페이지를 접근할 수 없다. reserved나 committed, 혹은 reserved이면서 committed 상태 페이지로 사용될 수 있다. free 페이지를 read 혹은 write 하려고 하면 access violation 예외처리가 발생한다.
+    : 가상 주소 공간의 페이지가 reserved 또는 committed 되지 않은 상태이다.<br/>
+    *프로세스는 해당 페이지를 접근할 수 없다. reserved나 committed, 혹은 reserved이면서 committed 상태 페이지로 사용될 수 있다. free 페이지를 read 혹은 write 하려고 하면 access violation 예외처리가 발생한다.*
 
 * Reserved
-    페이지가 나중에 사용될 것으로 예약된 상태이다. 해당 범위의 reserved 페이지들은 다른 할당 함수로부터 사용될 수 없다. 해당 페이지는 접근될 수 없으며 (access violation!) 물리 메모리(혹은 저장장치)가 관여하지 않는다. 오로지 committed 상태로만 사용될 수 있다. 
+    : 가상 주소 공간의 페이지가 나중에 사용될 것으로 예약된 상태이다.<br/>
+    *해당 범위의 reserved 페이지들은 다른 할당 함수로부터 사용될 수 없다. 해당 페이지는 접근될 수 없으며 (access violation!) 물리 메모리(혹은 저장장치)가 관여하지 않는다. 오로지 committed 상태로만 사용될 수 있다.*
 
 * Committed
-    총 RAM 및 저장장치 페이지파일 크기만큼 할당될 수 있는 장전된 메모리이다. 페이지는 접근될 수 있으며, 그리고 접근은 메모리 보호 상수 중 하나로부터 제어된다. 시스템은 각 committed 페이지에 처음으로 read 혹은 write하려고 할 때만 초기화하여 물리 메모리에 로드한다. 프로세스가 terminate되면 시스템은 committed 페이지에 대한 공간을 release(->free)한다.
+    : 가상 주소 공간에서 총 RAM 및 저장장치 페이지파일 크기만큼 할당될 수 있는 장전된 메모리이다.<br/>
+    *페이지는 접근될 수 있으며, 그리고 접근은 메모리 보호 상수 중 하나로부터 제어된다. 시스템은 각 committed 페이지에 처음으로 read 혹은 write하려고 할 때만 초기화하여 물리 메모리에 불러온다. 프로세스가 종료되면 시스템은 committed 페이지에 대한 공간을 release(메모리 free)한다.*
 
 ## 할당된 메모리 범위
 프로세스가 메모리 할당 함수(`HeapAlloc`, `VirtualAlloc`, `GlobalAlloc`, 또는 `LocalAlloc`)로 할당한 모든 메모리는 해당 프로세스로부터만이 접근할 수 있다. 하지만 DLL로부터 할당된 메모리는 DLL을 호출한 프로세스의 주소공간 내에 할당되며, 이는 동일한 DLL을 사용하는 프로세스라도 접근할 수가 없다. 만일 공용 메모리를 생성하려면 파일 매핑을 사용해야 한다.
@@ -118,7 +119,7 @@ DEP는 부팅 설정 데이터에 있는 no-execute page protection policy setti
 ## 메모리 보호
 프로세스가 소유하는 메모리는 private 가상 주소 공간으로 암묵적으로 보호되어있다. 게다가 Window 운영체제는 가상 메모리 하드웨어를 통해 메모리 보호를 제공하고 있다. 이러한 메모리 보호는 프로세서에 따라 어떻게 사용되는지 다르다: 예를 들어 프로세스 주소공간의 코드 페이지는 읽기전용으로 표시되어 사용자 모드 스레드로 인한 변경으로부터 보호받을 수 있다.
 
-### Copy-on-Write 보호
+### Copy-on-write 보호
 copy-on-write 보호는 프로세스 하나가 페이지를 변경하지 않는 이상, 여러 프로세스가 자신의 가상 주소 공간을 매핑하여 물리적 페이지를 공유할 수 있도록 하는 최적화이다. 이러한 기술은 일명 lazy evaluation이라 칭하며, 이는 시스템이 물리적 메모리는 물론 (정말로 필요하지 않는 이상 아무런 동작을 수행하지 않아도 되므로써) 시간까지 절약할 수 있도록 한다.
 
 만일 두 프로세스가 하나의 물리 메모리를 공유하고 있다고 가정한다. 프로세스 1이 물리 메모리의 페이지 하나를 변경하였다면, 변경한 내용은 물리 메모리에서 새로운 페이지에 적용되고 가상 메모리 매핑은 업데이트된다. 그러므로 매핑 업데이트가 일어나지 않은 프로세스 2는 프로세스 1이 변경한 내용을 절대 볼 수 없다!
@@ -128,10 +129,10 @@ copy-on-write 보호는 프로세스 하나가 페이지를 변경하지 않는 
 
 DLL을 불러오면 자신만의 기본 base 주소가 있다. 모든 프로세스는 DLL을 불러올 때, DLL을 주소공간을 자신들의 주소공간에서 로드하려고 한다. 만일 여러 어플리케이션이 자신들만의 기본 가상주소에 DLL을 로드할 수 있다면, 하나의 물리 메모리를 통해 DLL 주소공간을 공유할 수 있다. 어떠한 이유로 프로세스가 DLL을 프로세스의 기본 base 주소에 로드할 수 없다면 DLL을 다른 위치에 로드한다. copy-on-write 보호는 이러한 프로세스를 위해 일부 DLL 페이지를 다른 물리 페이지로 강제로 복사시킨다. 이러한 이유는 jump 명령에 대한 수정은 DLL 페이지 내에 write하는데, 이러한 과정이 없으면 해당 프로세스에 대해서만 달라지게 되기 때문이다. 만일 코드 영역이 많은 데이터 영역을 참조한다면, 일부 페이지가 아닌 코드 영역 통째로가 복사될 수 있다.
 
-# Memory Pools
+# 메모리: 메모리 풀
 메모리 관리자는 시스템이 메모리 할당을 위해 사용할 수 있는 다음 메모리 풀을 생성한다.
 
-* nonpgaed pool
+* nonpaged pool
     대응하는 커널 객체가 할당되었을 한, 물리 메모리에 머물 보장이 된 가상 메모리 주소    
 
 * paged pool
@@ -226,7 +227,7 @@ Private heap은 프로세스가 시작될 때 충분한 메모리 공간이 있�
 
 `HeapDestory`는 decommit 및 release, 그리고 핸들을 무효화시킨다.
 
-# 파일 매핑
+# 메모리: 파일 매핑
 파일 매핑은 (저장장치에 있는) (페이지)파일 내용과 프로세스의 가상 주소 공간의 연관성을 가리킨다.
 
 * file mapping object (aka. section object): 시스템에서 생성한 매핑 연관성 관리하는 객체
@@ -295,7 +296,7 @@ View가 unmap되어도 잔여하는 데이터가 파일에 write 될 수 있으�
 
 `malloc` 함수는 런타임에 의존하고, `new` 연산자는 컴파일러 및 언어에 의존한다.
 
-# 메모리 누수
+# 메모리: 덤프
 메모리 누수는 프로세스가 paged pools 또는 nonpaged pools에서부터 할당하였으나, 이들을 free하지 않으면서 발생한다. 결국 pools에서 관리되는 paged 및 nonpaged 메모리가 시간이 지나면서 줄어들어 운영체제가 느려지게 된다. 그리고 메모리가 완전히 바닥나면 운영체제가 결국 fail된다.
 
 ## 메모리 누수 증상 판단
