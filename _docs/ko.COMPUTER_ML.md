@@ -1,7 +1,7 @@
 ---
 layout: docs
 language: ko
-category: 인공지능
+category: 
 title: 기계학습
 meta: ML
 mathjax: true
@@ -67,7 +67,7 @@ order: 0xF0
 
 > 이진분류(binary classification)란, 주어진 입력 자료가 $$A$$와 $$B$$ 분류 중에 어느 곳에 속하는지 판단하는 작업을 가리킨다.
 
-![퍼셉트론 모델<sub><i>출처: <a href="https://towardsdatascience.com/everything-you-need-to-know-about-activation-functions-in-deep-learning-models-84ba9f82c253">Towards Data Science</a></i></sub>    ](/images/docs/ml/ml_perceptron_model.png)
+![퍼셉트론 모델<sub><i>출처: <a href="https://towardsdatascience.com/everything-you-need-to-know-about-activation-functions-in-deep-learning-models-84ba9f82c253">Towards Data Science</a></i></sub>](/images/docs/ml/ml_perceptron_model.png)
 
 퍼셉트론은 모든 머신러닝 모델이 선형적인 수학 방정식으로 표현될 수 있다고 가정한다: 뉴런의 [수상돌기](https://ko.wikipedia.org/wiki/가지돌기)(dendrite)로 입력 신호 $$x_0$$가 전달되는 과정에서 [시냅스](https://ko.wikipedia.org/wiki/시냅스)가 갖는 가중치(weight) $$w_0$$가 곱해진다. 뉴런에서 수신받은 모든 $$w_ix_i$$들은 편향(bias) $$b$$를 포함하여 뉴런 신경세포체(soma)에서 전부 합하여 아래의 표현식이 완성된다.
 

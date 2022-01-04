@@ -79,7 +79,7 @@ Control Panel\System and Security\System
 | `Python test suite` | 파이썬 프로그램 동작을 시험하는 프레임워크      |
 | `py launcher`       | 파이썬 인터프리터 관리 프로그램       |
 
-필자의 경우 `pip`와 `py launcher`만은 반드시 체크한다. 나머지 옵션들은 사용하지 않으며, 사용자 인터페이스를 가진 프로그램을 만든다 하더라도 대표적인 GUI 프레임워크 중 하나인 [PySide2](../ko.INTERFACE_Qt)를 사용하기 때문에 `tcl/tk`가 필요하지 않다. 코드 편집기 또한 IDLE보다 편한 것을 곧 소개할 예정이다.
+필자의 경우 `pip`와 `py launcher`만은 반드시 체크한다. 나머지 옵션들은 사용하지 않으며, 사용자 인터페이스를 가진 프로그램을 만든다 하더라도 대표적인 GUI 프레임워크 중 하나인 [PySide2](../ko.APPLICATION_Qt)를 사용하기 때문에 `tcl/tk`가 필요하지 않다. 코드 편집기 또한 IDLE보다 편한 것을 곧 소개할 예정이다.
 
 그 다음에 나타나는 "Advanced Options" 선택 사항들은 실질적으로 인터프리터 동작에 영향을 미칠 수 있는 고급 옵션들이다.
 
