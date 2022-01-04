@@ -74,17 +74,10 @@ order: 0x45
 
 ![윈도우 NT 운영체제 아키텍처<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Windows_2000_architecture.svg">위키미디어</a></i></sub>](/images/docs/windows/windows_nt_architecture.png)
 
-## 환경 서브시스템
-환경 서브시스템(environment subsystem)은 윈도우 NT 계열의 운영체제에서 다양한 
-
-## 통합 서브시스템
-통합 서브시스템(integral subsystem)
-
-## 하드웨어 추상화 계층
-[하드웨어 추상화](https://ko.wikipedia.org/wiki/하드웨어_추상화) 계층(harware abstraction layer; HAL)은 물리적 하드웨어와 상호작용하는 윈도우 NT 운영체제의 소프트웨어이다.
-
 # 윈도우: 배포
-> 윈도우 서버 OS 및 윈도우 도메인 네트워크를 활용한 운영체제 배포를 위주로 다루고 있어, 필자는 서버가 없는 관계로 일부 내용은 제한적이거나 생략되었다.
+> *참조: [Microsoft Docs - Deploy Windows 10 with MDT](https://docs.microsoft.com/en-us/windows/deployment/deploy-windows-mdt/prepare-for-windows-deployment-with-mdt)*
+
+윈도우 서버 OS 및 윈도우 도메인 네트워크를 활용한 운영체제 배포를 위주로 다루고 있어, 필자는 서버가 없는 관계로 일부 내용은 제한적이거나 생략되었다.
 
 본 장은 Microsoft Deployment Toolkit(MDT)를 사용한 운영체제 커스터마이징 및 배포 방법을 다룬다. 여기서 커스터마이징이란, 리눅스처럼 커널 코드를 수정하는 것이 아니라 기존에 접근할 수 없던 운영체제 설정 그리고 드라이버 및 어플리케이션 등을 배포 전에 미리 설치하는 것을 말한다. 추가적으로, 몇 가지의 시나리오를 제공하여 상황에 따라 배포를 하는 방법에 대해서도 설명한다.
 
