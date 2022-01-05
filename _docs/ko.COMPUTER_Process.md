@@ -58,7 +58,7 @@ order: 0x40
 
 > [윈도우](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우) 운영체제의 경우, *[선점형](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅)#비선점형과_선점형) [Round-robin](https://ko.wikipedia.org/wiki/라운드_로빈_스케줄링) 스케줄링*을 택하였다.
 >
-> 스레드 혹은 (단일 스레드) 프로세스는 "퀀텀(Quantum; 혹은 time slice)"란 일회성 시간제 티켓이 있어야만 프로세서로부터 처리될 수 있다. 프로세스는 작업 완료여부를 불문하고 time slice에 주어진 시간동안만 스레드를 처리하고 돌려보낸다. 작업이 완료되지 않은 스레드는 다시 time slice를 받기 위해 기다린다.
+> 스레드 혹은 (단일 스레드) 프로세스는 "퀀텀(Quantum; 혹은 time slice)"이란 일회성 시간제 티켓이 있어야만 프로세서로부터 처리될 수 있다. 프로세스는 작업 완료여부를 불문하고 time slice에 주어진 시간동안만 스레드를 처리하고 돌려보낸다. 작업이 완료되지 않은 스레드는 다시 time slice를 받기 위해 기다린다.
 
 스케줄링은 결과적으로 운영체제의 [멀티태스킹](https://ko.wikipedia.org/wiki/다중작업)(multitasking)으로 구현된다. 덕분에 여러 개의 프로그램을 동시에 사용하거나 자동저장과 같은 실시간 기능이 가능해진다.
 
@@ -68,7 +68,7 @@ order: 0x40
 * 장기 스케줄링
 
 * 중기 스케줄링
-    : 중기 스케줄러(medium-term scheduler)는 swapping out (혹은 paging out) 그리고 swapping in (혹은 paging in) 작업을 수행한다. 자세한 내용은 메모리 관리에서 참고한다.
+    : 중기 스케줄러(medium-term scheduler)는 swapping out (혹은 paging out) 그리고 swapping in (혹은 paging in) 작업을 수행한다. 자세한 내용은 [*페이징*](../ko.COMPUTER_Memory/#페이징)을 참고한다.
 
 * 단기 스케줄링
     : 단기 스케줄러(short-term scheduler), 일명 CPU 스케줄러는 어느 ready 스레드에게 프로세서 시간을 분배할지 결정한다.
