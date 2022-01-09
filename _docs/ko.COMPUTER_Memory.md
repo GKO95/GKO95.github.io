@@ -62,16 +62,8 @@ Working set은 프로세스 가상 주소 공간의 메모리 중에서 물리 �
 다음은 soft page fault가 발생할 수 있는 몇 가지 원인이다.
 
 * 참조하려는 물리 메모리 프레임이 다른 프로세스의 working set로 사용 중
-* 페이지가 in transition인 경우 (예. 페이지 repurpose 미수행, 메모리 관리자의 prefetch 등)
 * demand-zero fault; 즉, read/write로 물리 메모리를 처음 참조할 때 새로운 프레임을 건네주는 과정
-
-다음은 프로세스의 working set로부터 페이지가 제거될 수 있는 경우이다:
-
-* `SetProcessWorkingSetSize()`, `SetProcessWorkingSetSizeEx()`, 혹은 `EmptyWorkingSet()` 함수 등으로 working set 축소 혹은 비운 경우
-* `VirtualUnlock()` 함수로 특정 범위의 page들을 저장장치 페이지파일로 page out
-* `UnmapViewOfFile()` 함수로 파일 매핑의 view를 unmap
-* 메모리 관리자가 더 많은 메모리를 사용할 수 있도록 working set 크기를 줄일 경우
-* 메모리 관리자가 새로운 페이지를 위하여 어쩔 수 없이 페이지를 제거해야 할 경우 (working set가 최대치에 달하던가 하면)
+* Transition으로 인해 물리 메모리에 cached 된 페이지
 
 ## 페이지 상태
 프로세스의 가상 주소 공간에 있는 페이지는 다음 상태 중 하나에 속한다. 여기서 다루는 페이지 상태는 모두 가상 주소 공간에 있는 메모리를 가리킨다.
@@ -119,74 +111,68 @@ DEP는 모든 남용으로부터 포괄적인 보호를 제공하지 않는다. 
 메모리 풀(Memory pools)이란, 사용할 수 있는 메모리들을 미리 한군데 모아두어 관리한다. 관리하는 메모리 종류에 따라 두 가지의 메모리 풀로 나뉘어진다.
 
 * 페이지 불가한 메모리 풀 (Nonpaged Pool)
-    : 커널 객체가 할당된 
-
-    : 대응하는 커널 객체가 할당되었을 한, 물리 메모리에 머물 보장이 된 가상 메모리 주소    
+    : 할당된 커널 객체(예. 파일, 이벤트, 파이프 등)가 물리 메모리에 머무르도록 보장하는 가상 메모리
 
 * 페이지 가능한 메모리 풀 (Paged pool)
-    : 페이징(paging)이 가능한 가상 메모리; 대체로 사용자 모드에서 할당된다.
+    : 페이징이 가능한 가상 메모리 (예. 커널 객체 핸들 및 사용자 모드 등)
 
-이 두 메모리 풀은 물리 메모리 주소 공간의 시스템 영역에 위치하였으며, 각 프로세스의 가상 주소 공간마다 매핑되어 있다.
+# 메모리: 메모리 함수
+프로세스의 가상 주소 공간에 메모리를 사용자 모드에서 직접 관리할 수 있는 함수들은 몇 가지의 종류가 존재한다. 이들은 종류에 따라 장단점이 있지만, 가상 주소 공간 중에서 [힙](https://ko.wikipedia.org/wiki/동적_메모리_할당#힙_영역)(heap) 영역의 메모리를 다루는 공통점을 갖는다. 본 장에서는 가상 주소 공간에 사용되는 메모리 함수 종류를 소개한다.
 
-### 커널 객체
-커널 객체에 대한 핸들은 paged pool에 저장되어 있어, 생성할 수 있는 핸들의 개수는 사용 가능한 메모리에 따라 결정된다.
+> 힙 영역은 [힙 자료구조](https://ko.wikipedia.org/wiki/힙_(자료_구조))와 전혀 상관이 없으며, 순수히 특정 목적을 갖는 RAM의 메모리 공간을 지칭하는 용어이다.
 
-# 메모리: 가상 메모리
-가상 메모리 함수는 프로세스가 가상 주소 공간에 있는 페이지 상태를 변경하거나 결정하도록 한다. 다음과 같은 동작을 수행할 수 있다.
+## 가상 메모리 함수
+가상 메모리(virtual memory) 함수는 프로세스가 가상 주소 공간에 있는 페이지 상태를 변경하거나 결정하도록 하는 저급 메모리 관리 함수이다. 다양한 메모리 관리 옵션을 설정할 수 있어 다른 메모리 함수의 기반이 되지만, [granularity](https://en.wikipedia.org/wiki/Granularity)로 인해 할당하는데 더 많은 리소스 소모가 요구된다.
 
-> 가상 주소 공간(virtual address space)와 가상 메모리(virtual memory)는 엄연히 다른 존재이다!
+> 가상 주소 공간(virtual address space)와 가상 메모리(virtual memory)는 엄연히 다른 존재이다.
 >
 > * 가상 주소 공간은 프로세스가 실행될 때 시스템에서 제공하는 고립된 "주소 공간"이다.
 >
 > * 가상 메모리는 주소 공간에서 `VirtualAlloc()` 함수를 통해 할당된 "메모리"이다.
 
-* 프로세스의 가상 주소 공간의 메모리 범위를 reserved 시킨다.
-    주소공간 reserve는 물리 메모리(혹은 저장장치)에 할당되지 않으나 주어진 메모리 범위에 할당 동작을 수행할 수 없도록 한다. 다른 프로세스의 가상 주소 공간에 영향을 주지 않는다. 페이지 reserving은 불필요한 메모리 소모를 방지할 수 있으며, 프로세스의 필요에 따라 reserved 된 영역으로부터 동적 데이터 구조를 키워나갈 수 있다.
-* Reserved 된 메모리 범위를 commit시켜 프로세스가 해당 메모리에 접근할 수 있도록 한다.
-* commit된 페이지의 보호 상태를 설정한다.
-* 메모리 free
-* 메모리 페이지를 RAM에 lock 시켜 페이지파일로 swap 방지
-* 프로세스의 가상 주소 공간 범위 확인
+다음과 같은 동작을 수행할 수 있다.
 
-## 가상 메모리 할당
-`VirtualAlloc` 함수는 다음 중 하나를 수행한다.
+* `VirtualAlloc()`
+    : 가상 주소 공간에 가상 메모리를 할당한다.
 
-* Free -> Reserve
-* Reserve -> Commit
-* Free -> Reserve & Commit
-(...wait...no "free -> commit"?)
+        * Free → Reserved
+        * Reserved → Committed
+        * Free → Reserved & Committed
 
-reserved 또는 commit될 메모리의 시작주소를 직접 지정할 수 있으며, 아님 시스템이 결정하도록 할 수 있다. 시스템은 해당 주소를 대략적인 페이지 경계로 치환한다. reserved된 페이지는 접근할 수 없지만, committed 페이지는 `PAGE_READWRITE`, `PAGE_READONLY`, 혹은 `PAGE_NOACCESS`로 할당될 수 있다. committed될 시, 장전된 메모리는 RAM 혹은 저장장치로 할당되지만...처음으로 read 혹은 write 할 때에는 페이지가 초기화되어 반드시 RAM으로 할당된다. 일반 포인터 참조로 `VirtualAlloc`으로 commit된 메모리를 참조할 수 있다.
+* `VirtualFree()`
+    : 가상 주소 공간에 가상 메모리 할당을 해제한다.
 
-## 가상 메모리 해제
-`VirtualFree` 함수는 다음 규칙에 따라 decommit 및 release한다.
+        * Committed → Reserved
+        * Reserved → Free
+        * Committed & Reserved → Free
 
-* 하나 이상의 commit된 페이지를 decommit한다 (commit -> reserved). 이는 committed으로 실제 물리 메모리와의 연동을 끊으므로써 다른 프로세스가 해당 물리 메모리 주소를 사용할 수 있도록 한다. Commit된 블록의 일부만 따로 처리 가능하다.
+* `VirtualQuery()`
+    : 가상 주소 공간의 가상 메모리 페이지 정보를 반환한다.
 
-* 하나 이상의 reserved된 페이지를 release한다 (reserved -> free).
-    단, 이 단계에서는 `VirtualAlloc`을 통해 할당된 전체 페이지 블록이 한꺼번에 release되어야 한다.
-* 하나 이상의 reserved & commit된 페이지를 decommit과 release를 동시에 한다 (reserved & commit -> free)
-    단, 이 단계에서는 `VirtualAlloc`을 통해 할당된 전체 페이지 블록이 한꺼번에 release되어야 한다. 그리고 모든 페이지는 commit되어야 한다.
+* `VirtualLock()`
+    : 가상 주소 공간의 가상 메모리 페이지를 물리 메모리에 고정시킨다; 즉, page out이 되는 것을 방지한다.
 
-decommit 및 release 한 이후에는 참조가 불가하며, 데이터는 영영 사라졌다. 이를 접근 시도하면 access violation이다. 데이터를 유지하고 싶으면 decommit이나 release를 하지 말도록!
+* `VirtualProtect()`
+    : 가상 주소 공간의 가상 메모리 페이지 접근 권한을 변경한다.
 
-안에 있는 데이터가 더이상 필요없지만 할당을 유지하려면 `VirtualAlloc` 함수에 `MEM_RESET`과 함께 호출. 이러한 페이지는 read되지 않고 페이지파일로 write되지 않지만, 언제든지 다시 사용될 수 있다.
+## 힙 메모리 함수
+힙 메모리 함수는 시스템에서 제공하는 기본적인 물리 메모리의 힙 영역과 각 가상 공간 주소가 갖는 private 힙 영역 메모리를 다루는 함수이다.
 
-## 페이지 작업
-사용 중인 컴퓨터의 페이지 크기를 보려면 `GetSystemInfo` 함수를 사용한다.
+> 만일 어플리케이션이 힙 영역에 자주 할당을 하면 private 힙 영역을 사용하는 게 성능 향상에 도움을 줄 수 있다.
 
-`VirtualQuery` 또는 `VirtualQueryEx` 함수는 프로세스의 주소공간 내에 지정된 (시스템에서 반내림한 페이지 경계) 주소로부터 시작하여 해당 영역에 연이어 있는 페이지들의 정보를 반환한다. 전자는 해당 프로세스에 대해서, 후자는 지정한 프로세스에 대하여 반환하고 디버그 지원도 한다. 함수는 그 다음 페이지로도 쭉 이어지는데 이들은 공통적으로...
+Private 힙 영역을 다룰 때는 가상 메모리 함수와 다를 바가 없으나 조금 더 간략하다. 그러나 힙 메모리 함수로 한 번 할당된 메모리는 다른 주소로 이동하거나 크기를 변경할 수 없다.
 
-* 동일한 페이지 상태를 갖는다 (committed, reserved, 또는 free)
-* 시작 페이지가 free가 아니면 해당 영역에 있는 모든 페이지들은 `VirtualAlloc` 함수로 동일하게 할당된 것이다.
-* 접속 보호가 모두 동일하다 (`PAGE_READONLY`, `PAGE_READWRITE`, 또는 `PAGE_NOACCESS`)
+* `HeapAlloc()`
+    :
 
-`VirtualLock` 함수는 프로세스가 하나 이상의 committed 페이지를 물리 메모리에 고정시켜 저장장치의 페이지파일로 swap되는 것을 방지한다. 중요한 데이터는 저장장치로의 접근이 필요없이 접근할 수 있도록 하지만, 시스템의 메모리 관리에 제한을 걸기 때문에 위험하기도 한다. 과도한 사용은 실행 가능한 코드가 페이징 파일로 swap시켜 시스템 성능 저하로 이어진다. 이를 해제하려면 `VirtualUnlock`을 사용한다.
+* `HeapFree()`
+    :
 
-`VirtualProtect` 함수는 프로세스 주소공간에 있는 아무런 commmitted 페이지의 접근 권한을 변경한다. read/write로 할당된 페이지를 read-only 혹은 no-access로 바뀌어 덮어씌여지는 것을 방지할 수 있다. `VirtualALloc` 이외의 할당 함수에도 사용할 수 있으나...안하는게 좋다. `VirtalAlloc`으로 할당된 페이지 전체에 대해서 해야 하며, 다른 할당 함수로부터 반환된 포인터는 페이지 경계에 잘 정렬되어 있지 않기 때문이다. 확장된 버전으로 `VirtualProtectEx`가 있으며 지정한 프로세스에 대하여 진행할 수 있다.
+* `HeapCreate()`
+    :
 
-# 메모리: Heap
-각 프로세스는 시스템에서 제공하는 기본 heap이 있다. heap 영역에서 자주 할당하는 어플리케이션은 private heap으로 성능을 개선시킬 수 있다.
+* `HeapDestroy()`
+    :
 
 private heap은 프로세스 주소공간에 있는 하나 이상의 페이지 블록이다. private heap을 생성하였으면, `HeapAlloc` 그리고 `HeapFree` 함수로 heap 내의 메모리를 관리한다.
 
@@ -207,6 +193,19 @@ Private heap은 프로세스가 시작될 때 충분한 메모리 공간이 있�
 `HeapCreate`로 요청된 메모리는 인접하거나 인접하지 않을 수도 있다 (fragmentation). 그러나 `HeapAlloc`으로 할당된 메모리는 서로 인접한다. 이러한 이유(fragmentation)로 두 메모리 할당이 서로 인접할 것이라는 추측은 기피되어야 한다! 그리고 할당되지 않은 메모리 접근은 당연히 access violation으로 피해야 하고!
 
 `HeapDestory`는 decommit 및 release, 그리고 핸들을 무효화시킨다.
+
+## 전역 및 지역 함수
+16-비트 코드 포티 또는 16-비트 윈도우와 호환되는 소스 코드 관리를 위한 것! 32-비트부터는 Heap 함수의 wrapper에 불과하다.
+
+## C 라이브러리 함수
+어플리케이션은 C/C++ 메모리 관리 기능을 안전하게 사용할 수 있다. C 언어는 16비트 윈도우에서 겪었던 잠재적 위험이 존재하지 않는다. 그리고 시스템은 가상주소에 영향을 주지 않으면서 물리 메모리의 페이지를 이동시킬 수 있어 메모리 관리는 더 이상 문제가 되지 않는다. 하지만 가상메모리 함수는 C 런타임 라이브러리가 제공하지 않는 기능들을 제공한다.
+
+## 메모리 할당 함수 비교
+`HeapAlloc`, `GlobalAlloc`, 그리고 `LocalAlloc`은 사실상 같은 heap에 메모리를 할당하지만, 약간의 기능적 차이가 있다. `HeapAlloc`은 할당이 불가하면 exception이 발생하지만, `GlobalAlloc` 및 `LocalAlloc`은 exception이 발생하지 않는다. 그리고 `GlobalAlloc` 및 `LocalAlloc`은 핸들 변경 없이 재할당이 가능한, 메모리 이동이 불가한 `HeapAlloc`이 불가능한다. 그리고 `GlobalAlloc`, 그리고 `LocalAlloc`는 `HeapAlloc`의 wrapper이므로 overhead가 더 크다.
+
+비록 같은 Heap 메모리에 할당하지만 할당 매커니즘에 차이가 있으므로 `HeapAlloc` -> `HeapFree`, `GlobalAlloc` -> `GlobalFree`, `LocalAlloc` -> `LocalFree`로 free 되어야 한다.
+
+`malloc` 함수는 런타임에 의존하고, `new` 연산자는 컴파일러 및 언어에 의존한다.
 
 # 메모리: 파일 매핑
 파일 매핑은 (저장장치에 있는) 파일 내용과 프로세스의 가상 주소 공간의 연관성을 가리킨다. 여기서 파일은 페이지 파일을 가리키는 게 아니라, 그냥 일반적인 텍스트 파일과 같은 자료 파일이다.
@@ -261,21 +260,6 @@ file view는 파일 매핑 객체의 전체 혹은 일부분일 수 있다. 프�
 View가 unmap되어도 잔여하는 데이터가 파일에 write 될 수 있으므로, 전력 부족 및 시스템 충돌로 인해 발생할 수 있는 데이터 손실을 방지하기 위해 `FlushViewOfFile`로 혹시나 하는 데이터들을 곧바로 파일로 flush하여 전송하도록 한다.
 
 각 프로세스가 view를 unmap 하였으면 파일 매핑 객체의 핸들을 닫아준다. 그러나 view가 아직 매핑되어 살아있는 경우에서도 객체의 핸들은 닫힐 수 있는데, 이러한 경우 메모리 누수로 이어진다.
-
-# 전역 및 지역 함수
-16-비트 코드 포티 또는 16-비트 윈도우와 호환되는 소스 코드 관리를 위한 것! 32-비트부터는 Heap 함수의 wrapper에 불과하다.
-
-# C 라이브러리 함수
-어플리케이션은 C/C++ 메모리 관리 기능을 안전하게 사용할 수 있다. C 언어는 16비트 윈도우에서 겪었던 잠재적 위험이 존재하지 않는다. 그리고 시스템은 가상주소에 영향을 주지 않으면서 물리 메모리의 페이지를 이동시킬 수 있어 메모리 관리는 더 이상 문제가 되지 않는다. 하지만 가상메모리 함수는 C 런타임 라이브러리가 제공하지 않는 기능들을 제공한다.
-
-# 메모리 할당 함수 비교
-`HeapAlloc`, `GlobalAlloc`, 그리고 `LocalAlloc`은 사실상 같은 heap에 메모리를 할당하지만, 약간의 기능적 차이가 있다. `HeapAlloc`은 할당이 불가하면 exception이 발생하지만, `GlobalAlloc` 및 `LocalAlloc`은 exception이 발생하지 않는다. 그리고 `GlobalAlloc` 및 `LocalAlloc`은 핸들 변경 없이 재할당이 가능한, 메모리 이동이 불가한 `HeapAlloc`이 불가능한다. 그리고 `GlobalAlloc`, 그리고 `LocalAlloc`는 `HeapAlloc`의 wrapper이므로 overhead가 더 크다.
-
-비록 같은 Heap 메모리에 할당하지만 할당 매커니즘에 차이가 있으므로 `HeapAlloc` -> `HeapFree`, `GlobalAlloc` -> `GlobalFree`, `LocalAlloc` -> `LocalFree`로 free 되어야 한다.
-
-`VirtualAlloc` 함수는 메모리 할당에 더 많은 옵션이 주어진다. 하지만 할당이 페이지 granularity를 사용하기 때문에 더 많은 메모리를 소모한다.
-
-`malloc` 함수는 런타임에 의존하고, `new` 연산자는 컴파일러 및 언어에 의존한다.
 
 # 메모리: 덤프
 메모리 누수는 프로세스가 paged pools 또는 nonpaged pools에서부터 할당하였으나, 이들을 free하지 않으면서 발생한다. 결국 pools에서 관리되는 paged 및 nonpaged 메모리가 시간이 지나면서 줄어들어 운영체제가 느려지게 된다. 그리고 메모리가 완전히 바닥나면 운영체제가 결국 fail된다.
