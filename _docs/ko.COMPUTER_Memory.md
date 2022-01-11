@@ -9,7 +9,7 @@ order: 0x41
 # 메모리: 페이지
 > *참조: [Microsoft Docs - Memory Management](https://docs.microsoft.com/en-us/windows/win32/memory/memory-management)*
 
-모든 프로세스의 스레드는 이 가상 주소 공간에 접근할 수 있으나 다른 프로세스의 가상 주소 공간에는 접근할 수 없다. 이를 통해 한 프로세스가 다른 프로세스에 영향을 주는 것을 방지한다.
+본 장은 운영체제에서 [프로세스](../ko.COMPUTER_Process)의 메모리를 관리하는데 가장 핵심이 되는 가상 주소 공간과 페이지에 대하여 소개한다.
 
 ## 가상 주소 공간
 [가상 주소 공간](https://ko.wikipedia.org/wiki/가상_주소_공간)(virtual address space; VAS)는 각 프로세스마다 주어지는 private 가상 메모리 주소의 집합이다. 가상 주소는 메모리에 소재하는 프로세스의 실제 물리적 위치를 반영하지 않는다; 가상 주소를 대응하는 물리 메모리 주소에 매핑하는 페이지 테이블(page table)로부터 구축된 주소 공간이다. 가상 주소 공간은 별도로 공유하지 않는 이상, 타 프로세스에서 접근할 수 없으므로 고립(isolated)되었다고 표현한다.
