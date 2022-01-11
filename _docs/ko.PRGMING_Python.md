@@ -3,7 +3,7 @@ layout: docs
 language: ko
 category: 프로그래밍
 title: 파이썬
-icon: icon-python.png
+icon: icon-python.svg
 meta: Python
 order: 0x00
 ---

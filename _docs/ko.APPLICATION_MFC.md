@@ -3,7 +3,6 @@ layout: docs
 language: ko
 category: 어플리케이션
 title: MFC
-icon: icon-mfc.png
 meta: MFC
 order: 0x20
 ---

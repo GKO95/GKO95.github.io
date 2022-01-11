@@ -3,7 +3,7 @@ layout: docs
 language: ko
 category: 프로그래밍
 title: C++
-icon: icon-cpp.png
+icon: icon-cpp.svg
 meta: Cpp
 order: 0x02
 ---

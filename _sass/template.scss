@@ -137,7 +137,7 @@ nav {
         background: {
             position: center;
             repeat: no-repeat;
-            size: $ICON_SIZE;
+            size: contain;
         }
 
         height: inherit;
@@ -154,7 +154,7 @@ nav {
         padding: 0px 8px;
 
         height: $ICON_SIZE;
-        width: $ICON_SIZE;
+        width: 100%;
     }
 
     #nav-home   { background-image:url('/images/icons/icon-home.png'); }

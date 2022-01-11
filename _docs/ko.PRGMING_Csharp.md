@@ -3,7 +3,7 @@ layout: docs
 language: ko
 category: 프로그래밍
 title: C#
-icon: icon-csharp.png
+icon: icon-csharp.svg
 meta: Csharp
 order: 0x03
 ---

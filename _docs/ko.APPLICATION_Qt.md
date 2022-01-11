@@ -3,7 +3,7 @@ layout: docs
 language: ko
 category: 어플리케이션
 title: Qt
-icon: icon-qt.png
+icon: icon-qt.svg
 meta: Qt
 order: 0x22
 ---

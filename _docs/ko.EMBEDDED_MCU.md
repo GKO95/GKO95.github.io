@@ -3,7 +3,6 @@ layout: docs
 language: ko
 category: 임베디드
 title: MCU
-icon: icon-mcu.png
 meta: MCU
 order: 0x30
 ---
