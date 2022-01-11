@@ -6,7 +6,7 @@ title: 메모리
 meta: Memory
 order: 0x41
 ---
-# 메모리: 기초
+# 메모리: 페이지
 > *참조: [Microsoft Docs - Memory Management](https://docs.microsoft.com/en-us/windows/win32/memory/memory-management)*
 
 모든 프로세스의 스레드는 이 가상 주소 공간에 접근할 수 있으나 다른 프로세스의 가상 주소 공간에는 접근할 수 없다. 이를 통해 한 프로세스가 다른 프로세스에 영향을 주는 것을 방지한다.
