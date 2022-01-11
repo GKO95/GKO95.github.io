@@ -4,6 +4,7 @@ language: ko
 category: 운영체제
 title: 윈도우
 meta: Windows
+icon: icon-windows.svg
 order: 0x45
 ---
 # 윈도우: 소개
