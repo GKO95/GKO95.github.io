@@ -33,8 +33,10 @@ toc: false
 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)는 사람 가독형 *소스 코드*를 기계 가독형 *기계어*로 변환할 필요 없이 컴퓨터에서 곧바로 해석(interpret)하여 실행하는 프로그래밍 언어입니다. 그 중에는 세 가지 접근법이 있는데,
 
 1. 소스 코드를 독해하여 곧바로 실행한다.
-1. 소스 코드를 효율적인 중간 언어(예. [바이트코드](https://ko.wikipedia.org/wiki/바이트코드))로 번역한 후에 즉시 실행한다.
-1. 컴파일러를 갖는 인터프리터 시스템의 경우, 인터프리터 내부에 저장된 컴파일된 코드로부터 실행한다.
+2. 소스 코드를 효율적인 중간 언어(예. 바이트코드)로 번역한 후에 즉시 실행한다.
+3. 컴파일러를 갖는 인터프리터 시스템의 경우, 인터프리터 내부에 저장된 컴파일된 코드로부터 실행한다.
+
+> [바이트코드](https://ko.wikipedia.org/wiki/바이트코드)(bytecode)란, 인터프리터가 효율적으로 실행할 수 있도록 설계된 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)(instruction set)의 형태입니다. 어떠한 동작을 수행할 지 나타내는 [명령 코드](https://ko.wikipedia.org/wiki/명령_코드)(opcode) 한 [바이트](https://ko.wikipedia.org/wiki/바이트)(byte)와 부가적 옵션들로 구성되어 "바이트"코드라고 부릅니다. 명령 코드 목록은 파이썬 설치 경로로부터 `include\opcode.h`에서 찾아볼 수 있습니다.
 
 그 중에서 대표적인 인터프리트 언어인 [파이썬](/docs/ko.PRGMING_Python/)과 공학분야에서 흔히 사용되는 [MATLAB](/docs/ko.PRGMING_MATLAB/) 프로그래밍 언어는 두 번째 접근법에 해당합니다.
 
