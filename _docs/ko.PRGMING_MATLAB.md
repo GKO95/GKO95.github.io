@@ -5,7 +5,7 @@ category: 프로그래밍
 title: MATLAB
 icon: icon-matlab.png
 meta: MATLAB
-order: 0x05
+order: 0x07
 ---
 # MATLAB: 소개
 [MATLAB](https://www.mathworks.com/products/matlab.html)은 MathWorks에서 개발한 프로그래밍 및 수치해석 환경을 제공하는 유로 소프트웨어로 선형 방정식 계산을 위한 행렬 프로그래밍이 시초이다. 행렬 계산 이외에도 함수 및 데이터 그래프 출력, 알고리즘 정의, 사용자 인터페이스는 기본이며 필요에 따라 각 분야를 위한 툴박스(toolbox)를 추가하여 더 많은 기능을 수행할 수 있다. 현재 소프트웨어는 매년 상반기와 하반기마다 새로 업데이트되는데 만일 2021년 상반기에 출시된 MATLAB이면 R2021a 출시 번호가 붙는다.

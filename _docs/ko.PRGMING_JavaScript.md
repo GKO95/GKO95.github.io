@@ -5,7 +5,7 @@ category: 프로그래밍
 title: 자바스크립트
 icon: icon-javascript.svg
 meta: JavaScript
-order: 0x04
+order: 0x05
 ---
 # 자바스크립트: 소개
 자바스크립트(JavaScript)는 절차형 웹프로그래밍 언어로 HTML & CSS 웹디자인 언어와 함께 사용되어, 상호작용 가능한 동적 웹페이지를 만드는데 기여한다. 현재 자바스크립트의 용도는 데이터 처리 및 어플리케이션 제작 등 범위가 넓어지고 있다.
