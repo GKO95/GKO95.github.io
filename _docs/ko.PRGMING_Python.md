@@ -1634,7 +1634,7 @@ print(instance.attribute)
 
 ```
 "Goodbye World?"
-AttributeError: '서브클래스' object has no attribute '속성'
+AttributeError: 'SUBCLASS' object has no attribute 'attribute'
 ```
 
 `SUPERCLASS`의 `__init__()`메소드가 `SUBCLASS`로 상속되었으나 `SUBCLASS`는 이미 `__init__()` 메소드를 가지고 있어 오버로딩에 의해 상속이 되지 않은 것처럼 보인다. 결국 `print(Hello World")`가 나타나지 않고 `self.attribute`이 상속에도 불구하고 오류를 일으키는 이유이다.
