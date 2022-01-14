@@ -4,7 +4,6 @@ language: ko
 category: 인공지능
 title: 기계학습
 meta: ML
-mathjax: true
 order: null
 ---
 # 기계학습: 소개

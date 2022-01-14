@@ -1,10 +1,10 @@
 ---
 layout: docs
 language: ko
-category: 
+category: 운영체제
 title: 리눅스
 meta: Linux
-order: 0x40
+order: null
 ---
 # 리눅스: 소개
 [윈도우](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)(Windows) 운영체제는 마이크로소프트에서 개발한 [윈도우 NT](https://ko.wikipedia.org/wiki/윈도우_NT) 계열의 제품군으로 
