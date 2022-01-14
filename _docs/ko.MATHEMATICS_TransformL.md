@@ -34,13 +34,13 @@ $$
 라플라스 변환은 [확률 이론](../ko.MATHEMATICS_Probability)(probability theory)으로부터 유도된 변환식이다.
 
 ### 푸리에 변환
-라플라스 변환은 아래의 [푸리에 변환](../ko.ENGINEER_TransformF/#푸리에-변환)과 매우 유사한 형태를 띈다.
+라플라스 변환은 아래의 [푸리에 변환](../ko.MATHEMATICS_TransformF/#푸리에-변환)과 매우 유사한 형태를 띈다.
 
 $$
 X(\omega) = \mathcal{F} \{ x(t) \} = \int^{\infty}_{-\infty}x(t)e^{-j\omega t}dt
 $$
 
-만일 푸리에 변환의 유도 과정을 접하였다면 $j\omega$를 $\sigma + j\omega$로 확장하여 라플라스 변환의 유도를 설명하려고 시도할 수 있으나, 이는 매우 잘못된 접근법이다. 라플라스 변환의 유도 과정은 [푸리에 급수](../ko.ENGINEER_TransformF/#푸리에-급수)가 아닌 확률 이론(probability theory)에서 비롯되었기 때문이다. 그렇지만 라플라스와 푸리에 변환이 서로 연관성이 없다는 것은 전혀 아니며, 푸리에 변환은 복소변수 $s=\sigma + j\omega$에서 감쇠 $\sigma = 0$인 특수한 경우의 라플라스 변환이다.
+만일 푸리에 변환의 유도 과정을 접하였다면 $j\omega$를 $\sigma + j\omega$로 확장하여 라플라스 변환의 유도를 설명하려고 시도할 수 있으나, 이는 매우 잘못된 접근법이다. 라플라스 변환의 유도 과정은 [푸리에 급수](../ko.MATHEMATICS_TransformF/#푸리에-급수)가 아닌 확률 이론(probability theory)에서 비롯되었기 때문이다. 그렇지만 라플라스와 푸리에 변환이 서로 연관성이 없다는 것은 전혀 아니며, 푸리에 변환은 복소변수 $s=\sigma + j\omega$에서 감쇠 $\sigma = 0$인 특수한 경우의 라플라스 변환이다.
 
 ### 변환의 성질
 > *참조: [위키백과 - 라플라스 성질 및 이론](https://en.wikipedia.org/wiki/Laplace_transform#Properties_and_theorems)*
