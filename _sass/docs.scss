@@ -163,7 +163,7 @@ html {
             background-color: #FFFFFF;
         }
         blockquote {
-            background-color:#E8E8E8; 
+            background-color:#DFDFDF; 
             border-left-color: rgb(80, 80, 80); 
             color:rgb(64, 64, 64);
         }
@@ -180,7 +180,7 @@ html {
         }
         tr {
             &:nth-child(odd) {
-                background-color: #F0F0F0;
+                background-color: #F6F6F6;
             }
         }
     }
@@ -188,7 +188,7 @@ html {
         background-color: #202020A0;
     }
     #docs-menu {
-        background-color: #F0F0F0;
+        background-color: #E0E0E0;
     }
     #docs-sub {
         background-color: white;

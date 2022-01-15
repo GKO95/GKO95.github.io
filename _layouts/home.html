@@ -13,8 +13,10 @@ layout: template
     {%- assign langMarkdown1 = "" -%}{%- assign langMarkdown1 = "" -%}
     {%- assign fullMarkdown = site.docs | sort: "language" | sort: "order" -%}
     {%- for Markdown in fullMarkdown -%}
-      {%- assign langMarkdown1 = langMarkdown1 | append: "\" | append: Markdown.language -%}
-      {%- assign nameMarkdown1 = nameMarkdown1 | append: "\" | append: Markdown.category -%}
+      {%- if Markdown.order != nil -%}
+        {%- assign langMarkdown1 = langMarkdown1 | append: "\" | append: Markdown.language -%}
+        {%- assign nameMarkdown1 = nameMarkdown1 | append: "\" | append: Markdown.category -%}
+      {%- endif -%}
     {%- endfor -%}
     {%- assign langMarkdown1 = langMarkdown1 | remove_first: "\" | split: '\' | uniq -%}
     {%- assign nameMarkdown1 = nameMarkdown1 | remove_first: "\" | split: '\' | uniq -%}
@@ -26,9 +28,11 @@ layout: template
             <section class="home-category-header">{{group}}</section>
             <ol>
               {%- for Markdown in arrMarkdown -%}
-              <li class="home-category-list">
-                <a href="{{ Markdown.url }}" title="{{ Markdown.category }} | {{ Markdown.title }}">{{Markdown.title}}</a>
-              </li>
+              {%- if Markdown.order != nil -%}
+                <li class="home-category-list">
+                  <a href="{{ Markdown.url }}" title="{{ Markdown.category }} | {{ Markdown.title }}">{{Markdown.title}}</a>
+                </li>
+              {%- endif -%}
               {%- endfor -%}
             </ol>
           </div>

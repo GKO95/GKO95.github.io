@@ -3,7 +3,7 @@ layout: docs
 language: ko
 category: 라이브러리
 title: OpenCV
-icon: icon-opencv.png
+icon: icon-opencv.svg
 meta: OpenCV
 order: 0x12
 ---

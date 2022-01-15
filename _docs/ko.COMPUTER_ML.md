@@ -1,11 +1,10 @@
 ---
 layout: docs
 language: ko
-category: 
+category: 인공지능
 title: 기계학습
 meta: ML
-mathjax: true
-order: 0xF0
+order: null
 ---
 # 기계학습: 소개
 기계학습, 일명 머신러닝(machine learning)은 인공지능(artificial intelligence)의 한 분야로 여러 경험을 통해 향상되는 컴퓨터 알고리즘을 지칭한다. 여기서 "경험"이란, 일반적으로 데이터를 제공하여 "학습"시키므로써 컴퓨터 스스로가 최적의 알고리즘을 도출하도록 한다. 머신러닝은 크게 세 부류로 나뉘어진다:

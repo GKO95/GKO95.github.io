@@ -1,20 +1,11 @@
 ---
 layout: docs
 language: ko
-category: 운영체제
-title: 리눅스
-meta: Linux
+category: 
+title: 커널
+meta: Kernel
 order: null
 ---
-# 리눅스: 소개
-[윈도우](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)(Windows) 운영체제는 마이크로소프트에서 개발한 [윈도우 NT](https://ko.wikipedia.org/wiki/윈도우_NT) 계열의 제품군으로 
-
-
-# 윈도우: 드라이버
-
-
-
-
 # 커널: 소개
 [커널](https://ko.wikipedia.org/wiki/커널_(컴퓨팅))(kernel)은 [운영체제](https://ko.wikipedia.org/wiki/운영_체제)(operating system)의 일부분으로 하드웨어와 소프트웨어 간의 상호작용을 가능케 하고 리소스 관리 및 최적화를 제공하여 시스템 전체에 대한 완전한 주도권을 갖는다. 윈도우 OS(Windows OS)를 예시로 들자면, 운영체제는 [HDD](https://ko.wikipedia.org/wiki/하드_디스크_드라이브) 혹은 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브)와 같은 보조기억장치의 `C:` 드라이브에 저장되어 있다가 컴퓨터를 실행하면 BIOS에 의해 RAM [주기억장치](https://ko.wikipedia.org/wiki/주기억장치)에 로드되어 부팅된다.
 

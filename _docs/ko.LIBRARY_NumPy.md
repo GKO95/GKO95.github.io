@@ -3,7 +3,7 @@ layout: docs
 language: ko
 category: 라이브러리
 title: NumPy
-icon: icon-numpy.png
+icon: icon-numpy.svg
 meta: NumPy
 order: 0x10
 ---

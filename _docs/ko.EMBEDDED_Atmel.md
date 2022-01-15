@@ -3,7 +3,7 @@ layout: docs
 language: ko
 category: 임베디드
 title: Atmel
-icon: icon-atmel.png
+icon: icon-atmel.svg
 meta: Atmel
 order: 0x31
 ---
