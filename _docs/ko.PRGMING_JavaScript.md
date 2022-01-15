@@ -15,7 +15,7 @@ order: 0x05
 ## 인터프리트 언어
 > *참조: [컴파일 vs 인터프리트 언어](/blog/ko.compiler_vs_interpreter/)*
 
-자바스크립트 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)이다.
+자바스크립트 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다.
 
 ## HTML 웹프로그래밍 언어
 HTML(Hypertext Markup Language) 선언형 웹디자인 프로그래밍 언어는 정적 웹사이트를 생성하는데 흔히 사용되는 언어이다. 여기서 정적 웹사이트(static website)는 모든 웹페이지 방문자들에게 동일한 콘텐츠를 보여주는 성질을 갖는다. 즉, HTML 언어만으로는 웹사이트에 다양한 기능을 구현할 수가 없다.
