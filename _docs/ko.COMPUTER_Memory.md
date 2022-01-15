@@ -215,3 +215,202 @@ CRL 메모리 함수(예. `malloc()`, `free()` 등) 및 C++의 메모리 연산�
 
 ### 메모리 공유
 파일 매핑의 특성을 활용하여 메모리 공유 형태의 프로세스 간 통신(inter-process communication; IPC)를 구현할 수 있다. 파일 매핑 객체를 생성할 때 파일 핸들 대신에 `INVALID_HANDLE_VALUE`을 전달하고 공유할 메모리를 0보다 큰 정수로 지정하면 된다. 그러면 파일 매핑에서 파일만 없을 뿐, 두 프로세스는 파일 매핑 객체로 메모리를 공유하는 구조를 갖추게 된다.
+
+# 메모리: 덤프
+> *참조: [Microsoft Docs - Finding a Memory Leak](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/finding-a-memory-leak)*
+
+[메모리 덤프](https://ko.wikipedia.org/wiki/코어_덤프)(memory dump)는 RAM 물리 메모리에서 일어나는 모든 데이터를 한꺼번에 저장장치로 write 하는 작업이다. 위에서 언급한 [메모리 풀](#메모리-메모리-풀)로부터 할당할 수 있는 메모리가 고갈되면 운영체제에 치명적인 문제가 발생하는데, 메모리 덤프는 이러한 메모리 풀로 회수되지 못한 [메모리 누수](https://ko.wikipedia.org/wiki/메모리_누수)(memory leak)가 어디에서 발생하고 있는지 진단 및 추적하기 위해 목적을 갖는다. 본 장은 윈도우 운영체제를 위주로 메모리 누수 진단 및 덤프 작업 절차를 설명한다.
+
+만일 운영체제 성능이 시간이 지나면서 저하되어 메모리 누수가 의심된다면 Performance Monitor로 조사를 진행한다.
+
+![Performance Monitor](/images/docs/memory/memory_performance_monitor.png)
+
+`Performance > Monitoring Tools > Performance Monitor`에서 현재 시스템 리소스를 모니터링 할 수 있다. 그 중에서 메모리 덤프를 위해서는 아래의 사진과 같이 Counter를 추가한다.
+
+![Performance Monitor에서 Add Counter 설정](/images/docs/memory/memory_performance_counter.png)
+
+* Memory → Pool Nonpaged Bytes
+    : *페이지 불가한 풀로부터 할당된 현재 시스템이 사용하고 있는 메모리 크기 (단위: 바이트); 마지막으로 관측된 값을 표시하며 평균값이 아니다.*
+
+* Memory → Pool Paged Bytes
+    : *페이지 가능한 풀로부터 할당된 현재 시스템이 사용하고 있는 메모리 크기 (단위: 바이트); 마지막으로 관측된 값을 표시하며 평균값이 아니다.*
+
+* Paging File → % Usage
+    : *사용되고 있는 페이지 파일 객체 용량 (단위: %)*
+
+사용자 모드의 메모리 누수는 항상 페이지 가능한 풀(paged pools)에서 발생하므로 다음 증상이 함께 동반된다.
+> * Memory → Pool Paged Bytes 지속적 증가
+> * Paging File → % Usage 지속적 증가
+
+커널 모드의 누수는 일반적으로 페이지 불가한 풀(nonpaged pools)에서 고갈되므로 다음 증상이 동반된다.
+> * Memory → Pool Nonpaged Bytes 지속적 증가
+> * Memory → Pool Paged Bytes 영향 받을 수 있음
+
+## 커널 모드 메모리 누수
+다음은 Perfomance Monitor로부터 커널 모드에서 메모리 누수가 발생하고 있다고 판단하였을 때, 이를 진단 및 원인을 찾아내는 접근법을 설명한다. 커널 측을 디버깅해야 하기 때문에 [Windows Driver Kit]((https://docs.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk))(WDK) 설치가 필요하다.
+
+### PoolMon
+[메모리 풀 모니터](https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/poolmon)(Memroy Pool Monitor), 일명 PoolMon은 시스템의 페이지 가능한(paged) 및 페이지 불가한(nonpaged) 풀로부터 할당된 메모리 정보를 보여준다. Paged 및 nonpaged 메모리 풀마다 부여된 네 바이트로 구성된 풀 태그(pool tag)가 있으며, PoolMon은 각 풀 태그마다 처리된 할당 정보를 표시한다. 이러한 특징으로 메모리 누수가 어느 메모리 풀로부터 발생하는지 확인할 수 있다. 64비트 운영체제이면 프로그램은 `C:\Program Files (x86)\Windows Kits\10\Tools\x64`에서 찾을 수 있으며, 명령 프롬프트로 실행하기를 권장한다.
+
+> 윈도우 2000 및 XP 64비트를 사용하고 있으면 `C:\Program Files (x86)\Windows Kits\10\Debuggers\x64`에 위치한 `GFlags.exe`를 실행해야만 풀 태그가 활성화된다. 그 이후 버전의 운영체제는 풀 태그가 기본적으로 활성화되어 있다.
+
+![PoolMon.exe](/images/docs/memory/memory_poolmon_cmd.png)
+
+다음은 시스템 메모리 풀 도표가 각각 무엇을 나타내는지 설명한다. 여기서 소괄호 `()`는 변화량을 가리킨다.
+
+| `Tag ` | `Type` | `Allocs` | `Frees` | `Diff` | `Bytes` | `Per Alloc` |
+|:------:|:------:|:--------:|:-------:|:------:|:-------:|:-----------:|
+| 풀 태그 | Paged 혹은 Nonpaged | 누적 할당 개수 | 누적 Free 개수 | `Allocs` - `Free` | 할당 바이트 크기 | `Bytes` / `Diff`; 할당 당 바이트 |
+
+메모리 누수가 발생하는 요인 진단은 다음 절차를 따라 진행된다:
+
+1. 키보드 `P` 버튼을 눌러 Paged 혹은 Nonpaged, 아니면 전 메모리 풀에 대하여 관측한다.
+2. 키보드 `B` 버튼을 눌러 할당된 바이트 크기 위주로 도표를 정렬한다.
+3. 진단하려는 어플리케이션을 실행시키고 스크린샷으로 기록한다.
+4. 매 30분마다 스크린샷을 캡처하여 어느 풀 태그에서 바이트가 증가하는지 확인한다.
+5. 어플리케이션을 종료하였을 시, 1~2시간 후에 Free된 메모리 용량을 확인한다.
+
+해당 절차를 통해 어느 메모리 풀 태그에서 메모리 누수가 발생하고 있는지 파악할 수 있다.
+
+### Kernel Debugger
+PoolMon에서 확인한 메모리 누수가 Nonpaged에서 발생하고 있으면 운영체제 커널을 디버깅해야 한다. 그러기 위해 운영체제를 디버깅 모드로 전환해야 하는데 BitLocker와 Secure Boot와 같은 시스템 보안 기능을 임시 비활성시켜야 한다. 진단을 마치고 디버깅 모드를 해제하면 시스템 보안 기능은 다시 활성화가 가능하다. 가장 먼저 해야 할 것은 BitLocker을 PowerShell로 중지시킬 것을 권장한다.
+
+```powershell
+Suspend-BitLocker -MountPoint "C:" -RebootCount 0
+```
+
+BitLocker를 재개하려면 아래 명령어를 입력한다.
+
+```powershell
+Resume-BitLocker -MountPoint "C:" 
+```
+
+그 다음 Secure Boot는 BIOS에서 비활성화 한다. 만일 BitLocker를 비활성화 하지 않고서 Secure Boot를 비활성화 하면 BitLocker가 트리거될 수 있으므로 반드시 BitLocker부터 진행하도록 한다. 시스템 보안 기능을 임시 해제하였으면 `bcdedit`이란 Boot Configuration Data 편집 작업으로 커널 디버깅 모드를 활성화한다.
+
+```
+bcdedit /debug on
+```
+
+본 부문은 예시로 KDNET 네트워크 자동설정으로 호스트 컴퓨터가 디버그 컴퓨터로 접속하는 절차를 설명한다. 디버깅 컴퓨터를 접속하는 방법은 여러 가지가 있으며 이들은 *[Microsoft Docs- Setting Up Kernel-Mode Debugging](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/setting-up-kernel-mode-debugging-in-windbg--cdb--or-ntsd)*에서 확인할 수 있다.
+
+1. 호스트와 디버그 컴퓨터를 물리적으로 (즉, 이더넷으로) 동일한 LAN에 연결한다.
+
+2. 호스트 컴퓨터에서 다음을 진행한다:
+
+    * 명령 프롬프트에서 `ipconfig`로부터 IPv4 주소를 확인한다.
+    * Windows Debugging Tools (WDK 설치 화면의 선택옵션) 설치한다.
+    * `C:\Program Files (x86)\Windows Kits\10\Debuggers\x64`에서 `kdnet.exe`와 `VerifiedNICList.xml` 파일을 복사한다.
+
+3. 디버그 컴퓨터에서 다음을 진행한다:
+
+    * 복사한 `kdnet.exe`와 `VerifiedNICList.xml` 파일을 디버그 컴퓨터의 `C:\KDNET` 경로에 붙여넣는다.
+    * 명령 프롬프트를 관리자 모드로 열어 `kdnet.exe`을 실행하여 네트워크 어댑터 지원 여부를 확인한다.
+    * 네트워크 어댑터를 지원하면 아래 명령어를 입력한다: `<YourDebugPort>`는 호스트와 디버그 쌍을 연결해줄 포트를 선택하는 것이며, 50000~50039 범위 내에서 선택하기를 권장한다.
+
+    ```
+C:\KDNET> kdnet.exe <HostComputerIPAddress> <YourDebugPort> 
+    ```
+
+    * 명령 프롬프트에 나타난 `Key` 값을 저장한다.
+
+디버깅을 위한 네트워크 설정을 마무리하면 호스트 컴퓨터는 WinDbg 프로그램을 실행하여 `Kernel Debug > Net`에서 저장한 `Key` 값을 입력하여 디버그 컴퓨터에 접속한다. 만일 방화벽이 나타나면 **모든 네트워크**에 대하여 권한을 부여한다. 이 시점에서 디버거가 다시 연결되기를 기다리며, 디버그 컴퓨터를 재부팅하면 자동으로 연결된다.
+
+만일 메모리 누수가 발생한 태그가 `Abc `이면 아래와 같이 해당 태그를 리틀 엔디언으로 입력한다. 
+
+```
+kd> ed nt!poolhittag ' cbA' 
+```
+
+여기서 `Abc ` 풀로부터 메모리가 할당 혹은 free되면 디버그 컴퓨터는 자동적으로 break 된다. 해당 디버깅 내용을 자세히 확인하려면 아래를 입력한다.
+
+```
+kd> kb
+```
+
+## 사용자 모드 메모리 누수
+다음은 Perfomance Monitor로부터 사용자 모드에서 메모리 누수가 발생하고 있다고 판단하였을 때, 이를 진단 및 원인을 찾아내는 접근법을 설명한다.
+
+### Performance Monitor
+사용자 모드 메모리 누수가 의심되지만 정확히 어딘지 알 수 없으면, Performance Monitor로 각 프로세스마다 메모리 사용량을 확인할 수 있다.
+
+* Process → Private Bytes (진단하려는 각 프로세스 선택)
+    : *프로세스가 할당한 전체 용량을 의미하며, 타 프로세스와 공유되는 메모리는 제외된다.*
+
+* Process → Virtual Bytes (진단하려는 각 프로세스 선택)
+    : *프로세스가 사용하고 있는 현 가상 주소 공간 크기이다.*
+
+일부 메모리 누수는 Private Bytes 할당 증가로부터 나타나지만, 대다수는 Virtual Bytes 증가로 알아낼 수 있다.
+
+### UMDH
+[UMDH](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/umdh)(User-Mode Dump Heap)는 특정 프로세스의 힙 메모리 할당을 운영체제와 함께 분석하는 유틸리티 프로그램이다. UMDH 로그는 힙 메모리 할당의 stack traces를 제공하는데, 이를 통해서 프로세스의 어느 루틴에서 누수가 발생하는지 찾아낸다. 이를 위해 우선 `GFlags.exe`로부터 설정을 해야 한다.
+
+1. `GFlags.exe` GUI의 Image File 탭에서 프로세스 이름(파일 확장자 포함)을 적고 TAB을 눌러 `Create user mode stack trace database`를 체크하여 저장한다. 혹은 CLI로 `+`/`-`로 옵션을 활성 혹은 비활성한다.
+    ```
+gflags /i ImageName +ust
+    ```
+
+2. 기본적으로 운영체제가 수집할 수 있는 stack trace 데이터는 x86 프로세서에서는 32MB로, x64 프로세서에서는 64MB로 한정되어 있다. 이를 증가시키려면 Image File 탭에서 `Stack Backtrace (Megs)`를 체크하고 MB 크기를 입력하고 적용시킨다. 이는 제한된 윈도우 리소스를 고갈시킬 수 있으므로 필요 시에만 변경한다. 더 큰 크기가 필요없으면 다시 원래 값으로 되돌려놓는다.
+
+3. System Registry 탭에서 아무런 플래그라도 바꾸면, 이를 적용시키기 위해서는 윈도우를 재시작해야 한다. Image File 탭에서의 변경은 프로세스만 재시작하면 된다. Kernel Flags 탭은 즉시 적용되지만 윈도우를 재시작하면 초기화된다.
+
+UMDH가 stack traces로 어느 함수를 호출하였는지 확인하려면 심볼(symbol)을 필요로 하며 `_NT_SYMBOL_PATH` 환경 변수에 경로를 지정해야 한다. 만일 비주얼 스튜디오를 사용한 적이 있으면 `.pdb` 파일을 보았을 것인데, 이것이 바로 어플리케이션 심볼 파일이다. 그리고 윈도우 운영체제에 대한 공용 심볼은 온라인 서버로부터 불러올 수 있다.
+
+```
+set _NT_SYMBOL_PATH=c:\mysymbols;srv*c:\mycache*https://msdl.microsoft.com/download/symbols
+```
+* `srv*`: 심볼 서버에 있는 기본 심볼 스토어로부터 심볼을 가져온다.
+* `srv*c:\mycache`: 심볼 서버에 있는 기본 심볼 스토어로부터 심볼을 `c:\mycache`로 저장하여 불러온다.
+* `srv*c:\mycache*https://msdl.microsoft.com/download/symbols`: 해당 링크의 서버에 있는 심볼 스토어로부터 심볼을 `c:\mycache`로 저장하여 불러온다.
+
+정밀한 결과를 위해 trace 할 어플리케이션 실행 전에 환경 변수를 `set OANOCACHE=1`로 설정하여 BSTR caching을 비활성한다.
+
+UMDH로 어플리케이션 프로세스의 힙 할당 정보를 캡처 및 진단을 위해 다음 절차를 따른다.
+
+1. 진단하려는 프로세스의 ID (aka. PID)를 확인한다.
+
+2. 확인한 PID를 콘솔창에서 다음과 같이 입력한다; 아래 예시는 PID가 51448이고 저장할 로그 파일명을 `log1.txt`로 지정하였다.
+
+    ```
+umdh -p:51448 -f:log1.txt
+    ```
+
+    해당 로그 파일에는 각 힙 메모리 할당에 대한 call stack 및 그로부터 생성된 할당 개수 및 바이트 크기 정보가 들어있다. 여기서 call stack이란, 컴퓨터 프로그램의 활동 중인 서브루틴(특정 작업을 수행하는 일련의 프로그램 명령) 정보를 담고 있는 stack 데이터 구조이다.
+
+3. 메모리 누수를 진단하기 위한 비교할 수 있는 또 다른 로그 파일을 생성해야 한다. 충분한 시간 이후에 `log2.txt` 로그 파일을 생성하였다고 가정한다. UMDH는 두 로그 파일을 비교하여 각 힙 메모리 할당에 대한 변화를 보여줄 수 있다. 비교 데이터는 `logcompare.txt` 파일에 저장하고, 숫자를 십진수로 보기 위해 `-d` 옵션을 붙이면 아래의 명령어가 완성된다.
+
+    ```
+umdh log1.txt log2.txt > logcompare.txt -d
+    ```
+
+4. 비교 데이터 파일을 열면 다음과 같은 내용을 볼 수 있다.
+```
++  131072 ( 262144 - 131072)      4 allocs	BackTraceF9A156DA
++       2 (      4 -      2)	BackTraceF9A156DA	allocations
+```
+
+    UMDH 로그 파일에서 "BackTrace"로 레이블된 각 call stack에는 두 로그의 비교 내용이 들어있다. 상단은 할당 바이트, 그리고 하단은 할당 개수를 가리킨다. 로그 파일 `log1.txt`는 131072이었던게 로그 파일 `log2.txt`에서는 262144으로 해당 call stack에 대해서는 +131072로 할당 바이트가 증가하였다.
+
+    그리고 맨 아래는 총 메모리에 대한 종합적 요약이다.
+
+    ```
+Total decrease == 487210 requested +   1654 overhead = 488864
+    ```
+
+5. 해당 BackTrace가 무엇인지 확인하려면 `log1.txt` 혹은 `log2.txt` 둘 중 하나의 로그 파일로부터 찾아봐야 한다. `BackTraceF9A156DA`에 대한 로그 내용이 다음과 같다고 가정한다.
+```
+00005320 bytes in 0x14 allocations (@ 0x00000428) by: BackTraceF9A156DA
+ntdll!RtlDebugAllocateHeap+0x000000FD
+ntdll!RtlAllocateHeapSlowly+0x0000005A
+ntdll!RtlAllocateHeap+0x00000808
+MyApp!_heap_alloc_base+0x00000069
+MyApp!_heap_alloc_dbg+0x000001A2
+MyApp!_nh_malloc_dbg+0x00000023
+MyApp!_nh_malloc+0x00000016
+MyApp!operator new+0x0000000E
+MyApp!DisplayMyGraphics+0x0000001E
+MyApp!main+0x0000002C
+MyApp!mainCRTStartup+0x000000FC
+KERNEL32!BaseProcessStart+0x0000003D 
+```
+
+    로그에 의하면 해당 call stack으로부터 총 5320h 바이트가 할당되었으며, 이는 각각 428h 바이트 크기의 14h개 힙 메모리 할당이다. 그 밑에는 call stack이 있는데 `DisplayMyGraphics`가 `new` 연산자로 메모리를 할당하고 이는 Visual C++ 런타임 라이브러리의 `malloc`을 호출하여 힙 메모리를 확보하는 것을 파악할 수 있다. 그리고 이 중에서 어느 부분이 소스 코드에 명시되어 할당을 하는지 판단한다.
