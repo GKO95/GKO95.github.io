@@ -5,7 +5,7 @@ category: 임베디드
 title: Atmel
 icon: icon-atmel.svg
 meta: Atmel
-order: 0x31
+order: 0x32
 ---
 # ATMEL: 소개
 [Atmel](https://ko.wikipedia.org/wiki/아트멜)은 임베디드 관련 반도체 제조 회사였으며, [AVR](https://ko.wikipedia.org/wiki/아트멜_AVR) 계열의 마이크로컨트롤러 개발로 유명하다. 그러나 2016년에 Microchip Technology로 인수되면서 8비트, 32비트, ARM 기반 등의 AVR을 통틀어서 간단히 Atmel이라고 부른다. 플래시 메모리를 최초로 탑재한 마이크로컨트롤러인 AVR은 간단하고 저렴하면서 전력소모도 적어 현재까지도 임베디드 시스템에 널리 사용되고 있다.
