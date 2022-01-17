@@ -496,10 +496,10 @@ print("끝!")
 
 ```python
 if condition:
-    statements
+    ...
 
 # 간략화된 문장
-if condition: statement
+if condition: ...
 ```
 
 ### `else` 조건문
@@ -507,21 +507,21 @@ if condition: statement
 
 ```python
 if condition:
-    statement
+    ...
 else:
-    statement
+    ...
 ```
 
 `if` 조건문과 `else` 조건문을 다음과 같이 조건을 연쇄적으로 연결하여 사용할 수 있다.
 
 ```python
 if condition: 
-    statements
+    ...
 else:
     if condition:
-        statements
+        ...
     else:
-        statements
+        ...
 ```
 
 ### `elif` 조건문
@@ -529,11 +529,11 @@ else:
 
 ```python
 if condition:
-    statements
+    ...
 elif condition:
-    statements
+    ...
 else:
-    statements
+    ...
 ```
 
 ### 조건 연산자
@@ -550,10 +550,10 @@ True_return if condition else False_return
 
 ```python
 while condition:
-    statements
+    ...
 
 # 간략화된 문장
-while condition: statement
+while condition: ...
 ```
 
 `else` 조건문을 `while` 반복문 다음에 위치시키면 해당 코드는 반복문의 조건에 의해 정상적으로 종료되었을 경우에만 실행된다.
@@ -1245,7 +1245,7 @@ print(list(variable))
 ```python
 # 본래 함수
 def function():
-    statements
+    ...
 
 # 데코레이터 생성
 def decorator(func):
@@ -1285,7 +1285,7 @@ def decorator(func):
 # 함수 수정하기: @ 기호 사용
 @decorator
 def function():        # "function()"의 본래 함수
-    statements
+    ...
 
 # 함수 이름은 그대로 유지된다.
 function()
@@ -1297,7 +1297,7 @@ function()
 @decorator1
 @decorator2
 def function():
-    statements
+    ...
 ```
 
 수정될 함수로부터 가장 가까운 데코레이터가 우선적으로 적용된다. 그러므로 `function()` 함수는 먼저 `@decorator2` 다음 `@decorator1` 데코레이터 순서로 적용된다.
@@ -1381,10 +1381,10 @@ print(variable.index(5))
 ### 속성 및 메소드
 속성(attribute)과 메소드(method)는 객체에 캡슐화된 변수와 함수를 의미하며 아래와 같은 방법으로 접근한다.
 
-| 객체 구성요소 | 구문                 |
-| :-----------: | -------------------- |
-|     속성      | `instance.attribute` |
-|    메소드     | `instance.method()`  |
+| 객체 구성요소 | 구문                   |
+|:-------:|----------------------|
+| 속성      | `instance.attribute` |
+| 메소드     | `instance.method()`  |
 
 ## 클래스
 클래스(class)는 객체를 생성하는데 사용된다. 클래스는 `class` 키워드를 사용하여 정의되며, 클래스 내부에는 객체의 속성과 메소드가 되는 변수와 함수를 정의한다. 아래는 `class` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이며, 변수 및 함수와의 유사성을 확인할 수 있다.
@@ -1736,32 +1736,28 @@ AttributeError: 'CLASS' object has no attribute 'attribute'
 # 파이썬: 예외 처리
 예외(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 인터프리터에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
 
-### `try`/`except` 문
-`try`/`except` 쌍의 문은 예외를 감지하고 발생한 예외에 따라 특정 실행문을 호출하는데 사용된다. 이 두 가지 이외에도 예외처리에 사용되는 추가 문들도 있다.
+## `try`/`except` 예외 처리문
+`try`/`except` 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
 
 | 키워드    | 설명                                                         |
 |:---------:| ------------------------------------------------------------ |
 | `try`     | 예외가 있는지 확인하는 코드 블록을 제공한다.               |
 | `except`  | 특정 예외가 발생하였을 때 실행된다.         |
-| `else`    | [선택사항] 오류(예외)가 감지되지 않았을 시 실행된다. |
-| `finally` | [선택사항] 오류 발생 여부를 떠나 반드시 실행되는 코드이다. |
+| `else`    | [선택사항] 예외가 감지되지 않았을 시 실행된다. |
+| `finally` | [선택사항] 예외 처리 마지막에 반드시 실행되는 코드이다. |
 
 ```python
 try:
-    statements
+    ...
 except exception_type1:
-    statements
+    ...
 except exception_type2:
-    statements
+    ...
 except:            # 전조건 예외처리는 마지막에 위치한다.
-    statements
-finally:
-    statements
+    ...
 ```
 
-`try`/`except` 문이 실행된 후에도 프로그램은 멈추지 않고 계속 실행된다.
-
-### `raise` 문
+## `raise` 문
 `raise` 문은 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 함수나 클래스에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다.
 
 ```python
@@ -1770,23 +1766,6 @@ raise
 
 # 명시적으로 발생된 예외에 대한 자세한 설명을 제공한다.
 raise exception_description
-```
-
-### `assert` 문
-`assert` 문은 표현식의 타당성(일명 진술)을 확인한다. 확인한 표현식이 유효하고 문제가 없으면 해당 진술에 대하여 `True`를 반환하고, 예외가 발생하였으면 해당 진술은 `False`를 반환한다.
-
-```python
-print(0)
-assert TRUE_expression
-print(1)
-assert FALSE_expression, "예외유형 설명"
-print(2)
-```
-
-```
-0
-1
-AssertionError: 예외유형 설명
 ```
 
 # 파이썬: 파이썬다운
@@ -1817,84 +1796,84 @@ PEP8이란, 여덟 가지의 파이썬 개선 제안(Python Enhancement Proposal
 ```python
 # 시작점
 if __name__ == "__main__":
-    statements
+    ...
 ```
 
 파이썬에서는 이를 시작점이라고 부르며, 모듈로 가져온 스크립트에서는 시작점이 실행되지 않는다. 주의해야 할 점은 비교 연산자 `==`는 논리 연산자인 `is`로 절대 대체할 수 없다.
 
 # 파이썬: 파일 관리
-파이썬 프로그램에 여러 개의 입력 데이터를 터미널로 입력하는 방식은 매우 비효율적이다. 이러한 문제를 해결하기 위해 데이터가 입력된 파일을 불러와 프로그램상에서 처리할 수 있다.
+여러 데이터를 파이썬 프로세스에 전달하거나, 혹은 데이터를 외부로 출력하기 위해 파일을 불러와 read 혹은 write 하여 처리할 수 있다. 본 장은 파이썬에서 파일을 관리하는 방법에 대하여 소개한다.
 
-## 파일 열기
-파일을 처리하기 위해서는 우선 해당 파일을 열어야 한다. `open()` 함수를 통해 원하는 파일을 열 수 있다.
-
-```python
-open("파일이름.txt")
-```
-
-| 전달인자 | 설명                               |
-|:--------:| ---------------------------------- |
-| `r`      | 읽기 모드 (기본값)                 |
-| `w`      | 덮어쓰기 모드 (새로 쓰기)              |
-| `a`      | 덧붙이기 모드 (내용 추가)          |
-| `rb`     | 바이너리 읽기 모드 (비텍스트 파일) |
-| `wb`     | 바이너리 쓰기 모드 (비텍스트 파일) |
-
-`close()` 메소드는 현재 열려있는 파일을 닫는다. 파일을 닫는 것은 리소스 낭비를 줄이는데 매우 중요한 역할을 한다. 예외 처리가 발생하여도 정상적으로 파일을 닫을 수 있도록 `try`/`except` 문 혹은 `with` 문을 함께 사용할 것을 권장한다.
+## 파일 열기 및 닫기
+파이썬에서 파일을 열고 닫으려면 `open()` 함수와 `close()` 메소드를 사용한다.
 
 ```python
-file = open("파일이름.txt", "r")
+# 파일 열기: 읽기 전용
+file = open("filename.txt", "r")
+
+# 파일 닫기
 file.close()
 ```
+
+`open()` 함수에는 열고자 하는 파일경로 외에도 파일을 열기 위한 옵션을 설정할 수 있다.
+
+| 전달인자 | 설명                   |
+|:----:|----------------------|
+| `r`  | 읽기 모드 (기본값)          |
+| `w`  | 덮어쓰기 모드 (새로 쓰기)      |
+| `a`  | 덧붙이기 모드 (내용 추가)      |
+| `rb` | 바이너리 읽기 모드 (비텍스트 파일) |
+| `wb` | 바이너리 쓰기 모드 (비텍스트 파일) |
+
+`close()` 메소드로 더 이상 사용하지 않는 파일을 닫아주는 습관은 리소스 낭비를 줄여주므로 매우 중요하다. 예외가 발생하여도 정상적으로 파일을 닫을 수 있도록 `try`/`except` 예외 처리문 혹은 `with` 문을 함께 사용할 것을 권장한다.
 
 ### `with` 문
 `with` 문은 해당 코드 블록 안에서만 사용할 수 있는 임시 변수를 생성한다. `with` 문으로 파일을 열었을 경우, 코드 블록이 종료되면 파일은 자동적으로 닫힌다.
 
 ```python
-with open("파일이름.txt") as file:
-    statements
+with open("filename.txt") as file:
+    ...
 ```
 
-### 문맥 관리자
-[문맥 관리자](https://docs.python.org/3/library/stdtypes.html#typecontextmanager)(context manager)는 `with` 문을 지원하는 인터페이스이다. 함수나 메소드를 컨텍스트 관리자로 설정하는 방법은 두 가지가 있다:
+이를 가능케 하는 [문맥 관리자](https://docs.python.org/3/library/stdtypes.html#typecontextmanager)(context manager)는 `with` 문을 지원하는 인터페이스 역할을 담당한다. 함수나 메소드에 문맥 관리자를 설정하는 방법은 두 가지가 있다:
 
 1. `__enter__()`와 `__exit__()` 메소드
-
-```python
-# 컨텍스트 관리자 1
-class CLASS:
-    def __init__(self):
-        pass
     
-    # "with" 문 시작 시 실행
-    def __enter__(self):
-        self.var = expression
-        return self.var
-    
-    # "with" 문 종료 시 실행
-    def __exit__(self):
-        statements
-```
+    ```python
+    # 컨텍스트 관리자 1
+    class CLASS:
+        def __init__(self):
+            pass
+        
+        # "with" 문 시작 시 실행
+        def __enter__(self):
+            self.var = expression
+            return self.var
+        
+        # "with" 문 종료 시 실행
+        def __exit__(self):
+            ...
+    ```
 
 2. `contextlib` 모듈
-
-```python
-from contextlib import contextmanager
-
-# 컨텍스트 관리자 2 
-class CLASS:
-    def __init__(self):
-        pass
     
-    # "with" 문 지원 함수 혹은 메소드
-    @contextmanager
-    def method(self):
-        self.var = expression
-        yield self.var
-        statements
-```
+    ```python
+    from contextlib import contextmanager
+    
+    # 컨텍스트 관리자 2 
+    class CLASS:
+        def __init__(self):
+            ...
+        
+        # "with" 문 지원 함수 혹은 메소드
+        @contextmanager
+        def method(self):
+            self.var = expression
+            yield self.var
+            ...
+    ```
 
-컨텍스트 관리자는 `with` 문을 사용할 시, 반환(`return`) 혹은 양도(`yield`)된 데이터는 `with` 문에서 처리할 수 있는 리소스가 된다. 이렇게 암시적으로 지정된 리소스는 다른 명칭을 사용하지 않는 이상 `as` 키워드의 사용이 불필요하다.
+문맥 관리자는 `return` 혹은 `yield` 문으로 반환/양도된 데이터를 `with` 문에서 처리할 수 있는 리소스로 제공한다. 해당 리소스는 `as` 키워드로 별도의 명칭을 지정하지 않는 이상 암묵적으로 처리 대상으로 지목된다.
 
 ```python
 # 객체화
@@ -1902,40 +1881,48 @@ instance = CLASS()
 
 with instance.method():
     # "self.var"를 위주로 처리
-    statements
+    ...
 ```
 
 대표적인 컨텍스트 관리자의 실제 적용 예시로는 *[텐서플로우: 텐서보드](../ko.LIBRARY_TensorFlow#텐서보드)*에서 확인할 수 있다.
 
 ### 절대경로 및 상대경로
-컴퓨터에는 절대경로(absolute path)와 상대경로(relative path)가 존재한다. 경로를 지정할 때에는 백슬래시 두 개(`\\`)로 폴더 및 파일을 구분해야 하며, 하나만 사용하면 탈출 문자가 되어 원치 않은 텍스트 연산이 수행될 수 있다.
+컴퓨터에는 두 종류의 경로 탐색법이 존재한다.
+
+* 절대경로(absolute path)
+    : *시스템의 루트경로(예. 윈도우의 `C:\` 혹은 리눅스의 `/`)로부터 시작하여 탐색하는 방식이다.*
+
+* 상대경로(relative path)
+    : *실행되고 있는 프로세스의 현 위치를 기준으로 경로를 탐색하는 방식이다.*
+
+경로를 지정할 때에는 백슬래시 두 개(`\\`)로 폴더 및 파일을 구분한다. 하나만 사용하면 [탈출 문자](#탈출-문자)가 되어 원치 않은 텍스트 연산이 수행될 수 있다.
 
 ```python
-file = open("경로\\파일이름.txt")
+file = open("path\\filename.txt")
 ```
 
 ## 파일 읽기
-텍스트 기반 파일을 연 이후, 파이썬은 `read()` 메소드를 통해 파일 내용을 읽을 수 있다. 메소드의 인자로는 정수가 건네지며, 이는 읽을 바이트 수를 의미한다. 하나의 파일에서 `read()` 메소드는 여러 번 사용될 수 있으며, 마지막으로 읽은 부분에서부터 이어서 읽는다. 인자가 없을 시, 메소드는 나머지 내용 전체를 읽는다.
+파이썬에서 텍스트 기반 파일을 열었으면 `read()` 메소드로 파일 내용을 읽을 수 있다. 메소드의 인자로 정수를 건네면 파일로부터 지정한 바이트만큼 읽는다. 하나의 파일에서 `read()` 메소드는 여러 번 사용할 수 있으며, 마지막으로 읽은 부분에서부터 이어서 읽는다. 메소드에 인자를 전달하지 않으면 내용의 나머지 전부를 읽는다.
 
 ```python
-with open("경로\\파일이름.txt") as file:
+with open("path\\filename.txt") as file:
     print(file.read(16))    # 내용 시작 부분에서부터 16 바이트를 읽는다.
     print(file.read(4))     # 16 바이트 이후로부터 4 바이트를 읽는다.
     print(file.read())      # 4 바이트 이후로부터 나머지 바이트를 읽는다.
     print(file.read())      # 더 이상 읽을 내용이 없어 아무런 텍스트를 반환하지 않는다.
 ```
 
-`readlines()` 메소드는 각 줄의 내용을 하나의 요소로 갖는 리스트 객체를 반환한다. 메소드의 인자로는 정수가 건네지며, 이는 읽을 바이트 수를 의미한다. 다만, 첫 줄만 읽는 `readline()` 메소드와 혼돈하지 않도록 주의해야 한다.
+`readlines()` 메소드는 각 줄의 내용을 하나의 요소로 갖는 [리스트 객체](#리스트-객체)를 반환한다. 메소드의 인자로 정수를 건네면 파일로부터 지정한 바이트만큼 읽는다. 그러나 한 줄만 읽는 `readline()` 메소드와 혼돈하지 않도록 주의한다.
 
 ```
-<파일이름.txt>
+<filename.txt>
 첫 번째 줄은 여기에.
 두 번째 줄은 저기에.
 마지막 줄은 어딘가에.
 ```
 
 ```python
-with open("경로\\파일이름.txt") as file:
+with open("path\\filename.txt") as file:
     print(file.readlines())
     print(file.readline())
 ```
@@ -1954,53 +1941,53 @@ for variable in file:
 ```
 
 ## 파일 쓰기
-파이썬에서 텍스트 파일은 `write()` 메소드를 통해 생성되거나 작성된다. 파일 쓰기에는 두 가지의 모드가 존재한다: (1) 덮어쓰기와 (2) 덧붙여 쓰기가 있다. 아래의 텍스트 파일이 있다고 가정한다:
+파이썬에서 텍스트 기반 파일을 열었으면 `write()` 메소드로 파일 내용을 작성할 수 있다. 파일을 작성하는 모드에는 두 가지가 존재하며, 아래의 가상의 텍스트 파일을 예시로 든다:
 
 ```
-<Sample.txt>
+<filename.txt>
 첫 번째 줄은 여기에.
 두 번째 줄은 저기에.
 마지막 줄은 어딘가에.
 ```
 
-덮어쓰기(overwrite) 모드 `w`는 기존의 모든 내용들을 삭제하여 처음부터 새로 작성한다.
+1. 덮어쓰기(overwrite) 모드 `w`는 기존의 모든 내용들을 삭제하여 처음부터 새로 작성한다.
+    
+    ```python
+    with open("path\\filename.txt", "w") as file:
+        file.write("텍스트 덮어쓰기!")
+    ```
+    
+    ```
+    <filename.txt>
+    텍스트 덮어쓰기!
+    ```
 
-```python
-with open("경로\\파일이름.txt", "w") as file:
-    file.write("텍스트 덮어쓰기!")
-```
+2. 덧붙여 쓰기(append) 모드 `a`는 기존의 모든 내용들을 유지한 채 맨 끝 단락에서부터 작성한다.
 
-```
-<파일이름.txt>
-텍스트 덮어쓰기!
-```
+    ```python
+    with open("path\\filename.txt", "a") as file:
+        file.write("텍스트 덧붙여 쓰기!")
+    ```
+    
+    ```
+    <filename.txt>
+    첫 번째 줄은 여기에.
+    두 번째 줄은 저기에.
+    마지막 줄은 어딘가에.텍스트 덧붙여 쓰기!
+    ```
 
-덧붙여 쓰기(append) 모드 `a`는 기존의 모든 내용들을 유지한 채 맨 끝 단락에서부터 작성한다.
-
-```python
-with open("경로\\파일이름.txt", "a") as file:
-    file.write("텍스트 덧붙여 쓰기!")
-```
-
-```
-<파일이름.txt>
-첫 번째 줄은 여기에.
-두 번째 줄은 저기에.
-마지막 줄은 어딘가에.텍스트 덧붙여 쓰기!
-```
-
-성공적으로 쓰기를 완료하였을 시, `write()` 메소드는 작성된 내용의 바이트 수를 반환한다.
+성공적으로 파일 작성을 완료하였으면 `write()` 메소드는 작성된 내용의 바이트 개수를 반환한다.
 
 ### 파일 생성
-`write()` 메소드는 기존의 파일을 작성하는 것 이외에도 새로운 파일을 생성하기 위해 쓰인다. 만일 존재하지 않는 파일 이름으로 내용을 작성하면 해당 이름을 가진 새로운 파일이 생성된다. 
+파이썬 파일의 `write()` 메소드는 기존 파일을 작성할 뿐만 아니라, 해당하는 이름의 파일을 찾을 수가 없다면 새로운 파일을 생성한다.
 
 ```python
-with open("경로\\NEW-파일이름.txt", "w") as file:
+with open("path\\NEW_filename.txt", "w") as file:
     file.write("새 파일 생성!")
 ```
 
 ```
-<NEW-파일이름.txt>
+<NEW_filename.txt>
 새 파일 생성!
 ```
 
