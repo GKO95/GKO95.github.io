@@ -68,6 +68,11 @@
         }
         padding: 0.4em;
     }
+    ol, ul {
+        img {
+            margin-left: -2em;
+        }
+    }
 }
 
 #docs-mask {
