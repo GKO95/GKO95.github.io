@@ -140,14 +140,85 @@ Internet Layer의 패킷을 열어 (사용된 프로토콜에 따라) 세그먼�
     
     송신 측은 응답이 온 `Acknowledgment #`들을 종합하여 세그먼트가 수신 측에 모두 도달하였는지 알 수 있다. 만일 다 도달했으면 TCP Handshake와 동일한 절차이나 `SYN` 대신 `FIN` 플래그를 세워서 진행한다.
 
-- 
-    
-    
+- Pipelining은 여러 메시지(ex. 세그먼트)를 한 번에 송신하여 대역을 최대한으로 활용하는 개념이다. 여기서 한 번에 송신될 메시지 개수를 결정하는 게 세그먼트 헤더에 있는 Window size이다. 만일 5라면 5개의 세그먼트가 한 번에 송신된다. 그러면 송신된 5개의 세그먼트에 대한 `ACK`를 받지 않는 이상 다음 5개의 세그먼트를 송신하지 않는다. 충분한 시간이 지났는데 세그먼트에 대한 `ACK`를 수신받지 않았으면 해당 세그먼트를 다시 한 번 송신하여 빠뜨린 세그먼트가 없도록 한다. 만일 이미 수신받은 세그먼트 `ACK`라면 무시된다.
+
+- Flow Control 기능: 세그먼트 수신 측은 헤더에 있는 Window size로부터 얼만큼을 받을 수 있는지 알린다. Flow Control은 이를 기반으로 세그먼트 송신 측은 window size를 조정한다.
+
+- Congestion avoidance: flow control이 송신 측의 window size를 조정하지만 traffic이 얼만큼 빠쁜지는 알 수 없다. 알고리즘으로 `ACK`를 받는데 걸리는 시간을 구하여 traffic congestion 정도를 어림잡아 세그먼트 송신을 그에 따라 조정한다.
 
 ## Application Layer
 최상층에서는 세그먼트 혹은 데이터그램을 열어 메시지 (일명 데이터)를 읽는다. 메시지 안에는 해당 포트에서 동작하는 어플리케이션 프로세스가 무엇이며 사용된 프로토콜이 무엇이냐에 따라 다양한 내용이 들어있을 수 있다. 프로세스는 전용으로 할당된 포트가 있기 때문에, 포트 간 연결에 대한 정보가 위주이다.
 
-메시지 내용으로써는 HTTP 요청 및 응답, DNS 탐색 및 응답, SMTP 메시지 혹은 TLS 기록일 수 있다.
+메시지 내용으로써는 HTTP 요청 및 응답, DNS 탐색 및 응답, SMTP 메시지 혹은 TLS record일 수 있다.
+
+### DNS 메시지
+인터넷에서의 모든 통신은 목적지 IP 주소가 반드시 필요하다: 브라우저가 특정 도메인 이름의 IP 주소를 찾는 "DNS 탐색 과정"도 마찬가지이다.
+
+헤더에는 두 boolean이 있다.
+
+- `QR`: on = 응답, off = 탐색
+- `AA`: on = Authorative 응답, off = non-Authorative 응답 or 탐색
+- `Response Code`: 응답 상태
+
+payload 안에는 (1) 탐색하려는 실제 도메인 이름 및 (2) 탐색 record 종류가 들어있다.
+* `A`: IPv4를 사용하는 호스트네임
+* `AAAA`: IPv6를 사용하는 호스트네임
+* `CNAME`: cononical name record 혹은 호스트네임 alias
+* `MX`: mail exchanger record
+* `NS`: name server record
+
+응답에 대한 payload는 응답 크기와 응답 데이터 (말하자면 IP 주소)를 담는다.
+
+DNS 크기가 작고 속도가 우선이므로 일반적으로 UDP로 통신된다.
+
+### HTTP 요청 메시지
+헤더는 다음과 같이 구성된다.
+
+* Request Line (필수)
+    : HTTP 메소드(`GET`, `POST`, `PUT`/`PATCH`, `DELETE` 등), `GET` 일 경우 full URL 경로, HTTP 버전
+
+* Headers (선택)
+    : Key-value 쌍, 언어, 쿠키 등
+
+TCP에서 이루어짐
+
+### HTTP 응답 메시지
+헤더는 다음과 같이 구성된다.
+
+* Status Line (필수)
+    : HTTP 버전, 상태 코드, 상태 텍스트; 띄어쓰기로 나뉘어진다.
+
+* Headers (선택)
+    : key-value 쌍, 쿠키 등
+
+TCP에서 이루어짐
+
+### TLS record 메시지
+Transport Layer Security. Transport와 Application 계층 사이에 있는 또 하나의 계층으로 동작하는 메시지이다.
+
+HTTP 메시지를 encrypt하여 HTTPS를 생성한다 (일명 HTTP/TLS).
+
+헤더는 다음 정보를 갖는다.
+
+* payload의 content type
+* TLS 버전
+* 크기
+
+Payload 안의 내용은 순차적으로...
+1. TLS handshake (TCP handshake 종료 후, 즉 `FIN | ACK` 세그먼트 이후 곧바로 진행)
+2. ChangeCiperSpec
+
+    Step 1. 클라이언트가
+
+3. Alert
+4. Application Data
+
+푸터
+* Message Authentication Code
+    : data tampering(비인가된 채널에서 데이터를 망가뜨리는 행위)을 위한 checksum,
+
+TCP에서만 동작한다.
+(DTLS라는 UDP 버전의 TCP가 따로 있다.)
 
 ## HTTP
 
