@@ -4,7 +4,7 @@ language: ko
 category: 운영체제
 title: 네트워크
 meta: Network
-order: null
+order: 0x42
 ---
 # 네트워크: 기초
 
@@ -66,22 +66,22 @@ order: null
 > 본문은 가정용 공유기의 영문을 "residential gateway"라고 표기하였다; 일부 가정용 공유기는 모뎀을 거치지 않고 직접 WAN에 연결하여 인터넷에 접속할 수 있기 때문이다.
 
 # 네트워크: TCP/IP
-[인터넷 프로토콜 스위트](https://ko.wikipedia.org/wiki/인터넷_프로토콜_스위트)(Internet protocol suite), 일명 TCP/IP
+[인터넷 프로토콜 스위트](https://ko.wikipedia.org/wiki/인터넷_프로토콜_스위트)(Internet protocol suite), 일명 TCP/IP는 인터넷 및 유사 컴퓨터 네트워크에서 사용하는 통신 프로토콜이며, *전송 제어 프로토콜(TCP)* 및 *인터넷 프로토콜(IP)*의 조합을 가리킨다. TCP/IP 개발은 미국 국방부에서 투자한 "전송 제어 프로그램(Transmission Control Program)"로부터 시작되었으며, 초창기에는 [연결지향형](https://en.wikipedia.org/wiki/Connection-oriented_communication)(connection-oriented) 데이터그램 프로토콜 구현을 목표로 하였다.
 
-## IP
-Internet Protocol은 네트워크 상에서 datagram을 전달하기 위한 인터넷 프로토콜 suite의 네트워크 계층 통신 프로토콜이다.
+> 결론부터 말하자면, [비연결형](https://en.wikipedia.org/wiki/Connectionless_communication)(connectionless) 성질을 갖는 데이터그램을 연결지향형으로 만드는 자체가 난해한 과제였다. 결국 전송 제어 프로그램은 두 개의 프로토콜로 나뉘어지는데, 바로 연결지향형의 TCP와 비연결형 IP이다.
 
-> datagram은 패킷 교환 네트워크에서 가장 기본적인 전송 단위이다. 헤더와 payload로 구성된다.
+## 인터넷 프로토콜
+[인터넷 프로토콜](https://ko.wikipedia.org/wiki/인터넷_프로토콜)(Internet Protocol; IP)는 전송 제어 프로그램의 본래 프로토콜로 데이터그램의 인터네트워크 통신을 가능케 하는 프로토콜이다. IP는 주소 하나만으로 패킷을 목적지까지 도달하기 위한 패킷 구조를 정의한다. 일반적으로 패킷은 출발지 및 목적지 정보 등이 담겨있는 헤더(header), 그리고 데이터 혹은 상위 계층의 프로토콜을 캡슐화한 [페이로드](https://ko.wikipedia.org/wiki/페이로드_(컴퓨팅))(payload)로 구성된다. 특히 캡슐화(encapsulation)는 국지적으로 사용되는 로컬 네트워크 프로토콜을 공통 인터네트워크 프로토콜에 숨기므로써 네트워크 장벽 너머 전송될 수 있도록 한다. 
 
-### 패킷 교환
-[패킷 교환](https://ko.wikipedia.org/wiki/패킷_교환)(packet switching)은 디지털 네트워크에 전송될 패킷으로 데이터를 그룹화시키는 방법이다. 패킷은 header와 payload로 구성된다. Header에 있는 데이터는 네트워크 하드웨어에서 패킷을 목적지로 도달할 수 있게 안내하는데 사용된다. 그리고 패킷에서 추출된 payload는 운영체제, 어플리케이션 등에서 사용된다.
+![IP의 네트워크 계층 패킷 구조<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:UDP_encapsulation.svg">위키미디어</a></i></sub>](/images/docs/network/network_udp_encapsulation.svg)
 
-### MAC
-MAC(medium access control; 매체 접근 제어)은 유선, 무선, 혹은 광학 매질(transmission medium)과 상호작용을 담당하는 하드웨어를 제어하는 하위계층이다. 대표적인 하드웨어가 바로 Network Interface Controller(NIC)로, 네트워크 노드를 설명할 때 이들은 각자 주소를 갖는다고 하였는데 그것이 바로 MAC address이다. 이들은 장치 제조사로부터 부여받은 고유 주소로(그래서 일명 burned-in address, hardware address 혹은 physical address라고도 부름) 총 여섯 개의 바이트로 표현된다. 최근은 MAC address 수정을 지원하는 편이다. 동일한 네트워크에서는 MAC address는 고유해야 하지만, 서로 다른 네트워크에서는 같은 MAC address를 가질 수 있다.
+> 가장 처음으로 배포된 인터넷 프로토콜 버전이 4번째이므로 IPv4라고 부른다. 이전 버전들은 실험용에 그친다.
 
+IP는 비연결형(connectionless) 통신 성질을 갖는다: 확고한 통신 연결보다 빠른 속도로 데이터를 전송하는 것을 우선으로 여긴다.
 
+### 링크 계층
+링크 계층(link layer)
 
-## Link Layer
 Link는 두 장치의 연결을 가리킨다.
 
 Link Layer는 송신 장치 및 수신 장치 정보(MAC 주소), 그리고 SDU(여기서는 Internet Layer의 PDU인 패킷)를 갖는다. 즉, 노드 간 연결에 대한 정보가 위주이다.
@@ -91,7 +91,9 @@ Link Layer는 송신 장치 및 수신 장치 정보(MAC 주소), 그리고 SDU(
 - 프레임 헤더는 출발 및 도착 MAC 주소, payload 길이에 대한 정보를 갖는다.
 - 프레임 푸터는 [Frame check sequence](https://en.wikipedia.org/wiki/Frame_check_sequence)(FCS)가 있어 데이터 손실이나 간섭으로 인한 손상을 checksum으로 검사한다. 프레임을 수신받은 NIC에서 계산한 checksum이 FCS와 일치하지 않으면 손상된 것으로 간주하여 버려진다.
 
-## Internet Layer
+### 인터넷 계층
+인터넷 계층(internet layer)
+
 가장 활발한 계층; 라우터로 네트워크 간 이동이 발생하기 때문
 
 주 프로토콜은 IPv4 (4바이트, 즉 32비트) 및 IPv6(16=4^2바이트, 즉 128비트). 이전에는 IPv4가 할당할 수 있는 주소 개수로는 충분하였지만, 현재는 인터넷 장치 개수가 많아지며 더 많은 주소를 할당할 수 있는 IPv6 지원되는 라우터로 전환하고 있다.
@@ -105,8 +107,10 @@ Link Layer는 송신 장치 및 수신 장치 정보(MAC 주소), 그리고 SDU(
 
 > 하나의 네트워크 세그먼트에서 다음으로 넘어가는 것; 간단히 라우터를 통과한 횟수라고 볼 수 있다. 출발지를 0으로 보면 0-origin 홉 카운트, 1로 보면 1-origin 홉 카운트라 부른다.
 
+### 전송 계층
+전송 계층(transport layer)
 
-## Transport Layer
+
 (서버나 클라이언트 불문하고) 실제 호스트 장치에서 동작을 하는 계층.
 
 Internet Layer의 패킷을 열어 (사용된 프로토콜에 따라) 세그먼트 혹은 데이터그램을 읽는다.
@@ -123,11 +127,20 @@ Internet Layer의 패킷을 열어 (사용된 프로토콜에 따라) 세그먼�
 
 수신받은 세그먼트나 데이터그램을 올바른 포트로 전송하는 절차를 역다중화(demultiplexing)이라 부른다. 반대로 모든 포트로부터 세그먼트 및 데이터그램을 거두어 하나로 만드는 것을 다중화(multiplexing)이라고 한다.
 
-### UDP 프로토콜
+#### UDP 프로토콜
 데이터그램은 출발 및 도착 포트, 데이터그램 길이, 그리고 오류 검증용 checksum이 전부이다. 이는 TCP에도 있는 정보들이다.
 
-### TCP 프로토콜
-연결 중심의 TCP 프로토콜은 데이터 교환이 이루어지기 전에 클라이언트와 서버 간 확고한 연결이 반드시 되어야 한다.
+
+
+### 응용 계층
+응용 계층(application layer)
+
+최상층에서는 세그먼트 혹은 데이터그램을 열어 메시지 (일명 데이터)를 읽는다. 메시지 안에는 해당 포트에서 동작하는 어플리케이션 프로세스가 무엇이며 사용된 프로토콜이 무엇이냐에 따라 다양한 내용이 들어있을 수 있다. 프로세스는 전용으로 할당된 포트가 있기 때문에, 포트 간 연결에 대한 정보가 위주이다.
+
+메시지 내용으로써는 HTTP 요청 및 응답, DNS 탐색 및 응답, SMTP 메시지 혹은 TLS record일 수 있다.
+
+## 전송 제어 프로토콜
+[전송 제어 프로토콜](https://ko.wikipedia.org/wiki/전송_제어_프로토콜)(Transmission Control Protocol; TCP)는 초창기 IP를 보완하여 안정적인 통신 연결을 보장하는 연결지향형(connection-oriented)을 지원한다. 데이터 교환이 이루어지기 전에 우선적으로 서버와 클라이언트 사이에 확고한 연결이 수립되어야 한다.
 
 - 세그먼트 헤더 안에는 플래그가 TCP Handshake하여 초기 연결을 설립한다. TCP Handshake는 1.5 RTT를 거쳐 세 단계 절차를 통해 이루어진다.
     1. 클라이언트가 payload가 없는 bodyless `SYN` 플래그의 세그먼트를 송신한다.
@@ -146,12 +159,7 @@ Internet Layer의 패킷을 열어 (사용된 프로토콜에 따라) 세그먼�
 
 - Congestion avoidance: flow control이 송신 측의 window size를 조정하지만 traffic이 얼만큼 빠쁜지는 알 수 없다. 알고리즘으로 `ACK`를 받는데 걸리는 시간을 구하여 traffic congestion 정도를 어림잡아 세그먼트 송신을 그에 따라 조정한다.
 
-## Application Layer
-최상층에서는 세그먼트 혹은 데이터그램을 열어 메시지 (일명 데이터)를 읽는다. 메시지 안에는 해당 포트에서 동작하는 어플리케이션 프로세스가 무엇이며 사용된 프로토콜이 무엇이냐에 따라 다양한 내용이 들어있을 수 있다. 프로세스는 전용으로 할당된 포트가 있기 때문에, 포트 간 연결에 대한 정보가 위주이다.
-
-메시지 내용으로써는 HTTP 요청 및 응답, DNS 탐색 및 응답, SMTP 메시지 혹은 TLS record일 수 있다.
-
-### DNS 메시지
+#### DNS 메시지
 인터넷에서의 모든 통신은 목적지 IP 주소가 반드시 필요하다: 브라우저가 특정 도메인 이름의 IP 주소를 찾는 "DNS 탐색 과정"도 마찬가지이다.
 
 헤더에는 두 boolean이 있다.
@@ -171,7 +179,7 @@ payload 안에는 (1) 탐색하려는 실제 도메인 이름 및 (2) 탐색 rec
 
 DNS 크기가 작고 속도가 우선이므로 일반적으로 UDP로 통신된다.
 
-### HTTP 요청 메시지
+#### HTTP 요청 메시지
 헤더는 다음과 같이 구성된다.
 
 * Request Line (필수)
@@ -182,7 +190,7 @@ DNS 크기가 작고 속도가 우선이므로 일반적으로 UDP로 통신된�
 
 TCP에서 이루어짐
 
-### HTTP 응답 메시지
+#### HTTP 응답 메시지
 헤더는 다음과 같이 구성된다.
 
 * Status Line (필수)
@@ -193,7 +201,7 @@ TCP에서 이루어짐
 
 TCP에서 이루어짐
 
-### TLS record 메시지
+#### TLS record 메시지
 Transport Layer Security. Transport와 Application 계층 사이에 있는 또 하나의 계층으로 동작하는 메시지이다.
 
 HTTP 메시지를 encrypt하여 HTTPS를 생성한다 (일명 HTTP/TLS).
@@ -204,13 +212,18 @@ HTTP 메시지를 encrypt하여 HTTPS를 생성한다 (일명 HTTP/TLS).
 * TLS 버전
 * 크기
 
-Payload 안의 내용은 순차적으로...
+Payload 안의 내용에는 다음이 들어갈 수 있다.
 1. TLS handshake (TCP handshake 종료 후, 즉 `FIN | ACK` 세그먼트 이후 곧바로 진행)
 2. ChangeCiperSpec
 
-    Step 1. 클라이언트가
+    Step 1. 클라이언트 → 서버: 자신에게 지원되는 ciper 목록 및 최상위 TLS 버전 알림
+    Step 2. 서버 → 클라이언트: 서버는 사용할 ciper 및 TLS 버전 선택 + public key 제공
+    Step 3. 클라이언트 → 서버: 통신에 사용할 symmetric key를 생성할 pre-master key를 주어진 public key로 암호화하여 전송 + 이제부터 symmetric key로 암호화할거임
+    Step 4. 서버 → 클라이언트: pre-master key를 해독할 (public key의 쌍인) private key로 해독 + 나도 이제부터 symmetric key로 암호화할거임
 
 3. Alert
+    : 위의 handshake 및 ChangeCiperSpce 과정에서 문제가 발생하면 alert 종류의 내용물을 전송
+
 4. Application Data
 
 푸터
@@ -220,7 +233,11 @@ Payload 안의 내용은 순차적으로...
 TCP에서만 동작한다.
 (DTLS라는 UDP 버전의 TCP가 따로 있다.)
 
-## HTTP
+## 패킷 교환
+[패킷 교환](https://ko.wikipedia.org/wiki/패킷_교환)(packet switching)은 디지털 네트워크에 전송될 패킷으로 데이터를 그룹화시키는 방법이다. 패킷은 header와 payload로 구성된다. Header에 있는 데이터는 네트워크 하드웨어에서 패킷을 목적지로 도달할 수 있게 안내하는데 사용된다. 그리고 패킷에서 추출된 payload는 운영체제, 어플리케이션 등에서 사용된다.
+
+## MAC
+MAC(medium access control; 매체 접근 제어)은 유선, 무선, 혹은 광학 매질(transmission medium)과 상호작용을 담당하는 하드웨어를 제어하는 하위계층이다. 대표적인 하드웨어가 바로 Network Interface Controller(NIC)로, 네트워크 노드를 설명할 때 이들은 각자 주소를 갖는다고 하였는데 그것이 바로 MAC address이다. 이들은 장치 제조사로부터 부여받은 고유 주소로(그래서 일명 burned-in address, hardware address 혹은 physical address라고도 부름) 총 여섯 개의 바이트로 표현된다. 최근은 MAC address 수정을 지원하는 편이다. 동일한 네트워크에서는 MAC address는 고유해야 하지만, 서로 다른 네트워크에서는 같은 MAC address를 가질 수 있다.
 
 
 # 네트워크: OSI
