@@ -253,7 +253,7 @@ CONSTANT_VARIABLE = "Hello World!"
 ```
 
 ## 자료형
-자료형(data type)은 데이터의 내용물이 어떻게 표현되는지 결정하는 요소이며, 파이썬에서는 자료형이 크게 세 유형으로 나뉘어진다:
+[자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터의 내용물이 어떻게 표현되는지 결정하는 요소이며, 파이썬에서는 자료형이 크게 세 유형으로 나뉘어진다:
 
 ### 숫자 자료형
 [숫자 자료형](https://docs.python.org/3/library/stdtypes.html?#numeric-types-int-float-complex)(numeric data type)은 숫자로 표현되는 데이터들을 가리키며, 총 세 가지로 세분화된다.
@@ -492,7 +492,7 @@ print("끝!")
 ```
 
 ## `if` 조건문
-`if` 조건문은 조건 혹은 논리값이 참(`True`)일 경우 코드를 실행하며, 거짓(`False`)일 경우에는 코드를 실행하지 않는다.
+`if` 조건문은 조건 혹은 논리가 참(`True`)일 경우 코드를 실행하며, 거짓(`False`)일 경우에는 코드를 실행하지 않는다.
 
 ```python
 if condition:
@@ -510,18 +510,6 @@ if condition:
     ...
 else:
     ...
-```
-
-`if` 조건문과 `else` 조건문을 다음과 같이 조건을 연쇄적으로 연결하여 사용할 수 있다.
-
-```python
-if condition: 
-    ...
-else:
-    if condition:
-        ...
-    else:
-        ...
 ```
 
 ### `elif` 조건문
@@ -546,7 +534,7 @@ True_return if condition else False_return
 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
 
 ## `while` 반복문
-`while` 반복문은 조건 혹은 논리값이 참(`True`)일 동안 코드를 반복적으로 실행하며, 거짓(`False`)일 경우에는 반복문을 종료한다.
+`while` 반복문은 조건 혹은 논리가 참(`True`)일 동안 코드를 반복적으로 실행하며, 거짓(`False`)일 경우에는 반복문을 종료한다.
 
 ```python
 while condition:
@@ -577,7 +565,6 @@ while index < 10:
 else:
     print("두 번째 반복문...완료!")
 ```
-
 ```
 첫 번째 반복문...완료!
 ```
@@ -590,7 +577,6 @@ else:
 
 ## `for` 반복문
 `for` 반복문은 유효한 범위 내에서 코드를 반복적으로 실행하고, 범위의 모든 값이 반복되면 종료한다.
-
 
 ```python
 for index in iterable:
@@ -610,7 +596,6 @@ for index in iterable: statement
 for index in range(3):
     print("Hello World" , index)
 ```
-
 ```
 Hello World 0
 Hello World 1
@@ -634,7 +619,6 @@ for index in range(10):
 else:
     print("두 번째 반복문...완료!")
 ```
-
 ```
 첫 번째 반복문...완료!
 ```
@@ -655,7 +639,6 @@ else:
 variable = "Hello World!" 
 print(variable[1])
 ```
-
 ```
 e
 ```
@@ -732,7 +715,6 @@ lst[3] = value5        # IndexError: list assignment index out of range
 lst = [var**2 for variable in range(5)]
 lst = [var**2 for variable in range(5) if (variable ** 2) % 2 == 0]
 ```
-
 ```
 [0, 1, 4, 9, 16]
 [0, 4, 16]
@@ -819,7 +801,6 @@ print(tpl[0])        # >> 출력: value1
 tpl = (value1, value2, value3)
 tpl[1] = value4
 ```
-
 ```
 TypeError: 'tpl' object does not support item assignment
 ```
@@ -854,7 +835,6 @@ print(dictionary[key4])        # KeyError: key4
 ```python
 dictionary = {lst1: value1, key2: value2}
 ```
-
 ```
 TypeError: unhashable type: 'list'
 ```
@@ -866,7 +846,6 @@ dictionary = {key1: value1, key2: value2, key3: value3}
 dictionary[key1] = value4
 dictionary[key5] = value5
 ```
-
 ```
 {key1: value1, key2: value2, key3: value3, key5: value5}
 ```
@@ -908,7 +887,6 @@ print(dictionary.get(key3, "딕셔너리 내에 없음"))         # >> 출력: �
 st = {value1, value2, value3}
 print(st)
 ```
-
 ```
 {value1, value2, value3}
 ```
@@ -983,7 +961,6 @@ for variable in generator_function():
 lst = list(generator_function())
 print(lst)
 ```
-
 ```
 0
 1
@@ -994,7 +971,7 @@ print(lst)
 ```
 
 # 파이썬: 함수
-언제든지 재사용이 가능한 함수를 제작하여 프로그램을 코딩하는 기법을 *함수형 프로그래밍(functional programming)*이라고 부른다. 본 장은 파이썬에서 함수형 프로그래밍을 구현하기 위한 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
+원하는 작업을 수행하도록 함수를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있는데, 이러한 프로그래밍 기법을 *함수형 프로그래밍(functional programming)*이라고 한다. 본 장은 파이썬에서 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
 
 ## 함수
 함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
@@ -1004,7 +981,6 @@ variable = [0, 3, 5, 9]
 print(len(variable))
 # "print()" 출력 함수, 그리고 리스트 객체를 인자로 받아 리스트 길이를 반환하는 "len()" 함수
 ```
-
 ```
 4
 ```
@@ -1019,7 +995,6 @@ def function():
 
 function()
 ```
-
 ```
 Hello World!
 ```
@@ -1031,7 +1006,6 @@ function()
 def function(arg1, arg2):
     print("Hello World!")
 ```
-
 ```
 NameError: name 'function' is not defined
 ```
@@ -1060,7 +1034,7 @@ Hello World!
     : *간략하게 "인자"라고도 부르며, 함수로 전달되는 데이터이다.*
 
 * 매개변수 (parameter)
-    : *전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다.*
+    : *전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호(`()`) 내에서 이루어진다.*
 
 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
 
@@ -1097,7 +1071,6 @@ def function(arg1, **kwargs):
     
 function(1, key1 = value1, key2 = value2)
 ```
-
 ```
 {key1∶ value1, key2∶ value2}
 ```
@@ -1112,14 +1085,13 @@ def function(arg1, arg2 = "Hello"):
 function(1)
 function(2, "World!")
 ```
-
 ```
 Hello
 World!
 ```
 
 ### 지역 변수 및 전역 변수
-[*파이썬: 기초 § 변수*](#변수)에서 변수는 데이터를 저장하는 공간이라고 설명하였다. 하지만 변수가 파이썬 코드 중에서 어디에 정의되었는지에 따라 두 가지의 종류로 구분할 수 있다.
+[*파이썬: 기초 § 변수*](#변수)에서 변수는 데이터를 저장하는 공간이라고 설명하였다. 하지만 변수가 파이썬 코드 중에서 어디에 정의되었는지에 따라 두 가지의 종류로 구분된다.
 
 * 지역 변수(local variable)
     : *함수(function)나 [클래스](#파이썬-클래스)(class) 혹은 [모듈](#파이썬-패키지)(module) 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 해당 함수, 클래스, 혹은 모듈 외부에서는 소멸되어 사용할 수 없다. 어차피 소멸될 변수이므로 지역 변수는 외부에서 정의된 전역 변수와 같은 이름을 가질 수 있다.*
@@ -1211,7 +1183,6 @@ variable2 = map(lambda arg2, arg1: arg1 ** 2 + arg2, lst2, lst1)
 print(list(variable1))
 print(list(variable2))
 ```
-
 ```
 [1, 13, 17, 23, 31]
 [1, 83, 67, 53, 41]
@@ -1234,7 +1205,6 @@ variable = filter(lambda arg: arg % 2 is 0, lst)
 
 print(list(variable))
 ```
-
 ```
 [2, 4]
 ```
@@ -1324,7 +1294,6 @@ def function(arg1, arg2):
 variable = lambda arg1, arg2: 2 * arg1 + arg2
 variable(2,3)
 ```
-
 ```
 7
 ```
@@ -1791,7 +1760,7 @@ PEP8이란, 여덟 가지의 파이썬 개선 제안(Python Enhancement Proposal
 8. 한 줄에는 하나의 문만 있어야 한다.
 
 ## 시작점
-시작점(entry point)는 프로그램이 시작되는 부분을 의미하며, C/C++ 프로그래밍 언어의 경우 `main()` 함수에서부터 코드가 실행된다. 그러나 파이썬에는 시작점이 존재하지 않는다. 하지만 현재 어느 스크립트를 중심으로 실행되는지 판별하는 코드가 있으며 `__name__` 매직 메소드가 `"__main__"`과 일치 여부를 확인한다.
+시작점(entry point)는 프로그램이 시작되는 부분을 의미하며, C/C++ 프로그래밍 언어의 경우 `main()` 함수에서부터 코드가 실행된다. 파이썬에는 시작점이 존재하지 않는다. 하지만 현재 어느 스크립트를 중심으로 실행되는지 판별하는 코드가 있으며 `__name__` 매직 메소드가 `"__main__"`과 일치 여부를 확인한다.
 
 ```python
 # 시작점
