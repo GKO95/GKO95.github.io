@@ -565,7 +565,6 @@ while index < 10:
 else:
     print("두 번째 반복문...완료!")
 ```
-
 ```
 첫 번째 반복문...완료!
 ```
@@ -597,7 +596,6 @@ for index in iterable: statement
 for index in range(3):
     print("Hello World" , index)
 ```
-
 ```
 Hello World 0
 Hello World 1
@@ -621,7 +619,6 @@ for index in range(10):
 else:
     print("두 번째 반복문...완료!")
 ```
-
 ```
 첫 번째 반복문...완료!
 ```
@@ -642,7 +639,6 @@ else:
 variable = "Hello World!" 
 print(variable[1])
 ```
-
 ```
 e
 ```
@@ -719,7 +715,6 @@ lst[3] = value5        # IndexError: list assignment index out of range
 lst = [var**2 for variable in range(5)]
 lst = [var**2 for variable in range(5) if (variable ** 2) % 2 == 0]
 ```
-
 ```
 [0, 1, 4, 9, 16]
 [0, 4, 16]
@@ -806,7 +801,6 @@ print(tpl[0])        # >> 출력: value1
 tpl = (value1, value2, value3)
 tpl[1] = value4
 ```
-
 ```
 TypeError: 'tpl' object does not support item assignment
 ```
@@ -841,7 +835,6 @@ print(dictionary[key4])        # KeyError: key4
 ```python
 dictionary = {lst1: value1, key2: value2}
 ```
-
 ```
 TypeError: unhashable type: 'list'
 ```
@@ -853,7 +846,6 @@ dictionary = {key1: value1, key2: value2, key3: value3}
 dictionary[key1] = value4
 dictionary[key5] = value5
 ```
-
 ```
 {key1: value1, key2: value2, key3: value3, key5: value5}
 ```
@@ -895,7 +887,6 @@ print(dictionary.get(key3, "딕셔너리 내에 없음"))         # >> 출력: �
 st = {value1, value2, value3}
 print(st)
 ```
-
 ```
 {value1, value2, value3}
 ```
@@ -970,7 +961,6 @@ for variable in generator_function():
 lst = list(generator_function())
 print(lst)
 ```
-
 ```
 0
 1
@@ -991,7 +981,6 @@ variable = [0, 3, 5, 9]
 print(len(variable))
 # "print()" 출력 함수, 그리고 리스트 객체를 인자로 받아 리스트 길이를 반환하는 "len()" 함수
 ```
-
 ```
 4
 ```
@@ -1006,7 +995,6 @@ def function():
 
 function()
 ```
-
 ```
 Hello World!
 ```
@@ -1018,7 +1006,6 @@ function()
 def function(arg1, arg2):
     print("Hello World!")
 ```
-
 ```
 NameError: name 'function' is not defined
 ```
@@ -1047,7 +1034,7 @@ Hello World!
     : *간략하게 "인자"라고도 부르며, 함수로 전달되는 데이터이다.*
 
 * 매개변수 (parameter)
-    : *전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다.*
+    : *전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호(`()`) 내에서 이루어진다.*
 
 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
 
@@ -1084,7 +1071,6 @@ def function(arg1, **kwargs):
     
 function(1, key1 = value1, key2 = value2)
 ```
-
 ```
 {key1∶ value1, key2∶ value2}
 ```
@@ -1099,7 +1085,6 @@ def function(arg1, arg2 = "Hello"):
 function(1)
 function(2, "World!")
 ```
-
 ```
 Hello
 World!
@@ -1198,7 +1183,6 @@ variable2 = map(lambda arg2, arg1: arg1 ** 2 + arg2, lst2, lst1)
 print(list(variable1))
 print(list(variable2))
 ```
-
 ```
 [1, 13, 17, 23, 31]
 [1, 83, 67, 53, 41]
@@ -1221,7 +1205,6 @@ variable = filter(lambda arg: arg % 2 is 0, lst)
 
 print(list(variable))
 ```
-
 ```
 [2, 4]
 ```
@@ -1311,7 +1294,6 @@ def function(arg1, arg2):
 variable = lambda arg1, arg2: 2 * arg1 + arg2
 variable(2,3)
 ```
-
 ```
 7
 ```
