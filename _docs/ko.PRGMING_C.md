@@ -1136,7 +1136,7 @@ for (int index = 0; index < sizeof(variable); index++)
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
 # C: 사용자 정의 자료형
-C 언어에서 흔히 사용되는 `int`, `float`, `char` 등과 같은 데이터 자료형은 이미 `stdio.h` 헤더 파일에 정의되어 있다. 이러한 내부 자료형을 기반으로 목적에 알맞은 사용자 정의 자료형을 새롭게 지정할 수 있으며, 본 장은 일반 자료형보다 더 많은 자료를 복합적으로 저장할 수 있는 사용자 정의 자료형의 정의 및 활용법을 설명한다.
+C 프로그래밍 언어에서 흔히 사용되는 `int`, `float`, `char` 등과 같은 데이터 자료형은 이미 `stdio.h` 헤더 파일에 정의되어 있다. 이러한 내부 자료형을 기반으로 목적에 알맞은 사용자 정의 자료형을 새롭게 지정할 수 있으며, 본 장은 일반 자료형보다 더 많은 자료를 복합적으로 저장할 수 있는 사용자 정의 자료형의 정의 및 활용법을 설명한다.
 
 ## 구조체
 구조체(structure)는 자료형과 상관없이 여러 내부 변수(일명 맴버; member)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 구조체의 정의는 `struct` 키워드를 통해 이루어진다.
@@ -1612,6 +1612,116 @@ FILE* fptr = fopen("path\\new_file.txt", "w");
 fgets("Hello World!\n", fptr);
 ```
 
+# C: 전처리기
+C 프로그래밍 언어가 컴파일되기 전에 전처리기에서 `#include`와 같은 전처리기 지시문을 우선적으로 처리한다. 전처리기 지시문은 C 프로그래밍 언어 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
+
+## 매크로 정의
+매크로(macro)란 식별자가 있는 코드 조각이다. 코드 조각은 숫자나 문자와 같은 간단한 데이터가 될 수 있으며, 전달인자를 받는 표현식이나 문장이 될 수도 있다. 전자와 후자는 각각 "객체형식(object-like)" 그리고 "함수형식(function-like)" 매크로라고 부른다. 한 번 정의된 매크로는 프로그램을 실행하면 변경할 수 없다. 정의된 매크로는 마치 전역 변수인 마냥 헤더 파일에서 `#include`와 같은 포함 지시문을 통해 다른 스크립트에서도 사용할 수 있다.
+
+컴파일러 자체에 이미 내장되어 있는 매크로가 있으며, 공통된 표준 매크로 및 특정 컴파일러 전용 매크로가 들어있다. 아래는 Visual C++, GCC, 그리고 그 외의 컴파일러가 가지는 내장 매크로 목록을 보여주는 문서이다(영문).
+
+* Visual C++: [Microsoft Docs - 미리 정의된 매크로](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
+* GCC: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
+* 그 외: [SourceForge Wiki](https://sourceforge.net/p/predef/wiki/Compilers/)
+
+### `#define` 지시문
+`#define` 지시문은 새로운 매크로를 생성한다.
+
+```c
+#define SOMETHING       value                // 객체형식 매크로
+#define ANYTHING(x, y)  (x * SOMETHING - y)  // 함수형식 매크로
+```
+
+### `#undef` 지시문
+`#undef` 지시문은 매크로 정의를 제거한다.
+
+```c
+#undef SOMETHING        // 객체형식 매크로
+#undef ANYTHING         // 함수형식 매크로
+```
+
+### 쉼표 연산자
+쉼표 연산자(comma operator)는 앞에 있는 표현식을 평가하되 반환되지 않고, 뒤에 있는 표현식이 평가되어 반환된다. 흔히 매크로 정의를 간결하게 하기 위해 사용된다. 아래의 예시 코드에 의하면 먼저 할당 연산자로 `value1`은 4가 되고, 이후에 증가 연산자에 의해 5가 된다.
+
+```c
+int value1 = 1, value2 = 3;
+int variable = (value1 += value2, ++value1);
+printf("%d", variable);
+```
+```
+5
+```
+
+## 조건 포함문
+조건 포함문(conditional inclusion)은 조건여부에 따라 컴파일 시 특정 범위의 코드를 포함시킬 것인지 배제할 것인지 결정한다. 
+
+```c
+#if    SOMETHING > value
+    statements;
+#elif  SOMETHING < value
+    statements;
+#else
+    statements;
+#endif
+```
+
+비록 조건 포함문이 일반 조건문의 키워드와 유사할지라도 절대 `if` 및 `else` 조건문을 대체하기 위해 사용되지 말아야 한다.
+
+### 매크로 조건
+조건 포함문은 매크로의 정의 여부를 판단할 수 있다.
+
+```c
+// 만일 64비트 ARM 혹은 x64 아키텍쳐로 컴파일 할 경우...
+#ifdef    _WIN64
+    statments;
+#endif
+
+// 만일 64비트 ARM 혹은 x64 아키텍쳐로 컴파일되지 않은 경우...
+#ifndef    _WIN64
+    statements;
+#endif
+```
+
+## Pragma 지시문
+Pragma 지시문(pragma directive)은 컴파일러의 기능과 옵션을 설정하기 위해 사용되는 전처리기 지시문이다. 개발사마다 제작한 컴파일러는 기술적 성능이 각각 다르기 때문에 pragma는 비공통적인 컴파일러 특정 전처리기 지시문이다.
+
+> Pragma란 용어는 pragmatic의 줄임말로, 사전적 의미로는 "실용적인"을 뜻한다. 이는 실질적 컴파일러 동작 및 처리 방식에 관여한 것을 보아 붙여진 용어라고 판단된다.
+
+* Visual C++: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://docs.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
+* GCC: [GCC Online Documentation - Pragmas](https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html)
+
+본 장은 마이크로소프트의 비주얼 스튜디어에서 제공하는 Visual C++ 컴파일러의 pragma 지시문을 위주로 다룬다.
+
+### `#pragma once`
+`#pragma once`는 컴파일 작업 시 `#include` 지시문을 통해 중복 포함된 헤더 파일을 한 번만 포함시키는 pragma 지시문이다.
+
+```c
+#pragma once
+```
+
+결과적으로 하나의 소스 파일에 헤더 파일이 중복적으로 포함이 되는 것을 제한하므로써 정의가 반복되는 현상을 막을 수 있는데, 이러한 기능을 *헤더 중복 방지(include guard)*라고 부른다. 추가적으로 `#pragma once` 지시문을 사용하면 처리하는 헤더 파일 횟수가 줄어들어 컴파일 작업 시간도 함께 줄이게 된다.
+
+아래의 코드는 `#pragma once` 지시문을 사용하지 않고 헤더 중복 방지 기능을 구현하는 방법이다.
+
+```c
+/* 헤더 파일: "header.h" */
+#ifndef HEADER_FILE
+#define HEADER_FILE
+
+#endif    /* HEADER_FILE */
+```
+
+만일 `header.h` 헤더 파일이 아직 처리되지 않았으면 컴파일러는 처음으로 `HEADER_FILE` 매크로를 정의한다. 그러나 헤더 파일을 다시 한 번 마주하였을 시, `HEADER_FILE`이 이미 정의되어 있기에 매크로 조건에 의해 컴파일러는 헤더 파일을 처리하지 않는다.
+
+### `#pragma region`
+컴파일 작업에는 직접적인 영향을 미치지 않으나, `#pragma region` 및 `#pragma endregion` 쌍은 가독성을 위해 비주얼 스튜디오 내에서 지정된 코드 부분을 한 줄로 압축하거나 펼치는 기능을 제공한다.
+
+```c
+#pragma region REGIONNAME
+    statements;
+#pragma endregion
+```
+
 # C: 라이브러리
 본 문서는 `main()` 함수를 가지는 하나의 메인 스크립트만을 사용하여 프로그램을 빌드하였다. 프로젝트 규모가 커지면 두 개 이상의 스크립트를 사용하거나 컴파일된 라이브러리를 불러와 관리하는 방안도 고려해야 한다. 본 장은 프로젝트 내의 스크립트 간 데이터나 함수를 주고받을 수 있도록 구축하는 방법과 이에 대한 설명을 제공한다.
 
@@ -1723,7 +1833,7 @@ A
 `extern` 키워드를 사용하면 변수는 여러 번 선언이 가능하다. `module.c` 소스 파일과 메인 스크립트에서 중복 선언은 컴파일 작업에 아무런 문제를 야기하지 않는다. 허나, 선언된 변수를 사용하기 위해서는 단 한 번의 정의가 반드시 필요하다. 이러한 이유로 `module.c`에 `char variable = 'A';` 정의가 존재하는 것이며, 메인 스크립트에서는 `variable` 전역 변수의 값을 그대로 출력할 수 있게 된다.
 
 ## 라이브러리
-[라이브러리](https://ko.wikipedia.org/wiki/라이브러리_(컴퓨팅))(library)는 함수 기능 및 데이터 호출을 제공하는 이진파일이며 `main()` 시작점을 갖지 않는다. 본 문서도 여태까지 C 언어의 표준 라이브러리인 `libc`(MSVC 컴파일러에서는 `libcmt`)을 `stdio.h` 헤더 파일로 불러와 사용하고 있었다. 마찬가지로 소스 코드를 라이브러리로 만들어 헤더 파일과 함께 배포하면 누군든지 라이브러리의 함수 기능과 데이터를 활용할 수 있다. 또한 이진파일 컴파일되었기 때문에 저장공간 절약과 소스 코드 유출 방지를 함께 꾀할 수 있다.
+[라이브러리](https://ko.wikipedia.org/wiki/라이브러리_(컴퓨팅))(library)는 함수 기능 및 데이터 호출을 제공하는 이진파일이며 `main()` 시작점을 갖지 않는다. 본 문서도 여태까지 C 프로그래밍 언어의 표준 라이브러리인 `libc`(Visual C++ 컴파일러에서는 `libcmt`)을 `stdio.h` 헤더 파일로 불러와 사용하고 있었다. 마찬가지로 소스 코드를 라이브러리로 만들어 헤더 파일과 함께 배포하면 누군든지 라이브러리의 함수 기능과 데이터를 활용할 수 있다. 또한 이진파일 컴파일되었기 때문에 저장공간 절약과 소스 코드 유출 방지를 함께 꾀할 수 있다.
 
 ![비주얼 스튜디오 라이브러리 컴파일 설정](/images/docs/shared/c_cpp_library.png)
 
@@ -1736,113 +1846,3 @@ A
     : *동적 라이브러리(`.DLL` 혹은 `.SO`)는 프로그램에 내포되지 않고 별개의 파일로 존재하기 때문에 프로그램 용량이 작아지고 업데이트가 필요한 라이브러리만 교체하면 되지만, 프로그램의 외부 의존도가 높아져 라이브러리를 찾지 못하면 치명적인 문제를 야기할 수 있다.*
 
 C 프로그래밍 언어에서는 라이브러리 생성이 어렵지 않다; 본 장에서 예시로 들은 `module.c`를 컴파일하는 게 전부이다. 헤더 파일에서 이미 함수에 대한 선언이 모두 되어있기 때문에 컴파일러는 라이브러리 내에 있는 함수들의 존재를 알아차리고 있다. 그리고 프로그램을 컴파일 혹은 실행하면서 라이브러리를 호출하여 원하는 함수를 사용한다.
-
-# C: 전처리기
-C 프로그래밍 언어가 컴파일되기 전에 전처리기에서 `#include`와 같은 전처리기 지시문을 우선적으로 처리한다. 전처리기 지시문은 C 프로그래밍 언어 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
-
-## 매크로 정의
-매크로(macro)란 식별자가 있는 코드 조각이다. 코드 조각은 숫자나 문자와 같은 간단한 데이터가 될 수 있으며, 전달인자를 받는 표현식이나 문장이 될 수도 있다. 전자와 후자는 각각 "객체형식(object-like)" 그리고 "함수형식(function-like)" 매크로라고 부른다. 한 번 정의된 매크로는 프로그램을 실행하면 변경할 수 없다. 정의된 매크로는 마치 전역 변수인 마냥 헤더 파일에서 `#include`와 같은 포함 지시문을 통해 다른 스크립트에서도 사용할 수 있다.
-
-컴파일러 자체에 이미 내장되어 있는 매크로가 있으며, 공통된 표준 매크로 및 특정 컴파일러 전용 매크로가 들어있다. 아래는 Visual C++, GCC, 그리고 그 외의 컴파일러가 가지는 내장 매크로 목록을 보여주는 문서이다(영문).
-
-* Visual C++: [Microsoft Docs - 미리 정의된 매크로](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
-* GCC: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
-* 그 외: [SourceForge Wiki](https://sourceforge.net/p/predef/wiki/Compilers/)
-
-### `#define` 지시문
-`#define` 지시문은 새로운 매크로를 생성한다.
-
-```c
-#define SOMETHING       value                // 객체형식 매크로
-#define ANYTHING(x, y)  (x * SOMETHING - y)  // 함수형식 매크로
-```
-
-### `#undef` 지시문
-`#undef` 지시문은 매크로 정의를 제거한다.
-
-```c
-#undef SOMETHING        // 객체형식 매크로
-#undef ANYTHING         // 함수형식 매크로
-```
-
-### 쉼표 연산자
-쉼표 연산자(comma operator)는 앞에 있는 표현식을 평가하되 반환되지 않고, 뒤에 있는 표현식이 평가되어 반환된다. 흔히 매크로 정의를 간결하게 하기 위해 사용된다. 아래의 예시 코드에 의하면 먼저 할당 연산자로 `value1`은 4가 되고, 이후에 증가 연산자에 의해 5가 된다.
-
-```c
-int value1 = 1, value2 = 3;
-int variable = (value1 += value2, ++value1);
-printf("%d", variable);
-```
-```
-5
-```
-
-## 조건 포함문
-조건 포함문(conditional inclusion)은 조건여부에 따라 컴파일 시 특정 범위의 코드를 포함시킬 것인지 배제할 것인지 결정한다. 
-
-```c
-#if    SOMETHING > value
-    statements;
-#elif  SOMETHING < value
-    statements;
-#else
-    statements;
-#endif
-```
-
-비록 조건 포함문이 일반 조건문의 키워드와 유사할지라도 절대 `if` 및 `else` 조건문을 대체하기 위해 사용되지 말아야 한다.
-
-### 매크로 조건
-조건 포함문은 매크로의 정의 여부를 판단할 수 있다.
-
-```c
-// 만일 64비트 ARM 혹은 x64 아키텍쳐로 컴파일 할 경우...
-#ifdef    _WIN64
-    statments;
-#endif
-
-// 만일 64비트 ARM 혹은 x64 아키텍쳐로 컴파일되지 않은 경우...
-#ifndef    _WIN64
-    statements;
-#endif
-```
-
-## Pragma 지시문
-Pragma 지시문(pragma directive)은 컴파일러의 기능과 옵션을 설정하기 위해 사용되는 전처리기 지시문이다. 개발사마다 제작한 컴파일러는 기술적 성능이 각각 다르기 때문에 pragma는 비공통적인 컴파일러 특정 전처리기 지시문이다.
-
-> Pragma란 용어는 pragmatic의 줄임말로, 사전적 의미로는 "실용적인"을 뜻한다. 이는 실질적 컴파일러 동작 및 처리 방식에 관여한 것을 보아 붙여진 용어라고 판단된다.
-
-* Visual C++: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://docs.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
-* GCC: [GCC Online Documentation - Pragmas](https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html)
-
-본 장은 마이크로소프트의 비주얼 스튜디어에서 제공하는 Visual C++ 컴파일러의 pragma 지시문을 위주로 다룬다.
-
-### `#pragma once`
-`#pragma once`는 컴파일 작업 시 `#include` 지시문을 통해 중복 포함된 헤더 파일을 한 번만 포함시키는 pragma 지시문이다.
-
-```c
-#pragma once
-```
-
-결과적으로 하나의 소스 파일에 헤더 파일이 중복적으로 포함이 되는 것을 제한하므로써 정의가 반복되는 현상을 막을 수 있는데, 이러한 기능을 *헤더 중복 방지(include guard)*라고 부른다. 추가적으로 `#pragma once` 지시문을 사용하면 처리하는 헤더 파일 횟수가 줄어들어 컴파일 작업 시간도 함께 줄이게 된다.
-
-아래의 코드는 `#pragma once` 지시문을 사용하지 않고 헤더 중복 방지 기능을 구현하는 방법이다.
-
-```c
-/* 헤더 파일: "header.h" */
-#ifndef HEADER_FILE
-#define HEADER_FILE
-
-#endif    /* HEADER_FILE */
-```
-
-만일 `header.h` 헤더 파일이 아직 처리되지 않았으면 컴파일러는 처음으로 `HEADER_FILE` 매크로를 정의한다. 그러나 헤더 파일을 다시 한 번 마주하였을 시, `HEADER_FILE`이 이미 정의되어 있기에 매크로 조건에 의해 컴파일러는 헤더 파일을 처리하지 않는다.
-
-### `#pragma region`
-컴파일 작업에는 직접적인 영향을 미치지 않으나, `#pragma region` 및 `#pragma endregion` 쌍은 가독성을 위해 비주얼 스튜디오 내에서 지정된 코드 부분을 한 줄로 압축하거나 펼치는 기능을 제공한다.
-
-```c
-#pragma region REGIONNAME
-    statements;
-#pragma endregion
-```
