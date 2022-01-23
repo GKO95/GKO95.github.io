@@ -135,7 +135,6 @@ variable = input("입력: ")
 print("출력:", variable)
 # 동일: print("출력:", input("입력: "))
 ```
-
 ```
 입력: Hello World!
 출력: Hello World!
@@ -152,7 +151,6 @@ print("출력:", variable)
    # 텍스트와 숫자의 혼합된 데이터를 쉼표(,)를 사용해 나열한다.
    print("A는", A , ", \n그리고 B는", B, "이다.")
    ```
-
    ```
    A는 10.0 ,
    그리고 B는 파이썬 이다.
@@ -167,7 +165,6 @@ print("출력:", variable)
    # 텍스트와 숫자의 혼합된 데이터를 텍스트로 변환한 이후 더하기 기호(+)를 사용해 나열한다.
    print("A는", str(A) + ", \n그리고 B는", B + "이다.")
    ```
-
    ```
    A는 10.0,
    그리고 B는 파이썬이다.
@@ -182,7 +179,6 @@ print("출력:", variable)
    # 'f' 접두사를 붙여 지정된 위치에 데이터를 텍스트에 그대로 반영시킨다.
    print(f"A는 {A}\n그리고 B는 {B}이다.")
    ```
-
    ```
    A는 10.0,
    그리고 B는 파이썬이다.
@@ -237,7 +233,6 @@ print(variable)
 del variable
 print(variable)
 ```
-
 ```
 Hello World!
 NameError: name 'variable' is not defined
@@ -296,7 +291,6 @@ CONSTANT_VARIABLE = "Hello World!"
 print(round(164.259763145))
 print(round(164.259763145,2))
 ```
-
 ```
 164
 164.26
@@ -332,7 +326,6 @@ print(round(164.259763145,2))
 print('Where\'s my "Cat in the Hat" book?')
 print('Where's my "Cat in the Hat" book?')
 ```
-
 ```
 Where's my "Cat in the Hat" book?
 Where
@@ -346,7 +339,6 @@ print("Hello\nWorld!")
 print("""Goodbye
 World?""")
 ```
-
 ```
 Hello
 World!   
@@ -366,7 +358,6 @@ World?
 print("파이" + '썬3')
 print(4 * "2")
 ```
-
 ```
 파이썬3
 2222
@@ -402,7 +393,6 @@ print("This is a sentence.".endswith("sentence."))
 print("This is a SENTENCE.".upper())
 print("This is a SENTENCE.".lower())
 ```
-
 ```
 value2 value1 value3
 value1 value3 value2
@@ -451,7 +441,6 @@ World!
 if not(None and True):
     print(None)
 ```
-
 ```
 None    # 이는 논리 조건에서 None을 False로 사용할 수 있음을 보여준다.
 ```
@@ -483,7 +472,6 @@ if False:
 print("조건문 종료.")
 print("끝!") 
 ```
-
 ```
 끝!
 
@@ -1021,7 +1009,6 @@ def function():
     
 print(function())
 ```
-
 ```
 Hello World!
 3
@@ -1055,7 +1042,6 @@ def function(arg1, *args):
     
 function(1, 2, 3, 4)
 ```
-
 ```
 1
 (2, 3, 4)
@@ -1318,7 +1304,6 @@ def factorial(arg):
 
 print(factorial(5))
 ```
-
 ```
 120
 ```
@@ -1336,7 +1321,6 @@ variable = [0, 3, 5, 9]
 print(variable.index(5))
 # variable이란 이름을 가진 리스트 객체의 "index()" 메소드를 사용하여 값 5에 대한 위치를 반환한다
 ```
-
 ```
 2
 ```
@@ -1379,7 +1363,6 @@ instance = CLASS(value1, value2)    # 클래스로부터 객체 생성
 print(instance.attr3)
 print(instance.method(value3))
 ```
-
 ```
 value3
 value1 + value2 - value3
@@ -1605,7 +1588,6 @@ instance = SUBCLASS(3)
 # 그러므로...
 print(instance.attribute)
 ```
-
 ```
 "Goodbye World?"
 AttributeError: 'SUBCLASS' object has no attribute 'attribute'
@@ -1636,7 +1618,6 @@ instance = SUPERCLASS(3)
 # 그러므로...
 print(instance.attribute)
 ```
-
 ```
 "Hello World!"
 "Goodbye World?"
@@ -1693,7 +1674,6 @@ print(instance.method)
 del instance.method      # 예시: DELETER 메소드
 print(instance.method)
 ```
-
 ```
 3
 1
@@ -1895,7 +1875,6 @@ with open("path\\filename.txt") as file:
     print(file.readlines())
     print(file.readline())
 ```
-
 ```
 ['첫 번째 줄은 여기에.\n','두 번째 줄은 저기에.\n','마지막 줄은 어딘가에.']
 첫 번째 줄은 여기에.
@@ -1925,7 +1904,6 @@ for variable in file:
     with open("path\\filename.txt", "w") as file:
         file.write("텍스트 덮어쓰기!")
     ```
-    
     ```
     <filename.txt>
     텍스트 덮어쓰기!
@@ -1937,7 +1915,6 @@ for variable in file:
     with open("path\\filename.txt", "a") as file:
         file.write("텍스트 덧붙여 쓰기!")
     ```
-    
     ```
     <filename.txt>
     첫 번째 줄은 여기에.
@@ -1954,7 +1931,6 @@ for variable in file:
 with open("path\\NEW_filename.txt", "w") as file:
     file.write("새 파일 생성!")
 ```
-
 ```
 <NEW_filename.txt>
 새 파일 생성!
@@ -2038,13 +2014,13 @@ python -m venv D:\Workspace\Python\project\.venv
 * 윈도우 OS:
 
     ```
-    D:\Workspace\Python\project\.venv\Scripts\activate.bat
+D:\Workspace\Python\project\.venv\Scripts\activate.bat
     ```
 
 * 유닉스 (예. macOS 및 리눅스):
 
     ```
-    source ~/Workspace/Python/project/.venv/bin/activate
+source ~/Workspace/Python/project/.venv/bin/activate
     ```
 
 ### 가상환경 종료
