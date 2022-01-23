@@ -113,7 +113,7 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 
 간단한 예시로 *엑스코드 C 프로젝트 생성 (4단계)* 그림에 나온 코드를 그대로 가져와 `main.c` C 프로그래밍 언어 소스 파일에 저장하였다.
 
-![gcc 컴파일 작업 예시 코드](/images/docs/c/c_gcc_project1.png)
+![GCC 컴파일 작업 예시 코드](/images/docs/c/c_gcc_project1.png)
 
 `main.c` 소스 파일은 `~/Workspace/C/Experiment` 경로에 저장되었다고 가정한다.
 
