@@ -996,7 +996,6 @@ printf("%p", ptr);   // ERROR C4700: 초기화되지 않은 지역 변수 'ptr'�
 int variable = 365;
 printf("%p", &variable);
 ```
-
 ```
 000000D154AFFA14
 ```
@@ -1088,7 +1087,6 @@ int variable = 123456789;
 printf("십육진수: %#010x\n", variable);
 printf("포인터: 0x%p\n", &variable);
 ```
-
 ```
 십육진수: 0x075bcd15
 포인터: 0x0000008A97CFFB84
@@ -1127,7 +1125,6 @@ for (int index = 0; index < sizeof(variable); index++)
     printf("0x%#p : %#04x\n", ptr + index, *(ptr + index));
 }
 ```
-
 ```
 0x0000008A97CFFB84 : 0x15
 0x0000008A97CFFB85 : 0xcd
@@ -1159,9 +1156,7 @@ struct STRUCTURE {
 struct STRUCTURE variable1 = {3, 'A'};
 struct STRUCTURE variable2 = {.field2 = 'A', .field1 = 3};
 ```
-
 ----
-
 ```c
 // 구조체 변수 정의
 struct STRUCTURE variable;
@@ -1211,7 +1206,6 @@ union UNION variable = (union UNION) {365};    // >> 결과: 0x 00 00 01 6D
 printf("Field1: %d (%#010x)\n", variable.field1, variable.field1);
 printf("Field2: %d (%#010x)\n", variable.field2, variable.field2);
 ```
-
 ```
 Field1: 365 (0x0000016d)
 Field2: 109 (0x0000006d)
@@ -1338,7 +1332,6 @@ ptr->field2 = 'A';
 printf("%d\n", ptr->field1);
 printf("%c\n", ptr->field2);
 ```
-
 ```
 3
 A
@@ -1469,7 +1462,6 @@ int main(){
     return 0;
 }
 ```
-
 ```
 파일 열기 오류 발생! 오류 코드: 2
 ```
@@ -1502,7 +1494,6 @@ int main(){
     return 0;
 }
 ```
-
 ```
 오류 설명: No such file or directory
 ```
@@ -1563,7 +1554,6 @@ C 프로그래밍 언어에서 텍스트 기반 파일을 열었으면 아래의
 Hello World!
 65 3.14159
 ```
-
 ```cpp
 /* 파일 읽기 */
 FILE* fptr = fopen("sample.txt", "r");
@@ -1606,7 +1596,6 @@ fgets("Hello World!\n", fptr);
 // "fprintf()" 함수
 fprintf(fptr, "%d %.2f %s", 1, 3.14159, "Program");
 ```
-
 ```
 <sample.txt>
 AHello World!
@@ -1700,7 +1689,6 @@ void function(int arg1, float arg2) {
 extern char variable;
 void function(int, float);
 ```
-
 ```c
 /* 소스 파일: module.c */
 #include "module.h"
@@ -1711,7 +1699,6 @@ void function(int arg1, float arg2) {
     printf("%.3f\n", arg1 + arg2);
 }
 ```
-
 ```c
 /* 메인 스크립트 */
 #include <stdio.h>
