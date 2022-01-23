@@ -674,6 +674,7 @@ for (initialize; condition; increment) {
 // 간략화된 문장
 for (initialize; condition; increment) statement;
 ```
+
 `for` 반복문의 반복 절차는 다음과 같다:
 
 1. 변수 할당: `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한다.
