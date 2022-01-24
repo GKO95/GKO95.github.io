@@ -1940,7 +1940,7 @@ class Program
 ```
 
 # C#: 사용자 정의 자료형
-C# 프로그래밍 언어에서 흔히 사용되는 `int`, `float`, `char` 등과 같은 내부 자료형을 기반으로 목적에 알맞은 사용자 정의 자료형을 새롭게 지정할 수 있다. 본 장은 자료형처럼 사용할 수 있는 자료구조의 정의 및 활용법을 설명한다.
+C$ 프로그래밍 언어에서 흔히 사용되는 `int`, `float`, `char` 등과 같은 내부 자료형을 기반으로 목적에 알맞은 사용자 정의 자료형을 새롭게 지정할 수 있다. 본 장은 일반 자료형보다 더 많은 자료를 복합적으로 저장할 수 있는 사용자 정의 자료형의 정의 및 활용법을 설명한다.
 
 ## 구조체
 구조체(structure)는 자료형과 상관없이 여러 맴버 변수(일명 맴버 필드)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 구조체의 정의는 `struct` 키워드를 통해 이루어진다.
@@ -2197,33 +2197,45 @@ finally
 # C#: 파일 관리
 여러 데이터를 파이썬 프로세스에 전달하거나, 혹은 데이터를 외부로 출력하기 위해 파일을 불러와 read 혹은 write 하여 처리할 수 있다. 본 장은 C# 프로그래밍 언어에서 파일을 관리하는 방법에 대하여 소개한다.
 
-## 파일 읽기
-파일 읽기, 즉 파일로부터 데이터를 불러오는 작업은 `System.IO.File` 클래스의 `ReadAllText()` 정적 메소드를 사용한다. 
+### 절대경로 및 상대경로
+컴퓨터에는 두 종류의 경로 탐색법이 존재한다.
+
+* 절대경로(absolute path)
+    : *시스템의 루트경로(예. 윈도우의 `C:\` 혹은 리눅스의 `/`)로부터 시작하여 탐색하는 방식이다.*
+
+* 상대경로(relative path)
+    : *실행되고 있는 프로세스의 현 위치를 기준으로 경로를 탐색하는 방식이다.*
+
+경로를 지정할 때에는 백슬래시 두 개(`\\`)로 폴더 및 파일을 구분한다. 하나만 사용하면 [탈출 문자](#탈출-문자)가 되어 원치 않은 텍스트 연산이 수행될 수 있다.
+
+## 파일 생성
+C# 프로그래밍 언어에서 텍스트 기반 파일을 `System.IO.File.Create()` 메소드로 파일을 생성할 수 있다.
 
 ```csharp
-static void Main(){
-    string output = System.IO.File.ReadAllText("./sample.txt");
+static void Main()
+{
+    var file = System.IO.File.Create("path\\filename.txt");
+}
+```
+
+## 파일 읽기
+C# 프로그래밍 언어에서 텍스트 기반 파일을 `System.IO.File.ReadAllText()` 메소드로 파일 내용을 읽을 수 있다. 
+
+```csharp
+static void Main()
+{
+    string output = System.IO.File.ReadAllText("path\\filename.txt");
     System.Console.WriteLine(output);
 }
 ```
 
 ## 파일 쓰기
-파일 쓰기는 `System.IO.File` 클래스의 `WriteAllText()` 정적 메소드를 사용한다.
+C# 프로그래밍 언어에서 텍스트 기반 파일을 `System.IO.File.WriteAllText()` 메소드로 파일 내용을 작성할 수 있다. 파일이 이미 존재하면 기존의 내용은 덮어쓴다.
 
 ```csharp
-static void Main(){
+static void Main()
+{
     string input = "Hello World!";
-    System.IO.File.WriteAllText("./sample.txt", input);
-}
-```
-
-만일 해당 파일이 존재하지 않으면 새로운 파일을 생성한다. 반면, 파일이 이미 존재하면 기존의 내용은 덮어쓰여진다.
-
-### 파일 생성
-파일 생성은 `System.IO.File` 클래스의 `Create()` 정적 메소드를 사용한다.
-
-```csharp
-static void Main(){
-    System.IO.File.FileStream file = System.IO.File.Create("./sample.txt");
+    System.IO.File.WriteAllText("path\\filename.txt", input);
 }
 ```
