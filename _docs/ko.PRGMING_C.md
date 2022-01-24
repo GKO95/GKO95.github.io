@@ -667,7 +667,8 @@ do
 `for` 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
 
 ```c
-for (initialize; condition; increment) {
+for (initialize; condition; increment)
+{
     statements;
 }
 
