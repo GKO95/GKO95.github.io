@@ -1507,7 +1507,7 @@ C 프로그래밍 언어에서 파일을 열고 닫으려면 `fopen()` 함수와
 
 ```c
 /* 파일 열기 */
-FILE* fptr = fopen("sample.txt", mode);
+FILE* fptr = fopen("filename.txt", mode);
 
 /* 파일 닫기 */
 fclose(fptr);
@@ -1537,10 +1537,6 @@ fclose(fptr);
 
 경로를 지정할 때에는 백슬래시 두 개(`\\`)로 폴더 및 파일을 구분한다. 하나만 사용하면 [탈출 문자](#탈출-문자)가 되어 원치 않은 텍스트 연산이 수행될 수 있다.
 
-```c
-FILE* fptr = fopen("path\\filename.txt", "r");
-```
-
 ## 파일 읽기
 C 프로그래밍 언어에서 텍스트 기반 파일을 열었으면 아래의 read 함수로 파일 내용을 읽을 수 있다. 파일 read 함수는 입력 함수와 매우 유사한 형태를 지닌다:
 
@@ -1551,13 +1547,13 @@ C 프로그래밍 언어에서 텍스트 기반 파일을 열었으면 아래의
 | `fscanf()` | `fscanf(fptr,"format",vars)` | `fptr` 포인터가 가리키는 파일에서 데이터를 스페이스 혹은 줄바꿈을 기준으로 나누어 지정된 `"format"` 형식에 맞게 변수 `vars`에 저장한다.<br/> 문자열을 제외한 입력을 받을 모든 데이터는 주소 연산자(`&`)가 필요하다. |
 
 ```
-<sample.txt>
+<filename.txt>
 Hello World!
 65 3.14159
 ```
 ```cpp
 /* 파일 읽기 */
-FILE* fptr = fopen("sample.txt", "r");
+FILE* fptr = fopen("filename.txt", "r");
 
 // "fgetc()" 함수
 char variable1;
@@ -1573,6 +1569,8 @@ fgets(buff, 7, fptr);
 char[10] variable2; int variable3; float variable4;
 fscanf(fptr, "%s %d %f", var2, &var3, &var4);
 // >> 결과: variable2 = "orld!", variable3 = 65, variable4 = 3.141590
+
+fclose(fptr);
 ```
 
 ## 파일 쓰기
@@ -1586,7 +1584,7 @@ C 프로그래밍 언어에서 텍스트 기반 파일을 열었으면 아래의
 
 ```c
 /* 파일 쓰기 */
-FILE* fptr = fopen("sample.txt", "w");
+FILE* fptr = fopen("filename.txt", "w");
 
 // "fputc()" 함수
 fgets('A', fptr);
@@ -1596,9 +1594,11 @@ fgets("Hello World!\n", fptr);
 
 // "fprintf()" 함수
 fprintf(fptr, "%d %.2f %s", 1, 3.14159, "Program");
+
+fclose(fptr);
 ```
 ```
-<sample.txt>
+<filename.txt>
 AHello World!
 1 3.14 Program
 ```
@@ -1608,8 +1608,9 @@ C 프로그래밍 언어의 파일 write 함수는 기존 파일을 작성할 �
 
 ```c
 /* 파일 생성 */
-FILE* fptr = fopen("path\\new_file.txt", "w");
-fgets("Hello World!\n", fptr);
+FILE* fptr = fopen("path\\NEW_filename.txt", "w");
+fgets("New file created!", fptr);
+fclose(fptr);
 ```
 
 # C: 전처리기
