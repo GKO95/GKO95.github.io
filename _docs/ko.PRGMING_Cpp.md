@@ -890,9 +890,7 @@ void function(int arg[])
     return;
 }
 ```
-
 ----
-
 ```cpp
 void function(int *arg);
 
@@ -1690,11 +1688,11 @@ class DERIVEDCLASS
 ## 다형성
 다형성(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, C++ 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 의미한다. 객체지향 프로그래밍에서 다형성은 매우 중요한 특징이며 두 가지로 분류할 수 있다:
 
-* *컴파일타임 다형성(compile-time polymorphism)*
-    : 컴파일 시 이루어지는 다형성 (일명 정적 다형성; static polymorphism)
+* 컴파일타임 다형성(compile-time polymorphism)
+    : *컴파일 시 이루어지는 다형성 (일명 정적 다형성; static polymorphism)*
 
-* *런타임 다형성(run-time polymorphism)*
-    : 프로그램 실행 시 이루어지는 다형성 (일명 동적 다형성; dynamic polymorphism)
+* 런타임 다형성(run-time polymorphism)
+    : *프로그램 실행 시 이루어지는 다형성 (일명 동적 다형성; dynamic polymorphism)*
 
 컴파일타임 다형성 중 하나는 이미 소개가 되었으며, 바로 전달인자의 자료형과 개수에 따라 달리 동작하는 *함수 오버로딩*이다.
 
@@ -2239,6 +2237,14 @@ catch(const std::exception &e) {
 }
 ```
 
+`catch` 문이 모든 예외 사항과 자료형을 처리하도록 하려면 소괄호 내에 줄임표(`...`)를 기입한다.
+
+```cpp
+catch(...) {
+	// catch: 모든 예외 및 자료형
+}
+```
+
 ## `throw` 키워드
 `trhow` 키워드는 내에서 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 함수나 클래스에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다. 해당 키워드는 `try` 블록 내부 및 외부에서 동작 방식이 약간 다르다:
 
@@ -2259,14 +2265,6 @@ catch(int e) {
 }
 catch(char e) {
 	// catch: 문자형
-}
-```
-
-`catch` 문이 모든 예외 사항과 자료형을 처리하도록 하려면 소괄호 내에 줄임표(`...`)를 기입한다.
-
-```cpp
-catch(...) {
-	// catch: 모든 예외 및 자료형
 }
 ```
 
