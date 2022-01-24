@@ -394,7 +394,7 @@ C++ 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되�
 * 지역 변수(local variable)
     : *코드 블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.*
 
-  ```c
+  ```cpp
   int main() {
 
       /* 지역 변수 */
@@ -407,15 +407,15 @@ C++ 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되�
 * 전역 변수(global variable)
     : *코드 블록 내에 속하지 않은 외부에 정의된 변수이다. 전역 변수는 어느 코드 블록에서도 호출만으로 지역 변수와 함께 사용할 수 있다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수의 사용은 피하도록 한다.*
 
-    ```c
-    /* 전역 변수 */
-    int variable;
-    
-    int main() {
-    
-        return 0;
-    }
-    ```
+  ```cpp
+  /* 전역 변수 */
+  int variable;
+  
+  int main() {
+  
+      return 0;
+  }
+  ```
 
 ## 자료형 변환
 자료형 변환(type casting)은 상수 혹은 변수로부터 호출한 데이터를 강제로 다른 자료형으로 바꾸는 작업이다.
@@ -2289,14 +2289,14 @@ std::cerr << "Hello World!"
 헤더 파일에는 파일에서 프로그램으로 데이터를 전달하는 `std::ifstream` 클래스와 프로그램에서 파일로 데이터를 건네주는 `std::ofstream` 클래스가 포함되어 있다.
 
 ## 파일 열기 및 닫기
-C++ 프로그래밍 언어에서 파일을 열고 닫으려면 `std::ifstream` 혹은 `std::ofstream` 객체로 `open()` 메소드와 `close()` 메소드를 사용한다.
+C++ 프로그래밍 언어에서 파일을 열고 닫으려면 `std::ifstream` 혹은 `std::ofstream` 파일 스트림 객체로 `open()` 메소드와 `close()` 메소드를 사용한다.
 
 ```cpp
 #include <fstream>
 
 /* 파일 열기 */
 std::ifstream file;
-file.open("sample.txt");
+file.open("filename.txt");
 
 /* 동일:
 std::ifstream file("sample.txt");
@@ -2319,32 +2319,66 @@ file.close();
 
 경로를 지정할 때에는 백슬래시 두 개(`\\`)로 폴더 및 파일을 구분한다. 하나만 사용하면 [탈출 문자](#탈출-문자)가 되어 원치 않은 텍스트 연산이 수행될 수 있다.
 
-```cpp
-FILE* fptr = fopen("path\\filename.txt", "r");
-```
-
 ## 파일 읽기
-파일을 읽는 방법은 여러가지가 있지만, 가장 대표적인 예시는 `std::getline()` 함수를 사용하는 것이다. 한 번 실행은 텍스트 한 줄을 추출하므로, 반복문을 사용하여 파일 전체 내용을 불러올 수 있다. 
+C++ 프로그래밍 언어에서 텍스트 기반 파일을 열었으면 몇 가지의 방법으로 파일 내용을 읽을 수 있다. 파일 읽기에는 `std::ifstream` 클래스를 사용한다. 다음은 예시 텍스트 파일과 함께 일부 파일을 읽어오는 방법을 소개한다.
 
-또 다른 방법으로 추출 연산자(`>>`)를 사용하여 띄어쓰기나 줄바꿈과 같은 빈칸을 기준으로 텍스트를 가져올 수 있다. 파일 읽기에는 `std::ifstream` 클래스를 사용한다.
-
-```cpp
-#include <fstream>
-
-std::ifstream file("sample.txt");
-while (getline(file, line)) {
-	std::cout << line << std::endl;
-}
 ```
+<filename.txt>
+Hello World!
+65 3.14159
+```
+
+* 추출 연산자 `>>`
+    : *빈 공간(예. 띄어쓰기, 줄바꿈 등)을 기점으로 나누어서 텍스트를 불러온다.*
+
+  ```cpp
+  #include <fstream>
+  
+  std::string variable1, variable2, variable3;
+  double variable4;
+  
+  std::ifstream file("path\\filename.txt");
+  file >> variable1;    // variable1 = "Hello"
+  file >> variable2;    // variable2 = "World!"
+  file >> variable3;    // variable3 = "65"
+  file >> variable4;    // variable4 = 3.14159
+  file.close();
+  ```
+
+* `std::getline()` read 함수
+    : *줄바꿈을 기점으로 나누어서 텍스트를 불러온다; `<string>` 헤더 필요.*
+
+  ```cpp
+  #include <fstream>
+  #include <string>  
+
+  std::string variable1, variable2;
+  
+  std::ifstream file("path\\filename.txt");
+  std::getline(file, variable);    // variable1 = "Hello World!"
+  std::getline(file, variable);    // variable2 = "65 3.14159"
+  file.close();
+  ```
+
+그 외에도 여러 방법이 있으며, 파일 스트림 객체의 `eof()` 메소드로 프로그램이 파일 전체를 읽었는지 여부를 확인할 수도 있다.
+
+> 여기서 [EOF](https://ko.wikipedia.org/wiki/파일_끝)란, End-of-File의 약자로 파일의 끝에 도달하였으면 트리거되는 데이터이다.
 
 ## 파일 쓰기
-파일을 쓰기 위해서 삽입 연산자(`<<`)를 사용하여 작성하려는 텍스트를 입력하면 된다. 파일 읽기에는 `std::ofstream` 클래스를 사용한다.
+C++ 프로그래밍 언어에서 텍스트 기반 파일을 열었으면 아래의 삽입 연산자(`<<`)를 사용하여 파일 내용을 작성할 수 있다. 파일 쓰기에는 `std::ofstream` 클래스를 사용한다.
 
 ```cpp
 #include <fstream>
 
-std::ofstream file("sample.txt");
-file << "Hello World!\n";
+std::ofstream file("filename.txt");
+file << "Hello World!" << std::endl;
+file << 65 << " " << 3.14159
+file.close();
+```
+```
+<filename.txt>
+Hello World!
+65 3.14159
 ```
 
 ### 파일 생성
@@ -2353,8 +2387,9 @@ file << "Hello World!\n";
 ```cpp
 #include <fstream>
 
-std::ofstream file("path\\new_file.txt");
-file << "Hello World!\n";
+std::ofstream file("path\\NEW_filename.txt");
+file << "New file created!" << std::endl;
+file.close();
 ```
 
 # C++: 전처리기
