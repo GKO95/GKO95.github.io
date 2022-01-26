@@ -1,10 +1,9 @@
 ---
 layout: docs
-language: en
 category: Programming
 title: C
-meta: C
-icon: icon-c.png
+slug: en.C
+icon: icon-c.svg
 order: 0x01
 ---
 # C: INTRO

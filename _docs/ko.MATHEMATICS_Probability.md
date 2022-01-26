@@ -1,9 +1,8 @@
 ---
 layout: docs
-language: ko
 category: 공업수학
 title: 확률론
-meta: Probability
+slug: ko.Probability
 order: 0xE0
 ---
 # 확률론: 개요

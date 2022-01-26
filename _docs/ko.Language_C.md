@@ -1,9 +1,8 @@
 ---
 layout: docs
-language: ko
 category: 프로그래밍
 title: C
-meta: C
+slug: ko.C
 icon: icon-c.svg
 order: 0x01
 ---
@@ -13,7 +12,7 @@ order: 0x01
 C 언어는 [유닉스](https://ko.wikipedia.org/wiki/유닉스)(UNIX) 컴퓨터를 위한 소프트웨어 제작을 위해 개발된 [*B*](https://ko.wikipedia.org/wiki/B_(프로그래밍_언어)) 언어의 후속작이다. 현재 C 언어는 가장 널리 사용되고 있는 프로그래밍 언어로 C++, C#, 파이썬, 자바 등 여러 프로그래밍 언어에 영향을 주었다. C 언어는 다른 프로그래밍 언어에 비해 매우 빠른 처리 속도와 훌륭한 호환성을 가지고 있어 소프트웨어 및 펌웨어 개발에 여전히 사용되고 있다.
 
 ## 컴파일 언어
-> *참조: [컴파일 vs 인터프리트 언어](/blog/ko.compiler_vs_interpreter/)*
+> *참조: [컴파일 vs 인터프리트 언어](/blog/ko.compiler_vs_interpreter)*
 
 C 프로그래밍 언어는 [컴파일 언어](https://ko.wikipedia.org/wiki/컴파일_언어)(compiled language)이다. C 컴파일러는 국제표준기구(ISO)에서 표준을 발표한 년도에 따라 버전이 나뉘어진다. 가장 널리 사용되고 있는 버전으로는 ANSI C(일명 C89)와 C99가 있다. 본 문서는 <span style="color: red">*ANSI C 컴파일러 기준*</span>으로 C 프로그래밍 언어를 설명한다.
 
@@ -32,7 +31,7 @@ C 프로그래밍 언어는 [컴파일 언어](https://ko.wikipedia.org/wiki/컴
 C 프로그래밍 언어로 프로그램을 개발하려면 C 컴파일러가 반드시 필요하다. C 컴파일러 종류는 개발사와 목적에 따라 다양하지만, 전부 동일한 ISO 표준에 따라 동작하므로 일반적인 경우에는 어떠한 컴파일러를 사용하던 무관하다. 프로그래밍 언어의 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)을 설치하면 대체로 권장되는 컴파일러가 함께 설치된다. 그러므로 본 장에서는 IDE 설치 및 프로젝트 생성 단계를 위주로 설명한다.
 
 ## 비주얼 스튜디오
-[비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 IDE이며 [Visual C++](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C%2B%2B) 컴파일러를 제공한다. 비주얼 스튜디오의 세 가지 에디션 중에서 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 [C#](../ko.PRGMING_Csharp/)이나 [자바스크립트](../ko.PRGMING_JavaScript/) 등 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. C 프로그래밍 언어 개발을 위해서면 "Desktop development with C++"를 선택한다.
+[비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 IDE이며 [Visual C++](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C%2B%2B) 컴파일러를 제공한다. 비주얼 스튜디오의 세 가지 에디션 중에서 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 [C#](/docs/ko.Csharp)이나 [자바스크립트](/docs/ko.JavaScript) 등 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. C 프로그래밍 언어 개발을 위해서면 "Desktop development with C++"를 선택한다.
 
 ![비주얼 스튜디오 C 프로그래밍을 위한 구성요소](/images/docs/c/c_vs_component.png)
 
@@ -1340,7 +1339,7 @@ A
 ```
 
 # C: 메모리 관리
-> *참고: [GKO95 GitHub Pages - 메모리](../ko.COMPUTER_Memory)*
+> *참고: [GKO95 GitHub Pages - 메모리](/docs/ko.Memory)*
 
 프로그램을 실행하는데 있어 메모리 관리는 매우 중요한 작업에 해당한다. 그 중에서 동적 메모리 할당은 보다 더 나은 메모리 효율성을 위해 사용되며, [포인터](#c-포인터)에 대한 충분한 개념적 이해도가 필요하다. 여기서 메모리란, HDD 및 SSD와 같은 [보조기억장치](https://ko.wikipedia.org/wiki/기억_장치)가 아닌 RAM이 해당하는 [주기억장치](https://ko.wikipedia.org/wiki/주기억장치)를 가리킨다.
 
@@ -1405,7 +1404,7 @@ variable.capacity += 5;
 ```
 
 ### 메모리 누수
-[메모리 누수](../ko.COMPUTER_Memory)(memory leak)는 메모리 관리 문제로써 더 이상 사용되지 않는 메모리가 해제되지 않고 계속 잔여하여, 시스템에서 할당할 수 있는 메모리 리소스가 점차 줄어드는 현상이다. 만일 시스템에서 더 이상 할당할 수 있는 메모리가 없으면 시스템 충돌이 발생하는 치명적인 오류가 발생한다. 이를 해결하기 위해 동적 할당된 메모리는 반드시 `free()` 함수로 해제하도록 한다.
+[메모리 누수](/docs/ko.Memory)(memory leak)는 메모리 관리 문제로써 더 이상 사용되지 않는 메모리가 해제되지 않고 계속 잔여하여, 시스템에서 할당할 수 있는 메모리 리소스가 점차 줄어드는 현상이다. 만일 시스템에서 더 이상 할당할 수 있는 메모리가 없으면 시스템 충돌이 발생하는 치명적인 오류가 발생한다. 이를 해결하기 위해 동적 할당된 메모리는 반드시 `free()` 함수로 해제하도록 한다.
 
 ```c
 /* 동적 할당 해제 */

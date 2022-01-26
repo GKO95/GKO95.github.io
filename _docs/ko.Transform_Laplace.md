@@ -1,15 +1,14 @@
 ---
 layout: docs
-language: ko
 category: 공업수학
 title: 라플라스 변환
-meta: Laplace
+slug: ko.Laplace-Transform
 order: 0xE3
 ---
 # 라플라스: 개요
 > 본 내용은 고등학교 교육과정 중 하나인 [삼각함수](https://ko.wikipedia.org/wiki/삼각함수), [미분](https://ko.wikipedia.org/wiki/미분) 및 [적분](https://ko.wikipedia.org/wiki/적분), 그리고 [복소수](https://ko.wikipedia.org/wiki/복소수)를 기반하므로 이에 대해 충분한 이해가 필요하다.
 
-[라플라스 변환](https://en.wikipedia.org/wiki/Laplace_transform)(Laplace transform)은 복잡한 [미분방정식](../ko.ENGINEER_Differential)을 극히 익숙한 [대수방정식](https://en.wikipedia.org/wiki/Algebraic_equation)으로 풀 수 있는 매우 유용한 미적분학 기법이다. 이러한 변환이 가능한 이유는 바로 $t$-영역(또는 공간; domain)과 $s$-영역을 넘나드는 풀이 방식을 사용하기 때문이다.
+[라플라스 변환](https://en.wikipedia.org/wiki/Laplace_transform)(Laplace transform)은 복잡한 [미분방정식](/docs/ko.Differential)을 극히 익숙한 [대수방정식](https://en.wikipedia.org/wiki/Algebraic_equation)으로 풀 수 있는 매우 유용한 미적분학 기법이다. 이러한 변환이 가능한 이유는 바로 $t$-영역(또는 공간; domain)과 $s$-영역을 넘나드는 풀이 방식을 사용하기 때문이다.
 
 * *$t$-영역 (일명 시간 영역)*
     : 변수 $t$, 일명 시간이 중심이 되는 공간이다. 
@@ -31,16 +30,16 @@ $$
 ## 라플라스 변환
 > *참조: [MIT 온라인 공개수업 - 강의 19: 라플라스 변환의 소개](https://ocw.mit.edu/courses/mathematics/18-03-differential-equations-spring-2010/video-lectures/lecture-19-introduction-to-the-laplace-transform/)*
 
-라플라스 변환은 [확률 이론](../ko.MATHEMATICS_Probability)(probability theory)으로부터 유도된 변환식이다.
+라플라스 변환은 [확률 이론](/docs/ko.Probability)(probability theory)으로부터 유도된 변환식이다.
 
 ### 푸리에 변환
-라플라스 변환은 아래의 [푸리에 변환](../ko.MATHEMATICS_TransformF/#푸리에-변환)과 매우 유사한 형태를 띈다.
+라플라스 변환은 아래의 [푸리에 변환](/docs/ko.Fourier-Transform#푸리에-변환)과 매우 유사한 형태를 띈다.
 
 $$
 X(\omega) = \mathcal{F} \{ x(t) \} = \int^{\infty}_{-\infty}x(t)e^{-j\omega t}dt
 $$
 
-만일 푸리에 변환의 유도 과정을 접하였다면 $j\omega$를 $\sigma + j\omega$로 확장하여 라플라스 변환의 유도를 설명하려고 시도할 수 있으나, 이는 매우 잘못된 접근법이다. 라플라스 변환의 유도 과정은 [푸리에 급수](../ko.MATHEMATICS_TransformF/#푸리에-급수)가 아닌 확률 이론(probability theory)에서 비롯되었기 때문이다. 그렇지만 라플라스와 푸리에 변환이 서로 연관성이 없다는 것은 전혀 아니며, 푸리에 변환은 복소변수 $s=\sigma + j\omega$에서 감쇠 $\sigma = 0$인 특수한 경우의 라플라스 변환이다.
+만일 푸리에 변환의 유도 과정을 접하였다면 $j\omega$를 $\sigma + j\omega$로 확장하여 라플라스 변환의 유도를 설명하려고 시도할 수 있으나, 이는 매우 잘못된 접근법이다. 라플라스 변환의 유도 과정은 [푸리에 급수](/docs/ko.Fourier-Transform#푸리에-급수)가 아닌 확률 이론(probability theory)에서 비롯되었기 때문이다. 그렇지만 라플라스와 푸리에 변환이 서로 연관성이 없다는 것은 전혀 아니며, 푸리에 변환은 복소변수 $s=\sigma + j\omega$에서 감쇠 $\sigma = 0$인 특수한 경우의 라플라스 변환이다.
 
 ### 변환의 성질
 > *참조: [위키백과 - 라플라스 성질 및 이론](https://en.wikipedia.org/wiki/Laplace_transform#Properties_and_theorems)*
@@ -355,7 +354,7 @@ $$
     $$
 
 # 라플라스: 응용
-본 장은 [미분방정식 예시](../ko.ENGINEER_Differential/#미분방정식-응용)를 라플라스 변환으로 풀이하는 절차를 살펴본다. 또한 고전역학을 벗어나 전기회로라는 전혀 다른 분야에서는 어떻게 적용되는지 보여준다. 단, 미분방정식이 아닌 *예제 1. 평형상태 (1)*과 *예제 2. 평형상태 (2)*는 다루지 않으며 미분방정식 수립 과정은 동일하다.
+본 장은 [미분방정식 예시](/docs/ko.Differential#미분방정식-응용)를 라플라스 변환으로 풀이하는 절차를 살펴본다. 또한 고전역학을 벗어나 전기회로라는 전혀 다른 분야에서는 어떻게 적용되는지 보여준다. 단, 미분방정식이 아닌 *예제 1. 평형상태 (1)*과 *예제 2. 평형상태 (2)*는 다루지 않으며 미분방정식 수립 과정은 동일하다.
 
 ## 고전역학
 

@@ -1,9 +1,8 @@
 ---
 layout: docs
-language: ko
 category: 공업수학
 title: 푸리에 변환
-meta: Fourier
+slug: ko.Fourier-Transform
 order: 0xE2
 ---
 # 푸리에: 개요

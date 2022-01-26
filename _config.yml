@@ -41,10 +41,10 @@ plugins:
 collections:
   docs:
     output: true
-    permalink: /:collection/:path/
+    permalink: /:collection/:title
   blog:
     output: true
-    permalink: /:collection/:path/
+    permalink: /:collection/:path
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

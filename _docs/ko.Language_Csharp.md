@@ -1,19 +1,18 @@
 ---
 layout: docs
-language: ko
 category: 프로그래밍
 title: C#
+slug: ko.Csharp
 icon: icon-csharp.svg
-meta: Csharp
 order: 0x03
 ---
 # C#: 소개
 > *참조: [Microsoft Docs C# 언어 설명서 (한국어)](https://docs.microsoft.com/ko-kr/dotnet/csharp/)*
 
-C# (한국어:씨샵) 프로그래밍 언어는 [자바](https://ko.wikipedia.org/wiki/자바_(프로그래밍_언어))(Java) 언어를 대응하기 위해 마이크로소프트에서 개발한 [객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming) 언어이다. 자바와 상당한 유사점을 가지면서 [C](../ko.PRGMING_C)/[C++](../ko.PRGMING_Cpp) 언어로부터 이질감이 없도록 설계되었다. 또한 .NET (한국어: 닷넷) 프레임워크라는 방대한 데이터 라이브러리를 접속하고 사용할 수 있어 개발의 편리성을 제공하는 장점을 가진다.
+C# (한국어:씨샵) 프로그래밍 언어는 [자바](https://ko.wikipedia.org/wiki/자바_(프로그래밍_언어))(Java) 언어를 대응하기 위해 마이크로소프트에서 개발한 [객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming) 언어이다. 자바와 상당한 유사점을 가지면서 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 언어로부터 이질감이 없도록 설계되었다. 또한 .NET (한국어: 닷넷) 프레임워크라는 방대한 데이터 라이브러리를 접속하고 사용할 수 있어 개발의 편리성을 제공하는 장점을 가진다.
 
 ## .NET
-> *참조: [컴파일 vs 인터프리트 언어](/blog/ko.compiler_vs_interpreter/)*
+> *참조: [컴파일 vs 인터프리트 언어](/blog/ko.compiler_vs_interpreter)*
 
 [.NET](https://ko.wikipedia.org/wiki/닷넷)(혹은 .NET Core)은 마이크로소프트에서 개발한 오픈소스 소프트웨어 프레임워크이다. 국제표준기구 ISO와 ECMA에서 표준으로 채택된 공통 언어 기반(Common Language Infrasturcture; CLI)이 적용되어 운영체제 및 아키텍쳐가 다르더라도 [크로스 플랫폼](https://ko.wikipedia.org/wiki/크로스_플랫폼)(cross-platform)을 지원해야 하며 여러 고급 프로그래밍 언어을 사용할 수 있다. 그 중에서 C# 언어가 .NET이 지원하는 프로그래밍 언어 중 하나이며 윈도우 NT, macOS, 그리고 리눅스 운영체제에서 사용할 수 있다.
 
@@ -84,7 +83,7 @@ namespace PROJECT
 본문은 윈도우 NT 운영체제에서 C# 프로그래밍 언어 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE) 설치 및 프로젝트 생성 단계를 소개한다. 프레임워크는 .NET 프레임워크가 아닌 .NET Core 위주로 진행한다.
 
 ## 비주얼 스튜디오
-[비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 IDE이며 .NET을 제공한다. 비주얼 스튜디오의 세 가지 에디션 중에서 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 [C](../ko.PRGMING_C/)/[C++](../ko.PRGMING_Csharp/)이나 [자바스크립트](../ko.PRGMING_JavaScript/) 등 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. C# 프로그래밍 언어 개발을 위해서면 ".NET desktop development"를 선택한다.
+[비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 IDE이며 .NET을 제공한다. 비주얼 스튜디오의 세 가지 에디션 중에서 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 [C](/docs/ko.C)/[C++](/docs/ko.Csharp)이나 [자바스크립트](/docs/ko.JavaScript) 등 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. C# 프로그래밍 언어 개발을 위해서면 ".NET desktop development"를 선택한다.
 
 ![비주얼 스튜디오 C# 프로그래밍을 위한 구성요소](/images/docs/csharp/csharp_vs_component.png)
 
@@ -108,7 +107,7 @@ C# 프로그래밍 언어로 다양할 어플리케이션을 만들 수 있어, 
 
     ![비주얼 스튜디오 C# 프로젝트 생성 (3단계)](/images/docs/csharp/csharp_vs_project4.png)
 
-위의 3단계 절차는 콘솔 어플리케이션 프로젝트를 생성하는 가장 간단한 방법이다. 만일 아무것도 없는 빈 프로젝트를 생성하려면 [여기](../ko.PRGMING_C/#비주얼-스튜디오)를 참조한다.
+위의 3단계 절차는 콘솔 어플리케이션 프로젝트를 생성하는 가장 간단한 방법이다. 만일 아무것도 없는 빈 프로젝트를 생성하려면 [여기](/docs/ko.C#비주얼-스튜디오)를 참조한다.
 
 비주얼 스튜디오는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`)와 디버그 모드(`F5`)이다. [디버그](https://ko.wikipedia.org/wiki/디버그)(debug)는 프로그램에 발생한 문제를 해결하는 행위로, IDE에서 각 줄의 코드마다 어떠한 변화가 생겼는지 혹은 얼만큼의 시스템 리소스를 소모하는지 등을 확인할 수 있는 정보를 제공한다. 디버깅 목적이 아니면 일반 실행 모드를 사용하는 것을 권장한다.
 
@@ -1238,7 +1237,7 @@ class Program
 ## `delegate` 자료형
 `delegate` 자료형은 특정 매개변수와 반환 자료형을 갖는 메소드를 캡슐화하는 객체를 생성한다.
 
-> C/C++ 프로그래밍 언어에 비교하면 [함수 포인터](../ko.PRGMING_Cpp/#함수-포인터)와 동일한 역할을 한다.
+> C/C++ 프로그래밍 언어에 비교하면 [함수 포인터](/docs/ko.Cpp#함수-포인터)와 동일한 역할을 한다.
 
 아래는 하나의 문자열 매개변수와 보이드를 반환하는 메소드를 위임(delegate)받을 수 있는 `delegate` 대리자를 객체화하는 예시 코드이다.
 
@@ -1277,7 +1276,7 @@ hello world!
 ```
 
 ### 콜백 메소드
-[콜백 메소드](../ko.PRGMING_Cpp/#콜백-함수)(callback method)는 인자로 전달되는 메소드이다. 콜백 메소드를 전달받는 메소드, 일명 호출 메소드(calling method)는 코드 블록 내에서 매개변수 호출을 통해 콜백 메소드를 실행한다. `delegate` 자료형을 매개변수로 사용하여 콜백 메소드를 구현할 수 있다.
+[콜백 메소드](/docs/ko.Cpp#콜백-함수)(callback method)는 인자로 전달되는 메소드이다. 콜백 메소드를 전달받는 메소드, 일명 호출 메소드(calling method)는 코드 블록 내에서 매개변수 호출을 통해 콜백 메소드를 실행한다. `delegate` 자료형을 매개변수로 사용하여 콜백 메소드를 구현할 수 있다.
 
 ```csharp
 void method(string arg, Del callback)

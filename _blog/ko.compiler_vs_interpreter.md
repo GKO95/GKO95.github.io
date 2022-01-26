@@ -21,7 +21,7 @@ toc: false
 > 전자공학에서 이진 코드의 `0`과 `1`은 각각 LOW (이상적으로 0 V) 및 HIGH (3.3 ~ 5.0 V) 전압을 의미합니다. 프로그래밍에서는 이진 코드의 가독성을 높이기 위해 팔진법이나 십진법으로 나타내기도 하지만 그 중에서 [십육진법](https://ko.wikipedia.org/wiki/십육진법)(hexadecimal)이 가장 많이 사용됩니다.
 
 ## 컴파일 언어
-[컴파일 언어](https://ko.wikipedia.org/wiki/컴파일_언어)(compiled language)는 사람 가독형 *소스 코드*를 기계 가독형 *기계어*로 변환, 일명 컴파일(compile)하여 이진 파일을 생성하는 프로그래밍 언어입니다. 아래는 대표적인 컴파일 언어인 [C](/docs/ko.PRGMING_C/)/[C++](/docs/ko.PRGMING_Cpp/) 프로그래밍 언어의 소스 코드(左)와 기계어로 컴파일된 `.EXE` 이진 실행 파일(右)입니다. 여기서 기계어는 비록 십육진수로 표현되었지만 실제로는 이진 코드입니다.
+[컴파일 언어](https://ko.wikipedia.org/wiki/컴파일_언어)(compiled language)는 사람 가독형 *소스 코드*를 기계 가독형 *기계어*로 변환, 일명 컴파일(compile)하여 이진 파일을 생성하는 프로그래밍 언어입니다. 아래는 대표적인 컴파일 언어인 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 프로그래밍 언어의 소스 코드(左)와 기계어로 컴파일된 `.EXE` 이진 실행 파일(右)입니다. 여기서 기계어는 비록 십육진수로 표현되었지만 실제로는 이진 코드입니다.
 
 ![컴파일 언어의 소스 코드와 실행 파일](/images/blog/compiler_vs_interpreter/programming_lang_compile.png)
 
@@ -38,7 +38,7 @@ toc: false
 
 > [바이트코드](https://ko.wikipedia.org/wiki/바이트코드)(bytecode)란, 인터프리터가 효율적으로 실행할 수 있도록 설계된 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)(instruction set)의 형태입니다. 어떠한 동작을 수행할 지 나타내는 [명령 코드](https://ko.wikipedia.org/wiki/명령_코드)(opcode) 한 [바이트](https://ko.wikipedia.org/wiki/바이트)(byte)와 부가적 옵션들로 구성되어 "바이트"코드라고 부릅니다. 명령 코드 목록은 파이썬 설치 경로로부터 `include\opcode.h`에서 찾아볼 수 있습니다.
 
-그 중에서 대표적인 인터프리트 언어인 [파이썬](/docs/ko.PRGMING_Python/)과 공학분야에서 흔히 사용되는 [MATLAB](/docs/ko.PRGMING_MATLAB/) 프로그래밍 언어는 두 번째 접근법에 해당합니다.
+그 중에서 대표적인 인터프리트 언어인 [파이썬](/docs/ko.Python)과 공학분야에서 흔히 사용되는 [MATLAB](/docs/ko.MATLAB) 프로그래밍 언어는 두 번째 접근법에 해당합니다.
 
 ![인터프리터 언어의 소스 코드와 실행 파일](/images/blog/compiler_vs_interpreter/programming_lang_interpret.png)
 

@@ -1,10 +1,9 @@
 ---
 layout: docs
-language: en
 category: Programming
 title: Python
-icon: icon-python.png
-meta: Python
+slug: en.Python
+icon: icon-python.svg
 order: 0x00
 ---
 # PYTHON: INTRO
@@ -13,12 +12,12 @@ Python is a high-level programming language with applications in numerous areas,
 ## Interpreted Language
 There are two different categories of program languages based on its execution: compiled language and interpreted language.
 
-Source code written in English needs to be translated to binary computer language for the computer to understand. The compiler is responsible for the translation, and its best examples are [C](../en.PRGMING_C)/[C++](../en.PRGMING_Cpp) language. On the other hand, the interpreter executes code without translation but has a drawback on a slower speed.
+Source code written in English needs to be translated to binary computer language for the computer to understand. The compiler is responsible for the translation, and its best examples are [C](/docs/en.C)/[C++](/docs/en.Cpp) language. On the other hand, the interpreter executes code without translation but has a drawback on a slower speed.
 
 Python is the interpreted language, and the code runs equivalently despite running on a different system as long as it has the interpreter (aka. cross-platform).
 
 ### CPython Interpreter
-The first interpreter for Python was developed using C programming language, called CPython. CPython is the most widely used Python interpreter, and there are others developed using different languages such as Jython (Java implemented), IronPython ([.NET](../en.PRGMING_Csharp#net) implemented), and PyPy (pure Python implemented).
+The first interpreter for Python was developed using C programming language, called CPython. CPython is the most widely used Python interpreter, and there are others developed using different languages such as Jython (Java implemented), IronPython ([.NET](/docs/en.Csharp#net) implemented), and PyPy (pure Python implemented).
 
 Although introduced as the interpreted language, CPython technically uses both compiler and interpreter. First, the compiler translates Python code to bytecode, then the interpreter executes the bytecode. This bytecode is the one that guarantees Python's cross-platform property.
 
@@ -89,7 +88,7 @@ The next selection page is the "Advanced Options," which can affect how the inte
 
 ![Python 3 installer advanced options](/images/docs/python/python_interpreter_advanced.png)
 
-It is worth paying attention to the `Download debug binaries (requires VS 2015 or later)` checkbox, as this option may require when creating the [OpenCV](../en.LIBRARY_OpenCV) library. However, people who are learning Python as their first programming language may ignore this option for now.
+It is worth paying attention to the `Download debug binaries (requires VS 2015 or later)` checkbox, as this option may require when creating the [OpenCV](/docs/en.OpenCV) library. However, people who are learning Python as their first programming language may ignore this option for now.
 
 ## Integrated Development Environment
 An integrated development environment (IDE) is a software development program that provides at least a source code editor, program build tools, and debugger. Python interpreter is a software for running a Python-based program, but it is not a source code editor. Therefore, IDE is essential to edit a Python source code, run the program, and examine the execution when encountering problems.
@@ -1896,7 +1895,7 @@ with instance.method():
     statements
 ```
 
-One of the actual implementations of this syntax can be found in the  [TensorBoard](../en.LIBRARY_TensorFlow#TensorBoard) chapter of TensorFlow document.
+One of the actual implementations of this syntax can be found in the  [TensorBoard](/docs/en.TensorFlow#TensorBoard) chapter of TensorFlow document.
 
 ### Absolute & Relative Paths
 Python has two different types of paths: absolute and relative path. When designating a file path, use double backslash `\\` since using a single backslash will escape string object and can cause unwanted operation.

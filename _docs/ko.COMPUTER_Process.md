@@ -1,15 +1,14 @@
 ---
 layout: docs
-language: ko
 category: 운영체제
 title: 프로세스
-meta: Process
-order: 0x40
+slug: ko.Process
+order: 0x60
 ---
 # 프로세스: 소개
 > *참조: [Microsoft Docs - Processes and Threads](https://docs.microsoft.com/en-us/windows/win32/procthread/processes-and-threads)*
 
-비록 본문은 프로세스 및 스레드를 위주로 설명하지만, [메모리](../ko.COMPUTER_Memory)와 매우 밀접한 내용들이 있으므로 함께 보는 것을 권장한다.
+비록 본문은 프로세스 및 스레드를 위주로 설명하지만, [메모리](/docs/ko.Memory)와 매우 밀접한 내용들이 있으므로 함께 보는 것을 권장한다.
 
 ## 어플리케이션
 [어플리케이션은](https://ko.wikipedia.org/wiki/응용_소프트웨어)(application)은 [사용자 공간](https://ko.wikipedia.org/wiki/사용자_공간)에서 특정 작업을 수행하기 위해 설계된 [명령어](https://ko.wikipedia.org/기계어) 집합체, 일명 *실행 가능한 소프트웨어*이다. 프로그래밍 언어로 작성하여 컴파일된 `.EXE` 확장자를 갖는 실행 파일도 어플리케이션이다.
@@ -19,7 +18,7 @@ order: 0x40
 
 > CPU가 직접 접속할 수 있으면서 거리가 가까운 RAM 메모리에서 처리하는 게 HDD나 SSD와 같은 저장장치에서 실행하는 것보다 극적으로 빠르기 때문이다.
 
-생성된 프로세스마다 [가상 주소 공간](../ko.COMPUTER_Memory/#가상-주소-공간)(virtual address space)이 할당되는데, 가상 주소 공간은 서로 고립되어 있기 때문에 하나의 프로세스에 문제가 발생하여도 타 프로세스에 영향을 주지 않는다. 즉, 가상 주소 공간은 프로세스 전용 메모리와 다름없다.
+생성된 프로세스마다 [가상 주소 공간](/docs/ko.Memory#가상-주소-공간)(virtual address space)이 할당되는데, 가상 주소 공간은 서로 고립되어 있기 때문에 하나의 프로세스에 문제가 발생하여도 타 프로세스에 영향을 주지 않는다. 즉, 가상 주소 공간은 프로세스 전용 메모리와 다름없다.
 
 프로세스의 상태
 
@@ -68,7 +67,7 @@ order: 0x40
 * 장기 스케줄링
 
 * 중기 스케줄링
-    : 중기 스케줄러(medium-term scheduler)는 swapping out (혹은 paging out) 그리고 swapping in (혹은 paging in) 작업을 수행한다. 자세한 내용은 [*페이징*](../ko.COMPUTER_Memory/#페이징)을 참고한다.
+    : 중기 스케줄러(medium-term scheduler)는 swapping out (혹은 paging out) 그리고 swapping in (혹은 paging in) 작업을 수행한다. 자세한 내용은 [*페이징*](/docs/ko.Memory#페이징)을 참고한다.
 
 * 단기 스케줄링
     : 단기 스케줄러(short-term scheduler), 일명 CPU 스케줄러는 어느 ready 스레드에게 프로세서 시간을 분배할지 결정한다.

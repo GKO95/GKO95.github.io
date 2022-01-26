@@ -1,14 +1,13 @@
 ---
 layout: docs
-language: ko
 category: 라이브러리
 title: CUDA
+slug: ko.CUDA
 icon: icon-nvidia.svg
-meta: CUDA
 order: 0x13
 ---
 # CUDA: 소개
-[CUDA](https://ko.wikipedia.org/wiki/CUDA)(Compute Unified Device Architecture)는 게이밍 그래픽 카드로 매우 잘 알려진 [NVIDIA](https://www.nvidia.com/ko-kr/)에서 제공하는 병렬 컴퓨팅 플랫폼 및 API 모델이다. 해당 플랫폼은 [C](../ko.PRGMING_C)/[C++](../ko.PRGMING_Cpp) 그리고 [포트란](https://ko.wikipedia.org/wiki/포트란) 프로그래밍 언어와 함께 사용할 수 있도록 제작되어 접근성이 다른 그래픽 관련 API와 달리 용이하다.
+[CUDA](https://ko.wikipedia.org/wiki/CUDA)(Compute Unified Device Architecture)는 게이밍 그래픽 카드로 매우 잘 알려진 [NVIDIA](https://www.nvidia.com/ko-kr/)에서 제공하는 병렬 컴퓨팅 플랫폼 및 API 모델이다. 해당 플랫폼은 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 그리고 [포트란](https://ko.wikipedia.org/wiki/포트란) 프로그래밍 언어와 함께 사용할 수 있도록 제작되어 접근성이 다른 그래픽 관련 API와 달리 용이하다.
 
 컴퓨터의 중앙 처리 장치(CPU)에는 실질적인 연산을 담당하는 프로세서가 한 개 이상이 들어있다: 2개면 듀얼 코어, 4개면 쿼드 코어, 그리고 6개면 헥사 코어라 부른다. 그래픽 카드의 그래픽 처리 장치(GPU)에도 이러한 프로세서가 존재하는데 이들을 바로 스트리밍 프로세서(streaming processor; SP) 혹은 간단히 CUDA 코어라고 부르며, 흔히 규격상에는 [셰이더](https://ko.wikipedia.org/wiki/셰이더)(shader)로 알려져 있다. 단일 GPU 코어는 CPU 코어에 비해 비약적인 처리능력을 가졌으나, 게이밍에 사용되는 그래픽 카드에는 적어도 천 개 이상의 프로세서가 들어있어 한꺼번에 컴퓨팅을 진행하면 CPU보다 더 빠르고 높은 효율로 작업을 처리할 수 있다.
 
@@ -80,7 +79,7 @@ CUDA Toolkit 설치 절차가 모두 완료되었으면 CUDA 프로젝트를 생
 
 ![비주얼 스튜디오 CUDA 11.2 Runtime 프로젝트](/images/docs/cuda/cuda_project2.png)
 
-비주얼 스튜디오에서 프로젝트를 설정하는 방법은 [여기](../ko.PRGMING_Cpp/#비주얼-스튜디오)를 참고한다.
+비주얼 스튜디오에서 프로젝트를 설정하는 방법은 [여기](/docs/ko.Cpp#비주얼-스튜디오)를 참고한다.
 
 # CUDA: 기초
 > *출처: [NVIDIA CUDA C/C++ Basics - Supercomputing 2011 Tutorial](https://www.nvidia.com/docs/IO/116711/sc11-cuda-c-basics.pdf)*
@@ -153,7 +152,7 @@ __host__ __device__ void function() {
 ### 메모리 함수
 > *참조: [NVIDIA Docs CUDA 런타임 메모리 (영문)](https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__MEMORY.html)*
 
-호스트 메모리와 디바이스 메모리는 독립된 존재이며 서로 직접적으로 관여할 수 없다. 다시 말해, 일반 C/C++ 언어에서 다룬 [메모리 함수](../ko.PRGMING_C/#메모리-함수)로는 디바이스에서 처리할 메모리 공간을 확보 및 관리가 불가하다. CUDA 프로젝트에서는 디바이스 메모리만을 위한 함수가 있으며, 아래는 일부 호스트와 디바이스의 메모리 함수를 비교한다.
+호스트 메모리와 디바이스 메모리는 독립된 존재이며 서로 직접적으로 관여할 수 없다. 다시 말해, 일반 C/C++ 언어에서 다룬 [메모리 함수](/docs/ko.C#메모리-함수)로는 디바이스에서 처리할 메모리 공간을 확보 및 관리가 불가하다. CUDA 프로젝트에서는 디바이스 메모리만을 위한 함수가 있으며, 아래는 일부 호스트와 디바이스의 메모리 함수를 비교한다.
 
 * 메모리 할당
 
@@ -162,7 +161,7 @@ __host__ __device__ void function() {
 | C/C++ | `malloc(size_t size)`                    |
 | CUDA  | `cudaMalloc(void **devPtr, size_t size)` |
 
-CUDA 메모리 할당 함수는 `void**`를 추가 인자로 가진다. CUDA 함수가 C/C++의 `malloc()` 함수와 달리 포인터 아닌 `cudaError_t`를 반환하기 때문이다. 그러므로 [참조에 의한 호출](../ko.PRGMING_Cpp/#포인터)(call by reference)을 활용하여 반환되어야 할 메모리 주소를 인자로 통해 건네주는 방식을 채택하였는데, 포인터를 반환해야 하므로 결과적으로 포인터가 할당된 메모리 주소를 가리키는 `void**` 자료형을 가지게 된다.
+CUDA 메모리 할당 함수는 `void**`를 추가 인자로 가진다. CUDA 함수가 C/C++의 `malloc()` 함수와 달리 포인터 아닌 `cudaError_t`를 반환하기 때문이다. 그러므로 [참조에 의한 호출](/docs/ko.Cpp#포인터)(call by reference)을 활용하여 반환되어야 할 메모리 주소를 인자로 통해 건네주는 방식을 채택하였는데, 포인터를 반환해야 하므로 결과적으로 포인터가 할당된 메모리 주소를 가리키는 `void**` 자료형을 가지게 된다.
 
 할당된 디바이스 메모리는 호스트와 동일한 포인터 체계를 사용하나 메모리 주소 값이 꾀나 크다는 점을 확인할 수 있다. 이는 아마 호스트 메모리에서 접근하지 못하는 메모리 주소로 보인다. 이러한 이유로 디바이스 메모리 주소를 `printf()`와 같은 출력 함수로 값을 읽으려 시도하면 메모리 접근 오류가 발생한다.
 
@@ -262,7 +261,7 @@ __global__ void kernel(int *arg1, int *arg2, int *arg3) {
 > 
 > 스트리밍 프로세서 안에는 다음 구성장치를 가진다:
 > 
-> * 32비트 정수형 [ALU](../ko.EMBEDDED_MCU/#산술-논리-장치) (1개)
+> * 32비트 정수형 [ALU](/docs/ko.Microcontroller#산술-논리-장치) (1개)
 > * 단정밀도 부동소수점 [FPU](https://ko.wikipedia.org/wiki/부동_소수점_장치) (1개)
 
 CUDA 프로젝트에서 각 스레드에 접근하려면 두 가지를 변경해야 한다.
@@ -320,7 +319,7 @@ CUDA 프로젝트에서 각 블록에 접근하려면 두 가지를 변경해야
 
     > GeForce 600 시리즈(Kepler 마이크로아키텍처)부터 성능이 대폭 향상되어 명령어 및 데이터 전용 L1 캐시 메모리가 하나로 통합되었다.
 
-* *32비트 [레지스터](../ko.EMBEDDED_MCU/#레지스터) (32-bit register)*
+* *32비트 [레지스터](/docs/ko.Microcontroller#레지스터) (32-bit register)*
     : 스레드를 처리하는 스트리밍 프로세서의 ALU 및 FPU에 입력되는 피연산자 데이터와 출력되는 결과 데이터를 저장하는 장치이다. 즉, 레지스터 개수는 스트리밍 멀티프로세서가 한 번에 처리할 수 있는 스레드 개수 결정 요인 중 하나이다.
 
     > CUDA 성능 6.1의 *NVIDIA GeForce GTX 1070*에는 각 SM마다 64K개의 32비트 레지스터가 들어있다. 여기서 32비트 크기이면 정수형 혹은 단정밀도 부동소수점 한 개를 저장할 수 있다.

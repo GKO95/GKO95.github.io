@@ -1,10 +1,9 @@
 ---
 layout: docs
-language: ko
 category: 프로그래밍
 title: 자바스크립트
+slug: ko.JavaScript
 icon: icon-javascript.svg
-meta: JavaScript
 order: 0x05
 ---
 # 자바스크립트: 소개
@@ -13,7 +12,7 @@ order: 0x05
 본 문서는 전체적으로 웹프로그래밍 위주의 자바스크립트를 소개하기 때문에, 구체적인 내용은 생략하고 가장 중요하다고 판단되는 개념들만 함축적으로 설명할 예정이다.
 
 ## 인터프리트 언어
-> *참조: [컴파일 vs 인터프리트 언어](/blog/ko.compiler_vs_interpreter/)*
+> *참조: [컴파일 vs 인터프리트 언어](/blog/ko.compiler_vs_interpreter)*
 
 자바스크립트 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다.
 

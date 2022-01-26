@@ -1,13 +1,12 @@
 ---
 layout: docs
-language: ko
 category: 어플리케이션
 title: WPF
-meta: WPF
-order: 0x21
+slug: ko.WPF
+order: null
 ---
 # WPF: 소개
-[Windows Presentation Foundation](https://github.com/dotnet/wpf)(일명 WPF)은 마이크로소프트에서 개발한 [WinForms](https://github.com/dotnet/winforms)와 유사한 무료 오픈소스 그래픽 서브시스템으로 [.NET](../ko.PRGMING_Csharp) 플랫폼에서 사용자 인터페이스 제공을 목표로 한다. 비록 윈도우 OS에서만 실행할 수 있는 제약이 있으나, [XAML](https://ko.wikipedia.org/wiki/XAML)을 통해 시각적으로 UI를 제작할 수 있으며 [비즈니스 로직](https://ko.wikipedia.org/wiki/비즈니스_로직)과 별도로 관리할 수 있는 장점을 갖는다.
+[Windows Presentation Foundation](https://github.com/dotnet/wpf)(일명 WPF)은 마이크로소프트에서 개발한 [WinForms](https://github.com/dotnet/winforms)와 유사한 무료 오픈소스 그래픽 서브시스템으로 [.NET](/docs/ko.Csharp) 플랫폼에서 사용자 인터페이스 제공을 목표로 한다. 비록 윈도우 OS에서만 실행할 수 있는 제약이 있으나, [XAML](https://ko.wikipedia.org/wiki/XAML)을 통해 시각적으로 UI를 제작할 수 있으며 [비즈니스 로직](https://ko.wikipedia.org/wiki/비즈니스_로직)과 별도로 관리할 수 있는 장점을 갖는다.
 
 ## 아키텍처
 > *참조: [Microsoft Docs WPF 아키텍처 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/wpf-architecture)*
@@ -21,7 +20,7 @@ order: 0x21
 ### WinForms 비교
 
 # WPF: 프로젝트 생성
-> *본 내용부터 실질적인 WPF 프로그래밍을 소개하므로, 반드시 [C#](../ko.PRGMING_Csharp/) 내용을 숙지하도록 한다.*
+> *본 내용부터 실질적인 WPF 프로그래밍을 소개하므로, 반드시 [C#](/docs/ko.Csharp) 내용을 숙지하도록 한다.*
 
 위의 내용은 WPF 인터페이스 플랫폼에 대한 매우 기본적인 내용이다. 그 외에도 인터페이스의 실행 단계, 데이터 바인딩 등 중요한 내용들을 아직 설명하지 않았으나, 기본적인 WPF 어플리케이션이 어떻게 구성되어 있는지 알아보는 것도 차후 내용을 이해하는데 큰 도움이 될 수 있다. 그러므로 본 장에서는 직접 비주얼 스튜디오에서 WPF 어플리케이션 프로젝트를 생성 및 기본적인 코드과 API를 설명한다.
 
@@ -98,7 +97,7 @@ XML은 정해진 태그나 구조가 없다: 개발자가 원하는 태그 이�
 여기서 `<GHPages>` 태그와 같이 XML의 가장 최외각에 있는 루트 요소(root element)는 XML 파일마다 오로지 하나만 선언될 수 있다.
 
 ## XML 네임스페이스
-[XML 네임스페이스](https://en.wikipedia.org/wiki/XML_namespace)(namespace)는 개발자가 직접 부여한 태그 이름이 동일한 이름의 태그를 갖는 다른 XML 파일과 함께 사용될 때 충돌이 발생하는 것을 방지하기 위한 데이터 분류 공간이다. 이는 [C# 네임스페이스](../ko.PRGMING_Csharp/#네임스페이스)와 동일한 역할을 하면서도 유사점이 매우 많다. 그러므로 본 XML 네임스페이스 설명에서는 C# 네임스페이스가 자주 언급될 예정이다.
+[XML 네임스페이스](https://en.wikipedia.org/wiki/XML_namespace)(namespace)는 개발자가 직접 부여한 태그 이름이 동일한 이름의 태그를 갖는 다른 XML 파일과 함께 사용될 때 충돌이 발생하는 것을 방지하기 위한 데이터 분류 공간이다. 이는 [C# 네임스페이스](/docs/ko.Csharp#네임스페이스)와 동일한 역할을 하면서도 유사점이 매우 많다. 그러므로 본 XML 네임스페이스 설명에서는 C# 네임스페이스가 자주 언급될 예정이다.
 
 ### 통합 자원 식별자
 [통합 자원 식별자](https://ko.wikipedia.org/wiki/통합_자원_식별자)(uniform resource identifier; URI)는 네임스페이스 식별자를 지칭한다.
@@ -187,7 +186,7 @@ XML 요소들은 하나의 네임스페이스에만 속할 수 있다는 원칙�
 > 유사한 역할을 수행하는 [XML DTD](https://ko.wikipedia.org/wiki/문서_형식_정의)가 있으나, 스키마는 XML로 작성되었으면 네임스페이스를 지원하는 차이점이 있다.
 
 ## WPF XAML 네임스페이스
-WPF 프로젝트의 XAML 네임스페이스는 기존 XML 네임스페이스처럼 단순히 데이터 분류를 위해 URI로 유일성을 제공할 뿐만 아니라, 입력된 URI에 따라 XAML 문서에 특정 CLR 네임스페이스 혹은 참조 어셈블리로부터 지원받는 스키마 개념을 내포한다. 여기서 CLR은 [.NET](../ko.PRGMING_Csharp/#net) 공통 언어 런타임(Common Language Runtime)으로 XAML 마크업이 아닌 C# 언어 코드를 가리킨다.
+WPF 프로젝트의 XAML 네임스페이스는 기존 XML 네임스페이스처럼 단순히 데이터 분류를 위해 URI로 유일성을 제공할 뿐만 아니라, 입력된 URI에 따라 XAML 문서에 특정 CLR 네임스페이스 혹은 참조 어셈블리로부터 지원받는 스키마 개념을 내포한다. 여기서 CLR은 [.NET](/docs/ko.Csharp#net) 공통 언어 런타임(Common Language Runtime)으로 XAML 마크업이 아닌 C# 언어 코드를 가리킨다.
 
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
@@ -214,25 +213,25 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 ```
 
 * `x:Class` 지시문
-    : XAML 마크업 문서를 C# 코드의 [분할](../ko.PRGMING_Csharp/#한정자) 클래스에 연동시킨다. 본 지시문은 XAML 루트 요소에서만 기입할 수 있으며, 그 이외의 요소에서는 컴파일 오류가 발생한다.
+    : XAML 마크업 문서를 C# 코드의 [분할](/docs/ko.Csharp#한정자) 클래스에 연동시킨다. 본 지시문은 XAML 루트 요소에서만 기입할 수 있으며, 그 이외의 요소에서는 컴파일 오류가 발생한다.
 
 * `x:Name` 지시문
-    : XAML 요소에 [식별자](../ko.PRGMING_Csharp/#식별자)를 지정한다. 해당 식별자는 C# 코드에서 객체명으로 간단히 호출 및 접근하는데 유용하게 사용될 수 있으나, 식별자는 XAML 네임스페이스에서 요소마다 유일해야 한다. 이와 본질적으로 동일한 WPF 프레임워크 속성으로 [`Name`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.name)이 있다.
+    : XAML 요소에 [식별자](/docs/ko.Csharp#식별자)를 지정한다. 해당 식별자는 C# 코드에서 객체명으로 간단히 호출 및 접근하는데 유용하게 사용될 수 있으나, 식별자는 XAML 네임스페이스에서 요소마다 유일해야 한다. 이와 본질적으로 동일한 WPF 프레임워크 속성으로 [`Name`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.name)이 있다.
 
 * `x:Key` 지시문
-    : XAML로 정의된 딕셔너리에서 데이터를 불러올 호출자를 지정한다. 이는 C# 코드에서의 [딕셔너리](../ko.PRGMING_Csharp/#dictionary-컬렉션) 컬렉션과 같이 `{key, value}`의 `key`와 동일한 역할을 하며, 대표적은 [리소스 딕셔너리](#wpf-리소스)에서 사용된다.
+    : XAML로 정의된 딕셔너리에서 데이터를 불러올 호출자를 지정한다. 이는 C# 코드에서의 [딕셔너리](/docs/ko.Csharp#dictionary-컬렉션) 컬렉션과 같이 `{key, value}`의 `key`와 동일한 역할을 하며, 대표적은 [리소스 딕셔너리](#wpf-리소스)에서 사용된다.
 
 * `x:Type` 마크업 확장문
-    : XAML 요소의 자료형을 반환한다. 이는 C# 코드의 [`typeof`](../ko.PRGMING_Csharp/#typeof-연산자) 연산자의 XAML 버전으로 간주할 수 있다.
+    : XAML 요소의 자료형을 반환한다. 이는 C# 코드의 [`typeof`](/docs/ko.Csharp#typeof-연산자) 연산자의 XAML 버전으로 간주할 수 있다.
 
 ### CLR 네임스페이스
-CLR 네임스페이스는 간단히 말해 C# 프로그래밍 소스 코드에서 선언된 [네임스페이스](../ko.PRGMING_Csharp/#네임스페이스)이다; 접두사 `clr-namespace:`로부터 C# 네임스페이스 내의 클래스를 객체화하여 XAML에서 활용할 수 있다. 다음은 C# 소스 코드의 `WPFApplication` 네임스페이스를 불러온다.
+CLR 네임스페이스는 간단히 말해 C# 프로그래밍 소스 코드에서 선언된 [네임스페이스](/docs/ko.Csharp#네임스페이스)이다; 접두사 `clr-namespace:`로부터 C# 네임스페이스 내의 클래스를 객체화하여 XAML에서 활용할 수 있다. 다음은 C# 소스 코드의 `WPFApplication` 네임스페이스를 불러온다.
 
 ```xml
 xmlns:local="clr-namespace:WPFApplication"
 ```
 
-단, XAML 컴파일 작업 성질에 의해 객체화 과정에서 호출되는 생성자는 어떠한 전달인자도 받을 수 없다. 그리고 XAML에서 객체의 데이터를 접근하기 위해서는 [속성](../ko.PRGMING_Csharp/#객체)(property) 맴버를 사용해야 한다.
+단, XAML 컴파일 작업 성질에 의해 객체화 과정에서 호출되는 생성자는 어떠한 전달인자도 받을 수 없다. 그리고 XAML에서 객체의 데이터를 접근하기 위해서는 [속성](/docs/ko.Csharp#객체)(property) 맴버를 사용해야 한다.
 
 ```csharp
 using System.Windows;
@@ -322,7 +321,7 @@ XAML 리소스는 리소스 딕셔너리(resource dictionary)에 정의하며, �
 </Window>
 ```
 
-위에는 임의의 두 `Object` 객체를 리소스로 사용하였다. 리소스 딕셔너리인 만큼 C# [딕셔너리](../ko.PRGMING_Csharp/#dictionary-컬렉션) 컬렉션과 마찬가지로 `{key, value}` 형식에서 `value`에 해당하는 리소스를 불러오기 위해 필요한 `key`를 `x:Key`로 지정한다.
+위에는 임의의 두 `Object` 객체를 리소스로 사용하였다. 리소스 딕셔너리인 만큼 C# [딕셔너리](/docs/ko.Csharp#dictionary-컬렉션) 컬렉션과 마찬가지로 `{key, value}` 형식에서 `value`에 해당하는 리소스를 불러오기 위해 필요한 `key`를 `x:Key`로 지정한다.
 
 WPF 어플리케이션은 리소스를 정적(static) 혹은 동적(dynamic)으로 참조할 수 있다:
 

@@ -1,10 +1,9 @@
 ---
 layout: docs
-language: ko
 category: 운영체제
 title: 네트워크
-meta: Network
-order: 0x42
+slug: ko.Network
+order: 0x62
 ---
 # 네트워크: 기초
 
@@ -92,7 +91,7 @@ order: 0x42
 여기서 [TTL](https://ko.wikipedia.org/wiki/Time_to_live)(Time to live)이란, 라우터를 통해 다음 네트워크 세그먼트로 넘어가는 [홉](https://ko.wikipedia.org/wiki/홉_(네트워크))(hop) 횟수를 제한시키는 역할을 한다. 이를 통해 패킷이 라우터를 거치며 목적지 주소까지 도달하지 못하고 떠돌면서 쓸데없이 통신 대역을 낭비하는 것을 방지한다. 매 홉마다 라우터는 TTL을 차감하고, 0이 되면 패킷은 손실된다. IPv6에서는 이를 홉 제한(hop limit)이라고 부른다.
 
 ### 전송 계층
-전송 계층(transport layer)은 패킷이 라우터 안내를 받아 목적지 주소의 호스트에 도착했을 떄, 호스트 내에서 어느 [프로세스](../ko.COMPUTER_Process/#프로세스)에 통신을 전할지 [포트](https://ko.wikipedia.org/wiki/포트_(컴퓨터_네트워킹))(port)와의 연결에 가담하는 계층이다. 전송 계층의 PDU는 패킷 헤더에 명시된 전송 계층 프로토콜 종류에 따라 "데이터그램(datagram)" 혹은 "세그먼트(segment)"로 나뉜다.
+전송 계층(transport layer)은 패킷이 라우터 안내를 받아 목적지 주소의 호스트에 도착했을 떄, 호스트 내에서 어느 [프로세스](/docs/ko.Process#프로세스)에 통신을 전할지 [포트](https://ko.wikipedia.org/wiki/포트_(컴퓨터_네트워킹))(port)와의 연결에 가담하는 계층이다. 전송 계층의 PDU는 패킷 헤더에 명시된 전송 계층 프로토콜 종류에 따라 "데이터그램(datagram)" 혹은 "세그먼트(segment)"로 나뉜다.
 
 > [UDP](#사용자-데이터그램-프로토콜) 및 [TCP](#전송-제어-프로토콜)에 대한 설명은 본 장의 별도 부문에서 설명한다.
 

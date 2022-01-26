@@ -1,10 +1,9 @@
 ---
 layout: docs
-language: en
 category: Programming
 title: C++
-icon: icon-cpp.png
-meta: Cpp
+slug: en.Cpp
+icon: icon-cpp.svg
 order: 0x02
 ---
 # C++: INTRO
@@ -990,7 +989,7 @@ int WinMain(HINSTANCE 	hInstance,
 }
 ```
 
-The core functionality of the `WinMain()` function is entering a message retrieval-and-dispatch loop called Message Loop. For more information on how framework application works, refer to the [*LIBRARY_MFC.md*](../en.LIBRARY_MFC/) article.
+The core functionality of the `WinMain()` function is entering a message retrieval-and-dispatch loop called Message Loop. For more information on how framework application works, refer to the [*LIBRARY_MFC.md*](/docs/en.MFC) article.
 
 Receiving the `WM_QUIT` message will terminate the Loop and exit the application by returning its *wParam* parameter. Failed to enter the Loop will continue to `return 0;` statement, exiting the application program immediately.
 

@@ -1,9 +1,8 @@
 ---
 layout: docs
-language: ko
 category: 공업수학
 title: 미분방정식
-meta: Differential
+slug: ko.Differential
 order: 0xE1
 ---
 # 미분방정식: 개요

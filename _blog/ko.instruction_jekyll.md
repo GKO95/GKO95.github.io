@@ -122,7 +122,7 @@ SCSS 파일을 더 빨리 처리할 수 있도록 컴파일하여 저장하는 �
 위의 부문에서 Jekyll 사이트의 기본적인 구조를 설명하였으면, 해당 부문에서는 Jekyll 사이트를 설정하는 방법에 대하여 소개한다. 특히 `_config.html` 그리고 `Gemfile` 및 `Gemfile.lock` 파일들이 핵심이다.
 
 ### `Gemfile`
-Python 언어에서 [모듈](/docs/ko.PRGMING_Python/#모듈)(module)이란 배포용 라이브러리가 있으면, 이와 유사하게 Ruby 언어에서는 젬(gem)이 존재한다. 그리고 [Jekyll](https://rubygems.org/gems/jekyll) 또한 Ruby의 젬 중 하나이다. 이러한 이유로 Jekyll 생성 과정에서 Ruby를 설치한 것이며, Ruby 언어가 지원되는 SCSS 파일이 지속적으로 언급된 것이다.
+Python 언어에서 [모듈](/docs/ko.Python#모듈)(module)이란 배포용 라이브러리가 있으면, 이와 유사하게 Ruby 언어에서는 젬(gem)이 존재한다. 그리고 [Jekyll](https://rubygems.org/gems/jekyll) 또한 Ruby의 젬 중 하나이다. 이러한 이유로 Jekyll 생성 과정에서 Ruby를 설치한 것이며, Ruby 언어가 지원되는 SCSS 파일이 지속적으로 언급된 것이다.
 
 `Gemfile` 파일은 현재 Ruby에 적용되고 있는 젬들을 관리하는 파일이다. Jekyll 사이트를 생성 및 사용하는 과정에서 `Gemfile`을 직접 수정한 적이 있으며, 바로 Jekyll을 GitHub Pages에 사용할 수 있도록 주석에 달린 설명대로 편집한 때이다. `jekyll` 젬을 Gemfile에서 제거하였는데 여전히 Jekyll을 사용할 수 있는 이유는 바로 `github-pages` 젬이 내부적으로 `jekyll` 젬을 호출하기 때문이다. Ruby 언어의 젬 저장소인 [rubygems.org](https://rubygems.org/)을 확인하면 `github-pages`가 `jekyll`을 디펜던시(dependency), 즉 의존하므로 자동적으로 두 젬을 함께 사용하게 된다.
 

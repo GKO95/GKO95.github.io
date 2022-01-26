@@ -1,10 +1,9 @@
 ---
 layout: docs
-language: en
 category: Programming
 title: C#
-icon: icon-csharp.png
-meta: Csharp
+slug: en.Csharp
+icon: icon-csharp.svg
 order: 0x03
 ---
 # C#: INTRO

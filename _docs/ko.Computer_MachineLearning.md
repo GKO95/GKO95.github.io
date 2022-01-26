@@ -1,9 +1,8 @@
 ---
 layout: docs
-language: ko
 category: 인공지능
 title: 기계학습
-meta: ML
+slug: ko.Machine-Learning
 order: null
 ---
 # 기계학습: 소개

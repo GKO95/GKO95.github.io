@@ -1,10 +1,9 @@
 ---
 layout: docs
-language: ko
 category: 프로그래밍
 title: 파이썬
+slug: ko.Python
 icon: icon-python.svg
-meta: Python
 order: 0x00
 ---
 # 파이썬: 소개
@@ -13,7 +12,7 @@ order: 0x00
 ## 인터프리트 언어
 > *참조: [컴파일 vs 인터프리트 언어](/blog/ko.compiler_vs_interpreter/)*
 
-파이썬 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다. 가장 첫 인터프리터는 [C](../ko.PRGMING_C/) 프로그래밍 언어로 개발된 C파이썬(CPython)으로 현재 가장 널리 사용되는 파이썬 인터프리터이다. 그 외에도 다른 프로그래밍 언어로 개발된 Jython(자바로 구현된 인터프리터), IronPython([.NET](../ko.PRGMING_Csharp#net)으로 구현된 인터프리터), 그리고 PyPy(순수 파이썬으로 구현된 인터프리터) 등이 있다.
+파이썬 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다. 가장 첫 인터프리터는 [C](/docs/ko.C) 프로그래밍 언어로 개발된 C파이썬(CPython)으로 현재 가장 널리 사용되는 파이썬 인터프리터이다. 그 외에도 다른 프로그래밍 언어로 개발된 Jython(자바로 구현된 인터프리터), IronPython([.NET](/docs/ko.Csharp#net)으로 구현된 인터프리터), 그리고 PyPy(순수 파이썬으로 구현된 인터프리터) 등이 있다.
 
 파이썬은 인터프리트 언어 중에서도 기술적으로 인터프리터와 컴파일러 둘 다 사용한다: 우선 C파이썬은 파이썬 코드를 [바이트코드](https://ko.wikipedia.org/wiki/바이트코드)(bytecode)로 컴파일한 다음 C파이썬 인터프리터에 의해 실행된다. 파이썬 코드가 다른 컴퓨터에서도 동일하게 동작하는 [크로스 플랫폼](https://ko.wikipedia.org/wiki/크로스_플랫폼)(cross platform) 성질을 가질 수 있는 것은 바이트코드 덕분이다.
 
@@ -62,7 +61,7 @@ Control Panel\System and Security\System
 
 ![윈도우 명령 프롬프트에서 실행된 파이썬 3](/images/docs/python/python_interpreter_cmd.png)
 
-순수히 파이썬만 사용한다면 환경 변수 설정은 필수요소가 아니다. 그렇지만 외부 소프트웨어 또는 라이브러리와 연동하여 사용할 때 매우 유용하며 컴퓨터 성능에 영향을 주지 않으므로 본 문서는 환경 변수를 설정하는 것을 적극 권장한다. 설치 당시에 해당 옵션을 선택하지 않아도 방법만 알면 재설치 필요없이 손쉽게 설정할 수 있다 ([*환경 변수 설정 방법*](/blog/ko.environment_variable_configuration/) 참조).
+순수히 파이썬만 사용한다면 환경 변수 설정은 필수요소가 아니다. 그렇지만 외부 소프트웨어 또는 라이브러리와 연동하여 사용할 때 매우 유용하며 컴퓨터 성능에 영향을 주지 않으므로 본 문서는 환경 변수를 설정하는 것을 적극 권장한다. 설치 당시에 해당 옵션을 선택하지 않아도 방법만 알면 재설치 필요없이 손쉽게 설정할 수 있다 ([*환경 변수 설정 방법*](/blog/ko.environment_variable_configuration) 참조).
 
 설치 화면에서 "Install Now"를 눌러 인터프리터 설치를 진행하고, 설치가 완료되면 파이썬을 곧바로 실행할 수 있다.
 
@@ -79,13 +78,13 @@ Control Panel\System and Security\System
 | `Python test suite` | 파이썬 프로그램 동작을 시험하는 프레임워크      |
 | `py launcher`       | 파이썬 인터프리터 관리 프로그램       |
 
-필자는 `pip`와 `py launcher`만은 반드시 설치한다. 나머지 옵션들은 사용하지 않으며, 사용자 인터페이스를 가진 프로그램을 만든다 하더라도 대표적인 GUI 프레임워크 중 하나인 [PySide2](../ko.APPLICATION_Qt)를 사용하기 때문에 `tcl/tk`가 필요하지 않다. 코드 편집기 또한 IDLE보다 편한 것을 곧 소개할 예정이다.
+필자는 `pip`와 `py launcher`만은 반드시 설치한다. 나머지 옵션들은 사용하지 않으며, 사용자 인터페이스를 가진 프로그램을 만든다 하더라도 대표적인 GUI 프레임워크 중 하나인 [PySide2](/docs/ko.Qt)를 사용하기 때문에 `tcl/tk`가 필요하지 않다. 코드 편집기 또한 IDLE보다 편한 것을 곧 소개할 예정이다.
 
 다음에 나타나는 "Advanced Options" 화면은 실질적으로 인터프리터 동작에 영향을 미칠 수 있는 고급 옵션들이다.
 
 ![파이썬 3 설치 프로그램 고급 설정](/images/docs/python/python_interpreter_advanced.png)
 
-여기서 `Download debug binaries (requires VS 2015 or later)`는 "디버깅 라이브러리 다운로드" 여부를 묻는데, 이를 필요로 하는 경우로써 [OpenCV](../ko.LIBRARY_OpenCV) 라이브러리를 생성할 때가 있다. 하지만 파이썬을 프로그래밍 입문 언어로 배우는 초급자의 입장에서 위의 선택사항들은 공부에 지장을 주지 않아 무시하여도 된다.
+여기서 `Download debug binaries (requires VS 2015 or later)`는 "디버깅 라이브러리 다운로드" 여부를 묻는데, 이를 필요로 하는 경우로써 [OpenCV](/docs/ko.OpenCV) 라이브러리를 생성할 때가 있다. 하지만 파이썬을 프로그래밍 입문 언어로 배우는 초급자의 입장에서 위의 선택사항들은 공부에 지장을 주지 않아 무시하여도 된다.
 
 ## 통합 개발 환경
 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)은 최소한 프로그래밍 언어의 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 소프트웨어 개발 프로그램이다. 인터프리터는 파이썬 코드를 실행하는 소프트웨어이지만, 파이썬 코드 편집기가 아니다. 그러므로 파이썬 코드를 편집하고 곧바로 프로그램으로 실행하여 문제가 발생하면 검토할 수 있는 IDE가 절대적으로 필요하다.
@@ -1831,7 +1830,7 @@ with instance.method():
     ...
 ```
 
-대표적인 컨텍스트 관리자의 실제 적용 예시로는 *[텐서플로우: 텐서보드](../ko.LIBRARY_TensorFlow#텐서보드)*에서 확인할 수 있다.
+대표적인 컨텍스트 관리자의 실제 적용 예시로는 *[텐서플로우: 텐서보드](/docs/ko.TensorFlow#텐서보드)*에서 확인할 수 있다.
 
 ### 절대경로 및 상대경로
 컴퓨터에는 두 종류의 경로 탐색법이 존재한다.

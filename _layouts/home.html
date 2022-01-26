@@ -10,21 +10,23 @@ layout: template
 {% endif %}
 <section id="page">
   <article id="home-content" class="content">
-    {%- assign langMarkdown1 = "" -%}{%- assign langMarkdown1 = "" -%}
-    {%- assign fullMarkdown = site.docs | sort: "language" | sort: "order" -%}
+    {%- assign langMarkdown = "" -%}{%- assign langMarkdown = "" -%}
+    {%- assign fullMarkdown = site.docs | sort: "slug" | sort: "order" -%}
     {%- for Markdown in fullMarkdown -%}
       {%- if Markdown.order != nil -%}
-        {%- assign langMarkdown1 = langMarkdown1 | append: "\" | append: Markdown.language -%}
-        {%- assign nameMarkdown1 = nameMarkdown1 | append: "\" | append: Markdown.category -%}
+        {%- assign language = Markdown.slug | slice: 0, 3 -%}
+        {%- assign langMarkdown = langMarkdown | append: "\" | append: language -%}
+        {%- assign nameMarkdown = nameMarkdown | append: "\" | append: Markdown.category -%}
       {%- endif -%}
     {%- endfor -%}
-    {%- assign langMarkdown1 = langMarkdown1 | remove_first: "\" | split: '\' | uniq -%}
-    {%- assign nameMarkdown1 = nameMarkdown1 | remove_first: "\" | split: '\' | uniq -%}
-    {% for lang in langMarkdown1 %}
-      {%- for group in nameMarkdown1 -%}
-        {%- assign arrMarkdown = fullMarkdown | where: "category", group | where: "language", lang -%}{%- assign numMarkdown = arrMarkdown | size -%}
+    {%- assign langMarkdown = langMarkdown | remove_first: "\" | split: '\' | uniq -%}
+    {%- assign nameMarkdown = nameMarkdown | remove_first: "\" | split: '\' | uniq -%}
+    {% for lang in langMarkdown %}
+      {%- for group in nameMarkdown -%}
+        {%- assign arrMarkdown = fullMarkdown | where: "category", group | where_exp: "item", "item.slug contains lang" -%}
+        {%- assign numMarkdown = arrMarkdown | size -%}
         {%- unless numMarkdown == 0 -%}
-          <div class="home-category" lang="{{ lang }}" category="{{ group }}">
+          <div class="home-category" lang="{{ lang | slice: 0, 2 }}" category="{{ group }}">
             <section class="home-category-header">{{group}}</section>
             <ol>
               {%- for Markdown in arrMarkdown -%}

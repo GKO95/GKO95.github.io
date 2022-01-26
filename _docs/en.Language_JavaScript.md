@@ -1,10 +1,9 @@
 ---
 layout: docs
-language: en
 category: Programming
 title: JavaScript
-icon: icon-javascript.png
-meta: JavaScript
+slug: en.JavaScript
+icon: icon-javascript.svg
 order: 0x04
 ---
 # JAVASCRIPT: INTRO
