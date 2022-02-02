@@ -8,305 +8,70 @@ order: null
 # Git: 소개
 > *참조: [Pro Git, 2nd Edition](https://git-scm.com/book/)*
 
-[Git](https://git-scm.com/)은 버전 관리 시스템 중 하나로 프로젝트 소스 코드를 관리하는데 매우 유용한 소프트웨어이다. 인터넷에는 다양한 온라인 Git 호스팅 서비스들이 존재하며 대표적으로 [GitHub](https://github.com/) 및 [GitLab](https://gitlab.com/)가 존재한다. 본 장은 버전 관리의 기초적인 개념 및 의의, 그리고 Git의 활용에 대하여 소개한다.
-
-## 스냅샷
-[스냅샷](https://ko.wikipedia.org/wiki/스냅샷_(기억_장치))(snapshot)은 정지된 시간(frozen time)에서의 시스템 상태를 의미한다. 본 문서는 소스 코드 버전 관리를 논하고 있으므로, 여기서 언급된 시스템은 작업공간 혹은 프로젝트를 가리킨다. 스냅샷을 저장하는 것은 해당 시스템을 백업하는 작업과 유사하지만, 두 방식은 각각의 장단점을 갖는다.
-
-* [백업](https://ko.wikipedia.org/wiki/백업)(backup)
-    : 과정이 너무 오래 걸리고, 백업 진행 과정에서 멀티태스킹 및 다중 사용자의 이용으로 데이터 write에 의한 손상된 데이터를 백업할 수 있는 위험이 있다. Write 접근 권한을 제한하므로써 방지할 수 있는 문제이지만 빈번히 사용되는 시스템의 경우에는 백업을 위해 시스템을 일시적으로 중단(일명 downtime)되어야 한다.
-
-전통적인 시스템 백업(backup)은 과정이 너무 오래 걸리고, 백업 진행 과정에서 멀티태스킹 및 다중 사용자의 이용으로 데이터 write에 의한 손상된 데이터를 백업할 수 있는 위험이 있다. Write 접근 권한을 제한하므로써 방지할 수 있는 문제이지만 빈번히 사용되는 시스템의 경우에는 백업을 위해 시스템을 일시적으로 중단(일명 downtime)되어야 한다.
-
-Traditional backup has a drawback of taking long time to complete for a large data and may have data corruption due to data write from multi-tasking or multi-user system while on backup process. Restricting write access can avoid this encounter but is unsuitable for the system with high-availability as the system needs to be stopped (called downtime) for backup.
-
-스냅샷은 downtime이 필요하지 않다. 특정 시간에서의 읽기 전용 복사본을 생성하는 것은 타 어플리케이션의 데이터 write로 인한 간섭을 받지 않는다. 만일 이전 스냅샷에 비해 변경사항이 없을 시에는 이전 복사본을 그대로 참조하기만 한다. 이는 스냅샷을 생성하고 저장하는 시간을 대폭 줄일 수 있다. 하지만 스냅샷은 이전 스냅샷으로부터 크게 의존하며, 만일 손상된 포인터가 있으면 이전 데이터 복원이 불가하다.
-
-Snapshot does not need downtime to create backup: creating a read-only copy of the data at frozen point of time is not interfered by writing data from other applications. Additionally, if snapshot noticed unchanged data compared to its previous snapshot, that data is call by reference (yes, calling address of the data) from the previous copy instead. This can reduce the amount of time and space to create and store the snapshot. However, snapshot is dependency-sensitive and broken pointer reference can lead to failure of rollback.
-
-Back to the topic, general VCS applies update on the files that has difference with previous version. This can save time and bandwidth significantly compare to storing the whole source code. The updated file is called delta file, while the symbol delta $\Delta$ denotes "change" in mathematic (thus, called delta-base version control).
-
-<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\Git\whatisgit_VCS.png" width=100%></div>
-<center style="font-weight:bold">Figure #. Delta-base version control.</center>
-
-Git, on the other hand, uses a stream of snapshot: unchanged files are not stored again but is called by reference from the previous snapshot copy.  
-
-<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\Git\whatisgit_Git.png" width=100%></div>
-<center style="font-weight:bold">Figure #. Snapshot version control.</center>
-
-This does not mean snapshot is far better than delta update and vice versa. Each has its own benefits and drawback, and Git just happens to choose the snapshot technique for version-control.
-
-
+[Git](https://git-scm.com/)은 버전 관리 시스템 중 하나로 프로젝트 관리에 사용되는 소프트웨어이다. 비록 Subversion과 같은 Git이 아닌 소프트웨어라도 버전 관리 시스템은 개발자들에게 프로젝트 관리 및 작업에 효율성을 증대시키는 매우 유용한 기능을 제공하며, 대표적인 Git 호스팅 서비스로 [GitHub](https://github.com/) 및 [GitLab](https://gitlab.com/) 등이 존재한다. 본 장은 버전 관리의 기초적인 개념 및 원리를 시작으로 Git에 대하여 기본적인 내용을 소개한다.
 
 ## 버전 관리
-[버전 관리](https://ko.wikipedia.org/wiki/버전_관리)(version control)는 파일의 변화를 기록하는 시스템으로 언제든지 원하는 버전으로 되돌아갈 수 있도록 한다.   소스 코드 뿐만 아니라 파일 혹은 프로젝트 전체를 이전 상태로 되돌릴 수도 있다. 이러한 특성 덕분에 진행되고 있는 프로젝트에 문제 혹은 결함이 발생할 때 버전 관리를 통해 stable 했던 상태로 복원이 가능하다. 문서를 작성하거나 게임을 할 때 저장하는 것과 마찬가지로, 버전 관리는 프로젝트의 현 상태를 저장하여 나중에 불러올 수 있는 기능이다.
+[버전 관리](https://ko.wikipedia.org/wiki/버전_관리)(version control)는 파일의 변화를 기록하는 시스템으로 언제든지 원하는 버전으로 되돌아갈 수 있도록 한다. 소스 코드 뿐만 아니라 파일 혹은 프로젝트 전체를 이전 상태로 되돌릴 수도 있다. 이러한 특성 덕분에 진행되고 있는 프로젝트에 문제 혹은 결함이 발생할 때 버전 관리를 통해 stable 했던 상태로 복원이 가능하다. 문서를 작성하거나 게임을 할 때 저장하는 것과 마찬가지로, 버전 관리는 프로젝트의 현 상태를 저장하여 나중에 불러올 수 있는 기능이다.
 
 ### 로컬 버전 관리
-가장 간단한 형태의 버전 관리 시스템으로 파일 변경사항 기록들은 프로젝트를 작업하는 로컬 장치에 저장되어 있다. 단, 변경사항 기록 데이터가 손상되면 프로젝트 버전 이동이 불가능하다.
+로컬 버전 관리 시스템(local version control system; LVCS)은 가장 간단한 형태의 버전 관리 시스템으로 파일 변경사항 기록들은 프로젝트를 작업하는 로컬 장치에 저장되어 있다. 단, 변경사항 기록 데이터가 손상되면 프로젝트 버전 이동이 불가능하다.
 
 ![로컬 버전 관리 시스템 (LVCS)](/images/docs/git/vcs_local.png)
 
 ### 중앙 버전 관리
-여러 사용자가 협업하여 프로젝트를 진행해야 할 경우, 파일 변경사항 기록을 서버 측에서 관리한다. CVCS는 여러 장점을 갖는데, 그 예시로 효율적인 관리와 사용자들 간 어떠한 작업을 진행하고 있는지 확인할 수 있는 점 등이 있다. 그러나 서버가 다운되면 작업을 진행하지 못하며, 데이터베이스가 손상되면 프로젝트 작업을 전부 잃게 되는 치명적인 단점을 지닌다.
+중앙 버전 관리 시스템(centralized version control system; CVCS)은 파일 변경사항 기록을 서버에서 관리하여 클라이언트에게 작업할 프로젝트를 제공하므로써 여러 사용자가 협업할 수 있도록 한다. CVCS는 여러 장점을 갖는데, 그 예시로 효율적인 관리와 사용자들 간 어떠한 작업을 진행하고 있는지 확인할 수 있는 점 등이 있다. 그러나 서버가 다운되면 작업을 진행하지 못하며, 데이터베이스가 손상되면 프로젝트 작업을 전부 잃게 되는 치명적인 단점을 지닌다.
 
 ![중앙 버전 관리 시스템 (CVCS)](/images/docs/git/vcs_centralized.png)
 
 ### 분산 버전 관리
+분산 버전 관리 시스템(distirbuted version control system; DVCS)은 서버에서만 버전을 관리하는 게 아니라 프로젝트 작업에 임하는 클라이언트 측에서도 할 수 있다. 바로 서버가 가지고 있던 파일 변경사항 기록 전체를 클라이언트 컴퓨터로 복사하기 때문이다. 그러므로 서버와 연결이 불가하더라도 클라이언트가 자체적으로 버전 관리가 가능하며, 서버 연결이 재개되면 클라이언트에서 진행된 변경 내역들을 서버로 업데이트 할 수 있다.
 
-To resolve this matter, Distributed Version-Control System is introduced. Not only does the server holds the database, but the source code is also distributed to the clients working on the project. Git is one of the example that implements this VCS, and its distribution of the source code is called "clone".
+> Git은 분산 버전 관리 시스템을 활용한 소프트웨어이다.
 
 ![분산 버전 관리 시스템 (DVCS)](/images/docs/git/vcs_distributed.png)
 
+## 시스템 상태
+시스템 상태(system state)는 시스템을 정상적으로 구동하기 위해 필요한 정보들을 의미한다. 본문은 작업공간 혹은 프로젝트를 하나의 시스템 단위로 보고 있으므로, 여기서 논하는 시스템 상태는 프로젝트 경로에 있는 소스 코드, 리소스 파일, 프로젝트 환경 및 설정 등이 해당된다. 현 작업공간 혹은 프로젝트를 저장하는 방법으로 시스템 상태를 저장하는데, 이를 응용하기 몇 가지의 접근법을 설명한다.
 
-## Git
+### 백업
+[백업](https://ko.wikipedia.org/wiki/백업)(backup)은 시스템 전체에 대한 복사본이다. 버전 관리를 대상으로 예를 들면 프로젝트 경로에 있는 모든 파일들을 하나의 압축 파일로 저장하는 것과 동일한 이치이다. 그러나 버전마다 백업을 생성한다는 것은 사실상 시간이 너무 오래 걸려 비효율적이고, 만일 백업 진행 도중에 타 프로세스의 데이터 write 간섭 등의 의한 백업 데이터 손상 위험이 발생할 수 있다.
 
-Git is one of the Distributed VCS but do have some difference with other version-control system:
+### 델타
+[델타](https://en.wikipedia.org/wiki/Delta_encoding)(delta; 혹은 diff)란 파일의 변화를 가리키며, 이는 수학에서 변화량을 나타내는 $\Delta$ 기호에서 비롯된 용어이다. 그러므로 델타 기반은 버전마다 각 파일의 변화를 기록하는 기법으로 버전을 관리하는 시스템이다. 그리고 파일에 델타를 적용하는 작업을 패치(patch)라고 부른다.
 
-* **Local Operation Available**
+![델타 기법 버전 관리 시스템](/images/docs/git/vcs_delta.png)
 
-Once the Git repository is distributed on the client's computer, client do not need to access the network for more information; version history, changes, and more are already included in the local cloned Git, aka. local repository. Thus, programmer can commit changes locally and upload once the network connection is established.
+위의 그림에 나타난  $\Delta$ 기호들은 이전 버전에 비해 변경된 내용으로, File A의 경우에 Version 1에서 $\Delta 1$ 패치를 적용하면 Version 2 파일로 변경된다. 반면 $\Delta$ 기호가 없다는 것은 이전 버전과 차이가 없는 동일한 파일이라는 것을 의미한다. 즉, Version 2와 Version 3의 File A는 동일한 파일이다.
 
-* **Integrity**
+### 스냅샷
+[스냅샷](https://ko.wikipedia.org/wiki/스냅샷_(기억_장치))(snapshot)은 정지된 시간(frozen time)에서의 시스템 상태이며, 데이터 write에 의한 간섭 없이 빠른 속도로 시스템을 저장할 수 있다. 여러 스냅샷 기법 중에서 [Copy-on-write](/docs/ko.Memory#copy-on-write)를 예시로 설명하자: Copy-on-Write는 프로젝트 데이터를 하나의 메모리에서 다른 물리 메모리로 복사하는 게 아니라 공유하기 때문에 속도가 빠르다. 그리고 공유된 메모리에 새로운 데이터를 write 하면 새로운 물리 메모리를 할당하여 데이터를 저장하여 기존 버전의 데이터를 보호한다.
 
-Before storing the project on the network, the repository is checksummed to 40-character hexadecimal string based on the file contents and directory structure using SHA-1 hash. When uploaded and stored, the same checksum is referred to check for file validation (such as missing file and corruption check). Therefore, every change must be notified to Git or won't be able to store on the server-side. In database, Git stores everything not by its name but by hash value of its contents. 
+![스냅샷 기법 버전 관리 시스템](/images/docs/git/vcs_snapshot.png)
 
-* **Data Adds Only**
+다시 말해, 이전 버전과 동일한 데이터는 메모리 공유에 의해 그대로 포인터 참조되어 스냅샷 생성 시간 단축 및 메모리 최소화에 기여한다. 위의 그림에 나타난 점선 테두리 데이터(예. Version 3의 A1 파일, Version 2 및 Version 3의 B 파일 등)가 이에 해당한다. 그러나 이전 버전의 스냅샷에 크게 의존하므로 손상된 포인터가 있으면 버전 복원이 불가하다.
 
-While other VCS can lose and mess up the changes by committing undoable and erasing the data in any way, Git can only add data (i.e., changes) in snapshot. This allows programmer to experiment the repository without severely screwing up the Git.
+스냅샷 기법의 VCS도 타 버전과 비교하기 위해 diffs를 사용한다. 단, 델타 기법의 버전 관리와 달리 diffs 패치 여부가 아니라 스냅샷에 따라 버전을 구분짓는다.
 
-There are other properties the Git has and will be introduced on the following subsections:
+> 본 내용은 스냅샷이 델타 방식보다 우월하다는 것을 논하는 게 아니다. 각 접근법은 장점과 단점이 있으며, 단지 Git은 스냅샷 기법을 택하였을 뿐이다.
 
-### Three States
+# Git: 기초
+Git은 [스냅샷](#스냅샷) 기법을 적용한 [분산 버전 관리](#분산-버전-관리) 시스템이다. 비록 작업공간이나 프로젝트가 들어있지 않더라도 Git으로부터 버전 관리가 되는 폴더를 저장소(repository)라고 부른다. Git 호스팅 서비스(예. GitHub, GitLab 등) 서버에서 클라이언트 컴퓨터로 저장소를 복사하는 것을 클론(clone)이라고 하며, 클라이언트로 클론된 저장소에는 `.git` 폴더가 생성되어 버전 관리를 로컬에서 가능케 하고 서버의 저장소와 연동한다.
 
-As the most important underlying concept, Git processes file in three different states: modified, staged, and committed.
+## 상태
+본 부문은 Git 버전 관리 시스템의 네 가지 상태를 설명한다.
 
-* **Modified**: file that *has* changed but not committed to the Git repository yet.
-* **Staged**: modified file buffered just before committed to the next snapshot for management.
-* **Committed**: file that managed to safely stored in the Git repository server database.
+> 여기서 커밋(commit)이란, 버전 관리에서 변경사항이 적용된 새로운 스냅샷(즉, 새로운 버전)을 생성하는 작업이다.
 
-<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\Git\git_areas.png" width=100%></div>
-<center style="font-weight:bold">Figure #. Git file state process.</center>
+![Git의 라이프 사이클](/images/docs/git/git_lifecycle.png)
 
-This means Git project management can be divided into mainly three sections:
+* **Untracked**
+    : *VCS에서 변경사항을 추적할 수 없는 파일들이다. 이전 버전의 스냅샷에는 해당 파일이 존재하지 않아 비교를 할 수 없기에 추적 불가(untracked)하다. 즉, untracked 상태는 저장소에 새로 추가된 파일들을 가리킨다. 그 외의 상태를 통틀어 tracked 파일이라 부른다.*
 
-* **Working Directory**: local repository on client's computer distributed by the Git.
-* **Staging Area**: (aka. index) a file where staged file is stored for next commitment for snapshot.
-* **Git Directory**: a server repository stored by Git, and this database will be re-distributed to clients.
+* **Unmodified (aka. Committed)**
+    : *VCS의 스냅샷으로부터 변경사항이 없는 파일 상태이다. 서버로부터 저장소를 클론하거나 혹은 선택된 버전으로 히스토리 이동(일명 checkout)하면 저장소의 파일들은 스냅샷과 동일한 unmodified 상태로 재구성된다. 또한 변경사항을 VCS에 커밋할 시, 변경된 파일들은 새로 생성된 스냅샷 기준으로 동일하기 때문에 committed 상태라고도 부른다.*
 
-### Tracked & Untracked
+* **Modified**
+    : *현재 스냅샷과 비교할 때 파일에 변경사항이 있지만, 아직 커밋이 이루어지지 않은 상태이다. 흔히 작업 중인 프로젝트 소스 및 환경 파일들을 수정하면 modified 상태가 된다. VCS로부터 파일 내용 변경을 취소하여 unmodified 상태로 되돌아 갈 수 있다.*
 
-Previous section introduced three states of the file: modified, staged, and committed. When committed, the changes are implemented to the repository and thus become "unmodified". Keeping this in mind can help understand the conceptual difference on what tracked and untracked file is.
-
-Tracked files are the files that is being tracked by the Git via snapshot. The file that has a snapshot means it is original and not made anew; unmodified, modified and staged files are all tracked because their histories are being tracked by the snapshot.
-
-Untracked files are the files that cannot be tracked by Git since it does not have a snapshot to keep track of it: in other word, untracked file is a newly made that was never in the Git repository before.
-
-<div style="background:white; border:solid 3px #808e95; text-align: center; border-radius:0.5em; padding:0.5em 0 0.5em 0;"><img src=".\.images\Git\git_lifecycle.png" width=100%></div>
-<center style="font-weight:bold">Figure #. The lifecycle of the status of repository files.</center>
-
-To track the untracked files, it needs to be committed and included in the Git history. This creates a snapshot that has record to track the previously untracked file, thus becoming a tracked file.
-
-
-
-
-
-unstaged changes: changes not yet added to stage
-
-staged changes: changes added to stage
-
-
-
-
-
-clone (SVN: checkout)
-
-
-
-
-
-
-
-
-
-## HEAD
-
-SVN: Trunk
-
-## Branch
-
-SVN: Branch
-
-
-
-# GIT: MANUAL
-
-
-
-## Configuration
-
-To use the Git, it must be configured first by entering the name and email address. This is just to clarify who is responsible for the commits on Git and where to contact the user.
-
-```bash
-git config --global user.name "<user_name>"
-git config --global user.email "<email_address>"
-```
-
-There are three options available for configuration: 
-
-* `--local`: set name and email address specifically for that certain repository.
-* `--global`: configuration set is global across all repositories committed under that specific user.
-* `--system`: configuration set is system-wide, no matter what user is log in to.
-
-## **Repository**
-
-### Initialization
-
-To create repository for Git, go to the directory you would like to set it as the root and type
-
-```bash
-cd repo
-git init
-```
-
-```
-Initialized empty Git repository in C:/path/to/directory/repo/.git/
-```
-
-### Clone
-
-To import the repository, either from the server or local, go to the directory you would like to set it as the root of the cloned repository and type
-
-```bash
-git clone
-```
-
-### Fork
-
-
-
-## Status Check
-
-To check the current repository status, such as checking for the state of files, enter the command:
-
-```bash
-$ git status
-On branch master
-nothing to commit (working directory clean)
-```
-
-Current repository does not have any modified, or staged file now. However, this command can tell more on actual implementation, often to check the file state. It helps understand how the Git works.
-
-Upon making changes the `git status` command will tell what has been changed:
-
-```bash
-$ git status
-On branch master
-Changes not staged for commit:
-	(use "git add <file>..." to update what will be committed)
-	(use "git restore <file>..." to discard changes in working directory)
-		modified:	README.md
-```
-
-The Git knows the `README.md` has been changed but is not yet committed to the repository.
-
-## Contribution
-
-As discussed before, Git consist of three states on making contribution: modified, staged, and committed. This chapter provides instruction with actual examples for easier and better understanding on how Git contribution is done.
-
-### Staged Changes
-
-Modified or untracked files may be subject to present on the next version, or could be a complete garbage only to test some code that will definitely not be implemented. Until staged, these changes are called "unstaged changes".
-
-Add modified or untracked files to the staged area (aka. index), meaning accepting what-seems-to-be significant changes as staged files should use `git add` command:
-
-```bash
-$ git add README.md
-$ git status
-On branch master
-Changes to be committed:
-	(use "git reset HEAD <file>..." to unstage)
-		modified:	README.md
-```
-
-To add all files in the working directory, either place asterisk `*` or period `.` after the command:
-
-* Asterisk (`git add *`): stage every unmodified and untracked files, excluding the hidden files.
-* Period (`git add .`): stage every unmodified and untracked files, including the hidden files.
-
-However, just because the first changes made on the file has been added does not mean the later changes will be added automatically to the staged area.
-
-```bash
-# Former modification.
-$ git add README.md
-$ git status
-On branch master
-Changes to be committed:
-	(use "git reset HEAD <file>..." to unstage)
-		modified:	README.md
-
-# Latter modification.
-$ git status
-On branch master
-Changes to be committed:
-	(use "git reset HEAD <file>..." to unstage)
-		modified:	README.md
-	
-Changes not staged for commit:
-	(use "git add <file>..." to update what will be committed)
-	(use "git checkout -- <file>..." to discard changes in working directory)
-		modified:	README.md
-```
-
-The former and latter changes are deemed separate and require another `git add` command to stage the latter modification.
-
-To revert the change file back from staged area to working directory:
-
-```bash
-$ git reset
-```
-
-### Commit Changes
-
-To commit the staged files to the working repository, that is, to actually apply the changes to the currently working repository use `git commit` command:
-
-```bash
-$ git add A.md
-$ git add B.md
-$ git commit -m "Committed A and B"
-1 files changed, 1 insertions(+), 1 deletions(-)
-```
-
-This commits file `A.md` and `B.md` altogether with a single commit. The option `-m` represents comment to add upon committing. No comment will abort the commit.
-
-Checking the status of Git, there will be no staged file waiting to be committed.
-
-```bash
-$ git status
-On branch master
-nothing to commit (working directory clean)
-```
-
-### Push Changes
-
-Commit command contributes to the current working directory, but that only refers to the client's local repository if cloned from the server repository like GitHub. To commit the changes to the server-side of the repository, use the `git push` command.
-
-```bash
-$ git push
-```
-
-## **Update**
-
-Remember the final contribution was made using the push change with `git push` command? The "push" meant committing the changes from the cloned to the server-side repository. In opposite, "pull" can be its vice versa which take server-side repository and implement it to the cloned repository.
-
-```bash
-$ git pull
-```
-
-This is equivalent to the following command:
-
-```bash
-$ git fetch
-$ git merge
-```
-
-### Fetch & Merge
+* **Staged**
+    : *Modified 상태의 파일 변경사항 혹은 untracked 상태의 새 파일은 커밋되기 전에 우선 Staged 상태로 전환된다. Staged 파일은 변경사항 및 새 파일을 저장소의 Staging Area에 임시 저장하여 안전하게 보관하며, 변경 취소 영향을 받지 않는다. 다시 말해, staged 상태는 작업 중인 modified 파일들을 새로운 버전으로 커밋하기 전에 변경사항 및 새 파일을 저장할 수 있는 편의를 제공한다.*
