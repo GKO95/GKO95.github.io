@@ -4,7 +4,7 @@ category: 소프트웨어
 title: Git
 slug: ko.Git
 icon: icon-git.png
-order: null
+order: 0x30
 ---
 # GIT: 소개
 > *참조: [Pro Git, 2nd Edition](https://git-scm.com/book/)*
