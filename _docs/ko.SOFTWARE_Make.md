@@ -30,8 +30,6 @@ make -f sample.mk
 # MAKE: 기초
 Make 소프트웨어를 사용하기 위해서는 makefile 언어의 규칙을 준수해야 한다. 이를 제대로 준수하지 않으면 정상적인 빌드 작업이 보장되지 않는다. 가장 기본적인 makefile 규칙은 다음 형태를 지닌다.
 
-> Makefile 언어는 암묵적인 관습이 상당히 존재한다. Makefile의 동작 원리를 설명하면서 자츰 이해하게 될 것이다.
-
 ```makefile
 TARGET … : PREREQUISITES …
 	RECIPE
