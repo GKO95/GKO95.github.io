@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
 }
 ```
 
-## 규칙 설명
+## 규칙
 본 장에서 소개한 예시 코드를 활용하여 아래의 간단한 makefile을 작성하였다.
 
 ```makefile
@@ -108,6 +108,10 @@ main.o : main.c random.h
 # : 컴파일하기 전에 "random.c" 소스 파일 및 "random.h" 헤더 파일 확인
 random.o : random.c random.h
 	cc -c random.c
+
+# make로 생성된 모든 파일 삭제
+clean : 
+	rm main main.o random.o
 ```
 
 목표(goal)는 최종적으로 생성하려는 makefile 빌드 대상을 가리키며, 형식상 `make`에 빌드하려는 목표를 명시하는 게 정석이다 (단, `.`으로 이름이 시작되는 대상은 제외). 하지만 목표를 명시하지 않은 채 `make`를 실행하면 makefile의 최상단에 위치한 빌드 대상이 기본 목표(default goal)가 되어 빌드를 진행한다. 그러므로 위의 makefile에서 기본 목표인 `main`을 빌드하기 위해 아래 명령을 입력한다.
@@ -135,22 +139,8 @@ Makefile에 정의된 `main.o`(혹은 `random.o`) 대상의 빌드 전제에는 
 
 기반 목표의 빌드 전제인 `main.o` 그리고 `random.o`가 컴파일 되었으면 `main`의 빌드 명령을 실행한다. 이때의 명령은 컴파일만 된 오브젝트 파일을 비로소 라이브러리와 타 오브젝트 파일과 연동하는 링크 작업을 진행한다. 함수의 정의를 갖는 `random.o` 오브젝트 파일, [시작점](/docs/ko.C#시작점)으로부터 함수를 호출하는 `main.o` 오브젝트 파일, 그리고 시스템 헤더 파일(`stdio.h`, `stdlib.h`, 그리고 `time.h`)로 호출된 C 표준 라이브러리가 링크되어 하나의 `main` 이진 파일이 빌드된다.
 
-### 디렉토리 정리
-기본 목표를 빌드하는 과정의 부산물 `main.o` 및 `random.o` 오브젝트 파일, 그리고 최종 빌드 대상 `main` 이진 파일을 제거하려면 아래의 makefile 규칙을 스크립트에 작성한다. 단, 해당 규칙을 최상단에 위치시키면 기본 목표가 `clean`이 될 수 있으므로 `main` 빌드 대상보다 밑에 작성하도록 한다.
+기본 목표를 빌드하는 과정에서 생상된 부산물 `main.o` 및 `random.o` 오브젝트 파일, 그리고 최종 빌드 대상 `main` 이진 파일을 제거하는 목적으로 `clean`을 정의하였다.
 
-```makefile
-# make로 생성된 모든 파일 삭제
-clean : 
-	rm main main.o random.o
+```bash
+make clean
 ```
-
-하지만 실제 makefile에서는 예상치 못한 문제가 언제든지 발생할 수 있으므로 안정적인 다음 규칙을 더 많이 활용한다: `clean`이란 이름의 파일이 실제로 생성된 경우를 대비하여 무조건 명령을 실행하도록 하며, 파일을 제거하는 `rm` bash 명령에 오류가 발생하여도 진행한다.
-
-```makefile
-# 실용적인 디렉토리 정리 규칙
-.PHONY : clean
-clean : 
-	-rm main main.o random.o
-```
-
-해당 내용은 각각 허위 대상(phony target) 및 명령 오류처리와 관련된 내용으로, 자세한 내용은 차후 설명할 예정이다.
