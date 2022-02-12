@@ -28,26 +28,8 @@ make -f sample.mk
 ```
 
 # MAKE: 기초
-Make 소프트웨어를 사용하기 위해서는 makefile 언어의 규칙을 준수해야 한다. 이를 제대로 준수하지 않으면 정상적인 빌드 작업이 보장되지 않는다. 가장 기본적인 makefile 규칙은 다음 형태를 지닌다.
+Make 소프트웨어를 사용하기 위해서는 makefile 언어의 규칙을 준수해야 한다. 이를 제대로 준수하지 않으면 정상적인 빌드 작업이 보장되지 않는다. 
 
-```makefile
-TARGET … : PREREQUISITES …
-	RECIPE
-	…
-	…
-```
-
-| 요소             | 의미  | 설명                                             |
-|:---------------:|:---:|------------------------------------------------|
-| TARGET        | 빌드 대상 | `make`에서 생성될 파일명 혹은 실행할 작업명이다.     |
-| PREREQUISITES | 빌드 전제  | TARGET을 실행하기 전에 확인되어야 하는 파일들이다.  |
-| RECIPE        | 빌드 명령 | TARGET으로부터 실행될 명령들이며, 반드시 `Tab ↹`으로 들여쓰기 되어야 한다.     |
-
-`make`는 빌드 대상(target)의 명령(recipe)을 실행하기 전에 우선 빌드 전제(prerequisites)부터 확인하는데 아래의 순서도에 따라 진행된다. 빌드 전제는 필수요소가 아니므로 규칙에서 생략될 수 있다. 빌드 대상에 대한 아무런 전제가 없다면 명령을 무조건 실행되며, 일반적으로 파일의 존재 여부와 상관없이 특정 명령을 `make`를 통해 실행하기 위한 방안으로 활용된다.
-
-![Makefile의 <code>PREREQUISITE</code> 동작 순서도<sub><i>원본: <a href="https://lucid.app/lucidchart/16e14bf0-856d-4897-8351-bbe34a7f5d68/edit?invitationId=inv_e7b8df47-867b-4b75-9d43-e4b451ed7e1b">Lucidchart</a></i></sub>](/images/docs/make/makefile_prerequisite_flowchart_korean.svg)
-
-### 예시 코드
 Makefile을 직접 작성하기 위해서는 시험해 볼 수 있는 예시 코드가 필요하다. 본 장에서는 매 실행하다 난수를 출력하는 실행 파일을 만들기 위해 `main.c`, `random.c`, 그리고 `random.h` 파일을 하나의 디렉토리에 준비한다 *(참고: [C++: 랜덤 발생기](/docs/ko.Cpp#c-랜덤-발생기))*.
 
 ```c
@@ -91,11 +73,66 @@ int main(int argc, char **argv) {
 }
 ```
 
+## 주석
+주석(comment)은 makefile에서 실행되지 않는 부분이며, 흔히 어떠한 정보를 간략히 스크립트 내에 입력하는데 사용된다. 프로그래밍 언어와 달리 makefile에는 오로지 한줄 주석만이 존재한다.
+
+* 한줄 주석 (line comment)
+    : *Makefile 스크립트의 줄 하나를 차지하는 주석이며, 해시 기호(`#`)로 표시된다.*
+
+* 여러줄 주석(multiple-line comment)
+    : *줄바꿈을 기반으로 문장을 구분하는 makefile에서 백슬래시(`\`)는 긴 문장을 연속의 여러 줄의 짧은 문장으로 나누어 나타내는 편리함을 제공한다. 즉, 한줄 주석에 백슬래시를 통해 여러 줄을 차지하는 주석으로 활용할 수 있다.*
+
+```make
+# 한줄 주석: 코드 한 줄을 차지하는 주석이다.
+# 여러줄 주석: \
+코드 여러 줄을 차지하는 주석이지만, \
+블로그에서 구문 하이라이트가 정상적으로 동작하지 않아 본문에서는 사용하지 않을 것이다.
+```
+
 ## 규칙
+가장 기본적인 makefile 규칙은 다음 형태를 지닌다. 여기서 줄임표(ellipsis) `…`는 추가로 기입할 수 있다는 것을 의미한다.
+
+```makefile
+# Makefile 일반 규칙
+TARGETS … : PREREQUISITE …
+	RECIPE
+	…
+	…
+```
+
+| 요소             | 의미  | 설명                                             |
+|:---------------:|:---:|------------------------------------------------|
+| TARGETS       | 빌드 대상 | `make`에서 빌드될 파일명 혹은 실행할 작업명이다.     |
+| PREREQUISITES | 빌드 전제  | TARGETS 빌드를 진행하기 전에 확인되어야 하는 파일들이다.  |
+| RECIPE        | 빌드 명령 | TARGETS 빌드를 위해 실행될 명령들이며, 반드시 `Tab ↹`으로 들여쓰기 되어야 한다.     |
+
+TARGETS 구성요소에 줄임표가 있다는 것은 하나 이상의 대상(target)이 기입될 수 있다는 의미이다. 만일 하나의 규칙에서 `TARGET1` 및 `TARGET2`가 빌드 대상으로 명시되어 있다면 이들은 공통된 전제(prerequisites) 및 명령(recipe)을 갖는다.
+
+혹은 세미콜론(`;`)을 사용하여 다음과 같이 나타낼 수 있다.
+
+```makefile
+# Makefile 변형 규칙: 세미콜론 사용
+TARGET … : PREREQUISITES … ; RECIPE
+	RECIPE
+	…
+	…
+```
+
+허나 [C](/docs/ko.C#표현식-및-문장)/[C++](/docs/ko.Cpp#표현식-및-문장)의 문장 종단자(statement terminator)와 달리, makefile의 세미콜론은 오로지 빌드 전제 와 첫 번째 줄의 명령만을 구별짓기 위해 사용된다. 즉, makefile의 한 줄에 여려 개의 명령을 작성하도록 하는 용도가 아니다. Makefile에서 명령을 구분하는 기준은 `Tab ↹` 들여쓰기의 여부이다.
+
+### 동작 순서
+Makefile 규칙에 정의된 대상(TARGET)은 명령(RECIPE)을 통해 빌드가 진행되지만, 전제(PREREQUISITE)된 파일에 따라서 명령 실행 여부가 결정된다. 전제의 역할은 빌드 대상 파일을 생성하거나 최신으로 업데이트하는 것이다. 아래는 전제가 빌드 과정에 어떠한 영향을 미치는지 나타내는 순서도이다. 이에 대한 자세한 설명은 [makefile 예시](#makefile-예시)와 함께 설명할 예정이다.
+
+![Makefile 전제에 의한 동작 순서도<sub><i>원본: <a href="https://lucid.app/lucidchart/16e14bf0-856d-4897-8351-bbe34a7f5d68/edit?invitationId=inv_e7b8df47-867b-4b75-9d43-e4b451ed7e1b">Lucidchart</a></i></sub>](/images/docs/make/makefile_prerequisite_flowchart_korean.svg)
+
+여기서 makefile 규칙에 전제가 없는 동시에 디렉토리에 대상 파일 존재할 경우가 발생할 수 있다. 이때 전제 파일과 대상 파일의 수정된 날짜를 비교하는 프로세스가 있는데, 항상 존재하는 대상 파일이 부재하는 전제 파일보다 최신으로 간주된다.
+
+### Makefile 예시
 본 장에서 소개한 예시 코드를 활용하여 아래의 간단한 makefile을 작성하였다.
 
 ```makefile
-# "main" 이진 파일 생성 (기본 목표)
+# "main" 파일 생성
+# : 기본 목표
 main : main.o random.o
 	cc -o main main.o random.o
 
