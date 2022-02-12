@@ -106,7 +106,7 @@ TARGETS … : PREREQUISITE …
 | PREREQUISITES | 빌드 전제  | TARGETS 빌드를 진행하기 전에 확인되어야 하는 파일들이다.  |
 | RECIPE        | 빌드 명령 | TARGETS 빌드를 위해 실행될 명령들이며, 반드시 `Tab ↹`으로 들여쓰기 되어야 한다.     |
 
-TARGETS 구성요소에 줄임표가 있다는 것은 하나 이상의 대상(target)이 기입될 수 있다는 의미이다. 만일 하나의 규칙에서 `TARGET1` 및 `TARGET2`가 빌드 대상으로 명시되어 있다면 이들은 공통된 전제(prerequisites) 및 명령(recipe)을 갖는다.
+TARGETS 구성요소에 줄임표가 있다는 것은 하나 이상의 대상(target)이 기입될 수 있다는 의미이다. 만일 하나의 규칙에서 두 개 이상의 빌드 대상으로 명시되어 있다면 이들은 공통된 전제(prerequisites) 및 명령(recipe)을 갖는다.
 
 혹은 세미콜론(`;`)을 사용하여 다음과 같이 나타낼 수 있다.
 
