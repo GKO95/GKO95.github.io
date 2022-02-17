@@ -1,49 +1,69 @@
 ---
 layout: docs
 language: ko
-title: 컴파일 vs 인터프리트 언어
+title: 컴파일러 vs 인터프리터
 tags: Compiler Interpreter
 date: 2021-08-31 00:00:00
 notice: false
 toc: false
 ---
-# 컴파일 vs 인터프리트 언어
-프로그래밍 언어는 크게 두 분류로 나뉘어지며, 컴파일(compile) 언어와 인터프리트(interpret) 언어가 있습니다. 프로그래밍 입문자들은 코딩에 집중하기 때문에 두 언어의 개념을 간과하는 편이지만, 차이점을 확실히 알고 있으면 프로그래밍 언어가 어떻게 동작하는지 개념을 이해하고 장단점을 파악해 상황에 따라 어떤 언어를 사용할 지 결정할 수 있습니다. 우선 각 언어를 설명하기 전에 몇 가지의 용어부터 확립하려 합니다.
+개발자가 프로그래밍 언어로 작성한 코드를 컴퓨터에서 실행할 수 있도록 하는 프로그램으로 컴파일러(compiler)와 인터프리터(interpreter)가 있습니다. 프로그래밍 입문자들은 코딩에 집중하기 때문에 컴파일러와 인터프리터의 개념을 간과하는 편이지만, 차이점을 확실히 알고 있으면 프로그래밍 언어가 어떻게 동작하는지 원리를 이해하고 장단점을 파악할 수 있습니다. 이를 통해 상황에 따라 어떤 프로그래밍 언어를 사용하면 효율적인지 결정할 수 있게 됩니다.
 
-### 소스 코드
-[소스 코드](https://ko.wikipedia.org/wiki/소스_코드)(source code)는 사람이 가독(可讀)할 수 있는 프로그래밍 언어로 작성된 코드들의 모음(혹은 텍스트 파일)입니다.
+우선 본격적인 내용을 설명하기 전에 몇 가지 용어부터 확립할 필요가 있습니다.
 
-> 여기서 *[사람 가독형](https://ko.wikipedia.org/wiki/인간이_읽을_수_있는_매체)(human-readable)*이란, 사람이 자연스레 읽어 이해할 수 있는 형태의 데이터를 가리키며 대표적으로 [ASCII](https://ko.wikipedia.org/wiki/ASCII) 및 [유니코드](https://ko.wikipedia.org/wiki/유니코드) 인코딩이 있습니다. 완전한 문장을 구성하지 않더라도 프로그래밍 언어는 알파벳이나 한글, 숫자와 기호 등으로 작성되기 때문에 사람 가독형에 분류됩니다.
+* **[소스 코드](https://ko.wikipedia.org/wiki/소스_코드)**
 
-### 기계어
-[기계어](https://ko.wikipedia.org/wiki/기계어)(machine code)는 컴퓨터의 [중앙 처리 장치](https://ko.wikipedia.org/wiki/중앙_처리_장치)(central processing unit; CPU)의 연산 및 동작을 직접적으로 제어할 수 있는 `0`과 `1`만으로 구성된 [이진 코드](https://ko.wikipedia.org/wiki/이진_코드)(binary code)입니다.
+    : 소스 코드(source code)는 사람이 가독(可讀)할 수 있는 고급 프로그래밍 언어(예. 파이썬, C/C++ 및 C#, 자바스크립트)로 작성된 코드들의 모음 혹은 스크립트 파일입니다.
 
-> 전자공학에서 이진 코드의 `0`과 `1`은 각각 LOW (이상적으로 0 V) 및 HIGH (3.3 ~ 5.0 V) 전압을 의미합니다. 프로그래밍에서는 이진 코드의 가독성을 높이기 위해 팔진법이나 십진법으로 나타내기도 하지만 그 중에서 [십육진법](https://ko.wikipedia.org/wiki/십육진법)(hexadecimal)이 가장 많이 사용됩니다.
+    > *[사람 가독형](https://ko.wikipedia.org/wiki/인간이_읽을_수_있는_매체)(human-readable)*이란, 사람이 자연스레 읽어 이해할 수 있는 형태의 데이터를 가리키며 대표적으로 [ASCII](https://ko.wikipedia.org/wiki/ASCII) 및 [유니코드](https://ko.wikipedia.org/wiki/유니코드) 인코딩이 있습니다. 완전한 문장을 구성하지 않더라도 프로그래밍 언어는 알파벳이나 한글, 숫자와 기호 등으로 작성되기 때문에 사람 가독형에 분류됩니다.
 
-## 컴파일러
-[컴파일러](https://ko.wikipedia.org/wiki/컴파일러)(compiler)는 하나의 프로그래밍 언어를 다른 언어로 번역하는 프로그램이며, 해당 작업을 컴파일(compile)이라고 부릅니다. 흔히 고급 프로그래밍 언어(예. C/C++, C# 등)를 저급 언어(기계어, 어셈블리 등)으로 변환하는데 사용됩니다. 프로그래밍에서 컴파일 작업이 이루어지는 시점에 따라 두 유형으로 나뉩니다.
+* **[기계어](https://ko.wikipedia.org/wiki/기계어)**
+
+    : 기계어(machine code)는 컴퓨터 [중앙 처리 장치](https://ko.wikipedia.org/wiki/중앙_처리_장치)(central processing unit; CPU)의 연산 및 동작을 직접 제어할 수 있는 `0`과 `1`만으로 구성된 [이진 코드](https://ko.wikipedia.org/wiki/이진_코드)(binary code)입니다. CPU에는 x86, ARM 등 다양한 [아키텍처](https://ko.wikipedia.org/wiki/명령어_집합)(architecture)가 있는데, 각각 연산 및 동작을 수행하기 위한 이진 코드가 설계상 이유로 서로 다릅니다. 때문에 동일한 운영체제라도 호환성 문제가 발생하는 겁니다.
+
+    > 프로그래밍에서는 이진 코드의 가독성을 높이기 위해 팔진법이나 십진법으로 나타내기도 하지만 그 중에서 [십육진법](https://ko.wikipedia.org/wiki/십육진법)(hexadecimal)이 가장 많이 사용됩니다.
+
+* **[바이트코드](https://ko.wikipedia.org/wiki/바이트코드)**
+
+    : 바이트코드(bytecode)는 소스 코드에서 기계어로 변환하는데 징검다리 역할을 하는 [중간 언어](https://ko.wikipedia.org/wiki/중간_표현)(intermediate language)입니다.
+
+    > 수행할 연산 혹은 동작을 나타내는 [명령 코드](https://ko.wikipedia.org/wiki/명령_코드)(opcode)가 한 [바이트](https://ko.wikipedia.org/wiki/바이트)(byte) 내에서 표현되기 때문에 바이트코드("바이트" + <sub>명령</sub>"코드")라는 명칭이 유래되었습니다.
+
+
+인터프리터가 효율적으로 실행할 수 있도록 설계된 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)(instruction set)의 형태입니다.
+
+# 컴파일러
+[컴파일러](https://ko.wikipedia.org/wiki/컴파일러)(compiler)는 하나의 프로그래밍 언어를 다른 언어로 번역(일명 컴파일; compile)하는 프로그램입니다. 흔히 고급 프로그래밍 언어(예. C/C++, C# 등)를 저급 언어(기계어, 바이트코드 등)로 변환하는데 사용됩니다. 
+
+![컴파일 언어의 소스 코드와 실행 파일](/images/blog/compiler_vs_interpreter/programming_lang_compile.png)
+
+[컴파일 언어](https://ko.wikipedia.org/wiki/컴파일_언어)(compiled language)는 사람 가독형 *소스 코드*를 기계 가독형 *기계어*로 변환, 일명 컴파일(compile)하여 이진 파일을 생성하는 프로그래밍 언어입니다. 아래는 대표적인 컴파일 언어인 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 프로그래밍 언어의 소스 코드(左)와 기계어로 컴파일된 `.EXE` 이진 실행 파일(右)입니다. 여기서 기계어는 비록 십육진수로 표현되었지만 실제로는 이진 코드입니다.
+
+프로그래밍에서 컴파일 작업이 이루어지는 시점에 따라 두 유형으로 나뉩니다.
 
 * **[AOT 컴파일](https://ko.wikipedia.org/wiki/AOT_컴파일)**
 
-    : *AOT(ahead-of-time) 컴파일은 프로그램을 실행하기 전에 빌드 과정에서 컴파일을 하는 행위이다. 프로그램을 실행할 시, 런타임 도중에 수행되어야 할 별도의 작업이 적으므로 실행 속도 측면에서는 매우 빠른 장점을 갖는다. 대표적인 예시로 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 소스 코드를 기계어로 구성된 이진 파일로 컴파일하는 것이다.*
+    : AOT(ahead-of-time) 컴파일은 프로그램을 실행하기 전에 빌드 과정에서 컴파일을 하는 행위이다. 프로그램을 실행할 시, 런타임 도중에 수행되어야 할 별도의 작업이 적으므로 실행 속도 측면에서는 매우 빠른 장점을 갖는다. 대표적인 예시로 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 소스 코드를 기계어로 구성된 이진 파일로 컴파일하는 것이다.
 
 * **[JIT 컴파일](https://ko.wikipedia.org/wiki/JIT_컴파일)**
 
-    : *JIT(just-in-time) 컴파일은 프로그램이 실행되는 도중, 즉 런타임(run time)에 컴파일을 하는 행위이다.*
+    : JIT(just-in-time) 컴파일은 프로그램이 실행되는 도중, 즉 런타임(run time)에 컴파일을 하는 행위이다.
 
-### 컴파일 언어
-[컴파일 언어](https://ko.wikipedia.org/wiki/컴파일_언어)(compiled language)는 사람 가독형 *소스 코드*를 기계 가독형 *기계어*로 변환, 일명 컴파일(compile)하여 이진 파일을 생성하는 프로그래밍 언어입니다. 아래는 대표적인 컴파일 언어인 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 프로그래밍 언어의 소스 코드(左)와 기계어로 컴파일된 `.EXE` 이진 실행 파일(右)입니다. 여기서 기계어는 비록 십육진수로 표현되었지만 실제로는 이진 코드입니다.
+## 컴파일 언어
 
-![컴파일 언어의 소스 코드와 실행 파일](/images/blog/compiler_vs_interpreter/programming_lang_compile.png)
+
 
 일반적으로 *프로그램의 소스 코드 파일과 이진 파일의 별도 존재* 여부로부터 컴파일 언어인지 알아볼 수 있습니다. 컴파일 언어에서 이진 파일은 소스 코드로부터 컴파일되어 생성되지만, 소스 코드 자체가 소모되어 이진 파일이 되는 것이 아닙니다. C 프로그래밍 언어의 경우 `.C` 확장자를 갖는 소스 코드는 단순히 설계도 역할을 하여 컴파일을 이후에도 소스 코드는 그대로 남아있습니다. 오히려 새로운 실행 파일 혹은 라이브러리 파일이 생성된 것을 확인할 수 있습니다.
 
 동일한 소스 코드로부터 이진 파일이 컴파일되더라도, 컴퓨터 시스템이 무엇인지에 따라 생성된 이진 파일이 다릅니다. 특히 시스템 운영체제(윈도우, macOS, 리눅스 등) 및 아키텍처(x86, x64, ARM, ARM64 등)에 따라 최적화된 이진 파일로 컴파일되기 때문입니다. 이러한 이유로 컴파일 언어의 프로그램은 컴파일 대상 시스템에서만 실행될 수 있지만 처리 속도가 매우 빠른 장점이 있습니다.
 
-## 인터프리터
+# 인터프리터
 [인터프리터](https://ko.wikipedia.org/wiki/인터프리터)(interpreter)
 
-### 인터프리트 언어
+## 프로세스 가상 머신
+대표적으로 JVM, 일명 [자바 가상 머신](https://ko.wikipedia.org/wiki/자바_가상_머신)(Java virtual machine) 혹은 .NET 프레임워크의 CLR
+
+## 인터프리트 언어
 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)는 사람 가독형 *소스 코드*를 기계 가독형 *기계어*로 변환할 필요 없이 컴퓨터에서 곧바로 해석(interpret)하여 실행하는 프로그래밍 언어입니다. 그 중에는 세 가지 접근법이 있는데,
 
 1. 소스 코드를 독해하여 곧바로 실행한다.
