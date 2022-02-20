@@ -12,27 +12,27 @@ order: 0x03
 C# (한국어:씨샵) 프로그래밍 언어는 [자바](https://ko.wikipedia.org/wiki/자바_(프로그래밍_언어))(Java) 언어를 대응하기 위해 마이크로소프트에서 개발한 [객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming) 언어이다. 자바와 상당한 유사점을 가지면서 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 언어로부터 이질감이 없도록 설계되었다. 또한 .NET (한국어: 닷넷) 프레임워크라는 방대한 데이터 라이브러리를 접속하고 사용할 수 있어 개발의 편리성을 제공하는 장점을 가진다.
 
 ## .NET
-> *참조: [컴파일 vs 인터프리트 언어](/blog/ko.compiler_vs_interpreter)*
+> *참조: [컴파일러 vs 인터프리터](/blog/ko.compiler_vs_interpreter)*
 
 [.NET](https://ko.wikipedia.org/wiki/닷넷)(혹은 .NET Core)은 마이크로소프트에서 개발한 오픈소스 소프트웨어 프레임워크이다. 국제표준기구 ISO와 ECMA에서 표준으로 채택된 공통 언어 기반(Common Language Infrasturcture; CLI)이 적용되어 운영체제 및 아키텍쳐가 다르더라도 [크로스 플랫폼](https://ko.wikipedia.org/wiki/크로스_플랫폼)(cross-platform)을 지원해야 하며 여러 고급 프로그래밍 언어을 사용할 수 있다. 그 중에서 C# 언어가 .NET이 지원하는 프로그래밍 언어 중 하나이며 윈도우 NT, macOS, 그리고 리눅스 운영체제에서 사용할 수 있다.
 
 ![.NET 공통 언어 기반 (CLI) <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Overview_of_the_Common_Language_Infrastructure.svg">위키백과</a></i></sub>](/images/docs/csharp/csharp_wiki_netframework.png)
 
-프레임워크는 CoreFX*(FCL)* 그리고 CoreCLR*(CRL)*로 구성되어 있다. 아래의 표는 FCL과 CLR의 역할을 간략하게 설명한다:
+프레임워크는 CoreFX(이전 명칭: FCL) 그리고 CoreCLR(이전 명칭: CLR)로 구성되어 있으며 아래의 표는 이들의 역할을 간략하게 설명한다:
 
 | 구성요소                    | 설명                                                     |
 |-------------------------------|-----------------------------------------------------------------|
-| 프레임워크 클래스 라이브러리 (FCL) | .NET 프로그램을 개발하는데 필요한 표준 라이브러리를 제공한다. |
-| 공통 언어 런타임 (CLR) | JIT 컴파일러를 통해 .NET 프로그램을 컴파일 및 실행한다.      |
+| [프레임워크 클래스 라이브러리](https://en.wikipedia.org/wiki/Framework_Class_Library) (Framework Class Library; FCL) | .NET 프로그램을 개발하는데 필요한 표준 라이브러리를 제공한다. |
+| [공통 언어 런타임](https://ko.wikipedia.org/wiki/공통_언어_런타임) (Common Language Runtime; CLR) | [JIT 컴파일러](/blog/ko.compiler_vs_interpreter#jit-컴파일)를 통해 .NET 프로그램을 컴파일 및 실행한다.      |
 
 ### 어셈블리
 C/C++ 프로그래밍 언어는 컴파일러(예. Visual C++, Clang, GCC 등)가 소스 코드로부터 `.exe` 실행 파일 혹은 `.dll` 라이브러리 파일과 같은 컴퓨터가 읽을 수 있는 이진코드 기계어로 변환한다.
 
 > C/C++ 프로그램은 실행되기 전에 컴퓨터가 읽을 수 있도록 완전히 컴파일된다: 그러므로 해당 작업을 *AOT(ahead-of-time)* 컴파일이라고 부른다.
 
-반면, .NET 컴파일러 플랫폼(일명 "로즐린"; Roslyn)은 소스 코드에서 이진코드가 아닌 공통 중간 언어(Common Intermediate Language; CIL) 파일을 생성한다. 여기서 CIL은 바이트코드(bytecode)이며, 컴퓨터가 읽을 수 있는 기계어는 아니지만 아키텍처 독립 언어로 크로스 플랫폼 지원이 가능한 핵심 요소이다.
+반면, .NET 컴파일러 플랫폼(일명 "로즐린"; Roslyn)은 소스 코드에서 이진코드가 아닌 [공통 중간 언어](https://ko.wikipedia.org/wiki/공통_중간_언어)(Common Intermediate Language; CIL) 파일을 생성한다. 여기서 CIL은 [바이트코드](https://ko.wikipedia.org/wiki/바이트코드)(bytecode)이며, 컴퓨터가 읽을 수 있는 기계어는 아니지만 아키텍처 독립 언어로 크로스 플랫폼 지원이 가능한 핵심 요소이다.
 
-> 바이트코드 파일은 컴퓨터가 읽을 수 있는 기계어로 번역하기 위해 프로그램 실행 시 추가 컴파일 작업이 요구된다: 바이트코드에서 이진코드 변환 작업을 *런타임(runtime)* 혹은 *JIT(just-in-time)* 컴파일이라고 부른다.
+> 바이트코드 파일은 컴퓨터가 읽을 수 있는 기계어로 번환하기 위해 프로그램 [런타임](https://ko.wikipedia.org/wiki/런타임)(runtime) 시 JIT (just-in-time) 컴파일 작업이 추가로 요구된다.
 
 어셈블리(assembly)는 C# 프로그래밍 언어에서 바이트코드 파일을 의미한다. C/C++ 프로그래밍 언어와 같이 어셈블리에도 `.exe` 프로세스 어셈블리(process assembly)와 `.dll` 라이브러리 어셈블리로 나뉘어진다. 하지만 어셈블리는 이진파일이 아니므로 C#은 .NET (정확히는 CoreCLR) 없이 프로그램을 실행할 수 없다.
 

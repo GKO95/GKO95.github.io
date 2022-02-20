@@ -12,7 +12,7 @@ order: 0x01
 C 언어는 [유닉스](https://ko.wikipedia.org/wiki/유닉스)(UNIX) 컴퓨터를 위한 소프트웨어 제작을 위해 개발된 [*B*](https://ko.wikipedia.org/wiki/B_(프로그래밍_언어)) 언어의 후속작이다. 현재 C 언어는 가장 널리 사용되고 있는 프로그래밍 언어로 C++, C#, 파이썬, 자바 등 여러 프로그래밍 언어에 영향을 주었다. C 언어는 다른 프로그래밍 언어에 비해 매우 빠른 처리 속도와 훌륭한 호환성을 가지고 있어 소프트웨어 및 펌웨어 개발에 여전히 사용되고 있다.
 
 ## 컴파일 언어
-> *참조: [컴파일 vs 인터프리트 언어](/blog/ko.compiler_vs_interpreter)*
+> *참조: [컴파일러 vs 인터프리터](/blog/ko.compiler_vs_interpreter)*
 
 C 프로그래밍 언어는 [컴파일 언어](https://ko.wikipedia.org/wiki/컴파일_언어)(compiled language)이다. C 컴파일러는 국제표준기구(ISO)에서 표준을 발표한 년도에 따라 버전이 나뉘어진다. 가장 널리 사용되고 있는 버전으로는 ANSI C(일명 C89)와 C99가 있다. 본 문서는 <span style="color: red">*ANSI C 컴파일러 기준*</span>으로 C 프로그래밍 언어를 설명한다.
 
