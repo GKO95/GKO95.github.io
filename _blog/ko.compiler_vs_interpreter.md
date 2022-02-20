@@ -1,7 +1,7 @@
 ---
 layout: docs
 language: ko
-title: 컴파일러 vs 인터프리터
+title: 컴파일러 vs. 인터프리터
 tags: Compiler Interpreter
 date: 2021-08-31 00:00:00
 notice: false
@@ -41,7 +41,7 @@ toc: true
 ### JIT 컴파일
 > 본 내용은 [인터프리터](#인터프리터)에 관한 내용이 상당히 포함되어 있어, 해당 장을 먼저 읽어보시는 것을 권장합니다.
 
-[Just-in-time](https://ko.wikipedia.org/wiki/JIT_컴파일) (약자: JIT) 컴파일이란, 프로그램을 실행하는 [런타임](https://ko.wikipedia.org/wiki/런타임) 도중에 다른 언어로 컴파일 하는 것을 일컫습니다. JIT 컴파일은 전통적인 AOT 컴파일의 실행 속도와 인터프리트의 유연함을 통합하여 두 장점을 활용하는 것을 꾀하지만, 동시에 두 기술이 갖는 [오버헤드](https://ko.wikipedia.org/wiki/오버헤드)가 중첩(즉, [컴파일 타임](https://ko.wikipedia.org/wiki/컴파일_타임) + [링크 타임](https://ko.wikipedia.org/wiki/링크_타임) + 인터프리트 오버헤드)되는 단점을 지닙니다. 그렇기 때문에 JIT 컴파일을 활용하는 시스템은 실행되는 코드를 지속적으로 분석하여 컴파일로 취할 수 있는 속도 이점과 컴파일 과정에서 발생하는 [오버헤드](https://ko.wikipedia.org/wiki/오버헤드) 약점을 저울질합니다.
+[Just-in-time](https://ko.wikipedia.org/wiki/JIT_컴파일) (약자: JIT) 컴파일이란, 프로그램을 실행하는 [런타임](https://ko.wikipedia.org/wiki/런타임) 도중에 다른 언어로 컴파일 하는 것을 일컫습니다. JIT 컴파일은 전통적인 AOT 컴파일의 실행 속도와 인터프리트의 유연함을 통합하여 두 장점을 활용하는 것을 꾀하지만, 동시에 두 기술이 갖는 [오버헤드](https://ko.wikipedia.org/wiki/오버헤드)가 중첩(즉, [컴파일 타임](https://ko.wikipedia.org/wiki/컴파일_타임) + [링크 타임](https://ko.wikipedia.org/wiki/링크_타임) + 인터프리트 오버헤드)되는 단점을 지닙니다. 그렇기 때문에 JIT 컴파일을 활용하는 시스템은 실행되는 코드를 지속적으로 분석하여 컴파일로 취할 수 있는 속도 이점과 컴파일 과정에서 발생하는 오버헤드 실점을 저울질합니다.
 
 흔히 JIT 컴파일러는 AOT 컴파일러로 미리 생성된 바이트코드를 런타임 도중에 기계어로 변환하여 곧바로 실행합니다. 개발한 프로그램의 최초 실행에는 바이트코드 컴파일에 필요한 시간으로 인해 발생하는 지연이 불가피합니다. 여기서 실행되어야 할 코드가 컴파일을 거치면 차후 동일한 코드를 접할 때 다시 컴파일할 필요가 없더록 [캐시](https://ko.wikipedia.org/wiki/캐시)(cache)되는데, 이는 실행 성능 향상을 위해 빌드 최적화에도 사용됩니다. 그러나 최적화 작업이 많아질수록 초기 시간지연이 길어지기 때문에 적절한 균형이 필요합니다.
 
@@ -66,16 +66,16 @@ toc: true
 
 1. 소스 코드의 문장(statement)을 있는 그대로 하나씩 분석하고 수행합니다.
 2. 소스 코드를 보다 효율적인 [중간 언어](https://ko.wikipedia.org/wiki/중간_표현) 혹은 [오브젝트 코드](https://ko.wikipedia.org/wiki/목적_파일)로 변환(혹은 컴파일)을 마친 즉시 이를 실행합니다.
-3. 컴파일러로부터 미리 생성된 바이트코드를 이에 부합하는 인터프리터 [가상 머신](#가상-머신)(virtual machine)을 통해 실행합니다.
+3. 컴파일러로부터 미리 생성된 바이트코드를 이에 부합하는 인터프리터 [가상 머신](#프로세스-가상-머신)(virtual machine)을 통해 실행합니다.
 
 아래는 인터프리트의 2번 전략을 활용하는 해당하는 [파이썬](/docs/ko.Python) 프로그래밍 언어의 `.PY` 확장자 스크립트 파일(左)에 작성된 소스 코드(右上)와 인터프리터로 실행된 프로세스(右下) 예시입니다.
 
 ![파이썬 스크립트 파일의 소스 코드와 런타임 프로세스](/images/blog/compiler_vs_interpreter/programming_lang_interpret.png)
 
-## 가상 머신
-[프로세스 가상 머신](https://ko.wikipedia.org/wiki/가상_머신#프로세스_가상_머신[1])(Process virtual machine; 프로세스 VM)은 비록 명칭이 가상 "머신(장치)"이지만 시스템 운영체제에서 단일 [프로세스](/docs/ko.Process#프로세스) 실행을 지원하는 [어플리케이션](/docs/ko.Process#어플리케이션)입니다. 프로세스 VM의 목적은 하드웨어나 운영체제 상관없이 플랫폼 독립적인 프로그래밍 환경을 제공하여 프로세스가 동일하게 실행될 수 있도록 보장하는 겁니다. 흔히 인터프리터와 성질이 비슷하여 혼용되어 일컫는 경우가 자자하지만, 프로세스를 실행하는 인터프리터는 실행 환경을 제공하는 프로세스 VM의 구성요소 중 하나로 해당합니다.
+## 프로세스 가상 머신
+[프로세스 가상 머신](https://ko.wikipedia.org/wiki/가상_머신#프로세스_가상_머신[1])(Process virtual machine; 프로세스 VM)은 비록 명칭이 가상 "머신(장치)"이지만 시스템 운영체제에서 단일 [프로세스](/docs/ko.Process#프로세스) 실행을 지원하는 어플리케이션입니다. 프로세스 VM의 목적은 하드웨어나 운영체제 상관없이 플랫폼 독립적인 프로그래밍 환경을 제공하여 프로세스가 동일하게 실행될 수 있도록 보장하는 겁니다. 흔히 인터프리터와 성질이 비슷하여 혼용되어 일컫는 경우가 자자하지만, 프로세스를 실행하는 인터프리터는 실행 환경을 제공하는 프로세스 VM의 구성요소 중 하나로 해당합니다.
 
-대표적인 프로세스 VM으로 [자바](https://ko.wikipedia.org/wiki/자바_(소프트웨어_플랫폼)) 플랫폼의 [자바 가상 머신](https://ko.wikipedia.org/wiki/자바_가상_머신)(Java virtual machine; JVM) 그리고 [.NET](/docs/ko.Csharp#net) 프레임워크의 [공통 언어 런타임](https://ko.wikipedia.org/wiki/공통_언어_런타임)(Common language runtime; CLR)이 있습니다. 이들은 한 프로그래밍 언어에 국한되지 않고 다양한 언어를 지원하는데, 아래는 그 목록의 일부입니다.
+대표적인 프로세스 VM으로 [자바](https://ko.wikipedia.org/wiki/자바_(소프트웨어_플랫폼)) 플랫폼의 [자바 가상 머신](https://ko.wikipedia.org/wiki/자바_가상_머신)(Java virtual machine; JVM) 그리고 [.NET](/docs/ko.Csharp#net) 프레임워크의 [공통 언어 런타임](https://ko.wikipedia.org/wiki/공통_언어_런타임)(Common Language Runtime; CLR)이 있습니다. 이들은 한 프로그래밍 언어에 국한되지 않고 다양한 언어를 지원하는데, 아래는 그 목록의 일부입니다.
 
 * JVM: 자바, 코틀린, 그루비 등
 * CLR: [C#](/docs/ko.Csharp), F#, VB.NET 등
