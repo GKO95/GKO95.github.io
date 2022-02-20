@@ -10,9 +10,9 @@ order: 0x00
 [파이썬](https://ko.wikipedia.org/wiki/파이썬)(Python)은 웹 프로그래밍, 과학연구, 인공지능을 포함한 수많은 영역에서 응용 가능한 고급 프로그래밍 언어이다. 파이썬은 다른 프로그래밍 언어에 비해 간단하면서 폭넓은 커뮤니티 덕분에 파이썬 개발에 용이한 많은 종류의 소프트웨어(예. 라이브러리, 프레임워크 등)들이 존재한다. 이러한 이유로 파이썬은 프로그래밍 입문자로써 시작하기 매우 좋은 언어이다.
 
 ## 인터프리트 언어
-> *참조: [컴파일 vs 인터프리트 언어](/blog/ko.compiler_vs_interpreter/)*
+> *참조: [컴파일러 vs 인터프리터](/blog/ko.compiler_vs_interpreter/)*
 
-파이썬 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다. 가장 첫 인터프리터는 [C](/docs/ko.C) 프로그래밍 언어로 개발된 C파이썬(CPython)으로 현재 가장 널리 사용되는 파이썬 인터프리터이다. 그 외에도 다른 프로그래밍 언어로 개발된 Jython(자바로 구현된 인터프리터), IronPython([.NET](/docs/ko.Csharp#net)으로 구현된 인터프리터), 그리고 PyPy(순수 파이썬으로 구현된 인터프리터) 등이 있다.
+파이썬 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다. 가장 첫 인터프리터는 [C](/docs/ko.C) 프로그래밍 언어로 개발된 [C파이썬](https://ko.wikipedia.org/wiki/C파이썬)(CPython)으로 현재 가장 널리 사용되는 파이썬 인터프리터이다. 그 외에도 다른 프로그래밍 언어로 개발된 Jython(자바로 구현된 인터프리터), IronPython([.NET](/docs/ko.Csharp#net)으로 구현된 인터프리터), 그리고 PyPy(순수 파이썬으로 구현된 인터프리터) 등이 있다.
 
 파이썬은 인터프리트 언어 중에서도 컴파일 작업을 일련의 절차로써 활용한다: 우선 C파이썬은 파이썬 코드를 [바이트코드](https://ko.wikipedia.org/wiki/바이트코드)(bytecode)로 컴파일하는 동시에 C파이썬 인터프리터에 의해 실행된다. 파이썬 코드가 다른 컴퓨터에서도 동일하게 동작하는 [크로스 플랫폼](https://ko.wikipedia.org/wiki/크로스_플랫폼)(cross platform) 성질을 가질 수 있는 것은 바이트코드 덕분이다.
 
