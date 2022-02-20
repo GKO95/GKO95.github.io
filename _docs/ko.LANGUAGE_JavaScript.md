@@ -7,52 +7,20 @@ icon: icon-javascript.svg
 order: 0x05
 ---
 # 자바스크립트: 소개
-자바스크립트(JavaScript)는 절차형 웹프로그래밍 언어로 HTML & CSS 웹디자인 언어와 함께 사용되어, 상호작용 가능한 동적 웹페이지를 만드는데 기여한다. 현재 자바스크립트의 용도는 데이터 처리 및 어플리케이션 제작 등 범위가 넓어지고 있다.
-
-본 문서는 전체적으로 웹프로그래밍 위주의 자바스크립트를 소개하기 때문에, 구체적인 내용은 생략하고 가장 중요하다고 판단되는 개념들만 함축적으로 설명할 예정이다.
+[자바스크립트](https://ko.wikipedia.org/wiki/자바스크립트)(JavaScript)는 웹디자인을 위한 [HTML](#html-웹프로그래밍-언어) & [CSS](#css-스크립팅-언어)와 함께 사용되는 웹프로그래밍 언어이며, 상호작용 가능한 동적 웹페이지를 만드는데 기여한다. 현재 자바스크립트의 용도는 데이터 처리 및 어플리케이션 제작 등 범위가 넓어지고 있다. 그러므로 [웹 개발](https://ko.wikipedia.org/wiki/웹_개발)(web development) 등에 관여하는 IT 업계에서 자바스크립트는 필수 언어이다.
 
 ## 인터프리트 언어
-> *참조: [컴파일 vs 인터프리트 언어](/blog/ko.compiler_vs_interpreter)*
+> *참조: [컴파일러 vs 인터프리터](/blog/ko.compiler_vs_interpreter)*
 
-자바스크립트 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다.
+자바스크립트 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다. 초창기 자바스크립트 코드를 실행하는 [자바스크립트 엔진](https://ko.wikipedia.org/wiki/자바스크립트_엔진)(JavaScript engine)은 단순 인터프리터였으나, 현대에는 성능 향상을 위해 [JIT 컴파일](/blog/ko.compiler_vs_interpreter#jit-컴파일)(just-in-time compile)을 활용한다. 일반적으로 자바스크립트 엔진은 [웹 브라우저](https://ko.wikipedia.org/wiki/웹_브라우저) 제작사에서 자사 브라우저를 위한 목적으로 자바스크립트 엔진을 개발한다. 그러나 자바스크립트 엔진은 브라우저 없이도 사용할 수 있으며, 이에 대한 내용은 바로 다음 장에서 다룬다.
 
-## HTML 웹프로그래밍 언어
-HTML(Hypertext Markup Language) 선언형 웹디자인 프로그래밍 언어는 정적 웹사이트를 생성하는데 흔히 사용되는 언어이다. 여기서 정적 웹사이트(static website)는 모든 웹페이지 방문자들에게 동일한 콘텐츠를 보여주는 성질을 갖는다. 즉, HTML 언어만으로는 웹사이트에 다양한 기능을 구현할 수가 없다.
+# 자바스크립트: 설치
+자바스크립트를 실행하기 위해서는 두 가지 프로그램이 필요하다: (1) 자바스크립트 엔진 그리고 (2) 통합 개발 환경이다. 웹 브라우저는 기본적으로 자바스크립트 엔진이 들어있지만, 본문은 자바스크립트를 웹디자인에 국한되지 아니한 범용적으로 활용할 수 있도록 다른 환경을 소개한다.
 
-하지만 자바스크립트를 배우기 전에 HTML을 공부하기 적극 추천한다: HTML은 매우 쉬운 언어이며, 자바스크립트만으로 웹페이지를 만들 수 있으나 상당히 불편하고 비효율적인 작업이다. HTML로 우선적으로 디자인을 마치고 자바스크립트로 기능을 추가하는 방법이 가장 보편적이다.
+## Node.js
+[Node.js](https://nodejs.org/ko/)은 [구글 크롬](https://ko.wikipedia.org/wiki/구글_크롬)(Google Chrome) 및 [크로미엄](https://en.wikipedia.org/wiki/크로미엄_(웹_브라우저))(Chromium) 웹 브라우저에 탑재된 [V8](https://ko.wikipedia.org/wiki/V8_(자바스크립트_엔진)) 자바스크립트 엔진을 활용하는 런타임 환경(runtime environment)이다.
 
-아래는 HTML 언어의 사용 예시이다.
-
-```html
-<html>
-    <!-- HTML 주석 -->
-    <body style="text-align: center">
-        <span class="example">Hello World!</span>
-    </body>
-</html>
-```
-
-### CSS 스크립팅 언어
-CSS(Cascade Style Sheets) 스크립팅 언어는 HTML을 보조하는 언어로, HTML에 사용되는 구성요소(예를 들어 태그, 아이디, 클래스 등)의 디자인 내용만을 담고 있다. HTML을 공부하면 CSS 또한 함께 공부할 가치가 있는 매우 간단한 언어이다.
-
-아래는 CSS 언어의 사용 예시이다.
-
-```css
-body {
-    background-color: rgb(42, 45, 46);
-    border: solid 3px black;
-}
-
-.example {
-    font-family: 'Consola', monospace;
-    color: white;
-}
-```
-
-# 자바스크립트: 실행
-자바스크립트를 실행하기 위해서는 인터넷 브라우저만 있으면 된다: 마이크로소프트 엣지(Edge), 구글 크롬(Chrome), 모질라 파이어폭스(FireFox), 애플 사파리(Safari) 등 모두 자바스크립트를 실행할 수 있다.
-
-하지만 `.JS` 파일만으로 인터넷 브라우저로 자바스크립트를 실행할 수 없으며, 실행한다 하더라도 자바스크립트 파일의 내용을 텍스트로 보여줄 뿐이다. Node.js 프로그램을 사용하면 브라우저 없이 자바스크립트를 실행시킬 수 있으나, "입문자를 위한 자바스크립트 설명"이란 본질과 멀어지게 된다. 그러므로 본 장에서는 브라우저를 활용한 간단한 자바스크립트 작업 환경을 구축하는 방법을 설명한다.
+> 런타임 환경만 있으면 충분한지 의문을 가졌다면, 자바스크립트는 런타임에 프로그램을 분석하여 실행하는 [인터프리트 언어](/blog/ko.compiler_vs_interpreter#인터프리터)라는 점을 상기하면 된다.
 
 ## 비주얼 스튜디오 코드
 [비주얼 스튜디오 코드](https://code.visualstudio.com/download)(Visual Studio Code; VS Code)는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 특히 마이크로소프트에서 [타입스크립트](https://ko.wikipedia.org/wiki/타입스크립트)(TypeScript)라는 자바스크립트의 상위호환 언어 사용을 적극적으로 권장하므로써 자바스크립트 개발 환경에도 같이 신경쓰고 있다.
