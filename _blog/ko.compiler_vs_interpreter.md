@@ -22,9 +22,9 @@ toc: true
     > 프로그래밍에서는 이진 코드의 가독성을 높이기 위해 팔진법이나 십진법으로 나타내기도 하지만 그 중에서 [십육진법](https://ko.wikipedia.org/wiki/십육진법)(hexadecimal)이 가장 많이 사용됩니다.
 
 * **[바이트코드](https://ko.wikipedia.org/wiki/바이트코드)**
-    : 바이트코드(bytecode)는 소스 코드에서 기계어로 변환하는데 징검다리 역할을 하는 [중간 언어](https://ko.wikipedia.org/wiki/중간_표현)(intermediate language)입니다. 수행할 연산 혹은 동작을 나타내는 [명령 코드](https://ko.wikipedia.org/wiki/명령_코드)(opcode)가 한 [바이트](https://ko.wikipedia.org/wiki/바이트)(byte) 내에서 표현되기 때문에 바이트코드("바이트" + <sub>명령</sub>"코드")라는 명칭이 유래되었습니다.
+    : 바이트코드(bytecode)는 소스 코드에서 기계어로 변환하는데 징검다리 역할을 하는 [중간 언어](https://ko.wikipedia.org/wiki/중간_표현)(intermediate language)입니다. 수행할 연산 혹은 동작을 나타내는 [명령 코드](https://ko.wikipedia.org/wiki/명령_코드)(opcode)가 한 [바이트](https://ko.wikipedia.org/wiki/바이트)(byte) 내에서 표현되기 때문에 바이트코드("바이트" + <sub>명령</sub>"코드")라는 명칭이 유래되었습니다. 기계어와 유사하지만 바이트코드는 CPU 아키텍처에 의존하지 않고 소프트웨어에서 처리됩니다.
         
-    > 연산 및 동작을 수행한다는 점에서 기계어와 유사하지만, 바이트코드는 CPU 아키텍처에 의존하지 않고 소프트웨어에서 처리되므로 [크로스 플랫폼](https://ko.wikipedia.org/wiki/크로스_플랫폼)(cross platform) 성질을 갖습니다.
+    > 바이트코드도 전부 동일한 건 아닙니다: [파이썬](/docs/ko.Python)과 [자바](https://ko.wikipedia.org/wiki/자바_(프로그래밍_언어))는 바이트코드를 생성하는 대표적인 언어이지만, 명령 코드와 인자 여부 등이 달라 서로 호환되지 않습니다. 즉, 바이트코드는 이를 처리하는 소프트웨어에 의존합니다.
 
 # 컴파일러
 [컴파일러](https://ko.wikipedia.org/wiki/컴파일러)(compiler)는 하나의 프로그래밍 언어를 다른 언어로 변환(일명 컴파일; compile)하는 언어 처리 프로그램입니다. 흔히 고급 프로그래밍 언어를 저급 언어(기계어, 바이트코드 등)로 변환하는데 사용됩니다. 아래는 C++ 프로그래밍 언어의 `.CPP` 확장자 소스 코드(左)가 기계어로 구성된 `.EXE` 실행 파일(右)로 컴파일 된 예시입니다.
