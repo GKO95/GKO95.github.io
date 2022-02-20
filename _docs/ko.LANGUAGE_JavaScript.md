@@ -22,6 +22,8 @@ order: 0x05
 
 > 런타임 환경만 있으면 충분한지 의문을 가졌다면, 자바스크립트는 런타임에 프로그램을 분석하여 실행하는 [인터프리트 언어](/blog/ko.compiler_vs_interpreter#인터프리터)라는 점을 상기하면 된다.
 
+![Node.js 설치 화면](/images/docs/javascript/nodejs_install_startup.png)
+
 ## 비주얼 스튜디오 코드
 [비주얼 스튜디오 코드](https://code.visualstudio.com/download)(Visual Studio Code; VS Code)는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 특히 마이크로소프트에서 [타입스크립트](https://ko.wikipedia.org/wiki/타입스크립트)(TypeScript)라는 자바스크립트의 상위호환 언어 사용을 적극적으로 권장하므로써 자바스크립트 개발 환경에도 같이 신경쓰고 있다.
 
