@@ -7,22 +7,26 @@ icon: icon-javascript.svg
 order: 0x05
 ---
 # 자바스크립트: 소개
-[자바스크립트](https://ko.wikipedia.org/wiki/자바스크립트)(JavaScript)는 웹디자인을 위한 [HTML](#html-웹프로그래밍-언어) & [CSS](#css-스크립팅-언어)와 함께 사용되는 웹프로그래밍 언어이며, 상호작용 가능한 동적 웹페이지를 만드는데 기여한다. 현재 자바스크립트의 용도는 데이터 처리 및 어플리케이션 제작 등 범위가 넓어지고 있다. 그러므로 [웹 개발](https://ko.wikipedia.org/wiki/웹_개발)(web development) 등에 관여하는 IT 업계에서 자바스크립트는 필수 언어이다.
+[자바스크립트](https://ko.wikipedia.org/wiki/자바스크립트)(JavaScript)는 웹디자인에 사용된 [HTML](#html-웹프로그래밍-언어) & [CSS](https://ko.wikipedia.org/wiki/CSS)만으로는 제한적인 [동적 웹페이지](https://ko.wikipedia.org/wiki/동적_웹페이지)를 구현하기 위해 개발된 스크립트 언어였다. 자바스크립트가 [웹 브라우저](https://ko.wikipedia.org/wiki/웹_브라우저)에서만 실행될 수 있던 당시에는 활용도가 클라이언트 측에서 웹페이지 상호작용을 위한 [프론트엔드](https://ko.wikipedia.org/wiki/프론트엔드와_백엔드)(front-end)에 한정되었다. 현재는 데이터 처리 및 어플리케이션 제작 등 서버 측에서 [백엔드](https://ko.wikipedia.org/wiki/프론트엔드와_백엔드)(back-end)로도 활발히 사용되고 있다.
 
 ## 인터프리트 언어
 > *참조: [컴파일러 vs 인터프리터](/blog/ko.compiler_vs_interpreter)*
 
-자바스크립트 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다. 초창기 자바스크립트 코드를 실행하는 [자바스크립트 엔진](https://ko.wikipedia.org/wiki/자바스크립트_엔진)(JavaScript engine)은 단순 인터프리터였으나, 현대에는 성능 향상을 위해 [JIT 컴파일](/blog/ko.compiler_vs_interpreter#jit-컴파일)(just-in-time compile)을 활용한다. 일반적으로 자바스크립트 엔진은 [웹 브라우저](https://ko.wikipedia.org/wiki/웹_브라우저) 제작사에서 자사 브라우저를 위한 목적으로 자바스크립트 엔진을 개발한다. 그러나 자바스크립트 엔진은 브라우저 없이도 사용할 수 있으며, 이에 대한 내용은 바로 다음 장에서 다룬다.
+자바스크립트 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다. 초창기 자바스크립트 코드를 실행하는 [자바스크립트 엔진](https://ko.wikipedia.org/wiki/자바스크립트_엔진)(JavaScript engine)은 단순 인터프리터였으나, 현대에는 성능 향상을 위해 [JIT 컴파일](/blog/ko.compiler_vs_interpreter#jit-컴파일)(just-in-time compile)을 활용한다.
 
 # 자바스크립트: 설치
-자바스크립트를 실행하기 위해서는 두 가지 프로그램이 필요하다: (1) 자바스크립트 엔진 그리고 (2) 통합 개발 환경이다. 웹 브라우저는 기본적으로 자바스크립트 엔진이 들어있지만, 본문은 자바스크립트를 웹디자인에 국한되지 아니한 범용적으로 활용할 수 있도록 다른 환경을 소개한다.
+자바스크립트를 실행하기 위해서는 두 가지 프로그램이 필요하다: (1) 자바스크립트 엔진 그리고 (2) 통합 개발 환경이다. 자바스크립트 엔진은 기본적으로 웹 브라우저에 탑재되어 있으나, 본문은 자바스크립트를 최대한 프로그래밍 언어적인 측면에서 설명하기 위해 백엔드 관점에서 바라본다.
 
 ## Node.js
-[Node.js](https://nodejs.org/ko/)은 [구글 크롬](https://ko.wikipedia.org/wiki/구글_크롬)(Google Chrome) 및 [크로미엄](https://en.wikipedia.org/wiki/크로미엄_(웹_브라우저))(Chromium) 웹 브라우저에 탑재된 [V8](https://ko.wikipedia.org/wiki/V8_(자바스크립트_엔진)) 자바스크립트 엔진을 활용하는 런타임 환경(runtime environment)이다.
+[Node.js](https://ko.wikipedia.org/wiki/Node.js)<sub>([다운로드](https://nodejs.org/ko/))</sub>은 구글에서 개발한 [크롬](https://ko.wikipedia.org/wiki/구글_크롬) 및 [크로미엄](https://en.wikipedia.org/wiki/크로미엄_(웹_브라우저)) 웹 브라우저에 탑재된 [V8](https://ko.wikipedia.org/wiki/V8_(자바스크립트_엔진)) 자바스크립트 엔진을 활용하는 런타임 환경(runtime environment)이다.
 
-> 런타임 환경만 있으면 충분한지 의문을 가졌다면, 자바스크립트는 런타임에 프로그램을 분석하여 실행하는 [인터프리트 언어](/blog/ko.compiler_vs_interpreter#인터프리터)라는 점을 상기하면 된다.
+> 자바스크립트는 [인터프리트 언어](#인터프리트-언어)이기 때문에 런타임 환경만 있으면 프로그램을 실행하는데 충분하다.
 
 ![Node.js 설치 화면](/images/docs/javascript/nodejs_install_startup.png)
+
+Node.js는 "JavaScript everywhere(어디서든 자바스크립트)" 패러다임을 반영하여 웹 브라우저(즉, 클라이언트)로 한정되었던 자바스크립트의 활용도를 서버에서도 사용할 수 있도록 한다. 이는 웹 어플리케이션을 개발하는데 인터페이스와 알고리즘을 동일한 자바스크립트 언어로 구현할 수 있다는 점에서 강력한 장점 중 하나로 작용한다.
+
+가장 주목받는 특징으로써 [비동기 입출력](https://ko.wikipedia.org/wiki/비동기_입출력)(asynchronous I/O)이 가능한 [이벤트 기반 아키텍처](https://ko.wikipedia.org/wiki/이벤트_기반_아키텍처)(event-driven architecture)라는 점이다.
 
 ## 비주얼 스튜디오 코드
 [비주얼 스튜디오 코드](https://code.visualstudio.com/download)(Visual Studio Code; VS Code)는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 특히 마이크로소프트에서 [타입스크립트](https://ko.wikipedia.org/wiki/타입스크립트)(TypeScript)라는 자바스크립트의 상위호환 언어 사용을 적극적으로 권장하므로써 자바스크립트 개발 환경에도 같이 신경쓰고 있다.
