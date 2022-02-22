@@ -37,53 +37,11 @@ Node.js에서 가장 주목할 특징은 [비동기 입출력](https://ko.wikipe
 
 자바스크립트는 웹 브라우저에 탑재된 웹 API를 호출하여 함수 및 기능을 사용할 수 있다. 만일 웹 API 중에서 [DOM](https://ko.wikipedia.org/wiki/문서_객체_모델)으로부터 `onClick`, `onLoad`, 그리고 `onDone` 등의 이벤트가 동작하면 인자로써 전달된 [콜백](https://ko.wikipedia.org/wiki/콜백)(callback)이 [큐](https://ko.wikipedia.org/wiki/큐_(자료_구조))(queue)에 대기한다. 자바스크립트 엔진의 콜 스택이 비었으면 대기 중인 콜백을 불러와 실행하는데, 이를 처리하는 요소가 바로 [이벤트 루프](https://ko.wikipedia.org/wiki/이벤트_루프)(event loop)이다. 정리하자면, 자바스크립트는 콜백과 이를 지원하는 런타임 환경 덕분에 비동기 입출력이 가능한 것이다.
 
-## 비주얼 스튜디오 코드
+## 통합 개발 환경
+[통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)은 최소한 프로그래밍 언어의 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 소프트웨어 개발 프로그램이다. 자바스크립트 엔진은 자바스크립트 코드를 실행하는 소프트웨어이지만, 자바스크립트 코드 편집기가 아니다. 그러므로 자바스크립트 코드를 편집하고 곧바로 프로그램으로 실행하여 문제가 발생하면 검토할 수 있는 IDE가 절대적으로 필요하다.
+
+### 비주얼 스튜디오 코드
 [비주얼 스튜디오 코드](https://code.visualstudio.com/download)(Visual Studio Code; VS Code)는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 특히 마이크로소프트에서 [타입스크립트](https://ko.wikipedia.org/wiki/타입스크립트)(TypeScript)라는 자바스크립트의 상위호환 언어 사용을 적극적으로 권장하므로써 자바스크립트 개발 환경에도 같이 신경쓰고 있다.
-
-VS Code에서 자바스크립트 작업 환경을 구축하기 위해서는 최소 세 가지의 파일이 필요하다: 자바스크립트, HTML, 그리고 JSON 파일이다.
-
-### `script.js` 파일
-자바스크립트 파일은 당연히 현재 배우고자 하는 자바스크립트 언어를 작성하는 스크립트 파일이다. 자바스크립트 파일명은 `script.js`라고 가정한다.
-
-### `index.html` 파일
-HTML 파일을 통해 자바스크립트를 실행할 수 있는 런타임 환경을 제공한다. 자바스크립트 파일명이 `script.js`일 경우, 아래와 같이 HTML 파일을 생성하고 파일명은 간편하게 `index.html`로 지정한다.
-
-```html
-<html>
-    <!-- 자바스크립트 불러오기 -->
-    <script type="text/javascript" src="script.js"></script>
-</html>
-```
-
-### `.vscode/launch.json` 파일
-VS Code에서 자바스크립트를 실행하기 위해서는 확장도구가 필요하다: `F1` 키를 눌러 `Extensions: Install Extensions`을 입력한다. 선호하는 브라우저에 따라 왼쪽에 나타난 검색창에 다음과 같이 검색한다.
-
-* 구글 크롬: `Debugger for Chrome`
-* 모질라 파이어폭스: `Debugger for FireFox`
-* 마이크로소프트 엣지: `Debugger for Microsoft Edge`
-
-선택한 후, 초록색 `Install` 버튼을 눌러 설치한다. 이후 `F5` 버튼을 누르면 자바스크립트를 선택한 브라우저로 실행하는 옵션을 볼 수 있으며, 클릭할 시 자동적으로 `.vscode/launch.json` 파일이 생성된다.
-
-해당 파일에 설정을 추가해야 한다: `"file": "${workspaceFolder}/index.html"`. 여기서 설정을 추가할 시 쉼표(`,`)를 잊지말고 넣어주어야 한다. 아래는 브라우저를 마이크로소프트 엣지로 선택하였을 때의 예시이다.
-
-```json
-{
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "edge",
-            "request": "launch",
-            "name": "Launch Edge against localhost",
-            "url": "http://localhost:8080",
-            "file": "${workspaceFolder}/index.html"
-        }
-    ]
-}
-```
-
-종합적으로 아래와 같이 파일들이 준비되어야 한다.
-
-![VS Code의 자바스크립트 작업 환경](/images/docs/javascript/js_vs_workspace.png)
 
 현 상태에서 `F5` 버튼을 누르면 자바스크립트를 디벙깅 모드로 실행, 그리고 `CTRL+F5` 버튼을 누르면 디버깅 없이 실행된다. 여기서 [디버깅](https://ko.wikipedia.org/wiki/디버그)(debugging) 모드란, 코드를 단계별로 실행하여 데이터가 어떻게 변하는지 확인할 수 있도록 한다.
 
