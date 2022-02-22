@@ -26,7 +26,16 @@ order: 0x05
 
 Node.js는 "JavaScript everywhere(어디서든 자바스크립트)" 패러다임을 반영하여 웹 브라우저(즉, 클라이언트)로 한정되었던 자바스크립트의 활용도를 서버에서도 사용할 수 있도록 한다. 이는 웹 어플리케이션을 개발하는데 인터페이스와 알고리즘을 동일한 자바스크립트 언어로 구현할 수 있다는 점에서 강력한 장점 중 하나로 작용한다.
 
-가장 주목받는 특징으로써 [비동기 입출력](https://ko.wikipedia.org/wiki/비동기_입출력)(asynchronous I/O)이 가능한 [이벤트 기반 아키텍처](https://ko.wikipedia.org/wiki/이벤트_기반_아키텍처)(event-driven architecture)라는 점이다.
+### 런타임 환경
+> *참고: [What the heck is the event loop anyway? &#124; Philip Roberts &#124; JSConf EU - YouTube](https://www.youtube.com/watch?v=8aGhZQkoFbQ)*
+
+Node.js에서 가장 주목할 특징은 [비동기 입출력](https://ko.wikipedia.org/wiki/비동기_입출력)(asynchronous I/O)이 가능한 [이벤트 기반 아키텍처](https://ko.wikipedia.org/wiki/이벤트_기반_아키텍처)(event-driven architecture)라는 점이다. 비록 아래 이미지는 웹 브라우저의 런타임 환경을 시각화하였으나, 브라우저가 자체적으로 제공하는 [Web APIs](https://en.wikipedia.org/wiki/Web_API) 대신에 C 언어로 제작된 [libuv](https://en.wikipedia.org/wiki/Libuv) 라이브러리로 대체하면 바로 Node.js의 런타임 환경이다.
+
+![웹 브라우저 런타임 환경<sub><i>출처: <a href="https://medium.com/@lizfaria/the-javascript-engine-and-runtime-environment-e0ed86fea903">Medium @Liz Faria</a></i></sub>](/images/docs/javascript/browser_runtime_environment.png)
+
+좌측은 자바스크립트 엔진을 의미하며, Node.js 런타임 환경에서는 V8 엔진이 해당한다. 엔진 내부에는 데이터를 저장할 [힙](https://ko.wikipedia.org/wiki/동적_메모리_할당#힙_영역)(heap) 영역 메모리와 자바스크립트 코드를 실행하는 [스택](https://ko.wikipedia.org/wiki/스택) 메모리, 일명 [콜 스택](https://ko.wikipedia.org/wiki/콜_스택)(call stack)을 갖는다. 자바스크립트는 단일 [스레드](/docs/ko.Process#스레드)(thread)만을 사용하기 떄문에 하나의 콜 스택만을 활욯하는데, 스택 구조로 인해 한 코드가 완전히 끝날 때까지 다음 코드로 실행되지 않는 블로킹(blocking)이 작용한다.
+
+자바스크립트는 웹 브라우저에 탑재된 웹 API를 호출하여 함수 및 기능을 사용할 수 있다. 만일 웹 API 중에서 [DOM](https://ko.wikipedia.org/wiki/문서_객체_모델)으로부터 `onClick`, `onLoad`, 그리고 `onDone` 등의 이벤트가 동작하면 인자로써 전달된 [콜백](https://ko.wikipedia.org/wiki/콜백)(callback)이 [큐](https://ko.wikipedia.org/wiki/큐_(자료_구조))(queue)에 대기한다. 자바스크립트 엔진의 콜 스택이 비었으면 대기 중인 콜백을 불러와 실행하는데, 이를 처리하는 요소가 바로 [이벤트 루프](https://ko.wikipedia.org/wiki/이벤트_루프)(event loop)이다. 정리하자면, 자바스크립트는 콜백과 이를 지원하는 런타임 환경 덕분에 비동기 입출력이 가능한 것이다.
 
 ## 비주얼 스튜디오 코드
 [비주얼 스튜디오 코드](https://code.visualstudio.com/download)(Visual Studio Code; VS Code)는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 특히 마이크로소프트에서 [타입스크립트](https://ko.wikipedia.org/wiki/타입스크립트)(TypeScript)라는 자바스크립트의 상위호환 언어 사용을 적극적으로 권장하므로써 자바스크립트 개발 환경에도 같이 신경쓰고 있다.
