@@ -162,9 +162,10 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 
 이 둘은 전처리기가 헤더 파일을 어느 위치에서 찾을 것인지 차이점을 가진다.
 
-* `#include <header.h>`
+* **`#include <header.h>`**
     : 컴파일러 혹은 IDE에서 지정한 경로를 위주로 헤더 파일을 찾으며, 일반적으로 시스템 헤더 파일에 사용된다.
-* `#include "header.h"`
+
+* **`#include "header.h"`**
     : 현재 소스 파일이 위치한 경로를 위주로 헤더 파일을 찾는다. 만일 찾지 못하였을 시, `#include <header.h>`와 같이 지정된 경로에서 헤더 파일을 재탐색한다. 일반적으로 사용자 정의 헤더 파일에 사용된다.
 
 ### 컴파일된 헤더
@@ -178,10 +179,10 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 ## 주석
 주석(comment)은 프로그래밍에 있어 실행되지 않는 부분이며, 흔히 어떠한 정보를 간략히 스크립트 내에 입력하는데 사용된다. C 프로그래밍 언어에는 두 가지의 주석이 존재하며, 이들은 각각 한줄 주석과 블록 주석이라 부른다.
 
-* 한줄 주석 (line comment)
+* **한줄 주석 (line comment)**
     : *코드 한 줄을 차지하는 주석이며, 두 개의 슬래시(`//`)로 표시된다.*
 
-* 블록 주석 (block comment)
+* **블록 주석 (block comment)**
     : *코드 여러 줄을 차지하는 주석이며, 한 쌍의 슬래시와 별표(`/* */`)로 표시된다.*
 
 ```c
@@ -195,7 +196,7 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 ## 표현식 및 문장
 프로그래밍에서는 표현식과 문장이 있다.
 
-* [표현식](https://ko.wikipedia.org/wiki/식_(프로그래밍))(expression)
+* **[표현식](https://ko.wikipedia.org/wiki/식_(프로그래밍))(expression)**
     : *값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.*
     
     ```c
@@ -203,7 +204,7 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 2 < 3       // 논리 참을 반환
     ```
 
-* [문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)
+* **[문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)**
     : *실질적으로 무언가를 실행하는 하나의 완전한 코드를 의미한다. C 프로그래밍 언어에서 모든 문장은 문장 종단자(statement terminator)인 세미콜론 `;`으로 마무리 되어야 한다.*
 
     ```c
@@ -214,16 +215,16 @@ if (2 < 3) statement;      // 논리가 참이면 "statement" 문장 실행
 ## 입력 및 출력
 C 프로그래밍 언어는 다음과 같은 텍스트 기반의 입력 및 출력 함수를 가진다.
 
-* `putchar()`
+* **`putchar()`**
     : *문자(character) 하나를 터미널에 출력한다.*
 
-* `puts()`
+* **`puts()`**
     : *일련의 문자들(일명 문자열; string)을 터미널에 출력한다.*
 
-* `printf()`
+* **`printf()`**
     : *일련의 문자들(일명 문자열; string)을 터미널에 출력하며 형식 지원이 된다.*
 
-* `fprintf()`
+* **`fprintf()`**
     : *출력 함수 `printf()`의 확장된 개념으로 스트림 선택이 가능하다.*
 
 > 즉, `printf(...)`는 `fprintf(stdout, ...)`와 동일하며, `stdout`는 *표준 출력 스트림*을 의미한다.
@@ -247,13 +248,13 @@ variable: 3.14
 
 ----
 
-* `getchar()`
+* **`getchar()`**
     : *문자(character) 하나를 입력받는다.*
 
-* `gets()`
+* **`gets()`**
     : *일련의 문자들(일명 문자열; string)을 입력받는다.*
 
-* `scanf()`
+* **`scanf()`**
     : *일련의 문자들(일명 문자열; string)을 지정된 형식에 맞게 입력받는다. 문자열을 제외한 입력을 받을 모든 데이터는 주소 연산자(`&`)가 필요하다.*
 
 ```c
@@ -281,10 +282,10 @@ Hello World!    // variable2 = "Hello World!"
 ### 형식 지정자
 형식 지정자(format specifier)는 입출력 함수가 데이터를 어떻게 받아들일 것인지 지정한다. 형식 지정자는 `scanf()` 입력 함수에서 사용되는지, 혹은 `printf()` 출력 함수에서 사용하는지에 따라 데이터를 달리 처리한다.
 
-* 입력 함수: `scanf()`
+* **입력 함수: `scanf()`**
     : *본래 데이터의 성질이나 값이 변한다. 대표적인 예로 일련의 문자에서 원하는 부분만 추출한 작업이 있다(`Program`에서 `Pro`만 추출).*
 
-* 출력 함수: `printf()`
+* **출력 함수: `printf()`**
     : *본래 데이터의 성질과 값은 그대로 유지되나, 어떻게 표시되는지만 달라진다. 대표적인 예로 소수점 버림 작업이 있다(`3.14159`에서 `3.14`로 소수 두 자리만 표시).*
 
 ```c
@@ -416,7 +417,7 @@ C 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되었
 
 > 그 전에 [코드 블록](https://ko.wikipedia.org/wiki/블록_(프로그래밍))(code block)이란, 소스 코드 문장을 그룹화시키는 요소로 중괄호(`{}`)로 블록을 명시한다.
 
-* 지역 변수(local variable)
+* **지역 변수(local variable)**
     : *코드 블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.*
 
   ```c
@@ -429,7 +430,7 @@ C 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되었
   }
   ```
 
-* 전역 변수(global variable)
+* **전역 변수(global variable)**
     : *코드 블록 내에 속하지 않은 외부에 정의된 변수이다. 전역 변수는 어느 코드 블록에서도 호출만으로 지역 변수와 함께 사용할 수 있다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수의 사용은 피하도록 한다.*
 
     ```c
@@ -445,7 +446,7 @@ C 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되었
 ## 자료형 변환
 자료형 변환(type casting)은 상수 혹은 변수로부터 호출한 데이터를 강제로 다른 자료형으로 바꾸는 작업이다.
 
-* 암시적 자료형 변환(implicit type casting)
+* **암시적 자료형 변환(implicit type casting)**
     : *변환 시 데이터 손실이 없어 컴파일러에서 자연적으로 처리되는 변환이다. 흔히 유사한 자료형을 작은 크기에서 큰 크기로 키울 때 자동적으로 발생한다.*
 
     ```c
@@ -453,7 +454,7 @@ short A = 1;    // 2바이트 정수형
 int B = A;      // 4바이트 정수형
     ```
 
-* 명시적 자료형 변환(explicit type casting)
+* **명시적 자료형 변환(explicit type casting)**
     : *변환 시 데이터 손실의 위험을 감수하며 데이터의 자료형을 바꾼다. C 언어 캐스팅은 소괄호 `()` 안에 자료형을 기입한다.*
     
     ```c
@@ -780,8 +781,11 @@ printf(sizeof(variable));
 
 함수의 기능을 정의(definition)하기 위해서는 두 가지의 구성요소가 반드시 필요하다:
 
-* 코드 블록(`{}`): *함수를 호출할 때, 실행되는 코드가 들어있다.*
-* 자료형: *함수가 종료될 때, 반환되는 데이터의 자료형을 결정한다.* 
+* **코드 블록 `{ }`**
+    : *함수를 호출할 때, 실행되는 코드가 들어있다.*
+
+* **자료형**
+    : *함수가 종료될 때, 반환되는 데이터의 자료형을 결정한다.* 
 
 ```c
 /* 함수 정의 */
@@ -818,10 +822,10 @@ int function()
 ### 매개변수 및 전달인자
 다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
 
-* 전달인자 (argument)
+* **전달인자 (argument)**
     : *전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.*
 
-* 매개변수 (parameter)
+* **매개변수 (parameter)**
     : *전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호(`()`) 내에서 이루어진다.*
 
 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
@@ -908,8 +912,8 @@ C 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `int` 
 
 `main()` 시작점은 아래와 같은 매개변수를 함축적으로 가진다.
 
-* `argc`: *전달인자 개수(argument count).*
-* `argv`: *전달인자 데이터 배열(argument vector); 매개변수 정의는 `char *argv[]`로 대체 가능하다.*
+* **`argc`**: *전달인자 개수(argument count).*
+* **`argv`**: *전달인자 데이터 배열(argument vector); 매개변수 정의는 `char *argv[]`로 대체 가능하다.*
 
 위의 전달인자 동작은 터미널 명령창을 통해 시 명백히 관측할 수 있다.
 
@@ -1097,7 +1101,8 @@ printf("포인터: 0x%p\n", &variable);
 
 아래는 엔디언의 두 종류인 빅 엔디언(big-endian)과 리틀 엔디언(little-endian)에 대하여 우선 설명한다.
 
-* 빅 엔디언: 최상위 바이트가 첫 주소에 할당된다.
+* **빅 엔디언**
+    : *최상위 바이트가 첫 주소에 할당된다.*
   ```
   +-----------------------------------------------------------------------------------+
   | 0x0000008A97CFFB84 | 0x0000008A97CFFB85 | 0x0000008A97CFFB86 | 0x0000008A97CFFB87 |
@@ -1106,7 +1111,8 @@ printf("포인터: 0x%p\n", &variable);
   +-----------------------------------------------------------------------------------+
   ```
 
-* 리틀 엔디언: 최하위 바이트가 첫 주소에 할당된다.
+* **리틀 엔디언**
+    : *최하위 바이트가 첫 주소에 할당된다.*
   ```
   +-----------------------------------------------------------------------------------+
   | 0x0000008A97CFFB84 | 0x0000008A97CFFB85 | 0x0000008A97CFFB86 | 0x0000008A97CFFB87 |
@@ -1529,10 +1535,10 @@ fclose(fptr);
 ### 절대경로 및 상대경로
 컴퓨터에는 두 종류의 경로 탐색법이 존재한다.
 
-* 절대경로(absolute path)
+* **절대경로(absolute path)**
     : *시스템의 루트경로(예. 윈도우의 `C:\` 혹은 리눅스의 `/`)로부터 시작하여 탐색하는 방식이다.*
 
-* 상대경로(relative path)
+* **상대경로(relative path)**
     : *실행되고 있는 프로세스의 현 위치를 기준으로 경로를 탐색하는 방식이다.*
 
 경로를 지정할 때에는 백슬래시 두 개(`\\`)로 폴더 및 파일을 구분한다. 하나만 사용하면 [탈출 문자](#탈출-문자)가 되어 원치 않은 텍스트 연산이 수행될 수 있다.
@@ -1621,9 +1627,9 @@ C 프로그래밍 언어가 컴파일되기 전에 전처리기에서 `#include`
 
 컴파일러 자체에 이미 내장되어 있는 매크로가 있으며, 공통된 표준 매크로 및 특정 컴파일러 전용 매크로가 들어있다. 아래는 Visual C++, GCC, 그리고 그 외의 컴파일러가 가지는 내장 매크로 목록을 보여주는 문서이다(영문).
 
-* Visual C++: [Microsoft Docs - 미리 정의된 매크로](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
-* GCC: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
-* 그 외: [SourceForge Wiki](https://sourceforge.net/p/predef/wiki/Compilers/)
+* **Visual C++**: [Microsoft Docs - 미리 정의된 매크로](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
+* **GCC**: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
+* **그 외**: [SourceForge Wiki](https://sourceforge.net/p/predef/wiki/Compilers/)
 
 ### `#define` 지시문
 `#define` 지시문은 새로운 매크로를 생성한다.
@@ -1688,8 +1694,8 @@ Pragma 지시문(pragma directive)은 컴파일러의 기능과 옵션을 설정
 
 > Pragma란 용어는 pragmatic의 줄임말로, 사전적 의미로는 "실용적인"을 뜻한다. 이는 실질적 컴파일러 동작 및 처리 방식에 관여한 것을 보아 붙여진 용어라고 판단된다.
 
-* Visual C++: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://docs.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
-* GCC: [GCC Online Documentation - Pragmas](https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html)
+* **Visual C++**: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://docs.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
+* **GCC**: [GCC Online Documentation - Pragmas](https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html)
 
 본 장은 마이크로소프트의 비주얼 스튜디어에서 제공하는 Visual C++ 컴파일러의 pragma 지시문을 위주로 다룬다.
 
@@ -1840,10 +1846,10 @@ A
 
 라이브러리는 크게 두 종류로 나뉘어진다:
 
-* 정적 라이브러리(static library)
+* **정적 라이브러리(static library)**
     : *정적 라이브러리(`.LIB` 혹은 `.A` 확장자)는 프로그램 프로젝트를 컴파일하면 라이브러리도 함께 내포된다. 그러면 프로그램 하나가 완전체이기 때문에 외부 의존도가 낮아지는 장점을 가지지만, 프로그램 용량이 커지고 프로그램을 업데이트하려면 전부 새로 컴파일해야 하는 단점이 있다.*
 
-* 동적 라이브러리(dynamic library)
+* **동적 라이브러리(dynamic library)**
     : *동적 라이브러리(`.DLL` 혹은 `.SO`)는 프로그램에 내포되지 않고 별개의 파일로 존재하기 때문에 프로그램 용량이 작아지고 업데이트가 필요한 라이브러리만 교체하면 되지만, 프로그램의 외부 의존도가 높아져 라이브러리를 찾지 못하면 치명적인 문제를 야기할 수 있다.*
 
 C 프로그래밍 언어에서는 라이브러리 생성이 어렵지 않다; 본 장에서 예시로 들은 `module.c`를 컴파일하는 게 전부이다. 헤더 파일에서 이미 함수에 대한 선언이 모두 되어있기 때문에 컴파일러는 라이브러리 내에 있는 함수들의 존재를 알아차리고 있다. 그리고 프로그램을 컴파일 혹은 실행하면서 라이브러리를 호출하여 원하는 함수를 사용한다.
