@@ -207,7 +207,6 @@ variable = 1
 variable = "Hello World!"
 print(variable)
 ```
-
 ```
 Hello World!
 ```
