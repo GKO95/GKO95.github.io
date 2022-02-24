@@ -184,7 +184,7 @@ print("출력:", variable)
    ```
 
 ## 식별자
-[식별자](https://ko.wikipedia.org/wiki/식별자#컴퓨터_언어)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
+[식별자](https://ko.wikipedia.org/wiki/식별자#컴퓨터_언어)(identifier), 일명 네임(name)은 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
 
 * 오직 영문, 숫자, 밑줄(`_`)만 허용된다.
 * 첫 문자는 숫자로 시작할 수 없다.
@@ -192,18 +192,31 @@ print("출력:", variable)
 * 대소문자를 구분한다.
 
 ## 변수
-변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시의 변수는 `variable`이란 식별자를 가지며 `1`이란 값을 할당받는다.
+변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시의 `variable`이란 식별자를 갖는 변수에 숫자 3을 할당한다. 시스템적 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮은 절차를 [네임 바인딩](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
 
 ```python
-variable = 1
+# 변수 "variable"의 정의
+variable = 3
 ```
+
+파이썬의 변수는 반드시 네임 바인딩으로부터 정의되어야 한다. 즉, 아무런 데이터 할당이 없으면 인터프리터는 식별자를 변수로 간주하지 않아 오류가 발생한다.
+
+```python
+variable
+print(variable)
+```
+```
+NameError: name 'variable' is not defined
+```
+
+> 이러한 언어적 특징은 [C](/docs/ko.C#변수)/[C++](/docs/ko.Cpp#변수)와 같은 타 프로그래밍에서 자주 인용되는 "선언(declaration)" 및 "초기화(initialization)"란 용어가 파이썬 공식 문서에서 드믈게 언급된다.
 
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
 파이썬의 변수는 데이터 종류와 상관없이 새로운 데이터를 언제든지 할당받을 수 있다.
 
 ```python
-variable = 1
+variable = 3
 variable = "Hello World!"
 print(variable)
 ```
@@ -211,23 +224,15 @@ print(variable)
 Hello World!
 ```
 
-### 초기화
-초기화(initialization)란, 변수의 첫 데이터 할당을 가리킨다.
-
-```python
-# variable 변수가 할당받은 값 1이 최초의 저장값이면, 변수는 1로 "초기화"되었다고 한다.
-variable = 1
-```
-
 ### `del` 키워드
-`del` 키워드는 변수를 삭제 할 때 사용한다. 삭제된 변수 이름은 나중에 다시 사용할 수 있다.
+`del` 키워드는 식별자에 바인딩된 데이터를 해제, 즉 변수의 정의를 무효화할 때 사용한다. 차후 동일한 식별자로 변수를 다시 정의할 수 있다.
 
 ```python
-# 변수의 정의
+# 변수 "variable"의 정의
 variable = "Hello World!"
 print(variable)
 
-# 변수 "variable" 삭제
+# 변수 "variable" 네임 바인딩 해제
 del variable
 print(variable)
 ```
