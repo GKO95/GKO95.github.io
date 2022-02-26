@@ -169,6 +169,7 @@ console.log("출력:", variable);
 변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시는 `variable`이란 식별자를 갖는 변수에 숫자 3을 할당한다. 시스템적 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮는 절차를 [네임 바인딩](https://ko.wikipedia.org/wiki/네임_바인딩)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
 
 ```js
+// 변수 "variable"의 정의
 variable = 3;
 ```
 
@@ -181,6 +182,8 @@ console.log(variable);
 ```
 Uncaught ReferenceError: variable is not defined
 ```
+
+> 본 내용은 가장 근본된 자바스크립트의 변수 정의이다. 이후 ES6에서는 새로운 변수 유형 세 개를 소개하였으며, 이들과 구분짓기 위해 해당 변수를 "선언 생략형"이라 칭한다.
 
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
@@ -195,65 +198,106 @@ console.log(variable);
 Hello World!
 ```
 
+### 유효범위
+[유효범위](https://developer.mozilla.org/en-US/docs/Glossary/Scope)(scope)란, 현재 실행되는 코드로부터 값 또는 표현식이 가시적이거나 참조가 가능한 문맥을 가리킨다. 간단히 말해, 변수는 유효범위 내에서만 접근이 가능하며 벗어날 시에는 사용불가하다. 자바스크립트에는 총 세 가지의 유효범위가 존재한다.
+
+| 유효범위 | ES6 추가 | 설명 |
+|:-----:|:--:|------|
+| 블록 | ○ |  [코드 블록](https://ko.wikipedia.org/wiki/블록_(프로그래밍)) (code block) `{}` 내부에 정의/선언된 변수는 해당 코드 블록 어디서든 사용될 수 있다. |
+| 함수 | - | [함수](#자바스크립트-함수)(function) `function` 내부에 코드 블록 `{}` 여부 상관없이 정의/선언된 변수는 해당 함수 어디서든 사용될 수 있다. |
+| 전역 | - | 함수 `function` 외부에 코드 블록 `{}` 여부 상관없이 정의/선언된 변수는 해당 자바스크립트 프로그램 어디서든 사용될 수 있다. |
+
+> ES6 이전의 자바스크립트는 함수와 전역 범위만 존재하였으며, 비록 소스 코드 문장을 그룹화시키는 요소인 코드 블록이 있어도 별도의 범위로 구분하지 않았다.
+
+자바스크립트의 선언 생략형 변수는 항상 전역 범위(global scope)이다.
+
+* 웹 브라우저: 현 웹페이지에 연관된 모든 자바스크립트가 브라우저 창에 대한 `window` 전역 객체를 통해 공유된다.
+
+    ```js
+  /* 웹 브라우저 */
+  variable = "Hello World!";
+  console.log(window.variable);    // 출력: Hello World!
+    ```
+
+* Node.js: 실행되고 있는 자바스크립트 파일, 일명 [모듈](#자바스크립트-모듈)(module)에서만 `global` 전역 객체를 통해 모듈 내에서만 데이터가 공유된다.
+
+    ```js
+  /* Node.js */
+  variable = "Hello World!";
+  console.log(global.variable);    // 출력: Hello World!
+    ```
+
+이러한 차이점은 브라우저의 경우에 웹페이지 HTML이 중심이 되어 여러 자바스크립트 파일들을 `<script>` 태그로 불러와 마치 하나처럼 실행하는 반면, Node.js는 하나의 자바스크립트 파일이 중심이 되어 실행되는 게 원인으로 볼 수 있다. 타 변수와 중복된 이름을 가진다면 예상치 못한 결과와 오류가 발생할 수 있어 가급적 전역 변수의 사용은 피하도록 한다.
+
 ### 변수 선언문
-ES6부터는 새로운 방식의 바인딩이 소개되며 세 가지의 변수 선언(declaration) 문장이 추가되었다. 변수 선언문은 식별자 앞단에 위치하여 변수의유효범위 및 성질을 지정한다.
+ES6부터는 새로운 방식의 바인딩이 소개되어 식별자 앞단에 특정 키워드를 기입하는 것만으로 변수로 "선언(declaration)"한다. 선언된 변수는 자동으로 `undefined`로 네임 바인딩되지만, 선언 당시에 개발자가 직접 값을 할당하는 작업을 "초기화(initialization)"라고 일컫는다. 아래는 ES6에서 추가된 세 가지 변수 유형을 지정하는 선언문이다.
 
-> 그 전에 [코드 블록](https://ko.wikipedia.org/wiki/블록_(프로그래밍))(code block)이란, 소스 코드 문장을 그룹화시키는 요소로 중괄호(`{}`)로 블록을 명시한다.
+* **`let` 선언문**
 
-* **`var` 선언문** <sub>범위: [DOM](#자바스크립트-dom) 윈도우 전역(웹브라우저 한정) 혹은 [모듈](#자바스크립트-모듈)(Node.js 한정), [함수](#자바스크립트-함수)</sub>
+    블록 유효범위의 지역 변수(local variable)로 작용하며, 코드 블록 외부에서는 바인딩된 데이터가 소멸되어 더 이상 변수로써 사용할 수 없다. 지역 변수의 특징을 활용하면 코드 블록 외부에서 선언된 변수 이름을 그대로 가져와 코드 블록 내부에서 동일한 이름이지만 전혀 다른 존재의 변수를 새롭게 선언할 수 있다.
 
-    : *함수 내부에서 어디서든 사용할 수 있다. [호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting)(hoisting)을 지원하는 유일한 변수이지만 선언에 한정된다.*
+    ```js
+  let x = 3;
+  let y;
 
-    * 함수
-
-   ```js
-  function func() {
-      var 
+  /* 코드 블록 내부 */
+  {
+      x = 7;
+      let y = "Hello World!";
+      let z = true;
+      
+      console.log("x:", x);    // x: 7
+      console.log("y:", y);    // y: Hello World!
+      console.log("z:", z);    // z: true
   }
-   
 
-   ```
+  console.log("x:", x);        // x: 7
+  console.log("y:", y);        // y: undefined
+  console.log("z:", z);        // ReferenceError: z is not defined
+    ```
 
-    * [호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting)(hoisting)을 지원하는 유일한 변수이다. 단, 변수로의 최초 할당을 "초기화(initialization)"가 아닌 변수의 선언만이 해당한다.
+* **`const` 선언문**
 
+    블록 유효범위의 지역 상수(local constant)로 작용하며, 코드 블록 외부에서는 바인딩된 데이터가 소멸되어 더 이상 상수로써 사용할 수 없다. 여기서 상수는 한 번 초기화된 이후에는 변경이 불가하므로, 선언과 동시에 반드시 초기화를 해주어야 한다.
 
-   ```js
-  // 변수 호이스팅
-  variable = 3;
+    ```js
+  /* "const" 변수의 잘못된 사용법 */
+  const x;                     // SyntaxError: Missing initializer in const declaration
+  x = "Hello World!";          // TypeError: Assignment to constant variable
+    ```
+
+* **`var` 선언문**
+
+    해당 선언문은 두 가지 경우의 수가 있다:
+
+    1. 함수 내부에 선언될 시 함수 유효범위의 지역 변수(local variable)
+    2. 함수 외부에 선언될 시 전역 유효범위의 전역 변수(global variable)
+    
+    > [유효범위](#유효범위)(scope)에서 언급한 바에 따르면 Node.js의 전역 변수는 실행되는 자바스크립트 모듈 내에서 한정된다. 심지어 Node.js의 전역 객체 `global`의 속성과 연동되지 않는 점에서, 오히려 모듈 유효범위의 지역 변수라고 표현하는 게 적합하다.
+    >
+    > ```js
+    > /* Node.js */
+    > var variable = "Hello World!";
+    > console.log(global.variable);    // 출력: undefined
+    > ```
+
+    변수 중에서 유일하게 선언 [호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting)(hoisting)을 지원한다. 즉, 변수를 선언하기 전에 미리 할당 및 호출되어 사용될 수 있다는 의미이다.
+
+    ```js
+  /* 변수 호이스팅 예시 */
+  variable = "Hello World!";
   var variable;
 
   /* 동일:
   var variable;
-  variable = 3;
+  variable = "Hello World!";
   */
-   ```
-
-* **`let` 선언문** <sub>범위: 코드 블록</sub>
-
-    : **
-
-   ```js
-  function func() {
-      var 
-  }
-   
-
-   ```
-
-* **`const` 선언문** <sub>범위: 코드 블록</sub>
-
-    : *초기화 이후에 상수(constant)는 한 번 데이터를 할당한 후 변경할 수 없는 특별한 변수이다.*
-
-   ```js
-  function func() {
-      var 
-  }
-   
-
-   ```
+    ```
 
 ### `delete` 키워드
 `delete` 키워드는 식별자에 바인딩된 데이터를 해제, 즉 변수의 정의를 무효화할 때 사용한다. 차후 동일한 식별자로 변수를 다시 정의할 수 있다.
+
+> 단, `var` 선언문의 변수만이 유일하게 적용되지 않으며, 그 이유로 변수 호이스팅과 연관이 있는 것으로 판단된다.
 
 ```js
 // 변수 "variable"의 정의
@@ -268,42 +312,6 @@ console.log(variable);
 Hello World!
 Uncaught ReferenceError: variable is not defined
 ```
-
-### 지역 변수 및 전역 변수
-자바스크립트에는 전역 변수와 지역 변수라는 개념이 존재한다.
-
-* *지역 변수(local variable)*
-    : 함수(function)와 같은 코드 블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다. 그러므로 지역 변수는 외부에서 정의된 변수의 이름을 가질 수 있다.
-
-    ```js
-    /* "let" 지역 변수 */
-    let y = "Outer Scope";
-    if (true) {
-        let y = "Inner Scope";
-        console.log(y);
-    }
-    console.log(y);
-    ```
-    ```
-    Outer Scope
-    Inner Scope
-    ```
-    
-* *전역 변수(global variable)*
-    : 스크립트 내에서 어떠한 코드 블록에도 속하지 않은 외부에 정의된 변수이다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수의 사용은 피하도록 한다.
-
-    ```js
-    /* "var" 전역 변수 */
-    var x = 123.456;
-    console.log(x);
-    
-    x = "This is a string.";
-    console.log(x);
-    ```
-    ```
-    123.456
-    This is a string
-    ```
 
 ## 자료형
 파이썬은 기본적으로 세 가지의 데이터 유형이 존재하며, 이들은 숫자, 논리, 그리고 문자열 자료형(data type)으로 구분된다.
