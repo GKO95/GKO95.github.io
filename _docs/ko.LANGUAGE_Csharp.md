@@ -558,7 +558,7 @@ else
 ```
 
 ### `else if` 조건문
-`elif` 조건문은 `else`와 `if` 조건문의 조합으로 이전 조건이 거짓(`false`)일 때 새로운 조건을 제시한다.
+`else if` 조건문은 `else`와 `if` 조건문의 조합으로 이전 조건이 거짓(`false`)일 때 새로운 조건을 제시한다.
 
 ```csharp
 if (condition)
