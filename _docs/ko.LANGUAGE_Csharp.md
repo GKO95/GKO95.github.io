@@ -117,11 +117,8 @@ C# 프로그래밍 언어로 다양할 어플리케이션을 만들 수 있어, 
 ## 주석
 주석(comment)은 프로그래밍에 있어 실행되지 않는 부분이며, 흔히 어떠한 정보를 간략히 스크립트 내에 입력하는데 사용된다. C# 프로그래밍 언어에는 두 가지의 주석이 존재하며, 이들은 각각 한줄 주석과 블록 주석이라 부른다.
 
-* **한줄 주석 (line comment)**
-    : *코드 한 줄을 차지하는 주석이며, 두 개의 슬래시(`//`)로 표시된다.*
-
-* **블록 주석 (block comment)**
-    : *코드 여러 줄을 차지하는 주석이며, 한 쌍의 슬래시와 별표(`/* */`)로 표시된다.*
+* **한줄 주석 (line comment)**: 코드 한 줄을 차지하는 주석이며, 두 개의 슬래시(`//`)로 표시된다.
+* **블록 주석 (block comment)**: 코드 여러 줄을 차지하는 주석이며, 한 쌍의 슬래시와 별표(`/* */`)로 표시된다.
 
 ```csharp
 /*
@@ -135,19 +132,21 @@ C# 프로그래밍 언어로 다양할 어플리케이션을 만들 수 있어, 
 프로그래밍에서는 표현식과 문장이 있다.
 
 * **[표현식](https://ko.wikipedia.org/wiki/식_(프로그래밍))(expression)**
-    : *값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.*
+
+    값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
     
     ```csharp
-2 + 3       // 숫자 5를 반환
-2 < 3       // 논리 참을 반환
+  2 + 3       // 숫자 5를 반환
+  2 < 3       // 논리 참을 반환
     ```
 
 * **[문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)**
-    : *실질적으로 무언가를 실행하는 하나의 완전한 코드를 의미한다. C# 프로그래밍 언어에서 모든 문장은 문장 종단자(statement terminator)인 세미콜론 `;`으로 마무리 되어야 한다.*
+
+    실질적으로 무언가를 실행하는 하나의 완전한 코드를 의미한다. C# 프로그래밍 언어에서 모든 문장은 문장 종단자(statement terminator)인 세미콜론 `;`으로 마무리 되어야 한다.
 
     ```csharp
-int variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화
-if (2 < 3) statement;      // 논리가 참이면 "statement" 문장 실행
+  int variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화
+  if (2 < 3) statement;      // 논리가 참이면 "statement" 문장 실행
     ```
 
 ## 식별자
@@ -221,11 +220,9 @@ scope2.WriteLine("Second Line");
 ## 입력 및 출력
 C# 프로그래밍 언어는 `System` 네임스페이스 안에 `Console` 클래스, 혹은 간단히 `System.Console`에서 텍스트 입력 및 출력 기능을 제공한다.
 
-* **`Console.Write()`**
-    : *줄바꿈 없이 텍스트를 터미널에 출력한다.*
+* **`Console.Write()`**: 줄바꿈 없이 텍스트를 터미널에 출력한다.
 
-* **`Console.WriteLine()`**
-    : *줄바꿈과 함께 텍스트를 터미널에 출력한다.*
+* **`Console.WriteLine()`**: 줄바꿈과 함께 텍스트를 터미널에 출력한다.
 
 ```csharp
 class Program{
@@ -243,14 +240,11 @@ Egg
 ```
 ----
 
-* **`Console.Read()`**
-    : *하나의 문자(character)를 읽는다.*
+* **`Console.Read()`**: 하나의 문자(character)를 읽는다.
 
-* **`Console.ReadLine()`**
-    : *한 줄의 텍스트를 읽는다.*
+* **`Console.ReadLine()`**: 한 줄의 텍스트를 읽는다.
 
-* **`Console.ReadKey()`**
-    : *키보드 버튼 입력을 읽는다.*
+* **`Console.ReadKey()`**: 키보드 버튼 입력을 읽는다.
 
 ```csharp
 using System;
@@ -318,10 +312,6 @@ System.Console.Write("Hello\nWorld!");
 Hello
 World!
 ```
-
-| 줄바꿈  | 탭    | 백슬래시 | 백스페이스 | 작은 따옴표 | 큰 따옴표 |
-|:----:|:----:|:----:|:-----:|:------:|:-----:|
-| `\n` | `\t` | `\\` | `\b`  | `\'`   | `\"`  |
 
 ## 자료형
 [자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터의 내용물이 어떻게 표현되는지 결정하는 요소이며, C# 프로그래밍 언어에서는 여러 자료형이 존재한다. 각 자료형마다 데이터를 표현하기 위해 필요한 바이트 크기가 정해져 있다.
@@ -419,9 +409,10 @@ const int variable = 3;
 C# 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되었는지에 따라 두 가지의 종류로 구분된다.
 
 * **지역 변수(local variable)**
-    : *코드 블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.*
 
-  ```csharp
+    코드 블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.
+
+    ```csharp
   class Program {
       static void Main() {
 
@@ -429,28 +420,31 @@ C# 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되�
           int variable;
       }
   }
-  ```
+    ```
 
 * **전역 변수(global variable)**
-    : *이론적으로는 코드 블록 내에 속하지 않은 외부에 정의된 변수로써 어느 코드 블록에서도 호출만으로 지역 변수와 함께 사용할 수 있다. 그러나 객체지향 프로그래밍인 C# 언어에서 클래스 외부에 변수를 선언할 수 없기 때문에 공식적으로 지원되지 않는다.*
+
+    이론적으로는 코드 블록 내에 속하지 않은 외부에 정의된 변수로써 어느 코드 블록에서도 호출만으로 지역 변수와 함께 사용할 수 있다. 그러나 객체지향 프로그래밍인 C# 언어에서 클래스 외부에 변수를 선언할 수 없기 때문에 공식적으로 지원되지 않는다.
 
 ## 자료형 변환
 자료형 변환(type casting)은 상수 혹은 변수로부터 호출한 데이터를 강제로 다른 자료형으로 바꾸는 작업이다.
 
 * **암시적 자료형 변환(implicit type casting)**
-    : *변환 시 데이터 손실이 없어 컴파일러에서 자연적으로 처리되는 변환이다. 흔히 유사한 자료형을 작은 크기에서 큰 크기로 키울 때 자동적으로 발생한다.*
+
+    변환 시 데이터 손실이 없어 컴파일러에서 자연적으로 처리되는 변환이다. 흔히 유사한 자료형을 작은 크기에서 큰 크기로 키울 때 자동적으로 발생한다.
 
     ```csharp
-short A = 1;    // 2바이트 정수형
-int B = A;      // 4바이트 정수형
+  short A = 1;    // 2바이트 정수형
+  int B = A;      // 4바이트 정수형
     ```
 
 * **명시적 자료형 변환(explicit type casting)**
-    : *변환 시 데이터 손실의 위험을 감수하며 데이터의 자료형을 바꾼다. C 형식 캐스팅은 소괄호 `()` 안에 자료형을 기입한다.*
+
+    변환 시 데이터 손실의 위험을 감수하며 데이터의 자료형을 바꾼다. C 형식 캐스팅은 소괄호 `()` 안에 자료형을 기입한다.
     
     ```csharp
-float A = 1.9;  // 4바이트 부동소수점
-int B = (int)A; // 4바이트 정수형 - 완전 호환 불가: 정수 부분만 반환된다.
+  float A = 1.9;  // 4바이트 부동소수점
+  int B = (int)A; // 4바이트 정수형 - 완전 호환 불가: 정수 부분만 반환된다.
     ```
 
 ### 도우미 클래스 변환
@@ -1002,10 +996,8 @@ System.Console.WriteLine("Hello World!");
 
 함수의 기능을 정의하기 위해서는 두 가지의 구성요소가 반드시 필요하다:
 
-* **코드 블록 `{ }`**
-    : *메소드를 호출할 때, 실행되는 코드가 들어있다.*
-* **자료형**
-    : *메소드가 종료될 때, 반환되는 데이터의 자료형을 결정한다.* 
+* **코드 블록 `{}`**: 메소드를 호출할 때, 실행되는 코드가 들어있다.
+* **자료형**: 메소드가 종료될 때, 반환되는 데이터의 자료형을 결정한다.
 
 ```csharp
 /* 메소드 정의 */
@@ -1034,10 +1026,12 @@ C# 프로그래밍 언어는 객체지향 프로그래밍 언어가 갖는 [캡�
 다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
 
 * **전달인자 (argument)**
-    : *전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.*
+
+    전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.
 
 * **매개변수 (parameter)**
-    : *전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호(`()`) 내에서 이루어진다.*
+
+    전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호(`()`) 내에서 이루어진다.
 
 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
 
@@ -1069,109 +1063,113 @@ class Program
 메소드에서 전달인자를 매개변수로 전달하는 방법에는 값에 의한 호출(call by value) 그리고 참조에 의한 호출(call by reference)이 있다.
 
 * **값에 의한 호출**
-    : *값에 의한 호출은 오로지 전달인자의 값만 매개변수로 건네준다. 전달인자와 매개변수는 별개의 존재로 취급되어, 매개변수의 변화는 전달인자에 아무런 영향을 주지 않는다.*
+
+    값에 의한 호출은 오로지 전달인자의 값만 매개변수로 건네준다. 전달인자와 매개변수는 별개의 존재로 취급되어, 매개변수의 변화는 전달인자에 아무런 영향을 주지 않는다.
 
     ```csharp
-    using System.Console;
-    
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            int A = 1;
-            int B = 3;
-            
-            Console.WriteLine(A, B);    // >> 출력: 4 (1 + 3.0)
-            Console.WriteLine(A, B);    // >> 출력: 4 (1 + 3.0)
-        }
-        
-        /* 값에 의한 호출 */
-        static int method(int arg1, int arg2)
-        {
-            arg1 += arg2;
-            return arg1;
-        }
-    }
+  using System.Console;
+  
+  class Program
+  {
+      static void Main(string[] args)
+      {
+          int A = 1;
+          int B = 3;
+          
+          Console.WriteLine(A, B);    // >> 출력: 4 (1 + 3.0)
+          Console.WriteLine(A, B);    // >> 출력: 4 (1 + 3.0)
+      }
+      
+      /* 값에 의한 호출 */
+      static int method(int arg1, int arg2)
+      {
+          arg1 += arg2;
+          return arg1;
+      }
+  }
     ```
 
 * **참조에 의한 호출: `ref` 키워드**
-    : *`ref` 키워드를 사용하는 참조에 의한 호출은 전달인자 자체를 매개변수로 건네준다. 전달인자와 매개변수는 하나의 존재로 취급되어, 매개변수의 변화는 전달인자에 그대로 영향을 준다.*
+
+    `ref` 키워드를 사용하는 참조에 의한 호출은 전달인자 자체를 매개변수로 건네준다. 전달인자와 매개변수는 하나의 존재로 취급되어, 매개변수의 변화는 전달인자에 그대로 영향을 준다.
 
     ```csharp
-    using System.Console;
-    
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            int A = 1;
-            int B = 3;
-            
-            Console.WriteLine(ref A, ref B);    // >> 출력: 4 (1 + 3.0)
-            Console.WriteLine(ref A, ref B);    // >> 출력: 7 ((1 + 3.0) + 3.0)
-        }
-        
-        /* 참조에 의한 호출 */
-        static int method(ref int arg1, ref int arg2)
-        {
-            arg1 += arg2;
-            return arg1;
-        }
-    }
+  using System.Console;
+  
+  class Program
+  {
+      static void Main(string[] args)
+      {
+          int A = 1;
+          int B = 3;
+          
+          Console.WriteLine(ref A, ref B);    // >> 출력: 4 (1 + 3.0)
+          Console.WriteLine(ref A, ref B);    // >> 출력: 7 ((1 + 3.0)  + 3.0)
+      }
+      
+      /* 참조에 의한 호출 */
+      static int method(ref int arg1, ref int arg2)
+      {
+          arg1 += arg2;
+          return arg1;
+      }
+  }
     ```
 
 * **참조에 의한 호출: `in` 키워드**
-    : *`in` 키워드를 사용한 참조에 의한 호출에서 전달인자와 매개변수는 하나의 존재로 취급되지만 매개변수는 읽기 전용이 되어 데이터 변동이 불가능하다. 매개변수 데이터를 수정할 수 없으므로 전달인자는 그대로 유지된다.*
+
+    `in` 키워드를 사용한 참조에 의한 호출에서 전달인자와 매개변수는 하나의 존재로 취급되지만 매개변수는 읽기 전용이 되어 데이터 변동이 불가능하다. 매개변수 데이터를 수정할 수 없으므로 전달인자는 그대로 유지된다.
 
     ```csharp
-    using System.Console;
-    
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            int A = 1;
-            int B = 3;
-            
-            Console.WriteLine(in A, in B);    // 컴파일 오류: "arg1 += arg2;" 실행 불가!
-        }
-        
-        /* 참조에 의한 호출: in 키워드 */
-        static int method(in int arg1, in int arg2)
-        {
-            arg1 += arg2;
-            return arg1;
-        }
-    }
+  using System.Console;
+  
+  class Program
+  {
+      static void Main(string[] args)
+      {
+          int A = 1;
+          int B = 3;
+          
+          Console.WriteLine(in A, in B);    // 컴파일 오류: "arg1 +=  arg2;" 실행 불가!
+      }
+      
+      /* 참조에 의한 호출: in 키워드 */
+      static int method(in int arg1, in int arg2)
+      {
+          arg1 += arg2;
+          return arg1;
+      }
+  }
     ```
     ```
-    Cannot assign to variable 'in int' because it is a readonly variable
+  Cannot assign to variable 'in int' because it is a readonly variable
     ```
 
 * **참조에 의한 호출: `out` 키워드**
-    : *`out` 키워드를 사용한 참조에 의한 호출에서 전달인자와 매개변수는 하나의 존재로 취급되지만 오로지 초기화되지 않은 전달인자만 가능하다. 그리고 매개변수는 메소드가 종료되기 전에 반드시 초기화되어야 한다.*
+
+    `out` 키워드를 사용한 참조에 의한 호출에서 전달인자와 매개변수는 하나의 존재로 취급되지만 오로지 초기화되지 않은 전달인자만 가능하다. 그리고 매개변수는 메소드가 종료되기 전에 반드시 초기화되어야 한다.
 
     ```csharp
-    using System.Console;
-    
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            int A, B;    // 초기화되지 않은 변수
-            
-            Console.WriteLine(out A, out B);              // >> 출력: 4 (1 + 3.0)
-            Console.WriteLine("A: {0}, B: {1}", A, B);    // >> 출력: "A: 4, B: 3"
-        }
-        
-        /* 참조에 의한 호출: out 키워드 */
-        static int method(out int arg1, out int arg2)
-        {
-            arg1 = 1; arg2 = 3;
-            arg1 += arg2;
-            return arg1;
-        }
-    }
+  using System.Console;
+  
+  class Program
+  {
+      static void Main(string[] args)
+      {
+          int A, B;    // 초기화되지 않은 변수
+          
+          Console.WriteLine(out A, out B);              // >> 출력: 4  (1 + 3.0)
+          Console.WriteLine("A: {0}, B: {1}", A, B);    // >> 출력: "A:  4, B: 3"
+      }
+      
+      /* 참조에 의한 호출: out 키워드 */
+      static int method(out int arg1, out int arg2)
+      {
+          arg1 = 1; arg2 = 3;
+          arg1 += arg2;
+          return arg1;
+      }
+  }
     ```
 
 ### 정적 변수
@@ -1475,89 +1473,97 @@ static class CLASS
 한정자(modifier)는 객체 맴버를 선언할 때 성질을 지정하기 위해 사용된다.
 
 1. **`static` 한정자**
-    : 객체화 없이 클래스에서 바로 접근할 수 있는 정적 맴버, 혹은 정적 맴버만을 가지는 정적 클래스를 선언하는데 사용된다.
+
+    객체화 없이 클래스에서 바로 접근할 수 있는 정적 맴버, 혹은 정적 맴버만을 가지는 정적 클래스를 선언하는데 사용된다.
 
     ```csharp
-    /* 정적 필드 */
-    static int field = 3;
-    
-    /* 정적 메소드 */
-    static void method()
-    { 
-        statements;
-    }
+   /* 정적 필드 */
+   static int field = 3;
+     
+   /* 정적 메소드 */
+   static void method()
+   { 
+       statements;
+   }
     ```
 
 2. **`const` 한정자**
-    : *초기화 이후 값 변동이 불가한 정적 상수(constant) 필드를 선언하는데 사용된다. 해당 맴버는 반드시 선언 시 초기화가 되어야 하며, 그렇지 않으면 컴파일 오류가 발생한다.*
+
+    초기화 이후 값 변동이 불가한 정적 상수(constant) 필드를 선언하는데 사용된다. 해당 맴버는 반드시 선언 시 초기화가 되어야 하며, 그렇지 않으면 컴파일 오류가 발생한다.
 
     ```csharp
-    /* (정적) 상수 필드 */
-    const int field = 3;
+   /* (정적) 상수 필드 */
+   const int field = 3;
     ```
 
 3. **`readonly` 한정자**
-    : *초기화 이후 값 변동이 불가한 비정적(non-static) 비완전상수(semi-constant) 필드를 선언하는데 사용된다. 해당 맴버는 선언 단계는 물론, 생성자를 통해서도 초기화가 될 수 있다.*
+
+    초기화 이후 값 변동이 불가한 비정적(non-static) 비완전상수(semi-constant) 필드를 선언하는데 사용된다. 해당 맴버는 선언 단계는 물론, 생성자를 통해서도 초기화가 될 수 있다.
 
     ```csharp
-    // (비정적) 읽기전용 필드
-    readonly int field;
+   // (비정적) 읽기전용 필드
+   readonly int field;
     ```
 
 4. **`sealed` 한정자**
-    : *기반 클래스 혹은 기반 클래스의 맴버에 사용되어 파생 클래스가 상속받지 못하도록 제한하는 한정자이다.*
+    
+    기반 클래스 혹은 기반 클래스의 맴버에 사용되어 파생 클래스가 상속받지 못하도록 제한하는 한정자이다.
 
     ```csharp
-    // 봉인 필드
-    sealed int field;
+   // 봉인 필드
+   sealed int field;
     ```
 
 5. **`virtual` 및 `override` 한정자**
-    : *오버라이딩을 위해 사용되는 한정자 쌍이다: `virtual` 한정자는 기반 클래스의 맴버가 오버라이딩 될 수 있도록 하며, `override` 한정자는 파생 클래스가 해당 맴버를 오버라이딩 할 수 있도록 한다.*
+
+    오버라이딩을 위해 사용되는 한정자 쌍이다: `virtual` 한정자는 기반 클래스의 맴버가 오버라이딩 될 수 있도록 하며, `override` 한정자는 파생 클래스가 해당 맴버를 오버라이딩 할 수 있도록 한다.
 
     ```csharp
-    // 가상 메소드
-    virtual void method()
-    {
-        statements;
-    }
-    
-    // 오버라이드 메소드
-    override void method()
-    {
-        statements; 
-    }
+   // 가상 메소드
+   virtual void method()
+   {
+       statements;
+   }
+   
+   // 오버라이드 메소드
+   override void method()
+   {
+       statements; 
+   }
     ```
 
 6. **`abstract` 한정자**
-    : *코드 블록 없는 가상 메소드를 선언하는데 사용되는 한정자이다. 해당 한정자는 메소드 이외에도 클래스 자체에도 사용할 수 있다.*
+
+    코드 블록 없는 가상 메소드를 선언하는데 사용되는 한정자이다. 해당 한정자는 메소드 이외에도 클래스 자체에도 사용할 수 있다.
 
     ```csharp
-    // 추상 메소드
-    abstract void method();
+   // 추상 메소드
+   abstract void method();
     ```
 
 7. **`partial` 한정자**
-    : *클래스 또는 메소드를 분할하여 정의하는데 사용되는 한정자이다.*
+
+    클래스 또는 메소드를 분할하여 정의하는데 사용되는 한정자이다.
 
     ```csharp
-    // 분할 클래스
-    partial class CLASS
-    {
-        void method1();
-    }
-
-    partial class CLASS
-    {
-        void method2();
-    }
-
-    /* 동일:
-    class CLASS
-    {
-        void method1();
-        void method2();
-    } */
+   // 분할 클래스
+   partial class CLASS
+   {
+       void method1();
+   }
+   
+   partial class CLASS
+   {
+       void method2();
+   }
+   
+   /* 동일:
+   class CLASS
+   {
+       void method1();
+       void method2();
+   }
+   */
     ```
 
 ### 접근 한정자
@@ -1621,7 +1627,7 @@ class Program
 ### `base` 키워드
 `base` 키워드는 상속과 관련하여 다음 용도를 갖는다 (단, 정적 메소드에서 사용 불가).
 
-* *파생 클래스로부터 기반 클래스 맴버에 접근한다.*
+* 파생 클래스로부터 기반 클래스 맴버에 접근한다.
 
     ```csharp
   using System;
@@ -1661,7 +1667,7 @@ class Program
   "파생 클래스 메소드"
     ```
 
-* *객체화에서 호출할 기반 클래스 생성자를 선택할 수 있다.*
+* 객체화에서 호출할 기반 클래스 생성자를 선택할 수 있다.
 
     ```csharp
   using System;
@@ -1714,11 +1720,8 @@ class Program
 ## 다형성
 다형성(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, C# 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 가리킨다. 객체지향 프로그래밍에서 다형성은 매우 중요한 특징이며 두 가지로 분류된다.
 
-* **컴파일타임 다형성(compile-time polymorphism)**
-    : *컴파일 시 이루어지는 다형성 (일명 정적 다형성; static polymorphism)*
-
-* **런타임 다형성(run-time polymorphism)**
-    : *프로그램 실행 시 이루어지는 다형성 (일명 동적 다형성; dynamic polymorphism)*
+* **컴파일타임 다형성(compile-time polymorphism)**: 컴파일 시 이루어지는 다형성 (일명 정적 다형성; static polymorphism)
+* **런타임 다형성(run-time polymorphism)**: 프로그램 실행 시 이루어지는 다형성 (일명 동적 다형성; dynamic polymorphism)
 
 > 이전 장에서 소개한 적이 있는 [메소드 오버로딩](#메소드-오버로딩)는 컴파일타임 다형성 중 하나이다.
 
@@ -2088,10 +2091,12 @@ CLASS<int, double> instance = new(1, 3.0);
 `try`/`catch` 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
 
 * **`try` 문**
-    : *블록 내의 코드에 예외가 발생하는지 확인한다. 예외가 발생하였을 시, 나머지 코드는 실행되지 않고 예외 종류에 따라 해당하는 `catch` 블록으로 넘어간다.*
+
+    블록 내의 코드에 예외가 발생하는지 확인한다. 예외가 발생하였을 시, 나머지 코드는 실행되지 않고 예외 종류에 따라 해당하는 `catch` 블록으로 넘어간다.
 
 * **`catch` 문**
-    : *`try` 블록에서 예외가 발생하면 실행되는 코드를 포함한다. 하나의 `try` 블록에 여러 `catch` 블록을 사용하여 다양한 예외에 대비할 수 있다. 만일 `catch` 블록이 없으면 컴파일 오류가 발생한다 (컴파일 오류는 예외가 아니다).*
+
+    `try` 블록에서 예외가 발생하면 실행되는 코드를 포함한다. 하나의 `try` 블록에 여러 `catch` 블록을 사용하여 다양한 예외에 대비할 수 있다. 만일 `catch` 블록이 없으면 컴파일 오류가 발생한다 (컴파일 오류는 예외가 아니다).
 
 ```csharp
 /* try 블록 */
@@ -2194,11 +2199,8 @@ finally
 ### 절대경로 및 상대경로
 컴퓨터에는 두 종류의 경로 탐색법이 존재한다.
 
-* **절대경로(absolute path)**
-    : *시스템의 루트경로(예. 윈도우의 `C:\` 혹은 리눅스의 `/`)로부터 시작하여 탐색하는 방식이다.*
-
-* **상대경로(relative path)**
-    : *실행되고 있는 프로세스의 현 위치를 기준으로 경로를 탐색하는 방식이다.*
+* **절대경로(absolute path)**: 시스템의 루트경로(예. 윈도우의 `C:\` 혹은 리눅스의 `/`)로부터 시작하여 탐색하는 방식이다.
+* **상대경로(relative path)**: 실행되고 있는 프로세스의 현 위치를 기준으로 경로를 탐색하는 방식이다.
 
 경로를 지정할 때에는 백슬래시 두 개(`\\`)로 폴더 및 파일을 구분한다. 하나만 사용하면 [탈출 문자](#탈출-문자)가 되어 원치 않은 텍스트 연산이 수행될 수 있다.
 
