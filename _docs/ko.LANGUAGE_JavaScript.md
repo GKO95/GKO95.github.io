@@ -203,7 +203,7 @@ Hello World!
 이러한 차이점은 브라우저의 경우에 웹페이지 HTML이 중심이 되어 여러 자바스크립트 파일들을 `<script>` 태그로 불러와 마치 하나처럼 실행하는 반면, Node.js는 하나의 자바스크립트 파일이 중심이 되어 실행되는 게 원인으로 볼 수 있다. 타 변수와 중복된 이름을 가진다면 예상치 못한 결과와 오류가 발생할 수 있어 가급적 전역 변수의 사용은 피하도록 한다.
 
 ### 변수 선언문
-ES6부터는 새로운 방식의 바인딩이 소개되어 식별자 앞단에 특정 키워드를 기입하는 것만으로 변수로 "선언(declaration)"한다. 선언된 변수는 자동으로 `undefined`로 네임 바인딩되지만, 선언 당시에 개발자가 직접 값을 할당하는 작업을 "초기화(initialization)"라고 일컫는다. 아래는 ES6에서 추가된 세 가지 변수 유형을 지정하는 선언문이다.
+ES6부터는 새로운 방식의 바인딩이 소개되어 식별자 앞단에 특정 키워드를 기입하는 것만으로 변수로 "선언(declaration)"한다. 선언된 변수는 자동으로 `undefined`(즉, 아직 정의되지 않음)으로 네임 바인딩되지만, 선언 당시에 개발자가 직접 값을 할당하는 작업을 "초기화(initialization)"라고 일컫는다. 아래는 ES6에서 추가된 세 가지 변수 유형을 지정하는 선언문이다.
 
 * **`let` 선언문**
 
@@ -372,7 +372,7 @@ A는 10.0,
 그리고 B는 자바스크립트이다.
 ```
 
-차후에 설명할 예정이지만, [객체](#자바스크립트-클래스)(object)에 해당하는 문자열 자료형 데이터는 오로지 자신만이 사용할 수 있는 고유의 기능(일명 메소드)을 갖으며 목록은 [여기](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#instance_methods)에서 확인할 수 있다.
+차후에 설명할 예정이지만, [객체](#자바스크립트-객체)(object)에 해당하는 문자열 자료형 데이터는 오로지 자신만이 사용할 수 있는 고유의 기능(일명 메소드)을 갖으며 목록은 [여기](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#instance_methods)에서 확인할 수 있다.
 
 ```js
 /* 문자열 객체의 메소드에 대한 몇 가지 예시 */
@@ -399,11 +399,10 @@ World!
 조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 자바스크립트 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
 
 ## `if` 조건문
-`if` 조건문은 조건 혹은 논리값이 참(`true`)일 경우 코드를 실행한다. 반대로 거짓(`false`)일 경우에는 코드를 수행하지 않는다.
+`if` 조건문은 조건 혹은 논리가 참(`true`)일 경우 코드를 실행하며, 거짓(`false`)일 경우에는 코드를 실행하지 않는다.
 
 ```js
-if (condition)
-{
+if (condition) {
     statements;
 }
 
@@ -411,34 +410,20 @@ if (condition)
 if (condition) statement;
 ```
 
-`if` 조건문 안에 또 다른 `if` 조건문을 넣을 수 있는데 이를 *네스티드(nested)* `if` 조건문이라고 부른다. 코드 블록(`{}`)을 사용하여 서로 다른 `if` 조건문들의 경계를 명확히 구별하기를 권장한다.
-
-```js
-if (condition)
-{
-    if (condtion)
-    { 
-        statements;
-    } 
-}
-```
-
 ### `else` 조건문
-`else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 실행문에는 조건부가 `false`로 평가되었을 경우 호출되는 코드를 포함한다.
+`else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 조건부가 거짓(`false`)으로 판정되면 실행할 코드를 포함한다.
 
 ```js
-if (condition)
-{
+if (condition) {
     statements;
 }
-else
-{
+else {
     statements; 
 }
 ```
 
 ### `else if` 조건문
-`else if` 조건문은 `else`와 `if` 조건문의 조합으로 이전 조건이 거짓이면 새로운 조건을 제시한다.
+`else if` 조건문은 `else`와 `if` 조건문의 조합으로 이전 조건이 거짓(`false`)일 때 새로운 조건을 제시한다.
 
 ```js
 if (condition)
@@ -456,7 +441,7 @@ else
 ```
 
 ### 조건 연산자
-조건 연산자(ternary operator; `?:`)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략히 표현할 수 있다.
+조건 연산자(ternary operator; `?:`)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다.
 
 ```js
 condition ? true_return : false_return;
@@ -465,54 +450,59 @@ condition ? true_return : false_return;
 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에는 유용하다.
 
 ## `switch` 조건문
-`switch` 조건문은 인자를 `case` 키워드에서 제공하는 값과 일치하는지 비교하며, 참일 경우 코드를 실행한다. 참 조건 실행 이후, 더 이상의 조건 평가를 방지하기 위해 모든 `case` 키워드에는 `break`라는 탈출문이 필요하다.
-
-어떠한 경우에도 부합하지 않으면 `default` 키워드에 연동된 문장이 실행되며, `switch` 조건문에는 반드시 있어야 한다. 그러나 `case` 키워드와 달리 `break` 탈출문을 필요로 하지 않는다.
+`switch` 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
 
 ```js
-switch ( argument ) {
-    case value_1:
-        statements;
-        break;
-    case value_2:
-        statements;
-        break;
-    default:
-        statements;
-}
-```
-
-`switch` 조건문은 복수의 경우가 하나의 실행문을 공유할 수 있다.
-
-```js
-switch (argument)
-{
+switch (argument) {
     case value1:
-    default:
         statements;
         break;
+    
     case value2:
+        statements;
+        break;
+    
     case value3:
         statements;
         break;
-    case value4:
+    
+    default:
         statements;
         break;
 }
 ```
 
-### `break` 문
-`break` 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
-
-### `continue` 문
-`continue` 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
-
-## `while` 반복문
-`while` 반복문은 조건 혹은 논리값이 참(`true`) 동안 내부 코드를 반복적으로 실행한다. 반대로 거짓(`false`)일 경우에는 반복문을 종료한다.
+`switch` 조건문이 어느 `case` 코드를 실행할지 결정하는 것이라고 쉽사리 착각할 수 있으나, 이는 사실상 `break` 탈출문 덕분이다. 탈출문이 없었더라면 아래 예시 코드처럼 해당 조건의 `case` 코드 실행을 마쳤어도 다음 `case` 코드로 계속 진행하는 걸 확인할 수 있다. 즉, `case` 키워드는 코드 실행 영역을 분별하는 것이 아니라 진입 포인트 역할을 한다.
 
 ```js
-while (condition)
-{
+var variable = 2;
+
+// switch 조건문의 동작 예시
+switch (variable) {
+    case 1:
+        console.log("Statement 1");
+    
+    case 2:
+        console.log("Statement 2");
+    
+    case 3:
+        console.log("Statement 3");
+     
+    default:
+        console.log("Statement 4");
+}
+```
+```
+Statement 2
+Statement 3
+Statement 4
+```
+
+## `while` 반복문
+`while` 반복문은 조건 혹은 논리가 참(`true`)일 동안 코드를 반복적으로 실행하며, 거짓(`false`)일 경우에는 반복문을 종료한다.
+
+```js
+while (condition) {
     statements;
 }
 
@@ -521,59 +511,62 @@ while (condition) statement;
 ```
 
 ### `do`-`while` 반복문
-`do`-`while` 반복문은 `while` 반복문과 유사하지만 다르다: 후자는 조건을 먼저 확인하고 문장을 실행하였으면, 전자는 문장을 우선 실행하고 조건을 확인한다.
+`do`-`while` 반복문은 코드를 우선 실행하고 조건 혹은 논리가 참(`true`)일 경우 코드를 반복하며, 거짓(`false`)일 경우에는 반복문을 종료한다.
 
 ```js
-do
-{
-    statements
+do {
+    statements;
 } while (condition);
 ```
 
+### `break` 문
+`break` 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
+
+### `continue` 문
+`continue` 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
+
 ## `for` 반복문
-`for` 반복문은 정의된 지역 변수가 조건에 만족하는 한 지속적으로 반복한다. 한 번 반복할 때마다 지역 변수에는 반복문에 명시된 대로 변화가 발생하며, 일반적으로 정수형 증감을 사용한다.
+`for` 반복문은 조건 혹은 논리가 참(`true`)일 동안 코드를 반복적으로 실행하며, 거짓(`false`)일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
 
 ```js
-for (variable; condition; increment) {
+for (initialize; condition; increment) {
     statements;
 }
 
 // 간략화된 문장
-for (variable; condition; increment) statement;
+for (initialize; condition; increment) statement;
 ```
+
+`for` 반복문의 반복 절차는 다음과 같다:
+
+1. 변수 할당: `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한다.
+2. 조건 평가: `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다.
+3. 변수 증감: 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, "조건 평가" 단계로 돌아가 반복한다.
 
 ### 범위형 `for` 반복문
-ES6 표준부터 범위형 `for` 반복문 변형이 새로 소개되었으며, 조건 만족여부가 아닌 주어진 범위 내에서만 반복한다. 범위로 사용되는 데이터는 일반적으로 여러 데이터를 하나로 묶은 배열(array)을 사용한다.
+ES6부터 범위형 `for` 반복문이 소개되었으며, 조건 만족 여부가 아닌 주어진 범위 내에서만 반복한다.
 
-`for-of` 형식의 반복문은 배열 요소들의 값을 하나씩 변수에 반환한다.
+* **`for...of`**: 문자열과 배열 등의 [이터러블](#자바스크립트-이터러블)(iterable) 객체가 갖는 요소를 순서대로 하나씩 반환한다.
 
-```js
-for (let i of [1, 2, 3]) {
-    console.log(i);
-} 
-```
+    ```js
+  for (const element of "ES6") console.log(element);
+    ```
+    ```
+  E
+  S
+  6
+    ```
 
-```
-1
-2
-3
-```
+* **`for...in`**: [객체](#자바스크립트-객체)(object) 중에서 열거 가능한(enumerable) 속성들의 이름을 하나씩 반환한다.
 
-한편, `for-in` 형식의 반복문은 배열 요소들의 값을 호출하는데 사용되는 이름을 하나씩 변수에 반환한다.
-
-```js
-for (let i in {a:1, b:2, c:3}) {
-    console.log(i);
-}
-```
-
-```
-a
-b
-c
-```
-
-여기서 자바스크립트 언어의 배열은 차후 *자바스크립트: 이터러블* 장에서 구체적으로 설명한다.
+    ```js
+  for (const property in "ES6") console.log(property);
+    ```
+    ```
+  0
+  1
+  2
+    ```
 
 # 자바스크립트: 이터러블
 자바스크립트는 여러 데이터를 하나의 변수에 저장하는 이터러블을 가진다. 위에서 언급된 바가 있는 배열과 문자열은 자바스크립트에 내장된 이터러블 중 하나이다. 본 장에서는 가장 흔히 사용되는 배열을 중점으로 설명할 것이다.
