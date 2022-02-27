@@ -665,7 +665,7 @@ while (condition) statement;
 ```csharp
 do
 {
-    statements
+    statements;
 } while (condition);
 ```
 

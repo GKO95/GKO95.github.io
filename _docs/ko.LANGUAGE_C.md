@@ -648,7 +648,7 @@ while (condition) statement;
 ```c
 do
 {
-    statements
+    statements;
 } while (condition);
 ```
 

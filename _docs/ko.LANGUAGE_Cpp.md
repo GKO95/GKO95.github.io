@@ -667,7 +667,7 @@ while (condition) statement;
 ```cpp
 do
 {
-    statements
+    statements;
 } while (condition);
 ```
 
