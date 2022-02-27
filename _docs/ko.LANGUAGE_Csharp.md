@@ -625,7 +625,7 @@ default:
 int variable = 2;
 
 // switch 조건문의 동작 예시
-switch (int variable)
+switch (variable)
 {
 case 1:
     System.Console.WriteLine("Statement 1");
