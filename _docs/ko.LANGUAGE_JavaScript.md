@@ -384,6 +384,14 @@ HELLO WORLD!
 Hello-World!
 ```
 
+### `typeof` 연산자
+[`typeof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) 연산자는 변수 혹은 상수 데이터의 자료형을 문자열로 알려준다. 
+
+```js
+console.log(typeof 3);                // 출력: number
+console.log(typeof 'Hello World!');   // 출력: string
+```
+
 ## 탈출 문자
 [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 이전에 문자열 자료형을 소개할 때, `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
 
@@ -638,111 +646,81 @@ console.log(array.length);     // 출력: 0
 ```
 
 # 자바스크립트: 함수
-개발자가 직접 함수를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있는데, 이러한 프로그래밍 기법을 *함수형 프로그래밍(functional programming)*이라고 한다. 본 장은 자바스크립트 언어에서 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
-
-## 함수
 함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
 ```javascript
-/* ES6 이전 */
-function functionName() {
-	console.log(4)
-}
-
-/* ES6 이후 */
-const functionName = () => {
-    console.log(4);
-}
-
-// 함수 호출
-functionName();
+var variable = '3.14';
+console.log(parseInt(variable));
+// 문자열에서 정수를 반환하는 "parseInt()" 함수
 ```
 
-```
-4
-```
-
-ES6 구문은 특히 한줄 함수를 생성하는데 매우 유용하게 사용된다.
+함수의 기능을 정의(definition)하기 방법에는 두 가지가 있다: `function` 키워드를 사용한 기존 자바스크립트 방식, 그리고 ES6에서 추가된 방식이다.
 
 ```javascript
-/* 한 줄만 사용하여 함수 정의 (ES6). */
-const functionName = (arg) => console.log(arg);
-functionName(value1);
+/* 방법 1: 기존 자바스크립트 구문 */
+function func() {
+    
+}
 
-/* 배열 요소 열거에 적용 (ES6). */
-let arr = [1, 2, 3, 4];
-arr.forEach((arg) => console.log(arg*2) );
+/* 방법 2: ES6 구문 */
+const func = () => {
+    
+}
 ```
 
-### 매개변수 및 전달인자
+자바스크립트에서 함수 내에 선언된 변수 및 표현식은 [함수 유효범위](#유효범위)(function scope)를 갖는다. 그리고 자바스크립트는 이례적으로 함수 내에서 또 다른 함수를 정의하는 것이 허용되며, 유효범위에 의하여 정의된 함수 내에서만 사용할 수 있다.
+
+## `return` 반환문
+`return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 반환문을 반드시 필요로 하지 않으며, 없을 경우에 함수는 `undefined`을 반환된다.
+
+## 매개변수 및 전달인자
 다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
 
-* **전달인자 (argument)**
+* **전달인자 (argument)**: 간략하게 "인자"라고도 부르며, 함수로 전달되는 데이터이다.
 
-    전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.
-
-* **매개변수 (parameter)**
-
-    매개변수는 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수의 정의은 함수의 소괄호(`()`) 내에서 이루어진다.
+* **매개변수 (parameter)**: 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호(`()`) 내에서 이루어진다.
 
 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
 
 | 연산자 | 구문          | 설명                                                            |
 |:---:|:-----------:|---------------------------------------------------------------|
-| `=` | `arg=value` | 매개변수에 전달인자가 없으면 기본값 `value`가 대신 반환된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
+| `=` | `arg=value` | 전달인자가 없으면 기본값 `value`가 대신 매개변수에 할당된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
+| `...` | `...arg` | 여러 개의 전달인자들을 배열로 한꺼번에 받을 수 있다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
 
 아래의 예제는 함수의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
 
 ```javascript
-/* ES6 이전 */
-function functionName(arg1 = value1, arg2 = value2) {
-    console.log(arg1 + arg2);
-}
-
-/* ES6 이후 */
-const functionName = (arg1 = value1, arg2 = value2) => {
-    console.log(arg1 + arg2);
-}
-
-// 함수 호출
-functionName(2,3);
-```
-
-```
-5
-```
-
-### 나머지 매개변수
-나머지 매개변수(rest parameter)는 전개 연산자(`...`)를 가지는 매개변수로, 보다 더 많은 전달인자들을 배열로 받아낸다. 만일 추가 전달인자가 없으면 나머지 매개변수는 단순히 빈 배열인 상태가 된다.
-
-```javascript
-/* 나머지 매개변수를 가지는 함수 */
-function functionName(arg, ...rest) {
-	for(let variable of rest) {
-    	statements;
-    }
-} 
-```
-
-### `return` 반환문
-`return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수는 반환문을 반드시 필요로 하지 않으며, 이러한 경우에는 `undefined` 값이 반환되어 변수에 전달되거나 콘솔창에 출력되어 나타난다. 
-
-```javascript
-/* ES6 이전 */
-function functionName(arg1 = value1, arg2 = value2) {
+/* 택1: 기존 자바스크립트 구문 */
+function func(arg1, arg2 = 2) {
     return arg1 + arg2;
 }
 
-/* ES6 이후 */
-const functionName = (arg1 = value1, arg2 = value2) => {
+/* 택2: ES6 구문 */
+const func = (arg1, arg2 = 2) => {
     return arg1 + arg2;
 }
 
-console.log(functionName(2,3));
+/* 함수 호출 */
+func(3);        // 출력: 5 (= 3 + 2)
+func(3, 4);     // 출력: 7 (= 3 + 4)
 ```
+----
+```javascript
+/* 택1: 기존 자바스크립트 구문 */
+function func(arg1, ...arg2) {
+    console.log(arg1);
+    console.log(arg2);
+}
 
-```
-5
+/* 택2: ES6 구문 */
+const func = (arg1, ...arg2) => {
+    console.log(arg1);
+    console.log(arg2);
+}
+
+/* 함수 호출 */
+func(1, 2, 3, 4);   // 출력: 1
+                    // 출력: [ 2, 3, 4 ]
 ```
 
 # 자바스크립트: 객체
