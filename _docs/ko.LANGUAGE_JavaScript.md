@@ -670,6 +670,37 @@ const func = () => {
 
 자바스크립트에서 함수 내에 선언된 변수 및 표현식은 [함수 유효범위](#유효범위)(function scope)를 갖는다. 그리고 자바스크립트는 이례적으로 함수 내에서 또 다른 함수를 정의하는 것이 허용되며, 유효범위에 의하여 정의된 함수 내에서만 사용할 수 있다.
 
+함수명 뒤에 소괄호 `()` 기입여부에 따라 의미하는 바가 다르다.
+
+* `function()`은 함수에 정의된 코드를 실행한다.
+
+    ```javascript
+  const func = () => {
+      console.log('Hello World!');
+  }
+
+  var variable = func();
+  console.log(variable);
+    ```
+    ```
+  Hello World!
+  undefined
+    ```
+
+* `function`은 함수 자체를 의미한다.
+
+    ```javascript
+  const func = () => {
+      console.log('Hello World!');
+  }
+
+  var variable = func;
+  console.log(variable);
+    ```
+    ```
+  [Function: func]
+    ```
+
 ## `return` 반환문
 `return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 반환문을 반드시 필요로 하지 않으며, 없을 경우에 함수는 `undefined`을 반환된다.
 
@@ -722,6 +753,49 @@ const func = (arg1, ...arg2) => {
 func(1, 2, 3, 4);   // 출력: 1
                     // 출력: [ 2, 3, 4 ]
 ```
+
+## 콜백 함수
+[콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 코드 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
+
+> 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
+
+```javascript
+/* 호출 함수 */
+const calling = (arg1, arg2) => {
+    arg1(arg2);
+}
+
+/* 콜백 함수 */
+const callback = arg => {
+    console.log(`callback: ${arg}`);
+}
+
+calling(callback, "Hello World!");
+```
+```
+callback: Hello World!
+```
+
+## 람다 표현식
+[람다 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로, 데이터를 저장하지 않고 단일 표현식으로만 값을 반환한다. 익명 함수는 흔히 일회용 함수나 콜백 함수로 사용된다.
+
+아래는 [콜백 함수](#콜백-함수)의 예시 코드에 람다 표현식을 활용하였다.
+
+```javascript
+/* 호출 함수 */
+const calling = (arg1, arg2) => {
+    arg1(arg2);
+}
+
+calling(arg => {
+    console.log(`callback: ${arg}`);
+}, "Hello World!");
+```
+```
+callback: Hello World!
+```
+
+비록 익명 함수는 한 번만 사용되는 이름없는 함수이더라도 변수에 할당하여 언제든지 호출할 수 있다.
 
 # 자바스크립트: 객체
 프로그래밍 방법 중 하나인 객체지향 프로그래밍(object-oriented programming; OOP)은 함수 대신 클래스와 객체 사용을 기반으로 한다. 본 장은 자바스크립트에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 객체의 생성 및 사용 방법에 대하여 소개한다.
