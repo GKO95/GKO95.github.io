@@ -254,7 +254,7 @@ ES6부터는 새로운 방식의 바인딩이 소개되어 식별자 앞단에 �
     > console.log(global.variable);    // 출력: undefined
     > ```
 
-    변수 중에서 유일하게 선언 [호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting)(hoisting)을 지원한다. 즉, 변수를 선언하기 전에 미리 할당 및 호출되어 사용될 수 있다는 의미이다.
+    변수 중에서 유일하게 선언 [호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#variable_hoisting)(hoisting)을 지원한다. 즉, 변수를 선언하기 전에 미리 할당 및 호출되어 사용될 수 있다는 의미이다.
 
     ```javascript
   /* 변수 호이스팅 예시 */
@@ -646,7 +646,7 @@ console.log(array.length);     // 출력: 0
 ```
 
 # 자바스크립트: 함수
-함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
+[함수](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions)(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
 ```javascript
 var variable = '3.14';
@@ -654,7 +654,7 @@ console.log(parseInt(variable));
 // 문자열에서 정수를 반환하는 "parseInt()" 함수
 ```
 
-함수의 기능을 정의(definition)하기 방법에는 두 가지가 있다: `function` 키워드를 사용한 기존 자바스크립트 방식, 그리고 ES6에서 추가된 방식이다.
+함수의 기능을 정의(definition)하기 방법에는 두 가지가 있다: `function` 키워드를 사용한 기존 자바스크립트 방식, 그리고 ES6에서 추가된 [화살표 함수 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(arrow function expression) 방식이다.
 
 ```javascript
 /* 방법 1: 기존 자바스크립트 구문 */
@@ -662,7 +662,7 @@ function func() {
     
 }
 
-/* 방법 2: ES6 구문 */
+/* 방법 2: ES6 화살표 함수 표현식 */
 const func = () => {
     
 }
@@ -701,14 +701,28 @@ const func = () => {
   [Function: func]
     ```
 
-## `return` 반환문
+자바스크립트 프로그래밍 언어 실행 순서상 함수가 정의되기 전에 미리 호출되어 사용될 수 있는데, 이를 [함수 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)(function hoisting)이라고 부른다. 단, 함수 호이스팅은 ES6부터 추가된 화살표 함수 표현식으로 정의된 함수에는 사용할 수 없다.
+
+```javascript
+/* 함수 호출 */
+func();
+
+/* 함수 정의 */
+function func() {
+    console.log("Hello World!");
+}
+```
+```
+Hello World!
+```
+
+### `return` 반환문
 `return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 반환문을 반드시 필요로 하지 않으며, 없을 경우에 함수는 `undefined`을 반환된다.
 
 ## 매개변수 및 전달인자
 다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
 
 * **전달인자 (argument)**: 간략하게 "인자"라고도 부르며, 함수로 전달되는 데이터이다.
-
 * **매개변수 (parameter)**: 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호(`()`) 내에서 이루어진다.
 
 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
@@ -754,7 +768,7 @@ func(1, 2, 3, 4);   // 출력: 1
                     // 출력: [ 2, 3, 4 ]
 ```
 
-## 콜백 함수
+### 콜백 함수
 [콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 코드 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
 
 > 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
@@ -777,9 +791,7 @@ callback: Hello World!
 ```
 
 ## 람다 표현식
-[람다 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로, 데이터를 저장하지 않고 단일 표현식으로만 값을 반환한다. 익명 함수는 흔히 일회용 함수나 콜백 함수로 사용된다.
-
-아래는 [콜백 함수](#콜백-함수)의 예시 코드에 람다 표현식을 활용하였다.
+[람다 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로, 데이터를 저장하지 않고 단일 표현식으로만 값을 반환한다. 익명 함수는 흔히 일회용 함수나 콜백 함수로 사용된다. 아래는 [콜백 함수](#콜백-함수)의 예시 코드에 람다 표현식을 활용하였다.
 
 ```javascript
 /* 호출 함수 */
@@ -798,299 +810,313 @@ callback: Hello World!
 비록 익명 함수는 한 번만 사용되는 이름없는 함수이더라도 변수에 할당하여 언제든지 호출할 수 있다.
 
 # 자바스크립트: 객체
-프로그래밍 방법 중 하나인 객체지향 프로그래밍(object-oriented programming; OOP)은 함수 대신 클래스와 객체 사용을 기반으로 한다. 본 장은 자바스크립트에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 객체의 생성 및 사용 방법에 대하여 소개한다.
+[객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 배열이 있다.
 
-## 객체
-이전 장에서 (데이터를 저장할 수 있는) 변수와 (데이터를 처리 할 수 있는) 함수를 소개하였다. 객체(object 혹은 instance)는 이러한 변수와 함수를 하나의 데이터로 캡슐화한 데이터이다.
+```javascript
+var variable = [0, 3, 5, 9];
+console.log(variable.indexOf(5));
+// "variable" 이름을 가진 배열 이터러블 객체의 "indexOf()" 메소드를 사용하여 값 5에 대한 위치를 반환한다.
+```
+```
+2
+```
 
-여기서 캡슐화(encapsulation)은 다음과 같은 역할을 지닌다.
+객체에 속하는 변수와 함수를 각각 속성(property)과 메소드(method)라고 부르며 [속성 접근자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors)를 통해 접근한다. 
+
+| 객체 속성 | 속성 접근자                                      |
+|:-------:|-----------------------------------------------|
+| 변수 (일명 필드; field) | `instance.property` 혹은 `instance["property"]` |
+| 함수 (또는 메소드)    | `instance.method()` 혹은 `instance["method"]()` |
+
+여기서 속성의 개념이 매우 포괄적이고 애매모한데, 자바스크립트 특성상 식별자에 어떤 데이터가 바인딩 되는지에 따라 변수가 되거나 함수가 되는 유동적인 태도를 취하기 때문이다. 비록 메소드가 객체의 함수 역할을 하지만 속성에 함수가 바인딩되면 메소드처럼 사용될 수 있다. 그래도 [메소드 정의](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions)와 구분되어 엄연히 다른 존재이므로 자바스크립트는 "속성 및 메소드"를 분별한다.
+
+다음은 자바스크립트에서 사용자 정의 객체(user-defined object)를 생성하는 방법을 소개한다:
+
+> 아래 방법을 소개하기 앞서 두 개의 연산자에 대하여 설명한다.
+>
+> * **`this` 연산자**: 객체 스스로를 가리키기 위해 사용된다. 만일 `this` 연산자가 없이 속성을 호출하면 자바스크립트는 이를 일반 지역 변수 또는 함수로 간주한다.
+> * **`new` 연산자**: 사용자 정의 또는 생성자 함수를 갖는 객체 자료형으로부터 객체를 생성하는데 사용된다.
+
+* [객체 초기자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer)(object initializer), 일명 객체 리터럴(object literal) `{}` 안에 각 속성을 쉼표로 나누어 `property: definition` 형식으로 값을 할당하거나 함수를 정의하여 생성한다.
+
+    ```javascript
+  /* 객체 생성: 객체 초기자 */
+  const instance = {
+      
+      // 속성 정의 (변수)
+      property1: value1,
+      property2: value2,
+  
+      // 속성 정의 (함수)
+      property3: function(arg) {
+          return this.field1 + this.field2 - arg;
+      },
+      
+      // 메소드 정의
+      method(arg) {
+          return this.field1 + this.field2 - arg;
+      }
+  };
+    ```
+
+* [생성자 함수](https://developer.mozilla.org/en-US/docs/Glossary/Constructor)(constructor function), 즉 객체를 생성하기 위해 동작하는 함수를 사용한다. 생성자 함수에는 속성들이 정의되고, `new` 연산자를 통해 객체가 생성된다.
+
+    ```javascript
+  /* 객체 생성: 생성자 함수 */
+  function func(arg1, arg2) {
+      
+      // 속성 정의 (변수)
+      this.field1 = arg1;
+      this.field2 = arg2;
+
+      // 속성 정의 (함수)
+      this.method = function(arg) {
+          return this.field1 + this.field2 - arg;
+      }
+  }
+  
+  const instance = new func(value1, value2);
+    ```
+
+* [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) 클래스 자료형이 갖는 `Object.create()` 정적 메소드에 [프로토타입](#프로토타입)을 기입해 생성자 함수 정의가 필요없이 객체를 생성한다.
+
+    ```javascript
+  /* 객체 생성: 프로토타입 */
+  const prototype = {
+
+      // 속성 정의 (변수)
+      property1: value1,
+      property2: value2,
+
+      // 속성 정의 (함수)
+      property3: function(arg) {
+          return this.field1 + this.field2 - arg;
+      },
+      
+      // 메소드 정의
+      method(arg) {
+          return this.field1 + this.field2 - arg;
+      }
+  };
+
+  const instance = Object.create(prototype);
+    ```
+
+### 프로토타입
+[프로토타입](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)(prototype)은 기본적으로 객체에 내장된 속성 및 메소드를 일컬으며, 모든 자바스크립트 객체는 프로토타입을 갖는다. 프로토타입 또한 객체이므로 자신만의 프로토타입이 있는데 이러한 연속을 프로토타입 연쇄(prototype chain)라고 부르며, `null`을 프로토타입으로 갖는 프로토타입까지 이어진다. 객체의 프로토타입은 `Object.getPrototypeOf()` 정적 메소드로 반환된다.
+
+## 클래스
+[클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 동일한 구조를 갖는 객체를 매번 정의할 필요없이 간단히 생성할 수 있도록 한다. ES6부터 소개되었으며 `class` 키워드와 함께 객체의 속성 및 메소드를 클래스 내부에 정의한다. 클래스로부터 객체를 생성하는 절차를 *객체화(instantiation)*라고 한다. 직접 생성된 객체와 달리, 클래스로부터 생성된 객체는 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)로부터 아래의 특성을 가진다:
 
 1. 변수와 함수를 하나의 객체로 결합한다.
 2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
 
-사용자 정의 객체 중심으로 한 프로그래밍을 *객체지향 프로그래밍*이라고 한다.
+특히 2번 특성의 의해 클래스 및 객체는 외부에서 접근이 가능한 [public](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields) 속성 (및 메소드)와 외부에서 접근이 불가한 [private](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields) 속성 (및 메소드)를 지정할 수 있다. 기본적으로 public으로 선언되지만 private으로 선언하려면 식별자 앞에 해시 기호 `#`를 붙인다.
+
+> private 속성 및 메소드에 대해 몇 가지 유의할 사항이 있다.
+>
+> * 객체 리터럴에서 사용할 수 없다.
+> * 선언이 먼저 이루어져야 한다; 즉, 메소드 내에서 `this` 키워드로 정의하려면 오류가 발생한다.
+> * 2021년 4월 기준으로 아직 ECMAScript 실험 단계에 있으나 대부분의 브라우저에서 지원하고 있다.
 
 ```javascript
-let variable = "Hello World!";
-console.log(variable.search("World"));
-// variable 이름을 가진 문자열 객체의 "search()" 메소드를 사용하여 단어의 위치를 반환한다.
-```
-
-```
-6
-```
-
-### 속성 및 메소드
-속성(property)과 메소드(method)는 객체에 캡슐화된 변수와 함수를 의미하며 아래와 같은 방법으로 접근한다.
-
-| 객체 구성요소 | 구문                                            |
-|:-------:|-----------------------------------------------|
-| 속성      | `instance.property` 혹은 `instance["property"]` |
-| 메소드     | `instance.method()`                           |
-
-### 사용자 정의 객체
-개발자는 직접 객체를 정의하여 사용할 수 있다.
-
-메소드가 객체 내의 속성이나 또 다른 메소드를 접근하기 위해서는 `this` 키워드를 사용해야 한다. 이는 객체 스스로를 가리키는 연산자로, 해당 키워드 없이는 인터프리터는 변수로 인식한다.
-
-```javascript
-/* 사용자 정의 객체 생성: ES6 이전 */
-const variable = {
-    /* 속성 (변수와 비슷함) */
-    property1: value1,
-    property2: value2,
-
-    /* 메소드 (함수와 비슷함) */
-    method: function(arg) {
-        statements;
-        return this.property1 + this.property2 - arg;    
-    }
-};
-```
-----
-```javascript
-var property1 = value1;
-
-/* 사용자 정의 객체 생성: ES6 이후 */
-const variable = {
-    /* 속성 (변수와 비슷함) */
-    property1,
-    ["property2"]: value2,
-
-    /* 메소드 (함수와 비슷함) */
-    method(arg) {
-        statements;
-        return this.property1 + this.property2 - arg;   
-    }
-};
-```
-
-## 클래스
-클래스(class)는 객체를 생성하는데 사용된다. 클래스는 `class` 키워드를 사용하여 정의되며, 클래스 내부에는 객체의 속성과 메소드가 되는 변수와 함수를 정의한다. 아래는 `class` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이며, 변수 및 함수와의 유사성을 확인할 수 있다.
-
-```javascript
-/* 클래스 생성하기 */
+/* 클래스 생성 */
 class CLASS {
-    /* 속성 */
-    property1 = value1;
-    property2 = value2;
 
-    /* 메소드 */
+    public = value1;     // public  속성 정의
+    #private = value2;   // private 속성 정의
+
+    // 속성 정의 (함수)
+    property = function(arg) {
+        return this.public + this.#private - arg;
+    }
+
+    // 메소드 정의
     method(arg) {
-        statements;
-        return this.property1 + this.property2 - arg;   
+        return this.public + this.#private - arg;
     }
 }
+
+/* 클래스 객체화 */
+const instance = new CLASS();
 ```
 
-클래스를 통해 객체를 생성, 즉 객체화(instantiation)하려면 `new` 키워드를 사용한다. 아래는 하나의 클래스로 두 개 이상의 객체를 생성하는 예시 코드이다.
-
-```javascript
-const variable1 = new CLASS;
-const variable2 = new CLASS;
-
-console.log(variable1.property1);
-console.log(variable2.property2);
-```
-```
-value1
-value2
-```
+자바스크립트는 [클래스 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#class_hoisting)(class hoisting)을 지원하지 않는다.
 
 ### 생성자
-생성자(constructor) 메소드는 객체를 생성하는데 필요한 가장 중요한 메소드이다. 해당 메소드는 클래스에서 객체를 만들 때 자동으로 호출되며 객체 초기화에 필요한 인수의 수를 결정한다.
+[생성자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)(constructor)는 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 `constructor()` 메소드이다. 비록 생성자는 선택사항이지만, 만일 생성자를 정의한다면 객체화 과정에서 객체로 전달할 인자의 개수를 결정하는 요인으로 작용한다. 생성자는 흔히 객체화 단계에서 필드를 초기화하는 용도로 사용된다.
 
 ```javascript
-/* 클래스 생성하기 */
+/* 클래스 생성 */
 class CLASS {
-    /* 생성자 메소드 */
+
+    // 생성자 정의
     constructor(arg1, arg2) {
-        this.property1 = arg1;
-        this.property2 = arg2;
+        this.public = arg1;
+        this.#private = arg2;
     }
 
-    /* 메소드 */
+    // private 속성 선언
+    #private;
+
     method(arg) {
-        statements;
-        return this.property1 + this.property2 - arg;   
+        return this.property1 + this.#property2 - arg;
     }
 }
 ```
 
-만일 위와 같이 생성자가 따로 정의되지 않아도 클래스는 기본적으로 아래와 같은 생성자를 가진다.
+생성자를 정의하지 않으면 아래의 기본 생성자가 클래스에 제공된다.
 
 ```javascript
-/* 생성자 메소드: 기본값 */
 constructor() {}
 ```
 
-### 정적 메소드
-정적 메소드(static method)는 객체화없이 클래스에서 바로 호출할 수 있는 메소드이며, `static` 키워드로 선언된다. 그러나 객체는 정적 메소드를 접근할 수 없다. 다시 말해, 정적 메소드는 단순히 클래스에 속해있는 일반 함수와 동일하게 취급하면 된다.
+### 정적 속성 및 메소드
+[정적 속성 및 메소드](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#static_methods_and_properties)(static property & method)는 `static` 키워드로 선언된 속성 및 메소드로 객체화 없이 클래스에서 곧바로 사용할 수 있다. 그러나 클래스 객체화로 생성된 객체는 정적 속성 및 메소드를 접근할 수 없다. 다시 말해, 정적 속성 및 메소드는 단순히 클래스에 속해있는 일반 변수 및 함수와 동일하게 취급하면 된다.
+
+> 객체 속성 및 메소드(instance property & method)는 정적 속성 및 메소드와 서로 별개의 영역으로 간주되므로 `static`만 확실히 표시해주면 동일한 식별자를 가질 수 있다.
 
 ```javascript
+/* 클래스 생성 */
 class CLASS {
-    /* 정적 메소드 */
+
+    // 정적 속성 정의
+    static property = 2;
+
+    // 정적 메소드 정의
     static method(arg) {
-        return arg * arg;
+        return this.field * arg;
     }
 }
 
-console.log(CLASS.method(3));
-```
-```
-9
+/* 정적 메소드 호출 */
+console.log(CLASS.property);    // 출력: 2
+console.log(CLASS.method(3));   // 출력: 6
 ```
 
-### Setter 및 Getter 메소드
-Setter 및 Getter 메소드는 클래스에 정의된 하나의 속성을 할당 전용 메소드와 반환 전용 메소드로 나누어 접근한다. 각 메소드는 `set`와 `get`으로 선언되며, 이는 코드의 민감한 부분은 숨기면서 지속적으로 접근할 수 있도록 하는 데이터 숨기기(data hiding)의 일종이다.
+### Setter 및 Getter
+자바스크립트의 클래스는 하나의 속성을 [getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)와 [setter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set) 영역으로 나누어 데이터 숨기기를 지원한다.
+
+| 접근자 | 키워드 | 설명                                     |
+|:--------:| ------- | ----------------------------------------------- |
+| Getter   | `get`   | 속성으로부터 값을 반환받는 맴버이다. |
+| Setter   | `set`   | 속성으로부터 값을 설정하는 맴버이다. |
+
+속성을 나누므로써 수정되어서는 안될 민감한 코드를 `set` 영역에 숨기고 `get`만을 통해서 데이터를 반환한다. 정의된 형태는 메소드와 유사하지만 실제로 사용할 때는 소괄호 `()` 없이 속성처럼 사용된다. 또한 setter를 정의할 때에는 매개변수가 하나만 존재해야 하고 getter를 정의할 때에는 매개변수가 없어야 한다.
+
 
 ```javascript
+/* 클래스 정의 */
 class CLASS {
     
-    /* SETTER 메소드 */
-    set method(arg) {
-        this.property = arg * arg;
+    #property;
+
+    // Setter 정의
+    set property(arg) {
+        this.#property = arg;
     }
 
-    /* GETTER 메소드 */
-    get method(arg) {
-        return `Property: ${this.property}`;
+    // Getter 정의
+    get property() {
+        return this.#property ** 2;
     }
 }
 
-// 객체화
-const variable = new CLASS;
+/* 클래스 객체화 */
+const instance = new CLASS();
 
-variable.method = 3;
-console.log(varible.method);
+instance.property = 3;
+console.log(instance.property);    // 출력: 9 (= 3 ** 2)
 ```
-```
-Property: 9
-```
-
-이를 통해 `CLASS.property` 속성을 직접 호출하지 않고 데이터 할당과 반환 메소드를 개별적으로 정의하므로써, 속성을 더욱 유동적으로 접근 및 관리할 수 있다.
 
 ## 클래스 표현식
-클래스 표현식(class expression)은 이름없는 클래스를 정의하는 동시 객체를 선언하는 표현식이다. `new` 연산자 없이도 객체화가 되어 코드가 간략화되지만, 단 하나의 객체만 정의할 수 있는 단점을 가진다.
+[클래스 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/class)(class expression)은 익명의 클래스를 정의하는 동시 객체를 선언하는 표현식이다. `new` 연산자가 없어도 객체화가 되어 코드가 간략하지만, 단 하나의 객체만 정의할 수 있는 단점을 갖는다.
 
 ```javascript
-/* 클래스 표현식을 사용한 객체 선언 */
-const variable = new class {
-	constructor(arg1, arg2){
-        this.property1 = arg1;
-    	this.property2 = arg2;
-    }
-}
-```
-
-## 객체형
-객체형(object type)은 객체를 생성하는 함수를 가리킨다. 이는 클래스와 매우 유사하며, 객체형은 함수 자체가 생성자 메소드 역할을 한다.
-
-```javascript
-/* 생성자 함수를 통한 객체형 정의 */
-function OBJTYPE(arg1, arg2) {
-    /* 속성 */
-	this.property1 = arg1;
- 	this.property2 = arg2;
-    
-    /* 메소드 */
-    this.method(arg) {
-    	statements;
-        return this.property1 + this.property2 - arg;
-    }
-}
-
-// 객체화
-const variable = new OBJTYPE(value1, value2);
+/* 클래스 표현식 */
+const instance = class {
+    ...
+};
 ```
 
 ## 상속
-상속(inheritance)은 기반 클래스(base class)가 그로부터의 파생 클래스(derived class)에게 속성과 메소드를 제공하는 행위이다. 기반 클래스와 파생 클래스 둘 다에 동일한 이름의 속성과 메소드가 존재하는 경우, 기반 클래스의 속성과 메소드는 파생 클래스에 의해 묻힌다.
+[상속](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 속성을 제공하는 행위이다. 파생 클래스는 `extends` 키워드로 상속받을 기반 클래스를 명시하지만, 오로지 한 기반 클래스로부터만 파생될 수 있다. 기반 클래스와 파생 클래스에 동일한 이름의 속성과 메소드가 존재할 경우,
 
-파생 클래스는 `extend` 키워드를 통해 어느 기반 클래스로부터 상속되었는지 명시한다. 파생 클래스로부터 기반 클래스의 속성 및 메소드에 접근하기 위해서는 `super` 키워드가 사용된다. 단, `super()`는 기반 클래스의 생성자를 호출한다.
+* 기반 클래스의 속성은 파생 클래스에서 명시된 데이터로 재할당된다.
+* 기반 클래스의 메소드는 파생 클래스의 속성에 의해 묻혀진다.
+
+여기서 "묻힌다"는 표현은 기반 클래스의 메소드가 아직 살아있음을 시사한다. 이러한 차이점이 존재하여 자바스크립트에서 객체를 다룰 때 속성과 메소드를 확실히 구별짓는 것이다.
 
 ```javascript
 /* 기반 클래스 생성 */
-class BASECLASS {
-	constructor(arg1, arg2) {
-    	this.property1 = arg1;
-        this.property2 = arg2;
-    }
+class BASECLASS
+{
+    property1 = null;
+    property2 = 3;
 
-    method(arg) {
-    	statements;
-        return this.property1 + this.property2 - arg;
+    method() {
+        this.property1 = "JavaScript";
     }
 }
 
 /* 파생 클래스 생성 */
-class DERIVEDCLASS extends BASECLASS {
-    
-    /* "SUPER()" 함수는 기반 클래스의 생성자 메소드를 호출 */
-    constructor(arg1, arg2) {
-    	super(arg1, arg2)
-    }
+class DERIVEDCLASS extends BASECLASS
+{
+    property2 = 7;
+    property3 = true;
 
-    /* 이름이 동일한 메소드가 정의되면, 기반 클래스가 파생 클래스에 묻힘 */
-    method(arg1) {
-    	statements;
-        return (this.property1 + this.property2) * arg;
-    }
-
-	method2() {
-        /* 기반 클래스의 속성 및 메소드 호출은 `super` 키워드 사용 */
-        let temp = super.method();
-    	statements;
+    method() {
+        this.property1 = "Hello World!";
     }
 }
+
+const instance = new DERIVEDCLASS();
+
+console.log(instance);
+instance.method();
+console.log(instance);
+```
+```
+DERIVEDCLASS { property1: null, property2: 7, property3: true }
+DERIVEDCLASS { property1: 'Hello World!', property2: 7, property3: true }
 ```
 
-## 내장 객체
-흔히 사용되는 객체는 이미 자바스크립트에 내장되어 있어, 단순히 호출만 하여 사용할 수 있다. 아래는 자바스크립트의 대표적이고 매우 유용한 내장 객체 몇 가지를 소개한다.
+### `super` 키워드
+[`super`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super) 키워드는 파생 클래스가 기반 클래스의 생성자 및 메소드를 호출하는데 사용된다:
 
-### `Math` 객체
-`Math`는 수학적 계산을 위해 사용되는 자바스크립트 내장 객체이며, 흔히 사용되는 상수들을 속성으로 가진다.
+* `super()`은 기반 클래스의 생성자를 호출하며, 반드시 `this` 키워드가 사용되기 전에 기입되어야 한다. 단, 파생 클래스에 별도 생성자가 정의되지 않았다면 해당 키워드는 무시해도 된다.
 
-| 속성       | 구문            | 설명                |
-|----------|---------------|-------------------|
-| `E`      | `Math.E`      | 오일러 상수            |
-| `PI`     | `Math.PI`     | 파이 상수             |
-| `LN2`    | `Math.LN2`    | 2의 자연로그           |
-| `LOG10E` | `Math.LOG10E` | 오일러 상수의 로그 (밑 10) |
+    ```javascript
+  class BASECLASS {
+      constructor(arg1, arg2) {
+          ...
+      }
+  }
 
-`Math` 객체는 일부 수학 계산식을 메소드로 가진다.
+  class DERIVEDCLASS extends BASECLASS {
+      constructor(arg) {
+          super(arg, arg);
+          ...
+      }
+  }
+    ```
 
-| 메소드     | 예시           | 설명                       |
-| ---------- | ----------------- | --------------------------------- |
-| `abs()`    | `Math.abs(-3)`    | 절대값                   |
-| `sqrt()`   | `Math.sqrt(36)`   | 제곱근                      |
-| `power()`  | `Math.power(x,y)` | `x`의 `y` 거듭제곱 |
-| `random()` | `Math.random()`   | 0과 1 사이의 난수 발생기    |
+* `super.method()`은 기반 클래스의 메소드를 호출한다. 단, 메소드가 아닌 `function` 키워드 또는 화살표 함수 표현식에 바인딩된 속성에는 `super`를 인식하지 못하는 구문 오류가 발생한다.
 
-### `Date` 객체형
-`Date` 객체형은 날짜와 관련된 객체를 생성하여 시간 측정, 일자 날짜 확인 및 계산 등의 용도로 사용된다. 아무런 전달인자가 건네지지 않으면 객체는 현재 시각 데이터를 갖는다.
+    ```javascript
+  class BASECLASS {
+      method(arg1, arg2) {
+          ...
+      }
+  }
 
-```javascript
-/* 객체화: 현재 날짜 및 시각 (실시간이 아님) */
-var variable = new Date();
-```
-
-만일 전달인자가 건네지면 객체는 전달된 데이터를 기반하여 계산된 날짜 및 시각을 저장한다. 세 가지의 전달인자를 건네줄 수 있으며, 이들은 다음과 같다:
-
-| 전달인자                      | 예시                                      |
-|:-------------------------:|-----------------------------------------|
-| 타임스탬프 (1970년 1월 1일 00시부터) | `new Date(789971670000)`                |
-| 날짜 및 시간 문자열               | `new Date("January 13, 1995 13:34:30")` |
-| 년, 월, 일, 시, 분, 초, 밀리초     | `new Date(95,0,13,13,34,30,0)`          |
-
-생성된 객체는 날짜와 시간 계산을 위한 메소드를 제공한다.
-
-| 메소드          | 구문                  | 설명                                               |
-| --------------- | ------------------------ | --------------------------------------------------------- |
-| `getFullYear()` | `variable.getFullYear()` | `variable` 객체에 저장된 데이터에서 연도를 반환한다.             |
-| `getMonth()`    | `variable.getMonth()`    | `variable` 객체에 저장된 데이터에서 월(月)을 반환한다.            |
-| `getDate()`     | `variable.getDate()`     | `variable` 객체에 저장된 데이터에서 일(日)을 반환한다. |
-| `getHours()`    | `variable.getHours()`    | `variable` 객체에 저장된 데이터에서 시(時)를 반환한다. |
+  class DERIVEDCLASS extends BASECLASS {
+      method(arg) {
+          super.method(arg, arg);
+          ...
+      }
+  }
+    ```
 
 # 자바스크립트: 모듈
 기존의 자바스크립트는 웹페이지에 자그만한 상호작용 요소를 입히는 게 주된 목적이었다. 현재는 거의 모든 웹사이트 페이지에 들어가며 어플리케이션 제작에도 사용되는 등 활용도가 광범위하다. 방대해진 자바스크립트로부 코드 일부분을 기능성 모듈(module)로 분할하여 필요에 따라 언제든지 불러올 수 있는 매커니즘이 요구되기 시작하였다. 본 장에서는 자바스크립트로 모듈을 내보내거나 불러오는 방법에 대하여 소개한다.
