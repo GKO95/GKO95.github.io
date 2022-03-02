@@ -668,6 +668,8 @@ const func = () => {
 }
 ```
 
+> 두 방식은 함수를 생성하는데 기여하지만 차이점이 존재한다: 대표적인 예시로 `function` 키워드는 함수가 정의되기 전에 미리 호출하여 사용할 수 있는 [함수 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)(function hoisting)을 지원하는 반면, ES6부터 추가된 화살표 함수 표현식으로는 그렇지 못한다.
+
 자바스크립트에서 함수 내에 선언된 변수 및 표현식은 [함수 유효범위](#유효범위)(function scope)를 갖는다. 그리고 자바스크립트는 이례적으로 함수 내에서 또 다른 함수를 정의하는 것이 허용되며, 유효범위에 의하여 정의된 함수 내에서만 사용할 수 있다.
 
 함수명 뒤에 소괄호 `()` 기입여부에 따라 의미하는 바가 다르다.
@@ -687,7 +689,7 @@ const func = () => {
   undefined
     ```
 
-* `function`은 함수 자체를 의미한다.
+* `function`은 함수 자체를 가리킨다.
 
     ```javascript
   const func = () => {
@@ -701,23 +703,21 @@ const func = () => {
   [Function: func]
     ```
 
-자바스크립트 프로그래밍 언어 실행 순서상 함수가 정의되기 전에 미리 호출되어 사용될 수 있는데, 이를 [함수 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)(function hoisting)이라고 부른다. 단, 함수 호이스팅은 ES6부터 추가된 화살표 함수 표현식으로 정의된 함수에는 사용할 수 없다.
+### `return` 반환문
+`return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 반환문을 반드시 필요로 하지 않으며, 없을 경우에 함수는 `undefined`을 반환된다.
 
 ```javascript
-/* 함수 호출 */
-func();
-
-/* 함수 정의 */
 function func() {
     console.log("Hello World!");
+    return 3;
 }
+
+console.log(func());
 ```
 ```
 Hello World!
+3
 ```
-
-### `return` 반환문
-`return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 반환문을 반드시 필요로 하지 않으며, 없을 경우에 함수는 `undefined`을 반환된다.
 
 ## 매개변수 및 전달인자
 다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
