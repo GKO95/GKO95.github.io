@@ -58,7 +58,7 @@ VS Code에서 자바스크립트를 실행하는 방법에는 두 가지가 존�
 * **한줄 주석 (line comment)**: 코드 한 줄을 차지하는 주석이며, 두 개의 슬래시(`//`)로 표시된다.
 * **블록 주석 (block comment)**: 코드 여러 줄을 차지하는 주석이며, 한 쌍의 슬래시와 별표(`/* */`)로 표시된다.
 
-```js
+```javascript
 /*
 블록 주석:
 코드 여러 줄을 차지하는 주석이다.
@@ -73,7 +73,7 @@ VS Code에서 자바스크립트를 실행하는 방법에는 두 가지가 존�
 
     값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
     
-    ```js
+    ```javascript
   2 + 3       // 숫자 5를 반환
   2 < 3       // 논리 참을 반환
     ```
@@ -82,7 +82,7 @@ VS Code에서 자바스크립트를 실행하는 방법에는 두 가지가 존�
 
     실질적으로 무언가를 실행하는 하나의 완전한 코드를 의미한다. 자바스크립트 프로그래밍 언어에서 모든 문장은 문장 종단자(statement terminator)인 세미콜론 `;`으로 마무리 된다. 하지만 이는 강제되지 아니하며, 런타임 도중에 자바스크립트 엔진은 문장의 끝을 자체적으로 판단하여 세미콜론을 자동기입한다 (일명 Automatic Semicolon Insertion; ASI).
 
-    ```js
+    ```javascript
   variable = 2 + 3;          // 숫자 5를 "variable" 변수에 초기화
   if (2 < 3) statement;      // 논리가 참이면 "statement" 문장 실행
     ```
@@ -104,7 +104,7 @@ VS Code에서 자바스크립트를 실행하는 방법에는 두 가지가 존�
 
     출력 함수가 실행될 시, `console.log()`의 소괄호(`()`) 안에 있는 데이터가 터미널에 나타난다.
 
-```js
+```javascript
 // "prompt-sync" 모듈을 불러오는 절차이다.
 const prompt = require('prompt-sync')();
 
@@ -118,7 +118,7 @@ console.log("출력:", variable);
 
 하나의 `console.log()` 함수에서 두 개 이상의 데이터를 한꺼번에 출력하려면 쉼표(`,`)를 사용하여 연속적으로 데이터를 나열할 수 있다. 단, 각 쉼표가 위치한 곳에는 항상 공백이 놓여진다. 그 외의 다른 방법은 [문자열 자료형](#문자열-자료형)을 설명하는 부분에서 소개한다.
 
-```js
+```javascript
 A = 10.0;
 B = "자바스크립트";
 
@@ -141,14 +141,14 @@ A는 10.0 ,
 ## 변수
 변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시는 `variable`이란 식별자를 갖는 변수에 숫자 3을 할당한다. 시스템적 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮는 절차를 [네임 바인딩](https://ko.wikipedia.org/wiki/네임_바인딩)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
 
-```js
+```javascript
 // 변수 "variable"의 정의
 variable = 3;
 ```
 
 자바스크립트의 변수는 반드시 네임 바인딩으로부터 정의되어야 한다. 즉, 아무런 데이터 할당이 없으면 인터프리터는 식별자를 변수로 간주하지 않아 오류가 발생한다.
 
-```js
+```javascript
 variable;
 console.log(variable);
 ```
@@ -162,7 +162,7 @@ Uncaught ReferenceError: variable is not defined
 
 자바스크립트의 변수는 데이터 종류와 상관없이 새로운 데이터를 언제든지 할당받을 수 있다.
 
-```js
+```javascript
 variable = 3;
 variable = "Hello World!";
 console.log(variable);
@@ -186,7 +186,7 @@ Hello World!
 
 * **웹 브라우저**: 현 웹페이지에 연관된 모든 자바스크립트가 브라우저 창에 대한 `window` 전역 객체를 통해 공유된다.
 
-    ```js
+    ```javascript
   /* 웹 브라우저 */
   variable = "Hello World!";
   console.log(window.variable);    // 출력: Hello World!
@@ -194,7 +194,7 @@ Hello World!
 
 * **Node.js**: 실행되고 있는 자바스크립트 파일, 일명 [모듈](#자바스크립트-모듈)(module)에서만 `global` 전역 객체를 통해 모듈 내에서만 데이터가 공유된다.
 
-    ```js
+    ```javascript
   /* Node.js */
   variable = "Hello World!";
   console.log(global.variable);    // 출력: Hello World!
@@ -203,13 +203,13 @@ Hello World!
 이러한 차이점은 브라우저의 경우에 웹페이지 HTML이 중심이 되어 여러 자바스크립트 파일들을 `<script>` 태그로 불러와 마치 하나처럼 실행하는 반면, Node.js는 하나의 자바스크립트 파일이 중심이 되어 실행되는 게 원인으로 볼 수 있다. 타 변수와 중복된 이름을 가진다면 예상치 못한 결과와 오류가 발생할 수 있어 가급적 전역 변수의 사용은 피하도록 한다.
 
 ### 변수 선언문
-ES6부터는 새로운 방식의 바인딩이 소개되어 식별자 앞단에 특정 키워드를 기입하는 것만으로 변수로 "선언(declaration)"한다. 선언된 변수는 자동으로 `undefined`로 네임 바인딩되지만, 선언 당시에 개발자가 직접 값을 할당하는 작업을 "초기화(initialization)"라고 일컫는다. 아래는 ES6에서 추가된 세 가지 변수 유형을 지정하는 선언문이다.
+ES6부터는 새로운 방식의 바인딩이 소개되어 식별자 앞단에 특정 키워드를 기입하는 것만으로 변수로 "선언(declaration)"한다. 선언된 변수는 자동으로 `undefined`(즉, 아직 정의되지 않음)으로 네임 바인딩되지만, 선언 당시에 개발자가 직접 값을 할당하는 작업을 "초기화(initialization)"라고 일컫는다. 아래는 ES6에서 추가된 세 가지 변수 유형을 지정하는 선언문이다.
 
 * **`let` 선언문**
 
     블록 유효범위의 지역 변수(local variable)로 작용하며, 코드 블록 외부에서는 바인딩된 데이터가 소멸되어 더 이상 변수로써 사용할 수 없다. 지역 변수의 특징을 활용하면 코드 블록 외부에서 선언된 변수 이름을 그대로 가져와 코드 블록 내부에서 동일한 이름이지만 전혀 다른 존재의 변수를 새롭게 선언할 수 있다.
 
-    ```js
+    ```javascript
   let x = 3;
   let y;
 
@@ -233,7 +233,7 @@ ES6부터는 새로운 방식의 바인딩이 소개되어 식별자 앞단에 �
 
     블록 유효범위의 지역 상수(local constant)로 작용하며, 코드 블록 외부에서는 바인딩된 데이터가 소멸되어 더 이상 상수로써 사용할 수 없다. 여기서 상수는 한 번 초기화된 이후에는 변경이 불가하므로, 선언과 동시에 반드시 초기화를 해주어야 한다.
 
-    ```js
+    ```javascript
   /* "const" 변수의 잘못된 사용법 */
   const x;                     // SyntaxError: Missing initializer in const declaration
   x = "Hello World!";          // TypeError: Assignment to constant variable
@@ -248,15 +248,15 @@ ES6부터는 새로운 방식의 바인딩이 소개되어 식별자 앞단에 �
     
     > [유효범위](#유효범위)(scope)에서 언급한 바에 따르면 Node.js의 전역 변수는 실행되는 자바스크립트 모듈 내에서 한정된다. 심지어 Node.js의 전역 객체 `global`의 속성과 연동되지 않는 점에서, 오히려 모듈 유효범위의 지역 변수라고 표현하는 게 적합하다.
     >
-    > ```js
+    > ```javascript
     > /* Node.js */
     > var variable = "Hello World!";
     > console.log(global.variable);    // 출력: undefined
     > ```
 
-    변수 중에서 유일하게 선언 [호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting)(hoisting)을 지원한다. 즉, 변수를 선언하기 전에 미리 할당 및 호출되어 사용될 수 있다는 의미이다.
+    변수 중에서 유일하게 선언 [호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#variable_hoisting)(hoisting)을 지원한다. 즉, 변수를 선언하기 전에 미리 할당 및 호출되어 사용될 수 있다는 의미이다.
 
-    ```js
+    ```javascript
   /* 변수 호이스팅 예시 */
   variable = "Hello World!";
   var variable;
@@ -272,7 +272,7 @@ ES6부터는 새로운 방식의 바인딩이 소개되어 식별자 앞단에 �
 
 > 단, `var` 선언문의 변수만이 유일하게 적용되지 않으며, 그 이유로 변수 호이스팅과 연관이 있는 것으로 판단된다.
 
-```js
+```javascript
 // 변수 "variable"의 정의
 variable = "Hello World!";
 console.log(variable);
@@ -307,7 +307,7 @@ Uncaught ReferenceError: variable is not defined
 
 > 여기서 `=` 연산자가 할당된 값을 반환한다는 것을 통해 다음과 같은 표현식을 구현할 수 있다.
 >
-> ```js
+> ```javascript
 > var variable;
 > console.log(variable = 3);
 > ```
@@ -345,7 +345,7 @@ Uncaught ReferenceError: variable is not defined
 
 텍스트에 따옴표를 넣으려면 해당 따옴표 앞에 백슬래시(`\`)를 배치하여 문자열이 도중이 끊기는 현상을 방지한다.
 
-```js
+```javascript
 /* 문자열 작성의 부적절한 예시와 적절한 예시의 비교. */
 console.log('Where's my "Cat in the Hat" book?');
 console.log('Where\'s my "Cat in the Hat" book?');
@@ -357,7 +357,7 @@ Where's my "Cat in the Hat" book?
 
 문자열 객체는 다른 데이터와 더하기 기호(`+`)를 통해 공백없이 하나의 문자열로 연결할 수 있다. 원래는 문자열 간에만 사용할 수 있으나, 자바스크립트가 자동으로 숫자 및 논리 자료형 등을 문자열로 변환해 준다. 그 외에도 ES6부터 추가된 한 쌍의 [억음 부호](https://ko.wikipedia.org/wiki/억음_부호)로 표시되는 [템플릿 리터럴](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)(template literal) <code>&grave;&grave;</code>에서 `${}` 연산자를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
 
-```js
+```javascript
 A = 10.0;
 B = "자바스크립트";
 
@@ -372,9 +372,9 @@ A는 10.0,
 그리고 B는 자바스크립트이다.
 ```
 
-차후에 설명할 예정이지만, [객체](#자바스크립트-클래스)(object)에 해당하는 문자열 자료형 데이터는 오로지 자신만이 사용할 수 있는 고유의 기능(일명 메소드)을 갖으며 목록은 [여기](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#instance_methods)에서 확인할 수 있다.
+차후에 설명할 예정이지만, [객체](#자바스크립트-객체)(object)에 해당하는 문자열 자료형 데이터는 오로지 자신만이 사용할 수 있는 고유의 기능(일명 메소드)을 갖으며 목록은 [여기](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#instance_methods)에서 확인할 수 있다.
 
-```js
+```javascript
 /* 문자열 객체의 메소드에 대한 몇 가지 예시 */
 console.log("Hello World!".toUpperCase());
 console.log("Hello World!".replace(" ", "-"));
@@ -384,10 +384,18 @@ HELLO WORLD!
 Hello-World!
 ```
 
+### `typeof` 연산자
+[`typeof`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof) 연산자는 변수 혹은 상수 데이터의 자료형을 문자열로 알려준다. 
+
+```js
+console.log(typeof 3);                // 출력: number
+console.log(typeof 'Hello World!');   // 출력: string
+```
+
 ## 탈출 문자
 [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 이전에 문자열 자료형을 소개할 때, `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
 
-```js
+```javascript
 print("Hello\nWorld!")
 ```
 ```
@@ -399,11 +407,10 @@ World!
 조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 자바스크립트 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
 
 ## `if` 조건문
-`if` 조건문은 조건 혹은 논리값이 참(`true`)일 경우 코드를 실행한다. 반대로 거짓(`false`)일 경우에는 코드를 수행하지 않는다.
+`if` 조건문은 조건 혹은 논리가 참(`true`)일 경우 코드를 실행하며, 거짓(`false`)일 경우에는 코드를 실행하지 않는다.
 
-```js
-if (condition)
-{
+```javascript
+if (condition) {
     statements;
 }
 
@@ -411,36 +418,22 @@ if (condition)
 if (condition) statement;
 ```
 
-`if` 조건문 안에 또 다른 `if` 조건문을 넣을 수 있는데 이를 *네스티드(nested)* `if` 조건문이라고 부른다. 코드 블록(`{}`)을 사용하여 서로 다른 `if` 조건문들의 경계를 명확히 구별하기를 권장한다.
-
-```js
-if (condition)
-{
-    if (condtion)
-    { 
-        statements;
-    } 
-}
-```
-
 ### `else` 조건문
-`else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 실행문에는 조건부가 `false`로 평가되었을 경우 호출되는 코드를 포함한다.
+`else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 조건부가 거짓(`false`)으로 판정되면 실행할 코드를 포함한다.
 
-```js
-if (condition)
-{
+```javascript
+if (condition) {
     statements;
 }
-else
-{
+else {
     statements; 
 }
 ```
 
 ### `else if` 조건문
-`else if` 조건문은 `else`와 `if` 조건문의 조합으로 이전 조건이 거짓이면 새로운 조건을 제시한다.
+`else if` 조건문은 `else`와 `if` 조건문의 조합으로 이전 조건이 거짓(`false`)일 때 새로운 조건을 제시한다.
 
-```js
+```javascript
 if (condition)
 {
     statements;
@@ -456,63 +449,68 @@ else
 ```
 
 ### 조건 연산자
-조건 연산자(ternary operator; `?:`)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략히 표현할 수 있다.
+조건 연산자(ternary operator; `?:`)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다.
 
-```js
+```javascript
 condition ? true_return : false_return;
 ```
 
 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에는 유용하다.
 
 ## `switch` 조건문
-`switch` 조건문은 인자를 `case` 키워드에서 제공하는 값과 일치하는지 비교하며, 참일 경우 코드를 실행한다. 참 조건 실행 이후, 더 이상의 조건 평가를 방지하기 위해 모든 `case` 키워드에는 `break`라는 탈출문이 필요하다.
+`switch` 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
 
-어떠한 경우에도 부합하지 않으면 `default` 키워드에 연동된 문장이 실행되며, `switch` 조건문에는 반드시 있어야 한다. 그러나 `case` 키워드와 달리 `break` 탈출문을 필요로 하지 않는다.
-
-```js
-switch ( argument ) {
-    case value_1:
-        statements;
-        break;
-    case value_2:
-        statements;
-        break;
-    default:
-        statements;
-}
-```
-
-`switch` 조건문은 복수의 경우가 하나의 실행문을 공유할 수 있다.
-
-```js
-switch (argument)
-{
+```javascript
+switch (argument) {
     case value1:
-    default:
         statements;
         break;
+    
     case value2:
+        statements;
+        break;
+    
     case value3:
         statements;
         break;
-    case value4:
+    
+    default:
         statements;
         break;
 }
 ```
 
-### `break` 문
-`break` 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
+`switch` 조건문이 어느 `case` 코드를 실행할지 결정하는 것이라고 쉽사리 착각할 수 있으나, 이는 사실상 `break` 탈출문 덕분이다. 탈출문이 없었더라면 아래 예시 코드처럼 해당 조건의 `case` 코드 실행을 마쳤어도 다음 `case` 코드로 계속 진행하는 걸 확인할 수 있다. 즉, `case` 키워드는 코드 실행 영역을 분별하는 것이 아니라 진입 포인트 역할을 한다.
 
-### `continue` 문
-`continue` 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
+```javascript
+var variable = 2;
+
+// switch 조건문의 동작 예시
+switch (variable) {
+    case 1:
+        console.log("Statement 1");
+    
+    case 2:
+        console.log("Statement 2");
+    
+    case 3:
+        console.log("Statement 3");
+     
+    default:
+        console.log("Statement 4");
+}
+```
+```
+Statement 2
+Statement 3
+Statement 4
+```
 
 ## `while` 반복문
-`while` 반복문은 조건 혹은 논리값이 참(`true`) 동안 내부 코드를 반복적으로 실행한다. 반대로 거짓(`false`)일 경우에는 반복문을 종료한다.
+`while` 반복문은 조건 혹은 논리가 참(`true`)일 동안 코드를 반복적으로 실행하며, 거짓(`false`)일 경우에는 반복문을 종료한다.
 
-```js
-while (condition)
-{
+```javascript
+while (condition) {
     statements;
 }
 
@@ -521,942 +519,604 @@ while (condition) statement;
 ```
 
 ### `do`-`while` 반복문
-`do`-`while` 반복문은 `while` 반복문과 유사하지만 다르다: 후자는 조건을 먼저 확인하고 문장을 실행하였으면, 전자는 문장을 우선 실행하고 조건을 확인한다.
+`do`-`while` 반복문은 코드를 우선 실행하고 조건 혹은 논리가 참(`true`)일 경우 코드를 반복하며, 거짓(`false`)일 경우에는 반복문을 종료한다.
 
-```js
-do
-{
-    statements
+```javascript
+do {
+    statements;
 } while (condition);
 ```
 
-## `for` 반복문
-`for` 반복문은 정의된 지역 변수가 조건에 만족하는 한 지속적으로 반복한다. 한 번 반복할 때마다 지역 변수에는 반복문에 명시된 대로 변화가 발생하며, 일반적으로 정수형 증감을 사용한다.
+### `break` 문
+`break` 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
 
-```js
-for (variable; condition; increment) {
+### `continue` 문
+`continue` 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
+
+## `for` 반복문
+`for` 반복문은 조건 혹은 논리가 참(`true`)일 동안 코드를 반복적으로 실행하며, 거짓(`false`)일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
+
+```javascript
+for (initialize; condition; increment) {
     statements;
 }
 
 // 간략화된 문장
-for (variable; condition; increment) statement;
+for (initialize; condition; increment) statement;
 ```
+
+`for` 반복문의 반복 절차는 다음과 같다:
+
+1. 변수 할당: `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한다.
+2. 조건 평가: `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다.
+3. 변수 증감: 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, "조건 평가" 단계로 돌아가 반복한다.
 
 ### 범위형 `for` 반복문
-ES6 표준부터 범위형 `for` 반복문 변형이 새로 소개되었으며, 조건 만족여부가 아닌 주어진 범위 내에서만 반복한다. 범위로 사용되는 데이터는 일반적으로 여러 데이터를 하나로 묶은 배열(array)을 사용한다.
+ES6부터 범위형 `for` 반복문이 소개되었으며, 조건 만족 여부가 아닌 주어진 범위 내에서만 반복한다.
 
-`for-of` 형식의 반복문은 배열 요소들의 값을 하나씩 변수에 반환한다.
+* **`for...of`**: 문자열과 배열 등의 [이터러블](#자바스크립트-이터러블)(iterable) 객체가 갖는 요소를 순서대로 하나씩 반환한다.
 
-```js
-for (let i of [1, 2, 3]) {
-    console.log(i);
-} 
-```
+    ```javascript
+  for (const element of "ES6") console.log(element);
+    ```
+    ```
+  E
+  S
+  6
+    ```
 
-```
-1
-2
-3
-```
+* **`for...in`**: [객체](#자바스크립트-객체)(object) 중에서 열거 가능한(enumerable) 속성들의 이름을 하나씩 반환한다.
 
-한편, `for-in` 형식의 반복문은 배열 요소들의 값을 호출하는데 사용되는 이름을 하나씩 변수에 반환한다.
-
-```js
-for (let i in {a:1, b:2, c:3}) {
-    console.log(i);
-}
-```
-
-```
-a
-b
-c
-```
-
-여기서 자바스크립트 언어의 배열은 차후 *자바스크립트: 이터러블* 장에서 구체적으로 설명한다.
+    ```javascript
+  for (const property in "ES6") console.log(property);
+    ```
+    ```
+  0
+  1
+  2
+    ```
 
 # 자바스크립트: 이터러블
-자바스크립트는 여러 데이터를 하나의 변수에 저장하는 이터러블을 가진다. 위에서 언급된 바가 있는 배열과 문자열은 자바스크립트에 내장된 이터러블 중 하나이다. 본 장에서는 가장 흔히 사용되는 배열을 중점으로 설명할 것이다.
+자바스크립트는 여러 데이터를 하나의 변수에 저장하는 [이터러블](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)(iterable) 객체를 생성할 수 있다. 이터러블 객체는 여러 데이터를 한 번에 관리하는 편리성을 제공한다. 대표적인 이터러블 객체로 [문자열](#문자열-자료형)(string)이 있다. 본 장에서는 자바스크립트에서 활용할 수 있는 몇 가지의 이터러블 유형들을 소개한다.
 
 ## 배열
-배열(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 배열을 정의할 시, 대괄호(`[]`) 안에는 얼마나 많은 데이터를 담을 수 있는지 용량을 정해야 한다.
+배열(array) 이터러블 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 배열은 두 가지 방법으로 생성할 수 있다:
 
-```js
-/* 배열 선언 */
-var arr = [value1, value2, value3];
+* 대괄호(`[]`) 내에 데이터를 순서대로 쉼표로 나누어 나열한다.
+* [`Array()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) [클래스](#클래스)의 소괄호 `()` 내에 데이터를 순서대로 쉼표로 나누어 나열한다.
+
+> 아무런 데이터를 입력하지 않으면 빈 배열을 생성한다.
+
+대괄호는 인덱스 위치의 요소(element)를 호출할 때에도 사용되며, 해당 요소에 새로운 값을 재할당하여 데이터를 변경할 수 있다.
+
+```javascript
+var array = [value1, value2, value3, value4, ...];
+/* 동일:
+var array = new Array(value1, value2, value3, value4, ...);
+*/
+
+console.log(array);        // 출력: [ value1, value2, value3, value4, ... ]
+console.log(array[0]);     // 출력: value1
 ```
 
-배열은 `Array()` 생성자(constructor)와 괄호 안에 요소에 할당될 데이터를 입력하므로써 생성 및 초기화될 수 있다.
+배열 인덱스 범위를 벗어난 요소를 호출하면 `undefined`, 즉 정의되지 않은 요소라고 반환되는데 값을 할당할 수 있다.
 
-```js
-/* 배열 선언: Array 생성자 사용 */
-var arr = new Array(value1, value2, value3);
-```
+```javascript
+var array = [];
+console.log(array);        // 출력: []
 
-`Array()` 생성자에 단 하나의 정수만을 입력하여 크기만 존재하는 빈 배열을 생성할 수 있다. 하지만 자바스크립트의 배열은 항상 동적, 즉 크기를 언제든지 변경할 수 있어 무의미한 절차이다.
-
-```js
-/* 크기 3의 빈 배열 선언 */
-var arr1 = new Array(3);
-
-/* 크기 0의 빈 배열 선언 */
-var arr2 = new Array();
-var arr3 = [];
+array[2] = "Hello World!";
+console.log(array);        // 출력: [ <2 empty items>, 'Hello World!' ]
 ```
 
 ### 전개 연산자
-전개 연산자(spread operator; `...`)는 배열의 접두부에 위치시켜, 하나의 배열 자체를 반환하는 게 아닌 배열 내의 모든 요소들을 전개하여 한꺼번에 반환한다.
+[전개 연산자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)(spread operator; `...`)는 배열에서 두 가지 역할을 지닌다:
 
-```js
-let arr = [value1, value2, value3];
+* 배열 접두부에 위치할 경우, 배열의 모든 요소들을 전개하여 한꺼번에 반환한다.
 
-console.log(arr);
-console.log(...arr);
-```
+    ```javascript
+  var array = [value1, value2, value3, value4, value5];
 
-```
-Array [value1, value2, value3]
-value1, value2, value3
-```
+  console.log(array);       // 출력: [ value1, value2, value3, value4, value5 ]
+  console.log(...array);    // 출력: value1 value2 value3 value4 value5
+    ```
 
-또한 전개 연산자는 나머지 데이터를 모두 할당받는 데에도 사용되며, 대표적인 예시로는 아래의 *베열 구조 분해*의 예시 코드를 참고한다.
+* [배열 구조 분해](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)(array destructuring), 즉 배열의 요소를 각 변수마다 나누어서 할당하는 과정에서 나머지 요소들을 한꺼번에 받을 변수 앞단에 기입된다.
 
-### 배열 구조 분해
-배열의 구조 분해(array destructuring)는 배열의 요소들들 각 변수에 순서대로 할당하는 작업을 의미한다. 
+    ```javascript
+  var array = [value1, value2, value3, value4, value5];
 
-```js
-let arr = [value1, value2, value3, value4, value5];
-
-/* 배열의 구조 분해 할당 */
-let [variable1, , ...variable3] = arr;
-
-// 그러므로...
-console.log(variable1);
-console.log(variable3);
-```
-
-```
-value1
-Array [value3, value4, value5]
-```
+  var [variable1,  , ...variable2] = array;
+  console.log(variable1);    // 출력: value1
+  console.log(variable2);    // 출력: [ value3, value4, value5 ]
+    ```
 
 ## 연관 배열
-자바스크립트는 배열의 값을 정수가 아닌 문자열로 호출하는 연관 배열을 공식적으로 지원하지 않는다. 방법은 존재하나 권장되지는 않으며, 오히려 객체를 사용할 것을 권고한다.
+자바스크립트는 배열의 요소를 문자열로 호출하는 [연관 배열](https://ko.wikipedia.org/wiki/연관_배열)(associative array)을 지원하지 않는다. 설령 빈 배열에 요소 확장을 할 때 문자열을 입력하는 방법을 사용하여도, 이때부터는 배열이 아닌 [객체](#자바스크립트-객체)(object)가 된다. 자바스크립트는 이러한 경우에 오히려 객체를 사용하는 것을 권고한다.
 
-```js
-var arr = [];
+```javascript
+var array = [];
 
 /* 비록 배열을 선언하였으나, 아래의 코드로 인해 배열이 아닌 일반 객체로 변환 */
-arr['property1'] = value1;
-arr['proprety2'] = value2;
+array['property1'] = value1;
+array['proprety2'] = value2;
 
-// 그러므로 배열 정보나 함수를 더이상 사용할 수 없다!
-console.log(arr.length)
-```
-
-```
-0
+console.log(array);            // 출력: [ property1: value1, proprety2: value2 ]
+console.log(array.length);     // 출력: 0
 ```
 
 # 자바스크립트: 함수
-개발자가 직접 함수를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있는데, 이러한 프로그래밍 기법을 *함수형 프로그래밍(functional programming)*이라고 한다. 본 장은 자바스크립트 언어에서 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
+[함수](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions)(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
-## 함수
-함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
+```javascript
+var variable = '3.14';
+console.log(parseInt(variable));
+// 문자열에서 정수를 반환하는 "parseInt()" 함수
+```
 
-```js
-/* ES6 이전 */
-function functionName() {
-	console.log(4)
+함수의 기능을 정의(definition)하기 방법에는 두 가지가 있다: `function` 키워드를 사용한 기존 자바스크립트 방식, 그리고 ES6에서 추가된 [화살표 함수 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(arrow function expression) 방식이다.
+
+```javascript
+/* 방법 1: 기존 자바스크립트 구문 */
+function func() {
+    
 }
 
-/* ES6 이후 */
-const functionName = () => {
-    console.log(4);
+/* 방법 2: ES6 화살표 함수 표현식 */
+const func = () => {
+    
 }
-
-// 함수 호출
-functionName();
 ```
 
+자바스크립트에서 함수 내에 선언된 변수 및 표현식은 [함수 유효범위](#유효범위)(function scope)를 갖는다. 그리고 자바스크립트는 이례적으로 함수 내에서 또 다른 함수를 정의하는 것이 허용되며, 유효범위에 의하여 정의된 함수 내에서만 사용할 수 있다.
+
+함수명 뒤에 소괄호 `()` 기입여부에 따라 의미하는 바가 다르다.
+
+* `function()`은 함수에 정의된 코드를 실행한다.
+
+    ```javascript
+  const func = () => {
+      console.log('Hello World!');
+  }
+
+  var variable = func();
+  console.log(variable);
+    ```
+    ```
+  Hello World!
+  undefined
+    ```
+
+* `function`은 함수 자체를 의미한다.
+
+    ```javascript
+  const func = () => {
+      console.log('Hello World!');
+  }
+
+  var variable = func;
+  console.log(variable);
+    ```
+    ```
+  [Function: func]
+    ```
+
+자바스크립트 프로그래밍 언어 실행 순서상 함수가 정의되기 전에 미리 호출되어 사용될 수 있는데, 이를 [함수 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)(function hoisting)이라고 부른다. 단, 함수 호이스팅은 ES6부터 추가된 화살표 함수 표현식으로 정의된 함수에는 사용할 수 없다.
+
+```javascript
+/* 함수 호출 */
+func();
+
+/* 함수 정의 */
+function func() {
+    console.log("Hello World!");
+}
 ```
-4
+```
+Hello World!
 ```
 
-ES6 구문은 특히 한줄 함수를 생성하는데 매우 유용하게 사용된다.
+### `return` 반환문
+`return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 반환문을 반드시 필요로 하지 않으며, 없을 경우에 함수는 `undefined`을 반환된다.
 
-```js
-/* 한 줄만 사용하여 함수 정의 (ES6). */
-const functionName = (arg) => console.log(arg);
-functionName(value1);
-
-/* 배열 요소 열거에 적용 (ES6). */
-let arr = [1, 2, 3, 4];
-arr.forEach((arg) => console.log(arg*2) );
-```
-
-### 매개변수 및 전달인자
+## 매개변수 및 전달인자
 다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
 
-* **전달인자 (argument)**
-
-    전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.
-
-* **매개변수 (parameter)**
-
-    매개변수는 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수의 정의은 함수의 소괄호(`()`) 내에서 이루어진다.
+* **전달인자 (argument)**: 간략하게 "인자"라고도 부르며, 함수로 전달되는 데이터이다.
+* **매개변수 (parameter)**: 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호(`()`) 내에서 이루어진다.
 
 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
 
 | 연산자 | 구문          | 설명                                                            |
 |:---:|:-----------:|---------------------------------------------------------------|
-| `=` | `arg=value` | 매개변수에 전달인자가 없으면 기본값 `value`가 대신 반환된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
+| `=` | `arg=value` | 전달인자가 없으면 기본값 `value`가 대신 매개변수에 할당된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
+| `...` | `...arg` | 여러 개의 전달인자들을 배열로 한꺼번에 받을 수 있다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
 
 아래의 예제는 함수의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
 
-```js
-/* ES6 이전 */
-function functionName(arg1 = value1, arg2 = value2) {
-    console.log(arg1 + arg2);
-}
-
-/* ES6 이후 */
-const functionName = (arg1 = value1, arg2 = value2) => {
-    console.log(arg1 + arg2);
-}
-
-// 함수 호출
-functionName(2,3);
-```
-
-```
-5
-```
-
-### 나머지 매개변수
-나머지 매개변수(rest parameter)는 전개 연산자(`...`)를 가지는 매개변수로, 보다 더 많은 전달인자들을 배열로 받아낸다. 만일 추가 전달인자가 없으면 나머지 매개변수는 단순히 빈 배열인 상태가 된다.
-
-```js
-/* 나머지 매개변수를 가지는 함수 */
-function functionName(arg, ...rest) {
-	for(let variable of rest) {
-    	statements;
-    }
-} 
-```
-
-### `return` 반환문
-`return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수는 반환문을 반드시 필요로 하지 않으며, 이러한 경우에는 `undefined` 값이 반환되어 변수에 전달되거나 콘솔창에 출력되어 나타난다. 
-
-```js
-/* ES6 이전 */
-function functionName(arg1 = value1, arg2 = value2) {
+```javascript
+/* 택1: 기존 자바스크립트 구문 */
+function func(arg1, arg2 = 2) {
     return arg1 + arg2;
 }
 
-/* ES6 이후 */
-const functionName = (arg1 = value1, arg2 = value2) => {
+/* 택2: ES6 구문 */
+const func = (arg1, arg2 = 2) => {
     return arg1 + arg2;
 }
 
-console.log(functionName(2,3));
+/* 함수 호출 */
+func(3);        // 출력: 5 (= 3 + 2)
+func(3, 4);     // 출력: 7 (= 3 + 4)
+```
+----
+```javascript
+/* 택1: 기존 자바스크립트 구문 */
+function func(arg1, ...arg2) {
+    console.log(arg1);
+    console.log(arg2);
+}
+
+/* 택2: ES6 구문 */
+const func = (arg1, ...arg2) => {
+    console.log(arg1);
+    console.log(arg2);
+}
+
+/* 함수 호출 */
+func(1, 2, 3, 4);   // 출력: 1
+                    // 출력: [ 2, 3, 4 ]
 ```
 
+### 콜백 함수
+[콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 코드 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
+
+> 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
+
+```javascript
+/* 호출 함수 */
+const calling = (arg1, arg2) => {
+    arg1(arg2);
+}
+
+/* 콜백 함수 */
+const callback = arg => {
+    console.log(`callback: ${arg}`);
+}
+
+calling(callback, "Hello World!");
 ```
-5
 ```
+callback: Hello World!
+```
+
+## 람다 표현식
+[람다 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로, 데이터를 저장하지 않고 단일 표현식으로만 값을 반환한다. 익명 함수는 흔히 일회용 함수나 콜백 함수로 사용된다. 아래는 [콜백 함수](#콜백-함수)의 예시 코드에 람다 표현식을 활용하였다.
+
+```javascript
+/* 호출 함수 */
+const calling = (arg1, arg2) => {
+    arg1(arg2);
+}
+
+calling(arg => {
+    console.log(`callback: ${arg}`);
+}, "Hello World!");
+```
+```
+callback: Hello World!
+```
+
+비록 익명 함수는 한 번만 사용되는 이름없는 함수이더라도 변수에 할당하여 언제든지 호출할 수 있다.
 
 # 자바스크립트: 객체
-프로그래밍 방법 중 하나인 객체지향 프로그래밍(object-oriented programming; OOP)은 함수 대신 클래스와 객체 사용을 기반으로 한다. 본 장은 자바스크립트에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 객체의 생성 및 사용 방법에 대하여 소개한다.
+[객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 배열이 있다.
 
-## 객체
-이전 장에서 (데이터를 저장할 수 있는) 변수와 (데이터를 처리 할 수 있는) 함수를 소개하였다. 객체(object 혹은 instance)는 이러한 변수와 함수를 하나의 데이터로 캡슐화한 데이터이다.
+```javascript
+var variable = [0, 3, 5, 9];
+console.log(variable.indexOf(5));
+// "variable" 이름을 가진 배열 이터러블 객체의 "indexOf()" 메소드를 사용하여 값 5에 대한 위치를 반환한다.
+```
+```
+2
+```
 
-여기서 캡슐화(encapsulation)은 다음과 같은 역할을 지닌다.
+객체에 속하는 변수와 함수를 각각 속성(property)과 메소드(method)라고 부르며 [속성 접근자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors)를 통해 접근한다. 
+
+| 객체 속성 | 속성 접근자                                      |
+|:-------:|-----------------------------------------------|
+| 변수 (일명 필드; field) | `instance.property` 혹은 `instance["property"]` |
+| 함수 (또는 메소드)    | `instance.method()` 혹은 `instance["method"]()` |
+
+여기서 속성의 개념이 매우 포괄적이고 애매모한데, 자바스크립트 특성상 식별자에 어떤 데이터가 바인딩 되는지에 따라 변수가 되거나 함수가 되는 유동적인 태도를 취하기 때문이다. 비록 메소드가 객체의 함수 역할을 하지만 속성에 함수가 바인딩되면 메소드처럼 사용될 수 있다. 그래도 [메소드 정의](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions)와 구분되어 엄연히 다른 존재이므로 자바스크립트는 "속성 및 메소드"를 분별한다.
+
+다음은 자바스크립트에서 사용자 정의 객체(user-defined object)를 생성하는 방법을 소개한다:
+
+> 아래 방법을 소개하기 앞서 두 개의 연산자에 대하여 설명한다.
+>
+> * **`this` 연산자**: 객체 스스로를 가리키기 위해 사용된다. 만일 `this` 연산자가 없이 속성을 호출하면 자바스크립트는 이를 일반 지역 변수 또는 함수로 간주한다.
+> * **`new` 연산자**: 사용자 정의 또는 생성자 함수를 갖는 객체 자료형으로부터 객체를 생성하는데 사용된다.
+
+* [객체 초기자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer)(object initializer), 일명 객체 리터럴(object literal) `{}` 안에 각 속성을 쉼표로 나누어 `property: definition` 형식으로 값을 할당하거나 함수를 정의하여 생성한다.
+
+    ```javascript
+  /* 객체 생성: 객체 초기자 */
+  const instance = {
+      
+      // 속성 정의 (변수)
+      property1: value1,
+      property2: value2,
+  
+      // 속성 정의 (함수)
+      property3: function(arg) {
+          return this.field1 + this.field2 - arg;
+      },
+      
+      // 메소드 정의
+      method(arg) {
+          return this.field1 + this.field2 - arg;
+      }
+  };
+    ```
+
+* [생성자 함수](https://developer.mozilla.org/en-US/docs/Glossary/Constructor)(constructor function), 즉 객체를 생성하기 위해 동작하는 함수를 사용한다. 생성자 함수에는 속성들이 정의되고, `new` 연산자를 통해 객체가 생성된다.
+
+    ```javascript
+  /* 객체 생성: 생성자 함수 */
+  function func(arg1, arg2) {
+      
+      // 속성 정의 (변수)
+      this.field1 = arg1;
+      this.field2 = arg2;
+
+      // 속성 정의 (함수)
+      this.method = function(arg) {
+          return this.field1 + this.field2 - arg;
+      }
+  }
+  
+  const instance = new func(value1, value2);
+    ```
+
+* [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) 클래스 자료형이 갖는 `Object.create()` 정적 메소드에 [프로토타입](#프로토타입)을 기입해 생성자 함수 정의가 필요없이 객체를 생성한다.
+
+    ```javascript
+  /* 객체 생성: 프로토타입 */
+  const prototype = {
+
+      // 속성 정의 (변수)
+      property1: value1,
+      property2: value2,
+
+      // 속성 정의 (함수)
+      property3: function(arg) {
+          return this.field1 + this.field2 - arg;
+      },
+      
+      // 메소드 정의
+      method(arg) {
+          return this.field1 + this.field2 - arg;
+      }
+  };
+
+  const instance = Object.create(prototype);
+    ```
+
+### 프로토타입
+[프로토타입](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)(prototype)은 기본적으로 객체에 내장된 속성 및 메소드를 일컬으며, 모든 자바스크립트 객체는 프로토타입을 갖는다. 프로토타입 또한 객체이므로 자신만의 프로토타입이 있는데 이러한 연속을 프로토타입 연쇄(prototype chain)라고 부르며, `null`을 프로토타입으로 갖는 프로토타입까지 이어진다. 객체의 프로토타입은 `Object.getPrototypeOf()` 정적 메소드로 반환된다.
+
+## 클래스
+[클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 동일한 구조를 갖는 객체를 매번 정의할 필요없이 간단히 생성할 수 있도록 한다. ES6부터 소개되었으며 `class` 키워드와 함께 객체의 속성 및 메소드를 클래스 내부에 정의한다. 클래스로부터 객체를 생성하는 절차를 *객체화(instantiation)*라고 한다. 직접 생성된 객체와 달리, 클래스로부터 생성된 객체는 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)로부터 아래의 특성을 가진다:
 
 1. 변수와 함수를 하나의 객체로 결합한다.
 2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
 
-사용자 정의 객체 중심으로 한 프로그래밍을 *객체지향 프로그래밍*이라고 한다.
+특히 2번 특성의 의해 클래스 및 객체는 외부에서 접근이 가능한 [public](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields) 속성 (및 메소드)와 외부에서 접근이 불가한 [private](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields) 속성 (및 메소드)를 지정할 수 있다. 기본적으로 public으로 선언되지만 private으로 선언하려면 식별자 앞에 해시 기호 `#`를 붙인다.
 
-```js
-let variable = "Hello World!";
-console.log(variable.search("World"));
-// variable 이름을 가진 문자열 객체의 "search()" 메소드를 사용하여 단어의 위치를 반환한다.
-```
+> private 속성 및 메소드에 대해 몇 가지 유의할 사항이 있다.
+>
+> * 객체 리터럴에서 사용할 수 없다.
+> * 선언이 먼저 이루어져야 한다; 즉, 메소드 내에서 `this` 키워드로 정의하려면 오류가 발생한다.
+> * 2021년 4월 기준으로 아직 ECMAScript 실험 단계에 있으나 대부분의 브라우저에서 지원하고 있다.
 
-```
-6
-```
-
-### 속성 및 메소드
-속성(property)과 메소드(method)는 객체에 캡슐화된 변수와 함수를 의미하며 아래와 같은 방법으로 접근한다.
-
-| 객체 구성요소 | 구문                                            |
-|:-------:|-----------------------------------------------|
-| 속성      | `instance.property` 혹은 `instance["property"]` |
-| 메소드     | `instance.method()`                           |
-
-### 사용자 정의 객체
-개발자는 직접 객체를 정의하여 사용할 수 있다.
-
-메소드가 객체 내의 속성이나 또 다른 메소드를 접근하기 위해서는 `this` 키워드를 사용해야 한다. 이는 객체 스스로를 가리키는 연산자로, 해당 키워드 없이는 인터프리터는 변수로 인식한다.
-
-```js
-/* 사용자 정의 객체 생성: ES6 이전 */
-const variable = {
-    /* 속성 (변수와 비슷함) */
-    property1: value1,
-    property2: value2,
-
-    /* 메소드 (함수와 비슷함) */
-    method: function(arg) {
-        statements;
-        return this.property1 + this.property2 - arg;    
-    }
-};
-```
-----
-```js
-var property1 = value1;
-
-/* 사용자 정의 객체 생성: ES6 이후 */
-const variable = {
-    /* 속성 (변수와 비슷함) */
-    property1,
-    ["property2"]: value2,
-
-    /* 메소드 (함수와 비슷함) */
-    method(arg) {
-        statements;
-        return this.property1 + this.property2 - arg;   
-    }
-};
-```
-
-## 클래스
-클래스(class)는 객체를 생성하는데 사용된다. 클래스는 `class` 키워드를 사용하여 정의되며, 클래스 내부에는 객체의 속성과 메소드가 되는 변수와 함수를 정의한다. 아래는 `class` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이며, 변수 및 함수와의 유사성을 확인할 수 있다.
-
-```js
-/* 클래스 생성하기 */
+```javascript
+/* 클래스 생성 */
 class CLASS {
-    /* 속성 */
-    property1 = value1;
-    property2 = value2;
 
-    /* 메소드 */
+    public = value1;     // public  속성 정의
+    #private = value2;   // private 속성 정의
+
+    // 속성 정의 (함수)
+    property = function(arg) {
+        return this.public + this.#private - arg;
+    }
+
+    // 메소드 정의
     method(arg) {
-        statements;
-        return this.property1 + this.property2 - arg;   
+        return this.public + this.#private - arg;
     }
 }
+
+/* 클래스 객체화 */
+const instance = new CLASS();
 ```
 
-클래스를 통해 객체를 생성, 즉 객체화(instantiation)하려면 `new` 키워드를 사용한다. 아래는 하나의 클래스로 두 개 이상의 객체를 생성하는 예시 코드이다.
+자바스크립트는 [클래스 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#class_hoisting)(class hoisting)을 지원하지 않는다.
 
-```js
-const variable1 = new CLASS;
-const variable2 = new CLASS;
+### 생성자
+[생성자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)(constructor)는 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 `constructor()` 메소드이다. 비록 생성자는 선택사항이지만, 만일 생성자를 정의한다면 객체화 과정에서 객체로 전달할 인자의 개수를 결정하는 요인으로 작용한다. 생성자는 흔히 객체화 단계에서 필드를 초기화하는 용도로 사용된다.
 
-console.log(variable1.property1);
-console.log(variable2.property2);
-```
-```
-value1
-value2
-```
-
-### 생성자 메소드
-생성자(constructor) 메소드는 객체를 생성하는데 필요한 가장 중요한 메소드이다. 해당 메소드는 클래스에서 객체를 만들 때 자동으로 호출되며 객체 초기화에 필요한 인수의 수를 결정한다.
-
-```js
-/* 클래스 생성하기 */
+```javascript
+/* 클래스 생성 */
 class CLASS {
-    /* 생성자 메소드 */
+
+    // 생성자 정의
     constructor(arg1, arg2) {
-        this.property1 = arg1;
-        this.property2 = arg2;
+        this.public = arg1;
+        this.#private = arg2;
     }
 
-    /* 메소드 */
+    // private 속성 선언
+    #private;
+
     method(arg) {
-        statements;
-        return this.property1 + this.property2 - arg;   
+        return this.property1 + this.#property2 - arg;
     }
 }
 ```
 
-만일 위와 같이 생성자가 따로 정의되지 않아도 클래스는 기본적으로 아래와 같은 생성자를 가진다.
+생성자를 정의하지 않으면 아래의 기본 생성자가 클래스에 제공된다.
 
-```js
-/* 생성자 메소드: 기본값 */
+```javascript
 constructor() {}
 ```
 
-### 정적 메소드
-정적 메소드(static method)는 객체화없이 클래스에서 바로 호출할 수 있는 메소드이며, `static` 키워드로 선언된다. 그러나 객체는 정적 메소드를 접근할 수 없다. 다시 말해, 정적 메소드는 단순히 클래스에 속해있는 일반 함수와 동일하게 취급하면 된다.
+### 정적 속성 및 메소드
+[정적 속성 및 메소드](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#static_methods_and_properties)(static property & method)는 `static` 키워드로 선언된 속성 및 메소드로 객체화 없이 클래스에서 곧바로 사용할 수 있다. 그러나 클래스 객체화로 생성된 객체는 정적 속성 및 메소드를 접근할 수 없다. 다시 말해, 정적 속성 및 메소드는 단순히 클래스에 속해있는 일반 변수 및 함수와 동일하게 취급하면 된다.
 
-```js
+> 객체 속성 및 메소드(instance property & method)는 정적 속성 및 메소드와 서로 별개의 영역으로 간주되므로 `static`만 확실히 표시해주면 동일한 식별자를 가질 수 있다.
+
+```javascript
+/* 클래스 생성 */
 class CLASS {
-    /* 정적 메소드 */
+
+    // 정적 속성 정의
+    static property = 2;
+
+    // 정적 메소드 정의
     static method(arg) {
-        return arg * arg;
+        return this.field * arg;
     }
 }
 
-console.log(CLASS.method(3));
-```
-```
-9
+/* 정적 메소드 호출 */
+console.log(CLASS.property);    // 출력: 2
+console.log(CLASS.method(3));   // 출력: 6
 ```
 
-### Setter 및 Getter 메소드
-Setter 및 Getter 메소드는 클래스에 정의된 하나의 속성을 할당 전용 메소드와 반환 전용 메소드로 나누어 접근한다. 각 메소드는 `set`와 `get`으로 선언되며, 이는 코드의 민감한 부분은 숨기면서 지속적으로 접근할 수 있도록 하는 데이터 숨기기(data hiding)의 일종이다.
+### Setter 및 Getter
+자바스크립트의 클래스는 하나의 속성을 [getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)와 [setter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set) 영역으로 나누어 데이터 숨기기를 지원한다.
 
-```js
+| 접근자 | 키워드 | 설명                                     |
+|:--------:| ------- | ----------------------------------------------- |
+| Getter   | `get`   | 속성으로부터 값을 반환받는 맴버이다. |
+| Setter   | `set`   | 속성으로부터 값을 설정하는 맴버이다. |
+
+속성을 나누므로써 수정되어서는 안될 민감한 코드를 `set` 영역에 숨기고 `get`만을 통해서 데이터를 반환한다. 정의된 형태는 메소드와 유사하지만 실제로 사용할 때는 소괄호 `()` 없이 속성처럼 사용된다. 또한 setter를 정의할 때에는 매개변수가 하나만 존재해야 하고 getter를 정의할 때에는 매개변수가 없어야 한다.
+
+
+```javascript
+/* 클래스 정의 */
 class CLASS {
     
-    /* SETTER 메소드 */
-    set method(arg) {
-        this.property = arg * arg;
+    #property;
+
+    // Setter 정의
+    set property(arg) {
+        this.#property = arg;
     }
 
-    /* GETTER 메소드 */
-    get method(arg) {
-        return `Property: ${this.property}`;
+    // Getter 정의
+    get property() {
+        return this.#property ** 2;
     }
 }
 
-// 객체화
-const variable = new CLASS;
+/* 클래스 객체화 */
+const instance = new CLASS();
 
-variable.method = 3;
-console.log(varible.method);
+instance.property = 3;
+console.log(instance.property);    // 출력: 9 (= 3 ** 2)
 ```
-```
-Property: 9
-```
-
-이를 통해 `CLASS.property` 속성을 직접 호출하지 않고 데이터 할당과 반환 메소드를 개별적으로 정의하므로써, 속성을 더욱 유동적으로 접근 및 관리할 수 있다.
 
 ## 클래스 표현식
-클래스 표현식(class expression)은 이름없는 클래스를 정의하는 동시 객체를 선언하는 표현식이다. `new` 연산자 없이도 객체화가 되어 코드가 간략화되지만, 단 하나의 객체만 정의할 수 있는 단점을 가진다.
+[클래스 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/class)(class expression)은 익명의 클래스를 정의하는 동시 객체를 선언하는 표현식이다. `new` 연산자가 없어도 객체화가 되어 코드가 간략하지만, 단 하나의 객체만 정의할 수 있는 단점을 갖는다.
 
-```js
-/* 클래스 표현식을 사용한 객체 선언 */
-const variable = new class {
-	constructor(arg1, arg2){
-        this.property1 = arg1;
-    	this.property2 = arg2;
-    }
-}
-```
-
-## 객체형
-객체형(object type)은 객체를 생성하는 함수를 가리킨다. 이는 클래스와 매우 유사하며, 객체형은 함수 자체가 생성자 메소드 역할을 한다.
-
-```js
-/* 생성자 함수를 통한 객체형 정의 */
-function OBJTYPE(arg1, arg2) {
-    /* 속성 */
-	this.property1 = arg1;
- 	this.property2 = arg2;
-    
-    /* 메소드 */
-    this.method(arg) {
-    	statements;
-        return this.property1 + this.property2 - arg;
-    }
-}
-
-// 객체화
-const variable = new OBJTYPE(value1, value2);
+```javascript
+/* 클래스 표현식 */
+const instance = class {
+    ...
+};
 ```
 
 ## 상속
-상속(inheritance)은 기반 클래스(base class)가 그로부터의 파생 클래스(derived class)에게 속성과 메소드를 제공하는 행위이다. 기반 클래스와 파생 클래스 둘 다에 동일한 이름의 속성과 메소드가 존재하는 경우, 기반 클래스의 속성과 메소드는 파생 클래스에 의해 묻힌다.
+[상속](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 속성을 제공하는 행위이다. 파생 클래스는 `extends` 키워드로 상속받을 기반 클래스를 명시하지만, 오로지 한 기반 클래스로부터만 파생될 수 있다. 기반 클래스와 파생 클래스에 동일한 이름의 속성과 메소드가 존재할 경우,
 
-파생 클래스는 `extend` 키워드를 통해 어느 기반 클래스로부터 상속되었는지 명시한다. 파생 클래스로부터 기반 클래스의 속성 및 메소드에 접근하기 위해서는 `super` 키워드가 사용된다. 단, `super()`는 기반 클래스의 생성자를 호출한다.
+* 기반 클래스의 속성은 파생 클래스에서 명시된 데이터로 재할당된다.
+* 기반 클래스의 메소드는 파생 클래스의 속성에 의해 묻혀진다.
 
-```js
+여기서 "묻힌다"는 표현은 기반 클래스의 메소드가 아직 살아있음을 시사한다. 이러한 차이점이 존재하여 자바스크립트에서 객체를 다룰 때 속성과 메소드를 확실히 구별짓는 것이다.
+
+```javascript
 /* 기반 클래스 생성 */
-class BASECLASS {
-	constructor(arg1, arg2) {
-    	this.property1 = arg1;
-        this.property2 = arg2;
-    }
+class BASECLASS
+{
+    property1 = null;
+    property2 = 3;
 
-    method(arg) {
-    	statements;
-        return this.property1 + this.property2 - arg;
+    method() {
+        this.property1 = "JavaScript";
     }
 }
 
 /* 파생 클래스 생성 */
-class DERIVEDCLASS extends BASECLASS {
-    
-    /* "SUPER()" 함수는 기반 클래스의 생성자 메소드를 호출 */
-    constructor(arg1, arg2) {
-    	super(arg1, arg2)
-    }
+class DERIVEDCLASS extends BASECLASS
+{
+    property2 = 7;
+    property3 = true;
 
-    /* 이름이 동일한 메소드가 정의되면, 기반 클래스가 파생 클래스에 묻힘 */
-    method(arg1) {
-    	statements;
-        return (this.property1 + this.property2) * arg;
-    }
-
-	method2() {
-        /* 기반 클래스의 속성 및 메소드 호출은 `super` 키워드 사용 */
-        let temp = super.method();
-    	statements;
+    method() {
+        this.property1 = "Hello World!";
     }
 }
+
+const instance = new DERIVEDCLASS();
+
+console.log(instance);
+instance.method();
+console.log(instance);
+```
+```
+DERIVEDCLASS { property1: null, property2: 7, property3: true }
+DERIVEDCLASS { property1: 'Hello World!', property2: 7, property3: true }
 ```
 
-## 내장 객체
-흔히 사용되는 객체는 이미 자바스크립트에 내장되어 있어, 단순히 호출만 하여 사용할 수 있다. 아래는 자바스크립트의 대표적이고 매우 유용한 내장 객체 몇 가지를 소개한다.
+### `super` 키워드
+[`super`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super) 키워드는 파생 클래스가 기반 클래스의 생성자 및 메소드를 호출하는데 사용된다:
 
-### `Math` 객체
-`Math`는 수학적 계산을 위해 사용되는 자바스크립트 내장 객체이며, 흔히 사용되는 상수들을 속성으로 가진다.
+* `super()`은 기반 클래스의 생성자를 호출하며, 반드시 `this` 키워드가 사용되기 전에 기입되어야 한다. 단, 파생 클래스에 별도 생성자가 정의되지 않았다면 해당 키워드는 무시해도 된다.
 
-| 속성       | 구문            | 설명                |
-|----------|---------------|-------------------|
-| `E`      | `Math.E`      | 오일러 상수            |
-| `PI`     | `Math.PI`     | 파이 상수             |
-| `LN2`    | `Math.LN2`    | 2의 자연로그           |
-| `LOG10E` | `Math.LOG10E` | 오일러 상수의 로그 (밑 10) |
+    ```javascript
+  class BASECLASS {
+      constructor(arg1, arg2) {
+          ...
+      }
+  }
 
-`Math` 객체는 일부 수학 계산식을 메소드로 가진다.
+  class DERIVEDCLASS extends BASECLASS {
+      constructor(arg) {
+          super(arg, arg);
+          ...
+      }
+  }
+    ```
 
-| 메소드     | 예시           | 설명                       |
-| ---------- | ----------------- | --------------------------------- |
-| `abs()`    | `Math.abs(-3)`    | 절대값                   |
-| `sqrt()`   | `Math.sqrt(36)`   | 제곱근                      |
-| `power()`  | `Math.power(x,y)` | `x`의 `y` 거듭제곱 |
-| `random()` | `Math.random()`   | 0과 1 사이의 난수 발생기    |
+* `super.method()`은 기반 클래스의 메소드를 호출한다. 단, 메소드가 아닌 `function` 키워드 또는 화살표 함수 표현식에 바인딩된 속성에는 `super`를 인식하지 못하는 구문 오류가 발생한다.
 
-### `Date` 객체형
-`Date` 객체형은 날짜와 관련된 객체를 생성하여 시간 측정, 일자 날짜 확인 및 계산 등의 용도로 사용된다. 아무런 전달인자가 건네지지 않으면 객체는 현재 시각 데이터를 갖는다.
+    ```javascript
+  class BASECLASS {
+      method(arg1, arg2) {
+          ...
+      }
+  }
 
-```js
-/* 객체화: 현재 날짜 및 시각 (실시간이 아님) */
-var variable = new Date();
-```
-
-만일 전달인자가 건네지면 객체는 전달된 데이터를 기반하여 계산된 날짜 및 시각을 저장한다. 세 가지의 전달인자를 건네줄 수 있으며, 이들은 다음과 같다:
-
-| 전달인자                      | 예시                                      |
-|:-------------------------:|-----------------------------------------|
-| 타임스탬프 (1970년 1월 1일 00시부터) | `new Date(789971670000)`                |
-| 날짜 및 시간 문자열               | `new Date("January 13, 1995 13:34:30")` |
-| 년, 월, 일, 시, 분, 초, 밀리초     | `new Date(95,0,13,13,34,30,0)`          |
-
-생성된 객체는 날짜와 시간 계산을 위한 메소드를 제공한다.
-
-| 메소드          | 구문                  | 설명                                               |
-| --------------- | ------------------------ | --------------------------------------------------------- |
-| `getFullYear()` | `variable.getFullYear()` | `variable` 객체에 저장된 데이터에서 연도를 반환한다.             |
-| `getMonth()`    | `variable.getMonth()`    | `variable` 객체에 저장된 데이터에서 월(月)을 반환한다.            |
-| `getDate()`     | `variable.getDate()`     | `variable` 객체에 저장된 데이터에서 일(日)을 반환한다. |
-| `getHours()`    | `variable.getHours()`    | `variable` 객체에 저장된 데이터에서 시(時)를 반환한다. |
+  class DERIVEDCLASS extends BASECLASS {
+      method(arg) {
+          super.method(arg, arg);
+          ...
+      }
+  }
+    ```
 
 # 자바스크립트: 모듈
-기존의 자바스크립트는 웹페이지에 자그만한 상호작용 요소를 입히는 게 주된 목적이었다. 현재는 거의 모든 웹사이트 페이지에 들어가며 어플리케이션 제작에도 사용되는 등 활용도가 광범위하다. 방대해진 자바스크립트로부 코드 일부분을 기능성 모듈(module)로 분할하여 필요에 따라 언제든지 불러올 수 있는 매커니즘이 요구되기 시작하였다. 본 장에서는 자바스크립트로 모듈을 내보내거나 불러오는 방법에 대하여 소개한다.
-
-## 모듈
-모듈(module)이란, 데이터를 저장하거나 기능을 수행할 수 있는 자바스크립트 코드들을 하나로 묶은 파일을 가리킨다. 즉, 일반적인 변수나 함수, 객체 등을 담고 있는 자바스크립트 파일 또한 모듈로 사용될 수 있다. 모듈을 활용하기 위해서는 아래에 설명하는 두 개의 부문 `export` 및 `import` 문이 반드시 필요하다.
-
-본 장의 설명을 돕기 위해 모듈로 사용할 `./module.js` 파일 안에는 다음 코드가 작성되어 있다고 가정한다.
-
-```javascript
-/* 예시 변수 및 배열*/
-var variableName = 3;
-var arrayName = { value1, value2, value3 };
-
-/* 예시 함수 */
-function functionName(arg1, arg2) {
-    return arg1 + arg2;
-}
-
-/* 예시 객체 */
-const objectName = {
-    property1: value1,
-    property2: value2,
-
-    method: function(arg) {
-        statements;
-        return this.property1 + this.property2 - arg;    
-    }
-}; 
-```
-
-## `export` 문
-`export` 문은 모듈에서 내보내고 싶은 데이터 및 기능을 지정하는데 사용한다. 모듈에서 코드를 내보내는 방법에는 두 종류가 존재한다: 네임드(named)와 기본(default) 내보내기가 있다.
-
-```js
-/* 네임드 내보내기 */
-export variableName;               // 단일 네임드 내보내기
-export { arrayName, functionName}; // 다중 네임드 내보내기
-
-/* 기본 내보내기 */
-export default objectName;
-```
-
-이를 하나의 `export` 문으로 표현하려면 다음과 같이 작성하도록 한다.
-
-```js
-/* 기본 및 네임드 내보내기 */
-export { objectName as default, variableName, arrayName, functionName };
-```
-
-네임드 내보내기는 여러 데이터를 내보낼 수 있으나, 기본 내보내기는 오로지 하나만 지정할 수 있다. 특히 기본 내보내기는 모듈에서 해당 데이터 혹은 기능을 불러올 때 식별자 지정이 자유롭다. 이에 대한 내용은 `import` 문에서 다시 설명할 예정이다.
-
-네임드 내보내기 또한 식별자 충돌을 방지하기 위해 별칭을 사용해 내보낼 수 있다.
-
-```js
-/* 별칭 네임드 내보내기 */
-export { variableName as aliasName1, functionName as aliasName2 }
-```
-
-### 내보내기 시 정의
-`export` 문으로 내보낼 데이터 및 기능은 미리 정의가 되어야 할 필요는 없다. 내보내는 단계에서 바로 정의하여 내보낼 수 있다. 아래는 각각 네임드 및 기본 내보내기 시 데이터를 정의하는 방법을 보여준다.
-
-```js
-/* 네임드 내보내기 시 정의 */
-export let variableName = 3;
-export function functionName(arg1, arg2) { ... }
-export class CLASS { ... }
-
-/* 기본 내보내기 시 정의 */
-export default function (arg1, arg2) { ... }
-export default class { ... }
-```
-
-기본 내보내기는 모듈을 불러올 때 식별자를 자유롭게 지정할 수 있다는 특성으로 함수 및 클래스에 대한 식별자를 필요로 하지 않는다.
-
-### 다시 내보내기
-`export` 문은 다른 모듈의 데이터 및 기능을 불러와서 그대로 다시 내보낼 수 있다. 이를 통해 여러 모듈을 하나로 통합할 수 있는 장점을 가진다. 예를 들어 `./sample.js` 모듈에 `data1`과 `data2`가 있다고 가정한다.
-
-```js
-/* 모둘에서 불러온 데이터 및 기능 그대로 다시 내보내기 */
-export { data1 as default, data2 as aliasName } from "./sample.js"
-```
-
-위의 코드는 `./sample.js`에서 불러온 `data1`을 기본 내보내기, 그리고 `data2`를 `aliasName`이란 별칭으로 내보낸다.
-
-## `import` 문
-`import` 문은 모듈에서 `export` 된 데이터 및 기능을 불러오는데 사용된다. 모듈에서 네임드(named)와 기본(default) 내보내기에 대한 불러오는 방법이 약간 다르다. `./module.js`에서 다음과 같이 데이터 및 기능을 내보냈다고 가정한다.
-
-```js
-export { objectName as default, variableName as exportName, arrayName, functionName };
-```
-
-이에 대한 네임드 및 기본 불러오기는 다음과 같다.
-
-```js
-/* 네임드 불러오기 */
-import { exportName, arrayName, functionName } from "./module.js";
-
-/* 기본 불러오기 */
-import defaultName from "./module.js";
-```
-
-이를 하나의 `import` 문으로 표현하려면 다음과 같이 작성한다.
-
-```js
-/* 기본 및 네임드 내보내기 */
-import defaultName, { exportName, arrayName, functionName } from "./module.js";
-```
-
-여기에서 네임드와 기본 내보내기/불러오기의 차이점이 명확해진다: 네임드 내보내기 데이터 및 기능들을 불러올 때에는 정의될 때의 식별자 혹은 그에 해당하는 별칭으로 불어와야 한다. 그러나 기본 내보내기는 이와 별개로 불러오는 과정에서 `defaultName`처럼 아무런 변수 식별자를 사용할 수 있으며, 자동적으로 `objectName`이 해당 변수로 할당된다.
-
-`export` 문에서 별칭을 지정할 수 있듯이, `import` 문에서도 불러온 데이터 및 기능에 별칭을 지정할 수 있다.
-
-```js
-import { exportName as aliasName1, functionName as aliasName2 } from "./module.js";
-```
-
-### 전부 불러오기
-`import` 문으로 불러오고 싶은 데이터 및 기능을 하나씩 명시하지 않고서도 한꺼번에 전부 가져올 수 있다.
-
-```js
-/* 네임드 전부 불러오기 */
-import * as moduleName from "./module.js";
-```
-
-여기서 `moduleName`은 네임스페이스(namespace)로, 모듈에서 불러온 데이터 및 기능들은 네임스페이스를 거쳐 호출하게 된다. 만일 모듈 내 함수를 사용하려면 `moduleName.functionName()`라고 호출해야 한다.
-
-하지만 위의 명령어는 네임드에만 적용이 가능하며, 기본 데이터도 함께 `moduleName` 네임스페이스에 포함시키려면 다음과 같이 코드를 입력한다.
-
-```js
-/* 기본 및 네임드 전부 불러오기 */
-import defaultName, * as moduleName from "./module.js";
-```
-
-# 자바스크립트: DOM
-자바스크립트는 HTML 및 CSS와 함께 사용하여 다양한 기능을 제공하는데 기여한다. 선언형 언어인 HTML은 아래와 같이 트리 구조(tree structure)의 문서 객체 모델(Document Object Model; DOM)로 문서를 표현한다.
-
-![문서 객체 모델 <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">위키미디어</a></i></sub>](/images/docs/javascript/js_html_dom.png)
-
-자바스크립트는 HTML의 DOM에 접근하여 요소를 추가, 제거, 그리고 변경할 수 있어 동적이고 유연한 웹사이트를 표현할 수 있도록 한다. 트리 구조의 각 블록은 HTML의 요소를 의미하며, 이는 DOM에서 노드(node)라고 부른다.
-
-본 장은 본격적으로 자바스크립트를 HTML 및 CSS와 함께 통합하여 사용하는 방법을 간략하게 설명한다.
-
-## 노드 관계
-`<html>`, `<head>`, `<h1>`과 같은 HTML의 요소는 DOM의 노드에 해당한다. 노드는 다른 노들들과 상하 관계가 존재하며, 이는 가족 구성에 빗대어 부모(parent), 자식(child), 그리고 형제(sibling)이라 부른다.
-
-| 관계 | 설명                     |
-|:--:|------------------------|
-| 부모 | 해당 노드를 포함하고 있는 상위 노드.  |
-| 자식 | 해당 노드가 포함하고 있는 하위 노드.  |
-| 형제 | 해당 노드와 동일한 부모를 가지는 노드. |
-
-## `document` 객체
-자바스크립트의 `document` 내장 객체는 DOM의 노드를 최상위 권한으로 접근하는 데 사용된다. 노드 생성, 스타일 변경, 이벤트 설정 등은 전부 `document` 객체를 통해서 이루어진다.
-
-### 요소 선택
-DOM에서 원하는 요소 선택은 다음과 같은 `document` 객체 메소드를 통해 실현된다. 
-
-| 메소드                                      | 설명                                                  |
-|------------------------------------------|-----------------------------------------------------|
-| `getElementById("ID")`                   | `ID`란 아이디를 가진 요소를 접근한다.                             |
-| `getElementsByClassName("CLASS")[index]` | `CLASS`란 클래스를 가진 `index` 번째 요소를 접근한다 (JS의 클래스가 아님). |
-| `getElementsByTagName("DIV")[index]`     | `DIV` 태그를 가진 `index` 번째 요소를 접근한다.                   |
-
-여기서 `document.getElementById()`만 배열 형식이 아닌 이유는 아이디는 DOM 내에서 하나의 요소에만 할당할 수 있는 유일성을 지녔기 때문이다.
-
-이렇게 선택된 요소는 아래의 속성을 통해서 해당 요소의 부모, 자식, 혹은 형제 노드를 선택할 수도 있다.
-
-| 속성                | 구문                     | 설명                                            |
-|-------------------|------------------------|-----------------------------------------------|
-| `parentNode`      | `node.parentNode`      | `node`의 부모 노드를 호출한다.                          |
-| `childNodes`      | `node.childNodes[0]`   | `node`의 0 번째 자식 노드를 호출한다.                     |
-| `firstChild`      | `node.firstChild`      | `node`의 첫 자식 노드를 호출한다.                        |
-| `lastChild`       | `node.lastChild`       | `node`의 마지막 자식 노드를 호출한다.                      |
-| `hasChildNodes`   | `node.hasChildNodes`   | `node`가 자식 노드를 가지면 `true`, 아니면 `false`를 반환한다. |
-| `nextSibling`     | `node.nextSibling`     | `node`의 다음 형제를 호출한다.                          |
-| `previousSibling` | `node.previousSibling` | `node`의 이전 형제를 호출한다.                          |
-
-### 요소 스타일 변경
-DOM은 각 요소를 개별 객체로 간주한다. 즉, 요소의 특성(attribute)들은 객체의 속성처럼 접근할 수 있다.
-
-```html
-<!-- 예시 HTML -->
-<div id="SAMPLE">
-    <img src="path/to/image1.png" style="width:400px; height:300px;">
-    <span>그림 1. 예시 이미지</span>
-</div>
-
-<!-- 자바스크립트 -->
-<script>
-    /* "SAMPLE" 아이디를 가진 요소의 자식 노드 배열 접근 */
-    const node = document.getElementById("SAMPLE").ChildNodes;
-    
-    /* 0 번째 자식 노드, 즉 <IMG> 요소 접근 및 스타일 변경 */
-    node[0].src = "path/to/image2.png";
-    node[0].style.width = "800px";
-    node[0].style.height = "600px";
-</script>
-```
-
-### 요소 생성
-HTML이 아닌 자바스크립트를 사용해서 새로운 요소를 생성할 수 있다.
-
-| 메소드                        | 설명                                                   |
-|----------------------------|------------------------------------------------------|
-| `createElement("DIV")`     | `DIV` 요소를 생성하지만, 아직 DOM 내에는 위치하지 않은 상태이다.            |
-| `createTextNode("String")` | `String` 텍스트를 가진 노드를 생성하지만, 아직 DOM 내에는 위치하지 않은 상태이다. |
-
-생성된 요소는 도표에서 설명한 대로 아직 DOM 어딘가에도 속하지 않은 상태이므로 웹사이트에 표시되지 않는다. 웹사이트에 나타나게 하기 위해서는 DOM에 추가해야 한다.
-
-### 요소 추가 및 제거
-DOM에 요소를 추가하는 방법은 다음과 같다:
-
-| 메소드                         | 설명                                                |
-|-----------------------------|---------------------------------------------------|
-| `appendChild(node)`         | `node`를 현재 노드의 자식 노드로 둔다.                         |
-| `insertBefore(node1,node2)` | `node1`을 현재 노드의 자식 노드로 두지만, `node2` 다음 형제로 위치시킨다. |
-| `insertAfter(node1,node2)`  | `node1`을 현재 노드의 자식 노드로 두지만, `node2` 이전 형제로 위치시킨다. |
-
-DOM에 요소를 제거하는 방법은 다음과 같다:
-
-| 메소드                 | 설명                          |
-|---------------------|-----------------------------|
-| `remove()`          | 현재 노드를 제거한다.                |
-| `removeChild(node)` | 현재 노드에서 `node` 자식 노드를 제거한다. |
-
-```html
-<!-- 예시 HTML -->
-<div>
-    <p id="P1">첫 번째 문장.</p>
-    <p id="P2">두 번째 문장.</p>
-</div>
-
-<!-- 자바스크립트 -->
-<script>
-    /* 텍스트 노드를 새로 생성된 <P> 요소에 삽입 */
-    const textNode = document.createTextNode("JS로 생성된 텍스트.");
-    const paraNode = document.createElement("p");
-    paraNode.appendChild(textNode);
-    
-    /* 새로 생성된 <P> 요소를 <DIV> 자식 노드의 맨 끝에 추가 */
-    document.getElementsByTagName("div")[0].appendChild(paraNode);
-</script>
-```
-
-## 이벤트
-자바스크립트는 클릭이나 키보드 입력, 혹은 입력창 데이터 제출 등과 같은 이벤트(event)가 발생할 시 코드를 수행할 수 있다. 비록 이벤트는 HTML에서 인식하나, 해당 이벤트에 대한 동작(일명 이벤트 처리자; event handler)은 자바스크립트에서 정의된다.
-
-이벤트를 실행하는 방법에는 몇 가지가 존재한다. 그 중 하나는 HTML 소스 코드에 요소들이 어떠한 이벤트를 인식할지 미리 지정해 두는 것이다.
-
-```html
-<!-- 예시 1 -->
-<div>
-    <!-- <BUTTON> 요소는 클릭 이벤트 발생 시 "functionName()" 이벤트 처리자 실행 -->
-    <button onclick="functionName()">클릭</button>
-</div>
-
-<!-- 자바스크립트 -->
-<script>
-    /* "functionName()" 이벤트 처리자 */
-    const functionName = () => {
-        statements;
-    }
-</script>
-```
-
-하지만 HTML의 특성을 활용하지 않고 직접 자바스크립트에서 직접 이벤트를 동적으로 할당할 수 있다.
-
-```html
-<!-- 예시 2 -->
-<div>
-    <!-- DOM으로 이벤트 지정 예정 -->
-    <button>클릭</button>
-</div>
-
-<!-- 자바스크립트 -->
-<script>
-    /* DOM을 통한 <BUTTON> 요소 이벤트 지정 및 이벤트 처리자 정의 */
-    const variable = document.getElementsByTagName("BUTTON")[0];
-
-    /* "functionName()" 이벤트 처리자 */
-    variable.onclick = () => {
-        statements;
-    }
-</script>
-```
-
-`addEventListener()` 메소드는 DOM에서 이벤트와 이벤트 처리자를 동시에 지정하는 자바스크립트 메소드이다. 여기서 주의할 점은 이벤트 이름이 이전 이벤트 관련 예시 코드와 다르다는 것이다.
-
-| 메소드                  | 설명                                    |
-| ----------------------- | -------------------------------------------- | ---------------------------------------------- |
-| `addEventListener("click",funcName)`   | `funcName` 함수를 실행하는 `click` 이벤트를 해당 요소에 추가한다.   |
-| `removeEventListener("click",funcName)` | `funcName` 함수를 실행하는 `click` 이벤트를 해당 요소로부터 제거한다. |
-
-```html
-<!-- 예시 3 -->
-<div>
-    <!-- DOM에서 "addEventListener()" 메소드로 이벤트 지정 예정 -->
-    <button>클릭</button>
-</div>
-
-<!-- 자바스크립트 -->
-<script>
-    /* "addEventListener()"로 <BUTTON> 요소 이벤트 지정 및 이벤트 처리자 정의 */
-    const variable = document.getElementsByTagName("BUTTON")[0];
-    variable.addEventListener("click", functionName);
-    
-    /* "functionName()" 이벤트 처리자 */
-    function functionName() {
-        statements;
-        
-        // 이벤트 실행 시, statements 이후 마지막에 이벤트 할당 해제: 일회용 이벤트
-        variable.removeEventListener("click", functionName);
-    }
-</script>
-```
-
-### 이벤트 전파
-이벤트 전파(event propagation)은 이벤트 처리자의 실행 순서를 결정한다. 아래의 HTML 소스 코드를 예시로 들어본다.
-
-```html
-<div onclick="functionDIV()">
-    <span onclick="functionSPAN()">
-        Hello World!
-    </span>
-</div>
-```
-
-만일 "Hello World!" 텍스트를 클릭하였을 시, 어떤 요소의 이벤트 처리자가 우선적으로 실행되는가: `<DIV>` 아니면 `<SPAN>`인가?
-
-* **캡쳐링 (capturing)**: DOM 트리 구조에서 상위 노드에서 하위 노드 순서로 내려간다 (`<DIV>` 먼자, `<SPAN>` 이후).
-* **버블링 (bubbling)**: DOM 트리 구조에서 하위 노드에서 상위 노드 순서로 올라간다 (`<SPAN>` 먼자, `<DIV>` 이후).
-
-이러한 이벤트 전파는 `addEventListener()` 메소드에서 `useCapture` 논리형 매개변수를 통해 설정할 수 있다. 기본적으로 `usvCapture = faluse`로 버블링이 설정되어 있다.
-
-| 예시                                                                   |
-|:--------------------------------------------------------------------:|
-| `elem.addEventListener("click",funcName,useCapture)`                 |
-| `useCapture`는 논리 자료형을 받는 매개변수로, `true`이면 캡쳐링이고 `false`이면 버블링으로 설정된다. |
-
-## 반복 실행
-자바스크립트는 하나의 함수를 일정 주기에 맞춰 반복적으로 실행하도록 할 수 있으며, 이는 `setInterval` 및 `clearInterval` 쌍으로 구현할 수 있다.
-
-| 함수                | 예시                               | 설명                                                   |
-|-------------------|----------------------------------|------------------------------------------------------|
-| `setInterval()`   | `setInterval(funcName,millisec)` | `funcName` is executed with delayed `millisec` time. |
-| `clearInterval()` | `clearInterval(setInterval)`     | Disable `setInterval()` object.                      |
-
-```html
-<!-- 예시 HTML -->
-<div>
-    <span>Hello World!</span>
-</div>
-
-<!-- 자바스크립트 -->
-<script>
-    /* "functionName()" 함수를 매 0.5초 동안 반복 실행 */
-    let variable = setInterval(functionName, 500);
-
-    var index = 0;    // 전역 변수
-    const functionName = () => {
-        /* 세 번 반복하도록 설정 */
-        if (index == 3)
-        {
-            /* 반복 실행 해제 */
-            clearInterval(variable);
-        }
-        else
-        {
-            statements;
-            index++;    // 전역 변수이기에 값이 유지된다.
-        }
-    }
-</script>
-```
-
-이러한 반복 실행은 결국 HTML 요소의 위치 이동 및 스타일이 시간에 따라 서서히 변하는 애니메이션 동작을 구현하는데 흔히 활용된다.
-
-# JQUERY: 소개
-jQuery는 자바스크립트 라이브러리 중 하나로 HTML DOM 구조 이동, 제어, 그리고 이벤트 처리 등을 간략화하는데 목적을 둔다. 해당 특징들은 많은 웹사이트에서는 jQuery 라이브러리 사용을 독려하여, [W3Techs](https://w3techs.com/technologies/overview/javascript_library) 통계에 의하면 75% 이상의 전세계 웹사이트에서 jQuery를 사용하는 매우 유명한 라이브러리이다. 본 장에서는 jQuery를 사용하는 방법에 대해서 소개한다.
-
-라이브러리 파일은 `jquery-3.x.y.min.js`과 `jquery-3.x.y.js`로 나뉘어지는데, 전자는 압축된 배포용이며 후자는 개발용으로 사용된다. jQuery 라이브러리를 스크립트로 불러오는 방법은 두 가지가 있다:
-
-* 첫 번째로는 jQuery 자바스크립트 파일을 [다운로드](https://jquery.com/download/)하여 사용하는 것이다. 만일 jQuery 3.5.1 배포용을 불러오고 싶으면 다음과 같이 코드를 `<head>` 태그 아래에 입력한다.
-
-  ```html
-  <head>
-      <!-- 로컬 JQUERY 라이브러리 불러오기 -->
-      <script src="jquery-3.5.1.min.js"></script>
-  <head>
-  ```
-
-* 두 번째 방법으로는 온라인에서 jQuery 라이브러리만 전달하는 CDN을 통해 불러올 수 있다. 다음과 같이 코드를 `<head>` 태그 아래에 입력하여 jQuery 3.5.1 배포용 라이브러리를 Google 서버에서 직접 불러온다.
-
-  ```html
-  <head>
-      <!-- CDN JQUERY 라이브러리 불러오기 -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></  script>
-  </head>
-  ```
+[모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)(module)은 부가적인 기능 및 데이터를 제공하는 자바스크립트 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.JS` 혹은 일부 런타임에서 모듈로 인식할 수 있는 `.MJS` 확장자를 갖는다. 개발자는 변수나 함수 혹은 클래스를 담고 있는 자바스크립트 모듈을 작성하여 `export` 문으로 제공하고, 이들을 활용하려는 스크립트는 `import` 문을 통해 전달받는다.
