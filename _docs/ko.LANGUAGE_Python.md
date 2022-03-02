@@ -234,7 +234,7 @@ CONSTANT_VARIABLE = "Hello World!"
 
 위의 숫자 자료형들은 산술 연산이 가능하다: 가장 기본적인 `+`, `-`, `*`, `/` 사칙 연산자부터 나눗셈의 몫 `//`과 나머지 `%` 그리고 제곱 `**`을 구할 수 있다. 산술 연산을 쉽게 읽을 수 있도록 숫자와 산술 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않으므로 무관한다.
 
-산술 연산자는 할당 기호(`=`)와 조합하여 산술 연산 코드를 더욱 간결하게 작성할 수 있다.
+할당 연산자(assignment operator)는 할당 기호(`=`)와 조합하여 산술 연산 코드를 더욱 간결하게 작성할 수 있다.
 
 | 연산자 | 예시     | 동일                                          |
 | :----: |--------| --------------------------------------------- |
@@ -246,18 +246,6 @@ CONSTANT_VARIABLE = "Hello World!"
 |  `%=`  | `x %= y` | `x = x % y`                                   |
 
 > 파이썬은 증가 연산자 `++` 및 감소 연산자 `--`를 지원하지 않는다.
-
-파이썬은 숫자 자료형을 처리할 수 있는 [함수](#파이썬-함수)(function)들을 제공한다.
-
-```python
-# "round()" 반올림 함수
-print(round(164.259763145))
-print(round(164.259763145,2))
-```
-```
-164
-164.26
-```
 
 ### 논리 자료형
 논리 자료형(Boolean data type)은 문장이 참인지 거짓인지 판별하는 논리 조건에 사용되는 데이터 유형이다.
@@ -341,13 +329,31 @@ None
 ```
 
 ## 자료형 변환
-데이터는 다른 자료형으로 변환될 수 있으며, 아래는 자료형 변환 함수 중에서 대표적인 세 개를 소개한다.
+파이썬 프로그래밍 언어는 데이터를 타 자료형으로 변환할 수 있다:
 
-| 함수        | 이름       | 설명                                                       |
-|:---------:|:--------:|----------------------------------------------------------|
-| `int()`   | 정수 변환    | `float`: 분수는 제거되고 정수만 반환.<br />`string`: 숫자만 변환 및 반환 가능. |
-| `float()` | 부동소수점 변환 | `int`: 제약없음.<br />`string`: 숫자만 변환 및 반환 가능.              |
-| `str()`   | 문자열 변환   | `int`: 제약없음.<br />`float`: 제약없음.                         |
+* **정수 변환 `int()`**
+
+    ```python
+  print(int(3.14))        # 출력: 3 (정수만 반환; 반올림 아님)
+
+  print(int("7"))         # 출력: 7 (실수나 문자 포함 시 변환 불가)
+    ```
+
+* **실수 변환 `float()`**
+
+    ```python
+  print(float(7))         # 출력: 7.0
+
+  print(float("3.14"))    # 출력: 3.14 (문자 포함 시 변환 불가)
+    ```
+
+* **문자열 변환 `str()`**
+
+    ```python
+  print(str(7))           # 출력: '7'
+
+  print(str(3.14))        # 출력: '3.14'
+    ```
 
 ## 탈출 문자
 [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 이전에 문자열 자료형을 소개할 때, `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
@@ -364,7 +370,7 @@ World!
 조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
 
 ## 들여쓰기
-들여쓰기(indentation)는 문장이나 [함수](#파이썬-함수)(function), [클래스](#파이썬-클래스)(class) 코드의 경계를 표시하는데 사용된다. 이를 통해 코드가 조건문 혹은 반복문에 속하는지, 또는 어느 조건문 혹은 반복문의 코드인지 구분한다. 들여쓰기는 콜론(`:`)이 시작되는 이후부터 삽입되며 [탭](https://ko.wikipedia.org/wiki/Tab_키)(tab)이나 띄어쓰기 2칸 혹은 4칸으로 표현된다.
+[들여쓰기](https://www.python.org/dev/peps/pep-0008/#indentation)(indentation)는 문장이나 [함수](#파이썬-함수)(function), [클래스](#파이썬-클래스)(class) 코드의 경계를 표시하는데 사용된다. 이를 통해 코드가 조건문 혹은 반복문에 속하는지, 또는 어느 조건문 혹은 반복문의 코드인지 구분한다. 들여쓰기는 콜론(`:`)이 시작되는 이후부터 삽입되며 [탭](https://ko.wikipedia.org/wiki/Tab_키)(tab)이나 띄어쓰기 2칸 혹은 4칸으로 표현된다.
 
 > 파이썬의 들여쓰기를 탭이나 띄어쓰기 중 어느 것을 사용하여도 무관하지만, 들여쓰기 방법은 반드시 하나로 통일해야 한다. 만일 탭과 띄어쓰기를 섞어서 사용하면 파이썬에서 들여쓰기를 제대로 구분하지 못하여 아래의 요류를 표시하면 실행되지 않는다.
 >
@@ -489,21 +495,7 @@ for index in iterable:
 for index in iterable: statement
 ```
 
-여기서 지역 변수 `index`는 `iterable`에서 값을 얻고, 내부의 실행문은 더 이상 불러올 값이 없을 때까지 하나씩 반복한다. 흔히 반복문에 사용되는 `iterable` 데이터는 다음과 같다.
-
-1. **[범위 객체](#범위-객체)**: 숫자를 순서대로 담고있는 객체이다.
-2. **[리스트 객체](#리스트-객체)**: 자료형과 순서에 상관없이 데이터를 담고있는 객체이다.
-3. **[문자열 객체](#문자열-자료형)**: 문자열을 구성하는 문자를 반환한다.
-
-```python
-for index in range(3):
-    print("Hello World" , index)
-```
-```
-Hello World 0
-Hello World 1
-Hello World 2
-```
+여기서 지역 변수 `index`는 `iterable`에서 값을 얻고, 내부의 실행문은 더 이상 불러올 값이 없을 때까지 하나씩 반복한다. 흔히 반복문에 사용되는 `iterable` 데이터로 [범위 객체](#범위-객체), [리스트 객체](#리스트-객체), 또는 [문자열 객체](#문자열-자료형) 등이 있다.
 
 `else` 조건문을 `for` 반복문 다음에 위치시키면 해당 코드는 반복문의 조건에 의해 정상적으로 종료되었을 경우에만 실행된다.
 
@@ -530,13 +522,10 @@ else:
 `pass` 혹은 생략(`...`; 일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무 작업도 수행하지 않는다. 코드 블록이 아직 작성하지 않은 상태에서 임시 코드로 사용된다.
 
 # 파이썬: 이터러블
-파이썬의 유용함은 단순함 이외에도 다른 프로그래밍 언어에서 볼 수 없는 강력하고 유연한 이터러블 객첵에서 비롯된다. 본 장에서는 파이썬이 가지는 네 개의 다른 특성의 이터러블 객체를 소개한다.
-
-## 이터러블 객첵
 [이터러블](https://docs.python.org/3/glossary.html#term-iterable)(iterable; 반복 가능한) 객체는 여러 데이터를 한꺼번에 저장하는데 사용되며, 반복자(iterator) 객체를 반환하는 `__iter__` 메소드를 보유하는 객체로 정의된다. 반복자 데이터의 다음 요소를 자동으로 호출하는 객체로, 이터러블 객체 내의 모든 데이터를 순차적으로 불러올 수 있도록 한다.
 
 ## 시퀀스 객체
-[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence) 객체는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이다. 시퀀스는 하나는 대괄호(`[]`)을 사용하여 저장된 데이터 불러오거나 수정이 가능하다. [*파이썬: 기초 § 문자열 자료형*](#문자열-자료형)에 도입된 문자열 객체도 시퀀스 객체 중 하나이다.
+[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence) 객체는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이다. 시퀀스는 하나는 대괄호(`[]`)을 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)(string)이 있다.
 
 ```python
 variable = "Hello World!" 
@@ -556,19 +545,26 @@ e
 슬라이싱은 `start`에서부터 `end` 이전까지이며, `interval`만큼의 간격으로 데이터를 추출한다. 시퀀스 슬라이싱을 하기 위해 모든 인수를 채울 필요는 없다.
 
 ```python
-variable = "Hello World!"
-print(variable[2:8])     # >> 출력: "llo Wo"
+print("Hello World!"[2:8])         # 출력: 'llo Wo'
 
-# 시작 혹은 끝만 지정한 리시트 슬라이싱
-print(variable[2: ])     # >> 출력: "llo World!"
-print(variable[ :8])     # >> 출력: "Hello Wo"
+print("Hello World!"[2: ])         # 출력: 'llo World!'
 
-# 간격을 통해 일부 데이터를 뛰어넘어 슬라이싱
-print(variable[ : :2])   # >> 출력: "HloWrd"
-print(variable[2:8:2])   # >> 출력: "oW"
+print("Hello World!"[ :8])         # 출력: 'Hello Wo'
 
-# 역방향 슬라이싱
-print(variable[8:2:-1])  # >> 출력: "roW ol"
+print("Hello World!"[2:8:2])       # 출력: 'oW'
+```
+
+### 시퀀스 언패킹
+[시퀀스 언패킹](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences)(sequence unpacking)은 시퀀스 객체의 요소들을 분할하는 것을 가리킨다. 하나의 시퀀스를 여러 변수에 할당하는 방식으로 언패킹하며, 마지막 변수의 접두사에는 별표 `*`를 기입하여 나머지 요소를 한꺼번에 받을 수 있다.
+
+```python
+variable1, variable2, *variable3 = "Python"
+
+''' 결과:
+variable1 = P
+variable2 = y
+variable3 = ['t', 'h', 'o', 'n']
+'''
 ```
 
 ## 범위 객체
@@ -579,40 +575,69 @@ print(variable[8:2:-1])  # >> 출력: "roW ol"
 | `range()` | `range(start,end,interval)` | 정수 `start`에서부터 `end` 이전까지 `interval`만큼의 간견으로 순서대로 숫자를 나열한 범위 객체를 생성한다. |
 
 ```python
-rng = range(3, 10, 2)
-
-rng[0]        # >> 출력: 3
-rng[1]        # >> 출력: 5
-rng[2]        # >> 출력: 7
-rng[3]        # >> 출력: 9
+for element in range(3, 10, 2):
+    print(element)
+```
+```
+3
+5
+7
+9
 ```
 
 ## 리스트 객체
-[리스트](https://docs.python.org/3/library/stdtypes.html#lists)(list) 시퀀스 객체는 데이터 유형과 관계없이 인덱스(index) 위치에 따라 데이터를 저장한다. 리스트의 데이터 할당은 대괄호(`[]`) 내에 항목을 순서대로 쉼표로 나누어 나열한다. 또한 대괄호는 인덱스 위치의 요소(element)를 호출할 때에도 사용된다.
+[리스트](https://docs.python.org/3/library/stdtypes.html#lists)(list) 시퀀스 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 리스트의 데이터 할당은 대괄호 `[]` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 대괄호는 인덱스 위치의 요소(element)를 호출할 때에도 사용되며, 해당 요소에 새로운 값을 재할당하여 데이터를 변경할 수 있다.
 
 ```python
 lst = [value1, value2, value3, value4, ...]
 
-print(lst)           # >> 출력: [value1, value2, value3, value4, ...]
-print(lst[0])        # >> 출력: value1
+print(lst)           # 출력: [value1, value2, value3, value4, ...]
+print(lst[0])        # 출력: value1
 ```
 
-개별 요소를 재할당하여 데이터를 변경할 수 있다. 리스트 범위를 벗어난 요소를 호출할 수 없으므로, 이러한 경우 오류가 발생한다.
+개별 요소를 재할당하여 데이터를 변경할 수 있다. 리스트 범위를 벗어난 요소를 호출할 수 없으므로, 이러한 경우 오류가 발생한다. 그래도 파이썬의 리스트를 비교적 유연한 편으로 `append()` 혹은 `insert()` 메소드를 통해 언제든지 확장할 수 있다. 리스트의 메소드는 [여기](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists)에서 더 찾아볼 수 있다.
 
 ```python
-lst = [value1, value2, value3]
+lst = []
+print(lst)                # 출력: []
 
-lst[1] = value4        # >> 결과: lst = [value1, value4, value3]
-lst[3] = value5        # IndexError: list assignment index out of range
+lst.append("Python")
+print(lst)                # 출력: ['Python']
+
+lst[1] = "Hello World!"   # IndexError: list assignment index out of range
 ```
 
-리스트 객체는 *리스트 컴프리헨션(list comprehension)*라는 프로그램적 규칙을 따르는 일련화 방법으로 생성될 수 있다. 이를 위해서 `for` 반복문과 선택사항인 `if` 조건문을 사용하여 구현할 수 있다.
+리스트는 고유의 연산을 통해 항목을 추가하거나 곱할 수가 있다. 아래의 연산들은 리스트 객체에만 제한되지 않으며, 차후에 소개될 다른 시퀀스 객체에도 적용이 가능하다.
+
+* **시퀀스 연결 `+`**
+
+    ```python
+  print([value1, value2] + [value2, value3, value4])
+  # 출력: [value1, value2, value2, value3, value4]
+    ```
+
+* **시퀀스 반복 `*`**
+
+    ```python
+  print([value1, value2] * 3)
+  # 출력: [value1, value2, value1, value2, value1, value2]
+    ```
+
+* **시퀀스 항목 존재여부 `in`**
+
+    ```python
+  print(value1 in [value1, value2])
+  # 출력: True
+    ```
+
+### 리스트 컴프리헨션
+[리스트 컴프리헨션](https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions)(list comprehension)은 `for` 반복문 (그리고 `if` 조건문)을 활용한 프로그램적 규칙에 따라 리스트를 생성한다.
 
 | 구문          | 예시                                          |
 |:-----------------:|--------------------------------------------------|
 | `[ for in if ]` | `[element for variable in sequence if condition]` |
 
-리스트 객체를 구성하는 `element` 요소는 `sequence` 시퀀스 객체 내에서 `condition` 조건에 부합한 항목을 넘겨받은 `variable` 변수의 값을 할당받는다. `if` 조건문은 리스트 컴프리헨션에 있어 선택사항이다.
+리스트 객체의 `element` 요소는 `sequence` 시퀀스 객체 내에서 `condition` 조건에 부합한 항목을 넘겨받은 `variable` 변수로부터 할당받는다.
 
 ```python
 lst = [var**2 for variable in range(5)]
@@ -623,178 +648,63 @@ lst = [var**2 for variable in range(5) if (variable ** 2) % 2 == 0]
 [0, 4, 16]
 ```
 
-### 리스트 연산
-리스트는 고유의 연산을 통해 항목을 추가하거나 곱할 수가 있다. 아래의 연산들은 리스트 객체에만 제한되지 않으며, 차후에 소개될 다른 시퀀스 객체에도 적용이 가능하다.
-
-| 연산자  | 이름 | 설명                                 |
-|:----:|:--:|------------------------------------|
-| `+`  | 덧셈 | 서로 다른 두 리스트 객체를 하나의 리스트로 통합한다.     |
-| `*`  | 곱셈 | 리스트 항목을 정수만큼 반복한다 (`float` 사용 불가). |
-| `in` | 포함 | 해당 항목이 리스트에 있는지 확인한다.              |
-
-```python
-lst = [value1, value2, value3]
-
-# + 연산자
-print(lst + [value3, value4])      # >> 출력: [value1, value2, value3, value3, value4]
-
-# * 연산자
-print(lst * 2)                     # >> 출력: [value1, value2, value3, value1, value2, value3]
-
-# in 연산자
-print(value1 in lst)               # >> 출력: True
-print(value2 not in lst)           # >> 출력: False
-```
-
-다음은 리스트 객체(혹은 포괄적으로 시퀀스 객체)에 관한 특정 기능을 수행하는 함수들이다:
-
-| 함수          | 예시                                | 설명                                                         |
-|:-------------:| ----------------------------------- | ------------------------------------------------------------ |
-| `len()`       | `len(lst)`                     | 리스트 `lst` 내의 요소 개수(혹은 리스트 길이)를 확인한다. |
-| `all()`       | `all([condition for var in lst])` | 리스트 `lst`의 모든 요소가 `condition` 조건에 부합하면 `True`를 반환한다. |
-| `any()`       | `any([condition for var in lst])` | `lst`의 최소 한 요소가 `condition` 조건에 부합하면 `True`를 반환한다. |
-| `enumerate()` | `enumerate(lst)` | `lst` 내의 데이터를 해당 인덱스 번호와 함께 나열한다. |
-| `list()`      | `list(iterable)`             | 문자열이나 범위와 같은 `iterable` 객체를 리스트 객체로 변환한다; 만일 `iterable`이 없을 시 빈 리스트 객체를 생성한다. |
-
-```python
-lst = [10, 9, 8, 7, 6]
-
-# "all()" 함수
-if all( [variable > 5 for variable in lst] ):
-    print("숫자는 모두 5보다 크다.")           # >> 출력: 숫자는 모두 5보다 크다.
-
-# "any()" 함수
-if any( [variable % 2 ==  0 for variable in lst] ):
-    print("최소 하나의 숫자는 짝수이다.")       # >> 출력: 최소 하나의 숫자는 짝수이다.
-    
-# "enumerate()" 함수
-for variable in enumerate(lst):
-    print(variable)                           # >> 출력: (0,10)
-                                              # >>       (1,9)
-                                              # >>       (2,8)
-                                              # >>       (3,7)
-                                              # >>       (4,6)
-```
-
-리스트는 객체이므로 특정 기능을 수행하는 메소드 또한 가지고 있다.
-
-| 메소드     | 예시                        | 설명                                                       |
-|:----------:| -------------------------- | ---------------------------------------------------------- |
-| `append()` | `lst.append(value)`        | `value`를 `lst`의 맨 끝에 추가한다.                          |
-| `insert()` | `lst.insert(index, value)` | `value`를 `lst`의 `index` 위치에 추가한다.                   |
-| `index()`  | `lst.index(value)`         | `value`가 위치하는 가장 작은 인덱스 값을 반환한다.             |
-
 ## 튜플 객체
-[튜플](https://docs.python.org/3/library/stdtypes.html#tuples)(tuple) 시퀀스 객체는 리스트와 마찬가지로 항목을 순서대로 저장하는 데이터이나, 초기화 후에는 값을 변경할 수 없다. 이러한 시퀀스 객체의 속성을 불변(immutable)이라고 한다. 튜플을 초기화 할 때 소괄호(`()`)를 사용하거나 괄호 없이 사용할 수도 있다.
+[튜플](https://docs.python.org/3/library/stdtypes.html#tuples)(tuple) 시퀀스 객체는 리스트와 마찬가지로 항목을 순서대로 저장하는 데이터이나, 초기화 후에는 값을 변경할 수 없다. 이러한 시퀀스 객체의 속성을 [불변](https://docs.python.org/3/library/stdtypes.html#immutable-sequence-types)(immutable)이라고 한다. 튜플을 초기화 할 때 소괄호 `()`를 사용하거나 괄호 없이 사용할 수도 있다.
 
 ```python
 tpl = (value1, value2, value3)
-print(tpl)           # >> 출력: (value1, value2, value3)
-print(tpl[0])        # >> 출력: value1
 
-# 대안: 소괄호 없이 초기화된 튜플
+''' 동일:
 tpl = value1, value2, value3
-print(tpl)           # >> 출력: (value1, value2, value3)
-print(tpl[0])        # >> 출력: value1
+'''
+
+print(tpl)                       # 출력: (value1, value2, value3)
+print(tpl[0])                    # 출력: value1
 ```
 
-튜플은 리스트 객체의 상수 버전이므로 내부 항목은 변경이 불가능하다. 이를 시도할 경우 오류가 발생한다.
+튜플은 요소의 값을 변경할 수 없으며, 이를 시도할 경우 오류가 발생한다.
 
 ```python
-tpl = (value1, value2, value3)
-tpl[1] = value4
-```
-```
-TypeError: 'tpl' object does not support item assignment
-```
-
-튜플의 연산은 [*파이썬: 이터러블 § 리스트 연산*](#리스트-연산)에서 언급된 연산자, 함수, 그리고 메소드를 참고한다. 
-
-### 튜플 언패킹
-튜플을 언패킹(unpacking)한다는 것은 튜플의 각 요소를 변수나 또 다른 튜플에 할당하는 작업을 의미한다. 변수 접두부에 별표(`*`)를 넣으면 남은 요소들을 할당도 함께 받아 리스트 객체가 된다. 이에 대한 보조설명은 [*파이썬: 함수 § 매개변수 및 전달인자*](#매개변수-및-전달인자)에서 확인할 수 있다.
-
-```python
-var1, var2, *var3, var3 = [value1, value2, value3, value4, value5]
-
-print(var1)        # >> 출력: value1
-print(var2)        # >> 출력: value2
-print(var3)        # >> 출력: [value3, value4]
-print(var3)        # >> 출력: value5
+tpl = value1, value2, value3
+tpl[1] = value4                  # TypeError: 'tpl' object does not support item assignment
 ```
 
 ## 딕셔너리 객체
-[딕셔너리](https://docs.python.org/3/library/stdtypes.html#mapping-types-dict)(dictionary)는 인덱싱 키(key) 데이터와 값(value) 데이터를 단일 요소로 쌍을 이루는 (시퀀스가 아닌) 이터러블 객체이다. 딕셔너리의 값은 해당하는 키를 통해 호출한다. 딕셔너리는 중괄호(`{}`)를 사용하여 초기화한다.
+[딕셔너리](https://docs.python.org/3/tutorial/datastructures.html#dictionaries)(dictionary)는 인덱싱 역할의 키(key)와 해당 인덱스에 할당되는 값(value) 쌍을 하나의 요소로 갖는 (시퀀스가 아닌) 이터러블 객체이다. 딕셔너리는 중괄호 `{}` 안에 `key: value`을 나열하여 초기화한다. 딕셔너리의 값은 대괄호 안에 해당하는 키를 기입하여 호출한다.
 
-```python
-dictionary = {key1: value1, key2: value2, key3: value3}
-
-print(dictionary[key1])        # >> 출력: value1
-print(dictionary[key2])        # >> 출력: value2
-print(dictionary[key4])        # KeyError: key4
-```
-
-리스트와 딕셔너리와 같이 가변(mutable) 이터러블 객체는 딕셔너리의 키로 사용될 수 없으나 딕셔너리의 값으로 사용될 수 있다.
-
-```python
-dictionary = {lst1: value1, key2: value2}
-```
-```
-TypeError: unhashable type: 'list'
-```
-
-딕셔너리의 키에 연동된 값을 변경할 수 있다. 리스트 객체와 달리, 새로운 키를 생성하여 값를 연동시키는 것도 함수나 메소드의 도움 없이 가능하다.
-
-```python
-dictionary = {key1: value1, key2: value2, key3: value3}
-dictionary[key1] = value4
-dictionary[key5] = value5
-```
-```
-{key1: value1, key2: value2, key3: value3, key5: value5}
-```
-
-딕셔너리의 연산은 시퀀스 객체의 연산과 유사하나 약간의 차이점이 있다.
-
-| 연산자  | 이름        | 설명                                           |
-|:----:|:---------:|----------------------------------------------|
-| `+`  | 덧셈        | 서로 다른 두 딕셔너리 객체를 하나의 딕셔너리로 통합한다.             |
-| `in` | 포함 (키 제외) | 해당 키가 딕셔너리에 있는지 확인한다. 하지만 딕셔너리의 값은 확인하지 않는다. |
+> 단, 리스트와 딕셔너리 등의 가변(mutable) 이터러블 객체는 키로 사용될 수 없다.
 
 ```python
 dictionary = {key1: value1, key2: value2}
 
-print(key1 in dictionary)            # >> 출력: True
-print(value2 in dictionary)          # >> 출력: False
-print(key3 not in dictionary)        # >> 출력: True
+print(dictionary[key1])          # 출력: value1
+print(dictionary[key2])          # 출력: value2
 ```
 
-딕셔너리는 특정 함수와 메소드를 통해 딕셔너리 전용 연산을 수행할 수 있다.
-
-|   연산   | 예시                         | 설명                                                         |
-| :------: | ---------------------------- | ------------------------------------------------------------ |
-| `get()`  | `dictionary.get(key,[desc])` | `key` 키를 찾아 해당 값을 호출한다. `key`를 찾지 못할 시, 덧붙인 `desc` 설명이 반환된다 (기본값: `None`). |
-| `dict()` | `dictionary=dict()`          | 빈 딕셔너리 객체를 생성한다.                                 |
+개별 요소를 재할당하여 데이터를 변경할 수 있다. 딕셔너리 범위를 벗어난 요소를 호출할 수 없으므로, 이러한 경우 오류가 발생한다. 그래도 파이썬의 딕셔너리는 비교적 유연한 편으로 새로운 키와 함께 값을 할당하는 것만으로 확장이 가능하다.
 
 ```python
 dictionary = {key1: value1, key2: value2}
 
-print(dictionary.get(key1))                            # >> 출력: value1
-print(dictionary.get(key3))                            # >> 출력: None
-print(dictionary.get(key3, "딕셔너리 내에 없음"))         # >> 출력: 딕셔너리 내에 없음
+dictionary[key3] = value3
+print(dictionary)                # 출력: {key1: value1, key2: value2, key4: value4}
 ```
 
 ## 집합 객체
-[집합](https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset)(set) 객체는 요소의 고유성을 보장하는 (시퀀스가 아닌) 이터러블 객체이다. 집합 객체의 특징은 중복 요소를 허용하지 않는다. 딕셔너리와 마찬가지로 집합 초기화에는 중괄호(`{}`)를 사용하지만 `key: value` 형태가 아니다. 이러한 이유로 집합은 리스트보다 요소를 더 빠른 시간 내에 확인할 수 있다.
+[집합](https://docs.python.org/3/tutorial/datastructures.html#sets)(set) 객체는 요소의 고유성을 보장하는, 즉 중복 요소를 허용하지 않는 (시퀀스가 아닌) 이터러블 객체이다. 딕셔너리와 마찬가지로 집합 초기화에는 중괄호 `{}`를 사용하지만 `key: value` 형태가 아니다. 집합은 대괄호를 통해 개별 요소를 호출이 불가하다. 집합 객체에서 요소를 추가 혹은 제거하려면 `add()`, `remove()` 등의 별도 메소드를 사용해야 한다.
 
 ```python
-st = {value1, value2, value3}
-print(st)
-```
-```
-{value1, value2, value3}
+st = {value1, value2}
+
+st.add(value3)
+print(st)                        # {value1, value2, value3}
+
+print(st[0])                     # TypeError: 'set' object is not subscriptable
 ```
 
-집합의 연산자는 수학에서의 집합에서 사용되는 연산과 동일한 역할을 한다. 
+> 빈 집합 객체는 반드시 `set()` 함수로 생성해야 한다; 빈 중괄호 `{}`는 오히려 딕셔너리를 만들기 때문이다.
+
+집합 객체의 연산자는 수학에서의 [집합](https://ko.wikipedia.org/wiki/집합)에서 사용되는 연산과 동일하게 작용한다.
 
 | 연산자 | 이름   | 설명                                                       |
 |:------:|:------:| ---------------------------------------------------------- |
@@ -807,40 +717,14 @@ print(st)
 set1 = {1, 2, 3, 4, 5, 6}
 set2 = {4, 5, 6, 7, 8, 9}
 
-print(set1 | set2)        # >> 출력: {1, 2, 3, 4, 5, 6, 7, 8, 9}
+print(set1 | set2)            # 출력: {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-print(set1 & set2)        # >> 출력: {4, 5, 6}
+print(set1 & set2)            # 출력: {4, 5, 6}
 
-print(set1 - set2)        # >> 출력: {1, 2, 3}
-print(set1 - set2)        # >> 출력: {7, 8, 9}
+print(set1 - set2)            # 출력: {1, 2, 3}
+print(set1 - set2)            # 출력: {7, 8, 9}
 
-print(set1 ^ set2)        # >> 출력: {1, 2, 3, 7, 8, 9}
-```
-
-집합은 특정 함수와 메소드를 통해 집합 전용 연산을 수행할 수 있다.
-
-|  함수   | 예시            | 설명                                                         |
-| :-----: | --------------- | ------------------------------------------------------------ |
-| `set()` | `set(iterable)` | `iterable`로부터 집합을 생성하는 함수이다. 리스트와 튜플은 변환할 수 있으나, 딕셔너리는 불가하다. |
-
-빈 집합 객체는 위의 함수로 통해서만 생성될 수 있으며, 아무런 요소가 없는 중괄호(`{}`)는 빈 딕셔너리 객체를 생성하기 때문이다. 한편, 집합 객체가 사용할 수 있는 메소드는 다음과 같다.
-
-| 메소드        | 예시                 | 설명                        |
-|:----------:|--------------------|---------------------------|
-| `add()`    | `st.add(value)`    | 집합에서 `value` 요소를 끝에 추가한다. |
-| `remove()` | `st.remove(value)` | 집합에서 `value` 요소를 제거한다.    |
-| `pop()`    | `st.pop()`         | 무작위로 선택된 요소를 집합 내에서 제거한다. |
-
-```python
-st = set([value1, value2, value3, value1])
-print(st)                # >> 출력: {value1, value2, value3}
-
-st.add(value4)
-st.remove(value1)
-print(st)                # >> 출력: {value2, value3, value4}
-
-print(st.pop())          # >> 출력: value2 (무작위로 제거)
-print(st)                # >> 출력: {value3, value4}
+print(set1 ^ set2)            # 출력: {1, 2, 3, 7, 8, 9}
 ```
 
 ## 제너레이터 객체
@@ -874,9 +758,6 @@ print(lst)
 ```
 
 # 파이썬: 함수
-원하는 작업을 수행하도록 함수를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있는데, 이러한 프로그래밍 기법을 *[함수형 프로그래밍](https://ko.wikipedia.org/wiki/함수형_프로그래밍)(functional programming)*이라고 한다. 본 장은 파이썬에서 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
-
-## 함수
 함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
 ```python
@@ -888,30 +769,45 @@ print(len(variable))
 4
 ```
 
-## `def` 키워드
-`def` 키워드는 사용자가 직접 함수를 만드는데 사용된다. 함수를 호출할 때 전달할 데이터가 없을지언정 소괄호 `()`가 반드시 필요하다. 만일 사용자가 함수를 정의하기도 전에 호출하면, 순차적으로 실행되는 파이썬의 특성에 의해 존재하지 않는 함수를 호출하는 것으로 간주하여 오류가 발생한다.
+함수의 기능을 정의(definition)하기 위해 [`def`](https://docs.python.org/3/reference/compound_stmts.html#function) 키워드를 사용한다. 만일 사용자가 함수를 정의하기도 전에 호출하면, 순차적으로 실행되는 파이썬의 특성에 의해 존재하지 않는 함수를 호출하는 것으로 간주하여 오류가 발생한다.
 
 ```python
-# 올바른 함수 정의 및 호출 순서
+# 함수 정의
 def function():
-    print("Hello World!")
+    ...
 
+# 함수 호출
 function()
 ```
-```
-Hello World!
-```
----
-```python
-# 잘못된 함수 정의 및 호출 순서
-function()
 
-def function(arg1, arg2):
-    print("Hello World!")
-```
-```
-NameError: name 'function' is not defined
-```
+함수명 뒤에 소괄호 `()` 기입여부에 따라 의미하는 바가 다르다.
+
+* `function()`은 함수에 정의된 코드를 실행한다.
+
+    ```python
+  def function():
+      print("Hello World!")
+
+  variable = function()
+  print(variable)
+    ```
+    ```
+  Hello World!
+  None
+    ```
+
+* `function`은 함수 자체를 가리킨다.
+
+    ```python
+  def function():
+      print("Hello World!")
+
+  variable = function
+  print(variable)
+    ```
+    ```
+  <function function at 0x0000027FB6A57160>
+    ```
 
 ### `return` 반환문
 `return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수는 반환문을 반드시 필요로 하지 않으며, 이러한 경우에는 `None` 값이 반환되어 변수에 전달된다.
@@ -929,7 +825,7 @@ Hello World!
 3
 ```
 
-### 매개변수 및 전달인자
+## 매개변수 및 전달인자
 다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
 
 * **전달인자 (argument)**: 간략하게 "인자"라고도 부르며, 함수로 전달되는 데이터이다.
@@ -959,9 +855,7 @@ function(1, 2, 3, 4)
 (2, 3, 4)
 2
 ```
-
 ----
-
 ```python
 # 매개변수 **kwargs는 함수 내에서 정의되지 않은 매개변수를 수용할 수 있다.
 def function(arg1, **kwargs):
@@ -972,9 +866,7 @@ function(1, key1 = value1, key2 = value2)
 ```
 {key1∶ value1, key2∶ value2}
 ```
-
 ----
-
 ```python
 # 매개변수 arg2의 기본값 초기화
 def function(arg1, arg2 = "Hello"):
