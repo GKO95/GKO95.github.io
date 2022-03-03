@@ -564,15 +564,15 @@ print("Hello World!"[2:8:2])       # 출력: 'oW'
 ```
 
 ### 시퀀스 언패킹
-[시퀀스 언패킹](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences)(sequence unpacking)은 시퀀스 객체의 요소들을 분할하는 것을 가리킨다. 하나의 시퀀스를 여러 변수에 할당하는 방식으로 언패킹하며, 마지막 변수의 접두사에는 별표 `*`를 기입하여 나머지 요소를 한꺼번에 받을 수 있다.
+[시퀀스 언패킹](https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences)(sequence unpacking)은 시퀀스 객체의 요소들을 분할하는 것을 가리킨다. 하나의 시퀀스를 여러 변수에 할당하는 방식으로 언패킹하며, 변수의 접두부에는 별표 `*`를 기입하여 나머지 요소를 한꺼번에 받을 수 있다.
 
 ```python
-variable1, variable2, *variable3 = "Python"
+variable1, *variable2, variable3 = "Python"
 
 ''' 결과:
 variable1 = P
-variable2 = y
-variable3 = ['t', 'h', 'o', 'n']
+variable2 = ['y', 't', 'h', 'o']
+variable3 = n
 '''
 ```
 
@@ -696,7 +696,16 @@ print(dictionary[key2])          # 출력: value2
 dictionary = {key1: value1, key2: value2}
 
 dictionary[key3] = value3
-print(dictionary)                # 출력: {key1: value1, key2: value2, key4: value4}
+print(dictionary)                # 출력: {key1: value1, key2: value2, key3: value3}
+```
+
+### 딕셔너리 언패킹
+딕셔너리 언패킹(dictionary unpacking)은 딕셔너리 객체의 요소들을 분할하는 것을 가리킨다. 단, 언패킹된 `key: value` 쌍을 활용할 수 있는 곳은 딕셔너리에 한정되므로 결국 타 딕셔너리와 결합하는 용도로 사용된다. 언패킹할 딕셔너리 접두부에 두 개의 별표 `**`를 기입한다.
+
+```python
+dictionary = {key1: value1, key2: value2}
+
+print({**dictionary, key3: value3})    # 출력: {key1: value1, key2: value2, key3: value3}
 ```
 
 ## 집합 객체
@@ -834,127 +843,94 @@ Hello World!
 3
 ```
 
+### 지역 변수 및 전역 변수
+파이썬 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되었는지에 따라 두 가지의 종류로 구분된다.
+
+* **지역 변수(local variable)**
+
+    함수나 [클래스](#파이썬-클래스) 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 함수 (또는 클래스) 밖에서는 소멸되므로 외부에서 사용할 수 없다. 지역 변수의 특징을 활용하면 함수 (또는 클래스) 외부에서 정의된 변수 이름을 그대로 가져와 함수 (또는 클래스) 내부에서 동일한 이름이지만 전혀 다른 존재의 변수를 새롭게 정의할 수 있다.
+
+    ```python
+  variable = "Hello World!"
+
+  def function():
+      variable = "Python"
+      return variable
+
+  print(function())             # 출력: Python
+  print(variable)               # 출력: Hello World!
+    ```
+
+* **전역 변수(global variable)**
+
+    함수나 클래스에 속하지 않은 외부에 정의된 변수이다. 전역 변수는 어느 함수 (또는 클래스)에서도 호출만으로 지역 변수와 함께 사용할 수 있다. 단, 변수의 충돌로 인한 예상치 못한 결과와 오류를 방지하기 위해 가급적 전역 변수의 사용은 피하도록 한다.
+
+    ```python
+  variable = "Hello World!"
+
+  def function():
+      print(variable)
+
+  function()                    # 출력: Hello World!
+  
+  variable = "Python"
+  function()                    # 출력: Python
+    ```
+
+    함수 (또는 클래스) 내에서 해당 변수가 지역 변수가 아니라 전역 변수임을 확실하게 명시하려면 `global` 키워드를 사용한다. 하지만 가장 안전한 방법은 전역 변수를 함수의 인자로 전달하는 것이다.
+
+    ```python
+  variable = "Hello World!"
+
+  def function():
+      global variable
+      variable  = "Python"
+      return variable
+
+  print(function())             # 출력: Python
+  print(variable)               # 출력: Python
+    ```
+
 ## 매개변수 및 전달인자
 다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
 
 * **전달인자 (argument)**: 간략하게 "인자"라고도 부르며, 함수로 전달되는 데이터이다.
 * **매개변수 (parameter)**: 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호 `()` 내에서 이루어진다.
 
-매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+> 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+
+다음은 매개변수에 사용되는 연산자로 전달인자을 받는데 유연성을 제공한다. 이들은 프로그래밍 구문상 명확한 구별이 가능해야 하므로 반드시 일반 매개변수 뒤에 위치해야 한다.
 
 | 연산자 |    구문    | 설명                                                 |
 | :------: | :----------: | ------------------------------------------------------------ |
-|   `*`    |   `*args`    | 여러 개의 전달인자들을 한 번에 허용한다.<br />함수 내에서는 별표 없이 `args`로 호출하며 튜플을 반환한다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
-|   `**`   |  `**kwargs`  | 정의되지 않은 매개변수를 미리 사용할 수 있도록 한다.<br />함수 내에서는 별표 없이 `kwargs`로 호출하며 전달인자 이름과 해당 값으로 구성된 딕셔너리를 반환한다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
-|   `=`    | `arg=value` | 전달인자가 없으면 기본값 `value`가 대신 매개변수에 할당된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
-
-아래의 예제는 함수의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
+|   `=`    | `arg=value` | 전달인자가 없으면 기본값 `value`가 대신 매개변수에 할당된다. |
+|   `*`    |   `*args`    | [시퀀스 언패킹](#시퀀스-언패킹)으로 여러 개의 전달인자들을 하나의 튜플로 전달받는다. |
+|   `**`   |  `**kwargs`  | [딕셔너리 언패킹](#딕셔너리-언패킹)으로 여러 개의 `key = value` 형식 전달인자들을 하나의 딕셔너리로 전달받는다. |
 
 ```python
-# 매개변수 *args는 하나 이상의 인자를 전달할 수 있다.
-def function(arg1, *args):
-    print(arg1)
-    print(args)
-    print(args[0])
+''' 예시. arg = value '''
+def function(arg = "Python"):
+    print(arg)
     
-function(1, 2, 3, 4)
-```
-```
-1
-(2, 3, 4)
-2
+function()                    # 출력: Python
+function("Hello World!")      # 출력: Hello World!
 ```
 ----
 ```python
-# 매개변수 **kwargs는 함수 내에서 정의되지 않은 매개변수를 수용할 수 있다.
-def function(arg1, **kwargs):
+''' 예시. *args '''
+def function(*args):
+    print(args)
+    
+function(1, 2, 3, 4)          # 출력: (1, 2, 3, 4)
+```
+----
+```python
+''' 예시. **kwargs '''
+def function(**kwargs):
     print(kwargs)
     
-function(1, key1 = value1, key2 = value2)
+function(param1 = 3, param2 = "Hello World!")    # 출력: {param1: 3, param2: 'Hello World!'}
 ```
-```
-{key1∶ value1, key2∶ value2}
-```
-----
-```python
-# 매개변수 arg2의 기본값 초기화
-def function(arg1, arg2 = "Hello"):
-    print(arg2)
-    
-function(1)
-function(2, "World!")
-```
-```
-Hello
-World!
-```
-
-### 지역 변수 및 전역 변수
-[*파이썬: 기초 § 변수*](#변수)에서 변수는 데이터를 저장하는 공간이라고 설명하였다. 하지만 변수가 파이썬 코드 중에서 어디에 정의되었는지에 따라 두 가지의 종류로 구분된다.
-
-* **지역 변수(local variable)**
-    
-    함수(function)나 [클래스](#파이썬-클래스)(class) 혹은 [모듈](#파이썬-모듈)(module) 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 해당 함수, 클래스, 혹은 모듈 외부에서는 소멸되어 사용할 수 없다. 어차피 소멸될 변수이므로 지역 변수는 외부에서 정의된 전역 변수와 같은 이름을 가질 수 있다.
-
-* **전역 변수(global variable)**
-    
-    지역 변수가 아닌 나머지 변수들을 가리키며, 프로그램이 끝나거나 `del` 키워드로 소멸되지 않는 이상 함수, 클래스, 모듈을 포함해 어디에서든 사용할 수 있다. 혹시나 하는 경우를 대비해 지역 변수가 아니라 전역 변수임을 확실하게 명시하려면 `global` 키워드를 사용한다.
-
-다음 예시 코드는 외부에서 정의된 전역 변수가 함수 내에서도 사용될 수 있음을 보여준다.
-
-```python
-variable = "Hello World!"
-def function():
-    print("- Local:", variable)
-
-print("Initial:", variable)
-function()
-print("- Final:", variable)
-```
-```
-Initial: Hello World!
-- Local: Hello World!
-- Final: Hello World!
-```
-
-그러나 함수 내에서 동일한 식별자를 갖는 지역 변수를 정의할 수 있다. 그러면 함수 내에 있는 동안 전역 변수가 아닌 지역 변수로 인식한다.
-
-```python
-variable = "Hello World!"
-def function():
-    variable = "Python"
-    print("- Local:", variable)
-
-print("Initial:", variable)
-function()
-print("- Final:", variable)
-```
-```
-Initial: Hello World!
-- Local: Python
-- Final: Hello World!
-```
-
-만일 `global` 키워드로 함수 내에서 사용되는 변수가 전역 변수임을 명시한다면 다음과 같은 결과가 나타난다.
-
-```python
-variable = "Hello World!"
-def function():
-    global variable
-    variable = "Python"
-    print("- Local:", variable)
-
-print("Initial:", variable)
-function()
-print("- Final:", variable)
-```
-```
-Initial: Hello World!
-- Local: Python
-- Final: Python
-```
-
-> 전역 변수의 데이터를 함수로 불러올 목적으로 `global` 키워드를 사용할 수 있겠지만, 가장 안전한 방법은 전역 변수를 함수의 인자로 전달하는 것이다.
 
 ## 순수 함수 
 순수 함수(pure function)는 동일한 인자를 전달하면 항상 같은 데이터가 반환되며, 전역변수와 같은 외부적 부작용(side effect) 영향이 없는 함수이다. 예를 들어, 코사인 함수 `cos(x)`의 반환값은 오로지 `x` 전달인자에만 의존하며 동일한 숫자가 입력되면 항상 같은 결과값이 나온다. 그러므로 코사인 함수는 순수 함수이다.
@@ -1073,8 +1049,8 @@ def function():
 
 수정될 함수로부터 가장 가까운 데코레이터가 우선적으로 적용된다. 그러므로 `function()` 함수는 먼저 `@decorator2` 다음 `@decorator1` 데코레이터 순서로 적용된다.
 
-## 익명 함수
-익명 함수(anonymous function), 일명 *람다 함수(lambda function)* 혹은 *람다식(lambda expression)*은 이름이 없는 (즉, 익명) 함수로, 데이터를 저장하지 않고 단일 표현식으로만 값을 반환한다. 익명 함수는 흔히 일회용 함수로 사용되거나 고차 함수의 전달인자로 사용된다.
+## 람다 표현식
+[람다 표현식](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로, 데이터를 저장하지 않고 단일 표현식으로만 값을 반환한다. 익명 함수는 `lambda` 키워드로 생성되어 흔히 일회용 함수 또는 고차 함수의 전달인자로 사용된다.
 
 | 구문                                                  |
 |:---------------------------------------------------:|
@@ -1088,7 +1064,7 @@ def function():
 def function(arg1, arg2):
     return 2 * arg1 + arg2
 
-# 익명 함수
+# 람다 표현식
 (lambda arg1, arg2: 2 * arg1 + arg2)(2, 3)
 
 # 변수에 할당된 익명 함수
