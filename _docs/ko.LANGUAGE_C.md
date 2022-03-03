@@ -206,7 +206,7 @@ CRT 안정성 경고는 흔히 C 언어 프로그래밍에 자주 목격된다. 
 
 * **[문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)**
     
-    실질적으로 무언가를 실행하는 하나의 완전한 코드를 의미한다. C 프로그래밍 언어에서 모든 문장은 문장 종단자(statement terminator)인 세미콜론 `;`으로 마무리 되어야 한다.
+    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. C 프로그래밍 언어에서 모든 문장은 문장 종단자(statement terminator)인 세미콜론 `;`으로 마무리 되어야 한다.
 
     ```c
   int variable = 2 + 3;      // 숫자 5를 "variable" 변수에 초기화

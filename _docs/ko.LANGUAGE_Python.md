@@ -97,21 +97,30 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
 # 한줄 주석: 코드 한 줄을 차지하는 주석이다.
 ```
 
-## 표현식 및 문장
-프로그래밍에서는 표현식과 문장이 있다.
+## 표현식
+프로그래밍에서는 표현식, 아톰, 그리고 문장이 있다.
 
 * **[표현식](https://ko.wikipedia.org/wiki/식_(프로그래밍))(expression)**
     
     값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
     
     ```python
-  2 + 3       # 숫자 5를 반환
-  2 < 3       # 논리 참을 반환
+  2 + 3           # 숫자 5를 반환
+  2 < 3           # 논리 참을 반환
+    ```
+
+* **[아톰](https://docs.python.org/3/reference/expressions.html?highlight=asterisk#atoms)(atom)**
+
+    표현식을 구성하는 가장 기본적인 요소이며, 대표적으로 [식별자](#식별자)(identifier)와 [리터럴](https://docs.python.org/3/reference/expressions.html?highlight=asterisk#literals)(literal)이 있다.
+
+    ```python
+  variable        # 식별자
+  2               # 정수 리터럴
     ```
 
 * **[문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)**
     
-    실질적으로 무언가를 실행하는 하나의 완전한 코드를 의미한다. 파이썬 프로그래밍 언어는 기본적으로 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)(newline)을 기준으로 문장을 분별한다. 아래의 부호는 파이썬의 프로그래밍 문장과 줄바꿈을 유연하게 활용할 수 있도록 도와준다.
+    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 파이썬 프로그래밍 언어는 기본적으로 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)(newline)을 기준으로 문장을 분별한다. 아래의 부호는 파이썬의 프로그래밍 문장과 줄바꿈을 유연하게 활용할 수 있도록 도와준다.
 
     * 세미콜론 `;`: 여려 문장을 하나의 줄에 한꺼번에 기입하기 위해 사용된다.
     * 백슬래시 `\`: 하나의 긴 문장을 연속의 여러 줄로 나누어서 나타내기 위해 사용된다.

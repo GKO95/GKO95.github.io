@@ -66,7 +66,7 @@ VS Code에서 자바스크립트를 실행하는 방법에는 두 가지가 존�
 // 한줄 주석: 코드 한 줄을 차지하는 주석이다.
 ```
 
-## 표현식 및 문장
+## 표현식
 프로그래밍에서는 표현식과 문장이 있다.
 
 * **[표현식](https://ko.wikipedia.org/wiki/식_(프로그래밍))(expression)**
@@ -80,7 +80,7 @@ VS Code에서 자바스크립트를 실행하는 방법에는 두 가지가 존�
 
 * **[문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)**
 
-    실질적으로 무언가를 실행하는 하나의 완전한 코드를 의미한다. 자바스크립트 프로그래밍 언어에서 모든 문장은 문장 종단자(statement terminator)인 세미콜론 `;`으로 마무리 된다. 하지만 이는 강제되지 아니하며, 런타임 도중에 자바스크립트 엔진은 문장의 끝을 자체적으로 판단하여 세미콜론을 자동기입한다 (일명 Automatic Semicolon Insertion; ASI).
+    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 자바스크립트 프로그래밍 언어에서 모든 문장은 문장 종단자(statement terminator)인 세미콜론 `;`으로 마무리 된다. 하지만 이는 강제되지 아니하며, 런타임 도중에 자바스크립트 엔진은 문장의 끝을 자체적으로 판단하여 세미콜론을 자동기입한다 (일명 Automatic Semicolon Insertion; ASI).
 
     ```javascript
   variable = 2 + 3;          // 숫자 5를 "variable" 변수에 초기화
