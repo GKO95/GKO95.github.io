@@ -1100,92 +1100,49 @@ print(factorial(5))
 ```
 
 # 파이썬: 클래스
-파이썬은 객체와 클래스를 중심으로 프로그래밍하는 *[객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming; OOP)* 기법도 적용할 수 있다. 본 장은 파이썬에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
+[클래스](https://docs.python.org/3/tutorial/classes.html)(class)는 객체를 생성하는데 사용된다. 
 
-## 객체
-이전 장에서 (데이터를 저장할 수 있는) 변수와 (데이터를 처리 할 수 있는) 함수를 소개하였다. 객체(object 혹은 instance)는 이러한 변수와 함수를 하나의 데이터로 캡슐화한 데이터이다. 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 시퀀스 객체가 있다.
+> 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수는 각각 속성(attribute)과 메소드(method)라고 불리며, 이를 통틀어 맴버(member)라고 칭하고 다음과 같이 접근한다.
+>
+> * **속성**: `instance.attribute`
+> * **메소드**: `instance.method()`
+>
+> 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 시퀀스 객체가 있다.
+>
+> ```python
+> variable = [0, 3, 5, 9]
+> print(variable.index(5))
+> # variable이란 이름을 가진 리스트 객체의 "index()" 메소드를 사용하여 값 5에 대한 위치를 반환한다
+> ```
 
-```python
-variable = [0, 3, 5, 9]
-print(variable.index(5))
-# variable이란 이름을 가진 리스트 객체의 "index()" 메소드를 사용하여 값 5에 대한 위치를 반환한다
-```
-```
-2
-```
+클래스는 `class` 키워드를 사용하여 속성 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"이라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
-## 캡슐화
-캡슐화(encapsulation)는 객체의 핵심 개념으로 아래의 특성을 가진다.
+1. 변수와 함수가 하나의 객체로 결합된다.
+2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
 
-1. 변수와 함수를 하나의 객체로 결합한다.
-2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
-
-### 속성 및 메소드
-속성(attribute)과 메소드(method)는 객체에 캡슐화된 변수와 함수를 가리키는 용어이며, 아래와 같은 방법으로 접근한다. 객체에 속한 변수와 함수들은 객체의 맴버(member)라고 부르며 맴버 연산자(`.`)로 접근한다.
-
-| 객체 맴버 | 구문                   |
-|:-------:|----------------------|
-| 속성      | `instance.attribute` |
-| 메소드     | `instance.method()`  |
-
-## 클래스
-클래스(class)는 객체를 생성하는데 사용된다. 클래스는 `class` 키워드를 사용하여 정의되며, 클래스 내부에는 객체의 속성과 메소드가 되는 변수와 함수를 정의한다. 클래스로부터 객체를 생성하는 절차를 *객체화(instantiation)*라고 한다. 아래는 `class` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이며, 변수 및 함수와의 유사성을 확인할 수 있다.
+아래는 `class` 키워드로부터 정의된 클래스의 간단한 예시이다.
 
 ```python
 # 클래스 생성하기
 class CLASS:
-    # 인스턴스 초기화 (= 생성자)
-    def __init__(self, arg1, arg2):
-        # 속성 (변수와 비슷함)
-        self.attr1 = arg1
-        self.attr2 = arg2
         
-    # 메소드 (함수와 비슷함)
-    def method(self, arg3):
-        self.attr3 = arg3
-        return self.attr1 + self.attr2 - self.attr3
+    # 메소드 정의
+    def method(self, arg):
+        # 속성 정의
+        self.attr1 = value1
+        self.attr2 = value2
 
-# 객체화
-instance = CLASS(value1, value2)    # 클래스로부터 객체 생성
 
-# 그러므로...
-print(instance.attr3)
-print(instance.method(value3))
+# 클래스 객체화
+instance = CLASS()
 ```
-```
-value3
-value1 + value2 - value3
-```
-
-### `self` 변수
-`self` 변수는 객체 스스로를 가리키는 변수로, 사실상 `self`란 이름은 관습적인 명칭일 뿐이며 다른 식별자를 사용하여도 된다. 변수 또는 함수에 `self`를 두면 캡슐화에 의해 객체에서만 접근할 수 있는 속성 및 메소드로 정의된다. `self`가 없는 변수 및 함수는 객체 내부의 지역 변수 및 함수에 불과하여 외부에서 접근 할 수 없으며, 만일 접근을 시도하면 "AttributeError" 오류가 발생한다.
-
-```python
-# 클래스 생성
-class CLASS:
-    def __init__(self, arg1, arg2):
-        self.attr1 = arg1
-        self.attr2 = None        # 속성값을 초기화해주지 않으면 에러가 발생한다.
-        attr3 = arg2             # 지역 변수
-
-
-# 객체화
-instance = CLASS(1, 2)
-''' 동일: 
-CLASS.__init__(self = instance, arg1 = 1, arg2 = 2)
-'''
-
-# 그러므로
-instance.attr1        # >> 출력: 1
-instance.attr2        # >> 출력: None
-instance.attr3        # AttributeError: 'CLASS' object has no attribute 'attr3'
-```
-
-### `__init__()` 메소드
-`__init__()` 메소드는 클래스를 객체화하면 자동으로 호출되는 메소드이다. 객체의 속성 초기화(initialization)에 사용되며, 객체화를 위해 필요한 인자 개수를 지정하기도 한다. 만일 별도의 초기화가 필요하지 않다면 정의하지 않아도 되는 선택사항이다.
 
 ## 객체 속성 및 메소드
-객체 속성(instance attribute) 및 객체 메소드(instance method)는 클래스 내에서 `self`와 함께 정의된 객체만이 접근할 수 있는 속성과 메소드이다. 객체 속성은 객체 메소드 내에서만 정의될 수 있다.
+객체 속성 및 메소드(instance attribute & method)는 클래스 내부에서 `self` 변수가 명시된 변수와 함수를 가리킨다. `self`가 명시되지 않은 변수와 함수는 객체의 일부가 아니므로 지역 변수에 그치거나 접근이 불가하고, 이를 시도할 시 `AttributeError` 오류가 발생한다.
+
+> `self` 변수는 객체 스스로를 지칭하는 변수이다. 여기서 `self`란 이름은 관습적인 명칭일 뿐이며, 다른 식별자를 사용하여도 무관하다.
+
+클래스 내에서 `self`와 함께 정의된 객체만이 접근할 수 있는 속성과 메소드이다. 객체 속성은 객체 메소드 내에서만 정의될 수 있다.
 
 ```python
 # 클래스 생성
@@ -1199,6 +1156,43 @@ class CLASS:
     # 객체 메소드
     def method(self, arg3):
         self.attr3 = arg3
+```
+
+
+```python
+# 클래스 생성
+class CLASS:
+
+    # 메소드 정의
+    def method(self):
+        self.attr = value1    # 속성 정의
+        variable = value2     # 지역 변수 정의
+        print(f"{self.attr}, {variable}")
+
+
+# 클래스 객체화
+instance = CLASS()
+
+instance.method()            # 출력: value1, value2
+print(instance.attr)         # 출력: value1
+print(instance.variable)     # AttributeError: 'CLASS' object has no attribute 'variable'
+```
+
+### `__init__()` 메소드
+[`__init__()`](https://docs.python.org/3/reference/datamodel.html#object.__init__)는 클래스 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 메소드이다. 객체 속성을 초기화(initialization)하는 용도로 사용되며 객체화 과정에서 객체로 전달할 인자의 개수를 결정하는 요인으로 작용한다. 해당 메소드는 선택사항으로 객체화 시 초기화 및 인자 전달이 필요하지 않으면 생략하여도 된다.
+
+```python
+# 클래스 생성하기
+class CLASS:
+
+    # 객체 초기화 메소드
+    def __init__(self, arg1, arg2):
+        self.attr1 = arg1
+        self.attr2 = arg2
+
+
+# 클래스 객체화
+instance = CLASS(value1, value2)
 ```
 
 ## 클래스 속성 및 메소드
