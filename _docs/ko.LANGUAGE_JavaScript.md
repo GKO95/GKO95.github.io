@@ -906,7 +906,7 @@ console.log(variable.indexOf(5));
 [프로토타입](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)(prototype)은 기본적으로 객체에 내장된 속성 및 메소드를 일컬으며, 모든 자바스크립트 객체는 프로토타입을 갖는다. 프로토타입 또한 객체이므로 자신만의 프로토타입이 있는데 이러한 연속을 프로토타입 연쇄(prototype chain)라고 부르며, `null`을 프로토타입으로 갖는 프로토타입까지 이어진다. 객체의 프로토타입은 `Object.getPrototypeOf()` 정적 메소드로 반환된다.
 
 ## 클래스
-[클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 동일한 구조를 갖는 객체를 매번 정의할 필요없이 간단히 생성할 수 있도록 한다. ES6부터 소개되었으며 `class` 키워드와 함께 객체의 속성 및 메소드를 클래스 내부에 정의한다. 클래스로부터 객체를 생성하는 절차를 *객체화(instantiation)*라고 한다. 직접 생성된 객체와 달리, 클래스로부터 생성된 객체는 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)로부터 아래의 특성을 가진다:
+[클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 동일한 구조를 갖는 객체를 매번 정의할 필요없이 간단히 생성할 수 있도록 한다. ES6부터 소개되었으며 `class` 키워드와 함께 객체의 속성 및 메소드를 클래스 내부에 정의한다. 클래스로부터 객체를 생성하는 절차를 "객체화(instantiation)"라고 한다. 직접 생성된 객체와 달리, 클래스로부터 생성된 객체는 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)로부터 아래의 특성을 가진다:
 
 1. 변수와 함수를 하나의 객체로 결합한다.
 2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
@@ -944,7 +944,7 @@ const instance = new CLASS();
 자바스크립트는 [클래스 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#class_hoisting)(class hoisting)을 지원하지 않는다.
 
 ### 생성자
-[생성자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)(constructor)는 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 `constructor()` 메소드이다. 비록 생성자는 선택사항이지만, 만일 생성자를 정의한다면 객체화 과정에서 객체로 전달할 인자의 개수를 결정하는 요인으로 작용한다. 생성자는 흔히 객체화 단계에서 필드를 초기화하는 용도로 사용된다.
+[생성자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)(constructor)는 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 `constructor()` 메소드이다. 비록 생성자는 선택사항이지만, 만일 생성자를 정의한다면 객체화 과정에서 객체로 전달할 인자의 개수를 결정하는 요인으로 작용한다. 생성자는 흔히 객체화 단계에서 필드를 초기화(initialization)하는 용도로 사용된다.
 
 ```javascript
 /* 클래스 생성 */
