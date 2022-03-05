@@ -1119,4 +1119,4 @@ DERIVEDCLASS { property1: 'Hello World!', property2: 7, property3: true }
     ```
 
 # 자바스크립트: 모듈
-[모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)(module)은 부가적인 기능 및 데이터를 제공하는 자바스크립트 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.JS` 혹은 일부 런타임에서 모듈로 인식할 수 있는 `.MJS` 확장자를 갖는다. 개발자는 변수나 함수 혹은 클래스를 담고 있는 자바스크립트 모듈을 작성하여 `export` 문으로 제공하고, 이들을 활용하려는 스크립트는 `import` 문을 통해 전달받는다.
+[모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)(module)은 부가적인 기능 및 데이터를 제공하는 자바스크립트 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.JS` 혹은 일부 런타임에서 모듈로 인식할 수 있는 `.MJS` 확장자를 갖는다. 모듈은 정의된 변수나 함수 혹은 클래스 등을 `export` 문으로 제공하고, 이를 `import` 문을 통해 불러와 활용할 수 있다.
