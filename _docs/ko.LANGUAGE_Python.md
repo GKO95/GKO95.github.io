@@ -488,10 +488,10 @@ else:
 ```
 
 ### `break` 문
-`break` 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
+[`break`](https://docs.python.org/3/reference/simple_stmts.html#break) 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
 
 ### `continue` 문
-`continue` 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
+[`continue`](https://docs.python.org/3/reference/simple_stmts.html#continue) 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
 
 ## `for` 반복문
 `for` 반복문은 유효한 범위 내에서 코드를 반복적으로 실행하고, 범위의 모든 값이 반복되면 종료한다.
@@ -746,7 +746,7 @@ print(set1 ^ set2)            # 출력: {1, 2, 3, 7, 8, 9}
 ```
 
 ## 제너레이터 객체
-제너레이터(generator)는 `yield` 키워드와 반복문을 통해 요소들을 프로그램적으로 직접 생성할 수 있는 이터러블 객체이다. 요소들이 메모리에 저장되는 것이 아니라 코드를 통해 생성되는 것이기 때문에, 제너레이터 객체는 메모리 제한이 없는 점에서 무한한 개수의 데이터를 담을 수 있는 이점을 가진다.
+제너레이터(generator)는 [`yield`](https://docs.python.org/3/reference/simple_stmts.html#yield) 키워드와 반복문을 통해 요소들을 프로그램적으로 직접 생성할 수 있는 이터러블 객체이다. 요소들이 메모리에 저장되는 것이 아니라 코드를 통해 생성되는 것이기 때문에, 제너레이터 객체는 메모리 제한이 없는 점에서 무한한 개수의 데이터를 담을 수 있는 이점을 가진다.
 
 > 제너레이터에서 가장 중요한 것은 `yield` 키워드로 이터러블 객체로써 반환될 데이터를 지정한다.
 
@@ -828,7 +828,7 @@ function()
     ```
 
 ### `return` 반환문
-`return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수는 반환문을 반드시 필요로 하지 않으며, 이러한 경우에는 `None` 값이 반환되어 변수에 전달된다.
+[`return`](https://docs.python.org/3/reference/simple_stmts.html#return) 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수는 반환문을 반드시 필요로 하지 않으며, 이러한 경우에는 `None` 값이 반환되어 변수에 전달된다.
 
 ```python
 # return 반환문이 있는 사용자 정의 함수
@@ -1120,69 +1120,40 @@ print(factorial(5))
 1. 변수와 함수가 하나의 객체로 결합된다.
 2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
 
-아래는 `class` 키워드로부터 정의된 클래스의 간단한 예시이다.
-
-```python
-# 클래스 생성하기
-class CLASS:
-        
-    # 메소드 정의
-    def method(self, arg):
-        # 속성 정의
-        self.attr1 = value1
-        self.attr2 = value2
-
-
-# 클래스 객체화
-instance = CLASS()
-```
-
 ## 객체 속성 및 메소드
-객체 속성 및 메소드(instance attribute & method)는 클래스 내부에서 `self` 변수가 명시된 변수와 함수를 가리킨다. `self`가 명시되지 않은 변수와 함수는 객체의 일부가 아니므로 지역 변수에 그치거나 접근이 불가하고, 이를 시도할 시 `AttributeError` 오류가 발생한다.
+객체 속성 및 메소드(instance attribute & method)는 클래스 내부에서 `self` 변수가 명시되어 정의된 변수와 함수이며, 오로지 객체만이 접근할 수 있다. `self`가 명시되지 않은 변수와 함수는 객체의 일부가 아니므로 지역 변수에 그치거나 접근이 불가하고, 이를 시도할 시 `AttributeError` 오류가 발생한다.
 
 > `self` 변수는 객체 스스로를 지칭하는 변수이다. 여기서 `self`란 이름은 관습적인 명칭일 뿐이며, 다른 식별자를 사용하여도 무관하다.
 
-클래스 내에서 `self`와 함께 정의된 객체만이 접근할 수 있는 속성과 메소드이다. 객체 속성은 객체 메소드 내에서만 정의될 수 있다.
+객체 속성을 정의하려면 반드시 `self` 변수를 사용할 수 있는 객체 메소드 내에서만 정의될 수 있다. 또한 객체 속성은 네임 바인딩이 되지 않은 채 선언만 되면 `AttributeError` 오류가 발생한다.
 
 ```python
 # 클래스 생성
 class CLASS:
-    def __init__(self, arg1, arg2):
+
+    # 객체 메소드
+    def method(self, arg1, arg2):
         # 객체 속성
         self.attr1 = arg1
         self.attr2 = arg2
-        self.attr3 = None
 
-    # 객체 메소드
-    def method(self, arg3):
-        self.attr3 = arg3
-```
-
-
-```python
-# 클래스 생성
-class CLASS:
-
-    # 메소드 정의
-    def method(self):
-        self.attr = value1    # 속성 정의
-        variable = value2     # 지역 변수 정의
-        print(f"{self.attr}, {variable}")
+        variable = self.attr1 + self.attr2
+        print(f"{self.attr1} + {self.attr2} = {variable}")
 
 
 # 클래스 객체화
 instance = CLASS()
 
-instance.method()            # 출력: value1, value2
-print(instance.attr)         # 출력: value1
+instance.method(2, 3)        # 출력: 2 + 3 = 5
+print(instance.attr1)        # 출력: 2
 print(instance.variable)     # AttributeError: 'CLASS' object has no attribute 'variable'
 ```
 
 ### `__init__()` 메소드
-[`__init__()`](https://docs.python.org/3/reference/datamodel.html#object.__init__)는 클래스 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 메소드이다. 객체 속성을 초기화(initialization)하는 용도로 사용되며 객체화 과정에서 객체로 전달할 인자의 개수를 결정하는 요인으로 작용한다. 해당 메소드는 선택사항으로 객체화 시 초기화 및 인자 전달이 필요하지 않으면 생략하여도 된다.
+[`__init__()`](https://docs.python.org/3/reference/datamodel.html#object.__init__)는 클래스 객체화가 이루어질 때마다 자동적으로 실행되는 [특수한 메소드](#매직-메소드)이다. 객체 속성을 초기화(initialization)하는 용도로 사용되며 객체화 과정에서 객체로 전달할 인자의 개수를 결정하는 요인으로 작용한다. 해당 메소드는 선택사항으로 객체화 시 초기화 및 인자 전달이 필요하지 않으면 생략하여도 된다.
 
 ```python
-# 클래스 생성하기
+# 클래스 생성
 class CLASS:
 
     # 객체 초기화 메소드
@@ -1196,64 +1167,49 @@ instance = CLASS(value1, value2)
 ```
 
 ## 클래스 속성 및 메소드
-클래스 속성(class attribute) 및 클래스 메소드(class method)는 객체뿐만 아니라 클래스도 접근할 수 있는 속성과 메소드이다. 클래스 속성은 객체 메소드가 아닌 클래스 내에 정의된 속성이다. 그리고 클래스 메소드를 선언하기 위해서는 아래의 데코레이터를 필요로 하다. 
+클래스 속성 및 메소드(class attribute & method)는 객체와 클래스로부터 직접 접근이 가능한 클래스 내부에 정의된 변수와 함수이다. 객체 메소드가 객체 스스로를 가리키는 `self` 변수가 있다면, 클래스 메소드는 클래스 스스로를 가리키는 `cls` 변수를 갖는다. 단, 클래스 메소드를 정의하기 위해서는 데코레이터가 필요하다.
 
 |     구문     |설명                              |
 | :------------: | ---------------------------------------- |
 | `@classmethod` | 클래스 메소드를 선언하는데 사용되는 데코레이터이다. |
 
-클래스 메소드 또한 객체 클래스의 `self` 변수와 같이 클래스 스스로를 가리키는 변수가 필요하며, 관습적으로 `cls`라는 식별자를 사용한다.
+클래스 속성은 `class` 키워드 하에 곧바로 정의되거나, 혹은 `cls` 변수를 사용할 수 있는 클래스 메소드 내에서 정의될 수 있다. 또한 객체 속성은 네임 바인딩이 되지 않은 채 선언만 되면 `AttributeError` 오류가 발생한다.
+
+>  객체 메소드를 정의할 때, `self` 변수를 통해 클래스 속성 및 메소드를 호출할 수 있다.
 
 ```python
 # 클래스 생성
 class CLASS:
-    # 클래스 속성
-    attribute = value
-    
-    def __init__(self, arg1, arg2):
-        self.attr1 = arg1
-        self.attr2 = arg2
-        self.attr3 = None
+    def __init__(self, arg):
+        self.method1(arg)
 
-    def method1(self, arg3):
-        self.attr3 = arg3
-    
+    # 클래스 속성
+    attr1 = value1
+
     # 클래스 메소드
     @classmethod
-    def method2(cls, arg4):
-        return arg4
+    def method1(cls, arg):
+        cls.attr2 = arg
     
-    # 객체화를 위한 클래스 메소드
+    # 클래스 메소드: 객체 생성
     @classmethod
-    def method3(cls, arg5, arg6):
-        return cls(arg5**2, arg6**2)
+    def method2(cls, arg):
+        return cls(cls.attr1 + cls.attr2 - arg)
     
-    
-# 객체화
-instance1 = CLASS(1, 2)
-instance1.method1(4)
 
-# 객체화: arg1 = 1**1, arg2 = 2**2
-instance2 = CLASS.method3(1, 2)
-instance2.method1(4)
+# 클래스 객체화
+instance1 = CLASS(value2)
+print(f"{instance1.attr1}, {instance1.attr2}")    # 출력: 2, 3
 
-# 그러므로...
-CLASS.attribute         # >> 출력: value
-CLASS.method2(3)        # >> 출력: 3
+CLASS.method1(7)
+print(f"{CLASS.attr1}, {CLASS.attr2}")            # 출력: 2, 7
 
-instance1.attribute     # >> 출력: value
-instance1.attr1         # >> 출력: 1
-instance1.attr2         # >> 출력: 2
-instance1.attr3         # >> 출력: 4
-
-instance2.attribute     # >> 출력: value
-instance2.attr1         # >> 출력: 1 (= 1**2)
-instance2.attr2         # >> 출력: 4 (= 2**2)
-instance2.attr3         # >> 출력: 4
+instance2 = CLASS.method2(1)
+print(f"{instance2.attr1}, {instance2.attr2}")    # 출력: 2, 8
 ```
 
 ## 정적 메소드
-정적 메소드(static method)는 객체화없이 호출할 수 있으며, `self`나 `cls` 같은 변수를 필요로 하지 않는다. 이러한 변수가 없으므로 정적 메소드는 클래스 및 객체 속성과 메소드를 접근할 수 없다. 다시 말해, 정적 메소드는 단순히 클래스에 속해있는 일반 함수와 동일하게 취급하면 된다. 정적 메소드를 선언하기 위해서는 아래의 데코레이터가 필요하다. 
+정적 메소드(static method)는 클래스에서만 직접 접근이 가능한 클래스 내부에 정의된 함수이다. 정적 메소드는 객체나 클래스를 가리키는 변수가 없어, 객체 및 클래스 맴버 호출이 불가하다. 즉, 정적 메소드는 단순히 클래스에 묶여있는 일반 함수와 같다. 정적 메소드를 정의하기 위해서는 데코레이터가 필요하다.
 
 | 구문         |설명                               |
 |:---------------:| ----------------------------------------- |
@@ -1262,34 +1218,18 @@ instance2.attr3         # >> 출력: 4
 ```python
 # 클래스 생성
 class CLASS:
-    def __init__(self, arg1, arg2):
-        self.attr1 = arg1
-        self.attr2 = arg2
-        self.attr3 = None
         
-    def method1(self, arg3)
-        self.attr3 = arg3
-        
-    # 정적 메소드
+    # 정적 메소드 정의
     @staticmethod
-    def method2(arg4):
-        return True if arg4 is 4 else False
+    def method(arg1, arg2, arg3):
+        return arg1 + arg2 - arg3
 
 
-# 객체화
-instance = CLASS(1, 2)
-instance.method1(4)
-
-# 그러므로...
-instance.attr1            # >> 출력: 1
-instance.attr2            # >> 출력: 2
-instance.attr3            # >> 출력: 4
-
-CLASS.method2(4)        # >> 출력: True
+print(CLASS.method(2, 3, 1))        # 출력: 4
 ```
 
 ## 매직 메소드
-매직 메소드(magic method)는 식별자 양쪽에 던더(dunder; double underscore)가 있는 특수한 메소드이다. 매직 메소드는 대부분 연산자를 나타내며 연산자 오버로딩으로 기능을 수정하는데 사용된다. 초기화에 사용된 `__init__()` 메소드는 널리 사용되는 매직 메소드 중 하나이다. 아래의 도표는 연산자에 대한 매직 메소드의 목록이다.
+[매직 메소드](https://docs.python.org/3/reference/datamodel.html#special-method-names)(magic method)는 특수한 목적을 가진 메소드로 식별자 양측에 던더(dunder; double underscore)가 있는 게 특징이다. 대표적으로 객체 초기화를 위한 `__init__()` 메소드가 있으며, 그 외에도 [연산자 오버로딩](#연산자-오버로딩)에 흔히 사용된다.
 
 | 연산자  | 이름       | 매직 메소드                   |
 |:----:|:--------:|--------------------------|
@@ -1303,241 +1243,207 @@ CLASS.method2(4)        # >> 출력: True
 | `()` | 인자호출    | `__call__(self, arg)`    |
 
 ### 연산자 오버로딩
-연산자 오버로딩(operator overloading)은 특정 클래스나 자료형에서 연산자의 기능을 변경하는 작업이다. 연산자 오버로드에는 매직 메소드가 사용되지만 오버로드 된 기능은 해당 특정 클래스에만 적용된다. 예를 들어,`x + y`는 `x.__add__(y)`와 동일하다.
+[연산자 오버로딩](https://ko.wikipedia.org/wiki/연산자_오버로딩)(operator overloading)은 특정 클래스에서 연산자가 어떻게 동작할 지 정의하는 작업이다. 이를 위해 매직 메소드가 사용되며, 오버로드된 연산자는 해당 클래스에서만 적용된다.
 
 ```python
 # 클래스 생성
 class CLASS:
-    def __init__(self, arg1):
-        self.attribute = arg1
-        
-    def __add__(self, arg2):
-        # 두 객체의 attribute 속성을 합한 새로운 CLASS 객체 생성
-        return CLASS(self.attribute + " " + arg2.attribute)
+    def __init__(self, arg):
+        self.attr = arg
+    
+    # 연산자 오버로딩: 덧셈
+    def __add__(self, arg):
+        return CLASS(self.attr + " " + arg.attr)
 
-# 객체화
+
+# 클래스 객체화
 instance1 = CLASS("Hello")
 instance2 = CLASS("World!")
 
 instance3 = instance1 + instance2
-print(instance3.attribute)
-```
-```
-Hello World!
+''' 동일:
+instance3 = instance1.__add__(instance2)
+'''
+
+print(instance3.attr)            # 출력: Hello World!
 ```
 
 ## 상속
-상속(inheritance)은 슈퍼클래스(일명 기반 클래스)가 파생되는 서브클래스(일명 자식 클래스)에게 속성과 메소드를 제공하는 행위이다. 슈퍼클래스와 서브클래스에 동일한 이름의 속성과 메소드가 존재할 경우, 슈퍼클래스의 속성과 메소드는 서브클래스에 의해 묻힌다.
+[상속](https://docs.python.org/3/tutorial/classes.html#inheritance)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class; 일명 서브클래스)에게 속성과 메소드를 제공하는 행위이다. 기반 클래스와 파생 클래스에 동일한 이름의 맴버가 존재할 경우, 기반 클래스의 맴버는 파생 클래스에 의해 묻힌다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 있다.
 
 ```python
-# 슈퍼클래스 생성
-class SUPERCLASS:
-    attr1 = value1
-    attr2 = value2
+# 기반 클래스 생성
+class BASECLASS:
+    attr1 = 3
+    attr2 = "Python"
 
-# 서브클래스 생성
-class SUBCLASS(SUPERCLASS):
+    def __init__(self):
+        print("초기화: 기반 클래스")
+
+    def method(self, arg1, arg2):
+        return arg1 + arg2
+
+
+# 파생 클래스 생성
+class DERIVEDCLASS(BASECLASS):
     attr2 = "Hello World!"
-    attr3 = value3
+    attr3 = True
 
-# 객체화  
-instance = SUBCLASS()
+    def __init__(self):
+        print("초기화: 파생 클래스")
 
-# 그러므로...
-instance.attr1        # >> 출력: value1
-instance.attr2        # >> 출력: "Hello World!"
-instance.attr3        # >> 출력: value3
+    def method(self, arg1, arg2):
+        return arg1 * arg2
+
+
+# 클래스 객체화  
+instance = DERIVEDCLASS()
+
+print(instance.attr1, instance.attr2, instance.attr3)
+print(instance.method(2, 3))
+```
+```
+초기화: 파생 클래스
+3 Hello World! True
+6
 ```
 
-### 슈퍼 함수
-`super()` 함수는 슈퍼클래스의 속성과 메소드에 직접 접근한다. 해당 함수는 주로 슈퍼클래스 속성과 메소드가 서브클래스에 묻히는 것을 방지하기 위해 사용된다.
+### `super()` 함수
+`super()` 함수는 파생 클래스에 묻혀진 기반 클래스의 속성 및 메소드를 호출하는데 사용된다.
 
 ```python
-# 슈퍼클래스 생성
-class SUPERCLASS:
-    def __init__(self, arg1):
-        print("Hello World!")
-        self.attribute = arg1
+# 기반 클래스 생성
+class BASECLASS:
+    attr1 = 3
+    attr2 = "Python"
 
-# 서브클래스 생성
-class SUBCLASS(SUPERCLASS):
-    def __init__(self, arg2):
-        print("Goodbye World?")
+    def __init__(self):
+        print("초기화: 기반 클래스")
+
+    def method(self, arg1, arg2):
+        return arg1 + arg2
+
+# 파생 클래스 생성
+class DERIVEDCLASS(BASECLASS):
+    attr2 = "Hello World!"
+    attr3 = True
+
+    def __init__(self):
+        super().__init__()                   # 기반 클래스 초기화
+        self.attr2 = super().attr2           # 기반 클래스의 attr2 속성
+        print("초기화: 파생 클래스")
+
+    def method(self, arg1, arg2):
+        return super().method(arg1, arg2)    # 기반 클래스의 method() 메소드
 
 
-# 객체화
-instance = SUBCLASS(3)
+# 클래스 객체화  
+instance = DERIVEDCLASS()
 
-# 그러므로...
-print(instance.attribute)
+print(instance.attr1, instance.attr2, instance.attr3)
+print(instance.method(2, 3))
 ```
 ```
-"Goodbye World?"
-AttributeError: 'SUBCLASS' object has no attribute 'attribute'
+초기화: 기반 클래스
+초기화: 파생 클래스
+3 Python True
+5
 ```
 
-슈퍼클래스 `SUPERCLASS`의 `__init__()` 메소드는 서브클래스 `SUBCLASS`의 `__init__()` 메소드에 의해 묻혀 상속되지 않은 것처럼 보인다. 결국 `print(Hello World")`가 실행되지 않고 `self.attribute`이 상속에도 불구하고 오류를 일으키는 이유이다.
+## 프로퍼티
+[프로퍼티](https://docs.python.org/3/library/functions.html#property)(property)는 하나의 속성을 getter, setter, 그리고 deleter 영역으로 나누어 [데이터 숨기기](https://en.wikipedia.org/wiki/Information_hiding)(data hiding)을 지원한다.
 
-슈퍼 함수를 사용하여 슈퍼클래스 `SUPERCLASS`의 `__init__()` 메소드를 다음과 같이 집적 불러올 수 있다.
-
-```python
-# 슈퍼클래스 생성
-class SUPERCLASS:
-    def __init__(self, arg1):
-        print("Hello World!")
-        self.attribute = arg1
-
-# 서브클래스 생성
-class SUBCLASS(SUPERCLASS):
-    def __init__(self, arg2):
-        # 슈퍼클래스로부터 "__init__()" 메소드 직접 상속
-        super().__init__(arg2)
-        print("Goodbye World?")
-
-
-# 객체화
-instance = SUPERCLASS(3)
-
-# 그러므로...
-print(instance.attribute)
-```
-```
-"Hello World!"
-"Goodbye World?"
-3
-```
-
-## 데이터 숨기기
-파이썬의 캡슐화는 데이터 숨기기(data hiding)가 완전히 보장되지 않는다. 여전히 외부 코드에서 클래스의 속성과 메소드 접근이 가능하다. 클래스에서 가능한 숨겨져야 하는 속성과 메소드가 있는 경우 일반적으로 이름 뒤섞기(name mangling) 등의 방법으로 데이터를 숨길 수 있다.
-
-| 기호   | 예시            | 설명                                                |
-|:----:|---------------|---------------------------------------------------|
-| `_`  | `_attribute`  | 이름 뒤섞기 기법이 아니지만, 클래스가 모듈로써 불러올 경우에 대하여 접근을 제한된다. |
-| `__` | `__attribute` | 이름 뒤섞기: 모듈로써 접근과 클래스 외부에서의 접근을 제한한다.              |
-
-### 프로퍼티
-프로퍼티(property)는 단일 메소드를 `getter`,`setter` 그리고 `deleter`라는 세 개의 개별 메소드로 나누어 데이터 숨기기를 지원하는 데코레이터이다. 프로퍼티는 데코레이터 기호를 사용하여 선언되기 때문에 메소드에서만 사용할 수 있다.
-
-| 메소드     | 구문                | 설명                            |
+| 프로퍼티 | 데코레이터        | 설명                            |
 |:-------:|-------------------|-------------------------------|
-| Getter  | `@property`       | 프로퍼티 속성에서 값을 가져 오는 메소드이다.     |
-| Setter  | `@method.setter`  | [선택사항] 프로퍼티 속성 값을 설정하는 메소드이다. |
-| Deleter | `@method.deleter` | [선택사항] 프로퍼티 속성을 삭제하는 메소드이다.   |
+| Getter  | `@property`       | 프로퍼티로부터 값을 반환받는 맴버이다.     |
+| Setter  | `@<프로퍼티_이름>.setter`  | 프로퍼티로부터 값을 설정하는 맴버이다. |
+| Deleter | `@<프로퍼티_이름>.deleter` | 프로퍼티가 제거될 때 실행되는 맴버이다.   |
+
+속성을 나누므로써 수정되어서는 안될 민감한 코드를 setter 및 deleter 영역에 숨기고 getter만을 통해서 데이터를 반환한다. 정의된 형태는 메소드와 유사하지만 실제로 사용할 때는 소괄호 `()` 없이 속성처럼 사용된다. 프로퍼티의 setter와 deleter는 선택사항이지만, getter는 반드시 정의되어야 한다.
 
 ```python
 # 클래스 생성
 class CLASS:
-    def __init__(self, arg1):
-        self.attribute = arg1
     
-    # 정의: GETTER 메소드
+    # Getter 프로퍼티 정의
     @property
     def method(self):
-        return self.attribute
+        return self.attr ** 2
     
-    # 정의: SETTER 메소드
+    # Setter 프로퍼티 정의
     @method.setter
-    def method(self, arg2):
-        self.attribute = arg2
+    def method(self, arg):
+        print("프로퍼티: attr 객체 속성 설정")
+        self.attr = arg + 1
     
-    # 정의: DELETER 메소드
+    # Deleter 프로퍼티 정의
     @method.deleter
     def method(self):
-        del self.attribute
-        
-# 객체화
-instance = CLASS(3)
+        print("프로퍼티: attr 객체 속성 제거")
+        del self.attr
 
-# 그러므로
-print(instance.method)   # 예시: GETTER 메소드
 
-instance.method = 1      # 예시: SETTER 메소드
-print(instance.method)
+# 클래스 객체화
+instance = CLASS()
 
-del instance.method      # 예시: DELETER 메소드
-print(instance.method)
+instance.method = 3      # Setter  프로퍼티 호출
+print(instance.method)   # Getter  프로퍼티 호출
+del instance.method      # Deleter 프로퍼티 호출
 ```
 ```
-3
-1
-AttributeError: 'CLASS' object has no attribute 'attribute'
+프로퍼티: attr 속성 설정
+16
+프로퍼티: attr 속성 제거
 ```
-
-프로퍼티로 메소드를 나누므로써 `setter` 및 `deleter`와 같은 수정되어서는 안될 민감한 코드를 숨기고 `getter`만으로 메소드를 호출한다. 즉, `getter`로부터 메소드를 지속적으로 사용 가능하게 하면서 메소드의 내부적 코딩 작업을 `setter`에서 진행할 수 있다.
 
 # 파이썬: 예외 처리
-예외(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 인터프리터에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
+[예외](https://docs.python.org/3/tutorial/errors.html#exceptions)(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 인터프리터에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
 
 ## `try`/`except` 예외 처리문
-`try`/`except` 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
+[`try`](https://docs.python.org/3/reference/compound_stmts.html#try)/[`except`](https://docs.python.org/3/reference/compound_stmts.html#except) 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
 
-| 키워드    | 설명                                                         |
-|:---------:| ------------------------------------------------------------ |
-| `try`     | 예외가 있는지 확인하는 코드 블록을 제공한다.               |
-| `except`  | 특정 예외가 발생하였을 때 실행된다.         |
-| `else`    | [선택사항] 예외가 감지되지 않았을 시 실행된다. |
-| `finally` | [선택사항] 예외 처리 마지막에 반드시 실행되는 코드이다. |
+* **`try` 문**
+
+    코드에 예외가 발생하는지 확인한다. 예외가 발생하였을 시, 나머지 코드는 실행되지 않고 예외 유형에 따라 해당하는 `except` 문으로 넘어간다.
+
+* **`except` 문**
+
+    `try` 문에서 발생한 예외에 따라 실행되는 코드를 포함한다. 하나의 `try` 문에 여러 `except` 문을 사용하여 다양한 예외에 대비할 수 있다. 예외 유형을 기입하지 않으면 모든 유형의 예외를 처리하는 처리한다. 예외 유형의 목록은 [여기](https://docs.python.org/3/library/exceptions.html)에서 확인할 수 있다.
 
 ```python
 try:
     ...
-except exception_type1:
+except IndexError:    # 예외 유형: 시퀀스 객체 범위를 초과하여 호출
     ...
-except exception_type2:
+except NameError:     # 예외 유형: 존재하지 않은 식별자의 데이터 호출
     ...
-except:            # 전조건 예외처리는 마지막에 위치한다.
+except:               # 예외 유형: 모든 유형의 예외 처리
     ...
 ```
 
+다음은 `try`/`except` 예외 처리문 쌍을 보조하는 문장이며, 이들은 선택사항이다.
+
+| 키워드    | 설명                                            |
+|:---------:| ---------------------------------------------- |
+| [`else`](#else-조건문)    | `try` 문에서 예외가 발생하지 않으면 실행되는 코드를 포함한다. |
+| [`finally`](https://docs.python.org/3/reference/compound_stmts.html#finally) | `try` 문에서 예외가 발생 여부와 무관하게 마지막에 반드시 실행되는 코드를 포함한다. |
+
 ## `raise` 문
-`raise` 문은 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 함수나 클래스에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다.
+[`raise`](https://docs.python.org/3/reference/simple_stmts.html#raise) 문은 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 함수나 클래스에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다.
 
 ```python
-# 명시적 예외 발생: 위의 'except' 문 내에서도 단독으로 사용할 수 있음.
+# 명시적 예외 발생: 위의 'except' 문 내에서도 단독으로 사용할 수 있다.
 raise
 
 # 명시적으로 발생된 예외에 대한 자세한 설명을 제공한다.
-raise exception_description
+raise "예외에 대한 설명 기입"
 ```
-
-# 파이썬: 파이썬다운
-본 장에서는 개발자들이 파이썬으로 프로그래밍을 할 때 추천하는 파이썬 코딩 스타일에 대하여 소개를 하며, 이를 영어로 pythonic("파이썬"스러운)이라고 부른다.
-
-## 파이썬의 젠
-파이썬의 젠(Zen of Python)은 파이썬에 내장되어 있는 파이썬 코딩 지침을 담고 있으며, 아래의 코드로 확인할 수 있다.
-
-```python
-import this
-```
-
-## PEP8
-PEP8이란, 여덟 가지의 파이썬 개선 제안(Python Enhancement Proposals)으로 경력있는 파이썬 개발자들이 조언하는 파이썬 프로그래밍 스타일이다.
-
-1. 모듈 이름은 간결하고 소문자로만 구성되어야 한다.
-2. 클래스 이름은 대문자로 시작하는 단어들로 구성되어야 한다 (일명 CapWords 스타일).
-3. 대부분의 변수와 함수 이름은 소문자와 밑줄(띄어쓰기 대행)로만 구성되어야 한다.
-4. 상수 변수는 대문자와 밑줄(띄어쓰기 대행)로만 구성되어야 한다.
-5. 파이썬 키워드와 충돌이 일어날 수 있는 이름 접미부에 밑줄을 넣도록 한다.
-6. 한 줄은 80자를 초과하지 않도록 한다.
-7. `from module import *`는 되도록 사용하지 않는다.
-8. 한 줄에는 하나의 문만 있어야 한다.
-
-## 시작점
-시작점(entry point)는 프로그램이 시작되는 부분을 의미하며, C/C++ 프로그래밍 언어의 경우 `main()` 함수에서부터 코드가 실행된다. 파이썬에는 시작점이 존재하지 않는다. 하지만 현재 어느 스크립트를 중심으로 실행되는지 판별하는 코드가 있으며 `__name__` 매직 메소드가 `"__main__"`과 일치 여부를 확인한다.
-
-```python
-# 시작점
-if __name__ == "__main__":
-    ...
-```
-
-파이썬에서는 이를 시작점이라고 부르며, 모듈로 가져온 스크립트에서는 시작점이 실행되지 않는다. 주의해야 할 점은 비교 연산자 `==`는 논리 연산자인 `is`로 절대 대체할 수 없다.
 
 # 파이썬: 파일 관리
 여러 데이터를 파이썬 프로세스에 전달하거나, 혹은 데이터를 외부로 출력하기 위해 파일을 불러와 read 혹은 write 하여 처리할 수 있다. 본 장은 파이썬에서 파일을 관리하는 방법에 대하여 소개한다.
 
 ## 파일 열기 및 닫기
-파이썬에서 파일을 열고 닫으려면 `open()` 함수와 `close()` 메소드를 사용한다.
+파이썬에서 파일을 열고 닫으려면 [`open()`](https://docs.python.org/3/library/functions.html#open) 함수와 [`close()`](https://docs.python.org/3/distutils/apiref.html#distutils.text_file.TextFile.close) 메소드를 사용한다.
 
 ```python
 # 파일 열기: 읽기 전용
@@ -1557,10 +1463,10 @@ file.close()
 | `rb` | 바이너리 읽기 모드 (비텍스트 파일) |
 | `wb` | 바이너리 쓰기 모드 (비텍스트 파일) |
 
-`close()` 메소드로 더 이상 사용하지 않는 파일을 닫아주는 습관은 리소스 낭비를 줄여주므로 매우 중요하다. 예외가 발생하여도 정상적으로 파일을 닫을 수 있도록 `try`/`except` 예외 처리문 혹은 `with` 문을 함께 사용할 것을 권장한다.
+`close()` 메소드로 더 이상 사용하지 않는 파일을 닫아주는 습관은 리소스 낭비를 줄여주므로 매우 중요하다. 예외가 발생하여도 정상적으로 파일을 닫을 수 있도록 [`try`](#tryexcept-예외-처리문)/[`except`](#tryexcept-예외-처리문) 예외 처리문 혹은 [`with`](#with-문) 문을 함께 사용할 것을 권장한다.
 
 ### `with` 문
-`with` 문은 해당 코드 블록 안에서만 사용할 수 있는 임시 변수를 생성한다. `with` 문으로 파일을 열었을 경우, 코드 블록이 종료되면 파일은 자동적으로 닫힌다.
+[`with`](https://docs.python.org/3/reference/compound_stmts.html#the-with-statement) 문은 해당 코드 블록 안에서만 사용할 수 있는 임시 변수를 생성한다. `with` 문으로 파일을 열었을 경우, 코드 블록이 종료되면 파일은 자동적으로 닫힌다.
 
 ```python
 with open("filename.txt") as file:
@@ -1572,47 +1478,47 @@ with open("filename.txt") as file:
 1. `__enter__()`와 `__exit__()` 메소드
     
     ```python
-    # 컨텍스트 관리자 1
-    class CLASS:
-        def __init__(self):
-            pass
-        
-        # "with" 문 시작 시 실행
-        def __enter__(self):
-            self.var = expression
-            return self.var
-        
-        # "with" 문 종료 시 실행
-        def __exit__(self):
-            ...
+   # 컨텍스트 관리자 1
+   class CLASS:
+       def __init__(self):
+           pass
+       
+       # "with" 문 시작 시 실행
+       def __enter__(self):
+           self.attr = expression
+           return self.attr
+       
+       # "with" 문 종료 시 실행
+       def __exit__(self):
+           ...
     ```
 
-2. `contextlib` 모듈
+2. [`contextlib`](https://docs.python.org/3/library/contextlib.html) 모듈
     
     ```python
-    from contextlib import contextmanager
-    
-    # 컨텍스트 관리자 2 
-    class CLASS:
-        def __init__(self):
-            ...
-        
-        # "with" 문 지원 함수 혹은 메소드
-        @contextmanager
-        def method(self):
-            self.var = expression
-            yield self.var
-            ...
+   from contextlib import contextmanager
+   
+   # 컨텍스트 관리자 2 
+   class CLASS:
+       def __init__(self):
+           ...
+       
+       # "with" 문 지원 함수 혹은 메소드
+       @contextmanager
+       def method(self):
+           self.attr = expression
+           yield self.attr
+           ...
     ```
 
 문맥 관리자는 `return` 혹은 `yield` 문으로 반환/양도된 데이터를 `with` 문에서 처리할 수 있는 리소스로 제공한다. 해당 리소스는 `as` 키워드로 별도의 명칭을 지정하지 않는 이상 암묵적으로 처리 대상으로 지목된다.
 
 ```python
-# 객체화
+# 클래스 객체화
 instance = CLASS()
 
 with instance.method():
-    # "self.var"를 위주로 처리
+    # attr 객체 속성을 위주로 처리
     ...
 ```
 
@@ -1681,8 +1587,8 @@ for variable in file:
 1. 덮어쓰기(overwrite) 모드 `w`는 기존의 모든 내용들을 삭제하여 처음부터 새로 작성한다.
     
     ```python
-    with open("path\\filename.txt", "w") as file:
-        file.write("텍스트 덮어쓰기!")
+   with open("path\\filename.txt", "w") as file:
+       file.write("텍스트 덮어쓰기!")
     ```
     ```
     <filename.txt>
@@ -1692,8 +1598,8 @@ for variable in file:
 2. 덧붙여 쓰기(append) 모드 `a`는 기존의 모든 내용들을 유지한 채 맨 끝 단락에서부터 작성한다.
 
     ```python
-    with open("path\\filename.txt", "a") as file:
-        file.write("텍스트 덧붙여 쓰기!")
+   with open("path\\filename.txt", "a") as file:
+       file.write("텍스트 덧붙여 쓰기!")
     ```
     ```
     <filename.txt>
@@ -1769,6 +1675,39 @@ python -m pip
 ```
 py -3.8-32 -m pip
 ```
+
+# 파이썬: 파이썬다운
+본 장에서는 개발자들이 파이썬으로 프로그래밍을 할 때 추천하는 파이썬 코딩 스타일에 대하여 소개를 하며, 이를 영어로 pythonic("파이썬"스러운)이라고 부른다.
+
+## 파이썬의 젠
+파이썬의 젠(Zen of Python)은 파이썬에 내장되어 있는 파이썬 코딩 지침을 담고 있으며, 아래의 코드로 확인할 수 있다.
+
+```python
+import this
+```
+
+## PEP8
+PEP8이란, 여덟 가지의 파이썬 개선 제안(Python Enhancement Proposals)으로 경력있는 파이썬 개발자들이 조언하는 파이썬 프로그래밍 스타일이다.
+
+1. 모듈 이름은 간결하고 소문자로만 구성되어야 한다.
+2. 클래스 이름은 대문자로 시작하는 단어들로 구성되어야 한다 (일명 CapWords 스타일).
+3. 대부분의 변수와 함수 이름은 소문자와 밑줄(띄어쓰기 대행)로만 구성되어야 한다.
+4. 상수 변수는 대문자와 밑줄(띄어쓰기 대행)로만 구성되어야 한다.
+5. 파이썬 키워드와 충돌이 일어날 수 있는 이름 접미부에 밑줄을 넣도록 한다.
+6. 한 줄은 80자를 초과하지 않도록 한다.
+7. `from module import *`는 되도록 사용하지 않는다.
+8. 한 줄에는 하나의 문만 있어야 한다.
+
+## 시작점
+시작점(entry point)는 프로그램이 시작되는 부분을 의미하며, C/C++ 프로그래밍 언어의 경우 `main()` 함수에서부터 코드가 실행된다. 파이썬에는 시작점이 존재하지 않는다. 하지만 현재 어느 스크립트를 중심으로 실행되는지 판별하는 코드가 있으며 `__name__` 매직 메소드가 `"__main__"`과 일치 여부를 확인한다.
+
+```python
+# 시작점
+if __name__ == "__main__":
+    ...
+```
+
+파이썬에서는 이를 시작점이라고 부르며, 모듈로 가져온 스크립트에서는 시작점이 실행되지 않는다. 주의해야 할 점은 비교 연산자 `==`는 논리 연산자인 `is`로 절대 대체할 수 없다.
 
 # 파이썬: 가상환경
 파이썬에서 pip로 설치한 패키지들은 전부 인터프리터 경로에 설치된다. 이는 여러 파이썬 프로젝트를 진행할 시 치명적인 문제점이 될 수 있는데, 바로 인터프리터에는 하나의 패키지가 여러 개 존재할 수 없다는 것이다. 결국 두 프로젝트가 서로 다른 버전의 패키지를 요구하면 프로젝트를 작업할 때마다 모듈을 새로 설치하는 번거로움이 발생한다.
