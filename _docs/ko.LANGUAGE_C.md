@@ -580,13 +580,11 @@ else
 ```
 
 ## 조건 연산자
-[조건 연산자](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator)(ternary operator; `?:`)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다.
+[조건 연산자](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator)(ternary operator; `?:`)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
 
 ```c
 condition ? true_return : false_return;
 ```
-
-조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
 
 ## `switch` 조건문
 `switch` 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
@@ -685,6 +683,24 @@ for (initialize; condition; increment) statement;
 1. 변수 할당: `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한다.
 2. 조건 평가: `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다.
 3. 변수 증감: 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, "조건 평가" 단계로 돌아가 반복한다.
+
+## `goto` 문
+[`goto`](https://en.cppreference.com/w/cpp/language/goto) 문은 다른 문장으로써는 절대로 접근이 불가한 코드에 도달할 수 있도록 한다 (일명 제어 전달; control transfer). `goto` 키워드에 명시된 [레이블](https://en.cppreference.com/w/cpp/language/statements#Labels)로 제어를 전달하나, 이 둘은 반드시 동일한 [함수](#c-함수) 내에 위치해야 한다. 레이블은 `goto` 문 이전이나 이후에 위치하여도 무관하다.
+
+```c
+int main() {
+    
+    // 제어 전달: "label"로 이동
+    goto label;    
+
+    // "label" 레이블
+label:
+    statements;
+
+}
+```
+
+단, `goto` 문을 사용할 때에는 매우 조심해야 하며 무리한 남용은 [스파게티 코드](https://ko.wikipedia.org/wiki/스파게티_코드)의 원인이 된다.
 
 # C: 배열
 C 프로그래밍 언어는 여러 데이터를 하나의 변수에 저장하는 배열(array)을 생성할 수 있다. 배열은 여러 데이터를 한 번에 관리하는 편리성을 제공한다. 배열은 [포인터](#c-포인터)와 밀접한 관계가 있으며, 이에 대해서는 차후 설명할 예정이다. 본 장에서는 포인터 언급을 최소화하며 배열을 설명한다.
