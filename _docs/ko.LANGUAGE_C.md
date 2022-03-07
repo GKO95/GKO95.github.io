@@ -224,11 +224,11 @@ C 프로그래밍 언어는 다음과 같은 텍스트 기반의 출력 함수�
 
 ```c
 puts("Hello World!");
-printf("Number: %f", 3.14159);
+printf("Number: %.2f", 3.14159);
 ```
 ```
 Hello World!
-Number: 3.141590
+Number: 3.14
 ```
 
 반면, 입력 함수는 [변수](#변수)(variable)라는 데이터 저장공간이 필요하며 이는 차후에 설명할 예정이다.
@@ -240,15 +240,29 @@ Number: 3.141590
 | [`scanf()`](https://en.cppreference.com/w/cpp/io/c/fscanf) | 터미널로부터 입력받은 텍스트를 [형식 지정자](#형식-지정자) `%`에 따른 데이터로 변환하여 변수에 전달한다. |
 | [`fscanf()`](https://en.cppreference.com/w/cpp/io/c/fscanf) | 입력 함수 `scanf()`의 확장된 개념으로 [스트림](https://ko.wikipedia.org/wiki/스트림_(컴퓨팅)) 선택이 가능하다. |
 
-> 여기서 `scanf()`는 입력된 텍스트를 변수로 전달할 때 빈칸, 즉 띄어쓰기나 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)을 기준으로 데이터를 나눈다.
+> 여기서 `scanf(...)`는 `fscanf(stdin, ...)`와 동일하며, `stdin`는 [표준 입력 스트림](https://ko.wikipedia.org/wiki/표준_스트림)(standard input stream)을 의미한다.
+
+`scanf()` 유형의 입력 함수는 입력된 텍스트를 변수로 전달할 때 빈칸 (띄어쓰기, [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자) 등) 및 형식 지정자가 수용할 수 있는 문자 개수를 기준으로 데이터를 나눈다.
 
 ```c
-float number; char string[20];
-scanf("%f %s", &number, string);
-```
-```bash
-3.14159 Visual Studio   # number = 3.14
-                        # string = "Visual"
+float number; char string[10];
+scanf("%4f %s", &number, string);
+
+/* 입력:
+3.14159 Pi
+*/
+
+/* 결과:
+number = 3.14
+string = "159"
+*/
+
+scanf("%s", string);
+
+/* 결과:
+number = 3.14
+string = "Pi"
+*/
 ```
 
 ### 형식 지정자
@@ -258,18 +272,23 @@ scanf("%f %s", &number, string);
 |:---:|:---:|:---:|:---:|:---:|:---:|:--:|
 | 데이터 | 정수 | 실수 | 문자 | 문자열 | 포인터 | 십육진수 |
 
-그 외에도 숫자와 기호의 조합을 통해 더 다양한 형식을 지정할 수 있으며, 자세한 내용은 형식 지정자가 지원되는 함수들의 문서를 참고하도록 한다. 참고로 형식 지정자가 사용되는 곳이 `scanf()` 입력 함수인지 혹은 `printf()` 출력 함수인지에 따라 데이터에 미치는 영향은 다소 차이가 있다.
+그 외에도 숫자와 기호의 조합을 통해 더 다양한 형식을 지정할 수 있으며, 자세한 내용은 형식 지정자가 지원되는 함수들의 문서를 참고한다. 형식 지정자가 사용되는 곳이 `scanf()` 입력 함수인지 혹은 `printf()` 출력 함수인지에 따라 데이터에 미치는 영향은 다소 차이가 있다.
 
 * **입력 함수 `scanf()`**
     
     본래 데이터의 성질이나 값이 변한다.
 
     ```c
-  int variable = 0;        // 현재 변수에는 숫자 0이 저장되어 있다.
+  int variable = 0;        // 변수에 저장된 숫자: 0
   scanf("%c", &variable);
-    ```
-    ```bash
-  3    # variable = 51 (ASCII에서 문자 '3'은 코드 51번에 해당)
+
+  /* 입력:
+  3
+  */
+
+  /* 결과:
+  variable = 51    (ASCII에서 문자 '3'은 코드 51번에 해당)
+  */
     ```
 
 * **출력 함수 `printf()`**
@@ -277,7 +296,7 @@ scanf("%f %s", &number, string);
     본래 데이터의 성질과 값은 그대로 유지되나, 어떻게 표시되는지만 달라진다.
 
     ```c
-  int variable = 51;       // 현재 변수에는 숫자 51이 저장되어 있다.
+  int variable = 51;       // 변수에 저장된 숫자: 51
   printf("%c", variable);
     ```
     ```bash
