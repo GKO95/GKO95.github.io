@@ -593,7 +593,7 @@ for element in range(3, 10, 2):
 ```
 
 ## 리스트 객체
-[리스트](https://docs.python.org/3/library/stdtypes.html#lists)(list) 시퀀스 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 리스트의 데이터 할당은 대괄호 `[]` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 대괄호는 인덱스 위치의 요소(element)를 호출할 때에도 사용되며, 해당 요소에 새로운 값을 재할당하여 데이터를 변경할 수 있다.
+[리스트](https://docs.python.org/3/library/stdtypes.html#lists)(list) 시퀀스 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 리스트의 데이터 할당은 대괄호 `[]` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 대괄호는 0번부터 시작하는 인덱스 위치의 요소(element)를 호출할 때에도 사용된다.
 
 ```python
 lst = [value1, value2, value3, value4, ...]
