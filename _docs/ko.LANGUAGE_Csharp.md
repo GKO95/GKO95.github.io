@@ -12,7 +12,7 @@ order: 0x03
 C# (한국어:씨샵) 프로그래밍 언어는 [자바](https://ko.wikipedia.org/wiki/자바_(프로그래밍_언어))(Java) 언어를 대응하기 위해 마이크로소프트에서 개발한 [객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming) 언어이다. 자바와 상당한 유사점을 가지면서 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 언어로부터 이질감이 없도록 설계되었다. 또한 .NET (한국어: 닷넷) 프레임워크라는 방대한 데이터 라이브러리를 접속하고 사용할 수 있어 개발의 편리성을 제공하는 장점을 가진다.
 
 ## .NET
-> *참조: [컴파일러 vs 인터프리터](/blog/ko.compiler_vs_interpreter)*
+> *참조: [컴파일러 vs. 인터프리터](/blog/ko.compiler_vs_interpreter)*
 
 [.NET](https://ko.wikipedia.org/wiki/닷넷)(혹은 .NET Core)은 마이크로소프트에서 개발한 오픈소스 소프트웨어 프레임워크이다. 국제표준기구 ISO와 ECMA에서 표준으로 채택된 공통 언어 기반(Common Language Infrasturcture; CLI)이 적용되어 운영체제 및 아키텍쳐가 다르더라도 [크로스 플랫폼](https://ko.wikipedia.org/wiki/크로스_플랫폼)(cross-platform)을 지원해야 하며 여러 고급 프로그래밍 언어을 사용할 수 있다. 그 중에서 C# 언어가 .NET이 지원하는 프로그래밍 언어 중 하나이며 윈도우 NT, macOS, 그리고 리눅스 운영체제에서 사용할 수 있다.
 
