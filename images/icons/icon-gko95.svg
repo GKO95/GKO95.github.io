@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="gko_hangul" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256 256">
+    <style type="text/css">
+        .svg_font {fill: black;stroke: black;stroke-width: 0px;}
+    </style>
+    <g fill="black">
+        <rect id="svg_border_t" x="000" y="000" width="256" height="008"/>
+        <rect id="svg_border_b" x="000" y="248" width="256" height="008"/>
+        <rect id="svg_border_l" x="000" y="000" width="008" height="256"/>
+        <rect id="svg_border_r" x="248" y="000" width="008" height="256"/>
+    </g>
+    <!--
+    <rect x="8" y="8" width="120" height="120" fill="red"/>
+    <rect x="128" y="8" width="120" height="120" fill="green"/>
+    <rect x="8" y="128" width="120" height="120" fill="blue"/>
+    <rect x="128" y="128" width="120" height="120" fill="yellow"/>
+    -->
+    <defs>
+        <symbol id="hangul_giyeok">
+            <g class="svg_font">
+                <rect x="10" y="10" width="100" height="30"/>
+                <rect x="80" y="10" width="30" height="100"/>
+            </g>
+        </symbol>
+        <symbol id="hangul_ieung">
+            <g class="svg_font">
+                <circle cx="60" cy="60" r="35" fill="transparent" stroke-width="30" />
+            </g>
+        </symbol>
+        <symbol id="hangul_o">
+            <g class="svg_font">
+                <rect x="10" y="95" width="100" height="25"/>
+                <rect x="40" y="80" width="40" height="30"/>
+            </g>
+        </symbol>
+    </defs>
+    <use href="#hangul_giyeok" x="8" y="8"/>
+    <use href="#hangul_giyeok" x="8" y="128"/>
+    <use href="#hangul_ieung" x="128" y="128"/>
+    <use href="#hangul_o" x="128" y="8"/>
+</svg>
