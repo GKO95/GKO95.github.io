@@ -806,53 +806,100 @@ std::vector<int> vec;
 ```
 
 # C++: 함수
-C 프로그래밍 언어는 하나의 핵심 함수인 `main()`을 기점으로 모든 프로그램이 실행된다. 함수에 대한 이해는 매우 중요하며, 원하는 작업을 수행하도록 함수를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있는데, 이러한 프로그래밍 기법을 *함수형 프로그래밍(functional programming)*이라고 한다. 본 장은 C++ 프로그래밍 언어에서 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
-
-## 함수
 함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
 ```cpp
-int variable = {0, 3, 5, 9};
-printf(sizeof(variable));
-// "printf()" 함수, 그리고 바이트 용량을 반환하는 "sizeof()" 함수
+int variable[4] = {0, 3, 5, 9};
+std::cout << sizeof(variable);
+// 바이트 용량을 반환하는 "sizeof()" 함수
+```
+```
+16
 ```
 
 함수의 기능을 정의(definition)하기 위해서는 두 가지의 구성요소가 반드시 필요하다:
 
-* **코드 블록 `{}`**: 함수를 호출할 때, 실행되는 코드가 들어있다.
-* **자료형**: 함수가 종료될 때, 반환되는 데이터의 자료형을 결정한다. 
+* **코드 블록 `{}`**: 함수 호출 시 실행되는 코드가 들어있다.
+* **[자료형](#자료형)**: 함수 종료 시 [반환](#return-반환문)되는 데이터의 자료형을 결정한다.
 
 ```cpp
 /* 함수 정의 */
-int function()
+void function()
 {
-    return 1 + 2;
+    std::cout << 1 + 2;
 }
 
 /* 함수 호출 */
-function();    // >> 출력: 3
+function();    // 출력: 3
 ```
 
-C++ 프로그래밍 언어는 위에서부터 순차적으로 코드가 실행되기 때문에, 아직 정의가 되지 않은 상태에서 함수를 호출할 수 없다. 이를 고려하여 모든 함수의 정의를 스크립트 맨 위에 위치시키면 가독성이 저하되고 관리하기 매우 힘들어질 수 있다. 함수 프로토타입(prototype), 일명 전방선언(forward declaration)은 컴파일러에게 미리 함수의 존재를 알려 선언한다. 프로토타입은 선택사항이며, 함수를 실행하기 전에 먼저 선언되도록 대체로 스크립트의 상단부에 위치한다.
+함수가 정의하기도 전에 호출되면 순차적으로 실행되는 C++ 프로그래밍 언어 특성상 존재하지 않는 함수를 호출하는 것으로 간주되어 오류가 발생한다. 함수 [프로토타입](https://en.cppreference.com/w/c/language/function_declaration)(prototype), 일명 전방선언(forward declaration)은 컴파일러에게 미리 함수의 존재를 알려주어 정의되기 전에 호출할 수 있다. 프로토타입은 선택사항이며, 우선적으로 선언될 수 있게 스크립트 상단부에 기입하는 게 일반적이다.
 
 ```cpp
 /* 함수 프로토타입 */
-int function();
+void function();
 
 /* 함수 호출 */
 function();
 
 /* 함수 정의 */
-int function()
+void function()
 {
-    return 1 + 2;
+    std::cout << 1 + 2;
 }
 ```
 
-함수 내에서 또 다른 함수를 정의하는 것은 C++ 프로그래밍 언어에서 허용되지 않는다.
+함수명 뒤에 소괄호 `()` 기입여부에 따라 의미하는 바가 다르다.
+
+* `function()`은 함수에 정의된 코드를 실행한다.
+
+    ```cpp
+  void function()
+  {
+      std::cout << 1 + 2 << std::endl;
+  }
+
+  function();
+  std::cout << "반환: " << function(); // [C2679] 이항 '<<': 'void' 형식의 오른쪽 피연산자를 사용 하는 연산자가 없거나 허용 되는 변환이 없습니다.
+    ```
+    ```
+  3
+    ```
+
+* `function`은 함수의 [메모리 주소](#c-포인터)를 가리킨다.
+
+    ```cpp
+  void function()
+  {
+      std::cout << 1 + 2 << std::endl;
+  }
+
+  function;
+  std::cout << "반환: " << function;
+    ```
+    ```
+  반환: 002713B1
+    ```
+
+함수 안에 새로운 함수를 정의하는 것은 C++ 프로그래밍 언어에서 허용되지 않는다.
 
 ### `return` 반환문
-`return` 반환문은 함수로부터 데이터를 함수에 지정된 자료형으로 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수의 자료형이 `void`이면 반환문은 필요가 없으나, 조기 종료를 위해 아무런 데이터를 반환하지 않는 `return;`을 사용할 수 있다.
+[`return`](https://en.cppreference.com/w/cpp/language/return) 반환문은 함수로부터 데이터를 함수에 지정된 자료형으로 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수의 자료형이 `void`이면 반환문은 필요가 없으나, 흔히 함수를 조기에 종료하기 위해서도 사용된다.
+
+```cpp
+// return 반환문이 있는 사용자 정의 함수
+int function()
+{
+    printf("Hello World!\n");
+    return 3;
+}
+    
+std::cout << function();
+```
+```
+Hello World!
+3
+```
 
 ### 매개변수 및 전달인자
 다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
@@ -949,11 +996,8 @@ float function(float arg1, float arg2) {
 }
 ```
 
-## 시작점
-시작점(entry point)는 프로그램이 시작되는 부분을 의미한다. 시작점은 프로토타입 및 호출이 존재하지 않으며, 유일해야 하므로 복수의 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다. C++ 프로그래밍 언어의 시작점은 크게 세 가지로 분류되며, 이들의 프로그램 종류에 따라 활용도가 구분된다.
-
-### `main()` 함수
-`main()` 함수는 C++ 콘솔 어플리케이션의 시작점이다.
+## 진입점
+[진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)는 프로그램이 시작되는 부분을 의미하며, C++ 프로그래밍 언어의 경우 [`main()`](https://en.cppreference.com/w/cpp/language/main_function) 함수에서부터 코드가 실행된다. 진입점은 프로토타입 및 호출이 존재하지 않으며, 유일해야 하므로 복수의 `main()` 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
 
 ```cpp
 int main(int argc, char **argv)
@@ -968,7 +1012,7 @@ int main(int argc, char **argv)
 
 C++ 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을 반환해야 하며, `EXIT_SUCCESS`(혹은 정수 `0`) 그리고 `EXIT_FAILURE`이 있다. 만일 반환문이 없을 시, 컴파일러는 자동적으로 `return 0;` 문장을 `main()` 함수의 말단에 삽입한다.
 
-`main()` 시작점은 아래와 같은 매개변수를 함축적으로 가진다.
+`main()` 진입점은 아래와 같은 매개변수를 함축적으로 가진다.
 
 * **`argc`**: 전달인자 개수(argument count).
 * **`argv`**: 전달인자 데이터 배열(argument vector); 매개변수 정의는 `char *argv[]`로 대체 가능하다.
@@ -979,30 +1023,14 @@ C++ 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `int
 ./app.exe option1 option2
 ```
 
-| 전달인자 | 데이터        |
-|:---------:| ----------- |
-| `argv[0]` | `./app.exe` |
-| `argv[1]` | `option1`   |
-| `argv[2]` | `option2`   |
-
-한편, 윈도우 OS는 `wmain()` 함수라는 독자적인 시작점을 가지며, 이는 UTF-8 유니코드(1~4바이트)로 인코딩된 확장 문자(wide character)를 통해 더 많은 언어를 지원한다.
-
-```cpp
-/* 윈도우 OS 확장 문자 지원 C++ 언어 프로그램 시작점: wmain() */
-int wmain(int argc, wchar_t **argv)
-{
-    // 아래에 코드를 입력하세요.
-
-    return 0;
-}
-```
-
-확장 문자를 지원하는 `wmain()` 함수가 별도로 개발된 이유는 기존 C++ 프로그래밍 언어가 ASCII(1바이트)를 일반 인터페이스로 사용하는 UNIX 운영체제 기반에서 개발되었기 때문이다. 그러므로 윈도우 OS에서 일반 `main()` 시작점으로는 일부 언어(예를 들어 그리스 및 키릴 문자)를 표현할 수 없는 호환성 문제가 발생한다.
+| 매개변수: | `argc` | `argv[0]` | `argv[1]` | `argv[2]` |
+|:-------|:------:|:--------:|:----------:|:--------:|
+| 데이터:   | 3      | `./app.exe` | `option1` | `option2` |
 
 ### `WinMain()` 함수
 > *참조: [Microsoft Docs Win32 설명서 - WinMain() 함수 (영문)](https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain)*
 
-`WinMain()` 함수는 Win32나 MFC와 같은 GUI 프레임워크 어플리케이션의 시작점이다.
+`WinMain()` 함수는 Win32나 MFC와 같은 GUI 프레임워크 어플리케이션의 진입점이다.
 
 ```cpp
 int WinMain(HINSTANCE 	hInstance,
@@ -1020,12 +1048,12 @@ int WinMain(HINSTANCE 	hInstance,
 
 `WinMain()` 함수의 핵심 기능은 마우스 클릭이나 키보드 입력 등으로 발생된 메시지를 수신받아 해당 메시지를 처리할 수 있는 함수로 전달하는데, 이를 메시지 루프(Message Loop)라고 부른다. MFC 프레임워크를 활용한 프로그래밍은 [*APPLICATION_MFC*](/docs/ko.MFC) 문서에서 확인할 수 있다.
 
-`WM_QUIT` 메시지를 수신하면 시작점의 메시지 루프를 탈출하고 `WM_QUIT`의 *wParam* 매개변수를 반환하며 어플리케이션을 종료한다. 만일 메시지 루프 진입에 실패하였을 시 `return 0;` 문장이 실행되어 프로그램을 즉시 종료한다.
+`WM_QUIT` 메시지를 수신하면 진입점의 메시지 루프를 탈출하고 `WM_QUIT`의 *wParam* 매개변수를 반환하며 어플리케이션을 종료한다. 만일 메시지 루프 진입에 실패하였을 시 `return 0;` 문장이 실행되어 프로그램을 즉시 종료한다.
 
 ### `DllMain()` 함수
 > *참조: [Microsoft Docs Win32 설명서 - DllMain() 함수 (영문)](https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain)*
 
-`DllMain()` 함수는 `.dll` 확장자를 가지는 동적링크 라이브러리의 시작점이다.
+`DllMain()` 함수는 `.dll` 확장자를 가지는 동적링크 라이브러리의 진입점이다.
 
 ```cpp
 int DllMain(_In_ HINSTANCE hinstDLL,
@@ -1038,7 +1066,7 @@ int DllMain(_In_ HINSTANCE hinstDLL,
 ```
 
 ## 콜백 함수
-콜백 함수(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 코드 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
+[콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 코드 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
 
 > 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
 
@@ -1046,25 +1074,26 @@ int DllMain(_In_ HINSTANCE hinstDLL,
 
 ```cpp
 /* 호출 함수 */
-int calling(float (*function)(int, float), int arg)
+float calling(float (*function)(int, float), int arg)
 {
     // 콜백 함수의 호출
-    float var = function(arg, 3.0);
-    return var;
+    return function(arg, 3.14159);
 }
 
 /* 콜백 함수 */
-int callback(int arg1, float arg2)
+float callback(int arg1, float arg2)
 {
-    return arg1 + arg2;
+    return (float)arg1 + arg2;
 }
 
-// 그러므로...
-calling(&callback, 1);    // >> 출력: 4.0
+std::cout << calling(callback, 1);
+```
+```
+4.141590
 ```
 
 ## 재귀 함수
-재귀 함수(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없을 시, 재귀는 무한히 발생하여 메모리 부족으로 프로세스 충돌이 발생한다.
+[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없을 시, 재귀는 무한히 발생하여 메모리 부족으로 프로세스 충돌이 발생한다.
 
 ```cpp
 /* 예제: 펙토리얼 "!" */
@@ -2502,7 +2531,7 @@ Pragma 지시문(pragma directive)은 컴파일러의 기능과 옵션을 설정
 `#include` 포함 지시문(inclusive directive)은 전처리기 지시문 중 하나로 대표적으로 `iostream`과 같은 헤더 파일을 불러오는데 매번 사용된다. 헤더 파일에 선언된 기능들을 불러오는데 사용된 `#include` 지시문의 정확한 기능은 헤더 파일의 전체 코드를 지시문이 위치한 곳에 그대로 붙여넣는다.
 
 ### 헤더와 소스 파일 나누기
-문서 초반에 처음 언급된 소스(source) 파일과 [헤더](#헤더-파일)(header) 파일의 역할을 다시 정리하면 전자는 데이터나 함수의 정의, 그리고 후자는 데이터나 함수의 선언이 위주인 스크립트이다. 다만, 시작점인 `main()` 함수는 선언부가 없다는 점을 고려하면 메인 스크립트를 다음과 같이 구성할 수 있다.
+문서 초반에 처음 언급된 소스(source) 파일과 [헤더](#헤더-파일)(header) 파일의 역할을 다시 정리하면 전자는 데이터나 함수의 정의, 그리고 후자는 데이터나 함수의 선언이 위주인 스크립트이다. 다만, 진입점인 `main()` 함수는 선언부가 없다는 점을 고려하면 메인 스크립트를 다음과 같이 구성할 수 있다.
 
 ```cpp
 /* 헤더 파일: main.h */
@@ -2607,7 +2636,7 @@ A
 `extern` 키워드를 사용하면 변수는 여러 번 선언이 가능하다. `module.cpp` 소스 파일과 메인 스크립트에서 중복 선언은 컴파일 작업에 아무런 문제를 야기하지 않는다. 허나, 선언된 변수를 사용하기 위해서는 단 한 번의 정의가 반드시 필요하다. 이러한 이유로 `module.cpp`에 `char variable = 'A';` 정의가 존재하는 것이며, 메인 스크립트에서는 `variable` 전역 변수의 값을 그대로 출력할 수 있게 된다.
 
 ## 라이브러리
-[라이브러리](https://ko.wikipedia.org/wiki/라이브러리_(컴퓨팅))(library)는 함수 기능 및 데이터 호출을 제공하는 이진파일이며 `main()` 시작점을 갖지 않는다. 본 문서도 여태까지 C++ 프로그래밍 언어의 표준 라이브러리인 `libc++`(Visual C++ 컴파일러에서는 `stl`)을 `iostream` 헤더 파일로 불러와 사용하고 있었다. 마찬가지로 소스 코드를 라이브러리로 만들어 헤더 파일과 함께 배포하면 누군든지 라이브러리의 함수 기능과 데이터를 활용할 수 있다. 또한 이진파일 컴파일되었기 때문에 저장공간 절약과 소스 코드 유출 방지를 함께 꾀할 수 있다.
+[라이브러리](https://ko.wikipedia.org/wiki/라이브러리_(컴퓨팅))(library)는 함수 기능 및 데이터 호출을 제공하는 이진파일이며 `main()` 진입점을 갖지 않는다. 본 문서도 여태까지 C++ 프로그래밍 언어의 표준 라이브러리인 `libc++`(Visual C++ 컴파일러에서는 `stl`)을 `iostream` 헤더 파일로 불러와 사용하고 있었다. 마찬가지로 소스 코드를 라이브러리로 만들어 헤더 파일과 함께 배포하면 누군든지 라이브러리의 함수 기능과 데이터를 활용할 수 있다. 또한 이진파일 컴파일되었기 때문에 저장공간 절약과 소스 코드 유출 방지를 함께 꾀할 수 있다.
 
 ![비주얼 스튜디오 라이브러리 컴파일 설정](/images/docs/shared/c_cpp_library.png)
 

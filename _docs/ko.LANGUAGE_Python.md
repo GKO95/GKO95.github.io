@@ -449,6 +449,30 @@ else:
 True_return if condition else False_return
 ```
 
+## `match` 조건문
+> 본 조건문은 파이썬 3.10부터 추가된 기능으로, 자세한 내용은 [PEP 643](https://www.python.org/dev/peps/pep-0634/)을 참고한다.
+
+`match` 조건문은 전달받은 인자를 `case`의 패턴과 일치하는지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 그 중에서 밑줄 `_` 조건을 와일드카드(wildcard) 패턴이라 하여 무조건 실행되는 지점이다.
+
+```python
+match argument:
+
+    case pattern1:
+        ...
+
+    case pattern2:
+        ...
+
+    case pattern3:
+        ...
+
+    case _:
+        ...
+}
+```
+
+`match` 조건문은 타 프로그래밍 언어에서 소개되는 `switch` 조건문과 유사한 구조와 동작을 수행한다. 그러나 몇 가지 차이점이 있다면 `case` 문의 코드가 실행된 이후에 자동적으로 `match` 조건문이 종료되어 별도의 [`break`](#break-문) 문이 필요하지 않다. 또한 패턴 뒤에 `if` 문을 기입하는 감시(guard) 표현식으로 부가적인 조건 일치여부를 거칠 수 있다.
+
 ## `while` 반복문
 `while` 반복문은 조건 혹은 논리가 참(`True`)일 동안 코드를 반복적으로 실행하며, 거짓(`False`)일 경우에는 반복문을 종료한다.
 
@@ -805,11 +829,11 @@ function()
       print("Hello World!")
 
   variable = function()
-  print(variable)
+  print("반환:", variable)
     ```
     ```
   Hello World!
-  None
+  반환: None
     ```
 
 * `function`은 함수 자체를 가리킨다.
@@ -819,10 +843,10 @@ function()
       print("Hello World!")
 
   variable = function
-  print(variable)
+  print("반환:", variable)
     ```
     ```
-  <function function at 0x0000027FB6A57160>
+  반환: <function function at 0x0000027FB6A57160>
     ```
 
 ### `return` 반환문
