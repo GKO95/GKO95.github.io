@@ -153,7 +153,7 @@ C++ 프로그래밍 언어로 다양할 어플리케이션을 만들 수 있어,
 Visual C++에서는 `pch.h` (비주얼 스튜디오 2017 이전에는 `stdafx.h`)가 컴파일된 헤더 파일이다.
 
 ## 주석
-주석(comment)은 프로그래밍에 있어 실행되지 않는 부분이며, 흔히 어떠한 정보를 간략히 스크립트 내에 입력하는데 사용된다. C++ 프로그래밍 언어에는 두 가지의 주석이 존재하며, 이들은 각각 한줄 주석과 블록 주석이라 부른다.
+[주석](https://en.cppreference.com/w/cpp/comment)(comment)은 프로그래밍에 있어 실행되지 않는 부분이며, 흔히 어떠한 정보를 간략히 스크립트 내에 입력하는데 사용된다. C++ 프로그래밍 언어에는 두 가지의 주석이 존재하며, 이들은 각각 한줄 주석과 블록 주석이라 부른다.
 
 * **한줄 주석 (line comment)**: 코드 한 줄을 차지하는 주석이며, 두 개의 슬래시 `//`로 표시된다.
 * **블록 주석 (block comment)**: 코드 여러 줄을 차지하는 주석이며, 한 쌍의 슬래시와 별표 `/* */`로 표시된다.
@@ -187,73 +187,8 @@ Visual C++에서는 `pch.h` (비주얼 스튜디오 2017 이전에는 `stdafx.h`
   if (2 < 3) statement;      // 논리가 참이면 "statement" 문장 실행
     ```
 
-## 식별자
-[식별자](https://ko.wikipedia.org/wiki/식별자#컴퓨터_언어)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C++ 프로그래밍 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
-
-* 오직 영문, 숫자, 밑줄 `_`만 허용된다.
-* 첫 문자는 숫자로 시작할 수 없다.
-* 공백은 허용되지 않는다.
-* 대소문자를 구분한다.
-
-## 네임스페이스
-[네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)는 식별자의 유일성을 보장하기 위한 데이터 분류 공간으로, `namespace` 키워드를 통해 생성하여 코드 블록 `{}` 안에 데이터들을 분류한다. 
-
-> 여기서 [코드 블록](https://ko.wikipedia.org/wiki/블록_(프로그래밍))(code block)이란, 소스 코드 문장을 그룹화시키는 요소로 중괄호 `{}`로 블록을 명시한다.
-
-이는 마치 동일한 이름의 파일을 서로 다른 폴더에 넣어 관리하는 것과 동일한 개념이다. 하지만 네임스페이스 또한 유일한 식별자를 가져야 하기 때문에 동일한 영역범위에 놓여진 네임스페이스는 이름이 중복되어서는 안된다. 네임스페이스 안에 또 다른 네임스페이스를 정의할 수 있다. 네임스페이스에 들어있는 데이터를 접근하기 위해서는 범위결정 연산자(scope resolution operator) `::`를 사용한다. 
-
-```cpp
-/* 네임스페이스 1 정의 */
-namespace namespace1
-{
-    namespace nested
-    {
-        void function() {...}
-    }
-}
-
-/* 네임스페이스 2 정의 */
-namespace namespace2
-{
-    namespace nested
-    {
-        void fucntion() {...}
-    }
-}
-
-namespace1::nested::function();
-namespace2::nested::function();
-```
-
-### 전역 네임스페이스
-전역 네임스페이스(global namespace)는 어느 네임스페이스에도 속하지 않는 최외각 영역범위이다. 전역 네임스페이스는 범위결정 연산자 `::`를 식별자의 접두부에 기입하여 명시한다. 
-
-```cpp
-::namespace1::nested::function();
-::namespace2::nested::function();
-```
-
-### `using` 키워드
-`using` 키워드는 네임스페이스 내의 데이터를 간편하게 접근할 수 있도록 한다. 다시 말해, 네임스페이스 명시없이 데이터 호출이 가능하도록 만든다. 그러나 `using` 키워드의 무분별한 남용은 컴파일러가 어느 네임스페이스의 데이터를 호출하는 것인지 구별하지 못하는 오류가 발생할 위험이 있다.
-
-* **[`using` 선언](https://en.cppreference.com/w/cpp/language/namespace#Using-declarations)(using-declaration)**
-
-    네임스페이스 내의 개별 데이터를 선택적으로 간략화시킨다.
-
-    ```cpp
-  using NAMESPACE::function();
-    ```
-
-* **[`using` 지시문](https://en.cppreference.com/w/cpp/language/namespace#Using-directives)(using-directive)**
-
-    네임스페이스 전체를 생략한다.
-
-    ```cpp
-  using namespace NAMESPACE;
-    ```
-
 ## 입력 및 출력
-C++ 프로그래밍 언어는 `iostream` 헤더 파일의 `std` 네임스페이스 안에 텍스트 입력 및 출력 기능이 들어있으며, 각각 추출 연산자 `>>`와 삽입 연산자 `<<`를 함께 사용한다.
+C++ 프로그래밍 언어는 [`iostream`](https://en.cppreference.com/w/cpp/header/iostream) 헤더로부터 입출력 기능을 제공하며, 각각 추출 연산자 `>>`와 삽입 연산자 `<<`를 함께 사용한다.
 
 * **입력 객체 `std::cin`**
 
@@ -279,7 +214,7 @@ std::cout << "출력: " << variable;
 ```
 
 ### 줄바꿈 조작자
-줄바꿈 조작자(new-line manipulator; `std::endl`)는 C++ 표준 라이브러리로 텍스트 줄바꿈을 시전한다:
+[줄바꿈 조작자](https://en.cppreference.com/w/cpp/io/manip/endl)(new-line manipulator) `std::endl`는 C++ 표준 라이브러리에서 제공하는 텍스트 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)(newline)이다.
 
 ```cpp
 std::cout << "Hello" << std::endl << "World!"; 
@@ -288,6 +223,14 @@ std::cout << "Hello" << std::endl << "World!";
 Hello
 World!
 ```
+
+## 식별자
+[식별자](https://ko.wikipedia.org/wiki/식별자#컴퓨터_언어)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C++ 프로그래밍 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
+
+* 오직 영문, 숫자, 밑줄 `_`만 허용된다.
+* 첫 문자는 숫자로 시작할 수 없다.
+* 공백은 허용되지 않는다.
+* 대소문자를 구분한다.
 
 ## 자료형
 [자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터의 내용물이 어떻게 표현되는지 결정하는 요소이며, C++ 프로그래밍 언어에서는 여러 자료형이 존재한다. 각 자료형마다 데이터를 표현하기 위해 필요한 바이트 크기가 정해져 있다.
@@ -309,7 +252,7 @@ World!
 | `auto`   | 자동        | 적절한 자료형으로 자동 선택.<br />복잡한 자료형을 간략히 정의하는데 매우 유용하다.             |
 | `void`   | 보이드       | 불특정 자료형.<br />크기: 1바이트                                        |
 
-여기서 `int` 정수 자료형의 바이트 크기가 2 또는 4바이트라고 기입된 것을 주목한다. C 프로그래밍 언어 국제표준에 의하면 `int` 정수형은 "최소" 16비트(즉, 2바이트)를 가져야 한다고 명시되어 있다. 이전 컴퓨터가 16비트 시스템이었다는 점을 감안한 것으로, 현재는 32비트 시스템에 맞게 대중적으로 4바이트 크기를 갖는다.
+여기서 `int` 정수 자료형의 바이트 크기가 2 또는 4바이트라고 기입된 것을 주목한다. C++ 프로그래밍 언어 국제표준에 의하면 `int` 정수형은 "최소" 16비트(즉, 2바이트)를 가져야 한다고 명시되어 있다. 이전 컴퓨터가 16비트 시스템이었다는 점을 감안한 것으로, 현재는 32비트 시스템에 맞게 대중적으로 4바이트 크기를 갖는다.
 
 ### `unsigned` 키워드
 `unsigned` 키워드는 자료형 중에서 [최상위 비트](https://ko.wikipedia.org/wiki/최상위_비트)를 정수의 [부호](https://ko.wikipedia.org/wiki/Signed와_unsigned)를 결정하는 요소로 사용하지 않도록 한다. 아래의 16비트 정수형인 `short`는 원래 최상위 비트를 제외한 나머지 15개의 비트로 정수를 표현한다. `unsigned` 키워드를 사용하면 음의 정수를 나타낼 수 없지만, 16개의 비트로 양의 정수를 더 많이 표현할 수 있다.
@@ -319,8 +262,8 @@ short             // 표현 가능 범위: -32768 ~ +32767
 unsigned short    // 표현 가능 범위:     +0 ~ +65535
 ```
 
-### `sizeof()` 함수
-`sizeof()` 함수는 데이터나 자료형가 메모리에 할당된 바이트 크기를 반환한다.
+### `sizeof` 연산자
+[`sizeof`](https://en.cppreference.com/w/cpp/language/sizeof) 연산자는 데이터나 자료형가 메모리에 할당된 바이트 크기를 반환한다.
 
 ```cpp
 sizeof(int);      // 크기: 4바이트
@@ -413,6 +356,64 @@ C++ 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되�
       return 0;
   }
     ```
+
+## 네임스페이스
+[네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)는 식별자의 유일성을 보장하기 위한 데이터 분류 공간으로, `namespace` 키워드를 통해 생성하여 코드 블록 `{}` 안에 데이터들을 분류한다. 
+
+> 여기서 [코드 블록](https://ko.wikipedia.org/wiki/블록_(프로그래밍))(code block)이란, 소스 코드 문장을 그룹화시키는 요소로 중괄호 `{}`로 블록을 명시한다.
+
+이는 마치 동일한 이름의 파일을 서로 다른 폴더에 넣어 관리하는 것과 동일한 개념이다. 하지만 네임스페이스 또한 유일한 식별자를 가져야 하기 때문에 동일한 영역범위에 놓여진 네임스페이스는 이름이 중복되어서는 안된다. 네임스페이스 안에 또 다른 네임스페이스를 정의할 수 있다. 네임스페이스에 들어있는 데이터를 접근하기 위해서는 범위결정 연산자(scope resolution operator) `::`를 사용한다. 
+
+```cpp
+/* 네임스페이스 1 정의 */
+namespace namespace1
+{
+    namespace nested
+    {
+        void function() {...}
+    }
+}
+
+/* 네임스페이스 2 정의 */
+namespace namespace2
+{
+    namespace nested
+    {
+        void fucntion() {...}
+    }
+}
+
+namespace1::nested::function();
+namespace2::nested::function();
+```
+
+### 전역 네임스페이스
+전역 네임스페이스(global namespace)는 어느 네임스페이스에도 속하지 않는 최외각 영역범위이다. 전역 네임스페이스는 범위결정 연산자 `::`를 식별자의 접두부에 기입하여 명시한다. 
+
+```cpp
+::namespace1::nested::function();
+::namespace2::nested::function();
+```
+
+### `using` 키워드
+`using` 키워드는 네임스페이스 내의 데이터를 간편하게 접근할 수 있도록 한다. 다시 말해, 네임스페이스 명시없이 데이터 호출이 가능하도록 만든다. 그러나 `using` 키워드의 무분별한 남용은 컴파일러가 어느 네임스페이스의 데이터를 호출하는 것인지 구별하지 못하는 오류가 발생할 위험이 있다.
+
+* **[`using` 선언](https://en.cppreference.com/w/cpp/language/namespace#Using-declarations)(using-declaration)**
+
+    네임스페이스 내의 개별 데이터를 선택적으로 간략화시킨다.
+
+    ```cpp
+  using NAMESPACE::function();
+    ```
+
+* **[`using` 지시문](https://en.cppreference.com/w/cpp/language/namespace#Using-directives)(using-directive)**
+
+    네임스페이스 전체를 생략한다.
+
+    ```cpp
+  using namespace NAMESPACE;
+    ```
+
 
 ## 자료형 변환
 자료형 변환(type casting)은 상수 혹은 변수로부터 호출한 데이터를 강제로 다른 자료형으로 바꾸는 작업이다.
@@ -806,12 +807,12 @@ std::vector<int> vec;
 함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
 ```cpp
-int variable[4] = {0, 3, 5, 9};
-std::cout << sizeof(variable);
-// 바이트 용량을 반환하는 "sizeof()" 함수
+float variable = 3.14159
+std::cout << std::round(variable);
+// 실수의 소수점을 반올림하는 "std::round()" 함수
 ```
 ```
-16
+3
 ```
 
 함수의 기능을 정의(definition)하기 위해서는 두 가지의 구성요소가 반드시 필요하다:
