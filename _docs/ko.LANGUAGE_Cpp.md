@@ -319,7 +319,7 @@ char variable2 = 75;    // variable2에는 문자 'K'가 저장
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
 ### 상수
-상수(constant)는 한 번 데이터를 할당한 후 변경할 수 없는 특별한 변수이며, `const` 키워드와 함께 정의한다.
+[상수](https://en.cppreference.com/w/cpp/language/constant_expression)(constant)는 한 번 데이터를 할당한 후 변경할 수 없는 특별한 변수이며, `const` 키워드와 함께 정의한다.
 
 ```cpp
 /* 상수 정의 */
@@ -328,6 +328,8 @@ const int variable = 1;
 
 ### 지역 변수 및 전역 변수
 C++ 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되었는지에 따라 두 가지의 종류로 구분된다.
+
+> 그 전에 [코드 블록](https://ko.wikipedia.org/wiki/블록_(프로그래밍))(code block)이란, 소스 코드 문장을 그룹화시키는 요소로 중괄호 `{}`로 블록을 명시한다.
 
 * **지역 변수(local variable)**
 
@@ -358,11 +360,11 @@ C++ 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되�
     ```
 
 ## 네임스페이스
-[네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)는 식별자의 유일성을 보장하기 위한 데이터 분류 공간으로, `namespace` 키워드를 통해 생성하여 코드 블록 `{}` 안에 데이터들을 분류한다. 
+[네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)는 식별자의 유일성을 보장하기 위한 데이터 분류 공간으로, `namespace` 키워드를 통해 생성하여 코드 블록 `{}` 안에 데이터들을 분류한다. 네임스페이스 안에 또 다른 네임스페이스를 정의할 수 있으며, 이를 네스티드 네임스페이스(nested namespace)라고 부른다. 그러나 네임스페이스 또한 유일한 식별자를 가져야 하기 때문에 동일한 [영역범위](https://docs.microsoft.com/en-us/cpp/cpp/scope-visual-cpp)(scope)에 놓여진 네임스페이스는 이름이 중복되어서는 안된다.
 
-> 여기서 [코드 블록](https://ko.wikipedia.org/wiki/블록_(프로그래밍))(code block)이란, 소스 코드 문장을 그룹화시키는 요소로 중괄호 `{}`로 블록을 명시한다.
+> 서로 다른 이름의 폴더<sub>네임스페이스</sub> 안에 동명의 파일<sub>데이터</sub> 혹은 폴더<sub>네스티드 네임스페이스</sub>를 보관할 수 있는 것과 같은 개념이다.
 
-이는 마치 동일한 이름의 파일을 서로 다른 폴더에 넣어 관리하는 것과 동일한 개념이다. 하지만 네임스페이스 또한 유일한 식별자를 가져야 하기 때문에 동일한 영역범위에 놓여진 네임스페이스는 이름이 중복되어서는 안된다. 네임스페이스 안에 또 다른 네임스페이스를 정의할 수 있다. 네임스페이스에 들어있는 데이터를 접근하기 위해서는 범위결정 연산자(scope resolution operator) `::`를 사용한다. 
+네임스페이스에 들어있는 데이터 및 네스트디 네임스페이스를 접근하기 위해서는 범위지정 연산자(scope resolution operator) `::`를 사용한다. 
 
 ```cpp
 /* 네임스페이스 1 정의 */
@@ -370,7 +372,7 @@ namespace namespace1
 {
     namespace nested
     {
-        void function() {...}
+        int variable = 3;
     }
 }
 
@@ -379,24 +381,28 @@ namespace namespace2
 {
     namespace nested
     {
-        void fucntion() {...}
+        int variable = 7;
     }
 }
 
-namespace1::nested::function();
-namespace2::nested::function();
+std::cout << namespace1::nested::variable << std::endl;    // 출력: 3
+std::cout << namespace2::nested::variable << std::endl;    // 출력: 7
 ```
 
+여기서 입력 및 출력 앞단에 위치한 `std`는 표준 네임스페이스(standard namespace)로 C++ 표준 라이브러리에 정의된 데이터를 관리한다.
+
 ### 전역 네임스페이스
-전역 네임스페이스(global namespace)는 어느 네임스페이스에도 속하지 않는 최외각 영역범위이다. 전역 네임스페이스는 범위결정 연산자 `::`를 식별자의 접두부에 기입하여 명시한다. 
+전역 네임스페이스(global namespace)는 어느 네임스페이스에도 속하지 않는 최외각 영역범위이다. 전역 네임스페이스는 범위지정 연산자 `::`를 식별자의 접두부에 기입하여 명시한다. 
+
+다음은 위의 예시 코드에 전역 네임스페이스를 명시하여 데이터를 호출한 것이다.
 
 ```cpp
-::namespace1::nested::function();
-::namespace2::nested::function();
+::namespace1::nested::variable;
+::namespace2::nested::variable;
 ```
 
 ### `using` 키워드
-`using` 키워드는 네임스페이스 내의 데이터를 간편하게 접근할 수 있도록 한다. 다시 말해, 네임스페이스 명시없이 데이터 호출이 가능하도록 만든다. 그러나 `using` 키워드의 무분별한 남용은 컴파일러가 어느 네임스페이스의 데이터를 호출하는 것인지 구별하지 못하는 오류가 발생할 위험이 있다.
+`using` 키워드는 네임스페이스 내의 데이터를 간편하게 접근할 수 있도록 한다. 즉, 네임스페이스를 별도로 명시하지 않아도 데이터 호출이 가능하게 한다. 하지만 `using` 키워드의 무분별한 남용은 컴파일러가 어느 네임스페이스의 데이터를 호출하는 것인지 구별하지 못하게 하여 오류가 발생할 위험이 높다.
 
 * **[`using` 선언](https://en.cppreference.com/w/cpp/language/namespace#Using-declarations)(using-declaration)**
 
@@ -2055,7 +2061,7 @@ enum class ENUMERATION2 {
 };
 ```
 
-일반 열거형과 달리, 열거형 클래스는 정수형 변수에 할당할 수 없다. 또한, 열거자는 반드시 열거형 클래스로부터 범위결정 연산자 `::`를 통해 호출해야 한다.
+일반 열거형과 달리, 열거형 클래스는 정수형 변수에 할당할 수 없다. 또한, 열거자는 반드시 열거형 클래스로부터 범위지정 연산자 `::`를 통해 호출해야 한다.
 
 ```cpp
 /* 열거형 클래스 할당 */
