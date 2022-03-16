@@ -453,7 +453,7 @@ static_cast<double>(variable);
 ```
 
 ### `const_cast` 연산자
-[`constant_cast`](https://en.cppreference.com/w/cpp/language/const_cast) 연산자는 상수 전용 자료형 캐스팅 연산자이며, 상수의 자료형 이외에도 값 또한 [참조](#참조)를 통해 변경할 수 있다.
+[`const_cast`](https://en.cppreference.com/w/cpp/language/const_cast) 연산자는 상수 전용 자료형 캐스팅 연산자이며, 상수의 자료형 이외에도 값 또한 [참조](#참조)를 통해 변경할 수 있다.
 
 ```cpp
 const int A = 3;                 // 변환 이전: A = 3
@@ -462,7 +462,7 @@ int *B = const_cast<int *>(&A);
 ```
 
 ### `dynamic_cast` 연산자
-[`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast) 연산자는 [다형성](#다형성)(polymorphism)을 처리하는데 사용되는 자료형 캐스팅 연산자이다. 클래스 및 객체 변환을 위한 것으로 해당 내용은 [클래스](#c-클래스)에서 자세히 설명한다.
+[`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast) 연산자는 [클래스](#c-클래스) 혹은 [객체](#c-클래스)의 [다형성](#다형성)(polymorphism)을 처리하는데 사용되는 자료형 캐스팅 연산자이다.
 
 ```cpp
 derivedClass *A = new derivedClass;
@@ -470,7 +470,7 @@ baseClass *B = dynamic_cast<baseClass *>(A);
 ```
 
 ### `reinterpret_cast` 연산자
-[`reinterpret_cast`](https://en.cppreference.com/w/cpp/language/reinterpret_cast) 연산자는 포인터를 다른 자료형의 포인터로 변환하는데 사용되는 자료형 캐스팅 연산자이다. 차후 [포인터](#c-포인터)에 대하여 자세히 설명할 예정이다.
+[`reinterpret_cast`](https://en.cppreference.com/w/cpp/language/reinterpret_cast) 연산자는 [포인터](#c-포인터)를 다른 자료형의 포인터로 변환하는데 사용되는 자료형 캐스팅 연산자이다.
 
 ```cpp
 int *variable = 3
@@ -536,8 +536,8 @@ reinterpret_cast<double *>(variable)
 
 | 연산자  | 논리  | 설명                                        |
 |:----:|-----|-------------------------------------------|
-| `&&` | 논리곱 | 모든 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`를 반환한다.     |
-| `||` | 논리합 | 하나 이상의 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`를 반환한다. |
+| `&&` | 논리곱 | 모든 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`을 반환한다.     |
+| `||` | 논리합 | 하나 이상의 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`을 반환한다. |
 | `!`  | 보수  | 참을 거짓으로, 또는 거짓을 참으로 변경한다.                 |
 
 ## 탈출 문자
@@ -558,8 +558,7 @@ World!
 `if` 조건문은 조건 혹은 논리가 참(`true`)일 경우 코드를 실행하며, 거짓(`false`)일 경우에는 코드를 실행하지 않는다.
 
 ```cpp
-if (condition)
-{
+if (condition) {
     statements;
 }
 
@@ -571,12 +570,10 @@ if (condition) statement;
 `else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 조건부가 거짓(`false`)으로 판정되면 실행할 코드를 포함한다.
 
 ```cpp
-if (condition)
-{
+if (condition) {
     statements;
 }
-else
-{
+else {
     statements; 
 }
 ```
@@ -585,35 +582,29 @@ else
 `else if` 조건문은 `else`와 `if` 조건문의 조합으로 이전 조건이 거짓(`false`)일 때 새로운 조건을 제시한다.
 
 ```cpp
-if (condition)
-{
+if (condition) {
     statements;
 }
-else if (condition)
-{
+else if (condition) {
     statements;
 }
-else
-{
+else {
     statements;
 }
 ```
 
 ## 조건 연산자
-조건 연산자(ternary operator; `?:`)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다.
+[조건 연산자](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator)(ternary operator) `?:`는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
 
 ```cpp
 condition ? true_return : false_return;
 ```
 
-조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
-
 ## `switch` 조건문
 `switch` 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
 
 ```cpp
-switch (argument)
-{
+switch (argument) {
 case value1:
     statements;
     break;
@@ -637,8 +628,7 @@ default:
 int variable = 2;
 
 // switch 조건문의 동작 예시
-switch (variable)
-{
+switch (variable) {
 case 1:
     std::cout << "Statement 1" << std::endl;
 
@@ -659,11 +649,10 @@ Statement 4
 ```
 
 ## `while` 반복문
-`while` 반복문은 조건 혹은 논리가 참(`true`)일 동안 코드를 반복적으로 실행하며, 거짓(`false`)일 경우에는 반복문을 종료한다.
+`while` 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다.
 
 ```cpp
-while (condition)
-{
+while (condition) {
     statements;
 }
 
@@ -675,24 +664,22 @@ while (condition) statement;
 `do`-`while` 반복문은 코드를 우선 실행하고 조건 혹은 논리가 참(`true`)일 경우 코드를 반복하며, 거짓(`false`)일 경우에는 반복문을 종료한다.
 
 ```cpp
-do
-{
+do {
     statements;
 } while (condition);
 ```
 
 ### `break` 문
-`break` 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
+[`break`](https://en.cppreference.com/w/cpp/language/break) 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
 
 ### `continue` 문
-`continue` 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
+[`continue`](https://en.cppreference.com/w/cpp/language/continue) 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
 
 ## `for` 반복문
 `for` 반복문은 조건 혹은 논리가 참(`true`)일 동안 코드를 반복적으로 실행하며, 거짓(`false`)일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
 
 ```cpp
-for (initialize; condition; increment)
-{
+for (initialize; condition; increment) {
     statements;
 }
 
@@ -703,11 +690,10 @@ for (initialize; condition; increment) statement;
 `for` 반복문의 우선 `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한 다음 `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, `condition`으로 돌아가 절차를 반복한다.
 
 ### 범위형 `for` 반복문
-C++11부터 범위형 `for` 반복문이 새로 소개되었으며, 조건 만족 여부가 아닌 주어진 범위 내에서만 반복한다. 범위로 사용되는 데이터는 요소를 하나씩 나열할 수 있는 [시퀀스 컨테이너](#c-컨테이너)(sequence container)를 일반적으로 사용한다.
+C++11부터 범위형 `for` 반복문이 새로 소개되었으며, 조건 만족 여부에 따라 반복하는 게 아니라 주어진 범위 내에서 반복한다. 일반적으로 데이터 요소를 하나씩 나열할 수 있는 [시퀀스 컨테이너](#c-컨테이너)가 범위로 사용된다.
 
 ```cpp
-for (element : container)
-{
+for (element : container) {
 	statements;
 }
 
@@ -734,12 +720,12 @@ label:
 단, `goto` 이동문을 사용할 때에는 매우 조심해야 하며 무리한 남용은 [스파게티 코드](https://ko.wikipedia.org/wiki/스파게티_코드)의 원인이 된다.
 
 # C++: 컨테이너
-C++ 프로그래밍 언어는 여러 데이터를 하나의 변수에 저장하는 컨테이너(container)를 생성할 수 있다. 컨테이너는 여러 데이터를 한 번에 관리하는 편리성을 제공하여, 그 중에서 저장된 데이터가 순번을 가지는 컨테이너를 시퀀스 컨테이너(sequence container)라고 부른다. 본 장에서는 가장 흔히 사용되는 시퀀스 컨테이너를 중점으로 설명한다.
+C++ 프로그래밍 언어는 다수의 데이터를 변수 하나로 저장하는 [컨테이너](https://en.cppreference.com/w/cpp/container)(container)를 제공한다. 그 중에서 저장된 다수의 데이터, 일명 요소가 순번을 가지는 컨테이너를 [시퀀스 컨테이너](https://en.cppreference.com/w/cpp/container#Sequence_containers)(sequence container)라고 부른다. 본 장은 가장 흔히 사용되는 시퀀스 컨테이너를 중점으로 설명한다.
 
 ## 배열
 [배열](https://en.cppreference.com/w/cpp/language/array)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 정의 시 식별자 뒤에는 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 `size`를 [정수 리터럴](https://en.cppreference.com/w/cpp/language/integer_literal)(integer literal)이나 [상수](#상수)로 지정한다. 한 번 정의된 배열의 크기는 변경이 불가하다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 초기 데이터 개수는 배열 용량을 초과해서는 안되지만, 반면에 데이터 개수가 용량을 미치지 못하면 나머지는 `0` 혹은 `NULL`로 초기화된다.
 
-```c
+```cpp
 /* 배열 정의 1 */
 int arr[size] = {value1, value2, ... };
 
@@ -769,7 +755,7 @@ arr[1] = value2;
 arr[2] = value3;
 ```
 ### 배열의 크기
-`sizeof()` 함수가 배열에 사용되면 배열의 크기가 아닌, 배열이 차지하는 총 바이트 수를 반환한다. 배열의 각 요소마다 자료형만큼 메모리를 차지하므로 배열의 크기를 구하기 위해서는 다음과 같은 표현식을 사용한다. 자료형의 요소들로 구성된 배열을 해당 자료형으로 나누면 요소의 개수가 계산된다.
+`sizeof` 연산자가 배열에 사용되면 배열의 크기가 아닌, 배열이 차지하는 총 바이트 수를 반환한다. 배열의 각 요소마다 자료형만큼 메모리를 차지하므로 배열의 크기를 구하기 위해서는 다음과 같은 표현식을 사용한다. 자료형의 요소들로 구성된 배열을 해당 자료형으로 나누면 요소의 개수가 계산된다.
 
 ```cpp
 int arr[3];
@@ -790,22 +776,26 @@ int arr[][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 ```
 
 ## 배열 클래스
-[배열 클래스](https://en.cppreference.com/w/cpp/container/array)(array class)는 C 형식의 일반 배열과 기술적으로 동일하여 성능 차이가 없다. 단, 배열 클래스는 C++ 표준 라이브러리에서 추가로 제공하는 속성을 덕분에 접근성과 순차성이 훨씬 뛰어나 범위형 `for` 반복문과 같이 순차성이 요구되는 코드에 활용될 수 있다. 배열 클래스를 사용하기 위해서는 `<array>` 헤더를 추가해야 한다.
+[배열 클래스](https://en.cppreference.com/w/cpp/container/array)(array class)는 `<array>` 헤더로부터 제공되는 배열이며, 기술적인 방면에서 일반 [배열](#배열)과 동일하지만 C++ 표준 라이브러리에서 지원하는 추가 속성 덕분에 각 요소에 대한 접근성이 수월하다. 이러한 특성은 [범위형 `for` 반복문](#범위형-for-반복문)과 같이 순차성이 요구되는 코드에서 활용되는데 적합하다.
 
 ```cpp
 #include <array>
 
-// 배열 정의: C++ 표준 라이브러리
+/* 배열 정의: C++ 배열 클래스 */
 std::array<int, 3> arr;
 ```
 
 ## 벡터 클래스
-[벡터 클래스](https://en.cppreference.com/w/cpp/container/vector)(vector class)는 크기를 언제든지 변경할 수 있는 스퀀스 컨테이너이다. 배열과 달리, 벡터의 요소들은 개발자가 직접 할당해야 하는 별도의 [메모리 영역](#힙-영역)에 저장되기 때문에 크기 변경이 가능하다. 다행이 벡터 클래스를 사용하기 위한 메모리 할당은 시스템에서 자동적으로 처리하므로 아무런 염려없이 사용하도록 한다. 단, 처리 속도는 배열보다 상대적으로 느리다는 단점이 있다.
+[벡터 클래스](https://en.cppreference.com/w/cpp/container/vector)(vector class)는 `<vector>` 헤더로부터 제공되는 크기를 가변할 수 있는 스퀀스 컨테이너이다.
+
+> 배열의 데이터는 스택 영역에 저장되는 반면, 벡터는 힙 영역에 저장하기 때문에 크기 변경이 가능하다. 이에 대한 내용은 [메모리 관리](#c-메모리-관리)에서 설명한다.
+
+비록 유연하다는 장점이 있으나, 배열에 비해 상대적으로 처리 속도가 느리다는 단점을 지닌다.
 
 ```cpp
 #include <vector>
 
-// 벡터 정의
+/* 벡터 정의: C++ 벡터 클래스 */
 std::vector<int> vec;
 ```
 
@@ -828,8 +818,7 @@ std::cout << std::round(variable);
 
 ```cpp
 /* 함수 정의 */
-void function()
-{
+void function() {
     std::cout << 1 + 2;
 }
 
@@ -847,8 +836,7 @@ void function();
 function();
 
 /* 함수 정의 */
-void function()
-{
+void function() {
     std::cout << 1 + 2;
 }
 ```
@@ -858,8 +846,7 @@ void function()
 * `function()`은 함수에 정의된 코드를 실행한다.
 
     ```cpp
-  void function()
-  {
+  void function() {
       std::cout << 1 + 2 << std::endl;
   }
 
@@ -873,8 +860,7 @@ void function()
 * `function`은 함수의 [메모리 주소](#c-포인터)를 가리킨다.
 
     ```cpp
-  void function()
-  {
+  void function() {
       std::cout << 1 + 2 << std::endl;
   }
 
@@ -892,8 +878,7 @@ void function()
 
 ```cpp
 // return 반환문이 있는 사용자 정의 함수
-int function()
-{
+int function() {
     printf("Hello World!\n");
     return 3;
 }
@@ -911,63 +896,62 @@ Hello World!
 * **전달인자 (argument)**: 전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.
 * **매개변수 (parameter)**: 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호 `()` 내에서 이루어진다.
 
-매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+> 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+
+다음은 매개변수에 사용되는 연산자로 전달인자을 받는데 유연성을 제공한다. 이들은 프로그래밍 구문상 명확한 구별이 가능해야 하므로 반드시 일반 매개변수 뒤에 위치해야 한다.
 
 | 연산자 | 구문          | 설명                                                            |
 |:---:|:-----------:|---------------------------------------------------------------|
-| `=` | `arg=value` | 전달인자가 없으면 기본값 `value`가 대신 매개변수에 할당된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
-
-아래의 예제는 함수의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
+| `=` | `arg=value` | 전달인자가 없으면 기본값 `value`가 대신 매개변수에 할당된다. |
 
 ```cpp
 /* 함수 프로토타입 */
-int function(int arg1, float arg2);
+int function(int arg1, float arg2 = 2.0);
 
 /* 함수 호출 */
-function(1);            // >> 출력: 3
-function(1, 3.14);      // >> 출력: 4 ( = 1 + 3.14의 정수형만 추출)
+function(1);            // 반환: 3
+function(1, 3.14);      // 반환: 4 (= 1 + 3.14의 정수만 추출)
 
 /* 함수 정의 */
-int function(int arg1, float arg2 = 2.0)
-{
+int function(int arg1, float arg2) {
     return arg1 + arg2;
 }
 ```
 
-배열은 위와 동일한 구문으로 인자를 매개변수로 건네줄 수 없으며, 인자를 전달하는 방법으로 두 가지가 존재한다: 매개변수를 배열 혹은 메모리 주소(즉, 포인터)를 받을 변수로 선언하는 것이다.
+배열은 위와 동일한 구문으로 인자를 매개변수로 건네줄 수 없으며, 아래의 두 가지 방법이 존재한다:
 
-```cpp
-void function(int arg[]);
+* 매개변수를 배열로 선언한다.
 
-int arr[3] = {value1, value2, value3};
-function(arr);              // 배열을 함수의 인자로 넘겨준다.
+    ```cpp
+  void function(int arg[]);
+  
+  int arr[3] = {value1, value2, value3};
+  function(arr);              // 배열을 함수의 인자로 넘겨준다.
+  
+  // 넘겨받은 인자를 배열 그대로 받아들인다.
+  void function(int arg[]) {
+      statements;
+      return;
+  }
+    ```
 
-// 넘겨받은 인자를 배열 그대로 받아들인다.
-void function(int arg[])
-{
-    statements;
-    return;
-}
-```
-----
-```cpp
-void function(int *arg);
+* 매개변수를 [포인터](#c-포인터)로 선언한다. 배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오기 때문에 가능하다. 특히 배열의 각 요소가 할당된 메모리 주소는 연쇄적이므로, 바로 옆 (`int` 정수형이면 +4) 메모리 주소에는 배열의 다음 요소가 저장된 메모리 공간이다. 
 
-int arr[3] = {value1, value2, value3};
-function(arr);              // 배열을 함수의 인자로 넘겨준다.
-
-// 넘겨받은 인자를 배열이 아닌 포인터로 받아들인다.
-void function(int *arg)
-{
-    statements;
-    return;
-}
-```
-
-후자의 방법이 가능한 이유는 배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오기 때문이다. 특히 배열의 각 요소가 할당된 메모리 주소는 연쇄적이므로, 바로 옆 (`int` 정수형이면 +4) 메모리 주소에는 배열의 다음 요소가 저장된 메모리 공간이다.  자세한 내용은 차후 [포인터](#c-포인터)를 다룰 때 소개한다.
+    ```cpp
+  void function(int *arg);
+  
+  int arr[3] = {value1, value2, value3};
+  function(arr);              // 배열을 함수의 인자로 넘겨준다.
+  
+  // 넘겨받은 인자를 배열이 아닌 포인터로 받아들인다.
+  void function(int *arg) {
+      statements;
+      return;
+  }
+    ```
 
 ### 정적 변수
-정적 변수(static variable)는 프로그램이 실행되는 동안 함수를 탈출하여도 데이터가 소멸되지 않고 보존되는 `static` 키워드의 특수한 지역 변수이다. 해당 함수를 다시 호출하면 함수 종료 직전의 데이터를 그대로 이어서 사용할 수 있다.
+[정적 변수](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables)(static variable)는 프로그램이 실행되는 동안 함수를 탈출하여도 데이터가 소멸되지 않고 보존되는 `static` 키워드의 특수한 지역 변수이다. 해당 함수를 다시 호출하면 함수 종료 직전의 데이터를 그대로 이어서 사용할 수 있다.
 
 ```cpp
 int main() {
@@ -980,21 +964,22 @@ int main() {
 ```
 
 ## 함수 오버로딩
-함수 오버로딩(function overloading)은 동일한 이름의 함수가 전달받은 인자의 자료형 및 개수에 따라 달리 동작하는 것을 의미한다. 오버로딩 함수들은 동일한 자료형과 식별자가 지정되지만 제각각의 정의를 가진다.
+[함수 오버로딩](https://ko.wikipedia.org/wiki/함수_오버로드)(function overloading)은 동일한 이름 및 반환 자료형을 갖는 함수가 전달받은 인자의 자료형 및 개수에 따라 달리 동작하는 것을 의미한다. 이들은 각 인자 전달의 경우에 따라 제각각의 정의를 갖는다.
 
 ```cpp
-float function(int arg1, float arg2);		// 오버로딩된 함수의 프로토타입 1
-float function(float arg1, float arg2);		// 오버로딩된 함수의 프로토타입 2
+/* 오버로딩된 함수의 프로토타입 */
+float function(int arg1, float arg2);
+float function(float arg1, float arg2);
 
-function(1, 3.0);		// >> 출력: 4.0
-function(1.0, 3.0);		// >> 출력: -2.0
+function(1, 3.0);		// 반환: 4.0
+function(1.0, 3.0);		// 반환: -2.0
 
-// 오버로딩된 함수의 정의 1
+/* 오버로딩된 함수의 정의 1 */
 float function(int arg1, float arg2) {
 	return arg1 + arg2;
 }
 
-// 오버로딩된 함수의 정의 2
+/* 오버로딩된 함수의 정의 2 */
 float function(float arg1, float arg2) {
 	return arg1 - arg2;
 }
@@ -1004,9 +989,8 @@ float function(float arg1, float arg2) {
 [진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)는 프로그램이 시작되는 부분을 의미하며, C++ 프로그래밍 언어의 경우 [`main()`](https://en.cppreference.com/w/cpp/language/main_function) 함수에서부터 코드가 실행된다. 진입점은 프로토타입 및 호출이 존재하지 않으며, 유일해야 하므로 복수의 `main()` 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
 
 ```cpp
-int main(int argc, char **argv)
-{
-    // 아래에 코드를 입력하세요.
+/* C++ 프로그래밍 언어 진입점: main() */
+int main(int argc, char **argv) {
 
     return 0;
 }
@@ -1014,7 +998,7 @@ int main(int argc, char **argv)
 
 > 본 문서의 대부분 코드 예시에는 `main()` 함수가 직접 언급되지 않았으나, 전역 변수와 함수를 제외한 모든 코드들은 `main()` 함수 내에서 작성되어야만 실행된다.
 
-C++ 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을 반환해야 하며, `EXIT_SUCCESS`(혹은 정수 `0`) 그리고 `EXIT_FAILURE`이 있다. 만일 반환문이 없을 시, 컴파일러는 자동적으로 `return 0;` 문장을 `main()` 함수의 말단에 삽입한다.
+C/C++ 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을 반환해야 하며, `EXIT_SUCCESS`(혹은 정수 `0`) 그리고 `EXIT_FAILURE`이 있다. 만일 반환문이 없을 시, 컴파일러는 자동적으로 `return 0;` 문장을 `main()` 함수의 말단에 삽입한다.
 
 `main()` 진입점은 아래와 같은 매개변수를 함축적으로 가진다.
 
@@ -1032,9 +1016,7 @@ C++ 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `int
 | 데이터:   | 3      | `./app.exe` | `option1` | `option2` |
 
 ### `WinMain()` 함수
-> *참조: [Microsoft Docs Win32 설명서 - WinMain() 함수 (영문)](https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain)*
-
-`WinMain()` 함수는 Win32나 MFC와 같은 GUI 프레임워크 어플리케이션의 진입점이다.
+[`WinMain()`](https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain) 함수는 [Win32](https://ko.wikipedia.org/wiki/윈도우_API) 또는 [MFC](/docs/ko.MFC)와 같은 GUI 프레임워크 어플리케이션의 진입점이다. 본 진입점의 핵심은 마우스 클릭이나 키보드 입력 등으로 발생된 메시지를 수신받아 이를 처리할 함수로 전달하는 [메시지 루프](https://ko.wikipedia.org/wiki/이벤트_루프)(Message Loop)에 있다.
 
 ```cpp
 int WinMain(HINSTANCE 	hInstance,
@@ -1050,14 +1032,10 @@ int WinMain(HINSTANCE 	hInstance,
 }
 ```
 
-`WinMain()` 함수의 핵심 기능은 마우스 클릭이나 키보드 입력 등으로 발생된 메시지를 수신받아 해당 메시지를 처리할 수 있는 함수로 전달하는데, 이를 메시지 루프(Message Loop)라고 부른다. MFC 프레임워크를 활용한 프로그래밍은 [*APPLICATION_MFC*](/docs/ko.MFC) 문서에서 확인할 수 있다.
-
-`WM_QUIT` 메시지를 수신하면 진입점의 메시지 루프를 탈출하고 `WM_QUIT`의 *wParam* 매개변수를 반환하며 어플리케이션을 종료한다. 만일 메시지 루프 진입에 실패하였을 시 `return 0;` 문장이 실행되어 프로그램을 즉시 종료한다.
+진입점의 메시지 루프는 `WM_QUIT` 메시지를 수신할 때까지 지속적으로 어플리케이션 구동에 필요한 메시지 수신 및 분배가 이루어진다. 만일 메시지 루프 진입에 실패하면 진입점의 `return` 반환문에 의해 프로그램이 즉시 종료된다.
 
 ### `DllMain()` 함수
-> *참조: [Microsoft Docs Win32 설명서 - DllMain() 함수 (영문)](https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain)*
-
-`DllMain()` 함수는 `.dll` 확장자를 가지는 동적링크 라이브러리의 진입점이다.
+[`DllMain()`](https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain) 함수는 `.DLL` 확장자를 가지는 [동적 링크 라이브러리](#라이브러리)의 진입점이다.
 
 ```cpp
 int DllMain(_In_ HINSTANCE hinstDLL,
@@ -1078,15 +1056,13 @@ int DllMain(_In_ HINSTANCE hinstDLL,
 
 ```cpp
 /* 호출 함수 */
-float calling(float (*function)(int, float), int arg)
-{
+float calling(float (*function)(int, float), int arg) {
     // 콜백 함수의 호출
     return function(arg, 3.14159);
 }
 
 /* 콜백 함수 */
-float callback(int arg1, float arg2)
-{
+float callback(int arg1, float arg2) {
     return (float)arg1 + arg2;
 }
 
@@ -1097,12 +1073,11 @@ std::cout << calling(callback, 1);
 ```
 
 ## 재귀 함수
-[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없을 시, 재귀는 무한히 발생하여 메모리 부족으로 프로세스 충돌이 발생한다.
+[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
 
 ```cpp
 /* 예제: 펙토리얼 "!" */
-int factorial(int num)
-{
+int factorial(int num) {
     // 기저 조건: 재귀로부터 탈출하는 조건
     if (num == 1)
         return (1);
@@ -1112,58 +1087,44 @@ int factorial(int num)
 ```
 
 # C++: 포인터
-포인터란 용어는 [자료형 변환](#자료형-변환)을 다루기 시작할 때부터 "포인터"라는 새로운 데이터가 소개되어 자주 언급되었다. 포인터는 C++ 프로그래밍 언어에서 매우 중요한 개념 중 하나로써 더 발전된 프로그램 개발을 가능케 한다. 그러므로 이번 장에서는 포인터에 대한 설명과 이전 장에서 소개된 배열과 함수를 포인터를 활용한 심화된 처리 방식을 소개하려 한다.
+[포인터](https://en.cppreference.com/w/cpp/language/pointer)(pointer)는 변수가 저장된 메모리 주소를 저장하는 변수이다. 32비트와 64비트 운영체제에서 하나의 메모리 주소는 각각 4바이트(십육진수 8자리)와 8바이트(십육진수 16자리) 크기를 가진다. 포인터를 정의할 때 일반 변수처럼 자료형이 요구되나 그 뒤에는 별표 `*`가 있어야 한다. 변수의 메모리 주소는 참조 연산자 `&`로 반환받는다.
 
-## 포인터
-포인터(pointer)는 변수에 저장된 값이 아닌, 변수가 저장된 메모리 주소를 가리키는 데이터이다. 32비트와 64비트 운영체제에서 하나의 메모리 주소는 각각 4바이트(십육진수 8자리)와 8바이트(십육진수 16자리) 크기를 가진다. 포인터 데이터 또한 변수에 저장할 수 있으며, 일반 변수와 마찬가지로 포인터 변수를 정의할 때 자료형이 요구되나 별표 `*`가 자료형과 식별자 사이에 위치해야 한다.
+```c
+/* 포인터 정의 */
+int *ptr = &variable;
+```
+
+> 십육진수의 메모리 주소는 수기로 직접 작성하는 것이 아니며, 이는 매우 위험한 행위이다! 접근하려는 데이터의 메모리 주소가 항상 같을거란 보장이 없기 때문이다.
+
+비록 메모리 주소는 4바이트 혹은 8바이트로 표현되지만, 각 메모리 주소마다 담을 수 있는 데이터의 크기는 한 바이트이다. C/C++ 프로그래밍 언어의 [자료형](#자료형)에 의하면 `int` 정수나 `float` 부동소수점은 네 바이트가 필요하므로 이웃하는 총 네 개의 메모리 주소가 데이터를 저장하는데 관여한다. 포인터의 자료형은 이러한 특성을 고려하여 포인터가 저장한 메모리 주소로부터 어디까지 참조해야 완전한 데이터인지 알려주는 역할을 한다. 또한 포인터에 역참조 연산자 `*`를 사용하여 해당 자료형으로 어떠한 값이 표현되는지 확인도 가능하다 (포인터 정의에 사용된 별표 `*`와 다른 존재이다).
 
 ```cpp
-/* 정수형 포인터 변수 선언 */
-int *ptr;
-std::cout << ptr;    // ERROR C4700: 초기화되지 않은 지역 변수 'ptr'이 사용되었습니다.
-```
-
-변수의 포인터(즉, 메모리 주소)를 호출하기 위해서는 앰퍼샌드 기호 `&` 연산자를 사용하여 확인할 수 있다.
-
-```cpp
-/* 정수형 변수 선언 */
-int variable = 365;
-std::cout << &variable;
-```
-```
-000000D154AFFA14
-```
-
-십육진수의 메모리 주소는 수기로 직접 작성할 수 있는 것이 아니며, 이는 매우 위험한 행위이다! 포인터 변수를 초기화하는 방법으로는 기존하는 변수의 메모리 주소를 할당하는 것이 유일하다. 여기서 포인터 변수와 변수 간의 자료형은 일치하도록 한다.
-
-비록 하나의 메모리 주소는 8바이트(32비트 시스템) 혹은 16바이트(64비트 시스템)로 구성되어 있지만, 각 메모리 주소는 한 바이트의 데이터만 수용할 수 있다. 1바이트만 있으면 충분한 `char` 문자형 데이터와 달리, `int` 정수형이나 `float` 부동소수점 데이터를 표현하기 위해서는 4바이트의 메모리 용량이 필요하다. 그러나 포인터는 변수가 사용하고 있는 전체 메모리 주소 중에서 맨 첫 주소만 반환하므로 자료형이 언급되지 않으면 포인터는 어느 메모리 주소까지가 하나의 완전한 데이터인지 알 수 없다.
-
-```cpp
-/* 포인터 변수 초기화 */
 int variable = 365;
 
-// 동일한 자료형의 포인터 변수
+/* 동일한 자료형의 포인터 변수 */
 int *ptr1 = &variable;
-std::cout << "0x" << ptr1 << std::endl;    // >> 출력: 0x000000A3896FF954 (주소)
-std::cout << *ptr1 << std::endl;           // >> 출력: 365                (값)
+std::cout << "0x" << ptr1 << std::endl << *ptr1 << std::endl;
+// 출력: 0x000000A3896FF954 (주소)
+// 출력: 365                (값)
 
-// 상이한 자료형의 포인터 변수
+/* 상이한 자료형의 포인터 변수 */
 char *ptr2 = &variable;
-std::cout << "0x" << ptr2 << std::endl;    // >> 출력: 0x000000A3896FF954 (주소)
-std::cout << *ptr2 << std::endl;           // >> 출력: 109                (값)
+std::cout << "0x" << ptr2 << std::endl << static_cast<int>(*ptr2) << std::endl;
+// 출력: 0x000000A3896FF954 (주소)
+// 출력: 109                (값)
 ```
 
-여기서 `0x` 접두사는 [십육진수](https://ko.wikipedia.org/wiki/십육진수) 표현법임을 구별짓기 위해 삽입하였다. 위의 예시 코드에서 보이듯이, 포인터 변수가 가리키는 메모리 주소에 할당된 값을 역참조 연산자 `*`를 통해 호출하는 것이 가능하다. 포인터 변수의 정의에서도 별표를 사용하였으나, 이 둘은 동일한 기호만 사용할 뿐이며 서로 다른 존재이다.
+여기서 `0x` 접두사는 [십육진수](https://ko.wikipedia.org/wiki/십육진수) 표현법임을 구별짓기 위해 삽입하였다.
 
 | 연산자          | 변수     | 반환     |
 |:------------:|:------:|:------:|
-| 참조 연산자 `&` | 일반 변수  | 메모리 주소 |
-| 역참조 연산자 `*` | 포인터 변수 | 값      |
+| [참조 연산자 `&`](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_address-of_operator)  | 일반 변수  | 메모리 주소 |
+| [역참조 연산자 `*`](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator) | 포인터 | 값      |
 
-만일 일반 변수에서 데이터 변동이 발생하였으면 포인터 변수의 역참조에서도 동일한 데이터 변동을 목격할 수 있다. 이는 두 변수가 동일한 메모리 주소를 공유하고 있기 때문이다. 이러한 C++ 프로그래밍 언어의 포인터 성질은 매우 중요하게 다루어지는 개념 중 하나이며, 이를 "참조에 의한 호출(call by reference)"이라고 부른다.
+만일 일반 변수에서 데이터 변동이 발생하였으면 포인터 변수의 역참조에서도 동일한 데이터 변동을 목격할 수 있다. 두 변수가 동일한 메모리 주소를 공유하고 있기 때문이다. 이러한 C/C++ 프로그래밍 언어의 포인터 성질은 매우 중요하게 다루어지는 개념 중 하나이며, 이를 "참조에 의한 호출(call by reference)"이라고 부른다.
 
 ### 널 포인터
-널 포인터(null pointer)는 아무런 메모리 주소를 가리키지 않는 포인터이다. C 프로그래밍 언어에서 포인터 사용은 자칫 "access violation" 메모리 접근 오류 등의 치명적인 문제를 야기시킬 수 있기에, 안전한 포인터 사용을 위해 널 포인터을 `nullptr` 키워드로 할당한다.
+널 포인터(null pointer)는 아무런 메모리 주소를 가리키지 않는 포인터이다. C/C++ 프로그래밍 언어에서 포인터 사용은 자칫 "access violation" 메모리 접근 오류 등의 치명적인 문제를 야기시킬 수 있기에, 안전한 포인터 사용을 위해 널 포인터를 [`nullptr`](https://en.cppreference.com/w/cpp/language/nullptr) 키워드로 할당한다.
 
 ```cpp
 int* ptr = nullptr;
@@ -1174,14 +1135,12 @@ std::cout << "0x" << ptr;
 ```
 
 ### 보이드 포인터
-보이드 포인터(void pointer)는 지정된 자료형이 없는 포인터이다(즉, `void`). 이러한 포인터는 어떠한 자료형이라도 자료형 변환을 통해 메모리 주소를 가리킬 수 있는 장점을 가진다.
+보이드 포인터(void pointer)는 지정된 자료형이 없는, 즉 `void` 포인터이다. 이러한 포인터는 어떠한 자료형이라도 자료형 변환을 통해 메모리 주소를 가리킬 수 있는 장점을 가진다.
 
 ```cpp
-/* 보이드 포인터 선언 */
-void* ptr;
-
 int variable = 365;
-ptr = &variable;
+
+void *ptr = &variable;
 std::cout << *(reinterpret_cast<int*>(ptr));
 ```
 ```
@@ -1189,7 +1148,7 @@ std::cout << *(reinterpret_cast<int*>(ptr));
 ```
 
 ### 함수 포인터
-함수 포인터(function pointer)는 함수를 가리키는 보이드 포인터이다. 배열에서의 포인터가 첫 번째 요소 메모리 주소를 가리키는 것과 동일한 맥락으로, 함수에서 포인터는 첫 번째 실행문이 담긴 메모리 주소를 가리킨다. 함수 포인터는 아래와 같은 구문으로 초기화한다.
+함수 포인터(function pointer)는 함수 자체를 가리키는 보이드 포인터이다. 이는 배열 자체가 첫 번째 요소 메모리 주소를 가리키는 것과 동일한 맥락이다. 함수 포인터를 사용한 대표적인 예시로 [콜백 함수](#콜백-함수)가 있다. 함수 포인터의 선언은 아래와 같으며, 포인터의 자료형은 함수의 자료형과 일치해야 한다. 또한 함수가 갖는 매개변수의 자료형과 개수도 동일해야 한다. 이들을 만족하지 않으면 컴파일 작업 오류가 발생하게 된다.
 
 ```cpp
 // 함수 정의
@@ -1199,9 +1158,7 @@ int function(int arg1, float arg2) {
 }
 
 int main() {
-    // 여기서부터 코드 입력...
-
-    /* 함수 포인터 초기화 및 호출 */
+    /* 함수 포인터 선언 및 호출 */
     int (*ptr)(int, float) = function;
     ptr(1, 3.14);
 
@@ -1209,10 +1166,8 @@ int main() {
 }
 ```
 
-함수 포인터를 초기화 시, 포인터 함수의 자료형은 함수 자료형과 일치해야 하며 매개변수 또한 자료형과 개수가 동일해야 한다. 이들을 만족하지 않으면 컴파일 작업 오류가 발생하게 된다. 함수를 `function()`과 같이 소괄호와 함께 호출되면 함수 `return` 문의 데이터가 반환되지만, 소괄호가 없이 `function`만 호출하면 메모리 주소가 대신 반환된다.
-
 ## 엔디언
-[엔디언](https://ko.wikipedia.org/wiki/엔디언)(endianess)이란 컴퓨터 메모리에서 데이터를 표현하기 위해 바이트 단위의 정보를 어떻게 정렬할 것인지를 가리킨다. 특히 포인터가 메모리 주소를 접근 및 호출하기 때문에 엔디언의 기본적인 개념 이해는 필요하다고 본다.
+[엔디언](https://ko.wikipedia.org/wiki/엔디언)(endianess)이란 컴퓨터가 메모리로부터 데이터를 표현하기 위해 바이트 단위의 정보를 어떻게 정렬할 것인지를 가리킨다. 특히 포인터가 메모리 주소를 접근 및 호출하기 때문에 엔디언의 기본적인 개념 이해는 필요하다고 본다.
 
 아래는 십진수 정수를 십육진수로 변환하여 출력하는 C++ 프로그래밍 언어 코드이다:
 
@@ -1256,12 +1211,11 @@ std::cout << "포인터: 0x" << &variable << std::endl;
 int variable = 123456789;
 unsigned char* ptr = reinterpret_cast<unsigned char*>(&variable);
 
-for (int index = 0; index < sizeof(variable); index++)
-{
-    printf("0x%p : %#04x\n", ptr + index, *(ptr + index));
+for (int index = 0; index < sizeof(variable); index++) {
+    std::cout << "0x" << ptr + index << " : 0x" 
+        << std::hex << *(ptr + index) << std::endl;
 }
 ```
-
 ```
 0x0000008A97CFFB84 : 0x15
 0x0000008A97CFFB85 : 0xcd
@@ -1272,14 +1226,14 @@ for (int index = 0; index < sizeof(variable); index++)
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
 ## 참조
-참조(reference)는 기존에 존재하는 변수의 데이터를 또 다른 변수를 통해 처리할 수 있도록 한다. 두 변수가 하나의 메모리 주소를 공유하게 하므로써, 하나의 데이터에 또 다른 식별자가 부여되었다고 간주할 수 있다.
+[참조](https://en.cppreference.com/w/cpp/language/reference)(reference)는 이미 존재하는 데이터 혹은 함수에 별칭으로 사용하기 위해 앰퍼샌드 `&`와 함께 선언된 변수이다. 참조는 단순히 [네임 바인딩](https://ko.wikipedia.org/wiki/네임_바인딩)(name binding)된 변수이기 때문에 자체적으로 할당된 메모리를 갖지 않으며, 대신에 참조하는 데이터 혹은 함수가 할당된 메모리를 그대로 사용한다.
 
 ```cpp
-/* "ref" 변수는 "variable" 변수를 참조한다. */
+/* "ref" 변수의 "variable" 변수 참조 */
 int variable;
 int &ref = variable;
 
-ref = 3;    // >> 결과: variable = ref = 3
+ref = 3;    // 결과: variable = ref = 3
 ```
 
 참조의 원리는 기존 변수의 메모리 주소를 상수 포인터에 할당하는 것과 동일하다. 아래의 코드는 위의 예시를 포인터만 사용해서 나타내었다.
@@ -1294,7 +1248,7 @@ const int* ref = &variable;
 
 상수 포인터를 사용하기 때문에, 참조 시에는 정의와 초기화가 반드시 동시에 이루어져야 한다. 그리고 한 번 참조된 변수는 새로운 변수를 참조할 수 없다. 프로그래밍에서 흔히 언급되는 *참조에 의한 호출(call by reference)*도 이를 의미하는 것이다.
 
-# C++: 메모리 할당
+# C++: 메모리 관리
 > *참고: [GKO95 GitHub Pages - 메모리](/docs/ko.Memory)*
 
 프로그램을 실행하는데 있어 메모리 관리는 매우 중요한 작업에 해당한다. 그 중에서 동적 메모리 할당은 보다 더 나은 메모리 효율성을 위해 사용되며, [포인터](#c-포인터)에 대한 충분한 개념적 이해도가 필요하다. 여기서 메모리란, HDD 및 SSD와 같은 [보조기억장치](https://ko.wikipedia.org/wiki/기억_장치)가 아닌 RAM이 해당하는 [주기억장치](https://ko.wikipedia.org/wiki/주기억장치)를 가리킨다.
@@ -2646,11 +2600,11 @@ A
 
 라이브러리는 크게 두 종류로 나뉘어진다:
 
-* **정적 라이브러리(static library)**
+* **[정적 라이브러리](https://ko.wikipedia.org/wiki/정적_라이브러리)(static library)**
 
     정적 라이브러리(`.LIB` 혹은 `.A` 확장자)는 프로그램 프로젝트를 컴파일하면 라이브러리도 함께 내포된다. 그러면 프로그램 하나가 완전체이기 때문에 외부 의존도가 낮아지는 장점을 가지지만, 프로그램 용량이 커지고 프로그램을 업데이트하려면 전부 새로 컴파일해야 하는 단점이 있다.
 
-* **동적 라이브러리(dynamic library)**
+* **[동적 라이브러리](https://ko.wikipedia.org/wiki/동적_링커)(dynamic library)**
 
     동적 라이브러리(`.DLL` 혹은 `.SO`)는 프로그램에 내포되지 않고 별개의 파일로 존재하기 때문에 프로그램 용량이 작아지고 업데이트가 필요한 라이브러리만 교체하면 되지만, 프로그램의 외부 의존도가 높아져 라이브러리를 찾지 못하면 치명적인 문제를 야기할 수 있다.
 
