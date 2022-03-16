@@ -10,7 +10,7 @@ order: 0x00
 [파이썬](https://ko.wikipedia.org/wiki/파이썬)(Python)은 웹 프로그래밍, 과학연구, 인공지능을 포함한 수많은 영역에서 응용 가능한 고급 프로그래밍 언어이다. 파이썬은 다른 프로그래밍 언어에 비해 간단하면서 폭넓은 커뮤니티 덕분에 파이썬 개발에 용이한 많은 종류의 소프트웨어(예. 라이브러리, 프레임워크 등)들이 존재한다. 이러한 이유로 파이썬은 프로그래밍 입문자로써 시작하기 매우 좋은 언어이다.
 
 ## 인터프리트 언어
-> *참조: [컴파일러 vs 인터프리터](/blog/ko.compiler_vs_interpreter)*
+> *참조: [컴파일러 vs. 인터프리터](/blog/ko.compiler_vs_interpreter)*
 
 파이썬 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다. 버전은 크게 파이썬 2와 파이썬 3으로 분류되는데, 전자는 2020년 1월 1일부로 서비스가 종료되었다. 파이썬 1이라는 것도 존재하나, 가장 최신 버전 1.6.1이 2000년에 출시된 점을 고려하면 호환성과 실용성이 매우 떨어진다. 그러므로 본문은 파이썬 3을 위주로 프로그래밍을 설명한다.
 
@@ -82,10 +82,10 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
 각 프로그래밍 언어마다 준수되어야 할 규칙과 기반이 되는 데이터들이 존재한다. 이를 어길 시에는 프로그램에 오류가 발생하거나 정상적인 동작을 보장할 수 없다. 실질적인 프로그래밍에 있어, 본 장에서는 파이썬 프로그램 코딩에 기초적인 정보 제공을 목표로 한다.
 
 ## 주석
-주석(comment)은 프로그래밍에 있어 실행되지 않는 부분이며, 흔히 어떠한 정보를 간략히 스크립트 내에 입력하는데 사용된다. 파이썬에는 두 가지의 주석이 존재하며, 이들은 각각 한줄 주석과 블록 주석이라 부른다.
+각 프로그래밍 언어마다 준수되어야 할 규칙(일명 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어)); syntax)과 기반이 되는 데이터들이 존재한다. 이를 어길 시에는 프로그램에 오류가 발생하거나 정상적인 동작을 보장할 수 없다. 실질적인 프로그래밍에 있어, 본 장에서는 파이썬 프로그래밍에 기초적인 정보 제공을 목표로 한다.
 
-* **한줄 주석 (line comment)**: 코드 한 줄을 차지하는 주석이며, 해시 기호(`#`)로 표시된다.
-* **블록 주석 (block comment)**: 코드 여러 줄을 차지하는 주석이며, 세 쌍의 작은 따옴표(`''' '''`) 혹은 큰 따옴표(`""" """`)로 표시된다.
+* **한줄 주석 (line comment)**: 코드 한 줄을 차지하는 주석이며, 해시 기호 `#`로 표시된다.
+* **블록 주석 (block comment)**: 코드 여러 줄을 차지하는 주석이며, 세 쌍의 작은 따옴표 `''' '''` 혹은 큰 따옴표 `""" """`로 표시된다.
 
 > 세 쌍의 큰 따옴표로 구성된 블록 주석을 일명 [독스크링](https://en.wikipedia.org/wiki/Docstring)(docstrings)이라고도 부르는데, 이는 프로그램 실행 도중에도 볼 수 있다.
 
@@ -150,7 +150,7 @@ print("출력:", variable)
 출력: Hello World!
 ```
 
-하나의 `print()` 함수에서 두 개 이상의 데이터를 한꺼번에 출력하려면 쉼표(`,`)를 사용하여 연속적으로 데이터를 나열할 수 있다. 단, 각 쉼표가 위치한 곳에는 항상 공백이 놓여진다. 그 외의 다른 방법은 [문자열 자료형](#문자열-자료형)을 설명하는 부분에서 소개한다.
+하나의 `print()` 함수에서 두 개 이상의 데이터를 한꺼번에 출력하려면 쉼표 `,`를 사용하여 연속적으로 데이터를 나열할 수 있다. 단, 각 쉼표가 위치한 곳에는 항상 공백이 놓여진다. 그 외의 다른 방법은 [문자열 자료형](#문자열-자료형)을 설명하는 부분에서 소개한다.
 
 ```python
 A = 10.0
@@ -167,13 +167,13 @@ A는 10.0 ,
 ## 식별자
 [식별자](https://ko.wikipedia.org/wiki/식별자#컴퓨터_언어)(identifier), 일명 네임(name)은 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
 
-* 오직 영문, 숫자, 밑줄(`_`)만 허용된다.
+* 오직 영문, 숫자, 밑줄 `_`만 허용된다.
 * 첫 문자는 숫자로 시작할 수 없다.
 * 공백은 허용되지 않는다.
 * 대소문자를 구분한다.
 
 ## 변수
-변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시는 `variable`이란 식별자를 갖는 변수에 숫자 3을 할당한다. 시스템적 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮는 절차를 [네임 바인딩](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
+변수(variable)는 할당 기호 `=`를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시는 `variable`이란 식별자를 갖는 변수에 숫자 3을 할당한다. 시스템적 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮는 절차를 [네임 바인딩](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
 
 ```python
 # 변수 "variable"의 정의
@@ -243,7 +243,7 @@ CONSTANT_VARIABLE = "Hello World!"
 
 위의 숫자 자료형들은 산술 연산이 가능하다: 가장 기본적인 `+`, `-`, `*`, `/` 사칙 연산자부터 나눗셈의 몫 `//`과 나머지 `%` 그리고 제곱 `**`을 구할 수 있다. 산술 연산을 쉽게 읽을 수 있도록 숫자와 산술 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않으므로 무관한다.
 
-할당 연산자(assignment operator)는 할당 기호(`=`)와 조합하여 산술 연산 코드를 더욱 간결하게 작성할 수 있다.
+할당 연산자(assignment operator)는 할당 기호 `=`와 조합하여 산술 연산 코드를 더욱 간결하게 작성할 수 있다.
 
 | 연산자 | 예시     | 동일                                          |
 | :----: |--------| --------------------------------------------- |
@@ -274,9 +274,9 @@ CONSTANT_VARIABLE = "Hello World!"
 | `or`  | 논리합 | 하나 이상의 데이터가 참이면 `True`를 반환하고, 그렇지 않으면 `False`를 반환한다. |
 
 ### 문자열 자료형
-문자열 자료형(string data type)은 한 쌍의 작은 따옴표(`''`) 또는 큰 따옴표(`""`)로 구별되는 텍스트 데이터이다. 파이썬에서 문자열 자료형 데이터는 일반적으로 문자열 객체(string object)라고 부른다. 
+문자열 자료형(string data type)은 한 쌍의 작은 따옴표 `''` 또는 큰 따옴표 `""`로 구별되는 텍스트 데이터이다. 파이썬에서 문자열 자료형 데이터는 일반적으로 문자열 객체(string object)라고 부른다. 
 
-텍스트에 따옴표를 넣으려면 해당 따옴표 앞에 백슬래시(`\`)를 배치하여 문자열이 도중이 끊기는 현상을 방지한다.
+텍스트에 따옴표를 넣으려면 해당 따옴표 앞에 백슬래시 `\`를 배치하여 문자열이 도중이 끊기는 현상을 방지한다.
 
 ```python
 # 문자열 작성의 적절한 예시와 부적절한 예시의 비교.
@@ -300,7 +300,7 @@ Goodbye
 World?
 ```
 
-문자열 객체는 다른 데이터와 더하기 기호(`+`)를 통해 공백없이 하나의 문자열로 연결할 수 있다. 문자열 간에만 사용할 수 있으므로 숫자 및 논리 자료형은 문자열로 변환해야 한다. 그 외에도 파이썬 3.6부터 추가된 접두사 `f`를 갖는 [포맷 문자열 리터럴](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)(formatted string literal), 일명 f-문자열에서 중괄호 `{}`를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
+문자열 객체는 다른 데이터와 더하기 기호 `+`를 통해 공백없이 하나의 문자열로 연결할 수 있다. 문자열 간에만 사용할 수 있으므로 숫자 및 논리 자료형은 문자열로 변환해야 한다. 그 외에도 파이썬 3.6부터 추가된 접두사 `f`를 갖는 [포맷 문자열 리터럴](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)(formatted string literal), 일명 f-문자열에서 중괄호 `{}`를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
 
 ```python
 A = 10.0
@@ -365,7 +365,7 @@ None
     ```
 
 ## 탈출 문자
-[탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 이전에 문자열 자료형을 소개할 때, `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
+[탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 이전에 문자열 자료형을 소개할 때, `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
 
 ```python
 print("Hello\nWorld!")
@@ -379,7 +379,7 @@ World!
 조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
 
 ## 들여쓰기
-[들여쓰기](https://www.python.org/dev/peps/pep-0008/#indentation)(indentation)는 문장이나 [함수](#파이썬-함수)(function), [클래스](#파이썬-클래스)(class) 코드의 경계를 표시하는데 사용된다. 이를 통해 코드가 조건문 혹은 반복문에 속하는지, 또는 어느 조건문 혹은 반복문의 코드인지 구분한다. 들여쓰기는 콜론(`:`)이 시작되는 이후부터 삽입되며 [탭](https://ko.wikipedia.org/wiki/Tab_키)(tab)이나 띄어쓰기 2칸 혹은 4칸으로 표현된다.
+[들여쓰기](https://www.python.org/dev/peps/pep-0008/#indentation)(indentation)는 문장이나 [함수](#파이썬-함수)(function), [클래스](#파이썬-클래스)(class) 코드의 경계를 표시하는데 사용된다. 이를 통해 코드가 조건문 혹은 반복문에 속하는지, 또는 어느 조건문 혹은 반복문의 코드인지 구분한다. 들여쓰기는 콜론 `:`이 시작되는 이후부터 삽입되며 [탭](https://ko.wikipedia.org/wiki/Tab_키)(tab)이나 띄어쓰기 2칸 혹은 4칸으로 표현된다.
 
 > 파이썬의 들여쓰기를 탭이나 띄어쓰기 중 어느 것을 사용하여도 무관하지만, 들여쓰기 방법은 반드시 하나로 통일해야 한다. 만일 탭과 띄어쓰기를 섞어서 사용하면 파이썬에서 들여쓰기를 제대로 구분하지 못하여 아래의 요류를 표시하면 실행되지 않는다.
 >
@@ -410,7 +410,7 @@ print("끝!")
 ```
 
 ## `if` 조건문
-`if` 조건문은 조건 혹은 논리가 참(`True`)일 경우 코드를 실행하며, 거짓(`False`)일 경우에는 코드를 실행하지 않는다.
+`if` 조건문은 조건 혹은 논리가 참(`True`일 경우 코드를 실행하며, 거짓(`False`)일 경우에는 코드를 실행하지 않는다.
 
 ```python
 if condition:
@@ -442,14 +442,36 @@ else:
     ...
 ```
 
-### 조건 연산자
-조건 연산자(ternary operator)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다.
+## 조건 연산자
+조건 연산자(ternary operator)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
 
 ```python
 True_return if condition else False_return
 ```
 
-조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
+## `match` 조건문
+> 본 조건문은 파이썬 3.10부터 추가된 기능으로, 자세한 내용은 [PEP 643](https://www.python.org/dev/peps/pep-0634/)을 참고한다.
+
+`match` 조건문은 전달받은 인자를 `case`의 패턴과 일치하는지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 그 중에서 밑줄 `_` 조건을 와일드카드(wildcard) 패턴이라 하여 무조건 실행되는 지점이다.
+
+```python
+match argument:
+
+    case pattern1:
+        ...
+
+    case pattern2:
+        ...
+
+    case pattern3:
+        ...
+
+    case _:
+        ...
+}
+```
+
+`match` 조건문은 타 프로그래밍 언어에서 소개되는 `switch` 조건문과 유사한 구조와 동작을 수행한다. 그러나 몇 가지 차이점이 있다면 `case` 문의 코드가 실행된 이후에 자동적으로 `match` 조건문이 종료되어 별도의 [`break`](#break-문) 문이 필요하지 않다. 또한 패턴 뒤에 `if` 문을 기입하는 감시(guard) 표현식으로 부가적인 조건 일치여부를 거칠 수 있다.
 
 ## `while` 반복문
 `while` 반복문은 조건 혹은 논리가 참(`True`)일 동안 코드를 반복적으로 실행하며, 거짓(`False`)일 경우에는 반복문을 종료한다.
@@ -488,10 +510,10 @@ else:
 ```
 
 ### `break` 문
-`break` 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
+[`break`](https://docs.python.org/3/reference/simple_stmts.html#break) 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
 
 ### `continue` 문
-`continue` 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
+[`continue`](https://docs.python.org/3/reference/simple_stmts.html#continue) 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
 
 ## `for` 반복문
 `for` 반복문은 유효한 범위 내에서 코드를 반복적으로 실행하고, 범위의 모든 값이 반복되면 종료한다.
@@ -528,13 +550,13 @@ else:
 ```
 
 ## `pass` 키워드
-`pass` 혹은 생략(`...`; 일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무 작업도 수행하지 않는다. 코드 블록이 아직 작성하지 않은 상태에서 임시 코드로 사용된다.
+`pass` 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무 작업도 수행하지 않는다. 코드 블록이 아직 작성하지 않은 상태에서 임시 코드로 사용된다.
 
 # 파이썬: 이터러블
 [이터러블](https://docs.python.org/3/glossary.html#term-iterable)(iterable; 반복 가능한) 객체는 여러 데이터를 한꺼번에 저장하는데 사용되며, 반복자(iterator) 객체를 반환하는 `__iter__` 메소드를 보유하는 객체로 정의된다. 반복자 데이터의 다음 요소를 자동으로 호출하는 객체로, 이터러블 객체 내의 모든 데이터를 순차적으로 불러올 수 있도록 한다.
 
 ## 시퀀스 객체
-[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence) 객체는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이다. 시퀀스는 하나는 대괄호(`[]`)을 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)(string)이 있다.
+[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence) 객체는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이다. 시퀀스는 하나는 대괄호 `[]`를 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)(string)이 있다.
 
 ```python
 variable = "Hello World!" 
@@ -595,7 +617,7 @@ for element in range(3, 10, 2):
 ```
 
 ## 리스트 객체
-[리스트](https://docs.python.org/3/library/stdtypes.html#lists)(list) 시퀀스 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 리스트의 데이터 할당은 대괄호 `[]` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 대괄호는 인덱스 위치의 요소(element)를 호출할 때에도 사용되며, 해당 요소에 새로운 값을 재할당하여 데이터를 변경할 수 있다.
+[리스트](https://docs.python.org/3/library/stdtypes.html#lists)(list) 시퀀스 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 리스트의 데이터 할당은 대괄호 `[]` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 대괄호는 0번부터 시작하는 인덱스 위치의 요소(element)를 호출할 때에도 사용된다.
 
 ```python
 lst = [value1, value2, value3, value4, ...]
@@ -746,7 +768,7 @@ print(set1 ^ set2)            # 출력: {1, 2, 3, 7, 8, 9}
 ```
 
 ## 제너레이터 객체
-제너레이터(generator)는 `yield` 키워드와 반복문을 통해 요소들을 프로그램적으로 직접 생성할 수 있는 이터러블 객체이다. 요소들이 메모리에 저장되는 것이 아니라 코드를 통해 생성되는 것이기 때문에, 제너레이터 객체는 메모리 제한이 없는 점에서 무한한 개수의 데이터를 담을 수 있는 이점을 가진다.
+제너레이터(generator)는 [`yield`](https://docs.python.org/3/reference/simple_stmts.html#yield) 키워드와 반복문을 통해 요소들을 프로그램적으로 직접 생성할 수 있는 이터러블 객체이다. 요소들이 메모리에 저장되는 것이 아니라 코드를 통해 생성되는 것이기 때문에, 제너레이터 객체는 메모리 제한이 없는 점에서 무한한 개수의 데이터를 담을 수 있는 이점을 가진다.
 
 > 제너레이터에서 가장 중요한 것은 `yield` 키워드로 이터러블 객체로써 반환될 데이터를 지정한다.
 
@@ -807,11 +829,11 @@ function()
       print("Hello World!")
 
   variable = function()
-  print(variable)
+  print("반환:", variable)
     ```
     ```
   Hello World!
-  None
+  반환: None
     ```
 
 * `function`은 함수 자체를 가리킨다.
@@ -821,14 +843,14 @@ function()
       print("Hello World!")
 
   variable = function
-  print(variable)
+  print("반환:", variable)
     ```
     ```
-  <function function at 0x0000027FB6A57160>
+  반환: <function function at 0x0000027FB6A57160>
     ```
 
 ### `return` 반환문
-`return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수는 반환문을 반드시 필요로 하지 않으며, 이러한 경우에는 `None` 값이 반환되어 변수에 전달된다.
+[`return`](https://docs.python.org/3/reference/simple_stmts.html#return) 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수는 반환문을 반드시 필요로 하지 않으며, 이러한 경우에는 `None` 값이 반환되어 변수에 전달된다.
 
 ```python
 # return 반환문이 있는 사용자 정의 함수
@@ -1100,166 +1122,116 @@ print(factorial(5))
 ```
 
 # 파이썬: 클래스
-파이썬은 객체와 클래스를 중심으로 프로그래밍하는 *[객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming; OOP)* 기법도 적용할 수 있다. 본 장은 파이썬에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
+[클래스](https://docs.python.org/3/tutorial/classes.html)(class)는 객체를 생성하는데 사용된다. 
 
-## 객체
-이전 장에서 (데이터를 저장할 수 있는) 변수와 (데이터를 처리 할 수 있는) 함수를 소개하였다. 객체(object 혹은 instance)는 이러한 변수와 함수를 하나의 데이터로 캡슐화한 데이터이다. 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 시퀀스 객체가 있다.
+> 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수는 각각 속성(attribute)과 메소드(method)라고 불리며, 이를 통틀어 맴버(member)라고 칭하고 다음과 같이 접근한다.
+>
+> * **속성**: `instance.attribute`
+> * **메소드**: `instance.method()`
+>
+> 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 시퀀스 객체가 있다.
+>
+> ```python
+> variable = [0, 3, 5, 9]
+> print(variable.index(5))
+> # variable이란 이름을 가진 리스트 객체의 "index()" 메소드를 사용하여 값 5에 대한 위치를 반환한다
+> ```
 
-```python
-variable = [0, 3, 5, 9]
-print(variable.index(5))
-# variable이란 이름을 가진 리스트 객체의 "index()" 메소드를 사용하여 값 5에 대한 위치를 반환한다
-```
-```
-2
-```
+클래스는 `class` 키워드를 사용하여 속성 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"이라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
-## 캡슐화
-캡슐화(encapsulation)는 객체의 핵심 개념으로 아래의 특성을 가진다.
-
-1. 변수와 함수를 하나의 객체로 결합한다.
-2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
-
-### 속성 및 메소드
-속성(attribute)과 메소드(method)는 객체에 캡슐화된 변수와 함수를 가리키는 용어이며, 아래와 같은 방법으로 접근한다. 객체에 속한 변수와 함수들은 객체의 맴버(member)라고 부르며 맴버 연산자(`.`)로 접근한다.
-
-| 객체 맴버 | 구문                   |
-|:-------:|----------------------|
-| 속성      | `instance.attribute` |
-| 메소드     | `instance.method()`  |
-
-## 클래스
-클래스(class)는 객체를 생성하는데 사용된다. 클래스는 `class` 키워드를 사용하여 정의되며, 클래스 내부에는 객체의 속성과 메소드가 되는 변수와 함수를 정의한다. 클래스로부터 객체를 생성하는 절차를 *객체화(instantiation)*라고 한다. 아래는 `class` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이며, 변수 및 함수와의 유사성을 확인할 수 있다.
-
-```python
-# 클래스 생성하기
-class CLASS:
-    # 인스턴스 초기화 (= 생성자)
-    def __init__(self, arg1, arg2):
-        # 속성 (변수와 비슷함)
-        self.attr1 = arg1
-        self.attr2 = arg2
-        
-    # 메소드 (함수와 비슷함)
-    def method(self, arg3):
-        self.attr3 = arg3
-        return self.attr1 + self.attr2 - self.attr3
-
-# 객체화
-instance = CLASS(value1, value2)    # 클래스로부터 객체 생성
-
-# 그러므로...
-print(instance.attr3)
-print(instance.method(value3))
-```
-```
-value3
-value1 + value2 - value3
-```
-
-### `self` 변수
-`self` 변수는 객체 스스로를 가리키는 변수로, 사실상 `self`란 이름은 관습적인 명칭일 뿐이며 다른 식별자를 사용하여도 된다. 변수 또는 함수에 `self`를 두면 캡슐화에 의해 객체에서만 접근할 수 있는 속성 및 메소드로 정의된다. `self`가 없는 변수 및 함수는 객체 내부의 지역 변수 및 함수에 불과하여 외부에서 접근 할 수 없으며, 만일 접근을 시도하면 "AttributeError" 오류가 발생한다.
-
-```python
-# 클래스 생성
-class CLASS:
-    def __init__(self, arg1, arg2):
-        self.attr1 = arg1
-        self.attr2 = None        # 속성값을 초기화해주지 않으면 에러가 발생한다.
-        attr3 = arg2             # 지역 변수
-
-
-# 객체화
-instance = CLASS(1, 2)
-''' 동일: 
-CLASS.__init__(self = instance, arg1 = 1, arg2 = 2)
-'''
-
-# 그러므로
-instance.attr1        # >> 출력: 1
-instance.attr2        # >> 출력: None
-instance.attr3        # AttributeError: 'CLASS' object has no attribute 'attr3'
-```
-
-### `__init__()` 메소드
-`__init__()` 메소드는 클래스를 객체화하면 자동으로 호출되는 메소드이다. 객체의 속성 초기화(initialization)에 사용되며, 객체화를 위해 필요한 인자 개수를 지정하기도 한다. 만일 별도의 초기화가 필요하지 않다면 정의하지 않아도 되는 선택사항이다.
+1. 변수와 함수가 하나의 객체로 결합된다.
+2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
 
 ## 객체 속성 및 메소드
-객체 속성(instance attribute) 및 객체 메소드(instance method)는 클래스 내에서 `self`와 함께 정의된 객체만이 접근할 수 있는 속성과 메소드이다. 객체 속성은 객체 메소드 내에서만 정의될 수 있다.
+객체 속성 및 메소드(instance attribute & method)는 클래스 내부에서 `self` 변수가 명시되어 정의된 변수와 함수이며, 오로지 객체만이 접근할 수 있다. `self`가 명시되지 않은 변수와 함수는 객체의 일부가 아니므로 지역 변수에 그치거나 접근이 불가하고, 이를 시도할 시 `AttributeError` 오류가 발생한다.
+
+> `self` 변수는 객체 스스로를 지칭하는 변수이다. 여기서 `self`란 이름은 관습적인 명칭일 뿐이며, 다른 식별자를 사용하여도 무관하다.
+
+객체 속성을 정의하려면 반드시 `self` 변수를 사용할 수 있는 객체 메소드 내에서만 정의될 수 있다. 또한 객체 속성은 네임 바인딩이 되지 않은 채 선언만 되면 `AttributeError` 오류가 발생한다.
 
 ```python
 # 클래스 생성
 class CLASS:
-    def __init__(self, arg1, arg2):
+
+    # 객체 메소드
+    def method(self, arg1, arg2):
         # 객체 속성
         self.attr1 = arg1
         self.attr2 = arg2
-        self.attr3 = None
 
-    # 객체 메소드
-    def method(self, arg3):
-        self.attr3 = arg3
+        variable = self.attr1 + self.attr2
+        print(f"{self.attr1} + {self.attr2} = {variable}")
+
+
+# 클래스 객체화
+instance = CLASS()
+
+instance.method(2, 3)        # 출력: 2 + 3 = 5
+print(instance.attr1)        # 출력: 2
+print(instance.variable)     # AttributeError: 'CLASS' object has no attribute 'variable'
+```
+
+### `__init__()` 메소드
+[`__init__()`](https://docs.python.org/3/reference/datamodel.html#object.__init__)는 클래스 객체화가 이루어질 때마다 자동적으로 실행되는 [특수한 메소드](#매직-메소드)이다. 객체 속성을 초기화(initialization)하는 용도로 사용되며 객체화 과정에서 객체로 전달할 인자의 개수를 결정하는 요인으로 작용한다. 해당 메소드는 선택사항으로 객체화 시 초기화 및 인자 전달이 필요하지 않으면 생략하여도 된다.
+
+```python
+# 클래스 생성
+class CLASS:
+
+    # 객체 초기화 메소드
+    def __init__(self, arg1, arg2):
+        self.attr1 = arg1
+        self.attr2 = arg2
+
+
+# 클래스 객체화
+instance = CLASS(value1, value2)
 ```
 
 ## 클래스 속성 및 메소드
-클래스 속성(class attribute) 및 클래스 메소드(class method)는 객체뿐만 아니라 클래스도 접근할 수 있는 속성과 메소드이다. 클래스 속성은 객체 메소드가 아닌 클래스 내에 정의된 속성이다. 그리고 클래스 메소드를 선언하기 위해서는 아래의 데코레이터를 필요로 하다. 
+클래스 속성 및 메소드(class attribute & method)는 객체와 클래스로부터 직접 접근이 가능한 클래스 내부에 정의된 변수와 함수이다. 객체 메소드가 객체 스스로를 가리키는 `self` 변수가 있다면, 클래스 메소드는 클래스 스스로를 가리키는 `cls` 변수를 갖는다. 단, 클래스 메소드를 정의하기 위해서는 데코레이터가 필요하다.
 
 |     구문     |설명                              |
 | :------------: | ---------------------------------------- |
 | `@classmethod` | 클래스 메소드를 선언하는데 사용되는 데코레이터이다. |
 
-클래스 메소드 또한 객체 클래스의 `self` 변수와 같이 클래스 스스로를 가리키는 변수가 필요하며, 관습적으로 `cls`라는 식별자를 사용한다.
+클래스 속성은 `class` 키워드 하에 곧바로 정의되거나, 혹은 `cls` 변수를 사용할 수 있는 클래스 메소드 내에서 정의될 수 있다. 또한 객체 속성은 네임 바인딩이 되지 않은 채 선언만 되면 `AttributeError` 오류가 발생한다.
+
+>  객체 메소드를 정의할 때, `self` 변수를 통해 클래스 속성 및 메소드를 호출할 수 있다.
 
 ```python
 # 클래스 생성
 class CLASS:
-    # 클래스 속성
-    attribute = value
-    
-    def __init__(self, arg1, arg2):
-        self.attr1 = arg1
-        self.attr2 = arg2
-        self.attr3 = None
+    def __init__(self, arg):
+        self.method1(arg)
 
-    def method1(self, arg3):
-        self.attr3 = arg3
-    
+    # 클래스 속성
+    attr1 = value1
+
     # 클래스 메소드
     @classmethod
-    def method2(cls, arg4):
-        return arg4
+    def method1(cls, arg):
+        cls.attr2 = arg
     
-    # 객체화를 위한 클래스 메소드
+    # 클래스 메소드: 객체 생성
     @classmethod
-    def method3(cls, arg5, arg6):
-        return cls(arg5**2, arg6**2)
+    def method2(cls, arg):
+        return cls(cls.attr1 + cls.attr2 - arg)
     
-    
-# 객체화
-instance1 = CLASS(1, 2)
-instance1.method1(4)
 
-# 객체화: arg1 = 1**1, arg2 = 2**2
-instance2 = CLASS.method3(1, 2)
-instance2.method1(4)
+# 클래스 객체화
+instance1 = CLASS(value2)
+print(f"{instance1.attr1}, {instance1.attr2}")    # 출력: 2, 3
 
-# 그러므로...
-CLASS.attribute         # >> 출력: value
-CLASS.method2(3)        # >> 출력: 3
+CLASS.method1(7)
+print(f"{CLASS.attr1}, {CLASS.attr2}")            # 출력: 2, 7
 
-instance1.attribute     # >> 출력: value
-instance1.attr1         # >> 출력: 1
-instance1.attr2         # >> 출력: 2
-instance1.attr3         # >> 출력: 4
-
-instance2.attribute     # >> 출력: value
-instance2.attr1         # >> 출력: 1 (= 1**2)
-instance2.attr2         # >> 출력: 4 (= 2**2)
-instance2.attr3         # >> 출력: 4
+instance2 = CLASS.method2(1)
+print(f"{instance2.attr1}, {instance2.attr2}")    # 출력: 2, 8
 ```
 
 ## 정적 메소드
-정적 메소드(static method)는 객체화없이 호출할 수 있으며, `self`나 `cls` 같은 변수를 필요로 하지 않는다. 이러한 변수가 없으므로 정적 메소드는 클래스 및 객체 속성과 메소드를 접근할 수 없다. 다시 말해, 정적 메소드는 단순히 클래스에 속해있는 일반 함수와 동일하게 취급하면 된다. 정적 메소드를 선언하기 위해서는 아래의 데코레이터가 필요하다. 
+정적 메소드(static method)는 클래스에서만 직접 접근이 가능한 클래스 내부에 정의된 함수이다. 정적 메소드는 객체나 클래스를 가리키는 변수가 없어, 객체 및 클래스 맴버 호출이 불가하다. 즉, 정적 메소드는 단순히 클래스에 묶여있는 일반 함수와 같다. 정적 메소드를 정의하기 위해서는 데코레이터가 필요하다.
 
 | 구문         |설명                               |
 |:---------------:| ----------------------------------------- |
@@ -1268,34 +1240,18 @@ instance2.attr3         # >> 출력: 4
 ```python
 # 클래스 생성
 class CLASS:
-    def __init__(self, arg1, arg2):
-        self.attr1 = arg1
-        self.attr2 = arg2
-        self.attr3 = None
         
-    def method1(self, arg3)
-        self.attr3 = arg3
-        
-    # 정적 메소드
+    # 정적 메소드 정의
     @staticmethod
-    def method2(arg4):
-        return True if arg4 is 4 else False
+    def method(arg1, arg2, arg3):
+        return arg1 + arg2 - arg3
 
 
-# 객체화
-instance = CLASS(1, 2)
-instance.method1(4)
-
-# 그러므로...
-instance.attr1            # >> 출력: 1
-instance.attr2            # >> 출력: 2
-instance.attr3            # >> 출력: 4
-
-CLASS.method2(4)        # >> 출력: True
+print(CLASS.method(2, 3, 1))        # 출력: 4
 ```
 
 ## 매직 메소드
-매직 메소드(magic method)는 식별자 양쪽에 던더(dunder; double underscore)가 있는 특수한 메소드이다. 매직 메소드는 대부분 연산자를 나타내며 연산자 오버로딩으로 기능을 수정하는데 사용된다. 초기화에 사용된 `__init__()` 메소드는 널리 사용되는 매직 메소드 중 하나이다. 아래의 도표는 연산자에 대한 매직 메소드의 목록이다.
+[매직 메소드](https://docs.python.org/3/reference/datamodel.html#special-method-names)(magic method)는 특수한 목적을 가진 메소드로 식별자 양측에 던더(dunder; double underscore)가 있는 게 특징이다. 대표적으로 객체 초기화를 위한 `__init__()` 메소드가 있으며, 그 외에도 [연산자 오버로딩](#연산자-오버로딩)에 흔히 사용된다.
 
 | 연산자  | 이름       | 매직 메소드                   |
 |:----:|:--------:|--------------------------|
@@ -1309,241 +1265,207 @@ CLASS.method2(4)        # >> 출력: True
 | `()` | 인자호출    | `__call__(self, arg)`    |
 
 ### 연산자 오버로딩
-연산자 오버로딩(operator overloading)은 특정 클래스나 자료형에서 연산자의 기능을 변경하는 작업이다. 연산자 오버로드에는 매직 메소드가 사용되지만 오버로드 된 기능은 해당 특정 클래스에만 적용된다. 예를 들어,`x + y`는 `x.__add__(y)`와 동일하다.
+[연산자 오버로딩](https://ko.wikipedia.org/wiki/연산자_오버로딩)(operator overloading)은 특정 클래스에서 연산자가 어떻게 동작할 지 정의하는 작업이다. 이를 위해 매직 메소드가 사용되며, 오버로드된 연산자는 해당 클래스에서만 적용된다.
 
 ```python
 # 클래스 생성
 class CLASS:
-    def __init__(self, arg1):
-        self.attribute = arg1
-        
-    def __add__(self, arg2):
-        # 두 객체의 attribute 속성을 합한 새로운 CLASS 객체 생성
-        return CLASS(self.attribute + " " + arg2.attribute)
+    def __init__(self, arg):
+        self.attr = arg
+    
+    # 연산자 오버로딩: 덧셈
+    def __add__(self, arg):
+        return CLASS(self.attr + " " + arg.attr)
 
-# 객체화
+
+# 클래스 객체화
 instance1 = CLASS("Hello")
 instance2 = CLASS("World!")
 
 instance3 = instance1 + instance2
-print(instance3.attribute)
-```
-```
-Hello World!
+''' 동일:
+instance3 = instance1.__add__(instance2)
+'''
+
+print(instance3.attr)            # 출력: Hello World!
 ```
 
 ## 상속
-상속(inheritance)은 슈퍼클래스(일명 기반 클래스)가 파생되는 서브클래스(일명 자식 클래스)에게 속성과 메소드를 제공하는 행위이다. 슈퍼클래스와 서브클래스에 동일한 이름의 속성과 메소드가 존재할 경우, 슈퍼클래스의 속성과 메소드는 서브클래스에 의해 묻힌다.
+[상속](https://docs.python.org/3/tutorial/classes.html#inheritance)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class; 일명 서브클래스)에게 속성과 메소드를 제공하는 행위이다. 기반 클래스와 파생 클래스에 동일한 이름의 맴버가 존재할 경우, 기반 클래스의 맴버는 파생 클래스에 의해 묻힌다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 있다.
 
 ```python
-# 슈퍼클래스 생성
-class SUPERCLASS:
-    attr1 = value1
-    attr2 = value2
+# 기반 클래스 생성
+class BASECLASS:
+    attr1 = 3
+    attr2 = "Python"
 
-# 서브클래스 생성
-class SUBCLASS(SUPERCLASS):
+    def __init__(self):
+        print("초기화: 기반 클래스")
+
+    def method(self, arg1, arg2):
+        return arg1 + arg2
+
+
+# 파생 클래스 생성
+class DERIVEDCLASS(BASECLASS):
     attr2 = "Hello World!"
-    attr3 = value3
+    attr3 = True
 
-# 객체화  
-instance = SUBCLASS()
+    def __init__(self):
+        print("초기화: 파생 클래스")
 
-# 그러므로...
-instance.attr1        # >> 출력: value1
-instance.attr2        # >> 출력: "Hello World!"
-instance.attr3        # >> 출력: value3
+    def method(self, arg1, arg2):
+        return arg1 * arg2
+
+
+# 클래스 객체화  
+instance = DERIVEDCLASS()
+
+print(instance.attr1, instance.attr2, instance.attr3)
+print(instance.method(2, 3))
+```
+```
+초기화: 파생 클래스
+3 Hello World! True
+6
 ```
 
-### 슈퍼 함수
-`super()` 함수는 슈퍼클래스의 속성과 메소드에 직접 접근한다. 해당 함수는 주로 슈퍼클래스 속성과 메소드가 서브클래스에 묻히는 것을 방지하기 위해 사용된다.
+### `super()` 함수
+`super()` 함수는 파생 클래스에 묻혀진 기반 클래스의 속성 및 메소드를 호출하는데 사용된다.
 
 ```python
-# 슈퍼클래스 생성
-class SUPERCLASS:
-    def __init__(self, arg1):
-        print("Hello World!")
-        self.attribute = arg1
+# 기반 클래스 생성
+class BASECLASS:
+    attr1 = 3
+    attr2 = "Python"
 
-# 서브클래스 생성
-class SUBCLASS(SUPERCLASS):
-    def __init__(self, arg2):
-        print("Goodbye World?")
+    def __init__(self):
+        print("초기화: 기반 클래스")
+
+    def method(self, arg1, arg2):
+        return arg1 + arg2
+
+# 파생 클래스 생성
+class DERIVEDCLASS(BASECLASS):
+    attr2 = "Hello World!"
+    attr3 = True
+
+    def __init__(self):
+        super().__init__()                   # 기반 클래스 초기화
+        self.attr2 = super().attr2           # 기반 클래스의 attr2 속성
+        print("초기화: 파생 클래스")
+
+    def method(self, arg1, arg2):
+        return super().method(arg1, arg2)    # 기반 클래스의 method() 메소드
 
 
-# 객체화
-instance = SUBCLASS(3)
+# 클래스 객체화  
+instance = DERIVEDCLASS()
 
-# 그러므로...
-print(instance.attribute)
+print(instance.attr1, instance.attr2, instance.attr3)
+print(instance.method(2, 3))
 ```
 ```
-"Goodbye World?"
-AttributeError: 'SUBCLASS' object has no attribute 'attribute'
+초기화: 기반 클래스
+초기화: 파생 클래스
+3 Python True
+5
 ```
 
-슈퍼클래스 `SUPERCLASS`의 `__init__()` 메소드는 서브클래스 `SUBCLASS`의 `__init__()` 메소드에 의해 묻혀 상속되지 않은 것처럼 보인다. 결국 `print(Hello World")`가 실행되지 않고 `self.attribute`이 상속에도 불구하고 오류를 일으키는 이유이다.
+## 프로퍼티
+[프로퍼티](https://docs.python.org/3/library/functions.html#property)(property)는 하나의 속성을 getter, setter, 그리고 deleter 영역으로 나누어 [데이터 숨기기](https://en.wikipedia.org/wiki/Information_hiding)(data hiding)을 지원한다.
 
-슈퍼 함수를 사용하여 슈퍼클래스 `SUPERCLASS`의 `__init__()` 메소드를 다음과 같이 집적 불러올 수 있다.
-
-```python
-# 슈퍼클래스 생성
-class SUPERCLASS:
-    def __init__(self, arg1):
-        print("Hello World!")
-        self.attribute = arg1
-
-# 서브클래스 생성
-class SUBCLASS(SUPERCLASS):
-    def __init__(self, arg2):
-        # 슈퍼클래스로부터 "__init__()" 메소드 직접 상속
-        super().__init__(arg2)
-        print("Goodbye World?")
-
-
-# 객체화
-instance = SUPERCLASS(3)
-
-# 그러므로...
-print(instance.attribute)
-```
-```
-"Hello World!"
-"Goodbye World?"
-3
-```
-
-## 데이터 숨기기
-파이썬의 캡슐화는 데이터 숨기기(data hiding)가 완전히 보장되지 않는다. 여전히 외부 코드에서 클래스의 속성과 메소드 접근이 가능하다. 클래스에서 가능한 숨겨져야 하는 속성과 메소드가 있는 경우 일반적으로 이름 뒤섞기(name mangling) 등의 방법으로 데이터를 숨길 수 있다.
-
-| 기호   | 예시            | 설명                                                |
-|:----:|---------------|---------------------------------------------------|
-| `_`  | `_attribute`  | 이름 뒤섞기 기법이 아니지만, 클래스가 모듈로써 불러올 경우에 대하여 접근을 제한된다. |
-| `__` | `__attribute` | 이름 뒤섞기: 모듈로써 접근과 클래스 외부에서의 접근을 제한한다.              |
-
-### 프로퍼티
-프로퍼티(property)는 단일 메소드를 `getter`,`setter` 그리고 `deleter`라는 세 개의 개별 메소드로 나누어 데이터 숨기기를 지원하는 데코레이터이다. 프로퍼티는 데코레이터 기호를 사용하여 선언되기 때문에 메소드에서만 사용할 수 있다.
-
-| 메소드     | 구문                | 설명                            |
+| 프로퍼티 | 데코레이터        | 설명                            |
 |:-------:|-------------------|-------------------------------|
-| Getter  | `@property`       | 프로퍼티 속성에서 값을 가져 오는 메소드이다.     |
-| Setter  | `@method.setter`  | [선택사항] 프로퍼티 속성 값을 설정하는 메소드이다. |
-| Deleter | `@method.deleter` | [선택사항] 프로퍼티 속성을 삭제하는 메소드이다.   |
+| Getter  | `@property`       | 프로퍼티로부터 값을 반환받는 맴버이다.     |
+| Setter  | `@<프로퍼티명>.setter`  | 프로퍼티로부터 값을 설정하는 맴버이다. |
+| Deleter | `@<프로퍼티명>.deleter` | 프로퍼티가 제거될 때 실행되는 맴버이다.   |
+
+속성을 나누므로써 수정되어서는 안될 민감한 코드를 setter 및 deleter 영역에 숨기고 getter만을 통해서 데이터를 반환한다. 정의된 형태는 메소드와 유사하지만 실제로 사용할 때는 소괄호 `()` 없이 속성처럼 사용된다. 프로퍼티의 setter와 deleter는 선택사항이지만, getter는 반드시 정의되어야 한다.
 
 ```python
 # 클래스 생성
 class CLASS:
-    def __init__(self, arg1):
-        self.attribute = arg1
     
-    # 정의: GETTER 메소드
+    # Getter 프로퍼티 정의
     @property
     def method(self):
-        return self.attribute
+        return self.attr ** 2
     
-    # 정의: SETTER 메소드
+    # Setter 프로퍼티 정의
     @method.setter
-    def method(self, arg2):
-        self.attribute = arg2
+    def method(self, arg):
+        print("프로퍼티: attr 객체 속성 설정")
+        self.attr = arg + 1
     
-    # 정의: DELETER 메소드
+    # Deleter 프로퍼티 정의
     @method.deleter
     def method(self):
-        del self.attribute
-        
-# 객체화
-instance = CLASS(3)
+        print("프로퍼티: attr 객체 속성 제거")
+        del self.attr
 
-# 그러므로
-print(instance.method)   # 예시: GETTER 메소드
 
-instance.method = 1      # 예시: SETTER 메소드
-print(instance.method)
+# 클래스 객체화
+instance = CLASS()
 
-del instance.method      # 예시: DELETER 메소드
-print(instance.method)
+instance.method = 3      # Setter  프로퍼티 호출
+print(instance.method)   # Getter  프로퍼티 호출
+del instance.method      # Deleter 프로퍼티 호출
 ```
 ```
-3
-1
-AttributeError: 'CLASS' object has no attribute 'attribute'
+프로퍼티: attr 속성 설정
+16
+프로퍼티: attr 속성 제거
 ```
-
-프로퍼티로 메소드를 나누므로써 `setter` 및 `deleter`와 같은 수정되어서는 안될 민감한 코드를 숨기고 `getter`만으로 메소드를 호출한다. 즉, `getter`로부터 메소드를 지속적으로 사용 가능하게 하면서 메소드의 내부적 코딩 작업을 `setter`에서 진행할 수 있다.
 
 # 파이썬: 예외 처리
-예외(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 인터프리터에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
+[예외](https://docs.python.org/3/tutorial/errors.html#exceptions)(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 인터프리터에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
 
 ## `try`/`except` 예외 처리문
-`try`/`except` 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
+[`try`](https://docs.python.org/3/reference/compound_stmts.html#try)/[`except`](https://docs.python.org/3/reference/compound_stmts.html#except) 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
 
-| 키워드    | 설명                                                         |
-|:---------:| ------------------------------------------------------------ |
-| `try`     | 예외가 있는지 확인하는 코드 블록을 제공한다.               |
-| `except`  | 특정 예외가 발생하였을 때 실행된다.         |
-| `else`    | [선택사항] 예외가 감지되지 않았을 시 실행된다. |
-| `finally` | [선택사항] 예외 처리 마지막에 반드시 실행되는 코드이다. |
+* **`try` 문**
+
+    코드에 예외가 발생하는지 확인한다. 예외가 발생하였을 시, 나머지 코드는 실행되지 않고 예외 유형에 따라 해당하는 `except` 문으로 넘어간다.
+
+* **`except` 문**
+
+    `try` 문에서 발생한 예외에 따라 실행되는 코드를 포함한다. 하나의 `try` 문에 여러 `except` 문을 사용하여 다양한 예외에 대비할 수 있다. 예외 유형을 기입하지 않으면 모든 유형의 예외를 처리하는 처리한다. 예외 유형의 목록은 [여기](https://docs.python.org/3/library/exceptions.html)에서 확인할 수 있다.
 
 ```python
 try:
     ...
-except exception_type1:
+except IndexError:    # 예외 유형: 시퀀스 객체 범위를 초과하여 호출
     ...
-except exception_type2:
+except NameError:     # 예외 유형: 존재하지 않은 식별자의 데이터 호출
     ...
-except:            # 전조건 예외처리는 마지막에 위치한다.
+except:               # 예외 유형: 모든 유형의 예외 처리
     ...
 ```
 
+다음은 `try`/`except` 예외 처리문 쌍을 보조하는 문장이며, 이들은 선택사항이다.
+
+| 키워드    | 설명                                            |
+|:---------:| ---------------------------------------------- |
+| [`else`](#else-조건문)    | `try` 문에서 예외가 발생하지 않으면 실행되는 코드를 포함한다. |
+| [`finally`](https://docs.python.org/3/reference/compound_stmts.html#finally) | `try` 문에서 예외가 발생 여부와 무관하게 마지막에 반드시 실행되는 코드를 포함한다. |
+
 ## `raise` 문
-`raise` 문은 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 함수나 클래스에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다.
+[`raise`](https://docs.python.org/3/reference/simple_stmts.html#raise) 문은 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 함수나 클래스에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다.
 
 ```python
-# 명시적 예외 발생: 위의 'except' 문 내에서도 단독으로 사용할 수 있음.
+# 명시적 예외 발생: 위의 'except' 문 내에서도 단독으로 사용할 수 있다.
 raise
 
 # 명시적으로 발생된 예외에 대한 자세한 설명을 제공한다.
-raise exception_description
+raise "예외에 대한 설명 기입"
 ```
-
-# 파이썬: 파이썬다운
-본 장에서는 개발자들이 파이썬으로 프로그래밍을 할 때 추천하는 파이썬 코딩 스타일에 대하여 소개를 하며, 이를 영어로 pythonic("파이썬"스러운)이라고 부른다.
-
-## 파이썬의 젠
-파이썬의 젠(Zen of Python)은 파이썬에 내장되어 있는 파이썬 코딩 지침을 담고 있으며, 아래의 코드로 확인할 수 있다.
-
-```python
-import this
-```
-
-## PEP8
-PEP8이란, 여덟 가지의 파이썬 개선 제안(Python Enhancement Proposals)으로 경력있는 파이썬 개발자들이 조언하는 파이썬 프로그래밍 스타일이다.
-
-1. 모듈 이름은 간결하고 소문자로만 구성되어야 한다.
-2. 클래스 이름은 대문자로 시작하는 단어들로 구성되어야 한다 (일명 CapWords 스타일).
-3. 대부분의 변수와 함수 이름은 소문자와 밑줄(띄어쓰기 대행)로만 구성되어야 한다.
-4. 상수 변수는 대문자와 밑줄(띄어쓰기 대행)로만 구성되어야 한다.
-5. 파이썬 키워드와 충돌이 일어날 수 있는 이름 접미부에 밑줄을 넣도록 한다.
-6. 한 줄은 80자를 초과하지 않도록 한다.
-7. `from module import *`는 되도록 사용하지 않는다.
-8. 한 줄에는 하나의 문만 있어야 한다.
-
-## 시작점
-시작점(entry point)는 프로그램이 시작되는 부분을 의미하며, C/C++ 프로그래밍 언어의 경우 `main()` 함수에서부터 코드가 실행된다. 파이썬에는 시작점이 존재하지 않는다. 하지만 현재 어느 스크립트를 중심으로 실행되는지 판별하는 코드가 있으며 `__name__` 매직 메소드가 `"__main__"`과 일치 여부를 확인한다.
-
-```python
-# 시작점
-if __name__ == "__main__":
-    ...
-```
-
-파이썬에서는 이를 시작점이라고 부르며, 모듈로 가져온 스크립트에서는 시작점이 실행되지 않는다. 주의해야 할 점은 비교 연산자 `==`는 논리 연산자인 `is`로 절대 대체할 수 없다.
 
 # 파이썬: 파일 관리
 여러 데이터를 파이썬 프로세스에 전달하거나, 혹은 데이터를 외부로 출력하기 위해 파일을 불러와 read 혹은 write 하여 처리할 수 있다. 본 장은 파이썬에서 파일을 관리하는 방법에 대하여 소개한다.
 
 ## 파일 열기 및 닫기
-파이썬에서 파일을 열고 닫으려면 `open()` 함수와 `close()` 메소드를 사용한다.
+파이썬에서 파일을 열고 닫으려면 [`open()`](https://docs.python.org/3/library/functions.html#open) 함수와 [`close()`](https://docs.python.org/3/distutils/apiref.html#distutils.text_file.TextFile.close) 메소드를 사용한다.
 
 ```python
 # 파일 열기: 읽기 전용
@@ -1563,10 +1485,10 @@ file.close()
 | `rb` | 바이너리 읽기 모드 (비텍스트 파일) |
 | `wb` | 바이너리 쓰기 모드 (비텍스트 파일) |
 
-`close()` 메소드로 더 이상 사용하지 않는 파일을 닫아주는 습관은 리소스 낭비를 줄여주므로 매우 중요하다. 예외가 발생하여도 정상적으로 파일을 닫을 수 있도록 `try`/`except` 예외 처리문 혹은 `with` 문을 함께 사용할 것을 권장한다.
+`close()` 메소드로 더 이상 사용하지 않는 파일을 닫아주는 습관은 리소스 낭비를 줄여주므로 매우 중요하다. 예외가 발생하여도 정상적으로 파일을 닫을 수 있도록 [`try`](#tryexcept-예외-처리문)/[`except`](#tryexcept-예외-처리문) 예외 처리문 혹은 [`with`](#with-문) 문을 함께 사용할 것을 권장한다.
 
 ### `with` 문
-`with` 문은 해당 코드 블록 안에서만 사용할 수 있는 임시 변수를 생성한다. `with` 문으로 파일을 열었을 경우, 코드 블록이 종료되면 파일은 자동적으로 닫힌다.
+[`with`](https://docs.python.org/3/reference/compound_stmts.html#the-with-statement) 문은 해당 코드 블록 안에서만 사용할 수 있는 임시 변수를 생성한다. `with` 문으로 파일을 열었을 경우, 코드 블록이 종료되면 파일은 자동적으로 닫힌다.
 
 ```python
 with open("filename.txt") as file:
@@ -1578,51 +1500,51 @@ with open("filename.txt") as file:
 1. `__enter__()`와 `__exit__()` 메소드
     
     ```python
-    # 컨텍스트 관리자 1
-    class CLASS:
-        def __init__(self):
-            pass
-        
-        # "with" 문 시작 시 실행
-        def __enter__(self):
-            self.var = expression
-            return self.var
-        
-        # "with" 문 종료 시 실행
-        def __exit__(self):
-            ...
+   # 컨텍스트 관리자 1
+   class CLASS:
+       def __init__(self):
+           pass
+       
+       # "with" 문 시작 시 실행
+       def __enter__(self):
+           self.attr = expression
+           return self.attr
+       
+       # "with" 문 종료 시 실행
+       def __exit__(self):
+           ...
     ```
 
-2. `contextlib` 모듈
+2. [`contextlib`](https://docs.python.org/3/library/contextlib.html) 모듈
     
     ```python
-    from contextlib import contextmanager
-    
-    # 컨텍스트 관리자 2 
-    class CLASS:
-        def __init__(self):
-            ...
-        
-        # "with" 문 지원 함수 혹은 메소드
-        @contextmanager
-        def method(self):
-            self.var = expression
-            yield self.var
-            ...
+   from contextlib import contextmanager
+   
+   # 컨텍스트 관리자 2 
+   class CLASS:
+       def __init__(self):
+           ...
+       
+       # "with" 문 지원 함수 혹은 메소드
+       @contextmanager
+       def method(self):
+           self.attr = expression
+           yield self.attr
+           ...
     ```
 
 문맥 관리자는 `return` 혹은 `yield` 문으로 반환/양도된 데이터를 `with` 문에서 처리할 수 있는 리소스로 제공한다. 해당 리소스는 `as` 키워드로 별도의 명칭을 지정하지 않는 이상 암묵적으로 처리 대상으로 지목된다.
 
 ```python
-# 객체화
+# 클래스 객체화
 instance = CLASS()
 
 with instance.method():
-    # "self.var"를 위주로 처리
+    # attr 객체 속성을 위주로 처리
     ...
 ```
 
-대표적인 컨텍스트 관리자의 실제 적용 예시로는 *[텐서플로우: 텐서보드](/docs/ko.TensorFlow#텐서보드)*에서 확인할 수 있다.
+대표적인 컨텍스트 관리자의 실제 적용 예시로는 머신러닝 프레임워크의 일부인 [텐서보드](/docs/ko.TensorFlow#텐서보드)(TensorBoard)에서 확인할 수 있다.
 
 ### 절대경로 및 상대경로
 컴퓨터에는 두 종류의 경로 탐색법이 존재한다.
@@ -1630,7 +1552,7 @@ with instance.method():
 * **절대경로(absolute path)**: 시스템의 루트경로(예. 윈도우의 `C:\` 혹은 리눅스의 `/`)로부터 시작하여 탐색하는 방식이다.
 * **상대경로(relative path)**: 실행되고 있는 프로세스의 현 위치를 기준으로 경로를 탐색하는 방식이다.
 
-경로를 지정할 때에는 백슬래시 두 개(`\\`)로 폴더 및 파일을 구분한다. 하나만 사용하면 [탈출 문자](#탈출-문자)가 되어 원치 않은 텍스트 연산이 수행될 수 있다.
+경로를 지정할 때에는 백슬래시 두 개 `\\`로 폴더 및 파일을 구분한다. 하나만 사용하면 [탈출 문자](#탈출-문자)가 되어 원치 않은 텍스트 연산이 수행될 수 있다.
 
 ```python
 file = open("path\\filename.txt")
@@ -1687,8 +1609,8 @@ for variable in file:
 1. 덮어쓰기(overwrite) 모드 `w`는 기존의 모든 내용들을 삭제하여 처음부터 새로 작성한다.
     
     ```python
-    with open("path\\filename.txt", "w") as file:
-        file.write("텍스트 덮어쓰기!")
+   with open("path\\filename.txt", "w") as file:
+       file.write("텍스트 덮어쓰기!")
     ```
     ```
     <filename.txt>
@@ -1698,8 +1620,8 @@ for variable in file:
 2. 덧붙여 쓰기(append) 모드 `a`는 기존의 모든 내용들을 유지한 채 맨 끝 단락에서부터 작성한다.
 
     ```python
-    with open("path\\filename.txt", "a") as file:
-        file.write("텍스트 덧붙여 쓰기!")
+   with open("path\\filename.txt", "a") as file:
+       file.write("텍스트 덧붙여 쓰기!")
     ```
     ```
     <filename.txt>
@@ -1723,94 +1645,135 @@ with open("path\\NEW_filename.txt", "w") as file:
 ```
 
 # 파이썬: 모듈
-[모듈](https://docs.python.org/3/tutorial/modules.html)(module)은 부가적인 기능 및 데이터를 제공하는 파이썬 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.py` 확장자를 갖는다. 개발자는 함수나 클래스를 담고 있는 파이썬 스크립트를 작성하고, 이를 `import` 키워드를 통해 다른 스크립트로 자료형, 연산, 객체 및 클래스를 제공할 수 있다. 아래는 `module.py`이란 파이썬 모듈을 불러오는 예시이다.
+[모듈](https://docs.python.org/3/tutorial/modules.html)(module)은 부가적인 기능 및 데이터를 제공하는 파이썬 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.PY` 확장자를 갖는다. 파이썬 모듈을 불러오는 방법에는 두 가지가 있다:
+
+* [`import`](https://docs.python.org/3/reference/simple_stmts.html#the-import-statement) 키워드에 모듈명을 기입하여 모듈에 정의된 모든 변수, 함수, 그리고 클래스를 불러온다.
+
+    ```python
+  # 모듈 불러오기
+  import module
+
+  # 모듈에 정의된 함수 호출
+  module.function()
+    ```
+
+* [`from`](https://docs.python.org/3/reference/simple_stmts.html#from) 키워드로 모듈명을 기입한 다음 `import` 키워드로 불러오고자 하는 변수, 함수, 혹은 클래스를 지정한다.
+
+    > 만일 모든 변수, 함수, 그리고 클래스를 불러오려면 `from module import *`로 작성한다.
+
+    ```python
+  # 모듈 불러오기: 선택적
+  from module import variable, function, classes
+
+  # 모듈에 정의된 함수 호출
+  function()
+    ```
+
+불러온 모듈이나 변수, 함수, 그리고 클래스는 `as` 키워드를 통해 별칭을 지정할 수 있다. 이는 복잡하거나 긴 모듈명을 간단한 이름으로 호출하거나, 혹은 기존 데이터의 식별자와 중복되어 발생할 수 있는 문제를 방지하기 위해 사용된다.
 
 ```python
-import module
-module.function()
+# 모듈 별칭 지정
+import module as alias
+
+# 모듈 데이터 별칭 지정
+from module import variable as alias1, function as alias2
 ```
 
-위의 방법은 `function()`을 사용하기 위해 매번 `module`을 언급해야 하는 불편함이 있다. 이를 해소하기 위해 `from` 키워드를 통해 암묵적으로 모듈을 언급하는 방법을 택할 수 있다.
+### 진입점
+[진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)는 프로그램이 시작되는 부분을 의미하지만, 파이썬 프로그래밍 언어는 단일 스크립트에서 상단에서부터 순차적으로 실행하므로 진입점에 대한 개념이 무색하다. 그 대신에 구동되고 있는 파이썬 프로세스가 해당 스크립트로부터 실행된 것인지, 아니면 모듈로써 불러온 것인지 판별이 가능하다.
 
 ```python
-from module import function1, function2
-from module import function as name
+# 진입점
+if __name__ == "__main__":
+    ...
 ```
 
-그러나 모듈이 암묵적으로 언급되었기 때문에 서로 다른 모듈이 동일한 식별자를 가지므로써 생길 수 있는 충돌 문제가 잠재적으로 내포되어 있다. 함수 이름의 고유성이 확실히 보장되지 않는 이상, 모듈을 안전하게 불러오기 위해 전자의 방법을 사용할 것을 권장한다.
+> 절대로 비교 연산자 `==`는 논리 연산자 `is`로 대체되어서는 안된다.
+
+`import` 문으로 불러온 모듈이 정의된 변수, 함수, 그리고 클래스를 제공하기 위해서는 스크립트 내부에 작성된 코드를 실행해야 한다. 예를 들어, 정의와 상관없는 `print()` 출력 함수가 모듈에 작성되어 있으면 터미널에 해당 텍스트가 나타난다. 하지만 위의 조건문 하에 스크립트 코드를 작성하면 모듈로 불러올 때에는 실행되지 않는다. 그리고 파이썬 프로그래밍 언어에서는 이를 "진입점"이라고 부른다.
 
 ## 패키지
-패키지(package)는 관련 파이썬 모듈들을 포괄하는 하나의 폴더이다. 모든 파이썬 패키지 폴더 내에는 `__init__.py`라는 특수한 파이썬 파일이 존재하며, 안에는 아무런 내용이 없거나 해당 패키지의 파일경로가 담겨있기도 한다.
+[패키지](https://docs.python.org/3/tutorial/modules.html#packages)(package)는 여러 모듈들을 하나의 공간으로 분류하는 일종의 [네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)이다.
+
+> 파이썬의 패키지는 폴더 형태를 취하고 있으며, 이는 인터프리터 설치 경로로부터 `.\Lib\site-packages`에서 찾아볼 수 있다.
+
+모든 파이썬 패키지는 `__init__.py`라는 특수한 파이썬 파일을 반드시 가져야 한다. 비록 안에는 아무런 내용이 없더라도, 파이썬 인터프리터가 이를 패키지로 인식하도록 하는 중요한 역할을 한다.
 
 ```python
 import package.module
-from package.module import function
 ```
 
-## PyPI
-[PyPI](https://pypi.org/)(Python Package Index; 파이썬 패키지 목록)은 온라인 패키지 저장소이다. 모듈 및 패키지를 설치하기 위해서는 pip라는 소프트웨어가 반드시 필요하다.
+### PyPI
+[PyPI](https://pypi.org/)(Python Package Index; 파이썬 패키지 목록)는 온라인 패키지 저장소로 파이썬 커뮤니티에서 제작한 상당수의 패키지를 보유한다. PyPI로부터 패키지를 설치하려면 [pip](#pip) 소프트웨어가 필요하다.
 
 ### pip
-pip 소프트웨어는 파이썬 패키지 관리 시스템이다. 패키지 관리 소프트웨어는 기본적으로 파이썬 3 인터프리터와 함께 설치되지만, 온라인에서 개별적으로 설치할 수도 있다. 패키지의 설치 및 관리는 명령 프롬프트나 파워셸과 같은 터미널 유형 콘솔창에서 진행된다. 
+[pip](https://pip.pypa.io/en/stable/)는 파이썬 패키지 관리 소프트웨어이며 기본적으로 파이썬 인터프리터와 함께 설치된다. pip는 [GUI](https://ko.wikipedia.org/wiki/그래픽_사용자_인터페이스)가 갖춰진 프로그램이 아니므로 패키지 설치 및 관리는 [명령 프롬프트](https://ko.wikipedia.org/wiki/Cmd.exe) 또는 [파워셸](https://ko.wikipedia.org/wiki/파워셸)과 같은 터미널에서 처리되어야 한다.
 
-| 이름        | 설명               | 명령어                 |
+| 옵션        | 설명               | 명령어                 |
 | ----------- | ------------------ | ---------------------- |
 | `install`   | 패키지 설치        | `pip install 패키지`   |
 | `uninstall` | 패키지 제거        | `pip uninstall 패키지` |
 | `list`      | 설치된 패키지 목록 | `pip list`             |
 
-윈도우 OS에서 파이썬 pip를 사용할 경우, 단독적인 `pip`가 아닌 `python -m pip` 명령어를 사용하는 것을 권장한다(macOS 및 리눅스 제외).
+[윈도우 OS](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)에서 pip를 사용할 경우, 단독적인 `pip`가 아닌 `python -m pip` 명령어를 사용하는 것을 권장한다(macOS 및 리눅스 제외).
 
 ```
 python -m pip
 ```
 
-특히 원도우 10 OS를 사용하는 경우 `python`을 입력하는 것만으로 마이크로소프트 스토어로 이동하게 되는데, 해결 방법은 두 가지가 있다.
+특히 원도우 10 이상의 운영체제를 사용하는 경우 `python`을 입력하는 것만으로 마이크로소프트 스토어로 이동하게 되는데, 해결 방법은 두 가지가 있다.
 
-1. `python`을 `py`로 대체 (Python Launcher 프로그램 사용)
-2. 컴퓨터에서 `설정` → `앱` → `앱 및 기능` → `앱 실행 별칭 관리`에서 `python.exe` 및 `python3.exe`을 해제 (본질적 문제 해결)
+1. `python`을 `py`로 대체 ([Python Launcher](https://docs.python.org/3/using/windows.html#python-launcher-for-windows) 프로그램 사용)
+2. 컴퓨터에서 "설정 → 앱 → 앱 및 기능 → 앱 실행 별칭 관리"에서 `python.exe` 및 `python3.exe`을 해제 (본질적 문제 해결)
 
-위의 명령어는 컴퓨터 환경설정에서 지정된 파이썬 인터프리터의 pip를 접속한다는 것을 의미한다. 이를 통해 인터프리터 간의 패키지 관리에 혼돈을 줄일 수 있다. 만일 32비트 파이썬 3.8 인터프리터가 설치되었을 경우, 다음 명령어로 접근한다.  
+위의 명령어는 컴퓨터 환경설정에서 지정된 파이썬 인터프리터의 pip를 접속한다는 것을 의미한다. 이를 통해 인터프리터 간의 패키지 관리에 혼돈을 줄일 수 있다. 만일 32비트 파이썬 3.8 인터프리터가 설치되었다면 Python Launcher로 다음과 같이 접근한다.  
 
 ```
 py -3.8-32 -m pip
 ```
 
 # 파이썬: 가상환경
-파이썬에서 pip로 설치한 패키지들은 전부 인터프리터 경로에 설치된다. 이는 여러 파이썬 프로젝트를 진행할 시 치명적인 문제점이 될 수 있는데, 바로 인터프리터에는 하나의 패키지가 여러 개 존재할 수 없다는 것이다. 결국 두 프로젝트가 서로 다른 버전의 패키지를 요구하면 프로젝트를 작업할 때마다 모듈을 새로 설치하는 번거로움이 발생한다.
+[가상환경](https://docs.python.org/3/glossary.html#term-virtual-environment)(virtual environment)은 각 파이썬 프로젝트마다 런타임 환경을 고립시켜 타 프로젝트에 영향을 주지 않도록 한다. [pip](#pip)로 설치한 [패키지](#패키지)들은 전부 인터프리터 경로에 설치되는데, 파이썬 프로젝트마다 서로 다른 버전의 패키지가 요구될 때 매우 골치아픈 상황이 발생한다. 바로 다른 버전의 동일한 패키지 설치가 불가하기 때문이다. 가상환경은 패키지를 프로젝트에 국한된 런타임 환경에 설치하므로 패키지 관리가 훨씬 용이하다.
 
-이러한 문제를 해결하기 위한 게 바로 가상환경(virtual environment)이다. 해당 프로젝트만을 위한 인터프리터를 복제하여 할당하면, 두 프로젝트 간의 패키지 충돌이 일어나지 않으며 패키지 관리도 훨씬 용이해진다.
-
-## `venv` 패키지
-파이썬 3에는 기본적으로 `venv`라는 가상환경 패키지가 포함되어 있다. 본 패키지는 간단한 가상환경을 지원해주며, 시스템 인터프리터와 분리되었으나 동일한 버전의 개별 인터프리터가 할당된다. 해당 인터프리터의 pip로 설치된 패키지는 가상환경에 설치된다.
+본 장은 파이썬 3에 기본적으로 제공하는 [`venv`](https://docs.python.org/3/library/venv.html) 가상환경 패키지를 위주로 설명한다.
 
 ### 가상환경 생성
-원하는 파이썬 프로젝트에 `.venv` 이름의 가상환경을 생성하기 위해 아래의 명령어를 입력한다.
+파이썬 프로젝트란, 단순히 개발 중인 파이썬 스크립트가 위치한 폴더를 가리킨다. 터미널에서 가상환경을 설정하려는 경로로 이동해 아래 명령어를 입력한다.
 
 ```
-python -m venv D:\Workspace\Python\project\.venv
+py -m venv .venv
 ```
 
-### 가상환경 실행
-여기서 가상환경 "실행"이란 가상환경을 터미널을 통해 접속한다는 것을 의미한다. 파이썬 프로그램 실행에는 가상환경 실행을 요하지 않으나, 패키지를 설치하기 위해서는 가상환경 실행이 필요하다.
+이는 `.venv`라는 폴더를 생성하는데, 가상환경을 통해 설치한 패키지들은 전부 해당 폴더에 저장된다.
 
-* **윈도우 NT**
+### 가상환경 활성
+가상환경에 패키지를 설치하려면 우선 사용 중인 터미널에 가상환경을 활성시켜야 한다. 그렇지 않으면 설치한 패키지들은 가상환경이 아닌 시스템에 설치된 인터프리터 경로에 패키지가 설치된다.
 
-    ```
-  D:\Workspace\Python\project\.venv\Scripts\activate.bat
-    ```
-
-* **유닉스 (예. macOS 및 리눅스)**
+* **[명령 프롬프트](https://ko.wikipedia.org/wiki/Cmd.exe)**
 
     ```
-  source ~/Workspace/Python/project/.venv/bin/activate
+  .venv\Scripts\activate.bat
     ```
 
-### 가상환경 종료
-터미널로부터 가상환경을 종료하기 위해 아래의 명령어를 입력한다.
+* **[파워셸](https://ko.wikipedia.org/wiki/파워셸)**
+
+    ```
+  .venv/Scripts/Activate.ps1
+    ```
+
+* **[유닉스 셸](https://ko.wikipedia.org/wiki/유닉스_셸)**
+
+    ```
+  source .venv/bin/activate
+    ```
+
+명령줄 좌측에 `(.venv)`라는 표시가 나타났으면 가상환경 접속에 성공한 것이다.
+
+### 가상환경 비활성
+터미널에 가상환경을 비활성화하려면 아래의 명령어를 입력한다.
 
 ```
 deactivate
 ```
 
-이는 `D:\Workspace\Python\.venv\Scripts\deactivate.bat` 명령어를 입력하는 것과 동일하다. 이러한 이유로, 가상환경 경로를 옮길 시 `deactivate` 명령어를 인식하지 못하여 직접 경로를 찾아서 `deactivate.bat` 파일을 실행해야 한다.
+이는 `.venv\Scripts\deactivate` 명령어를 입력하는 것과 동일하다. 그러므로 프로젝트 경로를 다른 위치로 옮기면 `deactivate` 명령어가 동작하지 않아 손수 경로를 찾아 `deactivate` 파일을 실행해야 한다.

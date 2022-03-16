@@ -10,7 +10,7 @@ order: 0x05
 [자바스크립트](https://ko.wikipedia.org/wiki/자바스크립트)(JavaScript)는 웹디자인에 사용된 [HTML](#html-웹프로그래밍-언어) & [CSS](https://ko.wikipedia.org/wiki/CSS)만으로는 제한적인 [동적 웹페이지](https://ko.wikipedia.org/wiki/동적_웹페이지)를 구현하기 위해 개발된 스크립트 언어였다. 자바스크립트가 [웹 브라우저](https://ko.wikipedia.org/wiki/웹_브라우저)에서만 실행될 수 있던 당시에는 활용도가 클라이언트 측에서 웹페이지 상호작용을 위한 [프론트엔드](https://ko.wikipedia.org/wiki/프론트엔드와_백엔드)(front-end)에 한정되었다. 현재는 데이터 처리 및 어플리케이션 제작 등 서버 측에서 [백엔드](https://ko.wikipedia.org/wiki/프론트엔드와_백엔드)(back-end)로도 활발히 사용되고 있다.
 
 ## 인터프리트 언어
-> *참조: [컴파일러 vs 인터프리터](/blog/ko.compiler_vs_interpreter)*
+> *참조: [컴파일러 vs. 인터프리터](/blog/ko.compiler_vs_interpreter)*
 
 자바스크립트 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다. 초창기 자바스크립트 코드를 실행하는 [자바스크립트 엔진](https://ko.wikipedia.org/wiki/자바스크립트_엔진)(JavaScript engine)은 단순 인터프리터였으나, 현대에는 성능 향상을 위해 [JIT 컴파일](/blog/ko.compiler_vs_interpreter#jit-컴파일)(just-in-time compile)을 활용한다.
 
@@ -55,8 +55,8 @@ VS Code에서 자바스크립트를 실행하는 방법에는 두 가지가 존�
 ## 주석
 주석(comment)은 프로그래밍에 있어 실행되지 않는 부분이며, 흔히 어떠한 정보를 간략히 스크립트 내에 입력하는데 사용된다. 자바스크립트 프로그래밍 언어에는 두 가지의 주석이 존재하며, 이들은 각각 한줄 주석과 블록 주석이라 부른다.
 
-* **한줄 주석 (line comment)**: 코드 한 줄을 차지하는 주석이며, 두 개의 슬래시(`//`)로 표시된다.
-* **블록 주석 (block comment)**: 코드 여러 줄을 차지하는 주석이며, 한 쌍의 슬래시와 별표(`/* */`)로 표시된다.
+* **한줄 주석 (line comment)**: 코드 한 줄을 차지하는 주석이며, 두 개의 슬래시 `//`로 표시된다.
+* **블록 주석 (block comment)**: 코드 여러 줄을 차지하는 주석이며, 한 쌍의 슬래시와 별표 `/* */`로 표시된다.
 
 ```javascript
 /*
@@ -116,7 +116,7 @@ console.log("출력:", variable);
 출력: Hello World!
 ```
 
-하나의 `console.log()` 함수에서 두 개 이상의 데이터를 한꺼번에 출력하려면 쉼표(`,`)를 사용하여 연속적으로 데이터를 나열할 수 있다. 단, 각 쉼표가 위치한 곳에는 항상 공백이 놓여진다. 그 외의 다른 방법은 [문자열 자료형](#문자열-자료형)을 설명하는 부분에서 소개한다.
+하나의 `console.log()` 함수에서 두 개 이상의 데이터를 한꺼번에 출력하려면 쉼표 `,`를 사용하여 연속적으로 데이터를 나열할 수 있다. 단, 각 쉼표가 위치한 곳에는 항상 공백이 놓여진다. 그 외의 다른 방법은 [문자열 자료형](#문자열-자료형)을 설명하는 부분에서 소개한다.
 
 ```javascript
 A = 10.0;
@@ -133,13 +133,13 @@ A는 10.0 ,
 ## 식별자
 [식별자](https://ko.wikipedia.org/wiki/식별자#컴퓨터_언어)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. 자바스크립트에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
 
-* 오직 영문, 숫자, 밑줄(`_`), 그리고 달러 표시(`$`)만 허용된다.
+* 오직 영문, 숫자, 밑줄 `_`, 그리고 달러 표시 `$`만 허용된다.
 * 첫 문자는 숫자로 시작할 수 없다.
 * 공백은 허용되지 않는다.
 * 대소문자를 구분한다.
 
 ## 변수
-변수(variable)는 할당 기호(`=`)를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시는 `variable`이란 식별자를 갖는 변수에 숫자 3을 할당한다. 시스템적 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮는 절차를 [네임 바인딩](https://ko.wikipedia.org/wiki/네임_바인딩)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
+변수(variable)는 할당 기호 `=`를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시는 `variable`이란 식별자를 갖는 변수에 숫자 3을 할당한다. 시스템적 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮는 절차를 [네임 바인딩](https://ko.wikipedia.org/wiki/네임_바인딩)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
 
 ```javascript
 // 변수 "variable"의 정의
@@ -294,7 +294,7 @@ Uncaught ReferenceError: variable is not defined
 
 자바스크립트 숫자 자료형들은 산술 연산이 가능하다: 가장 기본적인 `+`, `-`, `*`, `/` 사칙 연산자부터 나눗셈의 나머지 `%` 그리고 제곱 `**`을 구할 수 있다. 산술 연산을 쉽게 읽을 수 있도록 숫자와 산술 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않으므로 무관한다.
 
-할당 연산자(assignment operator)는 할당 기호(`=`)와 조합하여 산술 연산 코드를 더욱 간결하게 작성할 수 있도록 한다.
+할당 연산자(assignment operator)는 할당 기호 `=`와 조합하여 산술 연산 코드를 더욱 간결하게 작성할 수 있도록 한다.
 
 | 연산자 | 예시     | 동일                                          |
 | :----: |--------| --------------------------------------------- |
@@ -341,9 +341,9 @@ Uncaught ReferenceError: variable is not defined
 | `!`  | 보수  | 참을 거짓으로, 또는 거짓을 참으로 변경한다.                 |
 
 ### 문자열 자료형
-문자열 자료형(string type)은 한 쌍의 작은 따옴표(`''`) 또는 큰 따옴표(`""`)로 구별되는 텍스트 데이터이다. 자바스크립트에서 문자열 자료형 데이터는 일반적으로 문자열 객체(string object)라고 부른다. 
+문자열 자료형(string type)은 한 쌍의 작은 따옴표 `''` 또는 큰 따옴표 `""`로 구별되는 텍스트 데이터이다. 자바스크립트에서 문자열 자료형 데이터는 일반적으로 문자열 객체(string object)라고 부른다. 
 
-텍스트에 따옴표를 넣으려면 해당 따옴표 앞에 백슬래시(`\`)를 배치하여 문자열이 도중이 끊기는 현상을 방지한다.
+텍스트에 따옴표를 넣으려면 해당 따옴표 앞에 백슬래시 `\`를 배치하여 문자열이 도중이 끊기는 현상을 방지한다.
 
 ```javascript
 /* 문자열 작성의 부적절한 예시와 적절한 예시의 비교. */
@@ -355,7 +355,7 @@ Where
 Where's my "Cat in the Hat" book?
 ```
 
-문자열 객체는 다른 데이터와 더하기 기호(`+`)를 통해 공백없이 하나의 문자열로 연결할 수 있다. 원래는 문자열 간에만 사용할 수 있으나, 자바스크립트가 자동으로 숫자 및 논리 자료형 등을 문자열로 변환해 준다. 그 외에도 ES6부터 추가된 한 쌍의 [억음 부호](https://ko.wikipedia.org/wiki/억음_부호)로 표시되는 [템플릿 리터럴](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)(template literal) <code>&grave;&grave;</code>에서 `${}` 연산자를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
+문자열 객체는 다른 데이터와 더하기 기호 `+`를 통해 공백없이 하나의 문자열로 연결할 수 있다. 원래는 문자열 간에만 사용할 수 있으나, 자바스크립트가 자동으로 숫자 및 논리 자료형 등을 문자열로 변환해 준다. 그 외에도 ES6부터 추가된 한 쌍의 [억음 부호](https://ko.wikipedia.org/wiki/억음_부호)로 표시되는 [템플릿 리터럴](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)(template literal) <code>&grave;&grave;</code>에서 `${}` 연산자를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
 
 ```javascript
 A = 10.0;
@@ -393,7 +393,7 @@ console.log(typeof 'Hello World!');   // 출력: string
 ```
 
 ## 탈출 문자
-[탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호(`\`)를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 이전에 문자열 자료형을 소개할 때, `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
+[탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 이전에 문자열 자료형을 소개할 때, `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
 
 ```javascript
 print("Hello\nWorld!")
@@ -582,7 +582,7 @@ ES6부터 범위형 `for` 반복문이 소개되었으며, 조건 만족 여부�
 ## 배열
 배열(array) 이터러블 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 배열은 두 가지 방법으로 생성할 수 있다:
 
-* 대괄호(`[]`) 내에 데이터를 순서대로 쉼표로 나누어 나열한다.
+* 대괄호 `[]` 내에 데이터를 순서대로 쉼표로 나누어 나열한다.
 * [`Array()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) [클래스](#클래스)의 소괄호 `()` 내에 데이터를 순서대로 쉼표로 나누어 나열한다.
 
 > 아무런 데이터를 입력하지 않으면 빈 배열을 생성한다.
@@ -906,7 +906,7 @@ console.log(variable.indexOf(5));
 [프로토타입](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)(prototype)은 기본적으로 객체에 내장된 속성 및 메소드를 일컬으며, 모든 자바스크립트 객체는 프로토타입을 갖는다. 프로토타입 또한 객체이므로 자신만의 프로토타입이 있는데 이러한 연속을 프로토타입 연쇄(prototype chain)라고 부르며, `null`을 프로토타입으로 갖는 프로토타입까지 이어진다. 객체의 프로토타입은 `Object.getPrototypeOf()` 정적 메소드로 반환된다.
 
 ## 클래스
-[클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 동일한 구조를 갖는 객체를 매번 정의할 필요없이 간단히 생성할 수 있도록 한다. ES6부터 소개되었으며 `class` 키워드와 함께 객체의 속성 및 메소드를 클래스 내부에 정의한다. 클래스로부터 객체를 생성하는 절차를 *객체화(instantiation)*라고 한다. 직접 생성된 객체와 달리, 클래스로부터 생성된 객체는 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)로부터 아래의 특성을 가진다:
+[클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 동일한 구조를 갖는 객체를 매번 정의할 필요없이 간단히 생성할 수 있도록 한다. ES6부터 소개되었으며 `class` 키워드와 함께 객체의 속성 및 메소드를 클래스 내부에 정의한다. 클래스로부터 객체를 생성하는 절차를 "객체화(instantiation)"라고 한다. 직접 생성된 객체와 달리, 클래스로부터 생성된 객체는 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)로부터 아래의 특성을 가진다:
 
 1. 변수와 함수를 하나의 객체로 결합한다.
 2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
@@ -944,7 +944,7 @@ const instance = new CLASS();
 자바스크립트는 [클래스 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#class_hoisting)(class hoisting)을 지원하지 않는다.
 
 ### 생성자
-[생성자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)(constructor)는 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 `constructor()` 메소드이다. 비록 생성자는 선택사항이지만, 만일 생성자를 정의한다면 객체화 과정에서 객체로 전달할 인자의 개수를 결정하는 요인으로 작용한다. 생성자는 흔히 객체화 단계에서 필드를 초기화하는 용도로 사용된다.
+[생성자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)(constructor)는 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 `constructor()` 메소드이다. 비록 생성자는 선택사항이지만, 만일 생성자를 정의한다면 객체화 과정에서 객체로 전달할 인자의 개수를 결정하는 요인으로 작용한다. 생성자는 흔히 객체화 단계에서 필드를 초기화(initialization)하는 용도로 사용된다.
 
 ```javascript
 /* 클래스 생성 */
@@ -1119,4 +1119,4 @@ DERIVEDCLASS { property1: 'Hello World!', property2: 7, property3: true }
     ```
 
 # 자바스크립트: 모듈
-[모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)(module)은 부가적인 기능 및 데이터를 제공하는 자바스크립트 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.JS` 혹은 일부 런타임에서 모듈로 인식할 수 있는 `.MJS` 확장자를 갖는다. 개발자는 변수나 함수 혹은 클래스를 담고 있는 자바스크립트 모듈을 작성하여 `export` 문으로 제공하고, 이들을 활용하려는 스크립트는 `import` 문을 통해 전달받는다.
+[모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)(module)은 부가적인 기능 및 데이터를 제공하는 자바스크립트 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.JS` 혹은 일부 런타임에서 모듈로 인식할 수 있는 `.MJS` 확장자를 갖는다. 모듈은 정의된 변수나 함수 혹은 클래스 등을 `export` 문으로 제공하고, 이를 `import` 문을 통해 불러와 활용할 수 있다.
