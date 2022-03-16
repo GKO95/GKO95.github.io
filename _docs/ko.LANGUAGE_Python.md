@@ -1098,13 +1098,7 @@ variable(2,3)
 ```
 
 ## 재귀 함수 
-재귀 함수(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없을 시, 재귀는 무한히 발생하여 메모리 부족으로 프로세스 충돌이 발생한다.
-
-```
-RuntimeError: maximum recursion depth exceeded
-```
-
-수학에서의 펙토리얼이 재귀 함수 구현의 대표적인 예제이다.
+[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 런타임 오류가 발생한다.
 
 ```python
 # 예제: 펙토리얼 "!"
@@ -1114,11 +1108,6 @@ def factorial(arg):
         return 1
     else:
         return arg * factorial(arg-1)
-
-print(factorial(5))
-```
-```
-120
 ```
 
 # 파이썬: 클래스
