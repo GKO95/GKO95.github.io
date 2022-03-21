@@ -237,7 +237,7 @@ World!
 
 > [바이트](https://ko.wikipedia.org/wiki/바이트)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다. 이에 대한 설명은 잠시 후 설명한다.
 
-아래는 C++ 프로그래밍 언어가 갖는 자료형이다:
+아래는 C++ 프로그래밍 언어가 갖는 자료형의 일부이며, 더 많은 목록은 [여기](https://en.cppreference.com/w/cpp/language/types)에서 확인할 수 있다:
 
 | 식별자      | 자료형       | 설명                                                            |
 |----------|-----------|---------------------------------------------------------------|
@@ -295,7 +295,7 @@ variable = 3;
 int variable1 = 3, variable2 = 4, variable3;
 ```
 
-변수의 "선언(declaration)"은 메모리 할당 여부와 관계없이 컴파일러에게 해당 변수의 존재성을 알리는 행위이다. 그러나 이미 변수를 정의하는 과정에서 컴파일러에게 변수의 존재를 알리는 과정이 있는데, 이 또한 변수의 선언이다. 그러므로 C/C++ 프로그래밍 언어 [ISO 표준](https://www.iso.org/standard/68564.html)의 § 3.1.2 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 본다. 단, 몇 가지의 특이사항이 존재한다.
+변수의 "선언(declaration)"은 메모리 할당 여부와 관계없이 컴파일러에게 해당 변수의 존재성을 알리는 행위이다. 그러나 이미 변수를 정의하는 과정에서 컴파일러에게 변수의 존재를 알리는 과정이 있는데, 이 또한 변수의 선언이다. 그러므로 C/C++ 프로그래밍 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarations and definitions 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 본다. 단, 몇 가지의 특이사항이 존재한다.
 
 * 함수 및 클래스 전방선언
 * 함수 및 템플릿 매개변수 선언
@@ -305,7 +305,7 @@ int variable1 = 3, variable2 = 4, variable3;
 * `typedef` 선언
 * 기타 등등
 
-차후에 소개할 `extern` 키워드는 변수를 선언만 하고 정의하지 않으므로 데이터를 저장할 메모리가 할당되지 않는다. 이러한 변수에 데이터를 저장하거나 호출하려는 행위는 시스템 오류를 야기하므로 컴파일이 불가하다. Visual C++ 컴파일러에서는 [`LNK1120`](https://docs.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-error-lnk1120?view=msvc-170) 오류의 원인이 된다.
+차후에 소개할 `extern` 키워드는 변수를 선언만 하고 정의하지 않으므로 데이터를 저장할 메모리가 할당되지 않는다. 이러한 변수에 데이터를 저장하거나 호출하려는 행위는 시스템 오류를 야기하므로 컴파일이 불가하다. Visual C++ 컴파일러에서는 [`LNK1120`](https://docs.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-error-lnk1120) 오류의 원인이 된다.
 
 > 위에서 언급한 선언과 정의에 대한 설명은 C/C++ 프로그래밍 언어에서 매우 중요한 개념이지만 프로그래밍 입문자들에게 쉽게 간과되는 내용이다.
 
@@ -799,6 +799,33 @@ std::array<int, 3> arr;
 std::vector<int> vec;
 ```
 
+## 문자열
+C/C++ 프로그래밍 언어는 일련의 문자들, 일명 [문자열](https://en.cppreference.com/w/cpp/string/byte)(string)을 한 개 이상의 `char` 문자들과 널 문자 `\0`로 구성된 배열로 표현할 수 있으며, 이를 "C 형식 문자열(C-style string)"이라고 부른다.
+
+```cpp
+/* C 형식 문자열 */
+char arr[] = "Hello";    // 즉, arr[] = {'H', 'e', 'l', 'l', 'o', '\0'};
+char* ptr = "World!";    // 포인터를 활용한 문자열 표현 방법
+```
+
+아래는 C 표준 라이브러리에서 제공하는 문자열과 관련된 함수들의 목록이다. 단, 이들을 사용하기 위해서는 [`cstring`](https://en.cppreference.com/w/cpp/header/string) 헤더를 추가해야 한다.
+
+| 함수   | 예시               | 설명                                                  |
+|:----------:| --------------------- | ------------------------------------------------------------ |
+| `strcat()` | `strcat(str1, str2);` | 문자열 `str2`를 문자열 `str1` 뒤에 덧붙인다.   |
+| `strcpy()` | `strcpy(str1, str2);` | 문자열 `str2`을 문자열 `str1`에 복사한다.                |
+| `strlen()` | `strlen(str);`        | 문자열 `str` 크기를 반환하며, 이때 널 문자는 제외된다. |
+
+### 문자열 자료형
+C++ 표준 라이브러리는 `iostream` (혹은 `string`) 헤더로부터 자체적으로 문자열 자료형 `std::string`을 제공한다. 문자열 자료형은 흔히 문자열 [객체](#c-클래스)(string object)라고도 부른다.
+
+```cpp
+/* C++ 문자열 자료형 */
+std::string variable = "Hello World!";
+```
+
+문자열 자료형은 매우 편리하지만, [윈도우 API](https://ko.wikipedia.org/wiki/윈도우_API) 또는 [POSIX](https://ko.wikipedia.org/wiki/POSIX) 등의 운영체제 API를 사용할 경우에는 불가피하게 C 형식 문자열을 사용해야 할 경우가 흔히 발생한다.
+
 # C++: 함수
 함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
@@ -1166,6 +1193,52 @@ int main() {
 }
 ```
 
+## 참조
+[참조](https://en.cppreference.com/w/cpp/language/reference)(reference)는 [포인터](#c-포인터)처럼 데이터가 저장된 메모리 주소를 저장하지만, 초기화 이후에는 메모리 주소 변동이 불가한 상수의 성질을 갖는다.
+
+
+이미 존재하는 데이터 혹은 함수에 별칭으로 사용하기 위해 선언된 변수이다. 참조는 단순히 [네임 바인딩](https://ko.wikipedia.org/wiki/네임_바인딩)(name binding)된 변수이기 때문에 자체적으로 할당된 메모리를 갖지 않으며, 대신에 참조하는 데이터 혹은 함수가 할당된 메모리를 그대로 사용한다.
+
+* **[lvalue 참조](https://docs.microsoft.com/en-us/cpp/cpp/lvalue-reference-declarator-amp) `&`**
+
+    > `lvalue`는 프로그램이 접근할 수 있는 메모리 주소를 갖는다.
+    
+정의된 변수를 참조한다.
+
+  ```cpp
+
+  ```
+
+* **[rvalue 참조](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp) `&&`**
+
+    > `rvalue`는 프로그램이 접근할 수 있는 메모리 주소가 없거나, 혹은 메모리 주소가 있어도 프로그램이 더 이상 접근할 수 없다.
+
+    임시 데이터를 참조한다.
+
+  ```cpp
+
+  ```
+
+```cpp
+/* "ref" 변수의 "variable" 변수 참조 */
+int variable;
+int &ref = variable;
+
+ref = 3;    // 결과: variable = ref = 3
+```
+
+참조의 원리는 기존 변수의 메모리 주소를 상수 포인터에 할당하는 것과 동일하다. 아래의 코드는 위의 예시를 포인터만 사용해서 나타내었다.
+
+```cpp
+/* 상수 포인터를 활용한 참조 */
+int variable;
+const int* ref = &variable;
+
+*ref = 3;    // 결과: variable = *ref = 3
+```
+
+상수 포인터를 사용하기 때문에, 참조 시에는 정의와 초기화가 반드시 동시에 이루어져야 한다. 그리고 한 번 참조된 변수는 새로운 변수를 참조할 수 없다. 프로그래밍에서 흔히 언급되는 *참조에 의한 호출(call by reference)*도 이를 의미하는 것이다.
+
 ## 엔디언
 [엔디언](https://ko.wikipedia.org/wiki/엔디언)(endianess)이란 컴퓨터가 메모리로부터 데이터를 표현하기 위해 바이트 단위의 정보를 어떻게 정렬할 것인지를 가리킨다. 특히 포인터가 메모리 주소를 접근 및 호출하기 때문에 엔디언의 기본적인 개념 이해는 필요하다고 본다.
 
@@ -1224,137 +1297,6 @@ for (int index = 0; index < sizeof(variable); index++) {
 ```
 
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
-
-## 참조
-[참조](https://en.cppreference.com/w/cpp/language/reference)(reference)는 이미 존재하는 데이터 혹은 함수에 별칭으로 사용하기 위해 앰퍼샌드 `&`와 함께 선언된 변수이다. 참조는 단순히 [네임 바인딩](https://ko.wikipedia.org/wiki/네임_바인딩)(name binding)된 변수이기 때문에 자체적으로 할당된 메모리를 갖지 않으며, 대신에 참조하는 데이터 혹은 함수가 할당된 메모리를 그대로 사용한다.
-
-```cpp
-/* "ref" 변수의 "variable" 변수 참조 */
-int variable;
-int &ref = variable;
-
-ref = 3;    // 결과: variable = ref = 3
-```
-
-참조의 원리는 기존 변수의 메모리 주소를 상수 포인터에 할당하는 것과 동일하다. 아래의 코드는 위의 예시를 포인터만 사용해서 나타내었다.
-
-```cpp
-/* 상수 포인터를 활용한 참조 */
-int variable;
-const int* ref = &variable;
-
-*ref = 3;    // >> 결과: variable = *ref = 3
-```
-
-상수 포인터를 사용하기 때문에, 참조 시에는 정의와 초기화가 반드시 동시에 이루어져야 한다. 그리고 한 번 참조된 변수는 새로운 변수를 참조할 수 없다. 프로그래밍에서 흔히 언급되는 *참조에 의한 호출(call by reference)*도 이를 의미하는 것이다.
-
-# C++: 메모리 관리
-> *참고: [GKO95 GitHub Pages - 메모리](/docs/ko.Memory)*
-
-프로그램을 실행하는데 있어 메모리 관리는 매우 중요한 작업에 해당한다. 그 중에서 동적 메모리 할당은 보다 더 나은 메모리 효율성을 위해 사용되며, [포인터](#c-포인터)에 대한 충분한 개념적 이해도가 필요하다. 여기서 메모리란, HDD 및 SSD와 같은 [보조기억장치](https://ko.wikipedia.org/wiki/기억_장치)가 아닌 RAM이 해당하는 [주기억장치](https://ko.wikipedia.org/wiki/주기억장치)를 가리킨다.
-
-## 스택 영역
-스택(stack)은 마지막에 입력된 데이터가 먼저 출력되는 선형적 LIFO(Last-In-First-Out) 데이터 나열 구조이다. 빠른 메모리 접근성의 장점을 가지고 있어 일반적으로 컴파일러에서 데이터 메모리 할당 및 해제를 스택 영역에서 처리한다. 대표적으로 조건문, 반복문, 혹은 함수에서 정의된 지역 변수 등이 코드 블록 외에서는 사용할 수 없다는 특징이 스택 영역 메모리를 활용하고 있음을 의미한다.
-
-스택 영역 메모리의 LIFO 구조는 프로그램 코드를 실행하는데 활용되며, 데이터를 저장하기 위한 용도로는 부적합하다. 전역 변수는 스택을 벗어나면 데이터가 사라지고, 전역 변수는 외부에 쉽게 노출되어 있어 권장되지 않는다.
-
-## 힙 영역
-힙(heap) 영역 메모리는 프로그램이 데이터를 저장할 수 있는 메모리 영역이다. 컴파일러가 코드를 실행하기 위해서 사용하는 영역이 아니며, 프로그램 개발자가 직접 메모리를 할당하고 해제해야 한다. 주소를 찾아가는데 걸리는 시간이 있어 스택 영역보다 접근 속도가 느리지만, 코드 블록의 영향을 받지 않고 프로그램이 종료될 때까지 데이터가 메모리에 남아있을 수 있다는 특징을 갖는다.
-
-> 힙 영역 메모리는 [힙 자료구조](https://ko.wikipedia.org/wiki/힙_(자료_구조))와 전혀 상관이 없으며, 사전적으로 "(데이터) 더미"를 뜻하는 순수히 RAM 물리 메모리의 주소공간 영역을 지칭하는 용어이다.
-
-## 동적 할당
-동적 할당(dynamic allocation)은 개발자가 힙 영역에 메모리를 할당하는 작업을 가리킨다. 시스템이 처리하는 메모리가 아니므로 더 이상 사용되지 않는 힙 메모리도 직접 할당을 해제해야 한다. 이러한 작업을 하지 않으면 컴파일된 프로그램이 비정상적으로 동작하거나 최악의 경우 시스템 충돌이 발생한다.
-
-동적 할당과 해제는 `new` 키워드와 `delete` 키워드를 통해 이루어진다:
-
-```cpp
-/* 동적 할당 */
-int* ptr1 = new int;
-int* ptr2 = new int();
-
-/* 동적 할당 해제 */
-delete ptr1;
-delete ptr2;
-```
-
-예시 코드의 전자와 후자 동적 할당은 각각 기본 초기화(default-initialization)와 값 초기화(value-initialization)라고 부른다.
-
-* **기본 초기화**: 임의의 값 혹은 매개변수의 기본값(클래스 한정)으로 초기화된다.
-* **값 초기화**: 소괄호 `()` 안의 값으로 초기화된다.
-
-배열의 동적 할당 및 해제는 위의 방법과 유사하다:
-
-```cpp
-/* 동적 할당: 배열 */
-int* ptr = new int[];
-
-/* 동적 할당 해제: 배열 */
-delete[] ptr;
-```
-
-### 메모리 누수
-[메모리 누수](/docs/ko.Memory)(memory leak)는 메모리 관리 문제로써 더 이상 사용되지 않는 메모리가 해제되지 않고 계속 잔여하여, 시스템에서 할당할 수 있는 메모리 리소스가 점차 줄어드는 현상이다. 만일 시스템에서 더 이상 할당할 수 있는 메모리가 없으면 시스템 충돌이 발생하는 치명적인 오류가 발생한다. 이를 해결하기 위해 동적 할당된 메모리는 반드시 `delete` 키워드로 해제하도록 한다.
-
-```cpp
-/* 동적 할당 해제 */
-delete ptr;
-```
-
-### 허상 포인터
-허상 포인터(dangling pointer)는 참조하려는 메모리 주소가 더 이상 유효하지 않을 때 발생하는 메모리 관리 문제이다. 시스템적으로 메모리 관리를 하는 과정에서 흔히 발생하는 현상이지만, 프로그래밍에서는 동적 할당이 해제된 포인터가 여전히 해당 주소를 가리키고 있어서 나타나는게 대다수이다. 그러므로 참조할 수 없는 주소를 가리키는 포인터에 `nullptr`을 할당하여 아무런 주소를 가리키지 않도록 한다.
-
-```cpp
-/* 올바른 동적 할당 해제: 메모리 주소의 데이터 반납 -> 널 포인터 할당 */
-delete ptr;
-ptr = nullptr;
-```
-
-## 메모리 함수
-C++ 프로그래밍 언어는 C 표준 라이브러리 중에서 문자열과 관련된 `cstring` 헤더를 통해 힙 영역 메모리를 처리하는 처리하는 전용 함수들을 호출할 수 있다. 아래의 메모리 함수들은 C 프로그래밍 언어에서 매우 흔히 사용되는 메모리 함수들의 목록이다.
-
-| 함수    | 예시               | 설명                                                  |
-|:-----------:| --------------------- | ------------------------------------------------------------ |
-| `memchr()`  | `memchr(str,'c',num);` | 문자열 `str`에서 `num` 개의 바이트 내에 문자 `'c'`의 존재여부를 확인한다.<br/>발견될 시 해당 문자의 메모리 주소가 반환되며, 없으면 널 포인터가 반환된다. |
-| `memcmp()` | `memcmp(ptr1,ptr2,num);` | 포인터 `ptr1`과 `ptr2`를 `num` 개의 바이트 내에서 크기를 비교한다.<br/>만일 `n`번째 바이트에서 처음으로 일치하지 않으면 함수는 `*(ptr1 + n)`에서 `*(ptr2 + n)` 차를 반환한다. |
-| `memset()`  | `malloc(ptr,value,num);` | 포인터 `ptr`로부터 시작해 `num` 개의 바이트를 `value` 값으로 채운다. |
-| `memcpy()`  | `memcpy(ptr1,ptr2,num);` | 포인터 `ptr2`에 있는 `num` 개의 바이트를 `ptr1`으로 복사한다; 단, `ptr1`과 `ptr2`가 겹쳐서는 안된다. |
-| `memmove()`    | `memmove(ptr1,ptr2,num);` | 포인터 `ptr2`에 있는 `num` 개의 바이트를 `ptr1`으로 복사한다; `memcpy()`와 달리 `ptr1`과 `ptr2`가 겹쳐도 동작하나 상대적으로 느리다. |
-
-# C++: 문자열
-C 프로그래밍 언어는 문자열 자료형이 존재하지 않으며, 그 대신 `char` 자료형 문자들과 널 문자 `\0`로 구성된 배열로 문자열을 표현하였다. 그러나 C++ 표준 라이브러리는 표준 네임스페이스 `std` 내에 문자열 전용 자료형을 제공한다.
-
-## 문자열
-C 형식의 문자열은 마지막에 널 문자가 포함된 [문자 배열](https://en.cppreference.com/w/cpp/string/byte)로 구성되어 있으며, 다음과 같이 정의된다:
-
-```cpp
-/* C 형식 문자열 */
-char arr[] = "Hello";
-char* ptr = "World!";
-```
-
-아래는 C 프로그래밍 언어에서 문자열과 관련된 함수들의 목록이다. 단, 이들을 사용하기 위해서는 [`cstring`](https://en.cppreference.com/w/cpp/header/string) 헤더를 추가해야 한다.
-
-| 함수   | 예시               | 설명                                                  |
-|:----------:| --------------------- | ------------------------------------------------------------ |
-| `strcat()` | `strcat(str1, str2);` | 문자열 `str2`를 문자열 `str1` 뒤에 덧붙인다.   |
-| `strcpy()` | `strcpy(str1, str2);` | 문자열 `str2`을 문자열 `str1`에 복사한다.                |
-| `strlen()` | `strlen(str);`        | 문자열 `str` 크기를 반환하며, 이때 널 문자는 제외된다. |
-
-## 문자열 자료형
-C++ 문자열 자료형은 `iostream` 헤더에 내포된 `string` 헤더로부터 제공되며 `std` 네임스페이스 영역에 속한다. 문자열 자료형 데이터는 일반적으로 문자열 객체(string object)라고도 부른다. C++ 프로그래밍 언어는 C 형식 문자열보다 해당 자료형을 사용할 것을 권장한다.
-
-```cpp
-/* C++ 문자열 */
-std::string variable = "Hello World!";
-```
-
-### 문자열 배열
-하나의 배열에는 바이트 크기가 서로 다른 요소를 가질 수 없다. 그러나 문자열 자료형은 텍스트 길이가 상이하여도 항상 일정한 크기를 갖는다. 자료형의 문자열은 사실상 힙 영역 메모리에 저장되어 있고, 포인터로부터 문자열을 불러오기 떄문에 문자열 자료형은 일정하게 크기로 유지된다.
-
-```cpp
-std::string arr[] = {"Hello", "World!"};
-```
 
 # C++: 클래스
 C++ 프로그래밍 언어는 객체와 클래스를 중심으로 프로그래밍하는 *[객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming; OOP)* 기법도 적용할 수 있다. 본 장은 C++ 언어에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
@@ -1809,56 +1751,76 @@ float ClassName::method(int arg3)
 ```
 
 # C++: 사용자 정의 자료형
-C++ 프로그래밍 언어에서 흔히 사용되는 `int`, `float`, `char` 등과 같은 데이터 자료형은 이미 `iostream` 헤더 파일에 정의되어 있다. 이러한 내부 자료형을 기반으로 목적에 알맞은 사용자 정의 자료형을 새롭게 지정할 수 있으며, 본 장은 일반 자료형보다 더 많은 자료를 복합적으로 저장할 수 있는 사용자 정의 자료형의 정의 및 활용법을 설명한다.
+사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 C++ 프로그래밍 언어에 내장된 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다.
 
 ## 구조체
-구조체(structure)는 자료형과 상관없이 여러 맴버 변수(일명 맴버 필드)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 구조체의 정의는 `struct` 키워드를 통해 이루어진다.
+[구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 구조체는 `struct` 키워드로 정의된다.
 
 ```cpp
 /* 구조체 정의: 총 5바이트 활용 */
 struct STRUCTURE {
-    // 맴버 필드 정의
+    /* 맴버 정의 */
     int   field1;    // 자료형 크기: 4바이트
     char  field2;    // 자료형 크기: 1바이트
 };
-
-/* 구조체 변수 정의 및 초기화 */
-STRUCTURE variable = {3, 'A'};
 ```
-----
+
+정의된 구조체로부터 변수를 정의하는 방법은 다음과 같다:
+
+* C++ 프로그래밍 언어 자료형처럼 변수 앞에 구조체를 명시하고, 중괄호 `{}` 내에 맴버가 선언된 순서대로 데이터를 나열한다.
+
+    ```cpp
+  /* 구조체 변수 정의 1 */
+  STRUCTURE variable1 = {3, 'A'};
+  STRUCTURE variable2 = {.field2 = 'A', .field1 = 3};
+    ```
+
+* 구조체 변수 선언 이후, 맴버 순서대로 데이터가 나열된 중괄호 `{}`로 초기화한다.
+
+    ```cpp
+  /* 구조체 변수 정의 2 */
+  STRUCTURE variable;
+  variable = {3, 'A'};
+    ```
+
+* 구조체를 정의하는 동시에 구조체 변수를 정의한다.
+
+    ```cpp
+  /* 구조체 및 변수 정의 */
+  struct STRUCTURE {
+      int  field1;
+      char field2;
+  } variable = {3, 'A'};  
+    ```
+
+정의된 구조체 변수는 [객체 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `.`를 통해 구조체 맴버를 호출한다.
+
 ```cpp
-/* 구조체 정의 & 변수 정의 */
-struct STRUCTURE {
-    int   field1;
-    char  field2;
-} variable;
-
-/* 구조체 변수 초기화*/
-variable = {3, 'A'};
+std::cout << variable.field1 << std::endl << variable.field2;
 ```
-----
-```cpp
-/* 구조체 정의 & 변수 정의 및 초기화 */
-struct STRUCTURE {
-    int   field1;
-    char  field2;
-} 	variable = {3, 'A'};
+```
+3
+A
 ```
 
-구조체 정의 이후, 구조체 변수의 맴버 필드는 맴버 연산자 `.`를 통해 접근한다.
+> 일부 C++ 소스 코드는 구조체 변수를 정의할 때 `struct` 키워드가 포함된 C 프로그래밍 구문을 사용하는데, 이는 C++11 이후부터 개정되어 더 이상 필요하지 않다.
+
+### 구조체 포인터
+구조체 포인터(structure pointer)는 구조체를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 구조체 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
 
 ```cpp
-variable.field1;    // >> 출력: 3
-variable.field2;    // >> 출력: A
-```
+/* 구조체 포인터 정의 */
+STRUCTURE *variable;
 
-일부 C++ 프로젝트는 C 프로그래밍 언어 형식의 구조체 호출 구문인 `struct STRUCTURE variable;` 표현식을 가진다. 그러나 이는 C++11 이후부터 더이상 사용되지 않는 구문이다. C 프로그래밍 언어에서는 구조체를 호출할 때마다 `struct` 키워드를 사용해야 한다는 점에 비해 구문이 매우 편리해졌다.
+variable->field1 = 3;
+variable->field2 = 'A';
+```
 
 ### 익명 구조체
-위에서 설명한 구문은 한 번 정의된 구조체를 재사용하여 동일한 자료형의 여러 구조체 변수를 정의할 수 있도록 한다. 만일 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 구조체를 생성하려면 아래와 같은 구문으로 익명 구조체(anonymous structure)를 정의한다.
+익명 구조체(anonymous structure)는 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 구조체와 변수를 함께 정의한다.
 
 ```cpp
-/* 일회용 구조체 정의 및 변수 초기화 */
+/* 익명 구조체 및 변수 정의 */
 struct {
     int   field1;
     char  field2;
@@ -1866,181 +1828,165 @@ struct {
 ```
 
 ## 공용체
-공용체(union)는 구조체와 유사하게 자료형과 상관없이 여러 여러 맴버 변수(일명 맴버 필드)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이지만, 맴버 필드들은 하나의 메모리 공간을 공유한다. 즉, 공용체의 한 맴버 필드 데이터가 변하면 하나의 메모리 주소를 공용하기 때문에 나머지 맴버 필드의 값에 영향을 미친다. 공용체의 정의는 `union` 키워드를 통해 이루어진다.
+[공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 각 맴버마다 데이터를 저장하는 [구조체](#구조체)와 달리, 맴버들은 하나의 공용 메모리를 사용한다. 즉, 공용체의 한 맴버에 데이터 변경이 발생하면 나머지 맴버에도 영향을 미친다. 공용체는 `union` 키워드로 정의된다.
 
 ```cpp
 /* 공용체 정의: 총 4바이트 활용 */
-union UNION {
-    // 맴버 필드 정의
-    int   field1;    // 자료형 크기: 4바이트
-    char  field2;    // 자료형 크기: 1바이트
-};
-
-/* 공용체 변수 정의 및 초기화 */
-UNION variable = {365};
+union UNION {    
+    /* 맴버 정의 */
+    int  field1;    // 자료형 크기: 4바이트
+    char field2;    // 자료형 크기: 1바이트
+}
 ```
-----
+
+공용체에 할당되는 메모리 크기는 내부 변수 중에서 가장 큰 메모리 용량이 요구되는 자료형과 동일한데, 이는 나머지 내부 변수도 하나의 메모리 공간에서 처리할 수 있도록 하기 위해서이다.
+
+정의된 공용체로부터 변수를 정의하는 방법은 다음과 같다:
+
+* C++ 프로그래밍 언어 자료형처럼 변수 앞에 `union`과 함께 공용체를 명시하고, 중괄호 `{}` 내에 단일 데이터를 기입한다.
+
+    > 만일 구조체처럼 각 맴버에 대하여 값을 지정하면, 맨 마지막에 순서에 할당된 값이 최종 데이터가 된다.
+
+    ```cpp
+  /* 공용체 변수 정의 1 */
+  UNION variable1 = {365};
+  UNION variable2 = {.field2 = 'A', .field1 = 3};    // 결과: variable2 = {3};
+    ```
+
+* 공용체 변수 선언 이후, 맴버 순서대로 데이터가 나열된 중괄호 `{}`로 초기화한다.
+
+    ```cpp
+  /* 공용체 변수 정의 2 */
+  UNION variable;
+  variable = {365};
+    ```
+
+* 공용체를 정의하는 동시에 공용체 변수를 정의한다.
+
+    ```cpp
+  /* 공용체 및 변수 정의 */
+  union UNION {
+      int  field1;
+      char field2;
+  } variable = {365};  
+    ```
+
+정의된 공용체 변수는 [객체 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `.`를 통해 공용체 맴버를 호출한다.
+
 ```cpp
-/* 공용체 정의 & 변수 정의 */
-union UNION {
-    int   field1;
-    char  field2;
-} variable;
+#include <iomanip>
+using namespace std;
 
-/* 구조체 변수 초기화*/
-variable = {365};
+cout << setw(3) << setfill(' ') << variable.field1 << " (0x" << hex 
+        << setw(sizeof(variable) * 2) << setfill('0') << static_cast<int>(variable.field1) << ")" << endl;
+cout << setw(3) << setfill(' ') << variable.field2 << " (0x" << hex 
+        << setw(sizeof(variable) * 2) << setfill('0') << static_cast<int>(variable.field2) << ")" << endl;
 ```
-----
-```cpp
-/* 공용체 정의 & 변수 정의 및 초기화 */
-union UNION {
-    int   field1;
-    char  field2;
-} variable = {365};
+```
+365 (0x0000016d)
+  m (0x0000006d)
 ```
 
-공용체에 할당되는 메모리 크기는 맴버 필드 중에서 가장 큰 메모리 용량이 요구되는 자료형과 동일한데, 이는 나머지 맴버 필드도 하나의 메모리 공간에서 처리할 수 있도록 하기 위해서이다. 비록 공용체가 두 개 이상의 맴버 필드를 가지지만 하나의 메모리 공간만을 사용하기 때문에 초기화 단계에서 하나의 맴버 필드만 할당하면 된다.
+첫 번째 내부 변수 `field1`은 4바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되는 반면, 두 번째 내부 변수 `field2`는 1바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 정수 109에 해당하는 ASCII 문자 'm'이 출력되었다.
 
-공용체 정의 이후, 공영체 변수의 맴버 필드는 맴버 연산자 `.`를 통해 접근한다.
+### 공용체 포인터
+공용체 포인터(union pointer)는 공용체를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 구조체 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
 
 ```cpp
-variable.field1;    // >> 출력: 365 (0x0000016d)
-variable.field2;    // >> 출력: 109 (0x0000006d)
-```
+/* 공용체 포인터 정의 */
+UNION *variable;
 
-첫 번째 맴버 필드 `field1`은 4바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되는 반면, 두 번째 맴버 필드 `field2`는 1바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 109 정수가 출력되었다.
+variable->field1 = 3;
+variable->field2 = 'A';
+```
 
 ### 익명 공용체
-위에서 설명한 구문은 한 번 정의된 공용체를 재사용하여 동일한 자료형의 여러 공용체 변수를 정의할 수 있도록 한다. 만일 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 공용체를 생성하려면 아래와 같은 구문으로 익명 공용체(anonymous union)를 정의한다.
+익명 공용체(anonymous union)는 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 공용체와 변수를 함께 정의한다.
 
 ```cpp
-/* 일회용 공용체 정의 및 변수 초기화 */
+/* 익명 공용체 및 변수 정의 */
 union {
-    int   field1;
-    char  field2;
+    int  field1;
+    char field2;
 } variable = {365};
 ```
 
 ## 열거형
-열거형(enumeration)은 열거된 항목들을 정수로 순번을 매기는 자료형이다. 열거자(enumerator)라고 부르는 열거 항목들은 기본적으로 정수 0부터 시작하여 순서대로 1만큼 값이 증가한다.
+[열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기는 자료형이다. 열거자들은 기본적으로 정수 0부터 시작하여 다음 열거자마다 1만큼 증가한다. 열거자에 할당 연산자 `=`로 정수를 집적 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거자를 추가하거나, 혹은 열거형의 값을 바꾸는 건 불가하다. 열거형은 `enum` 키워드로 정의된다.
 
 ```cpp
 /* 열거형 정의 */
 enum ENUMERATION {
-    enumerator1,     // 열거자 = 0
-    enumerator2,     // 열거자 = 1
-    enumerator3,     // 열거자 = 2
-    enumerator4      // 열거자 = 3
-};
-
-/* 열거형 변수 정의 및 초기화 */
-ENUMERATION variable = enumerator1;
-```
-----
-```cpp
-/* 열거형 정의 & 변수 정의 */
-enum ENUMERATION {
-    enumerator1,     // 열거자 = 0
-    enumerator2,     // 열거자 = 1
-    enumerator3,     // 열거자 = 2
-    enumerator4      // 열거자 = 3
-} variable;
-
-/* 열거형 변수 초기화 */
-variable = enumerator1;
-```
-----
-```cpp
-/* 열거형 정의 & 변수 정의 및 초기화 */
-enum ENUMERATION {
-    enumerator1,     // 열거자 = 0
-    enumerator2,     // 열거자 = 1
-    enumerator3,     // 열거자 = 2
-    enumerator4      // 열거자 = 3
-} variable = enumerator1;
-```
-
-열거자들에 할당되는 정수는 할당 연산자 `=`를 통해 달리 지정이 가능하며, 다른 열거자와 동일한 값이 할당되어도 상관없다.
-
-```cpp
-enum ENUMERATION {
-    enumerator1 = 3, // 열거자 = 3
-    enumerator2 = 1, // 열거자 = 1
-    enumerator3,     // 열거자 = 2
-    enumerator4      // 열거자 = 3
+    enumerator1,     // = 0
+    enumerator2,     // = 1
+    enumerator3 = 7, // = 7
+    enumerator4      // = 8
 };
 ```
 
-그러나 동일한 이름의 열거자는 유일해야 하는데, 이는 열거자가 상수 전역 변수와 같은 개념이 적용되기 때문이다. 즉, C++ 프로젝트 전체에 사용이 가능하나 초기화 이후 값 변동이 불가능한 데이터라고 볼 수 있다.
+비록 다른 열거형에 정의된 열거자여도 식별자는 전역적으로 유일해야 한다.
 
 ```cpp
 enum ENUMERATION1 {
     enumerator1,
     enumerator2,
-    enumerator3,
-    enumerator4
 };
 
 enum ENUMERATION2 {
-    enumeration4,    // 오류: 열거자 'enumerator4'가 재정의 되었습니다.
-    enumeration5,
-    enumeration6
+    enumeration2,    // [C2086] 'enumerator2': 재정의: 이전 정의는 '열거자'입니다.
+    enumeration3,
 };
 ```
 
-열거형 정의 이후, 열거형 변수는 열거자를 할당받아 사용한다. 또한 열거형 변수가 아닌 정수형 변수로도 열거자를 할당받을 수 있다.
+열거형으로부터 정의된 변수는 해당 열거형이 갖는 열거자만 할당받을 수 있다. 만일 타 열거형의 열거자나 범위 외의 정수로 할당하려면 자료형 변환이 필요하다.
 
 ```cpp
-/* 열거형 변수에 열거자 할당 */
+/* 열거형 변수 정의 */
 ENUMERATION variable = enumerator1;
-```
-----
-```cpp
-/* 정수형 변수에 열거자 할당 */
-int variable = enumerator1;
 ```
 
 ### 열거형 클래스
-열거형은 열거자 식별자가 전 프로젝트를 통틀어 유일해야 하며, 열거형이 달라도 동일한 이름을 공유할 수 없는 단점을 가진다. 반면, 열거형 클래스(enumeration class)는 다른 열거형 클래스 간에 동일한 열거자 식별자를 가질 수 있도록 한다.
+[열거형 클래스](https://en.cppreference.com/w/cpp/language/enum#Scoped_enumerations)(enumeration class)는 타 열거형과 관계없이 동명의 열거자를 가져도 네임스페이스처럼 국부적인 영역범위에 속하므로 오류가 발생하지 않는 열거형으며, 일명 영역 제한 열거형(scoped enumeration)이라고 칭한다. 열거형 클래스는 `enum class` 혹은 `enum struct`로 정의된다.
+
+> 일반 열거형과 달리 열거자 충돌 문제를 방지할 수 있기 때문에, C++ 프로그래밍 언어는 열거자 클래스의 활용을 적극 권장한다.
 
 ```cpp
+/* 열거형 클래스 정의 1 */
 enum class ENUMERATION1 {
     enumerator1,
     enumerator2
 };
 
-enum class ENUMERATION2 {
-    enumerator2,		// 컴파일 오류 발생하지 않음: "enumerator2"은 국부적!
-    enumerator3
+/* 열거형 클래스 정의 2 */
+enum struct ENUMERATION2 {
+    enumerator1,
+    enumerator2
 };
 ```
 
-일반 열거형과 달리, 열거형 클래스는 정수형 변수에 할당할 수 없다. 또한, 열거자는 반드시 열거형 클래스로부터 범위지정 연산자 `::`를 통해 호출해야 한다.
+열거형 클래스의 열거자는 반드시 해당 열거형 클래스를 함께 명시하여 범위지정 연산자 `::`를 통해 호출되어야 한다.
 
 ```cpp
-/* 열거형 클래스 할당 */
-ENUMERATION1 variable = ENUMERATION::enumerator2;
+/* 열거형 클래스 변수 정의 */
+ENUMERATION1 variable = ENUMERATION1::enumerator1;
 ```
-
-열거형과 달리 열거자 식별자 충돌 문제를 방지할 수 있으므로 C++에서는 열거자 클래스 사용을 권장한다.
 
 ## `typedef` 선언
-`typedef` 키워드는 기존에 존재하는 자료형을 다른 명칭(일명 별칭; alias)으로 선언하여 가독성을 높이는 역할을 한다.
+[`typedef`](https://en.cppreference.com/w/cpp/language/typedef) 키워드는 C/C++ 프로그래밍 언어 내장 자료형 및 사용자 지정 자료형에 별칭(alias)을 선언하여 가독성을 높이는 역할을 한다.
 
 ```cpp
-typedef int dtypeName;
+/* unsigned 문자 자료형의 BYTE 별칭 선언 */
+typedef unsigned char BYTE;
 ```
 
-C 프로그래밍 언어에서 `typedef` 키워드를 구조체나 공용체와 같은 사용자 정의 자료형과 함께 사용하여 정의 구문을 간략화하는 역할을 지닌다. 이는 C 프로그래밍 언어가 사용자 정의 자료형을 정의할 때마다 키워드를 요구하기 때문이며, 정의 시 키워드가 필요 없는 C++ 프로그래밍 언어에서는 사용되지 않는 구문이다.
+### 자료형 별칭 선언
+[`using`](https://en.cppreference.com/w/cpp/language/type_alias) 키워드는 [네임스페이스](#네임스페이스)의 반복적 호출을 생략하는데 사용되기도 하지만, 자료형에 별칭을 선언(type alias declaration)하여 가독성을 높이기도 한다.
 
-## 자료형 별칭 선언
-[네임스페이스](#네임스페이스)에서 `using` 키워드가 네임스페이스의 반복적 호출을 생략하는데 사용된다고 소개하였다. `using` 키워드는 기존 자료형을 다른 별칭으로 호출하여 가독성을 높이는데, 이를 자료형 별칭 선언(type alias declaration)이라 부른다.
+> 자료형 별칭 선언은 `typedef` 선언과 차이가 없으며 사실상 동일한 역할을 수행한다.
 
 ```cpp
 using dtypeName = int;
 ```
-
-자료형 별칭 선언은 typedef 선언과 차이점이 없으며, 사실상 두 선언은 동일하다고 볼 수 있다.
 
 # C++: 템플릿
 템플릿(template)은 자료형과 무관하게 함수 또는 클래스의 형식 틀을 제공한다. 개발자는 템플릿을 활용해 여러 유사한 함수 및 클래스를 손쉽게 생성할 수 있다. 본 장은 템플릿 정의 및 활용법을 설명한다.
@@ -2197,6 +2143,88 @@ template <class X>
 /* 함수 템플릿 객체화: 별칭 사용 */
 aliasName<int>(1, 3)
 ```
+
+# C++: 메모리 관리
+> *참고: [GKO95 GitHub Pages - 메모리](/docs/ko.Memory)*
+
+프로그램을 실행하는데 있어 메모리 관리는 매우 중요한 작업에 해당한다. 그 중에서 동적 메모리 할당은 보다 더 나은 메모리 효율성을 위해 사용되며, [포인터](#c-포인터)에 대한 충분한 개념적 이해도가 필요하다. 여기서 메모리는 HDD 및 SSD와 같은 [보조기억장치](https://ko.wikipedia.org/wiki/기억_장치)가 아닌 RAM이 해당하는 [주기억장치](https://ko.wikipedia.org/wiki/주기억장치)를 가리킨다.
+
+## 스택 영역
+[스택](https://ko.wikipedia.org/wiki/스택)(stack)은 마지막에 입력된 데이터가 먼저 출력되는 선형적 LIFO(Last-In-First-Out) 데이터 나열 구조이다. 빠른 메모리 접근성의 장점을 가지고 있어 일반적으로 컴파일러에서 데이터 메모리 할당 및 해제를 스택 영역에서 처리한다. 대표적으로 조건문, 반복문, 혹은 함수에서 정의된 지역 변수 등이 코드 블록 외에서는 사용할 수 없다는 특징이 스택 영역 메모리를 활용하고 있음을 의미한다.
+
+스택 영역 메모리의 LIFO 구조는 프로그램 코드를 실행하는데 활용되며, 데이터를 저장하기 위한 용도로는 부적합하다. 지역 변수는 스택을 벗어나면 데이터가 사라지고, 전역 변수는 외부에 쉽게 노출되어 있어 권장되지 않는다.
+
+## 힙 영역
+힙(heap) 영역 메모리는 프로그램이 데이터를 저장할 수 있는 메모리 영역이다. 컴파일러가 코드를 실행하기 위해서 사용하는 영역이 아니며, 프로그램 개발자가 직접 메모리를 할당하고 해제해야 한다. 주소를 찾아가는데 걸리는 시간이 있어 스택 영역보다 접근 속도가 느리지만, 코드 블록의 영향을 받지 않고 프로그램이 종료될 때까지 데이터가 메모리에 남아있을 수 있다는 특징을 갖는다.
+
+> 힙 영역 메모리는 [힙 자료구조](https://ko.wikipedia.org/wiki/힙_(자료_구조))와 전혀 상관이 없으며, 사전적으로 "(데이터) 더미"를 뜻하는 순수히 RAM 물리 메모리의 주소공간 영역을 지칭하는 용어이다.
+
+## 동적 할당
+[동적 할당](https://ko.wikipedia.org/wiki/동적_메모리_할당)(dynamic allocation)은 개발자가 힙 영역에 메모리를 할당하는 작업을 가리킨다. 시스템이 처리하는 메모리가 아니므로 더 이상 사용되지 않는 힙 메모리도 직접 할당을 해제해야 한다. 이러한 작업을 하지 않으면 컴파일된 프로그램이 비정상적으로 동작하거나 최악의 경우 시스템 충돌이 발생한다.
+
+동적 할당과 해제는 [`new`](https://en.cppreference.com/w/cpp/language/new) 및 [`delete`](https://en.cppreference.com/w/cpp/language/delete) 표현식을 통해 이루어진다.
+
+* **[값 초기화](https://en.cppreference.com/w/cpp/language/value_initialization)(value-initialization)**: 소괄호 `()` 내에 지정된 값으로 초기화된다.
+
+* **[기본 초기화](https://en.cppreference.com/w/cpp/language/default_initialization)(default-initialization)**: 자료형에 따라 기본 초기화는 달리 작용한다.
+
+    * 기본 자료형(`int`, `float`, `char` 등)은 초기화되지 않으며 메모리에 잔여하는 쓰레기 값(garbage value)을 갖는다.
+
+    * [클래스](#c-클래스) 및 [구조체](#구조체)는 [기본 생성자](#생성자)가 실행된다.
+
+    * [배열](#배열)의 경우에는 각 요소마다 자료형에 따른 기본 초기화가 작용한다.
+
+    ```cpp
+  /* 동적 할당: 값 초기화 */
+  int* temp = new int(3);
+  int* buff = new int[2] {1, 7};
+
+  std::cout << *temp << std::endl;                // 출력: 3
+  std::cout << buff[0] << buff[1] << std::endl;   // 출력: 17
+
+  /* 동적 할당: 기본 초기화 */
+  int* var = new(temp) int;
+  int* arr = new(buff) int[2];
+
+  std::cout << *var << std::endl;                 // 출력: 3 
+  std::cout << arr[0] << arr[1] << std::endl;     // 출력: 17
+
+  /* 동적 할당 해제 */
+  delete temp, var;
+  delete[] buff, arr;
+    ```
+
+> `new` 키워드 접미부의 소괄호 `()`는 동적 할당이 이루어질 메모리 주소를 직접 지정하기 위해 사용된다.
+
+### 메모리 누수
+[메모리 누수](/docs/ko.Memory)(memory leak)는 메모리 관리 문제로써 더 이상 사용되지 않는 메모리가 해제되지 않고 계속 잔여하여, 시스템에서 할당할 수 있는 메모리 리소스가 점차 줄어드는 현상이다. 만일 시스템에서 더 이상 할당할 수 있는 메모리가 없으면 시스템 충돌이 발생하는 치명적인 오류가 발생한다. 이를 해결하기 위해 동적 할당된 메모리는 반드시 `delete` 키워드로 해제하도록 한다.
+
+```cpp
+/* 동적 할당 해제 */
+delete ptr1;
+delete[] ptr2;
+```
+
+### 허상 포인터
+[허상 포인터](https://ko.wikipedia.org/wiki/허상_포인터)(dangling pointer)는 참조하려는 메모리 주소가 더 이상 유효하지 않을 때 발생하는 메모리 관리 문제이다. 시스템적으로 메모리 관리를 하는 과정에서 흔히 발생하는 현상이지만, 프로그래밍에서는 동적 할당이 해제된 포인터가 여전히 해당 주소를 가리키고 있어서 나타나는게 대다수이다. 그러므로 영값 주소 [`nullptr`](https://en.cppreference.com/w/cpp/language/nullptr)을 할당하여 아무런 주소를 가리키지 않도록 한다.
+
+```cpp
+/* 올바른 동적 할당 해제: 할당 해제 이후 포인터에 영값 할당 */
+delete ptr1;
+delete[] ptr2;
+ptr1 = ptr2 = nullptr;
+```
+
+## 메모리 함수
+C 표준 라이브러리 중에서 문자열 관련 [`cstring`]((https://en.cppreference.com/w/cpp/string)) 헤더는 힙 영역 메모리를 처리하는 전용 함수들이 존재한다. 이들은 C/C++ 프로그래밍 언어에서 매우 흔히 사용되는 메모리 함수들의 목록이다.
+
+| 함수    | 예시               | 설명                                                  |
+|:-----------:| --------------------- | ------------------------------------------------------------ |
+| `memchr()`  | `memchr(str,'c',num);` | 문자열 `str`에서 `num` 개의 바이트 내에 문자 `'c'`의 존재여부를 확인한다.<br/>발견될 시 해당 문자의 메모리 주소가 반환되며, 없으면 널 포인터가 반환된다. |
+| `memcmp()` | `memcmp(ptr1,ptr2,num);` | 포인터 `ptr1`과 `ptr2`를 `num` 개의 바이트 내에서 크기를 비교한다.<br/>만일 `n`번째 바이트에서 처음으로 일치하지 않으면 함수는 `*(ptr1 + n)`에서 `*(ptr2 + n)` 차를 반환한다. |
+| `memset()`  | `malloc(ptr,value,num);` | 포인터 `ptr`로부터 시작해 `num` 개의 바이트를 `value` 값으로 채운다. |
+| `memcpy()`  | `memcpy(ptr1,ptr2,num);` | 포인터 `ptr2`에 있는 `num` 개의 바이트를 `ptr1`으로 복사한다; 단, `ptr1`과 `ptr2`가 겹쳐서는 안된다. |
+| `memmove()`    | `memmove(ptr1,ptr2,num);` | 포인터 `ptr2`에 있는 `num` 개의 바이트를 `ptr1`으로 복사한다; `memcpy()`와 달리 `ptr1`과 `ptr2`가 겹쳐도 동작하나 상대적으로 느리다. |
 
 # C++: 예외 처리
 예외(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 컴파일러에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
