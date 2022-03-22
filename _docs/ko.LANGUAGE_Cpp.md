@@ -1194,50 +1194,35 @@ int main() {
 ```
 
 ## 참조
-[참조](https://en.cppreference.com/w/cpp/language/reference)(reference)는 [포인터](#c-포인터)처럼 데이터가 저장된 메모리 주소를 저장하지만, 초기화 이후에는 메모리 주소 변동이 불가한 상수의 성질을 갖는다.
-
-
-이미 존재하는 데이터 혹은 함수에 별칭으로 사용하기 위해 선언된 변수이다. 참조는 단순히 [네임 바인딩](https://ko.wikipedia.org/wiki/네임_바인딩)(name binding)된 변수이기 때문에 자체적으로 할당된 메모리를 갖지 않으며, 대신에 참조하는 데이터 혹은 함수가 할당된 메모리를 그대로 사용한다.
+[참조](https://en.cppreference.com/w/cpp/language/reference)(reference)는 메모리 주소를 저장하지만, 초기화 이루 메모리 주소 변동이 불가한 상수 포인터에 대응한다. 참조는 단순히 [네임 바인딩](https://ko.wikipedia.org/wiki/네임_바인딩)(name binding)된 변수이다: 자체적으로 할당된 메모리를 갖지 않는 대신에 참조하는 데이터가 할당된 메모리를 그대로 사용하며, 종속된 코드 블록 영역범위를 벗어나면 참조만이 자연스레 사라진다. 이러한 특징에 의해 참조는 보다 안전한 포인터 하위호환으로 사용된다.
 
 * **[lvalue 참조](https://docs.microsoft.com/en-us/cpp/cpp/lvalue-reference-declarator-amp) `&`**
 
-    > `lvalue`는 프로그램이 접근할 수 있는 메모리 주소를 갖는다.
-    
-정의된 변수를 참조한다.
+    `lvalue`는 프로그램이 접근할 수 있는 메모리 주소를 갖는 데이터이다. 즉, 이미 정의된 변수에 별칭을 선언하는 것과 같다. 특히 함수의 매개변수의 참조에 의한 호출을 포인터보다 안전하게 구현하는데 활용된다.
 
-  ```cpp
+    ```cpp
+  int variable = 3;
+  int &ref = variable;
 
-  ```
+  std::cout << ref;    // 출력: 3
+
+  variable++;
+  std::cout << ref;    // 출력: 4 
+    ```
 
 * **[rvalue 참조](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp) `&&`**
 
-    > `rvalue`는 프로그램이 접근할 수 있는 메모리 주소가 없거나, 혹은 메모리 주소가 있어도 프로그램이 더 이상 접근할 수 없다.
+    `rvalue`는 프로그램이 접근할 수 있는 메모리 주소가 없거나, 혹은 메모리 주소가 있어도 더 이상의 접근이 불가한 데이터이다. 즉, 임시 데이터를 곧바로 참조하여 불필요한 변수 정의를 배제할 수 있다.
 
-    임시 데이터를 참조한다.
+    ```cpp
+  int variable = 3;
+  int &&ref = variable + 4;
 
-  ```cpp
+  std::cout << ref;    // 출력: 7
 
-  ```
-
-```cpp
-/* "ref" 변수의 "variable" 변수 참조 */
-int variable;
-int &ref = variable;
-
-ref = 3;    // 결과: variable = ref = 3
-```
-
-참조의 원리는 기존 변수의 메모리 주소를 상수 포인터에 할당하는 것과 동일하다. 아래의 코드는 위의 예시를 포인터만 사용해서 나타내었다.
-
-```cpp
-/* 상수 포인터를 활용한 참조 */
-int variable;
-const int* ref = &variable;
-
-*ref = 3;    // 결과: variable = *ref = 3
-```
-
-상수 포인터를 사용하기 때문에, 참조 시에는 정의와 초기화가 반드시 동시에 이루어져야 한다. 그리고 한 번 참조된 변수는 새로운 변수를 참조할 수 없다. 프로그래밍에서 흔히 언급되는 *참조에 의한 호출(call by reference)*도 이를 의미하는 것이다.
+  ref++;
+  std::cout << ref;    // 출력: 8
+    ```
 
 ## 엔디언
 [엔디언](https://ko.wikipedia.org/wiki/엔디언)(endianess)이란 컴퓨터가 메모리로부터 데이터를 표현하기 위해 바이트 단위의 정보를 어떻게 정렬할 것인지를 가리킨다. 특히 포인터가 메모리 주소를 접근 및 호출하기 때문에 엔디언의 기본적인 개념 이해는 필요하다고 본다.
