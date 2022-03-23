@@ -1123,7 +1123,7 @@ def factorial(arg):
 > ```python
 > variable = [0, 3, 5, 9]
 > print(variable.index(5))
-> # variable이란 이름을 가진 리스트 객체의 "index()" 메소드를 사용하여 값 5에 대한 위치를 반환한다
+> # variable이란 이름을 가진 리스트 객체의 "index()" 메소드를 사용하여 값 5에 대한 위치를 반환한다.
 > ```
 
 클래스는 `class` 키워드를 사용하여 속성 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"이라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
