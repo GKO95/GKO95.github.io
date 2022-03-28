@@ -1181,10 +1181,10 @@ A
 
 ```c
 /* 구조체 포인터 정의 */
-struct STRUCTURE *variable;
+struct STRUCTURE *ptr = variable;
 
-variable->field1 = 3;
-variable->field2 = 'A';
+ptr->field1 = 3;
+ptr->field2 = 'A';
 ```
 
 ### 익명 구조체
@@ -1260,10 +1260,10 @@ printf("%3d (%#010x)\n%3c (%#010x)", variable.field1, variable.field1,\
 
 ```c
 /* 공용체 포인터 정의 */
-union UNION *variable;
+union UNION *ptr = variable;
 
-variable->field1 = 3;
-variable->field2 = 'A';
+ptr->field1 = 3;
+ptr->field2 = 'A';
 ```
 
 ### 익명 공용체
