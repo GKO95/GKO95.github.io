@@ -1284,322 +1284,438 @@ for (int index = 0; index < sizeof(variable); index++) {
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
 # C++: 클래스
-C++ 프로그래밍 언어는 객체와 클래스를 중심으로 프로그래밍하는 *[객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming; OOP)* 기법도 적용할 수 있다. 본 장은 C++ 언어에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
+[클래스](https://en.cppreference.com/w/cpp/language/classes)(class)는 객체를 생성하는데 사용된다. 
 
-## 객체
-이전 장에서 (데이터를 저장할 수 있는) 변수와 (데이터를 처리 할 수 있는) 함수를 소개하였다. 객체(object 혹은 instance)는 이러한 변수와 함수를 하나의 데이터로 캡슐화한 데이터이다. 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 일부 시퀀스 컨테이너와 문자열 객체가 있다.
+> 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수는 각각 필드(field)과 메소드(method)라고 불리며, 이를 통틀어 맴버(member)라고 칭하고 다음과 같이 접근한다.
+>
+> * **필드**: `instance.field`
+> * **메소드**: `instance.method()`
+>
+> 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 배열 및 벡터가 있다.
+>
+> ```cpp
+> std::array<int, 4> variable = {0, 3, 5, 9};
+> std::cout << variable.at(2);
+> // variable이란 배열 객체의 "at()" 메소드를 사용하여 2 번째 인덱스 요소의 값을 반환한다.
+> ```
 
-```cpp
-std::string variable = "Hello World!";
-std::cout << variable.length();
-// "variable"이란 이름을 가진 문자열 객체의 "length()" 메소드를 사용하여 값 널 문자를 제외한 총 문자 개수를 반환한다.
-```
-```
-12
-```
+클래스는 `class` 키워드를 사용하여 속성 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"이라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
-## 캡슐화
-캡슐화(encapsulation)는 객체의 핵심 개념으로 아래의 특성을 가진다.
-
-1. 변수와 함수를 하나의 객체로 결합한다.
-2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
-
-### 상태 및 행위
-상태(state)와 행위(behavior)는 객체에 캡슐화된 변수와 함수를 가리키는 용어이다. 객체에 속한 변수와 함수를 각각 맴버 변수(member variable)와 맴버 함수(member function)라고 부르며 맴버 연산자 `.`로 접근한다.
-
-| 객체 맴버 | 구성요소                           | 구문                  |
-|:-----:|:------------------------------:|---------------------|
-| 상태    | 맴버 변수 (일명 맴버 필드; member field) | `instance.field`    |
-| 행위    | 맴버 함수 (일명 메소드; method)         | `instance.method()` |
-
-## 클래스
-클래스(class)는 객체를 생성하는데 사용된다. 클래스는 `class` 키워드를 사용하여 정의되며, 클래스 내부에는 객체의 속성과 메소드가 되는 변수와 함수를 정의한다. 클래스의 코드 블록 끝에는 세미콜론 `;`이 필요하며, 클래스로부터 객체를 생성하는 절차를 *객체화(instantiation)*라고 한다. 아래는 `class` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이며, 변수 및 함수와의 유사성을 확인할 수 있다.
+1. 변수와 함수가 하나의 객체로 결합된다.
+2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
 
 ```cpp
-/* 클래스 생성하기 */
-class CLASS{
+/* 클래스 정의 */
+class CLASS {
 public:
-    /* 맴버 정의: 맴버 필드 (일명 맴버 변수) */
-    int field1 = 1;
-    float field2 = 3.0;
+
+    /* 필드 맴버 */
+    int   field1 = 2;
+    float field2 = 3.14;
     
-    /* 맴버 정의: 메소드 (일명 맴버 함수) */
-    float method(int arg) {
+    /* 메소드 맴버 */
+    int method() {
+        return field1 * field2;
+    }
+
+    /* 메소드 맴버 (오버로딩) */
+    int method(int arg) {
         return field1 + field2 - arg;
     }
 };
 
-// 객체화
-CLASS instance;
+int main () {
 
-// 그러므로...
-instance.field1;         // >> 출력: 1
-instance.field2;         // >> 출력: 3.0
-instance.method(2);      // >> 출력: 2.0 (= 1 + 3.0 - 2)
+    /* 클래스 객체화 */
+    CLASS instance;
+
+    std::cout << instance.field1;       // 출력: 2
+    std::cout << instance.field2;       // 출력: 3.14
+    std::cout << instance.method();     // 출력: 6
+    std::cout << instance.method(1);    // 출력: 4
+}
 ```
 
-### 생성자
-생성자(constructor)는 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 메소드이다. 비록 생성자는 선택사항이지만, 만일 생성자를 정의한다면 메소드의 이름은 클래스 식별자와 동일해야 하며 객체화 과정에서 객체로 전달할 인자의 자료형과 개수를 결정해야 한다. 반환 자료형은 `void`로 고정되어 있어 자료형 지정을 하지 않는다. 생성자는 흔히 객체화 단계에서 맴버 필드를 초기화하는 용도로 사용된다.
+### 접근 지정자
+[접근 지정자](https://en.cppreference.com/w/cpp/language/access)(access specifier)는 외부로부터 맴버에 접근할 수 있는 권한을 지정한다.
 
-생성자로 초기화하는 방법은 두 가지가 있다.
+> C++ 프로그래밍 언어는 암묵적으로 `private`을 기본 접근 지정자로 갖는다.
 
-1. **직접 초기화(direct initialization)**
-    
-   ```cpp
-   /* 클래스 생성하기 */
-   class CLASS {
-   public:
-       /* 생성자 */
-       CLASS(int arg1, float arg2)
-       {
-           field1 = arg1; field2 = arg2;	// 직접 초기화
-           statements;
-       }
-    
-       int field1;
-       float field2;
-    
-       float method(int arg) {
-           return field1 + field2 - arg;
-       }    
-   };
-   
-   // 객체화
-   CLASS instance(1, 3.0);
-   ```
+| 키워드     | 설명                                                  |
+| ----------- | ------------------------------------------------------------ |
+| `public`    | 객체 (또는 클래스) 외부 코드로부터 맴버 접근이 자유롭다.      |
+| `private`   | 객체 (또는 클래스) 내부에서만 맴버 접근이 가능하다.   |
+| `protected` | [상속](#상속)으로 파생된 객체 (또는 클래스)만이 접근할 수 있다. |
 
-2. **목록 초기화(list initailization)**: 직접 초기화로는 불가능한 상수 맴버 필드의 초기화가 가능하다.
-
-   ```cpp
-   /* 클래스 생성하기 */
-   class CLASS {
-   public:
-       /* 생성자 */
-       CLASS(int arg1, float arg2)
-           : field1(arg1), field2(arg2)	// 목록 초기화
-       {
-       	statements;
-       }
-       
-       int field1;
-       float field2;
-       
-       float method(int arg) {
-           return field1 + field2 - arg;
-       }
-   };
-   
-   // 객체화
-   CLASS instance(1, 3.0);
-   ```
-
-만일 생성자가 전달인자를 받도록 정의되었으면 반드시 소괄호 `()`를 통해 값을 전달하도록 한다. 단, 클래스에 정의된 생성자가 없거나 혹은 생성자가 전달인자를 받지 않을 때에는 소괄호를 사용하지 않는다. 함수 오버로딩에 의해 여러 생성자를 정의할 수 있다.
-
-### 소멸자
-소멸자(destructor)는 객체가 메모리에서 할당 해제되어 소멸되기 직전에 자동적으로 실행되는 특수한 메소드이다. 비록 소멸자는 선택사항이지만, 만일 소멸자를 정의한다면 메소드의 이름은 클래스 식별자와 동일하되 물결표 `~`를 접두사로 가져야 한다. 반환 자료형은 `void`로 고정되어 있어 자료형 지정을 하지 않는다.
+### 클래스 포인터
+클래스 포인터(class pointer)는 클래스를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 클래스 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
 
 ```cpp
-/* 클래스 생성하기 */
+/* 클래스 포인터 정의 */
+CLASS *ptr = &instance;
+
+std::cout << ptr->field1;       // 출력: 2
+std::cout << ptr->method(1);    // 출력: 4
+```
+
+### `this` 포인터
+[`this`](https://en.cppreference.com/w/cpp/language/this) 포인터는 객체가 자신의 메모리 주소를 반환하는데 사용된다. 객체의 [비정적](#정적-맴버)(non-static) 메소드로부터 자신의 맴버 호출을 `this->` 표현식으로 명시적으로 나타낼 수 있어, 흔히 필드 맴버를 매개변수 또는 지역변수와 구분짓는데 활용된다.
+
+```cpp
+/* 클래스 정의 */
 class CLASS {
 public:
+
+    /* 필드 맴버 */
+    int   field1 = 2;
+    float field2 = 3.14;
+    
+    /* 메소드 맴버 */
+    int method() {
+        return this->field1 * this->field2;
+    }
+
+    /* 메소드 맴버 (오버로딩) */
+    int method(int arg) {
+        return this->field1 + this->field2 - arg;
+    }
+};
+```
+
+## 생성자
+[생성자](https://en.cppreference.com/w/cpp/language/constructor)(constructor)는 객체화마다 자동으로 실행되는 특수한 `void` 자료형 메소드이다. 비록 생성자는 선택사항이지만, 정의한다면 반드시 클래스명과 동일해야 한다. 외부 코드로부터 객체화되기 때문에 생성자를 `public` 접근 지정자로 설정한다. 흔히 객체화 단계에서 맴버들을 초기화하는 용도로 사용된다.
+
+1. **직접 초기화(direct initialization)**
+
+    생성자의 코드 블록 내에서 각 맴버를 할당 연산자 `=`로 초기화하는 일반적인 방법이다.
+    
+   ```cpp
+   /* 클래스 정의 */
+   class CLASS {
+   
+       int field1;
+       float field2; 
+
+   public:
+   
+       /* 생성자: 직접 초기화 */
+       CLASS(int arg1, float arg2)
+       {
+           field1 = arg1;
+           field2 = arg2;
+
+           statements;
+       }
+   };
+
+   /* 클래스 객체화 */
+   CLASS intance(2, 3.14);
+   ```
+
+2. **목록 초기화(list initailization)**
+
+    직접 초기화로는 불가능한 [상수](#상수) 맴버의 초기화가 가능하다.
+
+   ```cpp
+   /* 클래스 정의 */
+   class CLASS {
+
+       int field1;
+       float field2;
+
+   public:
+   
+       /* 생성자: 목록 초기화 */
+       CLASS(int arg1, float arg2)
+           : field1(arg1), field2(arg2)
+       {
+           statements;
+       }
+   };
+
+   /* 클래스 객체화 */
+   CLASS intance(2, 3.14);
+   ```
+
+생성자는 오버로딩될 수 있어 한 개 이상이 정의될 수 있다. 그 중에서 아무런 전달인자를 받지 않는 생성자를 기본 생성자(default constructor)라고 칭한다.
+
+### 소멸자
+[소멸자](https://en.cppreference.com/w/cpp/language/destructor)(destructor)는 객체가 메모리로부터 소멸되기 직전에 자동으로 실행되는 특수한 `void` 자료형 메소드이다. 비록 소멸자는 선택사항이지만, 정의한다면 접두부에는 물결표 `~`와 함께 반드시 클래스명과 동일해야 한다. 외부 코드로부터 소멸되기 때문에 소멸자를 `public` 접근 지정자로 설정한다.
+
+```cpp
+/* 클래스 정의 */
+class CLASS {
+public:
+
     /* 소멸자 */
     ~CLASS() {
     	statements;
     }
-    
-    int field1 = 1;
-    float field2 = 3.0;
-    
-    float method(int arg) {
-        return field1 + field2 - arg;
-    }
 };
 ```
 
-소멸자는 전달인자를 허용하지 않아 함수 오버로딩이 불가하므로 하나만 정의될 수 있다.
+소멸자는 매개변수를 가질 수 없으므로 오버로딩될 수 없다. 그러므로 클래스는 오로지 하나의 소멸자만 정의할 수 있다.
 
-### 상수 객체
-상수 객체(constant object)는 객체화 이후에 맴버 값 변동이 불가능한 객체이다. 상수 객체 맴버들의 초기화는 생성자의 목록 초기화를 통해서만 이루어진다.
-
-```cpp
-// 객체화: 상수 객체
-const CLASS instance;
-```
-
-상수 객체는 오로지 상수 맴버 필드와 상수 맴버 함수만 접근할 수 있다. 여기서 상수 메소드란 개념은 단순히 상수 객체의 접근성을 위한 것이므로, 이와 대응하리라 생각되는 "상수 함수"라는 것은 존재하지 않는다. 상수 메소드를 선언 및 정의할 시 `const` 키워드는 매개변수 선언 이후에 위치해야 한다.
+## 맴버 선언
+클래스에서 맴버를 선언하면 외부에서 별도로 정의되어야 한다. 클래스 외부에서 정의된 맴버는 사실상 전역 데이터로써 공용될 수 있기 때문에 [정적 맴버](#정적-맴버)가 아닌 이상 맴버 선언의 활용은 메소드 맴버로 한정된다.
 
 ```cpp
-/* 클래스 생성하기 */
+/* 클래스 정의 */
 class CLASS {
-public: 
-    int field1 = 1;
-    float field2 = 3.0;
-    
-    float method1(int arg) {
-        return field1 + field2 - arg;
-    }
-    
-    // 맴버 정의: 상수 메소드
-    void method2(int arg) const {
-        statements;
-    }
+public:
+
+    int   field1 = 2;
+    float field2 = 3.14;
+
+    /* 메소드 맴버: 선언 */
+    int method(int arg);
 };
+
+/* 메소드 맴버: 정의 */
+int CLASS::method(int arg) {
+    return field1 + field2 - arg;
+}
 ```
 
-## 접근 지정자
-접근 지정자(access specifier)는 외부로부터 클래스 맴버에 접근할 수 있는 권한을 지정한다. C++ 프로그래밍 언어에는 세 가지의 접근 지정자가 존재한다.
+### 정적 맴버
+[정적 맴버](https://en.cppreference.com/w/cpp/language/static)(static member)는 클래스로부터 생성된 객체의 개수와 무관하게 오로지 하나의 데이터만 존재하여 공유되는 `static` 키워드로 명시된 맴버이다. 해당 유형의 맴버는 객체화가 필요없이 클래스로부터 직접 호출이 가능하다.
 
-| 키워드     | 설명                                                  |
-| ----------- | ------------------------------------------------------------ |
-| `public`    | 클래스 외부 코드에서 맴버를 접근할 수 있다.      |
-| `private`   | 클래스 내부에서만 맴버를 접근할 수 있다.   |
-| `protected` | 파생 클래스는 접근할 수 있으나, 여전히 외부에서는 접근할 수 없다 ([상속](#상속) 부문 참조). |
+> 파이썬 프로그래밍 언어와 비교하자면 [클래스 속성 및 메소드](/docs/ko.Python/#클래스-속성-및-메소드)에 대응한다.
 
-## 프렌드 함수
-프렌드 함수(friend function)는 비록 클래스 외부에 정의된 함수로 맴버가 아니지만 클래스의 `private` 맴버를 접근할 수 있다. 클래스 내에서 `friend` 키워드와 함께 해당 함수를 선언하면 된다.
+일반 맴버와 달리, 정적 맴버는 클래스 내에서 선언만 되고 외부에서 별도로 정의되어야 한다.
 
 ```cpp
+/* 클래스 정의 */
 class CLASS {
-private:
-    int field1 = 1;
-    float field2 = 3.0;
-    
-    float method1(int arg) {
-        return field1 + field2 - arg;
-    }
+public:
 
-    /* 프렌드 함수 선언 */
-    friend void function(CLASS &instance);
+    /* 정적 필드 및 메소드 선언 */
+    static int field;
+
+    static void method(int arg);
 };
 
-/* 함수 정의 */
-void function(CLASS &instance) {
-	instance.field1 = 2;
+/* 정적 필드 및 메소드 정의 */
+int CLASS::field = 7;
+
+void CLASS::method(int arg) {
+    CLASS::field += arg;
 }
 
-// 객체화
-CLASS instance;
-function(instance);
+int main() {
 
-// 그러므로...
-instance.field1;	// >> 출력: 2
-instance.field2;	// >> 출력: 3.0
-instance.method(2);	// >> 출력: 3.0 (= 2 + 3.0 - 2)
+    std::cout << CLASS::field;      // 출력: 7
+
+    /* 클래스 객체화 */
+    CLASS instance;
+    CLASS::method(2);
+
+    std::cout << instance.field;    // 출력: 9
+
+    return 0;
+}
 ```
 
-프렌드 함수는 클래스의 맴버가 아니므로 객체없이 호출하여 실행한다. 함수 프로토타입이 맴버와 함께 클래스 내에 선언되었기 때문에 캡슐화로 인하여 `private` 맴버 접근이 가능한 함수에 불과하다.
-
-## 클래스 포인터
-객체는 변수가 아닌 포인터를 통해서도 객체화가 가능하다. 객체가 포인터로 할당되면 화살표 연산자 `->`로 맴버에 접근할 수 있다.
+## 프렌드 선언
+[프렌드 선언](https://en.cppreference.com/w/cpp/language/friend)(friend declaration)는 `friend` 키워드로 외부 함수 (혹은 메소드, 클래스 등)을 캡슐화로부터 맴버들을 접근할 수 있도록 하는 선언이다. 단순히 맴버 접근 권한이 주어졌을 뿐, 프렌드 선언은 클래스 맴버가 전혀 아니므로 단독적으로 호출되어 사용된다. 캡슐화에 기반한 기술이므로 접근 지정자와 무관하다.
 
 ```cpp
+/* 클래스 정의 */
+class CLASS {
+
+    int   field1 = 2;
+    float field2 = 3.14;
+
+    /* 프렌드 함수 선언 */
+    friend int function(CLASS &instance, int arg);
+
+};
+
+/* 프렌드 함수 정의 */
+int function(CLASS &instance, int arg) {
+    return instance.field1 + instance.field2 - arg;
+}
+
+int main() {
+    
+    /* 클래스 객체화 */
+    CLASS instance;
+    
+    std::cout << function(instance, 1);    // 출력: 4
+}
+```
+
+## 상수 객체
+상수 객체(constant object)는 객체화 이후에 맴버의 데이터 변동이 불가한 객체이다. 일반 메소드 맴버를 접근할 수 없으나, 대신에 `const` 키워드가 매개변수 선언 이후에 기입되어 필드 맴버의 값을 바꿀 수 없는 상수 메소드(constant method)를 호출할 수 있다.
+
+```cpp
+/* 클래스 정의 */
 class CLASS {
 public:
-    CLASS(int arg1, float arg2)
-        : field1(arg1), field2(arg2) { }
-    ~CLASS() { }
-    
-    int field1;
-    float field2;
-    
-    float method1(int arg) {
+
+    int field1 = 2;
+    float field2 = 3.14;
+
+    /* 상수 메소드 정의 */
+    int method(int arg) const {
         return field1 + field2 - arg;
-    }
+    }    
 };
 
-// 객체화 (포인터)
-CLASS instance(1, 3.0);
-CLASS *ptr = &instance;
+int main() {
 
-// 그러므로...
-instance->field1;		// >> 출력: 1
-instance->field2;		// >> 출력: 3.0
-instance->method(2);	// >> 출력: 2.0 (= 1 + 3.0 - 2)
-```
-
-### 동적 객체
-동적 객체(dynamic object)는 스택이 아닌 힙 영역 메모리에 객체화된 객체이다. 프로그램 실행 도중에 스택 영역 메모리의 성질로부터 의도치 않게 객체 데이터가 소멸되는 것을 방지한다. 동적 객체는 특히 [MFC](/docs/ko.MFC)와 같은 어플리케이션 프레임워크 라이브러리에서 흔히 사용된다.
-
-```cpp
-/* 동적 객체 */
-CLASS *instance = new CLASS(1, 3.0);
-```
-
-### 신원
-신원(identity)은 상태와 행위 이외의 또 다른 객체 구성요소로써 타 객체로부터 자신을 구분짓는다. 신원 구분은 객체에 내포된 `this` 포인터가 가리키는 스스로의 메모리 주소를 통해 이루어지는데, 이를 통해 객체 내의 맴버 접근도 가능하다.
-
-```cpp
-class CLASS {
-public:
-    CLASS(int arg1, float arg2)
-        : field1(arg1), field2(arg2) { }
-    ~CLASS() { }
-    
-    int field1;
-    float field2;
-    
-    float method1(int arg) {
-        // "this" 포인터 사용
-        return (this->field1) + (this->field2) - arg;
-    }
-};
+    /* 클래스 객체화: 상수 객체 */
+    const CLASS instance;
+}
 ```
 
 ## 상속
-상속(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 맴버 필드와 메소드를 제공하는 행위이다. 기반 클래스와 파생 클래스에 동일한 이름의 속성과 메소드가 존재할 경우, 기반 클래스의 필드와 메소드는 파생 클래스에 의해 묻힌다.
+[상속](https://en.cppreference.com/w/cpp/language/derived_class)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 필드 및 메소드 맴버를 제공하는 행위이다. 기반 클래스와 파생 클래스에 동일한 이름의 맴버가 존재할 경우, 기반 클래스의 맴버는 파생 클래스에 의해 묻힌다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 있다.
 
 ```cpp
-/* 기반 클래스 생성 */
+using namespace std;
+
+/* 기반 클래스 정의 */
 class BASECLASS {
 public:
-    BASECLASS() { std::cout << "기반 클래스: 생성자" << std::endl; }
-    ~BASECLASS() { std::cout << "기반 클래스: 소멸자" << std::endl; }
     
-    int field1 = 1;
-    float field2 = 3.0;
+    BASECLASS() {
+        cout << "생성자: 기반 클래스" << endl;
+    }
+
+    ~BASECLASS() {
+        cout << "소멸자: 기반 클래스" << endl;
+    }
+
+    int    field1 = 3;
+    string field2 = "C++";
+
+    int method(int arg1, int arg2) {
+        return arg1 + arg2;
+    }
 };
 
-/* 파생 클래스 생성 */
+/* 파생 클래스 정의 */
 class DERIVEDCLASS
     : public BASECLASS {
 public:
-    DERIVEDCLASS() { std::cout << "파생 클래스: 생성자" << std::endl; }
-    ~DERIVEDCLASS() { std::cout << "파생 클래스: 생성자" << std::endl; }
     
-    float field2 = 7.0;
-    char field3 = 'A';
+    DERIVEDCLASS() {
+        cout << "생성자: 파생 클래스" << endl;
+    }
+
+    ~DERIVEDCLASS() {
+        cout << "소멸자: 파생 클래스" << endl;
+    }
+
+    string field2 = "Hello World!";
+    bool   field3 = true;
+
+    int method(int arg1, int arg2) {
+        return arg1 * arg2;
+    }
 };
 
+int main() {
+    
+    /* 클래스 객체화 */
+    DERIVEDCLASS instance;
 
-// 객체화
-DERIVEDCLASS instance;
-std::cout << instance.field1 << ", " << instance.field2 << ", " << instance.field3 << std::endl;
+    cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << endl;
+    cout << instance.method(2, 3) << endl;
+}
 ```
 ```
-"기반 클래스: 생성자"
-"파생 클래스: 생성자"
-
-1, 7.0, A
-
-"파생 클래스: 소멸자"
-"기반 클래스: 소멸자"
+생성자: 기반 클래스
+생성자: 파생 클래스
+3 Hello World! 1
+6
+소멸자: 파생 클래스
+소멸자: 기반 클래스
 ```
 
-### 상속 종류
-C++ 프로그래밍 언어의 객체지향 프로그래밍에는 세 가지의 상속 종류가 존재한다.
-
-| 상속 | 설명                                                  |
-| :---------: | ------------------------------------------------------------ |
-|   `public`    | 기반 클래스의 `private` 맴버는 상속되지 않으며 접근할 수 없다.<br />기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서도 그대로 `public` 및 `protected` 맴버로 상속된다. |
-|   `private`   | 기반 클래스의 `private` 맴버는 상속되지 않으며 접근할 수 없다.<br />기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `private` 맴버로 전환된다. |
-|  `protected`  | 기반 클래스의 `private` 맴버는 상속되지 않으며 접근할 수 없다.<br />기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `protected` 맴버로 전환된다. |
+### 상속 맴버 접근
+범위지정 연산자 `::`는 파생 클래스에 묻혀진 기반 클래스의 필드 및 메소드를 호출하는데 사용된다.
 
 ```cpp
-/* BASECLASS1 (PUBLIC) & BASECLASS2 (PROTECTED) 상속 */
+using namespace std;
+
+/* 기반 클래스 정의 */
+class BASECLASS {
+public:
+    
+    BASECLASS() {
+        cout << "생성자: 기반 클래스" << endl;
+    }
+
+    ~BASECLASS() {
+        cout << "소멸자: 기반 클래스" << endl;
+    }
+
+    int    field1 = 3;
+    string field2 = "C++";
+
+    int method(int arg1, int arg2) {
+        return arg1 + arg2;
+    }
+};
+
+/* 파생 클래스 정의 */
 class DERIVEDCLASS
-    : public BASECLASS1, protected BASECLASS2
-{
-    statements;
+    : public BASECLASS {
+public:
+    
+    DERIVEDCLASS() {
+        cout << "생성자: 파생 클래스" << endl;
+        field2 = BASECLASS::field2;            // 기반 클래스의 field2 필드
+    }
+
+    ~DERIVEDCLASS() {
+        cout << "소멸자: 파생 클래스" << endl;
+    }
+
+    string field2 = "Hello World!";
+    bool   field3 = true;
+
+    int method(int arg1, int arg2) {
+        return BASECLASS::method(arg1, arg2);  // 기반 클래스의 method() 메소드
+    }
+};
+
+int main() {
+    
+    /* 클래스 객체화 */
+    DERIVEDCLASS instance;
+
+    cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << endl;
+    cout << instance.method(2, 3) << endl;
+}
+```
+```
+생성자: 기반 클래스
+생성자: 파생 클래스
+3 C++ 1
+5
+소멸자: 파생 클래스
+소멸자: 기반 클래스
+```
+
+### 상속 접근 지정자
+[접근 지정자](https://en.cppreference.com/w/cpp/language/access)에 따라 어떠한 기반 클래스 맴버가 파생 클래스로 상속될 것인지 결정된다.
+
+> 어떠한 접근 지정자를 사용하더라도, 기반 클래스의 `private` 맴버는 상속되지 않으며 접근 불가하다.
+
+| 접근 지정자 | 설명                                           |
+| :---------: | ------------------------------------------------------------ |
+| `public` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서도 그대로 `public` 및 `protected` 맴버로 상속된다. |
+| `private` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `private` 맴버로 전환된다. |
+| `protected` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `protected` 맴버로 전환된다. |
+
+```cpp
+/* 파생 클래스의 BASECLASS1 및 BASECLASS2 상속 */
+class DERIVEDCLASS
+    : public BASECLASS1, protected BASECLASS2 {
+    
 };
 ```
 
@@ -1795,10 +1911,10 @@ A
 
 ```cpp
 /* 구조체 포인터 정의 */
-STRUCTURE *variable;
+STRUCTURE *ptr = &variable;
 
-variable->field1 = 3;
-variable->field2 = 'A';
+ptr->field1 = 3;
+ptr->field2 = 'A';
 ```
 
 ### 익명 구조체
@@ -1879,10 +1995,10 @@ cout << setw(3) << setfill(' ') << variable.field2 << " (0x" << hex
 
 ```cpp
 /* 공용체 포인터 정의 */
-UNION *variable;
+UNION *ptr = &variable;
 
-variable->field1 = 3;
-variable->field2 = 'A';
+ptr->field1 = 3;
+ptr->field2 = 'A';
 ```
 
 ### 익명 공용체
