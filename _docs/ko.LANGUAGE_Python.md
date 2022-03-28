@@ -1139,7 +1139,7 @@ def factorial(arg):
 객체 속성을 정의하려면 반드시 `self` 변수를 사용할 수 있는 객체 메소드 내에서만 정의될 수 있다. 또한 객체 속성은 네임 바인딩이 되지 않은 채 선언만 되면 `AttributeError` 오류가 발생한다.
 
 ```python
-# 클래스 생성
+# 클래스 정의
 class CLASS:
 
     # 객체 메소드
@@ -1164,7 +1164,7 @@ print(instance.variable)     # AttributeError: 'CLASS' object has no attribute '
 [`__init__()`](https://docs.python.org/3/reference/datamodel.html#object.__init__)는 클래스 객체화가 이루어질 때마다 자동적으로 실행되는 [특수한 메소드](#매직-메소드)이다. 객체 속성을 초기화(initialization)하는 용도로 사용되며 객체화 과정에서 객체로 전달할 인자의 개수를 결정하는 요인으로 작용한다. 해당 메소드는 선택사항으로 객체화 시 초기화 및 인자 전달이 필요하지 않으면 생략하여도 된다.
 
 ```python
-# 클래스 생성
+# 클래스 정의
 class CLASS:
 
     # 객체 초기화 메소드
@@ -1189,7 +1189,7 @@ instance = CLASS(value1, value2)
 >  객체 메소드를 정의할 때, `self` 변수를 통해 클래스 속성 및 메소드를 호출할 수 있다.
 
 ```python
-# 클래스 생성
+# 클래스 정의
 class CLASS:
     def __init__(self, arg):
         self.method1(arg)
@@ -1227,7 +1227,7 @@ print(f"{instance2.attr1}, {instance2.attr2}")    # 출력: 2, 8
 | `@staticmethod` | 정적 메소드를 선언하는데 사용되는 데코레이터이다. |
 
 ```python
-# 클래스 생성
+# 클래스 정의
 class CLASS:
         
     # 정적 메소드 정의
@@ -1257,7 +1257,7 @@ print(CLASS.method(2, 3, 1))        # 출력: 4
 [연산자 오버로딩](https://ko.wikipedia.org/wiki/연산자_오버로딩)(operator overloading)은 특정 클래스에서 연산자가 어떻게 동작할 지 정의하는 작업이다. 이를 위해 매직 메소드가 사용되며, 오버로드된 연산자는 해당 클래스에서만 적용된다.
 
 ```python
-# 클래스 생성
+# 클래스 정의
 class CLASS:
     def __init__(self, arg):
         self.attr = arg
@@ -1283,7 +1283,7 @@ print(instance3.attr)            # 출력: Hello World!
 [상속](https://docs.python.org/3/tutorial/classes.html#inheritance)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class; 일명 서브클래스)에게 속성과 메소드를 제공하는 행위이다. 기반 클래스와 파생 클래스에 동일한 이름의 맴버가 존재할 경우, 기반 클래스의 맴버는 파생 클래스에 의해 묻힌다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 있다.
 
 ```python
-# 기반 클래스 생성
+# 기반 클래스 정의
 class BASECLASS:
     attr1 = 3
     attr2 = "Python"
@@ -1295,7 +1295,7 @@ class BASECLASS:
         return arg1 + arg2
 
 
-# 파생 클래스 생성
+# 파생 클래스 정의
 class DERIVEDCLASS(BASECLASS):
     attr2 = "Hello World!"
     attr3 = True
@@ -1323,7 +1323,7 @@ print(instance.method(2, 3))
 `super()` 함수는 파생 클래스에 묻혀진 기반 클래스의 속성 및 메소드를 호출하는데 사용된다.
 
 ```python
-# 기반 클래스 생성
+# 기반 클래스 정의
 class BASECLASS:
     attr1 = 3
     attr2 = "Python"
@@ -1334,7 +1334,7 @@ class BASECLASS:
     def method(self, arg1, arg2):
         return arg1 + arg2
 
-# 파생 클래스 생성
+# 파생 클래스 정의
 class DERIVEDCLASS(BASECLASS):
     attr2 = "Hello World!"
     attr3 = True
@@ -1373,7 +1373,7 @@ print(instance.method(2, 3))
 속성을 나누므로써 수정되어서는 안될 민감한 코드를 setter 및 deleter 영역에 숨기고 getter만을 통해서 데이터를 반환한다. 정의된 형태는 메소드와 유사하지만 실제로 사용할 때는 소괄호 `()` 없이 속성처럼 사용된다. 프로퍼티의 setter와 deleter는 선택사항이지만, getter는 반드시 정의되어야 한다.
 
 ```python
-# 클래스 생성
+# 클래스 정의
 class CLASS:
     
     # Getter 프로퍼티 정의
