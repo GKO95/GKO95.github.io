@@ -1133,8 +1133,8 @@ for (int index = 0; index < sizeof(variable); index++) {
 /* 구조체 정의: 총 5바이트 활용 */
 struct STRUCTURE {
     /* 맴버 정의 */
-    int   field1;    // 자료형 크기: 4바이트
-    char  field2;    // 자료형 크기: 1바이트
+    int  field1;    // 자료형 크기: 4바이트
+    char field2;    // 자료형 크기: 1바이트
 };
 ```
 
@@ -1193,8 +1193,8 @@ ptr->field2 = 'A';
 ```c
 /* 익명 구조체 및 변수 정의 */
 struct {
-    int   field1;
-    char  field2;
+    int  field1;
+    char field2;
 } variable = {3, 'A'};
 ```
 
@@ -1205,8 +1205,8 @@ struct {
 /* 공용체 정의: 총 4바이트 활용 */
 union UNION {    
     /* 맴버 정의 */
-    int    field1;    // 자료형 크기: 4바이트
-    char   field2;    // 자료형 크기: 1바이트
+    int  field1;    // 자료형 크기: 4바이트
+    char field2;    // 자료형 크기: 1바이트
 }
 ```
 
@@ -1328,8 +1328,8 @@ typedef unsigned char BYTE;
     ```c
   /* 간략화된 구조체 정의 */
   typedef struct {
-      int    field1;
-      char   field2;
+      int  field1;
+      char field2;
   } STRUCTURE;
   
   STRUCTURE variable;                // 동일: struct STRUCTURE variable;
@@ -1341,8 +1341,8 @@ typedef unsigned char BYTE;
     ```c
   /* 간략화된 공용체 정의 */
   typedef union {
-      int    field1;
-      char   field2;
+      int  field1;
+      char field2;
   } UNION;
   
   UNION variable;                    // 동일: union UNION variable;
