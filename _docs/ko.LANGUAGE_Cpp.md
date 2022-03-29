@@ -1393,7 +1393,7 @@ public:
    /* 클래스 정의 */
    class CLASS {
    
-       int field1;
+       int   field1;
        float field2; 
 
    public:
@@ -1420,7 +1420,7 @@ public:
    /* 클래스 정의 */
    class CLASS {
 
-       int field1;
+       int   field1;
        float field2;
 
    public:
@@ -1720,82 +1720,104 @@ class DERIVEDCLASS
 ```
 
 ## 다형성
-다형성(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, C++ 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 가리킨다. 객체지향 프로그래밍에서 다형성은 매우 중요한 특징이며 두 가지로 분류된다.
+[다형성](https://ko.wikipedia.org/wiki/다형성_(컴퓨터_과학))(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 가리킨다.
 
 * **컴파일타임 다형성(compile-time polymorphism)**: 컴파일 시 이루어지는 다형성 (일명 정적 다형성; static polymorphism)
 * **런타임 다형성(run-time polymorphism)**: 프로그램 실행 시 이루어지는 다형성 (일명 동적 다형성; dynamic polymorphism)
 
-> 이전 장에서 소개한 적이 있는 [함수 오버로딩](#함수-오버로딩)는 컴파일타임 다형성 중 하나이다.
+> 이전 장에서 소개한 적이 있는 [함수 오버로딩](#함수-오버로딩)은 컴파일타임 다형성 중 하나이다.
 
 ### 연산자 오버로딩
-연산자 오버로딩(operator overloading)은 특정 클래스에서 연산자가 달리 동작하도록 하는 컴파일타임 다형성 중 하나이다. 함수 오버로딩과 마찬가지로 전달인자의 유일성이 보장되는 한, 연산자 하나로부터 여러 정의가 가능하다. 오버로딩된 연산자는 클래스 한정이므로 해당 클래스 및 객체 외에는 적용되지 않는다.
-
-`operator` 키워드는 기능성을 새로 정의할 연산자를 명시하기 위해 사용되며, 연산자 정의 구문은 메소드 정의와 동일하다.
+[연산자 오버로딩](https://en.cppreference.com/w/cpp/language/operators)(operator overloading)은 연산자가 특정 클래스 및 해당 객체에서 어떻게 동작할 지 `operator` 키워드로 재정의하는 컴파일타임 다형성 중 하나이다. 한 개의 연산자에 전달받은 인자의 자료형 및 개수에 따라 여러 정의가 가능하다.
 
 ```cpp
-/* 클래스 생성 */
+/* 클래스 정의 */
 class CLASS {
+
+    int field;
+
 public:
-    // 연산자 오버로딩 1
-    void operator [] (int arg1, int arg2) {
-    	statements;
-    }
+
+    CLASS(int arg) : field(arg) { }
     
-    // 연산자 오버로딩 2
+    /* 연산자 오버로딩: + 정의 */
     CLASS operator + (const CLASS &arg) {
-        statements;
-        return arg;
+        return CLASS obj(field + arg.field);
+    }
+
+    /* 연산자 오버로딩: [] 정의 */
+    std::string operator [] (std::string arg) {
+    	return std::string(std::to_string(field) + arg);
     }
 };
-```
 
-예시 코드의 두 번째 연산자 오버로딩에서 전달인자는 `CLASS` 클래스로 매개변수 `arg`에 참조되었다. 그리고 `const` 키워드는 해당 매개변수를 읽기 전용으로 만든다. 다시 말해, 매개변수는 `CLASS`로 생성된 객체를 전달인자로 받지만, 상수 성질로 인해 전달인자의 값 변동이 불가하다.
+int main() {
+
+    CLASS obj1(2), obj2(3);
+
+    /* 연산자 사용: + */
+    CLASS instance(obj1 + obj2);
+
+    /* 연산자 사용: [] */
+    std::cout << instance["!"] << std::endl;
+}
+```
+```
+5!
+```
 
 ### 함수 오버라이딩
-함수 오버라이딩(function overriding)은 파생 클래스가 기반 클래스의 맴버 함수를 재정의하는 런타임 다형성이다. 함수 오버로딩이 여러 개의 기능 중에서 하나를 선택하는 것이라면, 함수 오버라이딩은 하나의 기능을 새롭게 *재정의(re-definition)*한다는 것으로 이해하면 된다.
+[함수 오버라이딩](https://en.cppreference.com/w/cpp/language/override)(function overriding)은 상속된 기반 클래스의 맴버 함수 (일명 메소드)를 파생 클래스에서 재정의하는 런타임 다형성이다.
 
-*가상 함수(virtual function)*은 함수 오버라이딩이 가능한 함수이며 기반 클래스에서 `virtual` 키워드를 통해 선언된다. 가상 함수는 실행문을 갖도록 정의될 수 있으며, 해당 정의는 (1) 기반 클래스로부터 객체화되어 사용하거나 (2) 파생 클래스가 오버라이딩 하지 않고 객체화하여 사용하면 실행된다.
+> 동일한 이름 하에 정의된 여러 함수 중에서 하나를 택하여 실행하는 [함수 오버로딩](#함수-오버로딩)과 전혀 다른 개념이다.
+
+오버라이딩이 되는 기반 클래스의 메소드는 [`virtual`](https://en.cppreference.com/w/cpp/language/virtual) 지정자로 정의된 가상 함수(virtual function)이다. 정의된 가상 함수는 기반 클래스를 객체화하여 곧바로 사용할 수 있으며, 또는 파생 클래스에서 오버라이딩을 하지 않은 채 객체화하여 사용될 수 있다. 단, [상속](#상속)에서 보여준 예시 코드는 절대 함수 오버라이딩이 아니며 단순히 파생 클래스에 묻힌 것일 뿐이다.
 
 ```cpp
-/* 기반 클래스 생성 */
+/* 기반 클래스 정의 */
 class BASECLASS {
 public:
-    // 가상 함수
-    virtual void polymorph() {
-    	statements1;
-    }	
+    
+    /* 가상 함수 정의 */
+    virtual void function() {
+    	
+    }
 };
 
-/* 파생 클래스 생성 */
+/* 파생 클래스 정의 */
 class DERIVEDCLASS
     : public BASECLASS {
-public:	
-    // 함수 오버라이딩
-    void polymorph() {
-    	statements2;
-    }  
+public:
+
+    /* 함수 오버라이딩 */
+    void function() {
+    	
+    }
 };
 ```
-
-[상속](#상속)에서 보여준 기반 클래스의 맴버가 파생 클래스 맴버로 대체되는 것은 절대 함수 오버라이딩이 아니다. 이는 단순히 기반 클래스 맴버가 파생 클래스 맴버에 묻힌 것 뿐이다.
 
 *순수 가상 함수(pure virtual function)*는 정의가 없이 선언만 된 가상 함수를 가리킨다. 기반 클래스에서 정의되지 않았으므로, 파생 클래스에서는 반드시 오버라이딩을 해야 한다. 오버라이딩하지 않으면 컴파일 오류가 발생한다.
 
+기반 클래스의 가상 함수는 아무런 정의가 없이 `=0` 구문이 뒤에 붙는 [순수 가상 함수](https://en.cppreference.com/w/cpp/language/abstract_class)(pure virtual function)로 선언될 수 있다. 그리고 최소한 한 개 이상의 순수 가상 함수를 갖는 클래스를 추상 클래스(abstract class)라고 부른다.
+
 ```cpp
-/* 순수 가상 함수 */
-virtual void polymorph() = 0;
+/* 추상 클래스 정의 */
+class BASECLASS {
+public:
+    
+    /* 순수 가상 함수 선언 */
+    virtual void function() = 0;
+};
 ```
 
-*추상 클래스(abstract class)*는 최소 하나의 순수 가상 함수를 가진 기반 클래스를 가리킨다. 순수 가상 함수의 성질로 인해, 추상 클래스는 객체를 생성할 수 없으며 오로지 상속을 위해 사용된다.
+순수 가상 함수는 아무런 정의가 없으므로 추상 클래스는 객체화가 불가하며, 오로지 상속 목적으로만 사용된다.
 
 ## 클래스 파일
-C++ 프로젝트를 더 효율적으로 관리하기 위해서 클래스를 파일로 생성하는 것을 권장한다. 비주얼 스튜디오에서 클래스 파일은 솔루션 탐색기(Solution Explorer)에서 소스 파일(Source Files) 혹은 헤더 파일(Header Files) 필터를 오른쪽 클릭하여 `추가 >> 클래스...`을 선택한다.
+클래스는 `.HPP` (또는 `.H`) 헤더 및 `.CPP` 소스 파일로 나뉘어 관리될 수 있다. [비주얼 스튜디오](#비주얼-스튜디오)의 경우에는 솔루션 탐색기(Solution Explorer)에서 클래스를 추가하려는 프로젝트에 오른쪽 클릭하여 `Add > Class...`를 선택한다.
 
 ![비주얼 스튜디오에서 클래스 파일 생성하기](/images/docs/cpp/cpp_vs_class.png)
 
-"**C<u>l</u>ass Name:**" 란에 입력한 클래스 이름은 자동적으로 "**.h <u>f</u>ile:**"와 "**.c<u>p</u>p file:**"에 동일한 파일 이름이 입력된다. OK 버튼을 눌러 클래스의 헤더 파일과 소스 파일을 생성한다.
-
-클래스의 헤더와 소스 파일은 솔루션 탐색기의 헤더 파일 및 소스 파일 필터로 이동한다. 비록 클래스가 두 개의 파일로 나뉘어져 있어도 `#include` 지시문을 통해 C++ 스크립트에 클래스를 정상적으로 불러올 수 있다.
+**C<u>l</u>ass Name** 란에 입력한 클래스 식별자는 <b>.h <u>f</u>ile</b>와 <b>.c<u>p</u>p file</b>에 동일한 파일 이름으로 자동입력된다. OK 버튼을 누르면 클래스의 헤더 파일과 소스 파일이 생성된 것을 솔루션 탐색기에서 확인이 가능하다. 생성된 클래스는 `#include` 지시문으로 클래스 헤더를 불러와 사용할 수 있다.
 
 ```cpp
 #include "ClassName.h"
@@ -1809,26 +1831,25 @@ int main() {
 }
 ```
 
-클래스의 헤더 파일은 일반적으로 C 프로그래밍 언어와 호환이 가능한 `.h` 확장자로 생성되며, 이와 반대로 `.hpp`는 C++ 전용 헤더 파일이다. C 프로그래밍 언어는 클래스가 지원되지 않기 때문에, 사실상 어떤 확장자를 사용해도 아무런 문제는 없다.
-
 ### 클래스 헤더 파일
-클래스 헤더 파일(`.h`)은 일반적으로 클래스 맴버 필드 및 메소드의 선언을 담고 있다. 헤더 파일을 통해 다른 스크립트가 클래스의 존재를 알아차리고 사용할 수 있게 된다.
+`.HPP` (또는 `.H`) 확장자의 클래스 헤더 파일은 일반적으로 클래스의 필드 및 메소드 맴버의 선언을 담고 있다. 해당 클래스를 사용하려는 타 소스 파일이 오브젝트 파일로 컴파일되는 과정, 즉 [링크](/blog/ko.compiler_vs_interpreter#aot-컴파일)되기 이전에 클래스의 존재와 구성을 알리는 역할을 한다.
 
 ```cpp
 /* "ClassName.h" 헤더 파일 */
 class ClassName {
+    int   field1;
+    float field2;
+
 public:
     ClassName(int arg1, float arg2);
     ~CLASS() { }
     
-    int field1;
-    float field2;
-    float method(int arg3);
+    int method(int arg);
 };
 ```
 
 ### 클래스 소스 파일
-클래스 소스 파일(`.cpp`)은 헤더 파일에서 선언된 맴버 필드 및 메소드의 정의가 담겨 있는 스크립트이다. 비록 클래스의 존재를 헤더 파일이 알리지만, 실질적 정의는 모두 소스 파일에 내포되어 있다. 헤더 파일의 선언과 소스 파일의 정의를 연동하기 위해서 `#include` 전처리기 지시문을 사용해야 한다.
+`.CPP` 확장자의 클래스 소스 파일은 클래스 헤더 파일에서 선언된 맴버 필드 및 메소드의 정의를 내포한다. 해당 클래스 맴버들의 실질적인 코드가 들어있으나, `#include` 지시문으로 클래스 헤더를 포함해서 맴버의 선언과 정의를 연동시켜야 한다.
 
 ```cpp
 /* "ClassName.cpp" 소스 파일 */
@@ -1840,14 +1861,12 @@ ClassName::ClassName(int arg1, float arg2)
    statements;
 }
 
-ClassName::~ClassName()
-{
+ClassName::~ClassName() {
    statements;
 }
 
-float ClassName::method(int arg3)
-{
-    return field1 + field2 - arg3;
+int ClassName::method(int arg) {
+    return field1 + field2 - arg;
 }
 ```
 
@@ -1861,8 +1880,8 @@ float ClassName::method(int arg3)
 /* 구조체 정의: 총 5바이트 활용 */
 struct STRUCTURE {
     /* 맴버 정의 */
-    int   field1;    // 자료형 크기: 4바이트
-    char  field2;    // 자료형 크기: 1바이트
+    int  field1;    // 자료형 크기: 4바이트
+    char field2;    // 자료형 크기: 1바이트
 };
 ```
 
@@ -1923,8 +1942,8 @@ ptr->field2 = 'A';
 ```cpp
 /* 익명 구조체 및 변수 정의 */
 struct {
-    int   field1;
-    char  field2;
+    int  field1;
+    char field2;
 } variable = {3, 'A'};
 ```
 
