@@ -1130,7 +1130,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 [구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 정의된 사용자 정의 자료형이다.
 
 ```c
-/* 구조체 정의: 총 5바이트 활용 */
+/* 구조체 정의: 총 8바이트 활용 */
 struct STRUCTURE {
     /* 맴버 정의 */
     int  field1;    // 자료형 크기: 4바이트
@@ -1175,6 +1175,9 @@ printf("%d\n%c", variable.field1, variable.field2);
 3
 A
 ```
+
+### 데이터 구조 정렬
+위의 예시 코드에서 `int` (4바이트) 및 `char` (1바이트) 자료형 맴버로 구성된 구조체가 사실상 8바이트 메모리 용량을 차지한다고 언급하였다. 이는 프로그래밍 언어가 아닌 시스템 프로세서 차원에서 메모리 접근 효율성을 높이기 위한 [데이터 구조 정렬](https://en.wikipedia.org/wiki/Data_structure_alignment)(data structure alignment)이 반영된 결과이다.
 
 ### 구조체 포인터
 구조체 포인터(structure pointer)는 구조체를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 구조체 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
