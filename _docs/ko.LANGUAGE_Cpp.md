@@ -1286,7 +1286,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 # C++: 클래스
 [클래스](https://en.cppreference.com/w/cpp/language/classes)(class)는 객체를 생성하는데 사용된다. 
 
-> 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수는 각각 필드(field)과 메소드(method)라고 불리며, 이를 통틀어 맴버(member)라고 칭하고 다음과 같이 접근한다.
+> 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수를 통틀어 맴버(member)라고 칭하는데, 이들은 각각 필드(field; 맴버 변수)과 메소드(method; 맴버 함수)라고 불리며 다음과 같이 접근한다.
 >
 > * **필드**: `instance.field`
 > * **메소드**: `instance.method()`
@@ -1299,7 +1299,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 > // variable이란 배열 객체의 "at()" 메소드를 사용하여 2 번째 인덱스 요소의 값을 반환한다.
 > ```
 
-클래스는 `class` 키워드를 사용하여 속성 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"이라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
+클래스는 `class` 혹은 `struct` 키워드를 사용하여 필드 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"이라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
 1. 변수와 함수가 하나의 객체로 결합된다.
 2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
@@ -1337,9 +1337,7 @@ int main () {
 ```
 
 ### 접근 지정자
-[접근 지정자](https://en.cppreference.com/w/cpp/language/access)(access specifier)는 외부로부터 맴버에 접근할 수 있는 권한을 지정한다.
-
-> C++ 프로그래밍 언어는 암묵적으로 `private`을 기본 접근 지정자로 갖는다.
+[접근 지정자](https://en.cppreference.com/w/cpp/language/access)(access specifier)는 외부로부터 맴버에 접근할 수 있는 권한을 지정한다. 여기서 `class`와 `struct` 키워드로 정의된 클래스는 기본 접근 지정자가 각각 `private` 및 `public`이라는 차이점을 갖는다.
 
 | 키워드     | 설명                                                  |
 | ----------- | ------------------------------------------------------------ |
@@ -1363,8 +1361,7 @@ std::cout << ptr->method(1);    // 출력: 4
 
 ```cpp
 /* 클래스 정의 */
-class CLASS {
-public:
+struct CLASS {
 
     /* 필드 맴버 */
     int   field1 = 2;
@@ -1444,8 +1441,7 @@ public:
 
 ```cpp
 /* 클래스 정의 */
-class CLASS {
-public:
+struct CLASS {
 
     /* 소멸자 */
     ~CLASS() {
@@ -1461,8 +1457,7 @@ public:
 
 ```cpp
 /* 클래스 정의 */
-class CLASS {
-public:
+struct CLASS {
 
     int   field1 = 2;
     float field2 = 3.14;
@@ -1486,8 +1481,7 @@ int CLASS::method(int arg) {
 
 ```cpp
 /* 클래스 정의 */
-class CLASS {
-public:
+struct CLASS {
 
     /* 정적 필드 및 메소드 선언 */
     static int field;
@@ -1550,8 +1544,7 @@ int main() {
 
 ```cpp
 /* 클래스 정의 */
-class CLASS {
-public:
+struct CLASS {
 
     int field1 = 2;
     float field2 = 3.14;
@@ -1576,8 +1569,7 @@ int main() {
 using namespace std;
 
 /* 기반 클래스 정의 */
-class BASECLASS {
-public:
+struct BASECLASS {
     
     BASECLASS() {
         cout << "생성자: 기반 클래스" << endl;
@@ -1596,9 +1588,8 @@ public:
 };
 
 /* 파생 클래스 정의 */
-class DERIVEDCLASS
-    : public BASECLASS {
-public:
+struct DERIVEDCLASS
+    : BASECLASS {
     
     DERIVEDCLASS() {
         cout << "생성자: 파생 클래스" << endl;
@@ -1641,8 +1632,7 @@ int main() {
 using namespace std;
 
 /* 기반 클래스 정의 */
-class BASECLASS {
-public:
+struct BASECLASS {
     
     BASECLASS() {
         cout << "생성자: 기반 클래스" << endl;
@@ -1661,9 +1651,8 @@ public:
 };
 
 /* 파생 클래스 정의 */
-class DERIVEDCLASS
-    : public BASECLASS {
-public:
+struct DERIVEDCLASS
+    : BASECLASS {
     
     DERIVEDCLASS() {
         cout << "생성자: 파생 클래스" << endl;
@@ -1701,9 +1690,9 @@ int main() {
 ```
 
 ### 상속 접근 지정자
-[접근 지정자](https://en.cppreference.com/w/cpp/language/access)에 따라 어떠한 기반 클래스 맴버가 파생 클래스로 상속될 것인지 결정된다.
+[접근 지정자](https://en.cppreference.com/w/cpp/language/access)에 따라 어떠한 기반 클래스 맴버가 파생 클래스로 상속될 것인지 결정된다. 여기서 `class`와 `struct` 키워드로 정의된 클래스는 기본 상속 접근 지정자가 각각 `private` 및 `public`이라는 차이점을 갖는다.
 
-> 어떠한 접근 지정자를 사용하더라도, 기반 클래스의 `private` 맴버는 상속되지 않으며 접근 불가하다.
+> 기반 클래스의 `private` 맴버는 절대로 상속되지 않으며 접근 불가하다.
 
 | 접근 지정자 | 설명                                           |
 | :---------: | ------------------------------------------------------------ |
