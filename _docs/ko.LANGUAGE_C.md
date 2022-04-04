@@ -1137,8 +1137,8 @@ for (int index = 0; index < sizeof(variable); index++) {
 /* 구조체 정의: 총 8바이트 활용 */
 struct STRUCTURE {
     /* 맴버 정의 */
-    int  field1;    // 자료형 크기: 4바이트
-    char field2;    // 자료형 크기: 1바이트
+    char  field1;    // 자료형 크기: 1바이트
+    int   field2;    // 자료형 크기: 4바이트
 };
 ```
 
@@ -1148,8 +1148,8 @@ struct STRUCTURE {
 
     ```c
   /* 구조체 변수 정의 1 */
-  struct STRUCTURE variable1 = {3, 'A'};
-  struct STRUCTURE variable2 = {.field2 = 'A', .field1 = 3};
+  struct STRUCTURE variable1 = {'A', 3};
+  struct STRUCTURE variable2 = {.field2 = 3, .field1 = 'A'};
     ```
 
 * 구조체 변수 선언 이후, 맴버 순서대로 데이터가 나열된 중괄호 `{}`를 구조체로 [캐스팅](#자료형-변환)하여 초기화한다.
@@ -1157,7 +1157,7 @@ struct STRUCTURE {
     ```c
   /* 구조체 변수 정의 2 */
   struct STRUCTURE variable;
-  variable = (struct STRUCTURE){3, 'A'};
+  variable = (struct STRUCTURE){'A', 3};
     ```
 
 * 구조체를 정의하는 동시에 구조체 변수를 정의한다.
@@ -1165,37 +1165,35 @@ struct STRUCTURE {
     ```c
   /* 구조체 및 변수 정의 */
   struct STRUCTURE {
-      int  field1;
-      char field2;
-  } variable = {3, 'A'};  
+      char  field1;
+      int   field2;
+  } variable = {'A', 3};  
     ```
 
 정의된 구조체 변수는 [객체 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `.`를 통해 구조체 맴버를 호출한다.
 
 ```c
-printf("%d\n%c", variable.field1, variable.field2);
+printf("%c\n%d", variable.field1, variable.field2);
 ```
 ```
-3
 A
+3
 ```
 
 ### 데이터 구조 정렬
-위의 예시 코드에서 `int` (4바이트) 및 `char` (1바이트) 자료형 맴버로 구성된 구조체가 사실상 8바이트 메모리 용량을 차지한다고 언급하였다. 이는 시스템 프로세서 차원에서 메모리 접근성을 위한 [데이터 구조 정렬](https://en.wikipedia.org/wiki/Data_structure_alignment)(data structure alignment)이 반영된 결과이다.
+위의 예시 코드에서 `char` (1바이트) 및 `int` (4바이트) 자료형 맴버로 구성된 구조체가 사실상 8바이트 메모리 용량을 차지한다고 언급하였다. 이는 시스템 프로세서 차원에서 메모리 접근성을 위한 [데이터 구조 정렬](https://en.wikipedia.org/wiki/Data_structure_alignment)(data structure alignment)이 반영된 결과이다.
 
-데이터의 메모리 주소가 데이터 크기의 배수로 자연스럽게 정렬(naturally aligned)되었을 때가 하드웨어 성능 효율이 가장 높다. 대체적으로 구조체 내의 맴버들이 정렬되는 간격은 자료형 크기와 일치하는 편이지만, 컴파일러 및 운영체제에 따라 그렇지 않는 일부 자료형이 존재한다 (예시로 8바이트 크기의 `double` 자료형은 32비트 원도우에서는 8바이트 정렬, 그리고 32비트 리눅스에서는 4바이트 정렬이다). 구조체는 모든 맴버를 수용할 수 있을 만큼의 메모리를 자료형 중에서 가장 큰 정렬 간격의 배수 크기로 할당하는데, 만일 맴버로 정렬 구간을 전부 채우지 못하면 나머지를 패딩으로 메꾼다.
+데이터의 메모리 주소가 데이터 크기의 배수로 자연스럽게 정렬(naturally aligned)되었을 때가 하드웨어 성능 효율이 가장 높다. 다양한 데이터 크기의 맴버를 가질 수 있는 구조체의 경우, 자료형마다 지정된 정렬 간격이 가장 큰 맴버를 기준으로 삼는다. 대체적으로 자료형 크기와 구조체 내의 맴버 간 정렬 간격은 일치하는 편이지만, 컴파일러 및 운영체제에 따라 그렇지 않는 일부 자료형이 존재한다: 8바이트 크기의 `double` 자료형의 정렬 간격은 32비트 원도우에서는 8바이트이지만, 32비트 리눅스에서는 4바이트이다.
 
-예시 코드로 돌아와서, 구조체는 맴버 중에서 정렬 간격이 4바이트로 가장 큰 `int` 자료형에 의해 메모리를 정렬 간격만큼씩 할당한다. 할당된 메모리에는 정의된 맴버를 순서대로 자연스러운 정렬을 만족시키면서 채워간다.
+구조체의 맴버가 `char` 및 `int` 자료형 순서로 구성되었을 시, 이들의 정렬 간격은 각각 1바이트와 4바이트로 가장 큰 후자의 배수만큼 해당 구조체의 메모리를 할당받는다. 단, 구조체의 맴버는 정의된 순서대로 메모리에 자연스럽게 정렬되어야 한다.
 
 ```c
-/* 구조체 맴버의 최대 정렬 간격: 4바이트 (int 자료형) */
-
 struct STRUCTURE {
 //------------------------------------
-    int  field1;      // 크기: 4바이트
+    char  field1;      // 크기: 1바이트
+//  char  Padding[3];  // 패딩: 3바이트
 //------------------------------------
-    char field2;      // 크기: 1바이트
-//  char Padding[3];  // 패딩: 3바이트
+    int   field2;      // 크기: 4바이트
 //------------------------------------
 };
 ```
@@ -1207,8 +1205,8 @@ struct STRUCTURE {
 /* 구조체 포인터 정의 */
 struct STRUCTURE *ptr = variable;
 
-ptr->field1 = 3;
-ptr->field2 = 'A';
+ptr->field1 = 'A';
+ptr->field2 = 3;
 ```
 
 ### 익명 구조체
@@ -1217,9 +1215,9 @@ ptr->field2 = 'A';
 ```c
 /* 익명 구조체 및 변수 정의 */
 struct {
-    int  field1;
-    char field2;
-} variable = {3, 'A'};
+    char  field1;
+    int   field2;
+} variable = {'A', 3};
 ```
 
 ## 공용체
@@ -1229,8 +1227,8 @@ struct {
 /* 공용체 정의: 총 4바이트 활용 */
 union UNION {    
     /* 맴버 정의 */
-    int  field1;    // 자료형 크기: 4바이트
-    char field2;    // 자료형 크기: 1바이트
+    char  field1;    // 자료형 크기: 1바이트
+    int   field2;    // 자료형 크기: 4바이트
 }
 ```
 
@@ -1245,7 +1243,7 @@ union UNION {
     ```c
   /* 공용체 변수 정의 1 */
   union UNION variable1 = {365};
-  union UNION variable2 = {.field2 = 'A', .field1 = 3};    // 결과: variable2 = {3};
+  union UNION variable2 = {.field2 = 365, .field1 = 'A'};    // 결과: variable2 = {321};
     ```
 
 * 공용체 변수 선언 이후, 맴버 순서대로 데이터가 나열된 중괄호 `{}`를 공용체로 [캐스팅](#자료형-변환)하여 초기화한다.
@@ -1261,23 +1259,23 @@ union UNION {
     ```c
   /* 공용체 및 변수 정의 */
   union UNION {
-      int  field1;
-      char field2;
+      char  field1;
+      int   field2;
   } variable = {365};  
     ```
 
 정의된 공용체 변수는 [객체 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `.`를 통해 공용체 맴버를 호출한다.
 
 ```c
-printf("%3d (%#010x)\n%3c (%#010x)", variable.field1, variable.field1,\
+printf("%3c (%#010x)\n%3d (%#010x)", variable.field1, variable.field1,\
                                      variable.field2, variable.field2);
 ```
 ```
-365 (0x0000016d)
   m (0x0000006d)
+365 (0x0000016d)
 ```
 
-첫 번째 내부 변수 `field1`은 4바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되는 반면, 두 번째 내부 변수 `field2`는 1바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 정수 109에 해당하는 ASCII 문자 'm'이 출력되었다.
+첫 번째 내부 변수 `field1`은 1바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 정수 109에 해당하는 ASCII 문자 'm'이 출력되는 반면, 두 번째 내부 변수 `field2`는 4바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되었다.
 
 ### 공용체 포인터
 공용체 포인터(union pointer)는 공용체를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 구조체 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
@@ -1296,8 +1294,8 @@ ptr->field2 = 'A';
 ```c
 /* 익명 공용체 및 변수 정의 */
 union {
-    int  field1;
-    char field2;
+    char  field1;
+    int   field2;
 } variable = {365};
 ```
 
