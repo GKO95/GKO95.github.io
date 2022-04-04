@@ -1873,8 +1873,8 @@ int ClassName::method(int arg) {
 /* 구조체 정의: 총 5바이트 활용 */
 struct STRUCTURE {
     /* 맴버 정의 */
-    int  field1;    // 자료형 크기: 4바이트
-    char field2;    // 자료형 크기: 1바이트
+    char  field1;    // 자료형 크기: 1바이트
+    int   field2;    // 자료형 크기: 4바이트
 };
 ```
 
@@ -1884,8 +1884,8 @@ struct STRUCTURE {
 
     ```cpp
   /* 구조체 변수 정의 1 */
-  STRUCTURE variable1 = {3, 'A'};
-  STRUCTURE variable2 = {.field2 = 'A', .field1 = 3};
+  STRUCTURE variable1 = {'A', 3};
+  STRUCTURE variable2 = {.field2 = 3, .field1 = 'A'};
     ```
 
 * 구조체 변수 선언 이후, 맴버 순서대로 데이터가 나열된 중괄호 `{}`로 초기화한다.
@@ -1893,7 +1893,7 @@ struct STRUCTURE {
     ```cpp
   /* 구조체 변수 정의 2 */
   STRUCTURE variable;
-  variable = {3, 'A'};
+  variable = {'A', 3};
     ```
 
 * 구조체를 정의하는 동시에 구조체 변수를 정의한다.
@@ -1903,7 +1903,7 @@ struct STRUCTURE {
   struct STRUCTURE {
       int  field1;
       char field2;
-  } variable = {3, 'A'};  
+  } variable = {'A', 3};  
     ```
 
 정의된 구조체 변수는 [객체 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `.`를 통해 구조체 맴버를 호출한다.
@@ -1912,8 +1912,8 @@ struct STRUCTURE {
 std::cout << variable.field1 << std::endl << variable.field2;
 ```
 ```
-3
 A
+3
 ```
 
 > 일부 C++ 소스 코드는 구조체 변수를 정의할 때 `struct` 키워드가 포함된 C 프로그래밍 구문을 사용하는데, 이는 C++11 이후부터 개정되어 더 이상 필요하지 않다.
@@ -1925,8 +1925,8 @@ A
 /* 구조체 포인터 정의 */
 STRUCTURE *ptr = &variable;
 
-ptr->field1 = 3;
-ptr->field2 = 'A';
+ptr->field1 = 'A';
+ptr->field2 = 3;
 ```
 
 ### 익명 구조체
@@ -1935,9 +1935,9 @@ ptr->field2 = 'A';
 ```cpp
 /* 익명 구조체 및 변수 정의 */
 struct {
-    int  field1;
-    char field2;
-} variable = {3, 'A'};
+    char  field1;
+    int   field2;
+} variable = {'A', 3};
 ```
 
 ## 공용체
@@ -1947,8 +1947,8 @@ struct {
 /* 공용체 정의: 총 4바이트 활용 */
 union UNION {    
     /* 맴버 정의 */
-    int  field1;    // 자료형 크기: 4바이트
-    char field2;    // 자료형 크기: 1바이트
+    char  field1;    // 자료형 크기: 1바이트
+    int   field2;    // 자료형 크기: 4바이트
 }
 ```
 
@@ -1963,7 +1963,7 @@ union UNION {
     ```cpp
   /* 공용체 변수 정의 1 */
   UNION variable1 = {365};
-  UNION variable2 = {.field2 = 'A', .field1 = 3};    // 결과: variable2 = {3};
+  UNION variable2 = {.field2 = 365, .field1 = 'A'};    // 결과: variable2 = {321};
     ```
 
 * 공용체 변수 선언 이후, 맴버 순서대로 데이터가 나열된 중괄호 `{}`로 초기화한다.
@@ -1979,8 +1979,8 @@ union UNION {
     ```cpp
   /* 공용체 및 변수 정의 */
   union UNION {
-      int  field1;
-      char field2;
+      char  field1;
+      int   field2;
   } variable = {365};  
     ```
 
@@ -1996,11 +1996,11 @@ cout << setw(3) << setfill(' ') << variable.field2 << " (0x" << hex
         << setw(sizeof(variable) * 2) << setfill('0') << static_cast<int>(variable.field2) << ")" << endl;
 ```
 ```
-365 (0x0000016d)
   m (0x0000006d)
+365 (0x0000016d)
 ```
 
-첫 번째 내부 변수 `field1`은 4바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되는 반면, 두 번째 내부 변수 `field2`는 1바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 정수 109에 해당하는 ASCII 문자 'm'이 출력되었다.
+첫 번째 내부 변수 `field1`은 1바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 정수 109에 해당하는 ASCII 문자 'm'이 출력되는 반면, 두 번째 내부 변수 `field2`는 4바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되었다.
 
 ### 공용체 포인터
 공용체 포인터(union pointer)는 공용체를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 구조체 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
@@ -2019,8 +2019,8 @@ ptr->field2 = 'A';
 ```cpp
 /* 익명 공용체 및 변수 정의 */
 union {
-    int  field1;
-    char field2;
+    char  field1;
+    int   field2;
 } variable = {365};
 ```
 
