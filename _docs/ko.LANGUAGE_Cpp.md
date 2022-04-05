@@ -235,15 +235,15 @@ World!
 ## 자료형
 [자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터의 내용물이 어떻게 표현되는지 결정하는 요소이며, C++ 프로그래밍 언어에서는 여러 자료형이 존재한다. 각 자료형마다 데이터를 표현하기 위해 필요한 바이트 크기가 정해져 있다.
 
-> [바이트](https://ko.wikipedia.org/wiki/바이트)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다. 이에 대한 설명은 잠시 후 설명한다.
+> [바이트](https://ko.wikipedia.org/wiki/바이트)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다.
 
-아래는 C++ 프로그래밍 언어가 갖는 자료형이다:
+아래는 C++ 프로그래밍 언어가 갖는 자료형의 일부이며, 더 많은 목록은 [여기](https://en.cppreference.com/w/cpp/language/types)에서 확인할 수 있다:
 
 | 식별자      | 자료형       | 설명                                                            |
 |----------|-----------|---------------------------------------------------------------|
-| `short`  | 정수        | 16비트 정수형<br />크기: 2바이트                                        |
-| `int`    | 정수        | 기본 정수형<br />크기: 2 또는 4바이트                                     |
-| `long`   | 정수        | 32비트 정수형<br />크기: 4바이트                                        |
+| `short`  | 정수        | 소형 정수<br />크기: 2바이트                                        |
+| `int`    | 정수        | 기본 정수<br />크기: 2 또는 4바이트                                     |
+| `long`   | 정수        | 대형 정수<br />크기: 4 또는 8바이트                                        |
 | `float`  | 부동소수점     | 32비트 단정밀도 실수<br />크기: 4바이트                                    |
 | `double` | 부동소수점     | 64비트 배정밀도 실수<br />크기: 8바이트                                    |
 | `char`   | 문자: `''`  | 단일 문자: `'A'` 및 `'?'`.<br />크기: 1바이트                           |
@@ -252,7 +252,11 @@ World!
 | `auto`   | 자동        | 적절한 자료형으로 자동 선택.<br />복잡한 자료형을 간략히 정의하는데 매우 유용하다.             |
 | `void`   | 보이드       | 불특정 자료형.<br />크기: 1바이트                                        |
 
-여기서 `int` 정수 자료형의 바이트 크기가 2 또는 4바이트라고 기입된 것을 주목한다. C++ 프로그래밍 언어 국제표준에 의하면 `int` 정수형은 "최소" 16비트(즉, 2바이트)를 가져야 한다고 명시되어 있다. 이전 컴퓨터가 16비트 시스템이었다는 점을 감안한 것으로, 현재는 32비트 시스템에 맞게 대중적으로 4바이트 크기를 갖는다.
+아래는 C++ 프로그래밍 언어 자료형에 대한 추가적인 설명이다.
+
+* `int` 정수 자료형은 C/C++ 프로그래밍 언어 국제표준에 의하면 최소 크기가 16비트, 즉 2바이트로 명시되어 있다. 이는 16비트 시스템의 [워드](https://ko.wikipedia.org/wiki/워드_(컴퓨팅))(word)에서 감안된 것으로, 현재는 [마이크로컨트롤러](/docs/ko.Microcontroller) 등의 임베디드 시스템을 제외한 32비트 (및 64비트) 시스템에 맞게 대중적으로 4바이트 크기를 갖는다.
+
+* `long` 정수 자료형은 C/C++ 프로그래밍 언어 국제표준에 의하면 최소 크기가 32비트, 즉 4바이트로 명시되어 있다. 그러므로 32비트 (및 16비트) 시스템에서는 4바이트, 그리고 64비트 시스템에서는 8바이트 크기를 갖는다.
 
 ### `unsigned` 키워드
 `unsigned` 키워드는 자료형 중에서 [최상위 비트](https://ko.wikipedia.org/wiki/최상위_비트)를 정수의 [부호](https://ko.wikipedia.org/wiki/Signed와_unsigned)를 결정하는 요소로 사용하지 않도록 한다. 아래의 16비트 정수형인 `short`는 원래 최상위 비트를 제외한 나머지 15개의 비트로 정수를 표현한다. `unsigned` 키워드를 사용하면 음의 정수를 나타낼 수 없지만, 16개의 비트로 양의 정수를 더 많이 표현할 수 있다.
@@ -295,7 +299,7 @@ variable = 3;
 int variable1 = 3, variable2 = 4, variable3;
 ```
 
-변수의 "선언(declaration)"은 메모리 할당 여부와 관계없이 컴파일러에게 해당 변수의 존재성을 알리는 행위이다. 그러나 이미 변수를 정의하는 과정에서 컴파일러에게 변수의 존재를 알리는 과정이 있는데, 이 또한 변수의 선언이다. 그러므로 C/C++ 프로그래밍 언어 [ISO 표준](https://www.iso.org/standard/68564.html)의 § 3.1.2 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 본다. 단, 몇 가지의 특이사항이 존재한다.
+변수의 "선언(declaration)"은 메모리 할당 여부와 관계없이 컴파일러에게 해당 변수의 존재성을 알리는 행위이다. 그러나 이미 변수를 정의하는 과정에서 컴파일러에게 변수의 존재를 알리는 과정이 있는데, 이 또한 변수의 선언이다. 그러므로 C/C++ 프로그래밍 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarations and definitions 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 본다. 단, 몇 가지의 특이사항이 존재한다.
 
 * 함수 및 클래스 전방선언
 * 함수 및 템플릿 매개변수 선언
@@ -305,7 +309,7 @@ int variable1 = 3, variable2 = 4, variable3;
 * `typedef` 선언
 * 기타 등등
 
-차후에 소개할 `extern` 키워드는 변수를 선언만 하고 정의하지 않으므로 데이터를 저장할 메모리가 할당되지 않는다. 이러한 변수에 데이터를 저장하거나 호출하려는 행위는 시스템 오류를 야기하므로 컴파일이 불가하다. Visual C++ 컴파일러에서는 [`LNK1120`](https://docs.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-error-lnk1120?view=msvc-170) 오류의 원인이 된다.
+차후에 소개할 `extern` 키워드는 변수를 선언만 하고 정의하지 않으므로 데이터를 저장할 메모리가 할당되지 않는다. 이러한 변수에 데이터를 저장하거나 호출하려는 행위는 시스템 오류를 야기하므로 컴파일이 불가하다. Visual C++ 컴파일러에서는 [`LNK1120`](https://docs.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-error-lnk1120) 오류의 원인이 된다.
 
 > 위에서 언급한 선언과 정의에 대한 설명은 C/C++ 프로그래밍 언어에서 매우 중요한 개념이지만 프로그래밍 입문자들에게 쉽게 간과되는 내용이다.
 
@@ -453,7 +457,7 @@ static_cast<double>(variable);
 ```
 
 ### `const_cast` 연산자
-[`constant_cast`](https://en.cppreference.com/w/cpp/language/const_cast) 연산자는 상수 전용 자료형 캐스팅 연산자이며, 상수의 자료형 이외에도 값 또한 [참조](#참조)를 통해 변경할 수 있다.
+[`const_cast`](https://en.cppreference.com/w/cpp/language/const_cast) 연산자는 상수 전용 자료형 캐스팅 연산자이며, 상수의 자료형 이외에도 값 또한 [참조](#참조)를 통해 변경할 수 있다.
 
 ```cpp
 const int A = 3;                 // 변환 이전: A = 3
@@ -462,7 +466,7 @@ int *B = const_cast<int *>(&A);
 ```
 
 ### `dynamic_cast` 연산자
-[`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast) 연산자는 [다형성](#다형성)(polymorphism)을 처리하는데 사용되는 자료형 캐스팅 연산자이다. 클래스 및 객체 변환을 위한 것으로 해당 내용은 [클래스](#c-클래스)에서 자세히 설명한다.
+[`dynamic_cast`](https://en.cppreference.com/w/cpp/language/dynamic_cast) 연산자는 [클래스](#c-클래스) 혹은 [객체](#c-클래스)의 [다형성](#다형성)(polymorphism)을 처리하는데 사용되는 자료형 캐스팅 연산자이다.
 
 ```cpp
 derivedClass *A = new derivedClass;
@@ -470,7 +474,7 @@ baseClass *B = dynamic_cast<baseClass *>(A);
 ```
 
 ### `reinterpret_cast` 연산자
-[`reinterpret_cast`](https://en.cppreference.com/w/cpp/language/reinterpret_cast) 연산자는 포인터를 다른 자료형의 포인터로 변환하는데 사용되는 자료형 캐스팅 연산자이다. 차후 [포인터](#c-포인터)에 대하여 자세히 설명할 예정이다.
+[`reinterpret_cast`](https://en.cppreference.com/w/cpp/language/reinterpret_cast) 연산자는 [포인터](#c-포인터)를 다른 자료형의 포인터로 변환하는데 사용되는 자료형 캐스팅 연산자이다.
 
 ```cpp
 int *variable = 3
@@ -536,8 +540,8 @@ reinterpret_cast<double *>(variable)
 
 | 연산자  | 논리  | 설명                                        |
 |:----:|-----|-------------------------------------------|
-| `&&` | 논리곱 | 모든 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`를 반환한다.     |
-| `||` | 논리합 | 하나 이상의 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`를 반환한다. |
+| `&&` | 논리곱 | 모든 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`을 반환한다.     |
+| `||` | 논리합 | 하나 이상의 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`을 반환한다. |
 | `!`  | 보수  | 참을 거짓으로, 또는 거짓을 참으로 변경한다.                 |
 
 ## 탈출 문자
@@ -558,8 +562,7 @@ World!
 `if` 조건문은 조건 혹은 논리가 참(`true`)일 경우 코드를 실행하며, 거짓(`false`)일 경우에는 코드를 실행하지 않는다.
 
 ```cpp
-if (condition)
-{
+if (condition) {
     statements;
 }
 
@@ -571,12 +574,10 @@ if (condition) statement;
 `else` 조건문은 단독으로 사용될 수 없으며 반드시 `if` 조건문 이후에 사용되어야 한다. 조건부가 거짓(`false`)으로 판정되면 실행할 코드를 포함한다.
 
 ```cpp
-if (condition)
-{
+if (condition) {
     statements;
 }
-else
-{
+else {
     statements; 
 }
 ```
@@ -585,35 +586,29 @@ else
 `else if` 조건문은 `else`와 `if` 조건문의 조합으로 이전 조건이 거짓(`false`)일 때 새로운 조건을 제시한다.
 
 ```cpp
-if (condition)
-{
+if (condition) {
     statements;
 }
-else if (condition)
-{
+else if (condition) {
     statements;
 }
-else
-{
+else {
     statements;
 }
 ```
 
 ## 조건 연산자
-조건 연산자(ternary operator; `?:`)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다.
+[조건 연산자](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator)(ternary operator) `?:`는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
 
 ```cpp
 condition ? true_return : false_return;
 ```
 
-조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
-
 ## `switch` 조건문
 `switch` 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
 
 ```cpp
-switch (argument)
-{
+switch (argument) {
 case value1:
     statements;
     break;
@@ -637,8 +632,7 @@ default:
 int variable = 2;
 
 // switch 조건문의 동작 예시
-switch (variable)
-{
+switch (variable) {
 case 1:
     std::cout << "Statement 1" << std::endl;
 
@@ -659,11 +653,10 @@ Statement 4
 ```
 
 ## `while` 반복문
-`while` 반복문은 조건 혹은 논리가 참(`true`)일 동안 코드를 반복적으로 실행하며, 거짓(`false`)일 경우에는 반복문을 종료한다.
+`while` 반복문은 조건 혹은 논리가 참일 동안 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다.
 
 ```cpp
-while (condition)
-{
+while (condition) {
     statements;
 }
 
@@ -675,24 +668,22 @@ while (condition) statement;
 `do`-`while` 반복문은 코드를 우선 실행하고 조건 혹은 논리가 참(`true`)일 경우 코드를 반복하며, 거짓(`false`)일 경우에는 반복문을 종료한다.
 
 ```cpp
-do
-{
+do {
     statements;
 } while (condition);
 ```
 
 ### `break` 문
-`break` 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
+[`break`](https://en.cppreference.com/w/cpp/language/break) 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
 
 ### `continue` 문
-`continue` 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
+[`continue`](https://en.cppreference.com/w/cpp/language/continue) 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
 
 ## `for` 반복문
 `for` 반복문은 조건 혹은 논리가 참(`true`)일 동안 코드를 반복적으로 실행하며, 거짓(`false`)일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
 
 ```cpp
-for (initialize; condition; increment)
-{
+for (initialize; condition; increment) {
     statements;
 }
 
@@ -703,11 +694,10 @@ for (initialize; condition; increment) statement;
 `for` 반복문의 우선 `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한 다음 `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, `condition`으로 돌아가 절차를 반복한다.
 
 ### 범위형 `for` 반복문
-C++11부터 범위형 `for` 반복문이 새로 소개되었으며, 조건 만족 여부가 아닌 주어진 범위 내에서만 반복한다. 범위로 사용되는 데이터는 요소를 하나씩 나열할 수 있는 [시퀀스 컨테이너](#c-컨테이너)(sequence container)를 일반적으로 사용한다.
+C++11부터 범위형 `for` 반복문이 새로 소개되었으며, 조건 만족 여부에 따라 반복하는 게 아니라 주어진 범위 내에서 반복한다. 일반적으로 데이터 요소를 하나씩 나열할 수 있는 [시퀀스 컨테이너](#c-컨테이너)가 범위로 사용된다.
 
 ```cpp
-for (element : container)
-{
+for (element : container) {
 	statements;
 }
 
@@ -734,12 +724,12 @@ label:
 단, `goto` 이동문을 사용할 때에는 매우 조심해야 하며 무리한 남용은 [스파게티 코드](https://ko.wikipedia.org/wiki/스파게티_코드)의 원인이 된다.
 
 # C++: 컨테이너
-C++ 프로그래밍 언어는 여러 데이터를 하나의 변수에 저장하는 컨테이너(container)를 생성할 수 있다. 컨테이너는 여러 데이터를 한 번에 관리하는 편리성을 제공하여, 그 중에서 저장된 데이터가 순번을 가지는 컨테이너를 시퀀스 컨테이너(sequence container)라고 부른다. 본 장에서는 가장 흔히 사용되는 시퀀스 컨테이너를 중점으로 설명한다.
+C++ 프로그래밍 언어는 다수의 데이터를 변수 하나로 저장하는 [컨테이너](https://en.cppreference.com/w/cpp/container)(container)를 제공한다. 그 중에서 저장된 다수의 데이터, 일명 요소가 순번을 가지는 컨테이너를 [시퀀스 컨테이너](https://en.cppreference.com/w/cpp/container#Sequence_containers)(sequence container)라고 부른다. 본 장은 가장 흔히 사용되는 시퀀스 컨테이너를 중점으로 설명한다.
 
 ## 배열
 [배열](https://en.cppreference.com/w/cpp/language/array)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 정의 시 식별자 뒤에는 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 `size`를 [정수 리터럴](https://en.cppreference.com/w/cpp/language/integer_literal)(integer literal)이나 [상수](#상수)로 지정한다. 한 번 정의된 배열의 크기는 변경이 불가하다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 초기 데이터 개수는 배열 용량을 초과해서는 안되지만, 반면에 데이터 개수가 용량을 미치지 못하면 나머지는 `0` 혹은 `NULL`로 초기화된다.
 
-```c
+```cpp
 /* 배열 정의 1 */
 int arr[size] = {value1, value2, ... };
 
@@ -769,7 +759,7 @@ arr[1] = value2;
 arr[2] = value3;
 ```
 ### 배열의 크기
-`sizeof()` 함수가 배열에 사용되면 배열의 크기가 아닌, 배열이 차지하는 총 바이트 수를 반환한다. 배열의 각 요소마다 자료형만큼 메모리를 차지하므로 배열의 크기를 구하기 위해서는 다음과 같은 표현식을 사용한다. 자료형의 요소들로 구성된 배열을 해당 자료형으로 나누면 요소의 개수가 계산된다.
+`sizeof` 연산자가 배열에 사용되면 배열의 크기가 아닌, 배열이 차지하는 총 바이트 수를 반환한다. 배열의 각 요소마다 자료형만큼 메모리를 차지하므로 배열의 크기를 구하기 위해서는 다음과 같은 표현식을 사용한다. 자료형의 요소들로 구성된 배열을 해당 자료형으로 나누면 요소의 개수가 계산된다.
 
 ```cpp
 int arr[3];
@@ -790,24 +780,55 @@ int arr[][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 ```
 
 ## 배열 클래스
-[배열 클래스](https://en.cppreference.com/w/cpp/container/array)(array class)는 C 형식의 일반 배열과 기술적으로 동일하여 성능 차이가 없다. 단, 배열 클래스는 C++ 표준 라이브러리에서 추가로 제공하는 속성을 덕분에 접근성과 순차성이 훨씬 뛰어나 범위형 `for` 반복문과 같이 순차성이 요구되는 코드에 활용될 수 있다. 배열 클래스를 사용하기 위해서는 `<array>` 헤더를 추가해야 한다.
+[배열 클래스](https://en.cppreference.com/w/cpp/container/array)(array class)는 `<array>` 헤더로부터 제공되는 배열이며, 기술적인 방면에서 일반 [배열](#배열)과 동일하지만 C++ 표준 라이브러리에서 지원하는 추가 속성 덕분에 각 요소에 대한 접근성이 수월하다. 이러한 특성은 [범위형 `for` 반복문](#범위형-for-반복문)과 같이 순차성이 요구되는 코드에서 활용되는데 적합하다.
 
 ```cpp
 #include <array>
 
-// 배열 정의: C++ 표준 라이브러리
+/* 배열 정의: C++ 배열 클래스 */
 std::array<int, 3> arr;
 ```
 
 ## 벡터 클래스
-[벡터 클래스](https://en.cppreference.com/w/cpp/container/vector)(vector class)는 크기를 언제든지 변경할 수 있는 스퀀스 컨테이너이다. 배열과 달리, 벡터의 요소들은 개발자가 직접 할당해야 하는 별도의 [메모리 영역](#힙-영역)에 저장되기 때문에 크기 변경이 가능하다. 다행이 벡터 클래스를 사용하기 위한 메모리 할당은 시스템에서 자동적으로 처리하므로 아무런 염려없이 사용하도록 한다. 단, 처리 속도는 배열보다 상대적으로 느리다는 단점이 있다.
+[벡터 클래스](https://en.cppreference.com/w/cpp/container/vector)(vector class)는 `<vector>` 헤더로부터 제공되는 크기를 가변할 수 있는 스퀀스 컨테이너이다.
+
+> 배열의 데이터는 스택 영역에 저장되는 반면, 벡터는 힙 영역에 저장하기 때문에 크기 변경이 가능하다. 이에 대한 내용은 [메모리 관리](#c-메모리-관리)에서 설명한다.
+
+비록 유연하다는 장점이 있으나, 배열에 비해 상대적으로 처리 속도가 느리다는 단점을 지닌다.
 
 ```cpp
 #include <vector>
 
-// 벡터 정의
+/* 벡터 정의: C++ 벡터 클래스 */
 std::vector<int> vec;
 ```
+
+## 문자열
+C/C++ 프로그래밍 언어는 일련의 문자들, 일명 [문자열](https://en.cppreference.com/w/cpp/string/byte)(string)을 한 개 이상의 `char` 문자들과 널 문자 `\0`로 구성된 배열로 표현할 수 있으며, 이를 "C 형식 문자열(C-style string)"이라고 부른다.
+
+```cpp
+/* C 형식 문자열 */
+char arr[] = "Hello";    // 즉, arr[] = {'H', 'e', 'l', 'l', 'o', '\0'};
+char* ptr = "World!";    // 포인터를 활용한 문자열 표현 방법
+```
+
+아래는 C 표준 라이브러리에서 제공하는 문자열과 관련된 함수들의 목록이다. 단, 이들을 사용하기 위해서는 [`cstring`](https://en.cppreference.com/w/cpp/header/string) 헤더를 추가해야 한다.
+
+| 함수   | 예시               | 설명                                                  |
+|:----------:| --------------------- | ------------------------------------------------------------ |
+| `strcat()` | `strcat(str1, str2);` | 문자열 `str2`를 문자열 `str1` 뒤에 덧붙인다.   |
+| `strcpy()` | `strcpy(str1, str2);` | 문자열 `str2`을 문자열 `str1`에 복사한다.                |
+| `strlen()` | `strlen(str);`        | 문자열 `str` 크기를 반환하며, 이때 널 문자는 제외된다. |
+
+### 문자열 자료형
+C++ 표준 라이브러리는 `iostream` (혹은 `string`) 헤더로부터 자체적으로 문자열 자료형 `std::string`을 제공한다. 문자열 자료형은 흔히 문자열 [객체](#c-클래스)(string object)라고도 부른다.
+
+```cpp
+/* C++ 문자열 자료형 */
+std::string variable = "Hello World!";
+```
+
+문자열 자료형은 매우 편리하지만, [윈도우 API](https://ko.wikipedia.org/wiki/윈도우_API) 또는 [POSIX](https://ko.wikipedia.org/wiki/POSIX) 등의 운영체제 API를 사용할 경우에는 불가피하게 C 형식 문자열을 사용해야 할 경우가 흔히 발생한다.
 
 # C++: 함수
 함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
@@ -828,8 +849,7 @@ std::cout << std::round(variable);
 
 ```cpp
 /* 함수 정의 */
-void function()
-{
+void function() {
     std::cout << 1 + 2;
 }
 
@@ -847,8 +867,7 @@ void function();
 function();
 
 /* 함수 정의 */
-void function()
-{
+void function() {
     std::cout << 1 + 2;
 }
 ```
@@ -858,8 +877,7 @@ void function()
 * `function()`은 함수에 정의된 코드를 실행한다.
 
     ```cpp
-  void function()
-  {
+  void function() {
       std::cout << 1 + 2 << std::endl;
   }
 
@@ -873,8 +891,7 @@ void function()
 * `function`은 함수의 [메모리 주소](#c-포인터)를 가리킨다.
 
     ```cpp
-  void function()
-  {
+  void function() {
       std::cout << 1 + 2 << std::endl;
   }
 
@@ -892,8 +909,7 @@ void function()
 
 ```cpp
 // return 반환문이 있는 사용자 정의 함수
-int function()
-{
+int function() {
     printf("Hello World!\n");
     return 3;
 }
@@ -911,63 +927,62 @@ Hello World!
 * **전달인자 (argument)**: 전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.
 * **매개변수 (parameter)**: 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호 `()` 내에서 이루어진다.
 
-매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+> 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+
+다음은 매개변수에 사용되는 연산자로 전달인자을 받는데 유연성을 제공한다. 이들은 프로그래밍 구문상 명확한 구별이 가능해야 하므로 반드시 일반 매개변수 뒤에 위치해야 한다.
 
 | 연산자 | 구문          | 설명                                                            |
 |:---:|:-----------:|---------------------------------------------------------------|
-| `=` | `arg=value` | 전달인자가 없으면 기본값 `value`가 대신 매개변수에 할당된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
-
-아래의 예제는 함수의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
+| `=` | `arg=value` | 전달인자가 없으면 기본값 `value`가 대신 매개변수에 할당된다. |
 
 ```cpp
 /* 함수 프로토타입 */
-int function(int arg1, float arg2);
+int function(int arg1, float arg2 = 2.0);
 
 /* 함수 호출 */
-function(1);            // >> 출력: 3
-function(1, 3.14);      // >> 출력: 4 ( = 1 + 3.14의 정수형만 추출)
+function(1);            // 반환: 3
+function(1, 3.14);      // 반환: 4 (= 1 + 3.14의 정수만 추출)
 
 /* 함수 정의 */
-int function(int arg1, float arg2 = 2.0)
-{
+int function(int arg1, float arg2) {
     return arg1 + arg2;
 }
 ```
 
-배열은 위와 동일한 구문으로 인자를 매개변수로 건네줄 수 없으며, 인자를 전달하는 방법으로 두 가지가 존재한다: 매개변수를 배열 혹은 메모리 주소(즉, 포인터)를 받을 변수로 선언하는 것이다.
+배열은 위와 동일한 구문으로 인자를 매개변수로 건네줄 수 없으며, 아래의 두 가지 방법이 존재한다:
 
-```cpp
-void function(int arg[]);
+* 매개변수를 배열로 선언한다.
 
-int arr[3] = {value1, value2, value3};
-function(arr);              // 배열을 함수의 인자로 넘겨준다.
+    ```cpp
+  void function(int arg[]);
+  
+  int arr[3] = {value1, value2, value3};
+  function(arr);              // 배열을 함수의 인자로 넘겨준다.
+  
+  // 넘겨받은 인자를 배열 그대로 받아들인다.
+  void function(int arg[]) {
+      statements;
+      return;
+  }
+    ```
 
-// 넘겨받은 인자를 배열 그대로 받아들인다.
-void function(int arg[])
-{
-    statements;
-    return;
-}
-```
-----
-```cpp
-void function(int *arg);
+* 매개변수를 [포인터](#c-포인터)로 선언한다. 배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오기 때문에 가능하다. 특히 배열의 각 요소가 할당된 메모리 주소는 연쇄적이므로, 바로 옆 (`int` 정수형이면 +4) 메모리 주소에는 배열의 다음 요소가 저장된 메모리 공간이다. 
 
-int arr[3] = {value1, value2, value3};
-function(arr);              // 배열을 함수의 인자로 넘겨준다.
-
-// 넘겨받은 인자를 배열이 아닌 포인터로 받아들인다.
-void function(int *arg)
-{
-    statements;
-    return;
-}
-```
-
-후자의 방법이 가능한 이유는 배열 자체를 호출하면 배열의 첫 번째 요소의 메모리 주소를 가져오기 때문이다. 특히 배열의 각 요소가 할당된 메모리 주소는 연쇄적이므로, 바로 옆 (`int` 정수형이면 +4) 메모리 주소에는 배열의 다음 요소가 저장된 메모리 공간이다.  자세한 내용은 차후 [포인터](#c-포인터)를 다룰 때 소개한다.
+    ```cpp
+  void function(int *arg);
+  
+  int arr[3] = {value1, value2, value3};
+  function(arr);              // 배열을 함수의 인자로 넘겨준다.
+  
+  // 넘겨받은 인자를 배열이 아닌 포인터로 받아들인다.
+  void function(int *arg) {
+      statements;
+      return;
+  }
+    ```
 
 ### 정적 변수
-정적 변수(static variable)는 프로그램이 실행되는 동안 함수를 탈출하여도 데이터가 소멸되지 않고 보존되는 `static` 키워드의 특수한 지역 변수이다. 해당 함수를 다시 호출하면 함수 종료 직전의 데이터를 그대로 이어서 사용할 수 있다.
+[정적 변수](https://en.cppreference.com/w/cpp/language/storage_duration#Static_local_variables)(static variable)는 프로그램이 실행되는 동안 함수를 탈출하여도 데이터가 소멸되지 않고 보존되는 `static` 키워드의 특수한 지역 변수이다. 해당 함수를 다시 호출하면 함수 종료 직전의 데이터를 그대로 이어서 사용할 수 있다.
 
 ```cpp
 int main() {
@@ -980,21 +995,22 @@ int main() {
 ```
 
 ## 함수 오버로딩
-함수 오버로딩(function overloading)은 동일한 이름의 함수가 전달받은 인자의 자료형 및 개수에 따라 달리 동작하는 것을 의미한다. 오버로딩 함수들은 동일한 자료형과 식별자가 지정되지만 제각각의 정의를 가진다.
+[함수 오버로딩](https://ko.wikipedia.org/wiki/함수_오버로드)(function overloading)은 동일한 이름 및 반환 자료형을 갖는 함수가 전달받은 인자의 자료형 및 개수에 따라 달리 동작하는 것을 의미한다. 이들은 각 인자 전달의 경우에 따라 제각각의 정의를 갖는다.
 
 ```cpp
-float function(int arg1, float arg2);		// 오버로딩된 함수의 프로토타입 1
-float function(float arg1, float arg2);		// 오버로딩된 함수의 프로토타입 2
+/* 오버로딩된 함수의 프로토타입 */
+float function(int arg1, float arg2);
+float function(float arg1, float arg2);
 
-function(1, 3.0);		// >> 출력: 4.0
-function(1.0, 3.0);		// >> 출력: -2.0
+function(1, 3.0);		// 반환: 4.0
+function(1.0, 3.0);		// 반환: -2.0
 
-// 오버로딩된 함수의 정의 1
+/* 오버로딩된 함수의 정의 1 */
 float function(int arg1, float arg2) {
 	return arg1 + arg2;
 }
 
-// 오버로딩된 함수의 정의 2
+/* 오버로딩된 함수의 정의 2 */
 float function(float arg1, float arg2) {
 	return arg1 - arg2;
 }
@@ -1004,9 +1020,8 @@ float function(float arg1, float arg2) {
 [진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)는 프로그램이 시작되는 부분을 의미하며, C++ 프로그래밍 언어의 경우 [`main()`](https://en.cppreference.com/w/cpp/language/main_function) 함수에서부터 코드가 실행된다. 진입점은 프로토타입 및 호출이 존재하지 않으며, 유일해야 하므로 복수의 `main()` 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
 
 ```cpp
-int main(int argc, char **argv)
-{
-    // 아래에 코드를 입력하세요.
+/* C++ 프로그래밍 언어 진입점: main() */
+int main(int argc, char **argv) {
 
     return 0;
 }
@@ -1014,7 +1029,7 @@ int main(int argc, char **argv)
 
 > 본 문서의 대부분 코드 예시에는 `main()` 함수가 직접 언급되지 않았으나, 전역 변수와 함수를 제외한 모든 코드들은 `main()` 함수 내에서 작성되어야만 실행된다.
 
-C++ 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을 반환해야 하며, `EXIT_SUCCESS`(혹은 정수 `0`) 그리고 `EXIT_FAILURE`이 있다. 만일 반환문이 없을 시, 컴파일러는 자동적으로 `return 0;` 문장을 `main()` 함수의 말단에 삽입한다.
+C/C++ 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을 반환해야 하며, `EXIT_SUCCESS`(혹은 정수 `0`) 그리고 `EXIT_FAILURE`이 있다. 만일 반환문이 없을 시, 컴파일러는 자동적으로 `return 0;` 문장을 `main()` 함수의 말단에 삽입한다.
 
 `main()` 진입점은 아래와 같은 매개변수를 함축적으로 가진다.
 
@@ -1032,9 +1047,7 @@ C++ 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `int
 | 데이터:   | 3      | `./app.exe` | `option1` | `option2` |
 
 ### `WinMain()` 함수
-> *참조: [Microsoft Docs Win32 설명서 - WinMain() 함수 (영문)](https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain)*
-
-`WinMain()` 함수는 Win32나 MFC와 같은 GUI 프레임워크 어플리케이션의 진입점이다.
+[`WinMain()`](https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain) 함수는 [Win32](https://ko.wikipedia.org/wiki/윈도우_API) 또는 [MFC](/docs/ko.MFC)와 같은 GUI 프레임워크 어플리케이션의 진입점이다. 본 진입점의 핵심은 마우스 클릭이나 키보드 입력 등으로 발생된 메시지를 수신받아 이를 처리할 함수로 전달하는 [메시지 루프](https://ko.wikipedia.org/wiki/이벤트_루프)(Message Loop)에 있다.
 
 ```cpp
 int WinMain(HINSTANCE 	hInstance,
@@ -1050,14 +1063,10 @@ int WinMain(HINSTANCE 	hInstance,
 }
 ```
 
-`WinMain()` 함수의 핵심 기능은 마우스 클릭이나 키보드 입력 등으로 발생된 메시지를 수신받아 해당 메시지를 처리할 수 있는 함수로 전달하는데, 이를 메시지 루프(Message Loop)라고 부른다. MFC 프레임워크를 활용한 프로그래밍은 [*APPLICATION_MFC*](/docs/ko.MFC) 문서에서 확인할 수 있다.
-
-`WM_QUIT` 메시지를 수신하면 진입점의 메시지 루프를 탈출하고 `WM_QUIT`의 *wParam* 매개변수를 반환하며 어플리케이션을 종료한다. 만일 메시지 루프 진입에 실패하였을 시 `return 0;` 문장이 실행되어 프로그램을 즉시 종료한다.
+진입점의 메시지 루프는 `WM_QUIT` 메시지를 수신할 때까지 지속적으로 어플리케이션 구동에 필요한 메시지 수신 및 분배가 이루어진다. 만일 메시지 루프 진입에 실패하면 진입점의 `return` 반환문에 의해 프로그램이 즉시 종료된다.
 
 ### `DllMain()` 함수
-> *참조: [Microsoft Docs Win32 설명서 - DllMain() 함수 (영문)](https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain)*
-
-`DllMain()` 함수는 `.dll` 확장자를 가지는 동적링크 라이브러리의 진입점이다.
+[`DllMain()`](https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain) 함수는 `.DLL` 확장자를 가지는 [동적 링크 라이브러리](#라이브러리)의 진입점이다.
 
 ```cpp
 int DllMain(_In_ HINSTANCE hinstDLL,
@@ -1078,15 +1087,13 @@ int DllMain(_In_ HINSTANCE hinstDLL,
 
 ```cpp
 /* 호출 함수 */
-float calling(float (*function)(int, float), int arg)
-{
+float calling(float (*function)(int, float), int arg) {
     // 콜백 함수의 호출
     return function(arg, 3.14159);
 }
 
 /* 콜백 함수 */
-float callback(int arg1, float arg2)
-{
+float callback(int arg1, float arg2) {
     return (float)arg1 + arg2;
 }
 
@@ -1097,12 +1104,11 @@ std::cout << calling(callback, 1);
 ```
 
 ## 재귀 함수
-[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없을 시, 재귀는 무한히 발생하여 메모리 부족으로 프로세스 충돌이 발생한다.
+[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
 
 ```cpp
 /* 예제: 펙토리얼 "!" */
-int factorial(int num)
-{
+int factorial(int num) {
     // 기저 조건: 재귀로부터 탈출하는 조건
     if (num == 1)
         return (1);
@@ -1112,58 +1118,44 @@ int factorial(int num)
 ```
 
 # C++: 포인터
-포인터란 용어는 [자료형 변환](#자료형-변환)을 다루기 시작할 때부터 "포인터"라는 새로운 데이터가 소개되어 자주 언급되었다. 포인터는 C++ 프로그래밍 언어에서 매우 중요한 개념 중 하나로써 더 발전된 프로그램 개발을 가능케 한다. 그러므로 이번 장에서는 포인터에 대한 설명과 이전 장에서 소개된 배열과 함수를 포인터를 활용한 심화된 처리 방식을 소개하려 한다.
+[포인터](https://en.cppreference.com/w/cpp/language/pointer)(pointer)는 변수가 저장된 메모리 주소를 저장하는 변수이다. 32비트와 64비트 운영체제에서 하나의 메모리 주소는 각각 4바이트(십육진수 8자리)와 8바이트(십육진수 16자리) 크기를 가진다. 포인터를 정의할 때 일반 변수처럼 자료형이 요구되나 그 뒤에는 별표 `*`가 있어야 한다. 변수의 메모리 주소는 참조 연산자 `&`로 반환받는다.
 
-## 포인터
-포인터(pointer)는 변수에 저장된 값이 아닌, 변수가 저장된 메모리 주소를 가리키는 데이터이다. 32비트와 64비트 운영체제에서 하나의 메모리 주소는 각각 4바이트(십육진수 8자리)와 8바이트(십육진수 16자리) 크기를 가진다. 포인터 데이터 또한 변수에 저장할 수 있으며, 일반 변수와 마찬가지로 포인터 변수를 정의할 때 자료형이 요구되나 별표 `*`가 자료형과 식별자 사이에 위치해야 한다.
+```c
+/* 포인터 정의 */
+int *ptr = &variable;
+```
+
+> 십육진수의 메모리 주소는 수기로 직접 작성하는 것이 아니며, 이는 매우 위험한 행위이다! 접근하려는 데이터의 메모리 주소가 항상 같을거란 보장이 없기 때문이다.
+
+비록 메모리 주소는 4바이트 혹은 8바이트로 표현되지만, 각 메모리 주소마다 담을 수 있는 데이터의 크기는 한 바이트이다. C/C++ 프로그래밍 언어의 [자료형](#자료형)에 의하면 `int` 정수나 `float` 부동소수점은 네 바이트가 필요하므로 이웃하는 총 네 개의 메모리 주소가 데이터를 저장하는데 관여한다. 포인터의 자료형은 이러한 특성을 고려하여 포인터가 저장한 메모리 주소로부터 어디까지 참조해야 완전한 데이터인지 알려주는 역할을 한다. 또한 포인터에 역참조 연산자 `*`를 사용하여 해당 자료형으로 어떠한 값이 표현되는지 확인도 가능하다 (포인터 정의에 사용된 별표 `*`와 다른 존재이다).
 
 ```cpp
-/* 정수형 포인터 변수 선언 */
-int *ptr;
-std::cout << ptr;    // ERROR C4700: 초기화되지 않은 지역 변수 'ptr'이 사용되었습니다.
-```
-
-변수의 포인터(즉, 메모리 주소)를 호출하기 위해서는 앰퍼샌드 기호 `&` 연산자를 사용하여 확인할 수 있다.
-
-```cpp
-/* 정수형 변수 선언 */
-int variable = 365;
-std::cout << &variable;
-```
-```
-000000D154AFFA14
-```
-
-십육진수의 메모리 주소는 수기로 직접 작성할 수 있는 것이 아니며, 이는 매우 위험한 행위이다! 포인터 변수를 초기화하는 방법으로는 기존하는 변수의 메모리 주소를 할당하는 것이 유일하다. 여기서 포인터 변수와 변수 간의 자료형은 일치하도록 한다.
-
-비록 하나의 메모리 주소는 8바이트(32비트 시스템) 혹은 16바이트(64비트 시스템)로 구성되어 있지만, 각 메모리 주소는 한 바이트의 데이터만 수용할 수 있다. 1바이트만 있으면 충분한 `char` 문자형 데이터와 달리, `int` 정수형이나 `float` 부동소수점 데이터를 표현하기 위해서는 4바이트의 메모리 용량이 필요하다. 그러나 포인터는 변수가 사용하고 있는 전체 메모리 주소 중에서 맨 첫 주소만 반환하므로 자료형이 언급되지 않으면 포인터는 어느 메모리 주소까지가 하나의 완전한 데이터인지 알 수 없다.
-
-```cpp
-/* 포인터 변수 초기화 */
 int variable = 365;
 
-// 동일한 자료형의 포인터 변수
+/* 동일한 자료형의 포인터 변수 */
 int *ptr1 = &variable;
-std::cout << "0x" << ptr1 << std::endl;    // >> 출력: 0x000000A3896FF954 (주소)
-std::cout << *ptr1 << std::endl;           // >> 출력: 365                (값)
+std::cout << "0x" << ptr1 << std::endl << *ptr1 << std::endl;
+// 출력: 0x000000A3896FF954 (주소)
+// 출력: 365                (값)
 
-// 상이한 자료형의 포인터 변수
+/* 상이한 자료형의 포인터 변수 */
 char *ptr2 = &variable;
-std::cout << "0x" << ptr2 << std::endl;    // >> 출력: 0x000000A3896FF954 (주소)
-std::cout << *ptr2 << std::endl;           // >> 출력: 109                (값)
+std::cout << "0x" << ptr2 << std::endl << static_cast<int>(*ptr2) << std::endl;
+// 출력: 0x000000A3896FF954 (주소)
+// 출력: 109                (값)
 ```
 
-여기서 `0x` 접두사는 [십육진수](https://ko.wikipedia.org/wiki/십육진수) 표현법임을 구별짓기 위해 삽입하였다. 위의 예시 코드에서 보이듯이, 포인터 변수가 가리키는 메모리 주소에 할당된 값을 역참조 연산자 `*`를 통해 호출하는 것이 가능하다. 포인터 변수의 정의에서도 별표를 사용하였으나, 이 둘은 동일한 기호만 사용할 뿐이며 서로 다른 존재이다.
+여기서 `0x` 접두사는 [십육진수](https://ko.wikipedia.org/wiki/십육진수) 표현법임을 구별짓기 위해 삽입하였다.
 
 | 연산자          | 변수     | 반환     |
 |:------------:|:------:|:------:|
-| 참조 연산자 `&` | 일반 변수  | 메모리 주소 |
-| 역참조 연산자 `*` | 포인터 변수 | 값      |
+| [참조 연산자 `&`](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_address-of_operator)  | 일반 변수  | 메모리 주소 |
+| [역참조 연산자 `*`](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator) | 포인터 | 값      |
 
-만일 일반 변수에서 데이터 변동이 발생하였으면 포인터 변수의 역참조에서도 동일한 데이터 변동을 목격할 수 있다. 이는 두 변수가 동일한 메모리 주소를 공유하고 있기 때문이다. 이러한 C++ 프로그래밍 언어의 포인터 성질은 매우 중요하게 다루어지는 개념 중 하나이며, 이를 "참조에 의한 호출(call by reference)"이라고 부른다.
+만일 일반 변수에서 데이터 변동이 발생하였으면 포인터 변수의 역참조에서도 동일한 데이터 변동을 목격할 수 있다. 두 변수가 동일한 메모리 주소를 공유하고 있기 때문이다. 이러한 C/C++ 프로그래밍 언어의 포인터 성질은 매우 중요하게 다루어지는 개념 중 하나이며, 이를 "참조에 의한 호출(call by reference)"이라고 부른다.
 
 ### 널 포인터
-널 포인터(null pointer)는 아무런 메모리 주소를 가리키지 않는 포인터이다. C 프로그래밍 언어에서 포인터 사용은 자칫 "access violation" 메모리 접근 오류 등의 치명적인 문제를 야기시킬 수 있기에, 안전한 포인터 사용을 위해 널 포인터을 `nullptr` 키워드로 할당한다.
+널 포인터(null pointer)는 아무런 메모리 주소를 가리키지 않는 포인터이다. C/C++ 프로그래밍 언어에서 포인터 사용은 자칫 "access violation" 메모리 접근 오류 등의 치명적인 문제를 야기시킬 수 있기에, 안전한 포인터 사용을 위해 널 포인터를 [`nullptr`](https://en.cppreference.com/w/cpp/language/nullptr) 키워드로 할당한다.
 
 ```cpp
 int* ptr = nullptr;
@@ -1174,14 +1166,12 @@ std::cout << "0x" << ptr;
 ```
 
 ### 보이드 포인터
-보이드 포인터(void pointer)는 지정된 자료형이 없는 포인터이다(즉, `void`). 이러한 포인터는 어떠한 자료형이라도 자료형 변환을 통해 메모리 주소를 가리킬 수 있는 장점을 가진다.
+보이드 포인터(void pointer)는 지정된 자료형이 없는, 즉 `void` 포인터이다. 이러한 포인터는 어떠한 자료형이라도 자료형 변환을 통해 메모리 주소를 가리킬 수 있는 장점을 가진다.
 
 ```cpp
-/* 보이드 포인터 선언 */
-void* ptr;
-
 int variable = 365;
-ptr = &variable;
+
+void *ptr = &variable;
 std::cout << *(reinterpret_cast<int*>(ptr));
 ```
 ```
@@ -1189,7 +1179,7 @@ std::cout << *(reinterpret_cast<int*>(ptr));
 ```
 
 ### 함수 포인터
-함수 포인터(function pointer)는 함수를 가리키는 보이드 포인터이다. 배열에서의 포인터가 첫 번째 요소 메모리 주소를 가리키는 것과 동일한 맥락으로, 함수에서 포인터는 첫 번째 실행문이 담긴 메모리 주소를 가리킨다. 함수 포인터는 아래와 같은 구문으로 초기화한다.
+함수 포인터(function pointer)는 함수 자체를 가리키는 보이드 포인터이다. 이는 배열 자체가 첫 번째 요소 메모리 주소를 가리키는 것과 동일한 맥락이다. 함수 포인터를 사용한 대표적인 예시로 [콜백 함수](#콜백-함수)가 있다. 함수 포인터의 선언은 아래와 같으며, 포인터의 자료형은 함수의 자료형과 일치해야 한다. 또한 함수가 갖는 매개변수의 자료형과 개수도 동일해야 한다. 이들을 만족하지 않으면 컴파일 작업 오류가 발생하게 된다.
 
 ```cpp
 // 함수 정의
@@ -1199,9 +1189,7 @@ int function(int arg1, float arg2) {
 }
 
 int main() {
-    // 여기서부터 코드 입력...
-
-    /* 함수 포인터 초기화 및 호출 */
+    /* 함수 포인터 선언 및 호출 */
     int (*ptr)(int, float) = function;
     ptr(1, 3.14);
 
@@ -1209,10 +1197,39 @@ int main() {
 }
 ```
 
-함수 포인터를 초기화 시, 포인터 함수의 자료형은 함수 자료형과 일치해야 하며 매개변수 또한 자료형과 개수가 동일해야 한다. 이들을 만족하지 않으면 컴파일 작업 오류가 발생하게 된다. 함수를 `function()`과 같이 소괄호와 함께 호출되면 함수 `return` 문의 데이터가 반환되지만, 소괄호가 없이 `function`만 호출하면 메모리 주소가 대신 반환된다.
+## 참조
+[참조](https://en.cppreference.com/w/cpp/language/reference)(reference)는 메모리 주소를 저장하지만, 초기화 이루 메모리 주소 변동이 불가한 상수 포인터에 대응한다. 참조는 단순히 [네임 바인딩](https://ko.wikipedia.org/wiki/네임_바인딩)(name binding)된 변수이다: 자체적으로 할당된 메모리를 갖지 않는 대신에 참조하는 데이터가 할당된 메모리를 그대로 사용하며, 종속된 코드 블록 영역범위를 벗어나면 참조만이 자연스레 사라진다. 이러한 특징에 의해 참조는 보다 안전한 포인터 하위호환으로 사용된다.
+
+* **[lvalue 참조](https://docs.microsoft.com/en-us/cpp/cpp/lvalue-reference-declarator-amp) `&`**
+
+    `lvalue`는 프로그램이 접근할 수 있는 메모리 주소를 갖는 데이터이다. 즉, 이미 정의된 변수에 별칭을 선언하는 것과 같다. 특히 함수의 매개변수의 참조에 의한 호출을 포인터보다 안전하게 구현하는데 활용된다.
+
+    ```cpp
+  int variable = 3;
+  int &ref = variable;
+
+  std::cout << ref;    // 출력: 3
+
+  variable++;
+  std::cout << ref;    // 출력: 4 
+    ```
+
+* **[rvalue 참조](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp) `&&`**
+
+    `rvalue`는 프로그램이 접근할 수 있는 메모리 주소가 없거나, 혹은 메모리 주소가 있어도 더 이상의 접근이 불가한 데이터이다. 즉, 임시 데이터를 곧바로 참조하여 불필요한 변수 정의를 배제할 수 있다.
+
+    ```cpp
+  int variable = 3;
+  int &&ref = variable + 4;
+
+  std::cout << ref;    // 출력: 7
+
+  ref++;
+  std::cout << ref;    // 출력: 8
+    ```
 
 ## 엔디언
-[엔디언](https://ko.wikipedia.org/wiki/엔디언)(endianess)이란 컴퓨터 메모리에서 데이터를 표현하기 위해 바이트 단위의 정보를 어떻게 정렬할 것인지를 가리킨다. 특히 포인터가 메모리 주소를 접근 및 호출하기 때문에 엔디언의 기본적인 개념 이해는 필요하다고 본다.
+[엔디언](https://ko.wikipedia.org/wiki/엔디언)(endianess)이란 컴퓨터가 메모리로부터 데이터를 표현하기 위해 바이트 단위의 정보를 어떻게 정렬할 것인지를 가리킨다. 특히 포인터가 메모리 주소를 접근 및 호출하기 때문에 엔디언의 기본적인 개념 이해는 필요하다고 본다.
 
 아래는 십진수 정수를 십육진수로 변환하여 출력하는 C++ 프로그래밍 언어 코드이다:
 
@@ -1256,12 +1273,11 @@ std::cout << "포인터: 0x" << &variable << std::endl;
 int variable = 123456789;
 unsigned char* ptr = reinterpret_cast<unsigned char*>(&variable);
 
-for (int index = 0; index < sizeof(variable); index++)
-{
-    printf("0x%p : %#04x\n", ptr + index, *(ptr + index));
+for (int index = 0; index < sizeof(variable); index++) {
+    std::cout << "0x" << ptr + index << " : 0x" 
+        << std::hex << *(ptr + index) << std::endl;
 }
 ```
-
 ```
 0x0000008A97CFFB84 : 0x15
 0x0000008A97CFFB85 : 0xcd
@@ -1271,534 +1287,530 @@ for (int index = 0; index < sizeof(variable); index++)
 
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
-## 참조
-참조(reference)는 기존에 존재하는 변수의 데이터를 또 다른 변수를 통해 처리할 수 있도록 한다. 두 변수가 하나의 메모리 주소를 공유하게 하므로써, 하나의 데이터에 또 다른 식별자가 부여되었다고 간주할 수 있다.
-
-```cpp
-/* "ref" 변수는 "variable" 변수를 참조한다. */
-int variable;
-int &ref = variable;
-
-ref = 3;    // >> 결과: variable = ref = 3
-```
-
-참조의 원리는 기존 변수의 메모리 주소를 상수 포인터에 할당하는 것과 동일하다. 아래의 코드는 위의 예시를 포인터만 사용해서 나타내었다.
-
-```cpp
-/* 상수 포인터를 활용한 참조 */
-int variable;
-const int* ref = &variable;
-
-*ref = 3;    // >> 결과: variable = *ref = 3
-```
-
-상수 포인터를 사용하기 때문에, 참조 시에는 정의와 초기화가 반드시 동시에 이루어져야 한다. 그리고 한 번 참조된 변수는 새로운 변수를 참조할 수 없다. 프로그래밍에서 흔히 언급되는 *참조에 의한 호출(call by reference)*도 이를 의미하는 것이다.
-
-# C++: 메모리 할당
-> *참고: [GKO95 GitHub Pages - 메모리](/docs/ko.Memory)*
-
-프로그램을 실행하는데 있어 메모리 관리는 매우 중요한 작업에 해당한다. 그 중에서 동적 메모리 할당은 보다 더 나은 메모리 효율성을 위해 사용되며, [포인터](#c-포인터)에 대한 충분한 개념적 이해도가 필요하다. 여기서 메모리란, HDD 및 SSD와 같은 [보조기억장치](https://ko.wikipedia.org/wiki/기억_장치)가 아닌 RAM이 해당하는 [주기억장치](https://ko.wikipedia.org/wiki/주기억장치)를 가리킨다.
-
-## 스택 영역
-스택(stack)은 마지막에 입력된 데이터가 먼저 출력되는 선형적 LIFO(Last-In-First-Out) 데이터 나열 구조이다. 빠른 메모리 접근성의 장점을 가지고 있어 일반적으로 컴파일러에서 데이터 메모리 할당 및 해제를 스택 영역에서 처리한다. 대표적으로 조건문, 반복문, 혹은 함수에서 정의된 지역 변수 등이 코드 블록 외에서는 사용할 수 없다는 특징이 스택 영역 메모리를 활용하고 있음을 의미한다.
-
-스택 영역 메모리의 LIFO 구조는 프로그램 코드를 실행하는데 활용되며, 데이터를 저장하기 위한 용도로는 부적합하다. 전역 변수는 스택을 벗어나면 데이터가 사라지고, 전역 변수는 외부에 쉽게 노출되어 있어 권장되지 않는다.
-
-## 힙 영역
-힙(heap) 영역 메모리는 프로그램이 데이터를 저장할 수 있는 메모리 영역이다. 컴파일러가 코드를 실행하기 위해서 사용하는 영역이 아니며, 프로그램 개발자가 직접 메모리를 할당하고 해제해야 한다. 주소를 찾아가는데 걸리는 시간이 있어 스택 영역보다 접근 속도가 느리지만, 코드 블록의 영향을 받지 않고 프로그램이 종료될 때까지 데이터가 메모리에 남아있을 수 있다는 특징을 갖는다.
-
-> 힙 영역 메모리는 [힙 자료구조](https://ko.wikipedia.org/wiki/힙_(자료_구조))와 전혀 상관이 없으며, 사전적으로 "(데이터) 더미"를 뜻하는 순수히 RAM 물리 메모리의 주소공간 영역을 지칭하는 용어이다.
-
-## 동적 할당
-동적 할당(dynamic allocation)은 개발자가 힙 영역에 메모리를 할당하는 작업을 가리킨다. 시스템이 처리하는 메모리가 아니므로 더 이상 사용되지 않는 힙 메모리도 직접 할당을 해제해야 한다. 이러한 작업을 하지 않으면 컴파일된 프로그램이 비정상적으로 동작하거나 최악의 경우 시스템 충돌이 발생한다.
-
-동적 할당과 해제는 `new` 키워드와 `delete` 키워드를 통해 이루어진다:
-
-```cpp
-/* 동적 할당 */
-int* ptr1 = new int;
-int* ptr2 = new int();
-
-/* 동적 할당 해제 */
-delete ptr1;
-delete ptr2;
-```
-
-예시 코드의 전자와 후자 동적 할당은 각각 기본 초기화(default-initialization)와 값 초기화(value-initialization)라고 부른다.
-
-* **기본 초기화**: 임의의 값 혹은 매개변수의 기본값(클래스 한정)으로 초기화된다.
-* **값 초기화**: 소괄호 `()` 안의 값으로 초기화된다.
-
-배열의 동적 할당 및 해제는 위의 방법과 유사하다:
-
-```cpp
-/* 동적 할당: 배열 */
-int* ptr = new int[];
-
-/* 동적 할당 해제: 배열 */
-delete[] ptr;
-```
-
-### 메모리 누수
-[메모리 누수](/docs/ko.Memory)(memory leak)는 메모리 관리 문제로써 더 이상 사용되지 않는 메모리가 해제되지 않고 계속 잔여하여, 시스템에서 할당할 수 있는 메모리 리소스가 점차 줄어드는 현상이다. 만일 시스템에서 더 이상 할당할 수 있는 메모리가 없으면 시스템 충돌이 발생하는 치명적인 오류가 발생한다. 이를 해결하기 위해 동적 할당된 메모리는 반드시 `delete` 키워드로 해제하도록 한다.
-
-```cpp
-/* 동적 할당 해제 */
-delete ptr;
-```
-
-### 허상 포인터
-허상 포인터(dangling pointer)는 참조하려는 메모리 주소가 더 이상 유효하지 않을 때 발생하는 메모리 관리 문제이다. 시스템적으로 메모리 관리를 하는 과정에서 흔히 발생하는 현상이지만, 프로그래밍에서는 동적 할당이 해제된 포인터가 여전히 해당 주소를 가리키고 있어서 나타나는게 대다수이다. 그러므로 참조할 수 없는 주소를 가리키는 포인터에 `nullptr`을 할당하여 아무런 주소를 가리키지 않도록 한다.
-
-```cpp
-/* 올바른 동적 할당 해제: 메모리 주소의 데이터 반납 -> 널 포인터 할당 */
-delete ptr;
-ptr = nullptr;
-```
-
-## 메모리 함수
-C++ 프로그래밍 언어는 C 표준 라이브러리 중에서 문자열과 관련된 `cstring` 헤더를 통해 힙 영역 메모리를 처리하는 처리하는 전용 함수들을 호출할 수 있다. 아래의 메모리 함수들은 C 프로그래밍 언어에서 매우 흔히 사용되는 메모리 함수들의 목록이다.
-
-| 함수    | 예시               | 설명                                                  |
-|:-----------:| --------------------- | ------------------------------------------------------------ |
-| `memchr()`  | `memchr(str,'c',num);` | 문자열 `str`에서 `num` 개의 바이트 내에 문자 `'c'`의 존재여부를 확인한다.<br/>발견될 시 해당 문자의 메모리 주소가 반환되며, 없으면 널 포인터가 반환된다. |
-| `memcmp()` | `memcmp(ptr1,ptr2,num);` | 포인터 `ptr1`과 `ptr2`를 `num` 개의 바이트 내에서 크기를 비교한다.<br/>만일 `n`번째 바이트에서 처음으로 일치하지 않으면 함수는 `*(ptr1 + n)`에서 `*(ptr2 + n)` 차를 반환한다. |
-| `memset()`  | `malloc(ptr,value,num);` | 포인터 `ptr`로부터 시작해 `num` 개의 바이트를 `value` 값으로 채운다. |
-| `memcpy()`  | `memcpy(ptr1,ptr2,num);` | 포인터 `ptr2`에 있는 `num` 개의 바이트를 `ptr1`으로 복사한다; 단, `ptr1`과 `ptr2`가 겹쳐서는 안된다. |
-| `memmove()`    | `memmove(ptr1,ptr2,num);` | 포인터 `ptr2`에 있는 `num` 개의 바이트를 `ptr1`으로 복사한다; `memcpy()`와 달리 `ptr1`과 `ptr2`가 겹쳐도 동작하나 상대적으로 느리다. |
-
-# C++: 문자열
-C 프로그래밍 언어는 문자열 자료형이 존재하지 않으며, 그 대신 `char` 자료형 문자들과 널 문자 `\0`로 구성된 배열로 문자열을 표현하였다. 그러나 C++ 표준 라이브러리는 표준 네임스페이스 `std` 내에 문자열 전용 자료형을 제공한다.
-
-## 문자열
-C 형식의 문자열은 마지막에 널 문자가 포함된 [문자 배열](https://en.cppreference.com/w/cpp/string/byte)로 구성되어 있으며, 다음과 같이 정의된다:
-
-```cpp
-/* C 형식 문자열 */
-char arr[] = "Hello";
-char* ptr = "World!";
-```
-
-아래는 C 프로그래밍 언어에서 문자열과 관련된 함수들의 목록이다. 단, 이들을 사용하기 위해서는 [`cstring`](https://en.cppreference.com/w/cpp/header/string) 헤더를 추가해야 한다.
-
-| 함수   | 예시               | 설명                                                  |
-|:----------:| --------------------- | ------------------------------------------------------------ |
-| `strcat()` | `strcat(str1, str2);` | 문자열 `str2`를 문자열 `str1` 뒤에 덧붙인다.   |
-| `strcpy()` | `strcpy(str1, str2);` | 문자열 `str2`을 문자열 `str1`에 복사한다.                |
-| `strlen()` | `strlen(str);`        | 문자열 `str` 크기를 반환하며, 이때 널 문자는 제외된다. |
-
-## 문자열 자료형
-C++ 문자열 자료형은 `iostream` 헤더에 내포된 `string` 헤더로부터 제공되며 `std` 네임스페이스 영역에 속한다. 문자열 자료형 데이터는 일반적으로 문자열 객체(string object)라고도 부른다. C++ 프로그래밍 언어는 C 형식 문자열보다 해당 자료형을 사용할 것을 권장한다.
-
-```cpp
-/* C++ 문자열 */
-std::string variable = "Hello World!";
-```
-
-### 문자열 배열
-하나의 배열에는 바이트 크기가 서로 다른 요소를 가질 수 없다. 그러나 문자열 자료형은 텍스트 길이가 상이하여도 항상 일정한 크기를 갖는다. 자료형의 문자열은 사실상 힙 영역 메모리에 저장되어 있고, 포인터로부터 문자열을 불러오기 떄문에 문자열 자료형은 일정하게 크기로 유지된다.
-
-```cpp
-std::string arr[] = {"Hello", "World!"};
-```
-
 # C++: 클래스
-C++ 프로그래밍 언어는 객체와 클래스를 중심으로 프로그래밍하는 *[객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming; OOP)* 기법도 적용할 수 있다. 본 장은 C++ 언어에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
+[클래스](https://en.cppreference.com/w/cpp/language/classes)(class)는 객체를 생성하는데 사용된다. 
 
-## 객체
-이전 장에서 (데이터를 저장할 수 있는) 변수와 (데이터를 처리 할 수 있는) 함수를 소개하였다. 객체(object 혹은 instance)는 이러한 변수와 함수를 하나의 데이터로 캡슐화한 데이터이다. 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 일부 시퀀스 컨테이너와 문자열 객체가 있다.
+> 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수를 통틀어 맴버(member)라고 칭하는데, 이들은 각각 필드(field; 맴버 변수)과 메소드(method; 맴버 함수)라고 불리며 다음과 같이 접근한다.
+>
+> * **필드**: `instance.field`
+> * **메소드**: `instance.method()`
+>
+> 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 배열 및 벡터가 있다.
+>
+> ```cpp
+> std::array<int, 4> variable = {0, 3, 5, 9};
+> std::cout << variable.at(2);
+> // variable이란 배열 객체의 "at()" 메소드를 사용하여 2 번째 인덱스 요소의 값을 반환한다.
+> ```
 
-```cpp
-std::string variable = "Hello World!";
-std::cout << variable.length();
-// "variable"이란 이름을 가진 문자열 객체의 "length()" 메소드를 사용하여 값 널 문자를 제외한 총 문자 개수를 반환한다.
-```
-```
-12
-```
+클래스는 `class` 혹은 `struct` 키워드를 사용하여 필드 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"이라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
-## 캡슐화
-캡슐화(encapsulation)는 객체의 핵심 개념으로 아래의 특성을 가진다.
-
-1. 변수와 함수를 하나의 객체로 결합한다.
-2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
-
-### 상태 및 행위
-상태(state)와 행위(behavior)는 객체에 캡슐화된 변수와 함수를 가리키는 용어이다. 객체에 속한 변수와 함수를 각각 맴버 변수(member variable)와 맴버 함수(member function)라고 부르며 맴버 연산자 `.`로 접근한다.
-
-| 객체 맴버 | 구성요소                           | 구문                  |
-|:-----:|:------------------------------:|---------------------|
-| 상태    | 맴버 변수 (일명 맴버 필드; member field) | `instance.field`    |
-| 행위    | 맴버 함수 (일명 메소드; method)         | `instance.method()` |
-
-## 클래스
-클래스(class)는 객체를 생성하는데 사용된다. 클래스는 `class` 키워드를 사용하여 정의되며, 클래스 내부에는 객체의 속성과 메소드가 되는 변수와 함수를 정의한다. 클래스의 코드 블록 끝에는 세미콜론 `;`이 필요하며, 클래스로부터 객체를 생성하는 절차를 *객체화(instantiation)*라고 한다. 아래는 `class` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이며, 변수 및 함수와의 유사성을 확인할 수 있다.
+1. 변수와 함수가 하나의 객체로 결합된다.
+2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
 
 ```cpp
-/* 클래스 생성하기 */
-class CLASS{
+/* 클래스 정의 */
+class CLASS {
 public:
-    /* 맴버 정의: 맴버 필드 (일명 맴버 변수) */
-    int field1 = 1;
-    float field2 = 3.0;
+
+    /* 필드 맴버 */
+    int   field1 = 2;
+    float field2 = 3.14;
     
-    /* 맴버 정의: 메소드 (일명 맴버 함수) */
-    float method(int arg) {
+    /* 메소드 맴버 */
+    int method() {
+        return field1 * field2;
+    }
+
+    /* 메소드 맴버 (오버로딩) */
+    int method(int arg) {
         return field1 + field2 - arg;
     }
 };
 
-// 객체화
-CLASS instance;
+int main () {
 
-// 그러므로...
-instance.field1;         // >> 출력: 1
-instance.field2;         // >> 출력: 3.0
-instance.method(2);      // >> 출력: 2.0 (= 1 + 3.0 - 2)
+    /* 클래스 객체화 */
+    CLASS instance;
+
+    std::cout << instance.field1;       // 출력: 2
+    std::cout << instance.field2;       // 출력: 3.14
+    std::cout << instance.method();     // 출력: 6
+    std::cout << instance.method(1);    // 출력: 4
+}
 ```
 
-### 생성자
-생성자(constructor)는 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 메소드이다. 비록 생성자는 선택사항이지만, 만일 생성자를 정의한다면 메소드의 이름은 클래스 식별자와 동일해야 하며 객체화 과정에서 객체로 전달할 인자의 자료형과 개수를 결정해야 한다. 반환 자료형은 `void`로 고정되어 있어 자료형 지정을 하지 않는다. 생성자는 흔히 객체화 단계에서 맴버 필드를 초기화하는 용도로 사용된다.
+### 접근 지정자
+[접근 지정자](https://en.cppreference.com/w/cpp/language/access)(access specifier)는 외부로부터 맴버에 접근할 수 있는 권한을 지정한다. 여기서 `class`와 `struct` 키워드로 정의된 클래스는 기본 접근 지정자가 각각 `private` 및 `public`이라는 차이점을 갖는다.
 
-생성자로 초기화하는 방법은 두 가지가 있다.
+| 키워드     | 설명                                                  |
+| ----------- | ------------------------------------------------------------ |
+| `public`    | 객체 (또는 클래스) 외부 코드로부터 맴버 접근이 자유롭다.      |
+| `private`   | 객체 (또는 클래스) 내부에서만 맴버 접근이 가능하다.   |
+| `protected` | [상속](#상속)으로 파생된 객체 (또는 클래스)만이 접근할 수 있다. |
 
-1. **직접 초기화(direct initialization)**
-    
-   ```cpp
-   /* 클래스 생성하기 */
-   class CLASS {
-   public:
-       /* 생성자 */
-       CLASS(int arg1, float arg2)
-       {
-           field1 = arg1; field2 = arg2;	// 직접 초기화
-           statements;
-       }
-    
-       int field1;
-       float field2;
-    
-       float method(int arg) {
-           return field1 + field2 - arg;
-       }    
-   };
-   
-   // 객체화
-   CLASS instance(1, 3.0);
-   ```
-
-2. **목록 초기화(list initailization)**: 직접 초기화로는 불가능한 상수 맴버 필드의 초기화가 가능하다.
-
-   ```cpp
-   /* 클래스 생성하기 */
-   class CLASS {
-   public:
-       /* 생성자 */
-       CLASS(int arg1, float arg2)
-           : field1(arg1), field2(arg2)	// 목록 초기화
-       {
-       	statements;
-       }
-       
-       int field1;
-       float field2;
-       
-       float method(int arg) {
-           return field1 + field2 - arg;
-       }
-   };
-   
-   // 객체화
-   CLASS instance(1, 3.0);
-   ```
-
-만일 생성자가 전달인자를 받도록 정의되었으면 반드시 소괄호 `()`를 통해 값을 전달하도록 한다. 단, 클래스에 정의된 생성자가 없거나 혹은 생성자가 전달인자를 받지 않을 때에는 소괄호를 사용하지 않는다. 함수 오버로딩에 의해 여러 생성자를 정의할 수 있다.
-
-### 소멸자
-소멸자(destructor)는 객체가 메모리에서 할당 해제되어 소멸되기 직전에 자동적으로 실행되는 특수한 메소드이다. 비록 소멸자는 선택사항이지만, 만일 소멸자를 정의한다면 메소드의 이름은 클래스 식별자와 동일하되 물결표 `~`를 접두사로 가져야 한다. 반환 자료형은 `void`로 고정되어 있어 자료형 지정을 하지 않는다.
+### 클래스 포인터
+클래스 포인터(class pointer)는 클래스를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 클래스 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
 
 ```cpp
-/* 클래스 생성하기 */
-class CLASS {
-public:
+/* 클래스 포인터 정의 */
+CLASS *ptr = &instance;
+
+std::cout << ptr->field1;       // 출력: 2
+std::cout << ptr->method(1);    // 출력: 4
+```
+
+### `this` 포인터
+[`this`](https://en.cppreference.com/w/cpp/language/this) 포인터는 객체가 자신의 메모리 주소를 반환하는데 사용된다. 객체의 [비정적](#정적-맴버)(non-static) 메소드로부터 자신의 맴버 호출을 `this->` 표현식으로 명시적으로 나타낼 수 있어, 흔히 필드 맴버를 매개변수 또는 지역변수와 구분짓는데 활용된다.
+
+```cpp
+/* 클래스 정의 */
+struct CLASS {
+
+    /* 필드 맴버 */
+    int   field1 = 2;
+    float field2 = 3.14;
+    
+    /* 메소드 맴버 */
+    int method() {
+        return this->field1 * this->field2;
+    }
+
+    /* 메소드 맴버 (오버로딩) */
+    int method(int arg) {
+        return this->field1 + this->field2 - arg;
+    }
+};
+```
+
+## 생성자
+[생성자](https://en.cppreference.com/w/cpp/language/constructor)(constructor)는 객체화마다 자동으로 실행되는 특수한 `void` 자료형 메소드이다. 비록 생성자는 선택사항이지만, 정의한다면 반드시 클래스명과 동일해야 한다. 외부 코드로부터 객체화되기 때문에 생성자를 `public` 접근 지정자로 설정한다. 흔히 객체화 단계에서 맴버들을 초기화하는 용도로 사용된다.
+
+1. **직접 초기화(direct initialization)**
+
+    생성자의 코드 블록 내에서 각 맴버를 할당 연산자 `=`로 초기화하는 일반적인 방법이다.
+    
+   ```cpp
+   /* 클래스 정의 */
+   class CLASS {
+   
+       int   field1;
+       float field2; 
+
+   public:
+   
+       /* 생성자: 직접 초기화 */
+       CLASS(int arg1, float arg2)
+       {
+           field1 = arg1;
+           field2 = arg2;
+
+           statements;
+       }
+   };
+
+   /* 클래스 객체화 */
+   CLASS intance(2, 3.14);
+   ```
+
+2. **목록 초기화(list initailization)**
+
+    직접 초기화로는 불가능한 [상수](#상수) 맴버의 초기화가 가능하다.
+
+   ```cpp
+   /* 클래스 정의 */
+   class CLASS {
+
+       int   field1;
+       float field2;
+
+   public:
+   
+       /* 생성자: 목록 초기화 */
+       CLASS(int arg1, float arg2)
+           : field1(arg1), field2(arg2)
+       {
+           statements;
+       }
+   };
+
+   /* 클래스 객체화 */
+   CLASS intance(2, 3.14);
+   ```
+
+생성자는 오버로딩될 수 있어 한 개 이상이 정의될 수 있다. 그 중에서 아무런 전달인자를 받지 않는 생성자를 기본 생성자(default constructor)라고 칭한다.
+
+### 소멸자
+[소멸자](https://en.cppreference.com/w/cpp/language/destructor)(destructor)는 객체가 메모리로부터 소멸되기 직전에 자동으로 실행되는 특수한 `void` 자료형 메소드이다. 비록 소멸자는 선택사항이지만, 정의한다면 접두부에는 물결표 `~`와 함께 반드시 클래스명과 동일해야 한다. 외부 코드로부터 소멸되기 때문에 소멸자를 `public` 접근 지정자로 설정한다.
+
+```cpp
+/* 클래스 정의 */
+struct CLASS {
+
     /* 소멸자 */
     ~CLASS() {
     	statements;
     }
-    
-    int field1 = 1;
-    float field2 = 3.0;
-    
-    float method(int arg) {
-        return field1 + field2 - arg;
-    }
 };
 ```
 
-소멸자는 전달인자를 허용하지 않아 함수 오버로딩이 불가하므로 하나만 정의될 수 있다.
+소멸자는 매개변수를 가질 수 없으므로 오버로딩될 수 없다. 그러므로 클래스는 오로지 하나의 소멸자만 정의할 수 있다.
 
-### 상수 객체
-상수 객체(constant object)는 객체화 이후에 맴버 값 변동이 불가능한 객체이다. 상수 객체 맴버들의 초기화는 생성자의 목록 초기화를 통해서만 이루어진다.
-
-```cpp
-// 객체화: 상수 객체
-const CLASS instance;
-```
-
-상수 객체는 오로지 상수 맴버 필드와 상수 맴버 함수만 접근할 수 있다. 여기서 상수 메소드란 개념은 단순히 상수 객체의 접근성을 위한 것이므로, 이와 대응하리라 생각되는 "상수 함수"라는 것은 존재하지 않는다. 상수 메소드를 선언 및 정의할 시 `const` 키워드는 매개변수 선언 이후에 위치해야 한다.
+## 맴버 선언
+클래스에서 맴버를 선언하면 외부에서 별도로 정의되어야 한다. 클래스 외부에서 정의된 맴버는 사실상 전역 데이터로써 공용될 수 있기 때문에 [정적 맴버](#정적-맴버)가 아닌 이상 맴버 선언의 활용은 메소드 맴버로 한정된다.
 
 ```cpp
-/* 클래스 생성하기 */
-class CLASS {
-public: 
-    int field1 = 1;
-    float field2 = 3.0;
-    
-    float method1(int arg) {
-        return field1 + field2 - arg;
-    }
-    
-    // 맴버 정의: 상수 메소드
-    void method2(int arg) const {
-        statements;
-    }
-};
-```
+/* 클래스 정의 */
+struct CLASS {
 
-## 접근 지정자
-접근 지정자(access specifier)는 외부로부터 클래스 맴버에 접근할 수 있는 권한을 지정한다. C++ 프로그래밍 언어에는 세 가지의 접근 지정자가 존재한다.
+    int   field1 = 2;
+    float field2 = 3.14;
 
-| 키워드     | 설명                                                  |
-| ----------- | ------------------------------------------------------------ |
-| `public`    | 클래스 외부 코드에서 맴버를 접근할 수 있다.      |
-| `private`   | 클래스 내부에서만 맴버를 접근할 수 있다.   |
-| `protected` | 파생 클래스는 접근할 수 있으나, 여전히 외부에서는 접근할 수 없다 ([상속](#상속) 부문 참조). |
-
-## 프렌드 함수
-프렌드 함수(friend function)는 비록 클래스 외부에 정의된 함수로 맴버가 아니지만 클래스의 `private` 맴버를 접근할 수 있다. 클래스 내에서 `friend` 키워드와 함께 해당 함수를 선언하면 된다.
-
-```cpp
-class CLASS {
-private:
-    int field1 = 1;
-    float field2 = 3.0;
-    
-    float method1(int arg) {
-        return field1 + field2 - arg;
-    }
-
-    /* 프렌드 함수 선언 */
-    friend void function(CLASS &instance);
+    /* 메소드 맴버: 선언 */
+    int method(int arg);
 };
 
-/* 함수 정의 */
-void function(CLASS &instance) {
-	instance.field1 = 2;
+/* 메소드 맴버: 정의 */
+int CLASS::method(int arg) {
+    return field1 + field2 - arg;
+}
+```
+
+### 정적 맴버
+[정적 맴버](https://en.cppreference.com/w/cpp/language/static)(static member)는 클래스로부터 생성된 객체의 개수와 무관하게 오로지 하나의 데이터만 존재하여 공유되는 `static` 키워드로 명시된 맴버이다. 해당 유형의 맴버는 객체화가 필요없이 클래스로부터 직접 호출이 가능하다.
+
+> 파이썬 프로그래밍 언어와 비교하자면 [클래스 속성 및 메소드](/docs/ko.Python/#클래스-속성-및-메소드)에 대응한다.
+
+일반 맴버와 달리, 정적 맴버는 클래스 내에서 선언만 되고 외부에서 별도로 정의되어야 한다.
+
+```cpp
+/* 클래스 정의 */
+struct CLASS {
+
+    /* 정적 필드 및 메소드 선언 */
+    static int field;
+
+    static void method(int arg);
+};
+
+/* 정적 필드 및 메소드 정의 */
+int CLASS::field = 7;
+
+void CLASS::method(int arg) {
+    CLASS::field += arg;
 }
 
-// 객체화
-CLASS instance;
-function(instance);
+int main() {
 
-// 그러므로...
-instance.field1;	// >> 출력: 2
-instance.field2;	// >> 출력: 3.0
-instance.method(2);	// >> 출력: 3.0 (= 2 + 3.0 - 2)
+    std::cout << CLASS::field;      // 출력: 7
+
+    /* 클래스 객체화 */
+    CLASS instance;
+    CLASS::method(2);
+
+    std::cout << instance.field;    // 출력: 9
+
+    return 0;
+}
 ```
 
-프렌드 함수는 클래스의 맴버가 아니므로 객체없이 호출하여 실행한다. 함수 프로토타입이 맴버와 함께 클래스 내에 선언되었기 때문에 캡슐화로 인하여 `private` 맴버 접근이 가능한 함수에 불과하다.
-
-## 클래스 포인터
-객체는 변수가 아닌 포인터를 통해서도 객체화가 가능하다. 객체가 포인터로 할당되면 화살표 연산자 `->`로 맴버에 접근할 수 있다.
+## 프렌드 선언
+[프렌드 선언](https://en.cppreference.com/w/cpp/language/friend)(friend declaration)는 `friend` 키워드로 외부 함수 (혹은 메소드, 클래스 등)을 캡슐화로부터 맴버들을 접근할 수 있도록 하는 선언이다. 단순히 맴버 접근 권한이 주어졌을 뿐, 프렌드 선언은 클래스 맴버가 전혀 아니므로 단독적으로 호출되어 사용된다. 캡슐화에 기반한 기술이므로 접근 지정자와 무관하다.
 
 ```cpp
+/* 클래스 정의 */
 class CLASS {
-public:
-    CLASS(int arg1, float arg2)
-        : field1(arg1), field2(arg2) { }
-    ~CLASS() { }
+
+    int   field1 = 2;
+    float field2 = 3.14;
+
+    /* 프렌드 함수 선언 */
+    friend int function(CLASS &instance, int arg);
+
+};
+
+/* 프렌드 함수 정의 */
+int function(CLASS &instance, int arg) {
+    return instance.field1 + instance.field2 - arg;
+}
+
+int main() {
     
-    int field1;
-    float field2;
+    /* 클래스 객체화 */
+    CLASS instance;
     
-    float method1(int arg) {
+    std::cout << function(instance, 1);    // 출력: 4
+}
+```
+
+## 상수 객체
+상수 객체(constant object)는 객체화 이후에 맴버의 데이터 변동이 불가한 객체이다. 일반 메소드 맴버를 접근할 수 없으나, 대신에 `const` 키워드가 매개변수 선언 이후에 기입되어 필드 맴버의 값을 바꿀 수 없는 상수 메소드(constant method)를 호출할 수 있다.
+
+```cpp
+/* 클래스 정의 */
+struct CLASS {
+
+    int field1 = 2;
+    float field2 = 3.14;
+
+    /* 상수 메소드 정의 */
+    int method(int arg) const {
         return field1 + field2 - arg;
-    }
+    }    
 };
 
-// 객체화 (포인터)
-CLASS instance(1, 3.0);
-CLASS *ptr = &instance;
+int main() {
 
-// 그러므로...
-instance->field1;		// >> 출력: 1
-instance->field2;		// >> 출력: 3.0
-instance->method(2);	// >> 출력: 2.0 (= 1 + 3.0 - 2)
-```
-
-### 동적 객체
-동적 객체(dynamic object)는 스택이 아닌 힙 영역 메모리에 객체화된 객체이다. 프로그램 실행 도중에 스택 영역 메모리의 성질로부터 의도치 않게 객체 데이터가 소멸되는 것을 방지한다. 동적 객체는 특히 [MFC](/docs/ko.MFC)와 같은 어플리케이션 프레임워크 라이브러리에서 흔히 사용된다.
-
-```cpp
-/* 동적 객체 */
-CLASS *instance = new CLASS(1, 3.0);
-```
-
-### 신원
-신원(identity)은 상태와 행위 이외의 또 다른 객체 구성요소로써 타 객체로부터 자신을 구분짓는다. 신원 구분은 객체에 내포된 `this` 포인터가 가리키는 스스로의 메모리 주소를 통해 이루어지는데, 이를 통해 객체 내의 맴버 접근도 가능하다.
-
-```cpp
-class CLASS {
-public:
-    CLASS(int arg1, float arg2)
-        : field1(arg1), field2(arg2) { }
-    ~CLASS() { }
-    
-    int field1;
-    float field2;
-    
-    float method1(int arg) {
-        // "this" 포인터 사용
-        return (this->field1) + (this->field2) - arg;
-    }
-};
+    /* 클래스 객체화: 상수 객체 */
+    const CLASS instance;
+}
 ```
 
 ## 상속
-상속(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 맴버 필드와 메소드를 제공하는 행위이다. 기반 클래스와 파생 클래스에 동일한 이름의 속성과 메소드가 존재할 경우, 기반 클래스의 필드와 메소드는 파생 클래스에 의해 묻힌다.
+[상속](https://en.cppreference.com/w/cpp/language/derived_class)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 필드 및 메소드 맴버를 제공하는 행위이다. 기반 클래스와 파생 클래스에 동일한 이름의 맴버가 존재할 경우, 기반 클래스의 맴버는 파생 클래스에 의해 묻힌다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 있다.
 
 ```cpp
-/* 기반 클래스 생성 */
-class BASECLASS {
-public:
-    BASECLASS() { std::cout << "기반 클래스: 생성자" << std::endl; }
-    ~BASECLASS() { std::cout << "기반 클래스: 소멸자" << std::endl; }
+using namespace std;
+
+/* 기반 클래스 정의 */
+struct BASECLASS {
     
-    int field1 = 1;
-    float field2 = 3.0;
+    BASECLASS() {
+        cout << "생성자: 기반 클래스" << endl;
+    }
+
+    ~BASECLASS() {
+        cout << "소멸자: 기반 클래스" << endl;
+    }
+
+    int    field1 = 3;
+    string field2 = "C++";
+
+    int method(int arg1, int arg2) {
+        return arg1 + arg2;
+    }
 };
 
-/* 파생 클래스 생성 */
-class DERIVEDCLASS
-    : public BASECLASS {
-public:
-    DERIVEDCLASS() { std::cout << "파생 클래스: 생성자" << std::endl; }
-    ~DERIVEDCLASS() { std::cout << "파생 클래스: 생성자" << std::endl; }
+/* 파생 클래스 정의 */
+struct DERIVEDCLASS
+    : BASECLASS {
     
-    float field2 = 7.0;
-    char field3 = 'A';
+    DERIVEDCLASS() {
+        cout << "생성자: 파생 클래스" << endl;
+    }
+
+    ~DERIVEDCLASS() {
+        cout << "소멸자: 파생 클래스" << endl;
+    }
+
+    string field2 = "Hello World!";
+    bool   field3 = true;
+
+    int method(int arg1, int arg2) {
+        return arg1 * arg2;
+    }
 };
 
+int main() {
+    
+    /* 클래스 객체화 */
+    DERIVEDCLASS instance;
 
-// 객체화
-DERIVEDCLASS instance;
-std::cout << instance.field1 << ", " << instance.field2 << ", " << instance.field3 << std::endl;
+    cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << endl;
+    cout << instance.method(2, 3) << endl;
+}
 ```
 ```
-"기반 클래스: 생성자"
-"파생 클래스: 생성자"
-
-1, 7.0, A
-
-"파생 클래스: 소멸자"
-"기반 클래스: 소멸자"
+생성자: 기반 클래스
+생성자: 파생 클래스
+3 Hello World! 1
+6
+소멸자: 파생 클래스
+소멸자: 기반 클래스
 ```
 
-### 상속 종류
-C++ 프로그래밍 언어의 객체지향 프로그래밍에는 세 가지의 상속 종류가 존재한다.
+### 상속 맴버 접근
+범위지정 연산자 `::`는 파생 클래스에 묻혀진 기반 클래스의 필드 및 메소드를 호출하는데 사용된다.
 
-| 상속 | 설명                                                  |
+```cpp
+using namespace std;
+
+/* 기반 클래스 정의 */
+struct BASECLASS {
+    
+    BASECLASS() {
+        cout << "생성자: 기반 클래스" << endl;
+    }
+
+    ~BASECLASS() {
+        cout << "소멸자: 기반 클래스" << endl;
+    }
+
+    int    field1 = 3;
+    string field2 = "C++";
+
+    int method(int arg1, int arg2) {
+        return arg1 + arg2;
+    }
+};
+
+/* 파생 클래스 정의 */
+struct DERIVEDCLASS
+    : BASECLASS {
+    
+    DERIVEDCLASS() {
+        cout << "생성자: 파생 클래스" << endl;
+        field2 = BASECLASS::field2;            // 기반 클래스의 field2 필드
+    }
+
+    ~DERIVEDCLASS() {
+        cout << "소멸자: 파생 클래스" << endl;
+    }
+
+    string field2 = "Hello World!";
+    bool   field3 = true;
+
+    int method(int arg1, int arg2) {
+        return BASECLASS::method(arg1, arg2);  // 기반 클래스의 method() 메소드
+    }
+};
+
+int main() {
+    
+    /* 클래스 객체화 */
+    DERIVEDCLASS instance;
+
+    cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << endl;
+    cout << instance.method(2, 3) << endl;
+}
+```
+```
+생성자: 기반 클래스
+생성자: 파생 클래스
+3 C++ 1
+5
+소멸자: 파생 클래스
+소멸자: 기반 클래스
+```
+
+### 상속 접근 지정자
+[접근 지정자](https://en.cppreference.com/w/cpp/language/access)에 따라 어떠한 기반 클래스 맴버가 파생 클래스로 상속될 것인지 결정된다. 여기서 `class`와 `struct` 키워드로 정의된 클래스는 기본 상속 접근 지정자가 각각 `private` 및 `public`이라는 차이점을 갖는다.
+
+> 기반 클래스의 `private` 맴버는 절대로 상속되지 않으며 접근 불가하다.
+
+| 접근 지정자 | 설명                                           |
 | :---------: | ------------------------------------------------------------ |
-|   `public`    | 기반 클래스의 `private` 맴버는 상속되지 않으며 접근할 수 없다.<br />기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서도 그대로 `public` 및 `protected` 맴버로 상속된다. |
-|   `private`   | 기반 클래스의 `private` 맴버는 상속되지 않으며 접근할 수 없다.<br />기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `private` 맴버로 전환된다. |
-|  `protected`  | 기반 클래스의 `private` 맴버는 상속되지 않으며 접근할 수 없다.<br />기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `protected` 맴버로 전환된다. |
+| `public` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서도 그대로 `public` 및 `protected` 맴버로 상속된다. |
+| `private` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `private` 맴버로 전환된다. |
+| `protected` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `protected` 맴버로 전환된다. |
 
 ```cpp
-/* BASECLASS1 (PUBLIC) & BASECLASS2 (PROTECTED) 상속 */
+/* 파생 클래스의 BASECLASS1 및 BASECLASS2 상속 */
 class DERIVEDCLASS
-    : public BASECLASS1, protected BASECLASS2
-{
-    statements;
+    : public BASECLASS1, protected BASECLASS2 {
+    
 };
 ```
 
 ## 다형성
-다형성(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, C++ 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 가리킨다. 객체지향 프로그래밍에서 다형성은 매우 중요한 특징이며 두 가지로 분류된다.
+[다형성](https://ko.wikipedia.org/wiki/다형성_(컴퓨터_과학))(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 가리킨다.
 
 * **컴파일타임 다형성(compile-time polymorphism)**: 컴파일 시 이루어지는 다형성 (일명 정적 다형성; static polymorphism)
 * **런타임 다형성(run-time polymorphism)**: 프로그램 실행 시 이루어지는 다형성 (일명 동적 다형성; dynamic polymorphism)
 
-> 이전 장에서 소개한 적이 있는 [함수 오버로딩](#함수-오버로딩)는 컴파일타임 다형성 중 하나이다.
+> 이전 장에서 소개한 적이 있는 [함수 오버로딩](#함수-오버로딩)은 컴파일타임 다형성 중 하나이다.
 
 ### 연산자 오버로딩
-연산자 오버로딩(operator overloading)은 특정 클래스에서 연산자가 달리 동작하도록 하는 컴파일타임 다형성 중 하나이다. 함수 오버로딩과 마찬가지로 전달인자의 유일성이 보장되는 한, 연산자 하나로부터 여러 정의가 가능하다. 오버로딩된 연산자는 클래스 한정이므로 해당 클래스 및 객체 외에는 적용되지 않는다.
-
-`operator` 키워드는 기능성을 새로 정의할 연산자를 명시하기 위해 사용되며, 연산자 정의 구문은 메소드 정의와 동일하다.
+[연산자 오버로딩](https://en.cppreference.com/w/cpp/language/operators)(operator overloading)은 연산자가 특정 클래스 및 해당 객체에서 어떻게 동작할 지 `operator` 키워드로 재정의하는 컴파일타임 다형성 중 하나이다. 한 개의 연산자에 전달받은 인자의 자료형 및 개수에 따라 여러 정의가 가능하다.
 
 ```cpp
-/* 클래스 생성 */
+/* 클래스 정의 */
 class CLASS {
+
+    int field;
+
 public:
-    // 연산자 오버로딩 1
-    void operator [] (int arg1, int arg2) {
-    	statements;
-    }
+
+    CLASS(int arg) : field(arg) { }
     
-    // 연산자 오버로딩 2
+    /* 연산자 오버로딩: + 정의 */
     CLASS operator + (const CLASS &arg) {
-        statements;
-        return arg;
+        return CLASS obj(field + arg.field);
+    }
+
+    /* 연산자 오버로딩: [] 정의 */
+    std::string operator [] (std::string arg) {
+    	return std::string(std::to_string(field) + arg);
     }
 };
-```
 
-예시 코드의 두 번째 연산자 오버로딩에서 전달인자는 `CLASS` 클래스로 매개변수 `arg`에 참조되었다. 그리고 `const` 키워드는 해당 매개변수를 읽기 전용으로 만든다. 다시 말해, 매개변수는 `CLASS`로 생성된 객체를 전달인자로 받지만, 상수 성질로 인해 전달인자의 값 변동이 불가하다.
+int main() {
+
+    CLASS obj1(2), obj2(3);
+
+    /* 연산자 사용: + */
+    CLASS instance(obj1 + obj2);
+
+    /* 연산자 사용: [] */
+    std::cout << instance["!"] << std::endl;
+}
+```
+```
+5!
+```
 
 ### 함수 오버라이딩
-함수 오버라이딩(function overriding)은 파생 클래스가 기반 클래스의 맴버 함수를 재정의하는 런타임 다형성이다. 함수 오버로딩이 여러 개의 기능 중에서 하나를 선택하는 것이라면, 함수 오버라이딩은 하나의 기능을 새롭게 *재정의(re-definition)*한다는 것으로 이해하면 된다.
+[함수 오버라이딩](https://en.cppreference.com/w/cpp/language/override)(function overriding)은 상속된 기반 클래스의 맴버 함수 (일명 메소드)를 파생 클래스에서 재정의하는 런타임 다형성이다.
 
-*가상 함수(virtual function)*은 함수 오버라이딩이 가능한 함수이며 기반 클래스에서 `virtual` 키워드를 통해 선언된다. 가상 함수는 실행문을 갖도록 정의될 수 있으며, 해당 정의는 (1) 기반 클래스로부터 객체화되어 사용하거나 (2) 파생 클래스가 오버라이딩 하지 않고 객체화하여 사용하면 실행된다.
+> 동일한 이름 하에 정의된 여러 함수 중에서 하나를 택하여 실행하는 [함수 오버로딩](#함수-오버로딩)과 전혀 다른 개념이다.
+
+오버라이딩이 되는 기반 클래스의 메소드는 [`virtual`](https://en.cppreference.com/w/cpp/language/virtual) 지정자로 정의된 가상 함수(virtual function)이다. 정의된 가상 함수는 기반 클래스를 객체화하여 곧바로 사용할 수 있으며, 또는 파생 클래스에서 오버라이딩을 하지 않은 채 객체화하여 사용될 수 있다. 단, [상속](#상속)에서 보여준 예시 코드는 절대 함수 오버라이딩이 아니며 단순히 파생 클래스에 묻힌 것일 뿐이다.
 
 ```cpp
-/* 기반 클래스 생성 */
+/* 기반 클래스 정의 */
 class BASECLASS {
 public:
-    // 가상 함수
-    virtual void polymorph() {
-    	statements1;
-    }	
+    
+    /* 가상 함수 정의 */
+    virtual void function() {
+    	
+    }
 };
 
-/* 파생 클래스 생성 */
+/* 파생 클래스 정의 */
 class DERIVEDCLASS
     : public BASECLASS {
-public:	
-    // 함수 오버라이딩
-    void polymorph() {
-    	statements2;
-    }  
+public:
+
+    /* 함수 오버라이딩 */
+    void function() {
+    	
+    }
 };
 ```
-
-[상속](#상속)에서 보여준 기반 클래스의 맴버가 파생 클래스 맴버로 대체되는 것은 절대 함수 오버라이딩이 아니다. 이는 단순히 기반 클래스 맴버가 파생 클래스 맴버에 묻힌 것 뿐이다.
 
 *순수 가상 함수(pure virtual function)*는 정의가 없이 선언만 된 가상 함수를 가리킨다. 기반 클래스에서 정의되지 않았으므로, 파생 클래스에서는 반드시 오버라이딩을 해야 한다. 오버라이딩하지 않으면 컴파일 오류가 발생한다.
 
+기반 클래스의 가상 함수는 아무런 정의가 없이 `=0` 구문이 뒤에 붙는 [순수 가상 함수](https://en.cppreference.com/w/cpp/language/abstract_class)(pure virtual function)로 선언될 수 있다. 그리고 최소한 한 개 이상의 순수 가상 함수를 갖는 클래스를 추상 클래스(abstract class)라고 부른다.
+
 ```cpp
-/* 순수 가상 함수 */
-virtual void polymorph() = 0;
+/* 추상 클래스 정의 */
+class BASECLASS {
+public:
+    
+    /* 순수 가상 함수 선언 */
+    virtual void function() = 0;
+};
 ```
 
-*추상 클래스(abstract class)*는 최소 하나의 순수 가상 함수를 가진 기반 클래스를 가리킨다. 순수 가상 함수의 성질로 인해, 추상 클래스는 객체를 생성할 수 없으며 오로지 상속을 위해 사용된다.
+순수 가상 함수는 아무런 정의가 없으므로 추상 클래스는 객체화가 불가하며, 오로지 상속 목적으로만 사용된다.
 
 ## 클래스 파일
-C++ 프로젝트를 더 효율적으로 관리하기 위해서 클래스를 파일로 생성하는 것을 권장한다. 비주얼 스튜디오에서 클래스 파일은 솔루션 탐색기(Solution Explorer)에서 소스 파일(Source Files) 혹은 헤더 파일(Header Files) 필터를 오른쪽 클릭하여 `추가 >> 클래스...`을 선택한다.
+클래스는 `.HPP` (또는 `.H`) 헤더 및 `.CPP` 소스 파일로 나뉘어 관리될 수 있다. [비주얼 스튜디오](#비주얼-스튜디오)의 경우에는 솔루션 탐색기(Solution Explorer)에서 클래스를 추가하려는 프로젝트에 오른쪽 클릭하여 `Add > Class...`를 선택한다.
 
 ![비주얼 스튜디오에서 클래스 파일 생성하기](/images/docs/cpp/cpp_vs_class.png)
 
-"**C<u>l</u>ass Name:**" 란에 입력한 클래스 이름은 자동적으로 "**.h <u>f</u>ile:**"와 "**.c<u>p</u>p file:**"에 동일한 파일 이름이 입력된다. OK 버튼을 눌러 클래스의 헤더 파일과 소스 파일을 생성한다.
-
-클래스의 헤더와 소스 파일은 솔루션 탐색기의 헤더 파일 및 소스 파일 필터로 이동한다. 비록 클래스가 두 개의 파일로 나뉘어져 있어도 `#include` 지시문을 통해 C++ 스크립트에 클래스를 정상적으로 불러올 수 있다.
+**C<u>l</u>ass Name** 란에 입력한 클래스 식별자는 <b>.h <u>f</u>ile</b>와 <b>.c<u>p</u>p file</b>에 동일한 파일 이름으로 자동입력된다. OK 버튼을 누르면 클래스의 헤더 파일과 소스 파일이 생성된 것을 솔루션 탐색기에서 확인이 가능하다. 생성된 클래스는 `#include` 지시문으로 클래스 헤더를 불러와 사용할 수 있다.
 
 ```cpp
 #include "ClassName.h"
@@ -1812,26 +1824,25 @@ int main() {
 }
 ```
 
-클래스의 헤더 파일은 일반적으로 C 프로그래밍 언어와 호환이 가능한 `.h` 확장자로 생성되며, 이와 반대로 `.hpp`는 C++ 전용 헤더 파일이다. C 프로그래밍 언어는 클래스가 지원되지 않기 때문에, 사실상 어떤 확장자를 사용해도 아무런 문제는 없다.
-
 ### 클래스 헤더 파일
-클래스 헤더 파일(`.h`)은 일반적으로 클래스 맴버 필드 및 메소드의 선언을 담고 있다. 헤더 파일을 통해 다른 스크립트가 클래스의 존재를 알아차리고 사용할 수 있게 된다.
+`.HPP` (또는 `.H`) 확장자의 클래스 헤더 파일은 일반적으로 클래스의 필드 및 메소드 맴버의 선언을 담고 있다. 해당 클래스를 사용하려는 타 소스 파일이 오브젝트 파일로 컴파일되는 과정, 즉 [링크](/blog/ko.compiler_vs_interpreter#aot-컴파일)되기 이전에 클래스의 존재와 구성을 알리는 역할을 한다.
 
 ```cpp
 /* "ClassName.h" 헤더 파일 */
 class ClassName {
+    int   field1;
+    float field2;
+
 public:
     ClassName(int arg1, float arg2);
     ~CLASS() { }
     
-    int field1;
-    float field2;
-    float method(int arg3);
+    int method(int arg);
 };
 ```
 
 ### 클래스 소스 파일
-클래스 소스 파일(`.cpp`)은 헤더 파일에서 선언된 맴버 필드 및 메소드의 정의가 담겨 있는 스크립트이다. 비록 클래스의 존재를 헤더 파일이 알리지만, 실질적 정의는 모두 소스 파일에 내포되어 있다. 헤더 파일의 선언과 소스 파일의 정의를 연동하기 위해서 `#include` 전처리기 지시문을 사용해야 한다.
+`.CPP` 확장자의 클래스 소스 파일은 클래스 헤더 파일에서 선언된 맴버 필드 및 메소드의 정의를 내포한다. 해당 클래스 맴버들의 실질적인 코드가 들어있으나, `#include` 지시문으로 클래스 헤더를 포함해서 맴버의 선언과 정의를 연동시켜야 한다.
 
 ```cpp
 /* "ClassName.cpp" 소스 파일 */
@@ -1843,250 +1854,317 @@ ClassName::ClassName(int arg1, float arg2)
    statements;
 }
 
-ClassName::~ClassName()
-{
+ClassName::~ClassName() {
    statements;
 }
 
-float ClassName::method(int arg3)
-{
-    return field1 + field2 - arg3;
+int ClassName::method(int arg) {
+    return field1 + field2 - arg;
 }
 ```
 
 # C++: 사용자 정의 자료형
-C++ 프로그래밍 언어에서 흔히 사용되는 `int`, `float`, `char` 등과 같은 데이터 자료형은 이미 `iostream` 헤더 파일에 정의되어 있다. 이러한 내부 자료형을 기반으로 목적에 알맞은 사용자 정의 자료형을 새롭게 지정할 수 있으며, 본 장은 일반 자료형보다 더 많은 자료를 복합적으로 저장할 수 있는 사용자 정의 자료형의 정의 및 활용법을 설명한다.
+사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 C++ 프로그래밍 언어에 내장된 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다.
 
 ## 구조체
-구조체(structure)는 자료형과 상관없이 여러 맴버 변수(일명 맴버 필드)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 구조체의 정의는 `struct` 키워드를 통해 이루어진다.
+[구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 구조체는 `struct` 키워드로 정의된다.
 
 ```cpp
 /* 구조체 정의: 총 5바이트 활용 */
 struct STRUCTURE {
-    // 맴버 필드 정의
-    int   field1;    // 자료형 크기: 4바이트
-    char  field2;    // 자료형 크기: 1바이트
+    /* 맴버 정의 */
+    char  field1;    // 자료형 크기: 1바이트
+    int   field2;    // 자료형 크기: 4바이트
 };
-
-/* 구조체 변수 정의 및 초기화 */
-STRUCTURE variable = {3, 'A'};
 ```
-----
+
+정의된 구조체로부터 변수를 정의하는 방법은 다음과 같다:
+
+* C++ 프로그래밍 언어 자료형처럼 변수 앞에 구조체를 명시하고, 중괄호 `{}` 내에 맴버가 선언된 순서대로 데이터를 나열한다.
+
+    ```cpp
+  /* 구조체 변수 정의 1 */
+  STRUCTURE variable1 = {'A', 3};
+  STRUCTURE variable2 = {.field2 = 3, .field1 = 'A'};
+    ```
+
+* 구조체 변수 선언 이후, 맴버 순서대로 데이터가 나열된 중괄호 `{}`로 초기화한다.
+
+    ```cpp
+  /* 구조체 변수 정의 2 */
+  STRUCTURE variable;
+  variable = {'A', 3};
+    ```
+
+* 구조체를 정의하는 동시에 구조체 변수를 정의한다.
+
+    ```cpp
+  /* 구조체 및 변수 정의 */
+  struct STRUCTURE {
+      int  field1;
+      char field2;
+  } variable = {'A', 3};  
+    ```
+
+정의된 구조체 변수는 [객체 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `.`를 통해 구조체 맴버를 호출한다.
+
 ```cpp
-/* 구조체 정의 & 변수 정의 */
-struct STRUCTURE {
-    int   field1;
-    char  field2;
-} variable;
-
-/* 구조체 변수 초기화*/
-variable = {3, 'A'};
+std::cout << variable.field1 << std::endl << variable.field2;
 ```
-----
+```
+A
+3
+```
+
+> 일부 C++ 소스 코드는 구조체 변수를 정의할 때 `struct` 키워드가 포함된 C 프로그래밍 구문을 사용하는데, 이는 C++11 이후부터 개정되어 더 이상 필요하지 않다.
+
+### 데이터 구조 정렬
+위의 예시 코드에서 `char` (1바이트) 그리고 `int` (4바이트) 자료형 맴버로 구성된 구조체가 사실상 8바이트 메모리 용량을 차지한다고 언급하였다. 이는 시스템 프로세서 차원에서 메모리 접근성을 위한 [데이터 구조 정렬](https://en.wikipedia.org/wiki/Data_structure_alignment)(data structure alignment)이 반영된 결과이다. 여기서 데이터의 메모리 주소가 해당 데이터의 크기인 $n$-바이트 배수로써 자연스럽게 정렬(naturally aligned)되었을 때 하드웨어 성능 효율이 가장 높으며, 이를 "$n$-바이트 정렬"되었다고 부른다.
+
+대체적으로 자료형마다 지정된 정렬 크기는 해당 자료형 크기와 일치한다: `char`은 1바이트 정렬, `short`는 2바이트 정렬, `int` 및 `float`는 4바이트 정렬이다. 다양한 자료형 맴버들로 구성될 수 있는 구조체의 경우, 메모리 공간 절약보다 접근 효율이 우선시되기 때문에 맴버 자료형이 갖는 가장 큰 정렬 크기의 배수만큼 메모리를 할당받아 맴버들을 정의된 순서대로 정렬시킨다.
+
+1. 정렬에 의해 맴버 간 여분이 발생하면 메모리의 연속성을 위해 패딩으로 메워진다.
+
+    ```cpp
+   /* 구조체 크기: 8바이트 */
+   struct STRUCTURE {
+   //-------------------- Addr: 0x00000000
+        char  field1;         // + 1
+   //  char  Padding1[3];    // + 3
+   //-------------------- Addr: 0x00000004
+        int   field2;         // + 4
+   //-------------------- Addr: 0x00000008
+   };
+    ```
+
+2. 맨 마지막 맴버의 자료형 크기가 정렬 크기에 미치지 못하면 나머지를 패딩으로 채운다.
+
+    ```cpp
+   /* 구조체 크기: 8바이트 */
+   struct STRUCTURE {
+   //-------------------- Addr: 0x00000000
+        int   field1;         // + 4
+   //-------------------- Addr: 0x00000004
+        char  field2;         // + 1
+   //  char  Padding1[3];    // + 3
+   //-------------------- Addr: 0x00000008
+   };
+    ```
+
+3. 맴버가 정의된 순서는 구조체 크기에 영향을 줄 수 있다: `char`-`int`-`short` 자료형 순서로 정의된 구조체는 총 12바이트 크기를 갖는다.
+
+    ```cpp
+   /* 구조체 크기: 12바이트 */
+   struct STRUCTURE {
+   //-------------------- Addr: 0x00000000
+        char  field1;         // + 1
+   //  char  Padding1[3];    // + 3
+   //-------------------- Addr: 0x00000004
+        int   field2;         // + 4
+   //-------------------- Addr: 0x00000008
+        short field3;         // + 2
+   //  char  Padding2[2];    // + 2
+   //-------------------- Addr: 0x0000000C
+   };
+    ```
+
+    반면 `char`-`short`-`int` 자료형 순서로 정의하면 구조체의 크기는 8바이트로 줄어든다. 비록 `short` 자료형이 2바이트 정렬인 관계로 `char` 자료형 맴버 사이에 1바이트 패딩이 메워지지만, `int` 자료형에 의한 4바이트 크기의 정렬 경계 내에 두 맴버를 모두 담아낼 수 있기 때문이다.
+
+    ```cpp
+   /* 구조체 크기: 8바이트 */
+   struct STRUCTURE {
+   //-------------------- Addr: 0x00000000
+        char  field1;         // + 1
+   //  char  Padding1[1];    // + 1
+        short field2;         // + 2
+   //-------------------- Addr: 0x00000004
+        int   field3;         // + 4
+   //-------------------- Addr: 0x00000008
+   };
+    ```
+
+### 구조체 포인터
+구조체 포인터(structure pointer)는 구조체를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 구조체 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
+
 ```cpp
-/* 구조체 정의 & 변수 정의 및 초기화 */
-struct STRUCTURE {
-    int   field1;
-    char  field2;
-} 	variable = {3, 'A'};
+/* 구조체 포인터 정의 */
+STRUCTURE *ptr = &variable;
+
+ptr->field1 = 'A';
+ptr->field2 = 3;
 ```
-
-구조체 정의 이후, 구조체 변수의 맴버 필드는 맴버 연산자 `.`를 통해 접근한다.
-
-```cpp
-variable.field1;    // >> 출력: 3
-variable.field2;    // >> 출력: A
-```
-
-일부 C++ 프로젝트는 C 프로그래밍 언어 형식의 구조체 호출 구문인 `struct STRUCTURE variable;` 표현식을 가진다. 그러나 이는 C++11 이후부터 더이상 사용되지 않는 구문이다. C 프로그래밍 언어에서는 구조체를 호출할 때마다 `struct` 키워드를 사용해야 한다는 점에 비해 구문이 매우 편리해졌다.
 
 ### 익명 구조체
-위에서 설명한 구문은 한 번 정의된 구조체를 재사용하여 동일한 자료형의 여러 구조체 변수를 정의할 수 있도록 한다. 만일 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 구조체를 생성하려면 아래와 같은 구문으로 익명 구조체(anonymous structure)를 정의한다.
+익명 구조체(anonymous structure)는 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 구조체와 변수를 함께 정의한다.
 
 ```cpp
-/* 일회용 구조체 정의 및 변수 초기화 */
+/* 익명 구조체 및 변수 정의 */
 struct {
-    int   field1;
-    char  field2;
-} variable = {3, 'A'};
+    char  field1;
+    int   field2;
+} variable = {'A', 3};
 ```
 
 ## 공용체
-공용체(union)는 구조체와 유사하게 자료형과 상관없이 여러 여러 맴버 변수(일명 맴버 필드)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이지만, 맴버 필드들은 하나의 메모리 공간을 공유한다. 즉, 공용체의 한 맴버 필드 데이터가 변하면 하나의 메모리 주소를 공용하기 때문에 나머지 맴버 필드의 값에 영향을 미친다. 공용체의 정의는 `union` 키워드를 통해 이루어진다.
+[공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 각 맴버마다 데이터를 저장하는 [구조체](#구조체)와 달리, 맴버들은 하나의 공용 메모리를 사용한다. 즉, 공용체의 한 맴버에 데이터 변경이 발생하면 나머지 맴버에도 영향을 미친다. 공용체는 `union` 키워드로 정의된다.
 
 ```cpp
 /* 공용체 정의: 총 4바이트 활용 */
-union UNION {
-    // 맴버 필드 정의
-    int   field1;    // 자료형 크기: 4바이트
-    char  field2;    // 자료형 크기: 1바이트
-};
-
-/* 공용체 변수 정의 및 초기화 */
-UNION variable = {365};
+union UNION {    
+    /* 맴버 정의 */
+    char  field1;    // 자료형 크기: 1바이트
+    int   field2;    // 자료형 크기: 4바이트
+}
 ```
-----
+
+공용체에 할당되는 메모리 크기는 내부 변수 중에서 가장 큰 메모리 용량이 요구되는 자료형과 동일한데, 이는 나머지 내부 변수도 하나의 메모리 공간에서 처리할 수 있도록 하기 위해서이다.
+
+정의된 공용체로부터 변수를 정의하는 방법은 다음과 같다:
+
+* C++ 프로그래밍 언어 자료형처럼 변수 앞에 `union`과 함께 공용체를 명시하고, 중괄호 `{}` 내에 단일 데이터를 기입한다.
+
+    > 만일 구조체처럼 각 맴버에 대하여 값을 지정하면, 맨 마지막에 순서에 할당된 값이 최종 데이터가 된다.
+
+    ```cpp
+  /* 공용체 변수 정의 1 */
+  UNION variable1 = {365};
+  UNION variable2 = {.field2 = 365, .field1 = 'A'};    // 결과: variable2 = {321};
+    ```
+
+* 공용체 변수 선언 이후, 맴버 순서대로 데이터가 나열된 중괄호 `{}`로 초기화한다.
+
+    ```cpp
+  /* 공용체 변수 정의 2 */
+  UNION variable;
+  variable = {365};
+    ```
+
+* 공용체를 정의하는 동시에 공용체 변수를 정의한다.
+
+    ```cpp
+  /* 공용체 및 변수 정의 */
+  union UNION {
+      char  field1;
+      int   field2;
+  } variable = {365};  
+    ```
+
+정의된 공용체 변수는 [객체 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `.`를 통해 공용체 맴버를 호출한다.
+
 ```cpp
-/* 공용체 정의 & 변수 정의 */
-union UNION {
-    int   field1;
-    char  field2;
-} variable;
+#include <iomanip>
+using namespace std;
 
-/* 구조체 변수 초기화*/
-variable = {365};
+cout << setw(3) << setfill(' ') << variable.field1 << " (0x" << hex 
+        << setw(sizeof(variable) * 2) << setfill('0') << static_cast<int>(variable.field1) << ")" << endl;
+cout << setw(3) << setfill(' ') << variable.field2 << " (0x" << hex 
+        << setw(sizeof(variable) * 2) << setfill('0') << static_cast<int>(variable.field2) << ")" << endl;
 ```
-----
-```cpp
-/* 공용체 정의 & 변수 정의 및 초기화 */
-union UNION {
-    int   field1;
-    char  field2;
-} variable = {365};
+```
+  m (0x0000006d)
+365 (0x0000016d)
 ```
 
-공용체에 할당되는 메모리 크기는 맴버 필드 중에서 가장 큰 메모리 용량이 요구되는 자료형과 동일한데, 이는 나머지 맴버 필드도 하나의 메모리 공간에서 처리할 수 있도록 하기 위해서이다. 비록 공용체가 두 개 이상의 맴버 필드를 가지지만 하나의 메모리 공간만을 사용하기 때문에 초기화 단계에서 하나의 맴버 필드만 할당하면 된다.
+첫 번째 내부 변수 `field1`은 1바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 정수 109에 해당하는 ASCII 문자 'm'이 출력되는 반면, 두 번째 내부 변수 `field2`는 4바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되었다.
 
-공용체 정의 이후, 공영체 변수의 맴버 필드는 맴버 연산자 `.`를 통해 접근한다.
+### 공용체 포인터
+공용체 포인터(union pointer)는 공용체를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 구조체 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
 
 ```cpp
-variable.field1;    // >> 출력: 365 (0x0000016d)
-variable.field2;    // >> 출력: 109 (0x0000006d)
-```
+/* 공용체 포인터 정의 */
+UNION *ptr = &variable;
 
-첫 번째 맴버 필드 `field1`은 4바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되는 반면, 두 번째 맴버 필드 `field2`는 1바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 109 정수가 출력되었다.
+ptr->field1 = 3;
+ptr->field2 = 'A';
+```
 
 ### 익명 공용체
-위에서 설명한 구문은 한 번 정의된 공용체를 재사용하여 동일한 자료형의 여러 공용체 변수를 정의할 수 있도록 한다. 만일 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 공용체를 생성하려면 아래와 같은 구문으로 익명 공용체(anonymous union)를 정의한다.
+익명 공용체(anonymous union)는 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 공용체와 변수를 함께 정의한다.
 
 ```cpp
-/* 일회용 공용체 정의 및 변수 초기화 */
+/* 익명 공용체 및 변수 정의 */
 union {
-    int   field1;
-    char  field2;
+    char  field1;
+    int   field2;
 } variable = {365};
 ```
 
 ## 열거형
-열거형(enumeration)은 열거된 항목들을 정수로 순번을 매기는 자료형이다. 열거자(enumerator)라고 부르는 열거 항목들은 기본적으로 정수 0부터 시작하여 순서대로 1만큼 값이 증가한다.
+[열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기는 자료형이다. 열거자들은 기본적으로 정수 0부터 시작하여 다음 열거자마다 1만큼 증가한다. 열거자에 할당 연산자 `=`로 정수를 집적 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거자를 추가하거나, 혹은 열거형의 값을 바꾸는 건 불가하다. 열거형은 `enum` 키워드로 정의된다.
 
 ```cpp
 /* 열거형 정의 */
 enum ENUMERATION {
-    enumerator1,     // 열거자 = 0
-    enumerator2,     // 열거자 = 1
-    enumerator3,     // 열거자 = 2
-    enumerator4      // 열거자 = 3
-};
-
-/* 열거형 변수 정의 및 초기화 */
-ENUMERATION variable = enumerator1;
-```
-----
-```cpp
-/* 열거형 정의 & 변수 정의 */
-enum ENUMERATION {
-    enumerator1,     // 열거자 = 0
-    enumerator2,     // 열거자 = 1
-    enumerator3,     // 열거자 = 2
-    enumerator4      // 열거자 = 3
-} variable;
-
-/* 열거형 변수 초기화 */
-variable = enumerator1;
-```
-----
-```cpp
-/* 열거형 정의 & 변수 정의 및 초기화 */
-enum ENUMERATION {
-    enumerator1,     // 열거자 = 0
-    enumerator2,     // 열거자 = 1
-    enumerator3,     // 열거자 = 2
-    enumerator4      // 열거자 = 3
-} variable = enumerator1;
-```
-
-열거자들에 할당되는 정수는 할당 연산자 `=`를 통해 달리 지정이 가능하며, 다른 열거자와 동일한 값이 할당되어도 상관없다.
-
-```cpp
-enum ENUMERATION {
-    enumerator1 = 3, // 열거자 = 3
-    enumerator2 = 1, // 열거자 = 1
-    enumerator3,     // 열거자 = 2
-    enumerator4      // 열거자 = 3
+    enumerator1,     // = 0
+    enumerator2,     // = 1
+    enumerator3 = 7, // = 7
+    enumerator4      // = 8
 };
 ```
 
-그러나 동일한 이름의 열거자는 유일해야 하는데, 이는 열거자가 상수 전역 변수와 같은 개념이 적용되기 때문이다. 즉, C++ 프로젝트 전체에 사용이 가능하나 초기화 이후 값 변동이 불가능한 데이터라고 볼 수 있다.
+비록 다른 열거형에 정의된 열거자여도 식별자는 전역적으로 유일해야 한다.
 
 ```cpp
 enum ENUMERATION1 {
     enumerator1,
     enumerator2,
-    enumerator3,
-    enumerator4
 };
 
 enum ENUMERATION2 {
-    enumeration4,    // 오류: 열거자 'enumerator4'가 재정의 되었습니다.
-    enumeration5,
-    enumeration6
+    enumeration2,    // [C2086] 'enumerator2': 재정의: 이전 정의는 '열거자'입니다.
+    enumeration3,
 };
 ```
 
-열거형 정의 이후, 열거형 변수는 열거자를 할당받아 사용한다. 또한 열거형 변수가 아닌 정수형 변수로도 열거자를 할당받을 수 있다.
+열거형으로부터 정의된 변수는 해당 열거형이 갖는 열거자만 할당받을 수 있다. 만일 타 열거형의 열거자나 범위 외의 정수로 할당하려면 자료형 변환이 필요하다.
 
 ```cpp
-/* 열거형 변수에 열거자 할당 */
+/* 열거형 변수 정의 */
 ENUMERATION variable = enumerator1;
-```
-----
-```cpp
-/* 정수형 변수에 열거자 할당 */
-int variable = enumerator1;
 ```
 
 ### 열거형 클래스
-열거형은 열거자 식별자가 전 프로젝트를 통틀어 유일해야 하며, 열거형이 달라도 동일한 이름을 공유할 수 없는 단점을 가진다. 반면, 열거형 클래스(enumeration class)는 다른 열거형 클래스 간에 동일한 열거자 식별자를 가질 수 있도록 한다.
+[열거형 클래스](https://en.cppreference.com/w/cpp/language/enum#Scoped_enumerations)(enumeration class)는 타 열거형과 관계없이 동명의 열거자를 가져도 네임스페이스처럼 국부적인 영역범위에 속하므로 오류가 발생하지 않는 열거형으며, 일명 영역 제한 열거형(scoped enumeration)이라고 칭한다. 열거형 클래스는 `enum class` 혹은 `enum struct`로 정의된다.
+
+> 일반 열거형과 달리 열거자 충돌 문제를 방지할 수 있기 때문에, C++ 프로그래밍 언어는 열거자 클래스의 활용을 적극 권장한다.
 
 ```cpp
+/* 열거형 클래스 정의 1 */
 enum class ENUMERATION1 {
     enumerator1,
     enumerator2
 };
 
-enum class ENUMERATION2 {
-    enumerator2,		// 컴파일 오류 발생하지 않음: "enumerator2"은 국부적!
-    enumerator3
+/* 열거형 클래스 정의 2 */
+enum struct ENUMERATION2 {
+    enumerator1,
+    enumerator2
 };
 ```
 
-일반 열거형과 달리, 열거형 클래스는 정수형 변수에 할당할 수 없다. 또한, 열거자는 반드시 열거형 클래스로부터 범위지정 연산자 `::`를 통해 호출해야 한다.
+열거형 클래스의 열거자는 반드시 해당 열거형 클래스를 함께 명시하여 범위지정 연산자 `::`를 통해 호출되어야 한다.
 
 ```cpp
-/* 열거형 클래스 할당 */
-ENUMERATION1 variable = ENUMERATION::enumerator2;
+/* 열거형 클래스 변수 정의 */
+ENUMERATION1 variable = ENUMERATION1::enumerator1;
 ```
-
-열거형과 달리 열거자 식별자 충돌 문제를 방지할 수 있으므로 C++에서는 열거자 클래스 사용을 권장한다.
 
 ## `typedef` 선언
-`typedef` 키워드는 기존에 존재하는 자료형을 다른 명칭(일명 별칭; alias)으로 선언하여 가독성을 높이는 역할을 한다.
+[`typedef`](https://en.cppreference.com/w/cpp/language/typedef) 키워드는 C/C++ 프로그래밍 언어 내장 자료형 및 사용자 지정 자료형에 별칭(alias)을 선언하여 가독성을 높이는 역할을 한다.
 
 ```cpp
-typedef int dtypeName;
+/* unsigned 문자 자료형의 BYTE 별칭 선언 */
+typedef unsigned char BYTE;
 ```
 
-C 프로그래밍 언어에서 `typedef` 키워드를 구조체나 공용체와 같은 사용자 정의 자료형과 함께 사용하여 정의 구문을 간략화하는 역할을 지닌다. 이는 C 프로그래밍 언어가 사용자 정의 자료형을 정의할 때마다 키워드를 요구하기 때문이며, 정의 시 키워드가 필요 없는 C++ 프로그래밍 언어에서는 사용되지 않는 구문이다.
+### 자료형 별칭 선언
+[`using`](https://en.cppreference.com/w/cpp/language/type_alias) 키워드는 [네임스페이스](#네임스페이스)의 반복적 호출을 생략하는데 사용되기도 하지만, 자료형에 별칭을 선언(type alias declaration)하여 가독성을 높이기도 한다.
 
-## 자료형 별칭 선언
-[네임스페이스](#네임스페이스)에서 `using` 키워드가 네임스페이스의 반복적 호출을 생략하는데 사용된다고 소개하였다. `using` 키워드는 기존 자료형을 다른 별칭으로 호출하여 가독성을 높이는데, 이를 자료형 별칭 선언(type alias declaration)이라 부른다.
+> 자료형 별칭 선언은 `typedef` 선언과 차이가 없으며 사실상 동일한 역할을 수행한다.
 
 ```cpp
 using dtypeName = int;
 ```
-
-자료형 별칭 선언은 typedef 선언과 차이점이 없으며, 사실상 두 선언은 동일하다고 볼 수 있다.
 
 # C++: 템플릿
 템플릿(template)은 자료형과 무관하게 함수 또는 클래스의 형식 틀을 제공한다. 개발자는 템플릿을 활용해 여러 유사한 함수 및 클래스를 손쉽게 생성할 수 있다. 본 장은 템플릿 정의 및 활용법을 설명한다.
@@ -2243,6 +2321,88 @@ template <class X>
 /* 함수 템플릿 객체화: 별칭 사용 */
 aliasName<int>(1, 3)
 ```
+
+# C++: 메모리 관리
+> *참고: [GKO95 GitHub Pages - 메모리](/docs/ko.Memory)*
+
+프로그램을 실행하는데 있어 메모리 관리는 매우 중요한 작업에 해당한다. 그 중에서 동적 메모리 할당은 보다 더 나은 메모리 효율성을 위해 사용되며, [포인터](#c-포인터)에 대한 충분한 개념적 이해도가 필요하다. 여기서 메모리는 HDD 및 SSD와 같은 [보조기억장치](https://ko.wikipedia.org/wiki/기억_장치)가 아닌 RAM이 해당하는 [주기억장치](https://ko.wikipedia.org/wiki/주기억장치)를 가리킨다.
+
+## 스택 영역
+[스택](https://ko.wikipedia.org/wiki/스택)(stack)은 마지막에 입력된 데이터가 먼저 출력되는 선형적 LIFO(Last-In-First-Out) 데이터 나열 구조이다. 빠른 메모리 접근성의 장점을 가지고 있어 일반적으로 컴파일러에서 데이터 메모리 할당 및 해제를 스택 영역에서 처리한다. 대표적으로 조건문, 반복문, 혹은 함수에서 정의된 지역 변수 등이 코드 블록 외에서는 사용할 수 없다는 특징이 스택 영역 메모리를 활용하고 있음을 의미한다.
+
+스택 영역 메모리의 LIFO 구조는 프로그램 코드를 실행하는데 활용되며, 데이터를 저장하기 위한 용도로는 부적합하다. 지역 변수는 스택을 벗어나면 데이터가 사라지고, 전역 변수는 외부에 쉽게 노출되어 있어 권장되지 않는다.
+
+## 힙 영역
+힙(heap) 영역 메모리는 프로그램이 데이터를 저장할 수 있는 메모리 영역이다. 컴파일러가 코드를 실행하기 위해서 사용하는 영역이 아니며, 프로그램 개발자가 직접 메모리를 할당하고 해제해야 한다. 주소를 찾아가는데 걸리는 시간이 있어 스택 영역보다 접근 속도가 느리지만, 코드 블록의 영향을 받지 않고 프로그램이 종료될 때까지 데이터가 메모리에 남아있을 수 있다는 특징을 갖는다.
+
+> 힙 영역 메모리는 [힙 자료구조](https://ko.wikipedia.org/wiki/힙_(자료_구조))와 전혀 상관이 없으며, 사전적으로 "(데이터) 더미"를 뜻하는 순수히 RAM 물리 메모리의 주소공간 영역을 지칭하는 용어이다.
+
+## 동적 할당
+[동적 할당](https://ko.wikipedia.org/wiki/동적_메모리_할당)(dynamic allocation)은 개발자가 힙 영역에 메모리를 할당하는 작업을 가리킨다. 시스템이 처리하는 메모리가 아니므로 더 이상 사용되지 않는 힙 메모리도 직접 할당을 해제해야 한다. 이러한 작업을 하지 않으면 컴파일된 프로그램이 비정상적으로 동작하거나 최악의 경우 시스템 충돌이 발생한다.
+
+동적 할당과 해제는 [`new`](https://en.cppreference.com/w/cpp/language/new) 및 [`delete`](https://en.cppreference.com/w/cpp/language/delete) 표현식을 통해 이루어진다.
+
+* **[값 초기화](https://en.cppreference.com/w/cpp/language/value_initialization)(value-initialization)**: 소괄호 `()` 내에 지정된 값으로 초기화된다.
+
+* **[기본 초기화](https://en.cppreference.com/w/cpp/language/default_initialization)(default-initialization)**: 자료형에 따라 기본 초기화는 달리 작용한다.
+
+    * 기본 자료형(`int`, `float`, `char` 등)은 초기화되지 않으며 메모리에 잔여하는 쓰레기 값(garbage value)을 갖는다.
+
+    * [클래스](#c-클래스) 및 [구조체](#구조체)는 [기본 생성자](#생성자)가 실행된다.
+
+    * [배열](#배열)의 경우에는 각 요소마다 자료형에 따른 기본 초기화가 작용한다.
+
+    ```cpp
+  /* 동적 할당: 값 초기화 */
+  int* temp = new int(3);
+  int* buff = new int[2] {1, 7};
+
+  std::cout << *temp << std::endl;                // 출력: 3
+  std::cout << buff[0] << buff[1] << std::endl;   // 출력: 17
+
+  /* 동적 할당: 기본 초기화 */
+  int* var = new(temp) int;
+  int* arr = new(buff) int[2];
+
+  std::cout << *var << std::endl;                 // 출력: 3 
+  std::cout << arr[0] << arr[1] << std::endl;     // 출력: 17
+
+  /* 동적 할당 해제 */
+  delete temp, var;
+  delete[] buff, arr;
+    ```
+
+> `new` 키워드 접미부의 소괄호 `()`는 동적 할당이 이루어질 메모리 주소를 직접 지정하기 위해 사용된다.
+
+### 메모리 누수
+[메모리 누수](/docs/ko.Memory)(memory leak)는 메모리 관리 문제로써 더 이상 사용되지 않는 메모리가 해제되지 않고 계속 잔여하여, 시스템에서 할당할 수 있는 메모리 리소스가 점차 줄어드는 현상이다. 만일 시스템에서 더 이상 할당할 수 있는 메모리가 없으면 시스템 충돌이 발생하는 치명적인 오류가 발생한다. 이를 해결하기 위해 동적 할당된 메모리는 반드시 `delete` 키워드로 해제하도록 한다.
+
+```cpp
+/* 동적 할당 해제 */
+delete ptr1;
+delete[] ptr2;
+```
+
+### 허상 포인터
+[허상 포인터](https://ko.wikipedia.org/wiki/허상_포인터)(dangling pointer)는 참조하려는 메모리 주소가 더 이상 유효하지 않을 때 발생하는 메모리 관리 문제이다. 시스템적으로 메모리 관리를 하는 과정에서 흔히 발생하는 현상이지만, 프로그래밍에서는 동적 할당이 해제된 포인터가 여전히 해당 주소를 가리키고 있어서 나타나는게 대다수이다. 그러므로 영값 주소 [`nullptr`](https://en.cppreference.com/w/cpp/language/nullptr)을 할당하여 아무런 주소를 가리키지 않도록 한다.
+
+```cpp
+/* 올바른 동적 할당 해제: 할당 해제 이후 포인터에 영값 할당 */
+delete ptr1;
+delete[] ptr2;
+ptr1 = ptr2 = nullptr;
+```
+
+## 메모리 함수
+C 표준 라이브러리 중에서 문자열 관련 [`cstring`]((https://en.cppreference.com/w/cpp/string)) 헤더는 힙 영역 메모리를 처리하는 전용 함수들이 존재한다. 이들은 C/C++ 프로그래밍 언어에서 매우 흔히 사용되는 메모리 함수들의 목록이다.
+
+| 함수    | 예시               | 설명                                                  |
+|:-----------:| --------------------- | ------------------------------------------------------------ |
+| `memchr()`  | `memchr(str,'c',num);` | 문자열 `str`에서 `num` 개의 바이트 내에 문자 `'c'`의 존재여부를 확인한다.<br/>발견될 시 해당 문자의 메모리 주소가 반환되며, 없으면 널 포인터가 반환된다. |
+| `memcmp()` | `memcmp(ptr1,ptr2,num);` | 포인터 `ptr1`과 `ptr2`를 `num` 개의 바이트 내에서 크기를 비교한다.<br/>만일 `n`번째 바이트에서 처음으로 일치하지 않으면 함수는 `*(ptr1 + n)`에서 `*(ptr2 + n)` 차를 반환한다. |
+| `memset()`  | `malloc(ptr,value,num);` | 포인터 `ptr`로부터 시작해 `num` 개의 바이트를 `value` 값으로 채운다. |
+| `memcpy()`  | `memcpy(ptr1,ptr2,num);` | 포인터 `ptr2`에 있는 `num` 개의 바이트를 `ptr1`으로 복사한다; 단, `ptr1`과 `ptr2`가 겹쳐서는 안된다. |
+| `memmove()`    | `memmove(ptr1,ptr2,num);` | 포인터 `ptr2`에 있는 `num` 개의 바이트를 `ptr1`으로 복사한다; `memcpy()`와 달리 `ptr1`과 `ptr2`가 겹쳐도 동작하나 상대적으로 느리다. |
 
 # C++: 예외 처리
 예외(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 컴파일러에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
@@ -2646,11 +2806,11 @@ A
 
 라이브러리는 크게 두 종류로 나뉘어진다:
 
-* **정적 라이브러리(static library)**
+* **[정적 라이브러리](https://ko.wikipedia.org/wiki/정적_라이브러리)(static library)**
 
     정적 라이브러리(`.LIB` 혹은 `.A` 확장자)는 프로그램 프로젝트를 컴파일하면 라이브러리도 함께 내포된다. 그러면 프로그램 하나가 완전체이기 때문에 외부 의존도가 낮아지는 장점을 가지지만, 프로그램 용량이 커지고 프로그램을 업데이트하려면 전부 새로 컴파일해야 하는 단점이 있다.
 
-* **동적 라이브러리(dynamic library)**
+* **[동적 라이브러리](https://ko.wikipedia.org/wiki/동적_링커)(dynamic library)**
 
     동적 라이브러리(`.DLL` 혹은 `.SO`)는 프로그램에 내포되지 않고 별개의 파일로 존재하기 때문에 프로그램 용량이 작아지고 업데이트가 필요한 라이브러리만 교체하면 되지만, 프로그램의 외부 의존도가 높아져 라이브러리를 찾지 못하면 치명적인 문제를 야기할 수 있다.
 

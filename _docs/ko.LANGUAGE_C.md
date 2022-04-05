@@ -320,21 +320,25 @@ scanf("%s", string);
 ## 자료형
 [자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터의 내용물이 어떻게 표현되는지 결정하는 요소이며, C 프로그래밍 언어에서는 여러 자료형이 존재한다. 각 자료형마다 데이터를 표현하기 위해 필요한 바이트 크기가 정해져 있다.
 
-> [바이트](https://ko.wikipedia.org/wiki/바이트)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다. 이에 대한 설명은 잠시 후 설명한다.
+> [바이트](https://ko.wikipedia.org/wiki/바이트)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다.
 
-아래는 ANSI C 프로그래밍 언어가 갖는 자료형이다 (논리 자료형 `bool`은 이후 C99부터 추가되어서 목록에서 제외한다):
+아래는 ANSI C 프로그래밍 언어가 갖는 자료형이며, 더 많은 목록은 [여기](https://en.cppreference.com/w/c/language/type)에서 확인할 수 있다 (논리 자료형 `bool`은 이후 C99부터 추가되어서 목록에서 제외한다):
 
 | 키워드      | 자료형      | 설명                                 |
 |:--------:|----------|------------------------------------|
-| `short`  | 정수       | 16비트 정수형<br />크기: 2바이트             |
-| `int`    | 정수       | 기본 정수형<br />크기: 2 또는 4바이트          |
-| `long`   | 정수       | 32비트 정수형<br />크기: 4바이트             |
+| `short`  | 정수       | 소형 정수<br />크기: 2바이트             |
+| `int`    | 정수       | 기본 정수<br />크기: 2 또는 4바이트          |
+| `long`   | 정수       | 대형 정수<br />크기: 4 또는 8 바이트             |
 | `float`  | 부동소수점    | 32비트 단정밀도 실수<br />크기: 4바이트         |
 | `double` | 부동소수점    | 64비트 배정밀도 실수<br />크기: 8바이트         |
 | `char`   | 문자: `''` | 단일 문자: `'A'` 및 `'?'`<br />크기: 1바이트 |
 | `void`   | 보이드      | 불특정 자료형<br />크기: 1바이트              |
 
-여기서 `int` 정수 자료형의 바이트 크기가 2 또는 4바이트라고 기입된 것을 주목한다. C 프로그래밍 언어 국제표준에 의하면 `int` 정수형은 "최소" 16비트(즉, 2바이트)를 가져야 한다고 명시되어 있다. 이전 컴퓨터가 16비트 시스템이었다는 점을 감안한 것으로, 현재는 32비트 시스템에 맞게 대중적으로 4바이트 크기를 갖는다.
+아래는 C 프로그래밍 언어 자료형에 대한 추가적인 설명이다.
+
+* `int` 정수 자료형은 C/C++ 프로그래밍 언어 국제표준에 의하면 최소 크기가 16비트, 즉 2바이트로 명시되어 있다. 이는 16비트 시스템의 [워드](https://ko.wikipedia.org/wiki/워드_(컴퓨팅))(word)에서 감안된 것으로, 현재는 [마이크로컨트롤러](/docs/ko.Microcontroller) 등의 임베디드 시스템을 제외한 32비트 (및 64비트) 시스템에 맞게 대중적으로 4바이트 크기를 갖는다.
+
+* `long` 정수 자료형은 C/C++ 프로그래밍 언어 국제표준에 의하면 최소 크기가 32비트, 즉 4바이트로 명시되어 있다. 그러므로 32비트 (및 16비트) 시스템에서는 4바이트, 그리고 64비트 시스템에서는 8바이트 크기를 갖는다.
 
 ### `unsigned` 키워드
 `unsigned` 키워드는 자료형 중에서 [최상위 비트](https://ko.wikipedia.org/wiki/최상위_비트)를 정수의 [부호](https://ko.wikipedia.org/wiki/Signed와_unsigned)를 결정하는 요소로 사용하지 않도록 한다. 아래의 16비트 정수형인 `short`는 원래 최상위 비트를 제외한 나머지 15개의 비트로 정수를 표현한다. `unsigned` 키워드를 사용하면 음의 정수를 나타낼 수 없지만, 16개의 비트로 양의 정수를 더 많이 표현할 수 있다.
@@ -377,7 +381,7 @@ variable = 3;
 int variable1 = 3, variable2 = 4, variable3;
 ```
 
-변수의 "선언(declaration)"은 메모리 할당 여부와 관계없이 컴파일러에게 해당 변수의 존재성을 알리는 행위이다. 그러나 이미 변수를 정의하는 과정에서 컴파일러에게 변수의 존재를 알리는 과정이 있는데, 이 또한 변수의 선언이다. 그러므로 C/C++ 프로그래밍 언어 [ISO 표준](https://www.iso.org/standard/68564.html)의 § 3.1.2 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 본다. 단, 몇 가지의 특이사항이 존재한다.
+변수의 "선언(declaration)"은 메모리 할당 여부와 관계없이 컴파일러에게 해당 변수의 존재성을 알리는 행위이다. 그러나 이미 변수를 정의하는 과정에서 컴파일러에게 변수의 존재를 알리는 과정이 있는데, 이 또한 변수의 선언이다. 그러므로 C/C++ 프로그래밍 언어 [ISO 표준](https://github.com/cplusplus/draft)의 § 6.2 Declarations and definitions 부문에 의하면 일반적인 변수의 선언은 정의와 동일하다고 본다. 단, 몇 가지의 특이사항이 존재한다.
 
 * 함수 전방선언
 * 함수 매개변수 선언
@@ -574,7 +578,7 @@ else {
 ```
 
 ## 조건 연산자
-[조건 연산자](https://en.cppreference.com/w/cpp/language/operator_other#Conditional_operator)(ternary operator; `?:`)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
+[조건 연산자](https://en.cppreference.com/w/c/language/operator_other#Conditional_operator)(ternary operator) `?:`는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
 
 ```c
 condition ? true_return : false_return;
@@ -721,7 +725,7 @@ arr[2] = value3;
 ```
 
 ### 배열의 크기
-`sizeof()` 함수가 배열에 사용되면 배열의 크기가 아닌, 배열이 차지하는 총 바이트 수를 반환한다. 배열의 각 요소마다 자료형만큼 메모리를 차지하므로 배열의 크기를 구하기 위해서는 다음과 같은 표현식을 사용한다. 자료형의 요소들로 구성된 배열을 해당 자료형으로 나누면 요소의 개수가 계산된다.
+`sizeof` 연산자가 배열에 사용되면 배열의 크기가 아닌, 배열이 차지하는 총 바이트 수를 반환한다. 배열의 각 요소마다 자료형만큼 메모리를 차지하므로 배열의 크기를 구하기 위해서는 다음과 같은 표현식을 사용한다. 자료형의 요소들로 구성된 배열을 해당 자료형으로 나누면 요소의 개수가 계산된다.
 
 ```c
 int arr[3];
@@ -742,7 +746,7 @@ int arr[][size2] = { {value11, value12, ... }, {value21, value22, ...}, ... };
 ```
 
 ## 문자열
-C 프로그래밍 언어는 일련의 문자들, 일명 [문자열](https://en.cppreference.com/w/cpp/string/byte)(string)을 자체 자료형으로 지원하지 않는다. 하지만 이를 문자들과 널 문자 `\0`로 구성된 배열로 문자열을 표현할 수 있다.
+C 프로그래밍 언어는 일련의 문자들, 일명 [문자열](https://en.cppreference.com/w/cpp/string/byte)(string)을 자체 자료형으로 지원하지 않는다. 하지만 이를 한 개 이상의 `char` 문자들과 널 문자 `\0`로 구성된 배열로 문자열을 표현할 수 있다.
 
 ```c
 /* C 형식 문자열 */
@@ -750,7 +754,7 @@ char arr[] = "Hello";    // 즉, arr[] = {'H', 'e', 'l', 'l', 'o', '\0'};
 char* ptr = "World!";    // 포인터를 활용한 문자열 표현 방법
 ```
 
-아래는 C 프로그래밍 언어에서 문자열과 관련된 함수들의 목록이다. 단, 이들을 사용하기 위해서는 [`string.h`](https://en.cppreference.com/w/cpp/header/string) 헤더 파일을 추가해야 한다.
+아래는 C 표준 라이브러리에서 제공하는 문자열과 관련된 함수들의 목록이다. 단, 이들을 사용하기 위해서는 [`string.h`](https://en.cppreference.com/w/cpp/header/string) 헤더를 추가해야 한다.
 
 | 함수   | 예시               | 설명                                                  |
 |:----------:| --------------------- | ------------------------------------------------------------ |
@@ -864,7 +868,7 @@ Hello World!
 int function(int arg1, float arg2);
 
 /* 함수 호출 */
-function(1, 3.14);      // 출력: 4 ( = 1 + 3.14의 정수형만 추출)
+function(1, 3.14);      // 반환: 4 (= 1 + 3.14의 정수형만 추출)
 
 /* 함수 정의 */
 int function(int arg1, float arg2) {
@@ -923,7 +927,6 @@ int main() {
 ```c
 /* C 프로그래밍 언어 진입점: main() */
 int main(int argc, char **argv) {
-    // 아래에 코드를 입력하세요.
 
     return 0;
 }
@@ -931,7 +934,7 @@ int main(int argc, char **argv) {
 
 > 본 문서의 대부분 코드 예시에는 `main()` 함수가 직접 언급되지 않았으나, 전역 변수와 함수를 제외한 모든 코드들은 `main()` 함수 내에서 작성되어야만 실행된다.
 
-C 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을 반환해야 하며, `EXIT_SUCCESS`(혹은 정수 `0`) 그리고 `EXIT_FAILURE`이 있다. 만일 반환문이 없을 시, 컴파일러는 자동적으로 `return 0;` 문장을 `main()` 함수의 말단에 삽입한다.
+C/C++ 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `int` 정수형을 반환해야 하며, `EXIT_SUCCESS`(혹은 정수 `0`) 그리고 `EXIT_FAILURE`이 있다. 만일 반환문이 없을 시, 컴파일러는 자동적으로 `return 0;` 문장을 `main()` 함수의 말단에 삽입한다.
 
 `main()` 진입점은 아래와 같은 매개변수를 함축적으로 가진다.
 
@@ -974,7 +977,7 @@ printf("%f", calling(callback, 1));
 ```
 
 ## 재귀 함수
-[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없을 시, 재귀는 무한히 발생하여 메모리 부족으로 프로세스 충돌이 발생한다.
+[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
 
 ```c
 /* 예제: 펙토리얼 "!" */
@@ -997,20 +1000,22 @@ int *ptr = &variable;
 
 > 십육진수의 메모리 주소는 수기로 직접 작성하는 것이 아니며, 이는 매우 위험한 행위이다! 접근하려는 데이터의 메모리 주소가 항상 같을거란 보장이 없기 때문이다.
 
-비록 메모리 주소는 4바이트 혹은 8바이트로 표현되지만, 각 메모리 주소마다 담을 수 있는 데이터의 크기는 한 바이트이다. C 프로그래밍 언어의 [자료형](#자료형)에 의하면 `int` 정수나 `float` 부동소수점은 네 바이트가 필요하므로 이웃하는 총 네 개의 메모리 주소가 데이터를 저장하는데 관여한다. 포인터의 자료형은 이러한 특성을 고려하여 포인터가 저장한 메모리 주소로부터 어디까지 참조해야 완전한 데이터인지 알려주는 역할을 한다. 또한 포인터에 역참조 연산자 `*`를 사용하여 해당 자료형으로 어떠한 값이 표현되는지 확인도 가능하다 (포인터 정의에 사용된 별표 `*`와 다른 존재이다).
+비록 메모리 주소는 4바이트 혹은 8바이트로 표현되지만, 각 메모리 주소마다 담을 수 있는 데이터의 크기는 한 바이트이다. C/C++ 프로그래밍 언어의 [자료형](#자료형)에 의하면 `int` 정수나 `float` 부동소수점은 네 바이트가 필요하므로 이웃하는 총 네 개의 메모리 주소가 데이터를 저장하는데 관여한다. 포인터의 자료형은 이러한 특성을 고려하여 포인터가 저장한 메모리 주소로부터 어디까지 참조해야 완전한 데이터인지 알려주는 역할을 한다. 또한 포인터에 역참조 연산자 `*`를 사용하여 해당 자료형으로 어떠한 값이 표현되는지 확인도 가능하다 (포인터 정의에 사용된 별표 `*`와 다른 존재이다).
 
 ```c
 int variable = 365;
 
-// 동일한 자료형의 포인터 변수
+/* 동일한 자료형의 포인터 변수 */
 int *ptr1 = &variable;
-printf("0x%p\n%d\n", ptr1, *ptr1);    // 출력: 0x000000A3896FF954 (주소)
-                                      // 출력: 365                (값)
+printf("0x%p\n%d\n", ptr1, *ptr1);
+// 출력: 0x000000A3896FF954 (주소)
+// 출력: 365                (값)
 
-// 상이한 자료형의 포인터 변수
+/* 상이한 자료형의 포인터 변수 */
 char *ptr2 = &variable;
-printf("0x%p\n%d\n", ptr2, *ptr2);    // 출력: 0x000000A3896FF954 (주소)
-                                      // 출력: 109                (값)
+printf("0x%p\n%d\n", ptr2, *ptr2);
+// 출력: 0x000000A3896FF954 (주소)
+// 출력: 109                (값)
 ```
 
 여기서 `0x` 접두사는 [십육진수](https://ko.wikipedia.org/wiki/십육진수) 표현법임을 구별짓기 위해 삽입하였다.
@@ -1020,10 +1025,10 @@ printf("0x%p\n%d\n", ptr2, *ptr2);    // 출력: 0x000000A3896FF954 (주소)
 | [참조 연산자 `&`](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_address-of_operator)  | 일반 변수  | 메모리 주소 |
 | [역참조 연산자 `*`](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_indirection_operator) | 포인터 | 값      |
 
-만일 일반 변수에서 데이터 변동이 발생하였으면 포인터 변수의 역참조에서도 동일한 데이터 변동을 목격할 수 있다. 두 변수가 동일한 메모리 주소를 공유하고 있기 때문이다. 이러한 C 프로그래밍 언어의 포인터 성질은 매우 중요하게 다루어지는 개념 중 하나이며, 이를 "참조에 의한 호출(call by reference)"이라고 부른다.
+만일 일반 변수에서 데이터 변동이 발생하였으면 포인터 변수의 역참조에서도 동일한 데이터 변동을 목격할 수 있다. 두 변수가 동일한 메모리 주소를 공유하고 있기 때문이다. 이러한 C/C++ 프로그래밍 언어의 포인터 성질은 매우 중요하게 다루어지는 개념 중 하나이며, 이를 "참조에 의한 호출(call by reference)"이라고 부른다.
 
 ### 널 포인터
-널 포인터(null pointer)는 아무런 메모리 주소를 가리키지 않는 포인터이다. C 프로그래밍 언어에서 포인터 사용은 자칫 "access violation" 메모리 접근 오류 등의 치명적인 문제를 야기시킬 수 있기에, 안전한 포인터 사용을 위해 널 포인터를 [`NULL`](https://en.cppreference.com/w/cpp/types/NULL) 매크로로 할당한다.
+널 포인터(null pointer)는 아무런 메모리 주소를 가리키지 않는 포인터이다. C/C++ 프로그래밍 언어에서 포인터 사용은 자칫 "access violation" 메모리 접근 오류 등의 치명적인 문제를 야기시킬 수 있기에, 안전한 포인터 사용을 위해 널 포인터를 [`NULL`](https://en.cppreference.com/w/cpp/types/NULL) 매크로로 할당한다.
 
 ```c
 int *ptr = NULL;
@@ -1109,8 +1114,7 @@ printf("포인터: 0x%p\n", &variable);
 int variable = 123456789;
 unsigned char* ptr = (void*)&variable;
 
-for (int index = 0; index < sizeof(variable); index++)
-{
+for (int index = 0; index < sizeof(variable); index++) {
     printf("0x%#p : %#04x\n", ptr + index, *(ptr + index));
 }
 ```
@@ -1127,14 +1131,14 @@ for (int index = 0; index < sizeof(variable); index++)
 사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 C 프로그래밍 언어에 내장된 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다.
 
 ## 구조체
-[구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 구조체는 `struct` 키워드로 정의된다.
+[구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 정의된 사용자 정의 자료형이다.
 
 ```c
-/* 구조체 정의: 총 5바이트 활용 */
+/* 구조체 정의: 총 8바이트 활용 */
 struct STRUCTURE {
     /* 맴버 정의 */
-    int   field1;    // 자료형 크기: 4바이트
-    char  field2;    // 자료형 크기: 1바이트
+    char  field1;    // 자료형 크기: 1바이트
+    int   field2;    // 자료형 크기: 4바이트
 };
 ```
 
@@ -1144,8 +1148,8 @@ struct STRUCTURE {
 
     ```c
   /* 구조체 변수 정의 1 */
-  struct STRUCTURE variable1 = {3, 'A'};
-  struct STRUCTURE variable2 = {.field2 = 'A', .field1 = 3};
+  struct STRUCTURE variable1 = {'A', 3};
+  struct STRUCTURE variable2 = {.field2 = 3, .field1 = 'A'};
     ```
 
 * 구조체 변수 선언 이후, 맴버 순서대로 데이터가 나열된 중괄호 `{}`를 구조체로 [캐스팅](#자료형-변환)하여 초기화한다.
@@ -1153,28 +1157,103 @@ struct STRUCTURE {
     ```c
   /* 구조체 변수 정의 2 */
   struct STRUCTURE variable;
-  variable = (struct STRUCTURE){3, 'A'};
+  variable = (struct STRUCTURE){'A', 3};
+    ```
+
+* 구조체를 정의하는 동시에 구조체 변수를 정의한다.
+
+    ```c
+  /* 구조체 및 변수 정의 */
+  struct STRUCTURE {
+      char  field1;
+      int   field2;
+  } variable = {'A', 3};  
     ```
 
 정의된 구조체 변수는 [객체 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `.`를 통해 구조체 맴버를 호출한다.
 
 ```c
-printf("%d\n%c", variable.field1, variable.field2);
+printf("%c\n%d", variable.field1, variable.field2);
 ```
 ```
-3
 A
+3
 ```
+
+### 데이터 구조 정렬
+위의 예시 코드에서 `char` (1바이트) 그리고 `int` (4바이트) 자료형 맴버로 구성된 구조체가 사실상 8바이트 메모리 용량을 차지한다고 언급하였다. 이는 시스템 프로세서 차원에서 메모리 접근성을 위한 [데이터 구조 정렬](https://en.wikipedia.org/wiki/Data_structure_alignment)(data structure alignment)이 반영된 결과이다. 여기서 데이터의 메모리 주소가 해당 데이터의 크기인 $n$-바이트 배수로써 자연스럽게 정렬(naturally aligned)되었을 때 하드웨어 성능 효율이 가장 높으며, 이를 "$n$-바이트 정렬"되었다고 부른다.
+
+대체적으로 자료형마다 지정된 정렬 크기는 해당 자료형 크기와 일치한다: `char`은 1바이트 정렬, `short`는 2바이트 정렬, `int` 및 `float`는 4바이트 정렬이다. 다양한 자료형 맴버들로 구성될 수 있는 구조체의 경우, 메모리 공간 절약보다 접근 효율이 우선시되기 때문에 맴버 자료형이 갖는 가장 큰 정렬 크기의 배수만큼 메모리를 할당받아 맴버들을 정의된 순서대로 정렬시킨다.
+
+1. 정렬에 의해 맴버 간 여분이 발생하면 메모리의 연속성을 위해 패딩으로 메워진다.
+
+    ```c
+   /* 구조체 크기: 8바이트 */
+   struct STRUCTURE {
+   //-------------------- Addr: 0x00000000
+        char  field1;         // + 1
+   //  char  Padding1[3];    // + 3
+   //-------------------- Addr: 0x00000004
+        int   field2;         // + 4
+   //-------------------- Addr: 0x00000008
+   };
+    ```
+
+2. 맨 마지막 맴버의 자료형 크기가 정렬 크기에 미치지 못하면 나머지를 패딩으로 채운다.
+
+    ```c
+   /* 구조체 크기: 8바이트 */
+   struct STRUCTURE {
+   //-------------------- Addr: 0x00000000
+        int   field1;         // + 4
+   //-------------------- Addr: 0x00000004
+        char  field2;         // + 1
+   //  char  Padding1[3];    // + 3
+   //-------------------- Addr: 0x00000008
+   };
+    ```
+
+3. 맴버가 정의된 순서는 구조체 크기에 영향을 줄 수 있다: `char`-`int`-`short` 자료형 순서로 정의된 구조체는 총 12바이트 크기를 갖는다.
+
+    ```c
+   /* 구조체 크기: 12바이트 */
+   struct STRUCTURE {
+   //-------------------- Addr: 0x00000000
+        char  field1;         // + 1
+   //  char  Padding1[3];    // + 3
+   //-------------------- Addr: 0x00000004
+        int   field2;         // + 4
+   //-------------------- Addr: 0x00000008
+        short field3;         // + 2
+   //  char  Padding2[2];    // + 2
+   //-------------------- Addr: 0x0000000C
+   };
+    ```
+
+    반면 `char`-`short`-`int` 자료형 순서로 정의하면 구조체의 크기는 8바이트로 줄어든다. 비록 `short` 자료형이 2바이트 정렬인 관계로 `char` 자료형 맴버 사이에 1바이트 패딩이 메워지지만, `int` 자료형에 의한 4바이트 크기의 정렬 경계 내에 두 맴버를 모두 담아낼 수 있기 때문이다.
+
+    ```c
+   /* 구조체 크기: 8바이트 */
+   struct STRUCTURE {
+   //-------------------- Addr: 0x00000000
+        char  field1;         // + 1
+   //  char  Padding1[1];    // + 1
+        short field2;         // + 2
+   //-------------------- Addr: 0x00000004
+        int   field3;         // + 4
+   //-------------------- Addr: 0x00000008
+   };
+    ```
 
 ### 구조체 포인터
 구조체 포인터(structure pointer)는 구조체를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 구조체 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
 
 ```c
 /* 구조체 포인터 정의 */
-struct STRUCTURE *variable;
+struct STRUCTURE *ptr = variable;
 
-variable->field1 = 3;
-variable->field2 = 'A';
+ptr->field1 = 'A';
+ptr->field2 = 3;
 ```
 
 ### 익명 구조체
@@ -1183,20 +1262,20 @@ variable->field2 = 'A';
 ```c
 /* 익명 구조체 및 변수 정의 */
 struct {
-    int   field1;
-    char  field2;
-} variable = {3, 'A'};
+    char  field1;
+    int   field2;
+} variable = {'A', 3};
 ```
 
 ## 공용체
-[공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 각 맴버마다 데이터를 저장하는 [구조체](#구조체)와 달리, 맴버들은 하나의 공용 메모리를 사용한다. 즉, 공용체의 한 맴버에 데이터 변경이 발생하면 나머지 맴버에도 영향을 미친다. 공용체는 `union` 키워드로 정의된다.
+[공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 `union` 키워드로 정의된 사용자 정의 자료형이다. 각 맴버마다 데이터를 저장하는 [구조체](#구조체)와 달리, 맴버들은 하나의 공용 메모리를 사용한다. 즉, 공용체의 한 맴버에 데이터 변경이 발생하면 나머지 맴버에도 영향을 미친다.
 
 ```c
 /* 공용체 정의: 총 4바이트 활용 */
 union UNION {    
     /* 맴버 정의 */
-    int    field1;    // 자료형 크기: 4바이트
-    char   field2;    // 자료형 크기: 1바이트
+    char  field1;    // 자료형 크기: 1바이트
+    int   field2;    // 자료형 크기: 4바이트
 }
 ```
 
@@ -1211,7 +1290,7 @@ union UNION {
     ```c
   /* 공용체 변수 정의 1 */
   union UNION variable1 = {365};
-  union UNION variable2 = {.field2 = 'A', .field1 = 3};    // 결과: variable2 = {3};
+  union UNION variable2 = {.field2 = 365, .field1 = 'A'};    // 결과: variable2 = {321};
     ```
 
 * 공용체 변수 선언 이후, 맴버 순서대로 데이터가 나열된 중괄호 `{}`를 공용체로 [캐스팅](#자료형-변환)하여 초기화한다.
@@ -1222,28 +1301,38 @@ union UNION {
   variable = (union UNION){365};
     ```
 
+* 공용체를 정의하는 동시에 공용체 변수를 정의한다.
+
+    ```c
+  /* 공용체 및 변수 정의 */
+  union UNION {
+      char  field1;
+      int   field2;
+  } variable = {365};  
+    ```
+
 정의된 공용체 변수는 [객체 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `.`를 통해 공용체 맴버를 호출한다.
 
 ```c
-printf("%3d (%#010x)\n%3c (%#010x)", variable.field1, variable.field1,\
+printf("%3c (%#010x)\n%3d (%#010x)", variable.field1, variable.field1,\
                                      variable.field2, variable.field2);
 ```
 ```
-365 (0x0000016d)
   m (0x0000006d)
+365 (0x0000016d)
 ```
 
-첫 번째 내부 변수 `field1`은 4바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되는 반면, 두 번째 내부 변수 `field2`는 1바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 정수 109에 해당하는 ASCII 문자 'm'이 출력되었다.
+첫 번째 내부 변수 `field1`은 1바이트 자료형이므로 한 바이트 `0x6D`만 처리하여 정수 109에 해당하는 ASCII 문자 'm'이 출력되는 반면, 두 번째 내부 변수 `field2`는 4바이트 자료형이므로 `0x0000016D`를 전부 처리하여 365 정수가 출력되었다.
 
-### 공영체 포인터
+### 공용체 포인터
 공용체 포인터(union pointer)는 공용체를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 구조체 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
 
 ```c
 /* 공용체 포인터 정의 */
-union UNION *variable;
+union UNION *ptr = variable;
 
-variable->field1 = 3;
-variable->field2 = 'A';
+ptr->field1 = 3;
+ptr->field2 = 'A';
 ```
 
 ### 익명 공용체
@@ -1252,13 +1341,13 @@ variable->field2 = 'A';
 ```c
 /* 익명 공용체 및 변수 정의 */
 union {
-    int    field1;
-    char   field2;
+    char  field1;
+    int   field2;
 } variable = {365};
 ```
 
 ## 열거형
-[열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기는 자료형이다. 열거자들은 기본적으로 정수 0부터 시작하여 다음 열거자마다 1만큼 증가한다. 열거자에 할당 연산자 `=`로 정수를 집적 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거자를 추가하거나, 혹은 열거형의 값을 바꾸는 건 불가하다. 공용체는 `enum` 키워드로 정의된다.
+[열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기는 `enum` 키워드로 정의된 자료형이다. 열거자들은 기본적으로 정수 0부터 시작하여 다음 열거자마다 1만큼 증가한다. 열거자에 할당 연산자 `=`로 정수를 집적 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거자를 추가하거나, 혹은 열거형의 값을 바꾸는 건 불가하다.
 
 > 초창기 C 컴파일러인 "K&R C"에는 존재하지 않았으나, 본 문서에서 다루는 보편적인 컴파일러 버전인 "ANSI C"부터 추가된 데이터이다.
 
@@ -1294,7 +1383,7 @@ enum ENUMERATION variable = enumerator1;
 ```
 
 ## `typedef` 키워드
-`typedef` 키워드는 C 프로그래밍 언어 내장 자료형 및 사용자 지정 자료형에 별칭(alias)을 선언하여 가독성을 높이는 역할을 한다.
+[`typedef`](https://en.cppreference.com/w/c/language/typedef) 키워드는 C 프로그래밍 언어 내장 자료형 및 사용자 지정 자료형에 별칭(alias)을 선언하여 가독성을 높이는 역할을 한다.
 
 ```c
 /* unsigned 문자 자료형의 BYTE 별칭 선언 */
@@ -1308,8 +1397,8 @@ typedef unsigned char BYTE;
     ```c
   /* 간략화된 구조체 정의 */
   typedef struct {
-      int    field1;
-      char   field2;
+      int  field1;
+      char field2;
   } STRUCTURE;
   
   STRUCTURE variable;                // 동일: struct STRUCTURE variable;
@@ -1321,8 +1410,8 @@ typedef unsigned char BYTE;
     ```c
   /* 간략화된 공용체 정의 */
   typedef union {
-      int    field1;
-      char   field2;
+      int  field1;
+      char field2;
   } UNION;
   
   UNION variable;                    // 동일: union UNION variable;
@@ -1335,7 +1424,7 @@ typedef unsigned char BYTE;
 프로그램을 실행하는데 있어 메모리 관리는 매우 중요한 작업에 해당한다. 그 중에서 동적 메모리 할당은 보다 더 나은 메모리 효율성을 위해 사용되며, [포인터](#c-포인터)에 대한 충분한 개념적 이해도가 필요하다. 여기서 메모리는 HDD 및 SSD와 같은 [보조기억장치](https://ko.wikipedia.org/wiki/기억_장치)가 아닌 RAM이 해당하는 [주기억장치](https://ko.wikipedia.org/wiki/주기억장치)를 가리킨다.
 
 ## 스택 영역
-스택(stack)은 마지막에 입력된 데이터가 먼저 출력되는 선형적 LIFO(Last-In-First-Out) 데이터 나열 구조이다. 빠른 메모리 접근성의 장점을 가지고 있어 일반적으로 컴파일러에서 데이터 메모리 할당 및 해제를 스택 영역에서 처리한다. 대표적으로 조건문, 반복문, 혹은 함수에서 정의된 지역 변수 등이 코드 블록 외에서는 사용할 수 없다는 특징이 스택 영역 메모리를 활용하고 있음을 의미한다.
+[스택](https://ko.wikipedia.org/wiki/스택)(stack)은 마지막에 입력된 데이터가 먼저 출력되는 선형적 LIFO(Last-In-First-Out) 데이터 나열 구조이다. 빠른 메모리 접근성의 장점을 가지고 있어 일반적으로 컴파일러에서 데이터 메모리 할당 및 해제를 스택 영역에서 처리한다. 대표적으로 조건문, 반복문, 혹은 함수에서 정의된 지역 변수 등이 코드 블록 외에서는 사용할 수 없다는 특징이 스택 영역 메모리를 활용하고 있음을 의미한다.
 
 스택 영역 메모리의 LIFO 구조는 프로그램 코드를 실행하는데 활용되며, 데이터를 저장하기 위한 용도로는 부적합하다. 지역 변수는 스택을 벗어나면 데이터가 사라지고, 전역 변수는 외부에 쉽게 노출되어 있어 권장되지 않는다.
 
@@ -1359,13 +1448,13 @@ typedef unsigned char BYTE;
 ```c
 #include <stdlib.h>
 
-// 동적 할당: 10바이트
+/* 동적 할당: 10바이트 */
 int* ptr = malloc(10);
 
-// 재할당: 10 -> 20바이트
+/* 재할당: 10 -> 20바이트 */
 ptr = realloc(ptr, 20);
 
-// 동적 할당 해제
+/* 동적 할당 해제 */
 free(ptr);
 ```
 
@@ -1378,16 +1467,16 @@ free(ptr);
 ```
 
 ### 허상 포인터
-[허상 포인터](https://ko.wikipedia.org/wiki/허상_포인터)(dangling pointer)는 참조하려는 메모리 주소가 더 이상 유효하지 않을 때 발생하는 메모리 관리 문제이다. 시스템적으로 메모리 관리를 하는 과정에서 흔히 발생하는 현상이지만, 프로그래밍에서는 동적 할당이 해제된 포인터가 여전히 해당 주소를 가리키고 있어서 나타나는게 대다수이다. 그러므로 참조할 수 없는 주소를 가리키는 포인터에 `NULL`을 할당하여 아무런 주소를 가리키지 않도록 한다.
+[허상 포인터](https://ko.wikipedia.org/wiki/허상_포인터)(dangling pointer)는 참조하려는 메모리 주소가 더 이상 유효하지 않을 때 발생하는 메모리 관리 문제이다. 시스템적으로 메모리 관리를 하는 과정에서 흔히 발생하는 현상이지만, 프로그래밍에서는 동적 할당이 해제된 포인터가 여전히 해당 주소를 가리키고 있어서 나타나는게 대다수이다. 그러므로 영값 `NULL` 주소를 할당하여 아무런 주소를 가리키지 않도록 한다.
 
 ```c
-/* 올바른 동적 할당 해제: 메모리 주소의 데이터 반납 -> 널 포인터 할당 */
+/* 올바른 동적 할당 해제: 할당 해제 이후 포인터에 영값 할당 */
 free(ptr);
 ptr = NULL;
 ```
 
 ## 메모리 함수
-C 프로그래밍 언어 중에서 문자열 관련 [`string.h`](https://en.cppreference.com/w/cpp/string) 헤더 파일에는 힙 영역 메모리를 처리하는 전용 함수들이 존재한다. 이들은 C 프로그래밍 언어에서 매우 흔히 사용되는 메모리 함수들의 목록이다.
+C 표준 라이브러리 중에서 문자열 관련 [`string.h`](https://en.cppreference.com/w/cpp/string) 헤더는 힙 영역 메모리를 처리하는 전용 함수들이 존재한다. 이들은 C 프로그래밍 언어에서 매우 흔히 사용되는 메모리 함수들의 목록이다.
 
 | 함수    | 예시               | 설명                                                  |
 |:-----------:| --------------------- | ------------------------------------------------------------ |
