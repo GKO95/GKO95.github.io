@@ -1929,10 +1929,10 @@ A
    /* 구조체 크기: 8바이트 */
    struct STRUCTURE {
    //-------------------- Addr: 0x00000000
-        char  field1;         // + 1
+       char  field1;         // + 1
    //  char  Padding1[3];    // + 3
    //-------------------- Addr: 0x00000004
-        int   field2;         // + 4
+       int   field2;         // + 4
    //-------------------- Addr: 0x00000008
    };
     ```
@@ -1943,9 +1943,9 @@ A
    /* 구조체 크기: 8바이트 */
    struct STRUCTURE {
    //-------------------- Addr: 0x00000000
-        int   field1;         // + 4
+       int   field1;         // + 4
    //-------------------- Addr: 0x00000004
-        char  field2;         // + 1
+       char  field2;         // + 1
    //  char  Padding1[3];    // + 3
    //-------------------- Addr: 0x00000008
    };
@@ -1957,12 +1957,12 @@ A
    /* 구조체 크기: 12바이트 */
    struct STRUCTURE {
    //-------------------- Addr: 0x00000000
-        char  field1;         // + 1
+       char  field1;         // + 1
    //  char  Padding1[3];    // + 3
    //-------------------- Addr: 0x00000004
-        int   field2;         // + 4
+       int   field2;         // + 4
    //-------------------- Addr: 0x00000008
-        short field3;         // + 2
+       short field3;         // + 2
    //  char  Padding2[2];    // + 2
    //-------------------- Addr: 0x0000000C
    };
@@ -1974,11 +1974,11 @@ A
    /* 구조체 크기: 8바이트 */
    struct STRUCTURE {
    //-------------------- Addr: 0x00000000
-        char  field1;         // + 1
+       char  field1;         // + 1
    //  char  Padding1[1];    // + 1
-        short field2;         // + 2
+       short field2;         // + 2
    //-------------------- Addr: 0x00000004
-        int   field3;         // + 4
+       int   field3;         // + 4
    //-------------------- Addr: 0x00000008
    };
     ```
