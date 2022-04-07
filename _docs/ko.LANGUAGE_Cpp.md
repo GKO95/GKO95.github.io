@@ -1341,7 +1341,7 @@ int main () {
 ```
 
 ### 접근 지정자
-[접근 지정자](https://en.cppreference.com/w/cpp/language/access)(access specifier)는 외부로부터 맴버에 접근할 수 있는 권한을 지정한다. 여기서 `class`와 `struct` 키워드로 정의된 클래스는 기본 접근 지정자가 각각 `private` 및 `public`이라는 차이점을 갖는다.
+[접근 지정자](https://en.cppreference.com/w/cpp/language/access)(access specifier)는 외부로부터 맴버에 접근할 수 있는 권한을 지정한다.
 
 | 키워드     | 설명                                                  |
 | ----------- | ------------------------------------------------------------ |
