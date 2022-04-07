@@ -1288,7 +1288,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
 # C++: 클래스
-[클래스](https://en.cppreference.com/w/cpp/language/classes)(class)는 객체를 생성하는데 사용된다. 
+[클래스](https://en.cppreference.com/w/cpp/language/classes)(class)는 객체를 생성하는데 사용자 지정 자료형이다.
 
 > 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수를 통틀어 맴버(member)라고 칭하는데, 이들은 각각 필드(field; 맴버 변수)과 메소드(method; 맴버 함수)라고 불리며 다음과 같이 접근한다.
 >
@@ -1303,7 +1303,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 > // variable이란 배열 객체의 "at()" 메소드를 사용하여 2 번째 인덱스 요소의 값을 반환한다.
 > ```
 
-클래스는 `class` 혹은 `struct` 키워드를 사용하여 필드 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"이라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
+클래스는 `class`, `struct`, 혹은 `union` 키워드를 사용하여 필드 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"이라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
 1. 변수와 함수가 하나의 객체로 결합된다.
 2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
@@ -1345,9 +1345,9 @@ int main () {
 
 | 키워드     | 설명                                                  |
 | ----------- | ------------------------------------------------------------ |
-| `public`    | 객체 (또는 클래스) 외부 코드로부터 맴버 접근이 자유롭다.      |
-| `private`   | 객체 (또는 클래스) 내부에서만 맴버 접근이 가능하다.   |
-| `protected` | [상속](#상속)으로 파생된 객체 (또는 클래스)만이 접근할 수 있다. |
+| `public`    | 클래스 외부 코드로부터 맴버 접근이 자유롭다; `stuct` 및 `union` 키워드의 기본 접근 지정자이다.      |
+| `private`   | 클래스 내부에서만 맴버 접근이 가능하다; `class` 키워드의 기본 접근 지정자이다.   |
+| `protected` | [상속](#상속)으로 파생된 클래스만이 접근할 수 있다. |
 
 ### 클래스 포인터
 클래스 포인터(class pointer)는 클래스를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 클래스 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
@@ -1360,27 +1360,25 @@ std::cout << ptr->field1;       // 출력: 2
 std::cout << ptr->method(1);    // 출력: 4
 ```
 
-### `this` 포인터
-[`this`](https://en.cppreference.com/w/cpp/language/this) 포인터는 객체가 자신의 메모리 주소를 반환하는데 사용된다. 객체의 [비정적](#정적-맴버)(non-static) 메소드로부터 자신의 맴버 호출을 `this->` 표현식으로 명시적으로 나타낼 수 있어, 흔히 필드 맴버를 매개변수 또는 지역변수와 구분짓는데 활용된다.
+### 익명 클래스
+익명 클래스(anonymous class)는 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 클래스를 정의한 동시에 객체화한다.
 
 ```cpp
-/* 클래스 정의 */
-struct CLASS {
+/* 익명 클래스 정의 및 객체화 */
+class {
+public:
 
-    /* 필드 맴버 */
     int   field1 = 2;
     float field2 = 3.14;
     
-    /* 메소드 맴버 */
     int method() {
-        return this->field1 * this->field2;
+        return field1 * field2;
     }
 
-    /* 메소드 맴버 (오버로딩) */
     int method(int arg) {
-        return this->field1 + this->field2 - arg;
+        return field1 + field2 - arg;
     }
-};
+} instance;
 ```
 
 ## 생성자
@@ -1455,6 +1453,29 @@ struct CLASS {
 ```
 
 소멸자는 매개변수를 가질 수 없으므로 오버로딩될 수 없다. 그러므로 클래스는 오로지 하나의 소멸자만 정의할 수 있다.
+
+## `this` 포인터
+[`this`](https://en.cppreference.com/w/cpp/language/this) 포인터는 객체가 자신의 메모리 주소를 반환하는데 사용된다. 객체의 [비정적](#정적-맴버)(non-static) 메소드로부터 자신의 맴버 호출을 `this->` 표현식으로 명시적으로 나타낼 수 있어, 흔히 필드 맴버를 매개변수 또는 지역변수와 구분짓는데 활용된다.
+
+```cpp
+/* 클래스 정의 */
+struct CLASS {
+
+    /* 필드 맴버 */
+    int   field1 = 2;
+    float field2 = 3.14;
+    
+    /* 메소드 맴버 */
+    int method() {
+        return this->field1 * this->field2;
+    }
+
+    /* 메소드 맴버 (오버로딩) */
+    int method(int arg) {
+        return this->field1 + this->field2 - arg;
+    }
+};
+```
 
 ## 맴버 선언
 클래스에서 맴버를 선언하면 외부에서 별도로 정의되어야 한다. 클래스 외부에서 정의된 맴버는 사실상 전역 데이터로써 공용될 수 있기 때문에 [정적 맴버](#정적-맴버)가 아닌 이상 맴버 선언의 활용은 메소드 맴버로 한정된다.
@@ -1694,14 +1715,14 @@ int main() {
 ```
 
 ### 상속 접근 지정자
-[접근 지정자](https://en.cppreference.com/w/cpp/language/access)에 따라 어떠한 기반 클래스 맴버가 파생 클래스로 상속될 것인지 결정된다. 여기서 `class`와 `struct` 키워드로 정의된 클래스는 기본 상속 접근 지정자가 각각 `private` 및 `public`이라는 차이점을 갖는다.
+[접근 지정자](https://en.cppreference.com/w/cpp/language/access)에 따라 어떠한 기반 클래스 맴버가 파생 클래스로 상속될 것인지 결정된다.
 
 > 기반 클래스의 `private` 맴버는 절대로 상속되지 않으며 접근 불가하다.
 
 | 접근 지정자 | 설명                                           |
 | :---------: | ------------------------------------------------------------ |
-| `public` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서도 그대로 `public` 및 `protected` 맴버로 상속된다. |
-| `private` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `private` 맴버로 전환된다. |
+| `public` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서도 그대로 `public` 및 `protected` 맴버로 상속된다; `stuct` 및 `union` 키워드의 기본 접근 지정자이다. |
+| `private` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `private` 맴버로 전환된다; `class` 키워드의 기본 접근 지정자이다. |
 | `protected` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `protected` 맴버로 전환된다. |
 
 ```cpp
@@ -1867,10 +1888,10 @@ int ClassName::method(int arg) {
 사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 C++ 프로그래밍 언어에 내장된 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다.
 
 ## 구조체
-[구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 구조체는 `struct` 키워드로 정의된다.
+[구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 정의된 사용자 정의 자료형이다.
 
 ```cpp
-/* 구조체 정의: 총 5바이트 활용 */
+/* 구조체 정의: 총 8바이트 활용 */
 struct STRUCTURE {
     /* 맴버 정의 */
     char  field1;    // 자료형 크기: 1바이트
@@ -1915,8 +1936,6 @@ std::cout << variable.field1 << std::endl << variable.field2;
 A
 3
 ```
-
-> 일부 C++ 소스 코드는 구조체 변수를 정의할 때 `struct` 키워드가 포함된 C 프로그래밍 구문을 사용하는데, 이는 C++11 이후부터 개정되어 더 이상 필요하지 않다.
 
 ### 데이터 구조 정렬
 위의 예시 코드에서 `char` (1바이트) 그리고 `int` (4바이트) 자료형 맴버로 구성된 구조체가 사실상 8바이트 메모리 용량을 차지한다고 언급하였다. 이는 시스템 프로세서 차원에서 메모리 접근성을 위한 [데이터 구조 정렬](https://en.wikipedia.org/wiki/Data_structure_alignment)(data structure alignment)이 반영된 결과이다. 여기서 데이터의 메모리 주소가 해당 데이터의 크기인 $n$-바이트 배수로써 자연스럽게 정렬(naturally aligned)되었을 때 하드웨어 성능 효율이 가장 높으며, 이를 "$n$-바이트 정렬"되었다고 부른다.
@@ -2006,7 +2025,7 @@ struct {
 ```
 
 ## 공용체
-[공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 각 맴버마다 데이터를 저장하는 [구조체](#구조체)와 달리, 맴버들은 하나의 공용 메모리를 사용한다. 즉, 공용체의 한 맴버에 데이터 변경이 발생하면 나머지 맴버에도 영향을 미친다. 공용체는 `union` 키워드로 정의된다.
+[공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 `union` 키워드로 정의된 사용자 정의 자료형이다. 각 맴버마다 데이터를 저장하는 [구조체](#구조체)와 달리, 맴버들은 하나의 공용 메모리를 사용한다. 즉, 공용체의 한 맴버에 데이터 변경이 발생하면 나머지 맴버에도 영향을 미친다.
 
 ```cpp
 /* 공용체 정의: 총 4바이트 활용 */
@@ -2090,7 +2109,7 @@ union {
 ```
 
 ## 열거형
-[열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기는 자료형이다. 열거자들은 기본적으로 정수 0부터 시작하여 다음 열거자마다 1만큼 증가한다. 열거자에 할당 연산자 `=`로 정수를 집적 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거자를 추가하거나, 혹은 열거형의 값을 바꾸는 건 불가하다. 열거형은 `enum` 키워드로 정의된다.
+[열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기는 `enum` 키워드로 정의된 자료형이다. 열거자들은 기본적으로 정수 0부터 시작하여 다음 열거자마다 1만큼 증가한다. 열거자에 할당 연산자 `=`로 정수를 집적 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거자를 추가하거나, 혹은 열거형의 값을 바꾸는 건 불가하다.
 
 ```cpp
 /* 열거형 정의 */
