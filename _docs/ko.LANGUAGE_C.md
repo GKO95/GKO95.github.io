@@ -1128,7 +1128,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
 # C: 사용자 정의 자료형
-사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 C 프로그래밍 언어에 내장된 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다.
+사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 기존 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다.
 
 ## 구조체
 [구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 정의된 사용자 정의 자료형이다.
