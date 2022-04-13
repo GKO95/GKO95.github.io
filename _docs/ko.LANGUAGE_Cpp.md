@@ -1288,7 +1288,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
 # C++: 클래스
-[클래스](https://en.cppreference.com/w/cpp/language/classes)(class)는 객체를 생성하는데 사용자 지정 자료형이다.
+[클래스](https://en.cppreference.com/w/cpp/language/classes)(class)는 객체를 생성하는데 사용자 정의 자료형이다.
 
 > 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수를 통틀어 맴버(member)라고 칭하는데, 이들은 각각 필드(field; 맴버 변수)과 메소드(method; 맴버 함수)라고 불리며 다음과 같이 접근한다.
 >
@@ -1303,7 +1303,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 > // variable이란 배열 객체의 "at()" 메소드를 사용하여 2 번째 인덱스 요소의 값을 반환한다.
 > ```
 
-클래스는 `class`, `struct`, 혹은 `union` 키워드를 사용하여 필드 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
+일반적으로 클래스는 `class` 키워드를 사용하여 필드 및 메소드와 함께 정의되는데, `struct` 혹은 `union` 키워드로도 정의될 수 있으나 성질 차이가 존재하며 자세한 내용은 [PDS](#c-사용자-정의-자료형)에서 다룰 예정이다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
 1. 변수와 함수가 하나의 객체로 결합된다.
 2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
@@ -1334,20 +1334,20 @@ int main () {
     CLASS instance;
 
     std::cout << instance.field1;       // 출력: 2
-    std::cout << instance.field2;       // 출력: 3.14
-    std::cout << instance.method();     // 출력: 6
     std::cout << instance.method(1);    // 출력: 4
 }
 ```
 
 ### 접근 지정자
-[접근 지정자](https://en.cppreference.com/w/cpp/language/access)(access specifier)는 외부로부터 맴버에 접근할 수 있는 권한을 지정한다.
+[접근 지정자](https://en.cppreference.com/w/cpp/language/access)(access specifier)는 외부 코드 및 [상속](#상속)으로부터 맴버 접근 권한을 지정한다.
 
 | 키워드     | 설명                                                  |
 | ----------- | ------------------------------------------------------------ |
 | `public`    | 클래스 외부 코드로부터 맴버 접근이 자유롭다; `stuct` 및 `union` 키워드의 기본 접근 지정자이다.      |
 | `private`   | 클래스 내부에서만 맴버 접근이 가능하다; `class` 키워드의 기본 접근 지정자이다.   |
-| `protected` | [상속](#상속)으로 파생된 클래스만이 접근할 수 있다. |
+| `protected` | 맴버 접근이 가능한 외부 코드가 해당 클래스로부터 상속된 파생 클래스로 제한된다. |
+
+> `class`와 `struct` 키워드의 유일한 차이점은 기본 접근 지정자 뿐이다. 그러므로 클래스를 정의할 때 후자를 사용하는 경우도 흔하다.
 
 ### 클래스 포인터
 클래스 포인터(class pointer)는 클래스를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 클래스 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
