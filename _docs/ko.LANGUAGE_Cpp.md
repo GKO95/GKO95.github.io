@@ -1885,7 +1885,10 @@ int ClassName::method(int arg) {
 ```
 
 # C++: 사용자 정의 자료형
-사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 C++ 프로그래밍 언어에 내장된 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다.
+사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 기존 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다. 대표적인 예시로 [클래스](#c-클래스)가 있으나, 본문은 [PDS](#pds) 관점에서 소개한다.
+
+### PDS
+[PDS](https://ko.wikipedia.org/wiki/POD_(데이터_구조))(passive data structure; 수동형 자료구조), 일명 POD(plain old data)는 객체지향 프로그래밍 기법에서 객체가 아닌 필드 맴버만으로 구성된 [레코드](https://ko.wikipedia.org/wiki/레코드_(컴퓨터_과학))(record)를 가리킨다.
 
 ## 구조체
 [구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 정의된 사용자 정의 자료형이다.
