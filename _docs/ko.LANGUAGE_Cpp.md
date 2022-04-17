@@ -1347,7 +1347,7 @@ int main () {
 | `private`   | 클래스 내부에서만 맴버 접근이 가능하다; `class` 키워드의 기본 접근 지정자이다.   |
 | `protected` | 맴버 접근이 가능한 외부 코드가 해당 클래스로부터 상속된 파생 클래스로 제한된다. |
 
-> `class`와 `struct` 키워드의 유일한 차이점은 기본 접근 지정자 뿐이다. 그러므로 클래스를 정의할 때 후자를 사용하는 경우도 흔하다.
+> `class`와 `struct` 키워드의 유일한 차이점은 기본 접근 지정자 뿐이다. 그러므로 클래스를 정의할 때 후자를 사용하는 경우도 흔히 찾아볼 수 있다.
 
 ### 클래스 포인터
 클래스 포인터(class pointer)는 클래스를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 클래스 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
@@ -1588,24 +1588,31 @@ int main() {
 ```
 
 ## 상속
-[상속](https://en.cppreference.com/w/cpp/language/derived_class)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 필드 및 메소드 맴버를 제공하는 행위이다. 기반 클래스와 파생 클래스에 동일한 이름의 맴버가 존재할 경우, 기반 클래스의 맴버는 파생 클래스에 의해 묻힌다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 있다.
+[상속](https://en.cppreference.com/w/cpp/language/derived_class)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 필드 및 메소드 맴버를 제공하는 행위이다. 파생 클래스는 [접근 지정자](#접근-지정자)를 통해 기반 클래스로부터 상속받는 맴버들의 접근 권한을 설정할 수 있다. 기반 클래스와 파생 클래스에 동일한 이름의 맴버가 존재할 경우, 기반 클래스의 맴버는 파생 클래스에 의해 묻힌다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 있다.
+
+> 기반 클래스의 `private` 맴버는 절대로 상속되지 않으며 접근 불가하다.
+
+| 접근 지정자 | 설명                                           |
+| :---------: | ------------------------------------------------------------ |
+| `public` | 기반 클래스 맴버들의 접근 지정자는 파생 클래스에서도 그대로 유지된다; `stuct` 및 `union` 키워드의 기본 접근 지정자이다. |
+| `private` | 기반 클래스 맴버들은 파생 클래스에서 `private`으로 전환된다; `class` 키워드의 기본 접근 지정자이다. |
+| `protected` | 기반 클래스 맴버들은 파생 클래스에서 `protected`로 전환된다. |
 
 ```cpp
-using namespace std;
-
 /* 기반 클래스 정의 */
-struct BASECLASS {
-    
+class BASECLASS {
+public:
+
     BASECLASS() {
-        cout << "생성자: 기반 클래스" << endl;
+        std::cout << "생성자: 기반 클래스" << std::endl;
     }
 
     ~BASECLASS() {
-        cout << "소멸자: 기반 클래스" << endl;
+        std::cout << "소멸자: 기반 클래스" << std::endl;
     }
 
-    int    field1 = 3;
-    string field2 = "C++";
+    int field1 = 3;
+    std::string field2 = "C++";
 
     int method(int arg1, int arg2) {
         return arg1 + arg2;
@@ -1614,18 +1621,18 @@ struct BASECLASS {
 
 /* 파생 클래스 정의 */
 struct DERIVEDCLASS
-    : BASECLASS {
+    : public BASECLASS {
     
     DERIVEDCLASS() {
-        cout << "생성자: 파생 클래스" << endl;
+        std::cout << "생성자: 파생 클래스" << std::endl;
     }
 
     ~DERIVEDCLASS() {
-        cout << "소멸자: 파생 클래스" << endl;
+        std::cout << "소멸자: 파생 클래스" << std::endl;
     }
 
-    string field2 = "Hello World!";
-    bool   field3 = true;
+    std::string field2 = "Hello World!";
+    bool field3 = true;
 
     int method(int arg1, int arg2) {
         return arg1 * arg2;
@@ -1637,8 +1644,8 @@ int main() {
     /* 클래스 객체화 */
     DERIVEDCLASS instance;
 
-    cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << endl;
-    cout << instance.method(2, 3) << endl;
+    std::cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << std::endl;
+    std::cout << instance.method(2, 3) << std::endl;
 }
 ```
 ```
@@ -1651,24 +1658,23 @@ int main() {
 ```
 
 ### 상속 맴버 접근
-범위지정 연산자 `::`는 파생 클래스에 묻혀진 기반 클래스의 필드 및 메소드를 호출하는데 사용된다.
+범위지정 연산자 `::`를 사용하여 파생 클래스에 묻혀진 기반 클래스의 필드 및 메소드를 호출할 수 있다. 아래는 [상속](#상속)에서 다룬 예시 코드에서 동명의 기반 클래스 맴버를 파생 클래스로부터 호출한다.
 
 ```cpp
-using namespace std;
-
 /* 기반 클래스 정의 */
-struct BASECLASS {
-    
+class BASECLASS {
+public:
+
     BASECLASS() {
-        cout << "생성자: 기반 클래스" << endl;
+        std::cout << "생성자: 기반 클래스" << std::endl;
     }
 
     ~BASECLASS() {
-        cout << "소멸자: 기반 클래스" << endl;
+        std::cout << "소멸자: 기반 클래스" << std::endl;
     }
 
-    int    field1 = 3;
-    string field2 = "C++";
+    int field1 = 3;
+    std::string field2 = "C++";
 
     int method(int arg1, int arg2) {
         return arg1 + arg2;
@@ -1677,19 +1683,19 @@ struct BASECLASS {
 
 /* 파생 클래스 정의 */
 struct DERIVEDCLASS
-    : BASECLASS {
+    : public BASECLASS {
     
     DERIVEDCLASS() {
-        cout << "생성자: 파생 클래스" << endl;
+        std::cout << "생성자: 파생 클래스" << std::endl;
         field2 = BASECLASS::field2;            // 기반 클래스의 field2 필드
     }
 
     ~DERIVEDCLASS() {
-        cout << "소멸자: 파생 클래스" << endl;
+        std::cout << "소멸자: 파생 클래스" << std::endl;
     }
 
-    string field2 = "Hello World!";
-    bool   field3 = true;
+    std::string field2 = "Hello World!";
+    bool field3 = true;
 
     int method(int arg1, int arg2) {
         return BASECLASS::method(arg1, arg2);  // 기반 클래스의 method() 메소드
@@ -1701,8 +1707,8 @@ int main() {
     /* 클래스 객체화 */
     DERIVEDCLASS instance;
 
-    cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << endl;
-    cout << instance.method(2, 3) << endl;
+    std::cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << std::endl;
+    std::cout << instance.method(2, 3) << std::endl;
 }
 ```
 ```
@@ -1712,25 +1718,6 @@ int main() {
 5
 소멸자: 파생 클래스
 소멸자: 기반 클래스
-```
-
-### 상속 접근 지정자
-[접근 지정자](https://en.cppreference.com/w/cpp/language/access)에 따라 어떠한 기반 클래스 맴버가 파생 클래스로 상속될 것인지 결정된다.
-
-> 기반 클래스의 `private` 맴버는 절대로 상속되지 않으며 접근 불가하다.
-
-| 접근 지정자 | 설명                                           |
-| :---------: | ------------------------------------------------------------ |
-| `public` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서도 그대로 `public` 및 `protected` 맴버로 상속된다; `stuct` 및 `union` 키워드의 기본 접근 지정자이다. |
-| `private` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `private` 맴버로 전환된다; `class` 키워드의 기본 접근 지정자이다. |
-| `protected` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `protected` 맴버로 전환된다. |
-
-```cpp
-/* 파생 클래스의 BASECLASS1 및 BASECLASS2 상속 */
-class DERIVEDCLASS
-    : public BASECLASS1, protected BASECLASS2 {
-    
-};
 ```
 
 ## 다형성
