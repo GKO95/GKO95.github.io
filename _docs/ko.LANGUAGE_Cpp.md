@@ -1850,7 +1850,7 @@ public:
 ```
 
 ### 클래스 소스 파일
-`.CPP` 확장자의 클래스 소스 파일은 클래스 헤더 파일에서 선언된 맴버 필드 및 메소드의 정의를 내포한다. 해당 클래스 맴버들의 실질적인 코드가 들어있으나, `#include` 지시문으로 클래스 헤더를 포함해서 맴버의 선언과 정의를 연동시켜야 한다.
+`.CPP` 확장자의 클래스 소스 파일은 클래스 헤더 파일에서 선언된 필드 및 메소드 맴버의 정의를 내포한다. 해당 클래스 맴버들의 실질적인 코드가 들어있으나, `#include` 지시문으로 클래스 헤더를 포함해서 맴버의 선언과 정의를 연동시켜야 한다.
 
 ```cpp
 /* "ClassName.cpp" 소스 파일 */
@@ -1872,10 +1872,21 @@ int ClassName::method(int arg) {
 ```
 
 # C++: 사용자 정의 자료형
-사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 기존 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다. 대표적인 예시로 [클래스](#c-클래스)가 있으나, 본문은 [PDS](#pds) 관점에서 소개한다.
+사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 기존 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다. 대표적인 예시로 [클래스](#c-클래스)가 있으나 본 장은 객체지향 기능들이 결여되고 필드 맴버만으로 구성된 [레코드](https://ko.wikipedia.org/wiki/레코드_(컴퓨터_과학))(record)를 지칭하는 [PDS](https://ko.wikipedia.org/wiki/POD_(데이터_구조))(passive data structure 혹은 plain old data, POD; 수동형 자료구조) 관점에서 소개한다.
 
-### PDS
-[PDS](https://ko.wikipedia.org/wiki/POD_(데이터_구조))(passive data structure; 수동형 자료구조), 일명 POD(plain old data)는 객체지향 프로그래밍 기법에서 객체가 아닌 필드 맴버만으로 구성된 [레코드](https://ko.wikipedia.org/wiki/레코드_(컴퓨터_과학))(record)를 가리킨다.
+PDS 클래스는 다음 특징을 지닌다:
+
+* 사용자 정의 [소멸자](#소멸자)가 없다.
+* 사용자 정의 [복사 할당 연산자](https://en.cppreference.com/w/cpp/language/copy_assignment) `operator=`가 없다.
+* PDS가 아닌 클래스 자료형의 비정적 필드 맴버를 갖지 않는다.
+* 집합형 클래스이다.
+
+> 집합형(aggregate)이란, 중괄호 `{}`를 사용하는 [집합 초기화](https://en.cppreference.com/w/cpp/language/aggregate_initialization)를 통해 생성된 데이터이다. 대표적인 집합형으로 [배열](#배열)이 있으며 클래스(일반적으로 `struct` 및 `union`)도 아래의 특성을 모두 갖추면 집합형이다.
+>
+> * 사용자 정의 [생성자](#생성자)가 없다.
+> * 비정적 `private` 그리고 `protected` 필드 맴버를 갖지 않는다.
+> * `private`, `protected` 그리고 가상 기반 클래스로부터 상속되지 않다.
+> * 가상 맴버 함수가 없다.
 
 ## 구조체
 [구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 정의된 사용자 정의 자료형이다.
