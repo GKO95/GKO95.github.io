@@ -2546,32 +2546,31 @@ file.close();
 C++ 프로그래밍 언어가 컴파일되기 전에 전처리기에서 `#include`와 같은 전처리기 지시문을 우선적으로 처리한다. 전처리기 지시문은 C++ 프로그래밍 언어 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
 
 ## 매크로 정의
-매크로(macro)란 식별자가 있는 코드 조각이다. 코드 조각은 숫자나 문자와 같은 간단한 데이터가 될 수 있으며, 전달인자를 받는 표현식이나 문장이 될 수도 있다. 전자와 후자는 각각 "객체형식(object-like)" 그리고 "함수형식(function-like)" 매크로라고 부른다. 한 번 정의된 매크로는 프로그램을 실행하면 변경할 수 없다. 정의된 매크로는 마치 전역 변수인 마냥 헤더 파일에서 `#include`와 같은 포함 지시문을 통해 다른 스크립트에서도 사용할 수 있다.
+[매크로](https://en.cppreference.com/w/cpp/preprocessor/replace)(macro)란 식별자가 있는 코드 조각이다. 코드 조각은 숫자나 문자와 같은 간단한 데이터가 될 수 있으며 (객체형식 매크로; object-like macro), 전달인자를 받는 표현식이나 문장이 될 수도 있다 (함수형식 매크로; function-like macro). 매크로는 `#define` 지시문으로 정의되며, 각 매크로에 해당하는 데이터 및 표현식이 소스 코드에 대체된다. 정의된 매크로는 `#undef` 지시자로 제거할 수 있다.
 
-컴파일러 자체에 이미 내장되어 있는 매크로가 있으며, 공통된 표준 매크로 및 특정 컴파일러 전용 매크로가 들어있다. 아래는 Visual C++, GCC, 그리고 그 외의 컴파일러가 가지는 내장 매크로 목록을 보여주는 문서이다(영문).
+```cpp
+#define SOMETHING       7                    // 객체형식 매크로
+#define ANYTHING(x, y)  (x * SOMETHING - y)  // 함수형식 매크로
+
+std::cout << ANYTHING(2, 3);
+/* 결과:
+std::cout << (2 * 7 - 3);
+*/
+
+#undef SOMETHING
+#undef ANYTHING
+```
+
+한 번 정의된 매크로는 런타임 도중에 변경이 불가하다. 정의된 매크로는 마치 전역 변수인 마냥 헤더 파일에서 `#include`와 같은 포함 지시문을 통해 다른 스크립트에서도 사용할 수 있다.
+
+컴파일러에는 공통된 표준 매크로 및 컴파일러마다 전용 매크로가 내장되어 있다.
 
 * **Visual C++**: [Microsoft Docs - 미리 정의된 매크로](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
 * **GCC**: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
 * **그 외**: [SourceForge Wiki](https://sourceforge.net/p/predef/wiki/Compilers/)
 
-### `#define` 지시문
-`#define` 지시문은 새로운 매크로를 생성한다.
-
-```cpp
-#define SOMETHING       value                // 객체형식 매크로
-#define ANYTHING(x, y)  (x * SOMETHING - y)  // 함수형식 매크로
-```
-
-### `#undef` 지시문
-`#undef` 지시문은 매크로 정의를 제거한다.
-
-```cpp
-#undef SOMETHING        // 객체형식 매크로
-#undef ANYTHING         // 함수형식 매크로
-```
-
 ### 쉼표 연산자
-쉼표 연산자(comma operator)는 앞에 있는 표현식을 평가하되 반환되지 않고, 뒤에 있는 표현식이 평가되어 반환된다. 흔히 매크로 정의를 간결하게 하기 위해 사용된다. 아래의 예시 코드에 의하면 먼저 할당 연산자로 `value1`은 4가 되고, 이후에 증가 연산자에 의해 5가 된다.
+[쉼표 연산자](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator)(comma operator)는 앞에 있는 표현식을 평가하되 반환되지 않고, 뒤에 있는 표현식이 평가되어 반환된다. 흔히 매크로 정의를 간결하게 하기 위해 사용된다. 아래의 예시 코드에 의하면 먼저 할당 연산자로 `value1`은 4가 되고, 이후에 증가 연산자에 의해 5가 된다.
 
 ```cpp
 int value1 = 1, value2 = 3;
@@ -2583,15 +2582,15 @@ std::cout << variable;
 ```
 
 ## 조건 포함문
-조건 포함문(conditional inclusion)은 조건여부에 따라 컴파일 시 특정 범위의 코드를 포함시킬 것인지 배제할 것인지 결정한다. 
+[조건 포함문](https://en.cppreference.com/w/cpp/preprocessor/conditional)(conditional inclusion)은 조건여부에 따라 컴파일 시 특정 범위의 코드를 포함시킬 것인지 배제할 것인지 결정한다. 
 
 ```cpp
 #if    SOMETHING > value
-    statements;
+    ...
 #elif  SOMETHING < value
-    statements;
+    ...
 #else
-    statements;
+    ...
 #endif
 ```
 
@@ -2603,17 +2602,21 @@ std::cout << variable;
 ```cpp
 // 만일 64비트 ARM 혹은 x64 아키텍쳐로 컴파일 할 경우...
 #ifdef    _WIN64
-    statments;
+
+    ...
+
 #endif
 
 // 만일 64비트 ARM 혹은 x64 아키텍쳐로 컴파일되지 않은 경우...
-#ifndef    _WIN64
-    statements;
+#ifndef   _WIN64
+
+    ...
+
 #endif
 ```
 
 ## Pragma 지시문
-Pragma 지시문(pragma directive)은 컴파일러의 기능과 옵션을 설정하기 위해 사용되는 전처리기 지시문이다. 개발사마다 제작한 컴파일러는 기술적 성능이 각각 다르기 때문에 pragma는 비공통적인 컴파일러 특정 전처리기 지시문이다.
+[Pragma 지시문](https://en.cppreference.com/w/cpp/preprocessor/impl)(pragma directive)은 컴파일러의 기능과 옵션을 설정하기 위해 사용되는 전처리기 지시문이다. 개발사마다 제작한 컴파일러는 기술적 성능이 각각 다르기 때문에 pragma는 비공통적인 컴파일러 특정 전처리기 지시문이다.
 
 > Pragma란 용어는 pragmatic의 줄임말로, 사전적 의미로는 "실용적인"을 뜻한다. 이는 실질적 컴파일러 동작 및 처리 방식에 관여한 것을 보아 붙여진 용어라고 판단된다.
 
@@ -2629,7 +2632,7 @@ Pragma 지시문(pragma directive)은 컴파일러의 기능과 옵션을 설정
 #pragma once
 ```
 
-결과적으로 하나의 소스 파일에 헤더 파일이 중복적으로 포함이 되는 것을 제한하므로써 정의가 반복되는 현상을 막을 수 있는데, 이러한 기능을 *헤더 중복 방지(include guard)*라고 부른다. 추가적으로 `#pragma once` 지시문을 사용하면 처리하는 헤더 파일 횟수가 줄어들어 컴파일 작업 시간도 함께 줄이게 된다.
+결과적으로 하나의 소스 파일에 헤더 파일이 중복적으로 포함이 되는 것을 제한하므로써 정의가 반복되는 현상을 막을 수 있는데, 이러한 기능을 [헤더 중복 방지](https://en.wikipedia.org/wiki/Include_guard)(include guard)라고 부른다. 추가적으로 `#pragma once` 지시문을 사용하면 처리하는 헤더 파일 횟수가 줄어들어 컴파일 작업 시간도 함께 줄이게 된다.
 
 아래의 코드는 `#pragma once` 지시문을 사용하지 않고 헤더 중복 방지 기능을 구현하는 방법이다.
 
@@ -2644,19 +2647,21 @@ Pragma 지시문(pragma directive)은 컴파일러의 기능과 옵션을 설정
 만일 `header.h` 헤더 파일이 아직 처리되지 않았으면 컴파일러는 처음으로 `HEADER_FILE` 매크로를 정의한다. 그러나 헤더 파일을 다시 한 번 마주하였을 시, `HEADER_FILE`이 이미 정의되어 있기에 매크로 조건에 의해 컴파일러는 헤더 파일을 처리하지 않는다.
 
 ### `#pragma region`
-컴파일 작업에는 직접적인 영향을 미치지 않으나, `#pragma region` 및 `#pragma endregion` 쌍은 가독성을 위해 비주얼 스튜디오 내에서 지정된 코드 부분을 한 줄로 압축하거나 펼치는 기능을 제공한다.
+컴파일 작업에는 직접적인 영향을 주지 않지만, `#pragma region` 및 `#pragma endregion` 쌍은 가독성을 위해 비주얼 스튜디오에서 지정된 코드 부분을 한 줄로 압축하거나 펼치는 기능을 제공한다.
 
 ```cpp
 #pragma region REGIONNAME
-    statements;
-#pragma endregion
+
+    ...
+
+#pragma endregion REGIONNAME
 ```
 
 # C++: 라이브러리
-본 문서는 `main()` 함수를 가지는 하나의 메인 스크립트만을 사용하여 프로그램을 빌드하였다. 프로젝트 규모가 커지면 두 개 이상의 스크립트를 사용하거나 컴파일된 라이브러리를 불러와 관리하는 방안도 고려해야 한다. 본 장은 프로젝트 내의 스크립트 간 데이터나 함수를 주고받을 수 있도록 구축하는 방법과 이에 대한 설명을 제공한다.
+본 문서는 [`main()`](#진입점) 함수를 가지는 하나의 메인 스크립트만을 사용하여 프로그램을 빌드하였다. 프로젝트 규모가 커지면 두 개 이상의 스크립트를 사용하거나 컴파일된 라이브러리를 불러와 관리하는 방안도 고려해야 한다. 본 장은 프로젝트 내의 스크립트 간 데이터나 함수를 주고받을 수 있도록 구축하는 방법과 이에 대한 설명을 제공한다.
 
 ## 포함 지시문
-`#include` 포함 지시문(inclusive directive)은 전처리기 지시문 중 하나로 대표적으로 `iostream`과 같은 헤더 파일을 불러오는데 매번 사용된다. 헤더 파일에 선언된 기능들을 불러오는데 사용된 `#include` 지시문의 정확한 기능은 헤더 파일의 전체 코드를 지시문이 위치한 곳에 그대로 붙여넣는다.
+[포함 지시문](https://en.cppreference.com/w/cpp/preprocessor/include)(inclusive directive) `#include`는 전처리기 지시문 중 하나로 대표적으로 `stdio.h`와 같은 헤더 파일을 불러오는데 매번 사용된다. 헤더 파일에 선언된 기능들을 불러오는데 사용된 `#include` 지시문의 정확한 기능은 헤더 파일의 전체 코드를 지시문이 위치한 곳에 그대로 삽입한다.
 
 ### 헤더와 소스 파일 나누기
 문서 초반에 처음 언급된 소스(source) 파일과 [헤더](#헤더-파일)(header) 파일의 역할을 다시 정리하면 전자는 데이터나 함수의 정의, 그리고 후자는 데이터나 함수의 선언이 위주인 스크립트이다. 다만, 진입점인 `main()` 함수는 선언부가 없다는 점을 고려하면 메인 스크립트를 다음과 같이 구성할 수 있다.
@@ -2673,19 +2678,17 @@ void function(int, float);
 /* 소스 파일: main.cpp */
 #include "main.h"
 
-int main(){
-    
+int main() {
     variable = 'A';
-    printf("%c\n", variable);
 
+    std::cout << variable << std::endl;
     function(1, 3.14);
 
     return 0;
 }
 
-void function(int arg1, float arg2)
-{
-    printf("%.3d\n", arg1 + arg2);
+void function(int arg1, float arg2) {
+    std::cout << arg1 + arg2 << std::endl;
 }
 ```
 ```
@@ -2693,33 +2696,32 @@ A
 4.140
 ```
 
-위의 소스 파일의 헤더 파일 포함은 결과적으로 `#include` 지시문으로 인해 다음과 같이 표현된 것과 동일하다.
-
-```cpp
-/* #include "main.h" 코드 시작 */
-#include <iostream>
-
-int variable;
-void function(int, float);
-/* #include "main.h" 코드 끝 */
-
-int main(){
-    
-    variable = 'A';
-    printf("%c\n", variable);
-
-    function(1, 3.14);
-
-    return 0;
-}
-
-void function(int arg1, float arg2) {
-    printf("%.3d\n", arg1 + arg2);
-}
-```
+> 위의 소스 파일의 헤더 파일 포함은 결과적으로 `#include` 지시문으로 인해 다음과 같이 표현된 것과 동일하다.
+> 
+> ```cpp
+> /* #include "main.h" 코드 시작 */
+> #include <iostream>
+> 
+> int variable;
+> void function(int, float);
+> /* #include "main.h" 코드 끝 */
+> 
+> int main() {
+>     variable = 'A';
+>
+>     std::cout << variable << std::endl; 
+>     function(1, 3.14);
+> 
+>     return 0;
+> }
+> 
+> void function(int arg1, float arg2) {
+>     std::cout << arg1 + arg2 << std::endl;
+> }
+> ```
 
 ## `extern` 키워드
-`extern` 키워드는 변수를 정의 없이 선언만 한다. C++ 프로그래밍 언어의 [변수](#변수)를 처음 소개하였을 때 선언은 정의와 동일하다고 하였으나, 특수한 경우로써 `extern` 키워드가 있다고 함께 설명하였다. 그러므로 이번 내용은 선언(declaration)과 정의(definition)의 명확한 차이를 짚고 넘어가야 한다.
+[`extern`](https://en.cppreference.com/w/c/language/extern) 키워드는 변수를 정의 없이 선언만 한다. C++ 프로그래밍 언어의 [변수](#변수)를 처음 소개하였을 때 선언은 정의와 동일하다고 하였으나, 특수한 경우로써 `extern` 키워드가 있다고 함께 설명하였다. 그러므로 이번 내용은 선언(declaration)과 정의(definition)의 명확한 차이를 짚고 넘어가야 한다.
 
 변수 및 함수를 정의하면 해당 데이터를 위한 메모리가 할당되므로 한 번만 정의될 수 있다. 반면, 선언은 메모리 할당 없이 컴파일러에게 변수 및 함수의 존재만 알려줄 뿐이므로 데이터 메모리가 할당되지 않아 여러 번 선언이 가능하다. 이러한 특징이 스크립트 간 데이터 및 함수 공유에 매우 중요한 역할을 한다.
 
@@ -2738,7 +2740,7 @@ void function(int, float);
 // 본격 변수 "variable" 정의
 char variable = 'A';
 void function(int arg1, float arg2) {
-    printf("%.3f\n", arg1 + arg2);
+    std::cout << arg1 + arg2 << std::endl;
 }
 ```
 ```cpp
@@ -2747,8 +2749,7 @@ void function(int arg1, float arg2) {
 #include "module.h"
 
 int main() {
-
-    printf("%c\n", variable);
+    std::cout << variable << std::endl;
     function(1, 3.14);
 
     return 0;
@@ -2759,7 +2760,7 @@ A
 4.140
 ```
 
-만일 `module.h` 헤더 파일에서 `extern` 키워드를 사용하지 않았으면 변수는 정의가 되어버린다. 오로지 한 번만 정의될 수 있는 변수가 `module.c` 소스 파일과 메인 스크립트에서 중복되어 정의되므로 결국 재정의(re-definition) 문제로 컴파일 오류가 발생한다.
+만일 `module.h` 헤더 파일에서 `extern` 키워드를 사용하지 않았으면 변수는 정의가 되어버린다. 오로지 한 번만 정의될 수 있는 변수가 `module.cpp` 소스 파일과 메인 스크립트에서 중복되어 정의되므로 결국 재정의(re-definition) 문제로 컴파일 오류가 발생한다.
 
 `extern` 키워드를 사용하면 변수는 여러 번 선언이 가능하다. `module.cpp` 소스 파일과 메인 스크립트에서 중복 선언은 컴파일 작업에 아무런 문제를 야기하지 않는다. 허나, 선언된 변수를 사용하기 위해서는 단 한 번의 정의가 반드시 필요하다. 이러한 이유로 `module.cpp`에 `char variable = 'A';` 정의가 존재하는 것이며, 메인 스크립트에서는 `variable` 전역 변수의 값을 그대로 출력할 수 있게 된다.
 
