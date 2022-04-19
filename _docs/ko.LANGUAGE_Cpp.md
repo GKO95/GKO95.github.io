@@ -1288,7 +1288,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 비록 숫자를 읽을 때에는 빅 엔디언이 익숙하겠지만, 컴퓨터 메모리에서는 리틀 엔디언으로 데이터를 저장한다는 점을 명시하도록 한다.
 
 # C++: 클래스
-[클래스](https://en.cppreference.com/w/cpp/language/classes)(class)는 객체를 생성하는데 사용된다. 
+[클래스](https://en.cppreference.com/w/cpp/language/classes)(class)는 객체를 생성하는데 사용자 정의 자료형이다.
 
 > 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수를 통틀어 맴버(member)라고 칭하는데, 이들은 각각 필드(field; 맴버 변수)과 메소드(method; 맴버 함수)라고 불리며 다음과 같이 접근한다.
 >
@@ -1303,7 +1303,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 > // variable이란 배열 객체의 "at()" 메소드를 사용하여 2 번째 인덱스 요소의 값을 반환한다.
 > ```
 
-클래스는 `class` 혹은 `struct` 키워드를 사용하여 필드 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"이라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
+일반적으로 클래스는 `class` 키워드를 사용하여 필드 및 메소드와 함께 정의되는데, `struct` 혹은 `union` 키워드로도 정의될 수 있으나 성질 차이가 존재하며 자세한 내용은 [PDS](#c-사용자-정의-자료형)에서 다룰 예정이다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
 1. 변수와 함수가 하나의 객체로 결합된다.
 2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
@@ -1334,20 +1334,20 @@ int main () {
     CLASS instance;
 
     std::cout << instance.field1;       // 출력: 2
-    std::cout << instance.field2;       // 출력: 3.14
-    std::cout << instance.method();     // 출력: 6
     std::cout << instance.method(1);    // 출력: 4
 }
 ```
 
 ### 접근 지정자
-[접근 지정자](https://en.cppreference.com/w/cpp/language/access)(access specifier)는 외부로부터 맴버에 접근할 수 있는 권한을 지정한다. 여기서 `class`와 `struct` 키워드로 정의된 클래스는 기본 접근 지정자가 각각 `private` 및 `public`이라는 차이점을 갖는다.
+[접근 지정자](https://en.cppreference.com/w/cpp/language/access)(access specifier)는 외부 코드 및 [상속](#상속)으로부터 맴버 접근 권한을 지정한다.
 
 | 키워드     | 설명                                                  |
 | ----------- | ------------------------------------------------------------ |
-| `public`    | 객체 (또는 클래스) 외부 코드로부터 맴버 접근이 자유롭다.      |
-| `private`   | 객체 (또는 클래스) 내부에서만 맴버 접근이 가능하다.   |
-| `protected` | [상속](#상속)으로 파생된 객체 (또는 클래스)만이 접근할 수 있다. |
+| `public`    | 클래스 외부 코드로부터 맴버 접근이 자유롭다; `stuct` 및 `union` 키워드의 기본 접근 지정자이다.      |
+| `private`   | 클래스 내부에서만 맴버 접근이 가능하다; `class` 키워드의 기본 접근 지정자이다.   |
+| `protected` | 맴버 접근이 가능한 외부 코드가 해당 클래스로부터 상속된 파생 클래스로 제한된다. |
+
+> `class`와 `struct` 키워드의 유일한 차이점은 기본 접근 지정자 뿐이다. 그러므로 클래스를 정의할 때 후자를 사용하는 경우도 흔히 찾아볼 수 있다.
 
 ### 클래스 포인터
 클래스 포인터(class pointer)는 클래스를 자료형으로 갖는 포인터이다. 일반 포인터와 동일하게 클래스 뒤에 별표 `*`를 기입하여 포인터를 정의한다. 단, 포인터로부터 맴버를 접근하는기 위해 [포인터 맴버 연산자](https://en.cppreference.com/w/cpp/language/operator_member_access#Built-in_member_access_operators) `->`를 사용해야 하는 차이점이 있다.
@@ -1360,27 +1360,25 @@ std::cout << ptr->field1;       // 출력: 2
 std::cout << ptr->method(1);    // 출력: 4
 ```
 
-### `this` 포인터
-[`this`](https://en.cppreference.com/w/cpp/language/this) 포인터는 객체가 자신의 메모리 주소를 반환하는데 사용된다. 객체의 [비정적](#정적-맴버)(non-static) 메소드로부터 자신의 맴버 호출을 `this->` 표현식으로 명시적으로 나타낼 수 있어, 흔히 필드 맴버를 매개변수 또는 지역변수와 구분짓는데 활용된다.
+### 익명 클래스
+익명 클래스(anonymous class)는 불필요한 리소스를 줄이기 위해 재사용이 불가능한 일회용 클래스를 정의한 동시에 객체화한다.
 
 ```cpp
-/* 클래스 정의 */
-struct CLASS {
+/* 익명 클래스 정의 및 객체화 */
+class {
+public:
 
-    /* 필드 맴버 */
     int   field1 = 2;
     float field2 = 3.14;
     
-    /* 메소드 맴버 */
     int method() {
-        return this->field1 * this->field2;
+        return field1 * field2;
     }
 
-    /* 메소드 맴버 (오버로딩) */
     int method(int arg) {
-        return this->field1 + this->field2 - arg;
+        return field1 + field2 - arg;
     }
-};
+} instance;
 ```
 
 ## 생성자
@@ -1455,6 +1453,29 @@ struct CLASS {
 ```
 
 소멸자는 매개변수를 가질 수 없으므로 오버로딩될 수 없다. 그러므로 클래스는 오로지 하나의 소멸자만 정의할 수 있다.
+
+## `this` 포인터
+[`this`](https://en.cppreference.com/w/cpp/language/this) 포인터는 객체가 자신의 메모리 주소를 반환하는데 사용된다. 객체의 [비정적](#정적-맴버)(non-static) 메소드로부터 자신의 맴버 호출을 `this->` 표현식으로 명시적으로 나타낼 수 있어, 흔히 필드 맴버를 매개변수 또는 지역변수와 구분짓는데 활용된다.
+
+```cpp
+/* 클래스 정의 */
+struct CLASS {
+
+    /* 필드 맴버 */
+    int   field1 = 2;
+    float field2 = 3.14;
+    
+    /* 메소드 맴버 */
+    int method() {
+        return this->field1 * this->field2;
+    }
+
+    /* 메소드 맴버 (오버로딩) */
+    int method(int arg) {
+        return this->field1 + this->field2 - arg;
+    }
+};
+```
 
 ## 맴버 선언
 클래스에서 맴버를 선언하면 외부에서 별도로 정의되어야 한다. 클래스 외부에서 정의된 맴버는 사실상 전역 데이터로써 공용될 수 있기 때문에 [정적 맴버](#정적-맴버)가 아닌 이상 맴버 선언의 활용은 메소드 맴버로 한정된다.
@@ -1567,24 +1588,31 @@ int main() {
 ```
 
 ## 상속
-[상속](https://en.cppreference.com/w/cpp/language/derived_class)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 필드 및 메소드 맴버를 제공하는 행위이다. 기반 클래스와 파생 클래스에 동일한 이름의 맴버가 존재할 경우, 기반 클래스의 맴버는 파생 클래스에 의해 묻힌다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 있다.
+[상속](https://en.cppreference.com/w/cpp/language/derived_class)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 필드 및 메소드 맴버를 제공하는 행위이다. 파생 클래스는 [접근 지정자](#접근-지정자)를 통해 기반 클래스로부터 상속받는 맴버들의 접근 권한을 설정할 수 있다. 기반 클래스와 파생 클래스에 동일한 이름의 맴버가 존재할 경우, 기반 클래스의 맴버는 파생 클래스에 의해 묻힌다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 있다.
+
+> 기반 클래스의 `private` 맴버는 절대로 상속되지 않으며 접근 불가하다.
+
+| 접근 지정자 | 설명                                           |
+| :---------: | ------------------------------------------------------------ |
+| `public` | 기반 클래스 맴버들의 접근 지정자는 파생 클래스에서도 그대로 유지된다; `stuct` 및 `union` 키워드의 기본 접근 지정자이다. |
+| `private` | 기반 클래스 맴버들은 파생 클래스에서 `private`으로 전환된다; `class` 키워드의 기본 접근 지정자이다. |
+| `protected` | 기반 클래스 맴버들은 파생 클래스에서 `protected`로 전환된다. |
 
 ```cpp
-using namespace std;
-
 /* 기반 클래스 정의 */
-struct BASECLASS {
-    
+class BASECLASS {
+public:
+
     BASECLASS() {
-        cout << "생성자: 기반 클래스" << endl;
+        std::cout << "생성자: 기반 클래스" << std::endl;
     }
 
     ~BASECLASS() {
-        cout << "소멸자: 기반 클래스" << endl;
+        std::cout << "소멸자: 기반 클래스" << std::endl;
     }
 
-    int    field1 = 3;
-    string field2 = "C++";
+    int field1 = 3;
+    std::string field2 = "C++";
 
     int method(int arg1, int arg2) {
         return arg1 + arg2;
@@ -1593,18 +1621,18 @@ struct BASECLASS {
 
 /* 파생 클래스 정의 */
 struct DERIVEDCLASS
-    : BASECLASS {
+    : public BASECLASS {
     
     DERIVEDCLASS() {
-        cout << "생성자: 파생 클래스" << endl;
+        std::cout << "생성자: 파생 클래스" << std::endl;
     }
 
     ~DERIVEDCLASS() {
-        cout << "소멸자: 파생 클래스" << endl;
+        std::cout << "소멸자: 파생 클래스" << std::endl;
     }
 
-    string field2 = "Hello World!";
-    bool   field3 = true;
+    std::string field2 = "Hello World!";
+    bool field3 = true;
 
     int method(int arg1, int arg2) {
         return arg1 * arg2;
@@ -1616,8 +1644,8 @@ int main() {
     /* 클래스 객체화 */
     DERIVEDCLASS instance;
 
-    cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << endl;
-    cout << instance.method(2, 3) << endl;
+    std::cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << std::endl;
+    std::cout << instance.method(2, 3) << std::endl;
 }
 ```
 ```
@@ -1630,24 +1658,23 @@ int main() {
 ```
 
 ### 상속 맴버 접근
-범위지정 연산자 `::`는 파생 클래스에 묻혀진 기반 클래스의 필드 및 메소드를 호출하는데 사용된다.
+범위지정 연산자 `::`를 사용하여 파생 클래스에 묻혀진 기반 클래스의 필드 및 메소드를 호출할 수 있다. 아래는 [상속](#상속)에서 다룬 예시 코드에서 동명의 기반 클래스 맴버를 파생 클래스로부터 호출한다.
 
 ```cpp
-using namespace std;
-
 /* 기반 클래스 정의 */
-struct BASECLASS {
-    
+class BASECLASS {
+public:
+
     BASECLASS() {
-        cout << "생성자: 기반 클래스" << endl;
+        std::cout << "생성자: 기반 클래스" << std::endl;
     }
 
     ~BASECLASS() {
-        cout << "소멸자: 기반 클래스" << endl;
+        std::cout << "소멸자: 기반 클래스" << std::endl;
     }
 
-    int    field1 = 3;
-    string field2 = "C++";
+    int field1 = 3;
+    std::string field2 = "C++";
 
     int method(int arg1, int arg2) {
         return arg1 + arg2;
@@ -1656,19 +1683,19 @@ struct BASECLASS {
 
 /* 파생 클래스 정의 */
 struct DERIVEDCLASS
-    : BASECLASS {
+    : public BASECLASS {
     
     DERIVEDCLASS() {
-        cout << "생성자: 파생 클래스" << endl;
+        std::cout << "생성자: 파생 클래스" << std::endl;
         field2 = BASECLASS::field2;            // 기반 클래스의 field2 필드
     }
 
     ~DERIVEDCLASS() {
-        cout << "소멸자: 파생 클래스" << endl;
+        std::cout << "소멸자: 파생 클래스" << std::endl;
     }
 
-    string field2 = "Hello World!";
-    bool   field3 = true;
+    std::string field2 = "Hello World!";
+    bool field3 = true;
 
     int method(int arg1, int arg2) {
         return BASECLASS::method(arg1, arg2);  // 기반 클래스의 method() 메소드
@@ -1680,8 +1707,8 @@ int main() {
     /* 클래스 객체화 */
     DERIVEDCLASS instance;
 
-    cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << endl;
-    cout << instance.method(2, 3) << endl;
+    std::cout << instance.field1 << " " << instance.field2 << " " << instance.field3 << std::endl;
+    std::cout << instance.method(2, 3) << std::endl;
 }
 ```
 ```
@@ -1691,25 +1718,6 @@ int main() {
 5
 소멸자: 파생 클래스
 소멸자: 기반 클래스
-```
-
-### 상속 접근 지정자
-[접근 지정자](https://en.cppreference.com/w/cpp/language/access)에 따라 어떠한 기반 클래스 맴버가 파생 클래스로 상속될 것인지 결정된다. 여기서 `class`와 `struct` 키워드로 정의된 클래스는 기본 상속 접근 지정자가 각각 `private` 및 `public`이라는 차이점을 갖는다.
-
-> 기반 클래스의 `private` 맴버는 절대로 상속되지 않으며 접근 불가하다.
-
-| 접근 지정자 | 설명                                           |
-| :---------: | ------------------------------------------------------------ |
-| `public` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서도 그대로 `public` 및 `protected` 맴버로 상속된다. |
-| `private` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `private` 맴버로 전환된다. |
-| `protected` | 기반 클래스의 `public` 및 `protected` 맴버는 파생 클래스에서 `protected` 맴버로 전환된다. |
-
-```cpp
-/* 파생 클래스의 BASECLASS1 및 BASECLASS2 상속 */
-class DERIVEDCLASS
-    : public BASECLASS1, protected BASECLASS2 {
-    
-};
 ```
 
 ## 다형성
@@ -1842,7 +1850,7 @@ public:
 ```
 
 ### 클래스 소스 파일
-`.CPP` 확장자의 클래스 소스 파일은 클래스 헤더 파일에서 선언된 맴버 필드 및 메소드의 정의를 내포한다. 해당 클래스 맴버들의 실질적인 코드가 들어있으나, `#include` 지시문으로 클래스 헤더를 포함해서 맴버의 선언과 정의를 연동시켜야 한다.
+`.CPP` 확장자의 클래스 소스 파일은 클래스 헤더 파일에서 선언된 필드 및 메소드 맴버의 정의를 내포한다. 해당 클래스 맴버들의 실질적인 코드가 들어있으나, `#include` 지시문으로 클래스 헤더를 포함해서 맴버의 선언과 정의를 연동시켜야 한다.
 
 ```cpp
 /* "ClassName.cpp" 소스 파일 */
@@ -1864,13 +1872,29 @@ int ClassName::method(int arg) {
 ```
 
 # C++: 사용자 정의 자료형
-사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 C++ 프로그래밍 언어에 내장된 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다.
+사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 기존 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다. 대표적인 예시로 [클래스](#c-클래스)가 있으나 본 장은 객체지향 기능들이 결여되고 필드 맴버만으로 구성된 [레코드](https://ko.wikipedia.org/wiki/레코드_(컴퓨터_과학))(record)를 지칭하는 [PDS](https://ko.wikipedia.org/wiki/POD_(데이터_구조))(passive data structure 혹은 plain old data, POD; 수동형 자료구조) 관점에서 소개한다.
+
+PDS 클래스는 다음 특징을 지닌다:
+
+* 사용자 정의 [소멸자](#소멸자)가 없다.
+* 사용자 정의 [복사 할당 연산자](https://en.cppreference.com/w/cpp/language/copy_assignment) `operator=`가 없다.
+* PDS가 아닌 클래스 자료형의 비정적 필드 맴버를 갖지 않는다.
+* 집합형 클래스이다.
+
+> 집합형(aggregate)이란, 중괄호 `{}`를 사용하는 [집합 초기화](https://en.cppreference.com/w/cpp/language/aggregate_initialization)를 통해 생성된 데이터이다. 대표적인 집합형으로 [배열](#배열)이 있으며 클래스(일반적으로 `struct` 및 `union`)도 아래의 특성을 모두 갖추면 집합형이다.
+>
+> * 사용자 정의 [생성자](#생성자)가 없다.
+> * 비정적 `private` 그리고 `protected` 필드 맴버를 갖지 않는다.
+> * `private`, `protected` 그리고 가상 기반 클래스로부터 상속되지 않다.
+> * 가상 맴버 함수가 없다.
+
+C++ 프로그래밍 언어에서 PDS 클래스 자료형을 별도로 다루는 이유는 C 프로그래밍 언어의 [사용자 정의 자료형](/docs/ko.C#c-사용자-정의-자료형)과 호환되기 때문이다.
 
 ## 구조체
-[구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 구조체는 `struct` 키워드로 정의된다.
+[구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 필드 맴버를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 정의된 사용자 정의 자료형이다.
 
 ```cpp
-/* 구조체 정의: 총 5바이트 활용 */
+/* 구조체 정의: 총 8바이트 활용 */
 struct STRUCTURE {
     /* 맴버 정의 */
     char  field1;    // 자료형 크기: 1바이트
@@ -1916,8 +1940,6 @@ A
 3
 ```
 
-> 일부 C++ 소스 코드는 구조체 변수를 정의할 때 `struct` 키워드가 포함된 C 프로그래밍 구문을 사용하는데, 이는 C++11 이후부터 개정되어 더 이상 필요하지 않다.
-
 ### 데이터 구조 정렬
 위의 예시 코드에서 `char` (1바이트) 그리고 `int` (4바이트) 자료형 맴버로 구성된 구조체가 사실상 8바이트 메모리 용량을 차지한다고 언급하였다. 이는 시스템 프로세서 차원에서 메모리 접근성을 위한 [데이터 구조 정렬](https://en.wikipedia.org/wiki/Data_structure_alignment)(data structure alignment)이 반영된 결과이다. 여기서 데이터의 메모리 주소가 해당 데이터의 크기인 $n$-바이트 배수로써 자연스럽게 정렬(naturally aligned)되었을 때 하드웨어 성능 효율이 가장 높으며, 이를 "$n$-바이트 정렬"되었다고 부른다.
 
@@ -1937,7 +1959,7 @@ A
    };
     ```
 
-2. 맨 마지막 맴버의 자료형 크기가 정렬 크기에 미치지 못하면 나머지를 패딩으로 채운다.
+2. 구조체 자체의 정렬을 위해, 구조체 크기는 정렬 크기의 배수이어야 한다. 맨 마지막 맴버의 자료형 크기가 정렬 크기에 미치지 못하면 나머지를 패딩으로 채운다.
 
     ```cpp
    /* 구조체 크기: 8바이트 */
@@ -2006,7 +2028,7 @@ struct {
 ```
 
 ## 공용체
-[공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 각 맴버마다 데이터를 저장하는 [구조체](#구조체)와 달리, 맴버들은 하나의 공용 메모리를 사용한다. 즉, 공용체의 한 맴버에 데이터 변경이 발생하면 나머지 맴버에도 영향을 미친다. 공용체는 `union` 키워드로 정의된다.
+[공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 자료형과 무관하게 여러 필드 맴버를 하나의 단일 데이터로 통합시킨 `union` 키워드로 정의된 사용자 정의 자료형이다. 각 맴버마다 데이터를 저장하는 [구조체](#구조체)와 달리, 맴버들은 하나의 공용 메모리를 사용한다. 즉, 공용체의 한 맴버에 데이터 변경이 발생하면 나머지 맴버에도 영향을 미친다.
 
 ```cpp
 /* 공용체 정의: 총 4바이트 활용 */
@@ -2090,7 +2112,7 @@ union {
 ```
 
 ## 열거형
-[열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기는 자료형이다. 열거자들은 기본적으로 정수 0부터 시작하여 다음 열거자마다 1만큼 증가한다. 열거자에 할당 연산자 `=`로 정수를 집적 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거자를 추가하거나, 혹은 열거형의 값을 바꾸는 건 불가하다. 열거형은 `enum` 키워드로 정의된다.
+[열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기는 `enum` 키워드로 정의된 자료형이다. 열거자들은 기본적으로 정수 0부터 시작하여 다음 열거자마다 1만큼 증가한다. 열거자에 할당 연산자 `=`로 정수를 집적 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거자를 추가하거나, 혹은 열거형의 값을 바꾸는 건 불가하다.
 
 ```cpp
 /* 열거형 정의 */
@@ -2124,7 +2146,7 @@ ENUMERATION variable = enumerator1;
 ```
 
 ### 열거형 클래스
-[열거형 클래스](https://en.cppreference.com/w/cpp/language/enum#Scoped_enumerations)(enumeration class)는 타 열거형과 관계없이 동명의 열거자를 가져도 네임스페이스처럼 국부적인 영역범위에 속하므로 오류가 발생하지 않는 열거형으며, 일명 영역 제한 열거형(scoped enumeration)이라고 칭한다. 열거형 클래스는 `enum class` 혹은 `enum struct`로 정의된다.
+[열거형 클래스](https://en.cppreference.com/w/cpp/language/enum#Scoped_enumerations)(enumeration class)는 클래스 성질이 추가된 열거형이며 `enum class` 혹은 `enum struct` 키워드로 정의된다. 열거형 클래스 자료형으로 정의된 변수는 오로지 주어진 열거자만을 할당받을 수 있다. 개별 열거자는 열거형 클래스의 정적 필드 맴버인 마냥 호출되는데, 이러한 국부적 영역범위 특성은 서로 다른 열거형 클래스에도 동명의 열거자를 정의할 수 있도록 한다. 때문에 열거형 클래스는 영역 제한 열거형(scoped enumeration)이라고 칭한다.
 
 > 일반 열거형과 달리 열거자 충돌 문제를 방지할 수 있기 때문에, C++ 프로그래밍 언어는 열거자 클래스의 활용을 적극 권장한다.
 
@@ -2137,14 +2159,10 @@ enum class ENUMERATION1 {
 
 /* 열거형 클래스 정의 2 */
 enum struct ENUMERATION2 {
-    enumerator1,
-    enumerator2
+    enumerator2,
+    enumerator3
 };
-```
 
-열거형 클래스의 열거자는 반드시 해당 열거형 클래스를 함께 명시하여 범위지정 연산자 `::`를 통해 호출되어야 한다.
-
-```cpp
 /* 열거형 클래스 변수 정의 */
 ENUMERATION1 variable = ENUMERATION1::enumerator1;
 ```
@@ -2167,7 +2185,7 @@ using dtypeName = int;
 ```
 
 # C++: 템플릿
-템플릿(template)은 자료형과 무관하게 함수 또는 클래스의 형식 틀을 제공한다. 개발자는 템플릿을 활용해 여러 유사한 함수 및 클래스를 손쉽게 생성할 수 있다. 본 장은 템플릿 정의 및 활용법을 설명한다.
+[템플릿](https://en.cppreference.com/w/cpp/language/templates)(template)은 자료형을 나중에 지정하여 사용할 수 있는 함수 및 클래스 틀이며 `template <>` 구문과 함께 정의된다. 유사한 코드를 수행하는 함수 및 클래스를 각 자료형 조합마다 별도로 정의하지 않고 템플릿으로 통합시키므로써 관리가 편해지고 작업효율을 높일 수 있다. 대표적인 예시로 [배열 클래스](#배열-클래스)와 [벡터 클래스](#벡터-클래스)가 있다.
 
 ## 함수 템플릿
 함수 템플릿(function template)은 다음과 같은 구문으로 정의된다.
@@ -2221,71 +2239,17 @@ public:
 };
 ```
 
-정의된 클래스 템플릿을 사용하기 위해서는 홑화살괄호 `<>` 안에 자료형을 지정하여 객최화한다.
+정의된 클래스 템플릿을 사용하기 위해서는 홑화살괄호 `<>` 안에 자료형을 지정하여 객체화한다.
 
 ```cpp
 /* 클래스 템플릿 객체화 */
 CLASS<int, float> instance(1, 3.0);
 ```
 
-클래스 템플릿은 이미 *C++: 컨테이너* 장에서 소개된 적이 있으며, 배열 클래스와 벡터 클래스가 이에 해당된다.
-
-```cpp
-std::array<int, 3> arr;      // 배열 클래스: <class T, size_t N>
-std::vector<int> vec;        // 벡터 클래스: <class T>
-```
-
-### 클래스 템플릿 파일
-클래스 템플릿은 클래스가 아닌 *템플릿*이기 때문에, 클래스 템플릿을 헤더 파일과 소스 파일로 나누는 것은 C++ 프로그래밍 언어에서 공식적으로 지원되지 않는다. 클래스처럼 헤더 파일과 소스 파일로 나눌 수 있으나 권장되지 않는다.
-
-```cpp
-/* "ClassName.h" 헤더 파일 */
-template<class T, class U>
-class ClassName
-{
-public:
-	ClassName(T arg1, U arg2);
-	~ClassName();
-
-	T field1;
-	U field2;
-
-	U method(T arg3);
-};
-```
-```cpp
-/* "ClassName.cpp" 소스 파일 */
-#include "ClassName.h"
-
-template<class T, class U>
-ClassName<T, U>::ClassName(T arg1, U arg2)
-	: field1(arg1), field2(arg2) { }
-
-template<class T, class U>
-ClassName<T, U>::~ClassName() { }
-
-template<class T, class U>
-U ClassName<T, U>::method(T arg3) {
-	return field1 + field2 - arg3;
-}
-```
-```cpp
-/* "main.cpp" 메인 스크립트 */
-#include <iostream>
-#include "ClassName.h"
-#include "ClassName.cpp"  // 링크 오류 방지를 위해 필수!
-
-int main() {
-    
-    // 객체화
-    CLASS<int, double> instance(1, 3.0);
-    
-    return 0;
-}
-```
+클래스 템플릿은 클래스가 아니다: 즉, 클래스처럼 [헤더 파일과 소스 파일로 나누어서 관리하는 것](#클래스-파일)은 C++ 프로그래밍 언어에서 지원하지 않는다.
 
 ## 템플릿 특수화
-일부 함수 템플릿 혹은 클래스 템플릿은 경우에 따라 달리 정의될 필요가 있다. 템플릿 특수화(template specialization)은 특정 자료형으로 객체화하였을 시 별도의 정의가 적용되도록 한다.
+특정 자료형 조합에 따라 템플릿을 달리 정의해야 할 경우가 발생한다. 템플릿 특수화(template specialization)은 특정 자료형으로 객체화하였을 시 별도의 정의가 적용되도록 한다.
 
 ```cpp
 /* 함수 템플릿 정의 */
@@ -2421,13 +2385,13 @@ C 표준 라이브러리 중에서 문자열 관련 [`cstring`]((https://en.cppr
 ```cpp
 /* try 블록 */
 try {
-	statements;
+    statements;
 }
 catch(const std::out_of_range &e) {
-	// catch: 범위를 벗어난 요소 접근 시 발생 예외
+    // catch: 범위를 벗어난 요소 접근 시 발생 예외
 }
 catch(const std::exception &e) {
-	// catch: 모든 예외
+    // catch: 모든 예외
 }
 ```
 
@@ -2435,7 +2399,7 @@ catch(const std::exception &e) {
 
 ```cpp
 catch(...) {
-	// catch: 모든 예외 및 자료형
+    // catch: 모든 예외 및 자료형
 }
 ```
 
@@ -2449,13 +2413,13 @@ catch(...) {
 /* try 블록 */
 try {
     statements;
-	throw expression;
+    throw expression;
 }
 catch(int e) {
-	// catch: 정수형
+    // catch: 정수형
 }
 catch(char e) {
-	// catch: 문자형
+    // catch: 문자형
 }
 ```
 
@@ -2582,32 +2546,31 @@ file.close();
 C++ 프로그래밍 언어가 컴파일되기 전에 전처리기에서 `#include`와 같은 전처리기 지시문을 우선적으로 처리한다. 전처리기 지시문은 C++ 프로그래밍 언어 컴파일러 설정 및 프로그래밍의 편리성을 제공한다. 본 장에서는 일부 유용한 전처리기 지시문에 대하여 소개한다.
 
 ## 매크로 정의
-매크로(macro)란 식별자가 있는 코드 조각이다. 코드 조각은 숫자나 문자와 같은 간단한 데이터가 될 수 있으며, 전달인자를 받는 표현식이나 문장이 될 수도 있다. 전자와 후자는 각각 "객체형식(object-like)" 그리고 "함수형식(function-like)" 매크로라고 부른다. 한 번 정의된 매크로는 프로그램을 실행하면 변경할 수 없다. 정의된 매크로는 마치 전역 변수인 마냥 헤더 파일에서 `#include`와 같은 포함 지시문을 통해 다른 스크립트에서도 사용할 수 있다.
+[매크로](https://en.cppreference.com/w/cpp/preprocessor/replace)(macro)란 식별자가 있는 코드 조각이다. 코드 조각은 숫자나 문자와 같은 간단한 데이터가 될 수 있으며 (객체형식 매크로; object-like macro), 전달인자를 받는 표현식이나 문장이 될 수도 있다 (함수형식 매크로; function-like macro). 매크로는 `#define` 지시문으로 정의되며, 각 매크로에 해당하는 데이터 및 표현식이 소스 코드에 대체된다. 정의된 매크로는 `#undef` 지시자로 제거할 수 있다.
 
-컴파일러 자체에 이미 내장되어 있는 매크로가 있으며, 공통된 표준 매크로 및 특정 컴파일러 전용 매크로가 들어있다. 아래는 Visual C++, GCC, 그리고 그 외의 컴파일러가 가지는 내장 매크로 목록을 보여주는 문서이다(영문).
+```cpp
+#define SOMETHING       7                    // 객체형식 매크로
+#define ANYTHING(x, y)  (x * SOMETHING - y)  // 함수형식 매크로
+
+std::cout << ANYTHING(2, 3);
+/* 결과:
+std::cout << (2 * 7 - 3);
+*/
+
+#undef SOMETHING
+#undef ANYTHING
+```
+
+한 번 정의된 매크로는 런타임 도중에 변경이 불가하다. 정의된 매크로는 마치 전역 변수인 마냥 헤더 파일에서 `#include`와 같은 포함 지시문을 통해 다른 스크립트에서도 사용할 수 있다.
+
+컴파일러에는 공통된 표준 매크로 및 컴파일러마다 전용 매크로가 내장되어 있다.
 
 * **Visual C++**: [Microsoft Docs - 미리 정의된 매크로](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
 * **GCC**: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
 * **그 외**: [SourceForge Wiki](https://sourceforge.net/p/predef/wiki/Compilers/)
 
-### `#define` 지시문
-`#define` 지시문은 새로운 매크로를 생성한다.
-
-```cpp
-#define SOMETHING       value                // 객체형식 매크로
-#define ANYTHING(x, y)  (x * SOMETHING - y)  // 함수형식 매크로
-```
-
-### `#undef` 지시문
-`#undef` 지시문은 매크로 정의를 제거한다.
-
-```cpp
-#undef SOMETHING        // 객체형식 매크로
-#undef ANYTHING         // 함수형식 매크로
-```
-
 ### 쉼표 연산자
-쉼표 연산자(comma operator)는 앞에 있는 표현식을 평가하되 반환되지 않고, 뒤에 있는 표현식이 평가되어 반환된다. 흔히 매크로 정의를 간결하게 하기 위해 사용된다. 아래의 예시 코드에 의하면 먼저 할당 연산자로 `value1`은 4가 되고, 이후에 증가 연산자에 의해 5가 된다.
+[쉼표 연산자](https://en.cppreference.com/w/cpp/language/operator_other#Built-in_comma_operator)(comma operator)는 앞에 있는 표현식을 평가하되 반환되지 않고, 뒤에 있는 표현식이 평가되어 반환된다. 흔히 매크로 정의를 간결하게 하기 위해 사용된다. 아래의 예시 코드에 의하면 먼저 할당 연산자로 `value1`은 4가 되고, 이후에 증가 연산자에 의해 5가 된다.
 
 ```cpp
 int value1 = 1, value2 = 3;
@@ -2619,15 +2582,15 @@ std::cout << variable;
 ```
 
 ## 조건 포함문
-조건 포함문(conditional inclusion)은 조건여부에 따라 컴파일 시 특정 범위의 코드를 포함시킬 것인지 배제할 것인지 결정한다. 
+[조건 포함문](https://en.cppreference.com/w/cpp/preprocessor/conditional)(conditional inclusion)은 조건여부에 따라 컴파일 시 특정 범위의 코드를 포함시킬 것인지 배제할 것인지 결정한다. 
 
 ```cpp
 #if    SOMETHING > value
-    statements;
+    ...
 #elif  SOMETHING < value
-    statements;
+    ...
 #else
-    statements;
+    ...
 #endif
 ```
 
@@ -2639,17 +2602,21 @@ std::cout << variable;
 ```cpp
 // 만일 64비트 ARM 혹은 x64 아키텍쳐로 컴파일 할 경우...
 #ifdef    _WIN64
-    statments;
+
+    ...
+
 #endif
 
 // 만일 64비트 ARM 혹은 x64 아키텍쳐로 컴파일되지 않은 경우...
-#ifndef    _WIN64
-    statements;
+#ifndef   _WIN64
+
+    ...
+
 #endif
 ```
 
 ## Pragma 지시문
-Pragma 지시문(pragma directive)은 컴파일러의 기능과 옵션을 설정하기 위해 사용되는 전처리기 지시문이다. 개발사마다 제작한 컴파일러는 기술적 성능이 각각 다르기 때문에 pragma는 비공통적인 컴파일러 특정 전처리기 지시문이다.
+[Pragma 지시문](https://en.cppreference.com/w/cpp/preprocessor/impl)(pragma directive)은 컴파일러의 기능과 옵션을 설정하기 위해 사용되는 전처리기 지시문이다. 개발사마다 제작한 컴파일러는 기술적 성능이 각각 다르기 때문에 pragma는 비공통적인 컴파일러 특정 전처리기 지시문이다.
 
 > Pragma란 용어는 pragmatic의 줄임말로, 사전적 의미로는 "실용적인"을 뜻한다. 이는 실질적 컴파일러 동작 및 처리 방식에 관여한 것을 보아 붙여진 용어라고 판단된다.
 
@@ -2665,7 +2632,7 @@ Pragma 지시문(pragma directive)은 컴파일러의 기능과 옵션을 설정
 #pragma once
 ```
 
-결과적으로 하나의 소스 파일에 헤더 파일이 중복적으로 포함이 되는 것을 제한하므로써 정의가 반복되는 현상을 막을 수 있는데, 이러한 기능을 *헤더 중복 방지(include guard)*라고 부른다. 추가적으로 `#pragma once` 지시문을 사용하면 처리하는 헤더 파일 횟수가 줄어들어 컴파일 작업 시간도 함께 줄이게 된다.
+결과적으로 하나의 소스 파일에 헤더 파일이 중복적으로 포함이 되는 것을 제한하므로써 정의가 반복되는 현상을 막을 수 있는데, 이러한 기능을 [헤더 중복 방지](https://en.wikipedia.org/wiki/Include_guard)(include guard)라고 부른다. 추가적으로 `#pragma once` 지시문을 사용하면 처리하는 헤더 파일 횟수가 줄어들어 컴파일 작업 시간도 함께 줄이게 된다.
 
 아래의 코드는 `#pragma once` 지시문을 사용하지 않고 헤더 중복 방지 기능을 구현하는 방법이다.
 
@@ -2680,19 +2647,21 @@ Pragma 지시문(pragma directive)은 컴파일러의 기능과 옵션을 설정
 만일 `header.h` 헤더 파일이 아직 처리되지 않았으면 컴파일러는 처음으로 `HEADER_FILE` 매크로를 정의한다. 그러나 헤더 파일을 다시 한 번 마주하였을 시, `HEADER_FILE`이 이미 정의되어 있기에 매크로 조건에 의해 컴파일러는 헤더 파일을 처리하지 않는다.
 
 ### `#pragma region`
-컴파일 작업에는 직접적인 영향을 미치지 않으나, `#pragma region` 및 `#pragma endregion` 쌍은 가독성을 위해 비주얼 스튜디오 내에서 지정된 코드 부분을 한 줄로 압축하거나 펼치는 기능을 제공한다.
+컴파일 작업에는 직접적인 영향을 주지 않지만, `#pragma region` 및 `#pragma endregion` 쌍은 가독성을 위해 비주얼 스튜디오에서 지정된 코드 부분을 한 줄로 압축하거나 펼치는 기능을 제공한다.
 
 ```cpp
 #pragma region REGIONNAME
-    statements;
-#pragma endregion
+
+    ...
+
+#pragma endregion REGIONNAME
 ```
 
 # C++: 라이브러리
-본 문서는 `main()` 함수를 가지는 하나의 메인 스크립트만을 사용하여 프로그램을 빌드하였다. 프로젝트 규모가 커지면 두 개 이상의 스크립트를 사용하거나 컴파일된 라이브러리를 불러와 관리하는 방안도 고려해야 한다. 본 장은 프로젝트 내의 스크립트 간 데이터나 함수를 주고받을 수 있도록 구축하는 방법과 이에 대한 설명을 제공한다.
+본 문서는 [`main()`](#진입점) 함수를 가지는 하나의 메인 스크립트만을 사용하여 프로그램을 빌드하였다. 프로젝트 규모가 커지면 두 개 이상의 스크립트를 사용하거나 컴파일된 라이브러리를 불러와 관리하는 방안도 고려해야 한다. 본 장은 프로젝트 내의 스크립트 간 데이터나 함수를 주고받을 수 있도록 구축하는 방법과 이에 대한 설명을 제공한다.
 
 ## 포함 지시문
-`#include` 포함 지시문(inclusive directive)은 전처리기 지시문 중 하나로 대표적으로 `iostream`과 같은 헤더 파일을 불러오는데 매번 사용된다. 헤더 파일에 선언된 기능들을 불러오는데 사용된 `#include` 지시문의 정확한 기능은 헤더 파일의 전체 코드를 지시문이 위치한 곳에 그대로 붙여넣는다.
+[포함 지시문](https://en.cppreference.com/w/cpp/preprocessor/include)(inclusive directive) `#include`는 전처리기 지시문 중 하나로 대표적으로 `stdio.h`와 같은 헤더 파일을 불러오는데 매번 사용된다. 헤더 파일에 선언된 기능들을 불러오는데 사용된 `#include` 지시문의 정확한 기능은 헤더 파일의 전체 코드를 지시문이 위치한 곳에 그대로 삽입한다.
 
 ### 헤더와 소스 파일 나누기
 문서 초반에 처음 언급된 소스(source) 파일과 [헤더](#헤더-파일)(header) 파일의 역할을 다시 정리하면 전자는 데이터나 함수의 정의, 그리고 후자는 데이터나 함수의 선언이 위주인 스크립트이다. 다만, 진입점인 `main()` 함수는 선언부가 없다는 점을 고려하면 메인 스크립트를 다음과 같이 구성할 수 있다.
@@ -2709,19 +2678,17 @@ void function(int, float);
 /* 소스 파일: main.cpp */
 #include "main.h"
 
-int main(){
-    
+int main() {
     variable = 'A';
-    printf("%c\n", variable);
 
+    std::cout << variable << std::endl;
     function(1, 3.14);
 
     return 0;
 }
 
-void function(int arg1, float arg2)
-{
-    printf("%.3d\n", arg1 + arg2);
+void function(int arg1, float arg2) {
+    std::cout << arg1 + arg2 << std::endl;
 }
 ```
 ```
@@ -2729,33 +2696,32 @@ A
 4.140
 ```
 
-위의 소스 파일의 헤더 파일 포함은 결과적으로 `#include` 지시문으로 인해 다음과 같이 표현된 것과 동일하다.
-
-```cpp
-/* #include "main.h" 코드 시작 */
-#include <iostream>
-
-int variable;
-void function(int, float);
-/* #include "main.h" 코드 끝 */
-
-int main(){
-    
-    variable = 'A';
-    printf("%c\n", variable);
-
-    function(1, 3.14);
-
-    return 0;
-}
-
-void function(int arg1, float arg2) {
-    printf("%.3d\n", arg1 + arg2);
-}
-```
+> 위의 소스 파일의 헤더 파일 포함은 결과적으로 `#include` 지시문으로 인해 다음과 같이 표현된 것과 동일하다.
+> 
+> ```cpp
+> /* #include "main.h" 코드 시작 */
+> #include <iostream>
+> 
+> int variable;
+> void function(int, float);
+> /* #include "main.h" 코드 끝 */
+> 
+> int main() {
+>     variable = 'A';
+>
+>     std::cout << variable << std::endl; 
+>     function(1, 3.14);
+> 
+>     return 0;
+> }
+> 
+> void function(int arg1, float arg2) {
+>     std::cout << arg1 + arg2 << std::endl;
+> }
+> ```
 
 ## `extern` 키워드
-`extern` 키워드는 변수를 정의 없이 선언만 한다. C++ 프로그래밍 언어의 [변수](#변수)를 처음 소개하였을 때 선언은 정의와 동일하다고 하였으나, 특수한 경우로써 `extern` 키워드가 있다고 함께 설명하였다. 그러므로 이번 내용은 선언(declaration)과 정의(definition)의 명확한 차이를 짚고 넘어가야 한다.
+[`extern`](https://en.cppreference.com/w/c/language/extern) 키워드는 변수를 정의 없이 선언만 한다. C++ 프로그래밍 언어의 [변수](#변수)를 처음 소개하였을 때 선언은 정의와 동일하다고 하였으나, 특수한 경우로써 `extern` 키워드가 있다고 함께 설명하였다. 그러므로 이번 내용은 선언(declaration)과 정의(definition)의 명확한 차이를 짚고 넘어가야 한다.
 
 변수 및 함수를 정의하면 해당 데이터를 위한 메모리가 할당되므로 한 번만 정의될 수 있다. 반면, 선언은 메모리 할당 없이 컴파일러에게 변수 및 함수의 존재만 알려줄 뿐이므로 데이터 메모리가 할당되지 않아 여러 번 선언이 가능하다. 이러한 특징이 스크립트 간 데이터 및 함수 공유에 매우 중요한 역할을 한다.
 
@@ -2774,7 +2740,7 @@ void function(int, float);
 // 본격 변수 "variable" 정의
 char variable = 'A';
 void function(int arg1, float arg2) {
-    printf("%.3f\n", arg1 + arg2);
+    std::cout << arg1 + arg2 << std::endl;
 }
 ```
 ```cpp
@@ -2783,8 +2749,7 @@ void function(int arg1, float arg2) {
 #include "module.h"
 
 int main() {
-
-    printf("%c\n", variable);
+    std::cout << variable << std::endl;
     function(1, 3.14);
 
     return 0;
@@ -2795,7 +2760,7 @@ A
 4.140
 ```
 
-만일 `module.h` 헤더 파일에서 `extern` 키워드를 사용하지 않았으면 변수는 정의가 되어버린다. 오로지 한 번만 정의될 수 있는 변수가 `module.c` 소스 파일과 메인 스크립트에서 중복되어 정의되므로 결국 재정의(re-definition) 문제로 컴파일 오류가 발생한다.
+만일 `module.h` 헤더 파일에서 `extern` 키워드를 사용하지 않았으면 변수는 정의가 되어버린다. 오로지 한 번만 정의될 수 있는 변수가 `module.cpp` 소스 파일과 메인 스크립트에서 중복되어 정의되므로 결국 재정의(re-definition) 문제로 컴파일 오류가 발생한다.
 
 `extern` 키워드를 사용하면 변수는 여러 번 선언이 가능하다. `module.cpp` 소스 파일과 메인 스크립트에서 중복 선언은 컴파일 작업에 아무런 문제를 야기하지 않는다. 허나, 선언된 변수를 사용하기 위해서는 단 한 번의 정의가 반드시 필요하다. 이러한 이유로 `module.cpp`에 `char variable = 'A';` 정의가 존재하는 것이며, 메인 스크립트에서는 `variable` 전역 변수의 값을 그대로 출력할 수 있게 된다.
 
