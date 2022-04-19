@@ -1888,8 +1888,10 @@ PDS 클래스는 다음 특징을 지닌다:
 > * `private`, `protected` 그리고 가상 기반 클래스로부터 상속되지 않다.
 > * 가상 맴버 함수가 없다.
 
+C++ 프로그래밍 언어에서 PDS 클래스 자료형을 별도로 다루는 이유는 C 프로그래밍 언어의 [사용자 정의 자료형](/docs/ko.C#c-사용자-정의-자료형)과 호환되기 때문이다.
+
 ## 구조체
-[구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 정의된 사용자 정의 자료형이다.
+[구조체](https://en.cppreference.com/w/c/language/struct)(structure)는 자료형과 무관하게 필드 맴버를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 정의된 사용자 정의 자료형이다.
 
 ```cpp
 /* 구조체 정의: 총 8바이트 활용 */
@@ -2026,7 +2028,7 @@ struct {
 ```
 
 ## 공용체
-[공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 자료형과 무관하게 여러 내부 변수, 일명 맴버(member)를 하나의 단일 데이터로 통합시킨 `union` 키워드로 정의된 사용자 정의 자료형이다. 각 맴버마다 데이터를 저장하는 [구조체](#구조체)와 달리, 맴버들은 하나의 공용 메모리를 사용한다. 즉, 공용체의 한 맴버에 데이터 변경이 발생하면 나머지 맴버에도 영향을 미친다.
+[공용체](https://en.cppreference.com/w/cpp/language/union)(union)는 자료형과 무관하게 여러 필드 맴버를 하나의 단일 데이터로 통합시킨 `union` 키워드로 정의된 사용자 정의 자료형이다. 각 맴버마다 데이터를 저장하는 [구조체](#구조체)와 달리, 맴버들은 하나의 공용 메모리를 사용한다. 즉, 공용체의 한 맴버에 데이터 변경이 발생하면 나머지 맴버에도 영향을 미친다.
 
 ```cpp
 /* 공용체 정의: 총 4바이트 활용 */
@@ -2144,7 +2146,7 @@ ENUMERATION variable = enumerator1;
 ```
 
 ### 열거형 클래스
-[열거형 클래스](https://en.cppreference.com/w/cpp/language/enum#Scoped_enumerations)(enumeration class)는 타 열거형과 관계없이 동명의 열거자를 가져도 네임스페이스처럼 국부적인 영역범위에 속하므로 오류가 발생하지 않는 열거형으며, 일명 영역 제한 열거형(scoped enumeration)이라고 칭한다. 열거형 클래스는 `enum class` 혹은 `enum struct`로 정의된다.
+[열거형 클래스](https://en.cppreference.com/w/cpp/language/enum#Scoped_enumerations)(enumeration class)는 클래스 성질이 추가된 열거형이며 `enum class` 혹은 `enum struct` 키워드로 정의된다. 열거형 클래스 자료형으로 정의된 변수는 오로지 주어진 열거자만을 할당받을 수 있다. 개별 열거자는 열거형 클래스의 정적 필드 맴버인 마냥 호출되는데, 이러한 국부적 영역범위 특성은 서로 다른 열거형 클래스에도 동명의 열거자를 정의할 수 있도록 한다. 때문에 열거형 클래스는 영역 제한 열거형(scoped enumeration)이라고 칭한다.
 
 > 일반 열거형과 달리 열거자 충돌 문제를 방지할 수 있기 때문에, C++ 프로그래밍 언어는 열거자 클래스의 활용을 적극 권장한다.
 
@@ -2157,14 +2159,10 @@ enum class ENUMERATION1 {
 
 /* 열거형 클래스 정의 2 */
 enum struct ENUMERATION2 {
-    enumerator1,
-    enumerator2
+    enumerator2,
+    enumerator3
 };
-```
 
-열거형 클래스의 열거자는 반드시 해당 열거형 클래스를 함께 명시하여 범위지정 연산자 `::`를 통해 호출되어야 한다.
-
-```cpp
 /* 열거형 클래스 변수 정의 */
 ENUMERATION1 variable = ENUMERATION1::enumerator1;
 ```
