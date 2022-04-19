@@ -2185,7 +2185,7 @@ using dtypeName = int;
 ```
 
 # C++: 템플릿
-템플릿(template)은 자료형과 무관하게 함수 또는 클래스의 형식 틀을 제공한다. 개발자는 템플릿을 활용해 여러 유사한 함수 및 클래스를 손쉽게 생성할 수 있다. 본 장은 템플릿 정의 및 활용법을 설명한다.
+[템플릿](https://en.cppreference.com/w/cpp/language/templates)(template)은 자료형을 나중에 지정하여 사용할 수 있는 함수 및 클래스 틀이며 `template <>` 구문과 함께 정의된다. 유사한 코드를 수행하는 함수 및 클래스를 각 자료형 조합마다 별도로 정의하지 않고 템플릿으로 통합시키므로써 관리가 편해지고 작업효율을 높일 수 있다. 대표적인 예시로 [배열 클래스](#배열-클래스)와 [벡터 클래스](#벡터-클래스)가 있다.
 
 ## 함수 템플릿
 함수 템플릿(function template)은 다음과 같은 구문으로 정의된다.
@@ -2239,71 +2239,17 @@ public:
 };
 ```
 
-정의된 클래스 템플릿을 사용하기 위해서는 홑화살괄호 `<>` 안에 자료형을 지정하여 객최화한다.
+정의된 클래스 템플릿을 사용하기 위해서는 홑화살괄호 `<>` 안에 자료형을 지정하여 객체화한다.
 
 ```cpp
 /* 클래스 템플릿 객체화 */
 CLASS<int, float> instance(1, 3.0);
 ```
 
-클래스 템플릿은 이미 *C++: 컨테이너* 장에서 소개된 적이 있으며, 배열 클래스와 벡터 클래스가 이에 해당된다.
-
-```cpp
-std::array<int, 3> arr;      // 배열 클래스: <class T, size_t N>
-std::vector<int> vec;        // 벡터 클래스: <class T>
-```
-
-### 클래스 템플릿 파일
-클래스 템플릿은 클래스가 아닌 *템플릿*이기 때문에, 클래스 템플릿을 헤더 파일과 소스 파일로 나누는 것은 C++ 프로그래밍 언어에서 공식적으로 지원되지 않는다. 클래스처럼 헤더 파일과 소스 파일로 나눌 수 있으나 권장되지 않는다.
-
-```cpp
-/* "ClassName.h" 헤더 파일 */
-template<class T, class U>
-class ClassName
-{
-public:
-	ClassName(T arg1, U arg2);
-	~ClassName();
-
-	T field1;
-	U field2;
-
-	U method(T arg3);
-};
-```
-```cpp
-/* "ClassName.cpp" 소스 파일 */
-#include "ClassName.h"
-
-template<class T, class U>
-ClassName<T, U>::ClassName(T arg1, U arg2)
-	: field1(arg1), field2(arg2) { }
-
-template<class T, class U>
-ClassName<T, U>::~ClassName() { }
-
-template<class T, class U>
-U ClassName<T, U>::method(T arg3) {
-	return field1 + field2 - arg3;
-}
-```
-```cpp
-/* "main.cpp" 메인 스크립트 */
-#include <iostream>
-#include "ClassName.h"
-#include "ClassName.cpp"  // 링크 오류 방지를 위해 필수!
-
-int main() {
-    
-    // 객체화
-    CLASS<int, double> instance(1, 3.0);
-    
-    return 0;
-}
-```
+클래스 템플릿은 클래스가 아니다: 즉, 클래스처럼 [헤더 파일과 소스 파일로 나누어서 관리하는 것](#클래스-파일)은 C++ 프로그래밍 언어에서 지원하지 않는다.
 
 ## 템플릿 특수화
-일부 함수 템플릿 혹은 클래스 템플릿은 경우에 따라 달리 정의될 필요가 있다. 템플릿 특수화(template specialization)은 특정 자료형으로 객체화하였을 시 별도의 정의가 적용되도록 한다.
+특정 자료형 조합에 따라 템플릿을 달리 정의해야 할 경우가 발생한다. 템플릿 특수화(template specialization)은 특정 자료형으로 객체화하였을 시 별도의 정의가 적용되도록 한다.
 
 ```cpp
 /* 함수 템플릿 정의 */
@@ -2439,13 +2385,13 @@ C 표준 라이브러리 중에서 문자열 관련 [`cstring`]((https://en.cppr
 ```cpp
 /* try 블록 */
 try {
-	statements;
+    statements;
 }
 catch(const std::out_of_range &e) {
-	// catch: 범위를 벗어난 요소 접근 시 발생 예외
+    // catch: 범위를 벗어난 요소 접근 시 발생 예외
 }
 catch(const std::exception &e) {
-	// catch: 모든 예외
+    // catch: 모든 예외
 }
 ```
 
@@ -2453,7 +2399,7 @@ catch(const std::exception &e) {
 
 ```cpp
 catch(...) {
-	// catch: 모든 예외 및 자료형
+    // catch: 모든 예외 및 자료형
 }
 ```
 
@@ -2467,13 +2413,13 @@ catch(...) {
 /* try 블록 */
 try {
     statements;
-	throw expression;
+    throw expression;
 }
 catch(int e) {
-	// catch: 정수형
+    // catch: 정수형
 }
 catch(char e) {
-	// catch: 문자형
+    // catch: 문자형
 }
 ```
 
