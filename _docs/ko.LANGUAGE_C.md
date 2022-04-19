@@ -1802,8 +1802,8 @@ void function(int, float);
 
 int main() {
     variable = 'A';
-    printf("%c\n", variable);
 
+    printf("%c\n", variable);
     function(1, 3.14);
 
     return 0;
@@ -1830,8 +1830,8 @@ A
 > 
 > int main() {
 >     variable = 'A';
->     printf("%c\n", variable);
 > 
+>     printf("%c\n", variable);
 >     function(1, 3.14);
 > 
 >     return 0;
