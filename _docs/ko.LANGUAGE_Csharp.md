@@ -42,14 +42,11 @@ C/C++ 프로그래밍 언어는 컴파일러(예. Visual C++, Clang, GCC 등)가
 ## 객체지향 프로그래밍
 C# 프로그래밍 언어는 "객체"라는 데이터를 위주로 프로그램을 개발하는 [객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming; OOP) 언어이다. 객체와 클래스는 OOP에서 가장 핵심되는 개념으로 반드시 알아야 하며, 다음은 이들에 대한 간략한 설명이다.
 
-* **객체 (object 혹은 instance)**
-    : 값을 저장하는 데이터(일명 필드; field) 및 동작을 수행하는 코드(일명 메소드; method)의 묶음
+* **객체 (object 혹은 instance)**: 값을 저장하는 데이터(일명 필드; field) 및 동작을 수행하는 코드(일명 메소드; method)의 묶음
 
-* **클래스 (class)**
-    : 객체를 생성하는 [자료형](#자료형)
+* **클래스 (class)**: 객체를 생성하는 [자료형](#자료형)
 
-* **맴버 (member)**
-    : 구성원, 즉 객체와 클래스의 경우에는 필드와 메소드
+* **맴버 (member)**: 구성원, 즉 객체와 클래스의 경우에는 필드와 메소드
 
 # C#: 설치
 본문은 윈도우 NT 운영체제에서 C# 프로그래밍 언어 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE) 설치 및 프로젝트 생성 단계를 소개한다. 프레임워크는 .NET 프레임워크가 아닌 .NET Core 위주로 진행한다.
@@ -294,17 +291,22 @@ System.Console.WriteLine(double.MaxValue);   // 출력: 1.7976931348623157E+308
 /* 숫자 리터럴 */
 System.Console.WriteLine(3.14.GetType());    // 출력: System.Double
 ```
+자료형마다 정해진 [기본값](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values)이 있으며 이는 [`default`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/default) 자료형 기본값 표현식(default value expression)으로 알아낼 수 있다.
+
+```csharp
+System.Console.WriteLine(default(bool));     // 출력: False
+```
 
 ### Null 허용 자료형
 > [`null`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null) 키워드는 데이터가 없음을 의미하는 리터럴이다.
 
 [Nullable](https://docs.microsoft.com/en-us/dotnet/api/system.nullable-1), 즉 `null`이 허용된 자료형을 가리키며 자료형 키워드 접미부에 `?` 기호가 붙는다.
 
-* [값 자료형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types)
+* **[값 자료형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types)**
 
     본래 `null` 값을 가질 수 없는 자료형이다. `bool?`와 같이 nullable 자료형으로 지정하면 `true`, `false`, 그리고 아무런 데이터가 없는 `null`을 할당받을 수 있다.
 
-* [참조 자료형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-reference-types)
+* **[참조 자료형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-reference-types)**
 
     이전부터 `null`을 할당받을 수 있는 자료형이지만 컴파일러는 초기화가 되지 않은 것으로 인식하여 경고문이 표시된다. `string?`와 같이 nullable 자료형으로 지정하면 `null`도 하나의 값으로 인정하여 경고가 나타나지 않는다.
 
@@ -328,7 +330,7 @@ sizeof(char);       // 크기: 2바이트
 int variable = 3;
 ```
 
-정수형 변수인 `variable`을 생성한 동시에 값 3을 할당하였는데, 변수로의 최초 할당을 "초기화(initialization)"라고 부른다. 아래는 변수를 선언하는 과정에서 초기화를 나중에 하는 예시 코드이다. 비록 초기화되지 않은 변수는 자료형마다 정해진 [기본값](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values)(default value)을 갖는데, 안전한 언어를 추구하기 위해 컴파일러 측에서 초기화되지 않은 변수의 사용을 [오류](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs0165)로 치부한다.
+정수형 변수인 `variable`을 생성한 동시에 값 3을 할당하였는데, 변수로의 최초 할당을 "초기화(initialization)"라고 부른다. 아래는 변수를 선언하는 과정에서 초기화를 나중에 하는 예시 코드이다. 비록 초기화되지 않은 변수는 자료형마다 정해진 [기본값](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values)(default value)을 갖는데, 안전한 언어를 추구하기 위해 컴파일러 측에서 초기화되지 않은 변수의 사용을 [오류](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs0165)로 치부한다. 한 번 선언된 변수는 컴파일러 측에서 이미 존재를 알고 있으므로, 이후 변수에 다른 데이터를 저장하거나 호출할 때 자료형을 함께 언급할 필요가 없다.
 
 ```csharp
 /* 변수 "variable"의 선언 */
@@ -336,7 +338,15 @@ int variable;    // variable = default(int), 즉 0
 variable = 3;    // variable = 3
 ```
 
-한 번 정의된 변수는 컴파일러 측에서 이미 존재를 알고 있으므로, 이후 변수에 다른 데이터를 저장하거나 호출할 때 자료형을 함께 언급할 필요가 없다.
+단, [값 자료형](#자료형)과 [참조 자료형](#자료형)으로 생성된 변수는 데이터 할당에 있어 다소 차이가 존재한다.
+
+| 자료형 | 데이터 소재 메모리 | 설명 |
+|:----:|:------:|------|
+| [값 자료형][value-type] | [스택](/docs/ko.C#스택-영역) (stack) | 변수는 자신에게 할당된 (스택 영역) 메모리에 데이터를 직접 저장한다. |
+| [참조 자료형][reference-type] | [힙](/docs/ko.C#힙-영역) (heap) | 변수는 별도의 (힙 영역) 메모리에 저장된 데이터를 참조한다.<br/>그러므로 두 개 이상의 변수가 하나의 데이터를 참조하는 것이 가능하다. |
+
+[value-type]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types
+[reference-type]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/reference-types
 
 동일한 자료형의 변수 여러 개를 한꺼번에 정의하려면, 식별자마다 쉼표 `,`로 구분지을 수 있다.
 
@@ -442,7 +452,7 @@ global::System.Console;
 
 * **[`using` 지시문](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive)(using-directive)**
 
-    스크립트 파일에서 해당 네임스페이스 전체를 생략한다.
+    스크립트 파일에서 해당 네임스페이스 전체를 생략한다. 만일 프로젝트에 [암묵적 `using` 지시문](https://docs.microsoft.com/en-us/dotnet/core/tutorials/top-level-templates#implicit-using-directives)이 활성화되어 있으면 `System`을 포함한 흔히 사용되는 일부 네임스페이스가 자동으로 생략될 수 있다.
 
     ```csharp
   /* System 네임스페이스 생략 */
@@ -460,7 +470,7 @@ global::System.Console;
   using alias = System;
   
   alias::Console.WriteLine("Hello World!");
-  /* 대체:
+  /* 대안:
       alias.Console.WriteLine("Hello World!");
   */
     ```
@@ -774,55 +784,51 @@ statements;
 ```
 
 # C#: 컬렉션
-C# 프로그래밍 언어는 여러 데이터를 하나의 변수에 저장하는 컬렉션(collection)을 생성할 수 있다. 컬렉션은 여러 데이터를 한 번에 관리하는 편리성을 제공한다. 본 장에서는 .NET에서 활용할 수 있는 몇 가지의 컬렉션 유형들을 소개한다.
+C++ 프로그래밍 언어는 다수의 데이터를 변수 하나로 저장하는 [컬렉션](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/collections)(collection)을 제공한다. 본 장은 .NET에서 활용할 수 있는 몇 가지의 컬렉션 유형들을 소개한다.
 
 ## 배열
-배열(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 배열을 선언할 시, 자료형 뒤에 대괄호 `[]`를 기입하여 변수가 배열임을 명시해야 한다.
-
-```csharp
-/* 배열 선언 */
-int[] arr;
-```
-
-배열에 별도의 초기화가 이루어지지 않으면 기본값으로 빈 데이터 `null`을 갖는다. 배열 객체를 생성하려면 `new` 키워드와 함께 배열 자료형 및 크기를 지정하여 객체화(instantiation)한다.
+[배열](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 선언 시 자료형 뒤에는 대괄호 `[]`가 위치하여 배열임을 명시해야 한다. 비록 값 자료형에 대한 배열이라도 배열 자체는 참조 자료형이다. 초기화되지 않은 배열은 `null`을 기본값으로 가지며, [`new`](#new-연산자) 키워드와 함께 자료형 및 크기를 정수로 지정하여 객체로 생성된 배열을 할당하므로써 초기화한다.
 
 ```csharp
 /* 배열 선언 및 객체화 */
 int[] arr = new int[size];
 
 /* 동일:
-int[] arr;
-arr = new int[size];
+    int[] arr;
+    arr = new int[size];
 */
 ```
 
-> C/C++ 프로그래밍 언어와 달리, C# 프로그래밍 언어는 변수로 배열의 크기를 지정할 수 있다.
+> [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 프로그래밍 언어와 달리, C# 프로그래밍 언어는 변수로 배열의 크기를 지정할 수 있다.
 
-배열 객체화 과정에서 초기화를 하지 않으면 모든 요소들은 배열 자료형의 기본값을 갖는다. 배열 객체의 초기화는 중괄호 `{}`를 사용하여 데이터를 순번에 맞게 배열 요소에 할당한다.
+`new` 키워드로 객체화된 배열은 초기화가 이루어지지 않을 시, 요소들은 배열 자료형의 기본값으로 채워진다. 배열 객체의 초기화는 중괄호 `{}`를 사용하여 데이터를 순번에 맞게 배열 요소에 할당한다.
+
+* 방법 1: 반드시 크기만큼 요소의 값을 지정해야 한다.
+
+    ```csharp
+  int[] arr = new int[size] {value1, value2, ... };
+    ```
+
+* 방법 2: C/C++와 동일하게 곧바로 집합 초기화를 적용한다.
+
+    ```csharp
+  int[] arr = {value1, value2, ... };
+
+  /* 동일:
+      int[] arr = new int[] {value1, value2, ... };
+  */
+    ```
+
+배열의 각 요소에 할당된 데이터는 대괄호 `[]`를 사용해 0번부터 시작하는 인덱스 위치를 호출할 수 있다. 그러나 배열 자체를 호출하면 배열 자체의 자료형이 반환된다. 단, 자료형이 `char` 문자인 배열은 문자들을 하나씩 나열한 게 문자열처럼 반환된다.
 
 ```csharp
-/* 배열 선언 및 객체 초기화 */
+int[] arr = new int[3] {value1, value2, value3};
 
-int[] arr = new int[size] {value1, value2, ... };
-// 설명: 정해진 `size` 개수만큼 요소를 채워야 하며, 그렇지 않을 시 컴파일 오류가 발생한다.
-
-int[] arr = new int[] {value1, value2, ... };
-// 설명: 초기의 배열 크기는 할당되는 요소 개수만큼 동적으로 설정된다.
-
-int[] arr = {value1, value2, ... };
-// 설명: 위의 초기화 방법보다 더 간략화된 구문이다.
+Console.WriteLine(arr);       // 출력: System.Int32[]
+Console.WriteLine(arr[0]);    // 출력: value1
 ```
 
-배열 자체를 호출하면 할당된 데이터를 불러오지 않으며, 그 대신 배열의 자료형이 반환된다. 단, 자료형이 `char` 문자인 배열은 문자들을 하나씩 나열한 게 문자열처럼 반환된다.
-
-```csharp
-int[] arr = new int[size] {value1, value2, ... };
-
-System.Console.WriteLine(arr);      // 출력: System.Int32[]
-System.Console.WriteLine(arr[0]);   // 출력: value1
-```
-
-이러한 배열의 특징으로 인해 배열의 정의 외에는 한꺼번에 할당이 불가능하다. 그렇지만 0번부터 시작해 대괄호 `[]`로 각 요소를 인덱싱하여 하나씩 할당하는 방법이 있다.
+이러한 배열의 특징으로 인해 배열은 정의 외에 한꺼번에 할당이 불가능하다. 그렇지만 개별 요소를 재할당하여 데이터를 변경할 수 있다.
 
 ```csharp
 int[] arr = new int[3];
@@ -833,47 +839,50 @@ arr[1] = value2;
 arr[2] = value3;
 ```
 
-### `new` 키워드
-`new` 키워드는 자료형의 객체를 생성, 즉 객체화에 사용되는 연산자이다.
+### `new` 연산자
+[`new`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/new-operator) 연산자는 자료형의 객체를 생성, 즉 객체화(instantiation)에 사용되는 연산자이다.
 
 ```csharp
-object instance = new object();
+/* 자료형 객체화 */
+object variable = new object();
 ```
 
-만일 변수와 동일한 자료형의 객체를 생성하려면, 아래와 같이 구문을 간략화할 수 있다.
-
-```csharp
-object instance = new();
-```
+> 만일 변수와 동일한 자료형의 객체를 생성하려면 아래와 같이 구문을 간략화할 수 있다.
+>
+> ```csharp
+> object instance = new();
+> ```
 
 ### 다차원 배열
-배열은 또 다른 배열을 요소로 가질 수 있으나, 이들은 모두 동일한 자료형과 배열 크기를 가져야 한다.
+배열은 또 다른 배열을 요소로 가질 수 있으나, 자료형이 동일해야 하며 요소로 작용하는 배열들의 크기는 모두 같아야 하는 제약을 갖는다. 다차원 배열은 한 번의 객체화로 생성되었기 때문에, 비록 배열 안에 또 다른 배열이 있다 하더라도 전부 하나의 데이터로 간주된다.
 
-```csharp
-/* 다차원 배열 1 */
-int[ , ] arr = new int[3,2] { {value1, value2}, {value3, value4}, {value5, value6} };
+* 방법 1: 반드시 크기만큼 요소의 값을 지정해야 한다.
 
-/* 다차원 배열 2 */
-int[ , ] arr = new int[ , ] { {value1, value2}, {value3, value4}, {value5, value6} };
+    ```csharp
+  int[,] arr = new int[size1, size2] { {value1, value2}, {value3, value4}, ... };
+    ```
 
-/* 다차원 배열 3 */
-int[ , ] arr = { {value1, value2}, {value3, value4}, {value5, value6} };
-```
+* 방법 2: C/C++와 동일하게 곧바로 집합 초기화를 적용한다.
 
-다차원 배열은 한 번의 객체화로 생성되었기 때문에, 비록 배열 안에 또 다른 배열이 있다 하더라도 전부 하나의 데이터로 간주된다.
+    ```csharp
+  int[,] arr = { {value1, value2}, {value3, value4}, ... };
+
+  /* 동일:
+      int[,] arr = new int[,] { {value1, value2}, {value3, value4}, ... };
+  */
+    ```
 
 ### 가변 배열
-가변 배열(jagged array)은 크기와 상관없이 또 다른 동일 자료형 배열을 요소로써 가질 수 있다.
+[가변 배열](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/jagged-arrays)(jagged array)은 크기와 상관없이 또 다른 동일 자료형 배열을 요소로써 가질 수 있다. 이미 메모리가 할당된 배열을 요소로 가지므로, 가변 배열은 두 개 이상의 배열 데이터가 활용되는 것이다.
 
 ```csharp
-int[][] arr = new int[3][] {
-    new int[] {3}, 
-    new int[] {1, 4, 1}, 
-    new int[] {5, 9}
+int[][] arr = new int[size][] {
+    new int[] { ... }, 
+    new int[] { ... }, 
+    new int[] { ... },
+    ...
 };
 ```
-
-가변 배열은 이미 객체화를 통해 메모리가 할당된 배열을 요소로 가지므로, 가변 배열은 두 개 이상의 배열 데이터가 활용되는 것이다.
 
 ## 컬렉션
 > 본 내용은 차후에 소개될 [제네릭](#c-제네릭)과 연관이 깊은 부분이므로, 필수는 아니지만 해당 장을 읽으면 이해에 도움이 된다.
