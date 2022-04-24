@@ -9,7 +9,7 @@ order: 0x03
 # C#: 소개
 > *참조: [Microsoft Docs C# 언어 설명서 (한국어)](https://docs.microsoft.com/ko-kr/dotnet/csharp/)*
 
-C# (한국어:씨샵) 프로그래밍 언어는 [자바](https://ko.wikipedia.org/wiki/자바_(프로그래밍_언어))(Java) 언어를 대응하기 위해 마이크로소프트에서 개발한 [객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming) 언어이다. 자바와 상당한 유사점을 가지면서 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 언어로부터 이질감이 없도록 설계되었다. 또한 .NET (한국어: 닷넷) 프레임워크라는 방대한 데이터 라이브러리를 접속하고 사용할 수 있어 개발의 편리성을 제공하는 장점을 가진다.
+C# (한국어:씨샵) 프로그래밍 언어는 [자바](https://ko.wikipedia.org/wiki/자바_(프로그래밍_언어))(Java) 언어를 대응하기 위해 마이크로소프트에서 개발한 객체지향 프로그래밍 언어이다. 자바와 상당한 유사점을 가지면서 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 언어로부터 이질감이 없도록 설계되었다. 또한 .NET (한국어: 닷넷) 프레임워크라는 방대한 데이터 라이브러리를 접속하고 사용할 수 있어 개발의 편리성을 제공하는 장점을 가진다.
 
 ## .NET
 > *참조: [컴파일러 vs. 인터프리터](/blog/ko.compiler_vs_interpreter)*
@@ -42,11 +42,14 @@ C/C++ 프로그래밍 언어는 컴파일러(예. Visual C++, Clang, GCC 등)가
 ## 객체지향 프로그래밍
 C# 프로그래밍 언어는 "객체"라는 데이터를 위주로 프로그램을 개발하는 [객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming; OOP) 언어이다. 객체와 클래스는 OOP에서 가장 핵심되는 개념으로 반드시 알아야 하며, 다음은 이들에 대한 간략한 설명이다.
 
-* **객체 (object 혹은 instance)**: 값을 저장하는 데이터, 그리고 동작을 수행하는 코드의 묶음
+* **객체 (object 혹은 instance)**
+    : 값을 저장하는 데이터(일명 필드; field) 및 동작을 수행하는 코드(일명 메소드; method)의 묶음
 
-* **맴버 (member)**: 객체에 종속된 데이터 및 코드
+* **클래스 (class)**
+    : 객체를 생성하는 [자료형](#자료형)
 
-* **클래스 (class)**: 객체를 생성하는 설계도
+* **맴버 (member)**
+    : 구성원, 즉 객체와 클래스의 경우에는 필드와 메소드
 
 # C#: 설치
 본문은 윈도우 NT 운영체제에서 C# 프로그래밍 언어 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE) 설치 및 프로젝트 생성 단계를 소개한다. 프레임워크는 .NET 프레임워크가 아닌 .NET Core 위주로 진행한다.
@@ -144,157 +147,93 @@ C# 프로그래밍 언어로 다양할 어플리케이션을 만들 수 있어, 
   if (2 < 3) statement;      // 논리가 참이면 "statement" 문장 실행
     ```
 
-## 식별자
-[식별자](https://ko.wikipedia.org/wiki/식별자#컴퓨터_언어)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C# 프로그래밍 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
+* **[블록](https://ko.wikipedia.org/wiki/블록_(프로그래밍))(block)**
 
-* 오직 영문, 숫자, 밑줄 `_`만 허용된다.
-* 첫 문자는 숫자로 시작할 수 없다.
-* 공백은 허용되지 않는다.
-* 대소문자를 구분한다.
+    소스 코드를 중괄호 `{}`로 그룹화시키는 프로그래밍 언어의 어휘적 구조이다. 블록의 두 가지 의의는 (1) 여러 문장들을 하나의 문장처럼 다루거나 (2) 데이터가 취급되는 [영역](#네임스페이스)을 구분 짓는다.
 
-## 네임스페이스
-[네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)은 식별자의 유일성을 보장하기 위한 데이터 분류 공간으로, `namespace` 키워드를 통해 생성하여 코드 블록으로 데이터들을 분류시킨다. 컴퓨터에 대조하자면, 동일한 이름의 파일(데이터)을 서로 다른 폴더(네임스페이스)에 넣어 관리하는 것과 동일한 개념이다. 네임스페이스에 들어있는 데이터를 접근하기 위해서는 맴버 연산자(member access operator; `.`)를 사용한다. 그러나 네임스페이스 또한 유일한 식별자를 가져야 하며, 다른 네임스페이스와 동일한 이름을 가져서는 안된다.
-
-```csharp
-namespace NAMESPCAE1
-{
-	class Program{
-        static void Main(){
-            /* 다른 네임스페이스의 클래스 및 맴버 호출하기 */
-            NAMESPACE2.CLASS.field;
-            NAMESPACE3.NAMESPACE4.CLASS.method();
-        }
-    }
-    
-    /* 네스티드(NESTED) 네임스페이스 */
-    namespace NAMESPACE2
-    {
-        static class CLASS { public var field; }
-    }
-}
-
-/* NAMESPACE1과 독립된 별도의 네임스페이스 */
-namespace NAMESPACE3
-{
-    namespace NAMESPACE4
-    {
-	    static class CLASS { public void method() statement; }
-    }
-}
-```
-
-### 전역 네임스페이스
-전역 네임스페이스(global namespace)는 어느 네임스페이스에도 속하지 않는 최외각 영역범위이다. 전역 네임스페이스의 데이터는 `global` 키워드와 함께 네임스페이스 별칭 한정자(namespace alias qualifier)인 `::` 연산자를 데이터 식별자의 접두부에 위치하여 접근할 수 있다.
-
-```csharp
-global::variable;
-```
-
-### `using` 선언
-`using` 키워드는 네임스페이스 내의 데이터를 간편하게 접근할 수 있도록 한다. 다시 말해, 네임스페이스 명시없이 데이터 호출이 가능하도록 만든다.
-
-```csharp
-/* using 선언: System 네임스페이스 생략 가능 */
-using System;
-```
-
-그러나 `using` 키워드를 무분별하게 사용할 시 컴파일러는 네임스페이스로 나뉘어진 동일한 이름의 데이터를 구별하지 못하는 오류가 발생할 위험이 있다.
-
-C# 프로그래밍 언어는 네임스페이스 별칭 기능을 지원한다. 네임스페이스 별칭은 네임스페이스 자체를 참조하거나, 혹은 네임스페이스에 내포된 데이터를 참조할 수 있다. 전자의 경우는 네임스페이스 내에 어떠한 데이터를 호출할지 `::` 연산자로 선택할 수 있으나, 후자는 이미 선택된 데이터만 호출할 수 있다.
-
-```csharp
-// 네임스페이스 별칭: 네임스페이스 참조
-using scope1 = System;            // "System" 네임스페이스
-scope1::Console.WriteLine("First Line");
-
-// 네임스페이스 별칭: 데이터 참조
-using scope2 = System.Console;    // "System.Console" 클래스
-scope2.WriteLine("Second Line");
-```
+    ```csharp
+  {
+      int variable = 2 + 3;
+      if (2 < 3) statement;  
+  }
+    ```
 
 ## 입력 및 출력
-C# 프로그래밍 언어는 `System` 네임스페이스 안에 `Console` 클래스, 혹은 간단히 `System.Console`에서 텍스트 입력 및 출력 기능을 제공한다.
+C# 프로그래밍 언어는 [`System.Console`](https://docs.microsoft.com/en-us/dotnet/api/system.console) 클래스에서 입출력 기능을 제공하며, 다음과 같은 텍스트 기반의 출력 함수를 가진다.
 
-* **`Console.Write()`**: 줄바꿈 없이 텍스트를 터미널에 출력한다.
-
-* **`Console.WriteLine()`**: 줄바꿈과 함께 텍스트를 터미널에 출력한다.
-
-```csharp
-class Program{
-    static void Main(){
-        System.Console.Write("Hello");
-        System.Console.Write("World!");
-        System.Console.WriteLine("Spam");
-        System.Console.WriteLine("Egg");
-    }
-}
-```
-```
-HelloWorld!Spam
-Egg
-```
-----
-
-* **`Console.Read()`**: 하나의 문자(character)를 읽는다.
-
-* **`Console.ReadLine()`**: 한 줄의 텍스트를 읽는다.
-
-* **`Console.ReadKey()`**: 키보드 버튼 입력을 읽는다.
+| 출력 함수       | 설명                                            |
+|:-----------:|-----------------------------------------------|
+| [`Write()`](https://docs.microsoft.com/en-us/dotnet/api/system.console.write) | 단순히 데이터를 터미널에 출력한다.                  |
+| [`WriteLine()`](https://docs.microsoft.com/en-us/dotnet/api/system.console.writeline)    | 자동 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)과 함께 데이터를 터미널에 출력한다.           |
 
 ```csharp
-using System;
+System.Console.Write("C#");
+System.Console.Write(3.14159);
 
-class Program{
-    static void Main(){
-        Console.Write("Console.Read: ");
-            int value1 = Console.Read();
-            Console.WriteLine(">>> {0}\n", value1);
-        
-        Console.Write("Console.ReadLine: ");
-            string value2 = Console.ReadLine();
-            Console.WriteLine(">>> {0}\n", value2);
-        
-        Console.Write("Console.ReadKey: ");
-            ConsoleKeyInfo value3 = Console.ReadKey();
-            Console.WriteLine(">>> {0}", value3);
-    }
-}
+System.Console.WriteLine("Hello World!");
+System.Console.WriteLine(2);
 ```
 ```
-Console.Read: Ko
->>> 75
-
-Console.ReadLine: Hello World!
->>> Hello World!
-
-Console.ReadKey:  
->>> Spacebar
+C#3.14159Hello World!
+2
 ```
 
-### 자리 표시자
-자리 표시자(placeholder)는 데이터를 텍스트의 특정 위치에 나타나도록 하며, 중괄호 `{}` 안에 0부터 시작하여 숫자를 기입한다. 형식 텍스트 이후부터를 자리 표시자에 들어갈 데이터를 순차적 입력한다.
+반면, 입력 함수는 [변수](#변수)(variable)라는 데이터 저장공간이 필요하며 이는 차후에 설명할 예정이다.
+
+| 입력 함수 | 설명 |
+|:----:|------|
+| [`Read()`](https://docs.microsoft.com/en-us/dotnet/api/system.console.read) | 터미널에 입력된 텍스트 중에서 문자(character) 하나만을 읽는다. |
+| [`ReadLine()`](https://docs.microsoft.com/en-us/dotnet/api/system.console.readline) | 터미널에 입력된 텍스트 한 줄 전체를 읽는다. |
 
 ```csharp
-System.Console.Write("첫 번째: {0}, 두 번째: {1}, 그리고 다시 첫 번째: {0}.", 3, 'G');
+var variable1 = System.Console.Read();
+var variable2 = System.Console.Read();
+var variable3 = System.Console.ReadLine();
+var variable4 = System.Console.ReadLine();
+
+/* 입력:
+    Hello World!
+    3.14159
+*/
+
+System.Console.WriteLine(variable1);
+System.Console.WriteLine(variable2);
+System.Console.WriteLine(variable3);
+System.Console.WriteLine(variable4);
 ```
 ```
-첫 번쨰: 3, 두 번째: G, 그리고 다시 첫 번째: 3.
+72
+102
+llo World!
+3.14159
+```
+
+### 합성 형식지정
+[합성 형식지정](https://docs.microsoft.com/en-us/dotnet/standard/base-types/composite-formatting)(composite formatting)은 텍스트에 표시된 자리 표시자(placeholder) `{` *순번* `}`에 데이터를 형식에 맞추어 기입하는 기법이다. 형식 텍스트 다음에는 자리 표시자에 들어갈 데이터를 순번에 따라 순차적으로 입력한다.
+
+> 순번은 오로지 음이 아닌 정수만을 사용해야 하며 숫자 0부터 시작되어야 한다.
+
+```csharp
+System.Console.Write("첫 번째: {0}, 두 번째: {1}, 그리고 다시 첫 번째: {0:N2}", 3, 'G');
+```
+```
+첫 번째: 3, 두 번째: G, 그리고 다시 첫 번째: 3.00
 ```
 
 ### 문자열 보간
-문자열 보간(string interpolation)은 데이터를 텍스트의 특정 위치에 나타나도록 하며, 중괄호 `{}` 사이에 데이터나 표현식을 직접 삽입한다. 자리 표시자와 유사하지만, 두 가지의 차이점을 가진다.
+[문자열 보간](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated)(string interpolation)은 데이터를 텍스트의 특정 위치에 나타나도록 하며, 중괄호 `{}` 사이에 데이터나 표현식을 직접 삽입한다. 합성 형식지정과 유사하지만, 두 가지의 차이점을 가진다.
 
 1. 텍스트를 표시하는 큰 따옴표 `""` 앞에 달러 기호 `$`가 붙는다.
 2. 중괄호 안에는 번호가 아닌 실제 나타날 데이터가 삽입된다.
 
 ```csharp
-int number = 3;
-string str = "G";
+var number    = 3;
+var character = 'G';
 
-System.Console.Write($"첫 번째: {number}, 두 번째: {str}, 그리고 다시 첫 번째: {number}.");
+System.Console.Write($"첫 번째: {number}, 두 번째: {character}, 그리고 다시 첫 번째: {number:N2}");
 ```
 ```
-첫 번쨰: 3, 두 번째: G, 그리고 다시 첫 번째: 3.
+첫 번쨰: 3, 두 번째: G, 그리고 다시 첫 번째: 3.00
 ```
 
 ### 탈출 문자
@@ -308,48 +247,71 @@ Hello
 World!
 ```
 
+## 식별자
+[식별자](https://ko.wikipedia.org/wiki/식별자#컴퓨터_언어)(identifier)는 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. C# 프로그래밍 언어에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
+
+* 오직 영문, 숫자, 밑줄 `_`만 허용된다.
+* 첫 문자는 숫자로 시작할 수 없다.
+* 공백은 허용되지 않는다.
+* 대소문자를 구분한다.
+
 ## 자료형
-[자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터의 내용물이 어떻게 표현되는지 결정하는 요소이며, C# 프로그래밍 언어에서는 여러 자료형이 존재한다. 각 자료형마다 데이터를 표현하기 위해 필요한 바이트 크기가 정해져 있다.
+[자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터를 어떻게 표현할 지 결정하는 요소이며, C# 프로그래밍 언어에서는 여러 자료형이 존재한다. 이들은 크게 두 유형으로 나뉘어지는데 [값 자료형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types)(value type) 그리고 [참조 자료형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/reference-types)(reference type)이 있다. 해당 유형들이 의의는 [변수](#변수)를 소개할 때 설명할 예정이다.
 
-> [바이트](https://ko.wikipedia.org/wiki/바이트)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다.
+아래는 C# 프로그래밍 언어가 갖는 자료형의 일부이며, 자세한 내용은 [여기](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types)에서 확인할 수 있다:
 
-아래는 C# 프로그래밍 언어가 갖는 자료형이다:
+> [`System.Type`](https://docs.microsoft.com/en-us/dotnet/api/system.type)은 자료형이 갖는 [메타데이터](https://ko.wikipedia.org/wiki/메타데이터)(예. 자료형이 속한 어셈블리, 맴버들에 대한 정보 등)를 자세히 제공할 수 있는 클래스이다.
 
-| 식별자       | 자료형       | 설명                                                            |
-|-----------|-----------|---------------------------------------------------------------|
-| `byte`     | 정수        | 8비트 양의 정수<br />크기: 1바이트                                    |
-| `sbyte`     | 정수        | 8비트 정수<br />크기: 1바이트                                    |
-| `short`    | 정수        | 16비트 정수<br />크기: 2바이트                                    |
-| `ushort`    | 정수        | 16비트 양의 정수<br />크기: 2바이트                                    |
-| `int`     | 정수        | 32비트 정수<br />크기: 4바이트                                    |
-| `uint`     | 정수        | 32비트 양의 정수<br />크기: 4바이트                                    |
-| `long`     | 정수        | 64비트 정수<br />크기: 8바이트                                    |
-| `ulong`     | 정수        | 64비트 양의 정수<br />크기: 8바이트                                    |
-| `Half`   | 부동소수점: 이진    | 16비트 반정밀도 실수<br />크기: 2바이트 (.NET 5 한정)                     |
-| `float`   | 부동소수점: 이진    | 32비트 단정밀도 실수<br />크기: 4바이트 (`f` 혹은 `F` 접미사 필요)                     |
-| `double`  | 부동소수점: 이진    | 64비트 배정밀도 실수<br />크기: 8바이트 (`d` 혹은 `D` 접미사 사용; 선택사항)    |
-| `decimal` | 부동소수점: 십진    | 128비트 실수<br/>크기: 16바이트 (`m` 혹은 `M` 접미사 필요)         |
-| `char`    | 문자: `''`  | 단일 문자: `'A'` 및 `'?'`.<br />크기: 2바이트                           |
-| `string`  | 문자열: `""` | 일련의 문자들: `"Hello World!"`<br />크기: 알수 없음 (문자 개수에 따라 다름)       |
-| `bool`    | 논리형       | 논리의 참과 거짓을 `true`(0이 아닌 정수)와 `false`(정수 0)로 표시.<br />크기: 1바이트 |
-| `var`     | 자동        | 적절한 자료형으로 자동 선택.<br />복잡한 자료형을 간략히 선언하는데 매우 유용하다.             |
-| `object`  | 객체         | 아무런 자료형.<br />모든 자료형의 기반으로 어떠한 자료형도 수용할 수 있다.                  |
-| `void`    | 보이드       | 불특정 자료형.<br />크기: 1바이트                                        |
+| 키워드       | `System.Type` | 자료형 유형     | 설명                                                   |
+|-----------|----------------------------|:----------:|------------------------------------------------------|
+| `byte`    | `System.Byte`              | 값       | 8비트 [unsigned](/docs/ko.C#unsigned-키워드) 정수                             |
+| `sbyte`   | `System.SByte`             | 값       | 8비트 정수       |
+| `short`   | `System.Int16`             | 값       | 16비트 정수                                                    |
+| `ushort`  | `System.UInt16`            | 값       | 16비트 [unsigned](/docs/ko.C#unsigned-키워드) 정수                             |
+| `int`     | `System.Int32`             | 값       | 32비트 정수                                                    |
+| `uint`    | `System.UInt32`            | 값       | 32비트 [unsigned](/docs/ko.C#unsigned-키워드) 정수                             |
+| `long`    | `System.Int64`             | 값       | 64비트 정수                                                    |
+| `ulong`   | `System.UInt64`            | 값       | 64비트 [unsigned](/docs/ko.C#unsigned-키워드) 정수                             |
+| `float`   | `System.Single`            | 값 | 32비트 단정밀도 실수<br/>숫자 리터럴에 `f` 혹은 `F` 접미사 필요       |
+| `double`  | `System.Double`            | 값 | 64비트 배정밀도 실수<br/>(선택사항) 숫자 리터럴에 `d` 혹은 `D` 접미사 사용 |
+| `decimal` | `System.Decimal`           | 값 | 128비트 실수<br/>숫자 리터럴에 `m` 혹은 `M` 접미사 필요           |
+| `bool`    | `System.Boolean`           | 값      | 논리적 참과 거짓을 `true`(영이 아닌 정수)와 `false`(영)로 표시 |
+| `char`    | `System.Char`              | 값       | 단일 [UTF-16](https://ko.wikipedia.org/wiki/UTF-16) 문자<br/>문자 리터럴은 따옴표 `''` 필요                  |
+| `string`  | `System.String`  | 참조 | 일련의 문자들, 일명 문자열<br/>문자열 리터럴은 쌍따옴표 `""` 필요       |
+| `object`  | `System.Object`  | 참조         | 아무런 자료형<br/>모든 자료형의 기반이므로 어떠한 자료형이라도 수용 가능                  |
+| [`void`][type-void]  | `System.Void`  | 보이드         | 자료형 없음                  |
+| [`var`][type-var]  | -  | -         | 컴파일 과정에 적합한 자료형으로 자동 결정         |
 
-C# 프로그래밍 언어의 자료형은 필드와 메소드를 갖는 (클래스와 유사한) [구조체](#구조체)란 매우 독특한 성질을 가진다. 이를 간단히 확인하는 방법으로 비주얼 스튜디오에서 `F12`를 누르면 데이터 정의를 찾아볼 수 있는데, 대부분의 자료형이 `struct`라는 구조체 데이터인 것을 확인할 수 있다. 그러므로 C# 프로그래밍 언어에서는 `double` 자료형으로 다음을 수행할 수 있다.
+[type-void]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/void
+[type-var]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/var
+
+위의 대부분 자료형은 (참조 자료형의 경우) [클래스](#c-클래스) 혹은 (값 자료형의 경우) 이와 유사한 [구조체](#구조체)여서 자신만의 맴버를 가질 수 있다. 비주얼 스튜디오에서 `F12`를 누르면 자료형이 어떻게 구성되어 있는지 찾아볼 수 있는데, 대체로 `class` 혹은 `struct` 키워드를 사용한 것을 확인할 수 있다. 예를 들어, C# 프로그래밍 언어에서 `double` 자료형과 숫자 리터럴로 다음을 수행할 수 있다.
 
 ```csharp
+/* double 자료형 */
 System.Console.WriteLine(double.MaxValue);   // 출력: 1.7976931348623157E+308
-```
 
-위의 내용을 더 깊이 해석하자면, *자료형의 데이터는 전부 객체이다*.
-
-```csharp
+/* 숫자 리터럴 */
 System.Console.WriteLine(3.14.GetType());    // 출력: System.Double
 ```
 
+### Null 허용 자료형
+> [`null`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/null) 키워드는 데이터가 없음을 의미하는 리터럴이다.
+
+[Nullable](https://docs.microsoft.com/en-us/dotnet/api/system.nullable-1), 즉 `null`이 허용된 자료형을 가리키며 자료형 키워드 접미부에 `?` 기호가 붙는다.
+
+* [값 자료형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types)
+
+    본래 `null` 값을 가질 수 없는 자료형이다. `bool?`와 같이 nullable 자료형으로 지정하면 `true`, `false`, 그리고 아무런 데이터가 없는 `null`을 할당받을 수 있다.
+
+* [참조 자료형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-reference-types)
+
+    이전부터 `null`을 할당받을 수 있는 자료형이지만 컴파일러는 초기화가 되지 않은 것으로 인식하여 경고문이 표시된다. `string?`와 같이 nullable 자료형으로 지정하면 `null`도 하나의 값으로 인정하여 경고가 나타나지 않는다.
+
 ### `sizeof()` 연산자
-`sizeof()` 함수는 데이터나 자료형가 메모리에 할당된 바이트 크기를 반환한다.
+[`sizeof()`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/sizeof) 연산자는 데이터나 자료형가 메모리에 할당된 바이트 크기를 반환한다.
+
+> [바이트](https://ko.wikipedia.org/wiki/바이트)(byte)란, 컴퓨터에서 메모리에 저장하는 가장 기본적인 단위이다. 자료형마다 크기가 정해진 이유는 효율적인 메모리 관리 차원도 있으나 CPU 연산과도 깊은 연관성을 갖는다.
 
 ```csharp
 sizeof(int);        // 크기: 4바이트
@@ -357,19 +319,19 @@ sizeof(char);       // 크기: 2바이트
 ```
 
 ## 변수
-변수(variable)는 데이터를 지정된 자료형으로 저장하는 식별자를 갖는 저장공간이다. 객체지향 프로그래밍에서 객체 및 클래스의 필드 맴버(field member)에 해당한다. 아래 예시는 `variable`이란 식별자를 갖는 정수형 변수에 숫자 3을 할당한다. 시스템적 관점에서 바라보면 `variable` 정수형 변수의 존재가 컴파일러에 각인되고 메모리가 할당되어 3이란 값이 저장되는 것으로, 이를 변수의 "선언(declaration)" 혹은 "정의(definition)"라고 부른다.
+변수(variable)는 데이터를 지정된 자료형으로 저장하는 식별자를 갖는 저장공간이다. 아래 예시는 `variable`이란 식별자를 갖는 정수형 변수에 숫자 3을 할당한다. 시스템적 관점에서 바라보면 `variable` 정수형 변수의 존재가 컴파일러에 각인되고 메모리가 할당되어 3이란 값이 저장되는 것으로, 이를 변수의 "선언(declaration)"이라고 부른다.
 
-> C/C++ 프로그래밍 언어와 달리, C# 프로그래밍 언어는 ECMA-334 표준에 의하면 선언과 정의의 개념이 명확히 구분되어 있지 않다. 오히려 선언과 정의가 동일한 개념으로 보고 있다.
+> [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 프로그래밍 언어를 접하였으면 선언 외에도 "정의(definition)"에 대하여 인지하였을 것이다. C# 프로그래밍 언어는 [ECMA-334](https://www.ecma-international.org/publications-and-standards/standards/ecma-334/) 표준에 의하면 선언과 정의의 개념이 명확히 구분되어 있지 않으며, 오히려 선언과 정의를 동일한 개념으로 보고 있다.
 
 ```csharp
-/* 변수 "variable"의 정의 (혹은 선언) */
+/* 변수 "variable"의 선언 */
 int variable = 3;
 ```
 
-정수형 변수인 `variable`을 생성한 동시에 값 3을 할당하였는데, 변수로의 최초 할당을 "초기화(initialization)"라고 부른다. 그러나 변수 정의 과정에서 데이터 할당이 없다고 해서 초기화되지 않는 것이 아니다. "안전한 언어"를 추구하는 C# 프로그래밍 언어는 자료형마다 [기본값](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values)(default value)이 있어, 정의할 때 별도의 데이터 할당이 없으면 기본값으로 초기화된다.
+정수형 변수인 `variable`을 생성한 동시에 값 3을 할당하였는데, 변수로의 최초 할당을 "초기화(initialization)"라고 부른다. 아래는 변수를 선언하는 과정에서 초기화를 나중에 하는 예시 코드이다. 비록 초기화되지 않은 변수는 자료형마다 정해진 [기본값](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/default-values)(default value)을 갖는데, 안전한 언어를 추구하기 위해 컴파일러 측에서 초기화되지 않은 변수의 사용을 [오류](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs0165)로 치부한다.
 
 ```csharp
-/* 변수 "variable"의 정의 (혹은 선언) */
+/* 변수 "variable"의 선언 */
 int variable;    // variable = default(int), 즉 0
 variable = 3;    // variable = 3
 ```
@@ -379,13 +341,13 @@ variable = 3;    // variable = 3
 동일한 자료형의 변수 여러 개를 한꺼번에 정의하려면, 식별자마다 쉼표 `,`로 구분지을 수 있다.
 
 ```csharp
-/* 다수의 정수형 변수 정의 */
+/* 다수의 정수 자료형 변수 선언 */
 int variable1 = 3, variable2 = 4, variable3;
 ```
 
-변수는 오로지 지정된 자료형 데이터만을 할당받아야 하지 않다. 아래 예시 코드는 정수형 및 문자형 변수에 값 75로 초기화하였다. 정수형 변수에는 정수 75로 저장되지만, 문자형 변수의 경우 UTF-16 인코딩 코드에 의하여 대문자 'K'로 저장된다.
+변수는 오로지 지정된 자료형 데이터만을 할당받아야 하지 않다. 아래 예시 코드는 정수형 및 문자형 변수에 값 75로 초기화하였다. 정수형 변수에는 정수 75로 저장되지만, 문자형 변수의 경우 [UTF-16](https://ko.wikipedia.org/wiki/UTF-16) 인코딩 코드에 의하여 대문자 'K'로 저장된다.
 
-```csharp
+```cpp
 long variable1 = 75;    // variable1에는 정수 75가 저장
 char variable2 = 75;    // variable2에는 문자 'K'가 저장
 ```
@@ -393,7 +355,7 @@ char variable2 = 75;    // variable2에는 문자 'K'가 저장
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
 ### 상수
-상수(constant)는 한 번 데이터를 할당한 후 변경할 수 없는 특별한 변수이며, `const` 키워드와 함께 정의한다.
+[상수](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/const)(constant)는 한 번 데이터를 할당한 후 변경할 수 없는 특별한 변수이며, `const` 키워드와 함께 정의한다.
 
 ```csharp
 /* 상수 선언 */
@@ -405,12 +367,13 @@ C# 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되�
 
 * **지역 변수(local variable)**
 
-    코드 블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 코드 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.
+    블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.
 
     ```csharp
-  class Program {
-      static void Main() {
-
+  class Program
+  {
+      static void Main(int[] args)
+      {
           /* 지역 변수 */
           int variable;
       }
@@ -419,12 +382,102 @@ C# 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되�
 
 * **전역 변수(global variable)**
 
-    이론적으로는 코드 블록 내에 속하지 않은 외부에 정의된 변수로써 어느 코드 블록에서도 호출만으로 지역 변수와 함께 사용할 수 있다. 그러나 객체지향 프로그래밍인 C# 언어에서 클래스 외부에 변수를 선언할 수 없기 때문에 공식적으로 지원되지 않는다.
+    이론적으로 블록 내에 속하지 않은 외부에 정의된 변수로써 어느 블록에서도 호출만으로 지역 변수와 함께 사용할 수 있는 변수이다. 허나 객체지향 프로그래밍은 클래스 외부에 별도의 변수를 선언하는 게 불가능한 구조이므로 전역 변수를 지원하지 않는다.
+
+## 네임스페이스
+[네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)는 식별자의 유일성을 보장하기 위한 데이터 분류 공간으로, `namespace` 키워드를 통해 생성하여 (1) 블록 `{}` 안에 데이터들을 분류하거나 (2) [C# 10.0](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10) 이후부터 블록을 생략하여 해당 스크립트 파일 전체를 네임스페이스로 분류할 수 있다. 네임스페이스 안에 또 다른 네임스페이스를 선언할 수 있으며, 이를 네스티드 네임스페이스(nested namespace)라고 부른다. 그러나 네임스페이스 또한 유일한 식별자를 가져야 하기 때문에 동일한 [영역범위](https://docs.microsoft.com/en-us/cpp/cpp/scope-visual-cpp)(scope)에 놓여진 네임스페이스는 이름이 중복되어서는 안된다.
+
+> 서로 다른 이름의 폴더<sub>(네임스페이스)</sub> 안에 동명의 파일<sub>(데이터)</sub> 혹은 폴더<sub>(네스티드 네임스페이스)</sub>를 보관할 수 있는 것과 같은 개념이다.
+
+네임스페이스에 들어있는 데이터 및 네스트디 네임스페이스를 접근하기 위해서는 `.`을 활용하는 [맴버 접근 표현식](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/member-access-operators#member-access-expression-)(member access expression)을 사용한다.
+
+```csharp
+System.Console.WriteLine(namespace1.nested.cls.variable);
+System.Console.WriteLine(namespace2.nested.cls.variable);
+
+/* 네임스페이스 1 선언 */
+namespace namespace1
+{
+    namespace nested
+    {
+        class cls
+        {
+            int variable = 3;
+        }
+    }
+}
+
+/* 네임스페이스 2 선언 */
+namespace namespace2
+{
+    namespace nested
+    {
+        class cls
+        {
+            int variable = 7;
+        }
+    }
+}
+```
+```
+3
+7
+```
+
+터미널 [입력 및 출력](#입력-및-출력)의 `System.Console` 클래스에서 [`System`](https://docs.microsoft.com/en-us/dotnet/api/system)이 바로 네임스페이스에 해당한다.
+
+### 전역 네임스페이스
+전역 네임스페이스(global namespace)는 어느 네임스페이스에도 속하지 않는 최외각 영역범위이다. 전역 네임스페이스는 `global` 키워드와 함께 [네임스페이스 별칭 한정자](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/namespace-alias-qualifier)(namespace alias qualifier) `::` 연산자를 식별자의 접두부에 기입하여 명시한다.
+
+```csharp
+global::System.Console;
+
+/* 동일:
+    System.Console;
+*/
+```
+
+### `using` 키워드
+`using` 키워드는 네임스페이스 내의 데이터를 간편하게 접근할 수 있도록 한다. 즉, 네임스페이스를 별도로 명시하지 않아도 데이터 호출이 가능하게 한다. 하지만 `using` 키워드의 무분별한 남용은 컴파일러가 어느 네임스페이스의 데이터를 호출하는 것인지 구별하지 못하게 하여 오류가 발생할 위험이 높다.
+
+* **[`using` 지시문](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive)(using-directive)**
+
+    스크립트 파일에서 해당 네임스페이스 전체를 생략한다.
+
+    ```csharp
+  /* System 네임스페이스 생략 */
+  using System;
+
+  Console.WriteLine("Hello World!");
+    ```
+
+* **[`using` 별칭](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive#using-alias)(using-alias)**
+
+    네임스페이스에 별칭을 부여하여 코드 길이를 단축시키거나 가독성을 높인다. 네임스페이스 별칭으로부터 맴버들은 `.` 토큰 혹은 `::` 연산자를 통해 접근할 수 있으나, 후자는 좌측의 식별자가 반드시 네임스페이스임을 보장하여 권장된다.
+
+    ```csharp
+  /* System 네임스페이스 별칭 */
+  using alias = System;
+  
+  alias::Console.WriteLine("Hello World!");
+  /* 대체:
+      alias.Console.WriteLine("Hello World!");
+  */
+    ```
+
+    반면 별칭은 클래스까지 내포할 수 있으며, 이때는 오로지 `.` 토큰만을 사용하여 맴버를 호출해야 한다.
+
+    ```csharp
+  /* Console 클래스 별칭 */
+  using alias = System.Console;
+  
+  alias.WriteLine("Hello World!");
+    ```
 
 ## 자료형 변환
 자료형 변환(type casting)은 상수 혹은 변수로부터 호출한 데이터를 강제로 다른 자료형으로 바꾸는 작업이다.
 
-* **암시적 자료형 변환(implicit type casting)**
+* **암묵적 자료형 변환(implicit type casting)**
 
     변환 시 데이터 손실이 없어 컴파일러에서 자연적으로 처리되는 변환이다. 흔히 유사한 자료형을 작은 크기에서 큰 크기로 키울 때 자동적으로 발생한다.
 
@@ -442,44 +495,76 @@ C# 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되�
   int B = (int)A; // 4바이트 정수형 - 완전 호환 불가: 정수 부분만 반환된다.
     ```
 
-### 도우미 클래스 변환
-도우미 클래스(helper class)는 특정 기능을 제공하므로써 *도와주는* 클래스 유형이다. `System.Convert` 클래스는 도우미 클래스 중 하나로써 자료형 변환에 사용된다.
+* **`Convert` 클래스**
 
-```csharp
-int    ivalue = System.Convert.ToInt32(Console.ReadLine());
-bool   bvalue = System.Convert.ToBoolean(Console.ReadLine());
-double dvalue = System.Convert.ToDouble(Console.ReadLine());
-```
+    [`Convert`](https://docs.microsoft.com/en-us/dotnet/api/system.convert) 클래스는 특정 기능을 제공하므로써 *도와주는* 일종의 도우미 클래스(helper class)에 해당하며 자료형 변환에 사용된다.
 
-### `is` 연산자
-`is` 연산자는 주어진 데이터가 비교하고자 하는 자료형과 호환되는지 확인하는 C# 프로그래밍 언어의 연산자이다. 호환이 되면 논리적 참(`true`)이 반환되며, 그렇지 않으면 거짓(`false`)이 반환된다.
+    ```csharp
+  /* 도우미 클래스: 정수 자료형 변환 */
+  int ivalue = System.Convert.ToInt32("123");
+    ```
 
-```csharp
-variable is Type;
-```
+### 자료형 확인 연산자
+다음은 C# 프로그래밍 언어에서 제공하는 자료형을 
 
-### `typeof` 연산자
-`typeof` 연산자는 런타임 도중에 해당 자료형이 어느 `System.Type` 시스템 자료형 객체에 해당하는지 반환한다.
+* **[`is`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast#is-operator) 연산자**
+    
+    데이터가 비교하고자 하는 자료형과 호환되면 참(`true`)을 반환하고, 그렇지 않으면 거짓(`false`)을 반환한다.
 
-```csharp
-typeof(int);            // >> 출력: System.Int32
-```
+    ```csharp
+  variable is T;
+    ```
 
-`typeof` 연산자는 변수나 객체 등의 데이터를 인자로 받지 않으므로, 만일 데이터의 `System.Type`을 구하려면 `GetType()` 메소드를 사용하도록 한다.
+* **[`as`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast#as-operator) 연산자**
 
-```csharp
-int variable;
-variable.GetType();     // >> 출력: System.Int32
-```
+    데이터를 주어진 자료형으로 캐스팅하여 반환하는데, 만일 호환성 문제로 변환이 불가하면 `null`을 반환한다.
+
+    ```csharp
+  variable as T;
+  
+  /* 동일:
+      variable is Type ? (T)variable : (T)null;
+  */
+    ```
+
+* **[`typeof`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast#typeof-operator) 연산자**
+
+    자료형의 [`System.Type`](#type-클래스)을 반환한다. 흔히 자료형의 일치 여부를 확인하기 위해 사용된다.
+
+    > 자료형이 아닌 데이터의 경우에는 [`GetType()`](https://docs.microsoft.com/en-us/dotnet/api/system.object.gettype) 메소드로 확인한다.
+
+    ```csharp
+  variable.GetType() == typeof(T);
+    ```
 
 ## 연산자
 연산자(operator)는 피연산 데이터를 조작할 수 있는 가장 간단한 형태의 데이터 연산 요소이다. 연산자는 피연산자의 접두부, 접미부, 혹은 두 데이터 사이에 위치시켜 사용한다.
 
 ### 산술 연산자
-산술 연산자(arithmetic operator)는 정수나 부동소수점 자료형 산술 연산에 사용된다: 가장 기본적인 `+`, `-`, `*`, `/` 사칙 연산자부터 나눗셈의 나머지 `%`를 구할 수 있다. 산술 연산을 쉽게 읽을 수 있도록 숫자와 산술 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않으므로 무관한다.
+[산술 연산자](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators)(arithmetic operator)는 정수나 부동소수점 자료형 산술 연산에 사용된다: 가장 기본적인 `+`, `-`, `*`, `/` 사칙 연산자부터 나눗셈의 나머지 `%`를 구할 수 있다. 산술 연산을 쉽게 읽을 수 있도록 숫자와 산술 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않으므로 무관한다.
+
+증가 연산자(increment operator) `++` 및 감소 연산자(decrement operator) `--`는 데이터를 1만큼 증가 혹은 감소하는데 간략하게 한 줄로 표현할 수 있도록 한다.
+
+* **접두부**
+
+    해당 변수를 1만큼 증가/감소시킨 다음에 표현식을 평가한다.
+
+    ```csharp
+  x = ++y;    // 동일: y = y + 1; x = y;
+  x = --y;    // 동일: y = y - 1; x = y; 
+    ```
+
+* **접미부**
+
+    표현식을 평가한 다음에 해당 변수를 1만큼 증가/감소시킨다.
+
+    ```csharp
+  x = y++;    // 동일: x = y; y = y + 1;
+  x = y--;    // 동일: x = y; y = y - 1;
+    ```
 
 ### 할당 연산자
-할당 연산자(assignment operator)는 할당 기호 `=`와 조합하여 산술 연산 코드를 더욱 간결하게 작성할 수 있도록 한다.
+[할당 연산자](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/assignment-operator)(assignment operator)는 할당 기호 `=`와 조합하여 산술 연산 코드를 더욱 간결하게 작성할 수 있도록 한다.
 
 | 연산자  | 예시       | 동일                                |
 |:----:|----------|-----------------------------------|
@@ -500,33 +585,23 @@ variable.GetType();     // >> 출력: System.Int32
 > 3
 > ```
 
-### 증감 연산자
-증가 연산자(increment operator) 및 감소 연산자(decrement operator)는 데이터를 1만큼 증가 혹은 감소하는데 간략하게 한 줄로 표현할 수 있도록 한다.
-
-| 연산자      | 예시        | 설명                |
-|----------|-----------|-------------------|
-| `++` 접두사 | `x = y++` | `x = y; y = y + 1;` |
-| `++` 접미사 | `x = ++y` | `y = y + 1; x = y;` |
-| `--` 접두사 | `x = y--` | `x = y; y = y - 1;` |
-| `--` 접미사 | `x = --y` | `y = y - 1; x = y;` |
-
 ### 비교 연산자
-비교 연산자(relational operator)는 두 데이터를 대조하는데 사용된다: 초과 `>`와 미만 `<`, 이상 `>=`과 이하 `<=`, 그리고 동일 `==`와 다름 `!=` 관계 부합 여부에 따라 논리적 참 혹은 거짓이 반환된다.
+[비교 연산자](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/comparison-operators)(relational operator)는 두 데이터를 대조하는데 사용된다: 초과 `>`와 미만 `<`, 이상 `>=`과 이하 `<=`, 그리고 동일 `==`와 다름 `!=` 관계 부합 여부에 따라 논리적 참 혹은 거짓이 반환된다.
 
 ### 논리 연산자
-논리 연산자(logical operator)는 논리 자료형의 조합이 논리적으로 참인지 거짓인지 판별한다.
+[논리 연산자](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators)(logical operator)는 논리 자료형의 조합이 논리적으로 참인지 거짓인지 판별한다.
 
 | 연산자  | 논리  | 설명                                        |
 |:----:|-----|-------------------------------------------|
-| `&&` | 논리곱 | 모든 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`를 반환한다.     |
-| `||` | 논리합 | 하나 이상의 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`를 반환한다. |
+| `&&` | 논리곱 | 모든 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`을 반환한다.     |
+| `||` | 논리합 | 하나 이상의 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`을 반환한다. |
 | `!`  | 보수  | 참을 거짓으로, 또는 거짓을 참으로 변경한다.                 |
 
 # C#: 조건 및 루프
 조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 C# 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
 
 ## `if` 조건문
-`if` 조건문은 조건 혹은 논리가 참(`true`)일 경우 코드를 실행하며, 거짓(`false`)일 경우에는 코드를 실행하지 않는다.
+[`if`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements#the-if-statement) 조건문은 조건 혹은 논리가 참(`true`)일 경우 코드를 실행하며, 거짓(`false`)일 경우에는 코드를 실행하지 않는다.
 
 ```csharp
 if (condition)
@@ -571,7 +646,7 @@ else
 ```
 
 ## 조건 연산자
-조건 연산자(ternary operator; `?:`)는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다.
+[조건 연산자](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/conditional-operator)(ternary operator) `?:`는 세 가지 인수만을 사용하여 조건문을 아래와 같이 간략하게 표현한다. 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
 
 ```csharp
 condition ? true_return : false_return;
@@ -579,20 +654,8 @@ condition ? true_return : false_return;
 
 조건 연산자는 가독성을 감소시키므로 과용해서는 안되지만 변수 할당에 유용하다.
 
-### `as` 연산자
-`as` 연산자는 데이터를 주어진 자료형으로 캐스팅하여 반환하는데, 만일 데이터와 자료형의 호환성 문제로 변환이 불가하면 `null`을 반환한다.
-
-```csharp
-/* "as" 연산자 */
-variable as Type;
-
-/* 동일:
-variable is Type ? (Type)variable : (Type)null;
-*/
-```
-
 ## `switch` 조건문
-`switch` 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
+[`switch`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/selection-statements#the-switch-statement) 조건문은 전달받은 인자를 `case`의 상수와 동일한지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 선택사항으로 `default` 키워드를 통해 어떠한 `case` 조건에도 부합하지 않으면 실행될 지점을 지정한다.
 
 ```csharp
 switch (argument)
@@ -642,7 +705,7 @@ Statement 4
 ```
 
 ## `while` 반복문
-`while` 반복문은 조건 혹은 논리가 참(`true`)일 동안 코드를 반복적으로 실행하며, 거짓(`false`)일 경우에는 반복문을 종료한다.
+[`while`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-while-statement) 반복문은 조건 혹은 논리가 참(`true`)일 동안 코드를 반복적으로 실행하며, 거짓(`false`)일 경우에는 반복문을 종료한다.
 
 ```csharp
 while (condition)
@@ -654,8 +717,8 @@ while (condition)
 while (condition) statement;
 ```
 
-### `do`-`while` 반복문
-`do`-`while` 반복문은 코드를 우선 실행하고 조건 혹은 논리가 참(`true`)일 경우 코드를 반복하며, 거짓(`false`)일 경우에는 반복문을 종료한다.
+### `do` 반복문
+[`do`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-do-statement) 반복문은 코드를 우선 실행하고 조건 혹은 논리가 참(`true`)일 경우 코드를 반복하며, 거짓(`false`)일 경우에는 반복문을 종료한다.
 
 ```csharp
 do
@@ -665,13 +728,13 @@ do
 ```
 
 ### `break` 문
-`break` 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
+[`break`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-break-statement) 문(일명 탈출문)은 반복문을 조기 종료시키는데 사용된다. 반복 실행 도중에 탈출문을 마주치는 즉시 가장 인접한 반복문으로부터 탈출한다.
 
 ### `continue` 문
-`continue` 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
+[`continue`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-continue-statement) 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
 
 ## `for` 반복문
-`for` 반복문은 조건 혹은 논리가 참(`true`)일 동안 코드를 반복적으로 실행하며, 거짓(`false`)일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
+[`for`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-for-statement) 반복문은 조건 혹은 논리가 참(`true`)일 동안 코드를 반복적으로 실행하며, 거짓(`false`)일 경우에는 반복문을 종료한다. `for` 반복문은 조건 평가 외에도 지역 변수를 초기화 및 증감할 수 있는 인자가 있다.
 
 ```csharp
 for (initialize; condition; increment)
@@ -683,14 +746,10 @@ for (initialize; condition; increment)
 for (initialize; condition; increment) statement;
 ```
 
-`for` 반복문의 반복 절차는 다음과 같다:
-
-1. 변수 할당: `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한다.
-2. 조건 평가: `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다.
-3. 변수 증감: 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, "조건 평가" 단계로 돌아가 반복한다.
+`for` 반복문의 우선 `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한 다음 `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, `condition`으로 돌아가 절차를 반복한다.
 
 ## `foreach` 반복문
-`foreach` 반복문은 조건 만족 여부가 아닌 주어진 범위 내에서만 반복한다. 범위로 사용되는 데이터는 요소를 하나씩 나열할 수 있는 [컬렉션](#c-컬렉션)(collection)을 일반적으로 사용한다.
+[`foreach`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-foreach-statement) 반복문은 조건 만족 여부에 따라 반복하는 게 아니라 주어진 범위 내에서 반복한다. 범위로 사용되는 데이터는 요소를 하나씩 나열할 수 있는 [컬렉션](#c-컬렉션)(collection)을 일반적으로 사용한다.
 
 ```csharp
 foreach (element in range)
@@ -700,6 +759,18 @@ foreach (element in range)
 
 // 간략화된 문장
 foreach (element in range) statement;
+```
+
+## `goto` 이동문
+[`goto`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-goto-statement) 이동문은 다른 문장으로써는 절대로 접근이 불가한 코드에 도달할 수 있도록 한다 (일명 제어 전달; control transfer). `goto` 키워드에 명시된 레이블로 제어를 전달하나, 이 둘은 반드시 동일한 [함수](#c-함수) 내에 위치해야 한다. 레이블은 `goto` 문 이전이나 이후에 위치하여도 무관하다.
+
+```csharp
+// 제어 전달: "label"로 이동
+goto label;    
+
+// "label" 레이블
+label:
+statements;
 ```
 
 # C#: 컬렉션
