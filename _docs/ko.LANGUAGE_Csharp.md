@@ -784,18 +784,17 @@ statements;
 ```
 
 # C#: 컬렉션
-C++ 프로그래밍 언어는 다수의 데이터를 변수 하나로 저장하는 [컬렉션](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/collections)(collection)을 제공한다. 본 장은 .NET에서 활용할 수 있는 몇 가지의 컬렉션 유형들을 소개한다.
+C++ 프로그래밍 언어는 다수의 데이터를 변수 하나로 저장하는 [컬렉션](#컬렉션)(collection)을 제공한다. 본 장은 .NET에서 활용할 수 있는 몇 가지의 컬렉션 유형들을 소개한다.
 
 ## 배열
-[배열](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 선언 시 자료형 뒤에는 대괄호 `[]`가 위치하여 배열임을 명시해야 한다. 비록 값 자료형에 대한 배열이라도 배열 자체는 참조 자료형이다. 초기화되지 않은 배열은 `null`을 기본값으로 가지며, [`new`](#new-연산자) 키워드와 함께 자료형 및 크기를 정수로 지정하여 객체로 생성된 배열을 할당하므로써 초기화한다.
+[배열](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 선언 시 자료형 뒤에는 대괄호 `[]`가 위치하여 배열임을 명시해야 한다. 비록 배열이 갖는 자료형이 값 자료형(예. `int`, `double`, `char` 등)일지라도 배열 자체는 [`Array`](https://docs.microsoft.com/en-us/dotnet/api/system.array) 추상 기반 클래스로부터 파생된 참조 자료형이다. 초기화되지 않은 배열은 `null`을 기본값으로 가지며, [`new`](#new-연산자) 키워드와 함께 자료형 및 크기를 정수로 지정하여 객체로 생성된 배열을 할당하므로써 초기화한다.
 
 ```csharp
 /* 배열 선언 및 객체화 */
-int[] arr = new int[size];
+int[] variable = new int[size];
 
 /* 동일:
-    int[] arr;
-    arr = new int[size];
+    Array variable = Array.CreateInstance(typeof(int), size);
 */
 ```
 
@@ -806,23 +805,23 @@ int[] arr = new int[size];
 * 방법 1: 반드시 크기만큼 요소의 값을 지정해야 한다.
 
     ```csharp
-  int[] arr = new int[size] {value1, value2, ... };
+  int[] variable = new int[size] {value1, value2, ... };
     ```
 
 * 방법 2: C/C++와 동일하게 곧바로 집합 초기화를 적용한다.
 
     ```csharp
-  int[] arr = {value1, value2, ... };
+  int[] variable = {value1, value2, ... };
 
   /* 동일:
-      int[] arr = new int[] {value1, value2, ... };
+      int[] variable = new int[] {value1, value2, ... };
   */
     ```
 
 배열의 각 요소에 할당된 데이터는 대괄호 `[]`를 사용해 0번부터 시작하는 인덱스 위치를 호출할 수 있다. 그러나 배열 자체를 호출하면 배열 자체의 자료형이 반환된다. 단, 자료형이 `char` 문자인 배열은 문자들을 하나씩 나열한 게 문자열처럼 반환된다.
 
 ```csharp
-int[] arr = new int[3] {value1, value2, value3};
+int[] variable = new int[3] {value1, value2, value3};
 
 Console.WriteLine(arr);       // 출력: System.Int32[]
 Console.WriteLine(arr[0]);    // 출력: value1
@@ -831,12 +830,12 @@ Console.WriteLine(arr[0]);    // 출력: value1
 이러한 배열의 특징으로 인해 배열은 정의 외에 한꺼번에 할당이 불가능하다. 그렇지만 개별 요소를 재할당하여 데이터를 변경할 수 있다.
 
 ```csharp
-int[] arr = new int[3];
+int[] variable = new int[3];
 
 /* 배열의 개별 요소 할당 */
-arr[0] = value1;
-arr[1] = value2;
-arr[2] = value3;
+variable[0] = value1;
+variable[1] = value2;
+variable[2] = value3;
 ```
 
 ### `new` 연산자
@@ -850,7 +849,7 @@ object variable = new object();
 > 만일 변수와 동일한 자료형의 객체를 생성하려면 아래와 같이 구문을 간략화할 수 있다.
 >
 > ```csharp
-> object instance = new();
+> object variable = new();
 > ```
 
 ### 다차원 배열
@@ -859,16 +858,16 @@ object variable = new object();
 * 방법 1: 반드시 크기만큼 요소의 값을 지정해야 한다.
 
     ```csharp
-  int[,] arr = new int[size1, size2] { {value1, value2}, {value3, value4}, ... };
+  int[,] variable = new int[size1, size2] { {value1, value2}, {value3, value4}, ... };
     ```
 
 * 방법 2: C/C++와 동일하게 곧바로 집합 초기화를 적용한다.
 
     ```csharp
-  int[,] arr = { {value1, value2}, {value3, value4}, ... };
+  int[,] variable = { {value1, value2}, {value3, value4}, ... };
 
   /* 동일:
-      int[,] arr = new int[,] { {value1, value2}, {value3, value4}, ... };
+      int[,] variable = new int[,] { {value1, value2}, {value3, value4}, ... };
   */
     ```
 
@@ -876,7 +875,7 @@ object variable = new object();
 [가변 배열](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/jagged-arrays)(jagged array)은 크기와 상관없이 또 다른 동일 자료형 배열을 요소로써 가질 수 있다. 이미 메모리가 할당된 배열을 요소로 가지므로, 가변 배열은 두 개 이상의 배열 데이터가 활용되는 것이다.
 
 ```csharp
-int[][] arr = new int[size][] {
+int[][] variable = new int[size][] {
     new int[] { ... }, 
     new int[] { ... }, 
     new int[] { ... },
@@ -887,13 +886,11 @@ int[][] arr = new int[size][] {
 ## 컬렉션
 > 본 내용은 차후에 소개될 [제네릭](#c-제네릭)과 연관이 깊은 부분이므로, 필수는 아니지만 해당 장을 읽으면 이해에 도움이 된다.
 
-[컬렉션](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/collections)(collection)은 내장된 데이터 요소에 따라 크기를 확장하고 축소시킬 수 있는 또 다른 배열 형식의 데이터이며, 컬렉션마다 고유의 특징과 기능이 탑재되어 있다. 제네릭(generic) 및 비제네릭(non-generic) 컬렉션으로 나뉘어지는데, 간단히 설명하자면 제네릭은 홑화살괄호 `<>` 안애 원하는 자료형을 넣어 객체화 할 수 있는 클래스이다.
+[컬렉션](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/collections)(collection)은 크기를 가변할 수 있는 또 다른 배열 형식의 데이터이며, 컬렉션마다 고유의 특징과 기능이 탑재되어 있다. 제네릭 및 비제네릭 컬렉션으로 나뉘어지는데, 간단히 설명하자면 제네릭은 컬렉션이 수용할 자료형을 직접 객체화 과정에서 지정이 가능한 클래스를 일컫는다. 본 부문에서는 아래의 `using` 지시문을 사용할 것을 권고한다.
 
 ```csharp
-using System.Collections.Generic;
-
-/* 제네릭 컬렉션<정수형>의 객체화 */
-Collection<int> collectionName = new();
+using System.Collections.Generic;    // 제네릭 (암묵적 using 지시문에 포함)
+using System.Collections;            // 비제네릭
 ```
 
 ### `List` 컬렉션
