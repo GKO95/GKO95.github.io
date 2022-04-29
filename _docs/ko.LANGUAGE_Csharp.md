@@ -342,8 +342,8 @@ variable = 3;    // variable = 3
 
 | 자료형 | 데이터 소재 메모리 | 설명 |
 |:----:|:------:|------|
-| [값 자료형][value-type] | [스택](/docs/ko.C#스택-영역) (stack) | 변수는 자신에게 할당된 (스택 영역) 메모리에 데이터를 직접 저장한다. |
-| [참조 자료형][reference-type] | [힙](/docs/ko.C#힙-영역) (heap) | 변수는 별도의 (힙 영역) 메모리에 저장된 데이터를 참조한다.<br/>그러므로 두 개 이상의 변수가 하나의 데이터를 참조하는 것이 가능하다. |
+| [값 자료형][value-type] | [스택](/docs/ko.C#스택-영역) (stack);<br/>코드 실행용 | 변수는 자신에게 할당된 (스택 영역) 메모리에 데이터를 직접 저장한다. |
+| [참조 자료형][reference-type] | [힙](/docs/ko.C#힙-영역) (heap);<br/>데이터 저장용 | 변수는 별도의 (힙 영역) 메모리에 저장된 데이터를 참조한다.<br/>그러므로 두 개 이상의 변수가 하나의 데이터를 참조하는 것이 가능하다. |
 
 [value-type]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types
 [reference-type]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/reference-types
@@ -886,174 +886,101 @@ int[][] variable = new int[size][] {
 ## 컬렉션
 > 본 내용은 차후에 소개될 [제네릭](#c-제네릭)과 연관이 깊은 부분이므로, 필수는 아니지만 해당 장을 읽으면 이해에 도움이 된다.
 
-[컬렉션](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/collections)(collection)은 크기를 가변할 수 있는 또 다른 배열 형식의 데이터이며, 컬렉션마다 고유의 특징과 기능이 탑재되어 있다. 제네릭 및 비제네릭 컬렉션으로 나뉘어지는데, 간단히 설명하자면 제네릭은 컬렉션이 수용할 자료형을 직접 객체화 과정에서 지정이 가능한 클래스를 일컫는다. 본 부문에서는 아래의 `using` 지시문을 사용할 것을 권고한다.
+[컬렉션](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/collections)(collection)은 크기를 가변할 수 있는 또 다른 배열 형식의 데이터이며, 컬렉션마다 고유의 특징과 기능이 탑재되어 있다. 제네릭 및 비제네릭 컬렉션으로 나뉘어지는데, 간단히 설명하자면 제네릭은 컬렉션이 수용할 자료형을 직접 객체화 과정에서 지정이 가능한 클래스를 일컫는다.
 
-```csharp
-using System.Collections.Generic;    // 제네릭 (암묵적 using 지시문에 포함)
-using System.Collections;            // 비제네릭
-```
+* **[`List<T>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1) 클래스**
 
-### `List` 컬렉션
-`List<T>`는 배열과 유사한 제네릭 컬렉션이지만, 요소 추가 및 제거를 통해 컬렉션 크기 및 요소 관리를 유동적으로 제어할 수 있도록 한다. C++ 프로그래밍 언어의 벡터 클래스와 동일하다고 간주할 수 있다.
+    배열과 성질이 가장 유사하지만 비교적 높은 유연성이 요구될 때 사용되는 제네릭 컬렉션이다. 이와 유사한 데이터 구조로 C++의 [벡터 클래스](/docs/ko.Cpp#벡터-클래스) 또는 파이썬의 [리스트](/docs/ko.Python#리스트-객체)가 있다.
 
-```csharp
-using System.Collections.Generic;
+    ```csharp
+  List<int> variable = new List() {3, 1, 4, 1, 5};
+  
+  Console.WriteLine(variable[0]);             // 출력: 3
+    ```
 
-/* List<T> 컬렉션<정수형>의 객체화 */
-List<int> LIST = new();
-```
-----
-```csharp
-using System.Collections.Generic;
+* **[`Dictionary<TKey,TValue>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2) 클래스**
 
-/* List<T> 컬렉션<정수형>의 초기화 */
-List<int> LIST = new() {3, 1, 4, 1, 5};
+    배열 요소가 `{key, value}` 형식으로 구성된 크기 확장이 유연한 제네릭 컬렉션이다. `value` 값을 호출하려면 대괄호 `[]` 안에 정수 인덱스가 아닌 `key` 식별자를 기입한다.
 
-System.Console.WriteLine(LIST[0]);
-```
-```
-3
-```
+    ```csharp
+  Dictionary<string, int> variable = new() { {"Beta", 3}, {"Alpha", 1} };
 
-### `SortedList` 컬렉션
-`SortedList<TKey,TValue>`는 기존의 `List<T>` 컬렉션에서 요소가 `{key, value}` 형식으로 변경된 제네릭 컬렉션이다. 여기서 `key`는 요소의 `value`를 호출하는데 사용되는 식별자 역할을 한다. 요소의 순서는 `key`를 기준으로 자동적으로 정리된다.
+  Console.WriteLine(variable["Beta"]);        // 출력: 3
+    ```
 
-```csharp
-using System.Collections.Generic;
+* **[`SortedList<TKey,TValue>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedlist-2), [`SortedDictionary<TKey,TValue>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.sorteddictionary-2) 클래스**
 
-/* SortedList<TKey,TValue> 컬렉션<문자열,정수형>의 객체화 */
-SortedList<string, int> SLIST = new();
-```
-----
-```csharp
-using System.Collections.Generic;
+    배열 요소가 `{key, value}` 형식으로 구성되고 `key` 순서대로 정렬된 크기 확장이 유연한 제네릭 컬렉션이다. 두 클래스는 메모리 활용과 데이터 삽입 및 제거 속도에서 차이가 나타난다:
 
-/* SortedList<TKey,TValue> 컬렉션<문자열,정수형>의 초기화 */
-SortedList<string, int> SLIST = new() { {"B", 3}, {"A", 1} };
+    * `SortedList<TKey,TValue>`는 [`IList<T>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ilist-1)에 기반한 리스트 성질이 반영되어 인덱스로 요소 값을 호출할 수 있으며 메모리를 적게 사용한다.
 
-System.Console.WriteLine(SLIST["B"]);
-```
-```
-3
-```
+        ```csharp
+      SortedList<string, int> variable = new() { {"Beta", 3}, {"Alpha", 1} };
+  
+      Console.WriteLine(variable["Beta"]);    // 출력: 3
+        ```
 
-### `Dictionary` 컬렉션
-`Dictionary<TKey,TValue>`는 기존의 `List<T>` 컬렉션에서 요소가 `{key, value}` 형식으로 변경된 제네릭 컬렉션이다. 여기서 `key`는 요소의 `value`를 호출하는데 사용되는 식별자 역할을 한다. 요소의 순서는 자동적으로 정리되지 않는다.
+    * `SortedDictionary<TKey,TValue>`는 [`IDictionary<TKey,TValue>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.idictionary-2)에 기반한 딕셔너리의 성질이 반영되며 데이터 삽입 및 제거 작업이 빠르다.
 
-```csharp
-using System.Collections.Generic;
+        ```csharp
+      SortedDictionary<string, int> variable = new() { {"Beta", 3}, {"Alpha", 1} };
+  
+      Console.WriteLine(variable["Beta"]);    // 출력: 3
+        ```
 
-/* Dictionary<TKey,TValue> 컬렉션<문자열,정수형>의 객체화 */
-Dictionary<string, int> DICT = new();
-```
-----
-```csharp
-using System.Collections.Generic;
+* **[`Stack<T>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.stack-1) 클래스**
 
-/* Dictionary<TKey,TValue> 컬렉션<문자열,정수형>의 초기화 */
-Dictionary<string, int> DICT = new() { {"B", 3}, {"A", 1} };
+    선형적 LIFO(Last-In-First-Out), 즉 마지막에 입력된 데이터가 먼저 출력되는 스택 구조를 따르는 제네릭 컬렉션이다. 해당 컬렉션은 대괄호 `[]`를 통해 요소를 인덱싱 할 수 없다.
 
-System.Console.WriteLine(DICT["B"]);
-```
-```
-3
-```
+    ```csharp
+  Stack<int> variable = new();
+  
+  variable.Push(1);
+  variable.Push(2);
+  variable.Push(3);
 
-### `BitArray` 컬렉션
-`BitArray`는 오로지 논리적 참(`false`) 혹은 거짓(`true`)만을 저장하는 컬렉션이다. 이미 자료형이 논리형으로 굳혀졌기 때문에 비제네릭 컬렉션으로 분류된다. `BitArray` 컬렉션의 크기는 객체화 이후에 변경 불가하다.
+  Console.WriteLine(variable.Pop());          // 출력: 3
+  Console.WriteLine(variable.Pop());          // 출력: 2
+  Console.WriteLine(variable.Pop());          // 출력: 1
+    ```
 
-```csharp
-using System.Collections;
+* **[`Queue<T>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.queue-1) 클래스**
 
-/* BitArray 컬렉션의 객체화 */
-BitArray BITARR = new(4);
-```
-----
-```csharp
-using System.Collections;
+    선형적 FIFO(First-In-First-Out), 즉 먼저 입력된 데이터가 먼저 출력되는 큐 구조를 따르는 제네릭 컬렉션이다. 해당 컬렉션은 대괄호 `[]`를 통해 요소를 인덱싱 할 수 없다.
 
-/* BitArray 컬렉션의 초기화 */
-bool[] arr = new bool[4] {false, true, false, true};
-BitArray BITARR = new(arr);
+    ```csharp
+  Queue<int> variable = new();
 
-System.Console.WriteLine(BITARR[0]);
-```
-```
-False
-```
+  variable.Enqueue(1);
+  variable.Enqueue(2);
+  variable.Enqueue(3);
 
-### `Stack` 컬렉션
-`Stack<T>`은 선형적 LIFO(Last-In-First-Out), 즉 마지막에 입력된 데이터가 먼저 출력되는 스택 메모리 구조를 따르는 제네릭 컬렉션이다. `Stack<T>` 컬렉션은 개별 요소를 대괄호 `[]`로 호출할 수 없다.
+  Console.WriteLine(variable.Dequeue());      // 출력: 1
+  Console.WriteLine(variable.Dequeue());      // 출력: 2
+  Console.WriteLine(variable.Dequeue());      // 출력: 3
+    ```
 
-```csharp
-using System.Collections.Generic;
+* **[`HashSet<T>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1) 클래스**
 
-/* Stack<T> 컬렉션<정수형>의 객체화 */
-Stack<int> STACK = new();
-```
-----
-```csharp
-using System.Collections.Generic;
+    중복 요소를 허용하지 않는 제네릭 컬렉션이다. 해당 컬렉션은 수학에서의 [집합](https://ko.wikipedia.org/wiki/집합)에서 사용되는 연산과 동일하게 작용하나, 대괄호 `[]`를 통해 요소를 인덱싱 할 수 없다.
 
-/* Stack<T> 컬렉션<정수형>의 초기화 */
-int[] arr = new bool[4] {1, 2, 3, 4};
-Stack<int> STACK = new(arr);
+    ```csharp
+  HashSet<int> variable = new(new int[] {3, 1, 4, 1, 5});
 
-System.Console.WriteLine(STACK.Pop());
-System.Console.WriteLine(STACK.Pop());
-```
-```
-4
-3
-```
+  foreach(var element in variable)
+      Console.Write(element);                 // 출력: 3145
+    ```
 
-### `Queue` 컬렉션
-`Queue<T>`는 선형적 FIFO(First-In-First-Out), 즉 먼저 입력된 데이터가 먼저 출력되는 큐 메모리 구조를 따르는 제네릭 컬렉션이다. `Queue<T>` 컬렉션은 개별 요소를 대괄호 `[]`로 호출할 수 없다.
+* **[`BitArray`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.bitarray) 클래스**
 
-```csharp
-using System.Collections.Generic;
+    오로지 논리적 참(`false`) 혹은 거짓(`true`)만을 저장하여 자료형이 논리형으로 고정된 비제네릭 컬렉션이다. 논리형 배열과 달리 각 요소는 오로지 한 비트만을 차지하여 메모리를 적게 사용하지만, [데이터 정렬](https://en.wikipedia.org/wiki/Data_structure_alignment)에 의해 인덱스 탐색이 다소 느린 단점을 가진다. 비제네릭 컬렉션은 제네릭과 다른 네임스페이스에 속하므로 다음 코드와 같이 `using` 지시문을 기입하였다.
 
-/* Queue<T> 컬렉션<정수형>의 객체화 */
-Queue<int> QUEUE = new();
-```
-----
-```csharp
-using System.Collections.Generic;
+    ```csharp
+  using System.Collections;
+  BitArray variable = new(new bool[] {false, true, true, false});
 
-/* Queue<T> 컬렉션<정수형>의 초기화 */
-int[] arr = new bool[4] {1, 2, 3, 4};
-Queue<int> QUEUE = new(arr);
-
-System.Console.WriteLine(STACK.Dequeue());
-System.Console.WriteLine(STACK.Dequeue());
-```
-```
-1
-2
-```
-
-### `HashSet` 컬렉션
-`HashSet<T>`는 중복되는 요소를 갖지 않으므로써 유일성을 유지하는 제네릭 컬렉션이다. `HashSet<T>`는 고성능의 수학 집합 연산을 수행하나, 개별 요소를 대괄호 `[]`로 호출할 수 없다.
-
-```csharp
-using System.Collections.Generic;
-
-/* HashSet<T> 컬렉션<정수형>의 객체화 */
-HashSet<int> HSET = new();
-```
-----
-```csharp
-using System.Collections.Generic;
-
-/* HashSet<T> 컬렉션<정수형>의 초기화 */
-int[] arr = new bool[6] {1, 2, 3, 4, 1, 3};
-HashSet<int> HSET = new(arr);
-
-System.Console.WriteLine(HSET.Count);
-```
-```
-4
-```
+  Console.WriteLine(variable[0]);             // 출력: False
+    ```
 
 # C#: 메소드
 C# 프로그래밍 언어는 하나의 핵심 함수인 `Main()`을 기점으로 모든 프로그램이 실행된다. 메소드에 대한 이해는 매우 중요하며, 원하는 작업을 수행하도록 메소드를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있다. 본 장은 C# 프로그래밍 언어에서 사용자 정의 메소드의 생성 및 사용 방법에 대하여 소개한다.
