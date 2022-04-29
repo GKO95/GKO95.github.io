@@ -43,7 +43,7 @@ Working set은 프로세스 가상 주소 공간의 메모리 중에서 물리 �
 
 프로세스 working set의 일부 페이지는 타 프로세스와 공유될 수 있는데, 만일 하나의 프로세스가 공유된 페이지를 제거한다 하더라도 타 프로세스에는 영향을 주지 않는다([Copy-on-write](#copy-on-write) 참조). 단, 공유된 페이지가 모든 프로세스로부터 제거되면 페이지는 transition 된다.
 
-> 여기서 *transition*은 [페이지 캐싱]((https://en.wikipedia.org/wiki/Page_cache))을 의미하며, 사용되지 않는 페이지를 빠른 접근과 성능 향상을 꾀하여 저장장치의 페이지 파일이 아닌 사용되지 않는 메인 메모리에 cached 된 것을 가리킨다. 그러면 메모리가 추가로 필요한 쓰레드를 위해 재빨리 repurpose되어 활용될 수 있다.
+> 여기서 *transition*은 [페이지 캐싱](https://en.wikipedia.org/wiki/Page_cache)을 의미하며, 사용되지 않는 페이지를 빠른 접근과 성능 향상을 꾀하여 저장장치의 페이지 파일이 아닌 사용되지 않는 메인 메모리에 cached 된 것을 가리킨다. 그러면 메모리가 추가로 필요한 쓰레드를 위해 재빨리 repurpose되어 활용될 수 있다.
 
 만일 transition 페이지가 마지막으로 저장장치에 write 되었을 때와 내용이 다르면 (즉, 페이지가 "dirty" 할 때), 해당 transition 페이지는 repurpose 되기 전에 먼저 backing store에 write 되어야 한다. 시스템은 dirty transition 페이지를 발견한 즉시 backing store에 write 하도록 한다.
 
