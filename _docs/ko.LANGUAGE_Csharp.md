@@ -962,7 +962,7 @@ int[][] variable = new int[size][] {
 
 * **[`HashSet<T>`](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1) 클래스**
 
-    중복 요소를 허용하지 않는 제네릭 컬렉션이다. 해당 컬렉션은 수학에서의 [집합](https://ko.wikipedia.org/wiki/집합)에서 사용되는 연산과 동일하게 작용하나, 대괄호 `[]`를 통해 요소를 인덱싱 할 수 없다.
+    중복 요소를 허용하지 않는 제네릭 컬렉션이다. 해당 컬렉션은 수학의 [집합](https://ko.wikipedia.org/wiki/집합)에서 사용되는 연산과 동일하게 작용하나, 대괄호 `[]`를 통해 요소를 인덱싱 할 수 없다.
 
     ```csharp
   HashSet<int> variable = new(new int[] {3, 1, 4, 1, 5});
@@ -982,44 +982,104 @@ int[][] variable = new int[size][] {
   Console.WriteLine(variable[0]);             // 출력: False
     ```
 
-# C#: 메소드
-C# 프로그래밍 언어는 하나의 핵심 함수인 `Main()`을 기점으로 모든 프로그램이 실행된다. 메소드에 대한 이해는 매우 중요하며, 원하는 작업을 수행하도록 메소드를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있다. 본 장은 C# 프로그래밍 언어에서 사용자 정의 메소드의 생성 및 사용 방법에 대하여 소개한다.
-
-## 메소드
-메소드(method)는 데이터를 처리하는 클래스와 객체의 구성 맴버 중 하나이며, 재사용이 가능하고 호출 시 데이터 처리 또는 반환하여 유동적인 프로그램 코딩을 가능하게 한다. 메소드는 클래스 혹은 객체 뒤에 맴버 연산자 `.`로 소괄호와 함께 호출되는 `object.method()` 형식으로 구별된다.
+# C#: 함수
+함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
 ```csharp
-System.Console.WriteLine("Hello World!");
-// "System.Console" 클래스의 "WriteLine()" 메소드
+double variable = 3.14159
+Console.WriteLine(Math.Round(variable));
+// 터미널에 텍스트를 출력하는 "Console.WriteLine()", 그리고 소수점을 반올림하는 "Math.Round()" 함수
+```
+```
+3
 ```
 
-함수의 기능을 정의하기 위해서는 두 가지의 구성요소가 반드시 필요하다:
+함수의 기능을 선언(declaration)하기 위해서는 두 가지의 구성요소가 반드시 필요하다:
 
-* **코드 블록 `{}`**: 메소드를 호출할 때, 실행되는 코드가 들어있다.
-* **자료형**: 메소드가 종료될 때, 반환되는 데이터의 자료형을 결정한다.
+* **[블록](#표현식) `{}`**: 함수 호출 시 실행되는 코드가 들어있다.
+* **[자료형](#자료형)**: 함수 종료 시 [반환](#return-반환문)되는 데이터의 자료형을 결정한다.
 
-```csharp
-/* 메소드 정의 */
-int function()
+```cpp
+/* 함수 선언 */
+void function()
 {
-    return 1 + 2;
+    Console.WriteLine(1 + 2);
 }
 
-/* 메소드 호출 */
-function();     // >> 출력: 3
+/* 함수 호출 */
+function();    // 출력: 3
 ```
 
-한 줄로 표현될 수 있는 매우 간단한 메소드는 다음 코드처럼 간략화 할 수 있다.
+C# 프로그래밍 언어와 같은 [객체지향](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)에서는 [캡슐화](#c-클래스)(encapsulation)에 의해 함수의 선언과 호출 순서는 사실상 무의미하다. 즉, 위의 예시 코드와 달리 스크립트상 함수가 호출에 비해 나중에 선언되어도 정상적으로 동작한다.
 
-```csharp
-/* 메소드 정의: 간략화 */
-int function() => 1 + 2;
-```
+> [최상위 문장](#net-6-c-콘솔-프로젝트)의 암묵적 규칙은
+>
+> ```csharp
+> using System;
+>
+> class Program
+> {
+>     static void Main(string[] args)
+>     {
+>         function();
+>     }
+>
+>     static void function()
+>     {
+>         Console.WriteLine(1 + 2);
+>     {
+> }
+> ```
 
-C# 프로그래밍 언어는 객체지향 프로그래밍 언어가 갖는 [캡슐화](#캡슐화)(encapsulation) 성질에 의해 스크립트 상에서 메소드 정의 순서가 뒤늦어도 호출하여 실행시키는데 영향을 미치지 않는다. 하지만 메소드 안에 또 다른 메소드를 정의하는 것은 허용되지 않는다.
+함수명 뒤에 소괄호 `()` 기입여부에 따라 의미하는 바가 다르다.
+
+* `function()`은 함수에 정의된 코드를 실행한다.
+
+    ```csharp
+  void function()
+  {
+      Console.WriteLine(1 + 2);
+  }
+
+  function();
+  Console.WriteLine("반환: {0}", function());    // [CS1503] 2 인수: 'void'에서 'object?'(으)로 변환할 수 없습니다.
+    ```
+    ```
+  3
+    ```
+
+* `function`은 함수의 [Type](#자료형)을 반환한다.
+
+    ```cpp
+  void function()
+  {
+      Console.WriteLine(1 + 2);
+  }
+
+  function;                                      // [CS0201] 할당, 호출, 증가, 감소 및 새 개체 식만 문으로 사용할 수 있습니다.
+  Console.WriteLine("반환: {0}", function);
+    ```
+    ```
+  반환: System.Action
+    ```
 
 ### `return` 반환문
-`return` 반환문은 함수로부터 데이터를 함수에 지정된 자료형으로 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수의 자료형이 `void`이면 반환문은 필요가 없으나, 조기 종료를 위해 아무런 데이터를 반환하지 않는 `return;`을 사용할 수 있다.
+[`return`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-return-statement) 반환문은 함수로부터 데이터를 함수에 지정된 자료형으로 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수의 자료형이 `void`이면 반환문은 필요가 없으나, 흔히 함수를 조기에 종료하기 위해서도 사용된다.
+
+```csharp
+// return 반환문이 있는 사용자 정의 함수
+int function()
+{
+    Console.WriteLine("Hello World!");
+    return 1 + 2;
+}
+    
+Console.WriteLine(function());
+```
+```
+Hello World!
+3
+```
 
 ### 매개변수 및 전달인자
 다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
@@ -1027,206 +1087,127 @@ C# 프로그래밍 언어는 객체지향 프로그래밍 언어가 갖는 [캡�
 * **전달인자 (argument)**: 전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.
 * **매개변수 (parameter)**: 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호 `()` 내에서 이루어진다.
 
-매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+> 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+
+다음은 매개변수에 사용되는 연산자로 전달인자을 받는데 유연성을 제공한다. 이들은 프로그래밍 구문상 명확한 구별이 가능해야 하므로 반드시 일반 매개변수 뒤에 위치해야 한다.
 
 | 연산자 | 구문          | 설명                                                            |
 |:---:|:-----------:|---------------------------------------------------------------|
-| `=` | `arg=value` | 전달인자가 없으면 기본값 `value`가 대신 매개변수에 할당된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
+| `=` | `arg=value` | 전달인자가 없으면 기본값 `value`가 대신 매개변수에 할당된다. |
 | `:` | `arg:value` | 전달인자 `value`를 매개변수 `arg`로 넘겨주며, 매개변수의 순서는 중요하지 않다.            |
 
-아래의 예제는 메소드의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
-
 ```csharp
-using System;
-
-class Program
+/* 함수 선언 */
+int function(int arg1, double arg2 = 2.0)
 {
-    static void Main(string[] args)
-    {
-        /* 메소드 호출 */
-        Console.WriteLine(method(1, 3.0));                // >> 출력: 4.0
-        Console.WriteLine(method(1));                     // >> 출력: 8.0
-        Console.WriteLine(method(arg2: 3.0, arg1: 1));    // >> 출력: 4.0
-    }
-    
-    /* 메소드 선언 */
-    static double method(int arg1, double arg2 = 7.0) => arg1 + arg2;
+    return arg1 + arg2;
 }
+
+/* 함수 호출 */
+function(1);                    // 반환: 3
+function(1, 3.14);              // 반환: 4 (= 1 + 3.14의 정수만 추출)
+function(arg2: 2.71, arg1: 5);  // 반환: 7 (= 5 + 2.71의 정수만 추출)
 ```
 
-메소드에서 전달인자를 매개변수로 전달하는 방법에는 값에 의한 호출(call by value) 그리고 참조에 의한 호출(call by reference)이 있다.
+### 참조에 의한 전달
+매개변수로 인자를 전달하는 방법에는 크게 두 가지가 있다: 값에 의한 전달(pass by value) 그리고 참조에 의한 전달(pass by reference)이 있다. 전자는 데이터의 값만이 매개변수로 전달되는 반면, 후자는 데이터 자체가 매개변수로 전달되어 본래 데이터에도 영향을 미치는 특징을 갖는다. 현재까지 본문에서 다룬 함수들은 전부 값에 의한 전달을 사용하였다.
 
-* **값에 의한 호출**
+다음은 C# 프로그래밍 언어에서 참조에 의한 전달을 위해 사용되는 키워드를 소개한다.
 
-    값에 의한 호출은 오로지 전달인자의 값만 매개변수로 건네준다. 전달인자와 매개변수는 별개의 존재로 취급되어, 매개변수의 변화는 전달인자에 아무런 영향을 주지 않는다.
+* **[`ref`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/ref) 키워드**
 
-    ```csharp
-  using System.Console;
-  
-  class Program
-  {
-      static void Main(string[] args)
-      {
-          int A = 1;
-          int B = 3;
-          
-          Console.WriteLine(A, B);    // >> 출력: 4 (1 + 3.0)
-          Console.WriteLine(A, B);    // >> 출력: 4 (1 + 3.0)
-      }
-      
-      /* 값에 의한 호출 */
-      static int method(int arg1, int arg2)
-      {
-          arg1 += arg2;
-          return arg1;
-      }
-  }
-    ```
-
-* **참조에 의한 호출: `ref` 키워드**
-
-    `ref` 키워드를 사용하는 참조에 의한 호출은 전달인자 자체를 매개변수로 건네준다. 전달인자와 매개변수는 하나의 존재로 취급되어, 매개변수의 변화는 전달인자에 그대로 영향을 준다.
+    가장 일반적인 참조에 의한 전달이다.
 
     ```csharp
-  using System.Console;
-  
-  class Program
+  /* 참조에 의한 전달: ref 키워드 */
+  void function(ref int arg)
   {
-      static void Main(string[] args)
-      {
-          int A = 1;
-          int B = 3;
-          
-          Console.WriteLine(ref A, ref B);    // >> 출력: 4 (1 + 3.0)
-          Console.WriteLine(ref A, ref B);    // >> 출력: 7 ((1 + 3.0)  + 3.0)
-      }
-      
-      /* 참조에 의한 호출 */
-      static int method(ref int arg1, ref int arg2)
-      {
-          arg1 += arg2;
-          return arg1;
-      }
+      arg *= 2;
   }
+
+  int variable = 3;
+  
+  function(ref variable);
+  Console.WriteLine(variable);    // 출력: 6
     ```
 
-* **참조에 의한 호출: `in` 키워드**
+* **[`out`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/out-parameter-modifier) 키워드**
 
-    `in` 키워드를 사용한 참조에 의한 호출에서 전달인자와 매개변수는 하나의 존재로 취급되지만 매개변수는 읽기 전용이 되어 데이터 변동이 불가능하다. 매개변수 데이터를 수정할 수 없으므로 전달인자는 그대로 유지된다.
+    오로지 초기화되지 않은 변수만 매개변수로 전달될 수 있으며, 함수가 종료되기 전에 해당 매개변수는 반드시 초기화되어야 한다.
 
     ```csharp
-  using System.Console;
-  
-  class Program
+  /* 참조에 의한 전달: out 키워드 */
+  void function(out int arg)
   {
-      static void Main(string[] args)
-      {
-          int A = 1;
-          int B = 3;
-          
-          Console.WriteLine(in A, in B);    // 컴파일 오류: "arg1 +=  arg2;" 실행 불가!
-      }
-      
-      /* 참조에 의한 호출: in 키워드 */
-      static int method(in int arg1, in int arg2)
-      {
-          arg1 += arg2;
-          return arg1;
-      }
+      arg *= 2;                   // [CS0269] Use of unassigned out parameter 'arg'
   }
-    ```
-    ```
-  Cannot assign to variable 'in int' because it is a readonly variable
+
+  int variable = 3;
+  
+  function(out variable);
+  Console.WriteLine(variable);
     ```
 
-* **참조에 의한 호출: `out` 키워드**
+* **[`in`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/in-parameter-modifier) 키워드**
 
-    `out` 키워드를 사용한 참조에 의한 호출에서 전달인자와 매개변수는 하나의 존재로 취급되지만 오로지 초기화되지 않은 전달인자만 가능하다. 그리고 매개변수는 메소드가 종료되기 전에 반드시 초기화되어야 한다.
+    매개변수는 읽기 전용이 되어 변동이 불가능하다.
 
     ```csharp
-  using System.Console;
-  
-  class Program
+  /* 참조에 의한 전달: in 키워드 */
+  void function(in int arg)
   {
-      static void Main(string[] args)
-      {
-          int A, B;    // 초기화되지 않은 변수
-          
-          Console.WriteLine(out A, out B);              // >> 출력: 4  (1 + 3.0)
-          Console.WriteLine("A: {0}, B: {1}", A, B);    // >> 출력: "A:  4, B: 3"
-      }
-      
-      /* 참조에 의한 호출: out 키워드 */
-      static int method(out int arg1, out int arg2)
-      {
-          arg1 = 1; arg2 = 3;
-          arg1 += arg2;
-          return arg1;
-      }
+      arg *= 2;                   // [CS8331] Cannot assign to variable 'in int' because it is a readonly variable
   }
+
+  int variable = 3;
+  
+  function(in variable);
+  Console.WriteLine(variable);
     ```
 
-### 정적 변수
-정적 변수(static variable)는 프로그램이 실행되는 동안 함수를 탈출하여도 데이터가 소멸되지 않고 보존되는 `static` 키워드의 특수한 지역 변수이다. 해당 함수를 다시 호출하면 함수 종료 직전의 데이터를 그대로 이어서 사용할 수 있다. 이러한 성질로 정적 변수는 C# 프로그래밍 언어에서 전역 변수의 대안으로 사용되고 있다.
+## 함수 오버로딩
+[함수 오버로딩](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/member-overloading)(function overloading)은 동일한 이름 및 반환 자료형을 갖는 함수가 전달받은 인자의 자료형 및 개수에 따라 달리 동작하는 것을 의미한다. 이들은 각 인자 전달의 경우에 따라 제각각의 정의를 갖는다.
 
 ```csharp
-class Program {
-
-    /* 정적 변수: public은 외부에서 변수 접근이 가능하도록 한다. */
-    public static int variable;
-
-    static void Main() {
-
-    }
+/* 오버로딩된 함수 선언 1 */
+double function(int arg1, double arg2) {
+    return arg1 + arg2;
 }
-```
 
-## 메소드 오버로딩
-메소드 오버로딩(method overloading)은 동일한 이름의 메소드가 전달받은 인자의 자료형 및 개수에 따라 달리 동작하는 것을 의미한다. 오버로딩 메소드들은 동일한 자료형과 식별자가 지정되지만 제각각의 정의를 가진다.
-
-```csharp
-using System;
-
-class Program
-{
-	static void Main(string[] args)
-    {
-        Console.WriteLine(method(1, 3));        // >> 출력: 4
-        Consoel.WriteLine(method(1.0, 3.0));    // >> 출력: -2.0
-    }
-    
-    // 오버로딩된 메소드의 정의 1
-    static double method(int arg1, int arg2) => arg1 + arg2;
-    
-    // 오버로딩된 메소드의 정의 2
-    static double method(double arg1, double arg2) => arg1 - arg2;
+/* 오버로딩된 함수 선언 2 */
+double function(double arg1, double arg2) {
+    return arg1 - arg2;
 }
+
+function(1, 3.0);      // 반환: 4.0
+function(1.0, 3.0);    // 반환: -2.0
 ```
 
 ## 진입점
-진입점(entry point)는 프로그램이 시작되는 부분을 의미하며, C# 프로그래밍 언어의 경우 `Main()` 정적 메소드에서부터 코드가 실행된다. 진입점은 호출이 존재하지 않으며, 유일해야 하므로 복수의 `Main()` 정적 메소드가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
+[진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)는 프로그램이 시작되는 부분을 의미하며, C# 프로그래밍 언어의 경우 [`Main()`](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/main-command-line) 함수에서부터 코드가 실행된다. 진입점은 반드시 `static` 키워드가 명시되어야 하며, 유일해야 하므로 복수의 `Main()` 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
 
 ```csharp
 class Program
 {
-    // 진입점: 매개변수를 가진 Main() 정적 메소드
+    /* C# 프로그래밍 언어 진입점: Main() */
     static void Main(string[] args)
     {
-    	statements;
+        
     }
 }
 ```
 
-`Main()` 진입점의 `string[] args` 매개변수는 터미널 명령창을 통해 전달된 텍스트 데이터를 문자열 배열로 받는다.
+> C# 9.0부터 소개된 [최상위 문장](#net-6-c-콘솔-프로젝트)은 이를 모두 함축시켜 스크립트를 간략하게 만든다. 최상위 문장에서 별도의 `Main()` 함수를 선언할 수 있으나 이는 절대 진입점으로 동작하지 않는다.
+
+`Main()` 진입점의 `args` 매개변수는 터미널 명령창을 통해 전달된 텍스트 데이터를 문자열 배열로 전달받는다.
 
 ```
 ./app.exe option1 option2
 ```
 
-| 전달인자   | 데이터     |
-|-----------|-----------|
-| `args[0]` | `option1` |
-| `args[1]` | `option2` |
+| 매개변수: | `argv[0]` | `argv[1]` |
+|:-------|:--------:|:----------:|
+| 데이터:   | `option1` | `option2` |
 
 ## `delegate` 자료형
 `delegate` 자료형은 특정 매개변수와 반환 자료형을 갖는 메소드를 캡슐화하는 객체를 생성한다.
