@@ -850,7 +850,7 @@ void function() {
 // return 반환문이 있는 사용자 정의 함수
 int function() {
     printf("Hello World!\n");
-    return 3;
+    return 1 + 2;
 }
     
 printf("%d\n", function());
