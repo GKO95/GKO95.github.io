@@ -923,8 +923,8 @@ void function() {
 ```cpp
 // return 반환문이 있는 사용자 정의 함수
 int function() {
-    printf("Hello World!\n");
-    return 3;
+    std::cout << "Hello World!" << std::endl;
+    return 1 + 2;
 }
     
 std::cout << function();
@@ -1020,12 +1020,12 @@ function(1.0, 3.0);		// 반환: -2.0
 
 /* 오버로딩된 함수의 정의 1 */
 float function(int arg1, float arg2) {
-	return arg1 + arg2;
+    return arg1 + arg2;
 }
 
 /* 오버로딩된 함수의 정의 2 */
 float function(float arg1, float arg2) {
-	return arg1 - arg2;
+    return arg1 - arg2;
 }
 ```
 
@@ -1090,6 +1090,73 @@ int DllMain(_In_ HINSTANCE hinstDLL,
 	return 0;
 }
 ```
+
+## 람다 표현식
+[람다 표현식](https://en.cppreference.com/w/cpp/language/lambda)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 흔히 일회용 함수로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다.
+
+| 구문                                                  |
+|:---------------------------------------------------:|
+| `[]() -> type { statements; }`                    |
+| 캡쳐 조항 `[]` 및 매개변수 `()`로 전달받은 데이터를 블록 `{}`에서 처리하여 `type` 자료형으로 반환한다 (기본 반환 자료형: `auto`). |
+
+C++ 프로그래밍 언어의 람다 표현식에는 [캡쳐 조항](https://en.cppreference.com/w/cpp/language/lambda#Lambda_capture)(capture clause) `[]`이란 독특한 성질을 갖는다. 매개변수가 정의된 람다 표현식을 호출할 때 데이터를 전달받으면, 캡쳐 조항은 람다 표현식을 정의할 때 유효범위 내에 있는 정의된 변수를 블록 `{}`으로 전달한다.
+
+1. 캡쳐 조항이 `[]`처럼 비어있다면 아무런 캡쳐가 이루어지지 않는다.
+
+    ```cpp
+   int  number = 3;
+   char letter = 'A';
+ 
+   auto lambda = [] {
+       std::cout << number;    // [C3493] 기본 캡처 모드가 지정되지 않았기  때문에 'number'을 암시 적으로 캡처 할 수 없습니다.
+       std::cout << letter;    // [C3493] 기본 캡처 모드가 지정되지 않았기  때문에 'letter'을 암시 적으로 캡처 할 수 없습니다.
+   };
+    ```
+
+2. 람다 표현식에서 사용하려는 변수명을 캡쳐 조항에 기입한다. 여기서 식별자 접두부에 앰퍼샌드 `&` 기호 존재 여부에 따라 "값에 의한 캡쳐" 혹은 "참조에 의한 캡쳐"로 구분된다.
+
+    > 자세한 내용은 C++ 프로그래밍 언어의 [참조](#참조)(reference)를 참고하도록 한다.
+
+    ```cpp
+   int  number = 3;
+   char letter = 'A';
+ 
+   /* 값에 의한 캡쳐 'number', 그리고 참조에 의한 캡쳐 'letter' */
+   auto lambda = [number, &letter] {
+       std::cout << number;
+       std::cout << letter;
+   };
+ 
+   number = 7;
+   letter = 'C';
+ 
+   lambda();                   // 출력: 3C
+    ```
+
+3. 람다 표현식이 정의된 시점까지 유효범위 내의 변수들을 모두 캡쳐할 수 있다. 여기서 첫 조항이 `[=]`이면 "값에 의한 캡쳐" 혹은 `[&]`이면 "참조에 의한 캡쳐"가 기본으로 설정된다. 만일 특정 변수의 캡쳐 방식을 달리하려면 2번에서 설명한 것처럼 별도로 식별자를 기입해야 한다.
+
+    ```cpp
+   int  number = 3;
+   char letter = 'A';
+ 
+   /* 값에 의한 캡쳐 'number', 그리고 참조에 의한 캡쳐 'letter' */
+   auto lambda = [=, &letter] {
+       std::cout << number;
+       std::cout << letter;
+   };
+
+   /* 동일:
+       auto lambda = [&, number] {
+           std::cout << number;
+           std::cout << letter;
+       };
+   */
+
+   number = 7;
+   letter = 'C';
+ 
+   lambda();                   // 출력: 3C
+    ```
 
 ## 콜백 함수
 [콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
