@@ -1260,6 +1260,22 @@ void method(string arg, Del callback)
 }
 ```
 
+## 람다 표현식
+
+> [표현식 본문 정의](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator#expression-body-definition)(expression body definition)에서도 `=>` 연산자를 사용하여 단일 표현식을 갖는 간단한 함수 선언을 간략화할 수 있다.
+>
+> * `void` 자료형 함수
+> 
+>     ```csharp
+>   void function() => Console.WriteLine("Hello World!");
+>     ```
+>
+> * 그 외의 함수
+>
+>     ```csharp
+>   int function() => 1 + 2;
+>     ```
+
 # C#: 클래스
 C# 프로그래밍 언어는 객체와 클래스를 중심으로 프로그래밍하는 *[객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming; OOP)* 기법을 사용한다. 본 장은 C# 언어에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
 
@@ -1423,6 +1439,17 @@ Error	CS0712	Cannot create an instance of the static class 'CLASS'
 ```
 
 콘솔 터미널 입출력 기능을 담당하는 `Console` 클래스가 대표적인 정적 클래스의 예시이다. 객체화가 없이도 특정 목적의 필드 및 메소드를 제공하는데 활용된다.
+
+### 정적 변수
+[정적 변수](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static)(static variable)는 프로그램이 실행되는 동안 함수를 탈출하여도 데이터가 소멸되지 않고 보존되는 `static` 키워드의 특수한 지역 변수이다. 해당 함수를 다시 호출하면 함수 종료 직전의 데이터를 그대로 이어서 사용할 수 있다. 이러한 성질로 정적 변수는 C# 프로그래밍 언어에서 [전역 변수](#지역-변수-및-전역-변수)의 대안으로 사용된다.
+
+```csharp
+void function()
+{
+    /* 정적 변수: public은 외부에서 변수 접근이 가능하도록 한다. */
+    static int variable;
+}
+```
 
 ### 정적 생성자
 정적 생성자(static constructor)는 정적 클래스의 맴버가 호출될 때마다 실행되는 메소드이다. 정적 생성자는 선택사항이며, 전달인자를 허용하지 않아 함수 오버로딩이 불가하므로 하나만 선언할 수 있다.
