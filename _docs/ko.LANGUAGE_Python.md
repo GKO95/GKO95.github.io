@@ -856,7 +856,7 @@ function()
 # return 반환문이 있는 사용자 정의 함수
 def function():
     print("Hello World!")
-    return 3
+    return 1 + 2
     
 print(function())
 ```
@@ -1072,29 +1072,18 @@ def function():
 수정될 함수로부터 가장 가까운 데코레이터가 우선적으로 적용된다. 그러므로 `function()` 함수는 먼저 `@decorator2` 다음 `@decorator1` 데코레이터 순서로 적용된다.
 
 ## 람다 표현식
-[람다 표현식](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로, 데이터를 저장하지 않고 단일 표현식으로만 값을 반환한다. 익명 함수는 `lambda` 키워드로 생성되어 흔히 일회용 함수 또는 고차 함수의 전달인자로 사용된다.
+[람다 표현식](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 단일 표현식으로만 값을 반환한다. 익명 함수는 `lambda` 키워드로 생성되어 흔히 일회용 함수 또는 고차 함수의 전달인자로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다.
 
 | 구문                                                  |
 |:---------------------------------------------------:|
 | `lambda arg1, arg2 ∶ expression`                    |
 | 익명 함수는 매개변수 `arg`와 이를 반환하는 표현식 `expression`으로 구성된다. |
 
-비록 익명 함수는 한 번만 사용되는 이름없는 함수이더라도 변수에 할당하여 언제든지 호출할 수 있다.
-
 ```python
-# (이름이 있는) 네임드 함수
-def function(arg1, arg2):
-    return 2 * arg1 + arg2
-
 # 람다 표현식
-(lambda arg1, arg2: 2 * arg1 + arg2)(2, 3)
-
-# 변수에 할당된 익명 함수
 variable = lambda arg1, arg2: 2 * arg1 + arg2
-variable(2,3)
-```
-```
-7
+
+variable(2, 3)    # 출력: 7
 ```
 
 ## 재귀 함수 
