@@ -1055,9 +1055,9 @@ C/C++ 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `i
 ./app.exe option1 option2
 ```
 
-| 매개변수: | `argc` | `argv[0]` | `argv[1]` | `argv[2]` |
-|:-------|:------:|:--------:|:----------:|:--------:|
-| 데이터:   | 3      | `./app.exe` | `option1` | `option2` |
+| 매개변수 | `argc` | `argv[0]` | `argv[1]` | `argv[2]` |
+|:-------:|:------:|:--------:|:----------:|:--------:|
+| 데이터   | 3      | `./app.exe` | `option1` | `option2` |
 
 ### `WinMain()` 함수
 [`WinMain()`](https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain) 함수는 [Win32](https://ko.wikipedia.org/wiki/윈도우_API) 또는 [MFC](/docs/ko.MFC)와 같은 GUI 프레임워크 어플리케이션의 진입점이다. 본 진입점의 핵심은 마우스 클릭이나 키보드 입력 등으로 발생된 메시지를 수신받아 이를 처리할 함수로 전달하는 [메시지 루프](https://ko.wikipedia.org/wiki/이벤트_루프)(Message Loop)에 있다.
