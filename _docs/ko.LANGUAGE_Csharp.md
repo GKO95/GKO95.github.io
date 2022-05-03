@@ -1205,60 +1205,9 @@ class Program
 ./app.exe option1 option2
 ```
 
-| 매개변수: | `argv[0]` | `argv[1]` |
-|:-------|:--------:|:----------:|
-| 데이터:   | `option1` | `option2` |
-
-## `delegate` 자료형
-`delegate` 자료형은 특정 매개변수와 반환 자료형을 갖는 메소드를 캡슐화하는 객체를 생성한다.
-
-> C/C++ 프로그래밍 언어에 비교하면 [함수 포인터](/docs/ko.Cpp#함수-포인터)와 동일한 역할을 한다.
-
-아래는 하나의 문자열 매개변수와 보이드를 반환하는 메소드를 위임(delegate)받을 수 있는 `delegate` 대리자를 객체화하는 예시 코드이다.
-
-```csharp
-/* delegate 선언 */
-delegate void Del(string arg);
-```
-
-`delegate` 객체는 언제든지 다른 메소드를 할당받아 캡슐화할 수 있다. 아래 예시 코드는 `static` 한정자가 있는 정적 메소드만을 보여주고 있지만, 일반 메소드도 `delegate` 객체에서 캡슐화할 수 있다.
-
-```csharp
-static void Main(string[] args)
-{
-    // method1 캡슐화
-    Del handle = method1;
-    handle("Hello World!");
-
-    // method2 캡슐화
-    handle = method2;
-    handle("Hello World!");
-}
-
-static void method1(string arg)
-{
-    Console.WriteLine(arg.ToUpper());
-}
-
-static void method2(string arg)
-{
-    Console.WriteLine(arg.ToLower());
-}
-```
-```
-HELLO WORLD!
-hello world!
-```
-
-### 콜백 메소드
-[콜백 메소드](/docs/ko.Cpp#콜백-함수)(callback method)는 인자로 전달되는 메소드이다. 콜백 메소드를 전달받는 메소드, 일명 호출 메소드(calling method)는 코드 블록 내에서 매개변수 호출을 통해 콜백 메소드를 실행한다. `delegate` 자료형을 매개변수로 사용하여 콜백 메소드를 구현할 수 있다.
-
-```csharp
-void method(string arg, Del callback)
-{
-    callback(arg);
-}
-```
+| 매개변수 | `args[0]` | `args[1]` |
+|:-------:|:--------:|:----------:|
+| 데이터   | `option1` | `option2` |
 
 ## 람다 표현식
 
@@ -1275,6 +1224,70 @@ void method(string arg, Del callback)
 >     ```csharp
 >   int function() => 1 + 2;
 >     ```
+
+## `delegate` 자료형
+[`delegate`](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/) 키워드는 특정 매개변수 및 반환 자료형의 함수를 참조하는 자료형이다. 다시 말해, 함수 자체를 저장하여 호출(invoke)할 수 있는 변수의 "자료형"을 선언하는데 사용된다. 다음은 한 개의 문자열 매개변수를 가지며 반환 자료형이 없는 함수를 위임(delegate)받을 수 있는 자료형을 지정한다.
+
+```csharp
+/* delegate 자료형 선언 */
+delegate void Del(string arg);
+```
+
+`delegate` 자료형은 지정된 매개변수 및 반환 자료형의 함수만을 위임받을 수 있으며, 그 외에는 컴파일 오류가 발생한다. 해당 자료형의 변수는 언제든지 다른 함수를 할당받아 호출할 수 있다.
+
+> 종합하자면 C/C++ 프로그래밍 언어의 [함수 포인터](/docs/ko.C#함수-포인터)와 동일한 역할을 수행한다. 다만, 함수 포인터는 해당 함수만을 참조한다면 `delegate` 자료형은 함수가 속해있는 객체를 함께 캡슐화한다.
+
+```csharp
+void function1(string arg)
+{
+    Console.WriteLine(arg.ToUpper());
+}
+
+void function2(string arg)
+{
+    Console.WriteLine(arg.ToLower());
+}
+
+Del handle;
+
+handle = function1;
+handle("Hello World!");    // 출력: HELLO WORLD!
+
+handle = function2;
+handle("Hello World!");    // 출력: hello world!
+
+/* delegate 자료형 선언 */
+delegate void Del(string arg);
+```
+
+### 콜백 함수
+[콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
+
+> 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
+
+아래는 `delegate` 자료형을 사용한 콜백 함수의 예시이다.
+
+```csharp
+/* 호출 함수 */
+double calling(Del function, int arg)
+{
+    // 콜백 함수의 호출
+    return function(arg, 3.14159);
+}
+
+/* 콜백 함수 */
+double callback(int arg1, double arg2)
+{
+    return (double)arg1 + arg2;
+}
+
+Console.WriteLine(calling(callback, 1));
+
+delegate double Del(int arg1, double arg2);
+```
+```
+4.141590
+```
 
 # C#: 클래스
 C# 프로그래밍 언어는 객체와 클래스를 중심으로 프로그래밍하는 *[객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming; OOP)* 기법을 사용한다. 본 장은 C# 언어에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
