@@ -1325,122 +1325,102 @@ int factorial(int num) {
 ```
 
 # C#: 클래스
-C# 프로그래밍 언어는 객체와 클래스를 중심으로 프로그래밍하는 *[객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming; OOP)* 기법을 사용한다. 본 장은 C# 언어에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
+[클래스](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/classes)(class)는 객체를 생성하는데 사용자 정의 자료형이다.
 
-## 객체
-객체(object 혹은 instance)는 데이터를 저장할 수 있는 필드(field)와 데이터를 처리 할 수 있는 메소드(method)를 하나의 데이터로 캡슐화한 데이터이다.
+> 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수를 통틀어 맴버(member)라고 칭하는데, 이들은 각각 필드(field; 맴버 변수)과 메소드(method; 맴버 함수)라고 불리며 다음과 같이 접근한다.
+>
+> * **필드**: `instance.field`
+> * **메소드**: `instance.method()`
+>
+> 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 배열 및 벡터가 있다.
+>
+> ```csharp
+> List<int> variable = new() {0, 3, 5, 9};
+> Console.WriteLine(variable.IndexOf(5));
+> // "variable" 리스트 객체의 "IndexOf()" 메소드를 사용하여 값 5를 갖는 요소의 인덱스를 반환한다.
+> ```
 
-| 맴버   | 구문              | 설명                                                                                 |
-|:----------:|---------------------|---------------------------------------------------------------------------------------------|
-| 필드    | `object.field`      | 클래스 및 객체에서 데이터를 저장하는 변수를 지칭한다; 메소드의 매개변수 및 지역변수는 필드가 아니다. |
-| 메소드   | `object.method()`   | 클래스 및 객체에서 데이터를 처리하거나 역할을 한다; 메소드에 따라 인자를 전달받거나 데이터를 반환할 수 있다. |
-| 프로퍼티 | `object.property()` | 클래스 및 객체의 필드 값을 간접적으로 반환하는 메소드를 지칭한다; 필드를 직접 접근하지 않으므로, 필드의 값이 의도치 않게 변경되는 것을 방지한다. |
+클래스는 `class` 키워드를 사용하여 속성 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
-```csharp
-string variable = "Hello World!";
-System.Console.WriteLine(variable.Length);
-// "variable"이란 이름을 가진 문자열 객체의 "Length" 필드를 사용하여 값 널 문자를 제외한 총 문자 개수를 반환한다.
-```
-```
-12
-```
-
-## 캡슐화
-캡슐화(encapsulation)는 객체의 핵심 개념으로 아래의 특성을 가진다:
-
-1. 변수와 함수를 하나의 객체로 결합한다.
-2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
-
-## 클래스
-클래스(class)는 객체를 생성하는데 사용된다. 클래스는 `class` 키워드를 사용하여 정의되며, 클래스 내부에는 객체의 필드와 메소드가 되는 변수와 함수를 정의한다. 클래스로부터 객체를 생성하는 절차를 *객체화(instantiation)*라고 한다. 아래는 `class` 키워드를 사용하여 제작한 사용자 정의 클래스의 간단한 예시 중 하나이다.
+1. 변수와 함수가 하나의 객체로 결합된다.
+2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
 
 ```csharp
-/* 클래스 생성하기 */
-class CLASS
-{
-    public int field1 = 1;
-    public double field2 = 3.0;
+CLASS instance = new CLASS();
+
+Console.WriteLine(instance.field1);       // 출력: 2
+Console.WriteLine(instance.method(1));    // 출력: 4
+
+/* 클래스 선언 */
+class CLASS {
+
+    /* 필드 맴버 */
+    public int    field1 = 2;
+    public double field2 = 3.14;
     
-    public double method(int arg) => field1 + field2 - arg;
-}
+    /* 메소드 맴버 */
+    public int method() {
+        return field1 * field2;
+    }
 
-class Program
-{
-    static void Main(string[] args)
-    {
-    	// 객체화
-        CLASS instance = new CLASS();
-
-        // 그러므로...
-        instance.field1;       // >> 출력: 1
-        instance.field2;       // >> 출력: 3.0
-        instance.method(2);    // >> 출력: 2.0 (= 1 + 3.0 - 2)
+    /* 메소드 맴버 (오버로딩) */
+    public int method(int arg) {
+        return field1 + field2 - arg;
     }
 }
 ```
 
-### 생성자
-생성자(constructor)는 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 메소드이다. 비록 생성자는 선택사항이지만, 만일 생성자를 정의한다면 메소드의 이름은 클래스 식별자와 동일해야 하며 객체화 과정에서 객체로 전달할 인자의 자료형과 개수를 결정해야 한다. 반환 자료형은 `void`로 고정되어 있어 자료형 지정을 하지 않는다. 생성자는 흔히 객체화 단계에서 맴버 필드를 초기화하는 용도로 사용된다.
+### 접근 한정자
+[접근 한정자](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/access-modifiers)(access modifier)는 외부 코드 및 [상속](#상속)으로부터 맴버 접근 권한을 지정한다.
+
+| 키워드     | 설명                                                  |
+| ----------- | ------------------------------------------------------------ |
+| `public`    | 클래스 외부 코드로부터 맴버 접근이 자유롭다.      |
+| `private`   | 클래스 내부에서만 맴버 접근이 가능하다; `class` 키워드의 기본 접근 한정자이다.   |
+| `protected` | 맴버 접근이 가능한 외부 코드가 해당 클래스로부터 상속된 파생 클래스로 제한된다. |
+| `internal`  | 맴버 접근이 가능한 외부 코드가 해당 클래스가 속한 [어셈블리](#어셈블리)로 제한된다. | 
+
+## 생성자
+[생성자](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constructors)(constructor)는 객체화마다 자동으로 실행되는 특수한 `void` 자료형 메소드이다. 비록 생성자는 선택사항이지만, 선언한다면 반드시 클래스명과 동일해야 한다. 외부 코드로부터 객체화되기 때문에 생성자를 `public` 혹은 `internal` 접근 한정자로 설정한다. 흔히 객체화 단계에서 맴버들을 초기화하는 용도로 사용된다.
 
 ```csharp
-/* 클래스 생성하기 */
+CLASS instance = new CLASS();
+
+/* 클래스 선언 */
 class CLASS
 {
-    /* 생성자 */
+    /* 생성자: 맴버 초기화 */
     public CLASS(int arg1, double arg2)
     {
         field1 = arg1;
         field2 = arg2;
-    }
-    
-    public int field1 = 1;
-    public double field2 = 3.0;
-    
-    public double method(int arg) => field1 + field2 - arg;
-}
 
-class Program
-{
-    static void Main(string[] args)
-    {
-        // 객체화
-        CLASS instance = new CLASS(1, 3.0);
+        statements;
     }
+
+    private int    field1;
+    private double field2;
 }
 ```
 
-만일 생성자가 전달인자를 받도록 정의되었으면 반드시 소괄호 `()`를 통해 값을 전달하도록 한다. 단, 클래스에 정의된 생성자가 없거나 혹은 생성자가 전달인자를 받지 않을 때에는 소괄호를 사용하지 않는다. 메소드 오버로딩에 의해 여러 생성자를 정의할 수 있다.
+생성자는 오버로딩될 수 있어 한 개 이상이 정의될 수 있다. 그 중에서 아무런 전달인자를 받지 않는 생성자를 기본 생성자(default constructor)라고 칭한다.
 
 ### 종료자
-종료자(finalizer), 혹은 소멸자(destructor)는 객체가 메모리에서 할당 해제되어 소멸되기 직전에 자동적으로 실행되는 특수한 메소드이다. 비록 소멸자는 선택사항이지만, 만일 소멸자를 정의한다면 메소드의 이름은 클래스 식별자와 동일하되 물결표 `~`를 접두사로 가져야 한다. 반환 자료형은 `void`로 고정되어 있어 자료형 지정을 하지 않는다.
+[종료자](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/finalizers)(finalizer), 혹은 소멸자(destructor)는 객체가 메모리로부터 소멸되기 직전에 자동으로 실행되는 특수한 `void` 자료형 메소드이다. 비록 종료자는 선택사항이지만, 선언한다면 접두부에는 물결표 `~`와 함께 반드시 클래스명과 동일해야 한다. 종료자에는 접근 한정자가 설정될 수 없다.
 
 ```csharp
-/* 클래스 생성하기 */
-class CLASS
-{
-    /* 종료자 */
+/* 클래스 선언 */
+class CLASS {
+
+    /* 소멸자 */
     ~CLASS()
     {
-        statements
-    }
-    
-    public int field1 = 1;
-    public double field2 = 3.0;
-    
-    public double method(int arg) => field1 + field2 - arg;
-}
-
-class Program
-{
-    static void Main(string[] args)
-    {
-        // 객체화
-        CLASS instance = new CLASS(1, 3.0);
+    	statements;
     }
 }
 ```
 
-소멸자는 전달인자를 허용하지 않아 메소드 오버로딩이 불가하므로 하나만 정의될 수 있다.
+소멸자는 매개변수를 가질 수 없으므로 오버로딩될 수 없다. 그러므로 클래스는 오로지 하나의 소멸자만 정의할 수 있다.
 
 ### `this` 키워드
 `this` 키워드는 객체 스스로를 가리키는 연산자이며 객체 내의 필드와 메소드 등의 맴버 접근이 가능하다.
@@ -1615,16 +1595,6 @@ static class CLASS
    }
    */
     ```
-
-### 접근 한정자
-접근 한정자(access modifier)는 외부로부터 클래스 맴버에 접근할 수 있는 권한을 지정한다. C# 프로그래밍 언어에는 네 가지의 접근 한정자가 존재한다.
-
-| 키워드     | 설명                                                |
-|:-----------:| ------------------------------------------------------------ |
-| `public`    | 클래스 외부에서도 접근이 가능하다. |
-| `private`   | 클래스 내에서만 접근이 가능하다 (기본값). |
-| `protected` | 파생 클래스는 접근할 수 있으나, 여전히 클래스 외부에서는 접근할 수 없다 ([상속](#상속) 부문 참조). |
-| `internal`  | 클래스 외부에서도 접근이 가능하나, 해당 어셈블리 내에서만 한정되어 있다 (타 어셈블리 접근 불가).                         |
 
 ## 상속
 상속(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 맴버 필드와 메소드를 제공하는 행위이다. 기반 클래스와 파생 클래스에 동일한 이름의 필드와 메소드가 존재할 경우, 기반 클래스의 필드와 메소드는 파생 클래스에 의해 묻힌다. 그러나 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 없다. 오로지 한 기반 클래스로부터만 파생될 수 있다. 여러 기반 클래스로부터 동시에 상속받기 위해서는 [인터페이스](#인터페이스)를 참고한다.
