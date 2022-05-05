@@ -1091,6 +1091,31 @@ int DllMain(_In_ HINSTANCE hinstDLL,
 }
 ```
 
+## 콜백 함수
+[콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
+
+> 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
+
+아래는 콜백 함수의 예시이며, 이에 대한 자세한 원리는 차후 [함수 포인터](#함수-포인터)에서 설명한다.
+
+```cpp
+/* 호출 함수 */
+float calling(float (*function)(int, float), int arg) {
+    // 콜백 함수의 호출
+    return function(arg, 3.14159);
+}
+
+/* 콜백 함수 */
+float callback(int arg1, float arg2) {
+    return (float)arg1 + arg2;
+}
+
+std::cout << calling(callback, 1);
+```
+```
+4.141590
+```
+
 ## 람다 표현식
 [람다 표현식](https://en.cppreference.com/w/cpp/language/lambda)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 흔히 일회용 함수로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다.
 
@@ -1157,31 +1182,6 @@ C++ 프로그래밍 언어의 람다 표현식에는 [캡쳐 조항](https://en.
  
    lambda();                   // 출력: 3C
     ```
-
-## 콜백 함수
-[콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
-
-> 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
-
-아래는 콜백 함수의 예시이며, 이에 대한 자세한 원리는 차후 [함수 포인터](#함수-포인터)에서 설명한다.
-
-```cpp
-/* 호출 함수 */
-float calling(float (*function)(int, float), int arg) {
-    // 콜백 함수의 호출
-    return function(arg, 3.14159);
-}
-
-/* 콜백 함수 */
-float callback(int arg1, float arg2) {
-    return (float)arg1 + arg2;
-}
-
-std::cout << calling(callback, 1);
-```
-```
-4.141590
-```
 
 ## 재귀 함수
 [재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
