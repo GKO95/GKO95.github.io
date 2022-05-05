@@ -1209,24 +1209,8 @@ class Program
 |:-------:|:--------:|:----------:|
 | 데이터   | `option1` | `option2` |
 
-## 람다 표현식
-
-> [표현식 본문 정의](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator#expression-body-definition)(expression body definition)에서도 `=>` 연산자를 사용하여 단일 표현식을 갖는 간단한 함수 선언을 간략화할 수 있다.
->
-> * `void` 자료형 함수
-> 
->     ```csharp
->   void function() => Console.WriteLine("Hello World!");
->     ```
->
-> * 그 외의 함수
->
->     ```csharp
->   int function() => 1 + 2;
->     ```
-
 ## `delegate` 자료형
-[`delegate`](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/) 키워드는 특정 매개변수 및 반환 자료형의 함수를 참조하는 자료형이다. 다시 말해, 함수 자체를 저장하여 호출(invoke)할 수 있는 변수의 "자료형"을 선언하는데 사용된다. 다음은 한 개의 문자열 매개변수를 가지며 반환 자료형이 없는 함수를 위임(delegate)받을 수 있는 자료형을 지정한다.
+[`delegate`](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/delegates/) 키워드, 일명 대리자(delegate)는 특정 매개변수 및 반환 자료형의 함수를 참조하는 자료형이다. 다시 말해, 함수 자체를 저장하여 호출(invoke)할 수 있는 변수의 "자료형"을 선언하는데 사용된다. 다음은 한 개의 문자열 매개변수를 가지며 반환 자료형이 없는 함수를 위임받을 수 있는 자료형을 지정한다.
 
 ```csharp
 /* delegate 자료형 선언 */
@@ -1287,6 +1271,43 @@ delegate double Del(int arg1, double arg2);
 ```
 ```
 4.141590
+```
+
+## 람다 표현식
+[람다 표현식](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 흔히 일회용 함수로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다. [람다 연산자](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator#lambda-operator) [`=>`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator)를 통해 선언되지만 그 유형은 크게 두 가지로 나뉘어진다.
+
+* **[표현식 람다](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions#expression-lambdas)(expression lambda)**
+
+    람다 연산자 `=>` 이후에 [표현식](#표현식)이 위치하면 평가된 값 혹은 데이터가 반환된다.
+
+    ```csharp
+  () => expression;
+    ```
+
+* **[문장 람다](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions#statement-lambdas)(statement lambda)**
+
+    람다 연산자 `=>` 이후에 [문장](#표현식)이 위치하면 중괄호 `{}` 안에 문장들이 실행된다. 단일 문장일 경우 중괄호를 생략할 수 있으며, [`return`](#return-반환문) 문으로 값 혹은 데이터를 반환할 수 있다.
+
+    ```csharp
+  () => { statements; }
+    ```
+
+> 람다 연산자로 사용된 `=>` 토큰은 그 외에도 표현식 혹은 단일 문장을 갖는 간단한 함수 선언을 간략화하는 [표현식 본문 정의](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator#expression-body-definition)(expression body definition)에도 활용된다.
+> 
+> ```csharp
+> void function() => Console.WriteLine("Hello World!");
+> ```
+
+람다 표현식을 수용할 수 있는 대리자는 데이터 반환 여부에 따라 [`Func<T, TResult>`](https://docs.microsoft.com/en-us/dotnet/api/system.func-2) 혹은 [`Action<T1, T2>`](https://docs.microsoft.com/en-us/dotnet/api/system.action-2)를 사용할 수 있으며, 이들은 간편히 [`var`](#자료형) 자료형으로 컴파일러에서 자동 결정하도록 하는 것도 방법이다.
+
+```csharp
+var lambda = (int arg1, char arg2) => $"{arg1}, {arg2}";
+
+/* 동일:
+    Func<int, char, string> lambda = (arg1, arg2) => $"{arg1}, {arg2}";
+*/
+
+Console.WriteLine(lambda(3, 'A'));    // 출력: 3, A
 ```
 
 # C#: 클래스
