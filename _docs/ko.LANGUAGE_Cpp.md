@@ -1382,7 +1382,7 @@ for (int index = 0; index < sizeof(variable); index++) {
 > ```cpp
 > std::array<int, 4> variable = {0, 3, 5, 9};
 > std::cout << variable.at(2);
-> // variable이란 배열 객체의 "at()" 메소드를 사용하여 2 번째 인덱스 요소의 값을 반환한다.
+> // "variable" 배열 객체의 "at()" 메소드를 사용하여 2 번째 인덱스 요소의 값을 반환한다.
 > ```
 
 일반적으로 클래스는 `class` 키워드를 사용하여 필드 및 메소드와 함께 정의되는데, `struct` 혹은 `union` 키워드로도 정의될 수 있으나 성질 차이가 존재하며 자세한 내용은 [PDS](#c-사용자-정의-자료형)에서 다룰 예정이다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
@@ -1525,7 +1525,8 @@ public:
 
 ```cpp
 /* 클래스 정의 */
-struct CLASS {
+class CLASS {
+public:
 
     /* 소멸자 */
     ~CLASS() {
