@@ -1310,6 +1310,20 @@ var lambda = (int arg1, char arg2) => $"{arg1}, {arg2}";
 Console.WriteLine(lambda(3, 'A'));    // 출력: 3, A
 ```
 
+## 재귀 함수
+[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
+
+```csharp
+/* 예제: 펙토리얼 "!" */
+int factorial(int num) {
+    // 기저 조건: 재귀로부터 탈출하는 조건
+    if (num == 1)
+        return (1);
+    else
+        return (num * factorial(num-1));
+}
+```
+
 # C#: 클래스
 C# 프로그래밍 언어는 객체와 클래스를 중심으로 프로그래밍하는 *[객체지향 프로그래밍](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented programming; OOP)* 기법을 사용한다. 본 장은 C# 언어에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 클래스의 생성 및 사용 방법에 대하여 소개한다.
 
