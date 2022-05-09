@@ -365,12 +365,25 @@ char variable2 = 75;    // variable2에는 문자 'K'가 저장
 거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
 
 ### 상수
-[상수](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/const)(constant)는 한 번 데이터를 할당한 후 변경할 수 없는 특별한 변수이며, `const` 키워드와 함께 정의한다.
+상수(constant)는 한 번 데이터를 할당한 후 변경할 수 없는 특별한 변수이며, `const` 혹은 `readonly` 키워드와 함께 선언된다.
 
-```csharp
-/* 상수 선언 */
-const int variable = 3;
-```
+* **[`const`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/const) 한정자**
+
+    초기화 이후 변동이 불가한 [정적](#정적-맴버) 상수(static constant) 맴버를 선언한다. 컴파일 상수이므로 선언 당시에 초기화되지 않으면 컴파일 오류가 발생한다.
+
+    ```csharp
+  /* const 컴파일 상수 선언 */
+  const int variable = 3;
+    ```
+
+* **[`readonly`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/readonly) 한정자**
+
+    초기화 이후 변동이 불가한 [비정적](#정적-맴버) 비완전상수(non-static semi-constant) 맴버를 선언한다. 런타임 상수이므로 [생성자](#생성자)를 통한 유연한 초기화가 허용된다.
+
+    ```csharp
+  /* readonly 런타임 상수 선언 */
+  readonly int variable = 3;
+    ```
 
 ### 지역 변수 및 전역 변수
 C# 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되었는지에 따라 두 가지의 종류로 구분된다.
@@ -1184,7 +1197,7 @@ function(1.0, 3.0);    // 반환: -2.0
 ```
 
 ## 진입점
-[진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)는 프로그램이 시작되는 부분을 의미하며, C# 프로그래밍 언어의 경우 [`Main()`](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/main-command-line) 함수에서부터 코드가 실행된다. 진입점은 반드시 `static` 키워드가 명시되어야 하며, 유일해야 하므로 복수의 `Main()` 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
+[진입점](https://ko.wikipedia.org/wiki/엔트리_포인트)(entry point)는 프로그램이 시작되는 부분을 의미하며, C# 프로그래밍 언어의 경우 [`Main()`](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/program-structure/main-command-line) 함수에서부터 코드가 실행된다. 진입점은 반드시 [`static`](#정적-맴버) 키워드가 명시되어야 하며, 유일해야 하므로 복수의 `Main()` 함수가 존재하거나 찾지 못하면 요류가 발생하여 컴파일이 불가하다.
 
 ```csharp
 class Program
@@ -1422,408 +1435,286 @@ class CLASS {
 
 소멸자는 매개변수를 가질 수 없으므로 오버로딩될 수 없다. 그러므로 클래스는 오로지 하나의 소멸자만 정의할 수 있다.
 
-### `this` 키워드
-`this` 키워드는 객체 스스로를 가리키는 연산자이며 객체 내의 필드와 메소드 등의 맴버 접근이 가능하다.
+## `this` 키워드
+[`this`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/this) 키워드는 객체가 자신의 메모리 주소를 반환하는데 사용된다. 객체의 [비정적](#정적-맴버)(non-static) 메소드로부터 자신의 맴버 호출을 `this->` 표현식으로 명시적으로 나타낼 수 있어, 흔히 필드 맴버를 매개변수 또는 지역변수와 구분짓는데 활용된다.
 
 ```csharp
-/* 클래스 생성 */
-class CLASS{
-    private int field;
+/* 클래스 선언 */
+class CLASS {
+
+    /* 필드 맴버 */
+    public int    field1 = 2;
+    public double field2 = 3.14;
     
-    public int method() => this.field;
-}
-```
+    /* 메소드 맴버 */
+    public int method() {
+        return this.field1 * this.field2;
+    }
 
-## 정적 클래스
-클래스 내의 정의된 맴버들은 객체화를 거친 이후에서만 접근할 수 있으며, 다시 말해 클래스 자체가 접근할 수 없다. `static` 키워드로 정적 클래스(static class)를 선언하면 객체화 없이 클래스 내에 정의된 맴버를 접근할 수 있다. 그러나 정적 클래스는 오로지 정적 맴버만 가질 수 있기 때문에 객체화가 불가하다.
-
-```csharp
-/* 정적 클래스 생성 */
-static class CLASS
-{
-    public static int field1 = 1;
-    public static double field2 = 3.0;
-    
-    public static double method(int arg) => field1 + field2 - arg;
-}
-
-class Program
-{
-    static void Main(string[] args)
-    {
-        // 그러므로...
-        CLASS.field1;       // >> 출력: 1
-        CLASS.field2;       // >> 출력: 3.0
-        CLASS.method(2);    // >> 출력: 2.0 (= 1 + 3.0 - 2)
-        
-        // 객체화: 오류!
-        CLASS instance = new CLASS();
+    /* 메소드 맴버 (오버로딩) */
+    public int method(int arg) {
+        return this.field1 + this.field2 - arg;
     }
 }
 ```
-```
-Error	CS0723	Cannot declare a variable of static type 'CLASS'
-Error	CS0712	Cannot create an instance of the static class 'CLASS'
-```
 
-콘솔 터미널 입출력 기능을 담당하는 `Console` 클래스가 대표적인 정적 클래스의 예시이다. 객체화가 없이도 특정 목적의 필드 및 메소드를 제공하는데 활용된다.
+## 정적 맴버
+[정적 맴버](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members#static-members)(static member)는 클래스로부터 생성된 객체의 개수와 무관하게 오로지 하나의 데이터만 존재하여 공유되는 [`static`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static) 키워드로 명시된 맴버이다. 해당 유형의 맴버는 객체화가 필요없이 클래스로부터 직접 호출이 가능하다.
 
-### 정적 변수
-[정적 변수](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static)(static variable)는 프로그램이 실행되는 동안 함수를 탈출하여도 데이터가 소멸되지 않고 보존되는 `static` 키워드의 특수한 지역 변수이다. 해당 함수를 다시 호출하면 함수 종료 직전의 데이터를 그대로 이어서 사용할 수 있다. 이러한 성질로 정적 변수는 C# 프로그래밍 언어에서 [전역 변수](#지역-변수-및-전역-변수)의 대안으로 사용된다.
+> 파이썬 프로그래밍 언어와 비교하자면 [클래스 속성 및 메소드](/docs/ko.Python/#클래스-속성-및-메소드)에 대응한다.
+
+객체지향에 해당하는 C# 프로그래밍 언어는 정적 필드 맴버가 [전역 변수](#지역-변수-및-전역-변수)의 대안으로 사용된다.
 
 ```csharp
-void function()
+Console.WriteLine(CLASS.field);       // 출력: 7
+
+/* 클래스 객체화 */
+CLASS instance = new CLASS();
+CLASS.method(2);
+
+Console.WriteLine(instance.field);    // 출력: 9
+
+/* 클래스 선언 */
+class CLASS
 {
-    /* 정적 변수: public은 외부에서 변수 접근이 가능하도록 한다. */
-    static int variable;
+    /* 정적 필드 선언 */
+    public static int field = 7;
+
+    /* 정적 메소드 선언 */
+    public static void method(int arg) => CLASS.field += arg;
+}
+```
+
+### 정적 클래스
+[정적 클래스](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members)(static class)는 정적 맴버만을 가지는 객체화가 불가한 클래스이다. 해당 유형의 클래스는 객체를 생성하기보다 유사한 목적의 기능성과 데이터를 하나로 묶는 역할을 한다. 이는 사실상 일반 클래스를 전부 정적 맴버로 선언하는 것과 동일하지만, 정적 클래스를 사용하므로써 불필요한 객체의 생성을 방지할 수 있다. 대표적인 예시로 터미널 입출력 등을 제공하는 [`System.Console`](https://docs.microsoft.com/en-us/dotnet/api/system.console) 클래스가 있다.
+
+```csharp
+/* 클래스 객체화 */
+CLASS instance = new CLASS();    // [CS0712] Cannot create an instance of the static class 'CLASS'
+
+/* 정적 클래스 선언 */
+static class CLASS
+{
+    public static int field = 7;
+
+    public static void method(int arg) => CLASS.field += arg;
 }
 ```
 
 ### 정적 생성자
-정적 생성자(static constructor)는 정적 클래스의 맴버가 호출될 때마다 실행되는 메소드이다. 정적 생성자는 선택사항이며, 전달인자를 허용하지 않아 함수 오버로딩이 불가하므로 하나만 선언할 수 있다.
+[정적 생성자](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-constructors)(static constructor)는 정적 클래스의 맴버가 호출될 때마다 실행되는 생성자이다. 정적 생성자는 선택사항이며, 매개변수를 가질 수 없으므로 오버로딩될 수 없다. 그러므로 정적 클래스는 오로지 하나의 정적 생성자만 선언할 수 있다.
 
 ```csharp
-/* 정적 클래스 생성 */
+/* 정적 클래스 선언 */
 static class CLASS
 {
-    /* 정적 생성자 */
+    /* 정적 생성자 선언 */
     public static CLASS()
     {
         statements;
     }
-    
-    public static int field1 = 1;
-    public static double field2 = 3.0;
-    
-    public static double method(int arg) => field1 + field2 - arg;
 }
 ```
-
-## 한정자
-한정자(modifier)는 객체 맴버를 선언할 때 성질을 지정하기 위해 사용된다.
-
-1. **`static` 한정자**
-
-    객체화 없이 클래스에서 바로 접근할 수 있는 정적 맴버, 혹은 정적 맴버만을 가지는 정적 클래스를 선언하는데 사용된다.
-
-    ```csharp
-   /* 정적 필드 */
-   static int field = 3;
-     
-   /* 정적 메소드 */
-   static void method()
-   { 
-       statements;
-   }
-    ```
-
-2. **`const` 한정자**
-
-    초기화 이후 값 변동이 불가한 정적 상수(constant) 필드를 선언하는데 사용된다. 해당 맴버는 반드시 선언 시 초기화가 되어야 하며, 그렇지 않으면 컴파일 오류가 발생한다.
-
-    ```csharp
-   /* (정적) 상수 필드 */
-   const int field = 3;
-    ```
-
-3. **`readonly` 한정자**
-
-    초기화 이후 값 변동이 불가한 비정적(non-static) 비완전상수(semi-constant) 필드를 선언하는데 사용된다. 해당 맴버는 선언 단계는 물론, 생성자를 통해서도 초기화가 될 수 있다.
-
-    ```csharp
-   // (비정적) 읽기전용 필드
-   readonly int field;
-    ```
-
-4. **`sealed` 한정자**
-    
-    기반 클래스 혹은 기반 클래스의 맴버에 사용되어 파생 클래스가 상속받지 못하도록 제한하는 한정자이다.
-
-    ```csharp
-   // 봉인 필드
-   sealed int field;
-    ```
-
-5. **`virtual` 및 `override` 한정자**
-
-    오버라이딩을 위해 사용되는 한정자 쌍이다: `virtual` 한정자는 기반 클래스의 맴버가 오버라이딩 될 수 있도록 하며, `override` 한정자는 파생 클래스가 해당 맴버를 오버라이딩 할 수 있도록 한다.
-
-    ```csharp
-   // 가상 메소드
-   virtual void method()
-   {
-       statements;
-   }
-   
-   // 오버라이드 메소드
-   override void method()
-   {
-       statements; 
-   }
-    ```
-
-6. **`abstract` 한정자**
-
-    코드 블록 없는 가상 메소드를 선언하는데 사용되는 한정자이다. 해당 한정자는 메소드 이외에도 클래스 자체에도 사용할 수 있다.
-
-    ```csharp
-   // 추상 메소드
-   abstract void method();
-    ```
-
-7. **`partial` 한정자**
-
-    클래스 또는 메소드를 분할하여 정의하는데 사용되는 한정자이다.
-
-    ```csharp
-   // 분할 클래스
-   partial class CLASS
-   {
-       void method1();
-   }
-   
-   partial class CLASS
-   {
-       void method2();
-   }
-   
-   /* 동일:
-   class CLASS
-   {
-       void method1();
-       void method2();
-   }
-   */
-    ```
 
 ## 상속
-상속(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 맴버 필드와 메소드를 제공하는 행위이다. 기반 클래스와 파생 클래스에 동일한 이름의 필드와 메소드가 존재할 경우, 기반 클래스의 필드와 메소드는 파생 클래스에 의해 묻힌다. 그러나 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 없다. 오로지 한 기반 클래스로부터만 파생될 수 있다. 여러 기반 클래스로부터 동시에 상속받기 위해서는 [인터페이스](#인터페이스)를 참고한다.
+[상속](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/inheritance)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 필드 및 메소드 맴버를 제공하는 행위이다. 기반 클래스와 파생 클래스에 동일한 이름의 맴버가 존재할 경우, 기반 클래스의 맴버는 파생 클래스에 의해 묻힌다. 파생 클래스는 여러 기반 클래스로부터 동시에 상속받을 수 없는 대신, 대안으로 [인터페이스](#인터페이스)를 사용할 수 있다.
 
 ```csharp
-using System;
+/* 클래스 객체화 */
+DERIVEDCLASS instance = new DERIVEDCLASS();
 
-/* 기반 클래스 생성 */
+Console.WriteLine("{0} {1} {2}", instance.field1, instance.field2, instance.field3);
+Console.WriteLine(instance.method(2, 3));
+
+/* 기반 클래스 선언 */
 class BASECLASS
 {
-    public BASECLASS() { Console.WriteLine("기반 클래스 생성자"); }
-    ~BASECLASS() { Console.WriteLine("기반 클래스 종료자"); }
-    
-    public int field1 = 1;
-    public double field2 = 3.0;
+    public BASECLASS() => Console.WriteLine("생성자: 기반 클래스");
+    ~BASECLASS()       => Console.WriteLine("종료자: 기반 클래스");
+
+    public int    field1 = 3;
+    public string field2 = "C#";
+
+    public int method(int arg1, int arg2) => arg1 + arg2;
 }
 
-/* 파생 클래스 생성 */
-class DERIVEDCLASS
-    : BASECLASS
+/* 파생 클래스 선언 */
+class DERIVEDCLASS : BASECLASS
 {
-    public DERIVEDCLASS() { Console.WriteLine("파생 클래스 생성자"); }
-    ~DERIVEDCLASS() { Console.WriteLine("파생 클래스 종료자"); }
-    
-    public double field2 = 7.0;
-    public char field3 = 'A';
-}
+    public DERIVEDCLASS() => Console.WriteLine("생성자: 파생 클래스");
+    ~DERIVEDCLASS()       => Console.WriteLine("종료자: 파생 클래스");
 
-class Program
-{
-    static void Main(string[] args)
-    {
-        // 객체화
-        DERIVEDCLASS instance = new();
-        Console.WriteLine("{0}, {1}, {2}",
-            instance.field1, instance.field2, instance.field3);
-    }
+    public string field2 = "Hello World!";
+    public bool   field3 = true;
+
+    public int method(int arg1, int arg2) => arg1 * arg2;
 }
 ```
 ```
-"기반 클래스 생성자"
-"파생 클래스 생성자"
-
-1, 7.0, A
-
-"파생 클래스 소멸자"
-"기반 클래스 소멸자"
+생성자: 기반 클래스
+생성자: 파생 클래스
+3 Hello World! 1
+6
+소멸자: 파생 클래스
+소멸자: 기반 클래스
 ```
+
+> 만일 의도적으로 기반 클래스의 맴버를 숨기려고 한다면 [`new`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs0108) 키워드를 사용하여 [오버라이딩](#메소드-오버라이딩)과 확실히 구분짓도록 한다.
+>
+> ```csharp
+> /* 파생 클래스 선언: 올바른 맴버 숨기기 */
+> class DERIVEDCLASS : BASECLASS
+> {
+>     ...
+> 
+>     public new string field2 = "Hello World!";
+>
+>     ...
+>
+>     public new int method(int arg1, int arg2) => arg1 * arg2;
+> }
+> ```
 
 ### `base` 키워드
-`base` 키워드는 상속과 관련하여 다음 용도를 갖는다 (단, 정적 메소드에서 사용 불가).
+[`base`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/base) 키워드는 파생 클래스로부터 기반 클래스의 맴버를 접근하기 위해 사용되며, 다음과 같은 용도로 활용된다 (단, 정적 메소드에서 사용 불가).
 
-* 파생 클래스로부터 기반 클래스 맴버에 접근한다.
+* **`base.` 표현식**
+
+    파생 클래스로부터 원하는 기반 클래스 맴버를 호출한다.
 
     ```csharp
-  using System;
-  
-  /* 기반 클래스 생성 */
+  DERIVEDCLASS instance = new();
+  instance.method();                    // 출력: Hello, World!
+
+  /* 기반 클래스 선언 */
   class BASECLASS
   {
-      public method()
+      public void method()
       {
-          Console.WriteLine("기반 클래스 메소드");
+          Console.Write("Hello, ");
       }
   }
   
-  /* 파생 클래스 생성 */
-  class DERIVEDCLASS
-      : BASECLASS
+  /* 파생 클래스 선언 */
+  class DERIVEDCLASS : BASECLASS
   {
-      public method()
+      public void method()
       {
           // 기반 클래스 메소드 호출
           base.method();
-          Console.WriteLine("파생 클래스 메소드");
+          Console.WriteLine("World!");
       }
   }
-  
-  class Program
-  {
-      static void Main(string[] args)
-      {
-          DERIVEDCLASS instance = new();
-          instance.method();
-      }
-  }
-    ```
-    ```
-  "기반 클래스 메소드"
-  "파생 클래스 메소드"
     ```
 
-* 객체화에서 호출할 기반 클래스 생성자를 선택할 수 있다.
+* **`:base()` 표현식**
+
+    객체화 과정에서 호출할 기반 클래스의 생성자를 선택한다.
 
     ```csharp
-  using System;
-  
-  /* 기반 클래스 생성 */
+  DERIVEDCLASS instance1 = new();       // 출력: 클래스 생성자 1!
+  DERIVEDCLASS instance2 = new(3);      // 출력: 클래스 생성자 3?
+
+  /* 기반 클래스 선언 */
   class BASECLASS
   {
       protected int value;    
   
-      public BASECLASS()
-      {
-          value = 1;
-      }
-  
-      public BASECLASS(int arg)
-      {
-          value = arg;
-      }
+      public BASECLASS()        => value = 1;
+      public BASECLASS(int arg) => value = arg;
   }
   
-  /* 파생 클래스 생성 */
-  class DERIVEDCLASS
-      : BASECLASS
+  /* 파생 클래스 선언 */
+  class DERIVEDCLASS : BASECLASS
   {
-      public DERIVEDCLASS() : base()
-      {
-          Console.WriteLine($"클래스 생성자 {value}!");
-      }
-  
-      public DERIVEDCLASS(int arg) : base(arg)
-      {
-          Console.WriteLine($"클래스 생성자 {value}?");
-      }
+      public DERIVEDCLASS() : base()           => Console.WriteLine($"클래스 생성자 {value}!");
+      public DERIVEDCLASS(int arg) : base(arg) => Console.WriteLine($"클래스 생성자 {value}?");
   }
-  
-  class Program
-  {
-      static void Main(string[] args)
-      {
-          DERIVEDCLASS instance1 = new();
-          DERIVEDCLASS instance2 = new(3)
-      }
-  }
-    ```
-    ```
-  클래스 생성자 1!
-  클래스 생성자 3?
     ```
 
+### `sealed` 한정자
+[`sealed`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/sealed) 한정자는 클래스 혹은 그 맴버가 파생 클래스에 [상속](#상속)되지 못하도록 제한한다.
+
+```csharp
+sealed int field = 0;
+```
+
 ## 다형성
-다형성(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, C# 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 가리킨다. 객체지향 프로그래밍에서 다형성은 매우 중요한 특징이며 두 가지로 분류된다.
+[다형성](https://ko.wikipedia.org/wiki/다형성_(컴퓨터_과학))(polymorphism)은 "여러가지의 형태를 가진"이란 사전적 의미를 가지며, 프로그래밍 언어에서는 상황과 용도에 따라 달리 동작하는 것을 가리킨다.
 
 * **컴파일타임 다형성(compile-time polymorphism)**: 컴파일 시 이루어지는 다형성 (일명 정적 다형성; static polymorphism)
 * **런타임 다형성(run-time polymorphism)**: 프로그램 실행 시 이루어지는 다형성 (일명 동적 다형성; dynamic polymorphism)
 
-> 이전 장에서 소개한 적이 있는 [메소드 오버로딩](#메소드-오버로딩)는 컴파일타임 다형성 중 하나이다.
+> 이전 장에서 소개한 적이 있는 [함수 오버로딩](#함수-오버로딩)은 컴파일타임 다형성 중 하나이다.
 
 ### 연산자 오버로딩
-연산자 오버로딩(operator overloading)은 특정 클래스에서 연산자가 달리 동작하도록 하는 컴파일타임 다형성 중 하나이다. 메소드 오버로딩과 마찬가지로 전달인자의 유일성이 보장되는 한, 연산자 하나로부터 여러 정의가 가능하다. 오버로딩된 연산자는 클래스 한정이므로 해당 클래스 및 객체 외에는 적용되지 않는다.
-
-`operator` 키워드는 기능성을 새로 정의할 연산자를 명시하기 위해 사용되며, 연산자 정의 구문은 메소드 정의와 동일하다.
+[연산자 오버로딩](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading)(operator overloading)은 연산자가 특정 클래스 및 해당 객체에서 어떻게 동작할 지 `operator` 키워드로 재정의하는 컴파일타임 다형성 중 하나이다. 연산자 오버로딩에서는 `public` 및 `static` 한정자가 필수이며, 한 개의 연산자에 전달받은 인자의 자료형 및 개수에 따라 여러 정의가 가능하다. 단, `[]` 와 같이 오버로딩이 불가한 연산자도 존재하므로 유의하도록 한다.
 
 ```csharp
-/* 클래스 생성 */
-class CLASS
-{
-    public int field;
+CLASS obj1 = new(2), obj2 = new(3);
+CLASS instance = obj1 + obj2;
 
-    // 연산자 오버로딩
-    public static int operator + (CLASS arg1, CLASS arg2) => arg1.field + arg2.field;
+Console.WriteLine(!instance);
+
+/* 클래스 선언 */
+class CLASS {
+
+    public CLASS(int arg) => field = arg;
+
+    public int field;    
+
+    /* 연산자 오버로딩: + 선언 */
+    public static CLASS operator +(CLASS arg1, CLASS arg2) => new(arg1.field + arg2.field);
+
+    /* 연산자 오버로딩: 단항 ! 선언 */
+    public static string operator !(CLASS arg1) => $"{arg1.field}!";
 }
+```
+```
+5!
 ```
 
 ### 메소드 오버라이딩
-메소드 오버라이딩(function overriding)은 파생 클래스가 기반 클래스의 메소드를 재정의하는 런타임 다형성이다. 메소드 오버로딩이 여러 개의 기능 중에서 하나를 선택하는 것이라면, 메소드 오버라이딩은 하나의 기능을 새롭게 *재정의(re-definition)*한다는 것으로 이해하면 된다.
+[메소드 오버라이딩](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/override)(method overriding)은 상속된 기반 클래스의 맴버 함수 (일명 메소드)를 파생 클래스에서 재정의하는 런타임 다형성이다.
 
-*가상 메소드(virtual method)*은 메소드 오버라이딩이 가능한 메소드이며 기반 클래스에서 `virtual` 키워드를 통해 선언된다. 가상 메소드는 실행문을 갖도록 정의될 수 있으며, 해당 정의는 (1) 기반 클래스로부터 객체화되어 사용하거나 (2) 파생 클래스가 오버라이딩 하지 않고 객체화하여 사용하면 실행된다.
+> 동일한 이름 하에 정의된 여러 함수 중에서 하나를 택하여 실행하는 [메소드 오버로딩](#함수-오버로딩)과 전혀 다른 개념이다.
+
+오버라이딩이 되는 기반 클래스의 메소드는 [`virtual`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/virtual) 한정자로 정의된 가상 메소드(virtual method)이다. 정의된 가상 메소드는 기반 클래스를 객체화하여 곧바로 사용할 수 있으며, 또는 파생 클래스에서 오버라이딩을 하지 않은 채 객체화하여 사용될 수 있다. 오버라이딩을 하려면 반드시 `override` 한정자를 명시해야 하며, 그렇지 않으면 [상속](#상속)에서 보여준 예시 코드처럼 단순히 파생 클래스에 묻힐 뿐이다.
 
 ```csharp
-/* 기반 클래스 생성 */
+/* 기반 클래스 선언 */
 class BASECLASS
 {
-    // 가상 메소드
-    public virtual void polymorph()
+    /* 가상 함수 선언 */
+    public virtual void method()
     {
-        statements1; 
+    	
     }
 }
 
-/* 파생 클래스 생성 */
-class DERIVEDCLASS1
-    : BASECLASS
+/* 파생 클래스 선언 */
+class DERIVEDCLASS : BASECLASS
 {
-    // 메소드 오버라이딩
-    public override void polymorph()
+    /* 메소드 오버라이딩 */
+    public override void method()
     {
-        statements2;
+    	
     }
 }
 ```
 
-*추상 메소드(abstract method)*는 정의가 없이 선언만 된 가상 메소드를 가리킨다. 기반 클래스에서 정의되지 않았으므로, 파생 클래스에서는 반드시 오버라이딩을 해야 한다. 오버라이딩하지 않으면 컴파일 오류가 발생한다.
+기반 클래스의 가상 메소드 중에서 [`abstract`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/abstract) 한정자로 선언된 추상 메소드(abstract method)로 선언될 수 있으며, 이는 블록 `{}`이나 `=>` 토큰을 지니지 않은 빈 메소드이다. 그리고 최소한 한 개 이상의 추상 메소드를 갖는 클래스를 추상 클래스(abstract class)라고 부른다.
 
 ```csharp
-/* 추상 메소드 */
-public abstract void polymorph();
-```
-
-### 추상 클래스
-추상 클래스(abstract class)는 객체화를 하지 못하며 오로지 상속을 위해 존재하는 특수한 기반 클래스이며 `abstract` 키워드로 선언된다. 객체화를 시도하면 컴파일 오류가 발생한다.
-
-```csharp
-/* 추상 클래스 생성 */
-abstract class CLASS
+/* 추상 클래스 선언 */
+abstract class BASECLASS
 {
-    public int field1 = 1;
-    public double field2 = 3.0;
-    
-    /* 추상 메소드 */
-    public abstract void polymorph();
-}
-
-class Program
-{
-    static void Main(string[] args)
-    {
-        // 객체화: 오류!
-        CLASS instance = new();
-    }
+    /* 추상 메소드 선언 */
+    public abstract void method();
 }
 ```
-```
-Error	CS0144	Cannot create an instance of the abstract class or interface 'CLASS'
-```
 
-추상 클래스는 다른 접근 한정자의 맴버들을 가질 수 있다. 하지만 추상 클래스로부터 파생된 클래스는 *반드시* 모든 추상 메소드들을 오버라이딩을 해야 한다. 이러한 특징으로 인해 동일한 맴버 구조를 갖는 파생 클래스들을 생성해야 한다면 추상 클래스를 사용하여 효율을 높일 수 있다.
+추상 메소드는 아무런 정의가 없으므로 추상 클래스는 객체화가 불가하며, 오로지 상속 목적으로만 사용된다.
 
 ### 인터페이스
 인터페이스(interface)는 모든 맴버가 기본적으로 `abstract` 및 `public`으로 선언된 추상 클래스의 변이형태로써 별도로 한정자를 명시할 필요가 없다. 다시 말해, 인터페이스의 모든 메소드는 아무런 코드가 정의되지 않고 선언만 된 추상 메소드이다. 때문에 인터페이스의 파생 클래스는 메소드 오버라이딩이 아닌 *메소드를 정의하는* 개념이므로 `override` 한정자를 사용하지 않는다.
