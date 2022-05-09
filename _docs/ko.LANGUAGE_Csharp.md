@@ -1372,12 +1372,14 @@ class CLASS {
     public double field2 = 3.14;
     
     /* 메소드 맴버 */
-    public int method() {
+    public int method()
+    {
         return field1 * field2;
     }
 
     /* 메소드 맴버 (오버로딩) */
-    public int method(int arg) {
+    public int method(int arg)
+    {
         return field1 + field2 - arg;
     }
 }
@@ -1391,13 +1393,13 @@ class CLASS {
 | `public`    | 클래스 외부 코드로부터 맴버 접근이 자유롭다.      |
 | `private`   | 클래스 내부에서만 맴버 접근이 가능하다; `class` 키워드의 기본 접근 한정자이다.   |
 | `protected` | 맴버 접근이 가능한 외부 코드가 해당 클래스로부터 상속된 파생 클래스로 제한된다. |
-| `internal`  | 맴버 접근이 가능한 외부 코드가 해당 클래스가 속한 [어셈블리](#어셈블리)로 제한된다. | 
+| `internal`  | 맴버 접근이 가능한 외부 코드가 해당 클래스가 속한 [어셈블리](#어셈블리)로 제한된다. |
 
 ## 생성자
 [생성자](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/constructors)(constructor)는 객체화마다 자동으로 실행되는 특수한 `void` 자료형 메소드이다. 비록 생성자는 선택사항이지만, 선언한다면 반드시 클래스명과 동일해야 한다. 외부 코드로부터 객체화되기 때문에 생성자를 `public` 혹은 `internal` 접근 한정자로 설정한다. 흔히 객체화 단계에서 맴버들을 초기화하는 용도로 사용된다.
 
 ```csharp
-CLASS instance = new CLASS();
+CLASS instance = new CLASS(2, 3.14);
 
 /* 클래스 선언 */
 class CLASS
@@ -1417,6 +1419,15 @@ class CLASS
 ```
 
 생성자는 오버로딩될 수 있어 한 개 이상이 정의될 수 있다. 그 중에서 아무런 전달인자를 받지 않는 생성자를 기본 생성자(default constructor)라고 칭한다.
+
+### 객체 초기자
+[객체 초기자](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/object-and-collection-initializers)(object initializer)는 외부 코드로부터 접근이 가능한 (`public`, `internal` 등) 아무런 필드 맴버들을 한 번에 초기화하는데 사용된다. 그러므로 생성자에서 초기화가 필요한 필드마다 데이터를 할당하는 코드를 일일이 기입할 수고를 줄이는 장점을 지닌다. 객체 초기자는 생성자가 실행된 이후에 동작한다.
+
+
+```csharp
+/* 객체 초기자 */
+CLASS instance = new CLASS() { field1 = 2, field2 = 3.14 };
+```
 
 ### 종료자
 [종료자](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/finalizers)(finalizer), 혹은 소멸자(destructor)는 객체가 메모리로부터 소멸되기 직전에 자동으로 실행되는 특수한 `void` 자료형 메소드이다. 비록 종료자는 선택사항이지만, 선언한다면 접두부에는 물결표 `~`와 함께 반드시 클래스명과 동일해야 한다. 종료자에는 접근 한정자가 설정될 수 없다.
@@ -1512,6 +1523,25 @@ static class CLASS
     public static CLASS()
     {
         statements;
+    }
+}
+```
+
+## `partial` 키워드
+[`partial`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/partial-type) 자료형은 하나의 클래스를 분할하여 선언할 수 있도록 한다. 이는 심지어 서로 다른 파일 간에도 적용이 가능하여, [윈도우 폼](https://ko.wikipedia.org/wiki/윈도우_폼)(WinForms) 혹은 [WPF](https://ko.wikipedia.org/wiki/윈도우_프레젠테이션_파운데이션)(Windows Presentation Foundation) 등의 규모가 큰 C# 프로젝트에 흔히 사용된다.
+
+```csharp
+/* partial 클래스 */
+partial class CLASS
+{
+    int field;
+}
+
+partial class CLASS
+{
+    void method()
+    {
+        ...
     }
 }
 ```
@@ -1716,123 +1746,87 @@ abstract class BASECLASS
 
 추상 메소드는 아무런 정의가 없으므로 추상 클래스는 객체화가 불가하며, 오로지 상속 목적으로만 사용된다.
 
-### 인터페이스
-인터페이스(interface)는 모든 맴버가 기본적으로 `abstract` 및 `public`으로 선언된 추상 클래스의 변이형태로써 별도로 한정자를 명시할 필요가 없다. 다시 말해, 인터페이스의 모든 메소드는 아무런 코드가 정의되지 않고 선언만 된 추상 메소드이다. 때문에 인터페이스의 파생 클래스는 메소드 오버라이딩이 아닌 *메소드를 정의하는* 개념이므로 `override` 한정자를 사용하지 않는다.
-
-```csharp
-/* 인터페이스 생성 */
-interface INTERFACE
-{
-    int property { get; set; }
-    void polymorph();
-}
-
-/* 파생 클래스 생성 */
-class DERIVEDCLASS
-    : INTERFACE
-{
-    public DERIVEDCLASS(int arg) { property = arg; }
-    public void polymorph()
-    {
-        statements;
-    }
-}
-```
-
-인터페이스의 기본 한정자 `abstract`으로 인해 메소드와 프로퍼티를 맴버로 가질 수 있으나, 필드는 맴버로 가질 수 없다. 그리고 파생 클래스에 동일한 메소드 및 코드가 적용되어야 한다면 매번 정의를 해야하는 인터페이스보다 필요할 때에만 오버라이딩하면 되는 추상 클래스를 사용하는 것을 권장한다.
-
-파생 클래스는 한 개 이상의 인터페이스로부터 동시에 상속받을 수 있다.
-
-```csharp
-/* 파생 클래스 생성: 두 인터페이스로부터 상속 */
-class DERIVEDCLASS
-    : INTERFACE1, INTERFACE2
-{
-    // ...
-}
-```
-
-이러한 인터페이스의 특징은 오히려 기존 클래스에 메소드 및 프로퍼티를 추가하는 기능 확장에 더욱 적합하다.
-
 ## 프로퍼티
-프로퍼티(property)은 하나의 필드를 `get`와 `set` 영역으로 나누어 데이터 숨기기를 지원한다. 
+[프로퍼티](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties)(property)는 하나의 속성을 `get`와 `set` 영역으로 나누어 [데이터 숨기기](https://en.wikipedia.org/wiki/Information_hiding)(data hiding)을 지원한다.
 
-| 접근자 | 키워드 | 설명                                     |
-|:--------:| ------- | ----------------------------------------------- |
-| Getter   | `get`   | 필드로부터 값을 반환받는 맴버이다. |
-| Setter   | `set`   | 필드로부터 값을 설정하는 맴버이다. |
+| 접근자  | 설명 |
+|:------:|-----|
+| [`get`][accessor-get]  | 프로퍼티의 데이터를 반환한다.  |
+| [`set`][accessor-set]  | 프로퍼티에 데이터를 할당한다. |
+| [`init`][accessor-init] | 프로퍼티를 [객체 초기자](#객체-초기자)로부터 초기화한다 ([C# 9.0](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9)부터 소개). |
 
-프로퍼티로 필드를 나누므로써 수정되어서는 안될 민감한 코드를 `set` 영역에 숨기고 `get`만을 통해서 데이터를 반환한다. 프로퍼티은 메소드와 유사하게 생겼지만 소괄호 `()`가 없어 필드처럼 사용된다. 프로퍼티는 오로지 하나의 전달인자만 받을 수 있으며, 해당 인자는 `value` 연산자를 통해 프로퍼티 안으로 전달된다.
+[accessor-get]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/get
+[accessor-set]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/set
+[accessor-init]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/init
+
+> 프로퍼티는 `set`와 `init` 접근자를 동시에 가질 수 없다: 전자는 재할당이 가능하지만, 후자는 초기화 이후에 변동이 불가하다.
+
+필드를 나누므로써 수정되어서는 안될 민감한 코드를 `set` 혹은 `init` 접근자에 숨기고 `get` 접근자만을 통해서 데이터를 반환한다. 선언된 형태는 메소드와 유사하지만 실제로 사용할 때는 소괄호 `()` 없이 필드처럼 사용된다. 프로퍼티는 오로지 하나의 전달인자만 받을 수 있으며 [`value`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/value) 키워드를 통해 프로퍼티로 전달된다.
 
 ```csharp
-using System;
+CLASS instance = new CLASS();
 
-/* 클래스 생성 */
+instance.property = 3;
+Console.WriteLine(instance.property);    // 출력: 16
+
+/* 클래스 선언 */
 class CLASS
 {
-    private int field;
+    private int _property;
     
-    /* 프로퍼티 */
+    /* 프로퍼티 선언 */
     public int property
     {
-        get => field;            // GETTER 프로퍼티
-        set => field = value;    // SETTER 프로퍼티
+        get => _property * _property;
+        set => _property = value + 1;
         
         /* 동일:
-        get { return field; }
-        set { field = value; }
+            get { return _property; }
+            set { _property = value; }
         */
-    }
-}
-
-class Program
-{
-    static void Main(string[] args)
-    {
-        // 객체화
-        CLASS instance = new();
-        
-        instance.method = 1;
-        instance.method;        // >> OUTPUT: 1
     }
 }
 ```
 
 ### 자동 구현 프로퍼티
-자동 구현 프로퍼티(auto-implemented property)는 간략화된 프로퍼티이지만 `get` 및 `set` 영역의 코드를 수정할 수 없다.
+[자동 구현 프로퍼티](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/auto-implemented-properties)(auto-implemented property)는 간략화된 프로퍼티이지만 `get` 및 `set` 영역의 코드를 수정할 수 없다.
 
 ```csharp
-/* 클래스 생성 */
-public int property {get; set;}
+public int property { get; set; }
 
 /* 동일:
-string field;
-public int property{
-    get => field;
-    set => field = value;
-}
+    int _property;
+    public int property
+    {
+        get => _property;
+        set => _property = value;
+    }
 */
 ```
 
-## 인덱서
-인덱서(indexer) 맴버는 객체를 배열처럼 사용할 수 있게 한다. 프로퍼티와 유사하게 `get` 및 `set` 접근자를 사용하고, 데이터를 `private` 필드에 선언된 컬렉션에 저장한다.
+### 인덱서
+[인덱서](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/indexers/)(indexer) 맴버는 객체를 배열처럼 사용할 수 있게 한다. 프로퍼티와 유사하게 `get` 및 `set` 접근자를 사용하고, 데이터를 `private` 필드에 선언된 컬렉션에 저장한다.
 
 ```csharp
-using System;
+CLASS instance = new CLASS();
 
-/* 클래스 생성 */
+instance[0] = 1;
+instance[1] = 3;
+
+/* 클래스 선언 */
 class CLASS
 {
     /* 인덱서를 위한 컬렉션 */
     private int[] arr = new int[2];
     
-    /* 인덱서 */
+    /* 인덱서 선언 */
     public int this[int index]
     {
         get => arr[index];
         set => arr[index] = value;
     }
 }
+```
 
 class Program
 {
