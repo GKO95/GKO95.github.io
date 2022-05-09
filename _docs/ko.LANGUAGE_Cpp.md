@@ -1816,13 +1816,11 @@ int main() {
 
 ```cpp
 /* 클래스 정의 */
-class CLASS {
-
-    int field;
-
-public:
+struct CLASS {
 
     CLASS(int arg) : field(arg) { }
+
+    int field;
     
     /* 연산자 오버로딩: + 정의 */
     CLASS operator + (const CLASS &arg) {
@@ -1879,8 +1877,6 @@ public:
     }
 };
 ```
-
-*순수 가상 함수(pure virtual function)*는 정의가 없이 선언만 된 가상 함수를 가리킨다. 기반 클래스에서 정의되지 않았으므로, 파생 클래스에서는 반드시 오버라이딩을 해야 한다. 오버라이딩하지 않으면 컴파일 오류가 발생한다.
 
 기반 클래스의 가상 함수는 아무런 정의가 없이 `=0` 구문이 뒤에 붙는 [순수 가상 함수](https://en.cppreference.com/w/cpp/language/abstract_class)(pure virtual function)로 선언될 수 있다. 그리고 최소한 한 개 이상의 순수 가상 함수를 갖는 클래스를 추상 클래스(abstract class)라고 부른다.
 
