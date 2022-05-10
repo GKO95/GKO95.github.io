@@ -1951,7 +1951,7 @@ int ClassName::method(int arg) {
 ```
 
 # C++: 사용자 정의 자료형
-사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등과 같은 기존 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다. 대표적인 예시로 [클래스](#c-클래스)가 있으나 본 장은 객체지향 기능들이 결여되고 필드 맴버만으로 구성된 [레코드](https://ko.wikipedia.org/wiki/레코드_(컴퓨터_과학))(record)를 지칭하는 [PDS](https://ko.wikipedia.org/wiki/POD_(데이터_구조))(passive data structure 혹은 plain old data, POD; 수동형 자료구조) 관점에서 소개한다.
+사용자 정의 자료형(user-defined type)은 흔히 `int`, `float`, `char` 등의 기존하는 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다. 정의된 자료형은 또 다른 사용자 정의 자료형을 구성하는데 사용될 수 있다. 대표적인 예시로 [클래스](#c-클래스)가 있으나 본 장은 객체지향 기능들이 결여되고 필드 맴버만으로 구성된 [레코드](https://ko.wikipedia.org/wiki/레코드_(컴퓨터_과학))(record)를 지칭하는 [PDS](https://ko.wikipedia.org/wiki/POD_(데이터_구조))(passive data structure 혹은 plain old data, POD; 수동형 자료구조) 관점에서 소개한다.
 
 PDS 클래스는 다음 특징을 지닌다:
 
@@ -2191,7 +2191,7 @@ union {
 ```
 
 ## 열거형
-[열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기는 `enum` 키워드로 정의된 자료형이다. 열거자들은 기본적으로 정수 0부터 시작하여 다음 열거자마다 1만큼 증가한다. 열거자에 할당 연산자 `=`로 정수를 집적 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거자를 추가하거나, 혹은 열거형의 값을 바꾸는 건 불가하다.
+[열거형](https://en.cppreference.com/w/cpp/language/enum)(enumeration)은 열거된 항목, 일명 열거자(enumerator)들을 정수로 순번을 매기는 `enum` 키워드로 정의된 자료형이다. 열거자들은 기본적으로 정수 0부터 시작하여 다음 열거자마다 1만큼 증가한다. 열거자에 할당 연산자 `=`로 정수를 직접 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거자를 추가하거나, 혹은 열거형의 값을 바꾸는 건 불가하다.
 
 ```cpp
 /* 열거형 정의 */
