@@ -1744,7 +1744,7 @@ abstract class BASECLASS
 }
 ```
 
-추상 메소드는 아무런 정의가 없으므로 추상 클래스는 객체화가 불가하며, 오로지 상속 목적으로만 사용된다.
+추상 메소드는 아무런 정의가 없으므로 추상 클래스는 객체화가 불가하며, 오로지 상속 목적으로만 사용된다. 동일한 맴버 구조를 갖는 파생 클래스들을 생성해야 한다면 추상 클래스를 사용하여 효율을 높일 수 있다.
 
 ## 프로퍼티
 [프로퍼티](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties)(property)는 하나의 속성을 `get`와 `set` 영역으로 나누어 [데이터 숨기기](https://en.wikipedia.org/wiki/Information_hiding)(data hiding)을 지원한다.
@@ -1828,116 +1828,77 @@ class CLASS
 }
 ```
 
-class Program
-{
-    static void Main(string[] args)
-    {
-        // 객체화
-        CLASS instance = new();
-        
-        instance[0] = 1;        // >> 출력: 1
-        instance[1] = 3;        // >> 출력: 3
-    }
-}
-```
-
 # C#: 사용자 정의 자료형
-C# 프로그래밍 언어에서 흔히 사용되는 `int`, `float`, `char` 등과 같은 내부 자료형을 기반으로 목적에 알맞은 사용자 정의 자료형을 새롭게 지정할 수 있다. 본 장은 일반 자료형보다 더 많은 자료를 복합적으로 저장할 수 있는 사용자 정의 자료형의 정의 및 활용법을 설명한다.
+사용자 정의 자료형(custom type)은 흔히 `int`, `float`, `char` 등의 기존하는 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다. 정의된 자료형은 또 다른 사용자 정의 자료형을 구성하는데 사용될 수 있다. 대표적인 예시로 [클래스](#c-클래스)가 있으며, 본 장에서는 그 외에 C# 프로그래밍 언어가 제공하는 다양한 사용자 정의 자료형을 소개한다.
 
 ## 구조체
-구조체(structure)는 자료형과 상관없이 여러 맴버 변수(일명 맴버 필드)를 하나의 단일 데이터로 통합시킨 사용자 정의 자료형이다. 구조체의 정의는 `struct` 키워드를 통해 이루어진다.
+[구조체](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct)(structure)는 자료형과 무관하게 필드 맴버를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 정의된 사용자 정의 자료형이다.
 
 ```csharp
 /* 구조체 선언 */
-public struct STRUCTURE
+struct STRUCTURE
 {
-    public int    field1;
-    public double field2;
-    
-    public double method(int arg) => field1 + field2 - arg;
-}
+    /* 필드 맴버 선언 */
+    public char field1;
+    public int  field2;
 
-class Program
-{
-    static void Main(string[] args)
-    {
-        /* 구조체 변수 선언 */
-        STRUCTURE variable;
-        
-        variable.field1 = 1;
-        variable.field2 = 3.0;
-        System.Console.WriteLine(variable.method(2));    // >> 출력: 2.0 (= 1 + 3.0 - 2)
-    }
+    /* 메소드 맴버 선언 */
+    public string method() => $"{field1}, {field2}";
 }
 ```
-----
+
+선언된 구조체로부터 [`new`](#new-연산자) 연산자를 통해 객체화하며, 필드 맴버를 초기화하는 방법으로 (1) [생성자](#생성자)를 선언하거나 (2) [객체 초기자](#객체-초기자)를 사용한다.
+
 ```csharp
-/* 구조체 선언: 생성자 포함 */
-public struct STRUCTURE
-{
-    public STRUCTURE(int arg1, double arg2)
-    { field1 = arg1; field2 = arg2; }
-    
-    public int    field1;
-    public double field2;
-    
-    public double method(int arg) => field1 + field2 - arg;
-}
-
-class Program
-{
-    static void Main(string[] args)
-    {
-        /* 구조체 변수 초기화 */
-        STRUCTURE variable = new(1, 3.0);
-        
-        System.Console.WriteLine(variable.method(2));    // >> 출력: 2.0 (= 1 + 3.0 - 2)
-    }
-}
+/* 구조체 객체화 및 초기화 */
+STRUCTURE variable = new STRUCTURE() { field1 = 'A', field2 = 3 };
 ```
 
-클래스와 구조체는 서로 유사하지만 확연한 차이점이 존재한다.
+[클래스](#c-클래스)와 상당히 유사한 특징을 지니지만, 이 둘은 확실한 차이점이 존재한다.
 
-| 클래스             | 구조체               |
-|:---------------:|:-----------------:|
-| 힙 영역 메모리에 할당된다. | 스택 영역 메모리에 할당된다.  |
-| 상속이 허용된다.       | 상속이 허용되지 않는다.     |
-| 필드 초기화가 허용된다.   | 필드 초기화가 허용되지 않는다. |
+| 자료형 | [유형](#변수)          | [상속](#상속) 허용 여부 | 용도          |
+|:---:|:------------------------:|:---------------:|-----------------|
+| 클래스 | [값 자료형][value-type]  | ⭕ | 소규모의 데이터 중심 자료형 |
+| 구조체 | [참조 자료형][reference-type] | ❌ | 기능성 제공 위주의 자료형  |
 
 ## 열거형
-열거형(enumeration)은 열거된 항목들을 정수로 순번을 매기는 자료형이다. 열거자(enumerator)라고 부르는 열거 항목들은 기본적으로 정수 0부터 시작하여 순서대로 1만큼 값이 증가한다.
+[열거형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum)(enumeration)은 열거된 항목, 일명 열거형 맴버(enum member)들을 정수로 순번을 매기는 `enum` 키워드로 선언된 자료형이다. 맴버들은 기본적으로 정수 0부터 시작하여 다음 맴버마다 1만큼 증가한다. 맴버에 할당 연산자 `=`로 정수를 직접 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거형 맴버를 추가하거나, 혹은 맴버의 값을 바꾸는 건 불가하다.
 
 ```csharp
 /* 열거형 선언 */
-enum ENUMERATION {
-    enumerator1,    // = 0
-    enumerator2,    // = 1
-    enumerator3     // = 2
-};
-
-class Program
+enum ENUMERATION
 {
-    static void Main(string[] args)
+    member1,         // = 0
+    member2,         // = 1
+    member3 = 7,     // = 7
+    member4          // = 8
+}
+```
+
+> 열거형이 가질 수 있는 정수의 범위는 기본적으로 `int`로 지정되어 있다. 만일 이를 정수 0 ~ 255까지만 수용할 수 있는 `byte`로 변경하려면 다음과 같이 기입한다.
+> 
+> ```csharp
+> enum ENUMERATION : byte { ... }
+> ```
+
+열거형 자료형으로 선언된 변수는 오로지 주어진 열거형 맴버만을 할당받을 수 있다. 해당 맴버들은 열거형의 [정적 맴버](#정적-맴버)인 마냥 호출되는데, 이러한 국부적 영역범위 특성은 서로 다른 열거형에도 동명의 맴버들을 선언할 수 있도록 한다. 만일 타 열거형의 열거자나 범위 외의 정수로 할당하려면 [자료형 변환](#자료형-변환)이 필요하다.
+
+```csharp
+/* 열거형 변수 선언 */
+ENUMERATION variable = ENUMERATION.member1;
+```
+
+
+```csharp
+
+{
     {
-        /* 열거형 변수 초기화 */
-        ENUMERATION variable = ENUMERATION.enumerator1;
-        
-        System.Console.WriteLine(variable);         // >> 출력: enumerator1
-        System.Console.WriteLine((int)variable);    // >> 출력: 0
     }
 }
 ```
 
-열거자들에 할당되는 정수는 할당 연산자 `=`를 통해 달리 지정이 가능하며, 다른 열거자와 동일한 값이 할당되어도 상관없다. C/C++ 언어와 달리 동일한 이름의 열거자는 다른 열거형에 존재할 수 있다.
 
 ```csharp
-enum ENUMERATION {
-    enumerator1 = 2,    // >> 출력: 2
-    enumerator2,        // >> 출력: 3
-    enumerator3 = 1,    // >> 출력: 1
-    enumerator4,        // >> 출력: 2
-    enumerator5	        // >> 출력: 3
-};
 ```
 
 # C#: 제네릭
