@@ -1832,7 +1832,7 @@ class CLASS
 사용자 정의 자료형(custom type)은 흔히 `int`, `float`, `char` 등의 기존하는 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다. 정의된 자료형은 또 다른 사용자 정의 자료형을 구성하는데 사용될 수 있다. 대표적인 예시로 [클래스](#c-클래스)가 있으며, 본 장에서는 그 외에 C# 프로그래밍 언어가 제공하는 다양한 사용자 정의 자료형을 소개한다.
 
 ## 구조체
-[구조체](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct)(structure)는 자료형과 무관하게 필드 맴버를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 정의된 사용자 정의 자료형이다.
+[구조체](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct)(structure)는 자료형과 무관하게 필드 맴버를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 선언된 사용자 정의 자료형이다.
 
 ```csharp
 /* 구조체 선언 */
@@ -1858,8 +1858,57 @@ STRUCTURE variable = new STRUCTURE() { field1 = 'A', field2 = 3 };
 
 | 자료형 | [유형](#변수)          | [상속](#상속) 허용 여부 | 용도          |
 |:---:|:------------------------:|:---------------:|-----------------|
-| 클래스 | [값 자료형][value-type]  | ⭕ | 소규모의 데이터 중심 자료형 |
-| 구조체 | [참조 자료형][reference-type] | ❌ | 기능성 제공 위주의 자료형  |
+| 클래스 | [참조 자료형][reference-type]  | ⭕ | 기능성 제공 위주의 자료형 |
+| 구조체 | [값 자료형][value-type] | ❌ | 소규모의 데이터 중심 자료형  |
+
+## 레코드
+[레코드](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record)(record)는 [C# 9.0](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9)에 처음으로 소개되었으며, 데이터 캡슐화에 추가 기능성을 제공하는 [참조 자료형][reference-type]으로 `record` (혹은 `record class`) 키워드로 선언된다. 레코드는 본래 데이터 불변(immutable) 모델을 지원하기 위한 자료형으로 일반 프로퍼티 혹은 위치 매개변수(positional parameters) 레코드 전용 구문으로 선언된다.
+
+> 일반 프로퍼티 구문에서 `set` 접근자를 사용하므로써 데이터 변경이 가능한 가변(mutable) 속성을 맴버로 갖는 레코드를 선언할 수 있다.
+
+```csharp
+/* 일반 프로퍼티 구문 */
+record RECORD
+{
+    public char property1 { get; init; } = default!;
+    public int  property2 { get; init; } = default!;
+}
+```
+```csharp
+/* 위치 매개변수 구문 */
+record RECORD(char property1, int property2);
+```
+
+비록 레코드는 [클래스](#c-클래스)와 같은 참조 자료형이지만, 데이터 위주의 유용한 기능들이 내재되어 있다. 
+
+* **[값 동등성](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#value-equality)**
+
+    레코드 객체의 자료형 및 저장된 값이 동등한지 `==` 연산자로 확인할 수 있다. 클래스의 경우에는 메모리에 동일한 객체를 참조하고 있을 때에만 동등하다고 판단하며, 구조체는 자료형과 데이터를 비교하려면 [`Object.Equals(Object)`](https://docs.microsoft.com/en-us/dotnet/api/system.object.equals) 메소드를 활용하거나 연산자 오버로딩이 필요하다는 점을 빗대어 보면 레코드는 자료 비교에서 매우 유용하다.
+
+* **[레코드 서식 출력](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#built-in-formatting-for-display)**
+
+    레코드 객체 자체를 출력하면 필드 및 프로퍼티에 저장된 값이 표시된 형식으로 나타난다.
+
+    ```csharp
+  /* 레코드 선언 */
+  record RECORD(char property1, int property2);
+
+  Console.WriteLine(new RECORD('A', 3));    // 출력: RECORD { property1 = A, property = 3 }
+    ```
+
+* **[레코드 상속](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#inheritance)**
+
+    클래스와 마찬가지로 [상속](#상속)이란 개념이 동일하게 적용된다.
+
+    ```csharp
+  /* 기반 레코드 선언 */
+  record BASERECORD(int property1, int property2);
+
+  /* 파생 레코드 선언 */
+  record DERIVEDRECORD(int property1, int property2, int property3)
+      : BASERECORD(property1, property2);
+    ```
+
 
 ## 열거형
 [열거형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum)(enumeration)은 열거된 항목, 일명 열거형 맴버(enum member)들을 정수로 순번을 매기는 `enum` 키워드로 선언된 자료형이다. 맴버들은 기본적으로 정수 0부터 시작하여 다음 맴버마다 1만큼 증가한다. 맴버에 할당 연산자 `=`로 정수를 직접 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거형 맴버를 추가하거나, 혹은 맴버의 값을 바꾸는 건 불가하다.
