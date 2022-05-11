@@ -1864,7 +1864,7 @@ STRUCTURE variable = new STRUCTURE() { field1 = 'A', field2 = 3 };
 ## 레코드
 [레코드](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record)(record)는 [C# 9.0](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-9)에 처음으로 소개되었으며, 데이터 캡슐화에 추가 기능성을 제공하는 [참조 자료형][reference-type]으로 `record` (혹은 `record class`) 키워드로 선언된다. 레코드는 본래 데이터 불변(immutable) 모델을 지원하기 위한 자료형으로 일반 프로퍼티 혹은 위치 매개변수(positional parameters) 레코드 전용 구문으로 선언된다.
 
-> 일반 프로퍼티 구문에서 `set` 접근자를 사용하므로써 데이터 변경이 가능한 가변(mutable) 속성을 맴버로 갖는 레코드를 선언할 수 있다.
+> 일반 프로퍼티 구문에서 `set` 접근자를 사용하거나, 혹은 `record struct` 키워드를 사용하여 데이터 변경이 가능한 가변(mutable) 속성을 맴버로 갖는 레코드를 선언할 수 있다.
 
 ```csharp
 /* 일반 프로퍼티 구문 */
@@ -1879,7 +1879,7 @@ record RECORD
 record RECORD(char property1, int property2);
 ```
 
-비록 레코드는 [클래스](#c-클래스)와 같은 참조 자료형이지만, 데이터 위주의 유용한 기능들이 내재되어 있다. 
+비록 레코드는 [클래스](#c-클래스)와 같은 참조 자료형이지만 (`record struct`는 값 자료형에 해당), 데이터 위주의 유용한 기능들이 내재되어 있다. 
 
 * **[값 동등성](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#value-equality)**
 
@@ -1898,7 +1898,7 @@ record RECORD(char property1, int property2);
 
 * **[레코드 상속](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#inheritance)**
 
-    클래스와 마찬가지로 [상속](#상속)이란 개념이 동일하게 적용된다.
+    클래스와 마찬가지로 [상속](#상속)이란 개념이 동일하게 적용된다 (단, `record struct` 키워드는 제외).
 
     ```csharp
   /* 기반 레코드 선언 */
