@@ -1867,6 +1867,8 @@ STRUCTURE variable = new STRUCTURE() { field1 = 'A', field2 = 3 };
 > 일반 프로퍼티 구문에서 `set` 접근자를 사용하거나, 혹은 `record struct` 키워드를 사용하여 데이터 변경이 가능한 가변(mutable) 속성을 맴버로 갖는 레코드를 선언할 수 있다.
 
 ```csharp
+var instance = new RECORD() { property1 = 'A', property2 = 3 };
+
 /* 일반 프로퍼티 구문 */
 record RECORD
 {
@@ -1875,6 +1877,8 @@ record RECORD
 }
 ```
 ```csharp
+var instance = new RECORD('A', 3);
+
 /* 위치 매개변수 구문 */
 record RECORD(char property1, int property2);
 ```
@@ -1890,10 +1894,11 @@ record RECORD(char property1, int property2);
     레코드 객체 자체를 출력하면 필드 및 프로퍼티에 저장된 값이 표시된 형식으로 나타난다.
 
     ```csharp
-  /* 레코드 선언 */
-  record RECORD(char property1, int property2);
+  Console.WriteLine(new RECORD('A', 3));
 
-  Console.WriteLine(new RECORD('A', 3));    // 출력: RECORD { property1 = A, property = 3 }
+  /* 출력:
+      RECORD { property1 = A, property = 3 }
+  */
     ```
 
 * **[레코드 상속](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#inheritance)**
@@ -1902,13 +1907,24 @@ record RECORD(char property1, int property2);
 
     ```csharp
   /* 기반 레코드 선언 */
-  record BASERECORD(int property1, int property2);
+  record BASERECORD(char property1, int property2);
 
   /* 파생 레코드 선언 */
-  record DERIVEDRECORD(int property1, int property2, int property3)
+  record DERIVEDRECORD(char property1, int property2, bool property3)
       : BASERECORD(property1, property2);
     ```
 
+### `with` 표현식
+[`with`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/with-expression) 표현식은 객체 초기자를 활용하여 일부 프로퍼티 및 필드 맴버만을 수정한 채 복사본을 생성한다. 본래 레코드에만 한정되었으나, 현재는 구조체에도 사용할 수 있다.
+
+```csharp
+RECORD instance = new RECORD(3, 'A', true);
+Console.WriteLine(instance with { property2 = 'C', property3 = false });
+
+/* 출력: 
+    RECORD { property1 = 3, property2 = C, property3 = False }
+*/
+```
 
 ## 열거형
 [열거형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum)(enumeration)은 열거된 항목, 일명 열거형 맴버(enum member)들을 정수로 순번을 매기는 `enum` 키워드로 선언된 자료형이다. 맴버들은 기본적으로 정수 0부터 시작하여 다음 맴버마다 1만큼 증가한다. 맴버에 할당 연산자 `=`로 정수를 직접 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거형 맴버를 추가하거나, 혹은 맴버의 값을 바꾸는 건 불가하다.
