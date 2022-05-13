@@ -744,7 +744,7 @@ print(st[0])                     # TypeError: 'set' object is not subscriptable
 
 > 빈 집합 객체는 반드시 `set()` 함수로 생성해야 한다; 빈 중괄호 `{}`는 오히려 딕셔너리를 만들기 때문이다.
 
-집합 객체의 연산자는 수학에서의 [집합](https://ko.wikipedia.org/wiki/집합)에서 사용되는 연산과 동일하게 작용한다.
+집합 객체 연산자는 수학의 [집합](https://ko.wikipedia.org/wiki/집합)에서 사용되는 연산과 동일하게 작용한다.
 
 | 연산자 | 이름   | 설명                                                       |
 |:------:|:------:| ---------------------------------------------------------- |
@@ -856,7 +856,7 @@ function()
 # return 반환문이 있는 사용자 정의 함수
 def function():
     print("Hello World!")
-    return 3
+    return 1 + 2
     
 print(function())
 ```
@@ -1072,29 +1072,18 @@ def function():
 수정될 함수로부터 가장 가까운 데코레이터가 우선적으로 적용된다. 그러므로 `function()` 함수는 먼저 `@decorator2` 다음 `@decorator1` 데코레이터 순서로 적용된다.
 
 ## 람다 표현식
-[람다 표현식](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로, 데이터를 저장하지 않고 단일 표현식으로만 값을 반환한다. 익명 함수는 `lambda` 키워드로 생성되어 흔히 일회용 함수 또는 고차 함수의 전달인자로 사용된다.
+[람다 표현식](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 단일 표현식으로만 값을 반환한다. 익명 함수는 `lambda` 키워드로 생성되어 흔히 일회용 함수 또는 고차 함수의 전달인자로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다.
 
 | 구문                                                  |
 |:---------------------------------------------------:|
 | `lambda arg1, arg2 ∶ expression`                    |
 | 익명 함수는 매개변수 `arg`와 이를 반환하는 표현식 `expression`으로 구성된다. |
 
-비록 익명 함수는 한 번만 사용되는 이름없는 함수이더라도 변수에 할당하여 언제든지 호출할 수 있다.
-
 ```python
-# (이름이 있는) 네임드 함수
-def function(arg1, arg2):
-    return 2 * arg1 + arg2
-
 # 람다 표현식
-(lambda arg1, arg2: 2 * arg1 + arg2)(2, 3)
-
-# 변수에 할당된 익명 함수
 variable = lambda arg1, arg2: 2 * arg1 + arg2
-variable(2,3)
-```
-```
-7
+
+variable(2, 3)    # 출력: 7
 ```
 
 ## 재귀 함수 
@@ -1123,7 +1112,7 @@ def factorial(arg):
 > ```python
 > variable = [0, 3, 5, 9]
 > print(variable.index(5))
-> # variable이란 이름을 가진 리스트 객체의 "index()" 메소드를 사용하여 값 5에 대한 위치를 반환한다.
+> # "variable" 리스트 객체의 "index()" 메소드를 사용하여 값 5에 대한 위치를 반환한다.
 > ```
 
 클래스는 `class` 키워드를 사용하여 속성 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
@@ -1367,7 +1356,7 @@ print(instance.method(2, 3))
 | 프로퍼티 | 데코레이터        | 설명                            |
 |:-------:|-------------------|-------------------------------|
 | Getter  | `@property`       | 프로퍼티로부터 값을 반환받는 맴버이다.     |
-| Setter  | `@<프로퍼티명>.setter`  | 프로퍼티로부터 값을 설정하는 맴버이다. |
+| Setter  | `@<프로퍼티명>.setter`  | 프로퍼티의 값을 설정하는 맴버이다. |
 | Deleter | `@<프로퍼티명>.deleter` | 프로퍼티가 제거될 때 실행되는 맴버이다.   |
 
 속성을 나누므로써 수정되어서는 안될 민감한 코드를 setter 및 deleter 영역에 숨기고 getter만을 통해서 데이터를 반환한다. 정의된 형태는 메소드와 유사하지만 실제로 사용할 때는 소괄호 `()` 없이 속성처럼 사용된다. 프로퍼티의 setter와 deleter는 선택사항이지만, getter는 반드시 정의되어야 한다.
@@ -1410,8 +1399,8 @@ del instance.method      # Deleter 프로퍼티 호출
 # 파이썬: 예외 처리
 [예외](https://docs.python.org/3/tutorial/errors.html#exceptions)(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 인터프리터에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
 
-## `try`/`except` 예외 처리문
-[`try`](https://docs.python.org/3/reference/compound_stmts.html#try)/[`except`](https://docs.python.org/3/reference/compound_stmts.html#except) 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
+## `try`-`except` 예외 처리문
+[`try`](https://docs.python.org/3/reference/compound_stmts.html#try)-[`except`](https://docs.python.org/3/reference/compound_stmts.html#except) 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
 
 * **`try` 문**
 
@@ -1432,7 +1421,7 @@ except:               # 예외 유형: 모든 유형의 예외 처리
     ...
 ```
 
-다음은 `try`/`except` 예외 처리문 쌍을 보조하는 문장이며, 이들은 선택사항이다.
+다음은 `try`-`except` 예외 처리문 쌍을 보조하는 문장이며, 이들은 선택사항이다.
 
 | 키워드    | 설명                                            |
 |:---------:| ---------------------------------------------- |
