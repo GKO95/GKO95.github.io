@@ -1970,7 +1970,7 @@ class CLASS : INTERFACE1, INTERFACE2
 
 만일 인터페이스의 멤버 중 하나라도 코드가 구현되지 않았더라면 컴파일러 오류가 발생한다.
 
-> 인터페이스 안에 맴버가 구현될 수 있으나, 이는 [오버라이딩](#메소드-오버라이딩)이 되지 않은 가상 메소드처럼 인터페이스에 정의된 코드를 대신 실행할 수 있도록 한다. 그러므로 인터페이스를 도입한 사용자 정의 자료형에서 해당 맴버에 대한 코드 구현이 없어도 컴파일러 오류가 발생하지 않는다.
+> 인터페이스 안에 맴버가 구현될 수 있으나, 이는 [오버라이딩](#메소드-오버라이딩)이 되지 않은 가상 메소드처럼 인터페이스에 정의된 코드를 대신 실행할 수 있도록 한다 (일명 [기본 인터페이스 메소드](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/tutorials/default-interface-methods-versions); default implementation). 그러므로 인터페이스를 도입한 사용자 정의 자료형에서 해당 맴버에 대한 코드 구현이 없어도 컴파일러 오류가 발생하지 않는다.
 >
 > ```csharp
 > INTERFACE instance = new CLASS();
@@ -1985,6 +1985,63 @@ class CLASS : INTERFACE1, INTERFACE2
 > /* 인터페이스 도입 */
 > class CLASS : INTERFACE { }
 > ```
+
+## 제네릭
+[제네릭](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/generics)(generic)은 자료형을 나중에 지정하여 사용할 수 있는 함수 및 클래스 틀이며 식별자 뒤에 `<>` 구문과 함께 선언된다. 유사한 코드를 수행하는 함수 및 클래스를 각 자료형 조합마다 별도로 정의하지 않고 제네릭으로 통합시키므로써 관리가 편해지고 작업효율을 높일 수 있다. 대표적인 예시로 [제네릭 컬렉션](#컬렉션)들이 있다.
+
+### 제네릭 메소드
+[제네릭 메소드](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/generic-methods)(generic method)는 자료형 지정이 가능한 메소드이다. 선언된 제네릭 메소드를 사용하기 위해서는 홑화살괄호 `<>` 안에 자료형을 지정하여 객체화한다.
+
+```csharp
+/* 제네릭 메소드 객체화 */
+Method<int, double>(1, 3.14);
+
+/* 제네릭 메소드 선언 */
+U Method<T, U>(T arg1, U arg2)
+{
+    ...
+}
+```
+
+### 제네릭 클래스
+[제네릭 클래스](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/generic-classes)(generic class)는 자료형 지정이 가능한 클래스이다. 선언된 제네릭 클래스를 사용하기 위해서는 홑화살괄호 `<>` 안에 자료형을 지정하여 객체화한다.
+
+```csharp
+/* 제네릭 클래스 객체화 */
+CLASS<int, double> instance = new() { Field1 = 1, Field2 = 3.14 };
+
+/* 제네릭 클래스 선언 */
+class CLASS<T, U>
+{   
+    T Field1;
+    U Field2;
+    
+    U Method(T arg1, U arg2)
+    {
+        ...
+    }
+}
+```
+
+### 제네릭 인터페이스
+[제네릭 인터페이스](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/generic-interfaces)(generic interface)는 자료형 지정이 가능한 인터페이스이다. 선언된 제네릭 인터페이스를 사용하기 위해서는 홑화살괄호 `<>` 안에 자료형을 지정하여 도입한다.
+
+```csharp
+/* 제네릭 인터페이스 선언 */
+interface INTERFACE<T, U>
+{
+    T Property { get; set; }
+    U Property { get; set; }
+
+    U Method(T arg1, U arg2);
+}
+
+/* 제네릭 인터페이스 도입 */
+class CLASS<T, U> : INTERFACE<T, U>
+{
+    ...
+}
+```
 
 ## 열거형
 [열거형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum)(enumeration)은 열거된 항목, 일명 열거형 맴버(enum member)들을 정수로 순번을 매기는 `enum` 키워드로 선언된 자료형이다. 맴버들은 기본적으로 정수 0부터 시작하여 다음 맴버마다 1만큼 증가한다. 맴버에 할당 연산자 `=`로 정수를 직접 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 선언 이후에 열거형 맴버를 추가하거나, 혹은 맴버의 값을 바꾸는 건 불가하다.
@@ -2013,60 +2070,11 @@ enum ENUMERATION
 ENUMERATION variable = ENUMERATION.member1;
 ```
 
-# C#: 제네릭
-제네릭(generic)은 자료형과 무관하게 메소드 또는 클래스의 형식 틀을 제공한다. 개발자는 제네릭을 활용해 여러 유사한 함수 및 클래스를 손쉽게 생성할 수 있다. 본 장은 제네릭 선언 및 활용법을 설명한다.
-
-## 제네릭 메소드
-제네릭 메소드(generic method)는 다음과 같은 구문으로 선언된다.
-
-```csharp
-class CLASS
-{
-    /* 제네릭 메소드 선언 */
-    static U Method<T, U>(T arg1, U arg2)
-    {
-        statements;
-        return something;
-    }
-}
-```
-
-정의된 제네릭 메소드를 사용하기 위해서는 홑화살괄호 `<>` 안에 자료형을 지정하여 객체화한다.
-
-```csharp
-/* 제네릭 메소드 객체화 */
-CLASS.Method<int, double>(1, 3.0);
-```
-
-## 제네릭 클래스
-제네릭 클래스(generic class)는 다음과 같은 구문으로 선언된다.
-
-```csharp
-/* 제네릭 클래스 선언 */
-class CLASS<T, U>
-{
-    public CLASS(T arg1, U arg2) { Field1 = arg1,=; Field2 = arg2; }
-    ~CLASS() { }
-    
-    T Field1;
-    U Field2;
-    
-    U Method(T arg) => Field1 + Field2 - arg;
-}
-```
-
-정의된 제네릭 클래스를 사용하기 위해서는 홑화살괄호 `<>` 안에 자료형을 지정하여 객최화한다.
-
-```csharp
-/* 제네릭 클래스 객체화 */
-CLASS<int, double> instance = new(1, 3.0);
-```
-
 # C#: 예외 처리
 예외(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 컴파일러에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
 
-## `try`/`catch` 예외 처리문
-`try`/`catch` 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
+## `try`-`catch` 예외 처리문
+[`try`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/try-catch)-[`catch`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/try-catch) 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
 
 * **`try` 문**
 
@@ -2077,102 +2085,84 @@ CLASS<int, double> instance = new(1, 3.0);
     `try` 블록에서 예외가 발생하면 실행되는 코드를 포함한다. 하나의 `try` 블록에 여러 `catch` 블록을 사용하여 다양한 예외에 대비할 수 있다. 만일 `catch` 블록이 없으면 컴파일 오류가 발생한다 (컴파일 오류는 예외가 아니다).
 
 ```csharp
-/* try 블록 */
 try
-{
-	statements;
+{ 
+    statements;
 }
 catch(IndexOutOfRangeException e)
 {
-	// catch: 범위를 벗어난 요소 접근 시 발생 예외
-}
+    // 예외 유형: 범위를 벗어난 요소 접근
+} 
 catch(DivideByZeroException e)
 {
-	// catch: 숫자를 0으로 나눌 시 발생 예외
+    // 예외 유형: 숫자를 0으로 나누기
 }
-```
-
-`catch` 블록이 모든 예외 사항을 처리하도록 하기 위해서는 소괄호 내에 `Exception` 클래스를 넣는다. 
-
-```csharp
 catch(Exception e)
 {
-	// catch: 모든 예외
+    // 예외 유형: 모든 유형의 예외 처리
 }
 ```
+
+### `finally` 블록
+[`finally`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/try-finally) 블록은 [`try`](#try-catch-예외-처리문) 블록에서의 예외 발생 여부와 무관하게 마지막에 무조건 실행되는데, 이러한 특성을 활용하여 `try`-`finally` 혹은 `try`-`catch`-`finally` 조합으로 예외 처리문에서 할당된 리소스를 정리하는데 사용된다.
 
 ## `throw` 키워드
-`throw` 키워드는 내에서 의도적으로 예외를 발생시키는데 사용된다. 자체 제작 함수나 클래스에서 설계되지 않은 방식으로 접근하거나 사용하려는 경우, 해당 문으로 오류를 일으켜서 프로세스 실행을 즉시 중단시키는 용도로 활용된다.
+[`throw`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/throw) 키워드는 프로그램 실행 도중에 예외 발생을 알리는 역할을 담당하며, 아래 두 예시 코드는 `throw` 키워드의 대표적인 활용법이다.
 
-```csharp
-try
-{
-    statements;
-    
-    // 예외 발생: "INDEX OUT OF RANGE"
-	throw new IndexOutOfRangeException("오류 메시지!");
-}
-catch(IndexOutOfRangeException e)
-{
-    statements;
-}
-catch(DivideByZeroException e)
-{
-    statements;
-}
-```
-```
-오류 메시지!
-```
+1. **의도적 예외 발생**
 
-### 예외 건네주기
-`try`/`catch` 예외 처리문에서 감지한 예외는 또 다른 예외 처리문으로 넘겨줄 수 있다.
+    [`try`](#try-catch-예외-처리문) 블록 내에서 의도적으로 예외를 발생시키는데 사용된다. 함수나 자료형을 설계되지 않은 방식으로 접근하여 발생할 수 있는 문제를 원천적으로 방지하기 위해 일부러 오류를 발생시켜 프로세스 실행을 즉시 중단시키는 용도로 활용된다.
 
-```csharp
-class Program
-{
-    static void Method()
-    {
-        try { throw new IndexOutOfRangeException("오류 메시지!"); }
-        catch(Exception e) { throw; }    // 예외 건네주기: Method() -> Main()
-    }
+    ```csharp
+   try
+   {       
+       throw new IndexOutOfRangeException("ERROR!");
 
-    static void Main(string[] args)
-    {
-        try { Method(); }                // 건네진 예외 수신
-        catch (Exception e) { System.Console.WriteLine(e.Message) }
-    }
-}
-```
-```
-오류 메시지!
-```
+       Console.WriteLine("Hello World!");    // 예외 발생으로 실행되지 않음!
+   }
+   catch(Exception e)
+   {
+       Console.WriteLine(e);
+   }
+    ```
+    ```
+   System.IndexOutOfRangeException: ERROR!
+       at Program.<Main>$(String[] args) in D:\Workspace\Csharp\Experiment\Program.cs:line 3
+    ```
 
-## `finaly` 처리문
-`finally` 처리문은 선택사항으로 `try`/`catch` 다음에 위치하여 예외 처리 마지막에 반드시 실행되는 블록이다.
+2. **예외 건네주기**
 
-```csharp
-try
-{
-    statements;
-}
-catch(IndexOutOfRangeException e)
-{
-    statements;
-}
-catch(DivideByZeroException e)
-{
-    statements;
-}
-/* try/catch 이후의 실행 코드 */
-finally
-{
-	statements;
-}
-```
+    [`try`](#try-catch-예외-처리문)-[`catch`](#try-catch-예외-처리문) 예외 처리문에서 감지한 예외는 또 다른 예외 처리문으로 넘겨줄 수 있다.
+
+    ```csharp
+   void Function(int arg)
+   {
+       try
+       {
+           var variable = 100 / arg
+           Console.WriteLine(variable);
+       }
+       catch(Exception e)
+       {
+           throw;     // 예외 건네주기: Function() -> Main()
+       }
+   }
+
+   try
+   {
+       Function(0);   // 예외 건네받기: Function() -> Main()
+   }
+   catch(Exception e)
+   {
+       Console.WriteLine(e.Message);
+   }
+    ```
+    ```
+   Attempted to divide by zero.
+    ```
 
 # C#: 파일 관리
-여러 데이터를 파이썬 프로세스에 전달하거나, 혹은 데이터를 외부로 출력하기 위해 파일을 불러와 read 혹은 write 하여 처리할 수 있다. 본 장은 C# 프로그래밍 언어에서 파일을 관리하는 방법에 대하여 소개한다.
+여러 데이터를 C# 프로그래밍 언어로 개발된 프로세스에 전달하거나, 혹은 데이터를 외부로 출력하기 위해 파일을 불러와 read 혹은 write 하여 처리할 수 있다. 본 장은 C# 프로그래밍 언어에서 파일을 관리하는 방법에 대하여 소개한다. 외부 파일을 읽고 쓰기 위해서 [`System.IO.File`](https://docs.microsoft.com/en-us/dotnet/api/system.io.file) 클래스를 활용한다.
 
 ### 절대경로 및 상대경로
 컴퓨터에는 두 종류의 경로 탐색법이 존재한다.
@@ -2183,33 +2173,22 @@ finally
 경로를 지정할 때에는 백슬래시 두 개 `\\`로 폴더 및 파일을 구분한다. 하나만 사용하면 [탈출 문자](#탈출-문자)가 되어 원치 않은 텍스트 연산이 수행될 수 있다.
 
 ## 파일 생성
-C# 프로그래밍 언어에서 텍스트 기반 파일을 `System.IO.File.Create()` 메소드로 파일을 생성할 수 있다.
+C# 프로그래밍 언어에서 텍스트 기반 파일을 [`File.Create()`](https://docs.microsoft.com/en-us/dotnet/api/system.io.file.create) 메소드로 파일을 생성할 수 있다.
 
 ```csharp
-static void Main()
-{
-    var file = System.IO.File.Create("path\\filename.txt");
-}
+var file = File.Create("path\\filename.txt");
 ```
 
 ## 파일 읽기
-C# 프로그래밍 언어에서 텍스트 기반 파일을 `System.IO.File.ReadAllText()` 메소드로 파일 내용을 읽을 수 있다. 
+C# 프로그래밍 언어에서 텍스트 기반 파일을 [`File.ReadAllText()`](https://docs.microsoft.com/en-us/dotnet/api/system.io.file.readalltext) 메소드로 파일 내용을 곧바로 읽을 수 있다. 
 
 ```csharp
-static void Main()
-{
-    string output = System.IO.File.ReadAllText("path\\filename.txt");
-    System.Console.WriteLine(output);
-}
+string output = File.ReadAllText("path\\filename.txt");
 ```
 
 ## 파일 쓰기
-C# 프로그래밍 언어에서 텍스트 기반 파일을 `System.IO.File.WriteAllText()` 메소드로 파일 내용을 작성할 수 있다. 파일이 이미 존재하면 기존의 내용은 덮어쓴다.
+C# 프로그래밍 언어에서 텍스트 기반 파일을 [`File.WriteAllText()`](https://docs.microsoft.com/en-us/dotnet/api/system.io.file.writealltext) 메소드로 파일 내용을 곧바로 작성할 수 있다. 파일이 이미 존재하면 기존의 내용은 덮어쓴다.
 
 ```csharp
-static void Main()
-{
-    string input = "Hello World!";
-    System.IO.File.WriteAllText("path\\filename.txt", input);
-}
+File.WriteAllText("path\\filename.txt", "Hello World!");
 ```
