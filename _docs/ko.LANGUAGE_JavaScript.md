@@ -41,7 +41,7 @@ Node.js에서 가장 주목할 특징은 [비동기 입출력](https://ko.wikipe
 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)은 최소한 프로그래밍 언어의 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 소프트웨어 개발 프로그램이다. 자바스크립트 엔진은 자바스크립트 코드를 실행하는 소프트웨어이지만, 자바스크립트 코드 편집기가 아니다. 그러므로 자바스크립트 코드를 편집하고 곧바로 프로그램으로 실행하여 문제가 발생하면 검토할 수 있는 IDE가 절대적으로 필요하다.
 
 ### 비주얼 스튜디오 코드
-[비주얼 스튜디오 코드](https://code.visualstudio.com/download)(Visual Studio Code; VS Code)는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. VS Code에는 자바스립트 자동 코드 완성(일명 IntelliSense), 코드 탐색기, 디버거 등이 이미 탑재되어 있어 다른 프로그래밍 언어처럼 별도의 확장도구 설치가 불필요하다.
+[비주얼 스튜디오 코드](https://ko.wikipedia.org/wiki/비주얼_스튜디오_코드)<sub>([다운로드](https://code.visualstudio.com/download))</sub>, 일명 VS Code는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. VS Code에는 자바스립트 자동 코드 완성(일명 IntelliSense), 코드 탐색기, 디버거 등이 이미 탑재되어 있어 다른 프로그래밍 언어처럼 별도의 확장도구 설치가 불필요하다.
 
 ![VS Code에서 파이썬 3 작업 환경 예시](/images/docs/javascript/js_vscode_example.png)
 
