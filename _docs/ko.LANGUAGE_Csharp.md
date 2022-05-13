@@ -52,7 +52,7 @@ C# 프로그래밍 언어는 "객체"라는 데이터를 위주로 프로그램�
 본문은 윈도우 NT 운영체제에서 C# 프로그래밍 언어 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE) 설치 및 프로젝트 생성 단계를 소개한다. 프레임워크는 .NET 프레임워크가 아닌 .NET Core 위주로 진행한다.
 
 ## 비주얼 스튜디오
-[비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 IDE이며 .NET을 제공한다. 비주얼 스튜디오의 세 가지 에디션 중에서 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 [C](/docs/ko.C)/[C++](/docs/ko.Csharp)이나 [자바스크립트](/docs/ko.JavaScript) 등 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. C# 프로그래밍 언어 개발을 위해서면 ".NET desktop development"를 선택한다.
+[비주얼 스튜디오](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_스튜디오)<sub>([다운로드](https://visualstudio.microsoft.com/downloads/))</sub>는 마이크로소프트에서 개발한 IDE이며 .NET을 제공한다. 비주얼 스튜디오의 세 가지 에디션 중에서 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 [C](/docs/ko.C)/[C++](/docs/ko.Csharp)이나 [자바스크립트](/docs/ko.JavaScript) 등 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. C# 프로그래밍 언어 개발을 위해서면 ".NET desktop development"를 선택한다.
 
 ![비주얼 스튜디오 C# 프로그래밍을 위한 구성요소](/images/docs/csharp/csharp_vs_component.png)
 

@@ -31,7 +31,7 @@ C++ 프로그래밍 언어는 [컴파일 언어](https://ko.wikipedia.org/wiki/�
 C++ 프로그래밍 언어로 프로그램을 개발하려면 C++ 컴파일러가 반드시 필요하다. C++ 컴파일러 종류는 개발사와 목적에 따라 다양하지만, 전부 동일한 ISO 표준에 따라 동작하므로 일반적인 경우에는 어떠한 컴파일러를 사용하던 무관하다. 프로그래밍 언어의 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)을 설치하면 대체로 권장되는 컴파일러가 함께 설치된다. 그러므로 본 장에서는 IDE 설치 및 프로젝트 생성 단계를 위주로 설명한다.
 
 ## 비주얼 스튜디오
-[비주얼 스튜디오](https://visualstudio.microsoft.com/downloads/)(Visual Studio)는 마이크로소프트에서 개발한 IDE이며 [Visual C++](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C%2B%2B) 컴파일러를 제공한다. 비주얼 스튜디오의 세 가지 에디션 중에서 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 [C#](/docs/ko.Csharp/)이나 [자바스크립트](/docs/ko.JavaScript/) 등 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. C++ 프로그래밍 언어 개발을 위해서면 "Desktop development with C++"를 선택한다.
+[비주얼 스튜디오](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_스튜디오)<sub>([다운로드](https://visualstudio.microsoft.com/downloads/))</sub>는 마이크로소프트에서 개발한 IDE이며 [Visual C++](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_C%2B%2B) 컴파일러를 제공한다. 비주얼 스튜디오의 세 가지 에디션 중에서 무료 버전인 커뮤니티 에디션으로도 충분하다. 통합 개발 환경인 만큼 [C#](/docs/ko.Csharp/)이나 [자바스크립트](/docs/ko.JavaScript/) 등 다른 프로그래밍 언어도 함께 지원하므로 여러 종류의 구성요소를 제공한다. C++ 프로그래밍 언어 개발을 위해서면 "Desktop development with C++"를 선택한다.
 
 ![비주얼 스튜디오 C++ 프로그래밍을 위한 구성요소](/images/docs/cpp/cpp_vs_component.png)
 
@@ -60,7 +60,7 @@ C++ 프로그래밍 언어로 다양할 어플리케이션을 만들 수 있어,
 비주얼 스튜디오는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`)와 디버그 모드(`F5`)이다. [디버그](https://ko.wikipedia.org/wiki/디버그)(debug)는 프로그램에 발생한 문제를 해결하는 행위로, IDE에서 각 줄의 코드마다 어떠한 변화가 생겼는지 혹은 얼만큼의 시스템 리소스를 소모하는지 등을 확인할 수 있는 정보를 제공한다. 디버깅 목적이 아니면 일반 실행 모드를 사용하는 것을 권장한다.
 
 ## 엑스코드
-[엑스코드](https://developer.apple.com/download/release/)(Xcode)는 애플에서 개발한 macOS의 대표적인 IDE이며 Clang을 기본 컴파일러로 사용한다. 엑스코드는 [Swift](https://ko.wikipedia.org/wiki/스위프트_(프로그래밍_언어))와 같은 여러 프로그래밍 언어를 지원하는데, 해당 IDE는 C++ 프로그래밍 언어 프로젝트 생성 옵션이 존재한다. 엑스코드를 실행하면 새로운 프로젝트를 `File > New > Project...`로 통해 생성한다.
+[엑스코드](https://ko.wikipedia.org/wiki/엑스코드)<sub>([다운로드](https://developer.apple.com/download/release/))</sub>는 애플에서 개발한 macOS의 대표적인 IDE이며 Clang을 기본 컴파일러로 사용한다. 엑스코드는 [Swift](https://ko.wikipedia.org/wiki/스위프트_(프로그래밍_언어))와 같은 여러 프로그래밍 언어를 지원하는데, 해당 IDE는 C++ 프로그래밍 언어 프로젝트 생성 옵션이 존재한다. 엑스코드를 실행하면 새로운 프로젝트를 `File > New > Project...`로 통해 생성한다.
 
 ![엑스코드 시작화면](/images/docs/cpp/cpp_xcode_project1.png)
 
