@@ -348,7 +348,7 @@ variable = 3;    // variable = 3
 [value-type]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types
 [reference-type]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/reference-types
 
-동일한 자료형의 변수 여러 개를 한꺼번에 정의하려면, 식별자마다 쉼표 `,`로 구분지을 수 있다.
+동일한 자료형의 변수 여러 개를 한꺼번에 선언하려면, 식별자마다 쉼표 `,`로 구분지을 수 있다.
 
 ```csharp
 /* 다수의 정수 자료형 변수 선언 */
@@ -386,11 +386,11 @@ char variable2 = 75;    // variable2에는 문자 'K'가 저장
     ```
 
 ### 지역 변수 및 전역 변수
-C# 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되었는지에 따라 두 가지의 종류로 구분된다.
+C# 프로그래밍 언어에서 변수가 코드 중에서 어디에 선언되었는지에 따라 두 가지의 종류로 구분된다.
 
 * **지역 변수(local variable)**
 
-    블록 내부에서 정의된 변수이다. 지역 변수에 저장된 데이터는 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.
+    블록 내부에서 선언된 변수이다. 지역 변수에 저장된 데이터는 블록 밖에서는 소멸되므로 외부에서 사용할 수 없다.
 
     ```csharp
   class Program
@@ -405,7 +405,7 @@ C# 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되�
 
 * **전역 변수(global variable)**
 
-    이론적으로 블록 내에 속하지 않은 외부에 정의된 변수로써 어느 블록에서도 호출만으로 지역 변수와 함께 사용할 수 있는 변수이다. 허나 객체지향 프로그래밍은 클래스 외부에 별도의 변수를 선언하는 게 불가능한 구조이므로 전역 변수를 지원하지 않는다.
+    이론적으로 블록 내에 속하지 않은 외부에 선언된 변수로써 어느 블록에서도 호출만으로 지역 변수와 함께 사용할 수 있는 변수이다. 허나 객체지향 프로그래밍은 클래스 외부에 별도의 변수를 선언하는 게 불가능한 구조이므로 전역 변수를 지원하지 않는다.
 
 ## 네임스페이스
 [네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)는 식별자의 유일성을 보장하기 위한 데이터 분류 공간으로, `namespace` 키워드를 통해 생성하여 (1) 블록 `{}` 안에 데이터들을 분류하거나 (2) [C# 10.0](https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-10) 이후부터 블록을 생략하여 해당 스크립트 파일 전체를 네임스페이스로 분류할 수 있다. 네임스페이스 안에 또 다른 네임스페이스를 선언할 수 있으며, 이를 네스티드 네임스페이스(nested namespace)라고 부른다. 그러나 네임스페이스 또한 유일한 식별자를 가져야 하기 때문에 동일한 [영역범위](https://docs.microsoft.com/en-us/cpp/cpp/scope-visual-cpp)(scope)에 놓여진 네임스페이스는 이름이 중복되어서는 안된다.
@@ -769,7 +769,7 @@ for (initialize; condition; increment)
 for (initialize; condition; increment) statement;
 ```
 
-`for` 반복문의 우선 `initialize`에서 반복문 지역 변수를 정의하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한 다음 `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, `condition`으로 돌아가 절차를 반복한다.
+`for` 반복문의 우선 `initialize`에서 반복문 지역 변수를 선언하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한 다음 `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, `condition`으로 돌아가 절차를 반복한다.
 
 ## `foreach` 반복문
 [`foreach`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-foreach-statement) 반복문은 조건 만족 여부에 따라 반복하는 게 아니라 주어진 범위 내에서 반복한다. 범위로 사용되는 데이터는 요소를 하나씩 나열할 수 있는 [컬렉션](#c-컬렉션)(collection)을 일반적으로 사용한다.
@@ -840,7 +840,7 @@ Console.WriteLine(arr);       // 출력: System.Int32[]
 Console.WriteLine(arr[0]);    // 출력: value1
 ```
 
-이러한 배열의 특징으로 인해 배열은 정의 외에 한꺼번에 할당이 불가능하다. 그렇지만 개별 요소를 재할당하여 데이터를 변경할 수 있다.
+이러한 배열의 특징으로 인해 배열은 선언 외에 한꺼번에 할당이 불가능하다. 그렇지만 개별 요소를 재할당하여 데이터를 변경할 수 있다.
 
 ```csharp
 int[] variable = new int[3];
@@ -996,7 +996,7 @@ int[][] variable = new int[size][] {
     ```
 
 # C#: 함수
-함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
+함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `Function()` 형식으로 구별된다.
 
 ```csharp
 double variable = 3.14159
@@ -1014,13 +1014,13 @@ Console.WriteLine(Math.Round(variable));
 
 ```cpp
 /* 함수 선언 */
-void function()
+void Function()
 {
     Console.WriteLine(1 + 2);
 }
 
 /* 함수 호출 */
-function();    // 출력: 3
+Function();    // 출력: 3
 ```
 
 C# 프로그래밍 언어와 같은 [객체지향](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)에서는 [캡슐화](#c-클래스)(encapsulation)에 의해 함수의 선언과 호출 순서는 사실상 무의미하다. 즉, 위의 예시 코드와 달리 스크립트상 함수가 호출에 비해 나중에 선언되어도 정상적으로 동작한다.
@@ -1034,10 +1034,10 @@ C# 프로그래밍 언어와 같은 [객체지향](https://ko.wikipedia.org/wiki
 > {
 >     static void Main(string[] args)
 >     {
->         function();
+>         Function();
 >     }
 >
->     static void function()
+>     static void Function()
 >     {
 >         Console.WriteLine(1 + 2);
 >     {
@@ -1046,31 +1046,31 @@ C# 프로그래밍 언어와 같은 [객체지향](https://ko.wikipedia.org/wiki
 
 함수명 뒤에 소괄호 `()` 기입여부에 따라 의미하는 바가 다르다.
 
-* `function()`은 함수에 정의된 코드를 실행한다.
+* `Function()`은 함수에 정의된 코드를 실행한다.
 
     ```csharp
-  void function()
+  void Function()
   {
       Console.WriteLine(1 + 2);
   }
 
-  function();
-  Console.WriteLine("반환: {0}", function());    // [CS1503] 2 인수: 'void'에서 'object?'(으)로 변환할 수 없습니다.
+  Function();
+  Console.WriteLine("반환: {0}", Function());    // [CS1503] 2 인수: 'void'에서 'object?'(으)로 변환할 수 없습니다.
     ```
     ```
   3
     ```
 
-* `function`은 함수의 [Type](#자료형)을 반환한다.
+* `Function`은 함수의 [Type](#자료형)을 반환한다.
 
     ```cpp
-  void function()
+  void Function()
   {
       Console.WriteLine(1 + 2);
   }
 
-  function;                                      // [CS0201] 할당, 호출, 증가, 감소 및 새 개체 식만 문으로 사용할 수 있습니다.
-  Console.WriteLine("반환: {0}", function);
+  Function;                                      // [CS0201] 할당, 호출, 증가, 감소 및 새 개체 식만 문으로 사용할 수 있습니다.
+  Console.WriteLine("반환: {0}", Function);
     ```
     ```
   반환: System.Action
@@ -1081,13 +1081,13 @@ C# 프로그래밍 언어와 같은 [객체지향](https://ko.wikipedia.org/wiki
 
 ```csharp
 // return 반환문이 있는 사용자 정의 함수
-int function()
+int Function()
 {
     Console.WriteLine("Hello World!");
     return 1 + 2;
 }
     
-Console.WriteLine(function());
+Console.WriteLine(Function());
 ```
 ```
 Hello World!
@@ -1111,15 +1111,15 @@ Hello World!
 
 ```csharp
 /* 함수 선언 */
-int function(int arg1, double arg2 = 2.0)
+int Function(int arg1, double arg2 = 2.0)
 {
     return arg1 + arg2;
 }
 
 /* 함수 호출 */
-function(1);                    // 반환: 3
-function(1, 3.14);              // 반환: 4 (= 1 + 3.14의 정수만 추출)
-function(arg2: 2.71, arg1: 5);  // 반환: 7 (= 5 + 2.71의 정수만 추출)
+Function(1);                    // 반환: 3
+Function(1, 3.14);              // 반환: 4 (= 1 + 3.14의 정수만 추출)
+Function(arg2: 2.71, arg1: 5);  // 반환: 7 (= 5 + 2.71의 정수만 추출)
 ```
 
 ### 참조에 의한 전달
@@ -1133,14 +1133,14 @@ function(arg2: 2.71, arg1: 5);  // 반환: 7 (= 5 + 2.71의 정수만 추출)
 
     ```csharp
   /* 참조에 의한 전달: ref 키워드 */
-  void function(ref int arg)
+  void Function(ref int arg)
   {
       arg *= 2;
   }
 
   int variable = 3;
   
-  function(ref variable);
+  Function(ref variable);
   Console.WriteLine(variable);    // 출력: 6
     ```
 
@@ -1150,14 +1150,14 @@ function(arg2: 2.71, arg1: 5);  // 반환: 7 (= 5 + 2.71의 정수만 추출)
 
     ```csharp
   /* 참조에 의한 전달: out 키워드 */
-  void function(out int arg)
+  void Function(out int arg)
   {
       arg *= 2;                   // [CS0269] Use of unassigned out parameter 'arg'
   }
 
   int variable = 3;
   
-  function(out variable);
+  Function(out variable);
   Console.WriteLine(variable);
     ```
 
@@ -1167,14 +1167,14 @@ function(arg2: 2.71, arg1: 5);  // 반환: 7 (= 5 + 2.71의 정수만 추출)
 
     ```csharp
   /* 참조에 의한 전달: in 키워드 */
-  void function(in int arg)
+  void Function(in int arg)
   {
       arg *= 2;                   // [CS8331] Cannot assign to variable 'in int' because it is a readonly variable
   }
 
   int variable = 3;
   
-  function(in variable);
+  Function(in variable);
   Console.WriteLine(variable);
     ```
 
@@ -1183,17 +1183,17 @@ function(arg2: 2.71, arg1: 5);  // 반환: 7 (= 5 + 2.71의 정수만 추출)
 
 ```csharp
 /* 오버로딩된 함수 선언 1 */
-double function(int arg1, double arg2) {
+double Function(int arg1, double arg2) {
     return arg1 + arg2;
 }
 
 /* 오버로딩된 함수 선언 2 */
-double function(double arg1, double arg2) {
+double Function(double arg1, double arg2) {
     return arg1 - arg2;
 }
 
-function(1, 3.0);      // 반환: 4.0
-function(1.0, 3.0);    // 반환: -2.0
+Function(1, 3.0);      // 반환: 4.0
+Function(1.0, 3.0);    // 반환: -2.0
 ```
 
 ## 진입점
@@ -1235,22 +1235,22 @@ delegate void Del(string arg);
 > 종합하자면 C/C++ 프로그래밍 언어의 [함수 포인터](/docs/ko.C#함수-포인터)와 동일한 역할을 수행한다. 다만, 함수 포인터는 해당 함수만을 참조한다면 `delegate` 자료형은 함수가 속해있는 객체를 함께 캡슐화한다.
 
 ```csharp
-void function1(string arg)
+void Function1(string arg)
 {
     Console.WriteLine(arg.ToUpper());
 }
 
-void function2(string arg)
+void Function2(string arg)
 {
     Console.WriteLine(arg.ToLower());
 }
 
 Del handle;
 
-handle = function1;
+handle = Function1;
 handle("Hello World!");    // 출력: HELLO WORLD!
 
-handle = function2;
+handle = Function2;
 handle("Hello World!");    // 출력: hello world!
 
 /* delegate 자료형 선언 */
@@ -1308,7 +1308,7 @@ delegate double Del(int arg1, double arg2);
 > 람다 연산자로 사용된 `=>` 토큰은 그 외에도 표현식 혹은 단일 문장을 갖는 간단한 함수 선언을 간략화하는 [표현식 본문 정의](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator#expression-body-definition)(expression body definition)에도 활용된다.
 > 
 > ```csharp
-> void function() => Console.WriteLine("Hello World!");
+> void Function() => Console.WriteLine("Hello World!");
 > ```
 
 람다 표현식을 수용할 수 있는 대리자는 데이터 반환 여부에 따라 [`Func<T, TResult>`](https://docs.microsoft.com/en-us/dotnet/api/system.func-2) 혹은 [`Action<T1, T2>`](https://docs.microsoft.com/en-us/dotnet/api/system.action-2)를 사용할 수 있으며, 이들은 간편히 [`var`](#자료형) 자료형으로 컴파일러에서 자동 결정하도록 하는 것도 방법이다.
@@ -1342,8 +1342,8 @@ int factorial(int num) {
 
 > 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수를 통틀어 맴버(member)라고 칭하는데, 이들은 각각 필드(field; 맴버 변수)과 메소드(method; 맴버 함수)라고 불리며 다음과 같이 접근한다.
 >
-> * **필드**: `instance.field`
-> * **메소드**: `instance.method()`
+> * **필드**: `instance.Field`
+> * **메소드**: `instance.Method()`
 >
 > 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 배열 및 벡터가 있다.
 >
@@ -1353,7 +1353,7 @@ int factorial(int num) {
 > // "variable" 리스트 객체의 "IndexOf()" 메소드를 사용하여 값 5를 갖는 요소의 인덱스를 반환한다.
 > ```
 
-클래스는 `class` 키워드를 사용하여 속성 및 메소드와 함께 정의된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
+클래스는 `class` 키워드를 사용하여 속성 및 메소드와 함께 선언된다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 선언된 맴버들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
 1. 변수와 함수가 하나의 객체로 결합된다.
 2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
@@ -1361,26 +1361,26 @@ int factorial(int num) {
 ```csharp
 CLASS instance = new CLASS();
 
-Console.WriteLine(instance.field1);       // 출력: 2
-Console.WriteLine(instance.method(1));    // 출력: 4
+Console.WriteLine(instance.Field1);       // 출력: 2
+Console.WriteLine(instance.Method(1));    // 출력: 4
 
 /* 클래스 선언 */
 class CLASS {
 
     /* 필드 맴버 */
-    public int    field1 = 2;
-    public double field2 = 3.14;
+    public int    Field1 = 2;
+    public double Field2 = 3.14;
     
     /* 메소드 맴버 */
-    public int method()
+    public int Method()
     {
-        return field1 * field2;
+        return Field1 * Field2;
     }
 
     /* 메소드 맴버 (오버로딩) */
-    public int method(int arg)
+    public int Method(int arg)
     {
-        return field1 + field2 - arg;
+        return Field1 + Field2 - arg;
     }
 }
 ```
@@ -1407,18 +1407,18 @@ class CLASS
     /* 생성자: 맴버 초기화 */
     public CLASS(int arg1, double arg2)
     {
-        field1 = arg1;
-        field2 = arg2;
+        Field1 = arg1;
+        Field2 = arg2;
 
         statements;
     }
 
-    private int    field1;
-    private double field2;
+    private int    Field1;
+    private double Field2;
 }
 ```
 
-생성자는 오버로딩될 수 있어 한 개 이상이 정의될 수 있다. 그 중에서 아무런 전달인자를 받지 않는 생성자를 기본 생성자(default constructor)라고 칭한다.
+생성자는 오버로딩될 수 있어 한 개 이상이 선언될 수 있다. 그 중에서 아무런 전달인자를 받지 않는 생성자를 기본 생성자(default constructor)라고 칭한다.
 
 ### 객체 초기자
 [객체 초기자](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/object-and-collection-initializers)(object initializer)는 외부 코드로부터 접근이 가능한 (`public`, `internal` 등) 아무런 필드 맴버들을 한 번에 초기화하는데 사용된다. 그러므로 생성자에서 초기화가 필요한 필드마다 데이터를 할당하는 코드를 일일이 기입할 수고를 줄이는 장점을 지닌다. 객체 초기자는 생성자가 실행된 이후에 동작한다.
@@ -1426,7 +1426,7 @@ class CLASS
 
 ```csharp
 /* 객체 초기자 */
-CLASS instance = new CLASS() { field1 = 2, field2 = 3.14 };
+CLASS instance = new CLASS() { Field1 = 2, Field2 = 3.14 };
 ```
 
 ### 종료자
@@ -1444,7 +1444,7 @@ class CLASS {
 }
 ```
 
-소멸자는 매개변수를 가질 수 없으므로 오버로딩될 수 없다. 그러므로 클래스는 오로지 하나의 소멸자만 정의할 수 있다.
+소멸자는 매개변수를 가질 수 없으므로 오버로딩될 수 없다. 그러므로 클래스는 오로지 하나의 소멸자만 선언할 수 있다.
 
 ## `this` 키워드
 [`this`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/this) 키워드는 객체가 자신의 메모리 주소를 반환하는데 사용된다. 객체의 [비정적](#정적-맴버)(non-static) 메소드로부터 자신의 맴버 호출을 `this->` 표현식으로 명시적으로 나타낼 수 있어, 흔히 필드 맴버를 매개변수 또는 지역변수와 구분짓는데 활용된다.
@@ -1454,17 +1454,17 @@ class CLASS {
 class CLASS {
 
     /* 필드 맴버 */
-    public int    field1 = 2;
-    public double field2 = 3.14;
+    public int    Field1 = 2;
+    public double Field2 = 3.14;
     
     /* 메소드 맴버 */
-    public int method() {
-        return this.field1 * this.field2;
+    public int Method() {
+        return this.Field1 * this.Field2;
     }
 
     /* 메소드 맴버 (오버로딩) */
-    public int method(int arg) {
-        return this.field1 + this.field2 - arg;
+    public int Method(int arg) {
+        return this.Field1 + this.Field2 - arg;
     }
 }
 ```
@@ -1477,22 +1477,22 @@ class CLASS {
 객체지향에 해당하는 C# 프로그래밍 언어는 정적 필드 맴버가 [전역 변수](#지역-변수-및-전역-변수)의 대안으로 사용된다.
 
 ```csharp
-Console.WriteLine(CLASS.field);       // 출력: 7
+Console.WriteLine(CLASS.Field);       // 출력: 7
 
 /* 클래스 객체화 */
 CLASS instance = new CLASS();
-CLASS.method(2);
+CLASS.Method(2);
 
-Console.WriteLine(instance.field);    // 출력: 9
+Console.WriteLine(instance.Field);    // 출력: 9
 
 /* 클래스 선언 */
 class CLASS
 {
     /* 정적 필드 선언 */
-    public static int field = 7;
+    public static int Field = 7;
 
     /* 정적 메소드 선언 */
-    public static void method(int arg) => CLASS.field += arg;
+    public static void Method(int arg) => CLASS.Field += arg;
 }
 ```
 
@@ -1506,9 +1506,9 @@ CLASS instance = new CLASS();    // [CS0712] Cannot create an instance of the st
 /* 정적 클래스 선언 */
 static class CLASS
 {
-    public static int field = 7;
+    public static int Field = 7;
 
-    public static void method(int arg) => CLASS.field += arg;
+    public static void Method(int arg) => CLASS.Field += arg;
 }
 ```
 
@@ -1534,12 +1534,12 @@ static class CLASS
 /* partial 클래스 */
 partial class CLASS
 {
-    int field;
+    int Field;
 }
 
 partial class CLASS
 {
-    void method()
+    void Method()
     {
         ...
     }
@@ -1553,8 +1553,8 @@ partial class CLASS
 /* 클래스 객체화 */
 DERIVEDCLASS instance = new DERIVEDCLASS();
 
-Console.WriteLine("{0} {1} {2}", instance.field1, instance.field2, instance.field3);
-Console.WriteLine(instance.method(2, 3));
+Console.WriteLine("{0} {1} {2}", instance.Field1, instance.Field2, instance.Field3);
+Console.WriteLine(instance.Method(2, 3));
 
 /* 기반 클래스 선언 */
 class BASECLASS
@@ -1562,10 +1562,10 @@ class BASECLASS
     public BASECLASS() => Console.WriteLine("생성자: 기반 클래스");
     ~BASECLASS()       => Console.WriteLine("종료자: 기반 클래스");
 
-    public int    field1 = 3;
-    public string field2 = "C#";
+    public int    Field1 = 3;
+    public string Field2 = "C#";
 
-    public int method(int arg1, int arg2) => arg1 + arg2;
+    public int Method(int arg1, int arg2) => arg1 + arg2;
 }
 
 /* 파생 클래스 선언 */
@@ -1574,10 +1574,10 @@ class DERIVEDCLASS : BASECLASS
     public DERIVEDCLASS() => Console.WriteLine("생성자: 파생 클래스");
     ~DERIVEDCLASS()       => Console.WriteLine("종료자: 파생 클래스");
 
-    public string field2 = "Hello World!";
-    public bool   field3 = true;
+    public string Field2 = "Hello World!";
+    public bool   Field3 = true;
 
-    public int method(int arg1, int arg2) => arg1 * arg2;
+    public int Method(int arg1, int arg2) => arg1 * arg2;
 }
 ```
 ```
@@ -1597,11 +1597,11 @@ class DERIVEDCLASS : BASECLASS
 > {
 >     ...
 > 
->     public new string field2 = "Hello World!";
+>     public new string Field2 = "Hello World!";
 >
 >     ...
 >
->     public new int method(int arg1, int arg2) => arg1 * arg2;
+>     public new int Method(int arg1, int arg2) => arg1 * arg2;
 > }
 > ```
 
@@ -1614,12 +1614,12 @@ class DERIVEDCLASS : BASECLASS
 
     ```csharp
   DERIVEDCLASS instance = new();
-  instance.method();                    // 출력: Hello, World!
+  instance.Method();                    // 출력: Hello, World!
 
   /* 기반 클래스 선언 */
   class BASECLASS
   {
-      public void method()
+      public void Method()
       {
           Console.Write("Hello, ");
       }
@@ -1628,10 +1628,10 @@ class DERIVEDCLASS : BASECLASS
   /* 파생 클래스 선언 */
   class DERIVEDCLASS : BASECLASS
   {
-      public void method()
+      public void Method()
       {
           // 기반 클래스 메소드 호출
-          base.method();
+          base.Method();
           Console.WriteLine("World!");
       }
   }
@@ -1666,7 +1666,7 @@ class DERIVEDCLASS : BASECLASS
 [`sealed`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/sealed) 한정자는 클래스 혹은 그 맴버가 파생 클래스에 [상속](#상속)되지 못하도록 제한한다.
 
 ```csharp
-sealed int field = 0;
+sealed int Field = 0;
 ```
 
 ## 다형성
@@ -1678,7 +1678,7 @@ sealed int field = 0;
 > 이전 장에서 소개한 적이 있는 [함수 오버로딩](#함수-오버로딩)은 컴파일타임 다형성 중 하나이다.
 
 ### 연산자 오버로딩
-[연산자 오버로딩](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading)(operator overloading)은 연산자가 특정 클래스 및 해당 객체에서 어떻게 동작할 지 `operator` 키워드로 재정의하는 컴파일타임 다형성 중 하나이다. 연산자 오버로딩에서는 `public` 및 `static` 한정자가 필수이며, 한 개의 연산자에 전달받은 인자의 자료형 및 개수에 따라 여러 정의가 가능하다. 단, `[]` 와 같이 오버로딩이 불가한 연산자도 존재하므로 유의하도록 한다.
+[연산자 오버로딩](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading)(operator overloading)은 연산자가 특정 클래스 및 해당 객체에서 어떻게 동작할 지 `operator` 키워드로 재정의하는 컴파일타임 다형성 중 하나이다. 연산자 오버로딩에서는 `public` 및 `static` 한정자가 필수이며, 한 개의 연산자에 전달받은 인자의 자료형 및 개수에 따라 여러 선언이 가능하다. 단, `[]` 와 같이 오버로딩이 불가한 연산자도 존재하므로 유의하도록 한다.
 
 ```csharp
 CLASS obj1 = new(2), obj2 = new(3);
@@ -1689,15 +1689,15 @@ Console.WriteLine(!instance);
 /* 클래스 선언 */
 class CLASS {
 
-    public CLASS(int arg) => field = arg;
+    public CLASS(int arg) => Field = arg;
 
-    public int field;    
+    public int Field;    
 
     /* 연산자 오버로딩: + 선언 */
-    public static CLASS operator +(CLASS arg1, CLASS arg2) => new(arg1.field + arg2.field);
+    public static CLASS operator +(CLASS arg1, CLASS arg2) => new(arg1.Field + arg2.Field);
 
     /* 연산자 오버로딩: 단항 ! 선언 */
-    public static string operator !(CLASS arg1) => $"{arg1.field}!";
+    public static string operator !(CLASS arg1) => $"{arg1.Field}!";
 }
 ```
 ```
@@ -1707,9 +1707,9 @@ class CLASS {
 ### 메소드 오버라이딩
 [메소드 오버라이딩](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/override)(method overriding)은 상속된 기반 클래스의 맴버 함수 (일명 메소드)를 파생 클래스에서 재정의하는 런타임 다형성이다.
 
-> 동일한 이름 하에 정의된 여러 함수 중에서 하나를 택하여 실행하는 [메소드 오버로딩](#함수-오버로딩)과 전혀 다른 개념이다.
+> 동일한 이름 하에 선언된 여러 함수 중에서 하나를 택하여 실행하는 [메소드 오버로딩](#함수-오버로딩)과 전혀 다른 개념이다.
 
-오버라이딩이 되는 기반 클래스의 메소드는 [`virtual`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/virtual) 한정자로 정의된 가상 메소드(virtual method)이다. 정의된 가상 메소드는 기반 클래스를 객체화하여 곧바로 사용할 수 있으며, 또는 파생 클래스에서 오버라이딩을 하지 않은 채 객체화하여 사용될 수 있다. 오버라이딩을 하려면 반드시 `override` 한정자를 명시해야 하며, 그렇지 않으면 [상속](#상속)에서 보여준 예시 코드처럼 단순히 파생 클래스에 묻힐 뿐이다.
+오버라이딩이 되는 기반 클래스의 메소드는 [`virtual`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/virtual) 한정자로 선언된 가상 메소드(virtual method)이다. 선언된 가상 메소드는 기반 클래스를 객체화하여 곧바로 사용할 수 있으며, 또는 파생 클래스에서 오버라이딩을 하지 않은 채 객체화하여 사용될 수 있다. 오버라이딩을 하려면 반드시 `override` 한정자를 명시해야 하며, 그렇지 않으면 [상속](#상속)에서 보여준 예시 코드처럼 단순히 파생 클래스에 묻힐 뿐이다.
 
 ```csharp
 /* 기반 클래스 선언 */
@@ -1766,23 +1766,23 @@ abstract class BASECLASS
 ```csharp
 CLASS instance = new CLASS();
 
-instance.property = 3;
-Console.WriteLine(instance.property);    // 출력: 16
+instance.Property = 3;
+Console.WriteLine(instance.Property);    // 출력: 16
 
 /* 클래스 선언 */
 class CLASS
 {
-    private int _property;
+    private int property;
     
     /* 프로퍼티 선언 */
-    public int property
+    public int Property
     {
-        get => _property * _property;
-        set => _property = value + 1;
+        get => property * property;
+        set => property = value + 1;
         
         /* 동일:
-            get { return _property; }
-            set { _property = value; }
+            get { return property; }
+            set { property = value; }
         */
     }
 }
@@ -1792,20 +1792,20 @@ class CLASS
 [자동 구현 프로퍼티](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/auto-implemented-properties)(auto-implemented property)는 간략화된 프로퍼티이지만 `get` 및 `set` 영역의 코드를 수정할 수 없다.
 
 ```csharp
-public int property { get; set; }
+public int Property { get; set; }
 
 /* 동일:
-    int _property;
-    public int property
+    private int property;
+    public int Property
     {
-        get => _property;
-        set => _property = value;
+        get => property;
+        set => property = value;
     }
 */
 ```
 
-### 인덱서
-[인덱서](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/indexers/)(indexer) 맴버는 객체를 배열처럼 사용할 수 있게 한다. 프로퍼티와 유사하게 `get` 및 `set` 접근자를 사용하고, 데이터를 `private` 필드에 선언된 컬렉션에 저장한다.
+## 인덱서
+[인덱서](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/indexers/)(indexer) 맴버는 객체를 배열처럼 사용할 수 있게 한다. [프로퍼티](#프로퍼티)와 유사하게 `get` 및 `set` 접근자를 사용하고, 데이터를 `private` 필드에 선언된 컬렉션에 저장한다.
 
 ```csharp
 CLASS instance = new CLASS();
@@ -1839,11 +1839,11 @@ class CLASS
 struct STRUCTURE
 {
     /* 필드 맴버 선언 */
-    public char field1;
-    public int  field2;
+    public char Field1;
+    public int  Field2;
 
     /* 메소드 맴버 선언 */
-    public string method() => $"{field1}, {field2}";
+    public string method() => $"{Field1}, {Field2}";
 }
 ```
 
@@ -1851,7 +1851,7 @@ struct STRUCTURE
 
 ```csharp
 /* 구조체 객체화 및 초기화 */
-STRUCTURE variable = new STRUCTURE() { field1 = 'A', field2 = 3 };
+STRUCTURE variable = new STRUCTURE() { Field1 = 'A', Field2 = 3 };
 ```
 
 [클래스](#c-클래스)와 상당히 유사한 특징을 지니지만, 이 둘은 확실한 차이점이 존재한다.
@@ -1867,27 +1867,27 @@ STRUCTURE variable = new STRUCTURE() { field1 = 'A', field2 = 3 };
 > 일반 프로퍼티 구문에서 `set` 접근자를 사용하거나, 혹은 `record struct` 키워드를 사용하여 데이터 변경이 가능한 가변(mutable) 속성을 맴버로 갖는 레코드를 선언할 수 있다.
 
 ```csharp
-var instance = new RECORD() { property1 = 'A', property2 = 3 };
+var instance = new RECORD() { Property1 = 'A', Property2 = 3 };
 
 /* 일반 프로퍼티 구문 */
 record RECORD
 {
-    public char property1 { get; init; } = default!;
-    public int  property2 { get; init; } = default!;
+    public char Property1 { get; init; } = default!;
+    public int  Property2 { get; init; } = default!;
 }
 ```
 ```csharp
 var instance = new RECORD('A', 3);
 
 /* 위치 매개변수 구문 */
-record RECORD(char property1, int property2);
+record RECORD(char Property1, int Property2);
 ```
 
-비록 레코드는 [클래스](#c-클래스)와 같은 참조 자료형이지만 (`record struct`는 값 자료형에 해당), 데이터 위주의 유용한 기능들이 내재되어 있다. 
+비록 레코드는 참조 자료형이지만 (`record struct`는 값 자료형에 해당), 데이터 위주의 유용한 기능들이 내재되어 있다. 
 
 * **[값 동등성](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#value-equality)**
 
-    레코드 객체의 자료형 및 저장된 값이 동등한지 `==` 연산자로 확인할 수 있다. 클래스의 경우에는 메모리에 동일한 객체를 참조하고 있을 때에만 동등하다고 판단하며, 구조체는 자료형과 데이터를 비교하려면 [`Object.Equals(Object)`](https://docs.microsoft.com/en-us/dotnet/api/system.object.equals) 메소드를 활용하거나 연산자 오버로딩이 필요하다는 점을 빗대어 보면 레코드는 자료 비교에서 매우 유용하다.
+    레코드 객체의 자료형 및 저장된 값이 동등한지 `==` 연산자로 확인할 수 있다. [클래스](#c-클래스)의 경우에는 메모리에 동일한 객체를 참조하고 있을 때에만 동등하다고 판단하며, [구조체](#구조체)는 자료형과 데이터를 비교하려면 [`Object.Equals(Object)`](https://docs.microsoft.com/en-us/dotnet/api/system.object.equals) 메소드를 활용하거나 연산자 오버로딩이 필요하다는 점을 빗대어 보면 레코드는 자료 비교에서 매우 유용하다.
 
 * **[레코드 서식 출력](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#built-in-formatting-for-display)**
 
@@ -1897,7 +1897,7 @@ record RECORD(char property1, int property2);
   Console.WriteLine(new RECORD('A', 3));
 
   /* 출력:
-      RECORD { property1 = A, property = 3 }
+      RECORD { Property1 = A, Property = 3 }
   */
     ```
 
@@ -1907,11 +1907,11 @@ record RECORD(char property1, int property2);
 
     ```csharp
   /* 기반 레코드 선언 */
-  record BASERECORD(char property1, int property2);
+  record BASERECORD(char Property1, int Property2);
 
   /* 파생 레코드 선언 */
-  record DERIVEDRECORD(char property1, int property2, bool property3)
-      : BASERECORD(property1, property2);
+  record DERIVEDRECORD(char Property1, int Property2, bool Property3)
+      : BASERECORD(Property1, Property2);
     ```
 
 ### `with` 표현식
@@ -1919,15 +1919,75 @@ record RECORD(char property1, int property2);
 
 ```csharp
 RECORD instance = new RECORD(3, 'A', true);
-Console.WriteLine(instance with { property2 = 'C', property3 = false });
+Console.WriteLine(instance with { Property2 = 'C', Property3 = false });
 
 /* 출력: 
-    RECORD { property1 = 3, property2 = C, property3 = False }
+    RECORD { Property1 = 3, Property2 = C, Property3 = False }
 */
 ```
 
+## 인터페이스
+[인터페이스](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface)(interface)는 [클래스](#c-클래스), [구조체](#구조체), 그리고 [레코드](#레코드) 측에서 코드 구현이 반드시 충족되어야 할 맴버들을 제공하는 "계약형" 자료형이다. 인터페이스는 객체화 될 수 없으며, 클래스와 같은 타 사용자 정의 자료형에 인터페이스를 구성요소로써 제공하는 행위를 도입(implement)라고 하는데 이는 동일한 자료형 간에 맴버를 전달하는 [상속](#상속)과 다른 개념이다. 이와 별개로 인터페이스는 다른 여러 인터페이스로부터 상속받을 수 있다.
+
+인터페이스 내에 선언될 수 있는 맴버는 제한적이며, 아래의 표는 C# 버전에 따른 인터페이스에 선언될 수 있는 맴버 유형을 나열한다.
+
+| 버전 | 맴버 |
+|:----:|-----|
+| C# 8.0 이전 | [메소드](#c-함수), [프로퍼티](#프로퍼티), [인덱서](#인덱서), 이벤트 |
+| C# 8.0 이후 | [상수](#상수), [연산자](#연산자-오버로딩), [정적 맴버](#정적-맴버), [정적 생성자](#정적-생성자) |
+
+인터페이스는 기본적으로 `public` [접근 한정자](#접근-한정자)가 맴버에 적용되는데, 만일 다른 접근 한정자를 지정하려면 별도로 명시해야 한다.
+
+```csharp
+CLASS instance = new CLASS();
+instance.Property = 3;
+instance.Method();            // 출력: 10
+
+/* 인터페이스 선언 */
+interface INTERFACE1
+{
+    int Property { get; set; }
+}
+
+interface INTERFACE2
+{
+    void method();
+}
+
+/* 인터페이스 도입 */
+class CLASS : INTERFACE1, INTERFACE2
+{
+    private int property;
+    public int Property
+    {
+        get => property + 1;
+        set => property = value * value;
+    }
+
+    public void method() => Console.WriteLine("{0}", Property);
+}
+```
+
+만일 인터페이스의 멤버 중 하나라도 코드가 구현되지 않았더라면 컴파일러 오류가 발생한다.
+
+> 인터페이스 안에 맴버가 구현될 수 있으나, 이는 [오버라이딩](#메소드-오버라이딩)이 되지 않은 가상 메소드처럼 인터페이스에 정의된 코드를 대신 실행할 수 있도록 한다. 그러므로 인터페이스를 도입한 사용자 정의 자료형에서 해당 맴버에 대한 코드 구현이 없어도 컴파일러 오류가 발생하지 않는다.
+>
+> ```csharp
+> INTERFACE instance = new CLASS();
+> instance.Method();                // 출력: Hello World!
+> 
+> /* 인터페이스 선언 */
+> interface INTERFACE
+> {
+>     void Method() => Console.WriteLine("Hello World!");
+> }
+>
+> /* 인터페이스 도입 */
+> class CLASS : INTERFACE { }
+> ```
+
 ## 열거형
-[열거형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum)(enumeration)은 열거된 항목, 일명 열거형 맴버(enum member)들을 정수로 순번을 매기는 `enum` 키워드로 선언된 자료형이다. 맴버들은 기본적으로 정수 0부터 시작하여 다음 맴버마다 1만큼 증가한다. 맴버에 할당 연산자 `=`로 정수를 직접 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 정의 이후에 열거형 맴버를 추가하거나, 혹은 맴버의 값을 바꾸는 건 불가하다.
+[열거형](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum)(enumeration)은 열거된 항목, 일명 열거형 맴버(enum member)들을 정수로 순번을 매기는 `enum` 키워드로 선언된 자료형이다. 맴버들은 기본적으로 정수 0부터 시작하여 다음 맴버마다 1만큼 증가한다. 맴버에 할당 연산자 `=`로 정수를 직접 지정하지 않는 이상, 이러한 규칙은 계속 유지된다. 그러나 열거형 선언 이후에 열거형 맴버를 추가하거나, 혹은 맴버의 값을 바꾸는 건 불가하다.
 
 ```csharp
 /* 열거형 선언 */
@@ -1953,19 +2013,6 @@ enum ENUMERATION
 ENUMERATION variable = ENUMERATION.member1;
 ```
 
-
-```csharp
-
-{
-    {
-    }
-}
-```
-
-
-```csharp
-```
-
 # C#: 제네릭
 제네릭(generic)은 자료형과 무관하게 메소드 또는 클래스의 형식 틀을 제공한다. 개발자는 제네릭을 활용해 여러 유사한 함수 및 클래스를 손쉽게 생성할 수 있다. 본 장은 제네릭 선언 및 활용법을 설명한다.
 
@@ -1976,7 +2023,7 @@ ENUMERATION variable = ENUMERATION.member1;
 class CLASS
 {
     /* 제네릭 메소드 선언 */
-    static U method<T, U>(T arg1, U arg2)
+    static U Method<T, U>(T arg1, U arg2)
     {
         statements;
         return something;
@@ -1988,7 +2035,7 @@ class CLASS
 
 ```csharp
 /* 제네릭 메소드 객체화 */
-CLASS.method<int, double>(1, 3.0);
+CLASS.Method<int, double>(1, 3.0);
 ```
 
 ## 제네릭 클래스
@@ -1998,13 +2045,13 @@ CLASS.method<int, double>(1, 3.0);
 /* 제네릭 클래스 선언 */
 class CLASS<T, U>
 {
-    public CLASS(T arg1, U arg2) { field1 = arg1,=; field2 = arg2; }
+    public CLASS(T arg1, U arg2) { Field1 = arg1,=; Field2 = arg2; }
     ~CLASS() { }
     
-    T field1;
-    U field2;
+    T Field1;
+    U Field2;
     
-    U method(T arg) => field1 + field2 - arg;
+    U Method(T arg) => Field1 + Field2 - arg;
 }
 ```
 
@@ -2084,15 +2131,15 @@ catch(DivideByZeroException e)
 ```csharp
 class Program
 {
-    static void method()
+    static void Method()
     {
         try { throw new IndexOutOfRangeException("오류 메시지!"); }
-        catch(Exception e) { throw; }    // 예외 건네주기: method() -> Main()
+        catch(Exception e) { throw; }    // 예외 건네주기: Method() -> Main()
     }
 
     static void Main(string[] args)
     {
-        try { method(); }                // 건네진 예외 수신
+        try { Method(); }                // 건네진 예외 수신
         catch (Exception e) { System.Console.WriteLine(e.Message) }
     }
 }
