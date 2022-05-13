@@ -1399,8 +1399,8 @@ del instance.method      # Deleter 프로퍼티 호출
 # 파이썬: 예외 처리
 [예외](https://docs.python.org/3/tutorial/errors.html#exceptions)(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 인터프리터에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
 
-## `try`/`except` 예외 처리문
-[`try`](https://docs.python.org/3/reference/compound_stmts.html#try)/[`except`](https://docs.python.org/3/reference/compound_stmts.html#except) 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
+## `try`-`except` 예외 처리문
+[`try`](https://docs.python.org/3/reference/compound_stmts.html#try)-[`except`](https://docs.python.org/3/reference/compound_stmts.html#except) 쌍은 예외를 감지하고 발생한 예외 유형에 따라 기입된 코드를 실행하여 처리된다. 예외 처리된 파이썬 프로세스는 도중에 중단되지 않고 계속 실행된다.
 
 * **`try` 문**
 
@@ -1421,7 +1421,7 @@ except:               # 예외 유형: 모든 유형의 예외 처리
     ...
 ```
 
-다음은 `try`/`except` 예외 처리문 쌍을 보조하는 문장이며, 이들은 선택사항이다.
+다음은 `try`-`except` 예외 처리문 쌍을 보조하는 문장이며, 이들은 선택사항이다.
 
 | 키워드    | 설명                                            |
 |:---------:| ---------------------------------------------- |
