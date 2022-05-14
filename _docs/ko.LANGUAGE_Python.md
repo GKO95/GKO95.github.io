@@ -553,7 +553,7 @@ else:
 [`pass`](https://docs.python.org/3/tutorial/controlflow.html#pass-statements) 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무 작업도 수행하지 않는다. 코드 블록이 아직 작성하지 않은 상태에서 임시 코드로 사용된다.
 
 # 파이썬: 이터러블
-[이터러블](https://docs.python.org/3/glossary.html#term-iterable)(iterable; 반복 가능한) 객체는 여러 데이터를 한꺼번에 저장하는데 사용되며, 반복자(iterator) 객체를 반환하는 `__iter__` 메소드를 보유하는 객체로 정의된다. 반복자 데이터의 다음 요소를 자동으로 호출하는 객체로, 이터러블 객체 내의 모든 데이터를 순차적으로 불러올 수 있도록 한다.
+[이터러블](https://docs.python.org/3/glossary.html#term-iterable)(iterable; 반복 가능한) 객체는 여러 데이터를 하나의 변수에 저장하는데 사용되며, 반복자(iterator) 객체를 반환하는 `__iter__` 메소드를 보유하는 객체로 정의된다. 반복자 데이터의 다음 요소를 자동으로 호출하는 객체로, 이터러블 객체 내의 모든 데이터를 순차적으로 불러올 수 있도록 한다.
 
 ## 시퀀스 객체
 [시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence) 객체는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이다. 시퀀스는 하나는 대괄호 `[]`를 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)(string)이 있다.
