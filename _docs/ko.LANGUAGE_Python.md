@@ -277,30 +277,6 @@ CONSTANT_VARIABLE = "Hello World!"
 ### 문자열 자료형
 문자열 자료형(string data type)은 한 쌍의 작은 따옴표 `''` 또는 큰 따옴표 `""`로 구별되는 텍스트 데이터이다. 파이썬에서 문자열 자료형 데이터는 일반적으로 문자열 객체(string object)라고 부른다. 
 
-텍스트에 따옴표를 넣으려면 해당 따옴표 앞에 백슬래시 `\`를 배치하여 문자열이 도중이 끊기는 현상을 방지한다.
-
-```python
-# 문자열 작성의 적절한 예시와 부적절한 예시의 비교.
-print('Where\'s my "Cat in the Hat" book?')
-print('Where's my "Cat in the Hat" book?')
-```
-```
-Where's my "Cat in the Hat" book?
-Where
-```
-
-세 쌍의 따옴표는 다중 문자열 객체를 생성하며, 이는 단순히 Enter/Return 키를 눌러 줄바꿈이 가능하다. 일반 문자열로 줄바꿈을 구현하려면 원하는 위치에 [탈출 문자](#탈출-문자) 중 하나인 `\n`을 직접 삽입해야 한다.
-
-```python
-# 다중 문자열 객체로 여러 줄의 텍스트 작성 및 출력.
-print("""Goodbye
-World?""")
-```
-```  
-Goodbye
-World?
-```
-
 문자열 객체는 다른 데이터와 더하기 기호 `+`를 통해 공백없이 하나의 문자열로 연결할 수 있다. 문자열 간에만 사용할 수 있으므로 숫자 및 논리 자료형은 문자열로 변환해야 한다. 그 외에도 파이썬 3.6부터 추가된 접두사 `f`를 갖는 [포맷 문자열 리터럴](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)(formatted string literal), 일명 f-문자열에서 중괄호 `{}`를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
 
 ```python
@@ -314,10 +290,34 @@ print("A는 " + str(A) + ",\n그리고 B는 " + B + "이다.")
 print(f"A는 {A},\n그리고 B는 {B}이다.")
 ```
 
+텍스트에 따옴표를 넣으려면 해당 따옴표 앞에 백슬래시 `\`를 배치하여 문자열이 도중이 끊기는 현상을 방지한다.
+
+```python
+# 문자열 작성의 적절한 예시와 부적절한 예시의 비교
+print('Where\'s my "Cat in the Hat" book?')
+print('Where's my "Cat in the Hat" book?')
+```
+```
+Where's my "Cat in the Hat" book?
+Where
+```
+
+세 쌍의 따옴표는 다중 문자열 객체를 생성하며, 이는 단순히 Enter/Return 키를 눌러 줄바꿈이 가능하다. 일반 문자열로 줄바꿈을 구현하려면 원하는 위치에 [탈출 문자](#탈출-문자) 중 하나인 `\n`을 직접 삽입해야 한다.
+
+```python
+# 다중 문자열 객체로 여러 줄의 텍스트 작성 및 출력
+print("""Goodbye
+World?""")
+```
+```  
+Goodbye
+World?
+```
+
 차후에 설명할 예정이지만, [객체](#파이썬-클래스)(object)에 해당하는 문자열 자료형 데이터는 오로지 자신만이 사용할 수 있는 고유의 기능(일명 메소드)을 갖으며 목록은 [여기](https://docs.python.org/3/library/stdtypes.html#string-methods)에서 확인할 수 있다.
 
 ```python
-/* 문자열 객체의 메소드에 대한 몇 가지 예시 */
+# 문자열 객체의 메소드에 대한 몇 가지 예시
 print("Hello World!".upper())
 print("Hello World!".replace(" ", "-"))
 ```
@@ -327,7 +327,7 @@ Hello-World!
 ```
 
 ### `None` 키워드
-자료형과 관계없이 아무런 값이 없는 데이터이다. 비록 논리 조건에서는 `None`을 `False`로 사용할 수 있지만 (아래 예시 코드 참조), 개념적으로는 `None`과 `False`는 완전히 다른 존재이다.
+[`None`](https://docs.python.org/3/c-api/none.html) 키워드는 자료형과 관계없이 아무런 값이 없는 데이터이다. 비록 `None`과 `False`는 개념적으로 완전히 다른 존재이지만, 논리 조건에서는 `None`을 `False`로 사용할 수 있다.
 
 ```python
 # 조건부 확인: 논리 조건에서 None을 False로 간주할 수 있는가?
@@ -339,7 +339,7 @@ None
 ```
 
 ## 자료형 변환
-파이썬 프로그래밍 언어는 데이터를 타 자료형으로 변환할 수 있다:
+파이썬 프로그래밍 언어는 데이터를 타 자료형으로 변환할 수 있다.
 
 * **정수 변환 `int()`**
 
@@ -411,7 +411,7 @@ print("끝!")
 ```
 
 ## `if` 조건문
-`if` 조건문은 조건 혹은 논리가 참(`True`)일 경우 코드를 실행하며, 거짓(`False`)일 경우에는 코드를 실행하지 않는다.
+[`if`](https://docs.python.org/3/reference/compound_stmts.html#the-if-statement) 조건문은 조건 혹은 논리가 참(`True`)일 경우 코드를 실행하며, 거짓(`False`)일 경우에는 코드를 실행하지 않는다.
 
 ```python
 if condition:
@@ -453,7 +453,7 @@ True_return if condition else False_return
 ## `match` 조건문
 > 본 조건문은 파이썬 3.10부터 추가된 기능으로, 자세한 내용은 [PEP 643](https://www.python.org/dev/peps/pep-0634/)을 참고한다.
 
-`match` 조건문은 전달받은 인자를 `case`의 패턴과 일치하는지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 그 중에서 밑줄 `_` 조건을 와일드카드(wildcard) 패턴이라 하여 무조건 실행되는 지점이다.
+[`match`](https://docs.python.org/3/reference/compound_stmts.html#the-match-statement) 조건문은 전달받은 인자를 `case`의 패턴과 일치하는지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 그 중에서 밑줄 `_` 조건을 와일드카드(wildcard) 패턴이라 하여 무조건 실행되는 지점이다.
 
 ```python
 match argument:
@@ -469,13 +469,12 @@ match argument:
 
     case _:
         ...
-}
 ```
 
 `match` 조건문은 타 프로그래밍 언어에서 소개되는 `switch` 조건문과 유사한 구조와 동작을 수행한다. 그러나 몇 가지 차이점이 있다면 `case` 문의 코드가 실행된 이후에 자동적으로 `match` 조건문이 종료되어 별도의 [`break`](#break-문) 문이 필요하지 않다. 또한 패턴 뒤에 `if` 문을 기입하는 감시(guard) 표현식으로 부가적인 조건 일치여부를 거칠 수 있다.
 
 ## `while` 반복문
-`while` 반복문은 조건 혹은 논리가 참(`True`)일 동안 코드를 반복적으로 실행하며, 거짓(`False`)일 경우에는 반복문을 종료한다.
+[`while`](https://docs.python.org/3/reference/compound_stmts.html#the-while-statement) 반복문은 조건 혹은 논리가 참(`True`)일 동안 코드를 반복적으로 실행하며, 거짓(`False`)일 경우에는 반복문을 종료한다.
 
 ```python
 while condition:
@@ -517,7 +516,7 @@ else:
 [`continue`](https://docs.python.org/3/reference/simple_stmts.html#continue) 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
 
 ## `for` 반복문
-`for` 반복문은 유효한 범위 내에서 코드를 반복적으로 실행하고, 범위의 모든 값이 반복되면 종료한다.
+[`for`](https://docs.python.org/3/reference/compound_stmts.html#the-for-statement) 반복문은 유효한 범위 내에서 코드를 반복적으로 실행하고, 범위의 모든 값이 반복되면 종료한다.
 
 ```python
 for index in iterable:
@@ -551,7 +550,7 @@ else:
 ```
 
 ## `pass` 키워드
-`pass` 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무 작업도 수행하지 않는다. 코드 블록이 아직 작성하지 않은 상태에서 임시 코드로 사용된다.
+[`pass`](https://docs.python.org/3/tutorial/controlflow.html#pass-statements) 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무 작업도 수행하지 않는다. 코드 블록이 아직 작성하지 않은 상태에서 임시 코드로 사용된다.
 
 # 파이썬: 이터러블
 [이터러블](https://docs.python.org/3/glossary.html#term-iterable)(iterable; 반복 가능한) 객체는 여러 데이터를 한꺼번에 저장하는데 사용되며, 반복자(iterator) 객체를 반환하는 `__iter__` 메소드를 보유하는 객체로 정의된다. 반복자 데이터의 다음 요소를 자동으로 호출하는 객체로, 이터러블 객체 내의 모든 데이터를 순차적으로 불러올 수 있도록 한다.
