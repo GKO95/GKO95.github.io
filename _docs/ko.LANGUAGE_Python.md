@@ -1096,7 +1096,7 @@ def factorial(arg):
     if arg == 1: 
         return 1
     else:
-        return arg * factorial(arg-1)
+        return arg * factorial(arg - 1)
 ```
 
 # 파이썬: 클래스

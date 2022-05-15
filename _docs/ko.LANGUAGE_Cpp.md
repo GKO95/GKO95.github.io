@@ -1188,12 +1188,12 @@ C++ 프로그래밍 언어의 람다 표현식에는 [캡쳐 조항](https://en.
 
 ```cpp
 /* 예제: 펙토리얼 "!" */
-int factorial(int num) {
+int factorial(int arg) {
     // 기저 조건: 재귀로부터 탈출하는 조건
-    if (num == 1)
-        return (1);
+    if (arg == 1)
+        return 1;
     else
-        return (num * factorial(num-1));
+        return arg * factorial(arg - 1);
 }
 ```
 

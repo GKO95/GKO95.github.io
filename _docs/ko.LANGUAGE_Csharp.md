@@ -1328,12 +1328,12 @@ Console.WriteLine(lambda(3, 'A'));    // 출력: 3, A
 
 ```csharp
 /* 예제: 펙토리얼 "!" */
-int factorial(int num) {
+int factorial(int arg) {
     // 기저 조건: 재귀로부터 탈출하는 조건
-    if (num == 1)
-        return (1);
+    if (arg == 1)
+        return 1;
     else
-        return (num * factorial(num-1));
+        return arg * factorial(arg - 1);
 }
 ```
 
