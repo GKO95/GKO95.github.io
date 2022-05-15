@@ -736,7 +736,7 @@ label:
 단, `goto` 이동문을 사용할 때에는 매우 조심해야 하며 무리한 남용은 [스파게티 코드](https://ko.wikipedia.org/wiki/스파게티_코드)의 원인이 된다.
 
 # C++: 컨테이너
-C++ 프로그래밍 언어는 다수의 데이터를 변수 하나로 저장하는 [컨테이너](https://en.cppreference.com/w/cpp/container)(container)를 제공한다. 그 중에서 저장된 다수의 데이터, 일명 요소가 순번을 가지는 컨테이너를 [시퀀스 컨테이너](https://en.cppreference.com/w/cpp/container#Sequence_containers)(sequence container)라고 부른다. 본 장은 가장 흔히 사용되는 시퀀스 컨테이너를 중점으로 설명한다.
+C++ 프로그래밍 언어는 여러 데이터를 하나의 변수로 저장하는 [컨테이너](https://en.cppreference.com/w/cpp/container)(container)를 제공한다. 그 중에서 저장된 다수의 데이터, 일명 요소가 순번을 가지는 컨테이너를 [시퀀스 컨테이너](https://en.cppreference.com/w/cpp/container#Sequence_containers)(sequence container)라고 부른다. 본 장은 가장 흔히 사용되는 시퀀스 컨테이너를 중점으로 설명한다.
 
 ## 배열
 [배열](https://en.cppreference.com/w/cpp/language/array)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 정의 시 식별자 뒤에는 대괄호 `[]`가 위치하여 배열이 담을 수 있는 데이터 용량 `size`를 [정수 리터럴](https://en.cppreference.com/w/cpp/language/integer_literal)(integer literal)이나 [상수](#상수)로 지정한다. 한 번 정의된 배열의 크기는 변경이 불가하다. 배열의 데이터 초기화는 중괄호 `{}` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 초기 데이터 개수는 배열 용량을 초과해서는 안되지만, 반면에 데이터 개수가 용량을 미치지 못하면 나머지는 `0` 혹은 `NULL`로 초기화된다.
