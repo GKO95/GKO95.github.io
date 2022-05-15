@@ -797,7 +797,7 @@ statements;
 ```
 
 # C#: 컬렉션
-C++ 프로그래밍 언어는 다수의 데이터를 변수 하나로 저장하는 [컬렉션](#컬렉션)(collection)을 제공한다. 본 장은 .NET에서 활용할 수 있는 몇 가지의 컬렉션 유형들을 소개한다.
+C# 프로그래밍 언어는 여러 데이터를 하나의 변수로 저장하는 [컬렉션](#컬렉션)(collection)을 제공한다. 본 장은 .NET에서 활용할 수 있는 몇 가지의 컬렉션 유형들을 소개한다.
 
 ## 배열
 [배열](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 선언 시 자료형 뒤에는 대괄호 `[]`가 위치하여 배열임을 명시해야 한다. 비록 배열이 갖는 자료형이 값 자료형(예. `int`, `double`, `char` 등)일지라도 배열 자체는 [`Array`](https://docs.microsoft.com/en-us/dotnet/api/system.array) 추상 기반 클래스로부터 파생된 참조 자료형이다. 초기화되지 않은 배열은 `null`을 기본값으로 가지며, [`new`](#new-연산자) 키워드와 함께 자료형 및 크기를 정수로 지정하여 객체로 생성된 배열을 할당하므로써 초기화한다.
