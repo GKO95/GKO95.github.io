@@ -556,7 +556,7 @@ else:
 [이터러블](https://docs.python.org/3/library/stdtypes.html#typeiter)(iterable; 반복 가능한)은 저장된 여러 데이터 항목을 하나씩 반환할 수 있는 [컨테이너 객체](#파이썬-클래스)를 가리킨다. 이터러블의 특징인 `__iter__()` 메소드는 이터레이터(iterator) 객체를 반환하고, 그리고 이터레이터는 `__next__()` 메소드를 통해 [`for`](#for-반복문) 반복문에 전달될 다음 데이터 항목을 반환한다. 다시 말해 이터러블 객체의 핵심은 순차적으로 데이터를 반환할 수 있다는 점이며, 다수의 데이터를 하나의 변수로 저장하는 성질은 이를 구현하기 위한 일환이다.
 
 ## 시퀀스 객체
-[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence) 객체는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이다. 시퀀스는 하나는 대괄호 `[]`를 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)(string)이 있다.
+[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence) 객체는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이다. 시퀀스는 하나는 대괄호 `[]`를 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)이 있다.
 
 ```python
 variable = "Hello World!" 
@@ -620,22 +620,22 @@ for element in range(3, 10, 2):
 [리스트](https://docs.python.org/3/library/stdtypes.html#lists)(list) 시퀀스 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 리스트의 데이터 할당은 대괄호 `[]` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 대괄호는 0번부터 시작하는 인덱스 위치의 요소(element)를 호출할 때에도 사용된다.
 
 ```python
-lst = [value1, value2, value3, value4, ...]
+variable = [value1, value2, value3, value4, ...]
 
-print(lst)           # 출력: [value1, value2, value3, value4, ...]
-print(lst[0])        # 출력: value1
+print(variable)                # 출력: [value1, value2, value3, value4, ...]
+print(variable[0])             # 출력: value1
 ```
 
 개별 요소를 재할당하여 데이터를 변경할 수 있다. 리스트 범위를 벗어난 요소를 호출할 수 없으므로, 이러한 경우 오류가 발생한다. 그래도 파이썬의 리스트를 비교적 유연한 편으로 `append()` 혹은 `insert()` 메소드를 통해 언제든지 확장할 수 있다. 리스트의 메소드는 [여기](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists)에서 더 찾아볼 수 있다.
 
 ```python
-lst = []
-print(lst)                # 출력: []
+variable = []
+print(variable)                # 출력: []
 
-lst.append("Python")
-print(lst)                # 출력: ['Python']
+variable.append("Python")
+print(variable)                # 출력: ['Python']
 
-lst[1] = "Hello World!"   # IndexError: list assignment index out of range
+variable[1] = "Hello World!"   # IndexError: list assignment index out of range
 ```
 
 리스트는 고유의 연산을 통해 항목을 추가하거나 곱할 수가 있다. 아래의 연산들은 리스트 객체에만 제한되지 않으며, 차후에 소개될 다른 시퀀스 객체에도 적용이 가능하다.
@@ -671,8 +671,8 @@ lst[1] = "Hello World!"   # IndexError: list assignment index out of range
 리스트 객체의 `element` 요소는 `sequence` 시퀀스 객체 내에서 `condition` 조건에 부합한 항목을 넘겨받은 `variable` 변수로부터 할당받는다.
 
 ```python
-lst = [var**2 for variable in range(5)]
-lst = [var**2 for variable in range(5) if (variable ** 2) % 2 == 0]
+variable = [var**2 for var in range(5)]
+variable = [var**2 for var in range(5) if (var ** 2) % 2 == 0]
 ```
 ```
 [0, 1, 4, 9, 16]
@@ -683,21 +683,21 @@ lst = [var**2 for variable in range(5) if (variable ** 2) % 2 == 0]
 [튜플](https://docs.python.org/3/library/stdtypes.html#tuples)(tuple) 시퀀스 객체는 리스트와 마찬가지로 항목을 순서대로 저장하는 데이터이나, 초기화 후에는 값을 변경할 수 없다. 이러한 시퀀스 객체의 속성을 [불변](https://docs.python.org/3/library/stdtypes.html#immutable-sequence-types)(immutable)이라고 한다. 튜플을 초기화 할 때 소괄호 `()`를 사용하거나 괄호 없이 사용할 수도 있다.
 
 ```python
-tpl = (value1, value2, value3)
+variable = (value1, value2, value3)
 
 ''' 동일:
-tpl = value1, value2, value3
+variable = value1, value2, value3
 '''
 
-print(tpl)                       # 출력: (value1, value2, value3)
-print(tpl[0])                    # 출력: value1
+print(variable)               # 출력: (value1, value2, value3)
+print(variable[0])            # 출력: value1
 ```
 
 튜플은 요소의 값을 변경할 수 없으며, 이를 시도할 경우 오류가 발생한다.
 
 ```python
 tpl = value1, value2, value3
-tpl[1] = value4                  # TypeError: 'tpl' object does not support item assignment
+tpl[1] = value4               # TypeError: 'variable' object does not support item assignment
 ```
 
 ## 딕셔너리 객체
@@ -706,40 +706,40 @@ tpl[1] = value4                  # TypeError: 'tpl' object does not support item
 > 단, 리스트와 딕셔너리 등의 가변(mutable) 이터러블 객체는 키로 사용될 수 없다.
 
 ```python
-dictionary = {key1: value1, key2: value2}
+variable = {key1: value1, key2: value2}
 
-print(dictionary[key1])          # 출력: value1
-print(dictionary[key2])          # 출력: value2
+print(variable[key1])                # 출력: value1
+print(variable[key2])                # 출력: value2
 ```
 
 개별 요소를 재할당하여 데이터를 변경할 수 있다. 딕셔너리 범위를 벗어난 요소를 호출할 수 없으므로, 이러한 경우 오류가 발생한다. 그래도 파이썬의 딕셔너리는 비교적 유연한 편으로 새로운 키와 함께 값을 할당하는 것만으로 확장이 가능하다.
 
 ```python
-dictionary = {key1: value1, key2: value2}
+variable = {key1: value1, key2: value2}
 
-dictionary[key3] = value3
-print(dictionary)                # 출력: {key1: value1, key2: value2, key3: value3}
+variable[key3] = value3
+print(variable)                      # 출력: {key1: value1, key2: value2, key3: value3}
 ```
 
 ### 딕셔너리 언패킹
 딕셔너리 언패킹(dictionary unpacking)은 딕셔너리 객체의 요소들을 분할하는 것을 가리킨다. 단, 언패킹된 `key: value` 쌍을 활용할 수 있는 곳은 딕셔너리에 한정되므로 결국 타 딕셔너리와 결합하는 용도로 사용된다. 언패킹할 딕셔너리 접두부에 두 개의 별표 `**`를 기입한다.
 
 ```python
-dictionary = {key1: value1, key2: value2}
+variable = {key1: value1, key2: value2}
 
-print({**dictionary, key3: value3})    # 출력: {key1: value1, key2: value2, key3: value3}
+print({**variable, key3: value3})    # 출력: {key1: value1, key2: value2, key3: value3}
 ```
 
 ## 집합 객체
 [집합](https://docs.python.org/3/tutorial/datastructures.html#sets)(set) 객체는 요소의 고유성을 보장하는, 즉 중복 요소를 허용하지 않는 (시퀀스가 아닌) 이터러블 객체이다. 딕셔너리와 마찬가지로 집합 초기화에는 중괄호 `{}`를 사용하지만 `key: value` 형태가 아니다. 집합은 대괄호를 통해 개별 요소를 호출이 불가하다. 집합 객체에서 요소를 추가 혹은 제거하려면 `add()`, `remove()` 등의 별도 메소드를 사용해야 한다.
 
 ```python
-st = {value1, value2}
+variable = {value1, value2}
 
-st.add(value3)
-print(st)                        # {value1, value2, value3}
+variable.add(value3)
+print(variable)                 # {value1, value2, value3}
 
-print(st[0])                     # TypeError: 'set' object is not subscriptable
+print(variable[0])              # TypeError: 'variable' object is not subscriptable
 ```
 
 > 빈 집합 객체는 반드시 `set()` 함수로 생성해야 한다; 빈 중괄호 `{}`는 오히려 딕셔너리를 만들기 때문이다.
@@ -754,26 +754,26 @@ print(st[0])                     # TypeError: 'set' object is not subscriptable
 | `^`    | 대칭차 | 한 집합에는 존재하나 둘 다 속하지 않는 요소를 반환한다.    |
 
 ```python
-set1 = {1, 2, 3, 4, 5, 6}
-set2 = {4, 5, 6, 7, 8, 9}
+variable1 = {1, 2, 3, 4, 5, 6}
+variable2 = {4, 5, 6, 7, 8, 9}
 
-print(set1 | set2)            # 출력: {1, 2, 3, 4, 5, 6, 7, 8, 9}
+print(variable1 | variable2)    # 출력: {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-print(set1 & set2)            # 출력: {4, 5, 6}
+print(variable1 & variable2)    # 출력: {4, 5, 6}
 
-print(set1 - set2)            # 출력: {1, 2, 3}
-print(set1 - set2)            # 출력: {7, 8, 9}
+print(variable1 - variable2)    # 출력: {1, 2, 3}
+print(variable1 - variable2)    # 출력: {7, 8, 9}
 
-print(set1 ^ set2)            # 출력: {1, 2, 3, 7, 8, 9}
+print(variable1 ^ variable2)    # 출력: {1, 2, 3, 7, 8, 9}
 ```
 
-## 제너레이터 객체
-제너레이터(generator)는 [`yield`](https://docs.python.org/3/reference/simple_stmts.html#yield) 키워드와 반복문을 통해 요소들을 프로그램적으로 직접 생성할 수 있는 이터러블 객체이다. 요소들이 메모리에 저장되는 것이 아니라 코드를 통해 생성되는 것이기 때문에, 제너레이터 객체는 메모리 제한이 없는 점에서 무한한 개수의 데이터를 담을 수 있는 이점을 가진다.
+## 제너레이터 함수
+[제너레이터](https://docs.python.org/3/glossary.html#term-generator)(generator)는 [`yield`](https://docs.python.org/3/reference/simple_stmts.html#yield) 키워드와 반복문을 통해 요소들을 프로그램적으로 직접 생성할 수 있는 [함수](#파이썬-함수)이다. 요소들이 메모리에 저장되는 것이 아니라 코드를 통해 생성되는 것이기 때문에, 제너레이터 함수는 메모리 제한이 없는 점에서 무한한 개수의 데이터를 담을 수 있는 이점을 가진다.
 
 > 제너레이터에서 가장 중요한 것은 `yield` 키워드로 이터러블 객체로써 반환될 데이터를 지정한다.
 
 ```python
-# 제네레이터 생성
+# 제네레이터 함수
 def generator_function():
     variable = 0
     while variable < 5
