@@ -629,72 +629,80 @@ for (const property in "ES6") {
 ```
 
 # 자바스크립트: 이터러블
-자바스크립트는 여러 데이터를 하나의 변수에 저장하는 [이터러블](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)(iterable) 객체를 생성할 수 있다. 이터러블 객체는 여러 데이터를 한 번에 관리하는 편리성을 제공한다. 대표적인 이터러블 객체로 [문자열](#문자열-자료형)(string)이 있다. 본 장에서는 자바스크립트에서 활용할 수 있는 몇 가지의 이터러블 유형들을 소개한다.
+[이터러블](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)(iterable; 반복 가능한)은 저장된 여러 데이터 항목을 하나씩 반환할 수 있는 [컨테이너 객체](#자바스크립트-객체)를 가리킨다. 이터러블의 특징인 `@@iterator` 메소드는 이터레이터(iterator) 객체를 반환하고, 그리고 이터레이터는 `next()` 메소드를 통해 [`for...of`](#forof-반복문) 반복문에 전달될 다음 데이터 항목을 반환한다. 다시 말해 이터러블 객체의 핵심은 순차적으로 데이터를 반환할 수 있다는 점이며, 다수의 데이터를 하나의 변수로 저장하는 성질은 이를 구현하기 위한 일환이다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)이 있다.
 
 ## 배열
-배열(array) 이터러블 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 배열은 두 가지 방법으로 생성할 수 있다:
-
-* 대괄호 `[]` 내에 데이터를 순서대로 쉼표로 나누어 나열한다.
-* [`Array()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) [클래스](#클래스)의 소괄호 `()` 내에 데이터를 순서대로 쉼표로 나누어 나열한다.
-
-> 아무런 데이터를 입력하지 않으면 빈 배열을 생성한다.
-
-대괄호는 인덱스 위치의 요소(element)를 호출할 때에도 사용되며, 해당 요소에 새로운 값을 재할당하여 데이터를 변경할 수 있다.
+[배열](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)(array) 이터러블 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 배열의 데이터 할당은 (1) 대괄호 `[]` 혹은 (2) [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) [클래스](#클래스)의 [생성자](#생성자) 안에 항목을 순서대로 쉼표로 나누어 나열한다. 아무런 데이터를 입력하지 않으면 빈 배열을 생성한다. 대괄호는 0번부터 시작하는 인덱스 위치의 요소(element)를 호출할 때에도 사용된다.
 
 ```js
-var array = [value1, value2, value3, value4, ...];
+var variable = [value1, value2, value3, value4, ...];
 /* 동일:
-var array = new Array(value1, value2, value3, value4, ...);
+    var variable = new Array(value1, value2, value3, value4, ...);
 */
 
-console.log(array);        // 출력: [ value1, value2, value3, value4, ... ]
-console.log(array[0]);     // 출력: value1
+console.log(variable);       // 출력: [ value1, value2, value3, value4, ... ]
+console.log(variable[0]);    // 출력: value1
 ```
 
-배열 인덱스 범위를 벗어난 요소를 호출하면 `undefined`, 즉 정의되지 않은 요소라고 반환되는데 값을 할당할 수 있다.
+> [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) 연산자는 [클래스](#클래스)(`Array` 클래스)로부터 [객체](#자바스크립트-객체)(배열 이터러블 객체)를 생성하는 연산자이다.
+
+개별 요소를 재할당하여 데이터를 변경할 수 있다. 배열 범위를 벗어난 요소를 호출하면 `undefined`, 즉 초기화되지 않은 요소라고 반환되는데 차후에 데이터를 할당할 수 있다.
 
 ```js
-var array = [];
-console.log(array);        // 출력: []
+var variable = [];
+console.log(variable);        // 출력: []
 
-array[2] = "Hello World!";
-console.log(array);        // 출력: [ <2 empty items>, 'Hello World!' ]
+variable[2] = "Hello World!";
+console.log(variable);        // 출력: [ <2 empty items>, 'Hello World!' ]
 ```
 
 ### 전개 연산자
-[전개 연산자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)(spread operator; `...`)는 배열에서 두 가지 역할을 지닌다:
+[전개 연산자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)(spread operator) `...`는 배열에서 다음과 같이 활용된다.
 
 * 배열 접두부에 위치할 경우, 배열의 모든 요소들을 전개하여 한꺼번에 반환한다.
 
     ```js
-  var array = [value1, value2, value3, value4, value5];
+  var variable = [value1, value2, value3, value4, value5];
 
-  console.log(array);       // 출력: [ value1, value2, value3, value4, value5 ]
-  console.log(...array);    // 출력: value1 value2 value3 value4 value5
+  console.log(variable);       // 출력: [ value1, value2, value3, value4, value5 ]
+  console.log(...variable);    // 출력: value1 value2 value3 value4 value5
     ```
 
 * [배열 구조 분해](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)(array destructuring), 즉 배열의 요소를 각 변수마다 나누어서 할당하는 과정에서 나머지 요소들을 한꺼번에 받을 변수 앞단에 기입된다.
 
     ```js
-  var array = [value1, value2, value3, value4, value5];
+  var [batch1,  , ...batch2] = [value1, value2, value3, value4, value5];
 
-  var [variable1,  , ...variable2] = array;
-  console.log(variable1);    // 출력: value1
-  console.log(variable2);    // 출력: [ value3, value4, value5 ]
+  console.log(batch1);         // 출력: value1
+  console.log(batch2);         // 출력: [ value3, value4, value5 ]
     ```
 
 ## 연관 배열
 자바스크립트는 배열의 요소를 문자열로 호출하는 [연관 배열](https://ko.wikipedia.org/wiki/연관_배열)(associative array)을 지원하지 않는다. 설령 빈 배열에 요소 확장을 할 때 문자열을 입력하는 방법을 사용하여도, 이때부터는 배열이 아닌 [객체](#자바스크립트-객체)(object)가 된다. 자바스크립트는 이러한 경우에 오히려 객체를 사용하는 것을 권고한다.
 
 ```js
-var array = [];
+var variable = [];
 
 /* 비록 배열을 선언하였으나, 아래의 코드로 인해 배열이 아닌 일반 객체로 변환 */
-array['property1'] = value1;
-array['proprety2'] = value2;
+variable['property1'] = value1;
+variable['property2'] = value2;
 
-console.log(array);            // 출력: [ property1: value1, proprety2: value2 ]
-console.log(array.length);     // 출력: 0
+console.log(variable);            // 출력: [ property1: value1, property2: value2 ]
+console.log(variable.length);     // 출력: 0
+```
+
+## 형식화 배열
+[형식화 배열](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays)(typed array)은 요소의 데이터 형식이 고정된 이터러블 객체이다. 여기서 언급된 "데이터 형식"은 [자료형](#자료형)이 아니라 배열의 요소가 비가공된 이진 데이터를 어떻게 표현할 것인지를 가리킨다. 예를 들어 `Uint8Array` 형식화 배열은 데이터를 0 ~ 255 범위의 정수만으로 표현한다. 미디어 편집이나 비가공 데이터 접근 등과 같이 강력한 기능을 제공하는 현대 웹 어플리케이션의 요구에 대응하여 ES6부터 추가되었다. 단, 형식화 배열은 "배열"과 다른 존재이며 크기 확장이 불가하다.
+
+> 형식화 배열은 [`ArrayBuffer`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer) 클래스와 함께 사용되기도 하는데, 해당 클래스는 데이터 변경이 불가하지만 [바이트](https://ko.wikipedia.org/wiki/바이트)(byte) 단위의 [버퍼](https://ko.wikipedia.org/wiki/버퍼_(컴퓨터_과학))(buffer) 크기를 제공하는 용도로 사용된다.
+
+```js
+var buffer   = new ArrayBuffer(16);
+var variable = new Int32Array(buffer);
+
+/* 동일:
+    var variable = new Int32Array(4);
+*/
 ```
 
 # 자바스크립트: 함수
@@ -956,6 +964,9 @@ console.log(variable.indexOf(5));
 
 ### 프로토타입
 [프로토타입](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)(prototype)은 기본적으로 객체에 내장된 속성 및 메소드를 일컬으며, 모든 자바스크립트 객체는 프로토타입을 갖는다. 프로토타입 또한 객체이므로 자신만의 프로토타입이 있는데 이러한 연속을 프로토타입 연쇄(prototype chain)라고 부르며, `null`을 프로토타입으로 갖는 프로토타입까지 이어진다. 객체의 프로토타입은 `Object.getPrototypeOf()` 정적 메소드로 반환된다.
+
+### 심볼 자료형
+[심볼 자료형](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol)(symbol type)
 
 ## 클래스
 [클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 동일한 구조를 갖는 객체를 매번 정의할 필요없이 간단히 생성할 수 있도록 한다. ES6부터 소개되었으며 `class` 키워드와 함께 객체의 속성 및 메소드를 클래스 내부에 정의한다. 클래스로부터 객체를 생성하는 절차를 "객체화(instantiation)"라고 한다. 직접 생성된 객체와 달리, 클래스로부터 생성된 객체는 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)로부터 아래의 특성을 가진다:
