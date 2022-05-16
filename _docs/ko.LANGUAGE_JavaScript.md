@@ -7,7 +7,7 @@ icon: icon-javascript.svg
 order: 0x05
 ---
 # 자바스크립트: 소개
-> *참조: [MDN Web Docs - JavaScript (영문)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)*
+> *참조: [JavaScript &#124; MDN Web Docs (영문)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)*
 
 [자바스크립트](https://ko.wikipedia.org/wiki/자바스크립트)(JavaScript)는 웹디자인에 사용된 [HTML](#html-웹프로그래밍-언어) & [CSS](https://ko.wikipedia.org/wiki/CSS)만으로는 제한적인 [동적 웹페이지](https://ko.wikipedia.org/wiki/동적_웹페이지)를 구현하기 위해 개발된 스크립트 언어였다. 자바스크립트가 [웹 브라우저](https://ko.wikipedia.org/wiki/웹_브라우저)에서만 실행될 수 있던 당시에는 활용도가 클라이언트 측에서 웹페이지 상호작용을 위한 [프론트엔드](https://ko.wikipedia.org/wiki/프론트엔드와_백엔드)(front-end)에 한정되었다. 현재는 데이터 처리 및 어플리케이션 제작 등 서버 측에서 [백엔드](https://ko.wikipedia.org/wiki/프론트엔드와_백엔드)(back-end)로도 활발히 사용되고 있다.
 
@@ -185,15 +185,13 @@ Hello World!
 ```
 
 ### 유효범위
-[유효범위](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#variable_scope)(scope)란, 현재 실행되는 코드로부터 값 또는 표현식이 가시적이거나 참조가 가능한 문맥을 가리킨다. 간단히 말해, 변수는 유효범위 내에서만 접근이 가능하며 벗어날 시에는 사용불가하다. 자바스크립트에는 총 세 가지의 유효범위가 존재한다.
+[유효범위](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#variable_scope)(scope)란, 현재 실행되는 코드로부터 값 또는 표현식이 가시적이거나 참조가 가능한 문맥을 가리킨다. 간단히 말해, 변수는 유효범위 내에서만 접근이 가능하며 벗어날 시에는 사용불가하다. 자바스크립트에는 총 세 가지의 유효범위가 존재한다. ES6 이전의 자바스크립트는 함수와 전역 범위만 존재하였으며, 비록 소스 코드 문장을 그룹화시키는 요소인 블록이 있어도 별도의 범위로 구분하지 않았다.
 
 | 유효범위 | ES6 추가 | 설명 |
 |:-----:|:--:|------|
 | 블록 | ✔️ |  [블록](#표현식) `{}` 내부에 선언된 변수는 해당 블록 및 네스티드 블록(즉, 안에 있는 블록)으로 접근이 제한된다. |
 | 함수 | - | [함수](#자바스크립트-함수) 블록 내부에 선언된 변수는 해당 함수 안에서 네스티드 여부 상관없이 어디서든 사용될 수 있다.  |
 | 전역 | - | 블록 및 함수 외부에 선언된 변수는 어플리케이션 내에서 접근이 자유롭다. |
-
-> ES6 이전의 자바스크립트는 함수와 전역 범위만 존재하였으며, 비록 소스 코드 문장을 그룹화시키는 요소인 코드 블록이 있어도 별도의 범위로 구분하지 않았다.
 
 자바스크립트의 선언 생략형 변수는 항상 전역 범위(global scope)이다.
 
@@ -217,7 +215,19 @@ Hello World!
   console.log(global.variable);    // 출력: Hello World!
     ```
 
-이러한 차이점은 브라우저의 경우에 웹페이지 HTML이 중심이 되어 여러 자바스크립트 파일들을 [`<script>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script) 태그로 불러와 마치 하나처럼 실행하는 반면, Node.js는 하나의 자바스크립트 파일이 중심이 되어 실행되는 게 원인으로 볼 수 있다. 타 변수와 중복된 이름을 가진다면 예상치 못한 결과와 오류가 발생할 수 있어 가급적 전역 변수의 사용은 피하도록 한다.
+이러한 차이점은 브라우저의 경우에 웹페이지 HTML이 중심이 되어 여러 자바스크립트 파일들을 [`<script>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script) 태그로 불러와 마치 하나처럼 실행하는 반면, Node.js는 하나의 자바스크립트 파일이 중심이 되어 실행되는 게 원인으로 볼 수 있다.
+
+> 이러한 런타임 환경마다 상이한 전역 객체 호출 방식의 통일을 위해 자바스크립트는 [`globalThis`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis) 키워드를 제공한다.
+>
+> ```js
+> /* 웹 브라우저 */
+> console.log(globalThis == window);    // 출력: true
+>
+> /* Node.js */
+> console.log(globalThis == glabal);    // 출력: true
+> ```
+
+타 변수와 중복된 이름을 가진다면 예상치 못한 결과와 오류가 발생할 수 있어 가급적 전역 변수의 사용은 피하도록 한다.
 
 ### 변수 선언문
 ES6부터는 새로운 방식의 바인딩이 소개되어 식별자 앞단에 특정 키워드를 기입하는 것만으로 변수로 "선언(declaration)"한다. 선언된 변수는 자동으로 [`undefined`](https://developer.mozilla.org/en-US/docs/Glossary/undefined)(즉, 아직 정의되지 않음)으로 네임 바인딩되지만, 선언 당시에 개발자가 직접 값을 할당하는 작업을 "초기화(initialization)"라고 일컫는다. 아래는 ES6에서 추가된 세 가지 변수 유형을 지정하는 선언문이다.
@@ -462,6 +472,57 @@ print("Hello\nWorld!")
 Hello
 World!
 ```
+
+## 엄격 모드
+[엄격 모드](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)(strict mode)은 ECMAScript 5부터 소개되었으며 일반적인 자바스크립트에 비해 제약적인 자바스크립트 모드이다. 엄격 모드를 활성화하기 위해 `"use strict";`(혹은 `'use strict';`)을 (1) 스크립트 최상단에 기입하여 전체에 적용하거나 (2) [함수](#자바스크립트-함수)의 최상단에 기입하여 국부적으로 적용할 수 있지만, 일반 블록에는 적용이 불가하다.
+
+> 엄격 모드의 의의는 보다 "안전한" 자바스크립트를 작성할 수 있도록 하는 것으로, 이에 대한 내용은 함수 내에서의 [`this`](#this-키워드) 키워드와 밀접한 관련이 있다.
+
+엄격 모드는 일반 자바스크립트에 비해 다음과 같이 몇 가지 차이점을 가진다.
+
+1. 단순히 실수로 간주되었던 자바스크립트 코드를 오류로 치부한다.
+
+    ```js
+   'use strict';
+
+   /* 설명: 식별자 오타로 의도치 않은 변수를 새로 정의하는 것을 방지하기 차원에서 전역 변수를 생성하는 것을 금지한다. */
+   var variable;
+   varible = "Hello World!";
+    ```
+    ```
+   Uncaught ReferenceError: varible is not defined
+    ```
+
+2. 자바스크립트 엔진이 최적화를 수행하는데 어려워 했던 부분들을 해결하였다. 그러므로 일부 동일한 코드에서 엄격 모드가 상대적으로 더 빨리 실행되기도 한다.
+
+3. 차후 ECMAScript 버전에 정의될 수 있는 구문 사용을 금지한다.
+
+    ```js
+   'use strict';
+   
+   /* 설명: 차후 ECMAScript 버전을 위해 예약된 키워드 중 하나인 interface로 변수를 선언할 수 없다. */
+   var interface = "Hello World!";
+    ```
+    ```
+   Uncaught SyntaxError: var interface = "Hello World!";
+                             ^^^^^^^^^
+    ```
+
+## `this` 키워드
+[`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) 키워드는 런타임 도중에 자바스크립트가 실행되고 있는 현시점의 문맥을 대표하는 객체를 반환한다. 자바스크립트에서 상당히 난해한 개념 중 하나인데, 이는 `this` 키워드가 기입된 위치와 [엄격 모드](#엄격-모드) 여부에 따라 가리키는 문맥이 달라지기 때문이다. 그러한 동시에 활용도가 높아 널리 사용되고 있으므로 불가피한 내용이다.
+
+[전역 문맥](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#global_context)(global context)에서 [`this`](#this-키워드) 키워드는 엄격 모드와 무관하게 웹 브라우저에서는 `window` 전역 객체를 반환된다. 허나 모듈 형식의 Node.js 경우에는 `module.exports`를 반환한다.
+
+```js
+console.log(this == globalThis);    // 출력: true  (웹 브라우저)
+                                    // 출력: false (Node.js)
+```
+
+그 외의 문맥들에 대해서는 관련 내용을 다룰 시 `this` 키워드를 함께 언급할 예정이다.
+
+* [함수 문맥](#자바스크립트-함수)
+* [클래스 문맥](#클래스)
+* [파생 클래스](#상속)
 
 # 자바스크립트: 조건 및 루프
 조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 자바스크립트 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
@@ -711,35 +772,46 @@ var variable = new Int32Array(buffer);
 [함수](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions)(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
 ```js
-var variable = '3.14';
+var variable = "3.14159";
 console.log(parseInt(variable));
-// 문자열에서 정수를 반환하는 "parseInt()" 함수
+// 소수점을 반올림하는 "parseInt()" 함수
+```
+```
+3
 ```
 
-함수의 기능을 정의(definition)하기 방법에는 두 가지가 있다: `function` 키워드를 사용한 기존 자바스크립트 방식, 그리고 ES6에서 추가된 [화살표 함수 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(arrow function expression) 방식이다.
+함수의 기능을 정의(definition)하기 방법에는 두 가지가 있다. 
 
-```js
-/* 방법 1: 기존 자바스크립트 구문 */
-function func() {
-    
-}
+1. [`function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function) 키워드
 
-/* 방법 2: ES6 화살표 함수 표현식 */
-const func = () => {
-    
-}
-```
+    [함수 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)(function hoisting)을 지원하여 함수가 정의되기 전에 호출하여 사용할 수 있다.
 
-> 두 방식은 함수를 생성하는데 기여하지만 차이점이 존재한다: 대표적인 예시로 `function` 키워드는 함수가 정의되기 전에 미리 호출하여 사용할 수 있는 [함수 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)(function hoisting)을 지원하는 반면, ES6부터 추가된 화살표 함수 표현식으로는 그렇지 못한다.
+    ```js
+   /* 기존 자바스크립트 구문 */
+   function func() {
+       
+   }
+    ```
 
-자바스크립트에서 함수 내에 선언된 변수 및 표현식은 [함수 유효범위](#유효범위)(function scope)를 갖는다. 그리고 자바스크립트는 이례적으로 함수 내에서 또 다른 함수를 정의하는 것이 허용되며, 유효범위에 의하여 정의된 함수 내에서만 사용할 수 있다.
+2. [화살표 함수 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(arrow function expression)
+
+    함수 호이스팅이 지원되지 않으나, 기존 `function` 키워드가 가지는 몇 가지 단점을 보완하기 위해 ES6부터 새로 추가된 함수 표현식이다.
+
+    ```js
+   /* ES6부터 추가된 화살표 함수 표현식 */
+   const func = () => {
+       
+   }
+    ```
+
+> 자바스크립트는 이례적으로 함수 블록 안에 또 다른 함수를 정의하는 것이 허용되며, [함수 유효범위](#유효범위)에 해당하여 정의된 함수 내에서만 사용할 수 있다.
 
 함수명 뒤에 소괄호 `()` 기입여부에 따라 의미하는 바가 다르다.
 
 * `function()`은 함수에 정의된 코드를 실행한다.
 
     ```js
-  const func = () => {
+  function func() {
       console.log('Hello World!');
   }
 
@@ -754,7 +826,7 @@ const func = () => {
 * `function`은 함수 자체를 가리킨다.
 
     ```js
-  const func = () => {
+  function func() {
       console.log('Hello World!');
   }
 
@@ -766,12 +838,13 @@ const func = () => {
     ```
 
 ### `return` 반환문
-`return` 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 반환문을 반드시 필요로 하지 않으며, 없을 경우에 함수는 `undefined`을 반환된다.
+[`return`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/return) 반환문은 함수로부터 데이터를 반환하는 함수 전용 문장이다. 반환문이 실행되면 하단에 코드가 남아 있음에도 불구하고 함수는 즉시 종료된다. 함수는 반환문을 반드시 필요로 하지 않으며, 이러한 경우에는 `undefined` 원시값이 반환되어 변수에 전달된다.
 
 ```js
+// return 반환문이 있는 사용자 정의 함수
 function func() {
     console.log("Hello World!");
-    return 3;
+    return 1 + 2;
 }
 
 console.log(func());
@@ -781,51 +854,38 @@ Hello World!
 3
 ```
 
-## 매개변수 및 전달인자
+### 매개변수 및 전달인자
 다음은 함수에 대해 논의할 때 중요하게 언급되는 매개변수와 전달인자의 차이에 대하여 설명한다.
 
-* **전달인자 (argument)**: 간략하게 "인자"라고도 부르며, 함수로 전달되는 데이터이다.
+* **전달인자 (argument)**: 전달인자, 혹은 간략하게 "인자"는 함수로 전달되는 데이터이다.
 * **매개변수 (parameter)**: 전달인자를 할당받는 함수 내의 지역 변수이다. 그러므로 매개변수는 함수 외부에서 호출이 불가능하다. 매개변수 선언은 함수의 소괄호 `()` 내에서 이루어진다.
 
-매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+> 매개변수와 전달인자는 개념적으로 다른 존재이지만, 동일한 데이터를 가지고 있는 관계로 흔히 두 용어는 혼용되어 사용하는 경우가 많다.
+
+다음은 매개변수에 사용되는 연산자로 전달인자을 받는데 유연성을 제공한다. 이들은 프로그래밍 구문상 명확한 구별이 가능해야 하므로 반드시 일반 매개변수 뒤에 위치해야 한다.
 
 | 연산자 | 구문          | 설명                                                            |
 |:---:|:-----------:|---------------------------------------------------------------|
-| `=` | `arg=value` | 전달인자가 없으면 기본값 `value`가 대신 매개변수에 할당된다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
-| `...` | `...arg` | 여러 개의 전달인자들을 배열로 한꺼번에 받을 수 있다. 반드시 일반 매개변수 뒤에 위치해야 한다. |
-
-아래의 예제는 함수의 매개변수와 전달인자가 어떻게 동작하는지 보여준다.
+| `=` | `arg=value` | 전달인자가 없으면 기본값 `value`가 대신 매개변수에 할당된다. |
+| `...` | `...arg` | 여러 개의 전달인자들을 하나의 배열로 전달받는다. |
 
 ```js
-/* 택1: 기존 자바스크립트 구문 */
+/* 예시. arg = value */
 function func(arg1, arg2 = 2) {
     return arg1 + arg2;
 }
 
-/* 택2: ES6 구문 */
-const func = (arg1, arg2 = 2) => {
-    return arg1 + arg2;
-}
-
-/* 함수 호출 */
-func(3);        // 출력: 5 (= 3 + 2)
-func(3, 4);     // 출력: 7 (= 3 + 4)
+func(3);            // 출력: 5 (= 3 + 2)
+func(3, 4);         // 출력: 7 (= 3 + 4)
 ```
 ----
 ```js
-/* 택1: 기존 자바스크립트 구문 */
+/* 예시. ...arg */
 function func(arg1, ...arg2) {
     console.log(arg1);
     console.log(arg2);
 }
 
-/* 택2: ES6 구문 */
-const func = (arg1, ...arg2) => {
-    console.log(arg1);
-    console.log(arg2);
-}
-
-/* 함수 호출 */
 func(1, 2, 3, 4);   // 출력: 1
                     // 출력: [ 2, 3, 4 ]
 ```
@@ -870,6 +930,20 @@ callback: Hello World!
 ```
 
 비록 익명 함수는 한 번만 사용되는 이름없는 함수이더라도 변수에 할당하여 언제든지 호출할 수 있다.
+
+## 재귀 함수 
+[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](/docs/ko.C#스택-영역)가 부족하여 런타임 오류가 발생한다.
+
+```js
+/* 예제: 펙토리얼 "!" */
+function factorial(arg) {
+    // 기저 조건: 재귀로부터 탈출하는 조건
+    if (arg == 1)
+        return 1;
+    else
+        return arg * factorial(arg - 1);
+}
+```
 
 # 자바스크립트: 객체
 [객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 배열이 있다.
