@@ -786,6 +786,8 @@ console.log(parseInt(variable));
 
     [함수 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)(function hoisting)을 지원하여 함수가 정의되기 전에 호출하여 사용할 수 있다.
 
+    > 함수는 `global.func()`처럼 전역 문맥의 일부로 인식하므로, 함수 내의 [`this`](#this-키워드) 키워드는 [전역 객체](#유효범위)를 가리킨다. 반면, [엄격 모드](#엄격-모드)에서는 별도 설정이 없으면 `undefined`를 반환한다.
+
     ```js
    /* 기존 자바스크립트 구문 */
    function func() {
@@ -795,16 +797,18 @@ console.log(parseInt(variable));
 
 2. [화살표 함수 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(arrow function expression)
 
-    함수 호이스팅이 지원되지 않으나, 기존 `function` 키워드가 가지는 몇 가지 단점을 보완하기 위해 ES6부터 새로 추가된 함수 표현식이다.
+    함수 호이스팅이 지원되지 않으나, 기존 `function` 키워드가 가진 일부 문제점을 극복하기 위해 ES6부터 새로 추가된 대안 함수 표현식이다. 즉, 화살표 함수 표현식은 `function` 키워드를 완전히 대체하기 위한 것이 절대 아니다!
+
+    > 화살표 함수 표현식은 자체적인 [`this`](#this-키워드) 바인딩을 갖지 않으므로 함수를 내포하는 (혹은 정의하는) 문맥을 가리킨다.
 
     ```js
    /* ES6부터 추가된 화살표 함수 표현식 */
    const func = () => {
-       
+   
    }
     ```
 
-> 자바스크립트는 이례적으로 함수 블록 안에 또 다른 함수를 정의하는 것이 허용되며, [함수 유효범위](#유효범위)에 해당하여 정의된 함수 내에서만 사용할 수 있다.
+자바스크립트는 이례적으로 함수 블록 안에 또 다른 함수를 정의하는 것이 허용되며, [함수 유효범위](#유효범위)에 해당하여 정의된 함수 내에서만 사용할 수 있다.
 
 함수명 뒤에 소괄호 `()` 기입여부에 따라 의미하는 바가 다르다.
 
@@ -890,46 +894,41 @@ func(1, 2, 3, 4);   // 출력: 1
                     // 출력: [ 2, 3, 4 ]
 ```
 
-### 콜백 함수
-[콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 코드 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
+## 콜백 함수
+[콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
 
 > 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
 
+[`function`](#자바스크립트-함수) 키워드와 [화살표 함수 표현식](#자바스크립트-함수) 중 무엇을 사용할 것인지는 [`this`](#this-키워드) 키워드가 가리키고자 하는 문맥이 무엇인지에 따라 판단하도록 한다.
+
 ```js
+calling(callback, "Hello ");        // 출력: Hello World!
+
 /* 호출 함수 */
-const calling = (arg1, arg2) => {
-    arg1(arg2);
+function calling(func, arg) {
+    console.log(func(arg, "World!"));
 }
 
 /* 콜백 함수 */
-const callback = arg => {
-    console.log(`callback: ${arg}`);
+function callback(arg1, arg2) {
+    return arg1 + arg2;
 }
-
-calling(callback, "Hello World!");
-```
-```
-callback: Hello World!
 ```
 
-## 람다 표현식
-[람다 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로, 데이터를 저장하지 않고 단일 표현식으로만 값을 반환한다. 익명 함수는 흔히 일회용 함수나 콜백 함수로 사용된다. 아래는 [콜백 함수](#콜백-함수)의 예시 코드에 람다 표현식을 활용하였다.
+### 람다 표현식
+[람다 표현식](https://en.wikipedia.org/wiki/Anonymous_function)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 흔히 일회용 함수로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다.
 
 ```js
-/* 호출 함수 */
-const calling = (arg1, arg2) => {
-    arg1(arg2);
+calling(function(arg1, arg2) { return arg1 + arg2 }, "Hello ");
+
+/* 대안:
+    calling((arg1, arg2) => { return arg1 + arg2 }, "Hello ");
+*/
+
+function calling(func, arg) {
+    console.log(func(arg, "World!"));
 }
-
-calling(arg => {
-    console.log(`callback: ${arg}`);
-}, "Hello World!");
 ```
-```
-callback: Hello World!
-```
-
-비록 익명 함수는 한 번만 사용되는 이름없는 함수이더라도 변수에 할당하여 언제든지 호출할 수 있다.
 
 ## 재귀 함수 
 [재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](/docs/ko.C#스택-영역)가 부족하여 런타임 오류가 발생한다.
