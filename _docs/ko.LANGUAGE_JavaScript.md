@@ -35,9 +35,9 @@ Node.js에서 가장 주목할 특징은 [비동기 입출력](https://ko.wikipe
 
 ![웹 브라우저 런타임 환경<sub><i>출처: <a href="https://medium.com/@lizfaria/the-javascript-engine-and-runtime-environment-e0ed86fea903">Medium @Liz Faria</a></i></sub>](/images/docs/javascript/browser_runtime_environment.png)
 
-좌측은 자바스크립트 엔진을 의미하며, Node.js 런타임 환경에서는 V8 엔진이 해당한다. 엔진 내부에는 데이터를 저장할 [힙](https://ko.wikipedia.org/wiki/동적_메모리_할당#힙_영역)(heap) 영역 메모리와 자바스크립트 코드를 실행하는 [스택](https://ko.wikipedia.org/wiki/스택) 메모리, 일명 [콜 스택](https://ko.wikipedia.org/wiki/콜_스택)(call stack)을 갖는다. 자바스크립트는 단일 [스레드](/docs/ko.Process#스레드)(thread)만을 사용하기 떄문에 하나의 콜 스택만을 활욯하는데, 스택 구조로 인해 한 코드가 완전히 끝날 때까지 다음 코드로 실행되지 않는 블로킹(blocking)이 작용한다.
+좌측은 자바스크립트 엔진을 의미하며, Node.js 런타임 환경에서는 V8 엔진이 해당한다. 엔진 내부에는 데이터를 저장할 [힙](https://ko.wikipedia.org/wiki/동적_메모리_할당#힙_영역)(heap) 영역 메모리와 자바스크립트 코드를 실행하는 [스택](https://ko.wikipedia.org/wiki/스택) 메모리, 일명 [콜 스택](https://ko.wikipedia.org/wiki/콜_스택)(call stack)을 갖는다. [파이썬](/docs/ko.Python)이나 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 등의 일반적인 타 프로그래밍 언어와 마찬가지로 자바스크립트는 단일 [스레드](/docs/ko.Process#스레드)(thread)만을 사용하기 때문에 하나의 콜 스택만을 활용하는데, 스택 구조로 인해 한 코드가 완전히 끝날 때까지 다음 코드로 실행되지 않는 블로킹(blocking)이 작용한다. 허나 이러한 구조적 문제가 유난히 자바스크립트에서 지적되는 이유는 웹페이지 상호작용이나 마우스/키보드 이벤트 등이 자주 동시다발적으로 나타날 수 있는 환경에서 이를 최대한 막힘없이 처리할 수 있는 능력이 어느 프로그래밍 언어보다 요구되기 때문이다.
 
-자바스크립트는 웹 브라우저에 탑재된 웹 API를 호출하여 함수 및 기능을 사용할 수 있다. 만일 웹 API 중에서 [DOM](https://ko.wikipedia.org/wiki/문서_객체_모델)으로부터 `onClick`, `onLoad`, 그리고 `onDone` 등의 이벤트가 동작하면 인자로써 전달된 [콜백](https://ko.wikipedia.org/wiki/콜백)(callback)이 [큐](https://ko.wikipedia.org/wiki/큐_(자료_구조))(queue)에 대기한다. 자바스크립트 엔진의 콜 스택이 비었으면 대기 중인 콜백을 불러와 실행하는데, 이를 처리하는 요소가 바로 [이벤트 루프](https://ko.wikipedia.org/wiki/이벤트_루프)(event loop)이다. 정리하자면, 자바스크립트는 콜백과 이를 지원하는 런타임 환경 덕분에 비동기 입출력이 가능한 것이다.
+자바스크립트는 웹 브라우저에 탑재된 웹 API를 호출하여 함수 및 기능을 사용할 수 있다. 만일 웹 API 중에서 [DOM](https://ko.wikipedia.org/wiki/문서_객체_모델)으로부터 `onClick`, `onLoad`, `onDone` 등의 이벤트가 동작하면 웹 API의 인자로써 전달된 [콜백](#콜백-함수)(callback)이 [큐](https://ko.wikipedia.org/wiki/큐_(자료_구조))(queue)에 대기한다. 자바스크립트 엔진의 콜 스택이 비었으면 대기 중인 콜백을 불러와 실행하는데, 이를 처리하는 요소가 바로 [이벤트 루프](https://ko.wikipedia.org/wiki/이벤트_루프)(event loop)이다. 정리하자면, 자바스크립트는 콜백과 이를 지원하는 런타임 환경 덕분에 비동기 입출력이 가능해져 여러 작업을 동시에 처리할 수 있는 것이다.
 
 ## 통합 개발 환경
 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE)은 최소한 프로그래밍 언어의 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 소프트웨어 개발 프로그램이다. 자바스크립트 엔진은 자바스크립트 코드를 실행하는 소프트웨어이지만, 자바스크립트 코드 편집기가 아니다. 그러므로 자바스크립트 코드를 편집하고 곧바로 프로그램으로 실행하여 문제가 발생하면 검토할 수 있는 IDE가 절대적으로 필요하다.
@@ -782,7 +782,7 @@ console.log(parseInt(variable));
 
 함수의 기능을 정의(definition)하기 방법에는 두 가지가 있다. 
 
-1. [`function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function) 키워드
+1. **[`function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function) 키워드**
 
     [함수 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)(function hoisting)을 지원하여 함수가 정의되기 전에 호출하여 사용할 수 있다.
 
@@ -795,7 +795,7 @@ console.log(parseInt(variable));
    }
     ```
 
-2. [화살표 함수 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(arrow function expression)
+2. **[화살표 함수 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(arrow function expression)**
 
     함수 호이스팅이 지원되지 않으나, 기존 `function` 키워드가 가진 일부 문제점을 극복하기 위해 ES6부터 새로 추가된 대안 함수 표현식이다. 즉, 화살표 함수 표현식은 `function` 키워드를 완전히 대체하기 위한 것이 절대 아니다!
 
@@ -899,35 +899,56 @@ func(1, 2, 3, 4);   // 출력: 1
 
 > 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
 
-[`function`](#자바스크립트-함수) 키워드와 [화살표 함수 표현식](#자바스크립트-함수) 중 무엇을 사용할 것인지는 [`this`](#this-키워드) 키워드가 가리키고자 하는 문맥이 무엇인지에 따라 판단하도록 한다.
+콜백 함수는 자바스크립트에서 매우 중요한 개념 중 하나이며 [비동기 입출력](#런타임-환경)을 가능케 하는 요인이다. 아래는 콜백 함수를 어떻게 인자로써 전달하고, 그리고 전달받은 호출 함수는 콜백 함수를 어떻게 활용하는지 보여준다. 여기서 [`function`](#자바스크립트-함수) 키워드와 [화살표 함수 표현식](#자바스크립트-함수) 중 무엇을 사용할 지는 [`this`](#this-키워드) 키워드가 가리키고자 하는 문맥에 따라 결정한다.
 
 ```js
-calling(callback, "Hello ");        // 출력: Hello World!
-
 /* 호출 함수 */
 function calling(func, arg) {
-    console.log(func(arg, "World!"));
+
+    // 콜백 함수의 호출
+    return func(arg, 3.14159);
 }
 
 /* 콜백 함수 */
 function callback(arg1, arg2) {
     return arg1 + arg2;
 }
+
+console.log(calling(callback, 1));
+```
+```
+4.14159
 ```
 
 ### 람다 표현식
 [람다 표현식](https://en.wikipedia.org/wiki/Anonymous_function)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 흔히 일회용 함수로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다.
 
+* **[`function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function) 키워드**
+
+    ```js
+  function() { statements; }
+    ```
+
+* **[화살표 함수 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(arrow function expression)**
+
+    ```csharp
+  () => { statements; }
+    ```
+
+람다 표현식을 식별자에 [네임 바인딩](#변수)할 경우, 데이터 변경이 불가한 [`const`](#상수)로 선언하는 것을 권장한다.
+
 ```js
-calling(function(arg1, arg2) { return arg1 + arg2 }, "Hello ");
+const lambda = function(arg1, arg2) {
+    return `${arg1}, ${arg2}`;
+}
 
 /* 대안:
-    calling((arg1, arg2) => { return arg1 + arg2 }, "Hello ");
+    const func = (arg1, arg2) => {
+        return `${arg1}, ${arg2}`;
+    }
 */
 
-function calling(func, arg) {
-    console.log(func(arg, "World!"));
-}
+console.log(lambda(3, 'A'));    // 출력: 3, A
 ```
 
 ## 재귀 함수 
