@@ -476,7 +476,7 @@ World!
 ## 엄격 모드
 [엄격 모드](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)(strict mode)은 ECMAScript 5부터 소개되었으며 일반적인 자바스크립트에 비해 제약적인 자바스크립트 모드이다. 엄격 모드를 활성화하기 위해 `"use strict";`(혹은 `'use strict';`)을 (1) 스크립트 최상단에 기입하여 전체에 적용하거나 (2) [함수](#자바스크립트-함수)의 최상단에 기입하여 국부적으로 적용할 수 있지만, 일반 블록에는 적용이 불가하다.
 
-> 엄격 모드의 의의는 보다 "안전한" 자바스크립트를 작성할 수 있도록 하는 것으로, 이에 대한 내용은 함수 내에서의 [`this`](#this-키워드) 키워드와 밀접한 관련이 있다.
+> 엄격 모드의 의의는 보다 "안전한" 자바스크립트를 작성할 수 있도록 하는 것으로, 이에 대한 내용은 차후에 설명할 [`this`](#this-키워드) 키워드와 밀접한 관련이 있다.
 
 엄격 모드는 일반 자바스크립트에 비해 다음과 같이 몇 가지 차이점을 가진다.
 
@@ -507,22 +507,6 @@ World!
    Uncaught SyntaxError: var interface = "Hello World!";
                              ^^^^^^^^^
     ```
-
-## `this` 키워드
-[`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) 키워드는 런타임 도중에 자바스크립트가 실행되고 있는 현시점의 문맥을 대표하는 객체를 반환한다. 자바스크립트에서 상당히 난해한 개념 중 하나인데, 이는 `this` 키워드가 기입된 위치와 [엄격 모드](#엄격-모드) 여부에 따라 가리키는 문맥이 달라지기 때문이다. 그러한 동시에 활용도가 높아 널리 사용되고 있으므로 불가피한 내용이다.
-
-[전역 문맥](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#global_context)(global context)에서 [`this`](#this-키워드) 키워드는 엄격 모드와 무관하게 웹 브라우저에서는 `window` 전역 객체를 반환된다. 허나 모듈 형식의 Node.js 경우에는 `module.exports`를 반환한다.
-
-```js
-console.log(this == globalThis);    // 출력: true  (웹 브라우저)
-                                    // 출력: false (Node.js)
-```
-
-그 외의 문맥들에 대해서는 관련 내용을 다룰 시 `this` 키워드를 함께 언급할 예정이다.
-
-* [함수 문맥](#자바스크립트-함수)
-* [클래스 문맥](#클래스)
-* [파생 클래스](#상속)
 
 # 자바스크립트: 조건 및 루프
 조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 자바스크립트 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
@@ -780,13 +764,13 @@ console.log(parseInt(variable));
 3
 ```
 
-함수의 기능을 정의(definition)하기 방법에는 두 가지가 있다. 
+함수의 기능을 정의(definition)하는 방법으로 두 가지가 있는데, 이 둘의 차이점은 차후 [`this`](#this-키워드) 키워드와 함께 설명할 예정이다.
 
 1. **[`function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function) 키워드**
 
-    [함수 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)(function hoisting)을 지원하여 함수가 정의되기 전에 호출하여 사용할 수 있다.
+    자바스크립트에서 함수를 정의하는 전통적인 방식으로, [함수 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#function_hoisting)(function hoisting)을 지원하여 함수가 정의되기 전에 호출하여 사용할 수 있다.
 
-    > 함수는 `global.func()`처럼 전역 문맥의 일부로 인식하므로, 함수 내의 [`this`](#this-키워드) 키워드는 [전역 객체](#유효범위)를 가리킨다. 반면, [엄격 모드](#엄격-모드)에서는 별도 설정이 없으면 `undefined`를 반환한다.
+    > 함수의 식별자는 생략될 수 있는데, 이를 이름이 없는 [익명 함수](https://en.wikipedia.org/wiki/Anonymous_function)(anonymous function)라고 부르며 흔히 일회용으로 사용된다.
 
     ```js
    /* 기존 자바스크립트 구문 */
@@ -797,13 +781,13 @@ console.log(parseInt(variable));
 
 2. **[화살표 함수 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(arrow function expression)**
 
-    함수 호이스팅이 지원되지 않으나, 기존 `function` 키워드가 가진 일부 문제점을 극복하기 위해 ES6부터 새로 추가된 대안 함수 표현식이다. 즉, 화살표 함수 표현식은 `function` 키워드를 완전히 대체하기 위한 것이 절대 아니다!
+    ES6부터 새로 추가된 (익명) 함수를 정의하는 대안 방식으로, 기존 `function` 키워드의 일부 결함을 해소하기 위해 고안되었다.
 
-    > 화살표 함수 표현식은 자체적인 [`this`](#this-키워드) 바인딩을 갖지 않으므로 함수를 내포하는 (혹은 정의하는) 문맥을 가리킨다.
+    > 화살표 함수 표현식은 절대로 `function` 키워드를 대체하기 위한 것이 아니다! 이를 반영하는 예시로 화살표 함수 표현식은 함수 호이스팅을 지원하지 않는다.
 
     ```js
    /* ES6부터 추가된 화살표 함수 표현식 */
-   const func = () => {
+   () => {
    
    }
     ```
@@ -819,7 +803,7 @@ console.log(parseInt(variable));
       console.log('Hello World!');
   }
 
-  var variable = func();
+  const variable = func();
   console.log(variable);
     ```
     ```
@@ -834,7 +818,7 @@ console.log(parseInt(variable));
       console.log('Hello World!');
   }
 
-  var variable = func;
+  const variable = func;
   console.log(variable);
     ```
     ```
@@ -894,12 +878,82 @@ func(1, 2, 3, 4);   // 출력: 1
                     // 출력: [ 2, 3, 4 ]
 ```
 
+## `this` 키워드
+[`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) 키워드는 런타임 도중에 자바스크립트가 실행되고 있는 현시점의 문맥(context)을 대표하는 객체를 반환한다. 자바스크립트에서 상당히 난해한 개념 중 하나인데, 이는 `this` 키워드가 기입된 위치와 [엄격 모드](#엄격-모드) 여부에 따라 가리키는 객체가 달라지기 때문이다. 그러한 동시에 활용도가 높아 널리 사용되고 있으므로 불가피한 내용이다.
+
+### 전역 문맥
+[전역 문맥](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#global_context)(global context)에서 `this` 키워드가 가리키는 객체는 런타임 환경에 따라 달라진다.
+
+* **[웹 브라우저](#런타임-환경)**
+
+    `this` 키워드는 엄격 모드와 무관하게 `window` 전역 객체를 반환된다.
+
+    ```js
+  console.log(this === globalThis ? true : this);    // 출력: true
+    ```
+
+* **[Node.js](#런타임-환경)**
+
+    모듈 형식의 Node.js에서 `this` 키워드는 [`module.exports`](https://nodejs.org/api/modules.html#moduleexports)를 반환하며, 이는 `global` 전역 객체와는 전혀 다른 존재이다.
+
+    ```js
+  console.log(this === globalThis ? true : this);    // 출력: {}
+    ```
+
+### 함수 문맥
+[함수 문맥](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#function_context)(function context)에서 `this` 키워드가 가리키는 객체는 함수를 정의하는데 사용된 방식에 따라 달라진다.
+
+* **[`function`](#자바스크립트-함수) 키워드**
+
+    * **비엄격 모드**
+
+        일반적인 자바스크립트에서 함수는 `globalThis.func()`처럼 전역 객체에 종속된 함수로 받아들여져, 결과적으로 `this` 키워드는 `globalThis` 전역 객체를 가리킨다.
+
+        ```js
+      /* 런타임 환경: Node.js */
+      
+      function func() {
+          console.log(this === globalThis ? true : this);
+      }
+
+      func();    // 출력: true
+        ```
+    
+    * **엄격 모드**
+
+        엄격 모드에서는 [`call()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) 혹은 [`apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 등으로 `this` 키워드의 문맥을 직접 지정해야 하며, 만일 이러한 설정이 없으면 `undefined`를 반환한다.
+
+        ```js
+      /* 런타임 환경: Node.js */
+      
+      function func() {
+          "use strict";
+          console.log(this === globalThis ? true : this);
+      }
+
+      func();    // 출력: undefined
+        ```
+
+* **[화살표 함수 표현식](#자바스크립트-함수)**
+
+    화살표 함수 표현식은 `this` 키워드의 바인딩에 관여하지 않는다. 그러므로 `this` 키워드는 해당 함수를 내포하는 (혹은 정의하는) 객체를 가리킨다.
+
+    ```js
+  /* 런타임 환경: Node.js */
+  
+  const func = () => {
+      console.log(this === globalThis ? true : this);
+  };
+
+  func();    // 출력: {}
+    ```
+
 ## 콜백 함수
 [콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
 
 > 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
 
-콜백 함수는 자바스크립트에서 매우 중요한 개념 중 하나이며 [비동기 입출력](#런타임-환경)을 가능케 하는 요인이다. 아래는 콜백 함수를 어떻게 인자로써 전달하고, 그리고 전달받은 호출 함수는 콜백 함수를 어떻게 활용하는지 보여준다. 여기서 [`function`](#자바스크립트-함수) 키워드와 [화살표 함수 표현식](#자바스크립트-함수) 중 무엇을 사용할 지는 [`this`](#this-키워드) 키워드가 가리키고자 하는 문맥에 따라 결정한다.
+콜백 함수는 자바스크립트에서 매우 중요한 개념 중 하나이며 [비동기 입출력](#런타임-환경)을 가능케 하는 요인이다. 아래는 콜백 함수를 어떻게 인자로써 전달하고, 그리고 전달받은 호출 함수는 콜백 함수를 어떻게 활용하는지 보여준다. 여기서 [`function`](#자바스크립트-함수) 키워드와 [화살표 함수 표현식](#자바스크립트-함수) 중 무엇을 사용할 지는 [`this`](#this-키워드) 키워드가 가리키고자 하는 객체에 따라 결정한다.
 
 ```js
 /* 호출 함수 */
@@ -918,37 +972,6 @@ console.log(calling(callback, 1));
 ```
 ```
 4.14159
-```
-
-### 람다 표현식
-[람다 표현식](https://en.wikipedia.org/wiki/Anonymous_function)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 흔히 일회용 함수로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다.
-
-* **[`function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function) 키워드**
-
-    ```js
-  function() { statements; }
-    ```
-
-* **[화살표 함수 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)(arrow function expression)**
-
-    ```csharp
-  () => { statements; }
-    ```
-
-람다 표현식을 식별자에 [네임 바인딩](#변수)할 경우, 데이터 변경이 불가한 [`const`](#상수)로 선언하는 것을 권장한다.
-
-```js
-const lambda = function(arg1, arg2) {
-    return `${arg1}, ${arg2}`;
-}
-
-/* 대안:
-    const func = (arg1, arg2) => {
-        return `${arg1}, ${arg2}`;
-    }
-*/
-
-console.log(lambda(3, 'A'));    // 출력: 3, A
 ```
 
 ## 재귀 함수 
