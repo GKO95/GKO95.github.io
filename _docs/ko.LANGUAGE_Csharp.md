@@ -1287,7 +1287,7 @@ delegate double Del(int arg1, double arg2);
 ```
 
 ## 람다 표현식
-[람다 표현식](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 흔히 일회용 함수로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다. [람다 연산자](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator#lambda-operator) [`=>`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator)를 통해 선언되지만 그 유형은 크게 두 가지로 나뉘어진다.
+[람다 표현식](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 흔히 일회용 함수로 사용된다. [람다 연산자](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator#lambda-operator) [`=>`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator)를 통해 선언되지만 그 유형은 크게 두 가지로 나뉘어진다.
 
 * **[표현식 람다](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions#expression-lambdas)(expression lambda)**
 
@@ -1311,7 +1311,7 @@ delegate double Del(int arg1, double arg2);
 > void Function() => Console.WriteLine("Hello World!");
 > ```
 
-람다 표현식을 수용할 수 있는 대리자는 데이터 반환 여부에 따라 [`Func<T, TResult>`](https://docs.microsoft.com/en-us/dotnet/api/system.func-2) 혹은 [`Action<T1, T2>`](https://docs.microsoft.com/en-us/dotnet/api/system.action-2)를 사용할 수 있으며, 이들은 간편히 [`var`](#자료형) 자료형으로 컴파일러에서 자동 결정하도록 하는 것도 방법이다.
+비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다. 람다 표현식을 수용할 수 있는 대리자는 데이터 반환 여부에 따라 [`Func<T, TResult>`](https://docs.microsoft.com/en-us/dotnet/api/system.func-2) 혹은 [`Action<T1, T2>`](https://docs.microsoft.com/en-us/dotnet/api/system.action-2)를 사용할 수 있으며, 이들은 간편히 [`var`](#자료형) 자료형으로 컴파일러에서 자동 결정하도록 하는 것도 방법이다.
 
 ```csharp
 var lambda = (int arg1, char arg2) => $"{arg1}, {arg2}";
