@@ -989,129 +989,107 @@ function factorial(arg) {
 ```
 
 # 자바스크립트: 객체
-[객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 문자열 객체와 배열이 있다.
+[객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 데이터나 함수를 바인딩할 수 있는 객체 내부의 식별자들을 속성(property)라고 하는데, 이들은 다음과 같이 [속성 접근자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors)로 접근한다. 그 중에서 함수가 바인딩된 속성을 메소드(method)라고도 부르는데, 메소드는 반드시 [`function`](#자바스크립트-함수) 키워드를 정의되거나 ES6부터 소개된 [메소드 정의](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions)를 사용한다.
+
+> 반면 [화살표 함수 표현식](#자바스크립트-함수)은 [`this`](#this-키워드) 키워드가 바인딩되지 않는 성질로 메소드 정의에 절대 사용되지 말아야 한다.
+
+| 객체 속성 | 속성 접근자                                    |
+|:-------:|-----------------------------------------------|
+| 변수 | `instance.variable` 또는 `instance["variable"]` |
+| 함수 | `instance.method()` 또는 `instance["method"]()` |
+
+현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 [전역 객체](#유효범위)와 [이터러블 객체](#자바스크립트-이터러블)가 있다.
 
 ```js
 var variable = [0, 3, 5, 9];
 console.log(variable.indexOf(5));
-// "variable" 이름을 가진 배열 이터러블 객체의 "indexOf()" 메소드를 사용하여 값 5에 대한 위치를 반환한다.
+// "variable" 배열 이터러블 객체의 "indexOf()" 메소드를 사용하여 값 5에 대한 위치를 반환한다.
 ```
 ```
 2
 ```
 
-객체에 속하는 변수와 함수를 각각 속성(property)과 메소드(method)라고 부르며 [속성 접근자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors)를 통해 접근한다. 
+다음은 자바스크립트에서 사용자 정의 객체(user-defined object)를 정의하는 방법이다.
 
-| 객체 속성 | 속성 접근자                                      |
-|:-------:|-----------------------------------------------|
-| 변수 (일명 필드; field) | `instance.property` 혹은 `instance["property"]` |
-| 함수 (또는 메소드)    | `instance.method()` 혹은 `instance["method"]()` |
+* **[객체 초기자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer)(object initializer)**
 
-여기서 속성의 개념이 매우 포괄적이고 애매모한데, 자바스크립트 특성상 식별자에 어떤 데이터가 바인딩 되는지에 따라 변수가 되거나 함수가 되는 유동적인 태도를 취하기 때문이다. 비록 메소드가 객체의 함수 역할을 하지만 속성에 함수가 바인딩되면 메소드처럼 사용될 수 있다. 그래도 [메소드 정의](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions)와 구분되어 엄연히 다른 존재이므로 자바스크립트는 "속성 및 메소드"를 분별한다.
-
-다음은 자바스크립트에서 사용자 정의 객체(user-defined object)를 생성하는 방법을 소개한다:
-
-> 아래 방법을 소개하기 앞서 두 개의 연산자에 대하여 설명한다.
->
-> * **`this` 연산자**: 객체 스스로를 가리키기 위해 사용된다. 만일 `this` 연산자가 없이 속성을 호출하면 자바스크립트는 이를 일반 지역 변수 또는 함수로 간주한다.
-> * **`new` 연산자**: 사용자 정의 또는 생성자 함수를 갖는 객체 자료형으로부터 객체를 생성하는데 사용된다.
-
-* [객체 초기자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer)(object initializer), 일명 객체 리터럴(object literal) `{}` 안에 각 속성을 쉼표로 나누어 `property: definition` 형식으로 값을 할당하거나 함수를 정의하여 생성한다.
+    객체 리터럴(object literal) `{}` 안에 속성을 `property: definition` 구문으로 초기화 (또는 정의)하여 객체를 생성한다. 초기자는 엄밀히 말해 객체가 아니기 때문에, `this` 키워드는 객체가 아닌 전역 문맥을 가리키는 점을 유의한다. 초기자로부터 객체가 생성된 이후에는 `this` 키워드로 객체를 불러 속성을 접근해야 하므로 메소드 안에 `this` 키워드가 사용된 것이다.
 
     ```js
-  /* 객체 생성: 객체 초기자 */
   const instance = {
       
-      // 속성 정의 (변수)
-      property1: value1,
-      property2: value2,
-  
-      // 속성 정의 (함수)
-      property3: function(arg) {
-          return this.field1 + this.field2 - arg;
-      },
-      
+      // 속성 정의
+      property1: 2,
+      property2: 3.14,
+
       // 메소드 정의
-      method(arg) {
-          return this.field1 + this.field2 - arg;
+      property3: function(arg) {
+          return this.property1 + this.property2 - arg;
       }
+
+      /* 동일:
+          property3(arg) {
+              return this.property1 + this.property2 - arg;
+          }
+      */
   };
     ```
 
-* [생성자 함수](https://developer.mozilla.org/en-US/docs/Glossary/Constructor)(constructor function), 즉 객체를 생성하기 위해 동작하는 함수를 사용한다. 생성자 함수에는 속성들이 정의되고, `new` 연산자를 통해 객체가 생성된다.
+* **[생성자 함수](https://developer.mozilla.org/en-US/docs/Glossary/Constructor)(constructor function)**
 
-    ```js
-  /* 객체 생성: 생성자 함수 */
+    [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) 연산자에 의해 함수는 객체를 만드는 [생성자](#생성자) 역할을 한다. 생성자는 객체를 만드는 과정에서 자동으로 실행되는 특수한 메소드인데, 이를 외부 함수로 구현한 것이라 볼 수 있다. 생성자 함수는 이미 객체의 일부로 간주되고 있기 때문에 속성과 메소드는 객체를 가리키는 `this` 키워드를 통해 정의되어야 한다.
+
+    ```js  
+  const instance = new func(2, 3.14);
+
   function func(arg1, arg2) {
       
-      // 속성 정의 (변수)
-      this.field1 = arg1;
-      this.field2 = arg2;
+      // 속성 정의
+      this.property1 = arg1;
+      this.property2 = arg2;
 
-      // 속성 정의 (함수)
-      this.method = function(arg) {
-          return this.field1 + this.field2 - arg;
+      // 메소드 정의
+      this.property3 = function(arg) {
+          return this.property1 + this.property2 - arg;
       }
   }
-  
-  const instance = new func(value1, value2);
-    ```
-
-* [`Object`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) 클래스 자료형이 갖는 `Object.create()` 정적 메소드에 [프로토타입](#프로토타입)을 기입해 생성자 함수 정의가 필요없이 객체를 생성한다.
-
-    ```js
-  /* 객체 생성: 프로토타입 */
-  const prototype = {
-
-      // 속성 정의 (변수)
-      property1: value1,
-      property2: value2,
-
-      // 속성 정의 (함수)
-      property3: function(arg) {
-          return this.field1 + this.field2 - arg;
-      },
-      
-      // 메소드 정의
-      method(arg) {
-          return this.field1 + this.field2 - arg;
-      }
-  };
-
-  const instance = Object.create(prototype);
     ```
 
 ### 프로토타입
-[프로토타입](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)(prototype)은 기본적으로 객체에 내장된 속성 및 메소드를 일컬으며, 모든 자바스크립트 객체는 프로토타입을 갖는다. 프로토타입 또한 객체이므로 자신만의 프로토타입이 있는데 이러한 연속을 프로토타입 연쇄(prototype chain)라고 부르며, `null`을 프로토타입으로 갖는 프로토타입까지 이어진다. 객체의 프로토타입은 `Object.getPrototypeOf()` 정적 메소드로 반환된다.
+[프로토타입](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)(prototype)은 객체에 기본으로 내장된 속성 및 메소드를 일컬으며, 모든 자바스크립트 객체는 프로토타입을 갖는다. 프로토타입 또한 객체이므로 자신만의 프로토타입이 있는데 이러한 연속을 프로토타입 연쇄(prototype chain)라 부르고, 프로토타입이 `null`일 때까지 이러한 연쇄는 계속 이어진다. 객체의 프로토타입은 `Object.getPrototypeOf()` 메소드로 반환할 수 있다.
 
-### 심볼 자료형
-[심볼 자료형](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol)(symbol type)
-
-## 클래스
-[클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 동일한 구조를 갖는 객체를 매번 정의할 필요없이 간단히 생성할 수 있도록 한다. ES6부터 소개되었으며 `class` 키워드와 함께 객체의 속성 및 메소드를 클래스 내부에 정의한다. 클래스로부터 객체를 생성하는 절차를 "객체화(instantiation)"라고 한다. 직접 생성된 객체와 달리, 클래스로부터 생성된 객체는 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)로부터 아래의 특성을 가진다:
-
-1. 변수와 함수를 하나의 객체로 결합한다.
-2. 우연치 않은 수정을 방지하기 위해 이러한 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
-
-특히 2번 특성의 의해 클래스 및 객체는 외부에서 접근이 가능한 [public](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields) 속성 (및 메소드)와 외부에서 접근이 불가한 [private](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields) 속성 (및 메소드)를 지정할 수 있다. 기본적으로 public으로 선언되지만 private으로 선언하려면 식별자 앞에 해시 기호 `#`를 붙인다.
-
-> private 속성 및 메소드에 대해 몇 가지 유의할 사항이 있다.
->
-> * 객체 리터럴에서 사용할 수 없다.
-> * 선언이 먼저 이루어져야 한다; 즉, 메소드 내에서 `this` 키워드로 정의하려면 오류가 발생한다.
-> * 2021년 4월 기준으로 아직 ECMAScript 실험 단계에 있으나 대부분의 브라우저에서 지원하고 있다.
+[`Object.create()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create)에 프로토타입으로 사용될 객체를 인자로 전달하여 객체를 생성할 수 있다.
 
 ```js
-/* 클래스 생성 */
+const prototype = {
+
+    // 속성 정의
+    property1: value1,
+    property2: value2,
+
+    // 메소드 정의
+    property3(arg) {
+        return this.property1 + this.property2 - arg;
+    }
+};
+
+const instance = Object.create(prototype);
+```
+
+## 클래스
+[클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 ES6부터 소개되었으며 객체를 생성하는데 사용된다. 클래스는 `class` 키워드를 사용하여 맴버 변수(일명 필드; field) 및 맴버 함수(일명 메소드; method)와 함께 정의되나, [클래스 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#class_hoisting)(class hoisting)은 지원되지 않는다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 속성들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
+
+1. 변수와 함수가 하나의 객체로 결합된다.
+2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
+
+클래스는 외부에서 접근 가능한 [public](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields) 및 접근 불가한 [private](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields) 필드와 메소드를 지정할 수 있다. 클래스 맴버들은 기본적으로 public으로 선언되며, private 맴버는 식별자 앞에 해시 기호 `#`를 붙인다. 단, 2021년 4월 기준으로 private 맴버는 아직 ECMAScript 실험 단계에 있어 본문의 예시 코드에서는 알 수 없는 구문으로 치부한다.
+
+```js
+/* 클래스 정의 */
 class CLASS {
 
-    public = value1;     // public  속성 정의
-    #private = value2;   // private 속성 정의
-
-    // 속성 정의 (함수)
-    property = function(arg) {
-        return this.public + this.#private - arg;
-    }
+    field1  = 2;      // public  속성 정의
+    #field2 = 3.14;   // private 속성 정의
 
     // 메소드 정의
     method(arg) {
@@ -1123,31 +1101,31 @@ class CLASS {
 const instance = new CLASS();
 ```
 
-자바스크립트는 [클래스 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#class_hoisting)(class hoisting)을 지원하지 않는다.
-
 ### 생성자
-[생성자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)(constructor)는 객체화가 이루어질 때마다 자동적으로 실행되는 특수한 `constructor()` 메소드이다. 비록 생성자는 선택사항이지만, 만일 생성자를 정의한다면 객체화 과정에서 객체로 전달할 인자의 개수를 결정하는 요인으로 작용한다. 생성자는 흔히 객체화 단계에서 필드를 초기화(initialization)하는 용도로 사용된다.
+[생성자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)(constructor)는 객체화마다 자동으로 실행되는 데이터 반환이 없는 `constructor()` 메소드이다. 비록 생성자는 선택사항이지만, 선언한다면 반드시 클래스명과 동일해야 한다. 흔히 객체화 단계에서 맴버들을 초기화하는 용도로 사용된다.
+
+> Public 맴버는 메소드 내에서 `this` 키워드를 통해 자유롭게 정의될 수 있으나, private 맴버는 반드시 사전에 선언되어 사용되어야 한다.
 
 ```js
-/* 클래스 생성 */
-class CLASS {
-
-    // 생성자 정의
+/* 클래스 정의 */
+class CLASS
+{
+    /* 생성자 정의 */
     constructor(arg1, arg2) {
-        this.public = arg1;
-        this.#private = arg2;
+        this.field1 = arg1;
+        this.#field2 = arg2;
+
+        statements;
     }
 
-    // private 속성 선언
-    #private;
-
-    method(arg) {
-        return this.property1 + this.#property2 - arg;
-    }
+    // private 필드 선언
+    #field2;
 }
+
+const instance = new CLASS(2, 3.14);
 ```
 
-생성자를 정의하지 않으면 아래의 기본 생성자가 클래스에 제공된다.
+생성자를 별도로 정의하지 않으면 아래의 기본 생성자(default constructor)가 암묵적으로 클래스에 적용된다.
 
 ```js
 constructor() {}
