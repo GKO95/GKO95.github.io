@@ -1077,7 +1077,7 @@ const instance = Object.create(prototype);
 ```
 
 ## 클래스
-[클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 ES6부터 소개되었으며 객체를 생성하는데 사용된다. 클래스는 `class` 키워드를 사용하여 맴버 변수(일명 필드; field) 및 맴버 함수(일명 메소드; method)와 함께 정의되나, [클래스 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#class_hoisting)(class hoisting)은 지원되지 않는다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 속성들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
+[클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 ES6부터 소개되었으며 객체를 생성하는데 사용된다. 클래스는 `class` 키워드를 사용하여 맴버 변수(일명 속성 혹은 필드; field) 및 맴버 함수(일명 메소드; method)와 함께 정의되나, [클래스 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#class_hoisting)(class hoisting)은 지원되지 않는다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 속성들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
 1. 변수와 함수가 하나의 객체로 결합된다.
 2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
@@ -1131,38 +1131,45 @@ const instance = new CLASS(2, 3.14);
 constructor() {}
 ```
 
-### 정적 속성 및 메소드
-[정적 속성 및 메소드](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#static_methods_and_properties)(static property & method)는 `static` 키워드로 선언된 속성 및 메소드로 객체화 없이 클래스에서 곧바로 사용할 수 있다. 그러나 클래스 객체화로 생성된 객체는 정적 속성 및 메소드를 접근할 수 없다. 다시 말해, 정적 속성 및 메소드는 단순히 클래스에 속해있는 일반 변수 및 함수와 동일하게 취급하면 된다.
+### 정적 맴버
+[정적 맴버](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static)(static member)는 클래스로부터 생성된 객체의 개수와 무관하게 오로지 하나의 데이터만 존재하여 공유되는 [`static`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static) 키워드로 명시된 맴버이다. 해당 유형의 맴버는 객체화가 필요없이 클래스로부터 직접 호출이 가능하나, `this` 키워드가 클래스 자체에 바인딩된 관계로 객체로부터 접근할 수 없다. 즉, 정적 맴버는 단순히 클래스에 묶여있는 일반 데이터 혹은 함수와 같다.
 
-> 객체 속성 및 메소드(instance property & method)는 정적 속성 및 메소드와 서로 별개의 영역으로 간주되므로 `static`만 확실히 표시해주면 동일한 식별자를 가질 수 있다.
+> 객체 맴버(instance member)는 정적 맴버와 서로 별개의 영역으로 간주되므로 `static` 키워드만 확실히 표시해주면 동일한 식별자를 가질 수 있다.
 
 ```js
-/* 클래스 생성 */
-class CLASS {
+/* 클래스 정의 */
+class CLASS
+{
+    field1 = 2;
+    #field2 = 3.14;
 
-    // 정적 속성 정의
-    static property = 2;
+    /* 정적 필드 정의 */
+    static field1 = "Hello World!";
 
-    // 정적 메소드 정의
+    /* 정적 메소드 정의 */
     static method(arg) {
-        return this.field * arg;
+        return this.field1 + 7;
     }
 }
 
-/* 정적 메소드 호출 */
-console.log(CLASS.property);    // 출력: 2
-console.log(CLASS.method(3));   // 출력: 6
+console.log(CLASS.method());            // 출력: Hello World!7
+
+const instance = new CLASS(2, 3.14);
+console.log(instance.method());         // Uncaught TypeError: instance.method is not a function
 ```
 
 ### Setter 및 Getter
-자바스크립트의 클래스는 하나의 속성을 [getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)와 [setter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set) 영역으로 나누어 데이터 숨기기를 지원한다.
+클래스는 하나의 속성을 getter와 setter 영역으로 나누어 [데이터 숨기기](https://en.wikipedia.org/wiki/Information_hiding)(data hiding)을 지원한다.
 
 | 접근자 | 키워드 | 설명                                     |
 |:--------:| ------- | ----------------------------------------------- |
-| Getter   | `get`   | 속성으로부터 값을 반환받는 맴버이다. |
-| Setter   | `set`   | 속성으로부터 값을 설정하는 맴버이다. |
+| Getter   | [`get`][accessor-get]   | 속성으로부터 값을 반환받는 맴버이다. |
+| Setter   | [`set`][accessor-set]   | 속성으로부터 값을 설정하는 맴버이다. |
 
-속성을 나누므로써 수정되어서는 안될 민감한 코드를 `set` 영역에 숨기고 `get`만을 통해서 데이터를 반환한다. 정의된 형태는 메소드와 유사하지만 실제로 사용할 때는 소괄호 `()` 없이 속성처럼 사용된다. 또한 setter를 정의할 때에는 매개변수가 하나만 존재해야 하고 getter를 정의할 때에는 매개변수가 없어야 한다.
+[accessor-get]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
+[accessor-set]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set
+
+속성을 나누므로써 수정되어서는 안될 민감한 코드를 setter 영역 숨기고 getter 영역만을 통해서 데이터를 반환한다. 정의된 형태는 메소드와 유사하지만 실제로 사용할 때는 소괄호 `()` 없이 필드처럼 사용된다. Setter를 정의할 때 반드시 인자를 전달받을 매개변수 하나가 필요하며, 반대로 getter은 매개변수가 없지만 데이터를 반환할 [`return`](#return-반환문) 문이 있어야 한다.
 
 
 ```js
@@ -1190,89 +1197,101 @@ console.log(instance.property);    // 출력: 9 (= 3 ** 2)
 ```
 
 ## 클래스 표현식
-[클래스 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/class)(class expression)은 익명의 클래스를 정의하는 동시 객체를 선언하는 표현식이다. `new` 연산자가 없어도 객체화가 되어 코드가 간략하지만, 단 하나의 객체만 정의할 수 있는 단점을 갖는다.
+[클래스 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/class)(class expression)은 익명의 클래스를 정의하는 동시에 객체화하는 표현식이다. [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) 연산자 없이 간편히 객체를 생성할 수 있다는 점에서 편리하지만, 재활용이 불가능하다는 단점이 있다.
 
 ```js
 /* 클래스 표현식 */
 const instance = class {
-    ...
+    
 };
 ```
 
 ## 상속
-[상속](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 속성을 제공하는 행위이다. 파생 클래스는 `extends` 키워드로 상속받을 기반 클래스를 명시하지만, 오로지 한 기반 클래스로부터만 파생될 수 있다. 기반 클래스와 파생 클래스에 동일한 이름의 속성과 메소드가 존재할 경우,
+[상속](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 필드 및 메소드 맴버를 제공하는 행위이다. 파생 클래스는 [`extends`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends) 키워드로 하나의 기반 클래스로부터만 상속받을 수 있다. 기반 클래스와 파생 클래스에 동일한 이름의 속성과 메소드가 존재할 경우,
 
-* 기반 클래스의 속성은 파생 클래스에서 명시된 데이터로 재할당된다.
-* 기반 클래스의 메소드는 파생 클래스의 속성에 의해 묻혀진다.
-
-여기서 "묻힌다"는 표현은 기반 클래스의 메소드가 아직 살아있음을 시사한다. 이러한 차이점이 존재하여 자바스크립트에서 객체를 다룰 때 속성과 메소드를 확실히 구별짓는 것이다.
+* **속성**: 기반 클래스의 속성은 파생 클래스에 명시된 데이터로 재할당된다.
+* **메소드**: 기반 클래스의 메소드는 파생 클래스에 의해 묻혀진다.
 
 ```js
-/* 기반 클래스 생성 */
+/* 기반 클래스 정의 */
 class BASECLASS
 {
-    property1 = null;
-    property2 = 3;
+    field1 = 3;
+    field2 = "JavaScript";
 
-    method() {
-        this.property1 = "JavaScript";
+    method(arg1, arg2) {
+        return arg1 + arg2;
     }
 }
 
-/* 파생 클래스 생성 */
+/* 파생 클래스 정의 */
 class DERIVEDCLASS extends BASECLASS
 {
-    property2 = 7;
-    property3 = true;
+    field2 = "Hello World!";
+    field3 = true;
 
-    method() {
-        this.property1 = "Hello World!";
+    method(arg1, arg2) {
+        return arg1 * arg2;
     }
 }
 
+/* 클래스 객체화 */
 const instance = new DERIVEDCLASS();
 
-console.log(instance);
-instance.method();
-console.log(instance);
+console.log(`${instance.field1}, ${instance.field2}, ${instance.field3}`);
+console.log(instance.method(2, 3));
 ```
 ```
-DERIVEDCLASS { property1: null, property2: 7, property3: true }
-DERIVEDCLASS { property1: 'Hello World!', property2: 7, property3: true }
+3 Hello World! true
+6
 ```
 
 ### `super` 키워드
-[`super`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super) 키워드는 파생 클래스가 기반 클래스의 생성자 및 메소드를 호출하는데 사용된다:
+[`super`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super) 키워드는 파생 클래스로부터 기반 클래스의 객체 및 정적 메소드를 접근하기 위해 사용되며, 다음과 같은 용도로 활용된다.
 
-* `super()`은 기반 클래스의 생성자를 호출하며, 반드시 `this` 키워드가 사용되기 전에 기입되어야 한다. 단, 파생 클래스에 별도 생성자가 정의되지 않았다면 해당 키워드는 무시해도 된다.
+* **`super.` 표현식**
+
+    파생 클래스로부터 원하는 기반 클래스 맴버를 호출한다.
 
     ```js
+  /* 기반 클래스 정의 */
+  class BASECLASS {
+
+      method() {
+          return "Hello";
+      }
+  }
+
+  /* 파생 클래스 정의 */
+  class DERIVEDCLASS extends BASECLASS {
+
+      method() {
+          // 기반 클래스 메소드 호출
+          let variable = super.method();
+          console.log(`${variable} World!`);
+      }
+  }
+
+  const instance = new DERIVEDCLASS();
+  instance.method();                    // 출력: Hello World!
+    ```
+
+* **`super()` 표현식**
+
+    파생 클래스의 생성자가 정의되어 있으면, 반드시 `this` 키워드가 사용되기 전에 `super()` 표현식으로 기반 클래스의 생성자를 호출해야 한다. 이는 객체화 과정에서 각 클래스가 갖는 생성자가 이중으로 실행되는 것을 방지한다. 만일 파생 클래스에 별도의 생성자가 정의되지 않으면 생략해도 무방하다.
+
+    ```js
+  /* 기반 클래스 정의 */
   class BASECLASS {
       constructor(arg1, arg2) {
           ...
       }
   }
 
+  /* 파생 클래스 정의 */
   class DERIVEDCLASS extends BASECLASS {
       constructor(arg) {
           super(arg, arg);
-          ...
-      }
-  }
-    ```
-
-* `super.method()`은 기반 클래스의 메소드를 호출한다. 단, 메소드가 아닌 `function` 키워드 또는 화살표 함수 표현식에 바인딩된 속성에는 `super`를 인식하지 못하는 구문 오류가 발생한다.
-
-    ```js
-  class BASECLASS {
-      method(arg1, arg2) {
-          ...
-      }
-  }
-
-  class DERIVEDCLASS extends BASECLASS {
-      method(arg) {
-          super.method(arg, arg);
           ...
       }
   }
