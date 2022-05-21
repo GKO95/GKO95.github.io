@@ -773,7 +773,7 @@ console.log(parseInt(variable));
     > 함수의 식별자는 생략될 수 있는데, 이를 이름이 없는 [익명 함수](https://en.wikipedia.org/wiki/Anonymous_function)(anonymous function)라고 부르며 흔히 일회용으로 사용된다.
 
     ```js
-   /* 기존 자바스크립트 구문 */
+   /* 기존 함수 구문 */
    function func() {
        
    }
@@ -786,13 +786,13 @@ console.log(parseInt(variable));
     > 화살표 함수 표현식은 절대로 `function` 키워드를 대체하기 위한 것이 아니다! 이를 반영하는 예시로 화살표 함수 표현식은 함수 호이스팅을 지원하지 않는다.
 
     ```js
-   /* ES6부터 추가된 화살표 함수 표현식 */
+   /* 화살표 함수 표현식 */
    () => {
    
    }
     ```
 
-자바스크립트는 이례적으로 함수 블록 안에 또 다른 함수를 정의하는 것이 허용되며, [함수 유효범위](#유효범위)에 해당하여 정의된 함수 내에서만 사용할 수 있다.
+자바스크립트는 이례적으로 함수 블록 안에 또 다른 함수를 정의하는 것이 허용되며, [함수 유효범위](#유효범위)에 해당하여 정의된 함수 내에서만 사용할 수 있다. 그리고 정의된 함수는 익명 여부를 불문하고 식별자에 네임 바인딩이 될 수 있다.
 
 함수명 뒤에 소괄호 `()` 기입여부에 따라 의미하는 바가 다르다.
 
@@ -800,7 +800,7 @@ console.log(parseInt(variable));
 
     ```js
   function func() {
-      console.log('Hello World!');
+      console.log("Hello World!");
   }
 
   const variable = func();
@@ -815,7 +815,7 @@ console.log(parseInt(variable));
 
     ```js
   function func() {
-      console.log('Hello World!');
+      console.log("Hello World!");
   }
 
   const variable = func;
@@ -879,38 +879,34 @@ func(1, 2, 3, 4);   // 출력: 1
 ```
 
 ## `this` 키워드
-[`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) 키워드는 런타임 도중에 자바스크립트가 실행되고 있는 현시점의 문맥(context)을 대표하는 객체를 반환한다. 자바스크립트에서 상당히 난해한 개념 중 하나인데, 이는 `this` 키워드가 기입된 위치와 [엄격 모드](#엄격-모드) 여부에 따라 가리키는 객체가 달라지기 때문이다. 그러한 동시에 활용도가 높아 널리 사용되고 있으므로 불가피한 내용이다.
+[`this`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) 키워드는 런타임 도중에 현재 실행되고 있는 자바스크립트 코드가 어느 데이터에 종속(일명 바인딩; binding)되어 있는지를 가리킨다. 자바스크립트에서 상당히 난해한 개념 중 하나인데, 이는 `this` 키워드가 기입된 위치와 [엄격 모드](#엄격-모드) 여부에 따라 가리키는 객체가 달라지기 때문이다. 그러한 동시에 활용도가 높아 널리 사용되고 있으므로 불가피한 내용이다.
 
-### 전역 문맥
-[전역 문맥](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#global_context)(global context)에서 `this` 키워드가 가리키는 객체는 런타임 환경에 따라 달라진다.
+1. **[전역 문맥](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#global_context)(global context)**
 
-* **[웹 브라우저](#런타임-환경)**
+    * **[웹 브라우저](#런타임-환경)**
 
-    `this` 키워드는 엄격 모드와 무관하게 `window` 전역 객체를 반환된다.
-
-    ```js
-  console.log(this === globalThis ? true : this);    // 출력: true
-    ```
-
-* **[Node.js](#런타임-환경)**
-
-    모듈 형식의 Node.js에서 `this` 키워드는 [`module.exports`](https://nodejs.org/api/modules.html#moduleexports)를 반환하며, 이는 `global` 전역 객체와는 전혀 다른 존재이다.
-
-    ```js
-  console.log(this === globalThis ? true : this);    // 출력: {}
-    ```
-
-### 함수 문맥
-[함수 문맥](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#function_context)(function context)에서 `this` 키워드가 가리키는 객체는 함수를 정의하는데 사용된 방식에 따라 달라진다.
-
-* **[`function`](#자바스크립트-함수) 키워드**
-
-    * **비엄격 모드**
-
-        일반적인 자바스크립트에서 함수는 `globalThis.func()`처럼 전역 객체에 종속된 함수로 받아들여져, 결과적으로 `this` 키워드는 `globalThis` 전역 객체를 가리킨다.
+        `this` 키워드는 엄격 모드와 무관하게 `window` 전역 객체를 반환된다.
 
         ```js
-      /* 런타임 환경: Node.js */
+      console.log(this === globalThis ? true : this);    // 출력: true
+        ```
+
+    * **[Node.js](#런타임-환경)**
+
+        모듈 형식의 Node.js에서 `this` 키워드는 [`module.exports`](https://nodejs.org/api/modules.html#moduleexports)를 반환하며, 이는 `global` 전역 객체와는 전혀 다른 존재이다.
+
+        ```js
+      console.log(this === globalThis ? true : this);    // 출력: {}
+        ```
+
+2. **[함수 문맥](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#function_context)(function context)**
+
+    * **[`function`](#자바스크립트-함수) 키워드**
+
+        일반적인 자바스크립트에서 함수는 `globalThis.func()`처럼 전역 객체에 종속된 함수로 받아들여져, 결과적으로 `this` 키워드는 `globalThis` 전역 객체를 가리킨다. 엄격 모드에서는 [`call()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) 혹은 [`apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 등으로 `this` 키워드의 문맥을 직접 지정해야 하며, 만일 이러한 설정이 없으면 `undefined`를 반환한다.
+
+        ```js
+      /* 런타임 환경: Node.js (비엄격 모드) */
       
       function func() {
           console.log(this === globalThis ? true : this);
@@ -918,13 +914,8 @@ func(1, 2, 3, 4);   // 출력: 1
 
       func();    // 출력: true
         ```
-    
-    * **엄격 모드**
-
-        엄격 모드에서는 [`call()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) 혹은 [`apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 등으로 `this` 키워드의 문맥을 직접 지정해야 하며, 만일 이러한 설정이 없으면 `undefined`를 반환한다.
-
         ```js
-      /* 런타임 환경: Node.js */
+      /* 런타임 환경: Node.js (엄격 모드) */
       
       function func() {
           "use strict";
@@ -934,19 +925,19 @@ func(1, 2, 3, 4);   // 출력: 1
       func();    // 출력: undefined
         ```
 
-* **[화살표 함수 표현식](#자바스크립트-함수)**
+    * **[화살표 함수 표현식](#자바스크립트-함수)**
 
-    화살표 함수 표현식은 `this` 키워드의 바인딩에 관여하지 않는다. 그러므로 `this` 키워드는 해당 함수를 내포하는 (혹은 정의하는) 객체를 가리킨다.
+        화살표 함수 표현식은 `this` 키워드가 바인딩에 관여하지 않는다. 그러므로 `this` 키워드는 해당 함수를 내포하는 (혹은 정의하는) 객체를 가리킨다.
 
-    ```js
-  /* 런타임 환경: Node.js */
-  
-  const func = () => {
-      console.log(this === globalThis ? true : this);
-  };
+        ```js
+      /* 런타임 환경: Node.js */
+      
+      const func = () => {
+          console.log(this === globalThis ? true : this);
+      };
 
-  func();    // 출력: {}
-    ```
+      func();    // 출력: {}
+        ```
 
 ## 콜백 함수
 [콜백 함수](https://ko.wikipedia.org/wiki/콜백)(callback function)는 인자로 전달되는 함수이다. 콜백 함수를 전달받는 함수, 일명 호출 함수(calling function)는 블록 내에서 매개변수 호출을 통해 콜백 함수를 실행한다.
@@ -968,7 +959,9 @@ function callback(arg1, arg2) {
     return arg1 + arg2;
 }
 
-console.log(calling(callback, 1));
+console.log(
+    calling(callback, 1)
+);
 ```
 ```
 4.14159
@@ -989,13 +982,13 @@ function factorial(arg) {
 ```
 
 # 자바스크립트: 객체
-[객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 데이터나 함수를 바인딩할 수 있는 객체 내부의 식별자들을 속성(property)라고 하는데, 이들은 다음과 같이 [속성 접근자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors)로 접근한다. 그 중에서 함수가 바인딩된 속성을 메소드(method)라고도 부르는데, 메소드는 반드시 [`function`](#자바스크립트-함수) 키워드를 정의되거나 ES6부터 소개된 [메소드 정의](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions)를 사용한다.
+[객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 데이터나 함수를 바인딩할 수 있는 객체 내부의 식별자들을 속성(property)라고 하는데, 이들은 다음과 같이 [속성 접근자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors)로 접근한다. 함수가 바인딩된 속성을 메소드(method)라고도 부르는데, 반드시 [`function`](#자바스크립트-함수) 키워드 혹은 ES6부터 소개된 [메소드 정의](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions)를 사용한다.
 
-> 반면 [화살표 함수 표현식](#자바스크립트-함수)은 [`this`](#this-키워드) 키워드가 바인딩되지 않는 성질로 메소드 정의에 절대 사용되지 말아야 한다.
+> 반면 메소드는 절대 [화살표 함수 표현식](#자바스크립트-함수)로 정의되지 말아야 한다! 이는 화살표 함수 표현식의 성질에 의해 [`this`](#this-키워드) 키워드가 객체를 가리키지 않기 때문이다.
 
 | 객체 속성 | 속성 접근자                                    |
 |:-------:|-----------------------------------------------|
-| 변수 | `instance.variable` 또는 `instance["variable"]` |
+| 변수 | `instance.property` 또는 `instance["property"]` |
 | 함수 | `instance.method()` 또는 `instance["method"]()` |
 
 현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 [전역 객체](#유효범위)와 [이터러블 객체](#자바스크립트-이터러블)가 있다.
@@ -1009,7 +1002,7 @@ console.log(variable.indexOf(5));
 2
 ```
 
-다음은 자바스크립트에서 사용자 정의 객체(user-defined object)를 정의하는 방법이다.
+자바스크립트의 객체는 속성을 자유롭게 추가할 수 있는 특징을 가진다: 정의된 "선언 생략형" [변수](#변수)가 전역 객체의 속성처럼 접근될 수 있다는 점은 객체의 유연한 속성 확장을 잘 보여주는 [예시](#유효범위)이다. 다시 말해, 객체는 없던 속성도 언제든지 간단히 만들어 사용할 수 있다. 이러한 성질을 기반으로 자바스크립트는 아래의 방법으로 사용자 정의 객체를 생성한다.
 
 * **[객체 초기자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer)(object initializer)**
 
@@ -1056,9 +1049,9 @@ console.log(variable.indexOf(5));
     ```
 
 ### 프로토타입
-[프로토타입](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)(prototype)은 객체에 기본으로 내장된 속성 및 메소드를 일컬으며, 모든 자바스크립트 객체는 프로토타입을 갖는다. 프로토타입 또한 객체이므로 자신만의 프로토타입이 있는데 이러한 연속을 프로토타입 연쇄(prototype chain)라 부르고, 프로토타입이 `null`일 때까지 이러한 연쇄는 계속 이어진다. 객체의 프로토타입은 `Object.getPrototypeOf()` 메소드로 반환할 수 있다.
+[프로토타입](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)(prototype)은 객체에 기본으로 내장된 속성 및 메소드를 일컬으며, 모든 자바스크립트 객체는 프로토타입을 갖는다. 프로토타입 또한 객체이므로 자신만의 프로토타입이 있는데 이러한 연속을 프로토타입 연쇄(prototype chain)라 부르고, 프로토타입이 `null`일 때까지 연쇄는 계속 이어진다. [`Object.create()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create) 메소드는 인자로 전달받은 객체를 프로토타입으로 갖는 새로운 객체를 생성한다.
 
-[`Object.create()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create)에 프로토타입으로 사용될 객체를 인자로 전달하여 객체를 생성할 수 있다.
+> 객체의 프로토타입은 [`Object.getPrototypeOf()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf) 메소드로 반환한다.
 
 ```js
 const prototype = {
@@ -1077,23 +1070,22 @@ const instance = Object.create(prototype);
 ```
 
 ## 클래스
-[클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 ES6부터 소개되었으며 객체를 생성하는데 사용된다. 클래스는 `class` 키워드를 사용하여 맴버 변수(일명 속성 혹은 필드; field) 및 맴버 함수(일명 메소드; method)와 함께 정의되나, [클래스 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#class_hoisting)(class hoisting)은 지원되지 않는다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 속성들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
+[클래스](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)(class)는 객체를 생성하는데 사용된다. ES6부터 소개된 클래스는 `class` 키워드를 사용하여 속성 및 메소드와 함께 정의되나 [클래스 호이스팅](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting#class_hoisting)(class hoisting)을 지원하지 않는다. 클래스로부터 객체를 생성하는 것을 "객체화(instantiation)"라 부르는데, 이때 클래스에 정의된 속성과 메소드들은 [캡슐화](https://ko.wikipedia.org/wiki/캡슐화)(encapsulation)되어 다음 특징을 갖는다:
 
 1. 변수와 함수가 하나의 객체로 결합된다.
 2. 우연치 않은 수정을 방지하기 위해 변수 및 함수에 대한 직접적인 접근을 외부로부터 제한할 수 있다.
-
-클래스는 외부에서 접근 가능한 [public](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields) 및 접근 불가한 [private](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields) 필드와 메소드를 지정할 수 있다. 클래스 맴버들은 기본적으로 public으로 선언되며, private 맴버는 식별자 앞에 해시 기호 `#`를 붙인다. 단, 2021년 4월 기준으로 private 맴버는 아직 ECMAScript 실험 단계에 있어 본문의 예시 코드에서는 알 수 없는 구문으로 치부한다.
 
 ```js
 /* 클래스 정의 */
 class CLASS {
 
-    field1  = 2;      // public  속성 정의
-    #field2 = 3.14;   // private 속성 정의
+    // 속성 정의
+    property1 = 2;
+    property2 = 3.14;
 
     // 메소드 정의
     method(arg) {
-        return this.public + this.#private - arg;
+        return this.property1 + this.property2 - arg;
     }
 }
 
@@ -1104,7 +1096,11 @@ const instance = new CLASS();
 ### 생성자
 [생성자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)(constructor)는 객체화마다 자동으로 실행되는 데이터 반환이 없는 `constructor()` 메소드이다. 비록 생성자는 선택사항이지만, 선언한다면 반드시 클래스명과 동일해야 한다. 흔히 객체화 단계에서 맴버들을 초기화하는 용도로 사용된다.
 
-> Public 맴버는 메소드 내에서 `this` 키워드를 통해 자유롭게 정의될 수 있으나, private 맴버는 반드시 사전에 선언되어 사용되어야 한다.
+> 생성자를 별도로 정의하지 않으면 아래의 기본 생성자(default constructor)가 암묵적으로 클래스에 적용된다.
+>
+> ```js
+> constructor() {}
+> ```
 
 ```js
 /* 클래스 정의 */
@@ -1112,50 +1108,39 @@ class CLASS
 {
     /* 생성자 정의 */
     constructor(arg1, arg2) {
-        this.field1 = arg1;
-        this.#field2 = arg2;
+        this.property1 = arg1;
+        this.property2 = arg2;
 
         statements;
     }
-
-    // private 필드 선언
-    #field2;
 }
 
 const instance = new CLASS(2, 3.14);
 ```
 
-생성자를 별도로 정의하지 않으면 아래의 기본 생성자(default constructor)가 암묵적으로 클래스에 적용된다.
+### 정적 속성 및 메소드
+[정적 속성 및 메소드](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static)(static property & method)는 클래스에서만 직접 접근이 가능한 속성 및 메소드이며 `static` 키워드로 정의된다. 이와 반대로 객체를 통해 접근되는 일반적인 속성 및 메소드와 별개의 영역으로 간주되므로 `static` 키워드만 확실히 표시해주면 동일한 식별자를 가질 수 있다.
 
-```js
-constructor() {}
-```
-
-### 정적 맴버
-[정적 맴버](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/static)(static member)는 클래스로부터 생성된 객체의 개수와 무관하게 오로지 하나의 데이터만 존재하여 공유되는 [`static`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static) 키워드로 명시된 맴버이다. 해당 유형의 맴버는 객체화가 필요없이 클래스로부터 직접 호출이 가능하나, `this` 키워드가 클래스 자체에 바인딩된 관계로 객체로부터 접근할 수 없다. 즉, 정적 맴버는 단순히 클래스에 묶여있는 일반 데이터 혹은 함수와 같다.
-
-> 객체 맴버(instance member)는 정적 맴버와 서로 별개의 영역으로 간주되므로 `static` 키워드만 확실히 표시해주면 동일한 식별자를 가질 수 있다.
+> 다시 말해, 정적 속성 및 메소드는 단순히 클래스 자료형에 종속되어 있는 일반 변수 및 함수와 같다.
 
 ```js
 /* 클래스 정의 */
 class CLASS
 {
-    field1 = 2;
-    #field2 = 3.14;
-
     /* 정적 필드 정의 */
-    static field1 = "Hello World!";
+    static property = "Hello World!";
 
     /* 정적 메소드 정의 */
     static method(arg) {
-        return this.field1 + 7;
+        return this.property + arg;
     }
 }
 
-console.log(CLASS.method());            // 출력: Hello World!7
+console.log(CLASS.method(7));            // 출력: Hello World!7
 
+/* 클래스 객체화 */
 const instance = new CLASS(2, 3.14);
-console.log(instance.method());         // Uncaught TypeError: instance.method is not a function
+console.log(instance.method(7));         // Uncaught TypeError: instance.method is not a function
 ```
 
 ### Setter 및 Getter
@@ -1169,35 +1154,51 @@ console.log(instance.method());         // Uncaught TypeError: instance.method i
 [accessor-get]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
 [accessor-set]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set
 
-속성을 나누므로써 수정되어서는 안될 민감한 코드를 setter 영역 숨기고 getter 영역만을 통해서 데이터를 반환한다. 정의된 형태는 메소드와 유사하지만 실제로 사용할 때는 소괄호 `()` 없이 필드처럼 사용된다. Setter를 정의할 때 반드시 인자를 전달받을 매개변수 하나가 필요하며, 반대로 getter은 매개변수가 없지만 데이터를 반환할 [`return`](#return-반환문) 문이 있어야 한다.
+속성을 나누므로써 수정되어서는 안될 민감한 코드를 setter 영역에 숨기고 getter 영역만을 통해서 데이터를 반환한다. 정의된 형태는 메소드와 유사하지만 실제로 사용할 때는 소괄호 `()` 없이 필드처럼 사용된다. Setter를 정의할 때 반드시 인자를 전달받을 매개변수 하나가 필요하며, 반대로 getter은 매개변수가 없지만 데이터를 반환할 [`return`](#return-반환문) 문이 있어야 한다.
 
 
 ```js
 /* 클래스 정의 */
 class CLASS {
     
-    #property;
-
     // Setter 정의
-    set property(arg) {
-        this.#property = arg;
+    set setter(arg) {
+        this.property = arg + 1;
     }
 
     // Getter 정의
-    get property() {
-        return this.#property ** 2;
+    get getter() {
+        return this.property ** 2;
     }
 }
 
 /* 클래스 객체화 */
 const instance = new CLASS();
 
-instance.property = 3;
-console.log(instance.property);    // 출력: 9 (= 3 ** 2)
+instance.setter = 3;
+console.log(instance.getter);    // 출력: 16
+```
+
+### Private 필드
+속성은 클래스 및 객체 외부에서 접근이 가능한 [public](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Public_class_fields) 필드이며, 반대로 외부로부터 접근이 불가한 [private](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields) 필드도 존재한다. Private 필드는 식별자 앞에 해시 기호 `#`가 있는 게 특징이며, 속성(일명 public 필드)와 달리 `this` 키워드나 차후 객체화 이후에 추가될 수 없다. 단, 2021년 4월 기준으로 private 맴버는 아직 ECMAScript 실험 단계에 있어 본문의 예시 코드에서는 알 수 없는 구문으로 치부한다.
+
+```js
+/* 클래스 정의 */
+class CLASS
+{
+    /* 생성자 정의 */
+    public   = 2;
+    #private = 3.14;
+}
+
+const instance = new CLASS();
+
+console.log(instance.public);      // 출력: 2
+console.log(instance.#private);    // SyntaxError: Private field '#private' must be declared in an enclosing class
 ```
 
 ## 클래스 표현식
-[클래스 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/class)(class expression)은 익명의 클래스를 정의하는 동시에 객체화하는 표현식이다. [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) 연산자 없이 간편히 객체를 생성할 수 있다는 점에서 편리하지만, 재활용이 불가능하다는 단점이 있다.
+[클래스 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/class)(class expression)은 익명의 클래스를 정의하는 동시에 객체화한다. [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) 연산자 없이 간편히 객체를 생성할 수 있으나, 식별자가 없어 재활용이 불가능하다는 단점이 있다.
 
 ```js
 /* 클래스 표현식 */
@@ -1216,8 +1217,8 @@ const instance = class {
 /* 기반 클래스 정의 */
 class BASECLASS
 {
-    field1 = 3;
-    field2 = "JavaScript";
+    property1 = 3;
+    property2 = "JavaScript";
 
     method(arg1, arg2) {
         return arg1 + arg2;
@@ -1227,8 +1228,8 @@ class BASECLASS
 /* 파생 클래스 정의 */
 class DERIVEDCLASS extends BASECLASS
 {
-    field2 = "Hello World!";
-    field3 = true;
+    property2 = "Hello World!";
+    property3 = true;
 
     method(arg1, arg2) {
         return arg1 * arg2;
@@ -1238,7 +1239,7 @@ class DERIVEDCLASS extends BASECLASS
 /* 클래스 객체화 */
 const instance = new DERIVEDCLASS();
 
-console.log(`${instance.field1}, ${instance.field2}, ${instance.field3}`);
+console.log(`${instance.property1}, ${instance.property2}, ${instance.property3}`);
 console.log(instance.method(2, 3));
 ```
 ```
@@ -1284,7 +1285,7 @@ console.log(instance.method(2, 3));
   /* 기반 클래스 정의 */
   class BASECLASS {
       constructor(arg1, arg2) {
-          ...
+          
       }
   }
 
@@ -1292,7 +1293,6 @@ console.log(instance.method(2, 3));
   class DERIVEDCLASS extends BASECLASS {
       constructor(arg) {
           super(arg, arg);
-          ...
       }
   }
     ```
