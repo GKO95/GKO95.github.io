@@ -1093,6 +1093,23 @@ class CLASS {
 const instance = new CLASS();
 ```
 
+함수의 `function` 키워드와 유사하게 식별자를 생략하므로써 익명 클래스로 활용할 수 있다. `new` 연산자 없이 간편히 객체를 생성할 수 있으나, 식별자가 없어 재활용이 불가능하다는 단점이 있다.
+
+```js
+/* 클래스 표현식 */
+const instance = class {
+
+    // 속성 정의
+    property1 = 2;
+    property2 = 3.14;
+
+    // 메소드 정의
+    method(arg) {
+        return this.property1 + this.property2 - arg;
+    }
+};
+```
+
 ### 생성자
 [생성자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor)(constructor)는 객체화마다 자동으로 실행되는 데이터 반환이 없는 `constructor()` 메소드이다. 비록 생성자는 선택사항이지만, 선언한다면 반드시 클래스명과 동일해야 한다. 흔히 객체화 단계에서 맴버들을 초기화하는 용도로 사용된다.
 
@@ -1197,16 +1214,6 @@ console.log(instance.public);      // 출력: 2
 console.log(instance.#private);    // SyntaxError: Private field '#private' must be declared in an enclosing class
 ```
 
-## 클래스 표현식
-[클래스 표현식](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/class)(class expression)은 익명의 클래스를 정의하는 동시에 객체화한다. [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) 연산자 없이 간편히 객체를 생성할 수 있으나, 식별자가 없어 재활용이 불가능하다는 단점이 있다.
-
-```js
-/* 클래스 표현식 */
-const instance = class {
-    
-};
-```
-
 ## 상속
 [상속](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain)(inheritance)은 기반 클래스(base class)가 파생 클래스(derived class)에게 필드 및 메소드 맴버를 제공하는 행위이다. 파생 클래스는 [`extends`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends) 키워드로 하나의 기반 클래스로부터만 상속받을 수 있다. 기반 클래스와 파생 클래스에 동일한 이름의 속성과 메소드가 존재할 경우,
 
@@ -1298,4 +1305,375 @@ console.log(instance.method(2, 3));
     ```
 
 # 자바스크립트: 모듈
-[모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)(module)은 부가적인 기능 및 데이터를 제공하는 자바스크립트 소스 코드이며, 이들은 일반 스크립트와 마찬가지로 `.JS` 혹은 일부 런타임에서 모듈로 인식할 수 있는 `.MJS` 확장자를 갖는다. 모듈은 정의된 변수나 함수 혹은 클래스 등을 `export` 문으로 제공하고, 이를 `import` 문을 통해 불러와 활용할 수 있다.
+[모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)(module)은 부가적인 기능 및 데이터를 제공하는 자바스크립트 소스 코드이며, 일반 스크립트와 마찬가지로 `.JS` 혹은 일부 런타임에서 모듈로 인식할 수 있는 `.MJS` 확장자를 갖는다. 모듈은 정의된 변수, 함수, 클래스 및 객체 등을 제공하는 건 물론이고 타 모듈을 불러올 수 있다. 단, 불러온 모듈은 모두 [엄격 모드](#엄격-모드)라는 점을 유의한다.
+
+## `export` 문
+[`export`](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) 문은 모듈이 제공하고자 하는 데이터를 지정하는데 사용된다. 모듈로부터 데이터를 내보내는 방법은 크게 두 가지가 있다.
+
+* **유명 내보내기(named export)**
+
+    모듈에서 데이터를 불러올 때 식별자를 명시해야만 접근할 수 있도록 내보낸다. 중복된 식별자로 충돌이 우려되거나 너무 길면 `as` 키워드로 별칭을 지정할 수 있다.
+
+    ```js
+  /* 단일 유명 내보내기 */
+  export object1;
+
+  /* 다중 유명 내보내기 + 별칭 */
+  export { object2, object3 as aliased };
+    ```
+
+* **기본 내보내기(default export)**
+
+    모듈에서 데이터를 불러올 때 스크립트 측에서 식별자가 아니라 별칭을 지정하여 접근할 수 있도록 내보낸다. 모듈 당 한 개의 데이터만 기본 내보내기로 지정될 수 있다.
+
+    ```js
+  export default object4;
+    ```
+
+이에 대한 자세한 내용은 모듈을 불러오는 [`import`](#import-문) 문을 참고해야 한다.
+
+> 위의 유명 및 기본 내보내기는 하나의 문장으로 표현될 수 있다.
+>
+> ```js
+> export { object4 as default, object1, object2, object3 as aliased };
+> ```
+
+데이터는 `export` 문으로 내보내지는 동시에 정의될 수 있다. 특히 기본 내보내기는 익명의 함수 및 클래스 표현식을 사용하여 전달할 수 있다.
+
+```js
+/* 예시. 유명 내보내기 */
+export function func() { }
+
+/* 예시. 기본 내보내기 */
+export default class { }
+```
+
+### 집합형 모듈
+타 모듈에서 내보낸 데이터를 아무런 변동없이 있는 그대로 다시 내보낼 수 있다. 이러한 행위는 여러 모듈을 [`export from`](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export#re-exporting_aggregating) 구문으로 집합(aggregate)시켜 하나의 모듈로 불러올 수 있도록 한다.
+
+```js
+export { object1, object2 } from "./submodule1.js";
+export { object3, object4 } from "./submodule2.js";
+```
+
+## `import` 문
+[`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 문은 모듈에서 내보낸 데이터를 불러오는데 사용된다. 모듈로부터 데이터를 불러오는 방법은 크게 두 가지가 있다.
+
+* **유명 불러오기(named import)**
+
+    모듈에서 유명 내보내기로 전달된 데이터를 불러온다. 중복된 식별자로 충돌이 우려되거나 너무 길면 `as` 키워드로 별칭을 지정할 수 있다.
+
+    ```js
+  import { object1, object2, aliased as aka } from "./module.js";
+    ```
+
+* **기본 불러오기(default import)**
+
+    모듈에서 기본 내보내기로 전달된 데이터를 원하는 별칭으로 불러온다.
+
+    ```js
+  import defaultExport from "./module.js";
+    ```
+
+모듈에서 내보낸 데이터는 [`export`](#export-문) 문을 참고한다.
+
+> 위의 유명 및 기본 불러오기는 하나의 문장으로 표현될 수 있다.
+>
+> ```js
+> import defaultExport, { object1, object2, aliased as aka } from "./module.js";
+> ```
+
+## 네임스페이스 불러오기
+네임스페이스 불러오기(namespace import)는 모듈로부터 내보내진 데이터 전체를 [네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)란 하나의 그룹으로 묶어서 불러온다.
+
+```js
+/* 네임스페이스 불러오기 */
+import * as namespace from "./module.js";
+```
+
+데이터를 호출할 때에는 마치 객체의 속성을 접근하는 것처럼 `namespace.object` 구문을 사용한다. 단, 기본 내보내기로 전달된 데이터는 `namespace.default`로 호출한다.
+
+# 자바스크립트: DOM
+자바스크립트는 HTML 및 CSS와 함께 사용하여 다양한 기능을 제공하는데 기여한다. 선언형 언어인 HTML은 아래와 같이 [트리 구조](https://ko.wikipedia.org/wiki/트리_구조)의 [문서 객체 모델](https://ko.wikipedia.org/wiki/문서_객체_모델)(Document Object Model; DOM)로 문서를 표현한다.
+
+![문서 객체 모델 <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">위키미디어</a></i></sub>](/images/docs/javascript/js_html_dom.png)
+
+자바스크립트는 HTML의 DOM에 접근하여 요소를 추가, 제거, 그리고 변경할 수 있어 동적이고 유연한 웹사이트를 제작할 수 있다. 트리 구조의 블록, 즉 `<html>`, `<head>`, `<h1>`과 같은 HTML 요소는 DOM에서 [노드](https://developer.mozilla.org/en-US/docs/Web/API/Node)(node)라고 부른다. 노드는 타 노드와 상하 관계가 존재하며, 이는 가족 구성에 빗대어 부모(parent), 자식(child), 그리고 형제(sibling)이라 부른다.
+
+* **부모(parent)**: 해당 노드를 포함하고 있는 상위 노드
+* **자식(child)**: 해당 노드가 포함하고 있는 하위 노드
+* **형제(sibling)**: 해당 노드와 동일한 부모를 가지는 노드
+
+본 장은 웹 브라우저를 기준으로 자바스크립트가 HTML 및 CSS와 상호작용하는 방법을 간략하게 설명한다.
+
+## `document` 객체
+[`window.document`](https://developer.mozilla.org/en-US/docs/Web/API/Document) 혹은 간단히 `document` 객체는 DOM의 노드를 최상위 권한으로 접근하는 데 사용된다. 노드 생성, 스타일 변경, 이벤트 설정 등은 전부 `document` 객체를 통해서 이루어진다.
+
+### 요소 선택
+DOM에서 원하는 요소 선택은 다음과 같은 `document` 객체 메소드를 통해 실현된다. 단, 여기서 말하는 속성(attribute)은 자바스크립트의 속성(property)과 다른 존재이다.
+
+* **HTML 요소 태그**
+
+    ```js
+  // "DIV" 태그를 가진 index 번째 요소를 접근
+  document.getElementsByTagName("DIV")[index];
+    ```
+
+* **HTML 요소의 [`class`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class) 속성**
+
+    ```js
+  // "CLASS"란 클래스를 가진 index 번째 요소를 접근
+  document.getElementsByClassName("CLASS")[index];
+    ```
+
+* **HTML 요소의 [`id`](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) 속성**
+
+    타 요소 접근 방식과 달리 배열이 사용되지 않았는데, `id` 속성은 DOM 내에서 하나의 요소에만 할당할 수 있는 유일성을 지녔기 때문이다.
+
+    ```js
+  // "ID"란 아이디를 가진 요소를 접근
+  document.getElementById("ID");
+    ```
+
+이렇게 선택된 요소는 아래의 속성을 통해서 해당 요소의 부모, 자식, 혹은 형제 노드를 선택할 수도 있다.
+
+| 속성                | 설명                                            |
+|-------------------|------------------------|-----------------------------------------------|
+| [`Node.parentNode`](https://developer.mozilla.org/en-US/docs/Web/API/Node/parentNode)      |  `Node`의 부모 노드를 호출한다.                          |
+| [`Node.childNodes[index]`](https://developer.mozilla.org/en-US/docs/Web/API/Node/childNodes)      |  `Node`의 `index` 번째 자식 노드를 호출한다.                     |
+| [`Node.firstChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/firstChild)      |  `Node`의 첫 자식 노드를 호출한다.                        |
+| [`Node.lastChild`](https://developer.mozilla.org/en-US/docs/Web/API/Node/lastChild)       |  `Node`의 마지막 자식 노드를 호출한다.                      |
+| [`Node.hasChildNodes()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/hasChildNodes)   |  `Node`가 자식 노드를 가지면 `true`, 아니면 `false`를 반환한다. |
+| [`Node.nextSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Node/nextSibling)     |  `Node`의 다음 형제를 호출한다.                          |
+| [`Node.previousSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling) |  `Node`의 이전 형제를 호출한다.                          |
+
+### 요소 스타일 변경
+DOM은 각 요소를 개별 객체로 간주한다. 즉, 요소의 [속성](https://ko.wikipedia.org/wiki/HTML_속성)(attribute)들은 객체의 [속성](#자바스크립트-객체)처럼 접근할 수 있다.
+
+```html
+<!-- 예시 HTML -->
+<div id="SAMPLE">
+    <img src="path/to/image1.png" style="width:400px; height:300px;">
+    <span>그림 1. 예시 이미지</span>
+</div>
+
+<!-- 자바스크립트 -->
+<script>
+    /* "SAMPLE" 아이디를 가진 요소의 자식 노드 배열 접근 */
+    const node = document.getElementById("SAMPLE").ChildNodes;
+    
+    /* 0 번째 자식 노드, 즉 <IMG> 요소 접근 및 스타일 변경 */
+    node[0].src = "path/to/image2.png";
+    node[0].style.width = "800px";
+    node[0].style.height = "600px";
+</script>
+```
+
+### 요소 생성
+HTML이 아닌 자바스크립트를 사용해서 새로운 요소를 생성할 수 있다. 그러나 생성된 요소는 도표에서 설명한 대로 아직 DOM 어딘가에도 속하지 않은 상태이므로 웹사이트에 표시되지 않는다. 웹사이트에 나타나게 하기 위해서는 DOM에 추가해야 한다.
+
+* **HTML 요소 생성**
+    
+    ```js
+  // "DIV" 요소를 생성하지만, 아직 DOM 내에는 위치하지 않은 상태이다.
+  document.createElement("DIV");
+    ```
+
+* **텍스트 요소 생성**
+
+    ```js
+  // "String" 텍스트를 가진 노드를 생성하지만, 아직 DOM 내에는 위치하지 않은 상태이다.
+  document.createTextNode("String");
+    ```
+
+
+### 요소 추가 및 제거
+DOM에 요소를 추가하는 방법은 다음과 같다.
+
+| 메소드                         | 설명                                                |
+|-----------------------------|---------------------------------------------------|
+| [`Node.appendChild(node)`](https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild)         | 현재 노드에서 인자로 전달된 `node` 노드를 현시점 마지막 자식으로 추가한다. |
+| [`Node.insertBefore(node,child)`](https://developer.mozilla.org/en-US/docs/Web/API/Node/insertBefore) | 현재 노드에서 인자로 전달된 `node` 노드를 `child` 자식의 다음 순서로 추가한다. |
+
+DOM에 요소를 제거하는 방법은 다음과 같다.
+
+| 메소드                         | 설명                                                |
+|-----------------------------|---------------------------------------------------|
+| [`NELement.remove()`](https://developer.mozilla.org/en-US/docs/Web/API/Element/remove)         | 현재 노드를 제거한다. |
+| [`Node.removeChild()`](https://developer.mozilla.org/en-US/docs/Web/API/Node/removeChild) | 현재 노드에서 인자로 전달된 자식 노드를 제거한다. |
+
+```html
+<!-- 예시 HTML -->
+<div>
+    <p id="P1">첫 번째 문장.</p>
+    <p id="P2">두 번째 문장.</p>
+</div>
+
+<!-- 자바스크립트 -->
+<script>
+    /* 텍스트 노드를 새로 생성된 <P> 요소에 삽입 */
+    const textNode = document.createTextNode("JS로 생성된 텍스트.");
+    const paraNode = document.createElement("p");
+    paraNode.appendChild(textNode);
+    
+    /* 새로 생성된 <P> 요소를 <DIV> 자식 노드의 맨 끝에 추가 */
+    document.getElementsByTagName("div")[0].appendChild(paraNode);
+</script>
+```
+
+## 이벤트
+자바스크립트는 클릭이나 키보드 입력, 혹은 입력창 데이터 제출 등과 같은 [이벤트](https://developer.mozilla.org/en-US/docs/Web/API/Event)(event)가 발생할 시 코드가 실행되도록 할 수 있다. 비록 이벤트는 HTML에서 인식하나, 해당 이벤트에 대한 동작(일명 [이벤트 처리자](https://developer.mozilla.org/en-US/docs/Web/Events/Event_handlers); event handler)은 자바스크립트에서 정의된다.
+
+* HTML 소스 코드에 요소들이 어떠한 이벤트를 인식할지 미리 지정한다.
+
+    ```html
+  <div>
+      <!-- <BUTTON> 요소는 클릭 이벤트 발생 시 "functionName()" 이벤트 처리자   실행 -->
+      <button onclick="functionName()">클릭</button>
+  </div>
+  
+  <!-- 자바스크립트 -->
+  <script>
+      /* "functionName()" 이벤트 처리자 */
+      const functionName = () => {
+          statements;
+      }
+  </script>
+    ```
+
+* 자바스크립트에서 직접 이벤트를 동적으로 할당한다.
+
+    ```html
+  <div>
+      <!-- DOM으로 이벤트 지정 예정 -->
+      <button>클릭</button>
+  </div>
+  
+  <!-- 자바스크립트 -->
+  <script>
+      /* DOM을 통한 <BUTTON> 요소 이벤트 지정 및 이벤트 처리자 정의 */
+      const variable = document.getElementsByTagName("BUTTON")[0];
+  
+      /* "functionName()" 이벤트 처리자 */
+      variable.onclick = () => {
+          statements;
+      }
+  </script>
+    ```
+
+* [`EventTarget`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) 인터페이스를 활용하여 이벤트를 지정하는 동시에 이벤터 처리자를 함께 정의한다.
+
+
+
+    ```html
+  <div>
+      <!-- DOM에서 "addEventListener()" 메소드로 이벤트 지정 예정 -->
+      <button>클릭</button>
+  </div>
+  
+  <!-- 자바스크립트 -->
+  <script>
+      /* "addEventListener()"로 <BUTTON> 요소 이벤트 지정 및 이벤트 처리자 정의   */
+      const variable = document.getElementsByTagName("BUTTON")[0];
+      variable.addEventListener("click", functionName);
+      
+      /* "functionName()" 이벤트 처리자 */
+      function functionName() {
+          statements;
+          
+          // 이벤트 실행 시, statements 이후 마지막에 이벤트 할당 해제: 일회용   이벤트
+          variable.removeEventListener("click", functionName);
+      }
+  </script>
+    ```
+
+    여기서 주의할 점은 이벤트 이름이 이전 이벤트 관련 예시 코드와 다르다는 것이다.
+
+| 메소드                  | 설명                                    |
+| ----------------------- | -------------------------------------------- | ---------------------------------------------- |
+| [`EventTarget.addEventListener("click",func)`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)   | `func` 함수를 실행하는 `click` 이벤트를 해당 요소에 추가한다.   |
+| [`EventTarget.removeEventListener("click",func)`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener) | `func` 함수를 실행하는 `click` 이벤트를 해당 요소로부터 제거한다. |
+
+### 이벤트 전파
+[이벤트 전파](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Examples#example_5_event_propagation)(event propagation)은 이벤트 처리자의 실행 순서를 결정한다. 아래의 HTML 소스 코드를 예시로 들어본다.
+
+```html
+<div onclick="functionDIV()">
+    <span onclick="functionSPAN()">
+        Hello World!
+    </span>
+</div>
+```
+
+만일 "Hello World!" 텍스트를 클릭하였을 시, 어떤 요소의 이벤트 처리자가 우선적으로 실행되는가: `<DIV>` 아니면 `<SPAN>`인가?
+
+* **캡쳐링 (capturing)**: DOM 트리 구조에서 상위 노드에서 하위 노드 순서로 내려간다 (우선 `<DIV>`, 이후 `<SPAN>`).
+* **버블링 (bubbling)**: DOM 트리 구조에서 하위 노드에서 상위 노드 순서로 올라간다 (우선 `<SPAN>`, 이후 `<DIV>`).
+
+이러한 이벤트 전파는 `addEventListener()` 메소드에서 `useCapture` 논리형 매개변수를 통해 설정할 수 있다. 기본적으로 `useCapture = false`로 버블링이 설정되어 있다.
+
+| 예시                                                                   |
+|:--------------------------------------------------------------------:|
+| `EventTarget.addEventListener("click",func,useCapture)`                 |
+| `useCapture`는 논리 자료형을 받는 매개변수로, `true`이면 캡쳐링이고 `false`이면 버블링으로 설정된다. |
+
+## 반복 실행
+자바스크립트는 하나의 함수를 일정 주기에 맞춰 반복적으로 실행하도록 할 수 있으며, 이는 [`setInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/setInterval) 및 [`clearInterval()`](https://developer.mozilla.org/en-US/docs/Web/API/clearInterval) 메소드 쌍으로 구현할 수 있다.
+
+| 메소드                               | 설명                                                   |
+|----------------------------------|------------------------------------------------------|
+| `setInterval(func,millisec)` | `func` 함수가 `millisec` [밀리초](https://ko.wikipedia.org/wiki/밀리초) 지연시간을 가지며 실행된다. |
+| `clearInterval(setInterval)`     | `setInterval` 객체를 비활성화한다.                      |
+
+```html
+<!-- 예시 HTML -->
+<div>
+    <span>Hello World!</span>
+</div>
+
+<!-- 자바스크립트 -->
+<script>
+    /* "functionName()" 함수를 매 0.5초 동안 반복 실행 */
+    let variable = setInterval(functionName, 500);
+
+    var index = 0;    // 전역 변수
+    const functionName = () => {
+        /* 세 번 반복하도록 설정 */
+        if (index == 3)
+        {
+            /* 반복 실행 해제 */
+            clearInterval(variable);
+        }
+        else
+        {
+            statements;
+            index++;    // 전역 변수이기에 값이 유지된다.
+        }
+    }
+</script>
+```
+
+이러한 반복 실행은 결국 HTML 요소의 위치 이동 및 스타일이 시간에 따라 서서히 변하는 애니메이션 동작을 구현하는데 활용된다.
+
+# JQUERY: 소개
+jQuery는 자바스크립트 라이브러리 중 하나로 HTML DOM 구조 이동, 제어, 그리고 이벤트 처리 등을 간략화하는데 목적을 둔다. 해당 특징들은 많은 웹사이트에서는 jQuery 라이브러리 사용을 독려하여, [W3Techs](https://w3techs.com/technologies/overview/javascript_library) 통계에 의하면 75% 이상의 전세계 웹사이트에서 jQuery를 사용하는 매우 유명한 라이브러리이다. 본 장에서는 jQuery를 사용하는 방법에 대해서 소개한다.
+
+라이브러리 파일은 `jquery-3.x.y.min.js`과 `jquery-3.x.y.js`로 나뉘어지는데, 전자는 압축된 배포용이며 후자는 개발용으로 사용된다. jQuery 라이브러리를 스크립트로 불러오는 방법은 두 가지가 있다:
+
+* 첫 번째로는 jQuery 자바스크립트 파일을 [다운로드](https://jquery.com/download/)하여 사용하는 것이다. 만일 jQuery 3.5.1 배포용을 불러오고 싶으면 다음과 같이 코드를 `<head>` 태그 아래에 입력한다.
+
+  ```html
+  <head>
+      <!-- 로컬 JQUERY 라이브러리 불러오기 -->
+      <script src="jquery-3.5.1.min.js"></script>
+  <head>
+  ```
+
+* 두 번째 방법으로는 온라인에서 jQuery 라이브러리만 전달하는 CDN을 통해 불러올 수 있다. 다음과 같이 코드를 `<head>` 태그 아래에 입력하여 jQuery 3.5.1 배포용 라이브러리를 Google 서버에서 직접 불러온다.
+
+  ```html
+  <head>
+      <!-- CDN JQUERY 라이브러리 불러오기 -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></  script>
+  </head>
+  ```
