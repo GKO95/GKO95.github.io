@@ -1383,7 +1383,7 @@ export { object3, object4 } from "./submodule2.js";
 > import defaultExport, { object1, object2, aliased as aka } from "./module.js";
 > ```
 
-## 네임스페이스 불러오기
+### 네임스페이스 불러오기
 네임스페이스 불러오기(namespace import)는 모듈로부터 내보내진 데이터 전체를 [네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)란 하나의 그룹으로 묶어서 불러온다.
 
 ```js
