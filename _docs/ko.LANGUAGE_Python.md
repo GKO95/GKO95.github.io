@@ -277,30 +277,6 @@ CONSTANT_VARIABLE = "Hello World!"
 ### 문자열 자료형
 문자열 자료형(string data type)은 한 쌍의 작은 따옴표 `''` 또는 큰 따옴표 `""`로 구별되는 텍스트 데이터이다. 파이썬에서 문자열 자료형 데이터는 일반적으로 문자열 객체(string object)라고 부른다. 
 
-텍스트에 따옴표를 넣으려면 해당 따옴표 앞에 백슬래시 `\`를 배치하여 문자열이 도중이 끊기는 현상을 방지한다.
-
-```python
-# 문자열 작성의 적절한 예시와 부적절한 예시의 비교.
-print('Where\'s my "Cat in the Hat" book?')
-print('Where's my "Cat in the Hat" book?')
-```
-```
-Where's my "Cat in the Hat" book?
-Where
-```
-
-세 쌍의 따옴표는 다중 문자열 객체를 생성하며, 이는 단순히 Enter/Return 키를 눌러 줄바꿈이 가능하다. 일반 문자열로 줄바꿈을 구현하려면 원하는 위치에 [탈출 문자](#탈출-문자) 중 하나인 `\n`을 직접 삽입해야 한다.
-
-```python
-# 다중 문자열 객체로 여러 줄의 텍스트 작성 및 출력.
-print("""Goodbye
-World?""")
-```
-```  
-Goodbye
-World?
-```
-
 문자열 객체는 다른 데이터와 더하기 기호 `+`를 통해 공백없이 하나의 문자열로 연결할 수 있다. 문자열 간에만 사용할 수 있으므로 숫자 및 논리 자료형은 문자열로 변환해야 한다. 그 외에도 파이썬 3.6부터 추가된 접두사 `f`를 갖는 [포맷 문자열 리터럴](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)(formatted string literal), 일명 f-문자열에서 중괄호 `{}`를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
 
 ```python
@@ -314,10 +290,34 @@ print("A는 " + str(A) + ",\n그리고 B는 " + B + "이다.")
 print(f"A는 {A},\n그리고 B는 {B}이다.")
 ```
 
+텍스트에 따옴표를 넣으려면 해당 따옴표 앞에 백슬래시 `\`를 배치하여 문자열이 도중이 끊기는 현상을 방지한다.
+
+```python
+# 문자열 작성의 적절한 예시와 부적절한 예시의 비교
+print('Where\'s my "Cat in the Hat" book?')
+print('Where's my "Cat in the Hat" book?')
+```
+```
+Where's my "Cat in the Hat" book?
+Where
+```
+
+세 쌍의 따옴표는 다중 문자열 객체를 생성하며, 이는 단순히 Enter/Return 키를 눌러 줄바꿈이 가능하다. 일반 문자열로 줄바꿈을 구현하려면 원하는 위치에 [탈출 문자](#탈출-문자) 중 하나인 `\n`을 직접 삽입해야 한다.
+
+```python
+# 다중 문자열 객체로 여러 줄의 텍스트 작성 및 출력
+print("""Goodbye
+World?""")
+```
+```  
+Goodbye
+World?
+```
+
 차후에 설명할 예정이지만, [객체](#파이썬-클래스)(object)에 해당하는 문자열 자료형 데이터는 오로지 자신만이 사용할 수 있는 고유의 기능(일명 메소드)을 갖으며 목록은 [여기](https://docs.python.org/3/library/stdtypes.html#string-methods)에서 확인할 수 있다.
 
 ```python
-/* 문자열 객체의 메소드에 대한 몇 가지 예시 */
+# 문자열 객체의 메소드에 대한 몇 가지 예시
 print("Hello World!".upper())
 print("Hello World!".replace(" ", "-"))
 ```
@@ -327,7 +327,7 @@ Hello-World!
 ```
 
 ### `None` 키워드
-자료형과 관계없이 아무런 값이 없는 데이터이다. 비록 논리 조건에서는 `None`을 `False`로 사용할 수 있지만 (아래 예시 코드 참조), 개념적으로는 `None`과 `False`는 완전히 다른 존재이다.
+[`None`](https://docs.python.org/3/c-api/none.html) 키워드는 자료형과 관계없이 아무런 값이 없는 데이터이다. 비록 `None`과 `False`는 개념적으로 완전히 다른 존재이지만, 논리 조건에서는 `None`을 `False`로 사용할 수 있다.
 
 ```python
 # 조건부 확인: 논리 조건에서 None을 False로 간주할 수 있는가?
@@ -339,7 +339,7 @@ None
 ```
 
 ## 자료형 변환
-파이썬 프로그래밍 언어는 데이터를 타 자료형으로 변환할 수 있다:
+파이썬 프로그래밍 언어는 데이터를 타 자료형으로 변환할 수 있다.
 
 * **정수 변환 `int()`**
 
@@ -411,7 +411,7 @@ print("끝!")
 ```
 
 ## `if` 조건문
-`if` 조건문은 조건 혹은 논리가 참(`True`)일 경우 코드를 실행하며, 거짓(`False`)일 경우에는 코드를 실행하지 않는다.
+[`if`](https://docs.python.org/3/reference/compound_stmts.html#the-if-statement) 조건문은 조건 혹은 논리가 참(`True`)일 경우 코드를 실행하며, 거짓(`False`)일 경우에는 코드를 실행하지 않는다.
 
 ```python
 if condition:
@@ -453,7 +453,7 @@ True_return if condition else False_return
 ## `match` 조건문
 > 본 조건문은 파이썬 3.10부터 추가된 기능으로, 자세한 내용은 [PEP 643](https://www.python.org/dev/peps/pep-0634/)을 참고한다.
 
-`match` 조건문은 전달받은 인자를 `case`의 패턴과 일치하는지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 그 중에서 밑줄 `_` 조건을 와일드카드(wildcard) 패턴이라 하여 무조건 실행되는 지점이다.
+[`match`](https://docs.python.org/3/reference/compound_stmts.html#the-match-statement) 조건문은 전달받은 인자를 `case`의 패턴과 일치하는지 비교하여 논리가 참일 경우 해당 지점부터 코드를 실행하며, 거짓일 경우에는 다음 `case`로 넘어간다. 그 중에서 밑줄 `_` 조건을 와일드카드(wildcard) 패턴이라 하여 무조건 실행되는 지점이다.
 
 ```python
 match argument:
@@ -469,13 +469,12 @@ match argument:
 
     case _:
         ...
-}
 ```
 
 `match` 조건문은 타 프로그래밍 언어에서 소개되는 `switch` 조건문과 유사한 구조와 동작을 수행한다. 그러나 몇 가지 차이점이 있다면 `case` 문의 코드가 실행된 이후에 자동적으로 `match` 조건문이 종료되어 별도의 [`break`](#break-문) 문이 필요하지 않다. 또한 패턴 뒤에 `if` 문을 기입하는 감시(guard) 표현식으로 부가적인 조건 일치여부를 거칠 수 있다.
 
 ## `while` 반복문
-`while` 반복문은 조건 혹은 논리가 참(`True`)일 동안 코드를 반복적으로 실행하며, 거짓(`False`)일 경우에는 반복문을 종료한다.
+[`while`](https://docs.python.org/3/reference/compound_stmts.html#the-while-statement) 반복문은 조건 혹은 논리가 참(`True`)일 동안 코드를 반복적으로 실행하며, 거짓(`False`)일 경우에는 반복문을 종료한다.
 
 ```python
 while condition:
@@ -517,7 +516,7 @@ else:
 [`continue`](https://docs.python.org/3/reference/simple_stmts.html#continue) 문은 반복문의 나머지 실행문을 전부 건너뛰어 다시 반복문의 조건부로 돌아간다. `break`와 달리 반복문은 종료되지 않고 여전히 살아있다.
 
 ## `for` 반복문
-`for` 반복문은 유효한 범위 내에서 코드를 반복적으로 실행하고, 범위의 모든 값이 반복되면 종료한다.
+[`for`](https://docs.python.org/3/reference/compound_stmts.html#the-for-statement) 반복문은 유효한 범위 내에서 코드를 반복적으로 실행하고, 범위의 모든 값이 반복되면 종료한다.
 
 ```python
 for index in iterable:
@@ -551,13 +550,13 @@ else:
 ```
 
 ## `pass` 키워드
-`pass` 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무 작업도 수행하지 않는다. 코드 블록이 아직 작성하지 않은 상태에서 임시 코드로 사용된다.
+[`pass`](https://docs.python.org/3/tutorial/controlflow.html#pass-statements) 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무런 작업을 수행하지 않는다. 위에서 소개한 조건문 및 반복문에 아무런 코드를 작성하지 않으면 표현식이나 문장이 없다며 오류가 발생하는데, 이러한 상황에서 `pass` 키워드는 임시 코드로 사용된다.
 
 # 파이썬: 이터러블
-[이터러블](https://docs.python.org/3/glossary.html#term-iterable)(iterable; 반복 가능한) 객체는 여러 데이터를 한꺼번에 저장하는데 사용되며, 반복자(iterator) 객체를 반환하는 `__iter__` 메소드를 보유하는 객체로 정의된다. 반복자 데이터의 다음 요소를 자동으로 호출하는 객체로, 이터러블 객체 내의 모든 데이터를 순차적으로 불러올 수 있도록 한다.
+[이터러블](https://docs.python.org/3/library/stdtypes.html#typeiter)(iterable; 반복 가능한)은 저장된 여러 데이터 항목을 하나씩 반환할 수 있는 [컨테이너 객체](#파이썬-클래스)를 가리킨다. 이터러블의 특징인 `__iter__()` 메소드는 이터레이터(iterator) 객체를 반환하고, 그리고 이터레이터는 `__next__()` 메소드를 통해 [`for`](#for-반복문) 반복문에 전달될 다음 데이터 항목을 반환한다. 다시 말해 이터러블 객체의 핵심은 순차적으로 데이터를 반환할 수 있다는 점이며, 다수의 데이터를 하나의 변수로 저장하는 성질은 이를 구현하기 위한 일환이다.
 
 ## 시퀀스 객체
-[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence) 객체는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이다. 시퀀스는 하나는 대괄호 `[]`를 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)(string)이 있다.
+[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence) 객체는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이다. 시퀀스는 하나는 대괄호 `[]`를 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)이 있다.
 
 ```python
 variable = "Hello World!" 
@@ -621,22 +620,22 @@ for element in range(3, 10, 2):
 [리스트](https://docs.python.org/3/library/stdtypes.html#lists)(list) 시퀀스 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 리스트의 데이터 할당은 대괄호 `[]` 내에 항목을 순서대로 쉼표로 나누어 나열한다. 대괄호는 0번부터 시작하는 인덱스 위치의 요소(element)를 호출할 때에도 사용된다.
 
 ```python
-lst = [value1, value2, value3, value4, ...]
+variable = [value1, value2, value3, value4, ...]
 
-print(lst)           # 출력: [value1, value2, value3, value4, ...]
-print(lst[0])        # 출력: value1
+print(variable)                # 출력: [value1, value2, value3, value4, ...]
+print(variable[0])             # 출력: value1
 ```
 
 개별 요소를 재할당하여 데이터를 변경할 수 있다. 리스트 범위를 벗어난 요소를 호출할 수 없으므로, 이러한 경우 오류가 발생한다. 그래도 파이썬의 리스트를 비교적 유연한 편으로 `append()` 혹은 `insert()` 메소드를 통해 언제든지 확장할 수 있다. 리스트의 메소드는 [여기](https://docs.python.org/3/tutorial/datastructures.html#more-on-lists)에서 더 찾아볼 수 있다.
 
 ```python
-lst = []
-print(lst)                # 출력: []
+variable = []
+print(variable)                # 출력: []
 
-lst.append("Python")
-print(lst)                # 출력: ['Python']
+variable.append("Python")
+print(variable)                # 출력: ['Python']
 
-lst[1] = "Hello World!"   # IndexError: list assignment index out of range
+variable[1] = "Hello World!"   # IndexError: list assignment index out of range
 ```
 
 리스트는 고유의 연산을 통해 항목을 추가하거나 곱할 수가 있다. 아래의 연산들은 리스트 객체에만 제한되지 않으며, 차후에 소개될 다른 시퀀스 객체에도 적용이 가능하다.
@@ -672,8 +671,8 @@ lst[1] = "Hello World!"   # IndexError: list assignment index out of range
 리스트 객체의 `element` 요소는 `sequence` 시퀀스 객체 내에서 `condition` 조건에 부합한 항목을 넘겨받은 `variable` 변수로부터 할당받는다.
 
 ```python
-lst = [var**2 for variable in range(5)]
-lst = [var**2 for variable in range(5) if (variable ** 2) % 2 == 0]
+variable = [var**2 for var in range(5)]
+variable = [var**2 for var in range(5) if (var ** 2) % 2 == 0]
 ```
 ```
 [0, 1, 4, 9, 16]
@@ -684,21 +683,21 @@ lst = [var**2 for variable in range(5) if (variable ** 2) % 2 == 0]
 [튜플](https://docs.python.org/3/library/stdtypes.html#tuples)(tuple) 시퀀스 객체는 리스트와 마찬가지로 항목을 순서대로 저장하는 데이터이나, 초기화 후에는 값을 변경할 수 없다. 이러한 시퀀스 객체의 속성을 [불변](https://docs.python.org/3/library/stdtypes.html#immutable-sequence-types)(immutable)이라고 한다. 튜플을 초기화 할 때 소괄호 `()`를 사용하거나 괄호 없이 사용할 수도 있다.
 
 ```python
-tpl = (value1, value2, value3)
+variable = (value1, value2, value3)
 
 ''' 동일:
-tpl = value1, value2, value3
+variable = value1, value2, value3
 '''
 
-print(tpl)                       # 출력: (value1, value2, value3)
-print(tpl[0])                    # 출력: value1
+print(variable)               # 출력: (value1, value2, value3)
+print(variable[0])            # 출력: value1
 ```
 
 튜플은 요소의 값을 변경할 수 없으며, 이를 시도할 경우 오류가 발생한다.
 
 ```python
 tpl = value1, value2, value3
-tpl[1] = value4                  # TypeError: 'tpl' object does not support item assignment
+tpl[1] = value4               # TypeError: 'variable' object does not support item assignment
 ```
 
 ## 딕셔너리 객체
@@ -707,40 +706,40 @@ tpl[1] = value4                  # TypeError: 'tpl' object does not support item
 > 단, 리스트와 딕셔너리 등의 가변(mutable) 이터러블 객체는 키로 사용될 수 없다.
 
 ```python
-dictionary = {key1: value1, key2: value2}
+variable = {key1: value1, key2: value2}
 
-print(dictionary[key1])          # 출력: value1
-print(dictionary[key2])          # 출력: value2
+print(variable[key1])                # 출력: value1
+print(variable[key2])                # 출력: value2
 ```
 
 개별 요소를 재할당하여 데이터를 변경할 수 있다. 딕셔너리 범위를 벗어난 요소를 호출할 수 없으므로, 이러한 경우 오류가 발생한다. 그래도 파이썬의 딕셔너리는 비교적 유연한 편으로 새로운 키와 함께 값을 할당하는 것만으로 확장이 가능하다.
 
 ```python
-dictionary = {key1: value1, key2: value2}
+variable = {key1: value1, key2: value2}
 
-dictionary[key3] = value3
-print(dictionary)                # 출력: {key1: value1, key2: value2, key3: value3}
+variable[key3] = value3
+print(variable)                      # 출력: {key1: value1, key2: value2, key3: value3}
 ```
 
 ### 딕셔너리 언패킹
 딕셔너리 언패킹(dictionary unpacking)은 딕셔너리 객체의 요소들을 분할하는 것을 가리킨다. 단, 언패킹된 `key: value` 쌍을 활용할 수 있는 곳은 딕셔너리에 한정되므로 결국 타 딕셔너리와 결합하는 용도로 사용된다. 언패킹할 딕셔너리 접두부에 두 개의 별표 `**`를 기입한다.
 
 ```python
-dictionary = {key1: value1, key2: value2}
+variable = {key1: value1, key2: value2}
 
-print({**dictionary, key3: value3})    # 출력: {key1: value1, key2: value2, key3: value3}
+print({**variable, key3: value3})    # 출력: {key1: value1, key2: value2, key3: value3}
 ```
 
 ## 집합 객체
 [집합](https://docs.python.org/3/tutorial/datastructures.html#sets)(set) 객체는 요소의 고유성을 보장하는, 즉 중복 요소를 허용하지 않는 (시퀀스가 아닌) 이터러블 객체이다. 딕셔너리와 마찬가지로 집합 초기화에는 중괄호 `{}`를 사용하지만 `key: value` 형태가 아니다. 집합은 대괄호를 통해 개별 요소를 호출이 불가하다. 집합 객체에서 요소를 추가 혹은 제거하려면 `add()`, `remove()` 등의 별도 메소드를 사용해야 한다.
 
 ```python
-st = {value1, value2}
+variable = {value1, value2}
 
-st.add(value3)
-print(st)                        # {value1, value2, value3}
+variable.add(value3)
+print(variable)                 # {value1, value2, value3}
 
-print(st[0])                     # TypeError: 'set' object is not subscriptable
+print(variable[0])              # TypeError: 'variable' object is not subscriptable
 ```
 
 > 빈 집합 객체는 반드시 `set()` 함수로 생성해야 한다; 빈 중괄호 `{}`는 오히려 딕셔너리를 만들기 때문이다.
@@ -755,26 +754,26 @@ print(st[0])                     # TypeError: 'set' object is not subscriptable
 | `^`    | 대칭차 | 한 집합에는 존재하나 둘 다 속하지 않는 요소를 반환한다.    |
 
 ```python
-set1 = {1, 2, 3, 4, 5, 6}
-set2 = {4, 5, 6, 7, 8, 9}
+variable1 = {1, 2, 3, 4, 5, 6}
+variable2 = {4, 5, 6, 7, 8, 9}
 
-print(set1 | set2)            # 출력: {1, 2, 3, 4, 5, 6, 7, 8, 9}
+print(variable1 | variable2)    # 출력: {1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-print(set1 & set2)            # 출력: {4, 5, 6}
+print(variable1 & variable2)    # 출력: {4, 5, 6}
 
-print(set1 - set2)            # 출력: {1, 2, 3}
-print(set1 - set2)            # 출력: {7, 8, 9}
+print(variable1 - variable2)    # 출력: {1, 2, 3}
+print(variable1 - variable2)    # 출력: {7, 8, 9}
 
-print(set1 ^ set2)            # 출력: {1, 2, 3, 7, 8, 9}
+print(variable1 ^ variable2)    # 출력: {1, 2, 3, 7, 8, 9}
 ```
 
-## 제너레이터 객체
-제너레이터(generator)는 [`yield`](https://docs.python.org/3/reference/simple_stmts.html#yield) 키워드와 반복문을 통해 요소들을 프로그램적으로 직접 생성할 수 있는 이터러블 객체이다. 요소들이 메모리에 저장되는 것이 아니라 코드를 통해 생성되는 것이기 때문에, 제너레이터 객체는 메모리 제한이 없는 점에서 무한한 개수의 데이터를 담을 수 있는 이점을 가진다.
+## 제너레이터 함수
+[제너레이터](https://docs.python.org/3/glossary.html#term-generator)(generator)는 [`yield`](https://docs.python.org/3/reference/simple_stmts.html#yield) 키워드와 반복문을 통해 요소들을 프로그램적으로 직접 생성할 수 있는 [함수](#파이썬-함수)이다. 요소들이 메모리에 저장되는 것이 아니라 코드를 통해 생성되는 것이기 때문에, 제너레이터 함수는 메모리 제한이 없는 점에서 무한한 개수의 데이터를 담을 수 있는 이점을 가진다.
 
 > 제너레이터에서 가장 중요한 것은 `yield` 키워드로 이터러블 객체로써 반환될 데이터를 지정한다.
 
 ```python
-# 제네레이터 생성
+# 제네레이터 함수
 def generator_function():
     variable = 0
     while variable < 5
@@ -1088,7 +1087,7 @@ variable(2, 3)    # 출력: 7
 ```
 
 ## 재귀 함수 
-[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 런타임 오류가 발생한다.
+[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](/docs/ko.C#스택-영역)가 부족하여 런타임 오류가 발생한다.
 
 ```python
 # 예제: 펙토리얼 "!"
@@ -1097,7 +1096,7 @@ def factorial(arg):
     if arg == 1: 
         return 1
     else:
-        return arg * factorial(arg-1)
+        return arg * factorial(arg - 1)
 ```
 
 # 파이썬: 클래스

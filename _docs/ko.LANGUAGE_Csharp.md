@@ -797,7 +797,7 @@ statements;
 ```
 
 # C#: 컬렉션
-C++ 프로그래밍 언어는 다수의 데이터를 변수 하나로 저장하는 [컬렉션](#컬렉션)(collection)을 제공한다. 본 장은 .NET에서 활용할 수 있는 몇 가지의 컬렉션 유형들을 소개한다.
+C# 프로그래밍 언어는 여러 데이터를 하나의 변수로 저장하는 [컬렉션](#컬렉션)(collection)을 제공한다. 본 장은 .NET에서 활용할 수 있는 몇 가지의 컬렉션 유형들을 소개한다.
 
 ## 배열
 [배열](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/)(array)은 동일한 자료형의 데이터를 일련의 순서로 담는 저장공간이다. 선언 시 자료형 뒤에는 대괄호 `[]`가 위치하여 배열임을 명시해야 한다. 비록 배열이 갖는 자료형이 값 자료형(예. `int`, `double`, `char` 등)일지라도 배열 자체는 [`Array`](https://docs.microsoft.com/en-us/dotnet/api/system.array) 추상 기반 클래스로부터 파생된 참조 자료형이다. 초기화되지 않은 배열은 `null`을 기본값으로 가지며, [`new`](#new-연산자) 키워드와 함께 자료형 및 크기를 정수로 지정하여 객체로 생성된 배열을 할당하므로써 초기화한다.
@@ -1287,7 +1287,7 @@ delegate double Del(int arg1, double arg2);
 ```
 
 ## 람다 표현식
-[람다 표현식](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 흔히 일회용 함수로 사용된다. 비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다. [람다 연산자](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator#lambda-operator) [`=>`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator)를 통해 선언되지만 그 유형은 크게 두 가지로 나뉘어진다.
+[람다 표현식](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions)(lambda expression), 일명 람다 함수(lambda function) 혹은 익명 함수(anonymous function)는 이름이 없는 (즉, 익명) 함수로써 흔히 일회용 함수로 사용된다. [람다 연산자](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator#lambda-operator) [`=>`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-operator)를 통해 선언되지만 그 유형은 크게 두 가지로 나뉘어진다.
 
 * **[표현식 람다](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions#expression-lambdas)(expression lambda)**
 
@@ -1311,7 +1311,7 @@ delegate double Del(int arg1, double arg2);
 > void Function() => Console.WriteLine("Hello World!");
 > ```
 
-람다 표현식을 수용할 수 있는 대리자는 데이터 반환 여부에 따라 [`Func<T, TResult>`](https://docs.microsoft.com/en-us/dotnet/api/system.func-2) 혹은 [`Action<T1, T2>`](https://docs.microsoft.com/en-us/dotnet/api/system.action-2)를 사용할 수 있으며, 이들은 간편히 [`var`](#자료형) 자료형으로 컴파일러에서 자동 결정하도록 하는 것도 방법이다.
+비록 식별자가 필요하지 않는 익명 함수일지라도, 람다 표현식은 재호출을 위해 일반 함수처럼 식별자를 가질 수 있다. 람다 표현식을 수용할 수 있는 대리자는 데이터 반환 여부에 따라 [`Func<T, TResult>`](https://docs.microsoft.com/en-us/dotnet/api/system.func-2) 혹은 [`Action<T1, T2>`](https://docs.microsoft.com/en-us/dotnet/api/system.action-2)를 사용할 수 있으며, 이들은 간편히 [`var`](#자료형) 자료형으로 컴파일러에서 자동 결정하도록 하는 것도 방법이다.
 
 ```csharp
 var lambda = (int arg1, char arg2) => $"{arg1}, {arg2}";
@@ -1324,16 +1324,16 @@ Console.WriteLine(lambda(3, 'A'));    // 출력: 3, A
 ```
 
 ## 재귀 함수
-[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
+[재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](/docs/ko.C#스택-영역)가 부족하여 충돌이 발생한다.
 
 ```csharp
 /* 예제: 펙토리얼 "!" */
-int factorial(int num) {
+int factorial(int arg) {
     // 기저 조건: 재귀로부터 탈출하는 조건
-    if (num == 1)
-        return (1);
+    if (arg == 1)
+        return 1;
     else
-        return (num * factorial(num-1));
+        return arg * factorial(arg - 1);
 }
 ```
 
