@@ -893,7 +893,7 @@ func(1, 2, 3, 4);   // 출력: 1
 
     * **[Node.js](#런타임-환경)**
 
-        모듈 형식의 Node.js에서 `this` 키워드는 [`module.exports`](https://nodejs.org/api/modules.html#moduleexports)를 반환하며, 이는 `global` 전역 객체와는 전혀 다른 존재이다.
+        모듈 형식의 Node.js에서 `this` 키워드는 [`module.exports`](#commonjs)를 반환하며, 이는 `global` 전역 객체와는 전혀 다른 존재이다.
 
         ```js
       console.log(this === globalThis ? true : this);    // 출력: {}
@@ -1305,14 +1305,27 @@ console.log(instance.method(2, 3));
     ```
 
 # 자바스크립트: 모듈
-[모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)(module)은 부가적인 기능 및 데이터를 제공하는 자바스크립트 소스 코드이며, 일반 스크립트와 마찬가지로 `.JS` 혹은 일부 런타임에서 모듈로 인식할 수 있는 `.MJS` 확장자를 갖는다. 모듈은 정의된 변수, 함수, 클래스 및 객체 등을 제공하는 건 물론이고 타 모듈을 불러올 수 있다. 단, 불러온 모듈은 모두 [엄격 모드](#엄격-모드)라는 점을 유의한다.
+[모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)(module)은 부가적인 기능 및 데이터를 제공하는 자바스크립트 소스 코드이며, 일반 스크립트와 마찬가지로 `.JS` 혹은 일부 런타임에서 모듈로 인식할 수 있는 `.MJS` 확장자를 갖는다. 모듈은 정의된 변수, 함수, 클래스 및 객체 등을 제공하는 건 물론이고 타 모듈을 불러올 수 있다. 단, 모듈은 무조건 [엄격 모드](#엄격-모드)라는 점을 유의한다.
 
-## `export` 문
-[`export`](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) 문은 모듈이 제공하고자 하는 데이터를 지정하는데 사용된다. 모듈로부터 데이터를 내보내는 방법은 크게 두 가지가 있다.
+## ECMAScript 모듈
+[ECMAScript 모듈](https://nodejs.org/api/esm.html) 규격은 자바스크립트 코드를 재활용할 수 있도록 패키징하는 공식 표준 형식이며, `import` 및 `export` 문을 활용하는 게 특징이다. [Node.js](#nodejs)은 ECMAScript 모듈을 지원하지만 기본 규격으로 채택되어 있지 않다. 해당 규격을 활성화하기 위해서는 프로젝트 경로에 `package.json` 파일을 생성하여 아래 코드를 기입한다.
+
+```json
+{
+    "type": "module"
+}
+```
+
+이러한 설정을 하지 않으면 Node.js에서 채택한 자바스크립트 패키징 규격인 [CommonJS](#commonjs)이 작용하여 구문 요류가 발생한다.
+
+![Node.js 런타임 환경에서 ECMAScript 모듈 설정](/images/docs/javascript/nodejs_package_ecmascript.png)
+
+### `export` 문
+[`export`](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export) 문은 모듈이 제공하고자 하는 데이터를 지정하는데 사용된다.
 
 * **유명 내보내기(named export)**
 
-    모듈에서 데이터를 불러올 때 식별자를 명시해야만 접근할 수 있도록 내보낸다. 중복된 식별자로 충돌이 우려되거나 너무 길면 `as` 키워드로 별칭을 지정할 수 있다.
+    모듈에서 데이터를 불러올 때 식별자를 명시해야만 접근할 수 있다. 중복된 식별자로 충돌이 우려되거나 너무 길면 `as` 키워드로 별칭을 지정할 수 있다.
 
     ```js
   /* 단일 유명 내보내기 */
@@ -1324,13 +1337,13 @@ console.log(instance.method(2, 3));
 
 * **기본 내보내기(default export)**
 
-    모듈에서 데이터를 불러올 때 스크립트 측에서 식별자가 아니라 별칭을 지정하여 접근할 수 있도록 내보낸다. 모듈 당 한 개의 데이터만 기본 내보내기로 지정될 수 있다.
+    모듈에서 데이터를 불러올 때 스크립트 측에서 식별자가 아니라 별칭을 지정하여 접근한다. 모듈 당 한 개의 데이터만 기본 내보내기로 지정될 수 있다.
 
     ```js
   export default object4;
     ```
 
-이에 대한 자세한 내용은 모듈을 불러오는 [`import`](#import-문) 문을 참고해야 한다.
+이에 대한 자세한 내용을 이해하려면 모듈을 불러오는 [`import`](#import-문) 문을 함께 참고하도록 한다.
 
 > 위의 유명 및 기본 내보내기는 하나의 문장으로 표현될 수 있다.
 >
@@ -1338,7 +1351,7 @@ console.log(instance.method(2, 3));
 > export { object4 as default, object1, object2, object3 as aliased };
 > ```
 
-데이터는 `export` 문으로 내보내지는 동시에 정의될 수 있다. 특히 기본 내보내기는 익명의 함수 및 클래스 표현식을 사용하여 전달할 수 있다.
+데이터는 `export` 문에서 곧바로 정의될 수 있다. 특히 기본 내보내기는 익명의 함수 및 클래스 표현식을 사용하여 전달할 수 있다.
 
 ```js
 /* 예시. 유명 내보내기 */
@@ -1348,15 +1361,14 @@ export function func() { }
 export default class { }
 ```
 
-### 집합형 모듈
 타 모듈에서 내보낸 데이터를 아무런 변동없이 있는 그대로 다시 내보낼 수 있다. 이러한 행위는 여러 모듈을 [`export from`](https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export#re-exporting_aggregating) 구문으로 집합(aggregate)시켜 하나의 모듈로 불러올 수 있도록 한다.
 
 ```js
-export { object1, object2 } from "./submodule1.js";
-export { object3, object4 } from "./submodule2.js";
+export { object1, object2 } from "./module1.js";
+export { object3, object4 } from "./module2.js";
 ```
 
-## `import` 문
+### `import` 문
 [`import`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 문은 모듈에서 내보낸 데이터를 불러오는데 사용된다. 모듈로부터 데이터를 불러오는 방법은 크게 두 가지가 있다.
 
 * **유명 불러오기(named import)**
@@ -1383,7 +1395,6 @@ export { object3, object4 } from "./submodule2.js";
 > import defaultExport, { object1, object2, aliased as aka } from "./module.js";
 > ```
 
-### 네임스페이스 불러오기
 네임스페이스 불러오기(namespace import)는 모듈로부터 내보내진 데이터 전체를 [네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)란 하나의 그룹으로 묶어서 불러온다.
 
 ```js
@@ -1392,6 +1403,59 @@ import * as namespace from "./module.js";
 ```
 
 데이터를 호출할 때에는 마치 객체의 속성을 접근하는 것처럼 `namespace.object` 구문을 사용한다. 단, 기본 내보내기로 전달된 데이터는 `namespace.default`로 호출한다.
+
+## CommonJS
+[CommonJS](https://nodejs.org/api/modules.html)은 본래 [Node.js](#nodejs)에서 사용하던 자바스크립트 코드 패키징 방식이다. Node.js은 각 파일을 하나의 모듈로 간주하는데, [`module`](https://nodejs.org/api/modules.html#the-module-object) 모듈 객체는 개별 모듈을 참조하는 것으로 국한된다. 해당 내용을 간단히 풀어 설명하면 다음 성질을 나타낸다.
+
+1. 두 파일 간 `module` 객체는 서로 다른 존재이다.
+2. `module` 객체는 모듈에 국한된 반면, [`global`](#유효범위) 객체는 프로젝트 전역을 참조하므로 서로 다른 존재이다.
+
+### `exports` 객체
+[`module.exports`](https://nodejs.org/api/modules.html#moduleexports) 객체 혹은 [`exports`](https://nodejs.org/api/modules.html#exports) 변수는 모듈에서 내보낼 데이터를 할당받는다.
+
+* **`exports` 변수**
+
+    간략화된 `exports` 변수는 속성을 추가하여 데이터를 할당받는 방식으로 동작한다. `exports` 변수 자체에 데이터를 할당하려는 시도는 아무런 영향이 없어 무의미하다.
+
+    ```js
+  exports.property = 3.14;
+  exports.method = function(arg) {
+      return this.property * arg;
+  };
+    ```
+
+* **`module.exports` 객체**
+
+    간략화된 `exports` 변수와 달리 함수, 객체, 클래스 등을 `module.exports`에 곧바로 할당할 수 있다.
+
+    ```js
+  module.exports = class {
+      property = 3.14;
+      method(arg) {
+          return this.property * arg;
+      }
+  };
+    ```
+
+### `require()` 함수
+[`module.require()`](https://nodejs.org/api/modules.html#modulerequireid) 메소드 혹은 [`require()`](https://nodejs.org/api/modules.html#requireid) 함수는 CommonJS에서 모듈뿐만 아니라 JSON, 로컬 파일 등을 불러온다. [`module.exports`](#export-객체)를 어떻게 사용하였는지에 따라 활용할 수 있는 예시를 아래에서 소개한다.
+
+* 모듈이 `exports` 변수에서 속성을 확장하여 내보내었을 경우
+ 
+    ```js
+  const namespace = require("./module.js");
+
+  cossole.log(namespace.method(2));    // 출력: 6.28
+    ```
+
+* 모듈이 `module.exports` 객체를 사용하여 내보낼 클래스를 정의한 경우
+ 
+    ```js
+  const CLASS = require("./module.js");
+  const instance = new CLASS();
+
+  console.log(instance.method(2));     // 출력: 6.28
+    ```
 
 # 자바스크립트: DOM
 자바스크립트는 HTML 및 CSS와 함께 사용하여 다양한 기능을 제공하는데 기여한다. 선언형 언어인 HTML은 아래와 같이 [트리 구조](https://ko.wikipedia.org/wiki/트리_구조)의 [문서 객체 모델](https://ko.wikipedia.org/wiki/문서_객체_모델)(Document Object Model; DOM)로 문서를 표현한다.
