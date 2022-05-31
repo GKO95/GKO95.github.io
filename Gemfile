@@ -33,5 +33,5 @@ end
 gem "wdm", "~> 0.1.0", :install_if => Gem.win_platform?
 
 # GitHub Dependencies
-gem "nokogiri", ">= 1.13.5"
+gem "nokogiri", ">= 1.13.6"
 gem "commonmarker", ">= 0.23.4"
