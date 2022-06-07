@@ -1,7 +1,7 @@
 ---
 layout: docs
 language: ko
-title: "GitHub Pages 블로그 3.0 UI 업데이트"
+title: "GitHub Pages 블로그 UI 3.0 업데이트"
 tags: GitHub_Pages
 date: 2021-08-24 00:00:00
 notice: true
@@ -10,7 +10,7 @@ toc: false
 ## 블로그 업데이트 3.0
 > *2021년 8월 24일부로 Stable UI 3.0으로 업데이트가 적용됩니다.*
 
-미완성된 UI 3.0 Beta를 적용한 지 이틀만에 구현되어야 할 나머지 기능과 스타일까지 마무리하였습니다. 퇴근하고 하는 일이 코딩이나 자료정리만 하니 생각보다 일찍이 해결되었습니다. 아직 브라우저 간 호환성을 시험해 보지 않았지만, Microsoft Edge를 기반으로 제작하였으므로 Google Chrome에서는 정상적으로 나타날 겁니다. 이전 UI 3.0 업데이트 내용은 [3.0 Preview 버전 게시글](ko.update_v0300_preview)에서 확인할 수 있습니다.
+미완성된 UI 3.0 Beta를 적용한 지 이틀만에 구현되어야 할 나머지 기능과 스타일까지 마무리하였습니다. 퇴근하고 하는 일이 코딩이나 자료정리만 하니 생각보다 일찍이 해결되었습니다. 아직 브라우저 간 호환성을 시험해 보지 않았지만, Microsoft Edge를 기반으로 제작하였으므로 Google Chrome에서는 정상적으로 나타날 겁니다. 이전 UI 3.0 업데이트 내용은 [3.0 Preview 버전 게시글](ko.update_20210822_ui_v3_preview)에서 확인할 수 있습니다.
 
 다음은 Stable UI 3.0 업데이트에 대한 변경사항에 대하여 알려드립니다:
 

@@ -1,7 +1,7 @@
 ---
 layout: docs
 language: ko
-title: "GitHub Pages 블로그 3.0 UI 업데이트 Preview"
+title: "GitHub Pages 블로그 UI 3.0 업데이트 Preview"
 tags: GitHub_Pages
 date: 2021-08-22 00:00:00
 notice: true
