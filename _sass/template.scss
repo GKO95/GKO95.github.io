@@ -82,9 +82,14 @@ header {
         display: flex;
         flex-direction: row;
         justify-content:space-around;
+        max-width: $MAXWIDTH;
         padding: {
             top: 8px;
             bottom: 0px;
+        }
+        margin: {
+            left: auto;
+            right: auto;
         }
 
         .header-button {
@@ -171,7 +176,7 @@ main {
     }
     
     #page {
-        max-width: 1600px;
+        max-width: $MAXWIDTH;
         margin: auto;
         padding: 8px 16px;
     }
