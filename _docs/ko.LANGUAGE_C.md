@@ -983,6 +983,32 @@ printf("%f", calling(callback, 1));
 4.141590
 ```
 
+## 인라인 함수
+[인라인 함수](https://en.cppreference.com/w/c/language/inline)(inline function)는 인라인 확장에 사용될 `inline` 키워드로 지정된 함수이다.
+
+> [인라인 확장](https://ko.wikipedia.org/wiki/인라인_확장)(inline expansion)은 컴파일 과정에서 함수 [호출지](https://en.wikipedia.org/wiki/Call_site)(call site)를 함수 코드로 치환하는 최적화 기법이다. 
+
+프로그램 실행 (즉, 런타임) 도중에 함수를 호출하는데 소모되는 시간이 없으므로 속도가 소폭 향상되는 효과가 있으나, 과도한 사용은 프로그램 크기가 커지고 RAM 메모리를 더 많이 사용하는 단점으로 작용한다. 그러므로 인라인은 적은 코드에 자주 사용되는 함수에 가장 적합하다.
+
+```c
+/* 인라인 함수 */
+inline void function(char* arg) {
+    printf("%s", arg);
+}
+
+int main() {
+    function("Hello World!");
+    return 0;
+}
+
+/* 동일:
+    int main() {
+        printf("%s", "Hello World!");
+        return 0;
+    }
+*/
+```
+
 ## 재귀 함수
 [재귀 함수](https://ko.wikipedia.org/wiki/재귀_(컴퓨터_과학))(recursive function)는 스스로를 호출하는 함수이다. 재귀 함수는 반드시 스스로를 호출하는 반복으로부터 탈출하는 기저 조건(base case)이 필요하다. 기저 조건이 없으면 무한 재귀가 발생하는데 프로그램 실행에 기여하는 [메모리](#스택-영역)가 부족하여 충돌이 발생한다.
 
@@ -1684,7 +1710,7 @@ C 프로그래밍 언어가 컴파일되기 전에 전처리기에서 `#include`
 
 printf("%d", ANYTHING(2, 3));
 /* 결과:
-printf("%d", (2 * 7 - 3));
+    printf("%d", (2 * 7 - 3));
 */
 
 #undef SOMETHING
