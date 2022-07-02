@@ -26,33 +26,13 @@ order: 0x06
 ![비주얼 스튜디오 타입스크립트 프로젝트 생성](/images/docs/typescript/ts_vs_project.png)
 
 ### 비주얼 스튜디오 코드
-타입스크립트 컴파일러 `tsc`는 아래의 명령어로 직접 npm [패키지](https://www.npmjs.com/package/typescript)를 설치해야 한다.
+타입스크립트 컴파일러 `tsc`는 아래의 명령어로 직접 npm [패키지](https://www.npmjs.com/package/typescript)를 설치해야 한다. 만일 컴파일러를 시스템 전역에 일괄적으로 사용하려면 `--location=global` 옵션을 추가한다.
 
 ```
 npm install typescript
 ```
 
-> 만일 프로젝트에 한정되지 않고 시스템 전역적으로 사용할 수 있는 컴파일러를 설치하려면 `--location=global` 옵션을 추가한다.
-
-VS Code에서 타입스크립트를 작업하면 `tsconfig.json`이란 파일로부터 컴파일러 옵션과 같이 빌드에 적용되는 프로젝트 환경설정이 들어있다. 커맨드(`F1` 혹은 `Shift+Ctrl+P`)에서 `TypeScript: Go to Project Configuration`을 선택하여 해당 파일을 생성 및 확인할 수 있다.  다음은 2022년 7월 2일 시점에서 VS Code로부터 자동적으로 기입된 `tsconfig.json` 설정이다.
-
-```json
-{
-    "compilerOptions": {
-        "module": "ESNext",
-        "moduleResolution": "Node",
-        "target": "ES2020",
-        "jsx": "preserve",
-        "strictNullChecks": true,
-        "strictFunctionTypes": true,
-        "sourceMap": true
-    },
-    "exclude": [
-        "node_modules",
-        "**/node_modules/*"
-    ]
-}
-```
+VS Code에서 타입스크립트를 작업하면 `tsconfig.json`이란 파일로부터 컴파일러 옵션과 같이 빌드에 적용되는 프로젝트 환경설정이 들어있다. 커맨드(`F1` 혹은 `Shift+Ctrl+P`)에서 `TypeScript: Go to Project Configuration`을 선택하여 해당 파일을 생성 및 확인할 수 있다.
 
 `tsconfig.json` 환경설정에서 제공하는 컴파일러 옵션으로 타입스크립트를 자바스크립트로 빌드할 수 있다. 이를 위해 커맨드에서 `Tasks: Run Build Task` 혹은 `Shirt+Ctrl+B` 단축키를 누른 다음 빌드 작업을 `tsc: build - tsconfig.json`으로 선택한다. 만일 이러한 절차가 번거로우면 커맨드의 `Tasks: Configure Default Build Task`에서 기본 빌드 작업으로 지정할 수 있다.
 
