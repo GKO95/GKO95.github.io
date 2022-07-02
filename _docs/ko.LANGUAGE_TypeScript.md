@@ -15,31 +15,54 @@ order: 0x06
 자바스크립트와 달리, 타입스크립트는 [컴파일 언어](https://ko.wikipedia.org/wiki/컴파일_언어)(compiled language)이다. 하지만 컴파일러는 타입스크립트 언어를 [기계어](https://ko.wikipedia.org/wiki/기계어)가 아닌 자바스크립트 언어로 변환한다. 이러한 이유로 타입스크립트는 자바스크립트와 엄청난 호환성을 자랑하여 함께 병행되어 사용될 수 있다.
 
 # 타입스크립트: 설치
-1. npm 모듈
+타입스크립트를 실행하기 위해서는 세 가지 프로그램이 필요하다: (1) 자바스크립트 엔진, (2) 통합 개발 환경, 그리고 (3) 타입스크립트 컴파일러이다. 본 내용은 [*자바스크립트: 설치*](/docs/ko.JavaScript#자바스크립트-설치)와 중복되므로 언급되지 않았던 타입스크립트 컴파일러를 위주로 설명한다.
 
-[TypeScript 패키지](https://www.npmjs.com/package/typescript)
+## `tsc` 컴파일러
+타입스크립트 컴파일러 `tsc`는 npm로부터 사용되기 때문에 반드시 [Node.js](/docs/ko.JavaScript#nodejs)이 먼저 설치되어야 한다. 다시 한 번 언급하지만, `tsc` 컴파일러는 타입스크립트를 자바스크립트로 언어를 변환하는 게 목적이다. 그러므로 어플리케이션을 실행하기 위해서는 여전히 Node.js이 필요하다.
 
-```
-npm install -g typescript
-```
+### 비주얼 스튜디오
+비주얼 스튜디오에서는 타입스크립트 프로젝트 생성을 지원하며, 그 안에는 이미 컴파일러와 같은 필요한 패키지들이 로컬 경로에 들어있는 것을 확인할 수 있다.
 
-`-g` 옵션은 프로젝트 한정이 아닌 시스템 전역적으로 사용할 수 있도록 패키지를 설치한다.
+![비주얼 스튜디오 타입스크립트 프로젝트 생성](/images/docs/typescript/ts_vs_project.png)
 
-만일 해당 옵션이 없으면 패키지를 프로젝트에 한정된 로컬에서만 사용할 수 있도록 설치한다. 즉, 프로젝트 경로를 삭제하면 설치한 패키지도 사라진다.
-
-2. 비주얼 스튜디오 NuGet 패키지
-3. 비주얼 스튜디오 확장도구
-
-컴파일러 `tsc`
+### 비주얼 스튜디오 코드
+타입스크립트 컴파일러 `tsc`는 아래의 명령어로 직접 npm [패키지](https://www.npmjs.com/package/typescript)를 설치해야 한다.
 
 ```
-tsc main.ts
-node main.js
+npm install typescript
 ```
 
-create `tsconfig.json` which is used to run build task(`ctrl+shift+b`) via `tsc: build`. To set this as a default, go to Configure Default Build Task and select `tsc: build`.
+> 만일 프로젝트에 한정되지 않고 시스템 전역적으로 사용할 수 있는 컴파일러를 설치하려면 `--location=global` 옵션을 추가한다.
 
-configure `launch.json` as node.js
+VS Code에서 타입스크립트를 작업하면 `tsconfig.json`이란 파일로부터 컴파일러 옵션과 같이 빌드에 적용되는 프로젝트 환경설정이 들어있다. 커맨드(`F1` 혹은 `Shift+Ctrl+P`)에서 `TypeScript: Go to Project Configuration`을 선택하여 해당 파일을 생성 및 확인할 수 있다.  다음은 2022년 7월 2일 시점에서 VS Code로부터 자동적으로 기입된 `tsconfig.json` 설정이다.
 
-# 타입스크립트: 개요
+```json
+{
+    "compilerOptions": {
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "target": "ES2020",
+        "jsx": "preserve",
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "sourceMap": true
+    },
+    "exclude": [
+        "node_modules",
+        "**/node_modules/*"
+    ]
+}
+```
+
+`tsconfig.json` 환경설정에서 제공하는 컴파일러 옵션으로 타입스크립트를 자바스크립트로 빌드할 수 있다. 이를 위해 커맨드에서 `Tasks: Run Build Task` 혹은 `Shirt+Ctrl+B` 단축키를 누른 다음 빌드 작업을 `tsc: build - tsconfig.json`으로 선택한다. 만일 이러한 절차가 번거로우면 커맨드의 `Tasks: Configure Default Build Task`에서 기본 빌드 작업으로 지정할 수 있다.
+
+> 그 외의 `tsc: watch - tsconfig.json` 선택지는 [`--watch`](https://www.npmjs.com/package/tsc-watch) 옵션이 추가된 것으로, 컴파일 상태를 관측 및 적절한 반응을 취할 수 있도록 타입스크립트 개발에 편의성을 제공한다.
+
+위의 과정으로 타입스크립트의 빌드 환경설정을 구성하여도, 빌드로부터 생성된 자바스크립트를 디버깅(`Ctrl+F5`) 혹은 실행(`F5`)을 설정하는데 사용되는 `launch.json` 파일은 VS Code의 좌측 탭의 "Run and Debug" 혹은 단축키 `Shift+Ctrl+D`를 누르면 나타나는 "create a launch.json file" 링크를 클릭하여 생성할 수 있다. 이때 자바스크립트를 실행할 디버거를 Node.js으로 선택한다.
+
+![VS Code에서 <code>launch.json</code> 파일 생성하기](/images/docs/typescript/ts_vscode_launch.png)
+
+프로그램 실행 (혹은 디버깅)을 한다고 해서 빌드가 함께 되는 것이 아니다. 이 두 절차를 연동시키기 위해 `launch.json` 안에 `"preLaunchTask": "tsc: build - tsconfig.json"`을 추가한다. 그러면 프로그램 실행 (혹은 디버깅) 전에 타입스크립트 컴파일이 우선 진행되어 타입스크립트를 Node.js이 처리할 수 있는 자바스크립트로 변환시킨다.
+
+# 타입스크립트: 기초
 
