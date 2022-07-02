@@ -45,4 +45,6 @@ VS Code에서 타입스크립트를 작업하면 `tsconfig.json`이란 파일로
 프로그램 실행 (혹은 디버깅)을 한다고 해서 빌드가 함께 되는 것이 아니다. 이 두 절차를 연동시키기 위해 `launch.json` 안에 `"preLaunchTask": "tsc: build - tsconfig.json"`을 추가한다. 그러면 프로그램 실행 (혹은 디버깅) 전에 타입스크립트 컴파일이 우선 진행되어 타입스크립트를 Node.js이 처리할 수 있는 자바스크립트로 변환시킨다.
 
 # 타입스크립트: 기초
+> *참조: [TypeScript: Documentation - TypeScript for JavaScript Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)*
 
+타입스크립트는 일명 "자료형 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))이 지원되는 [자바스크립트](/docs/ko.JavaScript)"이다. 자바스크립트 지식이 타입스크립트에 그대로 적용된다는 의미인데, 실제로 타입스크립트 파일에 순수 자바스크립트 코드를 작성하면 별도의 컴파일 작업이 필요없이 곧바로 실행이 가능하다. 그러므로 타입스크립트를 배우기 위해서는 반드시 자바스크립트를 숙지해야 한다. 본 장에서는 타입스크립트만이 갖는 기초적인 특성들을 소개한다.
