@@ -1765,6 +1765,6 @@ jQuery는 자바스크립트 라이브러리 중 하나로 HTML DOM 구조 이�
   ```html
   <head>
       <!-- CDN JQUERY 라이브러리 불러오기 -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></  script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   ```
