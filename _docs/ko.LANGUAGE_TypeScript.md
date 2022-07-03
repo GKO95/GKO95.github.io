@@ -48,3 +48,10 @@ VS Code에서 타입스크립트를 작업하면 `tsconfig.json`이란 파일로
 > *참조: [TypeScript: Documentation - TypeScript for JavaScript Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)*
 
 타입스크립트는 일명 "자료형 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))이 지원되는 [자바스크립트](/docs/ko.JavaScript)"이다. 자바스크립트 지식이 타입스크립트에 그대로 적용된다는 의미인데, 실제로 타입스크립트 파일에 순수 자바스크립트 코드를 작성하면 별도의 컴파일 작업이 필요없이 곧바로 실행이 가능하다. 그러므로 타입스크립트를 배우기 위해서는 반드시 자바스크립트를 숙지해야 한다. 본 장에서는 타입스크립트만이 갖는 기초적인 특성들을 소개한다.
+
+## 자료형 추론
+[자료형 추론](https://en.wikipedia.org/wiki/Type_inference)(type inference)이란, 프로그래밍 언어의 표현식으로부터 [자료형](/docs/ko.JavaScript#자료형)을 자동으로 감지하는 기능이며 타입스크립트의 핵심이다. 타입스크립트는 자바스크립트 코드에 추가사항 필요 없이도 추론을 통해 어떠한 자료형에 해당하는지 명시할 수 있다. 아래의 이미지는 타입스크립트 기반의 VS Code 편집기에서 작업하는 자바스크립트 파일에 타입스크립트에서 제공하는 자료형 추론을 보여준다.
+
+![VS Code 편집기의 자바스크립트 자료형 추론](/images/docs/typescript/ts_vscode_inference.png)
+
+> 자바스크립트에는 `: <type>`이란 자료형 주석(type annotation) 구문이 존재하지 않으며, 추론된 표현식을 자바스크립트에 입력하면 유효하지 않은 구문으로 실행되지 않는다.
