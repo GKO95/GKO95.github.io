@@ -16,7 +16,7 @@ python -m pip install numpy
 ```
 
 ### vs. MATLAB
-> 본 내용은 [MATLAB](/docs/ko.SOFTWARE_MATLAB) 문서와 깊은 연관성이 있어, 관심이 있을 경우 한 번 확인하여 비교해 보는 것을 권장한다.
+> 본 내용은 [MATLAB](/docs/ko.MATLAB) 문서와 깊은 연관성이 있어, 관심이 있을 경우 한 번 확인하여 비교해 보는 것을 권장한다.
 
 [MATLAB](https://www.mathworks.com/products/matlab.html)은 1991년에 출시된 파이썬보다 더 역사가 깊은 1970년대 후반에 개발된 행렬 처리 프로그래밍 언어 및 환경이다. 비록 Mathworks라는 기업에서 판매하는 유료 프로그램이지만, 그만큼 서비스를 보장받을 수 있으며 오랜 기술 축적과 커뮤니티를 보유하고 있다. 그러나 2010년대 초반부터 시작하여 파이썬의 고속성장으로 MATLAB의 입지는 위협을 받고 있다.
 
