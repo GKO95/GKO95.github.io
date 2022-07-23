@@ -1,7 +1,7 @@
 ---
 layout: docs
 category: 윈도우
-title: Service
+title: 덤프
 slug: ko.Service
 order: null
 ---
