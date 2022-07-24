@@ -1,9 +1,9 @@
 ---
 layout: docs
-category: 운영체제
+category: 윈도우
 title: 프로세스
 slug: ko.Process
-order: 0x60
+order: null
 ---
 # 프로세스: 소개
 > *참조: [Microsoft Docs - Processes and Threads](https://docs.microsoft.com/en-us/windows/win32/procthread/processes-and-threads)*

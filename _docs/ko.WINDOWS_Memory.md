@@ -1,9 +1,9 @@
 ---
 layout: docs
-category: 운영체제
+category: 윈도우
 title: 메모리
 slug: ko.Memory
-order: 0x61
+order: null
 ---
 # 메모리: 페이지
 > *참조: [Microsoft Docs - Memory Management](https://docs.microsoft.com/en-us/windows/win32/memory/memory-management)*

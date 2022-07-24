@@ -1,9 +1,9 @@
 ---
 layout: docs
-category: 운영체제
+category: 윈도우
 title: 네트워크
 slug: ko.Network
-order: 0x62
+order: null
 ---
 # 네트워크: 기초
 
