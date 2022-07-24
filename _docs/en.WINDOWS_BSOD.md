@@ -6,7 +6,7 @@ slug: en.BSOD
 order: null
 ---
 # Blue Screen of Death
-[Blue Screen of Death](https://en.wikipedia.org/wiki/Blue_screen_of_death) is an error screen to prevent further damage to the system and generates a [dump](en.Dump#kernel-mode-dump) file to investigate and analyze the problem. The BSOD appears when [`KeBugCheck()`](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/ntddk/nf-ntddk-kebugcheck) (or [`KeBugCheckEx()`](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex)) routine is called by either reasons.
+[Blue Screen of Death](https://en.wikipedia.org/wiki/Blue_screen_of_death) (BSOD) is an error screen to prevent further damage to the system and generates a [dump](en.Dump#kernel-mode-dump) file to investigate and analyze the problem. The BSOD appears when [`KeBugCheck()`](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/ntddk/nf-ntddk-kebugcheck) (or [`KeBugCheckEx()`](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex)) routine is called by either reasons.
 
 * **[System crash](#system-crash)**: unhandled kernel-mode exceptions (aka. kernel-mode crash).
 * **Invalid operation**: triggered intentionally by the kernel source code when an unrecoverable issue arises from Windows, such as security, privacy, critical user-mode program, etc., which is not a system failure.
