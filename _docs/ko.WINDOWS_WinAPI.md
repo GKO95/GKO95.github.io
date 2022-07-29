@@ -6,14 +6,22 @@ slug: ko.WinAPI
 order: null
 ---
 # 윈도우 API
-[Windows API](https://en.wikipedia.org/wiki/Windows_API) (aka. WinAPI) is an [application programming interface](https://en.wikipedia.org/wiki/API) for accessing resources in Windows operating system. Formally known as Win32 API, a programming interface for 32-bit Windows operating system, Microsoft changed the name so it would be not an architecture-specific. Written in [C](en.C) programming language, which was the most commonly used low-level language by the time of Windows development, it is possible for other programming languages to implement Windows API as well.
+[윈도우 API](https://ko.wikipedia.org/wiki/윈도우_API)(일명 WinAPI)는 윈도우 운영체제 리소스에 접근하여 활용할 수 있도록 하는 [어플리케이션 프로그래밍 인터페이스](https://ko.wikipedia.org/wiki/API)이다. 이전에는 32비트 윈도우 운영체제의 프로그래밍 인터페이스인 Win32 API로 알려졌으나, 마이크로소프트는 특정 아키텍처에 종속되지 않는 명칭으로 변경한 것이다. 윈도우가 개발되는 당시 가장 널리 사용된 저급 [C](ko.C) 프로그래밍 언어로 작성되었으므로 윈도우 API는 타 프로그래밍 언어에서도 불러와 활용이 가능하다.
 
 ## 컴포넌트 오브젝트 모델
-> *참조: [The Component Object Model - Win32 apps &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows/win32/com/the-component-object-model)*
+> *참조: [구성 요소 개체 모델 - Win32 apps &#124; Microsoft Docs](https://docs.microsoft.com/ko-kr/windows/win32/com/the-component-object-model)*
 
-[컴포넌트 오브젝트 모델](https://ko.wikipedia.org/wiki/컴포넌트_오브젝트_모델)(Component Object Model; COM) is an [application "binary" interface](https://en.wikipedia.org/wiki/Application_binary_interface) standardized by Microsoft in 1993 to guarantee [cross-platform](https://en.wikipedia.org/wiki/Cross-platform_software) compatibility of a `.DLL` library or an `.EXE` executable file. Unlike the [Windows API](#windows-api) that provides interfaces through C programming language, COM uses binary [machine code](https://en.wikipedia.org/wiki/Machine_code) as a mean to interface. This means any language supporting [pointer](en.C#pointer) to access via memory address directly can create and use COM.
+[컴포넌트 오브젝트 모델](https://ko.wikipedia.org/wiki/컴포넌트_오브젝트_모델)(Component Object Model; COM)은 마이크로소프트가 1993년에 프로그램 간 호환성을 보장하기 위해 표준화한 [어플리케이션 "이진" 인터페이스](https://ko.wikipedia.org/wiki/응용_프로그램_이진_인터페이스)이다. 본 내용을 진행하기 전에 API와 ABI의 차이점을 간단히 소개할 필요가 있다.
 
-Programming knowledge on an [interface](en.Csharp#interface) and [class](en.Csharp#c-class) of [C#](en.Csharp) language can help understand the concept of COM due to similarity: a COM interface acts as the one and only access point to a COM class that defines implementations (aka. COM objects) of the interface. A caller and provider of a COM object is referred to as a COM client and a COM server respectively.
+| 비교 | API | ABI |
+|-----|:----:|:-----:|
+| 라이브러리 연관성 | 함수는 무엇이 존재하며<br/>인자의 개수와 순서가 어떤지 선언 | 함수는 어떻게 접근되며<br/>인자는 어떻게 전달이 되는지 정의 |
+| 인터페이스 영역 | 소스 코드 | [머신 코드](https://ko.wikipedia.org/wiki/기계어) |
+| 하드웨어 독립 | ⭕ | ❌ |
+
+라이브러리에 정의된 데이터와 함수를 소스 코드로 불러올 때는 API가 활용되나, 이를 컴파일 된 이진 파일에서 접근 및 호출할 때에는 ABI가 활용된다. 만일 시스템에 사용되고 있는 모든 프로그램이 하나의 공통된 ABI 규격을 준수해야 할 시, 어플리케이션 개발에 사용된 프로그래밍 언어나 컴파일러에 불문하고 어떠한 이진 파일과 상호작용이 가능해진다. 대표적인 예시가 `.DLL` [동적 링크 라이브러리](https://ko.wikipedia.org/wiki/동적_링크_라이브러리)로부터 함수나 리소스를 불러오는 행위이다. 윈도우 운영체제에 채택된 ABI는 바로 마이크로소프트가 소개한 COM이다.
+
+COM은 [가상 메소드 테이블](https://ko.wikipedia.org/wiki/가상_메소드_테이블)을 활용하므로, 메모리 주소를 직접 접근할 수 있는 [포인터](ko.C#c-포인터)가 지원되는 어떠한 프로그래밍 언어로부터 COM을 제작 및 사용이 가능하다. 특히 [C#](ko.Csharp) 프로그래밍 언어의 [인터페이스](ko.Csharp#인터페이스) 및 [클래스](en.Csharp#c-클래스)에 대한 지식은 개념의 유사성으로 COM을 이해하는데 도움이 된다: COM 클래스는 도입된 COM 인터페이스의 텅 빈 가상 메소드에 실질적인 함수 코드(일명 컴포넌트, 혹은 COM 오브젝트)를 정의하는데, 해당 컴포넌트를 사용하기 위해서는 오로지 COM 인터페이스로만 접근될 수 있다. 그리고 COM 오브젝트 호출하는 자를 COM 클라이언트, 그리고 제공하는 자를 COM 서버라고 지칭한다.
 
 ## 윈도우 런타임
 [윈도우 런타임](https://ko.wikipedia.org/wiki/윈도우_런타임) (일명 WinRT)
