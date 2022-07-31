@@ -59,11 +59,11 @@ $$
     > 본 성질에 대한 증명은 아래를 참고한다:
     >
     > $$
-    > \mathcal{L}\left\{ af(t) + bg(t) \right\} = \int^{\infty}_{0}\left\{ af(t) + bg(t) \right\} e^{-st}dt
+    > \mathcal{L}\{ af(t) + bg(t) \} = \int^{\infty}_{0}\{ af(t) + bg(t) \} e^{-st}dt
     > $$
     >
     > $$
-    > \quad = \int^{\infty}_{0}\left\{af(t)e^{-st} + bg(t)e^{-st}\right\}dt
+    > \quad = \int^{\infty}_{0}\{af(t)e^{-st} + bg(t)e^{-st}\}dt
     > $$
     >
     > $$
@@ -71,7 +71,7 @@ $$
     > $$
     >
     > $$
-    > \quad = a\mathcal{L}\left\{ f(t) \right\} + b\mathcal{L}\left\{ g(t) \right\}
+    > \quad = a\mathcal{L}\{ f(t) \} + b\mathcal{L}\{ g(t) \}
     > $$
     >
     > $$
@@ -88,7 +88,7 @@ $$
     > 예시 (3계도함수):
     >
     > $$
-    > \mathcal{L}\left\{ f'''(t) \right\} = s^3F(s) - s^2f(0) - sf'(0) - f''(0)
+    > \mathcal{L}\{ f'''(t) \} = s^3F(s) - s^2f(0) - sf'(0) - f''(0)
     > $$
     >
 
@@ -109,7 +109,7 @@ $$
     > 본 성질에 대한 증명은 아래를 참고한다:
     >
     > $$
-    > \mathcal{L}\left\{ f \ast g \right\} = \int^{\infty}_{0^-} \bigl( f \ast g \bigr) (t) e^{-st}dt
+    > \mathcal{L}\{ f \ast g \} = \int^{\infty}_{0^-} \bigl( f \ast g \bigr) (t) e^{-st}dt
     > $$
     >
     > $$
@@ -135,7 +135,7 @@ $$
     > $$
     >
     > $$
-    > \quad = \mathcal{L}\left\{ f(\tau) \right\} \cdot \mathcal{L}\left\{ g(u) \right\}
+    > \quad = \mathcal{L}\{ f(\tau) \} \cdot \mathcal{L}\{ g(u) \}
     > $$
     >
     > $$
@@ -152,11 +152,11 @@ $$
     > 본 성질에 대한 증명은 아래를 참고한다:
     >
     > $$
-    > \mathcal{L}\left\{ f^*(t) \right\} = \int^{\infty}_{0^-}  f^*(t) e^{-st}dt
+    > \mathcal{L}\{ f^*(t) \} = \int^{\infty}_{0^-}  f^*(t) e^{-st}dt
     > $$
     >
     > $$
-    > \quad = \left[ \int^{\infty}_{0^-}  f(t) e^{-s^*t}dt \right]^* \quad \left( \ \because \left\{ A^* \right\}^* = A \quad \mathrm{and} \quad \left\{ B\cdot C\right\}^* = B^*\cdot C^* \ \right)
+    > \quad = \left[ \int^{\infty}_{0^-}  f(t) e^{-s^*t}dt \right]^* \quad \left( \ \because \{ A^* \}^* = A \quad \mathrm{and} \quad \{ B\cdot C\}^* = B^*\cdot C^* \ \right)
     > $$
     >
     > $$
@@ -173,7 +173,7 @@ $$
     > 본 성질에 대한 증명은 아래를 참고한다:
     >
     > $$
-    > \mathcal{L}\left\{ f(t-a)u(t-a) \right\} = \int^{\infty}_{0^-}{f(t-a)u(t-a) e^{-st}dt}
+    > \mathcal{L}\{ f(t-a)u(t-a) \} = \int^{\infty}_{0^-}{f(t-a)u(t-a) e^{-st}dt}
     > $$
     >
     > $$
@@ -189,7 +189,7 @@ $$
     > $$
     >
     > $$
-    > \quad = e^{-as}\mathcal{L}\left\{ f(\tau) \right\}
+    > \quad = e^{-as}\mathcal{L}\{ f(\tau) \}
     > $$
     >
     > $$
@@ -206,7 +206,7 @@ $$
     > 본 성질에 대한 증명은 아래를 참고한다:
     >
     > $$
-    > \mathcal{L}\left\{ f(at) \right\} = \int^{\infty}_{0^-}{f(at)e^{-st}dt}
+    > \mathcal{L}\{ f(at) \} = \int^{\infty}_{0^-}{f(at)e^{-st}dt}
     > $$
     >
     > $$
@@ -227,7 +227,7 @@ $$
     > 본 성질에 대한 증명은 아래를 참고한다:
     >
     > $$
-    > \mathcal{L}\left\{ e^{at}f(t) \right\} = \int^{\infty}_{0^-}{e^{at}f(t)e^{-st}dt}
+    > \mathcal{L}\{ e^{at}f(t) \} = \int^{\infty}_{0^-}{e^{at}f(t)e^{-st}dt}
     > $$
     >
     > $$
@@ -366,7 +366,7 @@ my''(t) + ky(t) = 0
 $$
 
 $$
-\quad \Rightarrow \mathcal{L}\left\{ my''(t) + ky(t) \right\} = m\bigl( s^2Y(s) - sy(0) - y'(0) \bigr) + kY(s) = 0 \quad ... \mathrm{since} \ \mathcal{L}\left\{ 0 \right\} = 0
+\quad \Rightarrow \mathcal{L}\{ my''(t) + ky(t) \} = m\bigl( s^2Y(s) - sy(0) - y'(0) \bigr) + kY(s) = 0 \quad ... \mathrm{since} \ \mathcal{L}\{ 0 \} = 0
 $$
 
 방정식의 좌변과 우변을 각각 $Y(s)$에 대한 식과 그렇지 아니한 식으로 나눈다.
@@ -382,7 +382,7 @@ $$
 이를 다시 역변환시키면 시간 영역에서는 다음 방정식이 도출된다.
 
 $$
-\qquad \therefore \mathcal{L}^{-1}\left\{ Y(s) \right\} = y(t) = c_1e^{+j\omega t} + c_2e^{-j\omega t} \quad ...\mathrm{where} \ \omega = \sqrt{\frac{k}{m}}
+\qquad \therefore \mathcal{L}^{-1}\{ Y(s) \} = y(t) = c_1e^{+j\omega t} + c_2e^{-j\omega t} \quad ...\mathrm{where} \ \omega = \sqrt{\frac{k}{m}}
 $$
 
 이는 미분방정식의 일반해와 동일한 결과이며, 만일 초기값 $y(0)$ 및 $y'(0)$가 주어지면 특수해를 구할 수 있게 된다.
@@ -395,7 +395,7 @@ my''(t) + cy'(t) + ky(t) = 0
 $$
 
 $$
-\quad \Rightarrow \mathcal{L}\left\{ my''(t) + cy'(t) + ky(t) \right\} = m\bigl( s^2Y(s) - sy(0) - y'(0) \bigr) + c\bigl( sY(s) - y(0) \bigr) + kY(s) = 0
+\quad \Rightarrow \mathcal{L}\{ my''(t) + cy'(t) + ky(t) \} = m\bigl( s^2Y(s) - sy(0) - y'(0) \bigr) + c\bigl( sY(s) - y(0) \bigr) + kY(s) = 0
 $$
 
 방정식의 좌변과 우변을 각각 $Y(s)$에 대한 식과 그렇지 아니한 식으로 나눈다.
@@ -411,7 +411,7 @@ $$
 이를 다시 역변환시키면 시간 영역에서는 다음 방정식이 도출된다.
 
 $$
-\qquad \therefore \mathcal{L}^{-1}\left\{ Y(s) \right\} = y(t) = c_1e^{\left( \sigma+j\omega \right) t} + c_2e^{\left( \sigma-j\omega \right) t} \quad ...\mathrm{where} \ \sigma = \frac{-c}{2m}, \ \omega = \sqrt{\frac{4km-c^2}{4m^2}}
+\qquad \therefore \mathcal{L}^{-1}\{ Y(s) \} = y(t) = c_1e^{\left( \sigma+j\omega \right) t} + c_2e^{\left( \sigma-j\omega \right) t} \quad ...\mathrm{where} \ \sigma = \frac{-c}{2m}, \ \omega = \sqrt{\frac{4km-c^2}{4m^2}}
 $$
 
 이는 미분방정식의 일반해와 동일한 결과이며, 만일 초기값 $y(0)$ 및 $y'(0)$가 주어지면 특수해를 구할 수 있게 된다.
@@ -424,7 +424,7 @@ my''(t) + cy'(t) + ky(t) = F_0\cos{\omega t}
 $$
 
 $$
-\quad \Rightarrow \mathcal{L}\left\{ my''(t) + cy'(t) + ky(t) \right\} = m\bigl( s^2Y(s) - sy(0) - y'(0) \bigr) + c\bigl( sY(s) - y(0) \bigr) + kY(s) = F_0\frac{s}{s^2+\omega^2}
+\quad \Rightarrow \mathcal{L}\{ my''(t) + cy'(t) + ky(t) \} = m\bigl( s^2Y(s) - sy(0) - y'(0) \bigr) + c\bigl( sY(s) - y(0) \bigr) + kY(s) = F_0\frac{s}{s^2+\omega^2}
 $$
 
 방정식의 좌변과 우변을 각각 $Y(s)$에 대한 식과 그렇지 아니한 식으로 나눈다.
@@ -467,7 +467,7 @@ $$
 4. 독립전압원: 전압으로 전기를 생성하는 소자
 
     $$
-    V_{\mathrm{in}}(t) = E\cos{\omega t} \cong \mathrm{Re} \left\{ E\cos{\omega t} + jE\sin{\omega t} \right\} = Ee^{j\omega t}
+    V_{\mathrm{in}}(t) = E\cos{\omega t} \cong \mathrm{Re} \{ E\cos{\omega t} + jE\sin{\omega t} \} = Ee^{j\omega t}
     $$
 
 이를 모두 종합하면 다음 키르히호프 방정식이 세워진다.
@@ -481,7 +481,7 @@ $$
 $$
 
 $$
-\quad \Rightarrow \mathcal{L}\left\{ Li''(t) + Ri'(t) + \frac{1}{C}i(t) \right\} = L\bigl( s^2I(s) - si(0) - i'(0) \bigr) + R\bigl( sI(s) - i(0) \bigr) + \frac{1}{C}I(s) = \frac{j\omega E}{s-j\omega}
+\quad \Rightarrow \mathcal{L}\{ Li''(t) + Ri'(t) + \frac{1}{C}i(t) \} = L\bigl( s^2I(s) - si(0) - i'(0) \bigr) + R\bigl( sI(s) - i(0) \bigr) + \frac{1}{C}I(s) = \frac{j\omega E}{s-j\omega}
 $$
 
 방정식의 좌변과 우변을 각각 $I(s)$에 대한 식과 그렇지 아니한 식으로 나눈다.
