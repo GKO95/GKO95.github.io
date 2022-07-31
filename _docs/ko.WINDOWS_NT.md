@@ -1,10 +1,10 @@
 ---
 layout: docs
-category: 운영체제
-title: 윈도우
+category: 윈도우
+title: 윈도우 NT
 slug: ko.Windows
 icon: icon-windows.svg
-order: null
+order: 0x40
 ---
 # 윈도우: 소개
 [윈도우](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)(Windows)는 마이크로소프트에서 개발한 [윈도우 NT](https://ko.wikipedia.org/wiki/윈도우_NT) 계열 제품군의 운영체제이다. 전세계적으로 가장 널리 사용되고 있는 데스크탑 운영체제로 가정용 및 상업용 이외에도 연구개발 등의 목적으로 커스터마이징되어 활용된다. 본 장은 윈도우 OS를 컴퓨터 과학 관점에서 아키텍처 및 드라이버 등을 기술적으로 다루기에 앞서 운영체제에 대하여 기본적인 내용을 소개한다.

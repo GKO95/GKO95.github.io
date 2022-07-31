@@ -3,6 +3,7 @@ layout: docs
 category: 윈도우
 title: BSOD
 slug: ko.BSOD
+icon: icon-windows.svg
 order: null
 ---
 # 블루스크린
