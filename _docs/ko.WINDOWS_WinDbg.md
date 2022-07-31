@@ -1,13 +1,13 @@
 ---
 layout: docs
-category: 소프트웨어
-title: 윈도우 디버거
+category: 윈도우
+title: WinDbg
 slug: ko.WinDbg
 icon: icon-windbg.png
-order: 0x38
+order: 0x44
 ---
-# 윈도우 디버거
-[윈도우 디버거](https://ko.wikipedia.org/wiki/WinDbg)(Windows Debugger), 일명 WinDbg는 윈도우 운영체제에서 구동되는 [사용자 모드](ko.Windows#보호-링)의 어플리케이션이나 [커널 모드](ko.Windows#보호-링)의 덤프 등을 [디버깅](https://ko.wikipedia.org/wiki/디버그)하여 트러블슈팅에 활용되는 프로그램이다.
+# WinDbg
+[WinDbg](https://ko.wikipedia.org/wiki/WinDbg), 일명 윈도우 디버거(Windows Debugger)는 윈도우 운영체제에서 구동되는 [사용자 모드](ko.Windows#보호-링)의 어플리케이션이나 [커널 모드](ko.Windows#보호-링)의 덤프 등을 [디버깅](https://ko.wikipedia.org/wiki/디버그)하여 트러블슈팅에 활용되는 프로그램이다.
 
 ![WinDbg의 간단한 활용 예시: Surface Pro X에서 생성된 <a href="ko.Dump#커널-모드-덤프">커널 덤프</a> 분석](/images/docs/windbg/windbg_bugcheck_sample.png)
 
