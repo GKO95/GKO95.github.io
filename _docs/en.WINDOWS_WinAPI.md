@@ -3,6 +3,7 @@ layout: docs
 category: Windows
 title: Windows API
 slug: en.WinAPI
+icon: icon-windows.svg
 order: null
 ---
 # Windows API

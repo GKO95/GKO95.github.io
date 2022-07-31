@@ -3,6 +3,7 @@ layout: docs
 category: Windows
 title: Service
 slug: en.Service
+icon: icon-windows.svg
 order: null
 ---
 # Service

@@ -3,6 +3,7 @@ layout: docs
 category: 윈도우
 title: 덤프
 slug: ko.Dump
+icon: icon-windows.svg
 order: null
 ---
 # 사용자 모드 덤프

@@ -3,6 +3,7 @@ layout: docs
 category: Windows
 title: Dump
 slug: en.Dump
+icon: icon-windows.svg
 order: null
 ---
 # User-Mode Dump

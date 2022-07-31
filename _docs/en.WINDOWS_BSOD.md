@@ -3,6 +3,7 @@ layout: docs
 category: Windows
 title: BSOD
 slug: en.BSOD
+icon: icon-windows.svg
 order: null
 ---
 # Blue Screen of Death
