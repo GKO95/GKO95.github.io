@@ -3,7 +3,7 @@ layout: docs
 category: 소프트웨어
 title: 윈도우 디버거
 slug: ko.WinDbg
-icon: icon-windows.svg
+icon: icon-windbg.png
 order: 0x38
 ---
 # 윈도우 디버거
