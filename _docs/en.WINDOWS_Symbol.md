@@ -28,7 +28,7 @@ Microsoft Windows NT also has several levels of symbols available for use. Below
         <ul>
           <li>Function (from export table)</li>
         </ul>
-        <span>Server: N/A</span>
+        <sub>Server: N/A</sub>
       </td>
     </tr>
     <tr>
@@ -38,7 +38,7 @@ Microsoft Windows NT also has several levels of symbols available for use. Below
           <li>Function (non-static)</li>
           <li>Global variables (specified as external)</li>
         </ul>
-        <span>Server: </span><code>https://msdl.microsoft.com/download/symbols</code>
+        <sub>Server: <code>https://msdl.microsoft.com/download/symbols</code></sub>
       </td>
     </tr>
     <tr>
@@ -51,7 +51,7 @@ Microsoft Windows NT also has several levels of symbols available for use. Below
           <li>User-defined structures, classes, and data types</li>
           <li>Source file information: file name, line number, etc.</li>
         </ul>
-        <span>Server: N/A</span>
+        <sub>Server: N/A</sub>
       </td>
     </tr>
   </tbody>

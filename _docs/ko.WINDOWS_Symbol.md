@@ -28,7 +28,7 @@ order: null
         <ul>
           <li>함수 (export 테이블 한정)</li>
         </ul>
-        <span>서버: N/A</span>
+        <sub>서버: N/A</sub>
       </td>
     </tr>
     <tr>
@@ -38,7 +38,7 @@ order: null
           <li>함수 (비정적 한정)</li>
           <li>전역 변수 (<code>extern</code> 한정)</li>
         </ul>
-        <span>서버: </span><code>https://msdl.microsoft.com/download/symbols</code>
+        <sub>서버: <code>https://msdl.microsoft.com/download/symbols</code></sub>
       </td>
     </tr>
     <tr>
@@ -51,7 +51,7 @@ order: null
           <li>사용자 정의 구조체, 클래스, 그리고 자료형</li>
           <li>소스 파일 정보: 파일명, 줄번호, 기타 등등</li>
         </ul>
-        <span>서버: N/A</span>
+        <sub>서버: N/A</sub>
       </td>
     </tr>
   </tbody>
