@@ -496,7 +496,7 @@ protected:
     DECLARE_MESSAGE_MAP()
 ```
 
-그 다음 `.cpp` 소스 파일에서는 `BEGIN_MESSAGE_MAP()`과 `END_MESSAGE_MAP()` 매크로로 메시지 맵의 시작과 끝을 지정하는 매크로이다.
+그 다음 `.CPP` 소스 파일에서는 `BEGIN_MESSAGE_MAP()`과 `END_MESSAGE_MAP()` 매크로로 메시지 맵의 시작과 끝을 지정하는 매크로이다.
 
 ```cpp
 BEGIN_MESSAGE_MAP(CMFCApplicationDlg, CDialogEx)
