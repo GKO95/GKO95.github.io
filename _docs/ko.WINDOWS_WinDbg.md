@@ -77,16 +77,10 @@ int main(int argc, char** argv) {
 다음은 [x86 아키텍처](https://ko.wikipedia.org/wiki/X86)로 (최적화 없이) 빌드한 어플리케이션을 어셈블리 언어로 나타낸 것이며, 여기서 메모리 주소는 4바이트이다.
 
 <table style="table-layout: fixed; width: 100%">
-  <thead>
-    <tr>
-      <th><code>Sample!main</code></th>
-      <th><code>Sample!outer_function</code></th>
-      <th><code>Sample!inner_function</code></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="vertical-align: top; overflow-wrap: break-word;">
-      <td>
+<thead><tr><th><code>Sample!main</code></th><th><code>Sample!outer_function</code></th><th><code>Sample!inner_function</code></th></tr></thead>
+<tbody>
+<tr style="vertical-align: top; overflow-wrap: break-word;">
+<td>
 <div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="nf">push</span>	<span class="nb">ebp</span>
 <span class="nf">mov</span>	<span class="nb">ebp</span><span class="p">,</span> <span class="nb">esp</span>
 <span class="nf">sub</span>	<span class="nb">esp</span><span class="p">,</span> <span class="mi">8</span>
@@ -103,8 +97,8 @@ int main(int argc, char** argv) {
 <span class="nf">pop</span>	<span class="nb">ebp</span>
 <span class="nf">ret</span>
 </code></pre></div></div>
-      </td>
-      <td>
+</td>
+<td>
 <div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="nf">push</span>	<span class="nb">ebp</span>
 <span class="nf">mov</span>	<span class="nb">ebp</span><span class="p">,</span> <span class="nb">esp</span>
 <span class="nf">sub</span>	<span class="nb">esp</span><span class="p">,</span> <span class="mh">0Ch</span>
@@ -118,17 +112,17 @@ int main(int argc, char** argv) {
 <span class="nf">pop</span>	<span class="nb">ebp</span>
 <span class="nf">ret</span>
 </code></pre></div></div>
-      </td>
-      <td>
+</td>
+<td>
 <div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="nf">push</span>	<span class="nb">ebp</span>
 <span class="nf">mov</span>	<span class="nb">ebp</span><span class="p">,</span> <span class="nb">esp</span>
 <span class="nf">mov</span>	<span class="nb">eax</span><span class="p">,</span> <span class="mh">62h</span>
 <span class="nf">pop</span>	<span class="nb">ebp</span>
 <span class="nf">ret</span>
 </code></pre></div></div>
-      </td>
-    </tr>
-  </tbody>
+</td>
+</tr>
+</tbody>
 </table>
 
 우선적으로 다음 레지스터 및 저장하는 데이터를 주목한다. 여기서 레지스터 접두사 `E`는 16비트 레지스터에서 확장되었음을 의미하는 "Extended"를 가리킨다.
@@ -162,6 +156,6 @@ ret                 ; 현 스택의 SP가 가리키고 있는 `RetAddr` 주소�
 
 `ESP` 레지스터에 값을 빼는 명령이 있는데, 이는 지역 변수를 할당받을 공간을 SP를 스택이 쌓이는 방향으로 이동시켜 확보하는 행위이다. 지역 변수를 갖는 `main` 및 `outer_function` 함수는 각각 스택에서의 데이터 정렬을 고려하여 8바이트와 12바이트 공간을 확보하였다 (이와 유사한 개념으로 [구조체의 데이터 정렬](ko.C#데이터-구조-정렬)이 있다). 그리고 `EBP` 레지스터에 저장된 BP가 프레임의 "기반"으로써 지역 변수를 공간에 할당하는데 기준 메모리 주소로 활용된다.
 
-BP의 활용은 그 외에도 인자를 매개변수로 전달할 때에도 사용된다. 함수가 `call` 명령으로 호출되기 전에 전달인자가 스택에 푸쉬되는데, 이들 또한 BP를 기준으로 확보한 인자를 지역 변수로 전달된다. 전달인자는 자료형이 특정되지 않은 관계로 기본 [워드](https://ko.wikipedia.org/wiki/워드_(컴퓨팅)) 크기(즉, 4바이트)만큼 스택에 푸쉬된다. 호출한 함수가 종료되면 푸쉬된 크기만큼 `ESP` 레지스터에 값을 더하여 전달인자가 푸쉬되기 이전 SP로 되돌린다.
+BP의 활용은 그 외에도 인자를 매개변수로 전달할 때에도 사용된다. 함수가 `call` 명령으로 호출되기 전에 전달인자가 스택에 푸쉬되는데, 이들 또한 BP를 기준으로 확보한 인자를 지역 변수로 전달된다. 전달인자는 자료형이 특정되지 않은 관계로 아키텍처 기본 크기인 [워드](https://ko.wikipedia.org/wiki/워드_(컴퓨팅))(즉, 4바이트)만큼 스택에 푸쉬된다. 호출한 함수가 종료되면 푸쉬된 크기만큼 `ESP` 레지스터에 값을 더하여 전달인자가 푸쉬되기 이전 SP로 되돌린다.
 
 함수가 종료되기 전에 `EAX` 레지스터가 할당받은 데이터는 함수로부터 반환될 값이다. 일부 경우에는 `xor` 연산이 수행되는데, 반환값 0을 만들기 위해 필요한 바이트 수가 가장 적으면서 빠른 방법이다.
