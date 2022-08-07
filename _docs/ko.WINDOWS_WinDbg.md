@@ -224,6 +224,59 @@ BP의 활용은 그 외에도 인자를 매개변수로 전달할 때에도 사�
 
     > SP로 프레임 공간이 확보되었을 때 `RetAddr`와 최소 8바이트 혹은 그 이상의 빈 공간이 생기는데, 이는 스택 최상위 주소를 `0x10` 배수에 맞추는 과정에서 발생한 잔여 공간이다.
 
+## 스택 추적
+[스택 추적](https://ko.wikipedia.org/wiki/스택_추적)은 WinDbg의 [`k`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/k--kb--kc--kd--kp--kp--kv--display-stack-backtrace-) 명령으로 확인할 수 있으나, 스택 구조상 아키텍처에 따라 표시되는 정보가 다소 상이하다.
+
+<table style="table-layout: fixed; width: 100%">
+<thead><tr><th>x86 아키텍처 프로그램</th><th>x64 아키텍처 프로그램</th></tr></thead>
+<tbody>
+<tr style="vertical-align: top; overflow-wrap: break-word;">
+<td>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;">0:000&gt; kL
+ # ChildEBP RetAddr      
+00 00d8fe6c 00e41021     Experiment!inner_function+0x3
+01 00d8fe80 00e41060     Experiment!outer_function+0x11
+02 00d8fe98 00e41236     Experiment!main+0x20
+03 (Inline) --------     Experiment!invoke_main+0x1c
+04 00d8fee0 75356739     Experiment!__scrt_common_main_seh+0xfa
+05 00d8fef0 776290af     KERNEL32!BaseThreadInitThunk+0x19
+06 00d8ff48 7762907d     ntdll!__RtlUserThreadStart+0x2b
+07 00d8ff58 00000000     ntdll!_RtlUserThreadStart+0x1b
+</code></pre></div></div>
+</td>
+<td>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;">0:000&gt; kL
+ # Child-SP          RetAddr               Call Site
+00 00000031`56f3f9c8 00007ff7`a6b8102b     Experiment!inner_function
+01 00000031`56f3f9d0 00007ff7`a6b8106c     Experiment!outer_function+0x1b
+02 00000031`56f3fa10 00007ff7`a6b812a0     Experiment!main+0x2c
+03 (Inline Function) --------`--------     Experiment!invoke_main+0x22
+04 00000031`56f3fa50 00007ffc`7ac354e0     Experiment!__scrt_common_main_seh+0x10c
+05 00000031`56f3fa90 00007ffc`7c40485b     KERNEL32!BaseThreadInitThunk+0x10
+06 00000031`56f3fac0 00000000`00000000     ntdll!RtlUserThreadStart+0x2b
+</code></pre></div></div>
+</td>
+</tr>
+<tr>
+<td><ul>
+<li><code>ChildEBP</code>는 각 프레임의 기반이 되는 메모리 주소인 BP를 가리킨다.</li>
+</ul></td>
+<td><ul>
+<li><code>Child-SP</code>는 각 프레임의 최상위 메모리 주소인 SP를 가리킨다.</li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+
+> 명령어 옆에 `L` 매개변수를 기입하면 소스 코드에 대한 정보를 숨긴 채로 스택 내용을 보여준다.
+
+`Call Site`는 해당 프레임이 어느 함수의 호출로 생성되었는지, 그리고 오프셋이 있다면 이는 함수가 재개될 모듈상 메모리 주소를 가리킨다. 즉, 상위 프레임의 `RetAddr`와 동일한 값을 갖는다.
+
+```
+0:000> ? 00007ff7`a6b8102b == Experiment!outer_function+0x1b
+Evaluate expression: 1 = 00000000`00000001
+```
+
 # 같이 보기
 * [디버거 명령어 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/debugger-commands)
 * [x64 아키텍처 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/x64-architecture)
