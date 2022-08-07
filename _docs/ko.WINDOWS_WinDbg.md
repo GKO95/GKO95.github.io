@@ -159,3 +159,72 @@ ret                 ; 현 스택의 SP가 가리키고 있는 `RetAddr` 주소�
 BP의 활용은 그 외에도 인자를 매개변수로 전달할 때에도 사용된다. 함수가 `call` 명령으로 호출되기 전에 전달인자가 스택에 푸쉬되는데, 이들 또한 BP를 기준으로 확보한 인자를 지역 변수로 전달된다. 전달인자는 자료형이 특정되지 않은 관계로 아키텍처 기본 크기인 [워드](https://ko.wikipedia.org/wiki/워드_(컴퓨팅))(즉, 4바이트)만큼 스택에 푸쉬된다. 호출한 함수가 종료되면 푸쉬된 크기만큼 `ESP` 레지스터에 값을 더하여 전달인자가 푸쉬되기 이전 SP로 되돌린다.
 
 함수가 종료되기 전에 `EAX` 레지스터가 할당받은 데이터는 함수로부터 반환될 값이다. 일부 경우에는 `xor` 연산이 수행되는데, 반환값 0을 만들기 위해 필요한 바이트 수가 가장 적으면서 빠른 방법이다.
+
+## x64 아키텍처
+다음은 [x64 아키텍처](https://ko.wikipedia.org/wiki/X86-64)로 (최적화 없이) 빌드한 어플리케이션을 어셈블리 언어로 나타낸 것이며, 여기서 메모리 주소는 8바이트이다.
+
+<table style="table-layout: fixed; width: 100%">
+<thead><tr><th><code>Sample!main</code></th><th><code>Sample!outer_function</code></th><th><code>Sample!inner_function</code></th></tr></thead>
+<tbody>
+<tr style="vertical-align: top; overflow-wrap: break-word;">
+<td>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="nf">mov</span>	<span class="kt">qword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rsp</span><span class="o">+</span><span class="mh">10h</span><span class="p">],</span> <span class="nb">rdx</span>
+<span class="nf">mov</span>	<span class="kt">dword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rsp</span><span class="o">+</span><span class="mi">8</span><span class="p">],</span> <span class="nv">exc</span>
+<span class="nf">sub</span>	<span class="nb">rsp</span><span class="p">,</span> <span class="mh">38h</span>
+<span class="nf">mov</span>	<span class="kt">byte</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rsp</span><span class="o">+</span><span class="mh">20h</span><span class="p">],</span> <span class="mh">57h</span>
+<span class="nf">mov</span>	<span class="nb">eax</span><span class="p">,</span> <span class="mh">69h</span>
+<span class="nf">mov</span>	<span class="kt">word</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rsp</span><span class="o">+</span><span class="mh">24h</span><span class="p">],</span> <span class="nb">ax</span>
+<span class="nf">mov</span>	<span class="kt">byte</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rsp</span><span class="o">+</span><span class="mh">21h</span><span class="p">],</span> <span class="mh">6Eh</span>
+<span class="nf">mov</span>	<span class="nb">dl</span><span class="p">,</span> <span class="mh">67h</span>
+<span class="nf">mov</span>	<span class="nb">cx</span><span class="p">,</span> <span class="mh">44h</span>
+<span class="nf">call</span>	<span class="nt">Sample!outer_function</span>
+<span class="nf">xor</span>	<span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span>
+<span class="nf">add</span>	<span class="nb">rsp</span><span class="p">,</span> <span class="mh">38h</span>
+<span class="nf">ret</span>
+</code></pre></div></div>
+</td>
+<td>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="nf">mov</span>	<span class="kt">byte</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rsp</span><span class="o">+</span><span class="mh">10h</span><span class="p">],</span> <span class="nb">dl</span>
+<span class="nf">mov</span>	<span class="kt">word</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rsp</span><span class="o">+</span><span class="mi">8</span><span class="p">],</span> <span class="nb">cx</span>
+<span class="nf">sub</span>	<span class="nb">rsp</span><span class="p">,</span> <span class="mh">38h</span>
+<span class="nf">movzx</span>	<span class="nb">eax</span><span class="p">,</span> <span class="kt">byte</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rsp</span><span class="o">+</span><span class="mh">40h</span><span class="p">]</span>
+<span class="nf">mov</span>	<span class="kt">byte</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rsp</span><span class="o">+</span><span class="mh">20h</span><span class="p">],</span> <span class="nb">al</span>
+<span class="nf">call</span>	<span class="nt">Sample!inner_function</span>
+<span class="nf">mov</span>	<span class="kt">dword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rsp</span><span class="o">+</span><span class="mh">28h</span><span class="p">],</span> <span class="nb">eax</span>
+<span class="nf">movsx</span>	<span class="nb">ax</span><span class="p">,</span> <span class="kt">byte</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rsp</span><span class="o">+</span><span class="mh">48h</span><span class="p">]</span>
+<span class="nf">mov</span>	<span class="kt">word</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rsp</span><span class="o">+</span><span class="mh">24h</span><span class="p">],</span> <span class="nb">ax</span>
+<span class="nf">add</span>	<span class="nb">rsp</span><span class="p">,</span> <span class="mh">38h</span>
+<span class="nf">ret</span>
+</code></pre></div></div>
+</td>
+<td>
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: initial;"><span class="nf">mov</span>	<span class="nb">eax</span><span class="p">,</span> <span class="mh">62h</span>
+<span class="nf">ret</span>
+</code></pre></div></div>
+</td>
+</tr>
+</tbody>
+</table>
+
+가장 눈에 띄는 차이점으로 레지스터가 "Register"를 의미하는 `R` 접두사로 변경되었다. 총 8바이트 크기 중에 하위 4바이트가 x86 아키텍처의 `E` 접두사 레지스터와 동일하게 동작하는 게 x86 아키텍처와의 호환성에 기여를 한다. 범용 레지스터 `R8` ~ `R15` 총 여덟 개가 추가되었으며 그 외에 x64 아키텍처에서 변경된 사항은 다음과 같다:
+
+* 함수 매개변수로의 첫 네 개 인자들은 스택에 푸쉬되지 않고 각각 `RCX`, `RDX`, `R8`, 그리고 `R9`에 전달된다.
+
+    > 그 이상의 전달인자는 x86 아키텍처처럼 곧바로 스택에 푸쉬된다.
+
+* 인자들은 워드(즉, 8바이트)만큼 0을 패딩하지 않으며, 순전히 매개변수 자료형만큼 크기로 레지스터에 전달된다.
+    
+    > 예시 코드에서 알파벳 D(`44h`)와 g(`67h`)는 각각 매개변수 자료형 `short` 및 `char`에 대응하는 2바이트 `cx` 및 1바이트 `dl` 레지스터로 전달한다.
+
+* BP를 스택상에서 더 이상 찾아볼 수 없다.
+
+    > SP가 프레임 범위를 결정하는 역할을 대신한다; 종료된 함수의 프레임을 정리하는 게 호출된 함수(callee)가 아닌 호출한 함수(caller)에서 처리하는 일환이다.
+
+* 스택은 16 (`10h`) 바이트 정렬이다.
+
+    > SP로 프레임 공간이 확보되었을 때 `RetAddr`와 최소 8바이트 혹은 그 이상의 빈 공간이 생기는데, 이는 스택 최상위 주소를 `0x10` 배수에 맞추는 과정에서 발생한 잔여 공간이다.
+
+# 같이 보기
+* [디버거 명령어 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/debugger-commands)
+* [x64 아키텍처 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/x64-architecture)
+* [The history of calling conventions, part 5: amd64 - The Old New Thing](https://devblogs.microsoft.com/oldnewthing/20040114-00/?p=41053)
