@@ -57,7 +57,7 @@ long inner_function() {
 void outer_function(short param1, char param2) {
     
     char  variable4 = param1;
-    long  variable5 = Inner_function();
+    long  variable5 = inner_function();
     short variable6 = param2;
 }
 
@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
     short variable2 = 'i';    // 69h
     char  variable3 = 'n';    // 6Eh
 
-    Outer_function('D' /* 44h */, 'g' /* 67h */);
+    outer_function('D' /* 44h */, 'g' /* 67h */);
 
     return 0;
 }
