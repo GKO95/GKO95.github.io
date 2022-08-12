@@ -181,3 +181,102 @@ Makefile에 정의된 `main.o`(혹은 `random.o`) 대상의 빌드 전제에는 
 ```bash
 make clean
 ```
+
+## 변수
+변수(variable)는 할당 기호(`=`, `:=` 혹은 `::=`)를 사용하여 텍스트를 있는 그대로 할당받는 저장공간이다. 단, 일반 프로그래밍 언어의 변수와 달리 오로지 문자열만 저장할 수 있어 숫자나 논리값을 할당하여도 단순 텍스트로 저장된다. `make`가 타 문자열로부터 변수를 구별할 수 있어야 하기 때문에, [변수 참조](https://www.gnu.org/software/make/manual/make.html#Reference)(variable reference) `$( )` 혹은 `${ }`를 통해 변수가 위치한 자리에 할당된 텍스트로 치환(일명 확장; expand)한다.
+
+```makefile
+# 변수 "objects"에 텍스트 할당
+objects = main.o random.o
+
+# 변수 "objects"에 할당된 값을 확장
+main : $(objects)
+	cc -o main $(objects)
+```
+
+Makefile에 정의된 변수는 이를 참조하는 규칙 이전 또는 이후에 위치하여도 무관하다. 이는 `make`에서 빌드를 진행하기 전에 변수들을 우선적으로 처리하기 때문이다. 단, 변수 간의 순서는 신경써야 할 부분으로 자세한 내용은 변수의 [맛깔](#변수의-맛깔)을 다룰 때 다시 한 번 설명할 예정이다.
+
+> Makefile의 변수를 C/C++ 프로그래밍 언어에 빗대면 전처리기(preprocessor)에서 처리하는 [매크로](/docs/ko.C#매크로-정의)(macro)라고 간주할 수 있다: makefile 규칙에 대응되는 프로그램 [함수](/docs/ko.C#c-함수)(function)는 매크로가 정의된 위치에 아무런 영향을 받지 않는다.  그러나 타 매크로 간의 정의된 순서나 전처리기 지시문에 의한 영향은 존재한다.
+
+거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
+
+### 변수의 맛깔
+변수의 [맛깔](https://www.gnu.org/software/make/manual/make.html#Flavors)(flavors)은 GNU `make`에서 변수의 유형을 구분하는 용어이며, 사용되는 할당 기호(`=`, `:=`, 혹은 `::=`)에 따라 두 가지 맛깔이 결정된다. 맛깔에 따라 변수가 어떻게 정의되는지 및 참조될 때 어떤 작업이 이루어지는지 차이가 있다. 변수의 맛깔은 고정된 것이 아니므로 필요에 따라 언제든지 변경될 수 있다.
+
+* **재귀 확장 변수(recursively expanded variable; `=`)**
+	: *변수가 참조될 당시를 기준으로 텍스트가 확장된다. 재귀 확장 변수는 정의된 순서에 영향을 받지 않으므로 편리하게 사용할 수 있는 장점을 가진다. 그러나 타 변수로부터 참조되고 있다면 현재 정의된 문자열이 무엇인지 확실히 짚어가야 하는 점이 존재한다. 특히 스스로를 참조할 경우에는 무한 루프에 진입하여 `make`에서 오류로 치부하여 빌드를 진행하지 않는다.*
+
+	```makefile
+  variable1 = World
+  variable2 = $(variable3)!
+  variable3 = Hello $(variable1)
+
+  all : target1 target2 target3 ;
+
+  target1 :
+  	@echo $(variable1)
+  # variable1 참조를 순서대로 확장하면...
+  #     1. @echo World
+
+  target2 :
+  	@echo $(variable2)
+  # variable2 참조를 순서대로 확장하면...
+  #     1. @echo Hello $(variable3)!
+  #     2. @echo Hello World!
+
+  target3 :
+  	@echo $(variable3)
+  # variable3 참조를 순서대로 확장하면...
+  #     1. @echo Hello $(variable1)
+  #     2. @echo Hello World
+	```
+	```
+  Hello
+  Hello World!
+  Hello World
+	```
+
+* **단순 확장 변수(simply expanded variable; `:=` 또는 `::=`)**
+	: *변수에 할당할 당시를 기준으로 텍스트가 확장된다. 단순 확장 변수는 C/C++ 전처리기의 매크로와 가장 유사한 변수에 해당하며, 변수가 정의된 순서에 의한 영향이 크다. 그렇지만 한 번 정의된 문자열의 차후 타 변수의 영향을 받지 않아 그대로 유지된다. 이러한 특성으로부터 해당 변수는 스스로를 참조하여 사용할 수 있는 장점을 갖는다.*
+
+	```makefile
+  variable1 := World
+  # 現 변수 정의
+  #             variable1: World
+  #             variable2:
+  #             variable3: 
+
+  variable2 := $(variable3)!
+  # 現 변수 정의
+  #             variable1: World
+  #             variable2: $(variable3)! = !
+  #             variable3: 
+
+  variable3 := Hello $(variable1)
+  # 現 변수 정의
+  #             variable1: World
+  #             variable2: !
+  #             variable3: Hello $(variable1) = Hello World
+
+  all : target1 target2 target3 ;
+
+  target1 :
+  	@echo $(variable1)
+  # variable1 참조를 순서대로 확장하면...
+  #     1. echo Hello
+
+  target2 :
+  	@echo $(variable2)
+  # variable2 참조를 순서대로 확장하면...
+  #     1. echo !
+
+  target3 :
+  	@echo $(variable3)
+  # variable3 참조를 순서대로 확장하면...
+  #     1. echo Hello World
+	```
+	```
+  World
+  !
+  Hello World
+	```
