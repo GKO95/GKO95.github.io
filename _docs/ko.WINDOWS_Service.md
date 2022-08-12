@@ -6,7 +6,7 @@ slug: ko.Service
 icon: icon-windows.svg
 order: null
 ---
-# 서비스
+# 윈도우 서비스
 [윈도우 서비스](https://ko.wikipedia.org/wiki/윈도우_서비스)(Windows Service)는 [서비스 제어 관리자](#서비스-제어-관리자)로부터 관리받는 프로그램이다.
 
 | 프로그램 | 생명주기 | 복수 객체의 존재 가능 | GUI 활용 가능 |
@@ -16,15 +16,26 @@ order: null
 
 > 위의 표로부터 다음과 같은 서비스 성질을 파악할 수 있다: (1) 사용자 로그인 없이도 실행되며 (2) 사용자가 로그아웃 하여도 실행된다.
 
-서비스는 서비스 제어 관리자에서 지정된 인터페이스 규칙을 반드시 따라야 한다. 즉, 단순히 프로그램이 백그라운드에서 동작하고 있다는 이유로 서비스라고 추정해서는 안된다.
+서비스는 서비스 제어 관리자에서 지정된 [인터페이스](https://ko.wikipedia.org/wiki/API) 규칙을 반드시 따라야 한다. 즉, 단순히 프로그램이 백그라운드에서 동작하고 있다는 이유로 서비스라고 추정해서는 안된다. 서비스의 실행과 중단은 전부 API를 통해 이루어지기 때문에 사용자 및 외부 프로세스의 간섭을 최소화하였다.
 
-## 보호된 서비스
+### 보호된 서비스
 보호된 서비스(protected service)는 시스템에 추가적인 보호를 제공하는 서비스이다.
 
 1. 조기 실행 맬웨어 방지(Early Launch Antimalware; ELAM)
 2. 이진 서명
 
 서비스 제어 관리자는 보호된 서비스를 시작하기 전에 자격 유효성을 검증하며, 비보호 프로세스 및 관리자 권한으로도 보호된 서비스를 중지할 수 없다.
+
+## 서비스 제어 관리자
+[서비스 제어 관리자](https://ko.wikipedia.org/wiki/서비스_제어_관리자)(Service Control Manager; SCM), 일명 [`services.exe`](https://www.file.net/process/services.exe.html) 프로그램은 [윈도우 NT](ko.WindowsNT)에서 [서비스](#서비스)를 구동 및 관리하는 프로세스이다. 시스템이 부팅되어 운영체제가 초기화되는 과정에서 실행되지만, 사용자가 서비스와 상호작용하기 위해 설계된 프로세스가 아니다.
+
+만일 서비스를 직접 실행 및 중단해야 하는 등의 작업이 필요할 시, 서비스와의 상호작용에 필연적인 API를 활용한 아래 프로세스를 사용할 수 있다.
+
+* **`services.msc`**: [마이크로소프트 관리 콘솔](https://ko.wikipedia.org/wiki/마이크로소프트_관리_콘솔)을 통해 서비스 제어 관리자 데이터베이스에 등록된 서비스를 GUI로 확인하고 제어한다.
+* **[`sc.exe`](https://www.file.net/process/sc.exe.html)**: 서비스 제어 관리자가 서비스를 관리하기 위해 필요한 데이터를 [생성](https://docs.microsoft.com/ko-kr/windows-server/administration/windows-commands/sc-create), [설정](https://docs.microsoft.com/ko-kr/windows-server/administration/windows-commands/sc-config), [제거](https://docs.microsoft.com/ko-kr/windows-server/administration/windows-commands/sc-delete), 그리고 [탐색](https://docs.microsoft.com/ko-kr/windows-server/administration/windows-commands/sc-query)하는 명령어 기반 프로세스이다.
+
+그 외에도 [파워셸](https://ko.wikipedia.org/wiki/파워셸), 작업 관리자, MSConfig 등을 사용할 수 있다.
+
 
 # 서비스 호스트
 [서비스 호스트](https://en.wikipedia.org/wiki/Svchost.exe)(일명 svchost.exe)는 하나 이상의 `.DLL` 동적 링크 라이브러리 형태의 서비스를 탑재할 수 있는 시스템 프로세스이다. 이러한 방식으로 여러 서비스가 단일 svchost.exe 프로세스 내에서 리소스를 공유한다.
@@ -66,9 +77,6 @@ HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost
 ![<code>netsvcs</code> 서비스 호스트 그룹 (Winmgmt 서비스 포함)](/images/docs/windows/svchost_winmgmt_netsvcs.png)
 
 그러므로, svchost.exe 중에서 `netsvcs` 그룹을 시작하면 WMI을 포함한 데이터에 나열된 서비스가 실행된다.
-
-# 서비스 제어 관리자
-[서비스 제어 관리자](https://ko.wikipedia.org/wiki/서비스_제어_관리자)(Service Control Manager; SCM), 일명 `services.exe`는 [서비스](#서비스) 및 [`svchost.exe`](#서비스-호스트)를 관리하는 프로세스이다. 해당 프로세스는 시스템 시작 시 윈도우 운영체제가 초기화되는 과정에서 실행된다.
 
 # 참조
 * [맬웨어 방지 서비스 보호 - Win32 apps &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows/win32/services/protecting-anti-malware-services-)

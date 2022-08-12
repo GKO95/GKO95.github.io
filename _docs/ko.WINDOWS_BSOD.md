@@ -121,9 +121,15 @@ order: null
 
     ![시작 및 복구 다이얼로그 창](/images/docs/windows/bsod_advanced_startup.png)
 
-2. **가상 메모리**: 덤프를 생성하는데 사용되는 물리 메모리의 복사본인 페이징 파일 크기를 선정한다. 페이징 파일 크기를 직접 지정하려면 "모든 드라이브에 대한 페이징 파일 크기 자동 관리" 체크박스를 해제하고 "사용자 지정 크기"를 선택한다.
+2. **가상 메모리**: 덤프를 생성하는데 사용되는 물리 메모리의 복사본인 페이징 파일의 존재 여부 및 크기를 선정한다. 시스템은 기본적으로 OS 드라이브에만 페이징 파일이 설정되어 있으나, 만일 각 드라이브마다 페이징 파일 여부 및 크기를 직접 지정하려면 "모든 드라이브에 대한 페이징 파일 크기 자동 관리" 체크박스를 해제한다.
+
+    > BSOD 덤프를 굳이 페이징 파일로부터 생성하는 이유는, 만일 파일 시스템이 충돌의 원인이라면 일반적인 파일을 생성하는 방법으로는 덤프에 문제가 생길 수 있기 때문이다.
 
     ![가상 메모리 다이얼로그 창](/images/docs/windows/bsod_advanced_memory.png)
+
+    * 사용자 지정 크기: 페이징 파일의 처음 및 최대 크기를 직접 지정하는 방식이다.
+    * 시스템이 관리하는 크기: 물리 메모리의 사용량에 따라 시스템에서 알아서 페이징 파일 크기를 조정하는 방식이다.
+    * 페이징 파일 없음
 
 ## 레지스트리 편집기
 [고급 시스템 설정](#고급-시스템-설정)의 데이터들은 아래 레지스트리 키에 위치한 값들을 통해서도 동일하게 설정이 가능하다.
@@ -131,6 +137,16 @@ order: null
 ```
 HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 ```
+
+### 전용 덤프 파일
+전용 덤프 파일(dedicated dump file)은 페이징 파일을 지원하는 아무런 로컬 볼륨에서 BSOD 시스템 충돌 덤프를 생성할 수 있도록 한다. 위에서 소개한 동일한 레지스트리 키에서 다음 두 개의 레지스트리 데이터를 생성한다.
+
+<table style="table-layout: fixed; width: 80%">
+<thead><tr><th><code>DedicatedDumpFile</code></th><th><code>DumpFileSize</code></th></tr></thead>
+<tbody><tr><td><img src="/images/docs/windows/bsod_dedicated_dump_file.png" alt="전용 덤프의 경로 및 파일명 설정"/></td><td><img src="/images/docs/windows/bsod_dedicated_dump_size.png" alt="전용 덤프 파일의 크기 지정"/></td></tr></tbody>
+</table>
+
+단, 해당 레지스트리 설정은 페이징을 위한 가상 메모리로 사용될 수 없다.
 
 # 참조
 * [오류 검사 코드 참조 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-code-reference2)
