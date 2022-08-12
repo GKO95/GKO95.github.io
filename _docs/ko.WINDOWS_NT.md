@@ -2,7 +2,7 @@
 layout: docs
 category: 윈도우
 title: 윈도우 NT
-slug: ko.Windows
+slug: ko.WindowsNT
 icon: icon-windows.svg
 order: 0x40
 ---

@@ -108,7 +108,7 @@ order: null
     [`Debug-VM`](https://docs.microsoft.com/ko-kr/powershell/module/hyper-v/debug-vm) 파워셸 명령어는 호스트 서버로부터 가상 머신에 BSOD를 발생시키기 위해 사용되며, 이때 파워셸은 관리자 권한으로 실행되어야 한다. 아래의 명령어를 입력하므로써 [`Get-VM`](https://docs.microsoft.com/ko-kr/powershell/module/hyper-v/get-vm) 명령어로 확인된 가상 머신에 NMI 신호를 전송하여 시스템 충돌을 일으킨다.
     
     ```powershell
-  Debug-VM -Name "<VM name>" -InjectNoneMaskableInterrupt
+  Debug-VM -Name "<VM name>" -InjectNonMaskableInterrupt
     ```
 
 # BSOD: 덤프 설정
