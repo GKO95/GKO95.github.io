@@ -6,7 +6,7 @@ slug: ko.CUDA
 icon: icon-nvidia.svg
 order: 0x13
 ---
-# CUDA: 소개
+#  소개
 [CUDA](https://ko.wikipedia.org/wiki/CUDA)(Compute Unified Device Architecture)는 게이밍 그래픽 카드로 매우 잘 알려진 [NVIDIA](https://www.nvidia.com/ko-kr/)에서 제공하는 병렬 컴퓨팅 플랫폼 및 API 모델이다. 해당 플랫폼은 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 그리고 [포트란](https://ko.wikipedia.org/wiki/포트란) 프로그래밍 언어와 함께 사용할 수 있도록 제작되어 접근성이 다른 그래픽 관련 API와 달리 용이하다.
 
 컴퓨터의 중앙 처리 장치(CPU)에는 실질적인 연산을 담당하는 프로세서가 한 개 이상이 들어있다: 2개면 듀얼 코어, 4개면 쿼드 코어, 그리고 6개면 헥사 코어라 부른다. 그래픽 카드의 그래픽 처리 장치(GPU)에도 이러한 프로세서가 존재하는데 이들을 바로 스트리밍 프로세서(streaming processor; SP) 혹은 간단히 CUDA 코어라고 부르며, 흔히 규격상에는 [셰이더](https://ko.wikipedia.org/wiki/셰이더)(shader)로 알려져 있다. 단일 GPU 코어는 CPU 코어에 비해 비약적인 처리능력을 가졌으나, 게이밍에 사용되는 그래픽 카드에는 적어도 천 개 이상의 프로세서가 들어있어 한꺼번에 컴퓨팅을 진행하면 CPU보다 더 빠르고 높은 효율로 작업을 처리할 수 있다.
@@ -37,7 +37,7 @@ NVIDIA CUDA Compiler, 일명 NVCC는 CUDA 플랫폼의 핵심이 되는 컴파�
 
 > 즉, NVCC는 독립적으로 사용할 수 없으며 반드시 MSVC(윈도우 OS)나 clang(macOS) 혹은 GNU 컴파일러(리눅스 OS)와 같은 일반 C/C++ 컴파일러가 필요하다.
 
-# CUDA: 설치
+#  설치
 > CUDA는 NVIDIA 그래픽 카드 전용 플랫폼이므로 타사 그래픽 카드로는 절대 구동할 수 없다. 반드시 자신이 가지고 있는 NVIDIA GPU가 CUDA를 지원하는 모델인지 [목록](https://developer.nvidia.com/cuda-gpus)에서 확인하도록 한다.
 
 NVIDIA 개발자 웹사이트에서 CUDA Toolkit [다운로드](https://developer.nvidia.com/cuda-downloads) 페이지에서 아래의 그림과 같이 운영체제 및 아키텍처를 선택하여 설치 파일을 다운로드한다. 2021년 3월 31일 기준으로 가장 최신 버전은 11.2 업데이트이다.
@@ -81,7 +81,7 @@ CUDA Toolkit 설치 절차가 모두 완료되었으면 CUDA 프로젝트를 생
 
 비주얼 스튜디오에서 프로젝트를 설정하는 방법은 [여기](/docs/ko.Cpp#비주얼-스튜디오)를 참고한다.
 
-# CUDA: 기초
+#  기초
 > *출처: [NVIDIA CUDA C/C++ Basics - Supercomputing 2011 Tutorial](https://www.nvidia.com/docs/IO/116711/sc11-cuda-c-basics.pdf)*
 
 CUDA 프로그램을 진행하기 전에 유의사항이 하나 있다: 바로 `<<<>>>` 커널 실행(kernel launch) 연산자이다. 해당 심볼은 C/C++에 존재하지 않으나 CUDA Runtime 프로젝트가 C/C++ 기반하기 때문에 비주얼 스튜디오에서는 이를 잘못된 구문으로 인식한다. 밑에는 붉은 밑줄이 표시되어 오류 메시지가 나타나지만, 컴파일에는 전혀 문제가 없는 불편한 상황이 항상 동반된다. 이는 NVIDIA 개발진의 잘못된 설계 탓이지만 개선하려는 의도가 전혀 보이지 않는다.
@@ -245,7 +245,7 @@ __global__ void kernel(int *arg1, int *arg2, int *arg3) {
 출력값: 4
 ```
 
-# CUDA: 마이크로아키텍처
+#  마이크로아키텍처
 이전 장에서는 CUDA 프로젝트에서 호스트 영역과 디바이스 영역을 넘나들어 간단한 사칙연산을 하는 예시를 보여주었다. 그러나 CUDA의 장점인 병렬 컴퓨팅이 활용되지 않았으며, 호스트 코드만으로도 충분히 구현할 수 있다. 그 전에 본 장에서는 NVIDIA GPU가 가지는 [마이크로아키텍처](https://ko.wikipedia.org/wiki/마이크로아키텍처)(microarchitecture)를 간략하게 소개한다.
 
 > 본 문서는 이해를 돕기 위해 [CUDA 계산 성능 6.1](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capability-6-x)을 지닌 [*NVIDIA GeForce GTX 1070* 8GB GDDR5](https://www.nvidia.com/ko-kr/geforce/10-series/)로 규격 예시를 든다.
@@ -351,7 +351,7 @@ CUDA 프로젝트에서 각 블록에 접근하려면 두 가지를 변경해야
 
 워프 스케줄러는 [문맥 교환](https://ko.wikipedia.org/wiki/문맥_교환)(context switch)이란 작업으로 워프를 처리한다: *워프 A* 내의 스레드에서 피연산자가 준비되지 않아 명령어를 수행할 수 없을 시, 워프 스케줄러는 동일한 블록에서 준비된 다른 *워프 B*를 처리한다. 워프 스케줄러에서 *워프 B*에 명령어를 하달하는 동안, *워프 A*에서는 독립적으로 다음 명령어 처리 진행을 위해 스레드 레지스터에 피연산자를 인출한다. 그렇게 *워프 A*에서 준비를 마쳤으면 워프 스케줄러는 *워프 A*가 처리해야 할 다음 명령어를 하달한다.
 
-# CUDA: 병렬 컴퓨팅
+#  병렬 컴퓨팅
 NVIDIA CUDA의 마이크로아키텍처를 설명하면서 스레드(thread)와 블록(block)에 대하여 간단히 소개하였다. 이 두 요소의 조합이 바로 병렬 컴퓨팅의 기초가 된다. 본 장에서는 CUDA 프로젝트에서 스레드와 블록을 활용한 병렬 컴퓨팅을 본격적으로 구현하는 방법을 설명한다.
 
 ## 배열 인덱싱

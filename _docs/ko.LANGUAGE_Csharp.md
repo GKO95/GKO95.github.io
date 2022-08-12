@@ -6,7 +6,7 @@ slug: ko.Csharp
 icon: icon-csharp.svg
 order: 0x03
 ---
-# C#: 소개
+# 소개
 > *참조: [Microsoft Docs C# 언어 설명서 (한국어)](https://docs.microsoft.com/ko-kr/dotnet/csharp/)*
 
 C# (한국어:씨샵) 프로그래밍 언어는 [자바](https://ko.wikipedia.org/wiki/자바_(프로그래밍_언어))(Java) 언어를 대응하기 위해 마이크로소프트에서 개발한 객체지향 프로그래밍 언어이다. 자바와 상당한 유사점을 가지면서 [C](/docs/ko.C)/[C++](/docs/ko.Cpp) 언어로부터 이질감이 없도록 설계되었다. 또한 .NET (한국어: 닷넷) 프레임워크라는 방대한 데이터 라이브러리를 접속하고 사용할 수 있어 개발의 편리성을 제공하는 장점을 가진다.
@@ -48,7 +48,7 @@ C# 프로그래밍 언어는 "객체"라는 데이터를 위주로 프로그램�
 
 * **맴버 (member)**: 구성원, 즉 객체와 클래스의 경우에는 필드와 메소드
 
-# C#: 설치
+# 설치
 본문은 윈도우 NT 운영체제에서 C# 프로그래밍 언어 소스 코드 편집, 프로그램 빌드, 그리고 디버깅 기능을 제공하는 [통합 개발 환경](https://ko.wikipedia.org/wiki/통합_개발_환경)(integrated development environment; IDE) 설치 및 프로젝트 생성 단계를 소개한다. 프레임워크는 .NET 프레임워크가 아닌 .NET Core 위주로 진행한다.
 
 ## 비주얼 스튜디오
@@ -93,7 +93,7 @@ C# 프로그래밍 언어로 다양할 어플리케이션을 만들 수 있어, 
 
 본 문서는 가독성을 위해 후자에서 선보인 최상위 문장이 작용한 코드를 예시로 활용할 예정이다.
 
-# C#: 기초
+# 기초
 각 프로그래밍 언어마다 준수되어야 할 규칙(일명 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어)); syntax)과 기반이 되는 데이터들이 존재한다. 이를 어길 시에는 프로그램에 오류가 발생하거나 정상적인 동작을 보장할 수 없다. 실질적인 프로그래밍에 있어, 본 장에서는 C# 프로그램 코딩에 기초적인 정보 제공을 목표로 한다.
 
 ## 주석
@@ -282,7 +282,7 @@ World!
 [type-void]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/void
 [type-var]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/var
 
-위의 대부분 자료형은 (참조 자료형의 경우) [클래스](#c-클래스) 혹은 (값 자료형의 경우) 이와 유사한 [구조체](#구조체)여서 자신만의 맴버를 가질 수 있다. 비주얼 스튜디오에서 `F12`를 누르면 자료형이 어떻게 구성되어 있는지 찾아볼 수 있는데, 대체로 `class` 혹은 `struct` 키워드를 사용한 것을 확인할 수 있다. 예를 들어, C# 프로그래밍 언어에서 `double` 자료형과 숫자 리터럴로 다음을 수행할 수 있다.
+위의 대부분 자료형은 (참조 자료형의 경우) [클래스](#클래스) 혹은 (값 자료형의 경우) 이와 유사한 [구조체](#구조체)여서 자신만의 맴버를 가질 수 있다. 비주얼 스튜디오에서 `F12`를 누르면 자료형이 어떻게 구성되어 있는지 찾아볼 수 있는데, 대체로 `class` 혹은 `struct` 키워드를 사용한 것을 확인할 수 있다. 예를 들어, C# 프로그래밍 언어에서 `double` 자료형과 숫자 리터럴로 다음을 수행할 수 있다.
 
 ```csharp
 /* double 자료형 */
@@ -620,7 +620,7 @@ global::System.Console;
 | `||` | 논리합 | 하나 이상의 데이터가 참이면 `true`를 반환하고, 그렇지 않으면 `false`을 반환한다. |
 | `!`  | 보수  | 참을 거짓으로, 또는 거짓을 참으로 변경한다.                 |
 
-# C#: 조건 및 루프
+# 조건 및 루프
 조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 C# 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
 
 ## `if` 조건문
@@ -772,7 +772,7 @@ for (initialize; condition; increment) statement;
 `for` 반복문의 우선 `initialize`에서 반복문 지역 변수를 선언하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한 다음 `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, `condition`으로 돌아가 절차를 반복한다.
 
 ## `foreach` 반복문
-[`foreach`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-foreach-statement) 반복문은 조건 만족 여부에 따라 반복하는 게 아니라 주어진 범위 내에서 반복한다. 범위로 사용되는 데이터는 요소를 하나씩 나열할 수 있는 [컬렉션](#c-컬렉션)(collection)을 일반적으로 사용한다.
+[`foreach`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-foreach-statement) 반복문은 조건 만족 여부에 따라 반복하는 게 아니라 주어진 범위 내에서 반복한다. 범위로 사용되는 데이터는 요소를 하나씩 나열할 수 있는 [컬렉션](#컬렉션)(collection)을 일반적으로 사용한다.
 
 ```csharp
 foreach (element in range)
@@ -785,7 +785,7 @@ foreach (element in range) statement;
 ```
 
 ## `goto` 이동문
-[`goto`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-goto-statement) 이동문은 다른 문장으로써는 절대로 접근이 불가한 코드에 도달할 수 있도록 한다 (일명 제어 전달; control transfer). `goto` 키워드에 명시된 레이블로 제어를 전달하나, 이 둘은 반드시 동일한 [함수](#c-함수) 내에 위치해야 한다. 레이블은 `goto` 문 이전이나 이후에 위치하여도 무관하다.
+[`goto`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-goto-statement) 이동문은 다른 문장으로써는 절대로 접근이 불가한 코드에 도달할 수 있도록 한다 (일명 제어 전달; control transfer). `goto` 키워드에 명시된 레이블로 제어를 전달하나, 이 둘은 반드시 동일한 [함수](#함수) 내에 위치해야 한다. 레이블은 `goto` 문 이전이나 이후에 위치하여도 무관하다.
 
 ```csharp
 // 제어 전달: "label"로 이동
@@ -796,7 +796,7 @@ label:
 statements;
 ```
 
-# C#: 컬렉션
+# 컬렉션
 C# 프로그래밍 언어는 여러 데이터를 하나의 변수로 저장하는 [컬렉션](#컬렉션)(collection)을 제공한다. 본 장은 .NET에서 활용할 수 있는 몇 가지의 컬렉션 유형들을 소개한다.
 
 ## 배열
@@ -897,7 +897,7 @@ int[][] variable = new int[size][] {
 ```
 
 ## 컬렉션
-> 본 내용은 차후에 소개될 [제네릭](#c-제네릭)과 연관이 깊은 부분이므로, 필수는 아니지만 해당 장을 읽으면 이해에 도움이 된다.
+> 본 내용은 차후에 소개될 [제네릭](#제네릭)과 연관이 깊은 부분이므로, 필수는 아니지만 해당 장을 읽으면 이해에 도움이 된다.
 
 [컬렉션](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/collections)(collection)은 크기를 가변할 수 있는 또 다른 배열 형식의 데이터이며, 컬렉션마다 고유의 특징과 기능이 탑재되어 있다. 제네릭 및 비제네릭 컬렉션으로 나뉘어지는데, 간단히 설명하자면 제네릭은 컬렉션이 수용할 자료형을 직접 객체화 과정에서 지정이 가능한 클래스를 일컫는다.
 
@@ -995,7 +995,7 @@ int[][] variable = new int[size][] {
   Console.WriteLine(variable[0]);             // 출력: False
     ```
 
-# C#: 함수
+# 함수
 함수(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `Function()` 형식으로 구별된다.
 
 ```csharp
@@ -1023,7 +1023,7 @@ void Function()
 Function();    // 출력: 3
 ```
 
-C# 프로그래밍 언어와 같은 [객체지향](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)에서는 [캡슐화](#c-클래스)(encapsulation)에 의해 함수의 선언과 호출 순서는 사실상 무의미하다. 즉, 위의 예시 코드와 달리 스크립트상 함수가 호출에 비해 나중에 선언되어도 정상적으로 동작한다.
+C# 프로그래밍 언어와 같은 [객체지향](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)에서는 [캡슐화](#클래스)(encapsulation)에 의해 함수의 선언과 호출 순서는 사실상 무의미하다. 즉, 위의 예시 코드와 달리 스크립트상 함수가 호출에 비해 나중에 선언되어도 정상적으로 동작한다.
 
 > [최상위 문장](#net-6-c-콘솔-프로젝트)의 암묵적 규칙은
 >
@@ -1337,7 +1337,7 @@ int factorial(int arg) {
 }
 ```
 
-# C#: 클래스
+# 클래스
 [클래스](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/classes)(class)는 객체를 생성하는데 사용자 정의 자료형이다.
 
 > 객체(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 객체의 변수와 함수를 통틀어 맴버(member)라고 칭하는데, 이들은 각각 필드(field; 맴버 변수)과 메소드(method; 맴버 함수)라고 불리며 다음과 같이 접근한다.
@@ -1828,8 +1828,8 @@ class CLASS
 }
 ```
 
-# C#: 사용자 정의 자료형
-사용자 정의 자료형(custom type)은 흔히 `int`, `float`, `char` 등의 기존하는 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다. 정의된 자료형은 또 다른 사용자 정의 자료형을 구성하는데 사용될 수 있다. 대표적인 예시로 [클래스](#c-클래스)가 있으며, 본 장에서는 그 외에 C# 프로그래밍 언어가 제공하는 다양한 사용자 정의 자료형을 소개한다.
+# 사용자 정의 자료형
+사용자 정의 자료형(custom type)은 흔히 `int`, `float`, `char` 등의 기존하는 자료형으로부터 개발자가 특정 목적을 위해 제작한 새로운 자료형이다. 정의된 자료형은 또 다른 사용자 정의 자료형을 구성하는데 사용될 수 있다. 대표적인 예시로 [클래스](#클래스)가 있으며, 본 장에서는 그 외에 C# 프로그래밍 언어가 제공하는 다양한 사용자 정의 자료형을 소개한다.
 
 ## 구조체
 [구조체](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct)(structure)는 자료형과 무관하게 필드 맴버를 하나의 단일 데이터로 통합시킨 `struct` 키워드로 선언된 사용자 정의 자료형이다.
@@ -1854,7 +1854,7 @@ struct STRUCTURE
 STRUCTURE variable = new STRUCTURE() { Field1 = 'A', Field2 = 3 };
 ```
 
-[클래스](#c-클래스)와 상당히 유사한 특징을 지니지만, 이 둘은 확실한 차이점이 존재한다.
+[클래스](#클래스)와 상당히 유사한 특징을 지니지만, 이 둘은 확실한 차이점이 존재한다.
 
 | 자료형 | [유형](#변수)          | [상속](#상속) 허용 여부 | 용도          |
 |:---:|:------------------------:|:---------------:|-----------------|
@@ -1887,7 +1887,7 @@ record RECORD(char Property1, int Property2);
 
 * **[값 동등성](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#value-equality)**
 
-    레코드 객체의 자료형 및 저장된 값이 동등한지 `==` 연산자로 확인할 수 있다. [클래스](#c-클래스)의 경우에는 메모리에 동일한 객체를 참조하고 있을 때에만 동등하다고 판단하며, [구조체](#구조체)는 자료형과 데이터를 비교하려면 [`Object.Equals(Object)`](https://docs.microsoft.com/en-us/dotnet/api/system.object.equals) 메소드를 활용하거나 연산자 오버로딩이 필요하다는 점을 빗대어 보면 레코드는 자료 비교에서 매우 유용하다.
+    레코드 객체의 자료형 및 저장된 값이 동등한지 `==` 연산자로 확인할 수 있다. [클래스](#클래스)의 경우에는 메모리에 동일한 객체를 참조하고 있을 때에만 동등하다고 판단하며, [구조체](#구조체)는 자료형과 데이터를 비교하려면 [`Object.Equals(Object)`](https://docs.microsoft.com/en-us/dotnet/api/system.object.equals) 메소드를 활용하거나 연산자 오버로딩이 필요하다는 점을 빗대어 보면 레코드는 자료 비교에서 매우 유용하다.
 
 * **[레코드 서식 출력](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/record#built-in-formatting-for-display)**
 
@@ -1927,13 +1927,13 @@ Console.WriteLine(instance with { Property2 = 'C', Property3 = false });
 ```
 
 ## 인터페이스
-[인터페이스](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface)(interface)는 [클래스](#c-클래스), [구조체](#구조체), 그리고 [레코드](#레코드) 측에서 코드 구현이 반드시 충족되어야 할 맴버들을 제공하는 "계약형" 자료형이다. 인터페이스는 객체화 될 수 없으며, 클래스와 같은 타 사용자 정의 자료형에 인터페이스를 구성요소로써 제공하는 행위를 도입(implement)라고 하는데 이는 동일한 자료형 간에 맴버를 전달하는 [상속](#상속)과 다른 개념이다. 이와 별개로 인터페이스는 다른 여러 인터페이스로부터 상속받을 수 있다.
+[인터페이스](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/interface)(interface)는 [클래스](#클래스), [구조체](#구조체), 그리고 [레코드](#레코드) 측에서 코드 구현이 반드시 충족되어야 할 맴버들을 제공하는 "계약형" 자료형이다. 인터페이스는 객체화 될 수 없으며, 클래스와 같은 타 사용자 정의 자료형에 인터페이스를 구성요소로써 제공하는 행위를 도입(implement)라고 하는데 이는 동일한 자료형 간에 맴버를 전달하는 [상속](#상속)과 다른 개념이다. 이와 별개로 인터페이스는 다른 여러 인터페이스로부터 상속받을 수 있다.
 
 인터페이스 내에 선언될 수 있는 맴버는 제한적이며, 아래의 표는 C# 버전에 따른 인터페이스에 선언될 수 있는 맴버 유형을 나열한다.
 
 | 버전 | 맴버 |
 |:----:|-----|
-| C# 8.0 이전 | [메소드](#c-함수), [프로퍼티](#프로퍼티), [인덱서](#인덱서), 이벤트 |
+| C# 8.0 이전 | [메소드](#함수), [프로퍼티](#프로퍼티), [인덱서](#인덱서), 이벤트 |
 | C# 8.0 이후 | [상수](#상수), [연산자](#연산자-오버로딩), [정적 맴버](#정적-맴버), [정적 생성자](#정적-생성자) |
 
 인터페이스는 기본적으로 `public` [접근 한정자](#접근-한정자)가 맴버에 적용되는데, 만일 다른 접근 한정자를 지정하려면 별도로 명시해야 한다.
@@ -2070,7 +2070,7 @@ enum ENUMERATION
 ENUMERATION variable = ENUMERATION.member1;
 ```
 
-# C#: 예외 처리
+# 예외 처리
 예외(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 컴파일러에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
 
 ## `try`-`catch` 예외 처리문
@@ -2161,7 +2161,7 @@ catch(Exception e)
    Attempted to divide by zero.
     ```
 
-# C#: 파일 관리
+# 파일 관리
 여러 데이터를 C# 프로그래밍 언어로 개발된 프로세스에 전달하거나, 혹은 데이터를 외부로 출력하기 위해 파일을 불러와 read 혹은 write 하여 처리할 수 있다. 본 장은 C# 프로그래밍 언어에서 파일을 관리하는 방법에 대하여 소개한다. 외부 파일을 읽고 쓰기 위해서 [`System.IO.File`](https://docs.microsoft.com/en-us/dotnet/api/system.io.file) 클래스를 활용한다.
 
 ### 절대경로 및 상대경로

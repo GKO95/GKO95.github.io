@@ -6,7 +6,7 @@ slug: en.Csharp
 icon: icon-csharp.svg
 order: 0x03
 ---
-# C#: INTRO
+# INTRO
 > *Reference: [Microsoft Docs C# Language Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/)*
 
 C# (pronounced as "C sharp") is object-oriented programming (OOP) language developed by Microsoft to counter against another OOP language called Java by Oracle. While being similar to Java, it implements a lot of familiar concepts from C/C++ language. The language supports convenience on development by providing an enormous amount of various libraries from the .NET framework.
@@ -77,7 +77,7 @@ namespace PROJECT
 
 Most of the examples in this document will not have the full code shown above, but only the expression or statements that are necessary. However, be sure to know that the code only functions when inside the `static void Main()` entry point.
 
-# C#: INSTALL
+# INSTALL
 Although the .NET supports cross-platform, this chapter introduces mainly on installation and preparation for Windows OS. And if possible, focuses on utilizing .NET Core rather than .NET Framework.
 
 An integrated development environment (IDE) is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. Since C# is the language developed by Microsoft, there is one most suitable IDE.
@@ -109,7 +109,7 @@ The three-step procedure above for creating a C++ console application is the sim
 
 Visual Studio can run a C# language program in two different ways: debugging mode (`F5`) and without debugging mode (`Ctrl+F5`). Debugging mode is used to inspect the problem and visualize the process, otherwise run without debugging is recommended.
 
-# C#: BASIC
+# BASIC
 Every programming language has its own rules to be observed and fundamental data that works as a basis of the program. Failed to observe this causes either error or unexpected results. As for the beginning of the practical coding, this chapter will introduce basic knowledge of C# language coding.
 
 ## Statement Terminator
@@ -480,7 +480,7 @@ The logical operator consist of AND, OR, and NOT logic. Consider `true` and `fal
 | `||`     | OR    | `true` when at least one argument is `true`, else `false`. |
 | `!`      | NOT   | Changes `true` to `false` and vice versa.                  |
 
-# C#: CONDITIONAL AND LOOP
+# CONDITIONAL AND LOOP
 Conditional and iteration (or loop) statements are two of the most commonly used in programming. The "statement" in programming represents a code that executes or processes data. This chapter introduces a list of conditional and iteration statements in C# language programming.
 
 ## `if` Statement
@@ -664,7 +664,7 @@ foreach (variable in range) statement;
 
 Refer to the next chapter, *C#: COLLECTION*, to know more about the collection data in C# language.
 
-# C#: COLLECTION
+# COLLECTION
 C# has a collection that can store multiple data of the same type. Aside from the best-renowned "array" collection, there are various other collections available in .NET that are worth knowing.
 
 ## Array
@@ -931,7 +931,7 @@ System.Console.WriteLine(HSET.Count);
 4
 ```
 
-# C#: METHOD
+# METHOD
 C# language is executed based on a single method called the `Main()` method. Understanding the concept of method is crucial in C# languages and can increase efficiency by creating custom method. This chapter will be introducing the guide on how to create and use method in C# language.
 
 ## Method
@@ -1146,7 +1146,7 @@ The `Main()` entry point parameter `string[] args` takes text-input passed from 
 | `args[0]` | `option1` |
 | `args[1]` | `option2` |
 
-# C#: OBJECT AND CLASS
+# OBJECT AND CLASS
 Object-oriented programming (abbrev. OOP) focuses on the usage of classes and objects that was briefly explained at the very beginning of the *C#: INTRO* chapter.
 
 ## Objects
@@ -1708,7 +1708,7 @@ class Program
 }
 ```
 
-# C#: USER-DEFINED DATA TYPE
+# USER-DEFINED DATA TYPE
 Commonly used data types such as `int,` `float,` `char,` and more are already defined. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
 
 ## Structure
@@ -1813,7 +1813,7 @@ enum ENUMERATION {
 };
 ```
 
-# C#: GENERICS
+# GENERICS
 A generic provides a format of function or class definition regardless of its data type. Developers can utilize this generic to create similar methods and classes with ease. This chapter introduces defining and using a generic.
 
 ## Generic Method
@@ -1865,7 +1865,7 @@ Instantiate a generic class to use by specifying the data type in the angled bra
 CLASS<int, double> instance = new CLASS(1, 3.0);
 ```
 
-# C#: EXCEPTION
+# EXCEPTION
 An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon compilation, a successfully built program immediately halts when encountering an exception. C# language has keywords and code blocks for handling exceptions: `throw`, `try` and `catch`, and more. Exception handling aims to provide a stable program without any halt or crash.
 
 ## `try`/`catch` Blocks
@@ -1970,7 +1970,7 @@ finally
 }
 ```
 
-# C#: FILE MANAGEMENT
+# FILE MANAGEMENT
 C# language can read and write external files to save or load data. This chapter focuses on accessing and modifying the `.txt` extension text file.
 
 Unlike C/C++ language, C# does not have to open and close the file manually, making file management much easier for developers.

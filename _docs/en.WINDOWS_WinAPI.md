@@ -20,9 +20,9 @@ order: null
 | Scope of interface         | Source code                                                      | [Machine code](https://en.wikipedia.org/wiki/Machine_code)      |
 | Hardware independency      | ⭕                                                               | ❌                                                               |
 
-While API is used to access data and call functions from libraries on source code level, these actions are done using ABI once the source code is compiled to binary file. This allows interaction between different applications or libraries possible irrelevant to its programming language and compiled used on development. To creata and use COM, however, the programming language must support [pointer](en.C#c-pointer) to utilize [virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table).
+While API is used to access data and call functions from libraries on source code level, these actions are done using ABI once the source code is compiled to binary file. This allows interaction between different applications or libraries possible irrelevant to its programming language and compiled used on development. To creata and use COM, however, the programming language must support [pointer](en.C#pointer) to utilize [virtual method table](https://en.wikipedia.org/wiki/Virtual_method_table).
 
-Programming knowledge on an [interface](en.Csharp#interface) and [class](en.Csharp#c-class) of [C#](en.Csharp) language can help understand the concept of COM due to similarity: a COM interface acts as the one and only access point to a COM class that defines implementations (aka. components, or COM objects) of the interface. A caller and provider of a COM object is referred to as a COM client and a COM server respectively.
+Programming knowledge on an [interface](en.Csharp#interface) and [class](en.Csharp#class) of [C#](en.Csharp) language can help understand the concept of COM due to similarity: a COM interface acts as the one and only access point to a COM class that defines implementations (aka. components, or COM objects) of the interface. A caller and provider of a COM object is referred to as a COM client and a COM server respectively.
 
 ## Windows Runtime
 [Windows Runtime](https://en.wikipedia.org/wiki/Windows_Runtime) (aka. WinRT)

@@ -5,7 +5,7 @@ title: WPF
 slug: ko.WPF
 order: null
 ---
-# WPF: 소개
+# 소개
 [Windows Presentation Foundation](https://github.com/dotnet/wpf)(일명 WPF)은 마이크로소프트에서 개발한 [WinForms](https://github.com/dotnet/winforms)와 유사한 무료 오픈소스 그래픽 서브시스템으로 [.NET](/docs/ko.Csharp) 플랫폼에서 사용자 인터페이스 제공을 목표로 한다. 비록 윈도우 OS에서만 실행할 수 있는 제약이 있으나, [XAML](https://ko.wikipedia.org/wiki/XAML)을 통해 시각적으로 UI를 제작할 수 있으며 [비즈니스 로직](https://ko.wikipedia.org/wiki/비즈니스_로직)과 별도로 관리할 수 있는 장점을 갖는다.
 
 ## 아키텍처
@@ -19,7 +19,7 @@ order: null
 
 ### WinForms 비교
 
-# WPF: 프로젝트 생성
+# 프로젝트 생성
 > *본 내용부터 실질적인 WPF 프로그래밍을 소개하므로, 반드시 [C#](/docs/ko.Csharp) 내용을 숙지하도록 한다.*
 
 위의 내용은 WPF 인터페이스 플랫폼에 대한 매우 기본적인 내용이다. 그 외에도 인터페이스의 실행 단계, 데이터 바인딩 등 중요한 내용들을 아직 설명하지 않았으나, 기본적인 WPF 어플리케이션이 어떻게 구성되어 있는지 알아보는 것도 차후 내용을 이해하는데 큰 도움이 될 수 있다. 그러므로 본 장에서는 직접 비주얼 스튜디오에서 WPF 어플리케이션 프로젝트를 생성 및 기본적인 코드과 API를 설명한다.
@@ -51,7 +51,7 @@ WPF는 윈도우 OS 어플리케이션을 위한 .NET 라이브러리이다. WPF
 
 ![비주얼 스튜디오 WPF 프로젝트](/images/docs/wpf/wpf_vs_project5.png)
 
-# WPF: XAML
+# XAML
 [확장 응용 프로그램 마크업 언어](https://ko.wikipedia.org/wiki/XAML)(확장 응용 프로그램 마크업 언어), 혹은 간단히 XAML은 WPF에서 그래픽 사용자 인터페이스를 제작하는데 사용되는 선언형 언어이다. XAML은 정보화 사회에서 데이터를 저장 및 전달에 핵심 [XML](https://ko.wikipedia.org/wiki/XML)으로부터 응용 프로그램에도 적용할 수 있도록 확장된 것으로 XML의 기본 개념과 원리는 그대로 지니고 있다. 그러므로 본 장은 .NET에서의 XAML 사용법 이외에도 XML에 대한 내용을 간략히 설명한다.
 
 > XML은 데이터의 저장 및 전달에 매우 유용하게 사용되는 언어로 이미 수많은 분야에서 활용되고 있다. 단, XML 자체는 정보를 담는 데이터에 불과하며 이를 시각화시키거나 동작하는 소프트웨어가 별도로 필요하다. 대표적인 예시로 [SVG](https://ko.wikipedia.org/wiki/SVG) 이미지 파일은 XML로 구성되어 있으며, 웹에서는 확장된 HTML 언어로 [XHTML](https://ko.wikipedia.org/wiki/XHTML)가 사용되기도 한다.
@@ -219,7 +219,7 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     : XAML 요소에 [식별자](/docs/ko.Csharp#식별자)를 지정한다. 해당 식별자는 C# 코드에서 객체명으로 간단히 호출 및 접근하는데 유용하게 사용될 수 있으나, 식별자는 XAML 네임스페이스에서 요소마다 유일해야 한다. 이와 본질적으로 동일한 WPF 프레임워크 속성으로 [`Name`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.name)이 있다.
 
 * `x:Key` 지시문
-    : XAML로 정의된 딕셔너리에서 데이터를 불러올 호출자를 지정한다. 이는 C# 코드에서의 [딕셔너리](/docs/ko.Csharp#dictionary-컬렉션) 컬렉션과 같이 `{key, value}`의 `key`와 동일한 역할을 하며, 대표적은 [리소스 딕셔너리](#wpf-리소스)에서 사용된다.
+    : XAML로 정의된 딕셔너리에서 데이터를 불러올 호출자를 지정한다. 이는 C# 코드에서의 [딕셔너리](/docs/ko.Csharp#dictionary-컬렉션) 컬렉션과 같이 `{key, value}`의 `key`와 동일한 역할을 하며, 대표적은 [리소스 딕셔너리](#리소스)에서 사용된다.
 
 * `x:Type` 마크업 확장문
     : XAML 요소의 자료형을 반환한다. 이는 C# 코드의 [`typeof`](/docs/ko.Csharp#typeof-연산자) 연산자의 XAML 버전으로 간주할 수 있다.
@@ -261,7 +261,7 @@ WPF 사용자 인터페이스를 제작하는데 XAML 요소들은 .NET 객체�
 ### 시각 트리 구조
 시각 트리 구조(visual tree structure)는 렌더링되어 화면에 출력되는 인터페이스 요소 위주로 구성된 트리 구조이다. 해당 트리 구조를 확인하려면 디버깅 모드로 실행하여 `Debug → Windows → Live Visual Tree`에서 확인할 수 있다. 논리 트리 구조의 상위호환으로 간주되며, 성능 최적화에 사용되기도 한다.
 
-# WPF: 컨트롤
+# 컨트롤
 WPF 컨트롤(control)은 사용자 인터페이스를 제공하는 구성요소로 C# 혹은 XAML을 통해 불러올 수 있다. C#에서 WPF 컨트롤을 사용하려면 아래의 CLR 네임스페이스를 선언해야 한다.
 
 ```csharp
@@ -291,7 +291,7 @@ WPF 컨트롤은 메뉴에서 `View → Toolbox` 혹은 `Ctrl + Alt + X` 단축�
 | [캔버스](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.canvas) | Canvas | 자식을 상대좌표로 배치한다: 2D 그래픽 요소 (타원, 직사각형 등) 전용이다.                             |
 | [그리드](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.grid) | Grid   | 자식을 도표처럼 행과 열을 설정하여 배치한다: `*`로 비율을 조절할 수 있다.                             |
 
-# WPF: 리소스
+# 리소스
 > *참조: [Microsoft Docs XAML 리소스 개요 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/systems/xaml-resources-overview)*    
 
 XAML 리소스(resource)는 브러시와 스타일과 같이 어플리케이션의 다른 곳에서도 재사용할 수 있는 객체를 가리킨다. 단, 이는 외부 파일이나 데이터와 같은 어플리케이션 리소스와 별개이다. 저장된 XAML 리소스는 컨트롤이나 창 이외에도 전역적으로 어플리케이션 전체에서 사용할 수 있다. XAML 리소스는 루트의 `FrameworkElement.Resource` 하에 정의되어야 하며, 어떠한 객체라도 리소스로 정의되어 공유될 수 있다. 
@@ -427,7 +427,7 @@ btnControl1.Style = (Style)Resources["Resource1"];
 </Window>
 ```
 
-# WPF: 컨트롤
+# 컨트롤
 > *참조: [Microsoft Docs WPF 컨트롤 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/controls)*
 
 [컨트롤](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.control)(Control)은 WPF 어플리케이션 구성에 사용되는 사용자 인터페이스이다. 흔히 사용되는 [레이블](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.label), [버튼](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.button), [텍스트 상자](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.textbox) 등의 UI는 모두 WPF 컨트롤이다. 컨트롤 내부에는 두 개의 정의로 구성되어 있다: UI의 상태와 이벤트 및 속성을 정의하는 논리(logic), 그리고 UI의 그래픽을 정의하는 템플릿(template)으로 이루어진다.
@@ -459,7 +459,7 @@ btnControl1.Style = (Style)Resources["Resource1"];
 </Window.Resource>
 ```
 
-# WPF: 바인딩
+# 바인딩
 데이터 바인딩(Data binding)이란 피(被)바인딩 객체를 아무런 바인딩 소스(binding source)에 연동하는 것이다. 흔히 WPF 프로젝트에서는 컨트롤을 데이터베이스 혹은 XML 파일 등에 바인딩하여 사용되는데, 컨트롤의 상호작용 및 바인딩 소스의 데이터 변동은 서로에게 영향을 주어 실시간으로 업데이트된다.
 
 > 바인딩에서 [소스](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.source)(source)란, 바인딩 데이터로 가져올 객체를 가리킨다. 그리고 바인딩 [경로](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.path)(path)는 바인딩 소스로부터 접근하려는 속성을 의미한다.
@@ -531,7 +531,7 @@ namespace WPFApplication
 </Window>
 ```
 
-CLR 네임스페이스의 `CLASS`는 XAML 요소가 아니기 때문에 리소스 하에 선언되어 `x:Key` 지시문을 함께 기입하였다. 그러므로 바인딩 소스로 지정하기 위해서는 [`{StaticResource}`](#wpf-리소스)를 통해 리소스의 객체를 가져온다. 그리고 [`Binding.UpdateSourceTrigger`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.updatesourcetrigger) 속성이 `PropertyChanged`로 설정되어 있는데, 이는 피바인딩 객체의 `Text` 속성에 변화가 발생하면 바인딩 소스를 즉시 업데이트한다.
+CLR 네임스페이스의 `CLASS`는 XAML 요소가 아니기 때문에 리소스 하에 선언되어 `x:Key` 지시문을 함께 기입하였다. 그러므로 바인딩 소스로 지정하기 위해서는 [`{StaticResource}`](#리소스)를 통해 리소스의 객체를 가져온다. 그리고 [`Binding.UpdateSourceTrigger`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.updatesourcetrigger) 속성이 `PropertyChanged`로 설정되어 있는데, 이는 피바인딩 객체의 `Text` 속성에 변화가 발생하면 바인딩 소스를 즉시 업데이트한다.
 
 #### `Binding.RelativeSource`
 [`RelativeSource`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.relativesource) 속성은 피바인딩 객체의 부모 요소를 바인딩 소스로 지정하는데 사용된다. 그러나 자식과 형제 요소는 접근할 수 없으며, 다음은 [`{RelativeSource}`](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/relativesource-markupextension) 확장문을 통해 선택할 수 있는 네 가지의 모드에 대하여 소개한다.
@@ -607,4 +607,4 @@ CLR 네임스페이스의 `CLASS`는 XAML 요소가 아니기 때문에 리소�
 ### 양방향 데이터 바인딩
 양방향 데이터 바인딩(Two-way Data Binding)
 
-# WPF: 이벤트
+# 이벤트

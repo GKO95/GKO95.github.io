@@ -6,7 +6,7 @@ slug: en.C
 icon: icon-c.svg
 order: 0x01
 ---
-# C: INTRO
+# INTRO
 > *Refernce: [Microsoft Docs C Language Documentation](https://docs.microsoft.com/en-us/cpp/c-language/)*
 
 C programming language is a predecessor of the [*B*](https://en.wikipedia.org/wiki/B_(programming_language)) programming language for UNIX software development. Currently, C language is the most widely used programming language and had influenced C++, C#, Python, Java, and more. The C language has a faster processing speed and excellent compatibility, making it still great use for application and firmware development.
@@ -32,7 +32,7 @@ A preprocessor is responsible for optimizing the source code before the compiler
 
 A preprocessor does not read C language source code nor follows C language syntax. It only processes its directives, removes comments, and provides optimized source code to the compiler. A preprocessor directive isn't necessary but makes the coding easier and convenient. The preprocessor resides within the compiler program.
 
-# C: INSTALL
+# INSTALL
 A compiler for C is essential when developing with C programming language, and there are various C compilers available designed by different companies and organizations. The compilation method may differ depending on the compiler, but it doesn't matter for general users as every compiler observes the same ISO standard that defines the working mechanism.
 
 An integrated development environment (IDE) is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C language project.
@@ -143,7 +143,7 @@ To execute an object file from a terminal, place `./` followed by the file name.
 
 Here, the command `./` represents the current directory. Without this command, a terminal wouldn't be able to find the `main` file unless the directory is specified by the environment variable.
 
-# C: BASIC
+# BASIC
 Every programming language has its own rules to be observed and fundamental data that works as a basis of the program. Failed to observe this causes either error or unexpected results. As for the beginning of the practical coding, this chapter will introduce basic knowledge of C language coding.
 
 ## Header File
@@ -508,7 +508,7 @@ World!
 |:--------:|:--------------:|:---------:|:---------:|:------------:|:------------:|
 | `\n`     | `\t`           | `\\`      | `\b`      | `\'`         | `\"`         |
 
-# C: CONDITIONAL AND LOOP
+# CONDITIONAL AND LOOP
 Conditional and iteration (or loop) statements are two of the most commonly used in programming. The "statement" in programming represents a code that executes or processes data. This chapter introduces a list of conditional and iteration statements in C language programming.
 
 ## `if` Statement
@@ -655,7 +655,7 @@ for (variable; condition; increment) {
 for (variable; condition; increment) statement;
 ```
 
-# C: ARRAY
+# ARRAY
 C language can create an array that stores the collection of data. It provides convenience in managing multiple data at once. An array is closely related to a *pointer* introduced in a later chapter. This chapter describes an array in C language without referring to the pointer.
 
 ## Array
@@ -742,7 +742,7 @@ Below is a list of functions related to a string in C language:
 | `strcpy()` | `strcpy(str1, str2);` | Copy `str2` string to `str1` string variable.                |
 | `strlen()` | `strlen(str);`        | Return the length of `str` string, excluding a null terminator. |
 
-# C: FUNCTION
+# FUNCTION
 C/C++ language is executed based on a single function called the `main()` function. Understanding the concept of functions is crucial in C/C++ languages and can increase efficiency by creating custom functions, called *functional programming*. This chapter will be introducing the guide on how to create and use functions in C language for functional programming.
 
 ## Function
@@ -952,7 +952,7 @@ float function(int arg1, float arg2) {
 FUNC(&function, 1, 3.0);	// >> OUTPUT: 4.0
 ```
 
-# C: POINTER
+# POINTER
 This article has mentioned a new "pointer" data type since the *C: ARRAY* chapter. The pointer is one of the crucial concepts in C language, allowing more complex programming. This chapter describes what the pointer is in C language and revisits the array and function.
 
 ## Pointer
@@ -1052,7 +1052,7 @@ int main() {
 
 The function pointer should match the data type and parameters of the function when initializing. Failed to do so will result in a compilation error. While calling with a parenthesis like `function()` returns data from the `return` statement, without a parenthesis like `function` returns a memory address instead.
 
-# C: USER-DEFINED DATA TYPE
+# USER-DEFINED DATA TYPE
 Commonly used data types such as `int,` `float,` `char,` and more are already defined and are called through the `stdio.h` header file. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
 
 ## Structure
@@ -1258,7 +1258,7 @@ printf("%c\n", ptr->field2);
 A
 ```
 
-# C: DYNAMIC ALLOCATION
+# DYNAMIC ALLOCATION
 Memory management in C language is a significant task. Dynamic memory allocation provides higher memory efficiency but requires a clear understanding of the pointer as it is deeply involved. Here, the memory indicates random access memory (RAM), the primary memory in a computer.
 
 ## Stack Structure
@@ -1340,7 +1340,7 @@ free(ptr);
 ptr = NULL;
 ```
 
-# C: FILE MANAGEMENT
+# FILE MANAGEMENT
 C language can read and write external files to save or load data. This chapter focuses on accessing and modifying the `.txt` extension text file.
 
 ## Opening Files
@@ -1443,7 +1443,7 @@ fclose(fptr);
 
 The function returns an integer 0 if successfully closed, otherwise returns EOF (end of file).
 
-# C: MULTI-SCRIPT PROJECT
+# MULTI-SCRIPT PROJECT
 This article has mainly dealt with a project that only consists of a single script with the `main()` function. If the project starts to grow larger, however, additional scripts can help manage the project more efficiently by dividing and categorizing the codes. This chapter will explain how to create a C language project with multiple scripts sharing the data.
 
 ## Inclusive Directive
@@ -1555,7 +1555,7 @@ If the `module.h` header file does not use the `extern` keyword, the variable is
 
 On the other hand, the `extern` keyword allows data declaration multiple times. Variable declared on both the header and source file doesn't cause any error to the compiler but requires a definition to use the data. The `char variable = 'A';` statement in the `module.c` source file is for that definition, allowing the main script to use the `variable` globally with the defined value.
 
-# C: EXCEPTION
+# EXCEPTION
 An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon compilation, a successfully built program immediately halts when encountering an exception. C language has functions and macros for handling exceptions: `errno`, `perror()`, and `strerror()`, and more. Exception handling aims to provide a stable program without any halt or crash.
 
 ## Error Number
@@ -1625,7 +1625,7 @@ int main(){
 ERROR DESCRIPTION: No such file or directory
 ```
 
-# C: PREPROCESSOR
+# PREPROCESSOR
 C language compiler processes the script into two divided stages: preprocessing and compilation. On the stage of preprocessing, preprocessor directive such as `#include` is taken care of by the compiler. This chapter will introduce useful and commonly used preprocessor directives that is being implemented on development.
 
 ## Macro Definition

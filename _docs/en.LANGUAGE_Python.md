@@ -6,7 +6,7 @@ slug: en.Python
 icon: icon-python.svg
 order: 0x00
 ---
-# PYTHON: INTRO
+# INTRO
 Python is a high-level programming language with applications in numerous areas, including web programming, scientific computing, and artificial intelligence. Python is simple, easy to learn, and has various development software (such as a library, framework) available thanks to the contribution from vast communities. For the beginner, Python is an excellent language to learn how to program.
 
 ## Interpreted Language
@@ -21,7 +21,7 @@ The first interpreter for Python was developed using C programming language, cal
 
 Although introduced as the interpreted language, CPython technically uses both compiler and interpreter. First, the compiler translates Python code to bytecode, then the interpreter executes the bytecode. This bytecode is the one that guarantees Python's cross-platform property.
 
-# PYTHON: INSTALL
+# INSTALL
 Two programs are required to develop using Python language: the interpreter and integrated development environment(IDE). Linux and macOS have Python 2 and 3 installed on the system by default but needs manual installation for different versions. This chapter teaches on installing and applying the Python interpreter to IDE, which helps understand how interpreted language works.
 
 ## Select Interpreter
@@ -104,7 +104,7 @@ After installation, select and load a Python interpreter to the VS Code. Again, 
 
 There are two different methods when running Python on VS Code: Run with debugging (`F5`) and run without debugging (`Ctrl+F5`). Use the debugging mode when the program encounters an error to identify the cause, but run without debugging when executing in general.
 
-# PYTHON: BASIC
+# BASIC
 Every programming language has its own rules to be observed and fundamental data that works as a basis of the program. Failed to observe this causes either error or unexpected results. As for the beginning of the practical coding, this chapter will introduce basic knowledge of Python language coding.
 
 ## Comment
@@ -488,7 +488,7 @@ if not(None and True):
 None                    # This proves that None can be used as False in boolean.
 ```
 
-# PYTHON: CONDITIONAL AND LOOP
+# CONDITIONAL AND LOOP
 Conditional and iteration (or loop) statements are two of the most commonly used in programming. The "statement" in programming represents a code that executes or processes data. This chapter introduces a list of conditional and iteration statements in Python programming.
 
 ## Indentation
@@ -691,7 +691,7 @@ First...successful!
 ## `pass` Keyword
 The `pass` or `...` keyword is a null operation that does nothing when executed. It prevents an exception occurred when running an empty code.
 
-# PYTHON: ITERABLE
+# ITERABLE
 Not just its simplicity that makes Python language useful, its iterable object is powerful and flexible than any other programming language can provide. This chapter introduces four iterable objects in Python that have slightly different properties.
 
 ## Iterable Object
@@ -1043,7 +1043,7 @@ print(lst)
 ### `yield` Keyword
 An essential keyword to create a generator; the keyword returns the value when iterated by a `for` loop statement.
 
-# PYTHON: FUNCTIONAL PROGRAMMING
+# FUNCTIONAL PROGRAMMING
 Functional programming is a style of program scripting that is based mostly on the usage of functions. This chapter will be introducing the guide on how to create and use functions in Python for functional programming.
 
 ## Function
@@ -1346,7 +1346,7 @@ def function():
 
 A decorator located closest to the pre-decorated function will be applied firsthand. Thus, the function object `function()` will first be decorated by `@decorator2`  then `@decorator1` sequentially.
 
-# PYTHON: OBJECT-ORIENTED PROGRAMMING
+# OBJECT-ORIENTED PROGRAMMING
 The current document has explained and dealt with procedural and functional programming. The third scripting method, object-oriented programming (abbrev. OOP), focuses on the usage of classes and objects instead of functions.
 
 ## Object
@@ -1723,7 +1723,7 @@ Separating a method using property hides sensitive code such as `setter` and `de
 
 Although the `getter` is essential in property, the `setter` and `deleter` are optional; using the `getter` alone would make an unmodifiable read-only method.
 
-# PYTHON: EXCEPTION
+# EXCEPTION
 An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon running, a program immediately halts when encountering an exception. Exception handling aims to provide a stable program without any halt or crash.
 
 ### `try`/`except` Statement
@@ -1779,7 +1779,7 @@ print(2)
 AssertionError: exception_type
 ```
 
-# PYTHON: PYTHONICNESS
+# PYTHONICNESS
 This chapter introduces the programming coding style of Python recommended by various Python developers, called *pythonic*.
 
 ## Zen of Python
@@ -1812,7 +1812,7 @@ if __name__ == "__main__":
 
 Codes and statements indented under this condition won't run when imported as a module to the other script. Beware, the `is` operator cannot substitute the `==` operator.
 
-# PYTHON: FILE MANAGEMENT
+# FILE MANAGEMENT
 It is inefficient to input data through a console terminal when using Python for advanced purposes such as scientific research. Instead, a program can load data saved in a file and process them.
 
 ## Opening Files
@@ -1995,7 +1995,7 @@ with open("path\\NEW-filename.txt", "w") as file:
 NEW FILE CREATED!
 ```
 
-# PYTHON: PACKAGE
+# PACKAGE
 Python has a variety of packages that can be easily downloaded and used on-demand. This chapter describes what the package is and how to implement it to the script.
 
 ## Modules
@@ -2052,7 +2052,7 @@ The command means accessing the pip under the python interpreter specified in th
 py -3.5-32 -m pip
 ```
 
-# PYTHON: VIRTUAL ENVIRONMENT
+# VIRTUAL ENVIRONMENT
 Python installs every package to the interpreter directory. However, a single interpreter cannot have more than one of the same package, 
 which is a problem when managing multiple Python projects. If two projects require a different version, a developer has to reinstall every time switching a project.
 
@@ -2092,7 +2092,7 @@ deactivate
 
 The above is the same as entering the command <code style="word-break: break-all;">D:\Workspace\Python\.venv\Scripts\deactivate.bat</code>. Because of this, relocating the virtual environment directory will cause the `deactivate` command unable to recognize its path.
 
-# PYTHON: NUMPY
+# NUMPY
 NumPy is a powerful and useful library used in Python that supports multi-dimensional matrix (aka. NumPy array). As one of the best known scientific libraries, other well-recognized libraries also implements NumPy such as Matplotlib, TensorFlow, and more.
 
 To install NumPy library, open command prompt window and enter the command below: 

@@ -5,7 +5,7 @@ title: 확률론
 slug: ko.Probability
 order: 0xE0
 ---
-# 확률론: 개요
+#  개요
 [확률론](https://ko.wikipedia.org/wiki/확률론)(probability theory)은 [확률](https://ko.wikipedia.org/wiki/확률)(probability), 즉 사건이 발생하거나 명제가 참일 가능성을 수학적으로 접근하여 설명하는 학문이다. 이공계열에서는 확률을 통해 수집된 데이터를 분석하고 응용하는 수단으로 활용되지만 필연적이지 않다. 그러나 전자공학과의 [통신공학](https://ko.wikipedia.org/wiki/통신공학)이나 인공지능의 [기계학습](https://ko.wikipedia.org/wiki/기계_학습) 등의 일부 분야에서는 가장 핵심되는 수학이다.
 
 ## 용어집
@@ -31,7 +31,7 @@ order: 0xE0
 
 > 주사위 던지기 실험에서 눈이 숫자 3 이상일 사건 $A = \lbrace 3, 4, 5, 6\rbrace$ 또는 홀수일 사건 $B = \lbrace 1, 3, 5 \rbrace$ 등을 고려할 수 있다.
 
-# 확률론: 확률
+#  확률
 [확률](https://ko.wikipedia.org/wiki/확률)(probability)은 사건이 발생할 가능성으로 확률론에서 가장 기초적인 내용이다. 사건이 발생할 확률은 0 (불가능) ~ 1 (무조건) 사이의 소수로 표현된다. 주사위 던지기를 시행할 때, 숫자 3 이상의 눈이 나오는 사건 $A = \lbrace 3, 4, 5, 6 \rbrace$의 확률 $P(A)$는 다음과 같다.
 
 $$
@@ -274,7 +274,7 @@ $$
 > \quad \because \mathsf{Number \ of \ combination: \ } \lbrace 1, 2 \rbrace , \lbrace 1, 3 \rbrace , \lbrace 2, 3 \rbrace
 > $$    
 
-# 확률론: 변수
+#  변수
 [확률변수](https://ko.wikipedia.org/wiki/확률_변수)(random variable, stochastic variable; RV)는 확률 실험에서 발생한 사건을 수치적 값으로 표현하는 함수이다. 확률 분포를 이해하기 위해서 반드시 알아야 하는 중요한 개념이지만, 처음으로 접하면 확률변수의 정의 및 의의에 대한 의문점이 생기기 마련이다. 이러한 궁금증을 해소하기 위해 간단한 예시를 들어본다:
 
 동전 던지기를 시행하면 결과가 앞면(Head; $H$) 혹은 뒷면(Tail; $T$)이 나온다. 이러한 시행을 두 번 하는 확률 실험에서는 총 네 가지의 결과가 나오는 다음과 같은 표본공간이 도출된다.
@@ -445,7 +445,7 @@ $$
 
     연속과 이산이 혼합된 확률변수이다.
 
-# 확률론: 기대
+#  기대
 [기댓값](https://ko.wikipedia.org/wiki/기댓값)(expected value) $\mu_X$, 일명 기대치(expectation)는 하나의 확률 실험으로부터 발생할 것으로 기대(혹은 예측)되는 결과로써 확률변수 $X$의 [가중평균](https://ko.wikipedia.org/wiki/가중_산술_평균)(weighted average)으로 계산된다. 비록 가장 일반적인 [산술평균](https://ko.wikipedia.org/wiki/산술_평균)이 아니지만 확률변수에서는 기댓값을 평균(mean; average)이라고도 칭한다. 
 
 동전 던지기를 시행하면 결과가 앞면(Head; $H$) 혹은 뒷면(Tail; $T$)이 나온다. 이러한 시행을 두 번 하는 확률 실험에서 앞면 $H$가 나올 확률변수 $X$는 다음과 같은 결과를 갖는다:

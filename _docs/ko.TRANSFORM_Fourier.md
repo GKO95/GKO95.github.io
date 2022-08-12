@@ -5,12 +5,12 @@ title: 푸리에 변환
 slug: ko.Fourier-Transform
 order: 0xE2
 ---
-# 푸리에: 개요
+#  개요
 > 본 내용은 고등학교 교육과정 중 하나인 [삼각함수](https://ko.wikipedia.org/wiki/삼각함수), [미분](https://ko.wikipedia.org/wiki/미분) 및 [적분](https://ko.wikipedia.org/wiki/적분), 그리고 [복소수](https://ko.wikipedia.org/wiki/복소수)를 기반하므로 이에 대해 충분한 이해가 필요하다.
 
 [푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 시간 $t$ 영역의 함수를 주파수 $f$ 영역의 함수들로 분해하는 수학적 변환식이다. *일반적으로 함수(혹은 신호)는 서로 다른 주파수를 갖는 삼각함수($\sin$ 및 $\cos$)들의 합으로 표현될 수 있다*는 [푸리에 해석](https://en.wikipedia.org/wiki/Fourier_analysis)(Fourier analysis)을 기반으로 수립되었다. 대표적인 예시로 시간에 따라 흐르는 신호가 어떠한 주파수로 구성되어 있는지 알려주는 [스펙트럼 분석기](https://ko.wikipedia.org/wiki/스펙트럼_애널라이저)가 있다.
 
-# 푸리에: 급수
+#  급수
 [푸리에 급수](https://ko.wikipedia.org/wiki/푸리에_급수)(Fourier series)는 "연속시간"에서 지속적으로 동일한 패턴이 반복되는 "주기함수"를 주파수 영역으로의 변환한다. 비록 푸리에 급수는 주기함수에 한정된 변환이지만, 푸리에 변환의 시발점이므로 개념적인 면에서 큰 의의를 갖기 때문에 비중있게 다루는 내용 중 하나이다.
 
 연속시간 $t$ 주기함수의 변환은 푸리에 급수가 갖는 방정식에 의해 주파수 영역은 항상 이산주파수 $kf_0$ 비주기함수가 도출된다. 여기서 $f_0$는 [기본 주파수](https://en.wikipedia.org/wiki/Fundamental_frequency)(fundamental frequency)로 연속시간 주기함수 신호를 구성하는 이산주파수들의 최소공배수이다.
@@ -483,7 +483,7 @@ $$
 
 3. 범위 내의 불연속점 개수가 유한해야 한다.
 
-# 푸리에: 변환
+#  변환
 [푸리에 변환](https://ko.wikipedia.org/wiki/푸리에_변환)(Fourier transform)은 주기함수에 극한된 푸리에 급수와 달리 비주기함수(aperiodic function)에서도 적용할 수 있는 일반화된 시간과 주파수 영역간의 적분 변환식이다. 비주기함수의 주기는 $T\rightarrow\infty$로 간주할 수 있으며, 덕분에 매우 작아진 기본 주파수 $f_0 = \frac{1}{T}$ (혹은 기본 각주파수 $\omega_0 = \frac{2\pi}{T}$)는 더욱 미세한 고조 주파수 $f = kf_0$ (혹은 고조 각주파수 $\omega = k\omega_0$)까지 표현할 수 있다.
 
 푸리에 변환은 주기가 무한으로 확장된 푸리에 급수이기 때문에 디리클레 조건을 반드시 만족해야 한다.
@@ -782,7 +782,7 @@ $$
     > \Lambda\left(\textstyle \frac{t}{a}\right) \quad \longleftrightarrow \quad a^2 \operatorname{sinc}^2{af}
     > $$
 
-# 푸리에: 이산
+#  이산
 이전 장에서의 시간영역은 오로지 연속시간 함수에 대한 푸리에 변환을 다루었다. 푸리에 변환은 이산시간에 대해서도 적용할 수 있으며, 본 장에서는 총 세 가지의 이산형태의 푸리에 변환을 소개한다.
 
 ## 이산시간 푸리에 변환
@@ -810,7 +810,7 @@ $$
 |:--------------:|:-------------------------:|
 | 이산시간 주기함수      | 이산주파수 주기함수                 |
 
-# 푸리에: 증명
+#  증명
 본 장은 푸리에 변환의 성질 증명과 신호의 변환 과정을 설명하는 내용을 포함한다. 
 
 #### [성질] 선형성

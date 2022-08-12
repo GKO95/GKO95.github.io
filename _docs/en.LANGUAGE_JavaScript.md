@@ -6,7 +6,7 @@ slug: en.JavaScript
 icon: icon-javascript.svg
 order: 0x04
 ---
-# JAVASCRIPT: INTRO
+# INTRO
 JavaScript is a procedural web development language used together with HTML & CSS, providing interactable dynamic webpage supports. Currently, JavaScript has a range of use in data processing, application development, and more.
 
 This document focuses on JavaScript application in web development, thus only introduces crucial fundamental concepts while ignoring irrelevant.
@@ -51,7 +51,7 @@ body {
 }
 ```
 
-# JAVASCRIPT: EXECUTE
+# EXECUTE
 Only an internet browser is needed to execute JavaScript: Microsoft Edge, Google Chrome, Mozilla FireFox, Apple Safari, and more can run JavaScript.
 
 The `.js` extension file alone cannot run JavaScript on an internet browser but only shows the script in text. Node.js program can execute JavaScript without a browser, though this document intends to introduce JavaScript for the beginner. Hence, this chapter focuses on setting up a simple JavaScript workspace that runs on an internet browser.
@@ -106,7 +106,7 @@ Eventually, a JavaScript environment on VS Code would look like this:
 
 There are two different methods when running JavaScript on VS Code: Run with debugging (`F5`) and run without debugging (`Ctrl+F5`). Use the debugging mode when the program encounters an error to identify the cause, but run without debugging when executing in general.
 
-# JAVASCRIPT: BASIC
+# BASIC
 Every programming language has its own rules to be observed and fundamental data that works as a basis of the program. Failed to observe this causes either error or unexpected results. As for the beginning of the practical coding, this chapter will introduce basic knowledge of JavaScript language coding.
 
 The JavaScript documents also introduce newly added syntax since the release of ECMAScript 2015, also known as ES6, that is a standardization for script-language.
@@ -352,7 +352,7 @@ Escape character `\` is used to escape from a sequence of characters and execute
 |:--------:|:--------------:|:---------:|:---------:|:------------:|:------------:|
 | `\n`     | `\t`           | `\\`      | `\b`      | `\'`         | `\"`         |
 
-# JAVASCRIPT: CONDITIONAL AND LOOP
+# CONDITIONAL AND LOOP
 Conditional and iteration (or loop) statements are two of the most commonly used in programming. The "statement" in programming represents a code that executes or processes data. This chapter introduces a list of conditional and iteration statements in Python programming.
 
 ## `if` Statement
@@ -522,7 +522,7 @@ c
 
 The concept of an array and object in JavaScript will be explained in later chapters.
 
-# JAVASCRIPT: ITERABLE
+# ITERABLE
 JavaScript has an iterable object that stores the collection of data. An array and string mentioned above is also an iterable object built inside JavaScript. This chapter describes the most commonly used iterable object called an array.
 
 ## Array
@@ -605,7 +605,7 @@ console.log(arr.length);
 0
 ```
 
-# JAVASCRIPT: FUNCTION
+# FUNCTION
 Functional programming is a style of program scripting that is based mostly on the usage of functions. This chapter will be introducing the guide on how to create and use functions in Python for functional programming.
 
 ## Function
@@ -711,7 +711,7 @@ console.log(functionName(2,3));
 5
 ```
 
-# JAVASCRIPT: OBJECT
+# OBJECT
 Object-oriented programming (abbrev. OOP), one of the programming style, focuses on the usage of classes and objects instead of functions. This chapter will be introducing how to create a custom object and use it to achieve OOP in JavaScript.
 
 ## Object
@@ -1006,7 +1006,7 @@ The object type also has methods for date and time calculation.
 | `getDate()`     | `dateName.getDate()`     | Gets the day of the month from stored date in `dateName`. |
 | `getHours()`    | `dateName.getHours()`    | Gets the hour from stored date in `dateName`.             |
 
-# JAVASCRIPT: DOM
+# DOM
 JavaScript contributes to various dynamic features for webpages when used with HTML and CSS. HTML declarative language presents its document as a tree-structured Document Object Model (DOM). 
 
 ![Document Object Model<sub><i>ref: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">Wikipedia.org</a></i></sub>](/images/docs/javascript/js_html_dom.png)

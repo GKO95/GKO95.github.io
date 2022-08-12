@@ -6,7 +6,7 @@ slug: ko.JavaScript
 icon: icon-javascript.svg
 order: 0x05
 ---
-# 자바스크립트: 소개
+# 소개
 > *참조: [JavaScript &#124; MDN Web Docs (영문)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)*
 
 [자바스크립트](https://ko.wikipedia.org/wiki/자바스크립트)(JavaScript)는 웹디자인에 사용된 [HTML](#html-웹프로그래밍-언어) & [CSS](https://ko.wikipedia.org/wiki/CSS)만으로는 제한적인 [동적 웹페이지](https://ko.wikipedia.org/wiki/동적_웹페이지)를 구현하기 위해 개발된 스크립트 언어였다. 자바스크립트가 [웹 브라우저](https://ko.wikipedia.org/wiki/웹_브라우저)에서만 실행될 수 있던 당시에는 활용도가 클라이언트 측에서 웹페이지 상호작용을 위한 [프론트엔드](https://ko.wikipedia.org/wiki/프론트엔드와_백엔드)(front-end)에 한정되었다. 현재는 데이터 처리 및 어플리케이션 제작 등 서버 측에서 [백엔드](https://ko.wikipedia.org/wiki/프론트엔드와_백엔드)(back-end)로도 활발히 사용되고 있다.
@@ -16,7 +16,7 @@ order: 0x05
 
 자바스크립트 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다. 초창기 자바스크립트 코드를 실행하는 [자바스크립트 엔진](https://ko.wikipedia.org/wiki/자바스크립트_엔진)(JavaScript engine)은 단순 인터프리터였으나, 현대에는 성능 향상을 위해 [JIT 컴파일](/blog/ko.compiler_vs_interpreter#jit-컴파일)(just-in-time compile)을 활용한다.
 
-# 자바스크립트: 설치
+# 설치
 자바스크립트를 실행하기 위해서는 두 가지 프로그램이 필요하다: (1) 자바스크립트 엔진 그리고 (2) 통합 개발 환경이다. 자바스크립트 엔진은 기본적으로 웹 브라우저에 탑재되어 있으나, 본문은 자바스크립트를 최대한 프로그래밍 언어적인 측면에서 설명하기 위해 백엔드 관점에서 바라본다.
 
 ## Node.js
@@ -76,7 +76,7 @@ Node.js에서 가장 주목할 특징은 [비동기 입출력](https://ko.wikipe
 
 VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`)와 디버그 모드(`F5`)이다. [디버그](https://ko.wikipedia.org/wiki/디버그)(debug)는 프로그램에 발생한 문제를 해결하는 행위로, IDE에서 각 줄의 코드마다 어떠한 변화가 생겼는지 혹은 얼만큼의 시스템 리소스를 소모하는지 등을 확인할 수 있는 정보를 제공한다. 디버깅 목적이 아니면 일반 실행 모드를 사용하는 것을 권장한다. 최초 실행 당시에는 상단에 `Select Environment` 문구가 나타나면 Node.js을 선택하도록 한다.
 
-# 자바스크립트: 기초
+# 기초
 각 프로그래밍 언어마다 준수되어야 할 규칙(일명 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어)); syntax)과 기반이 되는 데이터들이 존재한다. 이를 어길 시에는 프로그램에 오류가 발생하거나 정상적인 동작을 보장할 수 없다. 실질적인 프로그래밍에 있어, 본 장에서는 자바스크립트 코딩에 기초적인 정보 제공을 목표로 한다.
 
 > 본문은 [ECMAScript 2015](https://ko.wikipedia.org/wiki/ECMA스크립트), 일명 ES6 스크립트 언어 표준으로부터 소개된 자바스크립트 데이터 및 구문을 기준으로 소개한다.
@@ -134,7 +134,7 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
     
     입력 함수가 실행될 시, `PromptSync.Prompt()`의 소괄호 `()` 안에 있는 텍스트가 터미널에 나타나며 Enter/Return을 누를 때까지 대기한다.
 
-    > 본 함수를 사용하기 위해서는 npm으로부터 [`prompt-sync`](https://www.npmjs.com/package/prompt-sync) 모듈을 설치해야 한다. 자세한 내용은 [모듈](#자바스크립트-모듈)(module)에서 설명한다.
+    > 본 함수를 사용하기 위해서는 npm으로부터 [`prompt-sync`](https://www.npmjs.com/package/prompt-sync) 모듈을 설치해야 한다. 자세한 내용은 [모듈](#모듈)(module)에서 설명한다.
     >
     > ```bash
     > npm install prompt-sync
@@ -217,7 +217,7 @@ Hello World!
 | 유효범위 | ES6 추가 | 설명 |
 |:-----:|:--:|------|
 | 블록 | ✔️ |  [블록](#표현식) `{}` 내부에 선언된 변수는 해당 블록 및 네스티드 블록(즉, 안에 있는 블록)으로 접근이 제한된다. |
-| 함수 | - | [함수](#자바스크립트-함수) 블록 내부에 선언된 변수는 해당 함수 안에서 네스티드 여부 상관없이 어디서든 사용될 수 있다.  |
+| 함수 | - | [함수](#함수) 블록 내부에 선언된 변수는 해당 함수 안에서 네스티드 여부 상관없이 어디서든 사용될 수 있다.  |
 | 전역 | - | 블록 및 함수 외부에 선언된 변수는 어플리케이션 내에서 접근이 자유롭다. |
 
 자바스크립트의 선언 생략형 변수는 항상 전역 범위(global scope)이다.
@@ -234,7 +234,7 @@ Hello World!
 
 * **Node.js**
 
-    실행되고 있는 자바스크립트 파일, 일명 [모듈](#자바스크립트-모듈)(module)에서만 [`global`](https://nodejs.org/api/globals.html#globals_global) [전역 객체](https://developer.mozilla.org/en-US/docs/Glossary/Global_object)를 통해 모듈 내에서만 데이터가 공유된다.
+    실행되고 있는 자바스크립트 파일, 일명 [모듈](#모듈)(module)에서만 [`global`](https://nodejs.org/api/globals.html#globals_global) [전역 객체](https://developer.mozilla.org/en-US/docs/Glossary/Global_object)를 통해 모듈 내에서만 데이터가 공유된다.
 
     ```js
   /* Node.js */
@@ -343,7 +343,7 @@ Uncaught ReferenceError: variable is not defined
 ## 자료형
 [자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터의 내용물이 어떻게 표현되는지 결정하는 요소이며, 자바스크립트이 갖는 총 일곱 개의 [원시 자료형](https://developer.mozilla.org/en-US/docs/Glossary/Primitive) 중에서 가장 중요한 몇 가지를 살펴본다.
 
-> 원시(primitive)는 데이터 자체에 기능성이나 하위 데이터를 내포하지 않는 순수한 데이터를 가리킨다. 이와 반대되는 개념으로 [객체](#자바스크립트-객체)(object)가 존재한다.
+> 원시(primitive)는 데이터 자체에 기능성이나 하위 데이터를 내포하지 않는 순수한 데이터를 가리킨다. 이와 반대되는 개념으로 [객체](#객체)(object)가 존재한다.
 
 ### 숫자 자료형
 [숫자 자료형](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#number_type)(number type)은 소수점을 포함한 64비트 실수를 표현하는 원시 자료형이다. 자바스크립트 숫자 자료형들은 산술 연산이 가능하다: 가장 기본적인 `+`, `-`, `*`, `/` 사칙 연산자부터 나눗셈의 나머지 `%` 그리고 제곱 `**`을 구할 수 있다. 산술 연산을 쉽게 읽을 수 있도록 숫자와 산술 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않으므로 무관한다.
@@ -501,7 +501,7 @@ World!
 ```
 
 ## 엄격 모드
-[엄격 모드](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)(strict mode)은 ECMAScript 5부터 소개되었으며 일반적인 자바스크립트에 비해 제약적인 자바스크립트 모드이다. 엄격 모드를 활성화하기 위해 `"use strict";`(혹은 `'use strict';`)을 (1) 스크립트 최상단에 기입하여 전체에 적용하거나 (2) [함수](#자바스크립트-함수)의 최상단에 기입하여 국부적으로 적용할 수 있지만, 일반 블록에는 적용이 불가하다.
+[엄격 모드](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)(strict mode)은 ECMAScript 5부터 소개되었으며 일반적인 자바스크립트에 비해 제약적인 자바스크립트 모드이다. 엄격 모드를 활성화하기 위해 `"use strict";`(혹은 `'use strict';`)을 (1) 스크립트 최상단에 기입하여 전체에 적용하거나 (2) [함수](#함수)의 최상단에 기입하여 국부적으로 적용할 수 있지만, 일반 블록에는 적용이 불가하다.
 
 > 엄격 모드의 의의는 보다 "안전한" 자바스크립트를 작성할 수 있도록 하는 것으로, 이에 대한 내용은 차후에 설명할 [`this`](#this-키워드) 키워드와 밀접한 관련이 있다.
 
@@ -535,7 +535,7 @@ World!
                              ^^^^^^^^^
     ```
 
-# 자바스크립트: 조건 및 루프
+# 조건 및 루프
 조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 자바스크립트 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
 
 ## `if` 조건문
@@ -675,7 +675,7 @@ for (initialize; condition; increment) statement;
 `for` 반복문의 우선 `initialize`에서 반복문 지역 변수를 선언하거나 외부 변수를 불러와 반복문을 위한 초기값을 할당한 다음 `condition`에서 조건을 평가한다. 논리가 참이면 코드를 반복적으로 실행하며, 거짓일 경우에는 반복문을 종료한다. 블록 내의 코드가 마무리되었거나 `continue` 문을 마주하면 `increment`에서 변수를 증감하고, `condition`으로 돌아가 절차를 반복한다.
 
 ### `for...of` 반복문
-[`for...of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) 반복문은 문자열이나 배열과 같은 [이터러블](#자바스크립트-이터러블)(iterable)의 요소를 순서대로 하나씩 반환한다.
+[`for...of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) 반복문은 문자열이나 배열과 같은 [이터러블](#이터러블)(iterable)의 요소를 순서대로 하나씩 반환한다.
 
 ```js
 for (const element of "ES6") {
@@ -689,7 +689,7 @@ S
 ```
 
 ### `for...in` 반복문
-[`for...in`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in) 반복문은 [객체](#자바스크립트-객체)(object)에 속한 열거 가능한 속성들(enumerable properties)의 이름을 하나씩 반환한다.
+[`for...in`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in) 반복문은 [객체](#객체)(object)에 속한 열거 가능한 속성들(enumerable properties)의 이름을 하나씩 반환한다.
 
 ```js
 for (const property in "ES6") {
@@ -702,8 +702,8 @@ for (const property in "ES6") {
 2
 ```
 
-# 자바스크립트: 이터러블
-[이터러블](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)(iterable; 반복 가능한)은 저장된 여러 데이터 항목을 하나씩 반환할 수 있는 [컨테이너 객체](#자바스크립트-객체)를 가리킨다. 이터러블의 특징인 `@@iterator` 메소드는 이터레이터(iterator) 객체를 반환하고, 그리고 이터레이터는 `next()` 메소드를 통해 [`for...of`](#forof-반복문) 반복문에 전달될 다음 데이터 항목을 반환한다. 다시 말해 이터러블 객체의 핵심은 순차적으로 데이터를 반환할 수 있다는 점이며, 다수의 데이터를 하나의 변수로 저장하는 성질은 이를 구현하기 위한 일환이다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)이 있다.
+# 이터러블
+[이터러블](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)(iterable; 반복 가능한)은 저장된 여러 데이터 항목을 하나씩 반환할 수 있는 [컨테이너 객체](#객체)를 가리킨다. 이터러블의 특징인 `@@iterator` 메소드는 이터레이터(iterator) 객체를 반환하고, 그리고 이터레이터는 `next()` 메소드를 통해 [`for...of`](#forof-반복문) 반복문에 전달될 다음 데이터 항목을 반환한다. 다시 말해 이터러블 객체의 핵심은 순차적으로 데이터를 반환할 수 있다는 점이며, 다수의 데이터를 하나의 변수로 저장하는 성질은 이를 구현하기 위한 일환이다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)이 있다.
 
 ## 배열
 [배열](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)(array) 이터러블 객체는 자료형과 관계없이 데이터를 나열한 순서대로 인덱스(index) 위치에 저장한다. 배열의 데이터 할당은 (1) 대괄호 `[]` 혹은 (2) [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) [클래스](#클래스)의 [생성자](#생성자) 안에 항목을 순서대로 쉼표로 나누어 나열한다. 아무런 데이터를 입력하지 않으면 빈 배열을 생성한다. 대괄호는 0번부터 시작하는 인덱스 위치의 요소(element)를 호출할 때에도 사용된다.
@@ -718,7 +718,7 @@ console.log(variable);       // 출력: [ value1, value2, value3, value4, ... ]
 console.log(variable[0]);    // 출력: value1
 ```
 
-> [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) 연산자는 [클래스](#클래스)(`Array` 클래스)로부터 [객체](#자바스크립트-객체)(배열 이터러블 객체)를 생성하는 연산자이다.
+> [`new`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new) 연산자는 [클래스](#클래스)(`Array` 클래스)로부터 [객체](#객체)(배열 이터러블 객체)를 생성하는 연산자이다.
 
 개별 요소를 재할당하여 데이터를 변경할 수 있다. 배열 범위를 벗어난 요소를 호출하면 `undefined`, 즉 초기화되지 않은 요소라고 반환되는데 차후에 데이터를 할당할 수 있다.
 
@@ -752,7 +752,7 @@ console.log(variable);        // 출력: [ <2 empty items>, 'Hello World!' ]
     ```
 
 ## 연관 배열
-자바스크립트는 배열의 요소를 문자열로 호출하는 [연관 배열](https://ko.wikipedia.org/wiki/연관_배열)(associative array)을 지원하지 않는다. 설령 빈 배열에 요소 확장을 할 때 문자열을 입력하는 방법을 사용하여도, 이때부터는 배열이 아닌 [객체](#자바스크립트-객체)(object)가 된다. 자바스크립트는 이러한 경우에 오히려 객체를 사용하는 것을 권고한다.
+자바스크립트는 배열의 요소를 문자열로 호출하는 [연관 배열](https://ko.wikipedia.org/wiki/연관_배열)(associative array)을 지원하지 않는다. 설령 빈 배열에 요소 확장을 할 때 문자열을 입력하는 방법을 사용하여도, 이때부터는 배열이 아닌 [객체](#객체)(object)가 된다. 자바스크립트는 이러한 경우에 오히려 객체를 사용하는 것을 권고한다.
 
 ```js
 var variable = [];
@@ -779,7 +779,7 @@ var variable = new Int32Array(buffer);
 */
 ```
 
-# 자바스크립트: 함수
+# 함수
 [함수](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions)(function)는 독립적인 코드 블록으로써 데이터를 처리하며, 재사용이 가능하고 호출 시 처리된 데이터를 보여주어 유동적인 프로그램 코딩을 가능하게 한다. 함수는 이름 뒤에 소괄호가 있는 `function()` 형식으로 구별된다.
 
 ```js
@@ -928,7 +928,7 @@ func(1, 2, 3, 4);   // 출력: 1
 
 2. **[함수 문맥](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#function_context)(function context)**
 
-    * **[`function`](#자바스크립트-함수) 키워드**
+    * **[`function`](#함수) 키워드**
 
         일반적인 자바스크립트에서 함수는 `globalThis.func()`처럼 전역 객체에 종속된 함수로 받아들여져, 결과적으로 `this` 키워드는 `globalThis` 전역 객체를 가리킨다. 엄격 모드에서는 [`call()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) 혹은 [`apply()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 등으로 `this` 키워드의 문맥을 직접 지정해야 하며, 만일 이러한 설정이 없으면 `undefined`를 반환한다.
 
@@ -952,7 +952,7 @@ func(1, 2, 3, 4);   // 출력: 1
       func();    // 출력: undefined
         ```
 
-    * **[화살표 함수 표현식](#자바스크립트-함수)**
+    * **[화살표 함수 표현식](#함수)**
 
         화살표 함수 표현식은 `this` 키워드가 바인딩에 관여하지 않는다. 그러므로 `this` 키워드는 해당 함수를 내포하는 (혹은 정의하는) 객체를 가리킨다.
 
@@ -971,7 +971,7 @@ func(1, 2, 3, 4);   // 출력: 1
 
 > 여기서 콜백이란, 전달인자로 전달된 함수가 다른 함수에서 언젠가 다시 호출(call back)되어 실행된다는 의미에서 붙여진 용어이다.
 
-콜백 함수는 자바스크립트에서 매우 중요한 개념 중 하나이며 [비동기 입출력](#런타임-환경)을 가능케 하는 요인이다. 아래는 콜백 함수를 어떻게 인자로써 전달하고, 그리고 전달받은 호출 함수는 콜백 함수를 어떻게 활용하는지 보여준다. 여기서 [`function`](#자바스크립트-함수) 키워드와 [화살표 함수 표현식](#자바스크립트-함수) 중 무엇을 사용할 지는 [`this`](#this-키워드) 키워드가 가리키고자 하는 객체에 따라 결정한다.
+콜백 함수는 자바스크립트에서 매우 중요한 개념 중 하나이며 [비동기 입출력](#런타임-환경)을 가능케 하는 요인이다. 아래는 콜백 함수를 어떻게 인자로써 전달하고, 그리고 전달받은 호출 함수는 콜백 함수를 어떻게 활용하는지 보여준다. 여기서 [`function`](#함수) 키워드와 [화살표 함수 표현식](#함수) 중 무엇을 사용할 지는 [`this`](#this-키워드) 키워드가 가리키고자 하는 객체에 따라 결정한다.
 
 ```js
 /* 호출 함수 */
@@ -1008,17 +1008,17 @@ function factorial(arg) {
 }
 ```
 
-# 자바스크립트: 객체
-[객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 데이터나 함수를 바인딩할 수 있는 객체 내부의 식별자들을 속성(property)라고 하는데, 이들은 다음과 같이 [속성 접근자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors)로 접근한다. 함수가 바인딩된 속성을 메소드(method)라고도 부르는데, 반드시 [`function`](#자바스크립트-함수) 키워드 혹은 ES6부터 소개된 [메소드 정의](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions)를 사용한다.
+# 객체
+[객체](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)(object 혹은 instance)는 데이터를 저장할 수 있는 변수와 처리할 수 있는 함수를 하나로 묶은 데이터이다. 데이터나 함수를 바인딩할 수 있는 객체 내부의 식별자들을 속성(property)라고 하는데, 이들은 다음과 같이 [속성 접근자](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_Accessors)로 접근한다. 함수가 바인딩된 속성을 메소드(method)라고도 부르는데, 반드시 [`function`](#함수) 키워드 혹은 ES6부터 소개된 [메소드 정의](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Method_definitions)를 사용한다.
 
-> 반면 메소드는 절대 [화살표 함수 표현식](#자바스크립트-함수)로 정의되지 말아야 한다! 이는 화살표 함수 표현식의 성질에 의해 [`this`](#this-키워드) 키워드가 객체를 가리키지 않기 때문이다.
+> 반면 메소드는 절대 [화살표 함수 표현식](#함수)로 정의되지 말아야 한다! 이는 화살표 함수 표현식의 성질에 의해 [`this`](#this-키워드) 키워드가 객체를 가리키지 않기 때문이다.
 
 | 객체 속성 | 속성 접근자                                    |
 |:-------:|-----------------------------------------------|
 | 변수 | `instance.property` 또는 `instance["property"]` |
 | 함수 | `instance.method()` 또는 `instance["method"]()` |
 
-현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 [전역 객체](#유효범위)와 [이터러블 객체](#자바스크립트-이터러블)가 있다.
+현재까지 다룬 내용 중에서 객체에 해당되는 데이터로는 [전역 객체](#유효범위)와 [이터러블 객체](#이터러블)가 있다.
 
 ```js
 var variable = [0, 3, 5, 9];
@@ -1331,7 +1331,7 @@ console.log(instance.method(2, 3));
   }
     ```
 
-# 자바스크립트: 모듈
+# 모듈
 [모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)(module)은 부가적인 기능 및 데이터를 제공하는 자바스크립트 소스 코드이며, 일반 스크립트와 마찬가지로 `.JS` 혹은 일부 런타임에서 모듈로 인식할 수 있는 `.MJS` 확장자를 갖는다. 모듈은 정의된 변수, 함수, 클래스 및 객체 등을 제공하는 건 물론이고 타 모듈을 불러올 수 있다. 단, 모듈은 무조건 [엄격 모드](#엄격-모드)라는 점을 유의한다.
 
 ## ECMAScript 모듈
@@ -1484,7 +1484,7 @@ import * as namespace from "./module.js";
   console.log(instance.method(2));     // 출력: 6.28
     ```
 
-# 자바스크립트: DOM
+# DOM
 자바스크립트는 HTML 및 CSS와 함께 사용하여 다양한 기능을 제공하는데 기여한다. 선언형 언어인 HTML은 아래와 같이 [트리 구조](https://ko.wikipedia.org/wiki/트리_구조)의 [문서 객체 모델](https://ko.wikipedia.org/wiki/문서_객체_모델)(Document Object Model; DOM)로 문서를 표현한다.
 
 ![문서 객체 모델 <sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:DOM-model.svg">위키미디어</a></i></sub>](/images/docs/javascript/js_html_dom.png)
@@ -1539,7 +1539,7 @@ DOM에서 원하는 요소 선택은 다음과 같은 `document` 객체 메소�
 | [`Node.previousSibling`](https://developer.mozilla.org/en-US/docs/Web/API/Node/previousSibling) |  `Node`의 이전 형제를 호출한다.                          |
 
 ### 요소 스타일 변경
-DOM은 각 요소를 개별 객체로 간주한다. 즉, 요소의 [속성](https://ko.wikipedia.org/wiki/HTML_속성)(attribute)들은 객체의 [속성](#자바스크립트-객체)처럼 접근할 수 있다.
+DOM은 각 요소를 개별 객체로 간주한다. 즉, 요소의 [속성](https://ko.wikipedia.org/wiki/HTML_속성)(attribute)들은 객체의 [속성](#객체)처럼 접근할 수 있다.
 
 ```html
 <!-- 예시 HTML -->

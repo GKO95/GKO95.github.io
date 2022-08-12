@@ -6,7 +6,7 @@ slug: ko.MATLAB
 icon: icon-matlab.png
 order: 0x37
 ---
-# MATLAB: 소개
+# 소개
 [MATLAB](https://www.mathworks.com/products/matlab.html)은 MathWorks에서 개발한 프로그래밍 및 수치해석 환경을 제공하는 유로 소프트웨어로 선형 방정식 계산을 위한 행렬 프로그래밍이 시초이다. 행렬 계산 이외에도 함수 및 데이터 그래프 출력, 알고리즘 정의, 사용자 인터페이스는 기본이며 필요에 따라 각 분야를 위한 툴박스(toolbox)를 추가하여 더 많은 기능을 수행할 수 있다. 현재 소프트웨어는 매년 상반기와 하반기마다 새로 업데이트되는데 만일 2021년 상반기에 출시된 MATLAB이면 R2021a 출시 번호가 붙는다.
 
 무료로 제공되는 [비주얼 스튜디오](https://ko.wikipedia.org/wiki/마이크로소프트_비주얼_스튜디오)나 [엑스코드](https://ko.wikipedia.org/wiki/엑스코드) 프로그래밍 개발 소프트웨어와 달리, MATLAB은 유료 서비스 정책을 갖는다. 가격 정책은 12개월 구독형 혹은 소장용 가격 정책이 있는데, 후자의 경우 명년 출시 버전까지만 업데이트가 가능하다: R2021a 출시버전을 소장용으로 구매하였면 2022b까지는 MATLAB 업데이트가 가능하나, 그 이후부터는 MathWorks 소프트웨어 관리 서비스를 별도로 구매해야만 소프트웨어 업데이트를 할 수 있다.
@@ -24,7 +24,7 @@ MATLAB의 불편하고 비싼 가격 정책은 많은 사용자들로 하여금 
 
 MATLAB 제품 사이트의 한 [게시글](https://www.mathworks.com/products/matlab/matlab-vs-python.html)을 보면 유난히 [파이썬](/docs/ko.Python)을 경계하는 것으로 보인다. 그도 그럴 것이 파이썬은 무료 소프트웨어이며 MATLAB 못지 않게 폭넓은 커뮤니티와 방대한 양의 라이브러리가 오픈 소스로 공유되고 있기 때문이다. 그 중에서 대표적인 네 개의 공학용 라이브러리인 [NumPy](https://numpy.org/), [SciPy](https://scipy.org/scipylib/), [matplotlib](https://matplotlib.org/), 그리고 [pandas](https://pandas.pydata.org/)가 있으면 MATLAB만큼 혹은 그 이상의 작업을 기대할 수 있다.
 
-# MATLAB: 인터페이스
+# 인터페이스
 
 ![MATLAB 초기화면](/images/docs/matlab/matlab_initial_window.png)
 
@@ -61,7 +61,7 @@ A + B
 ### 라이브 스크립트
 라이브 스크립트(Live Script)란, MATLAB R2016a부터 새롭게 소개된 라이브 편집기(Live Editor) 환경에서 일반 스크립트를 포맷 텍스트, 방정식, 그리고 이미지와 하나로 통합시킨 `.MXL` 확장자 상호작용 문서이다. 상호작용 문서에 걸맞게 라이브 스크립트의 코드 출력값은 전부 라이브 스크립트 내에서 나타나며, 명령창을 통해 실행되는 게 아니다. 이와 유사한 환경이 바로 상호작용 가능한 파이썬을 제공하는 [주피터 노트북](https://jupyter.org/)이다.
     
-# MATLAB: 기초
+# 기초
 > *참고: [Wikibooks - MATLAB Programming](https://en.wikibooks.org/wiki/MATLAB_Programming)*
 
 각 프로그래밍 언어마다 준수되어야 할 규칙과 기반이 되는 데이터들이 존재한다. 이를 어길 시에는 프로그램에 오류가 발생하거나 정상적인 동작을 보장할 수 없다. 실질적인 프로그래밍에 있어, 본 장에서는 MATLAB 프로그램 코딩에 기초적인 정보 제공을 목표로 한다.
@@ -184,7 +184,7 @@ ans =
      3
 ```
 
-# MATLAB: 행렬
+# 행렬
 MATLAB 프로그램 이름은 "[행렬](https://ko.wikipedia.org/wiki/행렬) 실험실(**MAT**rix **LAB**oratory)"에서 유래되었다. 태초부터 행렬 계산이 핵심이었던 MATLAB은 모든 데이터를 행렬로 취급한다. 이전 장에서 보였던 예시들은 `A = 1`과 같은 [스칼라](https://ko.wikipedia.org/wiki/스칼라_(수학))(scalar)였으나, 사실상 MATLAB에서는 이를 $1 \times 1$ 크기의 행렬로 취급한다.
 
 | 배열  | 영문            | 크기             |
@@ -692,7 +692,7 @@ ans =
 | `any`    | 논리합  | 배열의 각 행/열마다 하나 이상의 요소가 참이면 `true`이고, 그렇지 않으면 `false`이다. 모든 요소를 한꺼번에 확인하려면 `'all'` 옵션을 추가한다. |
 | `all`     | 논리곱  | 배열의 각 행/열마다 모든 요소가 참이면 `true`이고, 그렇지 않으면 `false`이다. 모든 요소를 한꺼번에 확인하려면 `'all'` 옵션을 추가한다. |
 
-# MATLAB: 조건 및 루프
+# 조건 및 루프
 조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 MATLAB 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
 
 > MATLAB에서 조건문, 반복문, 그리고 예외처리문은 공통적으로 `end` 키워드로 중단해야 한다. 이는 C 기반 언어의 중괄호(`{}`)나 파이썬의 들여쓰기와 같이 코드 블록을 구분할 수 있는 것이 없기 때문이다.
@@ -820,7 +820,7 @@ end
 
 내부의 실행문은 더 이상 불러올 배열이 없을 때까지 하나씩 반복한다.
 
-# MATLAB: 그래프
+# 그래프
 MATLAB은 수치해석 환경으로 배열을 통한 그래프 생성을 지원한다. 계산의 결과를 시각적으로 보여주는데 매우 중요한 요소로 MATLAB에서는 반드시 익혀야 할 내용이다. 본 장에서는 사용자가 원하는 방식대로 그래프 생성 및 설정하는 방법을 소개한다.
 
 ## 도면
@@ -994,7 +994,7 @@ title(ax2, "Scatter Command")
 
 산점도는 $x$ 축에 따른 함수의 변화를 관측하는 목적으로 사용되지 않는다. 오히려 변수 $x$와 변수 $y$의 분포를 통해 관계성을 확인 및 분석하기 위한 목적을 갖는다.
 
-# MATLAB: 함수
+# 함수
 개발자가 직접 함수를 제작하고 필요할 때마다 사용하여 효율성을 높일 수 있는데, 이러한 프로그래밍 기법을 *함수형 프로그래밍(functional programming)*이라고 한다. 본 장은 MATLAB 프로그래밍에서 사용자 정의 함수의 생성 및 사용 방법에 대하여 소개한다.
 
 ## 함수
@@ -1220,7 +1220,7 @@ rmpath path/to
 
 경로가 제거된 이후에는 `path/to/FUNCTION.m`은 경로를 다시 추가하지 않는 이상 불러올 수 없다.
 
-# MATLAB: 객체 및 클래스
+# 객체 및 클래스
 MATLAB은 다중 패러다임 프로그래밍 언어(multi-paradigm programming language)로 함수뿐만 아니라 객체 및 클래스를 기반하는 객체지향 프로그래밍(object-oriented programming; OOP)도 지원한다. 본 장은 MATLAB에서 객체지향 프로그래밍을 구현하기 위한 사용자 정의 객체의 생성 및 사용 방법을 소개한다.
 
 ## 객체

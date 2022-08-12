@@ -5,7 +5,7 @@ title: 라플라스 변환
 slug: ko.Laplace-Transform
 order: 0xE3
 ---
-# 라플라스: 개요
+#  개요
 > 본 내용은 고등학교 교육과정 중 하나인 [삼각함수](https://ko.wikipedia.org/wiki/삼각함수), [미분](https://ko.wikipedia.org/wiki/미분) 및 [적분](https://ko.wikipedia.org/wiki/적분), 그리고 [복소수](https://ko.wikipedia.org/wiki/복소수)를 기반하므로 이에 대해 충분한 이해가 필요하다.
 
 [라플라스 변환](https://en.wikipedia.org/wiki/Laplace_transform)(Laplace transform)은 복잡한 [미분방정식](/docs/ko.Differential)을 극히 익숙한 [대수방정식](https://en.wikipedia.org/wiki/Algebraic_equation)으로 풀 수 있는 매우 유용한 미적분학 기법이다. 이러한 변환이 가능한 이유는 바로 $t$-영역(또는 공간; domain)과 $s$-영역을 넘나드는 풀이 방식을 사용하기 때문이다.
@@ -16,7 +16,7 @@ order: 0xE3
 * *$s$-영역 (일명 복소주파수 영역)*
     : 변수 $s = \sigma + j\omega$가 중심이 되는 공간이며, 허수가 붙기 때문에 "복소"주파수라고 부른다. 여기서 $\omega$는 [각주파수](https://ko.wikipedia.org/wiki/각진동수)(angular frequency)로 $2\pi f$와 같다. 
 
-# 라플라스: 변환
+#  변환
 라플라스 변환은 $t$-영역을 $s$-영역으로 공간을 전환하며 다음과 같은 방정식을 갖는다.
 
 $$
@@ -353,7 +353,7 @@ $$
     A_{n-k} = \frac{1}{(n-k-1)!}\frac{d^k}{ds^k} \left[ (s-\alpha)^nF(s) \right]_{s=\alpha} \quad ... \mathrm{where} \ k = 0, \ 1, \ 2, \ \cdots, \ n-1
     $$
 
-# 라플라스: 응용
+#  응용
 본 장은 [미분방정식 예시](/docs/ko.Differential#미분방정식-응용)를 라플라스 변환으로 풀이하는 절차를 살펴본다. 또한 고전역학을 벗어나 전기회로라는 전혀 다른 분야에서는 어떻게 적용되는지 보여준다. 단, 미분방정식이 아닌 *예제 1. 평형상태 (1)*과 *예제 2. 평형상태 (2)*는 다루지 않으며 미분방정식 수립 과정은 동일하다.
 
 ## 고전역학

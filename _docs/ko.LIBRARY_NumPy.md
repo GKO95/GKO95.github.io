@@ -6,7 +6,7 @@ slug: ko.NumPy
 icon: icon-numpy.svg
 order: 0x10
 ---
-# NUMPY: 소개
+# 소개
 [넘파이](https://numpy.org/)(NumPy)는 다차원 배열을 지원하는 강력한 [파이썬](/docs/ko.Python) 전용 라이브러리이다. 본래 [SciPy](https://www.scipy.org/)라는 수학, 과학, 그리고 공학을 위한 파이썬 전용 오픈소스 프로젝트의 일부였으나, SciPy 없이도 사용할 수 있도록 독립된 패키지로 출시되었다. 덕분에 넘파이는 SciPy 이외에 [matplotlib](#넘파이-matplotlib) 및 [텐서플로우](/docs/ko.TensorFlow)와 같은 라이브러리에서도 흔히 사용된다.
 
 넘파이 라이브러리를 설치하기 위해, 아래의 명령어를 입력한다.
@@ -20,7 +20,7 @@ python -m pip install numpy
 
 [MATLAB](https://www.mathworks.com/products/matlab.html)은 1991년에 출시된 파이썬보다 더 역사가 깊은 1970년대 후반에 개발된 행렬 처리 프로그래밍 언어 및 환경이다. 비록 Mathworks라는 기업에서 판매하는 유료 프로그램이지만, 그만큼 서비스를 보장받을 수 있으며 오랜 기술 축적과 커뮤니티를 보유하고 있다. 그러나 2010년대 초반부터 시작하여 파이썬의 고속성장으로 MATLAB의 입지는 위협을 받고 있다.
 
-# NUMPY: 기초
+# 기초
 넘파이는 파이썬 전용 라이브러리인 관계로 파이썬 구문을 그대로 따른다. 메모리 효율이 파이썬의 [리스트 객체](/docs/ko.Python#리스트-객체)보다 우월하여 큰 규모의 배열을 다룰 때에는 매우 유용하다. 본 장에서는 넘파이 배열이 갖는 특징 및 장단점, 배열 연산 등의 기초적인 내용을 설명한다.
 
 본 문서에서 넘파이를 불러오기 위해 아래와 같은 가장 통상적인 코드를 사용한다.
@@ -395,7 +395,7 @@ print(var + [0, 1, 2, 3, 4])
 '''
 ```
 
-# NUMPY: Matplotlib
+# Matplotlib
 [Matplotlib](https://matplotlib.org/)는 그래프를 그리는데 활용되는 파이썬 프로그래밍 언어의 라이브러리이다. 넘파이와 함께 사용될 수 있으며, 인터페이스는 [MATLAB](/docs/ko.MATLAB)과 유사하도록 디자인되었다. 2020년부터 matplotlib는 파이썬의 공식 선언에 따라 파이썬 3에서만 지원한다.
 
 Matplotlib는 독립적인 라이브러리이므로 별도로 설치해야 하며, 아래의 명령어를 입력한다.
@@ -405,7 +405,7 @@ python -m pip install matplotlib
 ```
 
 ## `pyplot` 모듈
-`matplotlib.pyplot` 모듈은 matplotlib 라이브러리가 [MATLAB](/docs/ko.MATLAB#matlab-그래프)과 유사하게 동작하도록 하는 API들의 묶음이다. 즉, MATLAB과 동일하게 간단한 프로그래밍으로 원하는 그래프를 그릴 수 있도록 하는 목적을 갖는다. 아래의 코드로 `pyplot` 모듈을 불러온다. 여기서 플롯(plot; 전개)이란, 함수를 전개하므로써 "그래프를 그린다"는 의미를 갖는다.
+`matplotlib.pyplot` 모듈은 matplotlib 라이브러리가 [MATLAB](/docs/ko.MATLAB#그래프)과 유사하게 동작하도록 하는 API들의 묶음이다. 즉, MATLAB과 동일하게 간단한 프로그래밍으로 원하는 그래프를 그릴 수 있도록 하는 목적을 갖는다. 아래의 코드로 `pyplot` 모듈을 불러온다. 여기서 플롯(plot; 전개)이란, 함수를 전개하므로써 "그래프를 그린다"는 의미를 갖는다.
 
 ```python
 import matplotlib.pyplot as plt

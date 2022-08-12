@@ -6,7 +6,7 @@ slug: en.Cpp
 icon: icon-cpp.svg
 order: 0x02
 ---
-# C++: INTRO
+# INTRO
 > *Refernce: [Microsoft Docs C++ Language Documentation](https://docs.microsoft.com/en-us/cpp/cpp/)*
 
 C++ is a general-purpose low-level programming language based on C language. While C is a procedural programming language that executes codes top-to-bottom, C++ allows object-oriented programming as well; thus, C++ is called a hybrid language. C++, an extension of C language, guarantees a wide range of applications from various features.
@@ -32,7 +32,7 @@ A preprocessor is responsible for optimizing the source code before the compiler
 
 A preprocessor does not read C++ language source code nor follows C++ language syntax. It only processes its directives, removes comments, and provides optimized source code to the compiler. A preprocessor directive isn't necessary but makes the coding easier and convenient. The preprocessor resides within the compiler program.
 
-# C++: INSTALL
+# INSTALL
 A compiler for C++ is essential when developing with C++ programming language, and there are various C++ compilers available designed by different companies and organizations. The compilation method may differ depending on the compiler, but it doesn't matter for general users as every compiler observes the same ISO standard that defines the working mechanism.
 
 An integrated development environment (IDE) is a software development program that provides a source code editor and program build tools, compiling source codes to an executable program. This chapter introduces the installation and configuration of an IDE for a C++ language project.
@@ -118,7 +118,7 @@ To execute an object file from a terminal, place `./` followed by the file name.
 
 Here, the command `./` represents the current directory. Without this command, a terminal wouldn't be able to find the `main` file unless the directory is specified by the environment variable.
 
-# C++: BASIC
+# BASIC
 Every programming language has its own rules to be observed and fundamental data that works as a basis of the program. Failed to observe this causes either error or unexpected results. As for the beginning of the practical coding, this chapter will introduce basic knowledge of C++ language coding.
 
 ## Header File
@@ -525,7 +525,7 @@ World!
 |:--------:|:--------------:|:---------:|:---------:|:------------:|:------------:|
 | `\n`     | `\t`           | `\\`      | `\b`      | `\'`         | `\"`         |
 
-# C++: CONDITIONAL AND LOOP
+# CONDITIONAL AND LOOP
 Conditional and iteration (or loop) statements are two of the most commonly used in programming. The "statement" in programming represents a code that executes or processes data. This chapter introduces a list of conditional and iteration statements in C++ language programming.
 
 ## `if` Statement
@@ -686,7 +686,7 @@ for (variable : range) statement;
 
 Refer to the next chapter, *C++: CONTAINER*, to know more about the container data in C++ language.
 
-# C++: CONTAINER
+# CONTAINER
 C++ has containers that can store a collection of data, and the one that sequences data in order is called a sequence container; an array and vector are the most renowned. This chapter focuses on a sequence container commonly used in C++ language.
 
 ## Array
@@ -784,7 +784,7 @@ std::vector<int> vec;
 
 The benefit of using the vector class is the container size can change flexibly (and dynamically) due to its memory allocation property. However, vectors are slower than arrays when it comes to performance.
 
-# C++: FUNCTION
+# FUNCTION
 C/C++ language is executed based on a single function called the `main()` function. Understanding the concept of functions is crucial in C/C++ languages and can increase efficiency by creating custom functions, called *functional programming*. This chapter will be introducing the guide on how to create and use functions in C++ language for functional programming.
 
 ## Function
@@ -1047,7 +1047,7 @@ float function(int arg1, float arg2) {
 FUNC(&function, 1, 3.0);	// >> OUTPUT: 4.0
 ```
 
-# C++: POINTER
+# POINTER
 This article has mentioned a new "pointer" data type since the *C++: CONTAINER* chapter. The pointer is one of the crucial concepts in C language, allowing more complex programming. This chapter describes what the pointer is in C language and revisits the array and function.
 
 ## Pointer
@@ -1166,7 +1166,7 @@ const int* ref = &variable;
 
 Initialization is mandatory since the reference uses a constant pointer, and the variable that referenced once cannot re-reference another variable. The *call by reference* in programming is referring to this reference.
 
-# C++: DYNAMIC MEMORY
+# DYNAMIC MEMORY
 Memory management in C++ language is a significant task. Dynamic memory allocation provides higher memory efficiency but requires a clear understanding of the pointer as it is deeply involved. Here, the memory indicates random access memory (RAM), the primary memory in a computer.
 
 ## Stack Structure
@@ -1230,7 +1230,7 @@ delete ptr;
 ptr = nullptr;
 ```
 
-# C++: STRING
+# STRING
 Conventional C language does not have a string data type that can hold the string data specifically; it uses an array of a character with the null terminator `\0` at the end. However, C++ has a standard library for the string data type.
 
 ## String
@@ -1257,7 +1257,7 @@ An array cannot have elements of different sizes; the only possible way to store
 std::string arr[] = {"Hello", "World!"};
 ```
 
-# C++: OBJECT AND CLASS
+# OBJECT AND CLASS
 The current document has explained and dealt with procedural and functional programming. The third scripting method, object-oriented programming (abbrev. OOP), focuses on the usage of classes and objects instead of functions.
 
 ## Object
@@ -1721,7 +1721,7 @@ float ClassName::method(int arg3)
 }
 ```
 
-# C++: USER-DEFINED DATA TYPE
+# USER-DEFINED DATA TYPE
 Commonly used data types such as `int,` `float,` `char,` and more are already defined and are called through the `iostream` header file. This chapter introduces defining a new user-defined data type that is similar to these data types but can store multiple data in a single variable.
 
 ## Structure
@@ -1956,7 +1956,7 @@ using dtypeName = int;
 
 There is no difference between the type alias declaration and typedef declaration, and these two are equivalent.
 
-# C++: TEMPLATE
+# TEMPLATE
 A template provides a format of function or class definition regardless of its data type. Developers can utilize this template to create similar functions and classes with ease. This chapter introduces defining and using a template.
 
 ## Function Template
@@ -2114,7 +2114,7 @@ template <class X, class Y>
 aliasName<int>(1, 3)
 ```
 
-# C++: FILE MANAGEMENT
+# FILE MANAGEMENT
 C++ language can read and write external files to save or load data. This chapter focuses on accessing and modifying the `.txt` extension text file.
 
 Reading and writing external text file requires the following header:
@@ -2184,7 +2184,7 @@ statements;
 file.close();
 ```
 
-# C++: EXCEPTION
+# EXCEPTION
 An exception is an inexecutable code error due to incorrect coding or input. Because it is not an error filtered upon compilation, a successfully built program immediately halts when encountering an exception. C++ language has keywords and code blocks for handling exceptions: `throw`, `try` and `catch`, and more. Exception handling aims to provide a stable program without any halt or crash.
 
 ## `try`/`catch` Blocks
@@ -2245,7 +2245,7 @@ std::cerr << "Hello World!"
 
 This distinguishment on streams allows selective control of transmitting data from the program to target devices/locations, such as a terminal or file.
 
-# C++: PREPROCESSOR
+# PREPROCESSOR
 C++ language compiler processes the script into two divided stages: preprocessing and compilation. On the stage of preprocessing, preprocessor directive such as `#include` is taken care of by the compiler. This chapter will introduce useful and commonly used preprocessor directives that is being implemented on development.
 
 ## Macro Definition
@@ -2345,7 +2345,7 @@ Although it does not affect any on the compilation, the `#pragma region` and `#p
 #pragma endregion
 ```
 
-# C++: RANDOM
+# RANDOM
 Randomization may be necessary for some programming, such as game development and statistical modeling. Random numbers generation requires the following header:
 
 |   HEADER    | DESCRIPTION                                                  |
