@@ -6,7 +6,7 @@ slug: ko.Service
 icon: icon-windows.svg
 order: null
 ---
-# 서비스
+# 윈도우 서비스
 [윈도우 서비스](https://ko.wikipedia.org/wiki/윈도우_서비스)(Windows Service)는 [서비스 제어 관리자](#서비스-제어-관리자)로부터 관리받는 프로그램이다.
 
 | 프로그램 | 생명주기 | 복수 객체의 존재 가능 | GUI 활용 가능 |
