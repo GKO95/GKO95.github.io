@@ -1,7 +1,7 @@
 ---
 layout: docs
 category: 윈도우
-title: 덤프
+title: 서비스
 slug: ko.Service
 icon: icon-windows.svg
 order: null
