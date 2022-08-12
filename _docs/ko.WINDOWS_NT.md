@@ -6,7 +6,7 @@ slug: ko.WindowsNT
 icon: icon-windows.svg
 order: 0x40
 ---
-#  소개
+# 소개
 [윈도우](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)(Windows)는 마이크로소프트에서 개발한 [윈도우 NT](https://ko.wikipedia.org/wiki/윈도우_NT) 계열 제품군의 운영체제이다. 전세계적으로 가장 널리 사용되고 있는 데스크탑 운영체제로 가정용 및 상업용 이외에도 연구개발 등의 목적으로 커스터마이징되어 활용된다. 본 장은 윈도우 OS를 컴퓨터 과학 관점에서 아키텍처 및 드라이버 등을 기술적으로 다루기에 앞서 운영체제에 대하여 기본적인 내용을 소개한다.
 
 > 본 문서는 [*윈도우 11*](https://ko.wikipedia.org/wiki/윈도우_11) 운영체제를 예시로 설명한다.
@@ -92,12 +92,12 @@ order: 0x40
 
 이렇게 보호 링이 분류된 이유는 "더 많은 제어에는 더 큰 책임이 뒤따른다"는 관점에서 비롯된다. 커널 모드의 프로그램 오동작은 시스템 전체에 충돌을 일으킬 수 있기 때문에 문제가 절대로 발생하지 않도록 신뢰될 수 있어야 한다.
 
-#  아키텍처
+# 아키텍처
 본 장에서는 윈도우 NT 운영체제 [아키텍처](https://ko.wikipedia.org/wiki/윈도우_NT_아키텍처)에 대하여 살펴본다.
 
 ![윈도우 NT 운영체제 아키텍처<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Windows_2000_architecture.svg">위키미디어</a></i></sub>](/images/docs/windows/windows_nt_architecture.png)
 
-#  드라이버
+# 드라이버
 > *참조: [Windows 하드웨어 개발자 설명서](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/)*
 
 [디바이스 드라이버](https://ko.wikipedia.org/wiki/장치_드라이버)(device driver; 일명 장치 드라이버)는 특정 하드웨어와 상호작용하기 위해 짜여진 프로그래밍 인터페이스이다. 비록 운영체제나 어플리케이션이 구체적으로 하드웨어가 어떻게 동작하는지 몰라도 해당 하드웨어 특성을 파악하고 있는 드라이버를 통해 간편하게 사용할 수 있다. 시스템 부팅 이후에도 [커널](#커널)(kernel)은 하드웨어를 사용해야 할 때마다 디바이스 드라이버를 언제든지 불러올 수 있는데, 이러한 모듈성(modularity) 덕분에 드라이버 개발은 비교적 쉬워진다.

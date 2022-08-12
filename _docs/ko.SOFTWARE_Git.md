@@ -6,7 +6,7 @@ slug: ko.Git
 icon: icon-git.png
 order: 0x30
 ---
-#  소개
+# 소개
 > *참조: [Pro Git, 2nd Edition](https://git-scm.com/book/)*
 
 [Git](https://git-scm.com/)은 버전 관리 시스템 중 하나로 프로젝트 관리에 사용되는 소프트웨어이다. 비록 Subversion과 같은 Git이 아닌 소프트웨어라도 버전 관리 시스템은 개발자들에게 프로젝트 관리 및 작업에 효율성을 증대시키는 매우 유용한 기능을 제공하며, 대표적인 Git 호스팅 서비스로 [GitHub](https://github.com/) 및 [GitLab](https://gitlab.com/) 등이 존재한다. 본 장은 버전 관리의 기초적인 개념 및 원리를 시작으로 Git에 대하여 기본적인 내용을 소개한다.
@@ -55,7 +55,7 @@ order: 0x30
 
 > 본 내용은 스냅샷이 델타 방식보다 우월하다는 것을 논하는 게 아니다. 각 접근법은 장점과 단점이 있으며, 단지 Git은 스냅샷 기법을 택하였을 뿐이다.
 
-#  기초
+# 기초
 > *설치: [Git - Downloads](https://git-scm.com/downloads)*
 
 Git은 [스냅샷](#스냅샷) 기법을 적용한 [분산 버전 관리](#분산-버전-관리) 시스템이다. 비록 작업공간이나 프로젝트가 들어있지 않더라도 Git으로부터 버전 관리가 되는 폴더를 저장소(repository)라고 부른다. Git 호스팅 서비스(예. GitHub, GitLab 등) 서버에서 클라이언트 컴퓨터로 저장소를 복사하는 것을 클론(clone)이라고 한다. 클라이언트 컴퓨터로 클론되거나 생성된 저장소에는 `.git` 폴더가 있어 버전 관리를 로컬에서 가능케 하고 서버의 저장소와 연동하는데 임한다.
@@ -113,5 +113,5 @@ git config --global user.email "GKO95@example.com"
 * **Staged**
     : *Modified 상태의 파일 변경사항 혹은 untracked 상태의 새 파일은 커밋되기 전에 우선 staged 상태로 전환된다. Staged 파일은 변경사항 및 새 파일을 저장소의 Staging Area에 임시 저장하여 안전하게 보관하며, 변경 취소 영향을 받지 않는다. 다시 말해, staged 상태는 작업 중인 modified 파일들을 새로운 버전으로 커밋하기 전에 변경사항 및 새 파일을 저장할 수 있는 편의를 제공한다.*
 
-#  브랜치
+# 브랜치
 [브랜치](https://en.wikipedia.org/wiki/Branching_(version_control))(branch)는 독립적인 버전 관리 작업흐름 개체이다. Git 저장소를 생성하면 `master` 브랜치가 함께 생성되어 버전 관리가 이루어진다.

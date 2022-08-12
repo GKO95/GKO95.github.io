@@ -6,7 +6,7 @@ slug: ko.Linux
 icon: icon-linux.svg
 order: 0x64
 ---
-#  소개
+# 소개
 [리눅스](https://ko.wikipedia.org/wiki/리눅스_커널)(Linux)는 운영체제 커널이며, 이를 사용하는 리눅스 배포판 운영체제가 대표적으로 [우분투](https://ko.wikipedia.org/wiki/우분투_(운영_체제))(Ubuntu)/[데비안](https://ko.wikipedia.org/wiki/데비안)(Debian), [페도라](https://ko.wikipedia.org/wiki/페도라_리눅스)(Fedora), [안드로이드](https://ko.wikipedia.org/wiki/안드로이드_(운영_체제))(Android) 등이 있다. 배포판이 아닌 "순수" 리눅스를 설치하여 사용해보겠다는 생각을 가질 수 있겠으나, 커널 자체는 하드웨어와 소프트웨어의 징검다리 역할을 할 뿐이며 사용자 측에서 사용할 수 있는 소프트웨어가 없으므로 부팅 이후에 아무것도 실행되지 않는다. 본 장은 리눅스를 컴퓨터 과학 관점에서 아키텍처 및 드라이버 등을 기술적으로 다루기에 앞서 운영체제에 대하여 기본적인 내용을 소개한다.
 
 > 본 문서는 [*Debian 11 "Bullseye"*](https://www.debian.org/releases/bullseye/) 운영체제를 예시로 설명한다.
@@ -92,7 +92,7 @@ order: 0x64
 
 이렇게 보호 링이 분류된 이유는 "더 많은 제어에는 더 큰 책임이 뒤따른다"는 관점에서 비롯된다. 커널 모드의 프로그램 오동작은 시스템 전체에 충돌을 일으킬 수 있기 때문에 문제가 절대로 발생하지 않도록 신뢰될 수 있어야 한다.
 
-#  드라이버
+# 드라이버
 > *참조: [Linux Device Drivers, Third Edition [LWN.net]](https://lwn.net/Kernel/LDD3/)*
 
 [디바이스 드라이버](https://ko.wikipedia.org/wiki/장치_드라이버)(device driver; 일명 장치 드라이버)는 특정 하드웨어와 상호작용하기 위해 짜여진 프로그래밍 인터페이스이다. 비록 운영체제나 어플리케이션이 구체적으로 하드웨어가 어떻게 동작하는지 몰라도 해당 하드웨어 특성을 파악하고 있는 드라이버를 통해 간편하게 사용할 수 있다. 시스템 부팅 이후에도 [커널](#커널)(kernel)은 하드웨어를 사용해야 할 때마다 디바이스 드라이버를 언제든지 불러올 수 있는데, 이러한 모듈성(modularity) 덕분에 드라이버 개발은 비교적 쉬워진다.

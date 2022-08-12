@@ -5,7 +5,7 @@ title: 미분방정식
 slug: ko.Differential
 order: 0xE1
 ---
-#  개요
+# 개요
 > 본 내용은 고등학교 교육과정 중 하나인 [미분](https://en.wikipedia.org/wiki/Derivative) 및 [적분](https://en.wikipedia.org/wiki/Integral), 그리고 [복소수](https://en.wikipedia.org/wiki/Complex_number)를 기반하므로 이에 대해 충분한 이해가 필요하다.
 
 [미분방정식](https://en.wikipedia.org/wiki/Differential_equation)(differential equation)은 한 개 이상의 함수들 간 연관성을 나타내는 방정식이다. 하나의 함수가 나머지에 어떠한 영향을 주는지 연관성을 관측하는데, 이러한 변화는 수학적으로 미분이 동원되기 때문에 "미분"방정식이라 부른다. 연관성은 곧 시스템 내에서 발생하는 인과현상을 설명하기 때문에, 결과적으로 미분방정식은 시스템에서의 *현상을 수식으로 표현한 것*이라고 해석할 수 있다.
@@ -62,7 +62,7 @@ order: 0xE1
     y(0) = 2 \ \rightarrow y = 2e^{\kappa t} \quad (\because c=2)
     $$
 
-#  완전미분방정식
+# 완전미분방정식
 [완전미분방정식](https://ko.wikipedia.org/wiki/완전_미분_방정식)(exact differential equation)은 종속변수($u=f(x,y)$)가 의존하는 모든 독립변수의 편미분을 합한 [전미분](https://ko.wikipedia.org/wiki/전미분)(total derivative)이 완전한 형태를 갖는 미분방정식이다. 
 
 $$
@@ -183,7 +183,7 @@ $$
 
 > 단, 풀이 과정 및 적분인자의 수식에서 어떠한 가정을 기반하였는지 분명히 명시해야 한다; 타 가정에서는 풀이 과정과 수식이 전혀 달라지기 때문이다!
 
-#  선형미분방정식
+# 선형미분방정식
 선형미분방정식(linear differential equation)은 가장 흔한 형태의 미분방정식으로 다음과 같이 표현된다.
 
 $$
@@ -611,7 +611,7 @@ $$
 \qquad \therefore \mu(x) = \int{c\left\{ (y^{-2}_1)e^{-\int{p(x)dx}}\right\}dx}
 $$
 
-#  응용
+# 응용
 본 장은 미분방정식이 활용되는 대표적인 일부 예시 중에서도, 고등학교 물리학에서 배우는 [고전역학](https://en.wikipedia.org/wiki/Classical_mechanics) 내용을 바탕으로 한 아래의 간단한 몇 가지 예시를 통해 미분방정식 수립 방법을 다룬다.
 
 ### 예제 1. 평형상태 (1)
