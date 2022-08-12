@@ -32,6 +32,17 @@ const imageSize = () => {
 $(window).resize(imageSize)
 
 //========================================
+// >> OPEN NEW TAB
+//========================================
+const openNewTab = () => {
+    $(`article a`).each(function() {
+        if( $(this).attr("href").indexOf("://") != -1 ) {
+            $(this).attr("target","_blank");
+        }
+    })
+}; openNewTab();
+
+//========================================
 // >> DOCUMENT PROCESSING
 //========================================
 if ($(`#docs-content > :first-child`).is('H1')) {
