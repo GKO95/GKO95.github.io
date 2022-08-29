@@ -22,10 +22,12 @@ order: null
 * 프로그램 이미지
 * [가상 주소 공간](#가상-주소-공간)
 * [스레드](#스레드)
-* 핸들
+* [핸들](#핸들)
 
 ## 가상 주소 공간
 [가상 주소 공간](https://ko.wikipedia.org/wiki/가상_주소_공간)(virtual address space; VAS)은 프로세스마다 데이터를 저장할 수 있는 가상의 메모리 공간이다. 여기서 "가상"이 갖는 의미는 매우 중요하며, 아래의 성질들을 충족시킨다.
+
+![가상 주소 공간과 물리 메모리의 관계<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Virtual_address_space_and_physical_address_space_relationship.svg">위키미디어</a></i></sub>](/images/docs/process/virtual_address_space.png)
 
 1. **독립성**
 
@@ -37,7 +39,7 @@ order: null
 
 3. **연속성**
 
-    매핑된 메모리 공간이므로, 물리 메모리상 띄엄띄엄 분산된 메모리 조각(페이지 프레임; page frame)들을 하나의 연속된 가상 메모리 공간으로 구현한다. [메모리 관리 장치](https://ko.wikipedia.org/wiki/메모리_관리_장치)(MMU) 하드웨어에서 가상 메모리의 가장 작은 조각인 페이지(page)를 물리 메모리의 페이지 프레임과 일대일 매핑을 담당한다. 해당 성질은 메모리의 [파편화](https://en.wikipedia.org/wiki/Fragmentation_(computing))를 방지하는 효과를 기대할 수 있다.
+    매핑된 메모리 공간이므로, 물리 메모리상 띄엄띄엄 분산된 메모리 조각들을 하나의 연속된 가상 메모리 공간으로 구현한다. 가상 메모리의 [페이지](#페이지)(page)와 물리 메모리의 [페이지 프레임](#페이지)(page frame)를 일대일 매핑하는 것은 [메모리 관리 장치](https://ko.wikipedia.org/wiki/메모리_관리_장치)(MMU) 하드웨어에서 담당한다. 해당 성질은 메모리의 [파편화](https://en.wikipedia.org/wiki/Fragmentation_(computing))를 방지하는 효과를 기대할 수 있다.
 
 가상 주소 공간은 크게 (1) 개별 프로세스 데이터 및 리소스를 저장하는 "프로세스 공간"과 (2) 모든 프로세스에 공통적인 윈도우 운영체제 데이터 및 리소스를 담고있는 "시스템 공간"으로 나뉘어지는데, 흔히 전자와 후자를 각각 사용자 공간(user space) 및 커널 공간(kernel space)이라고 부르기도 한다. 윈도우 운영체제 및 아키텍처에 따라 각 공간들이 가질 수 있는 최대 크기는 아래와 같이 [지정](https://docs.microsoft.com/ko-kr/windows/win32/memory/memory-limits-for-windows-releases)되어 있다.
 
@@ -55,3 +57,46 @@ order: null
 프로세스에 `IMAGE_FILE_LARGE_ADDRESS_AWARE` 플래그 설정여부에 따라 사용자 공간을 2 GB으로 제한할 지 (32비트 프로세스 기본값), 혹은 그 이상 크기를 확장할 지 (64비트 프로세스 기본값) 선택할 수 있다. 32비트 프로세스에 해당 플래그가 설정되면 32비트가 표현할 수 있는 최대 주소 크기인 4 GB까지 사용자 공간으로 활용할 수 있으나, 32비트 윈도우 운영체제에서는 3 GB만 사용자 공간으로 사용하고 나머지 1 GB는 커널 공간으로 분배된다.
 
 ![비주얼 스튜디오에서 <code>IMAGE_FILE_LARGE_ADDRESS_AWARE</code> 플래그 설정여부 위치](/images/docs/process/process_large_addresses.png)
+
+### 페이지
+[페이지](https://ko.wikipedia.org/wiki/페이지_(컴퓨터_메모리))(page)는 가상 주소 공간에서 관리되는 가장 작은 단위의 메모리 블록이며, 이와 매핑된 하나의 물리 메모리 조각을 페이지 프레임(page frame) 혹은 간단히 프레임(frame)이라고 부른다. 페이지 및 프레임의 크기는 고정되어 있으며 일반적으로 4 KB이다.
+
+페이지에는 세 가지 [상태](https://docs.microsoft.com/ko-kr/windows/win32/memory/page-state)가 존재하며, 이에 따라 가상 메모리를 사용할 수 있는지 여부가 결정된다.
+
+<table>
+<thead><tr><th>상태</th><th>설명</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;">Free</td><td>가상 주소 공간에서 사용되고 있지 않는 가상 메모리이다.</td></tr>
+<tr><td style="text-align: center;">예약<br/>(Reserved)</td><td>가상 주소 공간의 메모리를 차지하지만 시스템에서는 메모리를 사용하지 않는 것으로 인식한다.</td></tr>
+<tr><td style="text-align: center;">커밋/기여<br/>(Committed)</td><td>가상 주소 공간의 메모리를 차지하면서 시스템에서는 메모리를 사용하는 것으로 인식한다.<ul><li>페이지가 committed 되었다고 곧바로 물리 메모리를 할당받는 게 아니다.</li><li>시스템에 committed 된 메모리 총 용량을 commit charge라고 부르며 "물리 메모리 + <a href="#페이징-파일">페이징 파일</a>" 크기만큼으로 제한된다.</li></ul></td></tr>
+</tbody>
+</table>
+
+### 페이징 파일
+페이징 파일(paging file)은 가상 주소 공간의 [페이지](#페이지)를 물리 메모리가 아닌 HDD 혹은 SSD와 같은 저장장치의 파일 형태로 나타낸 것이다.
+
+> 페이징 파일 `pagefile.sys`는 [고급 시스템 설정](ko.BSOD#고급-시스템-설정)의 가상 메모리에서 각 드라이브마다 활성 여부 및 크기를 지정할 수 있다.
+
+제한된 크기의 물리 메모리에서 페이지를 유연하게 관리 및 대처할 수 있도록 하는 [페이징](https://ko.wikipedia.org/wiki/페이징)(paging) 기법을 보조하는 게 페이징 파일의 목적이다. 페이징은 크게 두 가지로 나뉘어진다.
+
+* **페이징 아웃** (Paging out; 페이지 프레임 → 페이징 파일): 물리 메모리에 오랜 시간동안 머물고 있으나 사용되지 않은 committed 페이지를 저장장치로 옮겨 메모리 여유를 확보한다.
+* **페이징 인** (Paging in; 페이징 파일 → 페이지 프레임): 페이징 파일은 저장장치의 하드웨어적 한계로 인해 절대 물리 메모리를 대체할 수 없어, 참조되어야 할 페이지는 물리 메모리로 복귀되어야 한다.
+
+페이징이 아니더라도 committed 된 메모리 중 저장장치에서 찾아볼 수 없는 데이터는 흔히 페이징 파일에서 처리된다 (예. 저장되지 않은 [메모장](https://ko.wikipedia.org/wiki/메모장_(소프트웨어)) 텍스트). 이와 반대로 `notepad.exe` 프로그램 이미지 혹은 저장된 `.txt` 파일 등과 같이 저장장치에 찾을 수 있는 데이터는 물리 메모리에서 불러온다.
+
+## 핸들
+[핸들](https://ko.wikipedia.org/wiki/핸들_(컴퓨팅))(handle)은 프로세스가 파일이나 오브젝트와 같은 리소스에 접근하거나 불러오기 위해 사용하는 추상적인 [참조](ko.C#포인터)이다. 일반적으로 핸들을 아래와 같이 선언한다.
+
+```c
+typedef void* HANDLE;
+```
+
+비록 핸들은 `void` 자료형 포인터로 나타날지언정, 가상 메모리상 데이터가 위치한 주소를 직접적으로 가리키는 포인터와 엄밀히 다른 존재이다. 가상 주소 공간 안에는 리소스들의 포인터가 나열된 배열 혹은 테이블이 있는데, 여기서 원하는 리소스에 접근하기 위한 테이블 진입점을 색인하는 요소가 바로 핸들이다. 만일 어떠한 이유로 리소스 포인터가 바뀌었다 하여도, 테이블에서의 해당 리소스 진입점은 여전하기 때문에 핸들의 유효성이 그대로 유지된다는 점에서 "추상적"인 참조라고 언급하였다.
+
+리소스의 핸들을 생성 및 제거하는 것을 각각 열고(open) 닫는다(close)고 표현한다. 더 이상 사용되지 않는 리소스의 열린 핸들을 전부 닫아주지 않으면 프로세스가 종료될 때까지 테이블 및 메모리에 리소스가 계속 잔여하는 [핸들 누수](https://ko.wikipedia.org/wiki/핸들_누수)(handle leak) 문제가 발생한다.
+
+# 스레드
+[스레드](https://ko.wikipedia.org/wiki/스레드_(컴퓨팅))(thread)는 프로세스의 프로그램 이미지 코드를 실행하기 위해 CPU에서 처리할 수 있는 작업 흐름의 단위이다. 프로세스는 기본적으로 하나의 스레드를 갖는데 개발자의 설계에 의해 추가로 생성하여 두 개 이상의 스레드를 활용할 수 있고, 동일한 가상 주소 공간에 상주하기 때문에 서로의 리소스를 아무런 제약없이 공유할 수 있다. 그러나 프로세스에는 최소한 하나의 스레드가 존재해야 하므로, 모든 스레드가 종료되면 해당 프로세스는 자동적으로 함께 종료된다.
+
+# 같이 보기
+* [프로세스 및 스레드 - Win32 apps &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows/win32/procthread/processes-and-threads)
