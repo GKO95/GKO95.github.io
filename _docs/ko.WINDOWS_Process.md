@@ -25,7 +25,7 @@ order: null
 * [핸들](#핸들)
 
 ## 가상 주소 공간
-[가상 주소 공간](https://ko.wikipedia.org/wiki/가상_주소_공간)(virtual address space; VAS)은 프로세스마다 데이터를 저장할 수 있는 가상의 메모리 공간이다. 여기서 "가상"이 갖는 의미는 매우 중요하며, 아래의 성질들을 충족시킨다.
+[가상 주소 공간](https://ko.wikipedia.org/wiki/가상_주소_공간)(virtual address space; VAS)은 프로세스마다 데이터를 저장할 수 있는 가상의 [메모리](ko.Memory) 공간이다. 여기서 "가상"이 갖는 의미는 매우 중요하며, 아래의 성질들을 충족시킨다.
 
 ![가상 주소 공간과 물리 메모리의 관계<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Virtual_address_space_and_physical_address_space_relationship.svg">위키미디어</a></i></sub>](/images/docs/process/virtual_address_space.png)
 
@@ -66,9 +66,9 @@ order: null
 <table>
 <thead><tr><th>상태</th><th>설명</th></tr></thead>
 <tbody>
-<tr><td style="text-align: center;">Free</td><td>가상 주소 공간에서 사용되고 있지 않는 가상 메모리이다.</td></tr>
-<tr><td style="text-align: center;">예약<br/>(Reserved)</td><td>가상 주소 공간의 메모리를 차지하지만 시스템에서는 메모리를 사용하지 않는 것으로 인식한다.</td></tr>
-<tr><td style="text-align: center;">커밋/기여<br/>(Committed)</td><td>가상 주소 공간의 메모리를 차지하면서 시스템에서는 메모리를 사용하는 것으로 인식한다.<ul><li>페이지가 committed 되었다고 곧바로 물리 메모리를 할당받는 게 아니다.</li><li>시스템에 committed 된 메모리 총 용량을 commit charge라고 부르며 "물리 메모리 + <a href="#페이징-파일">페이징 파일</a>" 크기만큼으로 제한된다.</li></ul></td></tr>
+<tr><td style="text-align: center;">여유<br/>(Free)</td><td>가상 주소 공간에서 사용되고 있지 않는 가상 메모리이다.</td></tr>
+<tr><td style="text-align: center;">예약된<br/>(Reserved)</td><td>가상 주소 공간의 메모리를 차지하지만 시스템에서는 메모리를 사용하지 않는 것으로 인식한다.</td></tr>
+<tr><td style="text-align: center;">커밋된<br/>(Committed)</td><td>가상 주소 공간의 메모리를 차지하면서 시스템에서는 메모리를 사용하는 것으로 인식한다.<ul><li>페이지가 커밋되었다고 곧바로 물리 메모리를 할당받는 게 아니다.</li><li>시스템에 커밋된 메모리 전체 크기를 커밋 총량(commit charge)이라고 부르며 "물리 메모리 + <a href="#페이징-파일">페이징 파일</a>" 크기만큼으로 제한된다.</li></ul></td></tr>
 </tbody>
 </table>
 
@@ -79,7 +79,7 @@ order: null
 
 제한된 크기의 물리 메모리에서 페이지를 유연하게 관리 및 대처할 수 있도록 하는 [페이징](https://ko.wikipedia.org/wiki/페이징)(paging) 기법을 보조하는 게 페이징 파일의 목적이다. 페이징은 크게 두 가지로 나뉘어진다.
 
-* **페이징 아웃** (Paging out; 페이지 프레임 → 페이징 파일): 물리 메모리에 오랜 시간동안 머물고 있으나 사용되지 않은 committed 페이지를 저장장치로 옮겨 메모리 여유를 확보한다.
+* **페이징 아웃** (Paging out; 페이지 프레임 → 페이징 파일): 물리 메모리에 오랜 시간동안 머물고 있으나 사용 중이지 않은 커밋된 페이지를 저장장치로 옮겨 메모리 여유를 확보한다.
 * **페이징 인** (Paging in; 페이징 파일 → 페이지 프레임): 페이징 파일은 저장장치의 하드웨어적 한계로 인해 절대 물리 메모리를 대체할 수 없어, 참조되어야 할 페이지는 물리 메모리로 복귀되어야 한다.
 
 페이징이 아니더라도 committed 된 메모리 중 저장장치에서 찾아볼 수 없는 데이터는 흔히 페이징 파일에서 처리된다 (예. 저장되지 않은 [메모장](https://ko.wikipedia.org/wiki/메모장_(소프트웨어)) 텍스트). 이와 반대로 `notepad.exe` 프로그램 이미지 혹은 저장된 `.txt` 파일 등과 같이 저장장치에 찾을 수 있는 데이터는 물리 메모리에서 불러온다.
