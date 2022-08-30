@@ -45,12 +45,15 @@ order: null
 ### 커널 메모리 덤프
 [커널 메모리 덤프](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/kernel-memory-dump)(Kernel Memory Dump)는 물리 메모리 중에서 오로지 커널과 관련된 데이터만을 수집하며, 사용자 모드는 제외된다. 생성된 덤프의 크기는 [전체 메모리 덤프](#complete-memory-dump)의 삼분의 일 정도로 작다.
 
-| 포함                         | 제외              |
-|:--------------------------------:|:---------------------:|
-| 윈도우 커널                   | 비할당 메모리    |
-| 커널 모드 드라이버               | 사용자 모드 어플리케이션 |
-| 커널 모드 프로그램              | -                     |
-| 하드웨어 추상화 계층 (HAL) | -                     |
+<table style="table-layout: fixed; width: 40%">
+<thead><tr><th style="width: 50%;">포함</th><th style="width: 50%;">제외</th></tr></thead>
+<tbody style="text-align: center;">
+<tr><td>윈도우 커널</td><td>비할당 메모리</td></tr>
+<tr><td>커널 모드 드라이버</td><td>사용자 모드 어플리케이션</td></tr>
+<tr><td>커널 모드 프로그램</td><td>-</td></tr>
+<tr><td>하드웨어 추상화 계층 (HAL)</td><td>-</td></tr>
+</tbody>
+</table>
 
 ### 작은 메모리 덤프
 [작은 메모리 덤프](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/small-memory-dump)(Small Memory Dump)는 64 KB 크기로 제한된 메모리 공간에서 덤프를 생성해야 할 때 유용하다. 비록 데이터는 제한적이지만 다음 정보들이 포함되어 있다.
@@ -76,13 +79,16 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 ### 활성 메모리 덤프
 [활성 메모리 덤프](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/active-memory-dump)(Active Memory Dump)는 디버깅에 필요없는 데이터가 필터링된 [전체 메모리 덤프](#complete-memory-dump)의 일종으로, 덤프 파일 크기는 전체 메모리 덤프다 작지만 [커널 메모리 덤프](#kernel-memory-dump)보다 크다.
 
-| 포함                         | 제외            |
-|:--------------------------------:|:------------------:|
-| 윈도우 커널                   | 비할당 메모리 |
-| 커널 모드 드라이버               | 게스트 VM 페이지     |
-| 커널 모드 프로그램              | 파일 캐시         |
-| 사용자 모드 어플리케이션           | -                  |
-| 하드웨어 추상화 계층 (HAL) | -                  |
+<table style="table-layout: fixed; width: 40%">
+<thead><tr><th style="width: 50%;">포함</th><th style="width: 50%;">제외</th></tr></thead>
+<tbody style="text-align: center;">
+<tr><td>윈도우 커널</td><td>비할당 메모리</td></tr>
+<tr><td>커널 모드 드라이버</td><td>게스트 VM 페이지</td></tr>
+<tr><td>커널 모드 프로그램</td><td>파일 캐시</td></tr>
+<tr><td>사용자 모드 어플리케이션</td><td>-</td></tr>
+<tr><td>하드웨어 추상화 계층 (HAL)</td><td>-</td></tr>
+</tbody>
+</table>
 
 > 하이퍼바이저 호스트 머신의 경우, 자식 가상 머신들에 대한 데이터가 필터링된 활성 메모리 덤프가 매우 유용하다.
 
