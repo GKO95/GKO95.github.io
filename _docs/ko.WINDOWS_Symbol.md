@@ -15,46 +15,14 @@ order: null
 마이크로소프트 윈도우 NT는 관측할 수 있는 정보의 유형과 제약에 따라 심볼을 세 가지로 나눈다.
 
 <table>
-  <thead>
-    <tr>
-      <th style="text-align: center">심볼</th>
-      <th>관측 가능한 데이터</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">Export</td>
-      <td>
-        <ul>
-          <li>함수 (export 테이블 한정)</li>
-        </ul>
-        <sub>서버: N/A</sub>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Public</td>
-      <td>
-        <ul>
-          <li>함수 (비정적 한정)</li>
-          <li>전역 변수 (<code>extern</code> 한정)</li>
-        </ul>
-        <sub>서버: <code>https://msdl.microsoft.com/download/symbols</code></sub>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Private</td>
-      <td>
-        <ul>
-          <li>함수</li>
-          <li>전역 변수</li>
-          <li>지역 변수</li>
-          <li>사용자 정의 구조체, 클래스, 그리고 자료형</li>
-          <li>소스 파일 정보: 파일명, 줄번호, 기타 등등</li>
-        </ul>
-        <sub>서버: N/A</sub>
-      </td>
-    </tr>
-  </tbody>
+<thead>
+<tr><th style="text-align: center">심볼</th><th>관측 가능한 데이터</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: center">Export</td><td><ul><li>함수 (export 테이블 한정)</li></ul><sub>서버: N/A</sub></td></tr>
+<tr><td style="text-align: center">Public</td><td><ul><li>함수 (비정적 한정)</li><li>전역 변수 (<code>extern</code> 한정)</li></ul><sub>서버: <code>https://msdl.microsoft.com/download/symbols</code></sub></td></tr>
+<tr><td style="text-align: center">Private</td><td><ul><li>함수</li><li>전역 변수</li><li>지역 변수</li><li>사용자 정의 구조체, 클래스, 그리고 자료형</li><li>소스 파일 정보: 파일명, 줄번호, 기타 등등</li></ul><sub>서버: N/A</sub></td></tr>
+</tbody>
 </table>
 
 ## 프로그램 데이터베이스

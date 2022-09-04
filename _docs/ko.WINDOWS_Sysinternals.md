@@ -26,120 +26,19 @@ Sysinternals는 필요한 개별 프로그램만 [다운로드](https://docs.mic
 다음은 시스템 구성요소 대상에 따라 Sysinternals 유틸리티 프로그램들을 분류한 목록이다.
 
 <table style="table-layout: fixed; width: 100%">
-  <thead>
-    <tr>
-      <th>파일 및 디스크</th>
-      <th>네트워크</th>
-      <th><a href="ko.Process">프로세스</a></th>
-      <th>보안</th>
-      <th>시스템 정보</th>
-      <th>기타</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="vertical-align: top; overflow-wrap: break-word;">
-      <td>
-        <ul>
-          <li>AccessChk</li>
-          <li>AccessEnum</li>
-          <li>CacheSet</li>
-          <li>Contig</li>
-          <li>Disk2vhd</li>
-          <li>DiskExt</li>
-          <li>DiskMon</li>
-          <li>DiskView</li>
-          <li>Disk Usage</li>
-          <li>EFSDump</li>
-          <li>FindLinks</li>
-          <li>LDMDump</li>
-          <li>MoveFile</li>
-          <li>NTFSInfo</li>
-          <li>PendMoves</li>
-          <li>SDelete</li>
-          <li>Sigcheck</li>
-          <li>Streams</li>
-          <li>Sync</li>
-          <li>VolumeID</li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>AdExplorer</li>
-          <li>AdInsight</li>
-          <li>AdRestore</li>
-          <li>PipeList</li>
-          <li>PsFile</li>
-          <li>PsPing</li>
-          <li>ShareEnum</li>
-          <li>TCPView</li>
-          <li>WhoIs</li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>Autoruns</li>
-          <li>Handle</li>
-          <li>ListDLLs</li>
-          <li>PortMon</li>
-          <li>ProcDump</li>
-          <li>Process Explorer</li>
-          <li>Process Monitor</li>
-          <li>PsExec</li>
-          <li>PsGetSid</li>
-          <li>PsKill</li>
-          <li>PsList</li>
-          <li>PsService</li>
-          <li>PsSuspend</li>
-          <li>PsTools</li>
-          <li>ShellRunas</li>
-          <li>VMMap</li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>Autologon</li>
-          <li>LogonSessions</li>
-          <li>PsLoggedOn</li>
-          <li>PsLogList</li>
-          <li>Sysmon</li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>ClockRes</li>
-          <li>Coreinfo</li>
-          <li>LiveKD</li>
-          <li>LoadOrder</li>
-          <li>PsInfo</li>
-          <li>RAMMap</li>
-          <li>WinObj</li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li>BgInfo</li>
-          <li>BlueScreen</li>
-          <li>CpuStres</li>
-          <li>Ctrl2Cap</li>
-          <li>DebugView</li>
-          <li>Desktops</li>
-          <li>Hex2dec</li>
-          <li>Junction</li>
-          <li>NotMyFault</li>
-          <li>PsPasswd</li>
-          <li>PsShutdown</li>
-          <li>RDCMan</li>
-          <li>RegDelNull</li>
-          <li>RegHide</li>
-          <li>RegJump</li>
-          <li>Registry Usage</li>
-          <li>Strings</li>
-          <li>Testlimit</li>
-          <li>ZoomIt</li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
+<thead>
+<tr><th>파일 및 디스크</th><th>네트워크</th><th><a href="ko.Process">프로세스</a></th><th>보안</th><th>시스템 정보</th><th>기타</th></tr>
+</thead>
+<tbody>
+<tr style="vertical-align: top; overflow-wrap: break-word;">
+<td><ul><li>AccessChk</li><li>AccessEnum</li><li>CacheSet</li><li>Contig</li><li>Disk2vhd</li><li>DiskExt</li><li>DiskMon</li><li>DiskView</li><li>Disk Usage</li><li>EFSDump</li><li>FindLinks</li><li>LDMDump</li><li>MoveFile</li><li>NTFSInfo</li><li>PendMoves</li><li>SDelete</li><li>Sigcheck</li><li>Streams</li><li>Sync</li><li>VolumeID</li></ul></td>
+<td><ul><li>AdExplorer</li><li>AdInsight</li><li>AdRestore</li><li>PipeList</li><li>PsFile</li><li>PsPing</li><li>ShareEnum</li><li>TCPView</li><li>WhoIs</li></ul></td>
+<td><ul><li>Autoruns</li><li>Handle</li><li>ListDLLs</li><li>PortMon</li><li>ProcDump</li><li>Process Explorer</li><li>Process Monitor</li><li>PsExec</li><li>PsGetSid</li><li>PsKill</li><li>PsList</li><li>PsService</li><li>PsSuspend</li><li>PsTools</li><li>ShellRunas</li><li><a href="ko.VMMap">VMMap</a></li></ul></td>
+<td><ul><li>Autologon</li><li>LogonSessions</li><li>PsLoggedOn</li><li>PsLogList</li><li>Sysmon</li></ul></td>
+<td><ul><li>ClockRes</li><li>Coreinfo</li><li>LiveKD</li><li>LoadOrder</li><li>PsInfo</li><li><a href="ko.RAMMap">RAMMap</a></li><li>WinObj</li></ul></td>
+<td><ul><li>BgInfo</li><li>BlueScreen</li><li>CpuStres</li><li>Ctrl2Cap</li><li>DebugView</li><li>Desktops</li><li>Hex2dec</li><li>Junction</li><li>NotMyFault</li><li>PsPasswd</li><li>PsShutdown</li><li>RDCMan</li><li>RegDelNull</li><li>RegHide</li><li>RegJump</li><li>Registry Usage</li><li>Strings</li><li>Testlimit</li><li>ZoomIt</li></ul></td>
+</tr>
+</tbody>
 </table>
 
 # 같이 보기
