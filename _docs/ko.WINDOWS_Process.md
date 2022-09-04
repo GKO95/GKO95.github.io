@@ -67,8 +67,8 @@ order: null
 <thead><tr><th>상태</th><th>설명</th></tr></thead>
 <tbody>
 <tr><td style="text-align: center;">여유<br/>(Free)</td><td>가상 주소 공간에서 사용되고 있지 않는 가상 메모리이다.</td></tr>
-<tr><td style="text-align: center;">예약된<br/>(Reserved)</td><td>가상 주소 공간의 메모리를 차지하지만 시스템에서는 메모리를 사용하지 않는 것으로 인식한다.</td></tr>
-<tr><td style="text-align: center;">커밋된<br/>(Committed)</td><td>가상 주소 공간의 메모리를 차지하면서 시스템에서는 메모리를 사용하는 것으로 인식한다.<ul><li>페이지가 커밋되었다고 곧바로 물리 메모리를 할당받는 게 아니다.</li><li>시스템에 커밋된 메모리 전체 크기를 커밋 총량(commit charge)이라고 부르며 "물리 메모리 + <a href="#페이징-파일">페이징 파일</a>" 크기만큼으로 제한된다.</li></ul></td></tr>
+<tr><td style="text-align: center;"><a href="ko.Memory#가상-메모리">예약된</a><br/>(Reserved)</td><td>가상 주소 공간의 메모리를 차지하지만 시스템에서는 메모리를 사용하지 않는 것으로 인식한다.</td></tr>
+<tr><td style="text-align: center;"><a href="ko.Memory#커밋된-메모리">커밋된</a><br/>(Committed)</td><td>가상 주소 공간의 메모리를 차지하면서 시스템에서는 메모리를 사용하는 것으로 인식한다.<ul><li>페이지가 커밋되었다고 곧바로 물리 메모리를 할당받는 게 아니다.</li><li>시스템에 커밋된 메모리 전체 크기를 커밋 총량(commit charge)이라고 부르며 "<a href="ko.Memory#메모리">물리 메모리</a> + <a href="#페이징-파일">페이징 파일</a>" 크기만큼으로 제한된다.</li></ul></td></tr>
 </tbody>
 </table>
 
