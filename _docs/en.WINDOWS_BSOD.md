@@ -103,7 +103,6 @@ There are some occasions where a system crash needs to be triggered: most notabl
     
     Holding the power button for seven seconds issues bug check [`0x1C8`](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x1c8--manually-initiated-power-button-hold) MANUALLY_INITIATED_POWER_BUTTON_HOLD but should release before ten seconds which is for resetting UEFI. A reboot may require if the DWORD registry value did not exist beforehand.
 
-
 * **Debug-VM**
 
     System crash using the [`Debug-VM`](https://docs.microsoft.com/en-us/powershell/module/hyper-v/debug-vm) command is specific for triggering BSOD on virtual machines from the host server using elevated Windows PowerShell (i.e., run as administrator). Enter the following PowerShell command to signal a non-maskable interrupt (NMI) to the virtual machine identified by [`Get-VM`](https://docs.microsoft.com/en-us/powershell/module/hyper-v/get-vm).
@@ -112,7 +111,7 @@ There are some occasions where a system crash needs to be triggered: most notabl
   Debug-VM -Name "<VM name>" -InjectNoneMaskableInterrupt
     ```
 
-# BSOD: Dump Configuration
+# BSOD Dump Configuration
 By default, a system generates an [Automatic Memory Dump](en.Dump#automatic-memory-dump) file on BSOD. Modify a dump configuration to create different types of dump or change BSOD behaviors. 
 
 ## Advanced System Setting

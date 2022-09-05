@@ -111,7 +111,12 @@ order: null
   Debug-VM -Name "<VM name>" -InjectNonMaskableInterrupt
     ```
 
-# BSOD: 덤프 설정
+### 블루스크린 색상 변경
+윈도우 7까지는 [Sysinternals](ko.Sysinternals)의 [NotMyFault](ko.NotMyFault) 유틸리티 프로그램을 통해 블루스크린 색상을 변경할 수 있었으나, 윈도우 8 이후로는 아예 색상이 파란색으로 고정되어 변경이 불가하다.
+
+> [윈도우 참가자 프로그램](https://support.microsoft.com/ko-kr/windows/windows-참가자-프로그램에-참여하기-ef20bb3d-40f4-20cc-ba3c-a72c844b563c)(Windows Insider Program)을 통해 사용할 수 있는 Preview 버전의 윈도우 운영체제는 초록색 블루스크린이 나타난다.
+
+# BSOD 덤프 설정
 기본적으로 시스템은 BSOD가 발생하면 [자동 메모리 덤프](ko.Dump#자동-메모리-덤프)를 생성한다. 설정을 변경하여 타 유형의 덤프를 생성하거나 BSOD 동작을 바꿀 수 있다.
 
 ## 고급 시스템 설정
