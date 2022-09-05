@@ -143,7 +143,7 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 
 <table style="table-layout: fixed; width: 80%">
 <thead><tr><th><code>DedicatedDumpFile</code></th><th><code>DumpFileSize</code></th></tr></thead>
-<tbody><tr><td><img src="/images/docs/windows/bsod_dedicated_dump_file.png" alt="전용 덤프의 경로 및 파일명 설정"/></td><td><img src="/images/docs/windows/bsod_dedicated_dump_size.png" alt="전용 덤프 파일의 크기 지정"/></td></tr></tbody>
+<tbody><tr style="overflow: auto;"><td style="overflow: inherit;"><img src="/images/docs/windows/bsod_dedicated_dump_file.png" alt="전용 덤프의 경로 및 파일명 설정"/></td><td style="overflow: inherit;"><img src="/images/docs/windows/bsod_dedicated_dump_size.png" alt="전용 덤프 파일의 크기 지정"/></td></tr></tbody>
 </table>
 
 단, 해당 레지스트리 설정은 페이징을 위한 가상 메모리로 사용될 수 없다.
