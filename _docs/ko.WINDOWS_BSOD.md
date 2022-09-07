@@ -10,10 +10,10 @@ order: null
 [블루스크린](https://ko.wikipedia.org/wiki/블루스크린), 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템에 더 이상의 손상이 가해지는 것을 방지하기 위한 에러 화면이며, 해당 문제를 파악 및 분석할 수 있는 [덤프](ko.Dump#커널-모드-덤프) 파일을 생성한다. BSOD는 아래의 사유로부터 호출된 [`KeBugCheck()`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/ddi/ntddk/nf-ntddk-kebugcheck) (또는 [`KeBugCheckEx()`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex)) 루틴에 의해 나타난다.
 
 * **[시스템 충돌](#시스템-충돌)**: 처리되지 않은 커널 모드 예외 (일명. 커널 모드 충돌).
-* **유효하지 않은 동작**: 윈도우 운영체제에서 (보안, 개인 정보, 치명적인 사용자 모드 프로그램 등에 의한) 복구 불가한 문제가 나타나면 커널 소스 코드로부터 의도적으로 발생되는데, 이는 시스템 장애가 절대 아니다.
+* **유효하지 않은 동작**: 윈도우 운영체제에서 (설계에 벗어난 동작, 치명적인 사용자 모드 결함 등) 복구 불가한 문제가 나타나면 커널 소스 코드로부터 의도적으로 발생되며, 이는 절대 시스템 장애가 아니다.
 
 ## 시스템 충돌
-시스템 충돌은 치명적인 시스템 장애로 야기될 수 있는 커널상 처리되지 않은 예외(exception)로부터 일어난다. 다음은 시스템이 충돌될 수 있는 몇 가지 시나리오에 대한 설명이다.
+시스템 충돌은 치명적인 시스템 장애로 야기될 수 있는 커널상 처리되지 않은 [예외](https://ko.wikipedia.org/wiki/예외_처리)(exception)로부터 일어난다. 다음은 시스템이 충돌될 수 있는 몇 가지 시나리오에 대한 설명이다.
 
 * **손상된 풀 메모리**
     
@@ -23,7 +23,7 @@ order: null
 
 * **경쟁 상태**
 
-    소프트웨어에서 [경쟁 상태](https://ko.wikipedia.org/wiki/%EA%B2%BD%EC%9F%81_%EC%83%81%ED%83%9C)(race condition)는 취약한 동기화 혹은 과도한 코드 실행에 의해 타이밍에 민감한 구성요소가 의도치 않은 방향으로 코드가 실행되거나 상호 배제(mutual exclusion) 객체의 공유 상태를 손상시킬 수 있다.
+    소프트웨어에서 [경쟁 상태](https://ko.wikipedia.org/wiki/경쟁_상태)(race condition)는 취약한 동기화 혹은 과도한 코드 실행에 의해 타이밍에 민감한 구성요소가 의도치 않은 방향으로 코드가 실행되거나 상호 배제(mutual exclusion) 객체의 공유 상태를 손상시킬 수 있다.
 
 * **메모리 소진**
 
@@ -34,11 +34,22 @@ order: null
     물리 메모리상 손상된 페이지, 고장난 장치 등의 하드웨어 장애는 시스템 충돌의 원인이 될 수 있다.
 
 ## 강제 시스템 충돌
-시스템 충돌이 수동으로 일으켜야 할 경우가 발생할 수 있으며, 대표적으로 시스템 응답 없음이 있다. 본 부문에서는 BSOD를 강제로 발생시키는 방법을 설명한다.
+시스템 충돌이 수동으로 일으켜야 할 경우가 발생할 수 있으며, 대표적으로 시스템 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅))이 있다. 본 부문에서는 BSOD를 강제로 발생시키는 방법을 설명한다.
 
+* **NMI**
+
+    일명 [마스크 불가능 인터럽트](https://en.wikipedia.org/wiki/Non-maskable_interrupt)(Non-maskable Interrupt)는 가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](https://ko.wikipedia.org/wiki/인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 [오류 검사 코드](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-code-reference2)(bug check) [`0x80`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure) NMI_HARDWARE_FAILURE이 발생한다. BSOD를 일으키기에 가장 확실한 방법이지만, NMI 버튼이 없는 서버용 PC가 있으며, 특히 가정용 PC에는 거의 찾아볼 수 없다.
+
+    * **Debug-VM**
+
+        [`Debug-VM`](https://docs.microsoft.com/ko-kr/powershell/module/hyper-v/debug-vm) 파워셸 명령어는 마이크로소프트에서 개발한 [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저), 일명 [하이퍼-V](https://ko.wikipedia.org/wiki/하이퍼-V)(Hyper-V)에서 호스트 서버로부터 가상 머신에 NMI 신호를 전송하여 BSOD를 발생시킬 수 있다. 파워셸은 관리자 권한으로 실행되어야 하며, 가상 머신의 이름은 [`Get-VM`](https://docs.microsoft.com/ko-kr/powershell/module/hyper-v/get-vm) 명령어로 확인이 가능하다.
+    
+        ```powershell
+      Debug-VM -Name "<VM name>" -InjectNonMaskableInterrupt
+        ```
 * **키보드**
 
-    키보드로부터 커널에 `KeBugCheck()` 루틴을 호출하므로써 윈도우 운영체제에 오류 검사 [`0xE2`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash) MANUALLY_INITIATED_CRASH 코드를 발생시키는 방법이 있으나, 오로지 하나만이 적용할 수 있다.
+    키보드로부터 커널에 `KeBugCheck()` 루틴을 호출하므로써 윈도우 운영체제에 오류 검사 코드 [0xE2 MANUALLY_INITIATED_CRASH](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)를 발생시키는 방법이 있으나, 소개되는 아래의 두 방법 중에서 오로지 하나만이 적용된다.
 
     1. **`Ctrl+Scroll` 단축키**
 
@@ -46,13 +57,13 @@ order: null
 
         | 키보드 | 레지스트리 키                                                 |
         |:--------:|--------------------------------------------------------------|
-        | PS/2     | `HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters` |
-        | USB      | `HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters`   |
-        | Hyper-V  | `HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\Parameters` |
+        | [PS/2](https://ko.wikipedia.org/wiki/PS/2_단자)     | `HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters` |
+        | [USB](https://ko.wikipedia.org/wiki/USB)      | `HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters`   |
+        | 하이퍼-V  | `HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\Parameters` |
 
-        아래와 같이 새로운 DWORD (32-bit) 레지스트리 값을 생성한다.
+        아래와 같이 `CrashOnCtrlScroll`이란 새로운 DWORD (32-bit) 레지스트리 값을 생성한다.
 
-        ![<code>CTRL+SCROLL</code> 단축키로 BSOD를 발생시키기 위한 <code>CrashOnCtrlScroll</code> 레지스트리 값](/images/docs/windows/bsod_keyboard_scroll.png)
+        ![<code>CrashOnCtrlScroll</code> 레지스트리 값](/images/docs/windows/bsod_keyboard_scroll.png)
 
     2. **대안 키보드 단축키**
 
@@ -62,7 +73,7 @@ order: null
         |:--------:|-------------------------------------------------------------|
         | PS/2     | `HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\crashdump` |
         | USB      | `HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\crashdump`   |
-        | Hyper-V  | `HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\crashdump` |
+        | 하이퍼-V  | `HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\crashdump` |
 
         아래와 같이 DWORD (32-bit) 레지스트리 값을 생성하거나 편집한다.
 
@@ -87,37 +98,39 @@ order: null
               0x00,0x7B,0x79,0x70 };
             ```
 
-* **디버거**
-
-    WinDbg 프로그램으로 커널 모드를 디버깅하는 중에 [`.crash`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/-crash--force-system-crash-) 명령어로 시스템 강제 충돌을 일으킬 수 있으며, 이를 통해 `KeBugCheck()` 루틴으로부터 오류 검사 `0xE2` MANUALLY_INITIATED_CRASH 코드가 반환된다. 만일 시스템 충돌이 발생하지 않으면 중단점 탈출을 시도한다.
-
 * **전원 버튼**
 
-    전원 버튼으로 BSOD를 발생키려면 아래의 레지스트리 키로 이동하여 새로운 DWORD (32-bit) 값을 생성한다.
+    전원 버튼으로 BSOD를 발생키려면 반드시 하드웨어, 펌웨어, 그리고 운영체제 요건이 충족되어야 한다:
+
+    1. [GPIO](https://ko.wikipedia.org/wiki/GPIO) 기반의 전원 버튼
+    2. 전원 이벤트를 Windows Power Manager로 전달하는 펌웨어
+    3. [윈도우 10, 버전 1809](https://ko.wikipedia.org/wiki/윈도우_10#레드스톤_5) 혹은 [윈도우 서버 2019](https://ko.wikipedia.org/wiki/윈도우_서버_2019) 이상의 운영체제
+
+    위의 요건을 모두 충족한다면 아래의 레지스트리 키로 이동하여 `PowerButtonBugcheck`이란 새로운 DWORD (32-bit) 값을 생성한다.
     
     ```
   HKLM\SYSTEM\CurrentControlSet\Control\Power
     ```
 
-    ![전원 버튼으로 BSOD를 발생시키기 위한 <code>PowerButtonBugcheck</code> 레지스트리 값](/images/docs/windows/bsod_force_powerbutton.png)
+    ![<code>PowerButtonBugcheck</code> 레지스트리 값](/images/docs/windows/bsod_force_powerbutton.png)
     
-    전원 버튼을 7초 동안 누르고 있으면 오류 검증 [`0x1C8`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x1c8--manually-initiated-power-button-hold) MANUALLY_INITIATED_POWER_BUTTON_HOLD 코드가 반환되지만, 10초간 누르면 UEFI 재설정이 되므로 그 전에 전원 버튼에 손을 뗴도록 한다. 해당 레지스트리 값을 새로 생성해야 한다면 재부팅이 필요할 수 있다.
+    전원 버튼을 7초 동안 누르고 있으면 오류 검사 코드 [0x1C8 MANUALLY_INITIATED_POWER_BUTTON_HOLD](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x1c8--manually-initiated-power-button-hold)가 반환되지만, 10초 이상 누르면 UEFI 재설정이 되므로 그 전에 전원 버튼에 손을 떼도록 한다. 해당 레지스트리 값을 새로 생성해야 한다면 재부팅이 필요할 수 있다.
 
-* **Debug-VM**
+* **[WinDbg](ko.WinDbg)**
 
-    [`Debug-VM`](https://docs.microsoft.com/ko-kr/powershell/module/hyper-v/debug-vm) 파워셸 명령어는 호스트 서버로부터 가상 머신에 BSOD를 발생시키기 위해 사용되며, 이때 파워셸은 관리자 권한으로 실행되어야 한다. 아래의 명령어를 입력하므로써 [`Get-VM`](https://docs.microsoft.com/ko-kr/powershell/module/hyper-v/get-vm) 명령어로 확인된 가상 머신에 NMI 신호를 전송하여 시스템 충돌을 일으킨다.
-    
-    ```powershell
-  Debug-VM -Name "<VM name>" -InjectNonMaskableInterrupt
-    ```
+    [윈도우 NT](ko.WindowsNT) 운영체제를 [디버깅](https://ko.wikipedia.org/wiki/디버그)하는 프로그램으로 커널 모드에서 [`.crash`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/-crash--force-system-crash-) 명령어를 입력하여 시스템 강제 충돌을 일으킬 수 있다. `KeBugCheck()` 루틴으로부터 오류 검사 코드 0xE2 MANUALLY_INITIATED_CRASH가 반환되는데, 만일 시스템 충돌이 발생하지 않으면 중단점 탈출을 시도한다.
+
+* **[NotMyFault](ko.NotMyFault)**
+
+    [Sysinternals](ko.Sysinternals) 유틸리티 중에서 몇 가지 방식으로 시스템 충돌을 일으킬 수 있는 프로그램이다. 비록 시스템 응답이 없는 상태에서 적합하지 않으나, 일반적인 상황에서 BSOD를 일으킬 때는 유용하다.
 
 ### 블루스크린 색상 변경
-윈도우 7까지는 [Sysinternals](ko.Sysinternals)의 [NotMyFault](ko.NotMyFault) 유틸리티 프로그램을 통해 블루스크린 색상을 변경할 수 있었으나, 윈도우 8 이후로는 아예 색상이 파란색으로 고정되어 변경이 불가하다.
+윈도우 7까지는 NotMyFault 프로그램으로 블루스크린 색상을 변경할 수 있었으나, 윈도우 8 이후로는 아예 색상이 파란색으로 고정되어 변경이 불가하다.
 
-> [윈도우 참가자 프로그램](https://support.microsoft.com/ko-kr/windows/windows-참가자-프로그램에-참여하기-ef20bb3d-40f4-20cc-ba3c-a72c844b563c)(Windows Insider Program)을 통해 사용할 수 있는 Preview 버전의 윈도우 운영체제는 초록색 블루스크린이 나타난다.
+> [윈도우 참가자 프로그램](https://support.microsoft.com/ko-kr/windows/windows-참가자-프로그램에-참여하기-ef20bb3d-40f4-20cc-ba3c-a72c844b563c)(Windows Insider Program)을 통해 사용할 수 있는 Preview 버전의 윈도우 운영체제는 "초록색" 블루스크린이 나타난다.
 
 # BSOD 덤프 설정
-기본적으로 시스템은 BSOD가 발생하면 [자동 메모리 덤프](ko.Dump#자동-메모리-덤프)를 생성한다. 설정을 변경하여 타 유형의 덤프를 생성하거나 BSOD 동작을 바꿀 수 있다.
+기본적으로 시스템의 덤프는 [자동 메모리 덤프](ko.Dump#자동-메모리-덤프)로 설정되어 있다. 설정을 변경하여 타 유형의 덤프를 생성하거나 BSOD 동작을 바꿀 수 있다.
 
 ## 고급 시스템 설정
 고급 시스템 설정은 BSOD 덤프 및 동작을 GUI로 구성할 수 있도록 한다.
