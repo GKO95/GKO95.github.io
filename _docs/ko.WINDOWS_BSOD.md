@@ -7,10 +7,12 @@ icon: icon-windows.svg
 order: null
 ---
 # 블루스크린
-[블루스크린](https://ko.wikipedia.org/wiki/블루스크린), 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템에 더 이상의 손상이 가해지는 것을 방지하기 위한 에러 화면이며, 해당 문제를 파악 및 분석할 수 있는 [덤프](ko.Dump#커널-모드-덤프) 파일을 생성한다. BSOD는 아래의 사유로부터 호출된 [`KeBugCheck()`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/ddi/ntddk/nf-ntddk-kebugcheck) (또는 [`KeBugCheckEx()`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex)) 루틴에 의해 나타난다.
+![윈도우 10에서 발생한 블루스크린 화면](/images/docs/windows/bsod_bugcheck_0xd1.png)
 
-* **[시스템 충돌](#시스템-충돌)**: 처리되지 않은 커널 모드 예외 (일명. 커널 모드 충돌).
-* **유효하지 않은 동작**: 윈도우 운영체제에서 (설계에 벗어난 동작, 치명적인 사용자 모드 결함 등) 복구 불가한 문제가 나타나면 커널 소스 코드로부터 의도적으로 발생되며, 이는 절대 시스템 장애가 아니다.
+[블루스크린](https://ko.wikipedia.org/wiki/블루스크린), 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템에 더 이상의 손상이 가해지는 것을 방지하기 위한 에러 화면이며, 해당 문제의 발생 원인인 [오류 검사 코드](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-code-reference2)(bug check)와 함께 분석에 필요한 [메모리 덤프](ko.Dump#커널-모드-덤프) 파일을 생성한다. BSOD는 아래의 사유로부터 호출된 [`KeBugCheck()`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/ddi/ntddk/nf-ntddk-kebugcheck) (또는 [`KeBugCheckEx()`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex)) 루틴에 의해 나타난다.
+
+* **[시스템 충돌](#시스템-충돌)**: 처리되지 않은 커널 모드 오류, 일명 커널 모드 충돌이다 (예시. [0x19 BAD_POOL_HEADER](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x19--bad-pool-header))
+* **유효하지 않은 동작**: 운영체제가 본래 설계에 벗어난 동작을 하였을 때, 복구가 불가하다고 판정되면 커널 초기화를 명분으로 발생한다 (예시. [0x133 DPC_WATCHDOG_VIOLATION](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x133-dpc-watchdog-violation)).
 
 ## 시스템 충돌
 시스템 충돌은 치명적인 시스템 장애로 야기될 수 있는 커널상 처리되지 않은 [예외](https://ko.wikipedia.org/wiki/예외_처리)(exception)로부터 일어난다. 다음은 시스템이 충돌될 수 있는 몇 가지 시나리오에 대한 설명이다.
@@ -38,7 +40,7 @@ order: null
 
 * **NMI**
 
-    일명 [마스크 불가능 인터럽트](https://en.wikipedia.org/wiki/Non-maskable_interrupt)(Non-maskable Interrupt)는 가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](https://ko.wikipedia.org/wiki/인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 [오류 검사 코드](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-code-reference2)(bug check) [`0x80`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure) NMI_HARDWARE_FAILURE이 발생한다. BSOD를 일으키기에 가장 확실한 방법이지만, NMI 버튼이 없는 서버용 PC가 있으며, 특히 가정용 PC에는 거의 찾아볼 수 없다.
+    일명 [마스크 불가능 인터럽트](https://en.wikipedia.org/wiki/Non-maskable_interrupt)(Non-maskable Interrupt)는 가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](ko.Processor#인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 [오류 검사 코드](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-code-reference2)(bug check) [0x80 NMI_HARDWARE_FAILURE](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure)이 발생한다. BSOD를 일으키기에 가장 확실한 방법이지만, NMI 버튼이 없는 서버용 PC가 있으며 특히 가정용 PC에는 거의 찾아볼 수 없다.
 
     * **Debug-VM**
 
@@ -49,16 +51,16 @@ order: null
         ```
 * **키보드**
 
-    키보드로부터 커널에 `KeBugCheck()` 루틴을 호출하므로써 윈도우 운영체제에 오류 검사 코드 [0xE2 MANUALLY_INITIATED_CRASH](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)를 발생시키는 방법이 있으나, 소개되는 아래의 두 방법 중에서 오로지 하나만이 적용된다.
+    키보드로부터 커널에 `KeBugCheck()` 루틴을 호출하므로써 윈도우 운영체제에 오류 검사 코드 [0xE2 MANUALLY_INITIATED_CRASH](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)를 발생시키는 방법이다. [PS/2](https://ko.wikipedia.org/wiki/PS/2_단자) 혹은 [USB](https://ko.wikipedia.org/wiki/USB) 신호로 동작하는 키보드, 그리고 하이퍼-V의 가상 머신에서 키보드로 일으킨 강제 BSOD를 설정하는 방법은 아래의 두 방법 중에서 오로지 하나만이 적용된다.
 
-    1. **`Ctrl+Scroll` 단축키**
+    1. **`CTRL+SCROLL` 단축키**
 
         우측 `CTRL`를 누르는 동시에 `SCROLL LOCK` 키를 두 번 클릭하여 시스템 충돌을 발생시키기 위해, 사용하고 있는 키보드에 따라 아래 레지스트리 키로 이동한다.
 
         | 키보드 | 레지스트리 키                                                 |
         |:--------:|--------------------------------------------------------------|
-        | [PS/2](https://ko.wikipedia.org/wiki/PS/2_단자)     | `HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters` |
-        | [USB](https://ko.wikipedia.org/wiki/USB)      | `HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters`   |
+        | PS/2     | `HKLM\SYSTEM\CurrentControlSet\Services\i8042prt\Parameters` |
+        | USB      | `HKLM\SYSTEM\CurrentControlSet\Services\kbdhid\Parameters`   |
         | 하이퍼-V  | `HKLM\SYSTEM\CurrentControlSet\Services\hyperkbd\Parameters` |
 
         아래와 같이 `CrashOnCtrlScroll`이란 새로운 DWORD (32-bit) 레지스트리 값을 생성한다.
@@ -97,6 +99,10 @@ order: null
               0x43,0x44,0x57,0x58,0x00,0x46,0x00,0x00,0x00,0x00,
               0x00,0x7B,0x79,0x70 };
             ```
+
+    만일 키보드로 BSOD가 발생되지 않았을 경우, 처리되어야 할 우선순위(일명 [IRQL](https://en.wikipedia.org/wiki/IRQL_(Windows)))가 상당히 높은 인터럽트에 의해 시스템이 장애를 겪고 있을 가능성이 매우 크다. 시스템 응답 없음을 야기한 인터럽트보다 낮은 IRQL의 키보드 입력 신호를 전달하면 인식되지 않는다. 때문에 키보드로 BSOD를 강제하려면 IRQL이 상대적으로 높은 PS/2 키보드를 사용하기를 권장한다.
+
+    > [`CTRL+ALT+DELETE`](https://ko.wikipedia.org/wiki/Control-Alt-Delete) 단축키가 인식되지 않아도 키보드로 강제 BSOD를 일으킬 수 있으나, 해당 문제는 사실상 키보드와 상관없는 [`winlogon.exe`](https://docs.microsoft.com/ko-kr/windows/win32/secauthn/initializing-winlogon) 프로세스의 문제일 확률이 높다.
 
 * **전원 버튼**
 
