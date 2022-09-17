@@ -154,7 +154,7 @@ BSOD가 발생하면 시스템은 기본적으로 [자동 메모리 덤프](ko.D
 HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 ```
 
-<table style="width: 80%"><thead><tr><th>레지스트리 값</th><th>고급 시스템 설정</th></tr></thead><tbody>
+<table style="width: 80%"><thead><tr><th>레지스트리 값</th><th>시작 및 복구 설정</th></tr></thead><tbody>
 <tr><td style="text-align: center;"><code>AlwaysKeepMemoryDump</code></td><td>디스크 공간이 부족할 때 메모리 덤프의 자동 삭제를 사용하지 않도록 설정</td></tr>
 <tr><td style="text-align: center;"><code>AutoReboot</code></td><td>자동으로 다시 시작</td></tr>
 <tr><td style="text-align: center;"><code>CrashDumpEnabled</code></td><td>커널 모드 덤프 종류 설정<ul><li><code>0x0</code>: (없음)</li><li><code>0x1</code>: 전체 메모리 덤프</li><li><code>0x2</code>: 커널 메모리 덤프</li><li><code>0x3</code>: 작은 메모리 덤프</li><li><code>0x7</code>: 자동 메모리 덤프</li></ul></td></tr>
