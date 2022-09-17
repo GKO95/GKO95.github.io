@@ -124,24 +124,46 @@ BSOD가 발생하면 시스템은 기본적으로 [자동 메모리 덤프](ko.D
 
 > 이전 운영체제의 시스템 기본 덤프 유형은 달리 설정되어 있다: [윈도우 7](https://ko.wikipedia.org/wiki/윈도우_7) 및 [윈도우 비스타](https://ko.wikipedia.org/wiki/윈도우_비스타)에서는 [커널 메모리 덤프](ko.Dump#커널-메모리-덤프), 그리고 [윈도우 XP](https://ko.wikipedia.org/wiki/윈도우_XP)는 [작은 메모리 덤프](ko.Dump#작은-메모리-덤프)이다.
 
-## 고급 시스템 설정
-고급 시스템 설정(Advanced System Properties)은 [사용자 인터페이스](https://ko.wikipedia.org/wiki/그래픽_사용자_인터페이스)를 활용하여 덤프를 설정할 수 있도록 한다. 검색창에서 View advanced system settings를 검색하거나, 혹은 `WIN+R` 실행창에서 `systempropertiesadvanced.exe`을 실행한다. 아래는 고급 시스템 설정에서 BSOD 덤프 생성에 필요한 구성을 설명한다.
-    
-### 시작 및 복구
-시작 및 복구(Start and Recovery)에서 BSOD가 발생하였을 때 시스템이 행하는 동작 및 메모리 덤프를 어떻게 처리할 것인지 설정한다.
+## 시작 및 복구
+시작 및 복구(Start and Recovery)은 고급 시스템 설정 중 하나로써 블루스크린이 발생하였을 때 시스템이 행하는 동작 및 메모리 덤프를 어떻게 처리할 것인지 지정할 수 있다. 여기서 고급 시스템 설정은 검색창에서 View advanced system settings를 검색하거나, 혹은 `WIN+R` 실행창에서 `systempropertiesadvanced.exe`을 실행한다.
 
 ![시작 및 복구 다이얼로그 창](/images/docs/windows/bsod_advanced_startup.png)
 
-아래는 시스템 오류(System failure) 그룹의 각 체크박스에 대한 설명이다.
+> 가장 위에 있는 시스템 시작(System startup) 그룹은 BSOD와 전혀 상관이 없는 설정들인 관계로 설명은 건너뛴다.
 
-<ul><li><dl><table style="margin: initial; width: 100%; border-width: 0;"><thead><tr style="background: transparent;"><th style="background: inherit; border-width: inherit;">시스템 로그에 이벤트 기록 (Write an event to the system log)</th><th style="text-align: right; background: inherit; border-width: inherit; width: 10%;">기본값: ✔️</th></tr></thead><tbody><tr style="background: inherit;"><td colspan="2" style="border-width: inherit;">BSOD로 재부팅되면 오류 수준의 이벤트 ID 1001 시스템 로그를 <a href="https://ko.wikipedia.org/wiki/이벤트_뷰어">이벤트 뷰어</a>(Event Viewer)에서 찾아볼 수 있다.</td></tr></tbody></table></dl></li>
-<li><dl><table style="margin: initial; width: 100%; border-width: 0;"><thead><tr style="background: transparent;"><th style="background: inherit; border-width: inherit;">자동으로 다시 시작 (Automatically restart)</th><th style="text-align: right; background: inherit; border-width: inherit; width: 10%;">기본값: ✔️</th></tr></thead><tbody><tr style="background: inherit;"><td colspan="2" style="border-width: inherit;">BSOD가 발생한 이후 자동으로 재부팅된다. 비활성 시 덤프 수집이 100% 완료되어도 사용자가 전원을 직접 끌 때까지 블루스크린이 나타난다.</td></tr></tbody></table></dl></li>
-<li><dl><table style="margin: initial; width: 100%; border-width: 0;"><thead><tr style="background: transparent;"><th style="background: inherit; border-width: inherit;">기존 파일 덮어쓰기 (Overwrite any existing file)</th><th style="text-align: right; background: inherit; border-width: inherit; width: 10%;">기본값: ✔️</th></tr></thead><tbody><tr style="background: inherit;"><td colspan="2" style="border-width: inherit;">기존 BSOD 덤프 파일이 존재하면 최신 덤프로 덮어씌운다. 비활성 시 기존 BSOD 덤프 파일을 제거하거나 경로 혹은 파일명을 바꾸지 않는 이상 최신 BSOD 덤프가 생성되지 않는다.</td></tr></tbody></table></dl></li>
-<li><dl><table style="margin: initial; width: 100%; border-width: 0;"><thead><tr style="background: transparent;"><th style="background: inherit; border-width: inherit;">디스크 공간이 부족할 때 메모리 덤프의 자동 삭제를 사용하지 않도록 설정 (Disable automatic deletion of memory dumps when disk space is low)</th><th style="text-align: right; background: inherit; border-width: inherit; width: 10%;">기본값: ❌</th></tr></thead><tbody><tr style="background: inherit;"><td colspan="2" style="border-width: inherit;">윈도우 10부터 추가된 항목이며, 저장공간이 부족할 시 용량 확보를 위해 시스템에서 BSOD 덤프 파일을 자동 삭제한다. 체크박스 활성 시 생성된 BSOD 덤프 파일은 사용자가 직접 제거하지 않는 이상 계속 잔여한다.</td></tr></tbody></table></dl></li></ul>
+다음 시스템 오류(System failure) 그룹은 블루스크린이 발생하였을 때 어떠한 추고 조치를 취할 것인지를 선택한다.
 
-하위 디버깅 정보 쓰기(Write debugging information) 그룹에는 BSOD가 발생하면 생성할 [덤프 종류](ko.Dump#커널-모드-덤프-종류)를 선택할 수 있으며, 자세한 내용은 [커널 모드 덤프](ko.Dump#커널-모드-덤프)를 참고한다. BSOD 메모리 덤프 파일이 저장될 경로 및 파일명을 지정할 수 있다. 심지어 OS 드라이브(대표적으로 `C:\`)가 아닌 `D:\` 또는 `E:\`와 같은 타 드라이브로 경로 변경이 가능하다.
+* **시스템 로그에 이벤트 기록 (Write an event to the system log)**
+    : BSOD로 재부팅되면 오류 수준의 이벤트 ID 1001 시스템 로그를 [이벤트 뷰어](https://ko.wikipedia.org/wiki/이벤트_뷰어)(Event Viewer)에서 찾아볼 수 있다.
 
-### 가상 메모리
+* **자동으로 다시 시작 (Automatically restart)**
+    : BSOD가 발생한 이후 자동으로 재부팅된다. 비활성 시 덤프 수집이 100% 완료되어도 사용자가 전원을 직접 끌 때까지 블루스크린이 나타난다.
+
+하위 디버깅 정보 쓰기 (Write debugging information) 그룹에는 블루스크린이 발생하면 생성할 메모리 덤프 파일 관련 사항들을 설정한다. 상단의 콤보박스와 입력란은 각각 [덤프 종류](ko.Dump#커널-모드-덤프-종류) 및 메모리 덤프 파일이 생성될 경로와 파일명을 지정한다. 메모리 덤프를 저장할 경로는 OS 드라이브가 아닌 `D:\` 또는 `E:\`와 같은 타 드라이브로 지정할 수 있다.
+
+* **기존 파일 덮어쓰기 (Overwrite any existing file)**
+    : 기존 BSOD 덤프 파일이 존재하면 최신 덤프로 덮어씌운다. 비활성 시 기존 BSOD 덤프 파일을 제거하거나 경로 혹은 파일명을 바꾸지 않는 이상 최신 BSOD 덤프가 생성되지 않는다.
+
+* **디스크 공간이 부족할 때 메모리 덤프의 자동 삭제를 사용하지 않도록 설정 (Disable automatic deletion of memory dumps when disk space is low)**
+    : 저장공간이 부족할 시 용량 확보를 위해 시스템에서 BSOD 덤프 파일을 자동 삭제한다. 체크박스 활성 시 생성된 BSOD 덤프 파일은 사용자가 직접 제거하지 않는 이상 계속 잔여한다.
+
+### 레지스트리 편집기
+[시작 및 복구](#시작-및-복구) 설정들은 아래 레지스트리 키에 위치한 값들을 통해서도 동일하게 적용할 수 있으며, 데이터 `0x0`와 `0x1`은 각각 비활성화 및 활성화를 의미한다.
+
+```
+HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
+```
+
+<table style="width: 80%"><thead><tr><th>레지스트리 값</th><th>고급 시스템 설정</th></tr></thead><tbody>
+<tr><td style="text-align: center;"><code>AlwaysKeepMemoryDump</code></td><td>디스크 공간이 부족할 때 메모리 덤프의 자동 삭제를 사용하지 않도록 설정</td></tr>
+<tr><td style="text-align: center;"><code>AutoReboot</code></td><td>자동으로 다시 시작</td></tr>
+<tr><td style="text-align: center;"><code>CrashDumpEnabled</code></td><td>커널 모드 덤프 종류 설정<ul><li><code>0x0</code>: (없음)</li><li><code>0x1</code>: 전체 메모리 덤프</li><li><code>0x2</code>: 커널 메모리 덤프</li><li><code>0x3</code>: 작은 메모리 덤프</li><li><code>0x7</code>: 자동 메모리 덤프</li></ul></td></tr>
+<tr><td style="text-align: center;"><code>DumpFile</code></td><td>메모리 덤프 파일이 저장될 경로 및 파일명</td></tr>
+<tr><td style="text-align: center;"><code>LogEvent</code></td><td>시스템 로그에 이벤트 기록</td></tr>
+<tr><td style="text-align: center;"><code>Overwrite</code></td><td>기존 파일 덮어쓰기</td></tr>
+</tbody></table>
+
+## 가상 메모리
 가상 메모리(Virtual Memory), 즉 [페이징 파일](ko.Memory#페이징-파일)은 BSOD 발생 시 메모리 덤프 파일을 생성하기 전에 수집된 데이터를 임시로 저장할 수 있는 공간으로 활용된다. 재부팅되어 모든 시스템이 정상적으로 동작할 때 비로소 페이징 파일에 저장된 데이터들로부터 덤프 파일이 생성된다. 그러나 페이징 파일이 수집된 덤프를 수용하기에 부족한 크기라면 덤프 파일은 아예 생성되지 않는다.
 
 BSOD 덤프 수집에서 페이징 파일의 충분한 공간 확보는 매우 중요한 작업이다. 일반적으로 "시스템이 관리하는 크기"로 설정하여도 무관하지만, 서버와 같은 매우 중요한 시스템이라면 원활한 서비스 운영을 위해 문제가 발생하여도 빠른 복구와 확실한 재발 방지가 이루어져야 한다. 이러한 경우 "사용자 지정 크기"로 충분한 페이징 파일 크기를 직접 기입하여 저장공간을 확보하도록 한다.
@@ -156,24 +178,6 @@ BSOD 덤프 수집에서 페이징 파일의 충분한 공간 확보는 매우 �
 만일 페이징 파일 크기가 충분하지 않으면 다른 드라이브를 조회할 정도로 시스템이 정교하지 않으며, 결국 덤프 파일이 생성되지 않는다. 그러므로 RAM 용량을 충분히 수용할 수 있는 페이징 파일을 나누어 여러 드라이브에 분배하는 방법 또한 적합하지 않다.
 
 한편, 손상된 덤프 파일이 생성되기도 하는데 대표적인 원인으로 블루스크린이 화면이 나타나면서 덤프가 수집 도중에 시스템의 전원이 꺼져버린 경우이다. 특히 서버용 컴퓨터는 ASR(automatic server recovery), 즉 자동 서버 복구 기능이 있는데 정상적인 덤프 수집을 위해 반드시 비활성화시킨다.
-
-## 레지스트리 편집기
-[고급 시스템 설정](#고급-시스템-설정)의 데이터들은 아래 레지스트리 키에 위치한 값들을 통해서도 동일하게 설정이 가능하다.
-
-```
-HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
-```
-
-다음은 고급 시스템 설정에서 언급된 BSOD 및 메모리 덤프 설정에 대응하는 레지스트리 값들에 대한 설명이며, 데이터 `0x0`와 `0x1`은 각각 비활성화 및 활성화를 의미한다.
-
-<table style="width: 80%"><thead><tr><th>레지스트리 값</th><th>설명</th></tr></thead><tbody>
-<tr><td style="text-align: center;"><code>AlwaysKeepMemoryDump</code></td><td>디스크 공간이 부족할 때 메모리 덤프의 자동 삭제를 사용하지 않도록 설정</td></tr>
-<tr><td style="text-align: center;"><code>AutoReboot</code></td><td>자동으로 다시 시작</td></tr>
-<tr><td style="text-align: center;"><code>CrashDumpEnabled</code></td><td>커널 모드 덤프 종류 설정<ul><li><code>0x0</code>: (없음)</li><li><code>0x1</code>: 전체 메모리 덤프</li><li><code>0x2</code>: 커널 메모리 덤프</li><li><code>0x3</code>: 작은 메모리 덤프</li><li><code>0x7</code>: 자동 메모리 덤프</li></ul></td></tr>
-<tr><td style="text-align: center;"><code>DumpFile</code></td><td>메모리 덤프 파일이 저장될 경로 및 파일명</td></tr>
-<tr><td style="text-align: center;"><code>LogEvent</code></td><td>시스템 로그에 이벤트 기록</td></tr>
-<tr><td style="text-align: center;"><code>Overwrite</code></td><td>기존 파일 덮어쓰기</td></tr>
-</tbody></table>
 
 ### 전용 덤프 파일
 전용 덤프 파일(dedicated dump file)은 본래 OS 외의 드라이브에 가상 메모리로 사용될 수 없는 덤프 수집 전용 페이징 파일을 가리킨다. OS 드라이브에 용량이 부족하면 타 드라이브에 전용 덤프 파일을 지정하여 메모리 덤프를 생성하였으나, 윈도우 7부터 어떠한 드라이브의 페이징 파일도 덤프 수집에 자유롭게 사용될 수 있으면서 활용도가 축소되었다.
