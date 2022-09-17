@@ -12,49 +12,17 @@ order: null
 > 본 문서에서 `.EXE` 및 `.DLL` 확장자와 같은 이진 파일은 "모듈"이라고도 지칭한다.
 
 ## 윈도우 심볼
-마이크로소프트 윈도우 NT는 관측할 수 있는 정보의 유형과 제약에 따라 심볼을 세 가지로 나눈다.
+마이크로소프트 [윈도우 NT](ko.WindowsNT)는 관측할 수 있는 정보의 유형과 제약에 따라 심볼을 세 가지로 나눈다.
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">심볼</th>
-      <th>관측 가능한 데이터</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">Export</td>
-      <td>
-        <ul>
-          <li>함수 (export 테이블 한정)</li>
-        </ul>
-        <sub>서버: N/A</sub>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Public</td>
-      <td>
-        <ul>
-          <li>함수 (비정적 한정)</li>
-          <li>전역 변수 (<code>extern</code> 한정)</li>
-        </ul>
-        <sub>서버: <code>https://msdl.microsoft.com/download/symbols</code></sub>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: center">Private</td>
-      <td>
-        <ul>
-          <li>함수</li>
-          <li>전역 변수</li>
-          <li>지역 변수</li>
-          <li>사용자 정의 구조체, 클래스, 그리고 자료형</li>
-          <li>소스 파일 정보: 파일명, 줄번호, 기타 등등</li>
-        </ul>
-        <sub>서버: N/A</sub>
-      </td>
-    </tr>
-  </tbody>
+<table style="table-layout: fixed; width: 40%;">
+<thead>
+<tr><th style="text-align: center; width: 20%;">심볼</th><th>관측 가능한 데이터</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align: center;">Export</td><td><ul><li>함수 (export 테이블 한정)</li></ul><sub>서버: N/A</sub></td></tr>
+<tr><td style="text-align: center;">Public</td><td><ul><li>함수 (비정적 한정)</li><li>전역 변수 (<code>extern</code> 한정)</li></ul><sub>서버: <code>https://msdl.microsoft.com/download/symbols</code></sub></td></tr>
+<tr><td style="text-align: center;">Private</td><td><ul><li>함수</li><li>전역 변수</li><li>지역 변수</li><li>사용자 정의 구조체, 클래스, 그리고 자료형</li><li>소스 파일 정보: 파일명, 줄번호, 기타 등등</li></ul><sub>서버: N/A</sub></td></tr>
+</tbody>
 </table>
 
 ## 프로그램 데이터베이스
@@ -65,18 +33,24 @@ order: null
 
 * 심볼을 로컬에 캐싱하므로써 디버깅 성능 속도를 개선할 수 있다.
 
-    | 구문 | 설명 |
-    |--------|-------------|
-    | `cache*;` | 세미콜론 우측에 기입된 주소로부터 불러온 심볼을 기본 로컬 캐시 경로에 저장한다. |
-    | `cache*C:\Symbols;` | 세미콜론 우측에 기입된 주소로부터 불러온 심볼을 `C:\Symbols` 경로에 저장한다. |
+<table style="table-layout: fixed; width: 80%">
+<thead><tr><th style="width: 35%;">구문</th><th>설명</th></tr></thead>
+<tbody>
+<tr><td><code>cache*;</code></td><td>세미콜론 우측에 기입된 주소로부터 불러온 심볼을 기본 로컬 캐시 경로에 저장한다.</td></tr>
+<tr><td><code>cache*C:\Symbols;</code></td><td>세미콜론 우측에 기입된 주소로부터 불러온 심볼을 <code>C:\Symbols</code> 경로에 저장한다.</td></tr>
+</tbody>
+</table>
 
 * 심볼은 인터넷이나 사내망으로부터 심볼을 불러올 수 있다.
 
-    | 구문 | 설명 |
-    |--------|-------------|
-    | `srv*` | 기본 심볼 서버로부터 필요한 심볼을 획득한다. |
-    | `srv*https://example.com` | `https://example.com` 서버로부터 필요한 심볼을 획득한다. |
-    | `srv*C:\Symbols*https://example.com` | `https://example.com` 서버로부터 필요한 심볼을 획득하여 `C:\Symbols` 경로에 캐싱한다. |
+<table style="table-layout: fixed; width: 80%">
+<thead><tr><th style="width: 35%;">구문</th><th>설명</th></tr></thead>
+<tbody>
+<tr><td><code>srv*</code></td><td>기본 심볼 서버로부터 필요한 심볼을 획득한다.</td></tr>
+<tr><td><code>srv*https://example.com</code></td><td><code>https://example.com</code> 서버로부터 필요한 심볼을 획득한다.</td></tr>
+<tr><td><code>srv*C:\Symbols*https://example.com</code></td><td><code>https://example.com</code> 서버로부터 필요한 심볼을 획득하여 <code>C:\Symbols</code> 경로에 캐싱한다.</td></tr>
+</tbody>
+</table>
 
 * 시스템 환경 변수 `_NT_SYMBOL_PATH`는 하나의 심볼 경로를 다른 디버거 프로그램에 동일하게 적용하는데 매우 유용하게 사용된다.
 
