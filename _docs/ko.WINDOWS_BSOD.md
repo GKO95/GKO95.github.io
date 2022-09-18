@@ -7,7 +7,7 @@ icon: icon-windows.svg
 order: null
 ---
 # 블루스크린
-![윈도우 10에서 발생한 블루스크린 화면: <a href="https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal">0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL</a>](/images/docs/windows/bsod_bugcheck_0xd1.png)
+![윈도우 10 블루스크린 화면: <a href="https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal">0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL</a>](/images/docs/windows/bsod_bugcheck_0xd1.png)
 
 [블루스크린](https://ko.wikipedia.org/wiki/블루스크린), 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템에 더 이상의 손상이 가해지는 것을 방지하기 위한 화면이며, 해당 문제의 원인을 [버그 확인 코드](#버그-확인-코드)와 함께 표시하여 분석에 필요한 [메모리 덤프](ko.Dump#커널-모드-덤프) 파일을 생성한다. BSOD는 아래의 사유로부터 [`KeBugCheck()`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/ddi/ntddk/nf-ntddk-kebugcheck) (또는 [`KeBugCheckEx()`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex)) 루틴이 호출되어 나타난다.
 
@@ -15,9 +15,13 @@ order: null
 * **유효하지 않은 동작**: 운영체제가 본래 설계에 벗어난 동작을 하였을 때, 복구가 불가하다고 판정되면 커널 초기화를 명분으로 발생한다 (예시. [0x133 DPC_WATCHDOG_VIOLATION](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x133-dpc-watchdog-violation)).
 
 ## 버그 확인 코드
-버그 확인(bug check) 코드는 블루스크린이 발생한 원인을 설명하는 운영체제 오류 번호이다. `KeBugCheck()` 매개변수 (또는 `KeBugCheckEx()` 첫 번째 매개변수) 명칭인 `BugCheckCode`에서 유래된 용어이며, 여기로 전달되는 인자가 바로 버그 확인 코드이다. 특히 `KeBugCheckEx()` 루틴은 추가 매개변수 네 개가 있어 오류에 대한 구체적인 정보를 제공한다.
+버그 확인(bug check) 코드는 블루스크린이 발생한 원인을 설명하는 운영체제 오류 번호이다. `KeBugCheck()` 매개변수 또는 `KeBugCheckEx()` 첫 번째 매개변수 `BugCheckCode` 명칭에서 유래된 용어이며, 여기로 전달되는 인자가 바로 버그 확인 코드이다. 특히 `KeBugCheckEx()` 루틴은 추가 매개변수 네 개가 있어 오류에 대한 구체적인 정보를 제공한다.
 
 > 버그 확인 코드는 매우 다양하기 때문에, [참조 문서](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-code-reference2)로부터 정확한 블루스크린 발생 경위를 파악하고 [근본 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)(root cause analysis; RCA)을 진행한다.
+
+다음은 상기 블루스크린으로부터 생성된 덤프 파일을 확인한 내용이며, 버그 확인 코드 아래에 표시된 네 개의 전달인자로부터 문제가 발생한 메모리 주소 등의 시스템 충돌 관련 정보를 알 수 있다.
+
+![버그 확인 코드 0xD1에 대한 <a href="ko.WinDbg">WinDbg</a> 덤프 분석 내용](/images/docs/windows/bsod_dump_analysis.png)
 
 ## 강제 시스템 충돌
 시스템 충돌을 수동으로 일으켜야 할 경우가 발생할 수 있으며, 대표적으로 시스템에서 아무런 반응을 보이지 않는 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)) 증상이 있다. 본 부문에서는 BSOD를 강제로 발생시키는 방법을 설명한다.
