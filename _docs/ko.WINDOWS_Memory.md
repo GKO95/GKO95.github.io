@@ -53,7 +53,7 @@ order: null
 
 기본적으로 시스템은 "모든 드라이브에 대한 페이징 파일 크기 자동 관리(Automatically manage paging file size for all drives)"로 설정되어 있다. 이는 OS 드라이브만 크기가 자동 조정되는 페이징 파일을 가지며, 나머지 드라이브에는 페이징 파일이 없는 것과 마찬가지이다. 각 드라이브마다 페이징 파일의 크기는 아래 세 가지 선택지로부터 지정된다.
 
-* **사용자 지정 크기(Custom size)**: 사용자가 직접 페이징 파일의 처음 크기(Initial size) 및 확장될 수 있는 최대 크기(Maximum size)를 [MB](https://ko.wikipedia.org/wiki/메가바이트) 단위로 지정한다.
+* **사용자 지정 크기(Custom size)**: 사용자가 직접 페이징 파일의 처음 크기(Initial size) 및 확장될 수 있는 최대 크기(Maximum size)를 [메가바이트](https://ko.wikipedia.org/wiki/메가바이트) 단위로 지정한다.
 * **시스템이 관리하는 크기(System manged size)**: 물리 메모리의 사용량 및 상황에 따라 시스템이 알아서 페이징 파일 크기를 조정한다.
 * **페이징 파일 없음(No paging file)**: 페이징 파일을 사용하지 않는다.
 

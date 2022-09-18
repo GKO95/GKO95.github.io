@@ -20,11 +20,11 @@ order: null
 > 버그 확인 코드는 매우 다양하기 때문에, [참조 문서](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-code-reference2)로부터 정확한 블루스크린 발생 경위를 파악하고 [근본 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)(root cause analysis; RCA)을 진행한다.
 
 ## 강제 시스템 충돌
-시스템 충돌이 수동으로 일으켜야 할 경우가 발생할 수 있으며, 대표적으로 시스템 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅))이 있다. 본 부문에서는 BSOD를 강제로 발생시키는 방법을 설명한다.
+시스템 충돌을 수동으로 일으켜야 할 경우가 발생할 수 있으며, 대표적으로 시스템에서 아무런 반응을 보이지 않는 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)) 증상이 있다. 본 부문에서는 BSOD를 강제로 발생시키는 방법을 설명한다.
 
 * **NMI**
 
-    일명 [마스크 불가능 인터럽트](https://en.wikipedia.org/wiki/Non-maskable_interrupt)(Non-maskable Interrupt)는 가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](ko.Processor#인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 버그 확인 코드 [0x80 NMI_HARDWARE_FAILURE](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure)이 발생한다. BSOD를 일으키기에 가장 확실한 방법이지만, NMI 버튼이 없는 서버용 PC가 있으며 특히 가정용 PC에는 거의 찾아볼 수 없다.
+    일명 [마스크 불가능 인터럽트](https://en.wikipedia.org/wiki/Non-maskable_interrupt)(Non-maskable Interrupt)는 가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](ko.Processor#인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 버그 확인 코드 [0x80 NMI_HARDWARE_FAILURE](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure)이 발생한다. BSOD를 일으키기에 가장 확실한 방법이지만, NMI 버튼이 없는 서버용 PC도 있으며 특히 가정용 PC에는 거의 찾아볼 수 없다.
 
     * **Debug-VM**
 
@@ -94,7 +94,7 @@ order: null
 
     1. [GPIO](https://ko.wikipedia.org/wiki/GPIO) 기반의 전원 버튼
     2. 전원 이벤트를 Windows Power Manager로 전달하는 펌웨어
-    3. [윈도우 10, 버전 1809](https://ko.wikipedia.org/wiki/윈도우_10#레드스톤_5) 혹은 [윈도우 서버 2019](https://ko.wikipedia.org/wiki/윈도우_서버_2019) 이상의 운영체제
+    3. [윈도우 10](https://ko.wikipedia.org/wiki/윈도우_10)[, 버전 1809](https://ko.wikipedia.org/wiki/윈도우_10#레드스톤_5) 혹은 [윈도우 서버 2019](https://ko.wikipedia.org/wiki/윈도우_서버_2019) 이상의 운영체제
 
     위의 요건을 모두 충족한다면 아래의 레지스트리 키로 이동하여 `PowerButtonBugcheck`이란 새로운 DWORD (32-bit) 값을 생성한다.
     
@@ -115,7 +115,7 @@ order: null
     [Sysinternals](ko.Sysinternals) 유틸리티 중에서 몇 가지 방식으로 시스템 충돌을 일으킬 수 있는 프로그램이다. 비록 시스템 응답이 없는 상태에서 적합하지 않으나, 일반적인 상황에서 BSOD를 일으킬 때는 유용하다.
 
 ### 블루스크린 색상 변경
-윈도우 7까지는 NotMyFault 프로그램으로 블루스크린 색상을 변경할 수 있었으나, 윈도우 8 이후로는 아예 색상이 파란색으로 고정되어 변경이 불가하다.
+NotMyFault 프로그램으로 블루스크린 색상을 변경할 수 있었으나, 윈도우 8 이후로는 아예 색상이 파란색으로 고정되어 변경이 불가하다.
 
 > [윈도우 참가자 프로그램](https://support.microsoft.com/ko-kr/windows/windows-참가자-프로그램에-참여하기-ef20bb3d-40f4-20cc-ba3c-a72c844b563c)(Windows Insider Program)을 통해 사용할 수 있는 Preview 버전의 윈도우 운영체제는 "초록색" 블루스크린이 나타난다.
 
@@ -191,7 +191,7 @@ BSOD 덤프 수집에서 페이징 파일의 충분한 공간 확보는 매우 �
 
 <table style="table-layout: fixed; width: 80%">
 <thead><tr><th><code>DedicatedDumpFile</code></th><th><code>DumpFileSize</code></th></tr></thead>
-<tbody><tr style="overflow: auto;"><td style="overflow: inherit;"><img src="/images/docs/windows/bsod_dedicated_dump_file.png" alt="전용 덤프의 경로 및 파일명 설정"/></td><td style="overflow: inherit;"><img src="/images/docs/windows/bsod_dedicated_dump_size.png" alt="전용 덤프 파일의 크기 지정"/></td></tr><tr><td style="text-align: center;">덤프 수집 전용 페이징 파일 경로 및 파일명 지정</td><td style="text-align: center;">덤프 수집 전용 페이징 파일 크기 지정</td></tr></tbody>
+<tbody><tr style="overflow: auto;"><td style="overflow: inherit;"><img src="/images/docs/windows/bsod_dedicated_dump_file.png" alt="전용 덤프의 경로 및 파일명 설정"/></td><td style="overflow: inherit;"><img src="/images/docs/windows/bsod_dedicated_dump_size.png" alt="전용 덤프 파일의 크기 지정"/></td></tr><tr><td style="text-align: center;">덤프 수집 전용 페이징 파일 경로 및 파일명 지정</td><td style="text-align: center;">덤프 수집 전용 페이징 파일 크기 지정 (단위: <a href="https://ko.wikipedia.org/wiki/메가바이트">MB</a>)</td></tr></tbody>
 </table>
 
 > BSOD 메모리 덤프가 생성되는 위치는 `DumpFile` 레지스트리 값을 그대로 사용한다.
