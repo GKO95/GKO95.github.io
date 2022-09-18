@@ -21,7 +21,7 @@ order: null
 
 다음은 상기 블루스크린으로부터 생성된 덤프 파일을 확인한 내용이며, 버그 확인 코드 아래에 표시된 네 개의 전달인자로부터 문제가 발생한 메모리 주소 등의 시스템 충돌 관련 정보를 알 수 있다.
 
-![버그 확인 코드 0xD1에 대한 <a href="ko.WinDbg">WinDbg</a> 덤프 분석 내용](/images/docs/windows/bsod_dump_analysis.png)
+![버그 확인 코드 0xD1에 대한 <a href="ko.WinDbg">WinDbg</a> 덤프 분석 내용](/images/docs/windbg/windbg_bugcheck_0xd1.png)
 
 ## 강제 시스템 충돌
 시스템 충돌을 수동으로 일으켜야 할 경우가 발생할 수 있으며, 대표적으로 시스템에서 아무런 반응을 보이지 않는 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)) 증상이 있다. 본 부문에서는 BSOD를 강제로 발생시키는 방법을 설명한다.
