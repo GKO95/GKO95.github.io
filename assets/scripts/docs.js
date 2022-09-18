@@ -21,7 +21,7 @@ const imageSize = () => {
             "max-width": `calc(${$(`article`).width()}px - ${$(`article img`).css("border-width")} * 2)`,
             "cursor": "pointer",
         }).parent().css({"text-align": "center", "width": "100%"})
-        if(!$(this).parent().is('TD') && $(this).next('center').length == 0 ) {
+        if(!$(this).parent().is('TD') && $(this).attr("alt") && $(this).next('center').length == 0 ) {
              $(`<center style="font-weight: bold;">${txtFigure} ${index + 1}. ${$(this).attr("alt")}</center>`).insertAfter(this)
         }
         $(this).dblclick(function() { 
