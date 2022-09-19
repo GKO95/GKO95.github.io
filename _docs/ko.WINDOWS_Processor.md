@@ -29,3 +29,10 @@ order: null
     사용할 수 있는 CPU 작업이 커널 모드에 비해 하드웨어 상호작용 등 민간한 시스템 구성요소의 접근이 제한된다. 만일 커널 동작이 요구되면 시스템 호출(system call)을 통해 커널에 요청을 해야 한다. 가상 주소 공간 중 사용자 공간(user space)에서 작업을 처리한다. 대표적인 예시로 일반 어플리케이션의 프로세스가 사용자 모드에서 동작한다.
 
 이렇게 보호 링이 분류된 이유는 "더 많은 제어에는 더 큰 책임이 뒤따른다"는 관점에서 비롯된다. 커널 모드의 프로그램 오동작은 시스템 전체에 충돌을 일으킬 수 있기 때문에 문제가 절대로 발생하지 않도록 신뢰될 수 있어야 한다.
+
+# 인터럽트
+[인터럽트](https://ko.wikipedia.org/wiki/인터럽트)(interrupt; 간혹 "트랩"이라고도 언급)는 마우스 움직임이나 키보드 입력과 같은 시스템에서 발생한 일종의 비동기 사건, 즉 이벤트(event)가 최우선으로 처리될 수 있도록 [프로세서](#프로세서)에 요청되는 신호이다. 아래 그림은 인터럽트가 프로세서로부터 처리되기 위한 과정을 간략히 보여준다.
+
+![인터럽트의 종류 및 처리 과정<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Interrupt_Process.PNG">위키미디어</a></i></sub>](/images/docs/processor/interrupt_process_diagram.png)
+
+인터럽트를 전달받은 프로세서는 이벤트를 처리하기 위해 당시 실행 중이던 [스레드](ko.Process#스레드)를 잠시 중단시키고 재개되어야 할 시점의 스레드 [상태](https://en.wikipedia.org/wiki/State_(computer_science))(state)를 저장한다. 전달받은 인터럽트에 대응하는 [인터럽트 핸들러](https://ko.wikipedia.org/wiki/인터럽트_핸들러)(interrupt handler, 일명 interrupt service routine; ISR)가 프로세서에 의해 실행되면서 이벤트가 처리된다. 그리고 마지막으로 프로세서는 중단된 스레드를 다시 실행하므로써 일련의 인터럽트 처리 과정이 마무리된다.
