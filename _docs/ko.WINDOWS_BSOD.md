@@ -9,13 +9,13 @@ order: null
 # 블루스크린
 ![윈도우 10 블루스크린 화면: <a href="https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal">0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL</a>](/images/docs/windows/bsod_bugcheck_0xd1.png)
 
-[블루스크린](https://ko.wikipedia.org/wiki/블루스크린), 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템에 더 이상의 손상이 가해지는 것을 방지하기 위한 화면이며, 해당 문제의 원인을 [버그 확인 코드](#버그-확인-코드)와 함께 표시하여 분석에 필요한 [메모리 덤프](ko.Dump#커널-모드-덤프) 파일을 생성한다. BSOD는 아래의 사유로부터 [`KeBugCheck()`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/ddi/ntddk/nf-ntddk-kebugcheck) (또는 [`KeBugCheckEx()`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex)) 루틴이 호출되어 나타난다.
+[블루스크린](https://ko.wikipedia.org/wiki/블루스크린), 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템을 망가뜨릴 수 있는 손상이 가해지는 것을 방지하기 위한 화면이며, 블루스크린 원인을 알려주는 [버그 확인 코드](#버그-확인-코드)를 표시하고 분석에 필요한 [메모리 덤프](ko.Dump#커널-모드-덤프) 파일을 생성한다. 시스템은 아래의 사유가 발생하면 블루스크린이 나타난다.
 
 * **시스템 충돌**: 운영체제 커널상 처리되지 않은 [오류](https://ko.wikipedia.org/wiki/예외_처리), 일명 커널 모드 충돌이다 (예시. [0x19 BAD_POOL_HEADER](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x19--bad-pool-header)).
 * **유효하지 않은 동작**: 운영체제가 본래 설계에 벗어난 동작을 하였을 때, 복구가 불가하다고 판정되면 커널 초기화를 명분으로 발생한다 (예시. [0x133 DPC_WATCHDOG_VIOLATION](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x133-dpc-watchdog-violation)).
 
 ## 버그 확인 코드
-버그 확인(bug check) 코드는 블루스크린이 발생한 원인을 설명하는 운영체제 오류 번호이다. `KeBugCheck()` 매개변수 또는 `KeBugCheckEx()` 첫 번째 매개변수 `BugCheckCode` 명칭에서 유래된 용어이며, 여기로 전달되는 인자가 바로 버그 확인 코드이다. 특히 `KeBugCheckEx()` 루틴은 추가 매개변수 네 개가 있어 오류에 대한 구체적인 정보를 제공한다.
+버그 확인(bug check) 코드는 블루스크린이 발생한 원인을 설명하는 운영체제 오류 번호이다. [`KeBugCheck()`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/ddi/ntddk/nf-ntddk-kebugcheck) 매개변수 또는 [`KeBugCheckEx()`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 첫 번째 매개변수 `BugCheckCode` 명칭에서 유래된 용어이며, 여기로 전달되는 인자가 바로 버그 확인 코드이다. 특히 `KeBugCheckEx()` 루틴은 추가 매개변수 네 개가 있어 오류에 대한 구체적인 정보를 제공한다.
 
 > 버그 확인 코드는 매우 다양하기 때문에, [참조 문서](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-code-reference2)로부터 정확한 블루스크린 발생 경위를 파악하고 [근본 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)(root cause analysis; RCA)을 진행한다.
 
@@ -24,22 +24,22 @@ order: null
 ![버그 확인 코드 0xD1에 대한 <a href="ko.WinDbg">WinDbg</a> 덤프 분석 내용](/images/docs/windbg/windbg_bugcheck_0xd1.png)
 
 ## 강제 시스템 충돌
-시스템 충돌을 수동으로 일으켜야 할 경우가 발생할 수 있으며, 대표적으로 시스템에서 아무런 반응을 보이지 않는 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)) 증상이 있다. 본 부문에서는 BSOD를 강제로 발생시키는 방법을 설명한다.
+간혹 시스템이 아무런 반응이 없는 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)) 상태에 걸리면, 해당 증상의 원인 분석에 필요한 덤프 파일을 생성하기 위해 블루스크린이 강요된다. 다음은 블루스크린을 강제로 발생기키는 방법을 소개한다.
 
 * **NMI**
 
-    일명 [마스크 불가능 인터럽트](https://en.wikipedia.org/wiki/Non-maskable_interrupt)(Non-maskable Interrupt)는 가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](ko.Processor#인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 버그 확인 코드 [0x80 NMI_HARDWARE_FAILURE](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure)이 발생한다. BSOD를 일으키기에 가장 확실한 방법이지만, NMI 버튼이 없는 서버용 PC도 있으며 특히 가정용 PC에는 거의 찾아볼 수 없다.
+    [마스크 불가능 인터럽트](https://en.wikipedia.org/wiki/Non-maskable_interrupt)(Non-maskable Interrupt; NMI)는 가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](ko.Processor#인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 버그 확인 코드 [0x80 NMI_HARDWARE_FAILURE](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure)가 발생한다. 블루스크린을 일으키기에 가장 확실한 방법이지만, NMI 버튼이 없는 서버용 PC도 있으며 특히 가정용 PC에는 거의 찾아볼 수 없다.
 
     * **Debug-VM**
 
-        [`Debug-VM`](https://docs.microsoft.com/ko-kr/powershell/module/hyper-v/debug-vm) 파워셸 명령어는 마이크로소프트에서 개발한 [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저), 일명 [하이퍼-V](https://ko.wikipedia.org/wiki/하이퍼-V)(Hyper-V)에서 호스트 서버로부터 가상 머신에 NMI 신호를 전송하여 BSOD를 발생시킬 수 있다. 파워셸은 관리자 권한으로 실행되어야 하며, 가상 머신의 이름은 [`Get-VM`](https://docs.microsoft.com/ko-kr/powershell/module/hyper-v/get-vm) 명령어로 확인이 가능하다.
+        [`Debug-VM`](https://docs.microsoft.com/ko-kr/powershell/module/hyper-v/debug-vm) 파워셸 명령어는 마이크로소프트에서 개발한 [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저), 일명 [하이퍼-V](https://ko.wikipedia.org/wiki/하이퍼-V)(Hyper-V)에서 호스트 서버로부터 가상 머신에 NMI 신호를 전송하여 블루스크린을 발생시킬 수 있다. 파워셸은 관리자 권한으로 실행되어야 하며, 가상 머신의 이름은 [`Get-VM`](https://docs.microsoft.com/ko-kr/powershell/module/hyper-v/get-vm) 명령어로 확인이 가능하다.
     
         ```powershell
       Debug-VM -Name "<VM name>" -InjectNonMaskableInterrupt
         ```
 * **키보드**
 
-    키보드로부터 커널에 `KeBugCheck()` 루틴을 호출하므로써 윈도우 운영체제에 버그 확인 코드 [0xE2 MANUALLY_INITIATED_CRASH](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)를 발생시키는 방법이다. [PS/2](https://ko.wikipedia.org/wiki/PS/2_단자) 혹은 [USB](https://ko.wikipedia.org/wiki/USB) 신호로 동작하는 키보드, 그리고 하이퍼-V의 가상 머신에서 키보드로 일으킨 강제 BSOD를 설정하는 방법은 아래의 두 방법 중에서 오로지 하나만이 적용된다.
+    키보드로부터 커널에 `KeBugCheck()` 루틴을 호출하므로써 윈도우 운영체제에 버그 확인 코드 [0xE2 MANUALLY_INITIATED_CRASH](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)를 발생시키는 방법이다. [PS/2](https://ko.wikipedia.org/wiki/PS/2_단자) 혹은 [USB](https://ko.wikipedia.org/wiki/USB) 신호로 동작하는 키보드, 그리고 하이퍼-V의 가상 머신에서 키보드로 일으킨 강제 블루스크린을 설정하는 방법은 아래의 두 방법 중에서 오로지 하나만이 적용된다.
 
     1. **`CTRL+SCROLL` 단축키**
 
@@ -57,7 +57,7 @@ order: null
 
     2. **대안 키보드 단축키**
 
-        현재 대부분의 키보드는 `SCROLL LOCK` 키가 없어 BSOD를 강제할 대안의 단축키가 필요하다. 만일 `CrashOnCtrlScroll` 레지스트리 값이 이미 존재하면 대안 단축키가 인식되지 않으므로 삭제하도록 한다. 사용하고 있는 키보드에 따라 아래 레지스트리 키로 이동한다.
+        현재 대부분의 키보드는 `SCROLL LOCK` 키가 없어 블루스크린을 강제할 대안의 단축키가 필요하다. 만일 `CrashOnCtrlScroll` 레지스트리 값이 이미 존재하면 대안 단축키가 인식되지 않으므로 삭제하도록 한다. 사용하고 있는 키보드에 따라 아래 레지스트리 키로 이동한다.
 
         | 키보드 | 레지스트리 키                                                |
         |:--------:|-------------------------------------------------------------|
@@ -94,7 +94,7 @@ order: null
 
 * **전원 버튼**
 
-    전원 버튼으로 BSOD를 발생키려면 반드시 하드웨어, 펌웨어, 그리고 운영체제 요건이 충족되어야 한다:
+    전원 버튼으로 블루스크린을 발생키려면 반드시 하드웨어, 펌웨어, 그리고 운영체제 요건이 충족되어야 한다:
 
     1. [GPIO](https://ko.wikipedia.org/wiki/GPIO) 기반의 전원 버튼
     2. 전원 이벤트를 Windows Power Manager로 전달하는 펌웨어
@@ -129,7 +129,7 @@ BSOD가 발생하면 시스템은 기본적으로 [자동 메모리 덤프](ko.D
 > 이전 운영체제의 시스템 기본 덤프 유형은 달리 설정되어 있다: [윈도우 7](https://ko.wikipedia.org/wiki/윈도우_7) 및 [윈도우 비스타](https://ko.wikipedia.org/wiki/윈도우_비스타)에서는 [커널 메모리 덤프](ko.Dump#커널-메모리-덤프), 그리고 [윈도우 XP](https://ko.wikipedia.org/wiki/윈도우_XP)는 [작은 메모리 덤프](ko.Dump#작은-메모리-덤프)이다.
 
 ## 시작 및 복구
-시작 및 복구(Start and Recovery)은 고급 시스템 설정 중 하나로써 블루스크린이 발생하였을 때 시스템이 행하는 동작 및 메모리 덤프를 어떻게 처리할 것인지 지정할 수 있다. 여기서 고급 시스템 설정은 검색창에서 View advanced system settings를 검색하거나, 혹은 `WIN+R` 실행창에서 `systempropertiesadvanced.exe`을 실행한다.
+시작 및 복구(Start and Recovery)는 고급 시스템 설정 중 하나로써 블루스크린이 발생하였을 때 시스템이 행하는 동작 및 메모리 덤프를 어떻게 처리할 것인지 지정할 수 있다. 여기서 고급 시스템 설정은 검색창에서 View advanced system settings를 검색하거나, 혹은 `WIN+R` 실행창에서 `systempropertiesadvanced.exe`을 실행한다.
 
 ![시작 및 복구 다이얼로그 창](/images/docs/windows/bsod_advanced_startup.png)
 
