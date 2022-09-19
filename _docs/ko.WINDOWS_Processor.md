@@ -7,6 +7,11 @@ icon: icon-windows.svg
 order: null
 ---
 # 프로세서
+[프로세서](https://ko.wikipedia.org/wiki/중앙_처리_장치)(processor), 흔히 컴퓨터에서 중앙 처리 장치(central processing unit; CPU)로 알려진 하드웨어는 프로그램의 [기계어](https://ko.wikipedia.org/wiki/기계어)를 처리하는 [전자회로](https://ko.wikipedia.org/wiki/전자_회로)이다. 데이터 복사나 메모리 주소 이동과 같은 시스템이 취할 수 있는 다양한 작업들이 정의된 [명령어 집합](https://ko.wikipedia.org/wiki/명령어_집합)(instruction set)에 의해 기계어로부터 프로그램을 실행할 수 있는 것이며, 대표적으로 [x86](https://ko.wikipedia.org/wiki/X86)과 [ARM](https://ko.wikipedia.org/wiki/ARM_아키텍처) 계열 명령어 집합 아키텍처가 있다. 그리고 프로세서에서 처리할 수 있는 명령어 집합이 무엇인지에 따라 시스템 아키텍처가 함께 결정된다.
+
+컴퓨터 CPU에서 중요한 요소 중 하나가 코어(core) 개수인데, 여기서 말하는 코어가 바로 프로세서이다. 아래는 단일 코어 CPU를 간랸한 다이어그램으로 나타낸 그림이다.
+
+![단일 프로세서 중앙 처리 장치<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:ABasicComputer.svg">위키미디어</a></i></sub>](/images/docs/processor/processor_core_single.svg)
 
 ## 보호 링
 [보호 링](https://ko.wikipedia.org/wiki/보호_링)(protection ring)은 데이터와 기능을 결함과 위협적인 행위로부터 보호하는 메커니즘이다.
