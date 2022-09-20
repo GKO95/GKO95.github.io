@@ -31,8 +31,12 @@ order: null
 이렇게 보호 링이 분류된 이유는 "더 많은 제어에는 더 큰 책임이 뒤따른다"는 관점에서 비롯된다. 커널 모드의 프로그램 오동작은 시스템 전체에 충돌을 일으킬 수 있기 때문에 문제가 절대로 발생하지 않도록 신뢰될 수 있어야 한다.
 
 # 인터럽트
-[인터럽트](https://ko.wikipedia.org/wiki/인터럽트)(interrupt; 간혹 "트랩"이라고도 언급)는 마우스 움직임이나 키보드 입력과 같은 시스템에서 발생한 일종의 비동기 사건, 즉 이벤트(event)가 최우선으로 처리될 수 있도록 [프로세서](#프로세서)에 요청되는 신호이다. 아래 그림은 인터럽트가 프로세서로부터 처리되기 위한 과정을 간략히 보여준다.
+[인터럽트](https://ko.wikipedia.org/wiki/인터럽트)(interrupt; 간혹 "트랩"이라고도 언급)는 마우스 움직임이나 키보드 입력과 같은 시스템에서 발생한 일종의 비동기 사건, 즉 이벤트(event)가 최우선으로 처리될 수 있도록 [프로세서](#프로세서)에 요청되는 신호이다. 아래 그림은 인터럽트가 프로세서로부터 처리되는, 즉 인터럽트 서비스(interrupt service) 과정을 간략히 보여준다.
 
 ![인터럽트의 종류 및 처리 과정<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Interrupt_Process.PNG">위키미디어</a></i></sub>](/images/docs/processor/interrupt_process_diagram.png)
 
-인터럽트를 전달받은 프로세서는 이벤트를 처리하기 위해 당시 실행 중이던 [스레드](ko.Process#스레드)를 잠시 중단시키고 재개되어야 할 시점의 스레드 [상태](https://en.wikipedia.org/wiki/State_(computer_science))(state)를 저장한다. 전달받은 인터럽트에 대응하는 [인터럽트 핸들러](https://ko.wikipedia.org/wiki/인터럽트_핸들러)(interrupt handler, 일명 interrupt service routine; ISR)가 프로세서에 의해 실행되면서 이벤트가 처리된다. 그리고 마지막으로 프로세서는 중단된 스레드를 다시 실행하므로써 일련의 인터럽트 처리 과정이 마무리된다.
+인터럽트를 전달받은 프로세서는 이벤트를 처리하기 위해 현재 실행 중이던 [스레드](ko.Process#스레드)를 잠시 중단시키고 재개되어야 할 시점의 스레드 [상태](https://en.wikipedia.org/wiki/State_(computer_science))(state)를 저장한다. 각 인터럽트마다 대응되는 함수를 [인터럽트 핸들러](https://ko.wikipedia.org/wiki/인터럽트_핸들러)(interrupt handler) 또는 인터럽트 서비스 루틴(interrupt service routine; ISR)이라고 부르는데, 프로세서에 의해 실행되는 ISR이 바로 이벤트를 처리하는 역할을 한다.
+
+> ISR은 실행 중이던 스레드를 중단시켜 프로세서를 점유한 것이므로 최대한 빠른 시간 내에 처리되어야 한다. 그러나 ISR의 작업들이 많아질수록 인터럽트 처리 시간이 길어지는데, 이는 스레드가 재개되는 시점을 미루거나 새로운 인터럽트가 제때 처리되지 못하게 한다. 윈도우 운영체제는 [DPC](#지연-프로시저-호출)를 제공하므로써 이러한 문제를 해소한다.
+
+마지막으로 프로세서가 중단된 스레드를 다시 실행하므로써 일련의 인터럽트 서비스가 마무리된다.
