@@ -40,3 +40,10 @@ order: null
 > ISR은 실행 중이던 스레드를 중단시켜 프로세서를 점유한 것이므로 최대한 빠른 시간 내에 처리되어야 한다. 그러나 ISR의 작업들이 많아질수록 인터럽트 처리 시간이 길어지는데, 이는 스레드가 재개되는 시점을 미루거나 새로운 인터럽트가 제때 처리되지 못하게 한다. 윈도우 운영체제는 [DPC](#지연-프로시저-호출)를 제공하므로써 이러한 문제를 해소한다.
 
 마지막으로 프로세서가 중단된 스레드를 다시 실행하므로써 일련의 인터럽트 서비스가 마무리된다.
+
+### 하드웨어 인터럽트
+[하드웨어 인터럽트](https://en.wikipedia.org/wiki/Interrupt#Hardware_interrupts)(hardware interrupt)는 마우스, 키보드, 프린터 등의 컴퓨터 [하드웨어](https://ko.wikipedia.org/wiki/컴퓨터_하드웨어) 또는 [외부 장치](https://ko.wikipedia.org/wiki/주변기기)가 운영체제와 통신 및 상호작용을 하기 위해 발신되는 인터럽트이다.
+
+> 운영체제는 하드웨어마다 발생되는 인터럽트에 각자 다른 [IRQ](https://ko.wikipedia.org/wiki/인터럽트_요청) 값을 지정하여 장치를 분별한다. 만일 두 개 이상의 장치가 동일한 IRQ로 전송하면 [혼선](https://en.wikipedia.org/wiki/Interrupt_request_(PC_architecture)#Conflicts)이 발생하여 시스템 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅))을 야기한다.
+
+비록 하드웨어 인터럽트는 시스템에 아무 때나 도달할 수 있으나, 결국 프로세서의 [클럭 발진기](https://en.wikipedia.org/wiki/Clock_generator)에 의해 동기화된다.
