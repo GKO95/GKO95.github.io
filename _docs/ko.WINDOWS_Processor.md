@@ -47,3 +47,10 @@ order: null
 > 운영체제는 하드웨어마다 발생되는 인터럽트에 각자 다른 [IRQ](https://ko.wikipedia.org/wiki/인터럽트_요청) 값을 지정하여 장치를 분별한다. 만일 두 개 이상의 장치가 동일한 IRQ로 전송하면 [혼선](https://en.wikipedia.org/wiki/Interrupt_request_(PC_architecture)#Conflicts)이 발생하여 시스템 [프리징](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅))을 야기한다.
 
 비록 하드웨어 인터럽트는 시스템에 아무 때나 도달할 수 있으나, 결국 프로세서의 [클럭 발진기](https://en.wikipedia.org/wiki/Clock_generator)에 의해 동기화된다.
+
+### 소프트웨어 인터럽트
+[소프트웨어 인터럽트](https://en.wikipedia.org/wiki/Interrupt#Software_interrupts)(software interrupt)는 운영체제가 컴퓨터 하드웨어 또는 외부 장치와 통신 및 동작을 지시하기 위해, [특정 명령어](https://ko.wikipedia.org/wiki/INT_(x86_명령어))를 실행하거나 조건에 부합하면 프로세서로부터 발신되는 인터럽트이다. 일반적으로 소프트웨어 인터럽트는 운영체제의 커널단에서 수신받아 처리된다.
+
+> 흔히 커널 프로세스에 나타나서는 안될 특정 소프트웨어 인터럽트가 존재하나, 모종의 이유로 해당 신호가 발신되었다면 [시스템 충돌](ko.BSOD)을 초래할 수 있다.
+
+프로그램이 실행되는 도중에 발생한 [예외](https://ko.wikipedia.org/wiki/예외_처리)(exception)도 소프트웨어 인터럽트에 해당한다.
