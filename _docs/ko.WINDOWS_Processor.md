@@ -54,3 +54,17 @@ order: null
 > 흔히 커널 프로세스에 나타나서는 안될 특정 소프트웨어 인터럽트가 존재하나, 모종의 이유로 해당 신호가 발신되었다면 [시스템 충돌](ko.BSOD)을 초래할 수 있다.
 
 프로그램이 실행되는 도중에 발생한 [예외](https://ko.wikipedia.org/wiki/예외_처리)(exception)도 소프트웨어 인터럽트에 해당한다.
+
+## 지연 프로시저 호출
+[지연 프로시저 호출](https://learn.microsoft.com/ko-kr/windows-hardware/drivers/kernel/introduction-to-dpcs)(deferred procedure calls; DPC)은 [큐](https://ko.wikipedia.org/wiki/큐_(자료_구조))에 대기된 작업들을 나중에 한꺼번에 처리하는 매커니즘이다.
+
+인터럽트 핸들러는 기존 스레드를 중단시켜 프로세서를 점유한 것이기 때문에, 원활한 스레드 재개를 위해 인터럽트 서비스는 되도록 빠른 시간 내에 완료되어야 한다. 하지만 인터럽트 핸들러가 처리하는 작업이 많아질수록 인터럽트 서비스 완료에 필요한 시간은 더 길어지게 된다. 이는 스레드가 다시 실행되는 시점을 늦추고 또 다른 인터럽트 처리를 방해하여 매끄럽지 못한 시스템 성능을 야기할 수 있다.
+
+DPC는 필연적이지만 나중에 처리되어도 무관한 낮은 우선순위의 작업들을 실행할 수 있도록 다음 두 가지 특성을 지닌다:
+
+1. 인터럽트 서비스가 완료되면 큐에 대기된 작업들이 순서대로 처리된다.
+2. 인터럽트보다 낮은 IRQL을 가져 새로운 인터럽트 신호가 수신되면 DPC 처리 작업은 서비스 완료 때까지 잠시 중단된다.
+
+> 과거 운영체제는 인터럽트 핸들러를 1차(First-Level Interrupt Handler; FLIH)와 2차(SLIH)로 나누었으며, 여기서 후자가 윈도우 운영체제의 DPC에 해당한다.
+
+그러나 단일 및 누적 DPC 작업 처리 시간이 각가 20초와 120초를 초과하면 시스템은 이를 비정상 동작으로 인지하여 [버그 확인 코드](ko.BSOD#버그-확인-코드) [0x133 DPC_WATCHDOG_VIOLATION](https://learn.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x133-dpc-watchdog-violation)이 발생한다.
