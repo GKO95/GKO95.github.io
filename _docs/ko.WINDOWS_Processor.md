@@ -37,6 +37,23 @@ order: null
 
 > 윈도우 운영체제는 [선점형](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅)#비선점형과_선점형) [라운드 로빈](https://ko.wikipedia.org/wiki/라운드_로빈_스케줄링)(pre-emptive round-robin) 스캐줄링 알고리즘을 사용한다.
 
+## 프로세스 상태
+[프로세스 상태](https://en.wikipedia.org/wiki/Process_state)(process state)는 현재 프로세스가 어떠한 상태에 있는지를 가리키며, 크게 세 가지로 분류된다: 준비(ready), 실행(running), 그리고 대기(waiting) 상태가 있다. 윈도우 운영체제는 프로세스 상태에 따라 어떻게 처리할 지 결정한다. 다음은 프로세스 상태의 설명 및 전환되는 경우를 소개한다.
+
+![프로세스의 수명 주기를 상태와 함께 표시한 다이어그램](/images/docs/process/process_states_diagram.jpg)
+
+<table style="width: 100%;">
+<thead><tr><th>프로세스 상태</th><th>영문</th><th>설명</th></tr></thead>
+<colgroup><col style="width: 10%;"/><col style="width: 10%;"/><col style="width: 80%;"/></colgroup>
+<tbody>
+<tr><td style="text-align: center;">생성</td><td style="text-align: center;">Created</td><td>프로세스가 처음으로 생성되었을 때의 상태이며, 곧바로 준비 상태로 전환된다.</td></tr>
+<tr><td style="text-align: center;">준비</td><td style="text-align: center;">Ready</td><td>프로세서가 즉시 실행할 수 있는 준비된 상태이다.<ul><li style="margin: 5px 0;"><span style="padding: 0px 5px; border: 2px darkgray solid; border-radius: 5px;">→ 실행</span>: 스케줄링에 의해 프로세스를 처리할 프로세서가 지정 및 배치되면서 전환된다.</li></ul></td></tr>
+<tr><td style="text-align: center;">실행</td><td style="text-align: center;">Running</td><td>프로세서에 의해 현재 실행되고 있는 상태이다.<ul><li style="margin: 5px 0;"><span style="padding: 0px 5px; border: 2px darkgray solid; border-radius: 5px;">→ 준비</span>: 퀀텀 소진, <code>Sleep(0)</code> 함수, 혹은 우선순위에 밀리면 준비 상태로 전환된다.</li><li style="margin: 5px 0;"><span style="padding: 0px 5px; border: 2px darkgray solid; border-radius: 5px;">→ 대기</span>: <code>WaitingForSingleObject()</code> 또는 <code>Sleep()</code> 함수로 대기 중인 프로세스는 타 프로세스의 도움을 받거나 커널 동작을 기다려야 한다.</li></ul></td></tr>
+<tr><td style="text-align: center;">대기</td><td style="text-align: center;">Waiting</td><td>특정 이벤트가 발생하기 전까지는 프로세서로부터 실행될 수 없는 유예 상태이다.<ul><li style="margin: 5px 0;"><span style="padding: 0px 5px; border: 2px darkgray solid; border-radius: 5px;">→ 준비</span>: 대기 상태에서 탈출한 프로세스를 처리할 잔여 프로세서가 없을 시 전환된다.</li><li style="margin: 5px 0;"><span style="padding: 0px 5px; border: 2px darkgray solid; border-radius: 5px;">→ 실행</span>: 대기 상태에서 탈출한 프로세스를 처리할 잔여 프러세서가 있거나, 혹은 높은 우선순위에 의해 곧바로 처리될 시 전환된다.</li></ul></td></tr>
+<tr><td style="text-align: center;">종료</td><td style="text-align: center;">Terminated</td><td>외부에 의해 강제로, 혹은 코드에 의해 종료되었을 시 전환되는 상태이다.</td></tr>
+</tbody>
+</table>
+
 # 인터럽트
 [인터럽트](https://ko.wikipedia.org/wiki/인터럽트)(interrupt; 간혹 "트랩"이라고도 언급)는 마우스 움직임이나 키보드 입력과 같은 시스템에서 발생한 일종의 비동기 사건, 즉 이벤트(event)가 최우선으로 처리될 수 있도록 [프로세서](#프로세서)에 요청되는 신호이다. 아래 그림은 인터럽트가 프로세서로부터 처리되는, 즉 인터럽트 서비스(interrupt service) 과정을 간략히 보여준다.
 
