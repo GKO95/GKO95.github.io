@@ -32,7 +32,7 @@ byte B = 0xE4;          // 십진수: 228
 # 처리장치
 [중앙 처리 장치](https://en.wikipedia.org/wiki/중앙_처리_장치)(central processing unit; CPU)는 시스템에게 주어진 명령어(instruction)를 입력받아 대응하는 동작을 수행하도록 하는 컴퓨터에서 가장 핵심되는 부품 중 하나이다. 아래는 단일 프로세서를 가지는 CPU의 대략적인 구성 및 신호 흐름도이다. 
 
-![단일 프로세서 중앙 처리 장치](/images/docs/mcu/mcu_cpu_diagram.gif)
+![단일 프로세서 중앙 처리 장치](/images/docs/processor/processor_core_single.svg)
 
 > "단일 프로세서"를 강조한 이유는 CPU는 실질적인 연산을 담당하는 프로세서(혹은 코어)가 일반적으로 한 개 이상이 들어있다: 2개면 듀얼 코어, 4개면 쿼드 코어, 그리고 6개면 헥사 코어라 부른다. 
 
