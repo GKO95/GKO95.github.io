@@ -33,7 +33,7 @@ order: null
 # 스케줄링
 [스케줄링](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅))(scheduling)은 작업이 필요한 [프로세스](ko.Process#프로세스) 또는 [스레드](ko.Process#스레드)를 처리할 수 있는 [프로세서](#프로세서)에 분배 및 할당하는 행위이며, 이를 담당하는 프로그램을 스케줄러(scheduler)라고 부른다.
 
-스케줄링된 스레드는 [퀀텀](https://en.wikipedia.org/wiki/Preemption_(computing)#Time_slice)(quantum)이란 일회성 시간제 티켓을 부여받는데, 이는 프로세서가 스레드를 처리하기 위해 주어진 고정된 시간 간격이다. 처리 도중에 스레드의 퀀텀이 소진될 시, 프로세서는 해당 작업을 완료여부와 관계없이 즉각 중단하고 스케줄링된 다음 스레드를 처리한다. 한편, 작업이 마무리되지 않은 스레드는 다시 스케줄링이 되기를 기다린다. 이러한 과정으로부터 운영체제는 [멀티태스킹](https://ko.wikipedia.org/wiki/다중작업)을 구현하여 여러 프로그램 및 기능을 동시에 실행할 수 있게 된다.
+스케줄링된 프로세스는 [퀀텀](https://en.wikipedia.org/wiki/Preemption_(computing)#Time_slice)(quantum)이란 일회성 시간제 티켓을 부여받는데, 이는 프로세서가 프로세스를 처리하기 위해 주어진 고정된 시간 간격이다. 처리 도중에 프로세스의 퀀텀이 소진될 시, 프로세서는 해당 작업을 완료여부와 상관없이 즉각 중단하고 스케줄링된 다음 프로세스를 처리한다. 한편, 작업이 마무리되지 않은 프로세스는 다시 스케줄링이 되기를 기다린다. 이로부터 구현된 운영체제의 [멀티태스킹](https://ko.wikipedia.org/wiki/다중작업) 덕분에 여러 프로그램 및 기능을 동시에 실행할 수 있는 거다.
 
 > 윈도우 운영체제는 [선점형](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅)#비선점형과_선점형) [라운드 로빈](https://ko.wikipedia.org/wiki/라운드_로빈_스케줄링)(pre-emptive round-robin) 스캐줄링 알고리즘을 사용한다.
 
