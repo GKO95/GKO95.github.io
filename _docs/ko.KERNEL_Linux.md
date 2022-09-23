@@ -77,21 +77,6 @@ order: 0x64
 ### 모듈 병행처리
 멀티태스킹이 가능한 운영체제는 여러 프로세스를 한꺼번에 실행할 수 있는데, 이들은 동시에 하나의 커널 모듈을 접근하려 할 수 있다. 특히 [대칭형 멀티프로세서](/docs/ko.Process#다중-프로세서)(symmetric multiprocessor; SMP) 시스템에서는 커널 모듈이 하나 이상의 CPU 프로세서에서 병행될 수 있으며, 심지어 단일 프로세서 시스템에서도 [선점형 스케줄링](/docs/ko.Process#프로세스-스케줄링)(preemptive scheduling)에 의한 빈번한 문맥 교환으로 인해 멀티프로세서 시스템과 동일한 병행처리 문제가 발생할 수 있다. 그러므로 커널 모듈을 설계는 매우 까다로우며 병행처리를 고려하여 신중한 접근이 요구된다.
 
-## 보호 링
-[보호 링](https://ko.wikipedia.org/wiki/보호_링)(protection ring)은 데이터와 기능을 결함과 위협적인 행위로부터 보호하는 메커니즘이다.
-
-![x86 아키텍처의 보호 링<sub><i>출처: <a href="https://commons.wikimedia.org/wiki/File:Priv_rings.svg">위키미디어</a></i></sub>](/images/docs/shared/cpu_protection_ring.svg)
-
-보호 링은 시스템 운영체제의 [권한](https://en.wikipedia.org/wiki/Privilege_(computing))(privilege) 구조를 이루는 계층으로써, CPU 아키텍처가 하드웨어적으로 어떤 [모드](https://en.wikipedia.org/wiki/CPU_modes)에 있는지에 따라 권한에 의해 제한된 일부 명령어들 활용 가능여부가 결정된다. 해당 명령어들은 CPU 및 메모리와 같은 하드웨어를 직접적으로 상호작용하므로 자칫 잘못하면 시스템에 치명적인 문제를 야기한다. 일반적으로 보호 링은 최소 두 계층, 다시 말해 두 개의 CPU 모드를 사용하는데 이들을 커널 그리고 사용자 모드라고 부른다.
-
-* **[커널 모드](https://ko.wikipedia.org/wiki/보호_링#수퍼바이저_모드)(kernel mode)**
-    : *일명 수퍼바이저 모드(supervisor mode)는 시스템에 민감한 영향을 줄 수 있는 입출력 동작이나 메모리 접근에 아무런 제약을 받지 않고 아키텍처의 모든 작업을 수행할 수 있다. 커널 모드의 작업은 메모리 주소 공간 중 커널 공간(kernel space)에서 이루어진다. 대표적인 예시로 디바이스 드라이버(device driver)와 같은 커널 모듈(kernel module)이 커널 모드에서 동작한다.*
-
-* **사용자 모드(user mode)**
-    : *사용할 수 있는 CPU 작업이 제한되어 있으며, 일반적으로 어플리케이션이 사용자 모드에서 동작한다. 만일 커널 동작이 요구되면 시스템 호출(system call)을 통해 커널에 요청을 해야 한다. 사용자 모드의 작업은 메모리 주소 공간 중 사용자 공간(user space)에서 이루어진다. 사용자 공간에서 각 어플리케이션 프로세스마다 개별 [가상 주소 공간](/docs/ko.Memory#가상-주소-공간)(virtual address space)이 할당된다.*
-
-이렇게 보호 링이 분류된 이유는 "더 많은 제어에는 더 큰 책임이 뒤따른다"는 관점에서 비롯된다. 커널 모드의 프로그램 오동작은 시스템 전체에 충돌을 일으킬 수 있기 때문에 문제가 절대로 발생하지 않도록 신뢰될 수 있어야 한다.
-
 # 드라이버
 > *참조: [Linux Device Drivers, Third Edition [LWN.net]](https://lwn.net/Kernel/LDD3/)*
 
