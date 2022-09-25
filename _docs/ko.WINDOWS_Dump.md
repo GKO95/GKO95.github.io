@@ -16,7 +16,7 @@ order: null
 </ul>
 
 ## 사용자 모드 덤프 종류
-본 부문은 사용자 모드 덤프의 [종류](https://learn.microsoft.com/ko-kr/windows-hardware/drivers/debugger/user-mode-dump-files)를 소개하며, 덤프 수집에 필요한 설정은 각 프로그램 문서를 참고하도록 한다.
+본 부문은 사용자 모드 덤프의 [종류](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)를 소개하며, 덤프 수집에 필요한 설정은 각 프로그램 문서를 참고하도록 한다.
 
 ### 전체 덤프
 [전체 사용자 모드 덤프](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files#full)(Full User-Mode Dump), 일명 풀 덤프(full dump)는 프로세스의 사용자 주소 공간 전체를 수집한 기본적인 어플리케이션 덤프이다. 그 외에 프로그램 실행 이미지, [핸들](ko.Process#핸들) 테이블, 그리고 덤프가 수집되었을 당시 메모리를 재현하는 데 유용한 추가 정보들이 포함되어 있다.
