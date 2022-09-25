@@ -32,7 +32,7 @@ order: null
 만일 서비스를 직접 실행 및 중단해야 하는 등의 작업이 필요할 시, 서비스와의 상호작용에 필연적인 API를 활용한 아래 프로세스를 사용할 수 있다.
 
 * **`services.msc`**: [마이크로소프트 관리 콘솔](https://ko.wikipedia.org/wiki/마이크로소프트_관리_콘솔)을 통해 서비스 제어 관리자 데이터베이스에 등록된 서비스를 GUI로 확인하고 제어한다.
-* **[`sc.exe`](https://www.file.net/process/sc.exe.html)**: 서비스 제어 관리자가 서비스를 관리하기 위해 필요한 데이터를 [생성](https://docs.microsoft.com/ko-kr/windows-server/administration/windows-commands/sc-create), [설정](https://docs.microsoft.com/ko-kr/windows-server/administration/windows-commands/sc-config), [제거](https://docs.microsoft.com/ko-kr/windows-server/administration/windows-commands/sc-delete), 그리고 [탐색](https://docs.microsoft.com/ko-kr/windows-server/administration/windows-commands/sc-query)하는 명령어 기반 프로세스이다.
+* **[`sc.exe`](https://www.file.net/process/sc.exe.html)**: 서비스 제어 관리자가 서비스를 관리하기 위해 필요한 데이터를 [생성](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/sc-create), [설정](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/sc-config), [제거](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/sc-delete), 그리고 [탐색](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/sc-query)하는 명령어 기반 프로세스이다.
 
 그 외에도 [파워셸](https://ko.wikipedia.org/wiki/파워셸), 작업 관리자, MSConfig 등을 사용할 수 있다.
 

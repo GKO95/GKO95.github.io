@@ -29,7 +29,7 @@ order: null
 본 시스템에 설치된 48 GB의 RAM에서 8.7 GB가 사용 중(in use)이고 나머지 38.6 GB는 아직 [사용 가능](#사용-가능한-메모리)(available)하다. 괄호 안에 있는 7.5 MB는 사용 중인 RAM 내에서 압축된 메모리 크기를 가리키는데, 예를 들어 본래 100 MB 데이터를 92.5 MB만큼 절약한 것이다.
 
 ## 페이징 파일
-[페이징 파일](https://learn.microsoft.com/ko-kr/windows/client-management/introduction-page-file)(paging file)은 가상 주소 공간의 [페이지](ko.Process#페이지)를 물리 메모리가 아닌 HDD 혹은 SSD와 같은 저장장치에서 물리 메모리의 작업량 일부를 [페이징](https://ko.wikipedia.org/wiki/페이징)(paging) 기법으로 전담받아 원활한 시스템 성능을 유지하는데 기여하는 `pagefile.sys` 파일이다. 다음은 페이징 기법에 대한 간략한 설명이다.
+[페이징 파일](https://learn.microsoft.com/en-us/windows/client-management/introduction-page-file)(paging file)은 가상 주소 공간의 [페이지](ko.Process#페이지)를 물리 메모리가 아닌 HDD 혹은 SSD와 같은 저장장치에서 물리 메모리의 작업량 일부를 [페이징](https://ko.wikipedia.org/wiki/페이징)(paging) 기법으로 전담받아 원활한 시스템 성능을 유지하는데 기여하는 `pagefile.sys` 파일이다. 다음은 페이징 기법에 대한 간략한 설명이다.
 
 <table style="width: 80%">
 <thead><tr><th>페이징 기법</th><th>방향성</th><th>설명</th></tr></thead>

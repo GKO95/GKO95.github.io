@@ -7,7 +7,7 @@ icon: icon-windows.svg
 order: null
 ---
 # 사용자 모드 덤프
-[사용자 모드 덤프](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/user-mode-dump-files)(user-mode dump), 일명 어플리케이션 덤프는 특정 시점에서 [프로세스](ko.Process)의 [가상 주소 공간](ko.Process#가상-주소-공간) 중에서 사용자 공간(user space)에 내재된 데이터 및 리소스가 수집된 파일이다. 사용자 모드 덤프를 통해 당시 어플리케이션이 어떠한 작업을 수행하고 있었는지 파악할 수 있다. 사용자 모드 덤프는 아래 프로그램들을 통해 수집할 수 있다:
+[사용자 모드 덤프](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/user-mode-dump-files)(user-mode dump), 일명 어플리케이션 덤프는 특정 시점에서 [프로세스](ko.Process)의 [가상 주소 공간](ko.Process#가상-주소-공간) 중에서 사용자 공간(user space)에 내재된 데이터 및 리소스가 수집된 파일이다. 사용자 모드 덤프를 통해 당시 어플리케이션이 어떠한 작업을 수행하고 있었는지 파악할 수 있다. 사용자 모드 덤프는 아래 프로그램들을 통해 수집할 수 있다:
 
 <ul>
 <li><dl><b>시스템 기본 프로그램</b><ul><li><a href="ko.WER">Windows Error Reporting</a></li><li><a href="https://ko.wikipedia.org/wiki/작업_관리자">작업 관리자</a></li></ul></dl></li>
