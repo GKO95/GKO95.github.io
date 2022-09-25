@@ -2,7 +2,7 @@
 layout: docs
 category: 공업수학
 title: 라플라스 변환
-slug: ko.Laplace-Transform
+slug: ko.Transform_Laplace
 order: 0xE3
 ---
 # 개요

@@ -2,7 +2,7 @@
 layout: docs
 category: 공업수학
 title: 푸리에 변환
-slug: ko.Fourier-Transform
+slug: ko.Transform_Fourier
 order: 0xE2
 ---
 # 개요
