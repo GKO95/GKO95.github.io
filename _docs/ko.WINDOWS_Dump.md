@@ -29,7 +29,7 @@ order: null
 > 비록 명칭은 "미니 덤프"이지만, 가끔가다 전체 사용자 모드 덤프보다 더 많은 정보를 수집하는 경우도 있다.
 
 # 커널 모드 덤프
-[커널 모드 덤프](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/kernel-mode-dump-files)(kernel-mode dump), 일명 메모리 덤프는 특정 시점에서 커널이 기여한 [물리 메모리](https://en.wikipedia.org/wiki/Computer_memory) (즉, [RAM](https://en.wikipedia.org/wiki/Random-access_memory)) 내의 데이터를 수집한 파일이다. 메모리 덤프를 통해 운영체제가 당시 어떠한 작업을 수행하고 있었는지 파악할 수 있다. 아래의 커널 모드 덤프를 생성하는 방법들을 나열한다:
+[커널 모드 덤프](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/kernel-mode-dump-files)(kernel-mode dump), 일명 메모리 덤프는 특정 시점에서 커널이 기여한 [물리 메모리](https://en.wikipedia.org/wiki/Computer_memory) (즉, [RAM](https://en.wikipedia.org/wiki/Random-access_memory)) 내의 데이터를 수집한 파일이다. 메모리 덤프를 통해 운영체제가 당시 어떠한 작업을 수행하고 있었는지 파악할 수 있다. 아래의 커널 모드 덤프를 생성하는 방법들을 나열한다:
 
 * [블루스크린](ko.BSOD)
 * [LiveKD](ko.LiveKD)
