@@ -42,4 +42,4 @@ Sysinternals는 필요한 개별 프로그램만 [다운로드](https://docs.mic
 </table>
 
 # 같이 보기
-* [Sysinternals - Windows Sysinternals &#124; Microsoft Docs](https://docs.microsoft.com/ko-kr/sysinternals/)
+* [Sysinternals - Windows Sysinternals &#124; Microsoft Learn](https://docs.microsoft.com/en-us/sysinternals/)

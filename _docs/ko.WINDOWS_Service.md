@@ -79,6 +79,6 @@ HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost
 그러므로, svchost.exe 중에서 `netsvcs` 그룹을 시작하면 WMI을 포함한 데이터에 나열된 서비스가 실행된다.
 
 # 참조
-* [맬웨어 방지 서비스 보호 - Win32 apps &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows/win32/services/protecting-anti-malware-services-)
-* [서비스 호스트 - Win32 apps &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows/win32/wsw/service-host)
+* [맬웨어 방지 서비스 보호 - Win32 apps &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows/win32/services/protecting-anti-malware-services-)
+* [서비스 호스트 - Win32 apps &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows/win32/wsw/service-host)
 * [Demystifying the "SVCHOST.EXE" Process and Its Command Line Options &#124; by Nasreddine Bencherchali &#124; Medium](https://nasbench.medium.com/demystifying-the-svchost-exe-process-and-its-command-line-options-508e9114e747)

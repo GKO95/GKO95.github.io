@@ -280,6 +280,6 @@ Evaluate expression: 1 = 00000000`00000001
 ```
 
 # 같이 보기
-* [디버거 명령어 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/debugger-commands)
-* [x64 아키텍처 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/x64-architecture)
+* [Debugger Commands - Windows drivers &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-commands)
+* [x64 Architecture - Windows drivers &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/x64-architecture)
 * [The history of calling conventions, part 5: amd64 - The Old New Thing](https://devblogs.microsoft.com/oldnewthing/20040114-00/?p=41053)

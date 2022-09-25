@@ -93,5 +93,5 @@ HKLM\SYSTEM\CurrentControlSet\Control\CrashControl
 > 하이퍼바이저 호스트 머신의 경우, 자식 가상 머신들에 대한 데이터가 필터링된 활성 메모리 덤프가 매우 유용하다.
 
 # 참조
-* [Kernel-Mode 덤프 파일의 종류 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/varieties-of-kernel-mode-dump-files)
-* [Kernel-Mode 덤프 파일 사용 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/enabling-a-kernel-mode-dump-file)
+* [Enabling a Kernel-Mode Dump File - Windows drivers &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/enabling-a-kernel-mode-dump-file)
+* [How to determine the appropriate page file size for 64-bit versions of Windows - Windows Client Management &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows/client-management/determine-appropriate-page-file-size)

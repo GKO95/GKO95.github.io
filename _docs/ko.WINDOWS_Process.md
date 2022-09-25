@@ -87,4 +87,4 @@ typedef void* HANDLE;
 [스레드](https://ko.wikipedia.org/wiki/스레드_(컴퓨팅))(thread)는 프로세스의 프로그램 이미지 코드를 실행하기 위해 [CPU](ko.Processor)에서 처리할 수 있는 작업 흐름의 단위이다. 프로세스는 기본적으로 하나의 스레드를 갖는데 개발자의 설계에 의해 추가로 생성하여 두 개 이상의 스레드를 활용할 수 있고, 동일한 가상 주소 공간에 상주하기 때문에 서로의 리소스를 아무런 제약없이 공유할 수 있다. 그러나 프로세스에는 최소한 하나의 스레드가 존재해야 하므로, 모든 스레드가 종료되면 해당 프로세스는 자동적으로 함께 종료된다.
 
 # 같이 보기
-* [프로세스 및 스레드 - Win32 apps &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows/win32/procthread/processes-and-threads)
+* [Processes and Threads - Win32 apps &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows/win32/procthread/processes-and-threads)

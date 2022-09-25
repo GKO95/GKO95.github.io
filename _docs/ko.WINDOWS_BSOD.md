@@ -203,6 +203,6 @@ BSOD 덤프 수집에서 페이징 파일의 충분한 공간 확보는 매우 �
 전용 덤프 파일은 폴더 안에 위치할 수 있다는 특징이 있으나, 해당 경로가 시스템 부팅 당시에 이미 존재해야 한다는 제약을 받는다. 그리고 전용 덤프 파일을 통해 메모리 덤프가 생성된 이후에 `DumpFileSize`의 값은 0으로 초기화된다.
 
 # 참조
-* [키보드에서 시스템 충돌 강제 적용 - Windows dirvers &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-keyboard)
-* [디버거에서 시스템 충돌 강제 적용 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-debugger)
-* [전원 단추를 사용하여 시스템 충돌 강제 적용 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-with-the-power-button)
+* [Forcing a System Crash from the Keyboard - Windows dirvers &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-keyboard)
+* [Forcing a System Crash from the Debugger - Windows drivers &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-debugger)
+* [Forcing a System Crash with the Power Button - Windows drivers &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-with-the-power-button)

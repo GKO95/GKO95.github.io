@@ -10,7 +10,7 @@ order: null
 [윈도우 API](https://ko.wikipedia.org/wiki/윈도우_API)(일명 WinAPI)는 윈도우 운영체제 리소스에 접근하여 활용할 수 있도록 하는 [어플리케이션 프로그래밍 인터페이스](https://ko.wikipedia.org/wiki/API)이다. 이전에는 32비트 윈도우 운영체제의 프로그래밍 인터페이스인 Win32 API로 알려졌으나, 마이크로소프트는 특정 아키텍처에 종속되지 않는 명칭으로 변경한 것이다. 윈도우가 개발되는 당시 가장 널리 사용된 저급 [C](ko.C) 프로그래밍 언어로 작성되었으므로 윈도우 API는 타 프로그래밍 언어에서도 불러와 활용이 가능하다.
 
 ## 컴포넌트 오브젝트 모델
-> *참조: [구성 요소 개체 모델 - Win32 apps &#124; Microsoft Docs](https://docs.microsoft.com/ko-kr/windows/win32/com/the-component-object-model)*
+> *참조: [구성 요소 개체 모델 - Win32 apps &#124; Microsoft Learn](https://docs.microsoft.com/ko-kr/windows/win32/com/the-component-object-model)*
 
 [컴포넌트 오브젝트 모델](https://ko.wikipedia.org/wiki/컴포넌트_오브젝트_모델)(Component Object Model; COM)은 마이크로소프트가 1993년에 프로세스 간 통신에 호환성을 보장하기 위해 표준화한 [어플리케이션 "이진" 인터페이스](https://ko.wikipedia.org/wiki/응용_프로그램_이진_인터페이스)이다. 본 내용을 진행하기 전에 API와 ABI의 차이점을 간단히 소개할 필요가 있다.
 
