@@ -35,15 +35,15 @@ order: null
 * [LiveKD](ko.LiveKD)
 
 ## 커널 모드 덤프 종류
-본 부문은 블루스크린이 발생하였을 때 생성될 수 있는 커널 모드 덤프의 [종류](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/varieties-of-kernel-mode-dump-files) 및 적절한 [설정](ko.BSOD#bsod-덤프-설정) 방법을 소개한다.
+본 부문은 블루스크린이 발생하였을 때 생성될 수 있는 커널 모드 덤프의 [종류](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/varieties-of-kernel-mode-dump-files) 및 적절한 [설정](ko.BSOD#bsod-덤프-설정) 방법을 소개한다.
 
 ### 전체 메모리 덤프
-[전체 메모리 덤프](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/complete-memory-dump)(Complete Memory Dump)는 커널 및 사용자 공간 주소을 모두 포함한 물리 메모리 내의 데이터를 전부 수집한다. 시스템이 생성할 수 있는 가장 큰 덤프이며, [가상 메모리](ko.BSOD#가상-메모리)는 최소한 물리 메모리 전체 크기 + 1 [MB](https://ko.wikipedia.org/wiki/메가바이트)의 헤더 크기가 확보되어야 한다.
+[전체 메모리 덤프](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/complete-memory-dump)(Complete Memory Dump)는 커널 및 사용자 공간 주소을 모두 포함한 물리 메모리 내의 데이터를 전부 수집한다. 시스템이 생성할 수 있는 가장 큰 덤프이며, [가상 메모리](ko.BSOD#가상-메모리)는 최소한 물리 메모리 전체 크기 + 1 [MB](https://ko.wikipedia.org/wiki/메가바이트)의 헤더 크기가 확보되어야 한다.
 
 > 이론적으로 4 GB RAM이 설치되었다면 최소 가상 메모리는 4097 (= 4 × 1024 + 1) MB가 맞지만, 실제 시스템은 그 보다 몇 MB 적게 사용하므로 4096 MB를 최소로 설정해도 무방하다.
 
 ### 커널 메모리 덤프
-[커널 메모리 덤프](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/kernel-memory-dump)(Kernel Memory Dump)는 물리 메모리 중에서 오로지 커널 공간 주소의 데이터만을 수집하며, 사용자 공간은 제외된다. 생성된 덤프의 크기는 수집된 데이터 양에 따라 다르지만 [전체 메모리 덤프](#complete-memory-dump)보다 훨씬 작으며, 일반적으로 1~2 GB 안팎 혹은 수집된 데이터가 많으면 5~6 GB까지 되기도 한다.
+[커널 메모리 덤프](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/kernel-memory-dump)(Kernel Memory Dump)는 물리 메모리 중에서 오로지 커널 공간 주소의 데이터만을 수집하며, 사용자 공간은 제외된다. 생성된 덤프의 크기는 수집된 데이터 양에 따라 다르지만 [전체 메모리 덤프](#전체-메모리-덤프)보다 훨씬 작으며, 일반적으로 1~2 GB 안팎 혹은 수집된 데이터가 많으면 5~6 GB까지 되기도 한다.
 
 > 비록 전체 메모리 덤프보다 파일 크기는 작으나, "시스템이 관리하는 크기"로 가상 메모리를 설정하면 RAM 용량만큼의 페이징 파일 크기가 확보된다.
 
@@ -70,12 +70,12 @@ order: null
 * 로드 및 언로드된 모듈 목록<sub>(윈도우 XP부터)</sub>
 
 ### 자동 메모리 덤프
-[자동 메모리 덤프](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/automatic-memory-dump)(Automatic Memory Dump)는 [커널 메모리 덤프](#kernel-memory-dump)와 동일한 덤프를 수집하지만, 시스템에서 가상 메모리 크기를 결정하는 방식에서 차이가 있다. 블루스크린이 일어나면 시스템은 대부분의 상황에서도 커널 메모리 덤프를 수집하는 데 충분히 작은 페이징 파일 크기를 택한다. 만일 부족하다면 시스템은 페이징 파일의 크기를 RAM 용량 (혹은 최대 32 GB까지)만큼 확장시키고 QWORD 레지스트리 `PagefileTooSmall`을 생성을 생성한다.
+[자동 메모리 덤프](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/automatic-memory-dump)(Automatic Memory Dump)는 [커널 메모리 덤프](#커널-메모리-덤프)와 동일한 덤프를 수집하지만, 시스템에서 가상 메모리 크기를 결정하는 방식에서 차이가 있다. 블루스크린이 일어나면 시스템은 대부분의 상황에서도 커널 메모리 덤프를 수집하는 데 충분히 작은 페이징 파일 크기를 택한다. 만일 부족하다면 시스템은 페이징 파일의 크기를 RAM 용량 (혹은 최대 32 GB까지)만큼 확장시키고 QWORD 레지스트리 `PagefileTooSmall`을 생성을 생성한다.
 
 > 확장된 가상 메모리 크기는 4주간 유지되며, 당장 원래대로 되돌리고 싶다면 레지스트리 편집기에서 `PagefileTooSmall` 값을 삭제하고 재부팅한다.
 
 ### 활성 메모리 덤프
-[활성 메모리 덤프](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/active-memory-dump)(Active Memory Dump)는 디버깅에 필요없는 데이터가 필터링된 [전체 메모리 덤프](#complete-memory-dump)의 일종으로, 덤프 파일 크기는 전체 메모리 덤프보다 작지만 [커널 메모리 덤프](#kernel-memory-dump)보다 크다.
+[활성 메모리 덤프](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/active-memory-dump)(Active Memory Dump)는 디버깅에 필요없는 데이터가 필터링된 [전체 메모리 덤프](#전체-메모리-덤프)의 일종으로, 덤프 파일 크기는 전체 메모리 덤프보다 작지만 [커널 메모리 덤프](#kernel-memory-dump)보다 크다.
 
 > 자식 가상 머신들에 대한 데이터가 필터링되므로, [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저) 호스트 머신의 덤프를 수집하는 데 매우 유용하다.
 
