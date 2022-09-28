@@ -36,3 +36,32 @@ order: 0x08
 [비주얼 스튜디오 코드](https://ko.wikipedia.org/wiki/비주얼_스튜디오_코드)<sub>([다운로드](https://code.visualstudio.com/download))</sub>, 일명 VS Code는 마이크로소프트에서 개발한 무료 소스 코드 편집기이다. 비록 기술적으로 IDE는 아니지만, rust-analyzer 확장도구<sub>([다운로드](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer))</sub>를 설치하면 코드 자동완성, 자료형 정의, 구문 하이라이트 등의 기능들을 제공한다.
 
 > 본 문서는 VS Code를 기준으로 러스트 프로그래밍을 소개한다.
+
+# 프로젝트
+본 장은 러스트 프로그래밍 언어의 프로젝트 구성을 설명한다.
+
+![VS Code에서 러스트 프로그래밍의 프로젝트](/images/docs/rust/rust_vscode_toml.png)
+
+## 크레이트
+[크레이트](https://doc.rust-lang.org/rust-by-example/crates.html)(crate; 화물상자)는 컴파일로 생성된 가장 작은 단위의 결과물이며, 간단히 말해 `.RS` 소스 파일(일명 크레이트 파일; crate file)로부터 생성된 실행 및 라이브러리 파일이다. 크레이트 파일 중에서 러스트 프로그래밍 컴파일의 근본이 되는 소스 파일을 크레이트 루트(crate root)이라고 부른다.
+
+크레이트는 아래와 같이 두 유형으로 나뉘어진다:
+
+<table style="width: 70%; text-align: center;">
+<colgroup><col style="width: 12%;"/><col style="width: 44%;"/><col style="width: 44%;"/></colgroup>
+<thead><tr><th></th><th>이진 크레이트 (binary crate)</th><th>라이브러리 크레이트 (library crate)</th></tr></thead>
+<tbody><td>설명</td><td><code>.EXE</code> 실행 프로그램</td><td><code>.RLIB</code> 라이브러리 파일</td></tbody>
+<tbody><td>크레이트 루트</td><td><code>src/main.rs</code></td><td><code>src/lib.rs</code></td></tbody>
+<tbody><td><code>main</code> 진입점</td><td>⭕</td><td>❌</td></tbody>
+</table>
+
+> 러스트 프로그래밍에서 크레이트를 이야기하면 흔히 "라이브러리 크레이트"를 가리키며, 이는 일반 프로그래밍 언어에서의 "[라이브러리](ko.C#라이브러리)"와 혼용되어 언급되기도 한다.
+
+## 패키지
+패키지(package)는 하나 이상의 [크레이트](#크레이트)들의 묶음이며, 여러 이진 크레이트를 포함할 수 있지만 오로지 한 개의 라이브러리 크레이트만 가질 수 있다. 패키지의 특징 중 하나는 `Cargo.toml` 파일을 가지고 있다는 점인데, 이는 크레이트를 어떻게 빌드를 할 것인지 설명한다.
+
+> 러스트 프로그래밍에서 프로젝트를 생성한다는 것이 바로 패키지를 가리키며, 새로운 패키지를 생성하려면 아래 명령어를 입력한다.
+> 
+> ```
+> cargo new <프로젝트명>
+> ```
