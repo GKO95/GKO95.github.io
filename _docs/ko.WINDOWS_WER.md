@@ -24,7 +24,7 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
 <tbody>
 <tr><td style="text-align: center;"><code>DumpFolder</code></td><td>어플리케이션 충돌 덤프가 저장되는 경로이다.</td><td style="text-align: center;">REG_EXPAND_SZ</td><td><code>%LOCALAPPDATA%\CrashDumps</code></td></tr>
 <tr><td style="text-align: center;"><code>DumpCount</code></td><td>어플리케이션 충돌 덤프를 저장할 수 있는 최대 개수이다. 최대치에 도달한 상태에서 새로운 덤프가 생성되면 가장 오래된 덤프를 삭제한다.</td><td style="text-align: center;">REG_DWORD</td><td><code>0x0a</code>(10)</td></tr>
-<tr><td style="text-align: center;"><code>DumpType</code></td><td>어플리케이션 충돌 덤프 종류를 지정한다.<ul><li><code>0x00</code>: 커스텀 덤프</li><li><code>0x01</code>: <a href="ko.Dump#미니-덤프">미니 덤프</a></li><li><code>0x02</code>: <a href="ko.Dump#전체-덤프">전체 덤프</a></li></ul></td><td style="text-align: center;">REG_DWORD</td><td><code>0x02</code>(2)</td></tr>
+<tr><td style="text-align: center;"><code>DumpType</code></td><td>어플리케이션 충돌 덤프 종류를 지정한다.<ul><li><code>0x00</code>: 커스텀 덤프</li><li><code>0x01</code>: <a href="ko.Dump#미니-덤프">미니 덤프</a></li><li><code>0x02</code>: <a href="ko.Dump#전체-덤프">전체 덤프</a></li></ul></td><td style="text-align: center;">REG_DWORD</td><td><code>0x01</code>(1)</td></tr>
 </tbody>
 </table>
 
