@@ -57,7 +57,7 @@ order: null
 HKLM\SYSTEM\CurrentControlSet\Services
 ```
 
-서비스는 실행파일 위치를 알려주는 `ImagePaht` 레지스트리 값이 존재한다. 본 장에서는 DLL 유형의 서비스 중 하나인 Winmgmt 서비스(일명 WMI)를 예시로 들어, 실행파일이 svchost.exe로 지정된 것을 확인할 수 있다.
+서비스는 실행파일 위치를 알려주는 `ImagePath` 레지스트리 값이 존재한다. 본 장에서는 DLL 유형의 서비스 중 하나인 [Winmgmt](https://learn.microsoft.com/en-us/windows/win32/wmisdk/winmgmt) 서비스(일명 [WMI](https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmi-start-page))를 예시로 들어, 실행파일이 svchost.exe로 지정된 것을 확인할 수 있다.
 
 ![DLL 형태의 "Winmgmt" 서비스의 <code>ImagePath</code> 레지스트리 값](/images/docs/windows/svchost_winmgmt_imagepath.png)
 
@@ -77,6 +77,11 @@ HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost
 ![<code>netsvcs</code> 서비스 호스트 그룹 (Winmgmt 서비스 포함)](/images/docs/windows/svchost_winmgmt_netsvcs.png)
 
 그러므로, svchost.exe 중에서 `netsvcs` 그룹을 시작하면 WMI을 포함한 데이터에 나열된 서비스가 실행된다.
+
+# 서비스 목록
+다음은 본 블로그에서 문서로 다루고 있는 일부 서비스들의 나열한다.
+
+* [Windows Error Reporting](ko.WER)
 
 # 참조
 * [Protecting anti-malware services - Win32 apps &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/services/protecting-anti-malware-services-)
