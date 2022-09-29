@@ -38,9 +38,11 @@ order: 0x08
 > 본 문서는 VS Code를 기준으로 러스트 프로그래밍을 소개한다.
 
 # 프로젝트
-러스트 프로그래밍 언어는 [카고](https://doc.rust-lang.org/rust-by-example/cargo.html)(cargo; 화물)라는 공식 패키지 관리 도구를 통해 프로젝트를 관리한다.
+러스트 프로그래밍 언어는 [`cargo`](https://doc.rust-lang.org/rust-by-example/cargo.html)라는 공식 패키지 관리 도구를 통해 프로젝트를 관리한다.
 
 ![VS Code에서 러스트 프로그래밍의 프로젝트](/images/docs/rust/rust_vscode_toml.png)
+
+프로젝트를 [빌드](https://ko.wikipedia.org/wiki/소프트웨어_빌드)하거나 실행하기 위해 각각 `cargo build` 그리고 `cargo run` 명령어를 사용된다. 러스트 프로그래밍 언어의 독특한 기능 중 하나는 결과물을 생성하지 않은 채 컴파일이 가능한지 여부를 `cargo check` 명령어로 확인할 수 있다. 이는 소스 코드를 컴파일하는 데 소모되는 시간이 생략되므로 코드 유효성을 확인하기에 매우 유용하다.
 
 ## 크레이트
 [크레이트](https://doc.rust-lang.org/rust-by-example/crates.html)(crate; 화물상자)는 컴파일로 생성된 가장 작은 단위의 결과물이며, 간단히 말해 `.RS` 소스 파일(일명 크레이트 파일; crate file)로부터 생성된 실행 및 라이브러리 파일이다. 크레이트 파일 중에서 러스트 프로그래밍 컴파일의 근본이 되는 소스 파일을 크레이트 루트(crate root)이라고 부른다.
