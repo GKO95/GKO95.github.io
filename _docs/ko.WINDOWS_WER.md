@@ -12,7 +12,7 @@ order: null
 ![Windows Error Reporting 서비스](/images/docs/windows/wer_service_description.png)
 
 ## 사용자 모드 덤프 수집
-WER은 왓슨 서버로 전송되는 덤프와 별개로 로컬 시스템에서 덤프를 수집하도록 [설정](https://learn.microsoft.com/en-us/windows/win32/wer/collecting-user-mode-dumps)할 수 있다. 기본적으로 비활성화되어 있으나, 아래의 레지스트리 키를 생성하는 것만으로 충돌된 어플리케이션의 덤프가 수집된다. 본 내용의 모든 설정들은 곧바로 적용되며 재부팅이 필요하지 않다.
+WER은 왓슨 서버로 전송되는 덤프와 별개로 로컬 시스템에서 덤프를 수집하도록 [설정](https://learn.microsoft.com/en-us/windows/win32/wer/collecting-user-mode-dumps)할 수 있다. 기본적으로 비활성화되어 있으나, 아래의 레지스트리 키를 생성하는 것만으로 충돌된 모든 어플리케이션의 덤프가 수집된다. 본 내용의 설정들은 곧바로 적용되며 재부팅이 필요하지 않다.
 
 ```
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
@@ -28,4 +28,10 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
 </tbody>
 </table>
 
-만일 아무런 레지스트리 값이 설정되어 있지 않으면, 어플리케이션 충돌 시 아래에 명시된 기본값에 따라 덤프를 생성한다.
+> 만일 아무런 레지스트리 값이 설정되어 있지 않으면, 어플리케이션 충돌 시 아래에 명시된 기본값에 따라 덤프를 생성한다.
+
+WER 사용자 모드 덤프 수집은 개별 어플리케이션마다 설정될 수 있으며, 이는 위에서 소개한 모든 어플리케이션에 전역적으로 적용되는 설정보다 우선시된다. 예를 들어 [서비스 호스트](ko.Service#서비스-호스트)(`svchost.exe`) 충돌로 생성된 덤프를 별도로 설정하려면 아래의 레지스트리 키를 만들어야 한다:
+
+```
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps\svchost.exe
+```
