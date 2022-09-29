@@ -16,7 +16,7 @@ WinDbg는 어플리케이션 충돌이나 [블루스크린](ko.BSOD)으로 생�
 ## 설치
 윈도우 10 및 11을 사용하고 있다면 [마이크로소프트 스토어](https://apps.microsoft.com/store/detail/windbg-preview/9PGJGD53TN86)에서 WinDbg Preview 버전을 설치할 수 있다.
 
-> 만일 윈도우 7 혹은 8.1 운영체제를 사용하거나, 혹은 Preview가 아닌 버전을 설치하려면 윈도우 [SDK](https://developer.microsoft.com/ko-kr/windows/downloads/windows-sdk/)를 통해 설치를 진행한다.
+> 만일 윈도우 7 혹은 8.1 운영체제를 사용하거나, 혹은 Preview가 아닌 버전을 설치하려면 윈도우 [SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/)를 통해 설치를 진행한다.
 
 ## 설정
 원활한 디버깅 작업을 위해서는 아래의 설정을 하는 것을 권장한다.
@@ -225,7 +225,7 @@ BP의 활용은 그 외에도 인자를 매개변수로 전달할 때에도 사�
     > SP로 프레임 공간이 확보되었을 때 `RetAddr`와 최소 8바이트 혹은 그 이상의 빈 공간이 생기는데, 이는 스택 최상위 주소를 `0x10` 배수에 맞추는 과정에서 발생한 잔여 공간이다.
 
 ## 스택 추적
-[스택 추적](https://ko.wikipedia.org/wiki/스택_추적)은 WinDbg의 [`k`](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/k--kb--kc--kd--kp--kp--kv--display-stack-backtrace-) 명령으로 확인할 수 있으나, 스택 구조상 아키텍처에 따라 표시되는 정보가 다소 상이하다.
+[스택 추적](https://ko.wikipedia.org/wiki/스택_추적)은 WinDbg의 [`k`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/k--kb--kc--kd--kp--kp--kv--display-stack-backtrace-) 명령으로 확인할 수 있으나, 스택 구조상 아키텍처에 따라 표시되는 정보가 다소 상이하다.
 
 <table style="table-layout: fixed; width: 100%">
 <thead><tr><th>x86 아키텍처 프로그램</th><th>x64 아키텍처 프로그램</th></tr></thead>
@@ -280,6 +280,6 @@ Evaluate expression: 1 = 00000000`00000001
 ```
 
 # 같이 보기
-* [디버거 명령어 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/debugger-commands)
-* [x64 아키텍처 - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/x64-architecture)
+* [Debugger Commands - Windows drivers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/debugger-commands)
+* [x64 Architecture - Windows drivers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/x64-architecture)
 * [The history of calling conventions, part 5: amd64 - The Old New Thing](https://devblogs.microsoft.com/oldnewthing/20040114-00/?p=41053)

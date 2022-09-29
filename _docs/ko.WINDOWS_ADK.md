@@ -10,7 +10,7 @@ order: null
 [윈도우 평가 및 배포 키트](https://en.wikipedia.org/wiki/Windows_Assessment_and_Deployment_Kit)(Windows Assessment and Deployment Kit), 일명 윈도우 ADK는 운영체제 대규모 배포를 위한 윈도우 이미지 커스터마이징 및 시스템 성능을 시험할 수 있는 도구 등을 제공한다.
 
 ## 설치
-마이크로소프트 공식사이트에서 [Windows ADK 다운로드 및 설치](https://docs.microsoft.com/ko-kr/windows-hardware/get-started/adk-install) 페이지로 이동하여 설치 파일을 다운로드 및 실행한다.
+마이크로소프트 공식사이트에서 [Windows ADK 다운로드 및 설치](https://learn.microsoft.com/en-us/windows-hardware/get-started/adk-install) 페이지로 이동하여 설치 파일을 다운로드 및 실행한다.
 
 > 이전에 설치된 윈도우 ADK를 다른 버전으로 바꾸려고 한다면 제어판에서 해당 버전을 먼저 제거해야 한다.
 
@@ -30,7 +30,7 @@ order: null
 </table>
 
 # Windows Performance Recorder
-[Windows Performance Recorder](https://docs.microsoft.com/ko-kr/windows-hardware/test/wpt/windows-performance-recorder)(WPR)
+[Windows Performance Recorder](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/windows-performance-recorder)(WPR)
 
 # Windows Performance Analyzer
-[Windows Performance Analyzer](https://docs.microsoft.com/ko-kr/windows-hardware/test/wpt/windows-performance-analyzer)(WPA)
+[Windows Performance Analyzer](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/windows-performance-analyzer)(WPA)

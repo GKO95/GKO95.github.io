@@ -7,7 +7,7 @@ icon: icon-cpp.svg
 order: 0x02
 ---
 # 소개
-> *참조: [Microsoft Docs C++ 언어 설명서 (한국어)](https://docs.microsoft.com/ko-kr/cpp/cpp/)*
+> *참조: [Microsoft Docs C++ 언어 설명서](https://learn.microsoft.com/en-us/cpp/cpp/)*
 
 C++ 프로그래밍 언어는 [C 프로그래밍 언어](/docs/ko.C)에서 기반된 범목적(general-purpose) 저급(low-level) 프로그래밍 언어이다. 코드를 순서대로 실행하는 절차적 프로그래밍 언어인 C와 달리, 객체지향적 프로그래밍도 지원하는 C++를 하이브리드 언어라고 부른다. C 프로그래밍 언어의 확장판으로 볼 수 있는 C++ 언어는 더 많은 기능을 제공하므로써 폭넓은 활용도를 보장한다.
 
@@ -318,7 +318,7 @@ int variable1 = 3, variable2 = 4, variable3;
 * `typedef` 선언
 * 기타 등등
 
-차후에 소개할 `extern` 키워드는 변수를 선언만 하고 정의하지 않으므로 데이터를 저장할 메모리가 할당되지 않는다. 이러한 변수에 데이터를 저장하거나 호출하려는 행위는 시스템 오류를 야기하므로 컴파일이 불가하다. Visual C++ 컴파일러에서는 [`LNK1120`](https://docs.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-error-lnk1120) 오류의 원인이 된다.
+차후에 소개할 `extern` 키워드는 변수를 선언만 하고 정의하지 않으므로 데이터를 저장할 메모리가 할당되지 않는다. 이러한 변수에 데이터를 저장하거나 호출하려는 행위는 시스템 오류를 야기하므로 컴파일이 불가하다. Visual C++ 컴파일러에서는 [`LNK1120`](https://learn.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-error-lnk1120) 오류의 원인이 된다.
 
 > 위에서 언급한 선언과 정의에 대한 설명은 C/C++ 프로그래밍 언어에서 매우 중요한 개념이지만 프로그래밍 입문자들에게 쉽게 간과되는 내용이다.
 
@@ -371,7 +371,7 @@ C++ 프로그래밍 언어에서 변수가 코드 중에서 어디에 정의되�
     ```
 
 ## 네임스페이스
-[네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)는 식별자의 유일성을 보장하기 위한 데이터 분류 공간으로, `namespace` 키워드를 통해 생성하여 블록 `{}` 안에 데이터들을 분류한다. 네임스페이스 안에 또 다른 네임스페이스를 정의할 수 있으며, 이를 네스티드 네임스페이스(nested namespace)라고 부른다. 그러나 네임스페이스 또한 유일한 식별자를 가져야 하기 때문에 동일한 [영역범위](https://docs.microsoft.com/en-us/cpp/cpp/scope-visual-cpp)(scope)에 놓여진 네임스페이스는 이름이 중복되어서는 안된다.
+[네임스페이스](https://ko.wikipedia.org/wiki/이름공간)(namespace)는 식별자의 유일성을 보장하기 위한 데이터 분류 공간으로, `namespace` 키워드를 통해 생성하여 블록 `{}` 안에 데이터들을 분류한다. 네임스페이스 안에 또 다른 네임스페이스를 정의할 수 있으며, 이를 네스티드 네임스페이스(nested namespace)라고 부른다. 그러나 네임스페이스 또한 유일한 식별자를 가져야 하기 때문에 동일한 [영역범위](https://learn.microsoft.com/en-us/cpp/cpp/scope-visual-cpp)(scope)에 놓여진 네임스페이스는 이름이 중복되어서는 안된다.
 
 > 서로 다른 이름의 폴더<sub>(네임스페이스)</sub> 안에 동명의 파일<sub>(데이터)</sub> 혹은 폴더<sub>(네스티드 네임스페이스)</sub>를 보관할 수 있는 것과 같은 개념이다.
 
@@ -1060,7 +1060,7 @@ C/C++ 프로그래밍 언어 표준에 의하면 `main()` 함수는 반드시 `i
 | 데이터   | 3      | `./app.exe` | `option1` | `option2` |
 
 ### `WinMain()` 함수
-[`WinMain()`](https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain) 함수는 [Win32](https://ko.wikipedia.org/wiki/윈도우_API) 또는 [MFC](/docs/ko.MFC)와 같은 GUI 프레임워크 어플리케이션의 진입점이다. 본 진입점의 핵심은 마우스 클릭이나 키보드 입력 등으로 발생된 메시지를 수신받아 이를 처리할 함수로 전달하는 [메시지 루프](https://ko.wikipedia.org/wiki/이벤트_루프)(Message Loop)에 있다.
+[`WinMain()`](https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-winmain) 함수는 [Win32](https://ko.wikipedia.org/wiki/윈도우_API) 또는 [MFC](/docs/ko.MFC)와 같은 GUI 프레임워크 어플리케이션의 진입점이다. 본 진입점의 핵심은 마우스 클릭이나 키보드 입력 등으로 발생된 메시지를 수신받아 이를 처리할 함수로 전달하는 [메시지 루프](https://ko.wikipedia.org/wiki/이벤트_루프)(Message Loop)에 있다.
 
 ```cpp
 int WinMain(HINSTANCE 	hInstance,
@@ -1079,7 +1079,7 @@ int WinMain(HINSTANCE 	hInstance,
 진입점의 메시지 루프는 `WM_QUIT` 메시지를 수신할 때까지 지속적으로 어플리케이션 구동에 필요한 메시지 수신 및 분배가 이루어진다. 만일 메시지 루프 진입에 실패하면 진입점의 `return` 반환문에 의해 프로그램이 즉시 종료된다.
 
 ### `DllMain()` 함수
-[`DllMain()`](https://docs.microsoft.com/en-us/windows/win32/dlls/dllmain) 함수는 `.DLL` 확장자를 가지는 [동적 링크 라이브러리](#라이브러리)의 진입점이다.
+[`DllMain()`](https://learn.microsoft.com/en-us/windows/win32/dlls/dllmain) 함수는 `.DLL` 확장자를 가지는 [동적 링크 라이브러리](#라이브러리)의 진입점이다.
 
 ```cpp
 int DllMain(_In_ HINSTANCE hinstDLL,
@@ -1306,7 +1306,7 @@ int main() {
 ## 참조
 [참조](https://en.cppreference.com/w/cpp/language/reference)(reference)는 메모리 주소를 저장하지만, 초기화 이루 메모리 주소 변동이 불가한 상수 포인터에 대응한다. 참조는 단순히 [네임 바인딩](https://ko.wikipedia.org/wiki/네임_바인딩)(name binding)된 변수이다: 자체적으로 할당된 메모리를 갖지 않는 대신에 참조하는 데이터가 할당된 메모리를 그대로 사용하며, 종속된 블록 영역범위를 벗어나면 참조만이 자연스레 사라진다. 이러한 특징에 의해 참조는 보다 안전한 포인터 하위호환으로 사용된다.
 
-* **[lvalue 참조](https://docs.microsoft.com/en-us/cpp/cpp/lvalue-reference-declarator-amp) `&`**
+* **[lvalue 참조](https://learn.microsoft.com/en-us/cpp/cpp/lvalue-reference-declarator-amp) `&`**
 
     `lvalue`는 프로그램이 접근할 수 있는 메모리 주소를 갖는 데이터이다. 즉, 이미 정의된 변수에 별칭을 선언하는 것과 같다. 특히 함수의 매개변수의 참조에 의한 호출을 포인터보다 안전하게 구현하는데 활용된다.
 
@@ -1320,7 +1320,7 @@ int main() {
   std::cout << ref;    // 출력: 4 
     ```
 
-* **[rvalue 참조](https://docs.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp) `&&`**
+* **[rvalue 참조](https://learn.microsoft.com/en-us/cpp/cpp/rvalue-reference-declarator-amp-amp) `&&`**
 
     `rvalue`는 프로그램이 접근할 수 있는 메모리 주소가 없거나, 혹은 메모리 주소가 있어도 더 이상의 접근이 불가한 데이터이다. 즉, 임시 데이터를 곧바로 참조하여 불필요한 변수 정의를 배제할 수 있다.
 
@@ -2670,7 +2670,7 @@ std::cout << ANYTHING(2, 3);
 
 컴파일러에는 공통된 표준 매크로 및 컴파일러마다 전용 매크로가 내장되어 있다.
 
-* **Visual C++**: [Microsoft Docs - 미리 정의된 매크로](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
+* **Visual C++**: [Microsoft Docs - 미리 정의된 매크로](https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
 * **GCC**: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
 * **그 외**: [SourceForge Wiki](https://sourceforge.net/p/predef/wiki/Compilers/)
 
@@ -2725,7 +2725,7 @@ std::cout << variable;
 
 > Pragma란 용어는 pragmatic의 줄임말로, 사전적 의미로는 "실용적인"을 뜻한다. 이는 실질적 컴파일러 동작 및 처리 방식에 관여한 것을 보아 붙여진 용어라고 판단된다.
 
-* **Visual C++**: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://docs.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
+* **Visual C++**: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://learn.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
 * **GCC**: [GCC Online Documentation - Pragmas](https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html)
 
 본 장은 마이크로소프트의 비주얼 스튜디어에서 제공하는 Visual C++ 컴파일러의 pragma 지시문을 위주로 다룬다.

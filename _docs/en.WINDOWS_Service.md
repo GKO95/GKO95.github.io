@@ -71,6 +71,6 @@ Therefore, executing `netsvcs` group of svchost starts the services listed under
 [Service Control Manager](https://en.wikipedia.org/wiki/Service_Control_Manager) (SCM; `services.exe`) is a process that manages [services](#service) and [svchost.exe](#service-host). The process runs as Windows operating system initializes during system startup.
 
 # Reference
-* [Protecting anti-malware services - Win32 apps &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows/win32/services/protecting-anti-malware-services-)
-* [Service Host - Win32 apps &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows/win32/wsw/service-host)
+* [Protecting anti-malware services - Win32 apps &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows/win32/services/protecting-anti-malware-services-)
+* [Service Host - Win32 apps &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows/win32/wsw/service-host)
 * [Demystifying the "SVCHOST.EXE" Process and Its Command Line Options &#124; by Nasreddine Bencherchali &#124; Medium](https://nasbench.medium.com/demystifying-the-svchost-exe-process-and-its-command-line-options-508e9114e747)

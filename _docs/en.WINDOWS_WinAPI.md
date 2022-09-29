@@ -10,7 +10,7 @@ order: null
 [Windows API](https://en.wikipedia.org/wiki/Windows_API) (aka. WinAPI) is an [application programming interface](https://en.wikipedia.org/wiki/API) for accessing resources in Windows operating system. Formally known as Win32 API, a programming interface for 32-bit Windows operating system, Microsoft changed the name so it would be not an architecture-specific. Written in [C](en.C) programming language, which was the most common low-level language by the time of Windows development, it is possible for other programming languages to implement Windows API as well.
 
 ## Component Object Model
-> *Reference: [The Component Object Model - Win32 apps &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows/win32/com/the-component-object-model)*
+> *Reference: [The Component Object Model - Win32 apps &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows/win32/com/the-component-object-model)*
 
 [Component Object Model](https://en.wikipedia.org/wiki/Component_Object_Model) (COM) is an [application "binary" interface](https://en.wikipedia.org/wiki/Application_binary_interface) standardized by Microsoft in 1993 to guarantee compatibility of inter-process communication. Below is a comparison table between API and ABI.
 

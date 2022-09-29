@@ -62,6 +62,6 @@ order: null
 [윈도우 디버거](ko.WinDbg) 프로그램은 심볼을 불러오는 당시에 검증 절차가 자동으로 동작한다.
 
 # 같이 보기
-* [공용 및 개인 기호](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/public-and-private-symbols)
-* [Windows 디버거의 기호 경로](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/symbol-path)
-* [이식 가능한 PDB 기호](https://docs.microsoft.com/ko-kr/windows-hardware/drivers/debugger/symbols-portable-pdb)
+* [Public and Private Symbols - Windows drivers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/public-and-private-symbols)
+* [Symbol path for Windows debuggers - Windows drivers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/symbol-path)
+* [Portable PDB Symbols - Windows drivers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/symbols-portable-pdb)

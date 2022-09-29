@@ -6,7 +6,7 @@ slug: ko.MFC
 order: null
 ---
 # 소개
-> *참조: [Microsoft Docs MFC 데스크톱 애플리케이션 (한국어)](https://docs.microsoft.com/ko-kr/cpp/mfc/)*
+> *참조: [Microsoft Docs MFC 데스크톱 애플리케이션 (한국어)](https://learn.microsoft.com/en-us/cpp/mfc/)*
 
 MFC(Microsoft Foundation Class)는 1992년에 마이크로소프트에서 소개한 윈도우 OS 데스크톱 프로그램 개발을 위한 C++ 객체지향 라이브러리이다. 이후 마이크로소프트에서는 여러 다른 종류의 어플리케이션 프레임워크를 출시하였으나, 비주얼 스튜디오에서 간단히 생성할 수 있는 동시에 C++ 라이브러리라는 점이 [윈도우 API](https://ko.wikipedia.org/wiki/윈도우_API)와의 호환성을 보여주기 때문에 개발 분야에서는 여전히 MFC 수요가 있다. 그러나 오래된 어플리케이션 프레임워크인 만큼 최종 사용자들을 위한 (게임이나 유틸리티 등의) 프로그램 개발에는 적합하지 않으며, 그 대신에 필자는 [Qt](/docs/ko.Qt) 프레임워크를 시도해 볼 것을 추천한다.
 
@@ -287,7 +287,7 @@ BOOL CMFCApplicationApp::InitInstance()
       }
   ```
 
-* 비주얼 관리자: MFC 어플리케이션 컨트롤이 어떠한 스타일로 보여질지 선택한다. 라이브러리에서 제공하는 일부 스타일은 [여기](https://docs.microsoft.com/ko-kr/cpp/mfc/visualization-manager?view=msvc-160)에서 확인할 수 있다. 기본 스타일은 "Window Native/Default"이다.
+* 비주얼 관리자: MFC 어플리케이션 컨트롤이 어떠한 스타일로 보여질지 선택한다. 라이브러리에서 제공하는 일부 스타일은 [여기](https://learn.microsoft.com/en-us/cpp/mfc/visualization-manager?view=msvc-160)에서 확인할 수 있다. 기본 스타일은 "Window Native/Default"이다.
 
   ```cpp
       // Activate "Windows Native" visual manager for enabling themes in MFC   controls
@@ -420,7 +420,7 @@ typedef struct tagMSG {
 
 > 위의 도표에서 `WPARAM`과 `LPARAM`을 각각 "`int` 기반" 및 "`long` 기반"이라고 명시하였다. 바로 전자는 `INT` 자료형의 포인터이고 후자는 `LONG` 자료형의 포인터이기 때문에 붙여진 이름이다. 이때 `INT`는 16비트 아키텍처에서 4바이트가 아닌 2바이트, 즉 `WORD`와 동일한 크기를 가졌다.
 
-MFC 어플리케이션에서 메시지는 몇 가지의 분류로 나뉘어진다: *[Microsoft Docs - Message Categories](https://docs.microsoft.com/ko-kr/cpp/mfc/message-categories)*
+MFC 어플리케이션에서 메시지는 몇 가지의 분류로 나뉘어진다: *[Microsoft Docs - Message Categories](https://learn.microsoft.com/en-us/cpp/mfc/message-categories)*
 
 ### 윈도우 메시지
 윈도우 메시지는 `CWnd` 윈도우 클래스 기반의 객체에서 수신하여 처리하는 메시지이다. 일반적으로 윈도우 메시지 ID는 `WM_` 접두사를 가지며, 메시지 종류에 따라 `wParam` 및 `lParam`은 메시지를 어떻게 처리해야 하는지에 대한 정보가 있는가 하면 아예 사용하지 않는 윈도우 메시지도 존재한다.
@@ -511,12 +511,12 @@ END_MESSAGE_MAP()
 여기서 `afx_msg` 매크로는 사실상 무의미하며, 없어도 컴파일하거나 동작하는데 전혀 문제가 발생하지 않는다. 그렇지만 비주얼 스튜디오의 MFC 클래스 마법사가 메시지 처리자를 인식할 수 있도록 넣어주는 것을 권장한다. 또한 함수를 정의하였다 하더라도 해당 메시지 처리자의 시작점이 메시지 맵에 없으면 절대로 동작하지 않는다.
 
 # 실행
-> *참조: [Microsoft Docs - CWinApp: 어플리케이션 클래스](https://docs.microsoft.com/ko-kr/cpp/mfc/cwinapp-the-application-class)*
+> *참조: [Microsoft Docs - CWinApp: 어플리케이션 클래스](https://learn.microsoft.com/en-us/cpp/mfc/cwinapp-the-application-class)*
 
 전통적인 `main()` 함수를 사용하는 C++ 콘솔 어플리케이션과 달리, 프레임워크 어플리케이션은 `WinMain()` 함수를 중점으로 코드가 수행된다. MFC 라이브러리 또한 프레임워크 어플리케이션을 생성하므로써 `WinMain()` 시작점을 사용하나 표면적으로 드러나지 않는다. 그 대신 MFC 어플리케이션은 `CWinApp` 클래스로 네 단계의 실행 절차로 나뉘어져 진행된다.
 
 ## 초기화
-> *참조: [Microsoft Docs - InitInstance 맴버 함수](https://docs.microsoft.com/en-us/cpp/mfc/initinstance-member-function)*
+> *참조: [Microsoft Docs - InitInstance 맴버 함수](https://learn.microsoft.com/en-us/cpp/mfc/initinstance-member-function)*
 
 초기화(initialization) 단계는 `CWinApp::InitInstance()` 메소드에서 프레임워크 어플리케이션 시작점인 `WinMain()` 함수가 실행되기 전에 프로세스 초기화 작업을 담당한다. 하지만 해당 메소드의 핵심 기능은 하나의 이상의 객체(즉, 어플리케이션)가 동시에 실행될 수 있도록 한다.
 
@@ -533,14 +533,14 @@ BOOL CApplication::InitInstance() {
 본 메소드는 어플리케이션 실행에 있어 가장 중요하며, 어플리케이션의 메인 윈도우를 가리키는 `m_pMainWnd` 맴버에 프레임 창이나 다이얼로그 창 등을 할당할 수 있는 유일한 메소드이다. 그러므로 `CWinApp::InitInstance()` 함수는 GUI를 가진 어플리케이션 개발을 할 경우 `m_pMainWnd` 맴버 때문이라도 반드시 오버라이드를 거쳐야 한다.
 
 ## 실행
-> *참조: [Microsoft Docs - Run 맴버 함수](https://docs.microsoft.com/ko-kr/cpp/mfc/run-member-function)*
+> *참조: [Microsoft Docs - Run 맴버 함수](https://learn.microsoft.com/en-us/cpp/mfc/run-member-function)*
 
 초기화 단계를 마친 MFC 어플리케이션은 `WinMain()` 시작점에 진입하는데, 이때 실행(run) 단계에서의 메시지 루프 역할을 `CWinApp::Run()` 메소드가 담당한다. 해당 메소드는 처리되어야 할 새로운 메시지를 확인하기 위해 지속적으로 메시지 루프를 구동한다. 더이상 처리할 메시지가 없을 시, `CWinApp::Run()` 메소드는 `CWinApp::OnIdle()` 메소드를 호출해 어플리케이션은 아무런 작업을 하지 않는 유휴 상태에 진입한다. 만일 어플리케이션이 종료되면 `CWinApp::Run()` 메소드는 `CWinApp::ExitInstance()` 메소드를 호출해 소멸 단계에 들어간다.
 
 일반적으로 `CWinApp::Run()` 메소드는 메시지 루프에 특수한 기능을 추가하지 않는 이상 오버라이딩을 하지 않는다.
 
 ## 유휴
-> *참조: [Microsoft Docs - OnIdle 맴버 함수](https://docs.microsoft.com/ko-kr/cpp/mfc/onidle-member-function)*
+> *참조: [Microsoft Docs - OnIdle 맴버 함수](https://learn.microsoft.com/en-us/cpp/mfc/onidle-member-function)*
 
 
 메시지 루프에서 더이상 처리할 메시지가 없을 시, 어플리케이션은 `CWinApp::OnIdle()` 메소드를 통해 유휴(idle) 단계에 진입한다. 하지만 해당 단계에서 어플리케이션은 어떠한 작업도 하지 않는다는 것이 아니다. 기본적으로 유휴 단계에서 어플리케이션은 GUI 요소 업데이트 및 데이터 구조 정리(일명, 코드 리팩터링; code refactoring)를 진행한다. 여기서 데이터 구조 정리란, 내부적으로 메모리 및 파일시스템에 남아있는 잉여 데이터 구조나 불필요한 자료를 정리하는 작업을 의미한다.
@@ -558,7 +558,7 @@ BOOL CApplication::OnIdle(LONG lCount) {
 유휴 작업을 마무리 하였으면 MFC 어플리케이션은 다시 한 번 메시지 여부를 확인한다. 새로운 메시지를 발견하면 `CWinApp::Run()` 메소드를 통해 메시지 루프가 재가동되지만, 여전히 아무런 메시지를 발견하지 못하면 어떠한 작업도 할 것이 없는 어플리케이션은 대기 상태에 들어간다.
 
 ## 소멸
-> *참조: [Microsoft Docs - ExitInstance 맴버 함수](https://docs.microsoft.com/ko-kr/cpp/mfc/exitinstance-member-function)*
+> *참조: [Microsoft Docs - ExitInstance 맴버 함수](https://learn.microsoft.com/en-us/cpp/mfc/exitinstance-member-function)*
 
 소멸(terminate) 단계는 `CWinApp::ExitInstance()` 메소드에서 MFC 어플리케이션을 종료할 때 수행되는 단계로 MFC 라이브러리 데이터나 리소스를 정리하는 작업을 담당한다. MFC 관련 데이터 외의 동적 할당 메모리를 해제하는 등의 부가적인 정리가 필요하면 아래와 같이 메소드 오버라이딩을 한다.
 

@@ -87,5 +87,5 @@ An [Active Memory Dump](https://docs.microsoft.com/en-us/windows-hardware/driver
 > Use an Active Memory Dump for dumping hypervisor host machine since its child VMs are filtered out.
 
 # Reference
-* [Varieties of Kernel-Mode Dump Files - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/varieties-of-kernel-mode-dump-files)
-* [Enabling a Kernel-Mode Dump File - Windows drivers &#124; Microsoft Docs](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/enabling-a-kernel-mode-dump-file)
+* [Varieties of Kernel-Mode Dump Files - Windows drivers &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/varieties-of-kernel-mode-dump-files)
+* [Enabling a Kernel-Mode Dump File - Windows drivers &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/enabling-a-kernel-mode-dump-file)

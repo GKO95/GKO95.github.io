@@ -31,7 +31,7 @@ order: null
 이렇게 보호 링이 분류된 이유는 "더 많은 제어에는 더 큰 책임이 뒤따른다"는 관점에서 비롯된다. 커널 모드의 프로그램 오동작은 시스템 전체에 충돌을 일으킬 수 있기 때문에 문제가 절대로 발생하지 않도록 신뢰될 수 있어야 한다.
 
 # 스케줄링
-[스케줄링](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅))(scheduling)은 작업이 필요한 [프로세스](ko.Process#프로세스) 또는 [스레드](ko.Process#스레드)를 처리할 수 있는 [프로세서](#프로세서)에 분배 및 할당하는 행위이며, 이를 담당하는 프로그램을 스케줄러(scheduler)라고 부른다.
+[스케줄링](https://ko.wikipedia.org/wiki/스케줄링_(컴퓨팅))(scheduling)은 작업이 필요한 [프로세스](ko.Process) 또는 [스레드](ko.Process#스레드)를 처리할 수 있는 [프로세서](#프로세서)에 분배 및 할당하는 행위이며, 이를 담당하는 프로그램을 스케줄러(scheduler)라고 부른다.
 
 스케줄링된 프로세스는 [퀀텀](https://en.wikipedia.org/wiki/Preemption_(computing)#Time_slice)(quantum)이란 일회성 시간제 티켓을 부여받는데, 이는 프로세서가 프로세스를 처리하기 위해 주어진 고정된 시간 간격이다. 처리 도중에 프로세스의 퀀텀이 소진될 시, 프로세서는 해당 작업을 완료여부와 상관없이 즉각 중단하고 스케줄링된 다음 프로세스를 처리한다. 한편, 작업이 마무리되지 않은 프로세스는 다시 스케줄링이 되기를 기다린다. 이로부터 구현된 운영체제의 [멀티태스킹](https://ko.wikipedia.org/wiki/다중작업) 덕분에 여러 프로그램 및 기능을 동시에 실행할 수 있는 거다.
 
@@ -80,7 +80,7 @@ order: null
 프로그램이 실행되는 도중에 발생한 [예외](https://ko.wikipedia.org/wiki/예외_처리)(exception)도 소프트웨어 인터럽트에 해당한다.
 
 ## 지연 프로시저 호출
-[지연 프로시저 호출](https://learn.microsoft.com/ko-kr/windows-hardware/drivers/kernel/introduction-to-dpcs)(deferred procedure calls; DPC)은 [큐](https://ko.wikipedia.org/wiki/큐_(자료_구조))에 대기된 작업들을 나중에 한꺼번에 처리하는 매커니즘이다.
+[지연 프로시저 호출](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-dpcs)(deferred procedure calls; DPC)은 [큐](https://ko.wikipedia.org/wiki/큐_(자료_구조))에 대기된 작업들을 나중에 한꺼번에 처리하는 매커니즘이다.
 
 인터럽트 핸들러는 기존 스레드를 중단시켜 프로세서를 점유한 것이기 때문에, 원활한 스레드 재개를 위해 인터럽트 서비스는 되도록 빠른 시간 내에 완료되어야 한다. 하지만 인터럽트 핸들러가 처리하는 작업이 많아질수록 인터럽트 서비스 완료에 필요한 시간은 더 길어지게 된다. 이는 스레드가 다시 실행되는 시점을 늦추고 또 다른 인터럽트 처리를 방해하여 매끄럽지 못한 시스템 성능을 야기할 수 있다.
 
@@ -91,4 +91,4 @@ DPC는 필연적이지만 나중에 처리되어도 무관한 낮은 우선순�
 
 > 과거 운영체제는 인터럽트 핸들러를 1차(First-Level Interrupt Handler; FLIH)와 2차(SLIH)로 나누었으며, 여기서 후자가 윈도우 운영체제의 DPC에 해당한다.
 
-그러나 단일 및 누적 DPC 작업 처리 시간이 각가 20초와 120초를 초과하면 시스템은 이를 비정상 동작으로 인지하여 [버그 확인 코드](ko.BSOD#버그-확인-코드) [0x133 DPC_WATCHDOG_VIOLATION](https://learn.microsoft.com/ko-kr/windows-hardware/drivers/debugger/bug-check-0x133-dpc-watchdog-violation)이 발생한다.
+그러나 단일 및 누적 DPC 작업 처리 시간이 각가 20초와 120초를 초과하면 시스템은 이를 비정상 동작으로 인지하여 [버그 확인 코드](ko.BSOD#버그-확인-코드) [0x133 DPC_WATCHDOG_VIOLATION](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x133-dpc-watchdog-violation)이 발생한다.
