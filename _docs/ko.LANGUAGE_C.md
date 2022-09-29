@@ -7,7 +7,7 @@ icon: icon-c.svg
 order: 0x01
 ---
 # 소개
-> *참조: [Microsoft Docs C 언어 설명서 (한국어)](https://docs.microsoft.com/ko-kr/cpp/c-language/)*
+> *참조: [Microsoft Docs C 언어 설명서 (한국어)](https://learn.microsoft.com/en-us/cpp/c-language/)*
 
 C 언어는 [유닉스](https://ko.wikipedia.org/wiki/유닉스)(UNIX) 컴퓨터를 위한 소프트웨어 제작을 위해 개발된 [*B*](https://ko.wikipedia.org/wiki/B_(프로그래밍_언어)) 언어의 후속작이다. 현재 C 언어는 가장 널리 사용되고 있는 프로그래밍 언어로 C++, C#, 파이썬, 자바 등 여러 프로그래밍 언어에 영향을 주었다. C 언어는 다른 프로그래밍 언어에 비해 매우 빠른 처리 속도와 훌륭한 호환성을 가지고 있어 소프트웨어 및 펌웨어 개발에 여전히 사용되고 있다.
 
@@ -397,7 +397,7 @@ int variable1 = 3, variable2 = 4, variable3;
 * `extern` 키워드 선언
 * `typedef` 선언
 
-차후에 소개할 `extern` 키워드는 변수를 선언만 하고 정의하지 않으므로 데이터를 저장할 메모리가 할당되지 않는다. 이러한 변수에 데이터를 저장하거나 호출하려는 행위는 시스템 오류를 야기하므로 컴파일이 불가하다. Visual C++ 컴파일러에서는 [`LNK1120`](https://docs.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-error-lnk1120?view=msvc-170) 오류의 원인이 된다.
+차후에 소개할 `extern` 키워드는 변수를 선언만 하고 정의하지 않으므로 데이터를 저장할 메모리가 할당되지 않는다. 이러한 변수에 데이터를 저장하거나 호출하려는 행위는 시스템 오류를 야기하므로 컴파일이 불가하다. Visual C++ 컴파일러에서는 [`LNK1120`](https://learn.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-error-lnk1120?view=msvc-170) 오류의 원인이 된다.
 
 > 위에서 언급한 선언과 정의에 대한 설명은 C/C++ 프로그래밍 언어에서 매우 중요한 개념이지만 프로그래밍 입문자들에게 쉽게 간과되는 내용이다.
 
@@ -1523,7 +1523,7 @@ C 표준 라이브러리 중에서 문자열 관련 [`string.h`](https://en.cppr
 [예외](https://ko.wikipedia.org/wiki/예외_처리)(exception)는 잘못된 코딩이나 입력으로 인해 프로그램상 실행 불가능 코드 오류이다. 컴파일러에서 걸러지는 오류가 아니기에 정상적인 프로그램이 실행될 수 있으나, 예외가 발생하면 프로그램은 즉시 중단된다. 예외 처리는 실행된 프로그램이 예외로 인해 프로그램 실행이 중단되는 것을 방지하여 안정적으로 실행되는 것을 주목표로 한다.
 
 ## 오류 번호
-[오류 번호](https://en.cppreference.com/w/c/error/errno)(error number) 혹은 `errno` 매크로는 `errno.h` 헤더 파일 내에 정의된 전역 변수이다. 매크로를 사용하기 위해서는 먼저 정수 0으로 정수되어야 하며, 어떠한 오류가 발생하면 새로운 정수가 자동적으로 할당된다. Visual C++의 경우, 오류 번호와 내용은 [여기](https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes)에서 확인할 수 있다.
+[오류 번호](https://en.cppreference.com/w/c/error/errno)(error number) 혹은 `errno` 매크로는 `errno.h` 헤더 파일 내에 정의된 전역 변수이다. 매크로를 사용하기 위해서는 먼저 정수 0으로 정수되어야 하며, 어떠한 오류가 발생하면 새로운 정수가 자동적으로 할당된다. Visual C++의 경우, 오류 번호와 내용은 [여기](https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes)에서 확인할 수 있다.
 
 아래의 예시 코드는 존재하지 않는 파일을 읽기 모드로 열려고 할 때 발생하는 오류를 `errno` 매크로로 감지한다.
 
@@ -1721,7 +1721,7 @@ printf("%d", ANYTHING(2, 3));
 
 컴파일러에는 공통된 표준 매크로 및 컴파일러마다 전용 매크로가 내장되어 있다.
 
-* **Visual C++**: [Microsoft Docs - 미리 정의된 매크로](https://docs.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
+* **Visual C++**: [Microsoft Docs - 미리 정의된 매크로](https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros)
 * **GCC**: [GCC Online Documentation - Predefined Macros](https://gcc.gnu.org/onlinedocs/cpp/Predefined-Macros.html)
 * **그 외**: [SourceForge Wiki](https://sourceforge.net/p/predef/wiki/Compilers/)
 
@@ -1776,7 +1776,7 @@ printf("%d", variable);
 
 > Pragma란 용어는 pragmatic의 줄임말로, 사전적 의미로는 "실용적인"을 뜻한다. 이는 실질적 컴파일러 동작 및 처리 방식에 관여한 것을 보아 붙여진 용어라고 판단된다.
 
-* **Visual C++**: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://docs.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
+* **Visual C++**: [Microsoft Docs - Pragma Directives and the Pragma Keyword](https://learn.microsoft.com/en-us/cpp/preprocessor/pragma-directives-and-the-pragma-keyword)
 * **GCC**: [GCC Online Documentation - Pragmas](https://gcc.gnu.org/onlinedocs/gcc/Pragmas.html)
 
 본 장은 마이크로소프트의 비주얼 스튜디어에서 제공하는 Visual C++ 컴파일러의 pragma 지시문을 위주로 다룬다.

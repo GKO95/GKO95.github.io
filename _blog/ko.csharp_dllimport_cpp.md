@@ -10,7 +10,7 @@ toc: false
 제가 소프트웨어 및 펌웨어 엔지니어 직책으로 있으면서 [C](/docs/ko.C)/[C++](/docs/ko.Cpp)와 [C#](/docs/ko.Csharp) 프로그래밍 언어를 빈번히 사용하는데, 두 프로그래밍 언어를 동시에 사용하는 경우도 흔히 있습니다. 대체로 C++ 언어를 DLL 동적 라이브러리로 컴파일하여 C#에서 해당 라이브러리를 불러와 사용하는 형식입니다. 이는 C#의 편리함을 보여주는 기능 중 하나로써 매우 유용하게 활용할 수 있어 이번 게시글에서 소개하려고 합니다.
 
 # `DllImportAttribute` 클래스
-C# 언어의 `System.Runtime.InteropServices` 네임스페이스에 [`DllImportAttribute`](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.dllimportattribute) 클래스는 동적 라이브러리를 가져와 C# 코드에서 직접 사용할 수 있도록 합니다. 다시 말해, 해당 클래스를 사용하기 위해서는 C#에 다음과 같은 네임스페이스 선언을 권장합니다.
+C# 언어의 `System.Runtime.InteropServices` 네임스페이스에 [`DllImportAttribute`](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.dllimportattribute) 클래스는 동적 라이브러리를 가져와 C# 코드에서 직접 사용할 수 있도록 합니다. 다시 말해, 해당 클래스를 사용하기 위해서는 C#에 다음과 같은 네임스페이스 선언을 권장합니다.
 
 ```csharp
 using System.Runtime.InteropServices;
@@ -133,7 +133,7 @@ Win32 API에서는 더욱 다양한 종류의 문자열을 표현하는 자료�
 여기서 포인터(pointer)와 롱포인터(long pointer)가 따로 구별된 이유는 예전의 16비트 시스템에서 2 바이트와 4 바이트 메모리 주소를 구분짓기 위해서였습니다. 그러나 32비트 시스템 이상에서는 이 둘은 사실상 동일한 포인터가 되었습니다.
 
 ### 구조체
-Win32 API 함수 일부는 기본 자료형이 아닌 구조체를 전달인자로 받는 경우도 있습니다. 이러한 경우 동일한 네임스페이스에 있는 [`StructLayoutAttribute`](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.structlayoutattribute) 클래스를 통해 동적 라이브러리에 전달할 수 있는 동일한 형태의 구조체를 생성해야 합니다.
+Win32 API 함수 일부는 기본 자료형이 아닌 구조체를 전달인자로 받는 경우도 있습니다. 이러한 경우 동일한 네임스페이스에 있는 [`StructLayoutAttribute`](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.structlayoutattribute) 클래스를 통해 동적 라이브러리에 전달할 수 있는 동일한 형태의 구조체를 생성해야 합니다.
 
 구조체 레이아웃에는 두 가지 종류가 존재합니다: 순차적(sequential)과 명시적(explicit) 레이아웃이 있습니다. 순차적 레이아웃을 적용하면 구조체의 맨 첫 메모리 주소를 기점으로 위에서부터 아래로 순차적으로 맴버들이 구조체를 구성합니다.
 
@@ -148,7 +148,7 @@ public struct SP_DEVINFO_DATA
 }
 ```
 
-반면, 명시적 레이아웃은 맴버들이 구조체의 몇 번쨰 주소에 있는지 정확히 명시해야 하므로 반드시 [`FieldOffsetAttribute`](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.fieldoffsetattribute) 클래스로 주소 위치를 표기해야 합니다. 순차적 레이아웃에 비하여 신경써야 할 점이 있지만 맴버 주소를 자유롭게 조절할 수 있는 장점을 가집니다.
+반면, 명시적 레이아웃은 맴버들이 구조체의 몇 번쨰 주소에 있는지 정확히 명시해야 하므로 반드시 [`FieldOffsetAttribute`](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.fieldoffsetattribute) 클래스로 주소 위치를 표기해야 합니다. 순차적 레이아웃에 비하여 신경써야 할 점이 있지만 맴버 주소를 자유롭게 조절할 수 있는 장점을 가집니다.
 
 ```csharp
 [StructLayout(LayoutKind.Explicit, Size = 32, CharSet = CharSet.Unicode)]
@@ -162,7 +162,7 @@ public struct SP_DEVINFO_DATA
 ```
 
 ### 구조체 (문자열 포함)
-일부 C/C++ 구조체는 크기가 제한된 문자 배열 형식의 문자열을 맴버로 가지는 경우가 종종 있습니다. 아래는 Win32 API 중에서 모니터 정보를 담는 [`DISPLAY_DEVICEW`](https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-display_devicew) 구조체의 정의입니다.
+일부 C/C++ 구조체는 크기가 제한된 문자 배열 형식의 문자열을 맴버로 가지는 경우가 종종 있습니다. 아래는 Win32 API 중에서 모니터 정보를 담는 [`DISPLAY_DEVICEW`](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-display_devicew) 구조체의 정의입니다.
 
 ```cpp
 typedef struct _DISPLAY_DEVICEW {
@@ -177,7 +177,7 @@ typedef struct _DISPLAY_DEVICEW {
 
 여기서 주목할 점은 문자 배열의 자료형이 확장문자(wide-character)을 의미하는 `WCHAR`이란 점입니다. 문자 하나에 1 바이트를 차지하는 `CHAR` 자료형과 달리, `WCHAR`은 문자 하나에 2 바이트를 차지하는 16비트 유니코드(일명 UTF-16) 인코딩입니다. 반대로 흔히 알고있는 `CHAR`은 8비트를 사용하는 ANSI 인코딩을 사용합니다.
 
-구조체가 문자 배열을 가질 시, 명시적 레이아웃으로 크기와 위치를 지정하는 것으로 해결되지 않습니다. 이러한 경우에는 [`MarshalAsAttribute`](https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.marshalasattribute) 클래스를 사용하여 C# 소스 코드와 C/C++ 라이브러리 간에 데이터를 주고받도록 합니다.
+구조체가 문자 배열을 가질 시, 명시적 레이아웃으로 크기와 위치를 지정하는 것으로 해결되지 않습니다. 이러한 경우에는 [`MarshalAsAttribute`](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.marshalasattribute) 클래스를 사용하여 C# 소스 코드와 C/C++ 라이브러리 간에 데이터를 주고받도록 합니다.
 
 ```csharp
 [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]

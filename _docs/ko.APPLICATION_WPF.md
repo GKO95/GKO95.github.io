@@ -9,7 +9,7 @@ order: null
 [Windows Presentation Foundation](https://github.com/dotnet/wpf)(일명 WPF)은 마이크로소프트에서 개발한 [WinForms](https://github.com/dotnet/winforms)와 유사한 무료 오픈소스 그래픽 서브시스템으로 [.NET](/docs/ko.Csharp) 플랫폼에서 사용자 인터페이스 제공을 목표로 한다. 비록 윈도우 OS에서만 실행할 수 있는 제약이 있으나, [XAML](https://ko.wikipedia.org/wiki/XAML)을 통해 시각적으로 UI를 제작할 수 있으며 [비즈니스 로직](https://ko.wikipedia.org/wiki/비즈니스_로직)과 별도로 관리할 수 있는 장점을 갖는다.
 
 ## 아키텍처
-> *참조: [Microsoft Docs WPF 아키텍처 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/wpf-architecture)*
+> *참조: [Microsoft Docs WPF 아키텍처 (영문)](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/advanced/wpf-architecture)*
 
 * PresentationFramework
 
@@ -216,7 +216,7 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     : XAML 마크업 문서를 C# 코드의 [분할](/docs/ko.Csharp#한정자) 클래스에 연동시킨다. 본 지시문은 XAML 루트 요소에서만 기입할 수 있으며, 그 이외의 요소에서는 컴파일 오류가 발생한다.
 
 * `x:Name` 지시문
-    : XAML 요소에 [식별자](/docs/ko.Csharp#식별자)를 지정한다. 해당 식별자는 C# 코드에서 객체명으로 간단히 호출 및 접근하는데 유용하게 사용될 수 있으나, 식별자는 XAML 네임스페이스에서 요소마다 유일해야 한다. 이와 본질적으로 동일한 WPF 프레임워크 속성으로 [`Name`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.name)이 있다.
+    : XAML 요소에 [식별자](/docs/ko.Csharp#식별자)를 지정한다. 해당 식별자는 C# 코드에서 객체명으로 간단히 호출 및 접근하는데 유용하게 사용될 수 있으나, 식별자는 XAML 네임스페이스에서 요소마다 유일해야 한다. 이와 본질적으로 동일한 WPF 프레임워크 속성으로 [`Name`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.name)이 있다.
 
 * `x:Key` 지시문
     : XAML로 정의된 딕셔너리에서 데이터를 불러올 호출자를 지정한다. 이는 C# 코드에서의 [딕셔너리](/docs/ko.Csharp#dictionary-컬렉션) 컬렉션과 같이 `{key, value}`의 `key`와 동일한 역할을 하며, 대표적은 [리소스 딕셔너리](#리소스)에서 사용된다.
@@ -285,14 +285,14 @@ WPF 컨트롤은 메뉴에서 `View → Toolbox` 혹은 `Ctrl + Alt + X` 단축�
 
 | 패널     | 영문           | 설명                                                                       |
 |--------|--------------|--------------------------------------------------------------------------|
-| [스택 패널](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.stackpanel)  | Stack Panel  | 자식을 수직 혹은 수평 방향으로 한 줄로 나열한다: 나열할 공간이 부족하여도 계속 이어나간다.                     |
-| [줄바꿈 패널](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.wrappanel) | Wrap Panel   | 자식을 수직 혹은 수평 방향으로 한 줄로 나열한다: 나열할 공간이 부족하다면 다음 줄로 이동한다.                   |
-| [도크 패널](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.dockpanel)  | Dock Panel   | 자식을 상하좌우 중 한 곳으로 도킹한다: `LastChildFill` 속성으로 마지막 자식을 나머지 공간에 채울지 여부를 정한다. |
-| [캔버스](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.canvas) | Canvas | 자식을 상대좌표로 배치한다: 2D 그래픽 요소 (타원, 직사각형 등) 전용이다.                             |
-| [그리드](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.grid) | Grid   | 자식을 도표처럼 행과 열을 설정하여 배치한다: `*`로 비율을 조절할 수 있다.                             |
+| [스택 패널](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.stackpanel)  | Stack Panel  | 자식을 수직 혹은 수평 방향으로 한 줄로 나열한다: 나열할 공간이 부족하여도 계속 이어나간다.                     |
+| [줄바꿈 패널](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.wrappanel) | Wrap Panel   | 자식을 수직 혹은 수평 방향으로 한 줄로 나열한다: 나열할 공간이 부족하다면 다음 줄로 이동한다.                   |
+| [도크 패널](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.dockpanel)  | Dock Panel   | 자식을 상하좌우 중 한 곳으로 도킹한다: `LastChildFill` 속성으로 마지막 자식을 나머지 공간에 채울지 여부를 정한다. |
+| [캔버스](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.canvas) | Canvas | 자식을 상대좌표로 배치한다: 2D 그래픽 요소 (타원, 직사각형 등) 전용이다.                             |
+| [그리드](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.grid) | Grid   | 자식을 도표처럼 행과 열을 설정하여 배치한다: `*`로 비율을 조절할 수 있다.                             |
 
 # 리소스
-> *참조: [Microsoft Docs XAML 리소스 개요 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/systems/xaml-resources-overview)*    
+> *참조: [Microsoft Docs XAML 리소스 개요 (영문)](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/systems/xaml-resources-overview)*    
 
 XAML 리소스(resource)는 브러시와 스타일과 같이 어플리케이션의 다른 곳에서도 재사용할 수 있는 객체를 가리킨다. 단, 이는 외부 파일이나 데이터와 같은 어플리케이션 리소스와 별개이다. 저장된 XAML 리소스는 컨트롤이나 창 이외에도 전역적으로 어플리케이션 전체에서 사용할 수 있다. XAML 리소스는 루트의 `FrameworkElement.Resource` 하에 정의되어야 하며, 어떠한 객체라도 리소스로 정의되어 공유될 수 있다. 
 
@@ -325,10 +325,10 @@ XAML 리소스는 리소스 딕셔너리(resource dictionary)에 정의하며, �
 
 WPF 어플리케이션은 리소스를 정적(static) 혹은 동적(dynamic)으로 참조할 수 있다:
 
-* [StaticResource](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/staticresource-markup-extension)
+* [StaticResource](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/advanced/staticresource-markup-extension)
     : 이미 정의된 리소스를 어플리케이션 준비 과정에서 참조하며, 한 번 참조된 리소스는 더이상 변경이 불가하다.
 
-* [DynamicResource](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/dynamicresource-markup-extension)
+* [DynamicResource](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/advanced/dynamicresource-markup-extension)
     : 어플리케이션 실행 도중에 객체를 생성하는데 정의된 리소스가 필요할 때 참조한다. 리소스가 참조된 이후에도 차후에 변경할 수 있다.
 
 StaticResource와 DynamicResource는 공통적으로 다음과 같은 절차에 따라 리소스를 탐색한다: (1) 우선 XAML 요소가 참조하는 리소스가 해당 요소의 리소스 딕셔너리로부터 탐색한다. 그 다음 (2) 논리 트리 구조를 거슬러 올라가 루트 요소의 리소스 딕셔너리로 이동하며, 이후에는 (3) `Application` 객체에 정의된 어플리케이션 리소스 딕셔너리를 확인한다.
@@ -355,7 +355,7 @@ StaticResource와 DynamicResource는 공통적으로 다음과 같은 절차에 
 ```
 
 ## 스타일
-[스타일](https://docs.microsoft.com/en-us/dotnet/api/system.windows.style)(Style)은 컨트롤의 외관을 변경하는데 사용되며, 흔히 리소스로 사용되어 컨트롤에 공통된 혹은 `x:Key`에 해당하는 스타일을 적용한다. 그 중에서 `TargetType` 속성은 해당 스타일이 적용될 컨트롤이 어느 것인지 명시한다; `System.Windows.Setter`을 통해 컨트롤의 속성을 설정하기 위해서 반드시 필요하다.
+[스타일](https://learn.microsoft.com/en-us/dotnet/api/system.windows.style)(Style)은 컨트롤의 외관을 변경하는데 사용되며, 흔히 리소스로 사용되어 컨트롤에 공통된 혹은 `x:Key`에 해당하는 스타일을 적용한다. 그 중에서 `TargetType` 속성은 해당 스타일이 적용될 컨트롤이 어느 것인지 명시한다; `System.Windows.Setter`을 통해 컨트롤의 속성을 설정하기 위해서 반드시 필요하다.
 
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
@@ -428,12 +428,12 @@ btnControl1.Style = (Style)Resources["Resource1"];
 ```
 
 # 컨트롤
-> *참조: [Microsoft Docs WPF 컨트롤 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/controls)*
+> *참조: [Microsoft Docs WPF 컨트롤 (영문)](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls)*
 
-[컨트롤](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.control)(Control)은 WPF 어플리케이션 구성에 사용되는 사용자 인터페이스이다. 흔히 사용되는 [레이블](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.label), [버튼](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.button), [텍스트 상자](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.textbox) 등의 UI는 모두 WPF 컨트롤이다. 컨트롤 내부에는 두 개의 정의로 구성되어 있다: UI의 상태와 이벤트 및 속성을 정의하는 논리(logic), 그리고 UI의 그래픽을 정의하는 템플릿(template)으로 이루어진다.
+[컨트롤](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.control)(Control)은 WPF 어플리케이션 구성에 사용되는 사용자 인터페이스이다. 흔히 사용되는 [레이블](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.label), [버튼](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.button), [텍스트 상자](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.textbox) 등의 UI는 모두 WPF 컨트롤이다. 컨트롤 내부에는 두 개의 정의로 구성되어 있다: UI의 상태와 이벤트 및 속성을 정의하는 논리(logic), 그리고 UI의 그래픽을 정의하는 템플릿(template)으로 이루어진다.
 
 ## 컨트롤 템플릿
-[컨트롤 템플릿](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.controltemplate)(Control Template)은 컨트롤의 외형을 가리킨다. WPF 프레임워크에서 제공하는 컨트롤들은 기본적으로 템플릿이 미리 정의되어 있다. 리소스에서 [`<ControlTemplate>`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.controls.controltemplate)을 통해 템플릿을 직접 디자인할 수 있으며, 컨트롤의 [`Template`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworktemplate.template) 속성으로 적용한다.
+[컨트롤 템플릿](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.controltemplate)(Control Template)은 컨트롤의 외형을 가리킨다. WPF 프레임워크에서 제공하는 컨트롤들은 기본적으로 템플릿이 미리 정의되어 있다. 리소스에서 [`<ControlTemplate>`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.controls.controltemplate)을 통해 템플릿을 직접 디자인할 수 있으며, 컨트롤의 [`Template`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.frameworktemplate.template) 속성으로 적용한다.
 
 ```xml
 <!--DEFINITION-->
@@ -447,7 +447,7 @@ btnControl1.Style = (Style)Resources["Resource1"];
 <Control x:Name="btnControl1" Template="{StaticResource Template1}" />
 ```
 
-`<ControlTemplate>` 요소 내에 템플릿을 정의할 때에는 외형만을 제작하기 때문에 템플릿 루트 요소로는 흔히 [`<Rectangle>`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.shapes.rectangle), [`<Ellipse>`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.shapes.ellipse) 등의 단순 모양이나 `<Grid>`와 같은 레이아웃을 사용하여 복합적인 디자인이 가능하다.
+`<ControlTemplate>` 요소 내에 템플릿을 정의할 때에는 외형만을 제작하기 때문에 템플릿 루트 요소로는 흔히 [`<Rectangle>`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.shapes.rectangle), [`<Ellipse>`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.shapes.ellipse) 등의 단순 모양이나 `<Grid>`와 같은 레이아웃을 사용하여 복합적인 디자인이 가능하다.
 
 ```xml
 <Window.Resource>
@@ -462,10 +462,10 @@ btnControl1.Style = (Style)Resources["Resource1"];
 # 바인딩
 데이터 바인딩(Data binding)이란 피(被)바인딩 객체를 아무런 바인딩 소스(binding source)에 연동하는 것이다. 흔히 WPF 프로젝트에서는 컨트롤을 데이터베이스 혹은 XML 파일 등에 바인딩하여 사용되는데, 컨트롤의 상호작용 및 바인딩 소스의 데이터 변동은 서로에게 영향을 주어 실시간으로 업데이트된다.
 
-> 바인딩에서 [소스](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.source)(source)란, 바인딩 데이터로 가져올 객체를 가리킨다. 그리고 바인딩 [경로](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.path)(path)는 바인딩 소스로부터 접근하려는 속성을 의미한다.
+> 바인딩에서 [소스](https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.binding.source)(source)란, 바인딩 데이터로 가져올 객체를 가리킨다. 그리고 바인딩 [경로](https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.binding.path)(path)는 바인딩 소스로부터 접근하려는 속성을 의미한다.
 
 ## `Binding` 클래스
-[`Binding`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding) 클래스는 기본적인 바인딩 기능을 제공하는 고급 API이다. 비록 C# 클래스이지만 흔히 아래와 같이 WPF 프레임워크 XAML에서 `{Binding}`을 통해 바인딩이 이루어진다.
+[`Binding`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.binding) 클래스는 기본적인 바인딩 기능을 제공하는 고급 API이다. 비록 C# 클래스이지만 흔히 아래와 같이 WPF 프레임워크 XAML에서 `{Binding}`을 통해 바인딩이 이루어진다.
 
 ```xml
 <!--XAML DATA BINDING-->
@@ -486,12 +486,12 @@ txtBlock.SetBinding(TextBlock.TextProperty, binding);
 ```
 
 ### 바인딩 소스
-> *참조: [Microsoft Docs 방법: 바인딩 소스 지정 (영문)](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-specify-the-binding-source)*
+> *참조: [Microsoft Docs 방법: 바인딩 소스 지정 (영문)](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/data/how-to-specify-the-binding-source)*
 
 다음은 WPF 프로젝트에서 바인딩 소스를 지정하는 몇 가지 방법들을 소개한다.
 
 #### `Binding.Source`
-[`Source`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.source) 속성은 원하는 객체를 바인딩 소스로 지정하는데 사용된다. WPF 프레임워크나 XAML 요소가 아닌 단순 CLR 클래스로부터 객체화하여 바인딩시키는데, 아래는 C# 소스 코드에 정의된 `CLASS` 클래스로부터 생성된 객체를 `Source` 속성으로 연동시키는 작업이며 [CLR 네임스페이스](#clr-네임스페이스) 내용을 참조할 것을 권장한다.
+[`Source`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.binding.source) 속성은 원하는 객체를 바인딩 소스로 지정하는데 사용된다. WPF 프레임워크나 XAML 요소가 아닌 단순 CLR 클래스로부터 객체화하여 바인딩시키는데, 아래는 C# 소스 코드에 정의된 `CLASS` 클래스로부터 생성된 객체를 `Source` 속성으로 연동시키는 작업이며 [CLR 네임스페이스](#clr-네임스페이스) 내용을 참조할 것을 권장한다.
 
 ```csharp
 using System.Windows;
@@ -531,18 +531,18 @@ namespace WPFApplication
 </Window>
 ```
 
-CLR 네임스페이스의 `CLASS`는 XAML 요소가 아니기 때문에 리소스 하에 선언되어 `x:Key` 지시문을 함께 기입하였다. 그러므로 바인딩 소스로 지정하기 위해서는 [`{StaticResource}`](#리소스)를 통해 리소스의 객체를 가져온다. 그리고 [`Binding.UpdateSourceTrigger`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.updatesourcetrigger) 속성이 `PropertyChanged`로 설정되어 있는데, 이는 피바인딩 객체의 `Text` 속성에 변화가 발생하면 바인딩 소스를 즉시 업데이트한다.
+CLR 네임스페이스의 `CLASS`는 XAML 요소가 아니기 때문에 리소스 하에 선언되어 `x:Key` 지시문을 함께 기입하였다. 그러므로 바인딩 소스로 지정하기 위해서는 [`{StaticResource}`](#리소스)를 통해 리소스의 객체를 가져온다. 그리고 [`Binding.UpdateSourceTrigger`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.binding.updatesourcetrigger) 속성이 `PropertyChanged`로 설정되어 있는데, 이는 피바인딩 객체의 `Text` 속성에 변화가 발생하면 바인딩 소스를 즉시 업데이트한다.
 
 #### `Binding.RelativeSource`
-[`RelativeSource`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.relativesource) 속성은 피바인딩 객체의 부모 요소를 바인딩 소스로 지정하는데 사용된다. 그러나 자식과 형제 요소는 접근할 수 없으며, 다음은 [`{RelativeSource}`](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/relativesource-markupextension) 확장문을 통해 선택할 수 있는 네 가지의 모드에 대하여 소개한다.
+[`RelativeSource`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.binding.relativesource) 속성은 피바인딩 객체의 부모 요소를 바인딩 소스로 지정하는데 사용된다. 그러나 자식과 형제 요소는 접근할 수 없으며, 다음은 [`{RelativeSource}`](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/advanced/relativesource-markupextension) 확장문을 통해 선택할 수 있는 네 가지의 모드에 대하여 소개한다.
 
-* [`Self`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.relativesourcemode#System_Windows_Data_RelativeSourceMode_Self): 피바인딩 객체 스스로를 가리킨다.
+* [`Self`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.relativesourcemode#System_Windows_Data_RelativeSourceMode_Self): 피바인딩 객체 스스로를 가리킨다.
 
   ```xml
   <Button Content="Square" Width="100" Height="{Binding Path=Width, RelativeSource={RelativeSource Self}}" />
   ```
 
-* [`FindAncestor`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.relativesourcemode#System_Windows_Data_RelativeSourceMode_FindAncestor): 피바인딩 객체로부터 `AncestorType` 종류의 `AncestorLevel` 번째의 부모 요소를 가리킨다.
+* [`FindAncestor`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.relativesourcemode#System_Windows_Data_RelativeSourceMode_FindAncestor): 피바인딩 객체로부터 `AncestorType` 종류의 `AncestorLevel` 번째의 부모 요소를 가리킨다.
 
   ```xml
   <StackPanel Name="Column" Orientation="Vertical">
@@ -559,20 +559,20 @@ CLR 네임스페이스의 `CLASS`는 XAML 요소가 아니기 때문에 리소�
   </StackPanel>
   ```
 
-* [`TemplatedParent`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.relativesourcemode#System_Windows_Data_RelativeSourceMode_TemplatedParent)
+* [`TemplatedParent`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.relativesourcemode#System_Windows_Data_RelativeSourceMode_TemplatedParent)
 
   ```xml
   
   ```
 
-* [`PreviousData`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.relativesourcemode#System_Windows_Data_RelativeSourceMode_PreviousData)
+* [`PreviousData`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.relativesourcemode#System_Windows_Data_RelativeSourceMode_PreviousData)
 
   ```xml
   
   ```
 
 #### `Binding.ElementName`
-[`ElementName`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.binding.elementname) 속성은 원하는 XAML 요소의 `Name` 속성 혹은 `x:Name` 지시문으로 할당된 식별자를 통해 바인딩 소스로 지정하는데 사용된다. 바인딩 소스를 XAML 요소의 식별자로 찾아내 편리하지만, 리소스 하에 선언된 CLR 객체나 WPF 컨트롤을 대상으로는 사용 불가하다. 아래는 XAML 요소 간을 바인딩한 간단한 예시 코드이다.
+[`ElementName`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.data.binding.elementname) 속성은 원하는 XAML 요소의 `Name` 속성 혹은 `x:Name` 지시문으로 할당된 식별자를 통해 바인딩 소스로 지정하는데 사용된다. 바인딩 소스를 XAML 요소의 식별자로 찾아내 편리하지만, 리소스 하에 선언된 CLR 객체나 WPF 컨트롤을 대상으로는 사용 불가하다. 아래는 XAML 요소 간을 바인딩한 간단한 예시 코드이다.
 
 ```xml
 <Window x:Class="WPFApplication.MainWindow"
@@ -597,7 +597,7 @@ CLR 네임스페이스의 `CLASS`는 XAML 요소가 아니기 때문에 리소�
 ### `DataContext`
 
 
-바인딩 소스를 지정하는 대표적인 방법으로 [`FrameworkElement.DataContext`](https://docs.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.datacontext), 일명 데이터 컨텍스트(data context)가 있다.
+바인딩 소스를 지정하는 대표적인 방법으로 [`FrameworkElement.DataContext`](https://learn.microsoft.com/en-us/dotnet/api/system.windows.frameworkelement.datacontext), 일명 데이터 컨텍스트(data context)가 있다.
 
 데이터 컨텍스트(data context)는 요소가 부모로부터 데이터 소스 및  정보를 상속받도록 하는 개념이다.
 

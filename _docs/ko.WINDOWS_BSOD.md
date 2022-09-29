@@ -7,17 +7,17 @@ icon: icon-windows.svg
 order: null
 ---
 # 블루스크린
-![윈도우 10 블루스크린 화면: <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal">0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL</a>](/images/docs/windows/bsod_bugcheck_0xd1.png)
+![윈도우 10 블루스크린 화면: <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xd1--driver-irql-not-less-or-equal">0xD1 DRIVER_IRQL_NOT_LESS_OR_EQUAL</a>](/images/docs/windows/bsod_bugcheck_0xd1.png)
 
 [블루스크린](https://ko.wikipedia.org/wiki/블루스크린), 일명 BSOD(Blue Screen of Death; 죽음의 파란 화면)는 시스템을 망가뜨릴 수 있는 손상이 가해지는 것을 방지하기 위한 화면이며, 블루스크린 원인을 알려주는 [버그 확인 코드](#버그-확인-코드)를 표시하고 분석에 필요한 [메모리 덤프](ko.Dump#커널-모드-덤프) 파일을 생성한다. 시스템은 아래의 사유가 발생하면 블루스크린이 나타난다.
 
-* **시스템 충돌**: 운영체제 커널상 처리되지 않은 [오류](https://ko.wikipedia.org/wiki/예외_처리), 일명 커널 모드 충돌이다 (예시. [0x19 BAD_POOL_HEADER](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x19--bad-pool-header)).
-* **유효하지 않은 동작**: 운영체제가 본래 설계에 벗어난 동작을 하였을 때, 복구가 불가하다고 판정되면 커널 초기화를 명분으로 발생한다 (예시. [0x133 DPC_WATCHDOG_VIOLATION](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x133-dpc-watchdog-violation)).
+* **시스템 충돌**: 운영체제 커널상 처리되지 않은 [오류](https://ko.wikipedia.org/wiki/예외_처리), 일명 커널 모드 충돌이다 (예시. [0x19 BAD_POOL_HEADER](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x19--bad-pool-header)).
+* **유효하지 않은 동작**: 운영체제가 본래 설계에 벗어난 동작을 하였을 때, 복구가 불가하다고 판정되면 커널 초기화를 명분으로 발생한다 (예시. [0x133 DPC_WATCHDOG_VIOLATION](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x133-dpc-watchdog-violation)).
 
 ## 버그 확인 코드
-버그 확인(bug check), 일명 중지 오류(stop error) 코드는 블루스크린이 발생한 원인을 설명하는 운영체제 오류 번호이다. [`KeBugCheck()`](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/ntddk/nf-ntddk-kebugcheck) 매개변수 또는 [`KeBugCheckEx()`](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 첫 번째 매개변수 `BugCheckCode` 명칭에서 유래된 용어이며, 여기로 전달되는 인자가 바로 버그 확인 코드이다. 특히 `KeBugCheckEx()` 루틴은 추가 매개변수 네 개가 있어 오류에 대한 구체적인 정보를 제공한다.
+버그 확인(bug check), 일명 중지 오류(stop error) 코드는 블루스크린이 발생한 원인을 설명하는 운영체제 오류 번호이다. [`KeBugCheck()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntddk/nf-ntddk-kebugcheck) 매개변수 또는 [`KeBugCheckEx()`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-kebugcheckex) 첫 번째 매개변수 `BugCheckCode` 명칭에서 유래된 용어이며, 여기로 전달되는 인자가 바로 버그 확인 코드이다. 특히 `KeBugCheckEx()` 루틴은 추가 매개변수 네 개가 있어 오류에 대한 구체적인 정보를 제공한다.
 
-> 버그 확인 코드는 매우 다양하기 때문에, [참조 문서](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-code-reference2)로부터 정확한 블루스크린 발생 경위를 파악하고 [근본 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)(root cause analysis; RCA)을 진행한다.
+> 버그 확인 코드는 매우 다양하기 때문에, [참조 문서](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-code-reference2)로부터 정확한 블루스크린 발생 경위를 파악하고 [근본 원인 분석](https://en.wikipedia.org/wiki/Root_cause_analysis)(root cause analysis; RCA)을 진행한다.
 
 다음은 상기 블루스크린으로부터 생성된 덤프 파일을 확인한 내용이며, 버그 확인 코드 아래에 표시된 네 개의 전달인자로부터 문제가 발생한 메모리 주소 등의 시스템 충돌 관련 정보를 알 수 있다.
 
@@ -28,18 +28,18 @@ order: null
 
 * **NMI**
 
-    [마스크 불가능 인터럽트](https://en.wikipedia.org/wiki/Non-maskable_interrupt)(Non-maskable Interrupt; NMI)는 가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](ko.Processor#인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 버그 확인 코드 [0x80 NMI_HARDWARE_FAILURE](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure)가 발생한다. 블루스크린을 일으키기에 가장 확실한 방법이지만, NMI 버튼이 없는 서버용 PC도 있으며 특히 가정용 PC에는 거의 찾아볼 수 없다.
+    [마스크 불가능 인터럽트](https://en.wikipedia.org/wiki/Non-maskable_interrupt)(Non-maskable Interrupt; NMI)는 가장 최우선적으로 처리되어 시스템이 절대 무시할 수 없는 [인터럽트](ko.Processor#인터럽트) 신호이다. 흔히 서버용 PC는 NMI 버튼이 존재하여, 누를 시 버그 확인 코드 [0x80 NMI_HARDWARE_FAILURE](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x80--nmi-hardware-failure)가 발생한다. 블루스크린을 일으키기에 가장 확실한 방법이지만, NMI 버튼이 없는 서버용 PC도 있으며 특히 가정용 PC에는 거의 찾아볼 수 없다.
 
     * **Debug-VM**
 
-        [`Debug-VM`](https://docs.microsoft.com/en-us/powershell/module/hyper-v/debug-vm) 파워셸 명령어는 마이크로소프트에서 개발한 [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저), 일명 [하이퍼-V](https://ko.wikipedia.org/wiki/하이퍼-V)(Hyper-V)에서 호스트 서버로부터 가상 머신에 NMI 신호를 전송하여 블루스크린을 발생시킬 수 있다. 파워셸은 관리자 권한으로 실행되어야 하며, 가상 머신의 이름은 [`Get-VM`](https://docs.microsoft.com/en-us/powershell/module/hyper-v/get-vm) 명령어로 확인이 가능하다.
+        [`Debug-VM`](https://learn.microsoft.com/en-us/powershell/module/hyper-v/debug-vm) 파워셸 명령어는 마이크로소프트에서 개발한 [하이퍼바이저](https://ko.wikipedia.org/wiki/하이퍼바이저), 일명 [하이퍼-V](https://ko.wikipedia.org/wiki/하이퍼-V)(Hyper-V)에서 호스트 서버로부터 가상 머신에 NMI 신호를 전송하여 블루스크린을 발생시킬 수 있다. 파워셸은 관리자 권한으로 실행되어야 하며, 가상 머신의 이름은 [`Get-VM`](https://learn.microsoft.com/en-us/powershell/module/hyper-v/get-vm) 명령어로 확인이 가능하다.
     
         ```powershell
       Debug-VM -Name "<VM name>" -InjectNonMaskableInterrupt
         ```
 * **키보드**
 
-    키보드로부터 커널에 `KeBugCheck()` 루틴을 호출하므로써 윈도우 운영체제에 버그 확인 코드 [0xE2 MANUALLY_INITIATED_CRASH](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)를 발생시키는 방법이다. [PS/2](https://ko.wikipedia.org/wiki/PS/2_단자) 혹은 [USB](https://ko.wikipedia.org/wiki/USB) 신호로 동작하는 키보드, 그리고 하이퍼-V의 가상 머신에서 키보드로 일으킨 강제 블루스크린을 설정하는 방법은 아래의 두 방법 중에서 오로지 하나만이 적용된다.
+    키보드로부터 커널에 `KeBugCheck()` 루틴을 호출하므로써 윈도우 운영체제에 버그 확인 코드 [0xE2 MANUALLY_INITIATED_CRASH](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0xe2--manually-initiated-crash)를 발생시키는 방법이다. [PS/2](https://ko.wikipedia.org/wiki/PS/2_단자) 혹은 [USB](https://ko.wikipedia.org/wiki/USB) 신호로 동작하는 키보드, 그리고 하이퍼-V의 가상 머신에서 키보드로 일으킨 강제 블루스크린을 설정하는 방법은 아래의 두 방법 중에서 오로지 하나만이 적용된다.
 
     1. **`CTRL+SCROLL` 단축키**
 
@@ -90,7 +90,7 @@ order: null
 
     만일 키보드로 BSOD가 발생되지 않았을 경우, 처리되어야 할 우선순위(일명 [IRQL](https://en.wikipedia.org/wiki/IRQL_(Windows)))가 상당히 높은 인터럽트에 의해 시스템이 장애를 겪고 있을 가능성이 매우 크다. 시스템 응답 없음을 야기한 인터럽트보다 낮은 IRQL의 키보드 입력 신호를 전달하면 인식되지 않는다. 때문에 키보드로 BSOD를 강제하려면 IRQL이 상대적으로 높은 PS/2 키보드를 사용하기를 권장한다.
 
-    > [`CTRL+ALT+DELETE`](https://ko.wikipedia.org/wiki/Control-Alt-Delete) 단축키가 인식되지 않아도 키보드로 강제 BSOD를 일으킬 수 있으나, 해당 문제는 사실상 키보드와 상관없는 [`winlogon.exe`](https://docs.microsoft.com/en-us/windows/win32/secauthn/initializing-winlogon) 프로세스의 문제일 확률이 높다.
+    > [`CTRL+ALT+DELETE`](https://ko.wikipedia.org/wiki/Control-Alt-Delete) 단축키가 인식되지 않아도 키보드로 강제 BSOD를 일으킬 수 있으나, 해당 문제는 사실상 키보드와 상관없는 [`winlogon.exe`](https://learn.microsoft.com/en-us/windows/win32/secauthn/initializing-winlogon) 프로세스의 문제일 확률이 높다.
 
 * **전원 버튼**
 
@@ -108,11 +108,11 @@ order: null
 
     ![<code>PowerButtonBugcheck</code> 레지스트리 값](/images/docs/windows/bsod_force_powerbutton.png)
     
-    전원 버튼을 7초 동안 누르고 있으면 버그 확인 코드 [0x1C8 MANUALLY_INITIATED_POWER_BUTTON_HOLD](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x1c8--manually-initiated-power-button-hold)가 반환되지만, 10초 이상 누르면 UEFI 재설정이 되므로 그 전에 전원 버튼에 손을 떼도록 한다. 해당 레지스트리 값을 새로 생성해야 한다면 재부팅이 필요할 수 있다.
+    전원 버튼을 7초 동안 누르고 있으면 버그 확인 코드 [0x1C8 MANUALLY_INITIATED_POWER_BUTTON_HOLD](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/bug-check-0x1c8--manually-initiated-power-button-hold)가 반환되지만, 10초 이상 누르면 UEFI 재설정이 되므로 그 전에 전원 버튼에 손을 떼도록 한다. 해당 레지스트리 값을 새로 생성해야 한다면 재부팅이 필요할 수 있다.
 
 * **[WinDbg](ko.WinDbg)**
 
-    [윈도우 NT](ko.WindowsNT) 운영체제를 [디버깅](https://ko.wikipedia.org/wiki/디버그)하는 프로그램으로 커널 모드에서 [`.crash`](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/-crash--force-system-crash-) 명령어를 입력하여 시스템 강제 충돌을 일으킬 수 있다. `KeBugCheck()` 루틴으로부터 버그 확인 코드 0xE2 MANUALLY_INITIATED_CRASH가 반환되는데, 만일 시스템 충돌이 발생하지 않으면 중단점 탈출을 시도한다.
+    [윈도우 NT](ko.WindowsNT) 운영체제를 [디버깅](https://ko.wikipedia.org/wiki/디버그)하는 프로그램으로 커널 모드에서 [`.crash`](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/-crash--force-system-crash-) 명령어를 입력하여 시스템 강제 충돌을 일으킬 수 있다. `KeBugCheck()` 루틴으로부터 버그 확인 코드 0xE2 MANUALLY_INITIATED_CRASH가 반환되는데, 만일 시스템 충돌이 발생하지 않으면 중단점 탈출을 시도한다.
 
 * **[NotMyFault](ko.NotMyFault)**
 
@@ -203,6 +203,6 @@ BSOD 덤프 수집에서 페이징 파일의 충분한 공간 확보는 매우 �
 전용 덤프 파일은 폴더 안에 위치할 수 있다는 특징이 있으나, 해당 경로가 시스템 부팅 당시에 이미 존재해야 한다는 제약을 받는다. 그리고 전용 덤프 파일을 통해 메모리 덤프가 생성된 이후에 `DumpFileSize`의 값은 0으로 초기화된다.
 
 # 참조
-* [Forcing a System Crash from the Keyboard - Windows dirvers &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-keyboard)
-* [Forcing a System Crash from the Debugger - Windows drivers &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-debugger)
-* [Forcing a System Crash with the Power Button - Windows drivers &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-with-the-power-button)
+* [Forcing a System Crash from the Keyboard - Windows dirvers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-keyboard)
+* [Forcing a System Crash from the Debugger - Windows drivers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-from-the-debugger)
+* [Forcing a System Crash with the Power Button - Windows drivers &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/forcing-a-system-crash-with-the-power-button)

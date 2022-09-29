@@ -41,7 +41,7 @@ order: null
 
     매핑된 메모리 공간이므로, 물리 메모리상 띄엄띄엄 분산된 메모리 조각들을 하나의 연속된 가상 메모리 공간으로 구현한다. 가상 메모리의 [페이지](#페이지)(page)와 물리 메모리의 [페이지 프레임](#페이지)(page frame)를 일대일 매핑하는 것은 [메모리 관리 장치](https://ko.wikipedia.org/wiki/메모리_관리_장치)(MMU) 하드웨어에서 담당한다. 해당 성질은 메모리의 [파편화](https://en.wikipedia.org/wiki/Fragmentation_(computing))를 방지하는 효과를 기대할 수 있다.
 
-가상 주소 공간은 크게 (1) 개별 프로세스 데이터 및 리소스를 저장하는 "프로세스 공간"과 (2) 모든 프로세스에 공통적인 윈도우 운영체제 데이터 및 리소스를 담고있는 "시스템 공간"으로 나뉘어지는데, 흔히 전자와 후자를 각각 사용자 공간(user space) 및 커널 공간(kernel space)이라고 부르기도 한다. 윈도우 운영체제 및 아키텍처에 따라 각 공간들이 가질 수 있는 최대 크기는 아래와 같이 [지정](https://docs.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases)되어 있다.
+가상 주소 공간은 크게 (1) 개별 프로세스 데이터 및 리소스를 저장하는 "프로세스 공간"과 (2) 모든 프로세스에 공통적인 윈도우 운영체제 데이터 및 리소스를 담고있는 "시스템 공간"으로 나뉘어지는데, 흔히 전자와 후자를 각각 사용자 공간(user space) 및 커널 공간(kernel space)이라고 부르기도 한다. 윈도우 운영체제 및 아키텍처에 따라 각 공간들이 가질 수 있는 최대 크기는 아래와 같이 [지정](https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases)되어 있다.
 
 <table style="table-layout: fixed; width: 80%">
 <thead><tr><th rowspan="2" style="width: 10%;">가상 주소 공간</th><th rowspan="2" style="width: 20%;">32비트 프로세스</th><th colspan="2" style="border-bottom-style:none">64비트 프로세스</th></tr>
@@ -61,7 +61,7 @@ order: null
 ### 페이지
 [페이지](https://ko.wikipedia.org/wiki/페이지_(컴퓨터_메모리))(page)는 가상 주소 공간에서 관리되는 가장 작은 단위의 메모리 블록이며, 이와 매핑된 하나의 물리 메모리 조각을 페이지 프레임(page frame) 혹은 간단히 프레임(frame)이라고 부른다. 페이지 및 프레임의 크기는 고정되어 있으며 일반적으로 4 KB이다.
 
-페이지에는 세 가지 [상태](https://docs.microsoft.com/en-us/windows/win32/memory/page-state)가 존재하며, 이에 따라 가상 메모리를 사용할 수 있는지 여부가 결정된다.
+페이지에는 세 가지 [상태](https://learn.microsoft.com/en-us/windows/win32/memory/page-state)가 존재하며, 이에 따라 가상 메모리를 사용할 수 있는지 여부가 결정된다.
 
 <table>
 <thead><tr><th>상태</th><th>설명</th></tr></thead>
@@ -87,4 +87,4 @@ typedef void* HANDLE;
 [스레드](https://ko.wikipedia.org/wiki/스레드_(컴퓨팅))(thread)는 프로세스의 프로그램 이미지 코드를 실행하기 위해 [CPU](ko.Processor)에서 처리할 수 있는 작업 흐름의 단위이다. 프로세스는 기본적으로 하나의 스레드를 갖는데 개발자의 설계에 의해 추가로 생성하여 두 개 이상의 스레드를 활용할 수 있고, 동일한 가상 주소 공간에 상주하기 때문에 서로의 리소스를 아무런 제약없이 공유할 수 있다. 그러나 프로세스에는 최소한 하나의 스레드가 존재해야 하므로, 모든 스레드가 종료되면 해당 프로세스는 자동적으로 함께 종료된다.
 
 # 같이 보기
-* [Processes and Threads - Win32 apps &#124; Microsoft Learn](https://docs.microsoft.com/en-us/windows/win32/procthread/processes-and-threads)
+* [Processes and Threads - Win32 apps &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/procthread/processes-and-threads)

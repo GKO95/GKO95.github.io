@@ -77,7 +77,7 @@ from ctypes.wintypes import *
 여기서 포인터 지정 함수 `POINTER()`는 전부 대문자로 표기되어야 합니다. `ctypes`는 소문자로 된 `pointer()` 함수도 가지고 있지만 변수의 메모리 주소를 호출하는 용도로 사용됩니다. 이에 대한 예시는 다음 부분에서 확인할 수 있습니다.
 
 ### 배열
-C 언어에서 [배열](/docs/ko.C#배열)을 호출하면 메모리 주소가 반환되므로 흔히 포인터와 함께 사용됩니다. C#의 경우에는 [`unsafe`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/unsafe) 키워드로 코드의 안정성을 감안하지 않는 이상 변수의 메모리 주소를 알아낼 수 없었습니다. 그러나 파이썬은 `ctypes`로부터 자료형이 반영된 변수의 메모리 주소를 호출할 수 있습니다. 즉, 위의 포인터 매개변수 지정과 동일한 구문으로도 참조에 의한 호출이 가능합니다.
+C 언어에서 [배열](/docs/ko.C#배열)을 호출하면 메모리 주소가 반환되므로 흔히 포인터와 함께 사용됩니다. C#의 경우에는 [`unsafe`](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/unsafe) 키워드로 코드의 안정성을 감안하지 않는 이상 변수의 메모리 주소를 알아낼 수 없었습니다. 그러나 파이썬은 `ctypes`로부터 자료형이 반영된 변수의 메모리 주소를 호출할 수 있습니다. 즉, 위의 포인터 매개변수 지정과 동일한 구문으로도 참조에 의한 호출이 가능합니다.
 
 | C/C++       | 동일 자료형    | `ctypes`  | `wintypes` |
 |:-----------:|:---------:|:------------:|:-----------:|
