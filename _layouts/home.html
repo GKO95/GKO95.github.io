@@ -1,13 +1,10 @@
 ---
 layout: template
 ---
-{%- assign listNotice = site.blog | where: "notice", true | sort: "date" | reverse -%}
-{% if listNotice.size > 0 %}
 <section id="home-notice">
   <span>{{ listNotice[0].date | date: "%Y.%m.%d" }}</span>
   <a title="{{ listNotice[0].title }}" href="{{ listNotice[0].url }}">{{ listNotice[0].title }}</a>
 </section>
-{% endif %}
 <section id="page">
   <article id="home-content" class="content">
     {%- assign langMarkdown = "" -%}{%- assign langMarkdown = "" -%}

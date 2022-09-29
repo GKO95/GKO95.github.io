@@ -1,5 +1,5 @@
 <head>
-    <title>{{site.author.name}} | {% unless page.title == nil %}{{page.title}}{% else %}GitHub-Pages{% endunless %}</title>
+    <title>{{site.author.name}} | {% unless page.layout == 'home' %}{{page.title}}{% else %}GitHub-Pages{% endunless %}</title>
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
     <!-- Google Font -->
@@ -33,8 +33,8 @@
             });
         });
     </script>
-    <meta property="og:title" content="{{site.author.name}} | {% unless page.title == nil %}{{page.title}}{% else %}GitHub-Pages{% endunless %}"/>
+    <meta property="og:title" content="{{site.author.name}} | {% unless page.layout == 'home' %}{{page.title}}{% else %}GitHub-Pages{% endunless %}"/>
     <meta property="og:image" content="/images/icons/icon-gko95.png"/>
-    <meta property="og:url" content="{{site.url}}{% unless page.title == nil %}{{page.url}}{% endunless %}"/>
-    <meta property="og:description" content="{% unless page.title == nil %}{{page.description}}{% else %}{{site.description}}{% endunless %}"/>
+    <meta property="og:url" content="{{site.url}}{% unless page.layout == 'home' %}{{page.url}}{% endunless %}"/>
+    <meta property="og:description" content="{% unless page.layout == 'home' %}{{page.description}}{% else %}{{site.description}}{% endunless %}"/>
 </head>
