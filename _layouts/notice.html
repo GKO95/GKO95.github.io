@@ -1,0 +1,22 @@
+---
+layout: template
+---
+{% if page.toc != false %}
+<aside id="docs-mask">
+  <div id="docs-menu">
+    <section id="docs-toc">
+    </section>
+    <section id="docs-sub">
+      {%- assign meta = page.slug | split: "."-%}
+      {%- assign listRelated = site.blog | where: "language", meta[0] | where: "tags", meta[1] | sort: "date" | reverse -%}
+      {%- if page.slug != nil and listRelated.size > 0 -%}
+      <a class="sub-button" id="sub-related" title="See Also" tabindex="-1" href="/blog/#{{ meta[1] }} "></a>
+      {%- else -%}
+      <a class="sub-button" id="sub-related" title="See Also" tabindex="-1"></a>
+      {%- endif -%}
+      <a class="sub-button" id="sub-source" title="View Source" tabindex="-1"></a>
+    </section>
+  </div>
+</aside>
+{% endif %}
+{{ content }}
