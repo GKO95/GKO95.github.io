@@ -19,7 +19,7 @@ else
     $(`#home-notice > a`).attr("title", `Notice | ${$(`#home-notice > a`).attr("title")}`);
     $(`.home-category`).each(function() {
         if ($(this).attr("lang") == "ko") $(this).remove();
-    })
+    });
 }
 
 //========================================
@@ -27,16 +27,23 @@ else
 //========================================
 $(`#nav-menu`).click(() => {
     $(`#nav-menu`).effect("shake", { direction: "right", times: 3, distance: 4});
-})
+});
 
 //========================================
 // >> DISABLE STICKY POSITION
 //========================================
-$(`HEADER`).css("top", "unset")
+$(`HEADER`).css("top", "unset");
+
+//========================================
+// >> IMPORT LATEST NOTICE
+//========================================
+$("#home-notice").load('notice.html H1:first', function() {
+    $(this).children('H1').wrapInner('<a href="Notice"/>').children('A').unwrap();
+});
 
 //========================================
 // >> REMOVE EMPTY GROUP
 //========================================
 $(`.home-category`).each(function() {
     if ($(this).children('ul').children().length == 0 && $(this).children('ol').children().length == 0) $(this).remove();
-})
+});
