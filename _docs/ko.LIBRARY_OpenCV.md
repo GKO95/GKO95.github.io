@@ -411,7 +411,7 @@ int main()
 
 리눅스에서 OpenCV 프로젝트를 생성하는데 어떠한 IDE 및 코드 편집기를 사용해도 무관한다. 그 중에서 비주얼 스튜디오 코드는 리눅스에서 설치할 수 있는 동시에 필자가 자주 사용하는 코드 편집기이므로, 이번 부문에서는 VS Code를 활요한 OpenCV 프로젝트 설정법을 소개한다.
 
-필자는 `/home/gko95/Workspace/Cpp/OpenCV` 폴더를 만들어 `main.cpp` 파일을 생성하여 다음과 같이 코드를 작성하였다. 본 코드는 `opencv-logo.png` 파일을 불러와 이미지 창을 띄우는 기능을 수행한다.
+필자는 `/home/gihwanko/Workspace/Cpp/OpenCV` 폴더를 만들어 `main.cpp` 파일을 생성하여 다음과 같이 코드를 작성하였다. 본 코드는 `opencv-logo.png` 파일을 불러와 이미지 창을 띄우는 기능을 수행한다.
 
 ![그림 28. 비주얼 스튜디오 코드 OpenCV C++ 스크립트](/images/docs/opencv/opencv_deb_cpp_script.png)
 

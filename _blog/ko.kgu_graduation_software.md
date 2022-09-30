@@ -358,8 +358,8 @@ $ make -j7
 컴파일 도중에 CUDA와 관련되어 다음과 같이 오류가 흔히 나타나는 것을 확인할 수 있다.
 
 ```shell
-In file included from /home/gko95/OpenCV/opencv-4.0.1/modules/core/include/opencv2/core/cuda/functional.hpp:50:0,
-                 from /home/gko95/OpenCV/opencv_contrib-4.0.1/modules/cudalegacy/src/cuda/fgd.cu:50:
+In file included from /home/gihwanko/OpenCV/opencv-4.0.1/modules/core/include/opencv2/core/cuda/functional.hpp:50:0,
+                 from /home/gihwanko/OpenCV/opencv_contrib-4.0.1/modules/cudalegacy/src/cuda/fgd.cu:50:
 /usr/local/cuda/include/device_functions.h:54:2: warning: #warning "device_functions.h is an internal header file and must not be used directly.  This file will be removed in a future CUDA release.  Please use cuda_runtime_api.h or cuda_runtime.h instead." [-Wcpp]
  #warning "device_functions.h is an internal header file and must not be used directly.  This file will be removed in a future CUDA release.  Please use cuda_runtime_api.h or cuda_runtime.h instead."
   ^~~~~~~

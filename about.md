@@ -1,6 +1,5 @@
 ---
 layout: docs
-author: GKO95
 title: About
 toc: false
 ---

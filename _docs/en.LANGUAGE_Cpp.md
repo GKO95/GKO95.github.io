@@ -221,7 +221,7 @@ The scope resolution operator is a counterpart of the path separator `/` in the 
 
 ```powershell
 # UNIX DIRECTORY & PATH SEPARATOR (/)
-/Users/gko95/Documents
+/Users/gihwanko/Documents
 ```
 
 ```cpp

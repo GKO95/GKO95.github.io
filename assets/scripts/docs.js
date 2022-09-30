@@ -93,7 +93,7 @@ $(document).keydown((e) => {
 // >> MENU INSTANTIATION
 //========================================
 $(`#sub-source`).click(function() {
-    window.open(`https://github.com/GKO95/GKO95.github.io/blob/master${location.pathname.replace("/","/_").slice(0,-1)}.md`)
+    window.open(`https://github.com/GKO95/GKO95.github.io/blob/master${location.pathname.replace("/","/_")}.md`)
     docsMenuClose()
 })
 $(`#sub-related`).click(function() {

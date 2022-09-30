@@ -4,7 +4,7 @@ category: 운영체제
 title: 리눅스
 slug: ko.Linux
 icon: icon-linux.svg
-order: 0x64
+order: null
 ---
 # 소개
 [리눅스](https://ko.wikipedia.org/wiki/리눅스_커널)(Linux)는 운영체제 커널이며, 이를 사용하는 리눅스 배포판 운영체제가 대표적으로 [우분투](https://ko.wikipedia.org/wiki/우분투_(운영_체제))(Ubuntu)/[데비안](https://ko.wikipedia.org/wiki/데비안)(Debian), [페도라](https://ko.wikipedia.org/wiki/페도라_리눅스)(Fedora), [안드로이드](https://ko.wikipedia.org/wiki/안드로이드_(운영_체제))(Android) 등이 있다. 배포판이 아닌 "순수" 리눅스를 설치하여 사용해보겠다는 생각을 가질 수 있겠으나, 커널 자체는 하드웨어와 소프트웨어의 징검다리 역할을 할 뿐이며 사용자 측에서 사용할 수 있는 소프트웨어가 없으므로 부팅 이후에 아무것도 실행되지 않는다. 본 장은 리눅스를 컴퓨터 과학 관점에서 아키텍처 및 드라이버 등을 기술적으로 다루기에 앞서 운영체제에 대하여 기본적인 내용을 소개한다.

@@ -146,7 +146,7 @@ $ make
 /home/<username>/RPLidar/rplidar_sdk/sdk/output/Linux/Release
 ```
 
-그 외에도 `libpthread.a` 라이브러리도 함께 필요할 수 있으며, 컴파일하여 사용하기 위해서는 `g++`에 추가할 옵션들이 여러가지 생긴다. Visual Studio Code의 기준으로 다음과 같이 설정하였으며, 이 설정을 그대로 사용하려는 분들은 `gko95`를 해당 사용자 이름으로 변경하도록 한다. 또한 [OpenCV 4.0.1](../ko.kgu_graduation_software/#라이브러리-opencv-401)과 [Dlib 19.17](../ko.kgu_graduation_software/#라이브러리-dlib-1917) 라이브러리가 포함되어 있으므로, 이를 설치하지 않았으면 해당하는 줄은 삭제하여도 된다.
+그 외에도 `libpthread.a` 라이브러리도 함께 필요할 수 있으며, 컴파일하여 사용하기 위해서는 `g++`에 추가할 옵션들이 여러가지 생긴다. Visual Studio Code의 기준으로 다음과 같이 설정하였으며, 이 설정을 그대로 사용하려는 분들은 `gihwanko`를 해당 사용자 이름으로 변경하도록 한다. 또한 [OpenCV 4.0.1](../ko.kgu_graduation_software/#라이브러리-opencv-401)과 [Dlib 19.17](../ko.kgu_graduation_software/#라이브러리-dlib-1917) 라이브러리가 포함되어 있으므로, 이를 설치하지 않았으면 해당하는 줄은 삭제하여도 된다.
 
 **c_cpp_properties.json**
 ```json
@@ -157,8 +157,8 @@ $ make
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/local/include/opencv4",
-                "/home/gko95/RPLidar/rplidar_sdk/sdk/sdk/include",
-                "/home/gko95/RPLidar/rplidar_sdk/sdk/sdk/src"
+                "/home/gihwanko/RPLidar/rplidar_sdk/sdk/sdk/include",
+                "/home/gihwanko/RPLidar/rplidar_sdk/sdk/sdk/src"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
@@ -187,9 +187,9 @@ $ make
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "$(pkg-config", "opencv4", "--cflags", "--libs)",
                 "$(pkg-config", "dlib-1", "--cflags", "--libs)",
-                "-I/home/gko95/RPLidar/rplidar_sdk/sdk/sdk/include",
-                "-I/home/gko95/RPLidar/rplidar_sdk/sdk/sdk/src",
-                "-L/home/gko95/RPLidar/rplidar_sdk/sdk/output/Linux/Release/",
+                "-I/home/gihwanko/RPLidar/rplidar_sdk/sdk/sdk/include",
+                "-I/home/gihwanko/RPLidar/rplidar_sdk/sdk/sdk/src",
+                "-L/home/gihwanko/RPLidar/rplidar_sdk/sdk/output/Linux/Release/",
                 "-lrplidar_sdk", "-lpthread"
             ],
             "options": {

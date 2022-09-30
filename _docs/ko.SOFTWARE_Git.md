@@ -91,7 +91,7 @@ Git 환경설정에 사용자 정보를 입력하려면 다음과 같이 명령�
 
 ```bash
 git config --global user.name "Gihwan Ko"
-git config --global user.email "GKO95@example.com"
+git config --global user.email "gihwanko@example.com"
 ```
 
 ## 상태

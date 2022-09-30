@@ -1452,7 +1452,7 @@ typedef unsigned char BYTE;
     ```
 
 # 메모리 관리
-> *참고: [GKO95 GitHub Pages - 메모리](/docs/ko.Memory)*
+> *참고: [GKO95 GitHub Pages - 메모리](ko.Memory)*
 
 프로그램을 실행하는데 있어 메모리 관리는 매우 중요한 작업에 해당한다. 그 중에서 동적 메모리 할당은 보다 더 나은 메모리 효율성을 위해 사용되며, [포인터](#포인터)에 대한 충분한 개념적 이해도가 필요하다. 여기서 메모리는 HDD 및 SSD와 같은 [보조기억장치](https://ko.wikipedia.org/wiki/기억_장치)가 아닌 RAM이 해당하는 [주기억장치](https://ko.wikipedia.org/wiki/주기억장치)를 가리킨다.
 
