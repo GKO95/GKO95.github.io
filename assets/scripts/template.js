@@ -11,7 +11,7 @@ SetLANG(lang = this.LANG.KOREAN) { this.value = (this.value & 0b1101) | (0b0010 
 // >> SELECT THEME
 //========================================
 if (config.GetTHEME(config.THEME.DARK)) {
-    document.documentElement.setAttribute("dark", "true")
+    document.documentElement.setAttribute("dark", "true");
     $("<link/>", {
         rel: "stylesheet",
         type: "text/css",
@@ -19,7 +19,7 @@ if (config.GetTHEME(config.THEME.DARK)) {
      }).appendTo("head");
 }
 else {
-    document.documentElement.setAttribute("dark", "false")
+    document.documentElement.setAttribute("dark", "false");
     $("<link/>", {
         rel: "stylesheet",
         type: "text/css",
@@ -32,9 +32,9 @@ else {
 //========================================
 $(`#nav-theme`).click(function() {
     if (config.GetTHEME()) {
-        config.SetTHEME(config.THEME.DARK)
+        config.SetTHEME(config.THEME.DARK);
     } else {
-        config.SetTHEME(config.THEME.LIGHT)
+        config.SetTHEME(config.THEME.LIGHT);
     }
     location.reload();
 })
@@ -42,22 +42,22 @@ $(`#nav-theme`).click(function() {
 //========================================
 // >> SELECT LANGUAGE
 //========================================
-if (config.GetLANG(config.LANG.ENGLISH)) document.documentElement.setAttribute("lang", "en")
-else document.documentElement.setAttribute("lang", "ko")
+if (config.GetLANG(config.LANG.ENGLISH)) document.documentElement.setAttribute("lang", "en");
+else document.documentElement.setAttribute("lang", "ko");
 
 //========================================
 // >> SWITCH LANGUAGE
 //========================================
 $(`#nav-lang`).click(function() {
     if (config.GetLANG()) {
-        config.SetLANG(config.LANG.ENGLISH)
+        config.SetLANG(config.LANG.ENGLISH);
         if (document.location.pathname.includes("/docs/")) {
-            window.location = $(location).attr('pathname').replace("/docs/ko.","/docs/en.")
+            window.location = $(location).attr('pathname').replace("/docs/ko.","/docs/en.");
         } else document.location.reload();
     } else {
-        config.SetLANG(config.LANG.KOREAN)
+        config.SetLANG(config.LANG.KOREAN);
         if (document.location.pathname.includes("/docs/")) {
-            window.location = $(location).attr('pathname').replace("/docs/en.","/docs/ko.")
+            window.location = $(location).attr('pathname').replace("/docs/en.","/docs/ko.");
         } else document.location.reload();
     }
 })
@@ -67,12 +67,12 @@ $(`#nav-lang`).click(function() {
 //========================================
 if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
     // SAFARI, iOS SAFARI
-    $('HEADER').css("position", "-webkit-sticky")
+    $('HEADER').css("position", "-webkit-sticky");
 }
 else if (typeof window.InstallTrigger !== 'undefined') {
     // FIREFOX, Android FIREFOX
-    $('#header-title').css("width", "-moz-fit-content")
-    $('nva').css("height", "-moz-fit-content")
+    $('#header-title').css("width", "-moz-fit-content");
+    $('nva').css("height", "-moz-fit-content");
 }
 
 //========================================
@@ -81,13 +81,21 @@ else if (typeof window.InstallTrigger !== 'undefined') {
 switch(location.pathname.split('/')[1])
 {
     case "":
-        import("./home.js")
+        import("./home.js");
         break;
-        
+
+    case "notice":
+        import("./notice.js");
+        import("./docs.js");
+        break;
+
     case "blog":
-        import("./blog.js")
+        import("./blog.js");
+        import("./docs.js");
+        break;
+
     default:
-        import("./docs.js")
+        import("./docs.js");
         break;
 }
 
@@ -96,6 +104,6 @@ switch(location.pathname.split('/')[1])
 //========================================
 document.addEventListener("readystatechange", function () {
     if (document.readyState == "complete") {
-        $(`body`).css("visibility", "visible")
+        $(`body`).css("visibility", "visible");
     }
 }); 
