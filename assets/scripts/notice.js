@@ -11,7 +11,7 @@ else
 }
 
 //========================================
-// >> PARSER: RGB COLOR
+// >> NOTICE SECTION SEPARATOR
 //========================================
 const NoticeSeparator = () => {
 
@@ -19,7 +19,7 @@ const NoticeSeparator = () => {
     for (let counter = 0, checkpoint = 0; counter < children.length; counter++) {
         if ($(children[counter]).next().is("H1") || $(children[counter]).next().prop("tagName") == undefined)
         {
-            children.slice(checkpoint, ++counter).wrapAll('<div class="pages"><article class="notice-contents content"></article></div>');
+            children.slice(checkpoint, ++counter).wrapAll(`<div class="pages" ${$(children[counter - 1]).next().is("H1") ? 'style="margin-bottom: 16px;"' : ''} ><article class="notice-contents content"></article></div>`);
             checkpoint = counter;
         }
     }
