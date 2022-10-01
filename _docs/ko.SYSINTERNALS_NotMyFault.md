@@ -35,7 +35,7 @@ notmyfaultc crash crash_type_num
 <thead><tr><th>선택지</th><th>대상</th><th>증상</th></tr></thead>
 <tbody>
 <tr><td style="text-align: center; width: 20%">Hang with <a href="https://en.wikipedia.org/wiki/I/O_request_packet">IRP</a></td><td style="text-align: center; width: 20%">드라이버</td><td><code>myfault.sys</code> 드라이버를 먹통으로 만들어 시스템 충돌도 일으킬 수 없다.</td></tr>
-<tr><td style="text-align: center; width: 20%">Hang with <a href="https://en.wikipedia.org/wiki/Deferred_Procedure_Call">DPC</a></td><td style="text-align: center; width: 20%">시스템</td><td>시스템 자체가 아무런 반응이 없어 강제 종료 혹은 <a href="ko.BSOD#강제-시스템-충돌">시스템 충돌</a>을 일으켜야 한다.</td></tr>
+<tr><td style="text-align: center; width: 20%">Hang with <a href="ko.Processor#지연-프로시저-호출">DPC</a></td><td style="text-align: center; width: 20%">시스템</td><td>시스템 자체가 아무런 반응이 없어 강제 종료 혹은 <a href="ko.BSOD#강제-시스템-충돌">시스템 충돌</a>을 일으켜야 한다.</td></tr>
 <tr><td style="text-align: center; width: 20%"><a href="https://ko.wikipedia.org/wiki/교착_상태">Deadlock</a></td><td style="text-align: center; width: 20%">어플리케이션</td><td>어플리케이션 자체가 아무런 반응이 없으며 <a href="ko.Process">프로세스</a> 강제 종료도 되지 않는다.</td></tr>
 </tbody>
 </table>
