@@ -1,4 +1,50 @@
 .notice-contents {
     font-size: large;
     padding: 8px 32px;
+
+    h1 {
+        margin-bottom: 0;
+    }
+    
+    h4 {
+        margin-top: 0;
+        text-align: right;
+        font: {
+            weight: normal;
+            style: normal;
+            size: 12px;
+        }
+    }
+    blockquote {
+        border-left: {
+            width: 4px;
+            style: solid;
+        }
+        padding: 2px 16px;
+    }
 }
+
+html {
+    .notice-contents {
+        h4 {
+            color: gray;
+        }
+        blockquote {
+            background-color:#DFDFDF; 
+            border-left-color: rgb(80, 80, 80); 
+            color:rgb(64, 64, 64);
+        }
+    }
+    
+&:not(.style-scope)[dark=true] {
+    .notice-contents {
+        h4 {
+            color: darkgray;
+        }
+        blockquote {
+            background-color: rgb(24, 24, 24); 
+            border-left-color: rgb(224, 224, 224); 
+            color: rgb(200, 200, 200);
+        }
+    }
+}}
