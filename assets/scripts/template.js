@@ -84,11 +84,13 @@ switch(location.pathname.split('/')[1])
         import("./home.js");
         break;
 
+    case "Notice":
     case "notice":
         import("./notice.js");
         import("./docs.js");
         break;
 
+    case "Blog":
     case "blog":
         import("./blog.js");
         import("./docs.js");
