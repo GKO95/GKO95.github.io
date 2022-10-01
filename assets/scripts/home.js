@@ -5,6 +5,7 @@ if (config.GetLANG())
 {   // KOREAN
     $(`#header-about`).text("소개글").attr("title", "소개글");
     $(`#header-post`).text("블로그").attr("title", "블로그");
+    NoticeText = "알림";
 
     $(`#home-notice > a`).attr("title", `알림 | ${$(`#home-notice > a`).attr("title")}`);
     $(`.home-category`).each(function() {
@@ -15,6 +16,7 @@ else
 {   // ENGLISH
     $(`#header-about`).text("ABOUT").attr("title", "About");
     $(`#header-post`).text("BLOG").attr("title", "Blog");
+    NoticeText = "Notice";
 
     $(`#home-notice > a`).attr("title", `Notice | ${$(`#home-notice > a`).attr("title")}`);
     $(`.home-category`).each(function() {
@@ -38,8 +40,8 @@ $(`HEADER`).css("top", "unset");
 // >> IMPORT LATEST NOTICE
 //========================================
 $("#home-notice").load('notice.html H1:first', function() {
-    $(this).children('H1').wrapInner('<a href="Notice"/>').children('A').unwrap();
-});
+    $(this).children('H1').wrapInner('<a href="Notice"/>').children('A').unwrap().attr('title', NoticeText);
+}); var NoticeText;
 
 //========================================
 // >> REMOVE EMPTY GROUP
