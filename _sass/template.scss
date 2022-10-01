@@ -174,7 +174,7 @@ main {
         bottom: 16px;
     }
     
-    #page {
+    #page, .pages {
         max-width: $MAXWIDTH;
         margin: auto;
         padding: 8px 16px;
@@ -273,7 +273,7 @@ html {
     }
     main {
         background-color: #E0E0E0;
-        #page {
+        #page, .pages {
             background-color: white;
         }
         #content {
@@ -324,7 +324,7 @@ html {
     }
     main {
         background-color: #101010;
-        #page {
+        #page, .pages {
             background-color: #202020;
         }
         .content {

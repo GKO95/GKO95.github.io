@@ -3,13 +3,11 @@
 //========================================
 if (config.GetLANG(config.LANG.ENGLISH))
 {   // ENGLISH
-    var txtFigure = "Figure"
-    //$(`#docs-related-header`).text("See Also")
+    var txtFigure = "Figure";
 }
 else
 {   // KOREAN
-    var txtFigure = "그림"
-    //$(`#docs-related-header`).text("관련 게시글")
+    var txtFigure = "그림";
 }
 
 //========================================
@@ -26,10 +24,10 @@ const imageSize = () => {
         }
         $(this).dblclick(function() { 
             window.open(`https://raw.githubusercontent.com/GKO95/GKO95.github.io/master${$(this).attr("src")}`)
-        }).show()
+        }).show();
     })
 }; imageSize();
-$(window).resize(imageSize)
+$(window).resize(imageSize);
 
 //========================================
 // >> OPEN NEW TAB
@@ -46,30 +44,30 @@ const openNewTab = () => {
 // >> DOCUMENT PROCESSING
 //========================================
 if ($(`#docs-content > :first-child`).is('H1')) {
-    $(`#docs-content > :first-child`).css("margin-top", "24px")
+    $(`#docs-content > :first-child`).css("margin-top", "24px");
 }
 
 const breakCode = () => {
     $(`code`).each(function() {
-        if ($(this).width() > ($(this).parent().width() / 4)) $(this).css("word-break", "break-all")
-        else $(this).css("word-break", "initial")
+        if ($(this).width() > ($(this).parent().width() / 4)) $(this).css("word-break", "break-all");
+        else $(this).css("word-break", "initial");
     })
-}; breakCode()
-$(window).resize(breakCode)
+}; breakCode();
+$(window).resize(breakCode);
 
 //========================================
 // >> MENU CONFIGURATION
 //========================================
-$(`#docs-menu`).click((event) => event.stopPropagation())
+$(`#docs-menu`).click((event) => event.stopPropagation());
 const docsMenuOpen  = () => {
     $(`#docs-mask`).fadeIn(400, () => {
-        $(`#docs-menu`).slideDown()
+        $(`#docs-menu`).slideDown();
     })
     // $('body').css({height: '100%', overflow: 'hidden'});
 }
 const docsMenuClose = () => {
     $(`#docs-mask`).fadeOut(400, () => {
-        $(`#docs-menu`).slideUp()
+        $(`#docs-menu`).slideUp();
     })
     // $('body').css({height: 'auto', overflow: 'auto'});
 }
@@ -78,14 +76,14 @@ $(`#nav-menu`).click(() => {
         $(`#nav-menu`).effect("shake", { direction: "right", times: 3, distance: 4});
     }
     else {
-        if ($(`#docs-mask`).first().is(":hidden")) docsMenuOpen()
-        else docsMenuClose()
+        if ($(`#docs-mask`).first().is(":hidden")) docsMenuOpen();
+        else docsMenuClose();
     }
 })
-$(`#docs-mask`).click(() => docsMenuClose())
+$(`#docs-mask`).click(() => docsMenuClose());
 $(document).keydown((e) => {
     if (e.keyCode == 27 && $(`#docs-mask`).is(":visible")) {
-        $(`#docs-mask`).fadeOut(400, () => docsMenuClose())
+        $(`#docs-mask`).fadeOut(400, () => docsMenuClose());
     }
 })
 
@@ -93,8 +91,8 @@ $(document).keydown((e) => {
 // >> MENU INSTANTIATION
 //========================================
 $(`#sub-source`).click(function() {
-    window.open(`https://github.com/GKO95/GKO95.github.io/blob/master${location.pathname.replace("/","/_")}.md`)
-    docsMenuClose()
+    window.open(`https://github.com/GKO95/GKO95.github.io/blob/master${location.pathname.replace("/","/_")}.md`);
+    docsMenuClose();
 })
 $(`#sub-related`).click(function() {
     if ($("#sub-related").attr("href") === undefined) $(this).effect("shake", { direction: "right", times: 3, distance: 4});
@@ -102,21 +100,21 @@ $(`#sub-related`).click(function() {
 
 //$(`#docs-toc`).append($(`<div id="toc-sub" style="height: ${$(`#docs-related`).length > 0 ? "calc(100% - (64px + 16px))" : "100%"}; overflow: auto;"></div>`))
 $(`article#docs-content > :header`).each(function() {
-    let headerTag = $(this).prop("tagName")
+    let headerTag = $(this).prop("tagName");
     if ((headerTag == 'H1') || (headerTag == 'H2') || (headerTag == 'H3'))
     {
-        let headerURL = $(this).attr("id")
+        let headerURL = $(this).attr("id");
         let headerTxt = $(`<span style="cursor: pointer;">${$(this).html()}</span>`).click(function() {
-            location.href = `#${headerURL}`
-            docsMenuClose()
+            location.href = `#${headerURL}`;
+            docsMenuClose();
         })
-        $(`#docs-toc`).append($(`<${headerTag}></${headerTag}>`).append(headerTxt))
+        $(`#docs-toc`).append($(`<${headerTag}></${headerTag}>`).append(headerTxt));
     }
 })
 $(`#docs-toc > h1`).each(function() {
-    if ($(this).next().is("h1") || $(this).is(":last-child")) $(this).after("<h3>...</h3>")
+    if ($(this).next().is("h1") || $(this).is(":last-child")) $(this).after("<h3>...</h3>");
 })
 
 if ($(`#docs-toc > :first-child`).is('H1')) {
-    $(`#docs-toc > :first-child`).css("margin-top", "24px")
+    $(`#docs-toc > :first-child`).css("margin-top", "24px");
 }
