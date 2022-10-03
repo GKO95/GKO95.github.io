@@ -31,3 +31,18 @@ ProcDump는 아래의 덤프 종류를 생성할 수 있다.
 <tr><td style="text-align: center;"><code>-mm</code></td><td style="text-align: center;"><a href="ko.Dump#미니-덤프">미니 덤프</a></td><td>프로세스의 사용자 공간 중에서 <a href="ko.Process#스레드">스레드</a> 및 레지스트리 위주로 수집하며, ProcDump의 기본 덤프이다.</td></tr>
 <tr><td style="text-align: center;"><code>-mp</code></td><td style="text-align: center;">미니플러스 덤프<br/>(MiniPlus Dump)</td><td>프로세스의 프로그램 이미지를 제외한 사용자 공간 전체를 수집한다. 덤프에서 제외된 프로그램 이미지 정보는 해당 프로그램 파일이 위치한 경로를 디버깅 도구(예. <a href="ko.WinDbg">WinDbg</a>)에 명시하여 보충할 수 있다.</td></tr>
 <tr><td style="text-align: center;"><code>-mk</code></td><td style="text-align: center;">커널 덤프</td><td>프로세스에 관여한 커널 스택의 덤프를 추가로 생성한다. 단, 해당 덤프는 절대로 <a href="ko.Dump#커널-메모리-덤프">커널 메모리 덤프</a>가 아니다.</td></tr></tbody></table>
+
+## 예외 처리
+어플리케이션에서 처리하지 못한 [예외](ko.Cpp#예외-처리)(exception)가 발생, 즉 충돌이 일어나면 프로그램이 종료되기 전에 덤프를 수집하도록 하는 `-e` 매개변수가 있다. 해당 매개변수의 설명을 자세히 읽어보면 "first chance exception"이란 용어를 발견할 수 있는데, 이를 통해 예외에도 종류가 있다는 점을 확인할 수 있다.
+
+> 만일 예외가 무엇인지 잘 모르겠으면 대표적인 예시로 `0xC0000005` [STATUS_ACCESS_VIOLATION](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/596a1078-e883-4972-9bbc-49e60bebca55) 메모리 접근 오류가 존재한다.
+
+[디버깅](https://ko.wikipedia.org/wiki/디버그) 관점에서 예외는 두 가지로 나뉘어진다:
+
+* **1차 시도 예외(First chance exceptions)**
+
+    어플리케이션이 예외를 가장 처음으로 마주하였을 때를 가리킨다. 1차 시도 예외는 프로그램에 치명적인 문제가 있다는 것을 의미하지 않다; [`try`](ko.Cpp#try-catch-예외-처리문)-[`catch`](ko.Cpp#try-catch-예외-처리문) 등으로 훌륭한 예외 처리 코드가 마련되었다면, 1차 시도 예외의 발생 내역만 남긴 채 아무런 문제 없이 어플리케이션 실행을 이어간다. 디버깅 도구 설정을 통해 1차 시도 예외 때 어플리케이션 실행을 중단시켜 디버그 모드로 진입할 수 있다.
+
+* **2차 시도 예외(Second chance exceptions)**
+
+    어플리케이션이 1차 시도에서 예외를 처리하지 못하였을 때, 디버깅 도구에서 이를 처리할 수 있도록 주어진 두 번째 기회를 가리킨다. 어플리케이션은 실행이 중단되고 디버그 모드에 진입하는 데, 디버거에서 2차 시도 예외를 무사히 처리하였으면 어플리케이션 실행이 재개된다. 허나, 디버깅 도구가 없다면 어플리케이션은 2차 시도 예외를 처리하지 못한 채 그래도 충돌로 이어져 종료된다.
