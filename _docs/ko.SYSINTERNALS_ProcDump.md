@@ -11,7 +11,7 @@ order: null
 
 ![ProcDump 유틸리티 프로그램](/images/docs/sysinternals/sysinternals_procdump.png)
 
-실행 중인 어플리케이션으로부터 곧바로 덤프를 수집할 수 있으며, [충돌](https://ko.wikipedia.org/wiki/충돌_(컴퓨팅)#애플리케이션_충돌) 및 [응답 없음](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)), 그리고 [CPU](ko.Processor) 점유율이나 [메모리](ko.Memory) 사용량 등의 성능을 모니터링하여 한계치를 초과하거나 미달할 시 덤프를 수집하는 조건을 설정할 수 있다. 이는 서버 관리자나 프로그램 개발자가 비정상적인 [리소스](https://ko.wikipedia.org/wiki/시스템_리소스) 활동이 발생하였을 때 원인을 판단할 수 있는 자료가 된다. 덤프 수집이 완료되면 ProcDump는 종료된다.
+실행 중인 어플리케이션으로부터 곧바로 덤프를 수집할 수 있으며, [충돌](https://ko.wikipedia.org/wiki/충돌_(컴퓨팅)#애플리케이션_충돌) 및 [응답 없음](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅)), 그리고 [CPU](ko.Processor) 점유율이나 [메모리](ko.Memory) 사용량 등의 [성능 카운터](https://learn.microsoft.com/en-us/windows/win32/perfctrs/performance-counters-portal)(performance counter) 수치를 기반으로 덤프를 수집하는 조건을 설정할 수 있다. 이는 서버 관리자나 프로그램 개발자가 비정상적인 [리소스](https://ko.wikipedia.org/wiki/시스템_리소스) 활동이 발생하였을 때 원인을 판단할 수 있는 자료가 된다. 덤프 수집이 완료되면 ProcDump는 종료된다.
 
 ProcDump의 덤프 수집에는 두 가지의 치명적인 단점이 있다:
 
@@ -50,13 +50,13 @@ ProcDump에서 덤프를 생성하는 조건을 다음과 같이 설정할 수 �
 
 * **2차 시도 예외(Second chance exceptions)**
 
-    어플리케이션이 1차 시도에서 예외를 처리하지 못하였을 때, 디버깅 도구에서 이를 처리할 수 있도록 주어진 두 번째 기회를 가리킨다. 어플리케이션은 실행이 중단되고 디버그 모드에 진입하는 데, 디버거에서 2차 시도 예외를 무사히 처리하였으면 어플리케이션 실행이 재개된다. 허나, 디버깅 도구가 없다면 어플리케이션은 2차 시도 예외를 처리하지 못한 채 그래도 충돌로 이어져 종료된다.
+    어플리케이션이 1차 시도에서 예외를 처리하지 못하였을 때, 디버깅 도구에서 이를 처리할 수 있도록 주어진 두 번째 기회를 가리킨다. 어플리케이션은 실행이 중단되고 디버그 모드에 진입하는 데, 디버거에서 2차 시도 예외를 무사히 처리하였으면 어플리케이션 실행이 재개될 수 있다. 허나, 디버깅 도구가 없다면 어플리케이션은 2차 시도 예외를 처리하지 못한 채 그래도 충돌로 이어져 종료된다.
 
 ### 응답 없음
 [GUI](https://ko.wikipedia.org/wiki/그래픽_사용자_인터페이스) 창이 있는 어플리케이션이 최소 5초 동안 응답 없음에 놓여진 경우에 덤프를 수집하도록 하는 `-h` 매개변수가 있다.
 
 ### 성능 카운터
-어플리케이션의 리소스 사용량을 [성능 카운터](https://learn.microsoft.com/en-us/windows/win32/perfctrs/performance-counters-portal)(performance counter) 기준에서 지정한 한계치를 초과하거나 미달하면 덤프를 수집하도록 할 수 있다.
+어플리케이션의 리소스 사용량을 성능 카운터 기준에서 지정한 한계치를 초과하거나 미달하면 덤프를 수집하도록 할 수 있다.
 
 <table style="width: 50%;">
 <colgroup><col style="width: 19%;"/><col style="width: 8%;"/><col style="width: 8%;"/><col style="width: 65%;"/></colgroup>
