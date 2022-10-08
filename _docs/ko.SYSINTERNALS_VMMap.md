@@ -68,7 +68,7 @@ VMMap은 선택된 단 하나의 프로세스에서 가상 주소 공간(= 사�
 <thead><tr><th>공유 가능한 메모리</th><th>설명</th></tr></thead>
 <colgroup><col style="width: 20%;"/><col style="width: 80%;"/></colgroup>
 <tbody>
-<tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/동적_메모리_할당#힙_영역">매핑된 파일</a><br/>(Mapped File)</td><td>디스크에 있는 파일들을 나태낸 메모리이다. 상세 항목에서 해당 파일의 경로를 확인할 수 있다.</td></tr>
+<tr><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/메모리_맵_파일">매핑된 파일</a><br/>(Mapped File)</td><td>디스크에 있는 파일들을 나태낸 메모리이다. 상세 항목에서 해당 파일의 경로를 확인할 수 있다.</td></tr>
 </tbody>
 </table>
 
@@ -79,4 +79,4 @@ VMMap은 선택된 단 하나의 프로세스에서 가상 주소 공간(= 사�
     > 만일 초기화 정보 등의 일부 이미지 메모리 영역에 변동사항이 생길 시, 이미지 메모리를 수정하는 게 아니라 개인 메모리를 생성하여 수정된 내용을 기록한다.
 
 ### 문자열 메모리
-간혹 메모리에 저장된 문자열로부터 해당 메모리 영역이 어떠한 목적으로 사용되고 있는지 파악할 수 있다. VMMap은 창 메뉴에서 View → Strings 선택지(단축키: `CTRL+T`)를 클릭하여 세 개 이상의 문자로 구성된 [ASCII](https://ko.wikipedia.org/wiki/ASCII) 혹은 [유니코드](https://ko.wikipedia.org/wiki/유니코드) 문자열을 확인할 수 있다.
+간혹 메모리에 저장된 [문자열](ko.C#문자열)로부터 해당 메모리 영역이 어떠한 목적으로 사용되고 있는지 파악할 수 있다. VMMap은 창 메뉴에서 View → Strings 선택지(단축키: `CTRL+T`)를 클릭하여 세 개 이상의 문자로 구성된 [ASCII](https://ko.wikipedia.org/wiki/ASCII) 혹은 [유니코드](https://ko.wikipedia.org/wiki/유니코드) 문자열을 확인할 수 있다.
