@@ -7,7 +7,7 @@ icon: icon-sysinternals.png
 order: null
 ---
 # VMMap
-[VMMap](https://learn.microsoft.com/en-us/sysinternals/downloads/vmmap)는 [프로세스](ko.Process)의 [가상 주소 공간](ko.Process#가상-주소-공간) 메모리를 분석하는 [Sysinternals](ko.Sysinternals) 유틸리티 프로그램이다.
+[VMMap](https://learn.microsoft.com/en-us/sysinternals/downloads/vmmap)는 [프로세스](ko.Process)의 [가상 메모리](ko.Process#가상-주소-공간)를 분석하는 [Sysinternals](ko.Sysinternals) 유틸리티 프로그램이다.
 
 ![VMMap 유틸리티 프로그램](/images/docs/sysinternals/sysinternals_vmmap.png)
 
