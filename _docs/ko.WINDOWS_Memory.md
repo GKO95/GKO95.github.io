@@ -68,7 +68,7 @@ order: null
 지정된 크기만큼의 드라이브 용량을 페이징 파일로 사용되기 때문에 저장공간이 줄어든다는 단점이 있다. 그러나 물리 메모리 및 저장장치의 용량이 대폭 확장되고 운영체제가 64비트 페이징 파일의 역할이 퇴색되었으며, 현재는 [블루스크린](ko.BSOD)이 발생되었을 시 [덤프 수집](ko.BSOD#가상-메모리) 목적으로 활용된다.
 
 ## 커밋된 메모리
-커밋된 메모리(committed memory)는 시스템 메모리에서 사용 중으로 인식된 [페이지](ko.Process#페이지)이다. 프로세스의 사용자 공간에 커밋된 메모리는 두 유형으로 나뉘어진다.
+커밋된 메모리(committed memory)는 시스템 메모리에서 사용 중으로 인식된 [페이지](ko.Process#페이지)이다. [프로세스](ko.Process)의 사용자 공간에 커밋된 메모리는 두 유형으로 나뉘어진다.
 
 <table style="table-layout: fixed; width: 80%">
 <thead><tr><th>개인 메모리 (private memory)</th><th><a href="https://ko.wikipedia.org/wiki/공유_메모리">공유 메모리</a> (shared memory)</th></tr></thead>
@@ -99,7 +99,7 @@ order: null
 
 > 작업 관리자에서 사용 중(in use)인 RAM 크기에 대응하지만, `\Process(_Total)\Working Set` 카운터는 공유 메모리가 중복 계산되어 더 크게 측정된 점을 유의하도록 한다.
 
-운영체제는 건전한 시스템 상태를 유지하기 위해, 워킹 세트가 특정 크기에 도달하면 오랜 기간동안 사용되지 않은 메모리를 페이징 아웃시키는 트리밍(trimming) 작업을 진행한다. 트리밍은 실행 중인 모든 프로세스에 거쳐 처리되는데, 이는 권한이 매우 높은 작업으로 트리밍이 전부 끝날 때까지 기다려야 한다.
+운영체제는 건전한 시스템 상태를 유지하기 위해, 워킹 세트가 특정 크기에 도달하면 오랜 기간동안 사용되지 않은 메모리를 페이징 아웃시키는 트리밍(trimming) 작업을 진행한다. [메모리 관리자](https://ko.wikipedia.org/wiki/메모리_관리_장치)는 프로세스 혹은 [스레드](ko.Process#스레드)에 주어진 [메모리 우선순위](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/ns-processthreadsapi-memory_priority_information)에 따라 낮은 순위부터 트리밍한다. 트리밍은 실행 중인 모든 프로세스에 거쳐 처리되는데, 이는 권한이 매우 높은 작업으로 트리밍이 전부 끝날 때까지 기다려야 한다.
 
 ### 페이지 부재
 [페이지 부재](https://ko.wikipedia.org/wiki/페이지_부재)(page fault)는 프로세스의 페이지를 접근하려 하나 워킹 세트에 존재하지 않는 경우를 가리키며, 운영체제가 메모리를 관리하는 과정에서 일어나는 매우 자연스러운 현상이다. 페이지 부재는 하드웨어적 그리고 소프트웨어적 페이지 부재로 나뉘어진다.
