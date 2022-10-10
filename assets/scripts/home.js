@@ -40,7 +40,7 @@ $(`HEADER`).css("top", "unset");
 // >> IMPORT LATEST NOTICE
 //========================================
 $("#home-notice").load('notice.html H1:first', function() {
-    $(this).children('H1').wrapInner('<a href="Notice"/>').children('A').unwrap().attr('title', NoticeText);
+    $(this).children('H1').wrapInner('<a href="notice"/>').children('A').unwrap().attr('title', NoticeText);
 }); var NoticeText;
 
 //========================================
