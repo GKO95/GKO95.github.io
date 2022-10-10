@@ -49,7 +49,7 @@ order: 0x48
 <tr><td style="text-align: center;">Windows Assessment Toolkit</td>
 <td>.</td></tr>
 <tr><td style="text-align: center;"><a href="ko.WPT">Windows Performance Toolkit</a></td>
-<td><span>시스템 성능을 Event Tracing for Windows를 활용해 기록 및  GUI를 동반한 성능 분석 도구를 포함한다.</span><ul><li>Windows Performance Recorder</li><li>Windows Performance Analyzer</li><li>Xperf <sub>(deprecated)</sub></li></ul></td></tr>
+<td><span>시스템 성능을 Event Tracing for Windows를 활용해 기록 및  GUI를 동반한 성능 분석 도구를 포함한다.</span><ul><li>Windows Performance Recorder</li><li>Windows Performance Analyzer</li><li>Xperf <sub>(지원 종료)</sub></li></ul></td></tr>
 <tr><td style="text-align: center;">User State Migration Tool</td>
 <td>.</td></tr>
 <tr><td style="text-align: center;">Volume Activation Management Tool</td>
@@ -57,7 +57,7 @@ order: 0x48
 <tr><td style="text-align: center;">User Experience Virtualization</td>
 <td>.</td></tr>
 <tr><td style="text-align: center;">Application Virtualization</td>
-<td>.</td></tr>
+<td><span>마이크로소프트에서 제공하는 <a href="https://ko.wikipedia.org/wiki/응용_프로그램_가상화">어플리케이션 가상화</a> 및 <a href="https://en.wikipedia.org/wiki/Application_streaming">스트리밍</a> 솔루션이다.</span><br/><sub>2026년 4월 서비스 종료: 애저 가상 데스크탑에 MSIX 앱을 연결할 것을 권장</sub></td></tr>
 </tbody>
 </table>
 
