@@ -4,7 +4,7 @@ title: About
 toc: false
 ---
 <div style="display: flex; flex-flow: row nowrap; justify-content: center; padding: 8px 0px 8px 0px;">
-<a title="LinkedIn"  href="https://www.linkedin.com/in/gihwan-ko/" style="width: auto; height: auto; color: unset;">
+<a title="LinkedIn"  href="https://www.linkedin.com/in/gihwanko/" style="width: auto; height: auto; color: unset;">
 <section style="display: flex; flex-flow: row nowrap; justify-content: center;">
 <span style="display: inline-block; align-self:center; background-image:url('/images/icons/icon-linkedin.png'); background-repeat: no-repeat; background-position: center; background-size: 64px; width: 64px; height: 64px;"></span>
 <span style="align-self: center; margin-left: 8px; font-size: 40px; font-weight: bold;">Gihwan Ko</span>
@@ -12,6 +12,15 @@ toc: false
 
 기술지원 엔지니어 (前 소프트웨어 및 펌웨어 엔지니어) 고기환입니다.
 
-저의 GitHub Pages는 개인적으로 혹은 재학 중에 공부한 내용들을 문서로 정리하여 공유하기 위해 만들었습니다. 기억력이 좋지 않아 항상 공부한 내용들을 노트나 A4 용지에 정리하여 시험 기간이 되면 복습 자료로 사용하였는데, 그 내용이 방대해지기 시작하면서 컴퓨터에 저장할 필요를 절실히 느꼈습니다. 처음에는 [MS 오피스 워드](https://www.microsoft.com/en-us/microsoft-365/word)에 노트 정리를 작성하였지만 내용이 많아지면서 파일을 여는데 걸리는 시간이 오래 걸리고 용량이 예상 외로 커지는 문제를 마주하였습니다. GitHub로부터 [마크다운](https://www.markdownguide.org/)을 알게 된 이후에는 [Typora](https://typora.io/) 프로그램으로 문서를 작성하기 시작했습니다. 비록 모바일 어플리케이션은 없었으나 코드 블록과 $\LaTeX$ 지원이 매우 유용하여 한동안은 Typora로 내용 정리를 이어갔습니다. 그러다가 대학교 후배로부터 마크다운 문서를 기반으로 블로그를 만들 수 있는 [Jekyll](https://jekyllrb.com/)의 존재를 알게 되어 현재의 GitHub Pages까지 다다르게 되었습니다.
+본 GitHub Pages는 필자의 전공과 업무에서 반드시 필요하거나 밀접한 전문 지식을 타인들에게 알기 쉽게 공유하고자 작성된 블로그입니다. 필자도 해당 내용들을 계속 접하면서 배워가는 입장인 관계로 잘못된 정보가 있음을 양지하시되, 게시글은 현재도 지속적으로 업데이트가 되고 있습니다. 블로그는 비공식적으로 2019년에 생성되었으나 리포지터리를 초기화하면서 2021년 기점 이후로의 커밋 내역만 남았습니다. [Jekyll](https://jekyllrb.com/) 정적 웹사이트 생성기를 사용하고 있으며 [마크다운](https://www.markdownguide.org/)과 HTML을 혼합하여 게시글을 작성합니다.
 
-원래는 대학교에서 배운 전자공학 전공 관련 내용들을 위주로 작성하려 하였지만, 노트 정리에 그린 그림들을 컴퓨터에 다시 그릴 방법이 마땅치 않아 진전이 없었습니다. 그림이 없던 프로그래밍 문서를 우선으로 작성한 것이 결국에는 GitHub Pages의 메인 게시글이 되어 버렸습니다. 최근에는 태플릿 PC 및 MATLAB/Matplotlib의 도입으로 그림을 표현할 수 있는 대안이 생겨 전공 문서도 함께 진행하기 시작하였습니다. 기존에 완성된 문서도 시간이 날 때마다 전체적으로 점검을 하여 내용을 추가하거나 수정하는 등의 업데이트를 거칩니다.
+필자는 무한한 정보와 지식의 저장소인 인터넷에서 모두가 동일한 자료를 접근할 수 있는 기회가 주어져야 한다는 이데올로기를 지닙니다. 그러므로 본 블로그는 비영리 목적으로 독자들이 쉽게 접근하고 이해할 수 있도록 기여하고 있습니다. 단, 대외비 정보 유출과 같은 필자의 사내 규정에 반하지 않도록 교차검증도 신중하게 이루어집니다.
+
+독자들의 편의성을 위해 본 블로그는 다음 기능들이 탑재되어 있습니다:
+
+* 한영 전환
+* 다크 모드
+* $\KaTeX$ 지원
+* jQuery 라이브러리
+
+해당 블로그에 대하여, 혹은 개인적으로 문의사항이 있으면 위의 [LinkedIn](https://www.linkedin.com/in/gihwanko/) 배너를 클릭하여 메시지를 수신해 주시기 바랍니다.
