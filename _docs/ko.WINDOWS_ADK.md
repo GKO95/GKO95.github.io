@@ -40,7 +40,7 @@ order: 0x48
 <thead><tr><th><a href="https://learn.microsoft.com/en-us/windows-hardware/get-started/kits-and-tools-overview">ADK 도구</a></th><th>설명</th></tr></thead>
 <tbody>
 <tr><td style="text-align: center;">Windows Configuration Designer</td>
-<td>다수의 윈도우 데스크탑 운영체제 환경 설정을 한꺼번에 관리 및 적용한다.<br/><sub>※ 윈도우 10 이상에서는 <a href="https://apps.microsoft.com/store/detail/windows-configuration-designer/9NBLGGH4TX22">마이크로소프트 스토어</a>에서도 설치가 가능하다.</sub></td></tr>
+<td>다수의 윈도우 데스크탑 운영체제 환경 설정을 한꺼번에 관리 및 적용한다.<br/><sub style="font-style: italic;">※ 윈도우 10 이상에서는 <a href="https://apps.microsoft.com/store/detail/windows-configuration-designer/9NBLGGH4TX22">마이크로소프트 스토어</a>에서도 설치가 가능하다.</sub></td></tr>
 <tr><td style="text-align: center;">Deployment Image Servicing and Management</td>
 <td>윈도우 설치 이미지 배포 및 커스터마이징 서비스를 제공하는 명령어 도구이다.</td></tr>
 <tr><td style="text-align: center;">Windows System Image Manager</td>
@@ -56,7 +56,7 @@ order: 0x48
 <tr><td style="text-align: center;">User Experience Virtualization</td>
 <td>로그온 장치와 무관하게 개별 사용자가 구성한 윈도우 환경 및 어플리케이션 설정을 일관적으로 제공한다.</td></tr>
 <tr><td style="text-align: center;">Application Virtualization</td>
-<td>마이크로소프트에서 제공하는 <a href="https://ko.wikipedia.org/wiki/응용_프로그램_가상화">어플리케이션 가상화</a> 및 <a href="https://en.wikipedia.org/wiki/Application_streaming">스트리밍</a> 솔루션이다.<br/><sub>※ 2026년 4월 서비스 종료: <a href="https://azure.microsoft.com/products/virtual-desktop/">애저 가상 데스크탑</a>에 MSIX 앱을 연결할 것을 권장</sub></td></tr>
+<td>마이크로소프트에서 제공하는 <a href="https://ko.wikipedia.org/wiki/응용_프로그램_가상화">어플리케이션 가상화</a> 및 <a href="https://en.wikipedia.org/wiki/Application_streaming">스트리밍</a> 솔루션이다.<br/><sub style="font-style: italic;">※ 2026년 4월 서비스 종료: <a href="https://azure.microsoft.com/products/virtual-desktop/">애저 가상 데스크탑</a>에 MSIX 앱을 연결할 것을 권장한다.</sub></td></tr>
 </tbody>
 </table>
 
