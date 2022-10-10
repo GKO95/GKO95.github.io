@@ -60,7 +60,7 @@ order: 0x48
 </tbody>
 </table>
 
-### 애드온 도구
+### 애드온
 윈도우 ADK에 부가적으로 설치할 수 있는 애드온(add-on)이 있다:
 
 * **[Windows Preinstallation Environment](ko.WinPE)**: 윈도우 데스크탑 운영체제의 설치, 배포, 그리고 점검을 위한 초소형 운영체제이다.
