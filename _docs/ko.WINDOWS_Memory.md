@@ -92,7 +92,7 @@ order: null
 1. 예약된 페이지는 시스템 메모리와 아무런 상관이 없으므로, 시스템 관점에서는 무의미한 정보이다. 
 2. 64비트 아키텍처부터 프로세스의 사용자 공간은 최대 128 TB라는 엄청난 크기로 확장하여, [메모리 누수](https://ko.wikipedia.org/wiki/메모리_누수)가 일어나지 않는 한 용량이 부족할 일이 거의 없다.
 
-> 가상 메모리에 대한 정보는 작업 관리자에서도 찾아볼 수 없으며, 그 대신 [성능 모니터](ko.Performance_Monitor) 혹은 [Sysinternals](ko.Sysinternals)의 [VMMap](ko.VMMap) 유틸리티 프로그램 등으로 확인할 수 있다.
+> 가상 메모리에 대한 정보는 작업 관리자에서도 찾아볼 수 없으며, 그 대신 [성능 모니터](ko.Perfmon) 혹은 [Sysinternals](ko.Sysinternals)의 [VMMap](ko.VMMap) 유틸리티 프로그램 등으로 확인할 수 있다.
 
 ## 워킹 세트
 [워킹 세트](https://en.wikipedia.org/wiki/Working_set)(working set)는 프로세스의 사용자 및 커널 공간을 불문하고 [가상 주소 공간](ko.Process#가상-주소-공간) 전체에 [커밋된 메모리](#커밋된-메모리)(= 개인 메모리 + 공유 메모리) 중에서 오로지 RAM에만 상주하고 있는 페이지를 가리킨다.
