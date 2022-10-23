@@ -2,7 +2,7 @@
 layout: docs
 category: 윈도우
 title: 성능 모니터
-slug: ko.Perfmon
+slug: ko.Performance_Monitor
 icon: icon-windows.svg
 order: null
 ---
