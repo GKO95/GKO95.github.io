@@ -26,7 +26,7 @@ order: null
 
 ![작업 관리자에서 확인한 메모리 성능 (<a href="https://ko.wikipedia.org/wiki/윈도우_11">윈도우 11</a>, 버전 22H2)](/images/docs/memory/memory_task_manager.png)
 
-본 시스템에 설치된 48 GB의 RAM에서 8.6 GB가 사용 중(in use)이고 나머지 39.0 GB는 아직 [사용 가능](#사용-가능한-메모리)(available)하다. 괄호 안에 있는 38.4 MB는 사용 중인 RAM 내에서 압축된 메모리 크기를 가리키는데, 예를 들어 본래 100 MB 데이터를 61.6 MB만큼 절약한 것이다.
+설치된 48 GB의 RAM 중에서 본 시스템은 47.9 GB를 활용하여, 8.6 GB가 사용 중(in use)이고 나머지 39.0 GB는 아직 [사용 가능](#사용-가능한-메모리)(available)하다. 괄호 안에 있는 38.4 MB는 사용 중인 RAM 내에서 압축된 메모리 크기를 가리키는데, 예를 들어 본래 100 MB 데이터를 61.6 MB만큼 절약한 것이다.
 
 ## 페이징 파일
 [페이징 파일](https://learn.microsoft.com/en-us/windows/client-management/introduction-page-file)(paging file)은 가상 주소 공간의 [페이지](ko.Process#페이지)를 물리 메모리가 아닌 HDD 혹은 SSD와 같은 저장장치에서 물리 메모리의 작업량 일부를 [페이징](https://ko.wikipedia.org/wiki/페이징)(paging) 기법으로 전담받아 원활한 시스템 성능을 유지하는데 기여하는 `pagefile.sys` 파일이다. 다음은 페이징 기법에 대한 간략한 설명이다.
@@ -80,7 +80,7 @@ order: null
 
 시스템 관점에서 바라본 커밋된 메모리, 즉 커밋 총량(commit charge)은 모든 프로세스의 사용자 공간 및 커널로부터 커밋된 페이지의 합계이다. 커밋 총량이 도달할 수 있는 최대 크기인 커밋 한도(commit limit)는 페이지가 상주할 수 있는 "RAM + [페이징 파일](ko.Memory#페이징-파일)"로 계산된다. 커밋 총량이 한도에 도달할 시, 시스템은 여유 메모리가 생길 때까지 기다려야 하는 [응답 없음](https://ko.wikipedia.org/wiki/프리징_(컴퓨팅))(hang) 상태에 빠진다.
 
-> 작업 관리자 예시에서 커밋 총량과 한도가 각각 12.5 GB 및 54.9 GB로 측정되었다. 페이징 파일을 계산하면 총 6.9 GB(= 54.9 - 48.0) 중에서 3.9 GB(= 12.5 - 8.6)가 사용되고 있다.
+> 작업 관리자 예시에서 커밋 총량과 한도가 각각 12.5 GB 및 54.9 GB로 측정되었다. 페이징 파일을 계산하면 총 7.0 GB(= 54.9 - 47.9) 중에서 3.9 GB(= 12.5 - 8.6)가 사용되고 있다.
 
 ### 가상 메모리
 가상 메모리(virtual memory)는 프로세스의 사용자 공간에 할당된 "커밋된 페이지 + 예약된 페이지"이다. 시스템 아키텍처 및 운영체제에 따라 각 프로세스는 가상 주소 공간에 할당할 수 있는 최대 크기가 정해져 있는데, 이를 초과하면 오류 코드 0xC000012D와 함께 프로세스가 충돌하여 종료된다. 그러므로 단일 프로세스에 페이지를 얼마나 더 할당할 수 있는지 가상 메모리를 통해 알아볼 수 있다.
@@ -154,3 +154,26 @@ RAM 중에서 사용 중인 영역이 있으면 이와 반대로 사용 가능�
 <tr><td style="text-align: center;">수정된 페이지 리스트<br/>(modified page list)</td><td>트리밍된 페이지 중에서 디스크에 저장이 필요한 페이지들의 리스트이다. 수정된 페이지는 사용 가능한 메모리가 아니지만, 시스템에 의해 데이터가 페이징 파일에 저장된 이후에는 대기 페이지 리스트로 이전된다. 대기 리스트에 속한 페이지로는 다음 유형들이 포함된다:<ol><li>수정된 리스트에 속한 페이지로는 새로 생성되거나 기존 파일로부터 수정되어 저장장치에 찾아볼 수 없는 데이터를 담고 있는 페이지</li></ol></td></tr>
 </tbody>
 </table>
+
+## 메모리 풀
+윈도우 NT에서 [메모리 풀](https://learn.microsoft.com/en-us/windows/win32/memory/memory-pools)(memory pools)은 [커널](https://ko.wikipedia.org/wiki/커널_(컴퓨팅)) 혹은 [드라이버](https://learn.microsoft.com/en-us/windows-hardware/drivers/gettingstarted/what-is-a-driver-)가 시스템 공간에 할당하는 [힙](https://ko.wikipedia.org/wiki/동적_메모리_할당#힙_영역) 유형의 메모리를 가리키며 페이징 풀(paged pool)과 비페이징 풀(nonpaged pool)로 나뉘어진다.
+
+<table style="table-layout: fixed; width: 80%">
+<thead><tr><th>페이징 풀(paged pool)</th><th>비페이징 풀(nonpaged pool)</th></tr></thead>
+<tbody style="text-align: center;"><tr>
+<td>페이징될 수 있는 커널 메모리</td>
+<td>데이터가 항시 RAM에 상주하는 커널 메모리</td>
+</tr></tbody>
+</table>
+
+컴퓨터 과학에서 언급하는 "[메모리 풀](https://ko.wikipedia.org/wiki/메모리_풀)"과 동일한 개념으로 페이징 및 비페이징 풀로부터 할당받을 수 있는 총 커널 메모리 크기는 한정되어 있다. 운영체제와 아키텍처에 따라 한정된 용량은 상이하는 데, 64비트 NT 10 (윈도우 10 & 11, 서버 2016 등) 경우에는 각각 16 TB 그리고 RAM과 동일하거나 혹은 16 GB 중에서 가장 작은 크기로 선정된다.
+
+> 메모리 풀의 용량 한도를 확인할 수 있는 도구로 Sysinternals의 [프로세스 탐색기](ko.Process_Explorer)(Process Explorer) 유틸리티 프로그램을 사용할 수 있다.
+
+![프로세스 탐색기로 확인된 페이징 및 비페이징 풀의 사용량과 한도](/images/docs/sysinternals/sysinternals_procexp_memory.png)
+
+페이징 혹은 비페이징 풀 메모리는 [`ExAllocatePoolWithTag`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-exallocatepoolwithtag) 루틴으로부터 할당되는 데, 이들은 공통적으로 4바이트 크기의 태그가 반드시 지정되어야 한다.
+
+# 같이 보기
+* [Pushing the Limits of Windows: Physical Memory](https://techcommunity.microsoft.com/t5/windows-blog-archive/pushing-the-limits-of-windows-physical-memory/ba-p/723674)
+* [Pushing the Limits of Windows: Paged and Nonpaged Pool](https://techcommunity.microsoft.com/t5/windows-blog-archive/pushing-the-limits-of-windows-paged-and-nonpaged-pool/ba-p/723789)
