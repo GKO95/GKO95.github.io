@@ -40,23 +40,23 @@ order: 0x48
 <thead><tr><th><a href="https://learn.microsoft.com/en-us/windows-hardware/get-started/kits-and-tools-overview">ADK 도구</a></th><th>설명</th></tr></thead>
 <tbody>
 <tr><td style="text-align: center;">Windows Configuration Designer</td>
-<td>다수의 윈도우 데스크탑 운영체제 환경 설정을 한꺼번에 관리 및 적용한다.<br/><sub style="font-style: italic;">※ 윈도우 10 이상에서는 <a href="https://apps.microsoft.com/store/detail/windows-configuration-designer/9NBLGGH4TX22">마이크로소프트 스토어</a>에서도 설치가 가능하다.</sub></td></tr>
+<td>다수의 윈도우 데스크탑 운영체제 환경 설정을 한꺼번에 관리 및 적용<br/><sub style="font-style: italic;">※ 윈도우 10 이상에서는 <a href="https://apps.microsoft.com/store/detail/windows-configuration-designer/9NBLGGH4TX22">마이크로소프트 스토어</a>에서도 설치가 가능하다.</sub></td></tr>
 <tr><td style="text-align: center;">Deployment Image Servicing and Management</td>
-<td>윈도우 설치 이미지 배포 및 커스터마이징 서비스를 제공하는 명령어 도구이다.</td></tr>
+<td>윈도우 설치 이미지 배포 및 커스터마이징 서비스를 제공하는 명령어 도구</td></tr>
 <tr><td style="text-align: center;">Windows System Image Manager</td>
-<td>설치되는 윈도우 운영체제의 설정을 변경할 수 있는 <a href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/update-windows-settings-and-scripts-create-your-own-answer-file-sxs"><code>unattended.xml</code></a> 파일을 생성한다.</td></tr>
+<td>설치되는 윈도우 운영체제의 설정을 변경할 수 있는 <a href="https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/update-windows-settings-and-scripts-create-your-own-answer-file-sxs"><code>unattended.xml</code></a> 파일을 생성</td></tr>
 <tr><td style="text-align: center;">Windows Assessment Toolkit</td>
-<td>윈도우 운영체제 혹은 구성요소의 성능, 신뢰성, 그리고 기능성을 검사한다.</td></tr>
+<td>윈도우 운영체제 혹은 구성요소의 성능, 신뢰성, 그리고 기능성을 시나리오별 검사하는 도구</td></tr>
 <tr><td style="text-align: center;"><a href="ko.WPT">Windows Performance Toolkit</a></td>
-<td>Event Tracing for Windows를 활용한 <a href="ko.WPT#windows-performance-recorder">성능 기록</a> 및 <a href="ko.WPT#windows-performance-analyzer">분석 도구</a>를 제공한다.</td></tr>
+<td>Event Tracing for Windows를 활용한 <a href="ko.WPT#windows-performance-recorder">성능 기록</a> 및 <a href="ko.WPT#windows-performance-analyzer">분석 도구</a> 제공</td></tr>
 <tr><td style="text-align: center;">User State Migration Tool</td>
-<td>기존 사용자 계정, 파일, 그리고 환경 설정을 새로 설치된 윈도우 운영체제에 이식한다.</td></tr>
+<td>기존 사용자 계정, 파일, 그리고 환경 설정을 새로 설치된 윈도우 운영체제에 이식</td></tr>
 <tr><td style="text-align: center;">Volume Activation Management Tool</td>
-<td>마이크로소프트 제품군(예. 윈도우, <a href="https://www.office.com/">오피스</a> 등) 볼륨 및 상업용 라이선스 인증 절차를 자동화 및 중앙관리한다.</td></tr>
+<td>마이크로소프트 제품군(예. 윈도우, <a href="https://www.office.com/">오피스</a> 등) 볼륨 및 상업용 라이선스 인증 절차를 자동화 및 중앙관리</td></tr>
 <tr><td style="text-align: center;">User Experience Virtualization</td>
-<td>로그온 장치와 무관하게 개별 사용자가 구성한 윈도우 환경 및 어플리케이션 설정을 일관적으로 제공한다.</td></tr>
+<td>로그온 장치와 무관하게 개별 사용자가 구성한 윈도우 환경 및 어플리케이션 설정을 일관적으로 제공</td></tr>
 <tr><td style="text-align: center;">Application Virtualization</td>
-<td>마이크로소프트에서 제공하는 <a href="https://ko.wikipedia.org/wiki/응용_프로그램_가상화">어플리케이션 가상화</a> 및 <a href="https://en.wikipedia.org/wiki/Application_streaming">스트리밍</a> 솔루션이다.<br/><sub style="font-style: italic;">※ 2026년 4월 서비스 종료: <a href="https://azure.microsoft.com/products/virtual-desktop/">애저 가상 데스크탑</a>에 MSIX 앱을 연결할 것을 권장한다.</sub></td></tr>
+<td>마이크로소프트에서 제공하는 <a href="https://ko.wikipedia.org/wiki/응용_프로그램_가상화">어플리케이션 가상화</a> 및 <a href="https://en.wikipedia.org/wiki/Application_streaming">스트리밍</a> 솔루션<br/><sub style="font-style: italic;">※ 2026년 4월 서비스 종료: <a href="https://azure.microsoft.com/products/virtual-desktop/">애저 가상 데스크탑</a>에 MSIX 앱을 연결할 것을 권장한다.</sub></td></tr>
 </tbody>
 </table>
 
