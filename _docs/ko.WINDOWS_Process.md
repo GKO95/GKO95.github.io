@@ -58,6 +58,8 @@ order: null
 
 ![비주얼 스튜디오에서 <code>IMAGE_FILE_LARGE_ADDRESS_AWARE</code> 플래그 설정여부 위치](/images/docs/process/process_large_addresses.png)
 
+가상 주소 공간을 확인할 수 있는 도구로 [Sysinternals](ko.Sysinternals)의 [VMMap](ko.VMMap) 프로그램이 있다.
+
 ### 페이지
 [페이지](https://ko.wikipedia.org/wiki/페이지_(컴퓨터_메모리))(page)는 가상 주소 공간에서 관리되는 가장 작은 단위의 메모리 블록이며, 이와 매핑된 하나의 물리 메모리 조각을 페이지 프레임(page frame) 혹은 간단히 프레임(frame)이라고 부른다. 페이지 및 프레임의 크기는 고정되어 있으며 일반적으로 4 KB이다.
 
@@ -88,3 +90,4 @@ typedef void* HANDLE;
 
 # 같이 보기
 * [Processes and Threads - Win32 apps &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/procthread/processes-and-threads)
+* [Pushing the Limits of Windows: Virtual Memory](https://techcommunity.microsoft.com/t5/windows-blog-archive/pushing-the-limits-of-windows-virtual-memory/ba-p/723750)
