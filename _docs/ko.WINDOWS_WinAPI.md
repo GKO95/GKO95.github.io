@@ -7,7 +7,19 @@ icon: icon-windows.svg
 order: null
 ---
 # 윈도우 API
-[윈도우 API](https://ko.wikipedia.org/wiki/윈도우_API)(일명 WinAPI)는 윈도우 운영체제 리소스에 접근하여 활용할 수 있도록 하는 [어플리케이션 프로그래밍 인터페이스](https://ko.wikipedia.org/wiki/API)이다. 이전에는 32비트 윈도우 운영체제의 프로그래밍 인터페이스인 Win32 API로 알려졌으나, 마이크로소프트는 특정 아키텍처에 종속되지 않는 명칭으로 변경한 것이다. 윈도우가 개발되는 당시 가장 널리 사용된 저급 [C](ko.C) 프로그래밍 언어로 작성되었으므로 윈도우 API는 타 프로그래밍 언어에서도 불러와 활용이 가능하다.
+[윈도우 API](https://ko.wikipedia.org/wiki/윈도우_API)(일명 WinAPI)는 [사용자 모드](ko.Processor#보호-링)에서 윈도우에서 제공하는 기능들을 활용할 수 있도록 하는 [어플리케이션 프로그래밍 인터페이스](https://ko.wikipedia.org/wiki/API)이다. 이들은 마이크로소프트 공식 문서가 존재하여 개발자가 참고할 수 있으며 대표적으로 [`CreateProcess`](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw), [`CreateFile`](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilew) 등의 함수가 해당한다. 윈도우 개발 당시에 가장 널리 사용된 저급 [C](ko.C) 프로그래밍 언어로 작성되었으므로 윈도우 API는 타 프로그래밍 언어에서도 불러와 활용이 가능하다.
+
+> 이전에는 32비트 윈도우 운영체제의 프로그래밍 인터페이스인 Win32 API로 알려졌으나, 마이크로소프트는 특정 아키텍처에 종속되지 않는 명칭으로 변경한 것이다. 
+
+윈도우에서 다루는 [함수](https://ko.wikipedia.org/wiki/함수_(컴퓨터_과학))(혹은 서브루틴; subroutine)는 API 함수 외에도 다음 유형들이 존재한다:
+
+* **루틴(routines)**
+
+    [커널 모드](ko.Processor#보호-링)에서만 호출될 수 있는 윈도우 운영체제 함수이다. 마이크로소프트 공식 문서를 참고하여 루틴에 대한 설명을 확인할 수 있으나, 이들은 [장치 드라이버](https://ko.wikipedia.org/wiki/장치_드라이버) 개발자 위주로 내용을 다룬다. 대표적인 예시로 윈도우 시스템 공간에 힙 영역의 [풀 메모리](ko.Memory#메모리-풀)를 할당하는 [`ExAllocatePoolWithTag`](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/nf-wdm-exallocatepoolwithtag) 루틴이 있다.
+
+* **[시스템 서비스](https://ko.wikipedia.org/wiki/시스템_호출)(system services)**
+
+    운영체제에서 제공하는 기능을 사용자 모드에서 호출할 수 있도록 하는 함수이다. 시스템 서비스 실행 시 [프로세서](ko.Processor)의 특수한 명령에 의해 [스레드](ko.Process#스레드)는 커널 모드에 진입하여 루틴을 처리하고, 완료되면 사용자 모드로 되돌아가는 원리로 동작한다. 윈도우 API로 `CreateProcess` 함수를 호출하면 `NtCreateUserProcess` 시스템 서비스로 이어져 [프로세스](ko.Process)를 생성하는 루틴들이 처리된다. 시스템 서비스에 대하여 공개된 공식 마이크로소프트 참고 문서가 존재하지 않는다.
 
 ## 컴포넌트 오브젝트 모델
 > *참조: [The Component Object Model - Win32 apps &#124; Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/com/the-component-object-model)*
