@@ -12,30 +12,31 @@ order: 0x40
 다음은 2022년 8월 15일 기준에 작성된 윈도우 NT 제품 목록이다.
 
 <table style="margin-bottom: 16px; table-layout: fixed; width: 100%">
-<thead>
-<tr><th colspan="7">윈도우 NT 개인용 (2001년 ~ 현재)</th></tr>
-</thead>
+<thead><tr><th colspan="7">윈도우 NT 클라이언트 (2001년 ~ 현재)</th></tr></thead>
 <tbody>
 <tr style="vertical-align: top; overflow-wrap: break-word; text-align: center;"><td><a href="https://ko.wikipedia.org/wiki/윈도우_XP">윈도우 XP</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_비스타">윈도우 비스타</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_7">윈도우 7</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_8">윈도우 8</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_8.1">윈도우 8.1</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_10">윈도우 10</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_11">윈도우 11</a></td></tr>
 </tbody>
 </table>
 
 <table style="margin-top: 16px; table-layout: fixed; width: 100%">
-<thead>
-<tr><th colspan="6">윈도우 NT 서버용 (2001년 ~ 현재)</th></tr>
-</thead>
+<thead><tr><th colspan="6">윈도우 NT 서버 (2001년 ~ 현재)</th></tr></thead>
 <tbody>
-<tr style="vertical-align: top; overflow-wrap: break-word; text-align: center;"><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2003">윈도우 서버 2003</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2008">윈도우 서버 2008</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2012">윈도우 서버 2012</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2016">윈도우 서버 2016</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2019">윈도우 서버 2019</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2022">윈도우 서버 2022</a></td></tr>
+<tr style="vertical-align: top; overflow-wrap: break-word; text-align: center;"><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2003">윈도우 서버 2003</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2008">윈도우 서버 2008</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2012">윈도우 서버 2012</a> (<a href="https://ko.wikipedia.org/wiki/윈도우_서버_2012#윈도우_서버_2012_R2">R2</a>)</td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2016">윈도우 서버 2016</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2019">윈도우 서버 2019</a></td><td><a href="https://ko.wikipedia.org/wiki/윈도우_서버_2022">윈도우 서버 2022</a></td></tr>
 </tbody>
 </table>
 
 > 윈도우 NT와 함께 서비스 중인 운영체제로 [윈도우 IoT](https://ko.wikipedia.org/wiki/윈도우_IoT)가 있으며, 서비스 종료된 윈도우 제품으로 MS-DOS, [윈도우 9x](https://ko.wikipedia.org/wiki/윈도우_9x), [윈도우 모바일](https://ko.wikipedia.org/wiki/윈도우_모바일), 그리고 [윈도우 폰](https://ko.wikipedia.org/wiki/윈도우_폰)이 있다.
 
-MS-DOS에서 윈도우 NT로 운영체제를 전환한다는 것은 다음 기술적인 의미를 지닌다.
+비록 윈도우 NT는 클라이언트와 서버로 운영체제가 구분되지만 동일한 빌드의 커널을 사용한다. 예시로 윈도우 8.1과 윈도우 서버 2012 R2 운영체제의 커널은 빌드 9600으로 일치한다. 핵심 커널은 같지만 두 운영체제로 나뉘어진 이유는 성능 최적화 대상과 목적, 그리고 이에 따른 기술 사양과 기능에 차이가 존재하기 때문이다.
 
-* 완전한 32비트 아키텍처 지원
-* [커널 모드](ko.Processor#보호-링)와 [사용자 모드](ko.Processor#보호-링)의 구분
-* NTFS 도입
+마이크로소프트의 운영체제가 윈도우 NT로 전환한 것은 다음 기술적 의의를 가진다:
+
+* 하드웨어 및 소프트웨어 [이식성](https://en.wikipedia.org/wiki/Software_portability)
+* [커널 모드와 사용자 모드의 구분](ko.Processor#보호-링)
+* 완전한 [32비트](https://ko.wikipedia.org/wiki/32비트) 아키텍처 지원
+
+## 윈도우 아키텍처
+![윈도우 7 및 서버 2008 R2 아키텍처<br/><sub><i>출처: <a href="https://www.oreilly.com/library/view/windows-internals-sixth/9780735671294/">Windows Internals, 6th Edition</a> / 파일: <a href="https://github.com/LordNoteworthy/windows-internals/blob/master/windows-internals-6th-ed.md">LordNoteworthy/windows-internals</a></i></sub>](/images/docs/windows/windows_architecture_overview.png)
 
 ## 운영체제 리소스
 비록 본 문서에서 소개하는 내용들은 윈도우 NT 운영체제를 위주로 다루고 있으나, 전반적인 이해를 돕기 위해 아래에 나열된 시스템의 핵심 리소스에 대하여 살펴보기를 권장한다.
