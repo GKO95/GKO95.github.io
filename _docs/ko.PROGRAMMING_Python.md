@@ -15,10 +15,7 @@ order: 0x00
 파이썬 버전은 `X.Y.Z` 서식으로 매겨진다:
 
 <table style="width: 60%;">
-<thead>
-<caption>파이썬 버전 서식</caption>
-<tr><th>버전</th><th>설명</th><th>비고</th></tr>
-</thead>
+<thead><tr><th>버전</th><th>설명</th><th>비고</th></tr></thead>
 <tbody>
 <tr><td style="text-align: center;"><code>X</code> 메이저 버전</td><td>호환이 불가할 정도의 상당한 변화를 거친 업그레이드</td><td>파이썬 2와 3 분류</td></tr>
 <tr><td style="text-align: center;"><code>Y</code> 마이너 버전</td><td>새로운 기능이 추가될 때마다 증가하는 업데이트</td><td>마이너 버전 하위호환 보장</td></tr>
