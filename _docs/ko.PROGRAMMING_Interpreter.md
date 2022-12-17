@@ -17,7 +17,7 @@ order: null
 <thead><tr><th>프로그래밍 언어</th><th>인터프리터</th><th>인터프리터 빌드 언어</th></tr></thead>
 <tbody>
 <tr><td style="text-align: center;"><a href="ko.Java">자바</a></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/자바_가상_머신">Java Virtual Machine</a> (JVM)</td><td style="text-align: center;"><a href="ko.Cpp">C++</a></td></tr>
-<tr><td style="text-align: center;"><a href="ko.Python">파이썬</a></td><td style="text-align: center;"><a href="ko.Python#c파이썬">CPython</a></td><td style="text-align: center;"><a href="ko.C">C</a></td></tr>
+<tr><td style="text-align: center;"><a href="ko.Python">파이썬</a></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/C파이썬">CPython</a></td><td style="text-align: center;"><a href="ko.C">C</a></td></tr>
 <tr><td style="text-align: center;"><a href="ko.Python">파이썬</a></td><td style="text-align: center;"><a href="https://ko.wikipedia.org/wiki/자이썬">Jython</a></td><td style="text-align: center;"><a href="ko.Java">자바</a></td></tr>
 </tbody>
 </table>
