@@ -7,7 +7,7 @@ icon: icon-python.svg
 order: 0x00
 ---
 # 소개
-[파이썬](https://ko.wikipedia.org/wiki/파이썬)(Python)은 웹 프로그래밍, 과학연구, 인공지능을 포함한 수많은 영역에서 응용 가능한 고급 프로그래밍 언어이다. 파이썬은 다른 프로그래밍 언어에 비해 간단하면서 폭넓은 커뮤니티 덕분에 파이썬 개발에 용이한 많은 종류의 소프트웨어(예. 라이브러리, 프레임워크 등)들이 존재한다. 이러한 이유로 파이썬은 프로그래밍 입문자로써 시작하기 매우 좋은 언어이다.
+[파이썬](https://www.python.org/)(Python)은 웹 프로그래밍, 과학연구, 인공지능을 포함한 수많은 영역에서 응용 가능한 [다중 패러다임](https://ko.wikipedia.org/wiki/다중_패러다임_프로그래밍_언어) [고급 프로그래밍 언어](https://ko.wikipedia.org/wiki/고급_프로그래밍_언어)이다. 파이썬은 다른 프로그래밍 언어에 비해 매우 간편하여 프로그래밍 입문자에게 적합하고 커뮤니티가 매우 건재하다. 또한 [넘파이](ko.NumPy), [텐서플로우](ko.TensorFlow), [OpenCV](ko.OpenCV) 등의 다양한 [서드 파티](https://ko.wikipedia.org/wiki/서드_파티_개발자#서드파티) 라이브러리 생태계가 잘 갖춰져 있어 광범위한 활용도를 보여주는 강력한 프로그래밍 언어이다.
 
 ## 인터프리터
 파이썬 프로그래밍 언어는 [인터프리트 언어](ko.Interpreter)(interpreted language)이다. 버전은 크게 파이썬 2와 파이썬 3으로 분류되는데, 전자는 2020년 1월 1일부로 서비스가 종료되었다. 파이썬 1이라는 것도 존재하나, 가장 최신 버전 1.6.1이 2000년에 출시된 점을 고려하면 호환성과 실용성이 매우 떨어진다. 그러므로 본문은 파이썬 3을 위주로 프로그래밍을 설명한다.
@@ -38,8 +38,8 @@ order: 0x00
 
 윈도우 운영체제에서 인터프리터를 설치하는 방법에는 두 가지가 있다:
 
-1. **압축파일 (embeddable zip file)**: 파이썬 인터프리터를 구성하는 파일 전체가 압축된 상태로 존재한다.
-2. **설치 프로그램 (executable installer)**: 인터프리터를 설치하는 `.EXE` 확장자 프로그램이다.
+1. 압축파일 (embeddable zip file): 파이썬 인터프리터를 구성하는 파일 전체가 압축된 상태로 존재한다.
+2. 설치 프로그램 (executable installer): 인터프리터를 설치하는 `.EXE` 확장자 프로그램이다.
 
 > 일부 [윈도우](ko.WindowsNT) 파이썬 인터프리터는 32비트 및 64비트 빌드가 `x86` 및 `x86-64`으로 표시되어 있다. 그러나 [x86](https://ko.wikipedia.org/wiki/X86)은 인텔 [프로세서](ko.Processor)라는 특정 아키텍처를 가리키기 때문에, [ARM64](https://ko.wikipedia.org/wiki/ARM_아키텍처) 아키텍처를 사용하는 윈도우에서는 설치에 제약이 존재하였다. 버전 [3.9.1](https://docs.python.org/release/3.9.1/whatsnew/changelog.html#id100)부터는 윈도우 ARM64 지원이 공식화되며 [x86-64](https://ko.wikipedia.org/wiki/X86-64)와 함께 64비트 설치 파일로 통합되었다.
 
@@ -82,27 +82,10 @@ order: 0x00
 
 VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`)와 디버그 모드(`F5`)이다. [디버그](https://ko.wikipedia.org/wiki/디버그)(debug)는 프로그램에 발생한 문제를 해결하는 행위로, IDE에서 각 줄의 코드마다 어떠한 변화가 생겼는지 혹은 얼만큼의 시스템 리소스를 소모하는지 등을 확인할 수 있는 정보를 제공한다. 디버깅 목적이 아니면 일반 실행 모드를 사용하는 것을 권장한다.
 
-# 기초
-각 프로그래밍 언어마다 준수되어야 할 규칙과 기반이 되는 데이터들이 존재한다. 이를 어길 시에는 프로그램에 오류가 발생하거나 정상적인 동작을 보장할 수 없다. 실질적인 프로그래밍에 있어, 본 장에서는 파이썬 프로그램 코딩에 기초적인 정보 제공을 목표로 한다.
+# 구문
+[구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 특히 파이썬은 가독성을 매우 중요하게 여기어 "[파이썬의 선](https://peps.python.org/pep-0020/)(Zen of Python)"이란 프로그래밍 철학을 추구하고, 이에 부합한 구문을 파이썬다운(Pythonic) 코드라고 칭한다.
 
-## 주석
-각 프로그래밍 언어마다 준수되어야 할 규칙(일명 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어)); syntax)과 기반이 되는 데이터들이 존재한다. 이를 어길 시에는 프로그램에 오류가 발생하거나 정상적인 동작을 보장할 수 없다. 실질적인 프로그래밍에 있어, 본 장에서는 파이썬 프로그래밍에 기초적인 정보 제공을 목표로 한다.
-
-* **한줄 주석 (line comment)**: 코드 한 줄을 차지하는 주석이며, 해시 기호 `#`로 표시된다.
-* **블록 주석 (block comment)**: 코드 여러 줄을 차지하는 주석이며, 세 쌍의 작은 따옴표 `''' '''` 혹은 큰 따옴표 `""" """`로 표시된다.
-
-> 세 쌍의 큰 따옴표로 구성된 블록 주석을 일명 [독스크링](https://en.wikipedia.org/wiki/Docstring)(docstrings)이라고도 부르는데, 이는 프로그램 실행 도중에도 볼 수 있다.
-
-```python
-"""
-블록 주석:
-코드 여러 줄을 차지하는 주석이며, 프로그램 실행 중에서도 볼 수 있다.
-"""
-# 한줄 주석: 코드 한 줄을 차지하는 주석이다.
-```
-
-## 표현식
-프로그래밍에서는 표현식, 아톰, 그리고 문장이 있다.
+다음은 파이썬 프로그래밍 언어에서 구문에 관여하는 요소들을 소개한다:
 
 * **[표현식](https://ko.wikipedia.org/wiki/식_(프로그래밍))(expression)**
     
@@ -124,7 +107,7 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
 
 * **[문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)**
     
-    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 파이썬 프로그래밍 언어는 기본적으로 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)(newline)을 기준으로 문장을 분별한다. 아래의 부호는 파이썬의 프로그래밍 문장과 줄바꿈을 유연하게 활용할 수 있도록 도와준다.
+    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 파이썬 프로그래밍 언어는 기본적으로 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)(newline)을 기준으로 문장을 분별한다. 아래 기호는 파이썬의 프로그래밍 문장과 줄바꿈을 유연하게 활용할 수 있도록 도와준다.
 
     * 세미콜론 `;`: 여려 문장을 하나의 줄에 한꺼번에 기입하기 위해 사용된다.
     * 백슬래시 `\`: 하나의 긴 문장을 연속의 여러 줄로 나누어서 나타내기 위해 사용된다.
@@ -133,6 +116,27 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
   variable = 2 + 3           # 숫자 5를 "variable" 변수에 초기화
   if 2 < 3: statement        # 논리가 참이면 "statement" 문장 실행
     ```
+
+### 주석
+[주석](https://peps.python.org/pep-0008/#comments)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 줄 혹은 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 파이썬에는 두 가지의 주석이 존재한다.
+
+<table style="table-layout: fixed; width: 80%;">
+<thead><tr><th>블록 주석(block comment)</th><th><a href="https://en.wikipedia.org/wiki/Docstring">독스트링</a>(docstring)</th></tr></thead>
+<tbody>
+<tr><td>각 줄마다 표기된 해시 기호 <code>#</code>는 프로그램이 실행될 때 필터되는 주석이다.</td><td>세 쌍의 따옴표로 표기된 주석은 프로그램이 실행되는 <a href="https://ko.wikipedia.org/wiki/런타임">런타임</a>에도 유지된다.</td></tr>
+<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: initial;"><span class="c1"># 블록 주석:
+# 일반적인 주석에는 해시 기호가 권장된다.
+</span></code></pre></div></div>
+</td><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="s">"""
+독스트링:
+흔히 함수나 클래스에 대한 설명을 기입한다.
+"""</span>
+</code></pre></div></div>
+</td></tr>
+</tbody>
+</table>
 
 ## 입력 및 출력
 파이썬은 다음과 같은 텍스트 기반의 입력 및 출력 함수를 가진다.
