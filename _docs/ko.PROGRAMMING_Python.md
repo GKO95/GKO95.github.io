@@ -41,7 +41,7 @@ order: 0x00
 1. 압축파일 (embeddable zip file): 파이썬 인터프리터를 구성하는 파일 전체가 압축된 상태로 존재한다.
 2. 설치 프로그램 (executable installer): 인터프리터를 설치하는 `.EXE` 확장자 프로그램이다.
 
-> 일부 [윈도우](ko.WindowsNT) 파이썬 인터프리터는 32비트 및 64비트 빌드가 `x86` 및 `x86-64`으로 표시되어 있다. 그러나 [x86](https://ko.wikipedia.org/wiki/X86)은 인텔 [프로세서](ko.Processor)라는 특정 아키텍처를 가리키기 때문에, [ARM64](https://ko.wikipedia.org/wiki/ARM_아키텍처) 아키텍처를 사용하는 윈도우에서는 설치에 제약이 존재하였다. 버전 [3.9.1](https://docs.python.org/release/3.9.1/whatsnew/changelog.html#id100)부터는 윈도우 ARM64 지원이 공식화되며 [x86-64](https://ko.wikipedia.org/wiki/X86-64)와 함께 64비트 설치 파일로 통합되었다.
+> 일부 [윈도우](ko.WindowsNT) 파이썬 인터프리터는 32비트 및 64비트 빌드가 `x86` 및 `x86-64`로 표시되어 있다. 그러나 [x86](https://ko.wikipedia.org/wiki/X86)은 인텔 [프로세서](ko.Processor)라는 특정 아키텍처를 가리키기 때문에, [ARM64](https://ko.wikipedia.org/wiki/ARM_아키텍처) 아키텍처를 사용하는 윈도우에서는 설치에 제약이 존재하였다. 버전 [3.9.1](https://docs.python.org/release/3.9.1/whatsnew/changelog.html#id100)부터는 윈도우 ARM64 지원이 공식화되며 [x86-64](https://ko.wikipedia.org/wiki/X86-64)와 함께 64비트 설치 파일로 통합되었다.
 
 인터프리터 설치 프로그램을 실행하면 아래와 같은 화면이 나타난다.
 
@@ -144,21 +144,28 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
 
 > 독스트링이 적용될 수 있는 데이터는 공통적으로 정의될 수 있는 [함수](#함수), [클래스](#클래스), [모듈](#모듈) 등이 해당한다.
 
-## 입력 및 출력
-파이썬은 다음과 같은 텍스트 기반의 입력 및 출력 함수를 가진다.
+### 식별자
+[식별자](https://ko.wikipedia.org/wiki/식별자#컴퓨터_언어)(identifier), 일명 네임(name)은 프로그램의 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 프로그래머가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자를 지정하는 데 아래의 규칙을 준수해야 한다:
 
-* **입력 함수 `input()`**
+* 오직 영문, 숫자, 밑줄 `_`만 허용된다.
+* 첫 문자는 숫자로 시작할 수 없다.
+* 공백은 허용되지 않는다.
+* 대소문자를 구분한다.
+
+## 콘솔 입출력
+파이썬은 다음과 같이 콘솔에서 사용할 수 있는 텍스트 기반의 입력 및 출력 함수를 가진다:
+
+* **입력 함수 [`input()`](https://docs.python.org/3/library/functions.html#input)**
     
     입력 함수가 실행될 시, `input()`의 소괄호 `()` 안에 있는 텍스트가 터미널에 나타나며 Enter/Return을 누를 때까지 대기한다.
 
-* **출력 함수 `print()`**
+* **출력 함수 [`print()`](https://docs.python.org/3/library/functions.html#print)**
 
     출력 함수가 실행될 시, `print()`의 소괄호 `()` 안에 있는 데이터가 터미널에 나타난다.
 
 ```python
 variable = input("입력: ")
-print("출력:", variable)
-# 동일: print("출력:", input("입력: "))
+print("출력:", variable)      # 동일: print("출력:", input("입력: "))
 ```
 ```
 입력: Hello World!
@@ -179,13 +186,7 @@ A는 10.0 ,
 그리고 B는 파이썬 이다.
 ```
 
-## 식별자
-[식별자](https://ko.wikipedia.org/wiki/식별자#컴퓨터_언어)(identifier), 일명 네임(name)은 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
-
-* 오직 영문, 숫자, 밑줄 `_`만 허용된다.
-* 첫 문자는 숫자로 시작할 수 없다.
-* 공백은 허용되지 않는다.
-* 대소문자를 구분한다.
+> [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하여 문자열로부터 탈출해 텍스트 내에서 특정 연산을 수행한다: `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한다.
 
 ## 변수
 변수(variable)는 할당 기호 `=`를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시는 `variable`이란 식별자를 갖는 변수에 숫자 3을 할당한다. 시스템적 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮는 절차를 [네임 바인딩](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
@@ -235,15 +236,6 @@ print(variable)
 ```
 Hello World!
 NameError: name 'variable' is not defined
-```
-
-### 상수
-상수(constant)는 한 번 데이터를 할당한 후 변경할 수 없는 특별한 변수이다.
-
-> 파이썬은 상수를 지원하지 않는다. 파이썬 개발자는 일반 변수들로부터 구분짓기 위해 상수를 전부 대문자로 표기한다.
-
-```python
-CONSTANT_VARIABLE = "Hello World!"
 ```
 
 ## 자료형
@@ -378,17 +370,6 @@ None
 
   print(str(3.14))        # 출력: '3.14'
     ```
-
-## 탈출 문자
-[탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 이전에 문자열 자료형을 소개할 때, `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
-
-```python
-print("Hello\nWorld!")
-```
-```
-Hello
-World!
-```
 
 # 조건 및 루프
 조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
