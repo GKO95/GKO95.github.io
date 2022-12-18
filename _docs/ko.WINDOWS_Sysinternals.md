@@ -29,7 +29,7 @@ Sysinternals는 필요한 개별 프로그램만 [다운로드](https://learn.mi
 
 <table style="table-layout: fixed; width: 100%">
 <thead>
-<tr><th>파일 및 디스크</th><th>네트워크</th><th><a href="ko.Process">프로세스</a></th><th>보안</th><th>시스템 정보</th><th>기타</th></tr>
+<tr><th>파일 및 디스크</th><th><a href="ko.Network">네트워크</a></th><th><a href="ko.Process">프로세스</a></th><th>보안</th><th>시스템 정보</th><th>기타</th></tr>
 </thead>
 <tbody>
 <tr style="vertical-align: top; overflow-wrap: break-word;">
