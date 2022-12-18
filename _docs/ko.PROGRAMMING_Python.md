@@ -118,12 +118,12 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
     ```
 
 ### 주석
-[주석](https://peps.python.org/pep-0008/#comments)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 줄 혹은 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 파이썬에는 두 가지의 주석이 존재한다.
+[주석](https://peps.python.org/pep-0008/#comments)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 파이썬에는 두 가지의 주석이 존재한다.
 
 <table style="table-layout: fixed; width: 80%;">
 <thead><tr><th>블록 주석(block comment)</th><th><a href="https://en.wikipedia.org/wiki/Docstring">독스트링</a>(docstring)</th></tr></thead>
 <tbody>
-<tr><td>각 줄마다 표기된 해시 기호 <code>#</code>는 프로그램이 실행될 때 필터되는 주석이다.</td><td>세 쌍의 따옴표로 표기된 주석은 프로그램이 실행되는 <a href="https://ko.wikipedia.org/wiki/런타임">런타임</a>에도 유지된다.</td></tr>
+<tr><td>해시 기호 <code>#</code>로 표기되며 프로그램이 실행될 때 필터되는 주석이다.</td><td>세 쌍의 따옴표로 표기된 주석은 프로그램이 실행되는 <a href="https://ko.wikipedia.org/wiki/런타임">런타임</a>에도 유지된다.</td></tr>
 <tr style="vertical-align: top; overflow-wrap: break-word;"><td>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: initial;"><span class="c1"># 블록 주석:
 # 일반적인 주석에는 해시 기호가 권장된다.
@@ -131,12 +131,18 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
 </td><td>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="s">"""
 독스트링:
-흔히 함수나 클래스에 대한 설명을 기입한다.
+정의된 데이터에 간랸한 설명을 기입한다.
 """</span>
 </code></pre></div></div>
 </td></tr>
 </tbody>
 </table>
+
+일반 주석과 달리, 사용자가 정의한 데이터에 기입된 독스트링은 `__doc__`이란 특수한 변수에 저장되어 디버깅 과정에서도 정의된 데이터에 대한 설명을 확인할 수 있는 용도로 사용된다. 이를 기반으로 IDE 및 텍스트 편집기는 아래 사진처럼 데이터를 정의한 소스 코드를 찾아가지 않고서도 곧바로 내용을 살펴볼 수 있다.
+
+![VS Code에서의 독스트링 활용 예시](/images/docs/python/python_docstring_example.png)
+
+> 독스트링이 적용될 수 있는 데이터는 공통적으로 정의될 수 있는 [함수](#함수), [클래스](#클래스), [모듈](#모듈) 등이 해당한다.
 
 ## 입력 및 출력
 파이썬은 다음과 같은 텍스트 기반의 입력 및 출력 함수를 가진다.
