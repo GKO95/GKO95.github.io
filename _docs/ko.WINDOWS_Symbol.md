@@ -25,6 +25,17 @@ order: null
 </tbody>
 </table>
 
+### DbgHelp 라이브러리
+[디버그 지원 라이브러리](https://learn.microsoft.com/en-us/windows/win32/debug/debug-help-library)(debug help library), 일명 DbgHelp 라이브러리는 윈도우 NT 운영체제에서 구동되는 `.EXE` 확장자의 실행 파일을 디버깅하는 데 도움을 주는 [루틴](ko.WinAPI)들을 제공한다. [Sysinternals](ko.Sysinternals)를 포함한 일부 프로그램에서 [호출 스택](ko.WinDbg#호출-스택) 정보를 보기위해 필요할 수 있으며 [윈도우 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/)와 함께 설치된다.
+
+만일 64비트의 NT 버전 10 운영체제(즉, 윈도우 10 및 11)를 위한 DbgHelp 라이브러리는 다음 경로에 위치한다.
+
+```
+%ProgramFiles(x86)%\Windows Kits\10\Debuggers\x64\dbghelp.dll
+```
+
+> 윈도우에 기본적으로 설치된 `%windir%\System32\dbghelp.dll` 파일이 존재하지만, 이는 호환성을 위할 뿐이며 SDK로부터 설치한 버전과 달리 디버깅에 사용할 수 없다.
+
 ## 프로그램 데이터베이스
 [프로그램 데이터베이스](https://en.wikipedia.org/wiki/Program_database), 일명 `.PDB` 확장자 파일은 해당 모듈의 디버깅 정보가 들어있는 마이크로소프트 형식이며, 그 안에는 심볼도 포함된다. 비주얼 스튜디오(Visual Studio)로 소스 코드를 빌드하면 이진 파일 외에 함께 생성되는 파일 중 하나이다. 만일 트러블슈팅 과정에서 자체 개발 어플리케이션 등을 함께 분석할 필요가 있으면 해당하는 `.PDB` 파일이 필요할 수 있다.
 
