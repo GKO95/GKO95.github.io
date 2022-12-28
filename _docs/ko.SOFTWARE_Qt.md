@@ -1,6 +1,6 @@
 ---
 layout: docs
-category: GUI
+category: 소프트웨어
 title: Qt
 slug: ko.Qt
 icon: icon-qt.svg
