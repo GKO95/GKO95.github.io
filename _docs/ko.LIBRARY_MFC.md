@@ -1,9 +1,10 @@
 ---
 layout: docs
-category: GUI
+category: 라이브러리
 title: MFC
 slug: ko.MFC
-order: null
+icon: icon-mfc.svg
+order: 0x14
 ---
 # 소개
 > *참조: [Microsoft Docs MFC 데스크톱 애플리케이션 (한국어)](https://learn.microsoft.com/en-us/cpp/mfc/)*
