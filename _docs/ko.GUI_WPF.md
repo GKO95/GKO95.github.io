@@ -1,6 +1,6 @@
 ---
 layout: docs
-category: 어플리케이션
+category: GUI
 title: WPF
 slug: ko.WPF
 order: null
