@@ -1,6 +1,6 @@
 ---
 layout: docs
-category: GUI
+category: 프레임워크
 title: WPF
 slug: ko.WPF
 order: null
