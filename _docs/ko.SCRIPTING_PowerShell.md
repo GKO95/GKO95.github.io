@@ -45,3 +45,26 @@ Major  Minor  Build  Revision
 -----  -----  -----  --------
 5      1      22621  963
 ```
+
+## Cmdlet
+파워셸은 [cmdlet](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/cmdlet-overview)(발음: command-let)이란 수많은 명령어들을 제공한다. Cmdlet은 런타임에 빌드된 .NET 클래스의 객체인데, 이러한 특성으로부터 일관된 [파이프라인](#파이프라인) 동작 등이 보장된다.
+
+> 반면, 다른 셸 환경의 명령어(예. `tasklist`)는 그에 해당하는 프로그램(예. `%Windir%\System32\tasklist.exe`)이 실행되는 방식으로 동작한다.
+
+Cmdlet은 다음과 같이 동사(verb)와 명사(noun)의 조합으로 구성된다.
+
+```powershell
+Get-Command -Verb Add -Noun Appx*
+```
+```
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Cmdlet          Add-AppxPackage                                    2.0.1.0    Appx
+Cmdlet          Add-AppxProvisionedPackage                         3.0        Dism
+Cmdlet          Add-AppxVolume                                     2.0.1.0    Appx
+```
+
+Cmdlet은 사용자가 파워셸 또는 .NET을 활용하여 직접 제작하거나 커뮤니티에서 공유되고 있는 cmdlet 및 스크립트 등을 가져와서 사용할 수도 있다.
+
+### 파이프라인
+[파이프라인](https://ko.wikipedia.org/wiki/파이프라인_(컴퓨팅))(pipeline)
