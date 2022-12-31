@@ -19,7 +19,6 @@ order: null
 ## 객체 지향
 파워셸은 [객체 지향](https://ko.wikipedia.org/wiki/객체_지향_프로그래밍)(object-oriented) 성격이 짙은 스크립트 언어이며, 처리되는 입출력 데이터가 전부 [객체](ko.Csharp#클래스)(object)이다. 그 예시로 파워셸 버전을 확인할 수 있는 [`$PSVersionTable`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_powershell_editions#edition-in-psversiontable) 자동 변수를 불러오면 `PSVersion`, `PSEdition` 등의 다양한 정보가 출력되는 데, 이들은 [C#](ko.Csharp) 프로그래밍 언어에서 객체의 맴버를 접근하듯이 `.` 기호를 통해 정보를 선택적으로 호출할 수 있다.
 
-
 > [자동 변수](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_automatic_variables)(automatic variables)란, 파워셸에 대한 상태 정보가 저장된 읽기 전용 변수이며 파워셸에서 자체적으로 생성하고 관리한다.
 
 <table style="table-layout: fixed; width: 100%">
@@ -51,6 +50,8 @@ SerializationVersion           1.1.0.1
 </tbody>
 </table>
 
+반환된 객체의 유형 및 메소드나 이벤트 등의 맴버를 확인하려면 [`Get-Memeber`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-member)를 통해 확인을 해야 하며, 이에 대한 내용은 [파이프라인](#파이프라인)을 참고하도록 한다.
+
 ## Cmdlet
 파워셸은 [cmdlet](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet/cmdlet-overview)(발음: command-let)이란 수많은 명령어들을 제공한다. Cmdlet은 런타임에 빌드된 .NET 클래스의 객체인데, 이러한 특성으로부터 일관된 [파이프라인](#파이프라인) 동작 등이 보장된다.
 
@@ -72,4 +73,4 @@ Cmdlet          Add-AppxVolume                                     2.0.1.0    Ap
 Cmdlet은 사용자가 파워셸 또는 .NET을 활용하여 직접 제작하거나 온라인 커뮤니티에서 공유되고 있는 것을 가져와서 사용할 수도 있다.
 
 ### 파이프라인
-[파이프라인](https://ko.wikipedia.org/wiki/파이프라인_(컴퓨팅))(pipeline)
+[파이프라인](https://ko.wikipedia.org/wiki/파이프_(유닉스))(pipeline) 파워셸의 여러 cmdlet가 [파이프](https://ko.wikipedia.org/wiki/수직선_(기호)) `|`로 연계된 조합을 가리킨다.
