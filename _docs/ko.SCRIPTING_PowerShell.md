@@ -9,6 +9,8 @@ order: null
 # 파워셸
 [파워셸](https://learn.microsoft.com/en-us/powershell/scripting/overview)(PowerShell)은 [마이크로소프트](https://www.microsoft.com)에서 개발한 [크로스 플랫폼](https://ko.wikipedia.org/wiki/크로스_플랫폼)을 지원하는 [.NET](https://ko.wikipedia.org/wiki/닷넷) 기반의 [명령 줄](https://ko.wikipedia.org/wiki/명령_줄_인터페이스) [셸](https://ko.wikipedia.org/wiki/셸)이자 [스크립트 언어](https://ko.wikipedia.org/wiki/스크립트_언어)이다. 작업 자동화 및 구성 관리에 특화되었으며, [윈도우](https://learn.microsoft.com/en-us/powershell/windows/get-started)나 [애저](https://learn.microsoft.com/en-us/powershell/azure/)와 같은 마이크로소프트 제품 이외에도 [AWS](https://aws.amazon.com/powershell/), [VMware](https://core.vmware.com/vmware-powercli), [구글 클라우드](https://cloud.google.com/powershell/) 등의 [서드 파티](https://ko.wikipedia.org/wiki/서드_파티_개발자#서드파티) 제품에도 활용이 가능하다. [윈도우 8](ko.WindowsNT) 이상의 운영체제에서는 파워셸이 기본적으로 설치되어 있어 곧바로 실행될 수 있다.
 
+> "윈도우 파워셸(Windows PowerShell)"이란 것도 존재하는 데, 이는 윈도우 운영체제에서만 지원되는 [.NET 프레임워크](ko.Csharp#net-프레임워크)로 개발된 파워셸 빌드이며 흔히 버전 5.x를 가리킨다.
+
 ![<a href="https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701">윈도우 터미널</a>의 파워셸 7.3.1에서 <a href="#cmdlet">cmdlet</a>을 실행하는 예제](/images/docs/powershell/powershell_terminal_sample.png)
 
 ### 명령 프롬프트
@@ -57,7 +59,7 @@ SerializationVersion           1.1.0.1
 
 > 반면, 다른 셸 환경의 명령어(예. [`tasklist`](https://ko.wikipedia.org/wiki/Tasklist))는 그에 해당하는 프로그램(예. `%Windir%\System32\tasklist.exe`)이 실행되는 방식으로 동작한다.
 
-Cmdlet은 다음과 같이 동사(verb)와 명사(noun)의 조합으로 구성되며 [`Get-Commnad`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-command)으로 목록을 찾아볼 수 있다. 한편, 파워셸에서 사용 가능한 동사들은 [`Get-Verb`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-verb)으로 확인할 수 있다.
+Cmdlet은 다음과 같이 동사(verb)와 명사(noun)의 조합으로 구성되며 [`Get-Commnad`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-command)으로 목록을 찾아볼 수 있다. 한편, 파워셸에서 사용 가능한 동사들은 [`Get-Verb`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-verb)으로 확인할 수 있다. 파워셸은 대문자와 소문자를 구분하지 않는다.
 
 ```powershell
 Get-Command -Verb Add -Noun Appx*
