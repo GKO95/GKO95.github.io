@@ -55,30 +55,36 @@
             collapse: collapse;
         }
         font-size: large;
-    }
-    th {
-        border: {
-            style: solid;
-            width: 1px;
-            bottom: {
-                style: double;
-                width: 4px;
+        
+        th {
+            border: {
+                style: solid;
+                width: 1px;
+                bottom: {
+                    style: double;
+                    width: 4px;
+                }
+            }
+            padding: 0.2em;
+        }
+        td {
+            border: {
+                style: solid;
+                width: 1px;
+            }
+            padding: 0.4em;
+        }
+        ol, ul {
+            img {
+                margin-left: -2em;
             }
         }
-        padding: 0.2em;
-    }
-    td {
-        border: {
-            style: solid;
-            width: 1px;
-        }
-        padding: 0.4em;
-    }
-    ol, ul {
-        img {
-            margin-left: -2em;
+
+        .highlighter-rouge .syntax {
+            margin: 0.5em 0em;
         }
     }
+
 }
 
 #docs-mask {
