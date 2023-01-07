@@ -121,7 +121,20 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
   if 2 < 3: statement        # 논리가 참이면 "statement" 문장 실행
     ```
 
-### 주석
+### `pass` 문
+[`pass`](https://docs.python.org/3/tutorial/controlflow.html#pass-statements) 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무런 작업을 수행하지 않는 문장이다. 차후에 소개할 [조건문](#조건) 및 [반복문](#반복) 등에 아무런 코드를 작성하지 않으면 실행할 코드가 없다는 사유로 오류가 발생하는데, 이러한 상황에서 `pass` 키워드는 임시 코드로 사용된다.
+
+### 식별자
+[식별자](https://docs.python.org/3/reference/expressions.html#atom-identifiers)(identifier), 일명 네임(name)은 프로그램의 데이터들을 구별하기 위해 사용되는, 즉 프로그래머가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자 작명에는 다음 규칙을 준수해야 한다:
+
+1. 오직 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
+2. 식별자 첫 문자로 숫자 불허
+3. 대소문자 구분 필수
+4. 예약어 금지
+
+> [예약어](https://ko.wikipedia.org/wiki/예약어)(reserved identifier)는 프로그래밍 언어에서 정해진 용도가 있어 개발자가 다른 용도로 사용할 수 없는 식별자이다. 위에서 언급한 [`pass`](#pass-문) 문도 예약어에 해당한다.
+
+## 주석
 [주석](https://peps.python.org/pep-0008/#comments)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 파이썬에는 두 가지의 주석이 존재한다.
 
 <table style="table-layout: fixed; width: 80%;">
@@ -147,13 +160,6 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
 ![VS Code에서의 독스트링 활용 예시](/images/docs/python/python_docstring_example.png)
 
 > 독스트링이 적용될 수 있는 데이터는 공통적으로 정의될 수 있는 [함수](#함수), [클래스](#클래스), [모듈](#모듈) 등이 해당한다.
-
-### 식별자
-[식별자](https://docs.python.org/3/reference/expressions.html#atom-identifiers)(identifier), 일명 네임(name)은 프로그램의 데이터들을 구별하기 위해 사용되는, 즉 프로그래머가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자 작명에는 다음 규칙을 준수해야 한다:
-
-1. 오직 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
-2. 식별자 첫 문자로 숫자 불허
-3. 대소문자 구분 필수
 
 ## 콘솔 입출력
 파이썬은 다음과 같이 콘솔에서 사용할 수 있는 텍스트 기반의 입력 및 출력 함수를 가진다:
@@ -377,9 +383,6 @@ None
 </tbody>
 </table>
 
-# 조건 및 루프
-조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
-
 ## 들여쓰기
 [들여쓰기](https://www.python.org/dev/peps/pep-0008/#indentation)(indentation)는 문장이나 [함수](#함수)(function), [클래스](#클래스)(class) 코드의 경계를 표시하는데 사용된다. 이를 통해 코드가 조건문 혹은 반복문에 속하는지, 또는 어느 조건문 혹은 반복문의 코드인지 구분한다. 들여쓰기는 콜론 `:`이 시작되는 이후부터 삽입되며 [탭](https://ko.wikipedia.org/wiki/Tab_키)(tab)이나 띄어쓰기 2칸 혹은 4칸으로 표현된다.
 
@@ -391,25 +394,8 @@ None
 
 들여쓰기의 여부에 따라 코드의 내용이 완전히 변경될 수 있으므로 주의해야 한다.
 
-```python
-# 두 번째 "print()" 함수에 들여쓰기 된 경우.
-if False:
-    print("본 문장은 거짓이다.") 
-    print("조건문 종료.")
-print("끝!") 
-
-# 두 번째 "print()" 함수에 들여쓰기가 되지 않은 경우.
-if False:
-    print("본 문장은 거짓이다.") 
-print("조건문 종료.")
-print("끝!") 
-```
-```
-끝!
-
-조건문 종료.
-끝!
-```
+# 조건
+조건문(conditional statement)은 프로그래밍에 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 조건문에 대하여 소개한다.
 
 ## `if` 조건문
 [`if`](https://docs.python.org/3/reference/compound_stmts.html#the-if-statement) 조건문은 조건 혹은 논리가 참(`True`)일 경우 코드를 실행하며, 거짓(`False`)일 경우에는 코드를 실행하지 않는다.
@@ -474,6 +460,9 @@ match argument:
 
 `match` 조건문은 타 프로그래밍 언어에서 소개되는 `switch` 조건문과 유사한 구조와 동작을 수행한다. 그러나 몇 가지 차이점이 있다면 `case` 문의 코드가 실행된 이후에 자동적으로 `match` 조건문이 종료되어 별도의 [`break`](#break-문) 문이 필요하지 않다. 또한 패턴 뒤에 `if` 문을 기입하는 감시(guard) 표현식으로 부가적인 조건 일치여부를 거칠 수 있다.
 
+# 반복
+반복문(loop statement)은 프로그래밍에 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 것인지 결정하는 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 반복문에 대하여 소개한다.
+
 ## `while` 반복문
 [`while`](https://docs.python.org/3/reference/compound_stmts.html#the-while-statement) 반복문은 조건 혹은 논리가 참(`True`)일 동안 코드를 반복적으로 실행하며, 거짓(`False`)일 경우에는 반복문을 종료한다.
 
@@ -485,7 +474,7 @@ while condition:
 while condition: ...
 ```
 
-`else` 조건문을 `while` 반복문 다음에 위치시키면 해당 코드는 반복문의 조건에 의해 정상적으로 종료되었을 경우에만 실행된다.
+[`else`](#else-조건문) 조건문을 `while` 반복문 다음에 위치시키면 해당 코드는 반복문의 조건에 의해 정상적으로 종료되었을 경우에만 실행된다.
 
 ```python
 # 루프 종료: 반복 완료
@@ -506,7 +495,7 @@ while index < 10:
 else:
     print("두 번째 반복문...완료!")
 ```
-```
+```console
 첫 번째 반복문...완료!
 ```
 
@@ -546,12 +535,9 @@ for index in range(10):
 else:
     print("두 번째 반복문...완료!")
 ```
-```
+```console
 첫 번째 반복문...완료!
 ```
-
-## `pass` 키워드
-[`pass`](https://docs.python.org/3/tutorial/controlflow.html#pass-statements) 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무런 작업을 수행하지 않는다. 위에서 소개한 조건문 및 반복문에 아무런 코드를 작성하지 않으면 표현식이나 문장이 없다며 오류가 발생하는데, 이러한 상황에서 `pass` 키워드는 임시 코드로 사용된다.
 
 # 이터러블
 [이터러블](https://docs.python.org/3/library/stdtypes.html#typeiter)(iterable; 반복 가능한)은 저장된 여러 데이터 항목을 하나씩 반환할 수 있는 [컨테이너 객체](#클래스)를 가리킨다. 이터러블의 특징인 `__iter__()` 메소드는 이터레이터(iterator) 객체를 반환하고, 그리고 이터레이터는 `__next__()` 메소드를 통해 [`for`](#for-반복문) 반복문에 전달될 다음 데이터 항목을 반환한다. 다시 말해 이터러블 객체의 핵심은 순차적으로 데이터를 반환할 수 있다는 점이며, 다수의 데이터를 하나의 변수로 저장하는 성질은 이를 구현하기 위한 일환이다.
