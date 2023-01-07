@@ -116,6 +116,7 @@ WSL은 두 종류의 아키텍처 설계가 있어 각각 장단점을 가진다
 
 * [성능 모니터](ko.Performance_Monitor)
 * [이벤트 뷰어](ko.Eventvwr)
+* [파워셸](ko.PowerShell)
 
 # 같이 보기
 * [윈도우 서비스 (프로그램)](ko.Service)
