@@ -3,7 +3,7 @@ layout: docs
 category: 공업수학
 title: 푸리에 변환
 slug: ko.Transform_Fourier
-order: 0xE2
+order: null
 ---
 # 개요
 > 본 내용은 고등학교 교육과정 중 하나인 [삼각함수](https://ko.wikipedia.org/wiki/삼각함수), [미분](https://ko.wikipedia.org/wiki/미분) 및 [적분](https://ko.wikipedia.org/wiki/적분), 그리고 [복소수](https://ko.wikipedia.org/wiki/복소수)를 기반하므로 이에 대해 충분한 이해가 필요하다.
