@@ -3,7 +3,7 @@ layout: docs
 category: 공업수학
 title: 확률론
 slug: ko.Probability
-order: 0xE0
+order: null
 ---
 # 개요
 [확률론](https://ko.wikipedia.org/wiki/확률론)(probability theory)은 [확률](https://ko.wikipedia.org/wiki/확률)(probability), 즉 사건이 발생하거나 명제가 참일 가능성을 수학적으로 접근하여 설명하는 학문이다. 이공계열에서는 확률을 통해 수집된 데이터를 분석하고 응용하는 수단으로 활용되지만 필연적이지 않다. 그러나 전자공학과의 [통신공학](https://ko.wikipedia.org/wiki/통신공학)이나 인공지능의 [기계학습](https://ko.wikipedia.org/wiki/기계_학습) 등의 일부 분야에서는 가장 핵심되는 수학이다.
