@@ -97,7 +97,7 @@ Cmdlet          Add-AppxVolume                                     2.0.1.0    Ap
 Cmdlet은 사용자가 파워셸 또는 .NET을 활용하여 직접 제작하거나 온라인 커뮤니티에서 공유되고 있는 것을 가져와서 사용할 수도 있다.
 
 ### 파이프라인
-[파이프라인](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pipelines)(pipeline) 파워셸의 여러 cmdlet가 [파이프](https://ko.wikipedia.org/wiki/수직선_(기호)) 기호 `|`로 연계된 조합을 가리킨다. 파워셸 명령어는 맨 좌측에서 시작하여 반환된 객체를 파이프 건너에 있는 다음 명령어의 입력으로 전달한다.
+[파이프라인](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pipelines)(pipeline) 파워셸의 여러 cmdlet가 [파이프](https://ko.wikipedia.org/wiki/수직선_(기호)) 기호 `|`로 연계된 조합을 가리킨다. 파워셸 명령어는 맨 좌측에서 시작하여 반환된 객체를 파이프 건너에 있는 다음 명령어의 입력으로 전달한다. Cmdlet 이외에도 함수, 스크립트 파일, 혹은 실행 프로그램이 연계될 수 있다.
 
 > 비록 파이프라인 기능은 [UNIX](https://ko.wikipedia.org/wiki/유닉스)에서 비롯되었으나 윈도우 등의 다른 운영체제에서도 이를 채용하였으며, 파워셸에서는 .NET 런타임과 객체 지향을 통합하여 작업 효율성을 더욱 높였다.
 
@@ -130,3 +130,116 @@ WS                         AliasProperty  WS = WorkingSet64
 * **서식화(formatting)**
 
     파워셸로부터 원하던 자료들을 말끔하게 정리하여 보여주기 위해 데이터 서식화를 사용한다. 그러나 서식화 과정에서 본래 데이터들이 속하던 객체 속성들이 훼손되면서 더 이상의 데이터 추출이 어려워지게 되므로, "우서식"은 서식화 작업을 최대한 파이프라인의 마지막에 이루어져야 한다는 것을 의미한다.
+
+# 스크립트
+파워셸 스크립트는 `.PS1` 확장자 파일에 작성된다. [마이크로소프트](https://www.microsoft.com)는 스크립트를 작성하는 도구로 [파워셸 확장도구](https://code.visualstudio.com/docs/languages/powershell)가 설치된 [비주얼 스튜디오 코드](https://ko.wikipedia.org/wiki/비주얼_스튜디오_코드)<sub>([다운로드](https://code.visualstudio.com/download))</sub>, 일명 VS Code를 권장한다.
+
+> 그 외에 [파워셸 통합 스크립팅 환경](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/ise/introducing-the-windows-powershell-ise)(Integrated Scripting Environment; ISE)도 있지만 [.NET 프레임워크](ko.Csharp#net-프레임워크)로 빌드된 [윈도우 파워셸](#파워셸)(Windows PowerShell)만 지원한다.
+
+본 장은 파워셸로 스크립트를 작성하기 위해 알아야 할 구문들과 개념들을 위주로 설명한다. 만일 작성한 `sample.ps1` 스크립트를 파워셸에서 실행하려면 아래와 같이 [온점 연산자](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_operators#dot-sourcing-operator-)(dot sourcing operator) `.`를 함께 입력하는 걸 권장하며, 자세한 내용은 [범위](#범위)(scope)에서 설명할 예정이다.
+
+```powershell
+. ./sample.ps1
+```
+
+## 구문
+다음은 파워셸 스크립트 언어를 작성하는 데 준수되어야 할 기본적인 문법적 규칙, 일명 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)에 관여하는 요소들을 소개한다:
+
+* **[토큰](https://learn.microsoft.com/en-us/powershell/scripting/lang-spec/chapter-02#23-tokens)(token)**
+
+    줄바꿈, [주석](#주석), 빈칸, 혹은 이들의 조합에 의해 구분되는 파워셸에서 가장 작은 단위의 어휘 요소이다. 대표적으로 [키워드](https://learn.microsoft.com/en-us/powershell/scripting/lang-spec/chapter-02#231-keywords), [변수](#변수), [리터럴](https://ko.wikipedia.org/wiki/리터럴) 등이 있다.
+
+    ```powershell
+  $variable       # 변수
+  2               # 정수 리터럴
+    ```
+
+* **[표현식](https://learn.microsoft.com/en-us/powershell/scripting/lang-spec/chapter-07)(expression)**
+    
+    값을 반환하는 구문적 존재를 가리킨다. 표현식에 대한 결과를 도출하는 것을 평가(evaluate)라고 부른다.
+    
+    ```powershell
+  2 + 3           # 숫자 5를 반환
+  2 -lt 3         # 논리 참을 반환
+    ```
+
+* **[문장](https://learn.microsoft.com/en-us/powershell/scripting/lang-spec/chapter-08)(statement)**
+    
+    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 파워셸 스크립트 언어는 기본적으로 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)(newline)을 기준으로 문장을 분별한다. 아래 기호는 파워셸의 스크립팅 문장을 유연하게 활용할 수 있도록 도와준다.
+
+    * 세미콜론 `;`: 여려 문장을 하나의 줄에 한꺼번에 기입하기 위해 사용된다.
+
+    ```powershell
+  $variable = 2 + 3          # 숫자 5를 "variable" 변수에 초기화
+  if (2 -lt 3) { statement } # 논리가 참이면 "statement" 문장 실행
+    ```
+
+### 주석
+[주석](https://peps.python.org/pep-0008/#comments)(comment)은 스크립트의 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 파워셸에는 이를 해시 기호 `#`로 표기한다.
+
+```powershell
+# Comment section here.
+Write-Output "Hello World!"
+```
+
+## 콘솔 출력
+본 부문에서는 파워셸 콘솔에서 출력을 처리하는 대표적인 두 cmdlet을 소개한다:
+
+* **[`Write-Output`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-output)** (별칭: `echo`)
+
+    출력되는 데이터를 콘솔로 표시하지 않는 대신, 다음 [파이프라인](#파이프라인) 명령의 입력 객체로 전달한다. 단, `Write-Output` 이후로 연계될 명령이 없을 경우, 즉 파이프라인의 마지막 명령이거나 단일 cmdlet 구성이면 콘솔로 출력된다. 데이터를 출력할 때 가장 흔히 사용되는 cmdlet이다.
+
+    아래 예시는 `"Hello World!"` 텍스트 출력이 [`Get-Memeber`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-member)의 입력으로 전달되어 텍스트의 객체 유형 및 속성이 나열된 것이다.
+
+    ```powershell
+  Write-Output "Hello World!" | Get-Member
+    ```
+    ```console
+     TypeName: System.String
+  
+  Name                 MemberType
+  ----                 ----------
+  Clone                Method
+  CompareTo            Method
+  Contains             Method
+  CopyTo               Method
+  EndsWith             Method
+  EnumerateRunes       Method
+  Equals               Method
+  …
+    ```
+
+    파워셸에서 기본적으로 텍스트 및 객체 출력을 콘솔로 표시하는 cmdlet들은 `Write-Output`을 명시할 필요가 없다. 아래는 일부 cmdlet 및 텍스트만을 입력하는 것이 파워셸에서는 구문적으로 어떻게 간주되는지 보여준다.
+
+    <table style="width: 40%;"><colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup><thead style="text-align: center;"><tr><th>Cmdlet</th><th>동일 구문</th></tr></thead><tbody><tr><td><code>Get-Process</code></td><td><code>Get-Process | Write-Output</code></td></tr><tr><td><code>"Hello World!"</code></td><td><code>echo "Hello World!"</code></td></tr></tbody></table>
+
+* **[`Write-Host`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/write-host)**
+
+    여기에서 호스트(host)는 해당 cmdlet이 실행되고 있는 파워셸 콘솔 터미널을 가리킨다. 즉, `Write-Host` cmdlet은 무조건 데이터를 콘솔로 출력한다. 객체 출력보다는 텍스트 표시에 더욱 최적화된 cmdlet이며, `Write-Output`과 전혀 다른 결과물을 보여주는 점에 유의해야 한다.
+
+    아래 예시는 `"Hello World!"` 텍스트가 콘솔로 그대로 출력되면서 [`Get-Memeber`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-member)로 전달된 입력으로 없으면서 나타나는 현상이다.
+
+    ```powershell
+  Write-Host "Hello World!" | Get-Member
+    ```
+    ```console
+  Hello World!
+  Get-Member: You must specify an object for the Get-Member cmdlet.
+    ```
+
+## 콘솔 입력
+본 부문에서는 파워셸 콘솔에서 입력을 처리하는 대표적인 cmdlet을 소개한다:
+
+* **[`Read-Host`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/read-host)**
+
+    콘솔에 입력된 한 줄의 텍스트를 읽는다. `-Prompt` 매개변수를 통해 사용자로부터 콘솔 입력을 대기할 때 문구를 표시한다.
+
+    ```powershell
+  Read-Host -Prompt "Write anything here" | Write-Output
+    ```
+    ```console
+  Write anything here: Hello World!
+  Hello World!
+    ```
+
+> [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 [억음 부호](https://ko.wikipedia.org/wiki/억음_부호) <code>&grave;</code>를 사용하여 문자열로부터 탈출해 텍스트 내에서 특정 연산을 수행한다: <code>&grave;n</code> 탈출 문자를 사용하여 문자열 줄바꿈을 구현한다.
