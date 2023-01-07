@@ -56,13 +56,17 @@ order: 0x00
 
 ![파이썬 3 설치 프로그램 추가 설치 사항](/images/docs/python/python_interpreter_optional.png)
 
-| 옵션                  | 설명                                |
-|---------------------|-----------------------------------|
-| `Documentation`     | 파이썬 문서 파일                      |
-| [`pip`](#pip)       | 파이썬 패키지 관리 소프트웨어 |
-| `tcl/tk and IDLE`   | 파이썬으로 프로그램 GUI 제작도구와 코드 편집기  |
-| `Python test suite` | 파이썬 프로그램 동작을 시험하는 프레임워크      |
-| `py launcher`       | 파이썬 인터프리터 관리 프로그램       |
+<table style="width: 40%;">
+<colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup>
+<thead><tr><th>옵션</th><th>설명</th></tr></thead>
+<tbody>
+<tr><td>Documentation</td><td>파이썬 문서 파일</td></tr>
+<tr><td><a href="#pip">pip</a></td><td>파이썬 패키지 관리 소프트웨어</td></tr>
+<tr><td>tcl/tk and IDLE</td><td>파이썬으로 프로그램 GUI 제작도구와 코드 편집기</td></tr>
+<tr><td>Python test suite</td><td>파이썬 프로그램 동작을 시험하는 프레임워크</td></tr>
+<tr><td>py launcher</td><td>파이썬 인터프리터 관리 프로그램</td></tr>
+</tbody>
+</table>
 
 필자는 `pip`와 `py launcher`만은 반드시 설치한다. 나머지 옵션들은 사용하지 않으며, 사용자 인터페이스를 가진 프로그램을 만든다 하더라도 대표적인 GUI 프레임워크 중 하나인 [PySide2](/docs/ko.Qt)를 사용하기 때문에 `tcl/tk`가 필요하지 않다. 코드 편집기 또한 IDLE보다 편한 것을 곧 소개할 예정이다.
 
@@ -145,12 +149,11 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
 > 독스트링이 적용될 수 있는 데이터는 공통적으로 정의될 수 있는 [함수](#함수), [클래스](#클래스), [모듈](#모듈) 등이 해당한다.
 
 ### 식별자
-[식별자](https://ko.wikipedia.org/wiki/식별자#컴퓨터_언어)(identifier), 일명 네임(name)은 프로그램의 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 프로그래머가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자를 지정하는 데 아래의 규칙을 준수해야 한다:
+[식별자](https://docs.python.org/3/reference/expressions.html#atom-identifiers)(identifier), 일명 네임(name)은 프로그램의 데이터들을 구별하기 위해 사용되는, 즉 프로그래머가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자 작명에는 다음 규칙을 준수해야 한다:
 
-* 오직 영문, 숫자, 밑줄 `_`만 허용된다.
-* 첫 문자는 숫자로 시작할 수 없다.
-* 공백은 허용되지 않는다.
-* 대소문자를 구분한다.
+1. 오직 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
+2. 식별자 첫 문자로 숫자 불허
+3. 대소문자 구분 필수
 
 ## 콘솔 입출력
 파이썬은 다음과 같이 콘솔에서 사용할 수 있는 텍스트 기반의 입력 및 출력 함수를 가진다:
@@ -167,7 +170,7 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
 variable = input("입력: ")
 print("출력:", variable)      # 동일: print("출력:", input("입력: "))
 ```
-```
+```console
 입력: Hello World!
 출력: Hello World!
 ```
@@ -181,7 +184,7 @@ B = "파이썬"
 # 텍스트와 숫자의 혼합된 데이터를 쉼표(,)를 사용해 나열한다.
 print("A는", A , ", \n그리고 B는", B, "이다.")
 ```
-```
+```console
 A는 10.0 ,
 그리고 B는 파이썬 이다.
 ```
@@ -189,40 +192,38 @@ A는 10.0 ,
 > [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하여 문자열로부터 탈출해 텍스트 내에서 특정 연산을 수행한다: `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한다.
 
 ## 변수
-변수(variable)는 할당 기호 `=`를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시는 `variable`이란 식별자를 갖는 변수에 숫자 3을 할당한다. 시스템적 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮는 절차를 [네임 바인딩](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
+변수(variable)는 할당 기호 `=`를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시는 `variable`이란 식별자의 변수에 숫자 3을 할당한다. 시스템 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮는 절차를 [네임 바인딩](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
 
 ```python
 # 변수 "variable"의 정의
 variable = 3
 ```
 
-파이썬의 변수는 반드시 네임 바인딩으로부터 정의되어야 한다. 즉, 아무런 데이터 할당이 없으면 인터프리터는 식별자를 변수로 간주하지 않아 오류가 발생한다.
+파이썬의 변수는 반드시 네임 바인딩으로부터 정의되어야 하므로, 아무런 데이터가 할당되지 않은 식별자는 변수로 간주되지 않아 오류가 발생한다.
 
 ```python
 variable
 print(variable)
 ```
-```
+```console
 NameError: name 'variable' is not defined
 ```
 
 > 이러한 언어적 특징은 [C](/docs/ko.C#변수)/[C++](/docs/ko.Cpp#변수)와 같은 타 프로그래밍에서 자주 인용되는 "선언(declaration)" 및 "초기화(initialization)"란 용어가 파이썬 공식 문서에서 드믈게 언급된다.
 
-거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
-
-파이썬의 변수는 데이터 종류와 상관없이 새로운 데이터를 언제든지 할당받을 수 있다.
+거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다. 파이썬의 변수는 기존과 다른 유형의 데이터를 언제든지 새로 할당받을 수 있다.
 
 ```python
 variable = 3
 variable = "Hello World!"
 print(variable)
 ```
-```
+```console
 Hello World!
 ```
 
-### `del` 키워드
-`del` 키워드는 식별자에 바인딩된 데이터를 해제, 즉 변수의 정의를 무효화할 때 사용한다. 차후 동일한 식별자로 변수를 다시 정의할 수 있다.
+### `del` 문장
+[`del`](https://docs.python.org/3/reference/simple_stmts.html#the-del-statement) 문장은 식별자에 바인딩된 데이터를 해제, 즉 변수의 정의를 무효화할 때 사용한다. 차후 동일한 식별자로 변수를 다시 정의할 수 있다.
 
 ```python
 # 변수 "variable"의 정의
@@ -233,92 +234,93 @@ print(variable)
 del variable
 print(variable)
 ```
-```
+```console
 Hello World!
 NameError: name 'variable' is not defined
 ```
 
 ## 자료형
-[자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터의 내용물이 어떻게 표현되는지 결정하는 요소이며, 파이썬에서는 자료형이 크게 세 유형으로 나뉘어진다:
+[자료형](https://docs.python.org/3/library/stdtypes.html)(data type)은 데이터의 내용물을 결정하는 요소이며, 파이썬에서는 크게 세 개의 자료형으로 나뉘어진다.
 
 ### 숫자 자료형
 [숫자 자료형](https://docs.python.org/3/library/stdtypes.html?#numeric-types-int-float-complex)(numeric data type)은 숫자로 표현되는 데이터들을 가리키며, 총 세 가지로 세분화된다.
 
-* **정수 `int`**: 소수점이 없는 숫자
-* **부동소수점 `float`**: 소수점을 포함한 64비트 실수
-* **복소수 `complex`**: 실수 그리고/또는 허수로 이루어진 숫자
+<table style="table-layout: fixed; width: 60%;">
+<thead><tr><th><a href="https://docs.python.org/3/library/functions.html#int"><code>int</code></a></th><th><a href="https://docs.python.org/3/library/functions.html#float"><code>float</code></a></th><th><a href="https://docs.python.org/3/library/functions.html#complex"><code>complex</code></a></th></tr></thead>
+<tbody>
+<tr style="text-align: center;">
+<td>소수점이 없는 정수</td>
+<td>소수점을 포한한 64비트 실수</td>
+<td>실수와 허수로 구성된 복소수</td>
+</tr>
+</tbody>
+</table>
 
 위의 숫자 자료형들은 산술 연산이 가능하다: 가장 기본적인 `+`, `-`, `*`, `/` 사칙 연산자부터 나눗셈의 몫 `//`과 나머지 `%` 그리고 제곱 `**`을 구할 수 있다. 산술 연산을 쉽게 읽을 수 있도록 숫자와 산술 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않으므로 무관한다.
 
-할당 연산자(assignment operator)는 할당 기호 `=`와 조합하여 산술 연산 코드를 더욱 간결하게 작성할 수 있다.
-
-| 연산자 | 예시     | 동일                                          |
-| :----: |--------| --------------------------------------------- |
-|  `=`   | `x = y`  | `x = y`; `x` 변수에 `y` 변수의 값을 할당한다. |
-|  `+=`  | `x += y` | `x = x + y`                                   |
-|  `-=`  | `x -= y` | `x = x - y`                                   |
-|  `*=`  | `x *= y` | `x = x * y`                                   |
-|  `/=`  | `x /= y` | `x = x / y`                                   |
-|  `%=`  | `x %= y` | `x = x % y`                                   |
+[인플레이스 연산자](https://docs.python.org/3/library/operator.html#in-place-operators)(in-place operator)는 할당 기호 `=`와 조합하여 산술 연산을 더욱 간결하게 작성할 수 있도록 한다: `+=`, `-=`, `*=`, `/=`, `%=` 등이 존재하며, `x += y` 문장은 `x = x + y`와 동일하다.
 
 > 파이썬은 증가 연산자 `++` 및 감소 연산자 `--`를 지원하지 않는다.
 
 ### 논리 자료형
-논리 자료형(Boolean data type)은 문장이 참인지 거짓인지 판별하는 논리 조건에 사용되는 데이터 유형이다.
+[논리 자료형](https://docs.python.org/3/library/stdtypes.html?#boolean-operations-and-or-not)(Boolean data type)은 문장이 참인지 거짓인지 판별하는 논리 조건에 사용되는 데이터 유형이다.
 
-* **논리적 참 `True`**: 논리가 참일 때 반환된다; 숫자 0이 아닌 정수로 대체 가능하다.
-* **논리적 거짓 `False`**: 논리가 거짓일 때 반환된다; 숫자 0으로 대체 가능하다.
+<table style="table-layout: fixed; width: 60%;">
+<thead><tr><th><a href="https://docs.python.org/3/library/constants.html#True"><code>True</code></a></th><th><a href="https://docs.python.org/3/library/constants.html#False"><code>False</code></a></th></tr></thead>
+<tbody>
+<tr style="text-align: center;">
+<td>논리가 참일 때 반환; 0이 아닌 정수로 대체 가능</td>
+<td>논리가 거짓일 때 반환; 정수 0으로 대체 가능</td>
+</tr>
+</tbody>
+</table>
 
-대표적인 논리 조건으로써 두 데이터를 대조하는 [비교 연산자](https://docs.python.org/3/library/stdtypes.html?#comparisons)(relational operator)가 있다: 초과 `>`와 미만 `<`, 이상 `>=`과 이하 `<=`, 그리고 동일 `==`와 다름 `!=` 관계 부합 여부에 따라 논리적 참 혹은 거짓이 반환된다. 연산자는 기호가 아닌 단어일 수도 있으며, 일치 여부의 `is` 및 논리 보수의 `not`이 존재한다.
+대표적인 논리 조건으로써 두 데이터를 대조하는 [비교 연산자](https://docs.python.org/3/library/stdtypes.html?#comparisons)(relational operator)가 있다: 초과 `>`와 미만 `<`, 이상 `>=`과 이하 `<=`, 그리고 동일 `==`와 다름 `!=` 관계 부합 여부에 따라 논리적 참 혹은 거짓이 반환된다. 혹은 일치 여부를 확인하는 `is` 연산자와 같이 기호가 아닌 단어일 수도 있다.
 
 > 동일 `==`과 일치 `is`는 얼핏 비슷하지만 전혀 다른 연산자이다: `==` 연산자는 데이터 유형마다 커스터마이징이 가능하여 무엇을 동일한 데이터로 판단할지 정할 수 있지만, `is` 연산자는 커스터마이징이 불가하며 데이터가 정확히 일치해야 한다. 일부 데이터에서 `==` 연산자는 `is` 연산자와 동일하게 동작한다.
 
 논리 연산자(logical operator)는 논리 자료형의 조합이 논리적으로 참인지 거짓인지 판별한다.
 
-| 연산자   | 이름  | 설명                                           |
-|:-----:|:---:|----------------------------------------------|
-| `and` | 논리곱 | 모든 데이터가 참이면 `True`를 반환하고, 그렇지 않으면 `False`를 반환한다.     |
-| `or`  | 논리합 | 하나 이상의 데이터가 참이면 `True`를 반환하고, 그렇지 않으면 `False`를 반환한다. |
+* **`and`**: 모든 데이터가 참이면 `True`를 반환하고, 그렇지 않으면 `False`를 반환하는 [논리곱](https://ko.wikipedia.org/wiki/논리곱)이다.
+* **`or`**: 하나 이상의 데이터가 참이면 `True`를 반환하고, 그렇지 않으면 `False`를 반환하는 [논리합](https://ko.wikipedia.org/wiki/논리합)이다.
+* **`not`**: `True`을 `False`로, 혹은 그 반대로 논리값을 반전시키는 [부정](https://ko.wikipedia.org/wiki/부정_(논리학))이다.
 
 ### 문자열 자료형
-문자열 자료형(string data type)은 한 쌍의 작은 따옴표 `''` 또는 큰 따옴표 `""`로 구별되는 텍스트 데이터이다. 파이썬에서 문자열 자료형 데이터는 일반적으로 문자열 객체(string object)라고 부른다. 
+[문자열 자료형](https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str)(string data type)은 한 쌍의 작은 따옴표 `''` 또는 큰 따옴표 `""`로 구별되는 텍스트 데이터이다. 파이썬에서 문자열 자료형 데이터는 일반적으로 문자열 객체(string object)라고 부른다. 
 
-문자열 객체는 다른 데이터와 더하기 기호 `+`를 통해 공백없이 하나의 문자열로 연결할 수 있다. 문자열 간에만 사용할 수 있으므로 숫자 및 논리 자료형은 문자열로 변환해야 한다. 그 외에도 파이썬 3.6부터 추가된 접두사 `f`를 갖는 [포맷 문자열 리터럴](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)(formatted string literal), 일명 f-문자열에서 중괄호 `{}`를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
+문자열 객체는 다른 데이터와 더하기 기호 `+`를 통해 공백없이 하나의 문자열로 연결할 수 있다. 문자열 간에만 사용할 수 있으므로 숫자 및 논리 자료형은 문자열로 변환해야 한다. 그 외에도 파이썬 3.6부터 추가된 접두사 `f`를 갖는 [서식화된 문자열 리터럴](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)(formatted string literal), 일명 f-문자열에서 중괄호 `{}`를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
 
-```python
-A = 10.0
-B = "파이썬"
+<table style="table-layout: fixed; width: 80%;">
+<thead><tr><th>문자열 연결</th><th>서식화된 문자열 리터럴</th></tr></thead>
+<tbody>
+<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">파이썬</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"A는 "</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">+</span><span class="s">",</span><span class="se">\n</span><span class="s">그리고 B는 "</span><span class="o">+</span> <span class="n">B</span> <span class="o">+</span><span class="s">"이다."</span><span class="p">)</span>
+</code></pre></div></div>
+</td><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">파이썬</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"A는 </span><span class="si">{</span><span class="n">A</span><span class="si">}</span><span class="s">,</span><span class="se">\n</span><span class="s">그리고 B는 </span><span class="si">{</span><span class="n">B</span><span class="si">}</span><span class="s">이다."</span><span class="p">)</span>
+</code></pre></div></div>
+</td></tr>
+<tr><td colspan="2">
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: initial;"><span class="go">A는 10.0,
+그리고 B는 파이썬이다.
+</span></code></pre></div></div>
+</td></tr>
+</tbody>
+</table>
 
-# 문자열 연결
-print("A는 " + str(A) + ",\n그리고 B는 " + B + "이다.")
-
-# 포맷 문자열 리터럴
-print(f"A는 {A},\n그리고 B는 {B}이다.")
-```
-
-텍스트에 따옴표를 넣으려면 해당 따옴표 앞에 백슬래시 `\`를 배치하여 문자열이 도중이 끊기는 현상을 방지한다.
-
-```python
-# 문자열 작성의 적절한 예시와 부적절한 예시의 비교
-print('Where\'s my "Cat in the Hat" book?')
-print('Where's my "Cat in the Hat" book?')
-```
-```
-Where's my "Cat in the Hat" book?
-Where
-```
-
-세 쌍의 따옴표는 다중 문자열 객체를 생성하며, 이는 단순히 Enter/Return 키를 눌러 줄바꿈이 가능하다. 일반 문자열로 줄바꿈을 구현하려면 원하는 위치에 [탈출 문자](#탈출-문자) 중 하나인 `\n`을 직접 삽입해야 한다.
-
-```python
-# 다중 문자열 객체로 여러 줄의 텍스트 작성 및 출력
-print("""Goodbye
-World?""")
-```
-```  
-Goodbye
-World?
-```
+> 세 쌍의 따옴표는 다중 문자열 객체를 생성하며, 이는 단순히 Enter/Return 키를 눌러 줄바꿈이 가능하다.
+>
+> ```python
+> # 다중 문자열 객체로 여러 줄의 텍스트 작성 및 출력
+> print("""Hello
+> World!""")
+> ```
+> ```console
+> Hello
+> World!
+> ```
 
 차후에 설명할 예정이지만, [객체](#클래스)(object)에 해당하는 문자열 자료형 데이터는 오로지 자신만이 사용할 수 있는 고유의 기능(일명 메소드)을 갖으며 목록은 [여기](https://docs.python.org/3/library/stdtypes.html#string-methods)에서 확인할 수 있다.
 
@@ -327,49 +329,53 @@ World?
 print("Hello World!".upper())
 print("Hello World!".replace(" ", "-"))
 ```
-```
+```console
 HELLO WORLD!
 Hello-World!
 ```
 
 ### `None` 키워드
-[`None`](https://docs.python.org/3/c-api/none.html) 키워드는 자료형과 관계없이 아무런 값이 없는 데이터이다. 비록 `None`과 `False`는 개념적으로 완전히 다른 존재이지만, 논리 조건에서는 `None`을 `False`로 사용할 수 있다.
+[`None`](https://docs.python.org/3/library/constants.html#None) 키워드는 자료형과 관계없이 아무런 값이 없는 데이터이다. 비록 `None`과 `False`는 개념적으로 완전히 다른 존재이지만, 논리 조건에서는 `None`을 `False`로 사용할 수 있다.
 
 ```python
 # 조건부 확인: 논리 조건에서 None을 False로 간주할 수 있는가?
 if not(None and True):
     print(None)
 ```
-```
+```console
 None
 ```
 
 ## 자료형 변환
-파이썬 프로그래밍 언어는 데이터를 타 자료형으로 변환할 수 있다.
+파이썬 프로그래밍 언어는 데이터를 타 자료형으로 변환할 수 있는 함수를 제공한다.
 
-* **정수 변환 `int()`**
-
-    ```python
-  print(int(3.14))        # 출력: 3 (정수만 반환; 반올림 아님)
-
-  print(int("7"))         # 출력: 7 (실수나 문자 포함 시 변환 불가)
-    ```
-
-* **실수 변환 `float()`**
-
-    ```python
-  print(float(7))         # 출력: 7.0
-
-  print(float("3.14"))    # 출력: 3.14 (문자 포함 시 변환 불가)
-    ```
-
-* **문자열 변환 `str()`**
-
-    ```python
-  print(str(7))           # 출력: '7'
-
-  print(str(3.14))        # 출력: '3.14'
-    ```
+<table style="width: 80%;">
+<colgroup></colgroup>
+<thead><tr><th>자료형 변환</th><th>예시</th></tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center;">정수 변환<br/><a href="https://docs.python.org/3/library/functions.html#int"><code>int()</code></a></td><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="k">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">3.14</span><span class="p">))</span>        <span class="c1"># 출력: 3 (정수만 반환; 반올림 아님)
+</span><span class="k">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="s">"7"</span><span class="p">))</span>         <span class="c1"># 출력: 7 (실수나 문자 포함 시 변환 불가)
+</span></code></pre></div></div>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">실수 변환<br/><a href="https://docs.python.org/3/library/functions.html#float"><code>float()</code></a></td><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="k">print</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>         <span class="c1"># 출력: 7.0
+</span><span class="k">print</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s">"3.14"</span><span class="p">))</span>    <span class="c1"># 출력: 3.14 (문자 포함 시 변환 불가)
+</span></code></pre></div></div>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">문자열 변환<br/><a href="https://docs.python.org/3/library/stdtypes.html#str"><code>str()</code></a></td><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>           <span class="c1"># 출력: '7'
+</span><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mf">3.14</span><span class="p">))</span>        <span class="c1"># 출력: '3.14'
+</span></code></pre></div></div>
+</td>
+</tr>
+</tbody>
+</table>
 
 # 조건 및 루프
 조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
