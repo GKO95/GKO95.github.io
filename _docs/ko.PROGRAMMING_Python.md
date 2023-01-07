@@ -543,32 +543,31 @@ else:
 [이터러블](https://docs.python.org/3/library/stdtypes.html#typeiter)(iterable; 반복 가능한)은 저장된 여러 데이터 항목을 하나씩 반환할 수 있는 [컨테이너 객체](#클래스)를 가리킨다. 이터러블의 특징인 `__iter__()` 메소드는 이터레이터(iterator) 객체를 반환하고, 그리고 이터레이터는 `__next__()` 메소드를 통해 [`for`](#for-반복문) 반복문에 전달될 다음 데이터 항목을 반환한다. 다시 말해 이터러블 객체의 핵심은 순차적으로 데이터를 반환할 수 있다는 점이며, 다수의 데이터를 하나의 변수로 저장하는 성질은 이를 구현하기 위한 일환이다.
 
 ## 시퀀스 객체
-[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence) 객체는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이다. 시퀀스는 하나는 대괄호 `[]`를 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)이 있다.
+[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence)는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이며, 대괄호 `[]`를 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)이 있다.
 
 ```python
 variable = "Hello World!" 
 print(variable[1])
 ```
-```
+```console
 e
 ```
 
 ### 슬라이싱
-슬라이싱(slicing; 자르다)은 시퀀스 객체 원본으로부터 원하는 부분만 추출하는 기능이다.
+[슬라이싱](https://docs.python.org/3/glossary.html#term-slice)(slicing; 자르다)은 시퀀스 객체 원본으로부터 원하는 부분만 추출하는 기능이다.
 
-| 구문    | 예시                            |
-|:---------:|------------------------------------|
-| `[ : : ]` | `sequence[start : end : interval]` |
-
-슬라이싱은 `start`에서부터 `end` 이전까지이며, `interval`만큼의 간격으로 데이터를 추출한다. 시퀀스 슬라이싱을 하기 위해 모든 인수를 채울 필요는 없다.
+<table style="width: 80%;">
+<colgroup><col style="width: 30%;"/><col/></colgroup>
+<thead><tr><th>구문</th><th>예시</th></tr></thead>
+<tbody>
+<tr style="text-align: center;"><td><code>seq[start : end : interval]</code></td><td><code>start</code>부터 <code>end</code> 이전까지 <code>interval</code>만큼의 간격으로 데이터를 추출하며, 모든 인수를 채울 필요는 없다.</td></tr>
+</tbody>
+</table>
 
 ```python
 print("Hello World!"[2:8])         # 출력: 'llo Wo'
-
 print("Hello World!"[2: ])         # 출력: 'llo World!'
-
 print("Hello World!"[ :8])         # 출력: 'Hello Wo'
-
 print("Hello World!"[2:8:2])       # 출력: 'oW'
 ```
 
@@ -577,26 +576,29 @@ print("Hello World!"[2:8:2])       # 출력: 'oW'
 
 ```python
 variable1, *variable2, variable3 = "Python"
-
-''' 결과:
+```
+```console
 variable1 = P
 variable2 = ['y', 't', 'h', 'o']
 variable3 = n
-'''
 ```
 
 ## 범위 객체
-[범위](https://docs.python.org/3/library/stdtypes.html#ranges)(range) 시퀀스 객체는 시작할 숫자(포함), 끝을 맺을 숫자(제외) 그리고 순서 간격을 지정하여 일련의 숫자들을 순서에 맞게 저장하는 객체이다. 범위 객체는 `range()` 함수를 사용하여 생성된다.
+[범위](https://docs.python.org/3/library/stdtypes.html#ranges)(range) 시퀀스 객체는 시작할 숫자, 끝을 맺을 숫자 그리고 순서 간격을 지정하여 일련의 숫자들을 순서에 맞게 저장하는 객체이며, `range()` 함수로부터 생성된다.
 
-| 함수        | 예시                          | 설명                                                          |
-|-----------|-----------------------------|-------------------------------------------------------------|
-| `range()` | `range(start,end,interval)` | 정수 `start`에서부터 `end` 이전까지 `interval`만큼의 간견으로 순서대로 숫자를 나열한 범위 객체를 생성한다. |
+<table style="width: 80%;">
+<colgroup><col style="width: 30%;"/><col/></colgroup>
+<thead><tr><th>구문</th><th>예시</th></tr></thead>
+<tbody>
+<tr style="text-align: center;"><td><code>range(start, end, interval)</code></td><td><code>start</code>부터 <code>end</code> 이전까지 <code>interval</code>만큼의 간격으로 순서대로 숫자를 나열한 범위 객체를 생성한다.</td></tr>
+</tbody>
+</table>
 
 ```python
 for element in range(3, 10, 2):
     print(element)
 ```
-```
+```console
 3
 5
 7
@@ -661,7 +663,7 @@ variable[1] = "Hello World!"   # IndexError: list assignment index out of range
 variable = [var**2 for var in range(5)]
 variable = [var**2 for var in range(5) if (var ** 2) % 2 == 0]
 ```
-```
+```console
 [0, 1, 4, 9, 16]
 [0, 4, 16]
 ```
@@ -775,7 +777,7 @@ for variable in generator_function():
 lst = list(generator_function())
 print(lst)
 ```
-```
+```console
 0
 1
 2
