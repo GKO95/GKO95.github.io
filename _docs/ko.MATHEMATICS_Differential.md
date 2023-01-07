@@ -3,7 +3,7 @@ layout: docs
 category: 공업수학
 title: 미분방정식
 slug: ko.Differential
-order: 0xE1
+order: null
 ---
 # 개요
 > 본 내용은 고등학교 교육과정 중 하나인 [미분](https://en.wikipedia.org/wiki/Derivative) 및 [적분](https://en.wikipedia.org/wiki/Integral), 그리고 [복소수](https://en.wikipedia.org/wiki/Complex_number)를 기반하므로 이에 대해 충분한 이해가 필요하다.
