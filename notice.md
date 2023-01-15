@@ -5,7 +5,7 @@ toc: false
 ---
 # ❗Azure App Service로 마이그레이션 준비 중❗
 #### 2023.01.15 (UTC+09:00)
-Jekyll로 생성된 정적 웹사이트를 애용해 왔으나, 이제는 GitHub Pages를 떠나 Azure App Service로 넘어가려고 합니다. 현재 ASP.NET Core의 Blazor Server를 활용하여 페이지 구축 테스트를 해 보고 있으며, GitHub Pages는 유지하되 Azure로 우회시키면서 디자인과 기능성을 대폭 축소할 예정입니다. 동적 웹사이트의 활용으로 정적 웹사이트가 가진 한계를 넘어 더욱 유동적이고 다양한 기능을 구현해 보려고 합니다.
+Jekyll로 생성된 정적 웹사이트를 애용해 왔으나, 이제는 GitHub Pages를 떠나 [Azure App Service](https://gihwanko.azurewebsites.net/)로 넘어가려고 합니다. 현재 ASP.NET Core의 Blazor Server를 활용하여 페이지 구축 테스트를 해 보고 있으며, GitHub Pages는 유지하되 Azure로 우회시키면서 디자인과 기능성을 대폭 축소할 예정입니다. 동적 웹사이트의 활용으로 정적 웹사이트가 가진 한계를 넘어 더욱 유동적이고 다양한 기능을 구현해 보려고 합니다.
 
 # 운영체제 게시글 정비 중
 #### 2022.07.25 (UTC+09:00)
