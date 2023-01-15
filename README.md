@@ -12,11 +12,11 @@ Here are some of the featured you can find on this GitHub-Pages:
 For those who are interested in my GitHub-Pages theme, sorry but I didn't designed this for the distribution purpose. But you are free to use the code I made.
 
 ### Fonts
-The GitHub-Pages uses the following fonts:
-* [JetBrains Mono v2.001](https://www.jetbrains.com/lp/mono/)
+The GitHub-Pages uses the following fonts imported from [Google Fonts](https://fonts.google.com/):
+* [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
 * [Noto Sans KR](https://fonts.google.com/specimen/Noto+Sans+KR)
 
-Browse the [Google Fonts](https://fonts.google.com/) for your Jekyll, and select one or more font styles to be implemented. A new section will appear on the right; once finished selecting the font style, click on the *Embed* tab and copy & paste the `<link>` tag to head of HTML.
+Select one or more font styles to be implemented, which will show you a new section will appear on the right; once finished selecting the font style, click on the *Embed* tab and copy & paste the `<link>` tag to head of HTML.
 
 ### Icons
 Most of the icons in my GitHub-Pages are from [iconmonstr](https://iconmonstr.com/) and I love those simple designs!
