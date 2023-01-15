@@ -7,7 +7,7 @@ icon: icon-windows.svg
 order: 0x40
 ---
 # 윈도우 NT
-[윈도우 NT](https://ko.wikipedia.org/wiki/윈도우_NT)(Windows NT)는 [마이크로소프트](https://ko.wikipedia.org/wiki/마이크로소프트)에서 개발한 [윈도우](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)(Windows) 계열 중 하나이며, 전세계적으로 가장 널리 사용되고 있는 현역 [운영체제](https://ko.wikipedia.org/wiki/운영_체제)(operating system; OS)이다. 본래 NT는 기존 운영체제인 [MS-DOS](https://ko.wikipedia.org/wiki/MS-DOS)를 대체할 "신기술(New Technology)"을 염두하여 붙인 이름이지만, 현재는 아무런 의미가 없는 제품군 명칭으로 자리잡았다. 이름은 다소 생소할 수 있으나 사실상 배포되고 있는 거의 모든 윈도우 제품이 윈도우 NT 계열에 해당한다.
+[윈도우 NT](https://ko.wikipedia.org/wiki/윈도우_NT)(Windows NT)는 [마이크로소프트](https://ko.wikipedia.org/wiki/마이크로소프트)에서 개발한 [윈도우](https://ko.wikipedia.org/wiki/마이크로소프트_윈도우)(Windows) 계열 중 하나이며, 전세계적으로 가장 널리 사용되고 있는 현역 [운영체제](https://ko.wikipedia.org/wiki/운영체제)(operating system; OS)이다. 본래 NT는 기존 운영체제인 [MS-DOS](https://ko.wikipedia.org/wiki/MS-DOS)를 대체할 "신기술(New Technology)"을 염두하여 붙인 이름이지만, 현재는 아무런 의미가 없는 제품군 명칭으로 자리잡았다. 이름은 다소 생소할 수 있으나 사실상 배포되고 있는 거의 모든 윈도우 제품이 윈도우 NT 계열에 해당한다.
 
 다음은 2022년 8월 15일 기준에 작성된 윈도우 NT 제품 목록이다.
 
@@ -31,12 +31,23 @@ order: 0x40
 
 마이크로소프트의 운영체제가 윈도우 NT로 전환한 것은 다음 기술적 의의를 가진다:
 
-* 하드웨어 및 소프트웨어 [이식성](https://en.wikipedia.org/wiki/Software_portability)
+* [하드웨어 이식성](#하드웨어-이식성) 및 [소프트웨어 호환성](#환경-서브시스템)
 * [커널 모드와 사용자 모드의 구분](ko.Processor#보호-링)
 * 완전한 [32비트](https://ko.wikipedia.org/wiki/32비트) 아키텍처 지원
 
 ## 윈도우 아키텍처
 ![윈도우 7 및 서버 2008 R2 아키텍처<br/><sub><i>출처: <a href="https://www.oreilly.com/library/view/windows-internals-sixth/9780735671294/">Windows Internals, 6th Edition</a> / 파일: <a href="https://github.com/LordNoteworthy/windows-internals/blob/master/windows-internals-6th-ed.md">LordNoteworthy/windows-internals</a></i></sub>](/images/docs/windows/windows_architecture_overview.png)
+
+### 하드웨어 이식성
+[이식성](https://en.wikipedia.org/wiki/Software_portability)(portability), 즉 특정 하드웨어 및 명령어 집합에 대한 종속을 최소화하여 타 플랫폼으로 쉽게 설치하여 사용할 수 있는 성질은 초창기 윈도우 NT의 핵심 설계 목적이었다. 현재는 [i386](https://ko.wikipedia.org/wiki/IA-32)(단, 윈도우 11부터 제외), [x86-64](https://ko.wikipedia.org/wiki/X86-64), 그리고 [ARM64](https://ko.wikipedia.org/wiki/ARM_아키텍처) 아키텍처를 지원한다. 윈도우 NT는 이식성을 위해 다음 두 가지 설계를 채택하였다:
+
+* **계층화 설계**
+
+    윈도우 NT는 프로세서 아키텍처 및 하드웨어(예. [메인보드](https://ko.wikipedia.org/wiki/메인보드), [PCI](https://ko.wikipedia.org/wiki/PCI_버스) 장치 등)에 특정된 저급 시스템 코드, 그리고 이와 상관없이 공통된 운영체제의 기능들을 다루는 고급 시스템 코드로 계층을 두 개로 나눈다. 여기서 이식성에 기여하는 저급 시스템 코드에는 (1) 아키텍처 특화된 `Ntoskrnl.exe`의 [커널](https://ko.wikipedia.org/wiki/커널_(컴퓨팅)) 그리고 (2) 하드웨어 특화된 `hal.dll`의 [하드웨어 추상화 계층](https://ko.wikipedia.org/wiki/https://ko.wikipedia.org/wiki/하드웨어_추상화#하드웨어_추상화_계층)이 있다.
+
+* **[C 프로그래밍 언어](ko.C)**
+
+    윈도우 NT의 대부분 소스 코드는 이식성에 유리한 C 프로그래밍 언어로 작성되었다. 일부는 [C++](ko.Cpp) 프로그래밍 언어로 작성되었으며, 특히 하드웨어와 직접 통신이 필요하거나(예. [인터럽트 핸들러](ko.Processor#인터럽트)) 성능에 매우 민감한 운영체제 코드(예. [문맥 교환](ko.Processor#문맥-교환))는 [어셈블리](ko.Assembly)로 구현되었다.
 
 ## 환경 서브시스템
 환경 서브시스템(environment subsystems)은 어플리케이션이 윈도우 커널단으로부터 시스템 서비스를 사용할 수 있도록 한다. 환경 서브시스템은 크게 `.EXE` 그리고 `.DLL` 유형으로 나뉘어진다.
