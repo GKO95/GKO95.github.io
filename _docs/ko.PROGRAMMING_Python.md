@@ -7,43 +7,47 @@ icon: icon-python.svg
 order: 0x00
 ---
 # 소개
-[파이썬](https://ko.wikipedia.org/wiki/파이썬)(Python)은 웹 프로그래밍, 과학연구, 인공지능을 포함한 수많은 영역에서 응용 가능한 고급 프로그래밍 언어이다. 파이썬은 다른 프로그래밍 언어에 비해 간단하면서 폭넓은 커뮤니티 덕분에 파이썬 개발에 용이한 많은 종류의 소프트웨어(예. 라이브러리, 프레임워크 등)들이 존재한다. 이러한 이유로 파이썬은 프로그래밍 입문자로써 시작하기 매우 좋은 언어이다.
+[파이썬](https://www.python.org/)(Python)은 웹 프로그래밍, 과학연구, 인공지능을 포함한 수많은 영역에서 응용 가능한 [다중 패러다임](https://ko.wikipedia.org/wiki/다중_패러다임_프로그래밍_언어) [고급 프로그래밍 언어](https://ko.wikipedia.org/wiki/고급_프로그래밍_언어)이다. 파이썬은 다른 프로그래밍 언어에 비해 매우 간편하여 프로그래밍 입문자에게 적합하고 커뮤니티가 매우 건재하다. 또한 [넘파이](ko.NumPy), [텐서플로우](ko.TensorFlow), [OpenCV](ko.OpenCV) 등의 다양한 [서드 파티](https://ko.wikipedia.org/wiki/서드_파티_개발자#서드파티) 라이브러리 생태계가 잘 갖춰져 있어 광범위한 활용도를 보여주는 강력한 프로그래밍 언어이다.
 
-## 인터프리트 언어
-> *참조: [컴파일러 vs. 인터프리터](/blog/ko.compiler_vs_interpreter)*
+## 인터프리터
+파이썬 프로그래밍 언어는 [인터프리트 언어](ko.Interpreter)(interpreted language)이다. 버전은 크게 파이썬 2와 파이썬 3으로 분류되는데, 전자는 2020년 1월 1일부로 서비스가 종료되었다. 파이썬 1이라는 것도 존재하나, 가장 최신 버전 1.6.1이 2000년에 출시된 점을 고려하면 호환성과 실용성이 매우 떨어진다. 그러므로 본문은 파이썬 3을 위주로 프로그래밍을 설명한다.
 
-파이썬 프로그래밍 언어는 [인터프리트 언어](https://ko.wikipedia.org/wiki/인터프리트_언어)(interpreted language)이다. 버전은 크게 파이썬 2와 파이썬 3으로 분류되는데, 전자는 2020년 1월 1일부로 서비스가 종료되었다. 파이썬 1이라는 것도 존재하나, 가장 최신 버전 1.6.1이 2000년에 출시된 점을 고려하면 호환성과 실용성이 매우 떨어진다. 그러므로 본문은 파이썬 3을 위주로 프로그래밍을 설명한다.
+파이썬 버전은 `X.Y.Z` 서식으로 매겨진다:
 
-파이썬 버전은 `X.Y.Z` 형식으로 매겨진다:
+<table style="width: 60%;">
+<thead><tr><th>버전</th><th>설명</th><th>비고</th></tr></thead>
+<tbody>
+<tr><td style="text-align: center;"><code>X</code> 메이저 버전</td><td>호환이 불가할 정도의 상당한 변화를 거친 업그레이드</td><td>파이썬 2와 3 분류</td></tr>
+<tr><td style="text-align: center;"><code>Y</code> 마이너 버전</td><td>새로운 기능이 추가될 때마다 증가하는 업데이트</td><td>마이너 버전 하위호환 보장</td></tr>
+<tr><td style="text-align: center;"><code>Z</code> 마이크로 버전</td><td>버그 수정 및 유지관리 패치</td><td>안정성 척도</td></tr>
+</tbody>
+</table>
+    
+프로젝트에 활용될 [서드 파티](https://ko.wikipedia.org/wiki/서드_파티_개발자#서드파티) 라이브러리나 소프트웨어 연동에서 발생할 수 있는 호환성 문제를 사전에 방지하기 위해 인터프리터 버전을 신중히 선택해야 한다. 만일 단순히 프로그래밍 언어 공부가 목적이면 가장 최신 버전을 설치하여도 무방하다. 단, 인터프리터는 개발 환경 관리를 위해 버전 업데이트 기능이 자체적으로 결여되어 있다. 새로 출시된 버전을 설치하려면 해당 인터프리터를 별도로 설치해야 한다.
 
-| 버전 | 설명 | 비고 |
-|:----:|---|---|
-| `X` 메이저 버전 | 호환이 불가할 정도의 상당한 변화를 거친 업그레이드 | 파이썬 2와 3 분류 |
-| `Y` 마이너 버전 | 새로운 기능이 추가될 때마다 증가하는 업데이트 | 마이너 버전 하위호환 보장 |
-| `Z` 마이크로 버전 | 버그 수정 및 유지관리 패치 | 안정성 척도 |
+아래는 대표적인 파이썬 인터프리터 일부를 나열한다.
 
-개발자는 프로젝트에 활용될 서드 파티 라이브러리나 소프트웨어 연동에서 발생할 수 있는 호환성 문제를 사전에 방지하기 위해 인터프리터 버전을 선택해야 한다. 만일 단순히 프로그래밍 언어 공부가 목적이면 가장 최신 버전을 설치하여도 무방하다. 단, 인터프리터는 개발 환경 관리를 위해 버전 업데이트 기능이 자체적으로 결여되어 있다. 새로 출시된 버전을 설치하려면 해당 인터프리터를 별도로 설치해야 한다.
+* **[C파이썬](https://ko.wikipedia.org/wiki/C파이썬)**: [C](ko.C) 프로그래밍 언어로 개발된 가장 널리 쓰이는 최초의 파이썬 인터프리터
+* [자이썬](https://ko.wikipedia.org/wiki/자이썬): [Java](ko.Java) 프로그래밍 언어로 개발된 파이썬 인터프리터
+* [아이언파이썬](https://ko.wikipedia.org/wiki/IronPython): [C#](ko.Csharp) 프로그래밍 언어로 개발된 파이썬 인터프리터
 
-# 설치
-파이썬을 실행하기 위해서는 두 가지 프로그램이 필요하다: (1) [인터프리터](#c파이썬) 그리고 (2) [통합 개발 환경](#통합-개발-환경)이다. 리눅스와 macOS는 기본적으로 파이썬 2와 3 인터프리터가 설치되어 있으나, 다른 특정 버전을 원하면 새로 설치해야 한다. 본 장에서는 파이썬 인터프리터와 IDE의 설치 및 연동을 통해 파이썬과 같은 인터프리터 언어가 어떻게 동작하는지 이해를 돕는다.
-
-## C파이썬
-[C파이썬](https://ko.wikipedia.org/wiki/C파이썬)<sub>([다운로드](https://www.python.org/downloads/))</sub>은  [C](/docs/ko.C) 프로그래밍 언어로 개발된 파이썬의 가장 첫 [인터프리터](/blog/ko.compiler_vs_interpreter#인터프리터)이며 가장 널리 사용되고 있다. 해당 인터프리터는 먼저 파이썬 소스 코드를 [바이트코드](https://ko.wikipedia.org/wiki/바이트코드)(bytecode)로 컴파일한 즉시 실행하는 특징을 갖는다. 그 외에도 다른 언어로 제작된 인터프리터가 있으며, 대표적으로 Jython(자바로 구현된 인터프리터), IronPython([.NET](/docs/ko.Csharp#net)으로 구현된 인터프리터), 그리고 PyPy(순수 파이썬으로 구현된 인터프리터) 등이 있다.
+### 인터프리터 설치
+파이썬을 실행하기 위해서는 두 가지 프로그램이 필요하다: (1) 인터프리터<sub>([다운로드](https://www.python.org/downloads/))</sub> 그리고 (2) [통합 개발 환경](#통합-개발-환경)이다. 리눅스와 macOS는 기본적으로 파이썬 2와 3 인터프리터가 설치되어 있으나, 다른 특정 버전을 원하면 새로 설치해야 한다. 본 장에서는 파이썬 인터프리터와 IDE의 설치 및 연동을 통해 파이썬과 같은 인터프리터 언어가 어떻게 동작하는지 이해를 돕는다.
 
 ![파이썬 3 공식 웹사이트 인터프리터 다운로드 목록](/images/docs/python/python_interpreter_download.png)
 
-윈도우 운영체제에서 C파이썬을 설치하는 방법에는 두 가지가 있다:
+윈도우 운영체제에서 인터프리터를 설치하는 방법에는 두 가지가 있다:
 
-1. **압축파일 (embeddable zip file)**: 파이썬 인터프리터를 구성하는 파일 전체가 압축된 상태로 존재한다.
-2. **설치 프로그램 (executable installer)**: 인터프리터를 설치하는 `.EXE` 확장자 프로그램이다.
+1. 압축파일 (embeddable zip file): 파이썬 인터프리터를 구성하는 파일 전체가 압축된 상태로 존재한다.
+2. 설치 프로그램 (executable installer): 인터프리터를 설치하는 `.EXE` 확장자 프로그램이다.
 
-> 파이썬 3.7까지 윈도우 32비트 및 64비트 인터프리터는 각각 `x86-64` 및 `x86`으로 표시되어 있다. 그러나 `x86`은 인텔 CPU라는 특정 아키텍처를 가리키기 때문에 ARM CPU를 사용하는 컴퓨터에서는 파이썬 설치가 불가하다. 버전 3.8 이상부터 `x86` 표시가 없어졌으며 인텔 및 ARM CPU 모두 지원한다고 설명되어 있다.
+> 일부 [윈도우](ko.WindowsNT) 파이썬 인터프리터는 32비트 및 64비트 빌드가 `x86` 및 `x86-64`로 표시되어 있다. 그러나 [x86](https://ko.wikipedia.org/wiki/X86)은 인텔 [프로세서](ko.Processor)라는 특정 아키텍처를 가리키기 때문에, [ARM64](https://ko.wikipedia.org/wiki/ARM_아키텍처) 아키텍처를 사용하는 윈도우에서는 설치에 제약이 존재하였다. 버전 [3.9.1](https://docs.python.org/release/3.9.1/whatsnew/changelog.html#id100)부터는 윈도우 ARM64 지원이 공식화되며 [x86-64](https://ko.wikipedia.org/wiki/X86-64)와 함께 64비트 설치 파일로 통합되었다.
 
 인터프리터 설치 프로그램을 실행하면 아래와 같은 화면이 나타난다.
 
 ![파이썬 3 설치 프로그램 실행 화면](/images/docs/python/python_interpreter_install.png)
 
-설치 화면에 있는 "Add Python 3.x to PATH" 옵션은 [환경 변수](https://ko.wikipedia.org/wiki/환경_변수)(environment variable) 설정 여부를 의미한다: 윈도우의 [명령 프롬프트](https://ko.wikipedia.org/wiki/Cmd.exe)(Command Prompt)나  [PowerShell](https://ko.wikipedia.org/wiki/파워셸), 리눅스의 터미널 등으로부터 파이썬을 실행할 수 있도록 한다. 필수는 아니지만 차후 파이썬 커뮤니티에서 유용하게 사용되는 [패키지](#모듈)를 설치하려면 터미널이 필요하므로 환경 변수 설정을 적극 권장한다. 설치 당시에 해당 옵션을 선택하지 않아도 방법만 알면 재설치 필요없이 손쉽게 설정할 수 있다 ([*환경 변수 설정 방법*](/blog/ko.environment_variable_configuration) 참조).
+설치 화면에 있는 "Add Python 3.x to PATH" 옵션은 [환경 변수](https://ko.wikipedia.org/wiki/환경_변수)(environment variable) 설정 여부를 의미한다: 윈도우의 [명령 프롬프트](https://ko.wikipedia.org/wiki/Cmd.exe)(Command Prompt)나  [PowerShell](ko.PowerShell), 리눅스의 터미널 등으로부터 파이썬을 실행할 수 있도록 한다. 필수는 아니지만 차후 파이썬 커뮤니티에서 유용하게 사용되는 [패키지](#모듈)를 설치하려면 터미널이 필요하므로 환경 변수 설정을 적극 권장한다. 설치 당시에 해당 옵션을 선택하지 않아도 방법만 알면 재설치 필요없이 손쉽게 설정할 수 있다.
 
 설치 화면에서 "Install Now"를 눌러 인터프리터 설치를 진행하고, 설치가 완료되면 파이썬을 곧바로 실행할 수 있다.
 
@@ -52,13 +56,17 @@ order: 0x00
 
 ![파이썬 3 설치 프로그램 추가 설치 사항](/images/docs/python/python_interpreter_optional.png)
 
-| 옵션                  | 설명                                |
-|---------------------|-----------------------------------|
-| `Documentation`     | 파이썬 문서 파일                      |
-| [`pip`](#pip)       | 파이썬 패키지 관리 소프트웨어 |
-| `tcl/tk and IDLE`   | 파이썬으로 프로그램 GUI 제작도구와 코드 편집기  |
-| `Python test suite` | 파이썬 프로그램 동작을 시험하는 프레임워크      |
-| `py launcher`       | 파이썬 인터프리터 관리 프로그램       |
+<table style="width: 40%;">
+<colgroup><col style="width: 30%;"/><col style="width: 70%;"/></colgroup>
+<thead><tr><th>옵션</th><th>설명</th></tr></thead>
+<tbody>
+<tr><td>Documentation</td><td>파이썬 문서 파일</td></tr>
+<tr><td><a href="#pip">pip</a></td><td>파이썬 패키지 관리 소프트웨어</td></tr>
+<tr><td>tcl/tk and IDLE</td><td>파이썬으로 프로그램 GUI 제작도구와 코드 편집기</td></tr>
+<tr><td>Python test suite</td><td>파이썬 프로그램 동작을 시험하는 프레임워크</td></tr>
+<tr><td>py launcher</td><td>파이썬 인터프리터 관리 프로그램</td></tr>
+</tbody>
+</table>
 
 필자는 `pip`와 `py launcher`만은 반드시 설치한다. 나머지 옵션들은 사용하지 않으며, 사용자 인터페이스를 가진 프로그램을 만든다 하더라도 대표적인 GUI 프레임워크 중 하나인 [PySide2](/docs/ko.Qt)를 사용하기 때문에 `tcl/tk`가 필요하지 않다. 코드 편집기 또한 IDLE보다 편한 것을 곧 소개할 예정이다.
 
@@ -78,27 +86,10 @@ order: 0x00
 
 VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`)와 디버그 모드(`F5`)이다. [디버그](https://ko.wikipedia.org/wiki/디버그)(debug)는 프로그램에 발생한 문제를 해결하는 행위로, IDE에서 각 줄의 코드마다 어떠한 변화가 생겼는지 혹은 얼만큼의 시스템 리소스를 소모하는지 등을 확인할 수 있는 정보를 제공한다. 디버깅 목적이 아니면 일반 실행 모드를 사용하는 것을 권장한다.
 
-# 기초
-각 프로그래밍 언어마다 준수되어야 할 규칙과 기반이 되는 데이터들이 존재한다. 이를 어길 시에는 프로그램에 오류가 발생하거나 정상적인 동작을 보장할 수 없다. 실질적인 프로그래밍에 있어, 본 장에서는 파이썬 프로그램 코딩에 기초적인 정보 제공을 목표로 한다.
+# 구문
+[구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어))(syntax)은 프로그래밍 언어에서 문자 및 기호들의 조합이 올바른 문장 또는 표현식을 구성하였는지 정의하는 규칙이다. 특히 파이썬은 가독성을 매우 중요하게 여기어 "[파이썬의 선](https://peps.python.org/pep-0020/)(Zen of Python)"이란 프로그래밍 철학을 추구하고, 이에 부합한 구문을 파이썬다운(Pythonic) 코드라고 칭한다.
 
-## 주석
-각 프로그래밍 언어마다 준수되어야 할 규칙(일명 [구문](https://ko.wikipedia.org/wiki/구문_(프로그래밍_언어)); syntax)과 기반이 되는 데이터들이 존재한다. 이를 어길 시에는 프로그램에 오류가 발생하거나 정상적인 동작을 보장할 수 없다. 실질적인 프로그래밍에 있어, 본 장에서는 파이썬 프로그래밍에 기초적인 정보 제공을 목표로 한다.
-
-* **한줄 주석 (line comment)**: 코드 한 줄을 차지하는 주석이며, 해시 기호 `#`로 표시된다.
-* **블록 주석 (block comment)**: 코드 여러 줄을 차지하는 주석이며, 세 쌍의 작은 따옴표 `''' '''` 혹은 큰 따옴표 `""" """`로 표시된다.
-
-> 세 쌍의 큰 따옴표로 구성된 블록 주석을 일명 [독스크링](https://en.wikipedia.org/wiki/Docstring)(docstrings)이라고도 부르는데, 이는 프로그램 실행 도중에도 볼 수 있다.
-
-```python
-"""
-블록 주석:
-코드 여러 줄을 차지하는 주석이며, 프로그램 실행 중에서도 볼 수 있다.
-"""
-# 한줄 주석: 코드 한 줄을 차지하는 주석이다.
-```
-
-## 표현식
-프로그래밍에서는 표현식, 아톰, 그리고 문장이 있다.
+다음은 파이썬 프로그래밍 언어에서 구문에 관여하는 요소들을 소개한다:
 
 * **[표현식](https://ko.wikipedia.org/wiki/식_(프로그래밍))(expression)**
     
@@ -120,7 +111,7 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
 
 * **[문장](https://ko.wikipedia.org/wiki/문_(프로그래밍))(statement)**
     
-    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 파이썬 프로그래밍 언어는 기본적으로 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)(newline)을 기준으로 문장을 분별한다. 아래의 부호는 파이썬의 프로그래밍 문장과 줄바꿈을 유연하게 활용할 수 있도록 도와준다.
+    실질적으로 무언가를 실행하는 구문적 존재를 가리킨다: 흔히 하나 이상의 표현식으로 구성되지만, [`break`](#break-문) 및 [`continue`](#continue-문)와 같이 독립적으로 사용되는 문장도 있다. 파이썬 프로그래밍 언어는 기본적으로 [줄바꿈](https://ko.wikipedia.org/wiki/새줄_문자)(newline)을 기준으로 문장을 분별한다. 아래 기호는 파이썬의 프로그래밍 문장과 줄바꿈을 유연하게 활용할 수 있도록 도와준다.
 
     * 세미콜론 `;`: 여려 문장을 하나의 줄에 한꺼번에 기입하기 위해 사용된다.
     * 백슬래시 `\`: 하나의 긴 문장을 연속의 여러 줄로 나누어서 나타내기 위해 사용된다.
@@ -130,23 +121,62 @@ VS Code는 두 가지의 실행 방법이 있다: 일반 실행 모드(`Ctrl+F5`
   if 2 < 3: statement        # 논리가 참이면 "statement" 문장 실행
     ```
 
-## 입력 및 출력
-파이썬은 다음과 같은 텍스트 기반의 입력 및 출력 함수를 가진다.
+### `pass` 문
+[`pass`](https://docs.python.org/3/tutorial/controlflow.html#pass-statements) 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무런 작업을 수행하지 않는 문장이다. 차후에 소개할 [조건문](#조건) 및 [반복문](#반복) 등에 아무런 코드를 작성하지 않으면 실행할 코드가 없다는 사유로 오류가 발생하는데, 이러한 상황에서 `pass` 키워드는 임시 코드로 사용된다.
 
-* **입력 함수 `input()`**
+### 식별자
+[식별자](https://docs.python.org/3/reference/expressions.html#atom-identifiers)(identifier), 일명 네임(name)은 프로그램의 데이터들을 구별하기 위해 사용되는, 즉 프로그래머가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자 작명에는 다음 규칙을 준수해야 한다:
+
+1. 오직 알파벳, 숫자, 밑줄 `_`만 허용 (그 외 특수문자 및 공백 사용 불가)
+2. 식별자 첫 문자로 숫자 불허
+3. 대소문자 구분 필수
+4. 예약어 금지
+
+> [예약어](https://ko.wikipedia.org/wiki/예약어)(reserved identifier)는 프로그래밍 언어에서 정해진 용도가 있어 개발자가 다른 용도로 사용할 수 없는 식별자이다. 위에서 언급한 [`pass`](#pass-문) 문도 예약어에 해당한다.
+
+## 주석
+[주석](https://peps.python.org/pep-0008/#comments)(comment)은 프로그램의 소스 코드로 취급하지 않아 실행되지 않는 영역이다. 흔히 코드에 대한 간단한 정보를 기입하기 위해 사용되는 데, 파이썬에는 두 가지의 주석이 존재한다.
+
+<table style="table-layout: fixed; width: 80%;">
+<thead><tr><th>블록 주석(block comment)</th><th><a href="https://en.wikipedia.org/wiki/Docstring">독스트링</a>(docstring)</th></tr></thead>
+<tbody>
+<tr><td>해시 기호 <code>#</code>로 표기되며 프로그램이 실행될 때 필터되는 주석이다.</td><td>세 쌍의 따옴표로 표기된 주석은 프로그램이 실행되는 <a href="https://ko.wikipedia.org/wiki/런타임">런타임</a>에도 유지된다.</td></tr>
+<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: initial;"><span class="c1"># 블록 주석:
+# 일반적인 주석에는 해시 기호가 권장된다.
+</span></code></pre></div></div>
+</td><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="s">"""
+독스트링:
+정의된 데이터에 간랸한 설명을 기입한다.
+"""</span>
+</code></pre></div></div>
+</td></tr>
+</tbody>
+</table>
+
+일반 주석과 달리, 사용자가 정의한 데이터에 기입된 독스트링은 `__doc__`이란 특수한 변수에 저장되어 디버깅 과정에서도 정의된 데이터에 대한 설명을 확인할 수 있는 용도로 사용된다. 이를 기반으로 IDE 및 텍스트 편집기는 아래 사진처럼 데이터를 정의한 소스 코드를 찾아가지 않고서도 곧바로 내용을 살펴볼 수 있다.
+
+![VS Code에서의 독스트링 활용 예시](/images/docs/python/python_docstring_example.png)
+
+> 독스트링이 적용될 수 있는 데이터는 공통적으로 정의될 수 있는 [함수](#함수), [클래스](#클래스), [모듈](#모듈) 등이 해당한다.
+
+## 콘솔 입출력
+파이썬은 다음과 같이 콘솔에서 사용할 수 있는 텍스트 기반의 입력 및 출력 함수를 가진다:
+
+* **입력 함수 [`input()`](https://docs.python.org/3/library/functions.html#input)**
     
     입력 함수가 실행될 시, `input()`의 소괄호 `()` 안에 있는 텍스트가 터미널에 나타나며 Enter/Return을 누를 때까지 대기한다.
 
-* **출력 함수 `print()`**
+* **출력 함수 [`print()`](https://docs.python.org/3/library/functions.html#print)**
 
     출력 함수가 실행될 시, `print()`의 소괄호 `()` 안에 있는 데이터가 터미널에 나타난다.
 
 ```python
 variable = input("입력: ")
-print("출력:", variable)
-# 동일: print("출력:", input("입력: "))
+print("출력:", variable)      # 동일: print("출력:", input("입력: "))
 ```
-```
+```console
 입력: Hello World!
 출력: Hello World!
 ```
@@ -160,54 +190,46 @@ B = "파이썬"
 # 텍스트와 숫자의 혼합된 데이터를 쉼표(,)를 사용해 나열한다.
 print("A는", A , ", \n그리고 B는", B, "이다.")
 ```
-```
+```console
 A는 10.0 ,
 그리고 B는 파이썬 이다.
 ```
 
-## 식별자
-[식별자](https://ko.wikipedia.org/wiki/식별자#컴퓨터_언어)(identifier), 일명 네임(name)은 프로그램을 구성하는 데이터들을 구별하기 위해 사용되는 명칭이다. 즉, 식별자는 개발자가 데이터에 직접 붙여준 이름이다. 파이썬에서 식별자를 선정하는데 아래의 규칙을 지켜야 한다.
-
-* 오직 영문, 숫자, 밑줄 `_`만 허용된다.
-* 첫 문자는 숫자로 시작할 수 없다.
-* 공백은 허용되지 않는다.
-* 대소문자를 구분한다.
+> [탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하여 문자열로부터 탈출해 텍스트 내에서 특정 연산을 수행한다: `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한다.
 
 ## 변수
-변수(variable)는 할당 기호 `=`를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시는 `variable`이란 식별자를 갖는 변수에 숫자 3을 할당한다. 시스템적 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮는 절차를 [네임 바인딩](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
+변수(variable)는 할당 기호 `=`를 사용하여 데이터를 할당(assignment)받을 수 있는 저장공간이다. 아래 예시는 `variable`이란 식별자의 변수에 숫자 3을 할당한다. 시스템 관점에서 바라보면 `variable`이란 이름에 숫자 3이란 데이터를 엮는 절차를 [네임 바인딩](https://docs.python.org/3/reference/executionmodel.html#naming-and-binding)(name binding)이라고 하며, 비로서 해당 식별자가 변수로 "정의(definition)"되었다고 한다.
 
 ```python
 # 변수 "variable"의 정의
 variable = 3
 ```
 
-파이썬의 변수는 반드시 네임 바인딩으로부터 정의되어야 한다. 즉, 아무런 데이터 할당이 없으면 인터프리터는 식별자를 변수로 간주하지 않아 오류가 발생한다.
+파이썬의 변수는 반드시 네임 바인딩으로부터 정의되어야 하므로, 아무런 데이터가 할당되지 않은 식별자는 변수로 간주되지 않아 오류가 발생한다.
 
 ```python
 variable
 print(variable)
 ```
-```
+```console
 NameError: name 'variable' is not defined
 ```
 
 > 이러한 언어적 특징은 [C](/docs/ko.C#변수)/[C++](/docs/ko.Cpp#변수)와 같은 타 프로그래밍에서 자주 인용되는 "선언(declaration)" 및 "초기화(initialization)"란 용어가 파이썬 공식 문서에서 드믈게 언급된다.
 
-거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다.
-
-파이썬의 변수는 데이터 종류와 상관없이 새로운 데이터를 언제든지 할당받을 수 있다.
+거의 모든 프로그래밍 언어는 할당 기호를 기준으로 왼쪽에는 피할당자(변수), 오른쪽에는 할당자(데이터 혹은 변수)가 위치한다. 반대로 놓여질 경우, 오류가 발생하거나 원치 않는 결과가 도출될 수 있다. 파이썬의 변수는 기존과 다른 유형의 데이터를 언제든지 새로 할당받을 수 있다.
 
 ```python
 variable = 3
 variable = "Hello World!"
 print(variable)
 ```
-```
+```console
 Hello World!
 ```
 
-### `del` 키워드
-`del` 키워드는 식별자에 바인딩된 데이터를 해제, 즉 변수의 정의를 무효화할 때 사용한다. 차후 동일한 식별자로 변수를 다시 정의할 수 있다.
+### `del` 문장
+[`del`](https://docs.python.org/3/reference/simple_stmts.html#the-del-statement) 문장은 식별자에 바인딩된 데이터를 해제, 즉 변수의 정의를 무효화할 때 사용한다. 차후 동일한 식별자로 변수를 다시 정의할 수 있다.
 
 ```python
 # 변수 "variable"의 정의
@@ -218,101 +240,93 @@ print(variable)
 del variable
 print(variable)
 ```
-```
+```console
 Hello World!
 NameError: name 'variable' is not defined
 ```
 
-### 상수
-상수(constant)는 한 번 데이터를 할당한 후 변경할 수 없는 특별한 변수이다.
-
-> 파이썬은 상수를 지원하지 않는다. 파이썬 개발자는 일반 변수들로부터 구분짓기 위해 상수를 전부 대문자로 표기한다.
-
-```python
-CONSTANT_VARIABLE = "Hello World!"
-```
-
 ## 자료형
-[자료형](https://ko.wikipedia.org/wiki/자료형)(data type)은 데이터의 내용물이 어떻게 표현되는지 결정하는 요소이며, 파이썬에서는 자료형이 크게 세 유형으로 나뉘어진다:
+[자료형](https://docs.python.org/3/library/stdtypes.html)(data type)은 데이터의 내용물을 결정하는 요소이며, 파이썬에서는 크게 세 개의 자료형으로 나뉘어진다.
 
 ### 숫자 자료형
 [숫자 자료형](https://docs.python.org/3/library/stdtypes.html?#numeric-types-int-float-complex)(numeric data type)은 숫자로 표현되는 데이터들을 가리키며, 총 세 가지로 세분화된다.
 
-* **정수 `int`**: 소수점이 없는 숫자
-* **부동소수점 `float`**: 소수점을 포함한 64비트 실수
-* **복소수 `complex`**: 실수 그리고/또는 허수로 이루어진 숫자
+<table style="table-layout: fixed; width: 60%;">
+<thead><tr><th><a href="https://docs.python.org/3/library/functions.html#int"><code>int</code></a></th><th><a href="https://docs.python.org/3/library/functions.html#float"><code>float</code></a></th><th><a href="https://docs.python.org/3/library/functions.html#complex"><code>complex</code></a></th></tr></thead>
+<tbody>
+<tr style="text-align: center;">
+<td>소수점이 없는 정수</td>
+<td>소수점을 포한한 64비트 실수</td>
+<td>실수와 허수로 구성된 복소수</td>
+</tr>
+</tbody>
+</table>
 
 위의 숫자 자료형들은 산술 연산이 가능하다: 가장 기본적인 `+`, `-`, `*`, `/` 사칙 연산자부터 나눗셈의 몫 `//`과 나머지 `%` 그리고 제곱 `**`을 구할 수 있다. 산술 연산을 쉽게 읽을 수 있도록 숫자와 산술 연산자 사이에 공백을 넣어도 연산에는 아무런 영향을 주지 않으므로 무관한다.
 
-할당 연산자(assignment operator)는 할당 기호 `=`와 조합하여 산술 연산 코드를 더욱 간결하게 작성할 수 있다.
-
-| 연산자 | 예시     | 동일                                          |
-| :----: |--------| --------------------------------------------- |
-|  `=`   | `x = y`  | `x = y`; `x` 변수에 `y` 변수의 값을 할당한다. |
-|  `+=`  | `x += y` | `x = x + y`                                   |
-|  `-=`  | `x -= y` | `x = x - y`                                   |
-|  `*=`  | `x *= y` | `x = x * y`                                   |
-|  `/=`  | `x /= y` | `x = x / y`                                   |
-|  `%=`  | `x %= y` | `x = x % y`                                   |
+[인플레이스 연산자](https://docs.python.org/3/library/operator.html#in-place-operators)(in-place operator)는 할당 기호 `=`와 조합하여 산술 연산을 더욱 간결하게 작성할 수 있도록 한다: `+=`, `-=`, `*=`, `/=`, `%=` 등이 존재하며, `x += y` 문장은 `x = x + y`와 동일하다.
 
 > 파이썬은 증가 연산자 `++` 및 감소 연산자 `--`를 지원하지 않는다.
 
 ### 논리 자료형
-논리 자료형(Boolean data type)은 문장이 참인지 거짓인지 판별하는 논리 조건에 사용되는 데이터 유형이다.
+[논리 자료형](https://docs.python.org/3/library/stdtypes.html?#boolean-operations-and-or-not)(Boolean data type)은 문장이 참인지 거짓인지 판별하는 논리 조건에 사용되는 데이터 유형이다.
 
-* **논리적 참 `True`**: 논리가 참일 때 반환된다; 숫자 0이 아닌 정수로 대체 가능하다.
-* **논리적 거짓 `False`**: 논리가 거짓일 때 반환된다; 숫자 0으로 대체 가능하다.
+<table style="table-layout: fixed; width: 60%;">
+<thead><tr><th><a href="https://docs.python.org/3/library/constants.html#True"><code>True</code></a></th><th><a href="https://docs.python.org/3/library/constants.html#False"><code>False</code></a></th></tr></thead>
+<tbody>
+<tr style="text-align: center;">
+<td>논리가 참일 때 반환; 0이 아닌 정수로 대체 가능</td>
+<td>논리가 거짓일 때 반환; 정수 0으로 대체 가능</td>
+</tr>
+</tbody>
+</table>
 
-대표적인 논리 조건으로써 두 데이터를 대조하는 [비교 연산자](https://docs.python.org/3/library/stdtypes.html?#comparisons)(relational operator)가 있다: 초과 `>`와 미만 `<`, 이상 `>=`과 이하 `<=`, 그리고 동일 `==`와 다름 `!=` 관계 부합 여부에 따라 논리적 참 혹은 거짓이 반환된다. 연산자는 기호가 아닌 단어일 수도 있으며, 일치 여부의 `is` 및 논리 보수의 `not`이 존재한다.
+대표적인 논리 조건으로써 두 데이터를 대조하는 [비교 연산자](https://docs.python.org/3/library/stdtypes.html?#comparisons)(relational operator)가 있다: 초과 `>`와 미만 `<`, 이상 `>=`과 이하 `<=`, 그리고 동일 `==`와 다름 `!=` 관계 부합 여부에 따라 논리적 참 혹은 거짓이 반환된다. 혹은 일치 여부를 확인하는 `is` 연산자와 같이 기호가 아닌 단어일 수도 있다.
 
 > 동일 `==`과 일치 `is`는 얼핏 비슷하지만 전혀 다른 연산자이다: `==` 연산자는 데이터 유형마다 커스터마이징이 가능하여 무엇을 동일한 데이터로 판단할지 정할 수 있지만, `is` 연산자는 커스터마이징이 불가하며 데이터가 정확히 일치해야 한다. 일부 데이터에서 `==` 연산자는 `is` 연산자와 동일하게 동작한다.
 
 논리 연산자(logical operator)는 논리 자료형의 조합이 논리적으로 참인지 거짓인지 판별한다.
 
-| 연산자   | 이름  | 설명                                           |
-|:-----:|:---:|----------------------------------------------|
-| `and` | 논리곱 | 모든 데이터가 참이면 `True`를 반환하고, 그렇지 않으면 `False`를 반환한다.     |
-| `or`  | 논리합 | 하나 이상의 데이터가 참이면 `True`를 반환하고, 그렇지 않으면 `False`를 반환한다. |
+* **`and`**: 모든 데이터가 참이면 `True`를 반환하고, 그렇지 않으면 `False`를 반환하는 [논리곱](https://ko.wikipedia.org/wiki/논리곱)이다.
+* **`or`**: 하나 이상의 데이터가 참이면 `True`를 반환하고, 그렇지 않으면 `False`를 반환하는 [논리합](https://ko.wikipedia.org/wiki/논리합)이다.
+* **`not`**: `True`을 `False`로, 혹은 그 반대로 논리값을 반전시키는 [부정](https://ko.wikipedia.org/wiki/부정_(논리학))이다.
 
 ### 문자열 자료형
-문자열 자료형(string data type)은 한 쌍의 작은 따옴표 `''` 또는 큰 따옴표 `""`로 구별되는 텍스트 데이터이다. 파이썬에서 문자열 자료형 데이터는 일반적으로 문자열 객체(string object)라고 부른다. 
+[문자열 자료형](https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str)(string data type)은 한 쌍의 작은 따옴표 `''` 또는 큰 따옴표 `""`로 구별되는 텍스트 데이터이다. 파이썬에서 문자열 자료형 데이터는 일반적으로 문자열 객체(string object)라고 부른다. 
 
-문자열 객체는 다른 데이터와 더하기 기호 `+`를 통해 공백없이 하나의 문자열로 연결할 수 있다. 문자열 간에만 사용할 수 있으므로 숫자 및 논리 자료형은 문자열로 변환해야 한다. 그 외에도 파이썬 3.6부터 추가된 접두사 `f`를 갖는 [포맷 문자열 리터럴](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)(formatted string literal), 일명 f-문자열에서 중괄호 `{}`를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
+문자열 객체는 다른 데이터와 더하기 기호 `+`를 통해 공백없이 하나의 문자열로 연결할 수 있다. 문자열 간에만 사용할 수 있으므로 숫자 및 논리 자료형은 문자열로 변환해야 한다. 그 외에도 파이썬 3.6부터 추가된 접두사 `f`를 갖는 [서식화된 문자열 리터럴](https://docs.python.org/3/reference/lexical_analysis.html#f-strings)(formatted string literal), 일명 f-문자열에서 중괄호 `{}`를 통해 원하는 위치에 곧바로 데이터 삽입이 가능하다.
 
-```python
-A = 10.0
-B = "파이썬"
+<table style="table-layout: fixed; width: 80%;">
+<thead><tr><th>문자열 연결</th><th>서식화된 문자열 리터럴</th></tr></thead>
+<tbody>
+<tr style="vertical-align: top; overflow-wrap: break-word;"><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">파이썬</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"A는 "</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">+</span><span class="s">",</span><span class="se">\n</span><span class="s">그리고 B는 "</span><span class="o">+</span> <span class="n">B</span> <span class="o">+</span><span class="s">"이다."</span><span class="p">)</span>
+</code></pre></div></div>
+</td><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">파이썬</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"A는 </span><span class="si">{</span><span class="n">A</span><span class="si">}</span><span class="s">,</span><span class="se">\n</span><span class="s">그리고 B는 </span><span class="si">{</span><span class="n">B</span><span class="si">}</span><span class="s">이다."</span><span class="p">)</span>
+</code></pre></div></div>
+</td></tr>
+<tr><td colspan="2">
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: initial;"><span class="go">A는 10.0,
+그리고 B는 파이썬이다.
+</span></code></pre></div></div>
+</td></tr>
+</tbody>
+</table>
 
-# 문자열 연결
-print("A는 " + str(A) + ",\n그리고 B는 " + B + "이다.")
-
-# 포맷 문자열 리터럴
-print(f"A는 {A},\n그리고 B는 {B}이다.")
-```
-
-텍스트에 따옴표를 넣으려면 해당 따옴표 앞에 백슬래시 `\`를 배치하여 문자열이 도중이 끊기는 현상을 방지한다.
-
-```python
-# 문자열 작성의 적절한 예시와 부적절한 예시의 비교
-print('Where\'s my "Cat in the Hat" book?')
-print('Where's my "Cat in the Hat" book?')
-```
-```
-Where's my "Cat in the Hat" book?
-Where
-```
-
-세 쌍의 따옴표는 다중 문자열 객체를 생성하며, 이는 단순히 Enter/Return 키를 눌러 줄바꿈이 가능하다. 일반 문자열로 줄바꿈을 구현하려면 원하는 위치에 [탈출 문자](#탈출-문자) 중 하나인 `\n`을 직접 삽입해야 한다.
-
-```python
-# 다중 문자열 객체로 여러 줄의 텍스트 작성 및 출력
-print("""Goodbye
-World?""")
-```
-```  
-Goodbye
-World?
-```
+> 세 쌍의 따옴표는 다중 문자열 객체를 생성하며, 이는 단순히 Enter/Return 키를 눌러 줄바꿈이 가능하다.
+>
+> ```python
+> # 다중 문자열 객체로 여러 줄의 텍스트 작성 및 출력
+> print("""Hello
+> World!""")
+> ```
+> ```console
+> Hello
+> World!
+> ```
 
 차후에 설명할 예정이지만, [객체](#클래스)(object)에 해당하는 문자열 자료형 데이터는 오로지 자신만이 사용할 수 있는 고유의 기능(일명 메소드)을 갖으며 목록은 [여기](https://docs.python.org/3/library/stdtypes.html#string-methods)에서 확인할 수 있다.
 
@@ -321,63 +335,53 @@ World?
 print("Hello World!".upper())
 print("Hello World!".replace(" ", "-"))
 ```
-```
+```console
 HELLO WORLD!
 Hello-World!
 ```
 
 ### `None` 키워드
-[`None`](https://docs.python.org/3/c-api/none.html) 키워드는 자료형과 관계없이 아무런 값이 없는 데이터이다. 비록 `None`과 `False`는 개념적으로 완전히 다른 존재이지만, 논리 조건에서는 `None`을 `False`로 사용할 수 있다.
+[`None`](https://docs.python.org/3/library/constants.html#None) 키워드는 자료형과 관계없이 아무런 값이 없는 데이터이다. 비록 `None`과 `False`는 개념적으로 완전히 다른 존재이지만, 논리 조건에서는 `None`을 `False`로 사용할 수 있다.
 
 ```python
 # 조건부 확인: 논리 조건에서 None을 False로 간주할 수 있는가?
 if not(None and True):
     print(None)
 ```
-```
+```console
 None
 ```
 
 ## 자료형 변환
-파이썬 프로그래밍 언어는 데이터를 타 자료형으로 변환할 수 있다.
+파이썬 프로그래밍 언어는 데이터를 타 자료형으로 변환할 수 있는 함수를 제공한다.
 
-* **정수 변환 `int()`**
-
-    ```python
-  print(int(3.14))        # 출력: 3 (정수만 반환; 반올림 아님)
-
-  print(int("7"))         # 출력: 7 (실수나 문자 포함 시 변환 불가)
-    ```
-
-* **실수 변환 `float()`**
-
-    ```python
-  print(float(7))         # 출력: 7.0
-
-  print(float("3.14"))    # 출력: 3.14 (문자 포함 시 변환 불가)
-    ```
-
-* **문자열 변환 `str()`**
-
-    ```python
-  print(str(7))           # 출력: '7'
-
-  print(str(3.14))        # 출력: '3.14'
-    ```
-
-## 탈출 문자
-[탈출 문자](https://ko.wikipedia.org/wiki/이스케이프_문자)(escape character)는 백슬래시 기호 `\`를 사용하며, 문자열로부터 탈출하여 텍스트 데이터 내에서 특정 연산을 수행하도록 한다. 이전에 문자열 자료형을 소개할 때, `\n` 탈출 문자를 사용하여 문자열 줄바꿈을 구현한 것을 보여주었다.
-
-```python
-print("Hello\nWorld!")
-```
-```
-Hello
-World!
-```
-
-# 조건 및 루프
-조건문(conditional statement) 및 반복문(loop statement)은 프로그래밍에 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 여기서 문장이란, 실질적으로 무언가를 실행하는 코드를 의미한다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 조건문과 반복적으로 실행하는 반복문을 소개한다.
+<table style="width: 80%;">
+<colgroup></colgroup>
+<thead><tr><th>자료형 변환</th><th>예시</th></tr></thead>
+<tbody>
+<tr>
+<td style="text-align: center;">정수 변환<br/><a href="https://docs.python.org/3/library/functions.html#int"><code>int()</code></a></td><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="k">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mf">3.14</span><span class="p">))</span>        <span class="c1"># 출력: 3 (정수만 반환; 반올림 아님)
+</span><span class="k">print</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="s">"7"</span><span class="p">))</span>         <span class="c1"># 출력: 7 (실수나 문자 포함 시 변환 불가)
+</span></code></pre></div></div>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">실수 변환<br/><a href="https://docs.python.org/3/library/functions.html#float"><code>float()</code></a></td><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="k">print</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>         <span class="c1"># 출력: 7.0
+</span><span class="k">print</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s">"3.14"</span><span class="p">))</span>    <span class="c1"># 출력: 3.14 (문자 포함 시 변환 불가)
+</span></code></pre></div></div>
+</td>
+</tr>
+<tr>
+<td style="text-align: center;">문자열 변환<br/><a href="https://docs.python.org/3/library/stdtypes.html#str"><code>str()</code></a></td><td>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="syntax"><code style="word-break: break-all;"><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>           <span class="c1"># 출력: '7'
+</span><span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mf">3.14</span><span class="p">))</span>        <span class="c1"># 출력: '3.14'
+</span></code></pre></div></div>
+</td>
+</tr>
+</tbody>
+</table>
 
 ## 들여쓰기
 [들여쓰기](https://www.python.org/dev/peps/pep-0008/#indentation)(indentation)는 문장이나 [함수](#함수)(function), [클래스](#클래스)(class) 코드의 경계를 표시하는데 사용된다. 이를 통해 코드가 조건문 혹은 반복문에 속하는지, 또는 어느 조건문 혹은 반복문의 코드인지 구분한다. 들여쓰기는 콜론 `:`이 시작되는 이후부터 삽입되며 [탭](https://ko.wikipedia.org/wiki/Tab_키)(tab)이나 띄어쓰기 2칸 혹은 4칸으로 표현된다.
@@ -390,25 +394,8 @@ World!
 
 들여쓰기의 여부에 따라 코드의 내용이 완전히 변경될 수 있으므로 주의해야 한다.
 
-```python
-# 두 번째 "print()" 함수에 들여쓰기 된 경우.
-if False:
-    print("본 문장은 거짓이다.") 
-    print("조건문 종료.")
-print("끝!") 
-
-# 두 번째 "print()" 함수에 들여쓰기가 되지 않은 경우.
-if False:
-    print("본 문장은 거짓이다.") 
-print("조건문 종료.")
-print("끝!") 
-```
-```
-끝!
-
-조건문 종료.
-끝!
-```
+# 조건
+조건문(conditional statement)은 프로그래밍에 주어진 조건의 논리에 따라서 코드 실행 여부를 결정하는 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 조건문에 대하여 소개한다.
 
 ## `if` 조건문
 [`if`](https://docs.python.org/3/reference/compound_stmts.html#the-if-statement) 조건문은 조건 혹은 논리가 참(`True`)일 경우 코드를 실행하며, 거짓(`False`)일 경우에는 코드를 실행하지 않는다.
@@ -473,6 +460,9 @@ match argument:
 
 `match` 조건문은 타 프로그래밍 언어에서 소개되는 `switch` 조건문과 유사한 구조와 동작을 수행한다. 그러나 몇 가지 차이점이 있다면 `case` 문의 코드가 실행된 이후에 자동적으로 `match` 조건문이 종료되어 별도의 [`break`](#break-문) 문이 필요하지 않다. 또한 패턴 뒤에 `if` 문을 기입하는 감시(guard) 표현식으로 부가적인 조건 일치여부를 거칠 수 있다.
 
+# 반복
+반복문(loop statement)은 프로그래밍에 주어진 조건의 논리에 따라서 코드를 얼마나 반복적으로 실행할 것인지 결정하는 가장 흔히 사용되는 코드 문장(statement) 중 하나이다. 본 장에서는 파이썬 프로그래밍의 조건에 따라 실행하는 반복문에 대하여 소개한다.
+
 ## `while` 반복문
 [`while`](https://docs.python.org/3/reference/compound_stmts.html#the-while-statement) 반복문은 조건 혹은 논리가 참(`True`)일 동안 코드를 반복적으로 실행하며, 거짓(`False`)일 경우에는 반복문을 종료한다.
 
@@ -484,7 +474,7 @@ while condition:
 while condition: ...
 ```
 
-`else` 조건문을 `while` 반복문 다음에 위치시키면 해당 코드는 반복문의 조건에 의해 정상적으로 종료되었을 경우에만 실행된다.
+[`else`](#else-조건문) 조건문을 `while` 반복문 다음에 위치시키면 해당 코드는 반복문의 조건에 의해 정상적으로 종료되었을 경우에만 실행된다.
 
 ```python
 # 루프 종료: 반복 완료
@@ -505,7 +495,7 @@ while index < 10:
 else:
     print("두 번째 반복문...완료!")
 ```
-```
+```console
 첫 번째 반복문...완료!
 ```
 
@@ -545,43 +535,39 @@ for index in range(10):
 else:
     print("두 번째 반복문...완료!")
 ```
-```
+```console
 첫 번째 반복문...완료!
 ```
-
-## `pass` 키워드
-[`pass`](https://docs.python.org/3/tutorial/controlflow.html#pass-statements) 혹은 `...` (일명 [ellipsis](https://ko.wikipedia.org/wiki/줄임표)) 키워드는 실행될 때 아무런 작업을 수행하지 않는다. 위에서 소개한 조건문 및 반복문에 아무런 코드를 작성하지 않으면 표현식이나 문장이 없다며 오류가 발생하는데, 이러한 상황에서 `pass` 키워드는 임시 코드로 사용된다.
 
 # 이터러블
 [이터러블](https://docs.python.org/3/library/stdtypes.html#typeiter)(iterable; 반복 가능한)은 저장된 여러 데이터 항목을 하나씩 반환할 수 있는 [컨테이너 객체](#클래스)를 가리킨다. 이터러블의 특징인 `__iter__()` 메소드는 이터레이터(iterator) 객체를 반환하고, 그리고 이터레이터는 `__next__()` 메소드를 통해 [`for`](#for-반복문) 반복문에 전달될 다음 데이터 항목을 반환한다. 다시 말해 이터러블 객체의 핵심은 순차적으로 데이터를 반환할 수 있다는 점이며, 다수의 데이터를 하나의 변수로 저장하는 성질은 이를 구현하기 위한 일환이다.
 
 ## 시퀀스 객체
-[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence) 객체는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이다. 시퀀스는 하나는 대괄호 `[]`를 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)이 있다.
+[시퀀스](https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range)(sequence)는 [슬라이싱](#슬라이싱)과 같은 추가 기능이 활성화된 이터러블 객체이며, 대괄호 `[]`를 사용하여 저장된 데이터 불러오거나 수정이 가능하다. 대표적인 시퀀스 객체 중 하나로 [문자열](#문자열-자료형)이 있다.
 
 ```python
 variable = "Hello World!" 
 print(variable[1])
 ```
-```
+```console
 e
 ```
 
 ### 슬라이싱
-슬라이싱(slicing; 자르다)은 시퀀스 객체 원본으로부터 원하는 부분만 추출하는 기능이다.
+[슬라이싱](https://docs.python.org/3/glossary.html#term-slice)(slicing; 자르다)은 시퀀스 객체 원본으로부터 원하는 부분만 추출하는 기능이다.
 
-| 구문    | 예시                            |
-|:---------:|------------------------------------|
-| `[ : : ]` | `sequence[start : end : interval]` |
-
-슬라이싱은 `start`에서부터 `end` 이전까지이며, `interval`만큼의 간격으로 데이터를 추출한다. 시퀀스 슬라이싱을 하기 위해 모든 인수를 채울 필요는 없다.
+<table style="width: 80%;">
+<colgroup><col style="width: 30%;"/><col/></colgroup>
+<thead><tr><th>구문</th><th>예시</th></tr></thead>
+<tbody>
+<tr style="text-align: center;"><td><code>seq[start : end : interval]</code></td><td><code>start</code>부터 <code>end</code> 이전까지 <code>interval</code>만큼의 간격으로 데이터를 추출하며, 모든 인수를 채울 필요는 없다.</td></tr>
+</tbody>
+</table>
 
 ```python
 print("Hello World!"[2:8])         # 출력: 'llo Wo'
-
 print("Hello World!"[2: ])         # 출력: 'llo World!'
-
 print("Hello World!"[ :8])         # 출력: 'Hello Wo'
-
 print("Hello World!"[2:8:2])       # 출력: 'oW'
 ```
 
@@ -590,26 +576,29 @@ print("Hello World!"[2:8:2])       # 출력: 'oW'
 
 ```python
 variable1, *variable2, variable3 = "Python"
-
-''' 결과:
+```
+```console
 variable1 = P
 variable2 = ['y', 't', 'h', 'o']
 variable3 = n
-'''
 ```
 
 ## 범위 객체
-[범위](https://docs.python.org/3/library/stdtypes.html#ranges)(range) 시퀀스 객체는 시작할 숫자(포함), 끝을 맺을 숫자(제외) 그리고 순서 간격을 지정하여 일련의 숫자들을 순서에 맞게 저장하는 객체이다. 범위 객체는 `range()` 함수를 사용하여 생성된다.
+[범위](https://docs.python.org/3/library/stdtypes.html#ranges)(range) 시퀀스 객체는 시작할 숫자, 끝을 맺을 숫자 그리고 순서 간격을 지정하여 일련의 숫자들을 순서에 맞게 저장하는 객체이며, `range()` 함수로부터 생성된다.
 
-| 함수        | 예시                          | 설명                                                          |
-|-----------|-----------------------------|-------------------------------------------------------------|
-| `range()` | `range(start,end,interval)` | 정수 `start`에서부터 `end` 이전까지 `interval`만큼의 간견으로 순서대로 숫자를 나열한 범위 객체를 생성한다. |
+<table style="width: 80%;">
+<colgroup><col style="width: 30%;"/><col/></colgroup>
+<thead><tr><th>구문</th><th>예시</th></tr></thead>
+<tbody>
+<tr style="text-align: center;"><td><code>range(start, end, interval)</code></td><td><code>start</code>부터 <code>end</code> 이전까지 <code>interval</code>만큼의 간격으로 순서대로 숫자를 나열한 범위 객체를 생성한다.</td></tr>
+</tbody>
+</table>
 
 ```python
 for element in range(3, 10, 2):
     print(element)
 ```
-```
+```console
 3
 5
 7
@@ -674,7 +663,7 @@ variable[1] = "Hello World!"   # IndexError: list assignment index out of range
 variable = [var**2 for var in range(5)]
 variable = [var**2 for var in range(5) if (var ** 2) % 2 == 0]
 ```
-```
+```console
 [0, 1, 4, 9, 16]
 [0, 4, 16]
 ```
@@ -788,7 +777,7 @@ for variable in generator_function():
 lst = list(generator_function())
 print(lst)
 ```
-```
+```console
 0
 1
 2
