@@ -119,7 +119,7 @@ WSL은 두 종류의 아키텍처 설계가 있어 각각 장단점을 가진다
 
 * [프로세서](ko.Processor)
 * [메모리](ko.Memory)
-* [디스크](ko.Disk)
+* [디스크](ko.Storage)
 * [네트워크](ko.Network)
 
 ## 관리 프로그램
