@@ -27,7 +27,7 @@ CIM 표준은 다음 내용들을 소개한다:
 
 * **[CIM 스키마](https://en.wikipedia.org/wiki/CIM_Schema) (CIM Schema)**
 
-    IT 환경 내에서 운영되는 요소들의 공통 기반을 나타낸 특정 객체들의 집합과 이들의 관계를 정의하는 개념적 [스키마](https://ko.wikipedia.org/wiki/XML_스키마_(W3C))이다. 오늘날 IT 환경에서 사용되는 컴퓨터 시스템([`CIM_ComputerSystem`](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-computersystem)), 운영 체계([`CIM_OperatingSystem`](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-operatingsystem)), 프로세스([`CIM_Process`](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-process)), 네트워크, 미들웨어, 저장장치 등 대부분의 요소를 다룬다. 제품 및 제조사에 특화된 기능도 함께 반영될 수 있도록 확장성을 지원한다.
+    IT 환경 내에서 운영되는 요소들의 공통 기반을 나타낸 특정 객체들의 집합과 이들의 관계를 정의하는 개념적 [스키마](https://ko.wikipedia.org/wiki/XML_스키마_(W3C))이다. 오늘날 IT 환경에서 사용되는 컴퓨터 시스템([`CIM_ComputerSystem`](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-computersystem)), 운영 체계([`CIM_OperatingSystem`](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-operatingsystem)), 프로세스([`CIM_Process`](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/cim-process)), 네트워크, 미들웨어, 보조 기억 장치 등 대부분의 요소를 다룬다. 제품 및 제조사에 특화된 기능도 함께 반영될 수 있도록 확장성을 지원한다.
 
 ### 웹 서비스 관리
 [웹 서비스 관리](https://learn.microsoft.com/en-us/windows/win32/winrm/ws-management-protocol)(Web Service-Management), 일명 WS-Management 혹은 WS-MAN은 서버, 장치, 어플리케이션 그리고 다양한 [웹 서비스](https://ko.wikipedia.org/wiki/웹_서비스)를 관리하기 위한 [SOAP](https://ko.wikipedia.org/wiki/SOAP)(Simple Object Access Protocol; 단순 객체 접근 프로토콜) 기반의 프로토콜이다. WS-MAN은 시스템이 IT 인프라를 거쳐 운영 정보를 접근 및 교환할 수 있도록 하는 일반적인 방법을 제시한다.
