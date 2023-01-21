@@ -7,7 +7,7 @@ icon: icon-windows.svg
 order: null
 ---
 # 메모리
-주 기억 장치(primary storage), 일명 컴퓨터 [메모리](https://ko.wikipedia.org/wiki/주기억장치)(memory)는 시스템에서 즉각적으로 사용할 데이터를 저장하는 하드웨어로 [RAM](https://ko.wikipedia.org/wiki/랜덤_액세스_메모리)이 대표적인 예시이다. 데이터를 저장하는 또 다른 하드웨어로 [HDD](https://ko.wikipedia.org/wiki/하드_디스크_드라이브) 및 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브), [CD](https://ko.wikipedia.org/wiki/콤팩트_디스크) 혹은 [DVD](https://ko.wikipedia.org/wiki/DVD), [플래시 메모리](https://ko.wikipedia.org/wiki/플래시_메모리)와 같은 [보조 기억 장치](ko.Storage)(secondaty storage)가 존재하나, 이 둘은 확연한 차이점을 지닌다.
+주 기억 장치(primary storage), 일명 컴퓨터 [메모리](https://ko.wikipedia.org/wiki/주기억장치)(memory)는 시스템에서 즉각적으로 사용할 데이터를 저장하는 하드웨어로 [RAM](https://ko.wikipedia.org/wiki/랜덤_액세스_메모리)이 대표적인 예시이다. 데이터를 저장하는 또 다른 하드웨어로 [HDD](https://ko.wikipedia.org/wiki/하드_디스크_드라이브) 및 [SSD](https://ko.wikipedia.org/wiki/솔리드_스테이트_드라이브), [CD](https://ko.wikipedia.org/wiki/콤팩트_디스크) 또는 [DVD](https://ko.wikipedia.org/wiki/DVD), [플래시 메모리](https://ko.wikipedia.org/wiki/플래시_메모리)와 같은 [보조 기억 장치](ko.Storage)(secondaty storage)가 존재하나, 이 둘은 확연한 차이점을 지닌다.
 
 <table style="table-layout: fixed; width: 40%">
 <thead><tr><th>주 기억 장치</th><th>보조 기억 장치</th></tr></thead>
