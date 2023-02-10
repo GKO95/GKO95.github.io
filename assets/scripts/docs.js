@@ -24,7 +24,7 @@ const imageSize = () => {
              $(`<center style="font-weight: bold;">${txtFigure} ${++countImg}. ${$(this).attr("alt")}</center>`).insertAfter(this)
         }
         $(this).dblclick(function() { 
-            window.open(`https://raw.githubusercontent.com/GKO95/GKO95.github.io/archive${$(this).attr("src")}`)
+            window.open(`https://raw.githubusercontent.com/GKO95/GKO95.github.io/main${$(this).attr("src")}`)
         }).show();
     })
 }; imageSize();
@@ -92,7 +92,7 @@ $(document).keydown((e) => {
 // >> MENU INSTANTIATION
 //========================================
 $(`#sub-source`).click(function() {
-    window.open(`https://github.com/GKO95/GKO95.github.io/blob/archive${location.pathname.replace("/","/_")}.md`);
+    window.open(`https://github.com/GKO95/GKO95.github.io/blob/main${location.pathname.replace("/","/_")}.md`);
     docsMenuClose();
 })
 $(`#sub-related`).click(function() {
