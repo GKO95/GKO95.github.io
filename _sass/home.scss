@@ -15,19 +15,6 @@
     -webkit-user-select: none;
     
     span {
-        font-family: $MONOSPACE;
-        position: relative;
-        float: right;
-        height: 12px;
-        width: 100%;
-        text-align: end;
-        display: block;
-        font: {
-            size: 9px;
-            style: italic;
-        }
-    }
-    a {
         display: inline-block;
         position: relative;
         padding: 12px 0;
