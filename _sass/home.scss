@@ -106,7 +106,7 @@ html {
     #home-notice {
         background-color: white;
         color: black;
-        a { color: black; }
+        span { color: black; }
     }
     .home-category-list {
         border-color: rgba(0, 0, 0, 0.1);
@@ -121,7 +121,7 @@ html {
     #home-notice {
         background-color: #202020;
         color: white;
-        a { color: white; }
+        span { color: white; }
     }
     .home-category-list {
         border-color: rgba(0, 0, 0, 0.2);
